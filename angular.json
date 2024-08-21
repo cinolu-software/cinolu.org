@@ -20,7 +20,9 @@
             "outputPath": "dist/cinolu.org",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "allowedCommonJsDependencies": [
@@ -42,7 +44,9 @@
               }
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/@fuse/styles"]
+              "includePaths": [
+                "src/@fuse/styles"
+              ]
             },
             "styles": [
               "src/@fuse/styles/tailwind.scss",
@@ -52,7 +56,12 @@
               "src/styles/styles.scss",
               "src/styles/tailwind.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "server": "src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "server.ts"
+            }
           },
           "configurations": {
             "production": {
