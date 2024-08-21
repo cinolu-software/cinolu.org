@@ -37,7 +37,7 @@
             [routerLinkActiveOptions]="{ exact: true }">
             {{ trimName(user.name) }}
           </a>
-          <button class="hover:text-green-700 transition-colors duration-300" (click)="logOut()">Déconnexion</button>
+          <button class="hover:text-green-700 transition-colors duration-300">Déconnexion</button>
         } @else {
           @for (link of authLinks; track $index) {
             <a
@@ -77,9 +77,7 @@
             {{ trimName(user.name) }}
           </a>
 
-          <button href="" class="inline-flex hover:text-green-400 transition-colors duration-300" (click)="logOut()">
-            Déconnexion
-          </button>
+          <button href="" class="inline-flex hover:text-green-400 transition-colors duration-300">Déconnexion</button>
         } @else {
           @for (link of unAuthenticatedUserLinks; track $index) {
             <a

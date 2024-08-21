@@ -1,10 +1,6 @@
 {
-  "name": "fuse-angular",
+  "name": "cinolu.org",
   "version": "20.0.0",
-  "description": "Fuse - Angular Admin Template and Starter Project",
-  "author": "https://themeforest.net/user/srcn",
-  "license": "https://themeforest.net/licenses/standard",
-  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
