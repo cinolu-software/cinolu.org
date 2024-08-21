@@ -1,0 +1,55 @@
+<section class="px-8 md:px-32 mt-24 mb-24">
+  <div class="leading-snug">
+    <h1 class="font-satoshi font-bold text-2xl md:text-4xl mb-8">
+      Votre
+      <span class="text-green-600">“One Stop Ecosystem Support” </span>
+    </h1>
+    <p class="md:text-lg">
+      Notre expérience montre que nous sommes un partenaire de confiance et un point de référence et nous vous
+      accompagnons avec les compétences, les ressources et le réseau qu'il vous faut pour vous lancer et croître.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 items-center content-center mt-16">
+    @for (purpose of purposes; track $index) {
+      <div class="grid grid-cols-1 md:grid-cols-2 mb-20 gap-10 items-center">
+        <div class="relative w-full h-60 md:h-96 mt-5 lg:mt-0 {{ $index % 2 !== 0 ? 'md:order-last' : '' }}">
+          <img class="object-cover rounded-lg" [ngSrc]="purpose.image" alt="hero" fill />
+        </div>
+        <div class="">
+          <h2 class="font-extrabold text-2xl md:text-4xl mb-3">
+            <span class="inline-block mr-2">
+              <mat-icon class="icon-size-5 fill-green-700" [svgIcon]="purpose.icon"></mat-icon>
+            </span>
+            {{ purpose.title }}
+          </h2>
+          <p class="font-satoshi text-gray-800 text-lg font-semibold">{{ purpose.description }}</p>
+          <ul class="flex flex-col gap-3 mt-3">
+            @for (feature of purpose.features; track $index) {
+              <li class="flex items-center gap-2 font-medium">
+                <mat-icon class="icon-size-5 fill-green-600" svgIcon="check"></mat-icon>
+                {{ feature.name }}
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="bg-green-900 text-white shadow-lg rounded-md px-8 py-10 mb-10">
+    <h1 class="text-xl font-satoshi font-bold mb-4">Commencez votre voyage avec nous !</h1>
+    <h5 class="mb-8">
+      Rejoignez la communauté de startups à la croissance la plus rapide, composée d'individus et d'entreprises qui ont
+      un impact sur le monde entier. Commencez gratuitement
+    </h5>
+    <a
+      routerLink="/auth/sign-up"
+      class="rounded-md px-6 py-2 inline-flex items-center gap-1 bg-white/80 hover:bg-white text-green-700 transition-colors duration-300 group">
+      Rejoignez-nous
+      <mat-icon
+        class="icon-size-4 fill-green-700 group-hover:translate-x-1 transition-transform duration-300"
+        svgIcon="arrow_right"></mat-icon>
+    </a>
+  </div>
+</section>

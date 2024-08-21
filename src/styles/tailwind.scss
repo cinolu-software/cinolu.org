@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .nav-open div:first-child {
+    @apply rotate-45 translate-y-1.5;
+  }
+
+  app-root.open-nav {
+    @apply overflow-hidden;
+  }
+
+  .nav-open div:last-child {
+    @apply -rotate-45 -translate-y-1;
+  }
+
+  em {
+    @apply not-italic text-gray-950 bg-green-200/60;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+
+  ::-moz-selection {
+    @apply text-white bg-green-600;
+  }
+
+  ::selection {
+    @apply text-white bg-green-600;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-green-900/70 w-1 rounded-md;
+}
