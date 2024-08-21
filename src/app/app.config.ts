@@ -3,7 +3,13 @@ import { ApplicationConfig } from '@angular/core';
 import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { PreloadAllModules, provideRouter, withInMemoryScrolling, withPreloading } from '@angular/router';
+import {
+  PreloadAllModules,
+  provideRouter,
+  TitleStrategy,
+  withInMemoryScrolling,
+  withPreloading
+} from '@angular/router';
 import { provideFuse } from '@fuse';
 import { appRoutes } from 'app/app.routes';
 import { provideAuth } from 'app/core/auth/auth.provider';
@@ -12,11 +18,15 @@ import { mockApiServices } from 'app/mock-api';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideClientHydration } from '@angular/platform-browser';
+import { PageTitleStrategy } from './core/strategies/page-title.strategy';
+import { authReducers } from './core/auth/data-access/auth.reducers';
+import * as authEffects from './core/auth/data-access/auth.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
     provideHttpClient(withFetch()),
+    { provide: TitleStrategy, useClass: PageTitleStrategy },
     provideRouter(
       appRoutes,
       withPreloading(PreloadAllModules),
@@ -87,8 +97,10 @@ export const appConfig: ApplicationConfig = {
         ]
       }
     }),
-    provideStore(),
-    provideEffects(),
+    provideEffects(authEffects),
+    provideStore({
+      auth: authReducers
+    }),
     provideClientHydration()
   ]
 };

@@ -5,7 +5,7 @@ import { FuseConfig, FuseConfigService } from '@fuse/services/config';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { FusePlatformService } from '@fuse/services/platform';
 import { FUSE_VERSION } from '@fuse/version';
-import { Subject, filter, takeUntil } from 'rxjs';
+import { Subject, combineLatest, filter, map, takeUntil } from 'rxjs';
 import { SettingsComponent } from './common/settings/settings.component';
 import { EmptyLayoutComponent } from './layouts/empty/empty.component';
 import { FuturisticLayoutComponent } from './layouts/futuristic/futuristic.component';
@@ -16,7 +16,7 @@ import { FuturisticLayoutComponent } from './layouts/futuristic/futuristic.compo
   styleUrls: ['./layout.component.scss'],
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [EmptyLayoutComponent, FuturisticLayoutComponent, SettingsComponent]
+  imports: [EmptyLayoutComponent, FuturisticLayoutComponent]
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   config: FuseConfig;
@@ -46,21 +46,64 @@ export class LayoutComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
+    // Set the theme and scheme based on the configuration
+    combineLatest([
+      this._fuseConfigService.config$,
+      this._fuseMediaWatcherService.onMediaQueryChange$([
+        '(prefers-color-scheme: dark)',
+        '(prefers-color-scheme: light)'
+      ])
+    ])
+      .pipe(
+        takeUntil(this._unsubscribeAll),
+        map(([config, mql]) => {
+          const options = {
+            scheme: config.scheme,
+            theme: config.theme
+          };
+
+          // If the scheme is set to 'auto'...
+          if (config.scheme === 'auto') {
+            // Decide the scheme using the media query
+            options.scheme = mql.breakpoints['(prefers-color-scheme: dark)'] ? 'dark' : 'light';
+          }
+
+          return options;
+        })
+      )
+      .subscribe((options) => {
+        // Store the options
+        this.scheme = options.scheme;
+        this.theme = options.theme;
+
+        // Update the scheme and theme
+        this._updateScheme();
+      });
+
+    // Subscribe to config changes
     this._fuseConfigService.config$.pipe(takeUntil(this._unsubscribeAll)).subscribe((config: FuseConfig) => {
+      // Store the config
       this.config = config;
+
+      // Update the layout
       this._updateLayout();
     });
 
+    // Subscribe to NavigationEnd event
     this._router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
         takeUntil(this._unsubscribeAll)
       )
       .subscribe(() => {
+        // Update the layout
         this._updateLayout();
       });
 
+    // Set the app version
     this._renderer2.setAttribute(this._document.querySelector('[ng-version]'), 'fuse-version', FUSE_VERSION);
+
+    // Set the OS name
     this._renderer2.addClass(this._document.body, this._fusePlatformService.osName);
   }
 
@@ -68,6 +111,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
    * On destroy
    */
   ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
     this._unsubscribeAll.next(null);
     this._unsubscribeAll.complete();
   }
@@ -123,5 +167,18 @@ export class LayoutComponent implements OnInit, OnDestroy {
         this.layout = path.routeConfig.data.layout;
       }
     });
+  }
+
+  /**
+   * Update the selected scheme
+   *
+   * @private
+   */
+  private _updateScheme(): void {
+    // Remove class names for all schemes
+    this._document.body.classList.remove('light', 'dark');
+
+    // Add class name for the currently selected scheme
+    this._document.body.classList.add(this.scheme);
   }
 }
