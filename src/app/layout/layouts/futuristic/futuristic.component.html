@@ -11,14 +11,16 @@
   <!-- Navigation header hook -->
   <ng-container fuseVerticalNavigationHeader>
     <!-- Logo -->
-    <div class="flex h-20 w-26 items-center p-6 pb-0 mb-10">
-      <img class="object-cover" src="images/logo/logo-w.png" fill priority />
-    </div>
+    <a routerLink="/">
+      <div class="flex h-20 w-26 items-center p-6 pb-0 mb-10">
+        <img class="object-cover" src="images/logo/logo-w.png" fill priority />
+      </div>
+    </a>
   </ng-container>
   <!-- Navigation footer hook -->
   <ng-container fuseVerticalNavigationFooter>
     <!-- User -->
-    <div class="flex w-full items-center border-t px-6 py-8">
+    <div class="flex w-full items-center border-t border-primary-800 px-6 py-8">
       <user></user>
       <div class="ml-4 flex w-full flex-col overflow-hidden" *ngIf="user$ | async as user">
         <div class="w-full overflow-hidden text-ellipsis whitespace-nowrap leading-normal text-current opacity-80">

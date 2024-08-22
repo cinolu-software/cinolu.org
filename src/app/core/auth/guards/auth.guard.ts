@@ -1,21 +1,20 @@
+import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
-import { CanActivateChildFn, CanActivateFn } from '@angular/router';
-import { catchError, map } from 'rxjs';
+import { catchError, map, of } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { Store } from '@ngrx/store';
-import { authActions } from '../data-access/auth.actions';
+import { selectUser } from '../data-access/auth.reducers';
 
-export const AuthGuard: CanActivateFn | CanActivateChildFn = (route, state) => {
-  const authService = inject(AuthService);
+export const authGuard: CanActivateFn = () => {
+  const router = inject(Router);
   const store = inject(Store);
+  const user$ = store.select(selectUser);
 
-  return authService.authenticate().pipe(
-    map((user) => {
-      store.dispatch(authActions.authenticateUser({ user }));
-      return true;
-    }),
+  return user$.pipe(
+    map((user) => !!user),
     catchError(() => {
-      return [false];
+      router.navigate(['/sign-in']);
+      return of(false);
     })
   );
 };

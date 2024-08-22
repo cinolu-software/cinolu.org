@@ -20,7 +20,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PageTitleStrategy } from './core/strategies/page-title.strategy';
 import { authReducers } from './core/auth/data-access/auth.reducers';
-import * as authEffects from './core/auth/data-access/auth.effects';
+import { AuthEffects } from './core/auth/data-access/auth.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -97,7 +97,7 @@ export const appConfig: ApplicationConfig = {
         ]
       }
     }),
-    provideEffects(authEffects),
+    provideEffects(AuthEffects),
     provideStore({
       auth: authReducers
     }),

@@ -12,7 +12,8 @@ const authFeature = createFeature({
     initialState,
     on(authActions.authentication, (state) => ({ ...state })),
     on(authActions.authenticateUser, (state, actions) => ({ ...state, user: actions.user })),
-    on(authActions.signOut, (state) => ({ ...state, user: null }))
+    on(authActions.signOut, (state) => ({ ...state, user: null })),
+    on(authActions.signoutSuccess, (state) => ({ ...state, user: null }))
   )
 });
 

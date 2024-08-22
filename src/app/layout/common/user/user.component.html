@@ -1,17 +1,14 @@
-<!-- Button -->
-
 <div *ngIf="user$ | async as user">
   <button mat-icon-button [matMenuTriggerFor]="userActions">
     <span class="relative">
-      @if (showAvatar) {
+      @if (user.google_image || user.profile) {
         <img class="h-7 w-7 rounded-full" [src]="displayImage(user)" />
-      }
-      @if (!showAvatar) {
+      } @else {
         <mat-icon [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
       }
       <span
         class="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-green-500"
-        [ngClass]="{ 'mb-px mr-px': !showAvatar }"></span>
+        [ngClass]="{ 'mb-px mr-px': !user.profile || !user.profile }"></span>
     </span>
   </button>
 

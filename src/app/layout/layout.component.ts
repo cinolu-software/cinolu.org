@@ -6,7 +6,6 @@ import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { FusePlatformService } from '@fuse/services/platform';
 import { FUSE_VERSION } from '@fuse/version';
 import { Subject, combineLatest, filter, map, takeUntil } from 'rxjs';
-import { SettingsComponent } from './common/settings/settings.component';
 import { EmptyLayoutComponent } from './layouts/empty/empty.component';
 import { FuturisticLayoutComponent } from './layouts/futuristic/futuristic.component';
 
@@ -78,6 +77,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
         // Update the scheme and theme
         this._updateScheme();
+        this._updateTheme();
       });
 
     // Subscribe to config changes
@@ -180,5 +180,17 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     // Add class name for the currently selected scheme
     this._document.body.classList.add(this.scheme);
+  }
+
+  /**
+   * Update the selected theme
+   *
+   * @private
+   */
+  private _updateTheme(): void {
+    // Find the class name for the previously selected theme and remove it
+
+    // Add class name for the currently selected theme
+    this._document.body.classList.add(this.theme);
   }
 }

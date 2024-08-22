@@ -1,8 +1,7 @@
 import { Route } from '@angular/router';
 import { initialDataResolver } from 'app/app.resolvers';
-import { AuthGuard } from 'app/core/auth/guards/auth.guard';
-import { NoAuthGuard } from 'app/core/auth/guards/noAuth.guard';
 import { LayoutComponent } from 'app/layout/layout.component';
+import { authGuard } from './core/auth/guards/auth.guard';
 
 export const appRoutes: Route[] = [
   {
@@ -18,18 +17,21 @@ export const appRoutes: Route[] = [
   // Auth routes for guests
   {
     path: '',
-    canActivate: [NoAuthGuard],
-    canActivateChild: [NoAuthGuard],
     component: LayoutComponent,
     data: {
       layout: 'empty'
     },
     children: [
-      // {
-      //   path: 'forgot-password',
-      //   loadChildren: () => import('app/modules/auth/forgot-password/forgot-password.routes')
-      // },
-      // { path: 'reset-password', loadChildren: () => import('app/modules/auth/reset-password/reset-password.routes') },
+      {
+        path: 'forgot-password',
+        title: 'Forgot Password',
+        loadChildren: () => import('app/modules/auth/forgot-password/forgot-password.routes')
+      },
+      {
+        path: 'reset-password',
+        title: 'Reset Password',
+        loadChildren: () => import('app/modules/auth/reset-password/reset-password.routes')
+      },
       { path: 'sign-in', title: 'Sign In', loadChildren: () => import('app/modules/auth/sign-in/sign-in.routes') }
       // { path: 'sign-up', loadChildren: () => import('app/modules/auth/sign-up/sign-up.routes') }
     ]
@@ -38,8 +40,8 @@ export const appRoutes: Route[] = [
   // Auth routes for authenticated users
   {
     path: '',
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],
+    // canActivate: [authGuard],
+    // canActivateChild: [authGuard],
     component: LayoutComponent,
     data: {
       layout: 'empty'
@@ -52,9 +54,7 @@ export const appRoutes: Route[] = [
   // Admin routes
   {
     path: '',
-
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],
+    canActivate: [authGuard],
     component: LayoutComponent,
     data: {
       layout: 'futuristic'

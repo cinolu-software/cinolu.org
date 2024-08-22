@@ -1,35 +1,36 @@
-import { inject } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of } from 'rxjs';
-import { authActions } from './auth.actions';
-import { Router } from '@angular/router';
+import { inject, Injectable } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { authActions } from './auth.actions';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
-export const authenticateEffect = createEffect(
-  (actions$ = inject(Actions), authService = inject(AuthService)) =>
-    actions$.pipe(
+@Injectable()
+export class AuthEffects {
+  private _authService: AuthService = inject(AuthService);
+  private _actions$ = inject(Actions);
+
+  authenticate$ = createEffect(() =>
+    this._actions$.pipe(
       ofType(authActions.authentication),
-      exhaustMap(() =>
-        authService.authenticate().pipe(
+      mergeMap(() =>
+        this._authService.authenticate().pipe(
           map((user) => authActions.authenticateUser({ user })),
           catchError(() => of())
         )
       )
-    ),
-  { functional: true }
-);
+    )
+  );
 
-export const signOutEffect = createEffect(
-  (actions$ = inject(Actions), authService = inject(AuthService), router = inject(Router)) =>
-    actions$.pipe(
+  signOut$ = createEffect(() =>
+    this._actions$.pipe(
       ofType(authActions.signOut),
-      exhaustMap(() =>
-        authService.signOut().pipe(
-          map(() => router.navigateByUrl('/auth/login')),
-          map(() => authActions.authenticateUser({ user: null })),
+      mergeMap(() =>
+        this._authService.signOut().pipe(
+          map(() => authActions.signoutSuccess()),
           catchError(() => of())
         )
       )
-    ),
-  { functional: true }
-);
+    )
+  );
+}

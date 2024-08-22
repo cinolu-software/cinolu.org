@@ -6,11 +6,10 @@ import { Observable } from 'rxjs';
 import { ILink } from './types/link.interface';
 import { FormsModule } from '@angular/forms';
 import { IUser } from '../types/models.interface';
-// import { selectUser } from '../../store/auth/data-access/auth.reducers';
-// import { authActions } from '../../store/auth/data-access/auth.actions';
+import { selectUser } from '../auth/data-access/auth.reducers';
 
 @Component({
-  selector: 'home-topbar',
+  selector: 'app-topbar',
   standalone: true,
   imports: [CommonModule, RouterModule, NgOptimizedImage, FormsModule],
   templateUrl: './topbar.component.html'
@@ -22,7 +21,7 @@ export class TopbarComponent {
   private _router: Router = inject(Router);
 
   constructor() {
-    // this.user$ = this._store.pipe(select(selectUser));
+    this.user$ = this._store.pipe(select(selectUser));
   }
 
   commonLinks: ILink[] = [
@@ -48,16 +47,16 @@ export class TopbarComponent {
 
   unAuthenticatedUserLinks: ILink[] = [...this.commonLinks, ...this.authLinks];
 
-  signIn(): void {
-    // return this._store.dispatch(authActions.logout());
-  }
-
   trimName(name: string): string {
     return name.length > 15 ? name.substring(0, 15) + '...' : name;
   }
 
   openNavbar(): void {
     this.isOpen = true;
+  }
+
+  signOut(): void {
+    this._router.navigate(['/sign-out']);
   }
 
   closeNavbar(): void {

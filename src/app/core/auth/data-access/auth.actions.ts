@@ -6,6 +6,7 @@ export const authActions = createActionGroup({
   events: {
     authentication: emptyProps(),
     authenticateUser: props<{ user: IUser | null }>(),
-    signOut: emptyProps()
+    signOut: emptyProps(),
+    signoutSuccess: emptyProps()
   }
 });

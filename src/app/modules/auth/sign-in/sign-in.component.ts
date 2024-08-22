@@ -13,6 +13,7 @@ import { SignInStore } from './data-access/sign-in.store';
 import { Observable } from 'rxjs';
 import { ISignInStore } from './types/sign-in-store.interface';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { TopbarComponent } from '../../../core/topbar/topbar.component';
 
 @Component({
   selector: 'auth-sign-in',
@@ -30,25 +31,24 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatCheckboxModule,
     MatProgressSpinnerModule,
     CommonModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    TopbarComponent
   ]
 })
 export class AuthSignInComponent implements OnInit {
   signInForm: FormGroup;
-  vm$: Observable<ISignInStore>;
-  imgs: string[] = ['/images/team/ls.webp', '/images/team/mm.webp', '/images/team/jm.webp', '/images/team/bn.webp'];
+  state$: Observable<ISignInStore>;
   private _signInStore = inject(SignInStore);
   private _formBuilder: FormBuilder = inject(FormBuilder);
 
   ngOnInit(): void {
     this.signInForm = this._formBuilder.group({
-      email: ['admin@admin.com', [Validators.required, Validators.email]],
-      password: ['admin', Validators.required]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
     });
-    this.vm$ = this._signInStore.vm$;
+    this.state$ = this._signInStore.state$;
   }
 
   signIn(): void {
