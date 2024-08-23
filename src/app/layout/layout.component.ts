@@ -7,8 +7,8 @@ import { FusePlatformService } from '@fuse/services/platform';
 import { FUSE_VERSION } from '@fuse/version';
 import { Subject, combineLatest, filter, map, takeUntil } from 'rxjs';
 import { EmptyLayoutComponent } from './layouts/empty/empty.component';
-import { FuturisticLayoutComponent } from './layouts/futuristic/futuristic.component';
 import { AuthLayoutComponent } from './layouts/auth/auth.component';
+import { ClassicLayoutComponent } from './layouts/classic/classic.component';
 
 @Component({
   selector: 'layout',
@@ -16,7 +16,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth.component';
   styleUrls: ['./layout.component.scss'],
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [EmptyLayoutComponent, FuturisticLayoutComponent, AuthLayoutComponent]
+  imports: [EmptyLayoutComponent, AuthLayoutComponent, ClassicLayoutComponent]
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   config: FuseConfig;

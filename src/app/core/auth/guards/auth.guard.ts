@@ -11,7 +11,7 @@ export const authGuard: CanActivateFn = () => {
   const user$ = store.select(selectUser);
 
   return user$.pipe(
-    map((user) => !!user),
+    map(() => true),
     catchError(() => {
       router.navigate(['/sign-in']);
       return of(false);

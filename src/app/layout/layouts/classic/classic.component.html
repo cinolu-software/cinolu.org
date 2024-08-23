@@ -1,0 +1,43 @@
+<fuse-loading-bar />
+
+<fuse-vertical-navigation
+  class="dark bg-green-900 print:hidden"
+  [mode]="isScreenSmall ? 'over' : 'side'"
+  [name]="'mainNavigation'"
+  [navigation]="navigation.default"
+  [opened]="!isScreenSmall">
+  <ng-container fuseVerticalNavigationContentHeader>
+    <a routerLink="/">
+      <div class="flex h-20 w-26 items-center p-6 pb-0 mt-6 mb-10">
+        <img class="object-cover" src="images/logo/logo-w.png" fill priority />
+      </div>
+    </a>
+  </ng-container>
+</fuse-vertical-navigation>
+
+<!-- Wrapper -->
+<div class="flex w-full min-w-0 flex-auto flex-col">
+  <div
+    class="bg-card relative z-49 flex h-16 w-full flex-0 items-center px-4 shadow dark:border-b dark:bg-transparent dark:shadow-none md:px-6 print:hidden">
+    <button mat-icon-button (click)="toggleNavigation('mainNavigation')">
+      <mat-icon [svgIcon]="'heroicons_outline:bars-3'"></mat-icon>
+    </button>
+    <div class="ml-auto flex items-center space-x-0.5 pl-2 sm:space-x-2">
+      <search [appearance]="'bar'"></search>
+      <messages />
+      <notifications />
+      <user></user>
+    </div>
+  </div>
+
+  <div class="flex flex-auto flex-col">
+    @if (true) {
+      <router-outlet></router-outlet>
+    }
+  </div>
+
+  <div
+    class="bg-card relative z-49 flex h-14 w-full flex-0 items-center justify-start border-t px-4 dark:bg-transparent md:px-6 print:hidden">
+    <span class="text-secondary font-medium">CINOLU &copy; {{ currentYear }}</span>
+  </div>
+</div>

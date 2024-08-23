@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,44 +7,44 @@ import { FuseFullscreenComponent } from '@fuse/components/fullscreen';
 import { FuseLoadingBarComponent } from '@fuse/components/loading-bar';
 import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
-import { Store } from '@ngrx/store';
-import { selectUser } from 'app/core/auth/data-access/auth.reducers';
 import { NavigationService } from 'app/core/navigation/navigation.service';
 import { Navigation } from 'app/core/navigation/navigation.types';
-import { IUser } from 'app/core/types/models.interface';
+import { MessagesComponent } from 'app/layout/common/messages/messages.component';
 import { NotificationsComponent } from 'app/layout/common/notifications/notifications.component';
+import { QuickChatComponent } from 'app/layout/common/quick-chat/quick-chat.component';
 import { SearchComponent } from 'app/layout/common/search/search.component';
+import { ShortcutsComponent } from 'app/layout/common/shortcuts/shortcuts.component';
 import { UserComponent } from 'app/layout/common/user/user.component';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'futuristic-layout',
-  templateUrl: './futuristic.component.html',
+  selector: 'classic-layout',
+  templateUrl: './classic.component.html',
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
     FuseLoadingBarComponent,
     FuseVerticalNavigationComponent,
-    UserComponent,
     MatButtonModule,
     MatIconModule,
+    FuseFullscreenComponent,
     SearchComponent,
+    ShortcutsComponent,
+    MessagesComponent,
     NotificationsComponent,
+    UserComponent,
     RouterOutlet,
     NgOptimizedImage,
-    CommonModule,
     RouterLink
   ]
 })
-export class FuturisticLayoutComponent implements OnInit, OnDestroy {
+export class ClassicLayoutComponent implements OnInit, OnDestroy {
   isScreenSmall: boolean;
   navigation: Navigation;
-  user$: Observable<IUser>;
   private _unsubscribeAll = new Subject();
-  private _navigationService: NavigationService = inject(NavigationService);
-  private _fuseMediaWatcherService: FuseMediaWatcherService = inject(FuseMediaWatcherService);
-  private _fuseNavigationService: FuseNavigationService = inject(FuseNavigationService);
-  private _store: Store = inject(Store);
+  private _navigationService = inject(NavigationService);
+  private _fuseMediaWatcherService = inject(FuseMediaWatcherService);
+  private _fuseNavigationService = inject(FuseNavigationService);
 
   get currentYear(): number {
     return new Date().getFullYear();
@@ -59,7 +59,6 @@ export class FuturisticLayoutComponent implements OnInit, OnDestroy {
       .subscribe(({ matchingAliases }) => {
         this.isScreenSmall = !matchingAliases.includes('md');
       });
-    this.user$ = this._store.select(selectUser);
   }
 
   ngOnDestroy(): void {
