@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
   standalone: true,
   imports: [RouterOutlet]
 })
@@ -14,6 +13,6 @@ export class AppComponent {
   private _store: Store = inject(Store);
 
   ngOnInit(): void {
-    this._store.dispatch(authActions.authentication());
+    this._store.dispatch(authActions.authenticate());
   }
 }
