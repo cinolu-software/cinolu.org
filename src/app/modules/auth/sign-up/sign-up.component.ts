@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 import { TopbarComponent } from '../../../core/topbar/topbar.component';
 import { IAPIValidationError } from 'app/core/types/api-validation-error.interface';
 import { APIValiadationError } from '../../../core/pipes/api-validation-error.pipe';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'auth-sign-up',
@@ -47,6 +48,7 @@ export class AuthSignUpComponent {
   state$: Observable<ISignUpStore>;
   private _formBuilder = inject(FormBuilder);
   private _signUpStore = inject(SignUpStore);
+  private _apiUrl = environment.apiUrl;
 
   constructor() {
     this.signUpForm = this._formBuilder.group({
@@ -64,5 +66,9 @@ export class AuthSignUpComponent {
 
   signUp(): void {
     if (!this.signUpForm.invalid) this._signUpStore.signUp(this.signUpForm.value);
+  }
+
+  signinWithGoogle(): void {
+    window.location.replace(this._apiUrl + 'auth/google/redirect');
   }
 }

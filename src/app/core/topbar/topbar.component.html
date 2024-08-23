@@ -1,4 +1,4 @@
-<header class="relative z-40 text-gray-950 font-medium h-14 md:h-18">
+<header class="relative z-40 text-gray-950 font-generalSans font-medium h-14 md:h-18">
   <nav [ngClass]="isOpen ? 'lg:static fixed top-0 bottom-0 right-0 left-0 bg-white/75 z-10' : ''">
     <ul
       class="navbar fixed w-full top-0 left-0 right-0 translate-y-0 lg:px-20 px-10 py-3 transition-transform duration-300 bg-white shadow-sm z-20 flex items-center justify-between">
@@ -35,7 +35,7 @@
             (click)="closeNavbar()"
             routerLinkActive="text-green-700"
             [routerLinkActiveOptions]="{ exact: true }">
-            dashboard
+            Dashboard
           </a>
           <button class="hover:text-green-700 transition-colors duration-300" (click)="signOut()">Déconnexion</button>
         } @else {
@@ -75,7 +75,7 @@
             (click)="closeNavbar()"
             routerLinkActive="text-green-700"
             [routerLinkActiveOptions]="{ exact: true }">
-            dashboard
+            Dashboard
           </a>
 
           <button href="" class="inline-flex hover:text-green-400 transition-colors duration-300" (click)="signOut()">

@@ -2,8 +2,8 @@
   <div class="mb-2.5">
     <h2 class="text-2xl font-bold leading-tight tracking-tight">S'inscrire</h2>
     <div class="mt-0.5 flex items-baseline font-medium">
-      <div>Ou continuer avec</div>
-      <button class="ml-1 text-primary-500 hover:underline">Google</button>
+      <p>Ou continuer avec</p>
+      <button class="ml-1 text-primary-500 hover:underline" (click)="signinWithGoogle()">Google</button>
     </div>
     @if (state.error || state.errors.length > 0) {
       <fuse-alert class="mt-8" appearance="soft" type="error" [showIcon]="true" [@shake]="true">

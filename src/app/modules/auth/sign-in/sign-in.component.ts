@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { ISignInStore } from './types/sign-in-store.interface';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { TopbarComponent } from '../../../core/topbar/topbar.component';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'auth-sign-in',
@@ -42,6 +43,7 @@ export class AuthSignInComponent implements OnInit {
   state$: Observable<ISignInStore>;
   private _signInStore = inject(SignInStore);
   private _formBuilder: FormBuilder = inject(FormBuilder);
+  private _apiUrl = environment.apiUrl;
 
   ngOnInit(): void {
     this.signInForm = this._formBuilder.group({
@@ -55,5 +57,9 @@ export class AuthSignInComponent implements OnInit {
     if (!this.signInForm.invalid) {
       this._signInStore.signIn(this.signInForm.value);
     }
+  }
+
+  signinWithGoogle(): void {
+    window.location.replace(this._apiUrl + 'auth/google/redirect');
   }
 }
