@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { IUser } from '../types/models.interface';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 import { Router } from '@angular/router';
 import { IUserCredentials } from 'app/modules/auth/sign-in/types/sign-in-payload.interface';
 import { IForgotPasswordPayload } from 'app/modules/auth/forgot-password/types/forgot-password-payload.interface';

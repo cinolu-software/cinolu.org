@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'home-purposes',
+  selector: 'landing-purposes',
   standalone: true,
   imports: [NgOptimizedImage, RouterLink, MatIconModule],
   templateUrl: './purposes.component.html'

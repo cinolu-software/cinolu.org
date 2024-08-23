@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'home-hero',
+  selector: 'landing-hero',
   standalone: true,
   imports: [RouterLink, NgOptimizedImage, MatIconModule],
   templateUrl: './hero.component.html'

@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
-  selector: 'home-footer',
+  selector: 'app-footer',
   standalone: true,
   imports: [RouterLink, NgOptimizedImage],
   templateUrl: './footer.component.html'

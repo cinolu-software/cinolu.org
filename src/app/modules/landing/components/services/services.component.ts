@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'home-services',
+  selector: 'landing-services',
   standalone: true,
   imports: [],
   templateUrl: './services.component.html'

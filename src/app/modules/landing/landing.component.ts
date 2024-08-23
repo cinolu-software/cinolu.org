@@ -5,11 +5,11 @@ import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
 import { TeamComponent } from './components/team/team.component';
 import { PurposesComponent } from './components/purposes/purposes.component';
-import { TopbarComponent } from '../../../core/topbar/topbar.component';
-import { FooterComponent } from '../../../core/footer/footer.component';
+import { TopbarComponent } from 'app/core/topbar/topbar.component';
+import { FooterComponent } from 'app/core/footer/footer.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-landing',
   standalone: true,
   imports: [
     CommonModule,
@@ -21,6 +21,6 @@ import { FooterComponent } from '../../../core/footer/footer.component';
     TopbarComponent,
     FooterComponent
   ],
-  templateUrl: './home.component.html'
+  templateUrl: './landing.component.html'
 })
-export class LandingHomeComponent {}
+export class LandingComponent {}
