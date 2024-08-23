@@ -1,6 +1,6 @@
-import { Route } from '@angular/router';
+import { Routes } from '@angular/router';
 
-export const auhtRoutes: Route[] = [
+export const auhtRoutes: Routes = [
   {
     path: 'sign-in',
     title: 'Sign In',
