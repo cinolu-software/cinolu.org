@@ -1,120 +1,68 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import {
-    FormsModule,
-    NgForm,
-    ReactiveFormsModule,
-    UntypedFormBuilder,
-    UntypedFormGroup,
-    Validators,
-} from '@angular/forms';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
-import { FuseAlertComponent, FuseAlertType } from '@fuse/components/alert';
-import { AuthService } from 'app/core/auth/auth.service';
+import { FuseAlertComponent } from '@fuse/components/alert';
+import { SignUpStore } from './data-access/sign-up.store';
+import { Observable } from 'rxjs';
+import { ISignUpStore } from './types/sign-up-store.interface';
+import { CommonModule } from '@angular/common';
+import { TopbarComponent } from '../../../core/topbar/topbar.component';
+import { IAPIValidationError } from 'app/core/types/api-validation-error.interface';
+import { APIValiadationError } from '../../../core/pipes/api-validation-error.pipe';
 
 @Component({
-    selector: 'auth-sign-up',
-    templateUrl: './sign-up.component.html',
-    encapsulation: ViewEncapsulation.None,
-    animations: fuseAnimations,
-    standalone: true,
-    imports: [
-        RouterLink,
-        FuseAlertComponent,
-        FormsModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-        MatCheckboxModule,
-        MatProgressSpinnerModule,
-    ],
+  selector: 'auth-sign-up',
+  templateUrl: './sign-up.component.html',
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations,
+  standalone: true,
+  providers: [SignUpStore],
+  imports: [
+    RouterLink,
+    FuseAlertComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    CommonModule,
+    MatStepperModule,
+    TopbarComponent,
+    APIValiadationError
+  ]
 })
-export class AuthSignUpComponent implements OnInit {
-    @ViewChild('signUpNgForm') signUpNgForm: NgForm;
+export class AuthSignUpComponent {
+  signUpForm: FormGroup;
+  state$: Observable<ISignUpStore>;
+  private _formBuilder = inject(FormBuilder);
+  private _signUpStore = inject(SignUpStore);
 
-    alert: { type: FuseAlertType; message: string } = {
-        type: 'success',
-        message: '',
-    };
-    signUpForm: UntypedFormGroup;
-    showAlert: boolean = false;
+  constructor() {
+    this.signUpForm = this._formBuilder.group({
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      address: ['', Validators.required],
+      phone_number: ['', Validators.required],
+      password: ['', Validators.required],
+      password_confirm: ['', [Validators.required]]
+    });
+    this.state$ = this._signUpStore.state$;
+  }
 
-    /**
-     * Constructor
-     */
-    constructor(
-        private _authService: AuthService,
-        private _formBuilder: UntypedFormBuilder,
-        private _router: Router
-    ) {}
-
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * On init
-     */
-    ngOnInit(): void {
-        // Create the form
-        this.signUpForm = this._formBuilder.group({
-            name: ['', Validators.required],
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required],
-            company: [''],
-            agreements: ['', Validators.requiredTrue],
-        });
-    }
-
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Sign up
-     */
-    signUp(): void {
-        // Do nothing if the form is invalid
-        if (this.signUpForm.invalid) {
-            return;
-        }
-
-        // Disable the form
-        this.signUpForm.disable();
-
-        // Hide the alert
-        this.showAlert = false;
-
-        // Sign up
-        this._authService.signUp(this.signUpForm.value).subscribe(
-            (response) => {
-                // Navigate to the confirmation required page
-                this._router.navigateByUrl('/confirmation-required');
-            },
-            (response) => {
-                // Re-enable the form
-                this.signUpForm.enable();
-
-                // Reset the form
-                this.signUpNgForm.resetForm();
-
-                // Set the alert
-                this.alert = {
-                    type: 'error',
-                    message: 'Something went wrong, please try again.',
-                };
-
-                // Show the alert
-                this.showAlert = true;
-            }
-        );
-    }
+  signUp(): void {
+    if (!this.signUpForm.invalid) this._signUpStore.signUp(this.signUpForm.value);
+  }
 }

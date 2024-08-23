@@ -30,8 +30,8 @@ export class ResetPasswordStore extends ComponentStore<IResetPasswordStore> {
             next: () => this._setIsLoading(false),
             error: (error: HttpErrorResponse) => {
               const message = error.error.message;
-              if (typeof message === 'string') this._setError(message);
-              this._setErrors(message);
+              if (typeof message !== 'string') this._setErrors(message);
+              this._setError(message);
             },
             finalize: () => this._setIsLoading(false)
           })

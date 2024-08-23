@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { IUserCredentials } from 'app/modules/auth/sign-in/types/sign-in-payload.interface';
 import { IForgotPasswordPayload } from 'app/modules/auth/forgot-password/types/forgot-password-payload.interface';
 import { IResetPasswordPayload } from 'app/modules/auth/reset-password/types/reset-password-payload.interface';
+import { ISignUpPayload } from 'app/modules/auth/sign-up/types/sign-up-payload.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -22,6 +23,13 @@ export class AuthService {
     return this._httpClient.post<{ data: IUser }>(this._apiUrl + 'auth/login', credentials).pipe(
       map((res) => res.data),
       tap(() => this._router.navigate(['/dashboard']))
+    );
+  }
+
+  signUp(payload: ISignUpPayload): Observable<IUser> {
+    return this._httpClient.post<{ data: IUser }>(this._apiUrl + 'auth/register', payload).pipe(
+      map((response) => response.data),
+      tap(() => this._router.navigate(['/sign-in']))
     );
   }
 

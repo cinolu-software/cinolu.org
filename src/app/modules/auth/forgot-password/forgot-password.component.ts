@@ -12,7 +12,8 @@ import { ForgotPasswordStore } from './data-access/forgot-password.store';
 import { IForgotPasswordStore } from './types/forgot-password-store.interface';
 import { TopbarComponent } from '../../../core/topbar/topbar.component';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ValiadationInputError } from 'app/core/pipes/api-input-error.pipe';
+import { APIValiadationError } from 'app/core/pipes/api-validation-error.pipe';
+import { IAPIValidationError } from 'app/core/types/api-validation-error.interface';
 
 @Component({
   selector: 'auth-forgot-password',
@@ -32,8 +33,8 @@ import { ValiadationInputError } from 'app/core/pipes/api-input-error.pipe';
     RouterLink,
     TopbarComponent,
     CommonModule,
-    ValiadationInputError,
-    NgOptimizedImage
+    NgOptimizedImage,
+    APIValiadationError
   ]
 })
 export class AuthForgotPasswordComponent {

@@ -13,7 +13,7 @@ import { IResetPasswordStore } from './types/reset-password-store.interface';
 import { Observable } from 'rxjs';
 import { TopbarComponent } from '../../../core/topbar/topbar.component';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ValiadationInputError } from '../../../core/pipes/api-input-error.pipe';
+import { APIValiadationError } from '../../../core/pipes/api-validation-error.pipe';
 
 @Component({
   selector: 'auth-reset-password',
@@ -34,8 +34,8 @@ import { ValiadationInputError } from '../../../core/pipes/api-input-error.pipe'
     RouterLink,
     TopbarComponent,
     CommonModule,
-    ValiadationInputError,
-    NgOptimizedImage
+    NgOptimizedImage,
+    APIValiadationError
   ]
 })
 export class AuthResetPasswordComponent {
