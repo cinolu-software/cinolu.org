@@ -34,12 +34,12 @@ export class TopbarComponent {
 
   authLinks: ILink[] = [
     {
-      name: 'Connexion',
+      name: 'Se connecter',
       path: '/sign-in',
       type: 'normal'
     },
     {
-      name: 'Inscription',
+      name: "S'inscrire",
       path: '/sign-up',
       type: 'primary'
     }

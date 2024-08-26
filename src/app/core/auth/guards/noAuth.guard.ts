@@ -1,19 +1,10 @@
 import { inject } from '@angular/core';
 import { CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
-import { AuthService } from 'app/core/auth/auth.service';
-import { catchError, map, of } from 'rxjs';
+import { of } from 'rxjs';
 
-export const NoAuthGuard: CanActivateFn | CanActivateChildFn = (route, state) => {
+export const noAuthGuard: CanActivateFn | CanActivateChildFn = () => {
   const router: Router = inject(Router);
-  const authService = inject(AuthService);
+  const isAuthenticated = true;
 
-  return authService.authenticate().pipe(
-    map((user) => {
-      if (user) {
-        router.navigateByUrl('/dashboard');
-        return false;
-      }
-    }),
-    catchError(() => of(true))
-  );
+  return isAuthenticated ? of(router.parseUrl('')) : of(true);
 };
