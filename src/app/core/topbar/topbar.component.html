@@ -2,15 +2,15 @@
   <nav [ngClass]="isOpen ? 'lg:static fixed top-0 bottom-0 right-0 left-0 bg-white/75 z-10' : ''">
     <ul
       class="navbar fixed w-full top-0 left-0 right-0 translate-y-0 lg:px-20 px-10 py-3 transition-transform duration-300 bg-white shadow-sm z-20 flex items-center justify-between">
-      <a routerLink="/" class="flex items-center gap-3 cursor-pointer" aria-label="logo" (click)="closeNavbar()">
+      <a routerLink="/" class="flex items-center gap-3 cursor-pointer" aria-label="logo">
         <div class="relative h-10 w-8">
           <img ngSrc="/images/logo/logo-g.png" alt="logo" class="absolute" fill priority />
         </div>
       </a>
       <button
         class="flex flex-col cursor-pointer gap-2 lg:hidden"
-        [ngClass]="isOpen ? 'nav-open' : ''"
-        (click)="isOpen ? closeNavbar() : openNavbar()">
+        [ngClass]="isOpen() ? 'nav-open' : ''"
+        (click)="toogleNav()">
         <div class="h-[1px] w-6 bg-current transition-transform duration-300"></div>
         <div class="h-[1px] w-6 bg-current transition-transform duration-300"></div>
       </button>
@@ -22,7 +22,6 @@
           <a
             [routerLink]="link.path"
             class="hover:text-green-700 transition-colors duration-300"
-            (click)="closeNavbar()"
             routerLinkActive="text-green-700"
             [routerLinkActiveOptions]="{ exact: true }">
             {{ link.name }}
@@ -32,10 +31,9 @@
           <a
             routerLink="/dashboard"
             class="hover:text-green-700 transition-colors duration-300"
-            (click)="closeNavbar()"
             routerLinkActive="text-green-700"
             [routerLinkActiveOptions]="{ exact: true }">
-            Dashboard
+            Profil
           </a>
           <button class="hover:text-green-700 transition-colors duration-300" (click)="signOut()">Déconnexion</button>
         } @else {
@@ -43,7 +41,6 @@
             <a
               [routerLink]="link.path"
               class="inline-block transition-colors duration-300"
-              (click)="closeNavbar()"
               routerLinkActive="text-green-700">
               {{ link.name }}
             </a>
@@ -62,7 +59,6 @@
             <a
               [routerLink]="link.path"
               class="hover:text-green-400 transition-colors duration-300"
-              (click)="closeNavbar()"
               routerLinkActive="text-green-400">
               {{ link.name }}
             </a>
@@ -70,10 +66,9 @@
           <a
             routerLink="/dashboard"
             class="hover:text-green-700 transition-colors duration-300"
-            (click)="closeNavbar()"
             routerLinkActive="text-green-700"
             [routerLinkActiveOptions]="{ exact: true }">
-            Dashboard
+            Profil
           </a>
 
           <button href="" class="inline-flex hover:text-green-400 transition-colors duration-300" (click)="signOut()">
@@ -84,7 +79,6 @@
             <a
               [routerLink]="link.path"
               class="hover:text-green-400 transition-colors duration-300"
-              (click)="closeNavbar()"
               routerLinkActive="text-green-400"
               [routerLinkActiveOptions]="{ exact: true }">
               {{ link.name }}

@@ -15,8 +15,12 @@ export class AuthService {
   private _apiUrl = environment.apiUrl;
   private _router = inject(Router);
 
+  checkAuth(): Observable<boolean> {
+    return this._httpClient.get<{ data: boolean }>(this._apiUrl + 'auth/is-auth').pipe(map((res) => res.data));
+  }
+
   authenticate(): Observable<IUser> {
-    return this._httpClient.get<{ data: IUser }>(this._apiUrl + 'auth/profile').pipe(map((response) => response.data));
+    return this._httpClient.get<{ data: IUser } | null>(this._apiUrl + 'auth/profile').pipe(map((res) => res.data));
   }
 
   signIn(credentials: IUserCredentials): Observable<IUser> {

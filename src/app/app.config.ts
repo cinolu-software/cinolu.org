@@ -1,5 +1,5 @@
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, isDevMode } from '@angular/core';
 import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -21,6 +21,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { PageTitleStrategy } from './core/strategies/page-title.strategy';
 import { authReducers } from './core/auth/data-access/auth.reducers';
 import { AuthEffects } from './core/auth/data-access/auth.effects';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -60,7 +61,7 @@ export const appConfig: ApplicationConfig = {
         services: mockApiServices
       },
       fuse: {
-        layout: 'classy',
+        layout: 'classic',
         scheme: 'light',
         screens: {
           sm: '600px',
@@ -101,6 +102,7 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       auth: authReducers
     }),
-    provideClientHydration()
+    provideClientHydration(),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
   ]
 };

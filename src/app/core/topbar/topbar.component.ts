@@ -1,4 +1,4 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { select, Store } from '@ngrx/store';
@@ -16,7 +16,7 @@ import { selectUser } from '../auth/data-access/auth.reducers';
 })
 export class TopbarComponent {
   user$: Observable<IUser | null>;
-  isOpen = false;
+  isOpen = signal(false);
   private _store: Store = inject(Store);
   private _router: Router = inject(Router);
 
@@ -27,46 +27,35 @@ export class TopbarComponent {
   commonLinks: ILink[] = [
     {
       name: 'Accueil',
-      path: '/',
-      type: 'normal'
+      path: '/'
     }
   ];
 
   authLinks: ILink[] = [
     {
       name: 'Se connecter',
-      path: '/sign-in',
-      type: 'normal'
+      path: '/sign-in'
     },
     {
       name: "S'inscrire",
-      path: '/sign-up',
-      type: 'primary'
+      path: '/sign-up'
     }
   ];
 
   unAuthenticatedUserLinks: ILink[] = [...this.commonLinks, ...this.authLinks];
 
-  trimName(name: string): string {
-    return name.length > 15 ? name.substring(0, 15) + '...' : name;
-  }
-
-  openNavbar(): void {
-    this.isOpen = true;
+  toogleNav(): void {
+    this.isOpen.update((isOpen) => !isOpen);
   }
 
   signOut(): void {
     this._router.navigate(['/sign-out']);
   }
 
-  closeNavbar(): void {
-    this.isOpen = false;
-  }
-
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
     const isNavbar = target.closest('.navbar');
-    if (!isNavbar) this.isOpen = false;
+    if (!isNavbar) this.isOpen.set(false);
   }
 }
