@@ -24,10 +24,23 @@ export class TopbarComponent {
     this.user$ = this._store.pipe(select(selectUser));
   }
 
+  // Ajout de liens de navigation, programmes, evenements, services, nous rejoindre
   commonLinks: ILink[] = [
     {
       name: 'Accueil',
       path: '/'
+    },
+    {
+      name: 'Programmes',
+      path: '/programs'
+    },
+    {
+      name: 'Evénements',
+      path: '/events'
+    },
+    {
+      name: 'Services',
+      path: '/services'
     }
   ];
 

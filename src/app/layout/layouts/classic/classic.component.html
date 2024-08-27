@@ -4,7 +4,7 @@
   class="dark bg-green-900 print:hidden"
   [mode]="isScreenSmall ? 'over' : 'side'"
   [name]="'mainNavigation'"
-  [navigation]="navigation.default"
+  [navigation]="navigation"
   [opened]="!isScreenSmall">
   <ng-container fuseVerticalNavigationContentHeader>
     <a routerLink="/">
@@ -24,9 +24,9 @@
     </button>
     <div class="ml-auto flex items-center space-x-0.5 pl-2 sm:space-x-2">
       <search [appearance]="'bar'"></search>
-      <messages />
-      <notifications />
-      <user></user>
+      <!-- <messages /> -->
+      <!-- <notifications /> -->
+      <user />
     </div>
   </div>
 

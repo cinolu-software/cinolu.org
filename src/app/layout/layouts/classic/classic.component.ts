@@ -5,15 +5,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FuseFullscreenComponent } from '@fuse/components/fullscreen';
 import { FuseLoadingBarComponent } from '@fuse/components/loading-bar';
-import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
+import {
+  FuseNavigationItem,
+  FuseNavigationService,
+  FuseVerticalNavigationComponent
+} from '@fuse/components/navigation';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
-import { NavigationService } from 'app/core/navigation/navigation.service';
-import { Navigation } from 'app/core/navigation/navigation.types';
-import { MessagesComponent } from 'app/layout/common/messages/messages.component';
-import { NotificationsComponent } from 'app/layout/common/notifications/notifications.component';
-import { QuickChatComponent } from 'app/layout/common/quick-chat/quick-chat.component';
 import { SearchComponent } from 'app/layout/common/search/search.component';
-import { ShortcutsComponent } from 'app/layout/common/shortcuts/shortcuts.component';
 import { UserComponent } from 'app/layout/common/user/user.component';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -29,9 +27,6 @@ import { Subject, takeUntil } from 'rxjs';
     MatIconModule,
     FuseFullscreenComponent,
     SearchComponent,
-    ShortcutsComponent,
-    MessagesComponent,
-    NotificationsComponent,
     UserComponent,
     RouterOutlet,
     NgOptimizedImage,
@@ -40,20 +35,142 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class ClassicLayoutComponent implements OnInit, OnDestroy {
   isScreenSmall: boolean;
-  navigation: Navigation;
+  navigation: FuseNavigationItem[];
   private _unsubscribeAll = new Subject();
-  private _navigationService = inject(NavigationService);
   private _fuseMediaWatcherService = inject(FuseMediaWatcherService);
   private _fuseNavigationService = inject(FuseNavigationService);
+
+  constructor() {
+    this.navigation = [
+      {
+        id: 'my-info',
+        title: 'Mes informations',
+        type: 'group'
+      },
+      {
+        id: 'my-account',
+        title: 'Mon compte',
+        type: 'basic',
+        icon: 'heroicons_outline:user-circle',
+        link: '/dashboard/my-account'
+      },
+      {
+        id: 'preferences',
+        title: 'Préférences',
+        type: 'basic',
+        icon: 'heroicons_outline:cog',
+        link: '/dashboard/my-preferences'
+      },
+      {
+        id: 'my-enterprise',
+        title: 'Mon entreprise',
+        type: 'basic',
+        icon: 'feather:briefcase',
+        link: '/dashboard/my-enterprise'
+      },
+      {
+        id: 'activity',
+        title: 'Activités et nouvelles',
+        type: 'group'
+      },
+      {
+        id: 'calls',
+        title: 'Les appels',
+        type: 'basic',
+        icon: 'heroicons_outline:phone',
+        link: '/dashboard/calls'
+      },
+
+      {
+        id: 'coaching-mentorat',
+        title: 'Coaching',
+        type: 'collapsable',
+        icon: 'heroicons_outline:academic-cap',
+        children: [
+          {
+            id: 'coaching',
+            title: 'Coaching',
+            type: 'basic',
+            icon: 'feather:award',
+            link: '/dashboard/coaching'
+          },
+          {
+            id: 'mentoring',
+            title: 'Mentorat',
+            type: 'basic',
+            icon: 'feather:help-circle',
+            link: '/dashboard/mentoring'
+          }
+        ]
+      },
+      {
+        id: 'programs-trainning',
+        title: 'Programmes',
+        type: 'collapsable',
+        icon: 'heroicons_outline:book-open',
+        link: '/dashboard/coaching-mentorat',
+        children: [
+          {
+            id: 'programs',
+            title: 'Mes Programmes',
+            type: 'basic',
+            icon: 'feather:folder',
+            link: '/dashboard/programs'
+          },
+          {
+            id: 'available-trainnings',
+            title: 'Formations Disponibles',
+            type: 'basic',
+            icon: 'feather:list',
+            link: '/dashboard/available-trainnings'
+          },
+          {
+            id: 'history-trainning',
+            title: 'Historique de Formation',
+            type: 'basic',
+            icon: 'feather:archive',
+            link: '/dashboard/history-training'
+          }
+        ]
+      },
+      {
+        id: 'projects-collaborations',
+        title: 'Projets',
+        type: 'collapsable',
+        icon: 'feather:git-branch',
+        link: '/dashboard/coaching-mentorat',
+        children: [
+          {
+            id: 'projects',
+            title: 'Mes Projets',
+            type: 'basic',
+            icon: 'heroicons_outline:folder-open',
+            link: '/dashboard/projects'
+          },
+          {
+            id: 'submit-project',
+            title: 'Soumettre un Projet',
+            type: 'basic',
+            icon: 'feather:upload',
+            link: '/dashboard/submit-project'
+          },
+          {
+            id: 'collaborations',
+            title: 'Collaborations',
+            type: 'basic',
+            icon: 'heroicons_outline:users',
+            link: '/dashboard/collaborations'
+          }
+        ]
+      }
+    ];
+  }
 
   get currentYear(): number {
     return new Date().getFullYear();
   }
 
   ngOnInit(): void {
-    this._navigationService.navigation$.pipe(takeUntil(this._unsubscribeAll)).subscribe((navigation: Navigation) => {
-      this.navigation = navigation;
-    });
     this._fuseMediaWatcherService.onMediaChange$
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(({ matchingAliases }) => {

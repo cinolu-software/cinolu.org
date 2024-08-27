@@ -6,6 +6,7 @@ import { landingRoutes } from './modules/landing/landing.routes';
 import { dashboardRoutes } from './modules/dashboard/dashboard.routes';
 import { signOutRoutes } from './modules/auth/sign-out/sign-out.routes';
 import { authGuard } from './core/auth/guards/auth.guard';
+import { maintenanceRoutes } from './modules/maintenance/maintenance.routes';
 
 export const appRoutes: Route[] = [
   {
@@ -27,11 +28,17 @@ export const appRoutes: Route[] = [
     children: auhtRoutes
   },
   {
-    path: '',
+    path: 'dashboard',
     canActivate: [authGuard],
     canActivateChild: [authGuard],
     component: LayoutComponent,
     resolve: { initialData: initialDataResolver },
     children: dashboardRoutes
+  },
+  {
+    path: '**',
+    component: LayoutComponent,
+    data: { layout: 'empty' },
+    children: maintenanceRoutes
   }
 ];
