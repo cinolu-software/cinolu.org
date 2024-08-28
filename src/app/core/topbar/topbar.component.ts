@@ -31,14 +31,6 @@ export class TopbarComponent {
       path: '/'
     },
     {
-      name: 'Programmes',
-      path: '/programs'
-    },
-    {
-      name: 'Evénements',
-      path: '/events'
-    },
-    {
       name: 'Services',
       path: '/services'
     }
