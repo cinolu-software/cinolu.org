@@ -2,6 +2,11 @@ import { Routes } from '@angular/router';
 
 export const dashboardRoutes: Routes = [
   {
+    path: 'my-account',
+    title: 'My account',
+    loadComponent: () => import('./account/account.component').then((c) => c.AccountComponent)
+  },
+  {
     path: 'available-trainnings',
     title: 'Available Training',
     loadComponent: () =>
@@ -33,11 +38,7 @@ export const dashboardRoutes: Routes = [
     title: 'Mentoring',
     loadComponent: () => import('./mentoring/mentoring.component').then((c) => c.MentoringComponent)
   },
-  {
-    path: 'my-account',
-    title: 'My account',
-    loadComponent: () => import('./my-account/my-account.component').then((c) => c.MyAccountComponent)
-  },
+
   {
     path: 'my-enterprise',
     title: 'My entreprise',

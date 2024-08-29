@@ -23,8 +23,8 @@ export class SignInStore extends ComponentStore<ISignInStore> {
   private _setLoading = this.updater((state, isLoading: boolean) => ({ ...state, isLoading }));
   private _setError = this.updater((state, error: string) => ({ ...state, error }));
 
-  readonly signIn = this.effect((payload$: Observable<IUserCredentials>) => {
-    return payload$.pipe(
+  readonly signIn = this.effect((payload$: Observable<IUserCredentials>) =>
+    payload$.pipe(
       tap(() => this._setLoading(true)),
       mergeMap((payload: IUserCredentials) =>
         this._authService.signIn(payload).pipe(
@@ -35,6 +35,6 @@ export class SignInStore extends ComponentStore<ISignInStore> {
           })
         )
       )
-    );
-  });
+    )
+  );
 }
