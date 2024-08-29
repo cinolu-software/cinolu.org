@@ -2,11 +2,6 @@ import { Routes } from '@angular/router';
 
 export const dashboardRoutes: Routes = [
   {
-    path: '',
-    title: 'Dashboard',
-    loadComponent: () => import('app/modules/dashboard/dashboard.component').then((c) => c.DashboardComponent)
-  },
-  {
     path: 'available-trainnings',
     title: 'Available Training',
     loadComponent: () =>

@@ -65,7 +65,7 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
         id: 'my-enterprise',
         title: 'Mon entreprise',
         type: 'basic',
-        icon: 'feather:briefcase',
+        icon: 'feather:activity',
         link: '/dashboard/my-enterprise'
       },
       {
@@ -77,7 +77,7 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
         id: 'calls',
         title: 'Les appels',
         type: 'basic',
-        icon: 'heroicons_outline:phone',
+        icon: 'feather:phone',
         link: '/dashboard/calls'
       },
 
@@ -91,14 +91,12 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
             id: 'coaching',
             title: 'Coaching',
             type: 'basic',
-            icon: 'feather:award',
             link: '/dashboard/coaching'
           },
           {
             id: 'mentoring',
             title: 'Mentorat',
             type: 'basic',
-            icon: 'feather:help-circle',
             link: '/dashboard/mentoring'
           }
         ]
@@ -114,21 +112,18 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
             id: 'programs',
             title: 'Mes Programmes',
             type: 'basic',
-            icon: 'feather:folder',
             link: '/dashboard/programs'
           },
           {
             id: 'available-trainnings',
             title: 'Formations Disponibles',
             type: 'basic',
-            icon: 'feather:list',
             link: '/dashboard/available-trainnings'
           },
           {
             id: 'history-trainning',
             title: 'Historique de Formation',
             type: 'basic',
-            icon: 'feather:archive',
             link: '/dashboard/history-training'
           }
         ]
@@ -137,28 +132,25 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
         id: 'projects-collaborations',
         title: 'Projets',
         type: 'collapsable',
-        icon: 'feather:git-branch',
+        icon: 'heroicons_outline:folder-open',
         link: '/dashboard/coaching-mentorat',
         children: [
           {
             id: 'projects',
             title: 'Mes Projets',
             type: 'basic',
-            icon: 'heroicons_outline:folder-open',
             link: '/dashboard/projects'
           },
           {
             id: 'submit-project',
             title: 'Soumettre un Projet',
             type: 'basic',
-            icon: 'feather:upload',
             link: '/dashboard/submit-project'
           },
           {
             id: 'collaborations',
             title: 'Collaborations',
             type: 'basic',
-            icon: 'heroicons_outline:users',
             link: '/dashboard/collaborations'
           }
         ]

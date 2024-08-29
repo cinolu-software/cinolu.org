@@ -26,7 +26,7 @@ export class AuthService {
   signIn(credentials: IUserCredentials): Observable<IUser> {
     return this._httpClient.post<{ data: IUser }>(this._apiUrl + 'auth/login', credentials).pipe(
       map((res) => res.data),
-      tap(() => this._router.navigate(['/dashboard']))
+      tap(() => this._router.navigate(['/dashboard/my-account']))
     );
   }
 
