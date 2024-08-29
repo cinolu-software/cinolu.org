@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectUser } from 'app/core/auth/data-access/auth.reducers';
 import { IUser } from 'app/core/types/models.interface';
@@ -18,7 +18,16 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'user',
   standalone: true,
-  imports: [MatButtonModule, MatMenuModule, MatIconModule, NgClass, MatDividerModule, CommonModule, NgOptimizedImage]
+  imports: [
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    NgClass,
+    MatDividerModule,
+    CommonModule,
+    NgOptimizedImage,
+    RouterLink
+  ]
 })
 export class UserComponent {
   user$: Observable<IUser>;

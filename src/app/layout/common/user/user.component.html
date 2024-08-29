@@ -13,24 +13,25 @@
   </button>
 
   <mat-menu [xPosition]="'before'" #userActions="matMenu">
-    <button mat-menu-item>
-      <span class="flex flex-col leading-none">
+    <div class="px-4 py-2">
+      <div class="flex flex-col leading-none">
+        <span>Connecté en tant que</span>
         <span class="mt-1.5 text-md font-medium">{{ user.email }}</span>
-      </span>
-    </button>
+      </div>
+    </div>
     <mat-divider class="my-2"></mat-divider>
-    <button mat-menu-item>
+    <a routerLink="/dashboard/my-account" rout mat-menu-item>
       <mat-icon [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
-      <span>Profile</span>
-    </button>
-    <button mat-menu-item>
+      <span>Profil</span>
+    </a>
+    <a routerLink="/dashboard/my-preferences" mat-menu-item>
       <mat-icon [svgIcon]="'heroicons_outline:cog-8-tooth'"></mat-icon>
-      <span>Settings</span>
-    </button>
+      <span>Préférences</span>
+    </a>
     <mat-divider class="my-2"></mat-divider>
     <button mat-menu-item (click)="signOut()">
       <mat-icon [svgIcon]="'heroicons_outline:arrow-right-on-rectangle'"></mat-icon>
-      <span>Sign out</span>
+      <span>Se déconnecter</span>
     </button>
   </mat-menu>
 </div>
