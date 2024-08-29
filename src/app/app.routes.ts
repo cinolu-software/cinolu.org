@@ -1,5 +1,4 @@
 import { Route } from '@angular/router';
-import { initialDataResolver } from 'app/app.resolvers';
 import { LayoutComponent } from 'app/layout/layout.component';
 import { auhtRoutes } from './modules/auth/auth.routes';
 import { landingRoutes } from './modules/landing/landing.routes';
@@ -32,7 +31,6 @@ export const appRoutes: Route[] = [
     canActivate: [authGuard],
     canActivateChild: [authGuard],
     component: LayoutComponent,
-    resolve: { initialData: initialDataResolver },
     children: dashboardRoutes
   },
   {

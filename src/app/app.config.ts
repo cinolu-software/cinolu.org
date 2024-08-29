@@ -14,7 +14,6 @@ import { provideFuse } from '@fuse';
 import { appRoutes } from 'app/app.routes';
 import { provideAuth } from 'app/core/auth/auth.provider';
 import { provideIcons } from 'app/core/icons/icons.provider';
-import { mockApiServices } from 'app/mock-api';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideClientHydration } from '@angular/platform-browser';
@@ -56,10 +55,6 @@ export const appConfig: ApplicationConfig = {
     provideAuth(),
     provideIcons(),
     provideFuse({
-      mockApi: {
-        delay: 0,
-        services: mockApiServices
-      },
       fuse: {
         layout: 'classic',
         scheme: 'light',

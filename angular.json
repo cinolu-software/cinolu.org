@@ -23,13 +23,7 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "allowedCommonJsDependencies": [
-              "apexcharts",
-              "crypto-js/enc-utf8",
-              "crypto-js/hmac-sha256",
-              "crypto-js/enc-base64",
-              "quill-delta"
-            ],
+            "allowedCommonJsDependencies": ["quill-delta"],
             "assets": [
               {
                 "glob": "**/*",
