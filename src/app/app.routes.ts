@@ -11,14 +11,7 @@ export const appRoutes: Route[] = [
   {
     path: '',
     component: LayoutComponent,
-    data: { layout: 'empty' },
     children: landingRoutes
-  },
-  {
-    path: '',
-    component: LayoutComponent,
-    data: { layout: 'empty' },
-    children: signOutRoutes
   },
   {
     path: '',
@@ -30,13 +23,13 @@ export const appRoutes: Route[] = [
     path: 'dashboard',
     canActivate: [authGuard],
     canActivateChild: [authGuard],
+    data: { layout: 'classic' },
     component: LayoutComponent,
     children: dashboardRoutes
   },
   {
     path: '**',
     component: LayoutComponent,
-    data: { layout: 'empty' },
     children: maintenanceRoutes
   }
 ];

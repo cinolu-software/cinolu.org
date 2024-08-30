@@ -1,15 +1,13 @@
-<div class="min-h-screen flex flex-col items-center justify-center bg-white w-full px-8">
-  <div>
-    <div class="text-3xl font-extrabold leading-tight tracking-tight">Vous vous êtes déconnecté(e) !</div>
-    <div class="mt-8 flex font-medium text-lg">
-      @if (countdown > 0) {
-        Redirection dans
-        {{ countdown }}
-        secondes...
-      }
-      @if (countdown === 0) {
-        Vous êtes maintenant redirigé!
-      }
-    </div>
-  </div>
+<div>
+  <div class="text-2xl font-extrabold leading-tight tracking-tight">Vous vous êtes déconnecté(e) !</div>
+  <p class="mt-8 flex font-medium text-lg">
+    @if (countdown > 0) {
+      Redirection dans
+      <span class="text-primary-600 inline-block mx-1">{{ countdown }}</span>
+      secondes...
+    }
+    @if (countdown === 0) {
+      Vous êtes maintenant redirigé!
+    }
+  </p>
 </div>

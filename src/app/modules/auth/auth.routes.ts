@@ -21,5 +21,10 @@ export const auhtRoutes: Routes = [
     path: 'reset-password',
     title: 'Reset Password',
     loadComponent: () => import('./reset-password/reset-password.component').then((c) => c.AuthResetPasswordComponent)
+  },
+  {
+    path: 'sign-out',
+    title: 'Sign Out',
+    loadComponent: () => import('./sign-out/sign-out.component').then((c) => c.AuthSignOutComponent)
   }
 ];

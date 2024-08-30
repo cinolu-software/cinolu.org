@@ -56,7 +56,7 @@ export const appConfig: ApplicationConfig = {
     provideIcons(),
     provideFuse({
       fuse: {
-        layout: 'classic',
+        layout: 'empty',
         scheme: 'light',
         screens: {
           sm: '600px',
