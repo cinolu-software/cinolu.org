@@ -33,7 +33,6 @@ export class UserComponent {
   user$: Observable<IUser>;
   private _store: Store = inject(Store);
   private _router: Router = inject(Router);
-  private _apiUrl = environment.apiUrl;
 
   constructor() {
     this.user$ = this._store.select(selectUser);
@@ -43,9 +42,8 @@ export class UserComponent {
     this._router.navigate(['/sign-out']);
   }
 
-  displayImage(user: IUser): string {
-    if (user.profile || user.google_image) {
-      return this._apiUrl + 'uploads/profiles/' + user.profile ? user.profile : user.google_image;
-    }
+  displayProfile(user: IUser): string {
+    if (user.profile) return environment.apiUrl + 'uploads/profiles/' + user.profile;
+    return user.google_image;
   }
 }

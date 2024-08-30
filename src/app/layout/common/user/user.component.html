@@ -2,7 +2,9 @@
   <button mat-icon-button [matMenuTriggerFor]="userActions">
     <span class="relative">
       @if (user.google_image || user.profile) {
-        <img class="h-7 w-7 rounded-full" [src]="displayImage(user)" />
+        <div class="w-7 h-7 bg-gray-200 relative rounded-full overflow-hidden flex items-center justify-center">
+          <img [ngSrc]="displayProfile(user)" class="object-cover" alt="profile picture" fill />
+        </div>
       } @else {
         <mat-icon [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
       }

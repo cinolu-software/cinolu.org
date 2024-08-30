@@ -1,5 +1,13 @@
 import { TextFieldModule } from '@angular/cdk/text-field';
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
@@ -17,8 +25,15 @@ import { FuseAlertComponent } from '../../../../@fuse/components/alert/alert.com
 import { CommonModule } from '@angular/common';
 import { IAccountStore } from './types/account-store.interface';
 import { APIValiadationError } from '../../../core/pipes/api-validation-error.pipe';
-import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { fuseAnimations } from '@fuse/animations';
+import { FilePondModule, registerPlugin } from 'ngx-filepond';
+import { FilePond, FilePondOptions } from 'filepond';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import { environment } from 'environments/environment.development';
+import { authActions } from 'app/core/auth/data-access/auth.actions';
+registerPlugin(FilePondPluginFileValidateType, FilePondPluginImagePreview);
 
 @Component({
   selector: 'settings-account',
@@ -30,6 +45,7 @@ import { fuseAnimations } from '@fuse/animations';
   providers: [AccountStore],
   imports: [
     FormsModule,
+    FilePondModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatIconModule,
@@ -53,6 +69,21 @@ export class AccountComponent implements OnInit, OnDestroy {
   user$: Observable<IUser> = this._store.select(selectUser);
   infoForm: FormGroup;
   securityForm: FormGroup;
+  pondOptions: FilePondOptions = {
+    name: 'thumb',
+    allowFileTypeValidation: true,
+    allowImagePreview: true,
+    acceptedFileTypes: ['image/png', 'image/jpeg', 'image/webp'],
+    labelIdle: 'Ajouter une photo ici (JPG, PNG, WEBP)',
+    server: {
+      url: environment.apiUrl,
+      process: {
+        url: 'users/image-profile',
+        method: 'POST',
+        withCredentials: true
+      }
+    }
+  };
 
   constructor() {
     this.infoForm = this._formBuilder.group({
@@ -72,9 +103,7 @@ export class AccountComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // Patch the form with the user's information
     this.user$.subscribe((user) => {
-      console.log(user);
       this.infoForm.patchValue({
         first_name: user.first_name,
         last_name: user.last_name,
@@ -89,6 +118,10 @@ export class AccountComponent implements OnInit, OnDestroy {
   updateInfo(): void {
     const payload: IInfoPayload = this.infoForm.value;
     this._accountStore.$updateInfo(payload);
+  }
+
+  processFile(event: Event): void {
+    if (!event['error']) this._store.dispatch(authActions.authenticate());
   }
 
   updatePassword(): void {

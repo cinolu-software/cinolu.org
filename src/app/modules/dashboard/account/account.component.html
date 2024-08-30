@@ -13,7 +13,14 @@
         {{ state.infoSuccess }}
       </fuse-alert>
     }
+
     <div class="mt-6 grid w-full gap-6 grid-cols-1 md:grid-cols-2">
+      <div class="col-span-2">
+        <file-pond
+          class="cursor-pointer bg-gray-100 rounded-md"
+          [options]="pondOptions"
+          (onprocessfile)="processFile($event)" />
+      </div>
       <mat-form-field class="fuse-mat-emphasized-affix w-full" [subscriptSizing]="'dynamic'">
         <mat-label>Nom</mat-label>
         <input formControlName="first_name" autocomplete="off" matInput />

@@ -1,5 +1,9 @@
 .mat-step-icon-content {
-  color: #fff !important;
-  font-size: bold;
-  font-family: 'Satoshi', sans-serif;
+  @apply text-white font-bold;
+}
+
+.filepond--root {
+  .filepond--credits {
+    @apply hidden;
+  }
 }
