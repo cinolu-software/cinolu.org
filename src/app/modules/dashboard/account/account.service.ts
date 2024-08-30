@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 import { IInfoPayload } from './types/info-payload.interface';
 import { map, Observable } from 'rxjs';
 import { IUser } from 'app/core/types/models.interface';
