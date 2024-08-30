@@ -14,13 +14,11 @@
       </fuse-alert>
     }
 
-    <div class="mt-6 grid w-full gap-6 grid-cols-1 md:grid-cols-2">
-      <div class="col-span-2">
-        <file-pond
-          class="cursor-pointer bg-gray-100 rounded-md"
-          [options]="pondOptions"
-          (onprocessfile)="processFile($event)" />
-      </div>
+    <file-pond
+      class="cursor-pointer bg-gray-100 rounded-md mt-6 mb-4"
+      [options]="pondOptions"
+      (onprocessfile)="processFile($event)" />
+    <div class="grid w-full gap-2 grid-cols-1 md:grid-cols-2 md:gap-6">
       <mat-form-field class="w-full">
         <mat-label>Nom</mat-label>
         <input formControlName="first_name" autocomplete="off" matInput />
@@ -49,21 +47,20 @@
         <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:phone'" matPrefix></mat-icon>
         <input formControlName="phone_number" autocomplete="off" matInput />
       </mat-form-field>
-
-      <button
-        class="text-white mb-10 mt-2"
-        mat-flat-button
-        type="submit"
-        [disabled]="state.infoIsLoading || infoForm.invalid"
-        [color]="'primary'">
-        @if (!state.infoIsLoading && !infoForm.invalid) {
-          <span>Enregistrer les modifications</span>
-        }
-        @if (state.infoIsLoading) {
-          <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'"></mat-progress-spinner>
-        }
-      </button>
     </div>
+    <button
+      class="text-white mb-10 mt-2"
+      mat-flat-button
+      type="submit"
+      [disabled]="state.infoIsLoading || infoForm.invalid"
+      [color]="'primary'">
+      @if (!state.infoIsLoading && !infoForm.invalid) {
+        <span>Enregistrer les modifications</span>
+      }
+      @if (state.infoIsLoading) {
+        <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'"></mat-progress-spinner>
+      }
+    </button>
   </form>
 
   <form [formGroup]="securityForm" (submit)="updatePassword()">
@@ -81,8 +78,8 @@
       </fuse-alert>
     }
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-      <div class="col-span-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6 mt-6">
+      <div class="md:col-span-2">
         <mat-form-field class="w-full">
           <mat-label> Mot de passe actuel </mat-label>
           <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:key'" matPrefix></mat-icon>
