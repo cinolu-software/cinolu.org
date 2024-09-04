@@ -1,7 +1,6 @@
-import { Component, inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -43,7 +42,6 @@ export class AuthSignInComponent implements OnInit {
   state$: Observable<ISignInStore>;
   private _signInStore = inject(SignInStore);
   private _formBuilder: FormBuilder = inject(FormBuilder);
-  private _apiUrl = environment.apiUrl;
 
   ngOnInit(): void {
     this.signInForm = this._formBuilder.group({
@@ -60,6 +58,6 @@ export class AuthSignInComponent implements OnInit {
   }
 
   signinWithGoogle(): void {
-    window.location.replace(this._apiUrl + 'auth/google/redirect');
+    window.location.replace(environment.apiUrl + 'auth/google/redirect');
   }
 }
