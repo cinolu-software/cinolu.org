@@ -1,4 +1,4 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -7,15 +7,16 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
-import { Observable } from 'rxjs';
-import { ISignUpStore } from './types/sign-up-store.interface';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { TopbarComponent } from '../../../core/topbar/topbar.component';
-import { APIValiadationError } from '../../../core/pipes/api-validation-error.pipe';
 import { environment } from 'environments/environment';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'app/core/auth/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { team } from 'app/modules/landing/data/team';
 
 @Component({
   selector: 'auth-sign-up',
@@ -34,22 +35,34 @@ import { environment } from 'environments/environment';
     MatIconModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    CommonModule,
     MatStepperModule,
     TopbarComponent,
-    APIValiadationError
+    NgOptimizedImage
   ]
 })
-export class AuthSignUpComponent {
+export class AuthSignUpComponent implements OnInit, OnDestroy {
   signUpForm: FormGroup;
-  state$: Observable<ISignUpStore>;
+  isLoading = false;
+  error: string | null = null;
+  team = team;
   private _formBuilder = inject(FormBuilder);
-  private _apiUrl = environment.apiUrl;
+  private _authService = inject(AuthService);
+  private _router = inject(Router);
+  private _subscription: Subscription | null = null;
 
-  constructor() {
+  private resetState(): void {
+    this.error = null;
+    this.isLoading = false;
+    this.signUpForm.enable();
+  }
+
+  private enableLoading(): void {
+    this.isLoading = true;
+    this.signUpForm.disable();
+  }
+
+  ngOnInit(): void {
     this.signUpForm = this._formBuilder.group({
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
       name: ['', Validators.required],
       email: ['', Validators.required],
       address: ['', Validators.required],
@@ -59,9 +72,30 @@ export class AuthSignUpComponent {
     });
   }
 
-  signUp(): void {}
+  signUp(): void {
+    if (this.signUpForm.invalid) return;
+    this.enableLoading();
+    this._subscription = this._authService.signUp(this.signUpForm.value).subscribe({
+      next: () => {
+        this.resetState();
+        this._router.navigate(['/sign-in']);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.resetState();
+        this.error = error.error.message;
+        this.signUpForm.enable();
+      }
+    });
+  }
 
   signinWithGoogle(): void {
-    window.location.replace(this._apiUrl + 'auth/google/redirect');
+    window.location.replace(environment.apiUrl + 'auth/google/redirect');
+  }
+
+  ngOnDestroy(): void {
+    if (this._subscription) {
+      console.log('Unsubscribing from sign-up subscription');
+      this._subscription.unsubscribe();
+    }
   }
 }

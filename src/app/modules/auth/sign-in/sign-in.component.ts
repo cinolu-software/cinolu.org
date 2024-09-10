@@ -14,6 +14,7 @@ import { environment } from 'environments/environment';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from 'app/core/auth/auth.service';
 import { Subscription } from 'rxjs';
+import { team } from 'app/modules/landing/data/team';
 
 @Component({
   selector: 'auth-sign-in',
@@ -39,17 +40,11 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
   signInForm: FormGroup;
   isLoading = false;
   error = null;
+  team = team;
   private _authService = inject(AuthService);
   private _formBuilder: FormBuilder = inject(FormBuilder);
   private _router = inject(Router);
   private _subscription: Subscription | null = null;
-
-  ngOnInit(): void {
-    this.signInForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    });
-  }
 
   private resetState(): void {
     this.error = null;
@@ -60,6 +55,13 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
   private enableLoading(): void {
     this.isLoading = true;
     this.signInForm.disable();
+  }
+
+  ngOnInit(): void {
+    this.signInForm = this._formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
   }
 
   signIn(): void {

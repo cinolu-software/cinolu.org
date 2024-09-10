@@ -1,154 +1,199 @@
-<div *ngIf="state$ | async as state">
-  <div class="mb-2.5">
-    <h2 class="text-2xl font-bold leading-tight tracking-tight">S'inscrire</h2>
-    <div class="mt-0.5 flex items-baseline font-medium">
-      <p>Ou continuer avec</p>
-      <button class="ml-1 text-primary-500 hover:underline" (click)="signinWithGoogle()">Google</button>
+<div
+  class="flex min-w-0 min-h-screen flex-auto flex-col items-center sm:flex-row sm:justify-center md:items-center md:justify-center">
+  <app-topbar />
+  <div
+    class="w-full p-8 sm:bg-card sm:w-auto sm:rounded-2xl sm:shadow md:flex md:h-full md:w-1/2 md:items-center md:justify-center md:rounded-none md:shadow-none">
+    <div class="mx-auto w-full max-w-80 sm:mx-0 sm:w-80">
+      <!-- Title -->
+      <div class="mb-2.5">
+        <h2 class="text-2xl font-bold leading-tight tracking-tight">S'inscrire</h2>
+        <div class="mt-0.5 flex items-baseline font-medium">
+          <p>Ou continuer avec</p>
+          <button class="ml-1 text-primary-500 hover:underline" (click)="signinWithGoogle()">Google</button>
+        </div>
+        @if (error) {
+          <fuse-alert class="mt-8" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
+            {{ error }}
+          </fuse-alert>
+        }
+      </div>
+      <form [formGroup]="signUpForm" class="-ml-6">
+        <mat-stepper orientation="horizontal" [color]="'primary'" [linear]="true" #stepper>
+          <mat-step label="Etape 1">
+            <ng-template matStepContent>
+              <mat-form-field class="w-full">
+                <mat-label>Nom complet</mat-label>
+                <input autocomplete="name" id="name" matInput formControlName="name" />
+              </mat-form-field>
+              <mat-form-field class="w-full">
+                <mat-label>E-mail</mat-label>
+                <input
+                  autocomplete="off"
+                  id="email"
+                  type="email"
+                  matInput
+                  formControlName="email"
+                  placeholder="example@gmail.com"
+                  required />
+              </mat-form-field>
+              <mat-form-field class="w-full">
+                <mat-label>Adresse</mat-label>
+                <input
+                  autocomplete="off"
+                  id="address"
+                  matInput
+                  formControlName="address"
+                  placeholder="Lubumbashi, RDC."
+                  required />
+              </mat-form-field>
+              <div>
+                <button
+                  class="bg-primary-600 hover:bg-primary-800 duration-150 transition-colors rounded-full text-white px-6 py-2"
+                  matStepperNext>
+                  Suivant
+                </button>
+              </div>
+            </ng-template>
+          </mat-step>
+
+          <mat-step label="Etape 2">
+            <ng-template matStepContent>
+              <mat-form-field class="w-full">
+                <mat-label>Numéro de téléphone </mat-label>
+                <input
+                  autocomplete="off"
+                  id="phone_number"
+                  matInput
+                  formControlName="phone_number"
+                  placeholder="+243979265726"
+                  required />
+              </mat-form-field>
+              <mat-form-field class="w-full">
+                <mat-label>Mot de passe</mat-label>
+                <input
+                  id="password"
+                  matInput
+                  type="password"
+                  autocomplete="off"
+                  formControlName="password"
+                  #passwordField />
+                <button
+                  mat-icon-button
+                  type="button"
+                  (click)="
+                    passwordField.type === 'password'
+                      ? (passwordField.type = 'text')
+                      : (passwordField.type = 'password')
+                  "
+                  matSuffix>
+                  @if (passwordField.type === 'password') {
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+                  }
+                  @if (passwordField.type === 'text') {
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
+                  }
+                </button>
+              </mat-form-field>
+
+              <mat-form-field class="w-full">
+                <mat-label>Confirmer le mot de passe</mat-label>
+                <input
+                  id="password_confirm"
+                  matInput
+                  type="password"
+                  autocomplete="off"
+                  formControlName="password_confirm"
+                  #passwordConfirm />
+                <button
+                  mat-icon-button
+                  type="button"
+                  (click)="
+                    passwordConfirm.type === 'password'
+                      ? (passwordConfirm.type = 'text')
+                      : (passwordConfirm.type = 'password')
+                  "
+                  matSuffix>
+                  @if (passwordConfirm.type === 'password') {
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+                  }
+                  @if (passwordConfirm.type === 'text') {
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
+                  }
+                </button>
+              </mat-form-field>
+
+              <div>
+                <button
+                  class="fuse-mat-button-large mt-6 w-full text-white"
+                  mat-flat-button
+                  [color]="'primary'"
+                  [disabled]="isLoading || signUpForm.invalid"
+                  (click)="signUp()">
+                  @if (!isLoading && !signUpForm.invalid) {
+                    <span>S'inscrire</span>
+                  }
+                  @if (isLoading) {
+                    <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'"></mat-progress-spinner>
+                  }
+                </button>
+              </div>
+            </ng-template>
+          </mat-step>
+        </mat-stepper>
+      </form>
     </div>
-    @if (state.error || state.errors.length > 0) {
-      <fuse-alert class="mt-8" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
-        {{ state.error }}
-        <span *ngIf="state.errors.length > 0">{{ state.errors | APIValidationError }}</span>
-      </fuse-alert>
-    }
   </div>
+  <div
+    class="relative hidden h-full w-1/2 flex-auto items-center justify-center overflow-hidden bg-green-800 p-16 md:flex lg:px-28">
+    <svg
+      class="absolute inset-0 pointer-events-none"
+      viewBox="0 0 960 540"
+      width="100%"
+      height="100%"
+      preserveAspectRatio="xMidYMax slice"
+      xmlns="http://www.w3.org/2000/svg">
+      <g class="text-green-700 opacity-25" fill="none" stroke="currentColor" stroke-width="100">
+        <circle r="234" cx="196" cy="23"></circle>
+        <circle r="234" cx="790" cy="491"></circle>
+      </g>
+    </svg>
 
-  <form [formGroup]="signUpForm" class="-ml-6">
-    <mat-stepper orientation="vertical" [color]="'primary'" [linear]="true" #stepper>
-      <!-- Step 1 -->
-      <mat-step label="Etape 1">
-        <ng-template matStepContent>
-          <mat-form-field class="w-full">
-            <mat-label>Nom</mat-label>
-            <input autocomplete="off" id="name" matInput formControlName="name" />
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label>Postnom</mat-label>
-            <input autocomplete="off" id="last_name" matInput formControlName="last_name" />
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label>Prénom</mat-label>
-            <input autocomplete="off" id="first_name" matInput formControlName="first_name" />
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperNext>Suivant</button>
-          </div>
-        </ng-template>
-      </mat-step>
-
-      <!-- Step 2-->
-      <mat-step label="Etape 2">
-        <ng-template matStepContent>
-          <mat-form-field class="w-full">
-            <mat-label>E-mail</mat-label>
-            <input
-              autocomplete="off"
-              id="email"
-              type="email"
-              matInput
-              formControlName="email"
-              placeholder="example@gmail.com"
-              required />
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label>Adresse</mat-label>
-            <input
-              autocomplete="off"
-              id="address"
-              matInput
-              formControlName="address"
-              placeholder="Lubumbashi, RDC."
-              required />
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label> Numéro de téléphone </mat-label>
-            <input
-              autocomplete="off"
-              id="phone_number"
-              matInput
-              formControlName="phone_number"
-              placeholder="+243979265726"
-              required />
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperPrevious>Précédent</button>
-            <button mat-button matStepperNext>Suivant</button>
-          </div>
-        </ng-template>
-      </mat-step>
-
-      <!-- Step 3 -->
-      <mat-step label="Etape 3">
-        <ng-template matStepContent>
-          <mat-form-field class="w-full">
-            <mat-label>Mot de passe</mat-label>
-            <input
-              id="password"
-              matInput
-              type="password"
-              autocomplete="off"
-              [formControlName]="'password'"
-              #passwordField />
-            <button
-              mat-icon-button
-              type="button"
-              (click)="
-                passwordField.type === 'password' ? (passwordField.type = 'text') : (passwordField.type = 'password')
-              "
-              matSuffix>
-              @if (passwordField.type === 'password') {
-                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
-              }
-              @if (passwordField.type === 'text') {
-                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
-              }
-            </button>
-          </mat-form-field>
-
-          <mat-form-field class="w-full">
-            <mat-label>Confirmer le mot de passe</mat-label>
-            <input
-              id="password_confirm"
-              matInput
-              type="password"
-              autocomplete="off"
-              formControlName="password_confirm"
-              #passwordConfirm />
-            <button
-              mat-icon-button
-              type="button"
-              (click)="
-                passwordConfirm.type === 'password'
-                  ? (passwordConfirm.type = 'text')
-                  : (passwordConfirm.type = 'password')
-              "
-              matSuffix>
-              @if (passwordConfirm.type === 'password') {
-                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
-              }
-              @if (passwordConfirm.type === 'text') {
-                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
-              }
-            </button>
-          </mat-form-field>
-
-          <div>
-            <button
-              class="fuse-mat-button-large mt-6 w-full text-white"
-              mat-flat-button
-              [color]="'primary'"
-              [disabled]="state.isLoading || signUpForm.invalid"
-              (click)="signUp()">
-              @if (!state.isLoading && !signUpForm.invalid) {
-                <span>S'inscrire</span>
-              }
-              @if (state.isLoading) {
-                <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'"></mat-progress-spinner>
-              }
-            </button>
-          </div>
-        </ng-template>
-      </mat-step>
-    </mat-stepper>
-  </form>
+    <svg class="absolute -top-16 -right-16 text-green-700" viewBox="0 0 220 192" width="220" height="192" fill="none">
+      <defs>
+        <pattern
+          id="837c3e70-6c3a-44e6-8854-cc48c737b659"
+          x="0"
+          y="0"
+          width="20"
+          height="20"
+          patternUnits="userSpaceOnUse">
+          <rect x="0" y="0" width="4" height="4" fill="currentColor"></rect>
+        </pattern>
+      </defs>
+      <rect width="220" height="192" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)"></rect>
+    </svg>
+    <!-- Content -->
+    <div class="relative z-10 w-full max-w-2xl">
+      <div class="text-5xl font-bold leading-none text-gray-100">
+        <h4>Rejoignez-nous !</h4>
+        <h4>CINOLU</h4>
+      </div>
+      <div class="mt-6 text-lg leading-6 tracking-tight text-gray-400">
+        <p>Rejoignez notre communauté de plus de 1000 utilisateurs et profitez de nos services au quotidien.</p>
+      </div>
+      <div class="mt-8 flex items-center">
+        <div class="flex flex-0 items-center -space-x-1.5">
+          @for (member of team.slice(0, 4); track $index) {
+            <div class="relative h-10 w-10">
+              <img
+                class="h-10 w-10 flex-0 rounded-full object-cover ring-4 ring-primary-900 ring-offset-1 ring-offset-primary-900"
+                [ngSrc]="member.image"
+                fill />
+            </div>
+          }
+          <p class="font-medium tracking-tight text-green-400">Plus de 1000 utilisateurs</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
