@@ -8,12 +8,10 @@ import { RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
 import { Observable } from 'rxjs';
-import { ForgotPasswordStore } from './data-access/forgot-password.store';
 import { IForgotPasswordStore } from './types/forgot-password-store.interface';
 import { TopbarComponent } from '../../../core/topbar/topbar.component';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { APIValiadationError } from 'app/core/pipes/api-validation-error.pipe';
-import { IAPIValidationError } from 'app/core/types/api-validation-error.interface';
 
 @Component({
   selector: 'auth-forgot-password',
@@ -21,7 +19,6 @@ import { IAPIValidationError } from 'app/core/types/api-validation-error.interfa
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations,
   standalone: true,
-  providers: [ForgotPasswordStore],
   imports: [
     FuseAlertComponent,
     FormsModule,
@@ -41,18 +38,15 @@ export class AuthForgotPasswordComponent {
   forgotPasswordForm: FormGroup;
   state$: Observable<IForgotPasswordStore>;
   private _formBuilder: FormBuilder = inject(FormBuilder);
-  private _forgotPasswordStore = inject(ForgotPasswordStore);
 
   constructor() {
     this.forgotPasswordForm = this._formBuilder.group({
       email: ['', [Validators.required]]
     });
-    this.state$ = this._forgotPasswordStore.state$;
   }
 
   sendResetToken(): void {
     if (!this.forgotPasswordForm.invalid) {
-      this._forgotPasswordStore.forgotPassword(this.forgotPasswordForm.value);
     }
   }
 }

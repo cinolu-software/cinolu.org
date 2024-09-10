@@ -8,7 +8,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
-import { ResetPasswordStore } from './data-access/reset-password.store';
 import { IResetPasswordStore } from './types/reset-password-store.interface';
 import { Observable } from 'rxjs';
 import { TopbarComponent } from '../../../core/topbar/topbar.component';
@@ -21,7 +20,6 @@ import { APIValiadationError } from '../../../core/pipes/api-validation-error.pi
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations,
   standalone: true,
-  providers: [ResetPasswordStore],
   imports: [
     FuseAlertComponent,
     FormsModule,
@@ -42,7 +40,6 @@ export class AuthResetPasswordComponent {
   resetPasswordForm: FormGroup;
   state$: Observable<IResetPasswordStore>;
   private _formBuilder = inject(FormBuilder);
-  private _resetPasswordStore = inject(ResetPasswordStore);
 
   constructor() {
     this.resetPasswordForm = this._formBuilder.group({
@@ -50,10 +47,10 @@ export class AuthResetPasswordComponent {
       password: ['', Validators.required],
       password_confirm: ['', Validators.required]
     });
-    this.state$ = this._resetPasswordStore.state$;
   }
 
   resetPassword(): void {
-    if (!this.resetPasswordForm.invalid) this._resetPasswordStore.resetPassword(this.resetPasswordForm.value);
+    if (!this.resetPasswordForm.invalid) {
+    }
   }
 }

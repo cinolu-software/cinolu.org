@@ -1,8 +1,8 @@
-<div class="flex flex-col gap-4 px-8 py-10 max-w-3xl w-full" *ngIf="state$ | async as state">
+<div class="flex flex-col gap-4 px-8 py-10 max-w-3xl w-full">
   <form [formGroup]="infoForm" (submit)="updateInfo()">
     <h2 class="text-xl">Informations personnelles</h2>
     <p class="text-secondary">Mettez à jour vos informations personnelles.</p>
-    @if (state.infoError || state.infoErrors.length > 0) {
+    <!-- @if (state.infoError || state.infoErrors.length > 0) {
       <fuse-alert class="mt-8" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
         {{ state.infoError }}
         <span *ngIf="state.infoErrors.length > 0">{{ state.infoErrors | APIValidationError }}</span>
@@ -12,7 +12,7 @@
       <fuse-alert class="mt-8" appearance="soft" type="success" [showIcon]="true" [@shake]="true">
         {{ state.infoSuccess }}
       </fuse-alert>
-    }
+    } -->
 
     <file-pond
       class="cursor-pointer bg-gray-100 rounded-md mt-6 mb-4"
@@ -48,25 +48,18 @@
         <input formControlName="phone_number" autocomplete="off" matInput />
       </mat-form-field>
     </div>
-    <button
-      class="text-white mb-10 mt-2"
-      mat-flat-button
-      type="submit"
-      [disabled]="state.infoIsLoading || infoForm.invalid"
-      [color]="'primary'">
-      @if (!state.infoIsLoading && !infoForm.invalid) {
-        <span>Enregistrer les modifications</span>
-      }
-      @if (state.infoIsLoading) {
+    <button class="text-white mb-10 mt-2" mat-flat-button type="submit" [color]="'primary'">
+      <span>Enregistrer les modifications</span>
+      <!-- @if (state.infoIsLoading) {
         <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'"></mat-progress-spinner>
-      }
+      } -->
     </button>
   </form>
 
   <form [formGroup]="securityForm" (submit)="updatePassword()">
     <h2 class="text-xl">Changer le mot de passe</h2>
     <p class="text-secondary">Soyez prudent avec les informations sensibles.</p>
-    @if (state.securityError || state.securityErrors.length > 0) {
+    <!-- @if (state.securityError || state.securityErrors.length > 0) {
       <fuse-alert class="mt-8" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
         {{ state.securityError }}
         <span *ngIf="state.securityErrors.length > 0">{{ state.securityErrors | APIValidationError }}</span>
@@ -76,7 +69,7 @@
       <fuse-alert class="mt-8" appearance="soft" type="success" [showIcon]="true" [@shake]="true">
         {{ state.securitySuccess }}
       </fuse-alert>
-    }
+    } -->
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6 mt-6">
       <div class="md:col-span-2">
@@ -98,18 +91,11 @@
       </mat-form-field>
     </div>
 
-    <button
-      class="text-white mb-10 mt-8"
-      mat-flat-button
-      type="submit"
-      [disabled]="state.securityIsLoading || securityForm.invalid"
-      [color]="'primary'">
-      @if (!state.securityIsLoading && !securityForm.invalid) {
-        <span>Enregistrer les modifications</span>
-      }
-      @if (state.securityIsLoading) {
+    <button class="text-white mb-10 mt-8" mat-flat-button type="submit" [color]="'primary'">
+      <span>Enregistrer les modifications</span>
+      <!-- @if (state.securityIsLoading) {
         <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'"></mat-progress-spinner>
-      }
+      } -->
     </button>
   </form>
 </div>

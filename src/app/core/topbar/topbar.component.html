@@ -27,26 +27,14 @@
             {{ link.name }}
           </a>
         }
-        @if (user$ | async; as user) {
+
+        @for (link of authLinks; track $index) {
           <a
-            routerLink="/dashboard/my-account"
-            class="hover:text-green-700 transition-colors duration-300"
-            routerLinkActive="text-green-700"
-            [routerLinkActiveOptions]="{ exact: true }">
-            Profil
+            [routerLink]="link.path"
+            class="inline-block transition-colors duration-300"
+            routerLinkActive="text-green-700">
+            {{ link.name }}
           </a>
-          <button class="hover:text-green-700 transition-colors duration-300" (click)="signOut()">
-            Se déconnecter
-          </button>
-        } @else {
-          @for (link of authLinks; track $index) {
-            <a
-              [routerLink]="link.path"
-              class="inline-block transition-colors duration-300"
-              routerLinkActive="text-green-700">
-              {{ link.name }}
-            </a>
-          }
         }
       </div>
     </ul>
@@ -56,36 +44,14 @@
       class="lg:hidden fixed top-14 left-0 right-0 backdrop-blur-lg bottom-0 bg-white z-40 text-lg transition-transform duration-300"
       [ngClass]="isOpen() ? 'translate-x-0' : '-translate-x-[200%]'">
       <div class="flex flex-col gap-5 p-20 py-40">
-        @if (user$ | async; as user) {
-          @for (link of commonLinks; track $index) {
-            <a
-              [routerLink]="link.path"
-              class="hover:text-green-400 transition-colors duration-300"
-              routerLinkActive="text-green-400">
-              {{ link.name }}
-            </a>
-          }
+        @for (link of unAuthenticatedUserLinks; track $index) {
           <a
-            routerLink="/dashboard/my-account"
-            class="hover:text-green-700 transition-colors duration-300"
-            routerLinkActive="text-green-700"
+            [routerLink]="link.path"
+            class="hover:text-green-400 transition-colors duration-300"
+            routerLinkActive="text-green-400"
             [routerLinkActiveOptions]="{ exact: true }">
-            Profil
+            {{ link.name }}
           </a>
-
-          <button href="" class="inline-flex hover:text-green-400 transition-colors duration-300" (click)="signOut()">
-            Se déconnecter
-          </button>
-        } @else {
-          @for (link of unAuthenticatedUserLinks; track $index) {
-            <a
-              [routerLink]="link.path"
-              class="hover:text-green-400 transition-colors duration-300"
-              routerLinkActive="text-green-400"
-              [routerLinkActiveOptions]="{ exact: true }">
-              {{ link.name }}
-            </a>
-          }
         }
       </div>
     </div>

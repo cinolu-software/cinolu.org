@@ -1,57 +1,73 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { inject, Injectable, OnInit } from '@angular/core';
+import { catchError, Observable, of, switchMap } from 'rxjs';
+import { UserService } from '../user/user.service';
 import { IUser } from '../types/models.interface';
-import { environment } from 'environments/environment';
-import { Router } from '@angular/router';
-import { IUserCredentials } from 'app/modules/auth/sign-in/types/sign-in-payload.interface';
-import { IForgotPasswordPayload } from 'app/modules/auth/forgot-password/types/forgot-password-payload.interface';
-import { IResetPasswordPayload } from 'app/modules/auth/reset-password/types/reset-password-payload.interface';
-import { ISignUpPayload } from 'app/modules/auth/sign-up/types/sign-up-payload.interface';
 
 @Injectable({ providedIn: 'root' })
-export class AuthService {
+export class AuthService implements OnInit {
+  accessToken: string;
+  private _authenticated: boolean = false;
   private _httpClient = inject(HttpClient);
-  private _apiUrl = environment.apiUrl;
-  private _router = inject(Router);
+  private _userService = inject(UserService);
 
-  checkAuth(): Observable<boolean> {
-    return this._httpClient.get<{ data: boolean }>(this._apiUrl + 'auth/is-auth').pipe(map((res) => res.data));
+  ngOnInit(): void {
+    this.accessToken = '';
   }
 
-  authenticate(): Observable<IUser> {
-    return this._httpClient.get<{ data: IUser } | null>(this._apiUrl + 'auth/profile').pipe(map((res) => res.data));
+  forgotPassword(email: string): Observable<{ data: IUser }> {
+    return this._httpClient.post<{ data: IUser }>('api/auth/forgot-password', email);
   }
 
-  signIn(credentials: IUserCredentials): Observable<IUser> {
-    return this._httpClient.post<{ data: IUser }>(this._apiUrl + 'auth/login', credentials).pipe(
-      map((res) => res.data),
-      tap(() => this._router.navigate(['/dashboard/my-account']))
+  resetPassword(password: string): Observable<{ data: IUser }> {
+    return this._httpClient.post<{ data: IUser }>('api/auth/reset-password', password);
+  }
+
+  signIn(credentials: { email: string; password: string }): Observable<{ access_token: string }> {
+    return this._httpClient.post<{ access_token: string }>('auth/sign-in', credentials).pipe(
+      switchMap((res) => {
+        this.accessToken = res.access_token;
+        this._authenticated = true;
+        return of(res);
+      })
     );
   }
 
-  signUp(payload: ISignUpPayload): Observable<IUser> {
-    return this._httpClient.post<{ data: IUser }>(this._apiUrl + 'auth/register', payload).pipe(
-      map((response) => response.data),
-      tap(() => this._router.navigate(['/sign-in']))
-    );
+  signInUsingToken(): Observable<any> {
+    return this._httpClient
+      .post('auth/sign-in-with-token', {
+        accessToken: this.accessToken
+      })
+      .pipe(
+        catchError(() => of(false)),
+        switchMap((response: any) => {
+          if (response.accessToken) {
+            this.accessToken = response.accessToken;
+          }
+          this._authenticated = true;
+          this._userService.user = response.user;
+          return of(true);
+        })
+      );
   }
 
-  signOut(): Observable<string> {
-    return this._httpClient.post<{ data: string }>(this._apiUrl + 'auth/logout', {}).pipe(map((res) => res.data));
+  signOut(): Observable<boolean> {
+    localStorage.removeItem('accessToken');
+    this._authenticated = false;
+    return of(true);
   }
 
-  forgotPassword(credentials: IForgotPasswordPayload): Observable<any> {
-    return this._httpClient.post<{ data: IUser }>(this._apiUrl + 'auth/forgot-password', credentials).pipe(
-      map((response) => response.data),
-      tap(() => this._router.navigate(['/reset-password']))
-    );
+  signUp(user: { name: string; email: string; password: string; company: string }): Observable<any> {
+    return this._httpClient.post('api/auth/sign-up', user);
   }
 
-  resetPassword(payload: IResetPasswordPayload): Observable<IUser> {
-    return this._httpClient.post<{ data: IUser }>(this._apiUrl + 'auth/reset-password', payload).pipe(
-      map((response) => response.data),
-      tap(() => this._router.navigate(['/sign-in']))
-    );
+  unlockSession(credentials: { email: string; password: string }): Observable<any> {
+    return this._httpClient.post('api/auth/unlock-session', credentials);
+  }
+
+  check(): Observable<boolean> {
+    if (this._authenticated) return of(true);
+    if (!this.accessToken) return of(false);
+    return this.signInUsingToken();
   }
 }

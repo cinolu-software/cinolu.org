@@ -1,12 +1,8 @@
 import { Component, HostListener, inject, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { ILink } from './types/link.interface';
 import { FormsModule } from '@angular/forms';
-import { IUser } from '../types/models.interface';
-import { selectUser } from '../auth/data-access/auth.reducers';
 
 @Component({
   selector: 'app-topbar',
@@ -15,24 +11,15 @@ import { selectUser } from '../auth/data-access/auth.reducers';
   templateUrl: './topbar.component.html'
 })
 export class TopbarComponent {
-  user$: Observable<IUser | null>;
   isOpen = signal(false);
-  private _store: Store = inject(Store);
   private _router: Router = inject(Router);
 
-  constructor() {
-    this.user$ = this._store.pipe(select(selectUser));
-  }
+  constructor() {}
 
-  // Ajout de liens de navigation, programmes, evenements, services, nous rejoindre
   commonLinks: ILink[] = [
     {
       name: 'Accueil',
       path: '/'
-    },
-    {
-      name: 'Services',
-      path: '/services'
     }
   ];
 

@@ -1,19 +1,19 @@
-import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
-import { SignInStore } from './data-access/sign-in.store';
-import { Observable } from 'rxjs';
-import { ISignInStore } from './types/sign-in-store.interface';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { TopbarComponent } from '../../../core/topbar/topbar.component';
 import { environment } from 'environments/environment';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from 'app/core/auth/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'auth-sign-in',
@@ -21,7 +21,6 @@ import { environment } from 'environments/environment';
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations,
   standalone: true,
-  providers: [SignInStore],
   imports: [
     RouterLink,
     FuseAlertComponent,
@@ -32,32 +31,58 @@ import { environment } from 'environments/environment';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    CommonModule,
     NgOptimizedImage,
     TopbarComponent
   ]
 })
-export class AuthSignInComponent implements OnInit {
+export class AuthSignInComponent implements OnInit, OnDestroy {
   signInForm: FormGroup;
-  state$: Observable<ISignInStore>;
-  private _signInStore = inject(SignInStore);
+  isLoading = false;
+  error = null;
+  private _authService = inject(AuthService);
   private _formBuilder: FormBuilder = inject(FormBuilder);
+  private _router = inject(Router);
+  private _subscription: Subscription | null = null;
 
   ngOnInit(): void {
     this.signInForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-    this.state$ = this._signInStore.state$;
+  }
+
+  private resetState(): void {
+    this.error = null;
+    this.isLoading = false;
+    this.signInForm.enable();
+  }
+
+  private enableLoading(): void {
+    this.isLoading = true;
+    this.signInForm.disable();
   }
 
   signIn(): void {
-    if (!this.signInForm.invalid) {
-      this._signInStore.signIn(this.signInForm.value);
-    }
+    if (this.signInForm.invalid) return;
+    this.enableLoading();
+    this._subscription = this._authService.signIn(this.signInForm.value).subscribe({
+      next: () => {
+        this.resetState();
+        this._router.navigate(['/dashboard/my-account']);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.resetState();
+        this.error = error.error.message;
+        this.signInForm.enable();
+      }
+    });
   }
 
   signinWithGoogle(): void {
-    window.location.replace(environment.apiUrl + 'auth/google/redirect');
+    window.location.replace(environment.apiUrl + 'auth/google');
+  }
+
+  ngOnDestroy(): void {
+    if (this._subscription) this._subscription.unsubscribe();
   }
 }

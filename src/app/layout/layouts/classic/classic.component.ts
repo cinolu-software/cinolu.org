@@ -27,8 +27,8 @@ import { Subject, takeUntil } from 'rxjs';
     MatIconModule,
     FuseFullscreenComponent,
     SearchComponent,
-    UserComponent,
     RouterOutlet,
+    UserComponent,
     NgOptimizedImage,
     RouterLink
   ]
