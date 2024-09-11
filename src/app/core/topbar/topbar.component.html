@@ -1,4 +1,4 @@
-<header class="relative z-40 text-gray-950 font-generalSans font-medium h-14 md:h-18">
+<header class="relative z-40 text-gray-950 font-satoshi font-medium h-14 md:h-18">
   <nav [ngClass]="isOpen() ? 'lg:static fixed top-0 bottom-0 right-0 left-0 bg-white/75 z-10' : ''">
     <ul
       class="navbar fixed w-full top-0 left-0 right-0 translate-y-0 lg:px-20 px-10 py-3 transition-transform duration-300 bg-white shadow-sm z-20 flex items-center justify-between">
@@ -15,20 +15,8 @@
         <div class="h-[1px] w-6 bg-current transition-transform duration-300"></div>
       </button>
 
-      <!-- Desktop navbar -->
-
       <div class="hidden lg:flex gap-4 items-center">
-        @for (link of commonLinks; track $index) {
-          <a
-            [routerLink]="link.path"
-            class="hover:text-green-700 transition-colors duration-300"
-            routerLinkActive="text-green-700"
-            [routerLinkActiveOptions]="{ exact: true }">
-            {{ link.name }}
-          </a>
-        }
-
-        @for (link of authLinks; track $index) {
+        @for (link of links; track $index) {
           <a
             [routerLink]="link.path"
             class="inline-block transition-colors duration-300"
@@ -44,7 +32,7 @@
       class="lg:hidden fixed top-14 left-0 right-0 backdrop-blur-lg bottom-0 bg-white z-40 text-lg transition-transform duration-300"
       [ngClass]="isOpen() ? 'translate-x-0' : '-translate-x-[200%]'">
       <div class="flex flex-col gap-5 p-20 py-40">
-        @for (link of unAuthenticatedUserLinks; track $index) {
+        @for (link of links; track $index) {
           <a
             [routerLink]="link.path"
             class="hover:text-green-400 transition-colors duration-300"

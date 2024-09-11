@@ -14,16 +14,7 @@ export class TopbarComponent {
   isOpen = signal(false);
   private _router: Router = inject(Router);
 
-  constructor() {}
-
-  commonLinks: ILink[] = [
-    {
-      name: 'Accueil',
-      path: '/'
-    }
-  ];
-
-  authLinks: ILink[] = [
+  links: ILink[] = [
     {
       name: 'Se connecter',
       path: '/sign-in'
@@ -33,8 +24,6 @@ export class TopbarComponent {
       path: '/sign-up'
     }
   ];
-
-  unAuthenticatedUserLinks: ILink[] = [...this.commonLinks, ...this.authLinks];
 
   toogleNav(): void {
     this.isOpen.update((isOpen) => !isOpen);

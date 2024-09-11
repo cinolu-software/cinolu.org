@@ -74,7 +74,7 @@ const config = {
         0: '0 0 auto'
       },
       fontFamily: {
-        generalSans: ['General Sans', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
         satoshi: ['Satoshi', 'sans-serif']
       },
       opacity: {

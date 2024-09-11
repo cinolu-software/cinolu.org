@@ -181,18 +181,18 @@
       <div class="mt-6 text-lg leading-6 tracking-tight text-gray-400">
         <p>Rejoignez notre communauté de plus de 1000 utilisateurs et profitez de nos services au quotidien.</p>
       </div>
-      <div class="mt-8 flex items-center">
-        <div class="flex flex-0 items-center -space-x-1.5">
-          @for (member of team.slice(0, 4); track $index) {
-            <div class="relative h-10 w-10">
+      <div class="mt-8 flex gap-3 items-center">
+        <div class="flex items-center -space-x-1.5">
+          @for (member of team.slice(0, 5); track $index) {
+            <div class="relative h-10 w-10 flex-0">
               <img
-                class="h-10 w-10 flex-0 rounded-full object-cover ring-4 ring-primary-900 ring-offset-1 ring-offset-primary-900"
+                class="rounded-full object-cover ring-4 ring-primary-900 ring-offset-1 ring-offset-primary-900"
                 [ngSrc]="member.image"
                 fill />
             </div>
           }
-          <p class="font-medium tracking-tight text-green-400">Plus de 1000 utilisateurs</p>
         </div>
+        <p class="font-medium tracking-tight text-green-400">Plus de 1000 utilisateurs</p>
       </div>
     </div>
   </div>
