@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
 import { NgOptimizedImage } from '@angular/common';
@@ -43,7 +43,6 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
   team = team;
   private _authService = inject(AuthService);
   private _formBuilder: FormBuilder = inject(FormBuilder);
-  private _router = inject(Router);
   private _subscription: Subscription | null = null;
 
   private resetState(): void {
