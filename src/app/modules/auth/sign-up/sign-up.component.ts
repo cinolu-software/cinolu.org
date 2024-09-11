@@ -93,9 +93,6 @@ export class AuthSignUpComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._subscription) {
-      console.log('Unsubscribing from sign-up subscription');
-      this._subscription.unsubscribe();
-    }
+    if (this._subscription) this._subscription.unsubscribe();
   }
 }

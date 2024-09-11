@@ -68,9 +68,10 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
     if (this.signInForm.invalid) return;
     this.enableLoading();
     this._subscription = this._authService.signIn(this.signInForm.value).subscribe({
-      next: () => {
+      next: ({ access_token }) => {
         this.resetState();
-        this._router.navigate(['/dashboard/my-account']);
+        this._authService.storeToken(access_token);
+        window.location.replace(environment.accountUrl + access_token);
       },
       error: (error: HttpErrorResponse) => {
         this.resetState();

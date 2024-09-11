@@ -7,11 +7,20 @@ import { ISignUpPayload } from './types/sign-up.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService implements OnInit {
-  accessToken: string;
+  token: string;
   private _httpClient = inject(HttpClient);
 
   ngOnInit(): void {
-    this.accessToken = '';
+    this.token = window.localStorage.getItem('cil-token');
+  }
+
+  getToken(): string {
+    return window.localStorage.getItem('cil-token');
+  }
+
+  storeToken(token: string): void {
+    this.token = token;
+    window.localStorage.setItem('cil-token', token);
   }
 
   forgotPassword(email: string): Observable<{ data: IUser }> {
@@ -27,7 +36,7 @@ export class AuthService implements OnInit {
   }
 
   signOut(): Observable<boolean> {
-    window.localStorage.removeItem('accessToken');
+    window.localStorage.removeItem('token');
     return of(true);
   }
 
