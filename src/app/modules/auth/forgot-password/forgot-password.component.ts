@@ -8,10 +8,8 @@ import { RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
 import { Observable } from 'rxjs';
-import { IForgotPasswordStore } from './types/forgot-password-store.interface';
 import { TopbarComponent } from '../../../core/topbar/topbar.component';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { APIValiadationError } from 'app/core/pipes/api-validation-error.pipe';
 
 @Component({
   selector: 'auth-forgot-password',
@@ -30,13 +28,13 @@ import { APIValiadationError } from 'app/core/pipes/api-validation-error.pipe';
     RouterLink,
     TopbarComponent,
     CommonModule,
-    NgOptimizedImage,
-    APIValiadationError
+    NgOptimizedImage
   ]
 })
 export class AuthForgotPasswordComponent {
   forgotPasswordForm: FormGroup;
-  state$: Observable<IForgotPasswordStore>;
+  isLoading = false;
+  error = null;
   private _formBuilder: FormBuilder = inject(FormBuilder);
 
   constructor() {

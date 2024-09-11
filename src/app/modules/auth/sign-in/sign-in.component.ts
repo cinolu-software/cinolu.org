@@ -71,7 +71,7 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
       next: ({ access_token }) => {
         this.resetState();
         this._authService.storeToken(access_token);
-        window.location.replace(environment.accountUrl + access_token);
+        window.location.replace(environment.accountUrl + '?token=' + access_token);
       },
       error: (error: HttpErrorResponse) => {
         this.resetState();

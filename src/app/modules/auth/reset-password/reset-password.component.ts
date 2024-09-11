@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,11 +8,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
-import { IResetPasswordStore } from './types/reset-password-store.interface';
 import { Observable } from 'rxjs';
 import { TopbarComponent } from '../../../core/topbar/topbar.component';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { APIValiadationError } from '../../../core/pipes/api-validation-error.pipe';
 
 @Component({
   selector: 'auth-reset-password',
@@ -32,13 +30,13 @@ import { APIValiadationError } from '../../../core/pipes/api-validation-error.pi
     RouterLink,
     TopbarComponent,
     CommonModule,
-    NgOptimizedImage,
-    APIValiadationError
+    NgOptimizedImage
   ]
 })
 export class AuthResetPasswordComponent {
   resetPasswordForm: FormGroup;
-  state$: Observable<IResetPasswordStore>;
+  isLoading = false;
+  error = null;
   private _formBuilder = inject(FormBuilder);
 
   constructor() {

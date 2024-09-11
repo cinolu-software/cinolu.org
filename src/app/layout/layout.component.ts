@@ -7,8 +7,6 @@ import { FusePlatformService } from '@fuse/services/platform';
 import { FUSE_VERSION } from '@fuse/version';
 import { Subject, combineLatest, filter, map, takeUntil } from 'rxjs';
 import { EmptyLayoutComponent } from './layouts/empty/empty.component';
-import { AuthLayoutComponent } from './layouts/auth/auth.component';
-import { ClassicLayoutComponent } from './layouts/classic/classic.component';
 
 @Component({
   selector: 'layout',
@@ -16,7 +14,7 @@ import { ClassicLayoutComponent } from './layouts/classic/classic.component';
   styleUrls: ['./layout.component.scss'],
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [EmptyLayoutComponent, AuthLayoutComponent, ClassicLayoutComponent]
+  imports: [EmptyLayoutComponent]
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   config: FuseConfig;
@@ -38,13 +36,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private _fusePlatformService: FusePlatformService
   ) {}
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Lifecycle hooks
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * On init
-   */
   ngOnInit(): void {
     // Set the theme and scheme based on the configuration
     combineLatest([
@@ -62,9 +53,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
             theme: config.theme
           };
 
-          // If the scheme is set to 'auto'...
           if (config.scheme === 'auto') {
-            // Decide the scheme using the media query
             options.scheme = mql.breakpoints['(prefers-color-scheme: dark)'] ? 'dark' : 'light';
           }
 
@@ -117,13 +106,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.complete();
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Private methods
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * Update the selected layout
-   */
   private _updateLayout(): void {
     // Get the current activated route
     let route = this._activatedRoute;
