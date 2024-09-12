@@ -58,8 +58,8 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.signInForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      email: ['musanziwilfried@gmail.com', [Validators.required, Validators.email]],
+      password: ['12345678', Validators.required]
     });
   }
 
@@ -70,7 +70,7 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
       next: ({ access_token }) => {
         this.resetState();
         this._authService.storeToken(access_token);
-        window.location.replace(environment.accountUrl + '?token=' + access_token);
+        window.location.replace(environment.accountUrl + 'sign-in?token=' + access_token);
       },
       error: (error: HttpErrorResponse) => {
         this.resetState();
