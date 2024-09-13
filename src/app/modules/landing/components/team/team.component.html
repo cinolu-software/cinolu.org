@@ -7,7 +7,7 @@
     <div class="grid gap-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
       @for (member of team; track $index) {
         <div
-          class="group relative rounded-xl space-y-6 overflow-hidden transition-transform duration-700 hidde"
+          class="group relative rounded-xl space-y-6 overflow-hidden hidde"
           observeVisibility
           [debounceTime]="$index * 100">
           <div class="relative w-full h-[400px]">

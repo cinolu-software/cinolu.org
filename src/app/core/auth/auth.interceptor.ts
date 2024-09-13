@@ -11,7 +11,7 @@ export const authInterceptor = (req: HttpRequest<unknown>, next: HttpHandlerFn):
   if (!req.url.includes('icons')) {
     newReq = req.clone({
       url: environment.apiUrl + req.url,
-      headers: req.headers.set('Authorization', 'Bearer ' + authService.getToken())
+      headers: req.headers.set('Authorization', 'Bearer ' + authService.token)
     });
   }
 

@@ -14,9 +14,7 @@
     @for (purpose of purposes; track $index) {
       <div class="grid grid-cols-1 md:grid-cols-2 mb-20 gap-10 items-center">
         <div
-          class="relative w-full h-60 md:h-96 mt-5 lg:mt-0  transition-transform duration-500 hidde {{
-            $index % 2 !== 0 ? 'md:order-last' : ''
-          }}"
+          class="relative w-full h-60 md:h-96 mt-5 lg:mt-0 hidde {{ $index % 2 !== 0 ? 'md:order-last' : '' }}"
           observeVisibility
           [debounceTime]="$index * 100">
           <img class="object-cover rounded-lg" [ngSrc]="purpose.image" alt="hero" fill />

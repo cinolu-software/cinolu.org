@@ -1,5 +1,5 @@
 <header class="relative z-40 text-gray-950 font-satoshi font-medium h-14 md:h-18">
-  <nav [ngClass]="isOpen() ? 'lg:static fixed top-0 bottom-0 right-0 left-0 bg-white/75 z-10' : ''">
+  <nav>
     <ul
       class="navbar fixed w-full top-0 left-0 right-0 translate-y-0 lg:px-20 px-10 py-3 transition-transform duration-300 bg-white shadow-sm z-20 flex items-center justify-between">
       <a routerLink="/" class="flex items-center gap-3 cursor-pointer" aria-label="logo">
@@ -7,41 +7,26 @@
           <img ngSrc="/images/logo/logo-g.png" alt="logo" class="absolute" fill priority />
         </div>
       </a>
-      <button
-        class="flex flex-col cursor-pointer gap-2 lg:hidden"
-        [ngClass]="isOpen() ? 'nav-open' : ''"
-        (click)="toogleNav()">
-        <div class="h-[1px] w-6 bg-current transition-transform duration-300"></div>
-        <div class="h-[1px] w-6 bg-current transition-transform duration-300"></div>
-      </button>
 
-      <div class="hidden lg:flex gap-4 items-center">
-        @for (link of links; track $index) {
-          <a
-            [routerLink]="link.path"
-            class="inline-block transition-colors duration-300"
-            routerLinkActive="text-green-700">
-            {{ link.name }}
+      <div class="flex gap-4 items-center">
+        @if (user$ | async; as user) {
+          <a [href]="accountUrl" class="flex items-center gap-2" routerLinkActive="text-green-700">
+            <div class="w-8 h-8 bg-gray-200 relative rounded-full overflow-hidden flex items-center justify-center">
+              <img [ngSrc]="displayProfileImage(user)" class="object-cover" alt="profile picture" fill />
+            </div>
+            {{ user.name[0] }}
           </a>
+        } @else {
+          @for (link of links; track $index) {
+            <a
+              [routerLink]="link.path"
+              class="inline-block transition-colors duration-300"
+              routerLinkActive="text-green-700">
+              {{ link.name }}
+            </a>
+          }
         }
       </div>
     </ul>
-
-    <!-- Mobile navbar -->
-    <div
-      class="lg:hidden fixed top-14 left-0 right-0 backdrop-blur-lg bottom-0 bg-white z-40 text-lg transition-transform duration-300"
-      [ngClass]="isOpen() ? 'translate-x-0' : '-translate-x-[200%]'">
-      <div class="flex flex-col gap-5 p-20 py-40">
-        @for (link of links; track $index) {
-          <a
-            [routerLink]="link.path"
-            class="hover:text-green-400 transition-colors duration-300"
-            routerLinkActive="text-green-400"
-            [routerLinkActiveOptions]="{ exact: true }">
-            {{ link.name }}
-          </a>
-        }
-      </div>
-    </div>
   </nav>
 </header>

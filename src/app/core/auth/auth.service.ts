@@ -1,26 +1,25 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { catchError, Observable, of, switchMap } from 'rxjs';
 import { IUser } from '../types/models.interface';
 import { ISignInPayload } from './types/sign-in.interface';
 import { ISignUpPayload } from './types/sign-up.interface';
 
 @Injectable({ providedIn: 'root' })
-export class AuthService implements OnInit {
-  token: string;
+export class AuthService {
+  token: string = this.getToken();
   private _httpClient = inject(HttpClient);
 
-  ngOnInit(): void {
-    this.token = window.localStorage.getItem('cil-token');
-  }
-
   getToken(): string {
-    return window.localStorage.getItem('cil-token');
+    return typeof window !== 'undefined' && localStorage.getItem('token');
   }
 
   storeToken(token: string): void {
-    this.token = token;
-    window.localStorage.setItem('cil-token', token);
+    if (token && typeof window !== 'undefined') localStorage.setItem('token', token);
+  }
+
+  getProfile(): Observable<{ data: IUser }> {
+    return this._httpClient.get<{ data: IUser }>('auth/profile');
   }
 
   forgotPassword(email: string): Observable<{ data: IUser }> {
@@ -36,11 +35,18 @@ export class AuthService implements OnInit {
   }
 
   signOut(): Observable<boolean> {
-    window.localStorage.removeItem('token');
+    typeof window !== 'undefined' && localStorage.removeItem('token');
     return of(true);
   }
 
   signUp(payload: ISignUpPayload): Observable<{ data: IUser }> {
     return this._httpClient.post<{ data: IUser }>('auth/sign-up', payload);
+  }
+
+  check(): Observable<boolean> {
+    return this.getProfile().pipe(
+      switchMap(() => of(true)),
+      catchError(() => of(false))
+    );
   }
 }

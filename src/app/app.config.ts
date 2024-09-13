@@ -1,5 +1,5 @@
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, isDevMode } from '@angular/core';
 import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -10,6 +10,11 @@ import { provideIcons } from 'app/core/icons/icons.provider';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PageTitleStrategy } from './core/strategies/page-title.strategy';
 import { authInterceptor } from './core/auth/auth.interceptor';
+import { provideEffects } from '@ngrx/effects';
+import { provideStore } from '@ngrx/store';
+import { authReducers } from './core/store/app.reducers';
+import { AuthEffects } from './core/store/app.effects';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -75,6 +80,14 @@ export const appConfig: ApplicationConfig = {
         ]
       }
     }),
-    provideClientHydration()
+    provideClientHydration(),
+    provideEffects([AuthEffects]),
+    provideStore({
+      auth: authReducers
+    }),
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode()
+    })
   ]
 };

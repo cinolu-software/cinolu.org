@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { authActions } from './core/store/app.actions';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +10,9 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet]
 })
 export class AppComponent {
-  // private _authService = inject(AuthService);
-  // private _router = inject(Router);
-  // ngOnInit(): void {
-  //   this._authService.check().pipe(
-  //     map((auth) => this._router.navigate([auth ? '/' : '/login'])),
-  //     catchError(() => of())
-  //   );
-  // }
+  private _store = inject(Store);
+
+  ngOnInit(): void {
+    this._store.dispatch(authActions.authentication());
+  }
 }
