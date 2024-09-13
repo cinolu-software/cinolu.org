@@ -14,7 +14,7 @@
             <div class="w-8 h-8 bg-gray-200 relative rounded-full overflow-hidden flex items-center justify-center">
               <img [ngSrc]="displayProfileImage(user)" class="object-cover" alt="profile picture" fill />
             </div>
-            {{ user.name[0] }}
+            {{ user.name }}
           </a>
         } @else {
           @for (link of links; track $index) {

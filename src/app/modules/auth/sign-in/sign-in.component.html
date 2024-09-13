@@ -57,7 +57,7 @@
           class="fuse-mat-button-large mt-6 w-full text-white"
           mat-flat-button
           [color]="'primary'"
-          [disabled]="isLoading || signInForm.invalid"
+          [disabled]="isLoading || signInForm.invalid || signInForm.disabled"
           (click)="signIn()">
           @if (!isLoading && !signInForm.invalid) {
             <span>Se connecter</span>

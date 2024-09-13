@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
 import { NgOptimizedImage } from '@angular/common';
@@ -44,6 +44,9 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
   private _authService = inject(AuthService);
   private _formBuilder: FormBuilder = inject(FormBuilder);
   private _subscription: Subscription | null = null;
+  private _route = inject(ActivatedRoute);
+  private _router = inject(Router);
+  token: string = this._route.snapshot.queryParams['token'];
 
   private resetState(): void {
     this.error = null;
@@ -56,11 +59,27 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
     this.signInForm.disable();
   }
 
+  private verifyEmail() {
+    this.signInForm.disable();
+    this._subscription = this._authService.verifyEmail(this.token).subscribe({
+      next: ({ access_token }) => {
+        this.signInForm.enable();
+        this._authService.storeToken(access_token);
+        this._router.navigate(['/']);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.error = error.error.message;
+        this.signInForm.enable();
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.signInForm = this._formBuilder.group({
-      email: ['musanziwilfried@gmail.com', [Validators.required, Validators.email]],
-      password: ['12345678', Validators.required]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
     });
+    if (this.token) this.verifyEmail();
   }
 
   signIn(): void {

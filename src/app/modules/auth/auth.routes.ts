@@ -7,6 +7,12 @@ export const auhtRoutes: Routes = [
     loadComponent: () => import('./sign-up/sign-up.component').then((c) => c.AuthSignUpComponent)
   },
   {
+    path: 'confirmation-required',
+    title: 'Confirm Password',
+    loadComponent: () =>
+      import('./confirmation-required/confirmation-required.component').then((c) => c.AuthConfirmationRequiredComponent)
+  },
+  {
     path: 'sign-in',
     title: 'Sign In',
     loadComponent: () => import('./sign-in/sign-in.component').then((c) => c.AuthSignInComponent)

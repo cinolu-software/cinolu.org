@@ -43,6 +43,10 @@ export class AuthService {
     return this._httpClient.post<{ data: IUser }>('auth/sign-up', payload);
   }
 
+  verifyEmail(token: string): Observable<{ access_token: string }> {
+    return this._httpClient.post<{ access_token: string }>('auth/verify-email', { token });
+  }
+
   check(): Observable<boolean> {
     return this.getProfile().pipe(
       switchMap(() => of(true)),

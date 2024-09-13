@@ -78,7 +78,9 @@ export class AuthSignUpComponent implements OnInit, OnDestroy {
     this._subscription = this._authService.signUp(this.signUpForm.value).subscribe({
       next: () => {
         this.resetState();
-        this._router.navigate(['/sign-in']);
+        this._router.navigate(['/confirmation-required'], {
+          queryParams: { email: this.signUpForm.value.email }
+        });
       },
       error: (error: HttpErrorResponse) => {
         this.resetState();
