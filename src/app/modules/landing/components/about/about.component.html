@@ -1,14 +1,12 @@
 <section
   class="bg-white text-gray-800 px-8 md:px-32 grid grid-cols-1 md:grid-cols-2 items-center content-center gap-5 md:gap-20 mt-40">
-  <div class="relative w-full h-52 md:h-96 mt-5 lg:mt-0">
+  <div class="relative w-full h-52 md:h-96 mt-5 lg:mt-0 hidde" observeVisibility [debounceTime]="50">
     <img class="object-cover rounded-md" ngSrc="/images/team/all.jpg" alt="hero" fill priority />
   </div>
   <div class="leading-snug">
-    <h1
-      class="font-satoshi font-medium text-3xl md:text-4xl mb-8 transition-transform duration-500 hidde"
-      observeVisibility>
+    <h1 class="font-satoshi font-medium text-3xl md:text-4xl mb-8 hidde" observeVisibility>
       Votre hub d'innovation
-      <span class="text-green-600 transition-transform duration-500 hidde" observeVisibility>one stop</span>
+      <span class="text-green-600">one stop</span>
     </h1>
     <p class="font-medium text-base hidde" observeVisibility [debounceTime]="100">
       Rejoindre un tech hub, un incubateur ou un accélérateur? Ne cherchez plus! Intégrez notre hub d'innovation pour
