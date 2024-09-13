@@ -34,6 +34,30 @@
     animation: fadeIn 0.5s ease-in;
   }
 
+  .fade-in-1 {
+    animation: fadeIn 0.5s ease-in 0.1s;
+  }
+
+  .fade-in-2 {
+    animation: fadeIn 0.5s ease-in 0.2s;
+  }
+
+  .fade-in-3 {
+    animation: fadeIn 0.5s ease-in 0.3s;
+  }
+
+  .fade-in-4 {
+    animation: fadeIn 0.5s ease-in 0.4s;
+  }
+
+  .fade-in-5 {
+    animation: fadeIn 0.5s ease-in 0.5s;
+  }
+
+  .fade-in-6 {
+    animation: fadeIn 0.5s ease-in 0.6s;
+  }
+
   ::-moz-selection {
     @apply text-white bg-green-600;
   }

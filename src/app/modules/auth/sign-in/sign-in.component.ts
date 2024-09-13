@@ -81,7 +81,7 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
   }
 
   signinWithGoogle(): void {
-    window.location.replace(environment.apiUrl + 'auth/google');
+    window.location.replace(environment.apiUrl + 'auth/sign-in');
   }
 
   ngOnDestroy(): void {

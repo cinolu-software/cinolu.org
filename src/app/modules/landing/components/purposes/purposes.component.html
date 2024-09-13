@@ -1,10 +1,12 @@
 <section class="px-8 md:px-32 mt-24 mb-24">
   <div class="leading-snug">
-    <h1 class="font-satoshi font-bold text-2xl md:text-3xl mb-8">
+    <h1
+      class="font-satoshi font-bold text-2xl md:text-3xl mb-8 transition-transform duration-300 hidde"
+      observeVisibility>
       Votre
-      <span class="text-green-600">“One Stop Ecosystem Support” </span>
+      <span class="text-green-600 hidde" observeVisibility>“One Stop Ecosystem Support” </span>
     </h1>
-    <p class="md:text-lg">
+    <p class="md:text-lg transition-transform duration-300 hidde" observeVisibility [debounceTime]="100">
       Notre expérience montre que nous sommes un partenaire de confiance et un point de référence et nous vous
       accompagnons avec les compétences, les ressources et le réseau qu'il vous faut pour vous lancer et croître.
     </p>
@@ -13,10 +15,15 @@
   <div class="grid grid-cols-1 items-center content-center mt-16">
     @for (purpose of purposes; track $index) {
       <div class="grid grid-cols-1 md:grid-cols-2 mb-20 gap-10 items-center">
-        <div class="relative w-full h-60 md:h-96 mt-5 lg:mt-0 {{ $index % 2 !== 0 ? 'md:order-last' : '' }}">
+        <div
+          class="relative w-full h-60 md:h-96 mt-5 lg:mt-0  transition-transform duration-500 hidde {{
+            $index % 2 !== 0 ? 'md:order-last' : ''
+          }}"
+          observeVisibility
+          [debounceTime]="$index * 100">
           <img class="object-cover rounded-lg" [ngSrc]="purpose.image" alt="hero" fill />
         </div>
-        <div class="">
+        <div class="transition-transform duration-300 hidde" observeVisibility [debounceTime]="$index * 140">
           <h2 class="font-extrabold text-xl md:text-3xl mb-3">
             <span class="inline-block mr-2">
               <mat-icon class="icon-size-5 fill-green-700" [svgIcon]="purpose.icon"></mat-icon>
@@ -37,7 +44,9 @@
     }
   </div>
 
-  <div class="bg-green-900 text-white shadow-lg rounded-md px-8 py-10 mb-10">
+  <div
+    class="bg-green-900 text-white shadow-lg rounded-md px-8 py-10 mb-10 transition-transform duration-300 hidde"
+    observeVisibility>
     <h1 class="text-xl font-satoshi font-bold mb-4">Commencez votre voyage avec nous !</h1>
     <h5 class="mb-8">
       Rejoignez la communauté de startups à la croissance la plus rapide, composée d'individus et d'entreprises qui ont

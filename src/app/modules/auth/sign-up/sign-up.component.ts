@@ -10,7 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router, RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { TopbarComponent } from '../../../core/topbar/topbar.component';
 import { environment } from 'environments/environment';
 import { Subscription } from 'rxjs';
@@ -88,8 +88,8 @@ export class AuthSignUpComponent implements OnInit, OnDestroy {
     });
   }
 
-  signinWithGoogle(): void {
-    window.location.replace(environment.apiUrl + 'auth/google/redirect');
+  signUpWithGoogle(): void {
+    window.location.replace(environment.apiUrl + 'auth/sign-up');
   }
 
   ngOnDestroy(): void {

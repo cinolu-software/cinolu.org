@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { ObserveVisibilityDirective } from 'app/core/directives/observer.directives';
 
 @Component({
   selector: 'landing-services',
   standalone: true,
-  imports: [],
+  imports: [ObserveVisibilityDirective],
   templateUrl: './services.component.html'
 })
 export class ServicesComponent {
