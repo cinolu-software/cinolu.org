@@ -1,6 +1,5 @@
 import { AfterViewInit, Directive, ElementRef, input, OnDestroy, OnInit } from '@angular/core';
 import { delay, filter, Subject } from 'rxjs';
-import gsap from 'gsap';
 
 @Directive({
   selector: '[observeVisibility]',
@@ -64,7 +63,7 @@ export class ObserveVisibilityDirective implements OnDestroy, OnInit, AfterViewI
     this.observer.observe(this.element.nativeElement);
     this.subject$.pipe(delay(this.debounceTime()), filter(Boolean)).subscribe(async ({ entry, observer }) => {
       const target = entry.target as HTMLElement;
-      gsap.to(target, { duration: 0.5, opacity: 1, y: 0, ease: 'expo.out' });
+      target.classList.replace('hidde', 'show');
       const isStillVisible = await this.isVisible(target);
       if (isStillVisible) observer.unobserve(target);
     });

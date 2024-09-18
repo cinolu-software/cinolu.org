@@ -12,27 +12,26 @@ import { ObserveVisibilityDirective } from 'app/core/directives/observer.directi
 })
 export class HeroComponent {
   debounceTimes: number[] = [0, 100, 200, 300, 400];
-  purposes: { title: string; description: string; icon: string }[] = [
+  stakeholdersPurposes: { title: string; description: string; icon: string }[] = [
     {
-      title: 'Startups et PMEs',
-      description: 'Obtenez les ressources, du mentorat et des opportunités de financement',
-      icon: 'lightbulb'
-    },
-    {
-      title: 'ISOs & ESOs',
-      description: "Améliorons notre impact et  réseau tout contribuant ainsi à l'écosystème entrepreneurial global",
-      icon: 'euro_symbol'
-    },
-    {
-      title: 'Corporates & Organisations',
-      description: "Intégration de l'innovation dans vos processus, créer des synergies avec les startups et les PMEs",
+      title: 'Corporates',
+      description: "Intégrez l'innovation et créez des synergies avec les startups et PMEs.",
       icon: 'location_city'
     },
     {
-      title: 'Gouvernement & Institutions',
-      description:
-        "Élaborer les politiques publiques favorables à l'innovation, soutient des initiatives de développement",
-      icon: 'check_circle'
+      title: 'ISA & ESE',
+      description: "Renforçons notre impact et réseau dans l'écosystème entrepreneurial global.",
+      icon: 'travel_explore'
+    },
+    {
+      title: 'Startups et PMEs',
+      description: 'Accédez à des ressources, du mentorat et des opportunités de financement.',
+      icon: 'lightbulb'
+    },
+    {
+      title: 'Institutions',
+      description: "Élaborez des politiques favorables à l'innovation et soutenez le développement.",
+      icon: 'flag'
     }
   ];
 }

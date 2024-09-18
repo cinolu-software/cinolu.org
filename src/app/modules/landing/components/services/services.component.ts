@@ -1,37 +1,39 @@
 import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 import { ObserveVisibilityDirective } from 'app/core/directives/observer.directives';
 
 @Component({
   selector: 'landing-services',
   standalone: true,
-  imports: [ObserveVisibilityDirective],
+  imports: [ObserveVisibilityDirective, MatIconModule],
   templateUrl: './services.component.html'
 })
 export class ServicesComponent {
-  services: { title: string; description: string; icon: string }[] = [
+  offerings: { title: string; description: string; icon: string }[] = [
     {
-      title: "Camps d'innovation",
-      description:
-        "Apprenez des compétences et mettez toute suite a l'œuvre pour construire des prototypes et solutions innovantes pour votre groupe ou votre entreprise",
-      icon: 'code'
+      title: "Soutien complet de l'écosystème",
+      description: 'Offrir un soutien global pour aider les innovateurs et entrepreneurs à chaque étape.',
+      icon: 'public' // Represents a global or comprehensive ecosystem
     },
     {
-      title: 'Ecosystème building & engagment',
-      description:
-        "Nous formulons des projets et des plaidoyers pour des politiques publiquesen faveur des acteurs de l'entreprenariat innovant en ligne",
-      icon: 'smartphone'
+      title: 'Compétences validées',
+      description: 'Fournir des compétences certifiées et reconnues par les standards internationaux.',
+      icon: 'verified' // Represents validated or certified skills
     },
     {
-      title: 'Incubation',
-      description:
-        "Nous offrons un accompagnement en pré-incubation , incubation, post-incubation avec des méthodes accréditées a l'international",
-      icon: 'search'
+      title: 'Programmes de niveau international',
+      description: "Proposer des programmes d'accompagnement alignés aux normes internationales.",
+      icon: 'school' // Represents educational or high-standard programs
     },
     {
-      title: 'Capacity building',
-      description:
-        'Nous mettons a disposition une gamme variée de workshops et activités adaptés aux jeunes entrepreneurs, aux mentors et coachs',
-      icon: 'users'
+      title: 'Réseau panafricain',
+      description: "Connecter les innovateurs à un vaste réseau à l'échelle du continent africain.",
+      icon: 'language' // Represents a broad, international network
+    },
+    {
+      title: "Acteurs dynamiques de l'écosystème",
+      description: "Collaborer avec des acteurs clés et dynamiques de l'écosystème entrepreneurial.",
+      icon: 'group' // Represents dynamic, collaborative actors
     }
   ];
 }

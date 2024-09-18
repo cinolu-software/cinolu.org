@@ -4,9 +4,11 @@ import { HeroComponent } from './components/hero/hero.component';
 import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
 import { TeamComponent } from './components/team/team.component';
-import { PurposesComponent } from './components/purposes/purposes.component';
 import { TopbarComponent } from 'app/core/topbar/topbar.component';
 import { FooterComponent } from 'app/core/footer/footer.component';
+import { ProblemStatementComponent } from './components/problem-statement/problem-statement.component';
+import { OurAimComponent } from './components/our-aim/our-aim/our-aim.component';
+import { OurVisionComponent } from './components/our-vision/our-vision.component';
 
 @Component({
   selector: 'app-landing',
@@ -17,9 +19,11 @@ import { FooterComponent } from 'app/core/footer/footer.component';
     AboutComponent,
     ServicesComponent,
     TeamComponent,
-    PurposesComponent,
     TopbarComponent,
-    FooterComponent
+    FooterComponent,
+    ProblemStatementComponent,
+    OurAimComponent,
+    OurVisionComponent
   ],
   templateUrl: './landing.component.html'
 })
