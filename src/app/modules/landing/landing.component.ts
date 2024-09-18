@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { HeroComponent } from './components/hero/hero.component';
 import { AboutComponent } from './components/about/about.component';
-import { ServicesComponent } from './components/services/services.component';
 import { TeamComponent } from './components/team/team.component';
 import { TopbarComponent } from 'app/core/topbar/topbar.component';
 import { FooterComponent } from 'app/core/footer/footer.component';
 import { ProblemStatementComponent } from './components/problem-statement/problem-statement.component';
-import { OurAimComponent } from './components/our-aim/our-aim/our-aim.component';
+import { OurAimComponent } from './components/our-aim/our-aim.component';
 import { OurVisionComponent } from './components/our-vision/our-vision.component';
+import { OfferingsComponent } from './components/offerings/offerings.component';
 
 @Component({
   selector: 'app-landing',
@@ -17,7 +17,7 @@ import { OurVisionComponent } from './components/our-vision/our-vision.component
     CommonModule,
     HeroComponent,
     AboutComponent,
-    ServicesComponent,
+    OfferingsComponent,
     TeamComponent,
     TopbarComponent,
     FooterComponent,

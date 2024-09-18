@@ -1,5 +1,5 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { afterNextRender, Component, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { ObserveVisibilityDirective } from 'app/core/directives/observer.directives';
@@ -7,11 +7,18 @@ import { ObserveVisibilityDirective } from 'app/core/directives/observer.directi
 @Component({
   selector: 'landing-hero',
   standalone: true,
-  imports: [RouterLink, NgOptimizedImage, MatIconModule, ObserveVisibilityDirective],
+  imports: [RouterLink, NgOptimizedImage, MatIconModule, ObserveVisibilityDirective, CommonModule],
   templateUrl: './hero.component.html'
 })
 export class HeroComponent {
-  debounceTimes: number[] = [0, 100, 200, 300, 400];
+  currentImage = signal(0);
+  images: string[] = [
+    '/images/purposes/corporate.webp',
+    '/images/purposes/iso.webp',
+    '/images/purposes/startup.webp',
+    '/images/purposes/government.webp',
+    '/images/team/all.jpg'
+  ];
   stakeholdersPurposes: { title: string; description: string; icon: string }[] = [
     {
       title: 'Corporates',
@@ -34,4 +41,12 @@ export class HeroComponent {
       icon: 'flag'
     }
   ];
+
+  constructor() {
+    afterNextRender(() => {
+      setInterval(() => {
+        this.currentImage.update((v) => (v + 1) % this.images.length);
+      }, 5000);
+    });
+  }
 }

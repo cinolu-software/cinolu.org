@@ -1,10 +1,18 @@
 <section class="-mt-20 md:-mt-8">
-  <div class="relative py-90 md:py-100 flex flex-col">
-    <img ngSrc="/images/team/all.jpg" class="absolute object-cover top-0 bottom-0 left-0 right-0 z-10" fill priority />
+  <div class="relative py-90 md:py-100 flex flex-col overflow-hidden">
+    @for (img of images; track $index) {
+      <img
+        [ngSrc]="img"
+        class="absolute object-cover top-0 bottom-0 left-0 right-0 z-10 transition-opacity duration-300 ease-in {{
+          $index == currentImage() ? 'opacity-100' : 'opacity-0'
+        }}"
+        fill />
+    }
+
     <div
-      class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-black bg-opacity-80 gap-6 text-2xl md:text-4xl z-20 px-8 md:px-32 text-white">
+      class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-black/80 gap-6 text-2xl md:text-4xl z-20 px-8 md:px-32 text-white">
       <div class="max-w-screen-md flex flex-col items-start justify-center md:-mt-16">
-        <h1 class="font-bold text-green-600 block text-3xl md:text-6xl font-satoshi hidde hidde" observeVisibility>
+        <h1 class="font-bold text-green-400 block text-3xl md:text-6xl font-satoshi hidde hidde" observeVisibility>
           Innovons ensemble !
         </h1>
         <p
@@ -12,8 +20,7 @@
           observeVisibility
           [debounceTime]="100">
           Les talents, les innovations à haut potentiel et les startups africaines ne réussiront pas en tant
-          qu&apos;entreprise compétitive sur le long terme si aucune fonction de soutien économique efficace
-          n&apos;existe pas
+          qu'entreprise compétitive sur le long terme si aucune fonction de soutien économique efficace n'existe pas.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base text-center">

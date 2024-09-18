@@ -6,7 +6,7 @@
 
   <div class="grid md:grid-cols-3 gap-10 mt-16">
     @for (s of offerings; track $index) {
-      <div class="flex gap-4 items-start flex-col" observeVisibility [debounceTime]="$index * 100">
+      <div class="flex gap-4 items-start flex-col hidde" observeVisibility [debounceTime]="$index * 100">
         <span class="bg-primary-950/90 px-3 py-2.5 rounded-full">
           <mat-icon class="icon-size-5 fill-white" [svgIcon]="s.icon"></mat-icon>
         </span>
