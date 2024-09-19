@@ -9,7 +9,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
 import { NgOptimizedImage } from '@angular/common';
-import { TopbarComponent } from '../../../core/topbar/topbar.component';
+import { TopbarComponent } from '../../../core/components/topbar/topbar.component';
 import { environment } from 'environments/environment';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from 'app/core/auth/auth.service';

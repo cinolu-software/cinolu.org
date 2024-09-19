@@ -74,9 +74,6 @@ importers:
       filepond-plugin-image-preview:
         specifier: ^4.6.12
         version: 4.6.12(filepond@4.31.2)
-      gsap:
-        specifier: ^3.12.5
-        version: 3.12.5
       lodash-es:
         specifier: 4.17.21
         version: 4.17.21
@@ -86,9 +83,6 @@ importers:
       ngx-filepond:
         specifier: ^7.0.3
         version: 7.0.3(@angular/common@18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(filepond@4.31.2)
-      ngx-owl-carousel-o:
-        specifier: ^18.0.0
-        version: 18.0.0(@angular/common@18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       ngx-quill:
         specifier: 26.0.8
         version: 26.0.8(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(quill@2.0.2)(rxjs@7.8.1)
@@ -3584,9 +3578,6 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
-  gsap@3.12.5:
-    resolution: {integrity: sha512-srBfnk4n+Oe/ZnMIOXt3gT605BX9x5+rh/prT2F1SsNJsU1XuMiP0E2aptW481OnonOGACZWBqseH5Z7csHxhQ==}
-
   handle-thing@2.0.1:
     resolution: {integrity: sha512-9Qn4yBxelxoh2Ow62nP+Ka/kMnOXRi8BXnRaUwezLNhqelnN49xKz4F/dPP8OYLxLxq6JDtZb2i9XznUQbNPTg==}
 
@@ -4460,13 +4451,6 @@ packages:
       '@angular/common': '>=14.x'
       '@angular/core': '>=14.x'
       filepond: '>=4.19.1 <5.x'
-
-  ngx-owl-carousel-o@18.0.0:
-    resolution: {integrity: sha512-3ukc6mDGseUXvYrpfV+Hm2O6cBOgV0p1bT51fykQQxAMZptbnzIQJ+U6ADbeds4tkZiwAHLK2a3qItlHz5YVOg==}
-    peerDependencies:
-      '@angular/common': ' ^18.0.0-rc.0 || ^18.0.0'
-      '@angular/core': ^18.0.0-rc.0 || ^18.0.0
-      rxjs: ^6.0.1 || ^7.0.0
 
   ngx-quill@26.0.8:
     resolution: {integrity: sha512-Yt35k3Tzs6hEE1XzOU10K/nSD5+pvN944zPJ13Ux/tVouM1bZ2QffEWWHrmC3fqEBsLA//ltbxmf+TfGk9rLuw==}
@@ -10354,8 +10338,6 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  gsap@3.12.5: {}
-
   handle-thing@2.0.1: {}
 
   has-flag@3.0.0: {}
@@ -11286,13 +11268,6 @@ snapshots:
       '@angular/common': 18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       '@angular/core': 18.2.2(rxjs@7.8.1)(zone.js@0.14.10)
       filepond: 4.31.2
-      tslib: 2.7.0
-
-  ngx-owl-carousel-o@18.0.0(@angular/common@18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1):
-    dependencies:
-      '@angular/common': 18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
-      '@angular/core': 18.2.2(rxjs@7.8.1)(zone.js@0.14.10)
-      rxjs: 7.8.1
       tslib: 2.7.0
 
   ngx-quill@26.0.8(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(quill@2.0.2)(rxjs@7.8.1):

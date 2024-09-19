@@ -4,13 +4,20 @@
       Notre
       <span class="text-green-600">équipe</span>
     </h1>
-    <div class="grid gap-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+
+    <div class="relative grid gap-6 grid-cols-1 md:grid-cols-4">
+      <!-- <button
+        class="absolute top-1/2 -left-8 z-10 bg-white rounded-full px-3 py-2 shadow-md"
+        *ngIf="!disablePrevious"
+        (click)="previousSlide()">
+        <mat-icon class="icon-size-5 fill-primary-800" svgIcon="mat_outline:arrow_back_ios"></mat-icon>
+      </button> -->
       @for (member of team; track $index) {
         <div
           class="group relative rounded-xl space-y-6 overflow-hidden hidde"
           observeVisibility
           [debounceTime]="$index * 100">
-          <div class="relative w-full h-[400px]">
+          <div class="relative w-full h-[380px]">
             <img
               class="object-cover transition duration-500 group-hover:scale-105"
               [ngSrc]="member.image"
@@ -27,6 +34,12 @@
           </div>
         </div>
       }
+      <!-- <button
+        class="absolute top-1/2 -right-8 z-10 bg-white rounded-full px-3 py-2 shadow-md"
+        *ngIf="!disableNext"
+        (click)="nextSlide()">
+        <mat-icon class="icon-size-5 fill-primary-800" svgIcon="mat_outline:arrow_forward_ios"></mat-icon>
+      </button> -->
     </div>
   </div>
 </section>

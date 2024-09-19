@@ -4,11 +4,11 @@ import { RouterModule } from '@angular/router';
 import { ILink } from './types/link.interface';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { IUser } from '../types/models.interface';
+import { IUser } from '../../types/models.interface';
 import { select, Store } from '@ngrx/store';
-import { selectUser } from '../store/app.reducers';
+import { selectUser } from '../../store/app.reducers';
 import { environment } from 'environments/environment';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-topbar',
@@ -40,9 +40,9 @@ export class TopbarComponent {
   }
 
   displayProfileImage(user: IUser): string {
-    if (user.profile) return user.profile;
-    else if (user.google_image) return user.profile;
-    else return '/images/avatar-default.webp';
+    return user.profile
+      ? `${environment.accountUrl}uploads/profiles/${user.profile}`
+      : user.google_image || '/images/avatar-default.webp';
   }
 
   toogleNav(): void {

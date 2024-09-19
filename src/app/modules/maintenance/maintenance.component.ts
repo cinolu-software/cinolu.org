@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { TopbarComponent } from '../../core/topbar/topbar.component';
+import { TopbarComponent } from '../../core/components/topbar/topbar.component';
 
 @Component({
   selector: 'maintenance',

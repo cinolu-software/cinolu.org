@@ -10,12 +10,16 @@
 
       <div class="flex gap-4 items-center">
         @if (user$ | async; as user) {
-          <a [href]="accountUrl" class="flex items-center gap-2" routerLinkActive="text-green-700">
-            <div class="w-8 h-8 bg-gray-200 relative rounded-full overflow-hidden flex items-center justify-center">
-              <img [ngSrc]="displayProfileImage(user)" class="object-cover" alt="profile picture" fill />
-            </div>
-            {{ user.name }}
-          </a>
+          <div class="flex items-center gap-2">
+            <a
+              [href]="accountUrl"
+              target="_blank"
+              class="relative w-8 h-8 bg-gray-200 rounded-full overflow-hidden inline-block"
+              routerLinkActive="text-green-700">
+              <img [ngSrc]="displayProfileImage(user)" class="object-contain" alt="profile picture" fill />
+            </a>
+            Mon compte
+          </div>
         } @else {
           @for (link of links; track $index) {
             <a
