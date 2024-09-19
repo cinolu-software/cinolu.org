@@ -6,10 +6,7 @@
     </h1>
 
     <div class="relative grid gap-6 grid-cols-1 md:grid-cols-4">
-      <button class="absolute top-1/2 -left-8 z-10 bg-white rounded-full px-3 py-2 shadow-md">
-        <mat-icon class="icon-size-5 fill-primary-800" svgIcon="mat_outline:arrow_back_ios"></mat-icon>
-      </button>
-      @for (member of team.slice(0, 4); track $index) {
+      @for (member of team; track $index) {
         <div
           class="group relative rounded-xl space-y-6 overflow-hidden hidde"
           observeVisibility
@@ -30,9 +27,6 @@
           </div>
         </div>
       }
-      <button class="absolute top-1/2 -right-8 z-10 bg-white rounded-full px-3 py-2 shadow-md">
-        <mat-icon class="icon-size-5 fill-primary-800" svgIcon="mat_outline:arrow_forward_ios"></mat-icon>
-      </button>
     </div>
   </div>
 </section>
