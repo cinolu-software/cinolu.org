@@ -1,22 +1,18 @@
-name: CD
+name: Deploy to VPS
+
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Deploy using ssh
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.PRIVATE_KEY }}
-          port: 22
-          script: |
-            cd cinolu/cinolu.org
-            git pull 
-            pnpm i
-            nx build
-            pm2 restart cinolu.org
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to VPS
+        run: |
+          ssh ${{ secrets.USERNAME }}@${{secrets.HOST}} "cd cinolu/cinolu.org && git pull && pnpm i && nx build && pm2 restart cinolu.org"
