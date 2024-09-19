@@ -15,4 +15,4 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          ssh ${{ secrets.USERNAME }}@${{secrets.HOST}} -p 22 "cd cinolu/cinolu.org && git pull && pnpm i && nx build && pm2 restart cinolu.org"
+          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} -p 22 "cd cinolu/cinolu.org && git pull && pnpm i && nx build && pm2 restart cinolu.org"
