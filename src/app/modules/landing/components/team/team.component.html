@@ -6,13 +6,10 @@
     </h1>
 
     <div class="relative grid gap-6 grid-cols-1 md:grid-cols-4">
-      <!-- <button
-        class="absolute top-1/2 -left-8 z-10 bg-white rounded-full px-3 py-2 shadow-md"
-        *ngIf="!disablePrevious"
-        (click)="previousSlide()">
+      <button class="absolute top-1/2 -left-8 z-10 bg-white rounded-full px-3 py-2 shadow-md">
         <mat-icon class="icon-size-5 fill-primary-800" svgIcon="mat_outline:arrow_back_ios"></mat-icon>
-      </button> -->
-      @for (member of team; track $index) {
+      </button>
+      @for (member of team.slice(0, 4); track $index) {
         <div
           class="group relative rounded-xl space-y-6 overflow-hidden hidde"
           observeVisibility
@@ -24,9 +21,8 @@
               [alt]="member.name"
               fill />
           </div>
-
           <div
-            class="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-green-800 translate-y-[100%] transition duration-300 ease-in-out group-hover:translate-y-0">
+            class="absolute bottom-0 rounded-b-xl inset-x-0 h-max mt-auto px-8 py-6 bg-green-800 translate-y-[100%] transition duration-300 ease-in-out group-hover:translate-y-0">
             <div>
               <h4 class="text-xl font-semibold text-white font-satoshi">{{ member.name }}</h4>
               <span class="block text-sm text-gray-100">{{ member.role }}</span>
@@ -34,12 +30,9 @@
           </div>
         </div>
       }
-      <!-- <button
-        class="absolute top-1/2 -right-8 z-10 bg-white rounded-full px-3 py-2 shadow-md"
-        *ngIf="!disableNext"
-        (click)="nextSlide()">
+      <button class="absolute top-1/2 -right-8 z-10 bg-white rounded-full px-3 py-2 shadow-md">
         <mat-icon class="icon-size-5 fill-primary-800" svgIcon="mat_outline:arrow_forward_ios"></mat-icon>
-      </button> -->
+      </button>
     </div>
   </div>
 </section>

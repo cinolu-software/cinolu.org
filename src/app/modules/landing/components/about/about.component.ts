@@ -1,6 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
-import { ObserveVisibilityDirective } from 'app/core/directives/observer.directives';
+import { ObserveVisibilityDirective } from 'app/core/directives/observer.directive';
 
 @Component({
   selector: 'landing-about',

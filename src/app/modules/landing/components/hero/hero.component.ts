@@ -2,7 +2,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { ObserveVisibilityDirective } from 'app/core/directives/observer.directives';
+import { ObserveVisibilityDirective } from 'app/core/directives/observer.directive';
 
 @Component({
   selector: 'landing-hero',
