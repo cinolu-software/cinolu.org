@@ -13,6 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "${{ secrets.HOST }}" >> ~/.ssh/known_hosts
+
       - name: Deploy to VPS
         run: |
-          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} -p 22 "cd cinolu/cinolu.org && git pull && pnpm i && nx build && pm2 restart cinolu.org"
+          ssh "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}" "cd cinolu/cinolu.org && git pull && pnpm i && nx build && pm2 restart cinolu.org"
