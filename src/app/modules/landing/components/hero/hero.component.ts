@@ -13,27 +13,30 @@ import { ObserveVisibilityDirective } from 'app/core/directives/observer.directi
 export class HeroComponent {
   currentImage = signal(0);
   images: string[] = [
-    '/images/purposes/corporate.webp',
-    '/images/purposes/iso.webp',
-    '/images/purposes/startup.webp',
-    '/images/purposes/government.webp',
-    '/images/team/all.jpg'
+    '/images/slides/slide-1.webp',
+    '/images/slides/slide-2.webp',
+    '/images/slides/slide-3.webp',
+    '/images/slides/slide-4.webp',
+    '/images/slides/slide-5.webp',
+    '/images/slides/slide-6.webp',
+    '/images/slides/slide-7.webp',
+    '/images/slides/slide-8.webp'
   ];
   stakeholdersPurposes: { title: string; description: string; icon: string }[] = [
-    {
-      title: 'Corporates',
-      description: "Intégrez l'innovation et créez des synergies avec les startups et PMEs.",
-      icon: 'location_city'
-    },
-    {
-      title: 'ISA & ESE',
-      description: "Renforçons notre impact et réseau dans l'écosystème entrepreneurial global.",
-      icon: 'travel_explore'
-    },
     {
       title: 'Startups et PMEs',
       description: 'Accédez à des ressources, du mentorat et des opportunités de financement.',
       icon: 'lightbulb'
+    },
+    {
+      title: 'SAEI & ESE',
+      description: "Renforçons notre impact et réseau dans l'écosystème entrepreneurial global.",
+      icon: 'travel_explore'
+    },
+    {
+      title: 'Corporates',
+      description: "Intégrez l'innovation et créez des synergies avec les startups et PMEs.",
+      icon: 'location_city'
     },
     {
       title: 'Institutions',
@@ -46,7 +49,7 @@ export class HeroComponent {
     afterNextRender(() => {
       setInterval(() => {
         this.currentImage.update((v) => (v + 1) % this.images.length);
-      }, 5000);
+      }, 3000);
     });
   }
 }

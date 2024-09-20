@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,7 +19,6 @@ import { team } from 'app/modules/landing/data/team';
 @Component({
   selector: 'auth-sign-in',
   templateUrl: './sign-in.component.html',
-  encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations,
   standalone: true,
   imports: [
@@ -36,7 +35,7 @@ import { team } from 'app/modules/landing/data/team';
     TopbarComponent
   ]
 })
-export class AuthSignInComponent implements OnInit, OnDestroy {
+export class AuthSignInComponent implements OnDestroy {
   signInForm: FormGroup;
   isLoading = false;
   error = null;
@@ -48,15 +47,12 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
   private _router = inject(Router);
   private _token: string = this._route.snapshot.queryParams['token'];
 
-  private resetState(): void {
-    this.error = null;
-    this.isLoading = false;
-    this.signInForm.enable();
-  }
-
-  private enableLoading(): void {
-    this.isLoading = true;
-    this.signInForm.disable();
+  constructor() {
+    this.signInForm = this._formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+    if (this._token) this.verifyEmail();
   }
 
   private verifyEmail() {
@@ -73,25 +69,18 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
-    this.signInForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    });
-    if (this._token) this.verifyEmail();
-  }
-
   signIn(): void {
     if (this.signInForm.invalid) return;
-    this.enableLoading();
+    this.isLoading = true;
+    this.error = null;
+    this.signInForm.disable();
     this._subscription = this._authService.signIn(this.signInForm.value).subscribe({
       next: ({ access_token }) => {
-        this.resetState();
         this._authService.storeToken(access_token);
-        window.location.replace(environment.accountUrl + 'sign-in?token=' + access_token);
+        this._router.navigate(['/']);
       },
       error: (error: HttpErrorResponse) => {
-        this.resetState();
+        this.isLoading = false;
         this.error = error.error.message;
         this.signInForm.enable();
       }
