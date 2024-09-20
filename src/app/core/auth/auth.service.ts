@@ -4,6 +4,7 @@ import { catchError, Observable, of, switchMap } from 'rxjs';
 import { IUser } from '../types/models.interface';
 import { ISignInPayload } from './types/sign-in.interface';
 import { ISignUpPayload } from './types/sign-up.interface';
+import { IResetPassword } from './types/reset-password.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -21,15 +22,6 @@ export class AuthService {
   getProfile(): Observable<{ data: IUser }> {
     return this._httpClient.get<{ data: IUser }>('auth/profile');
   }
-
-  forgotPassword(email: string): Observable<{ data: IUser }> {
-    return this._httpClient.post<{ data: IUser }>('auth/forgot-password', email);
-  }
-
-  resetPassword(password: string): Observable<{ data: IUser }> {
-    return this._httpClient.post<{ data: IUser }>('auth/reset-password', password);
-  }
-
   signIn(payload: ISignInPayload): Observable<{ access_token: string }> {
     return this._httpClient.post<{ access_token: string }>('auth/sign-in', payload);
   }
@@ -41,6 +33,14 @@ export class AuthService {
 
   signUp(payload: ISignUpPayload): Observable<{ data: IUser }> {
     return this._httpClient.post<{ data: IUser }>('auth/sign-up', payload);
+  }
+
+  forgotPassword(email: { email: string }): Observable<void> {
+    return this._httpClient.post<void>('auth/forgot-password', email);
+  }
+
+  resetPassword(payload: IResetPassword): Observable<{ access_token: string }> {
+    return this._httpClient.post<{ access_token: string }>('auth/reset-password', payload);
   }
 
   verifyEmail(token: string): Observable<{ access_token: string }> {

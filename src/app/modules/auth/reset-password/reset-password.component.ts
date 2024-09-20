@@ -1,16 +1,18 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { TopbarComponent } from '../../../core/components/topbar/topbar.component';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { team } from 'app/modules/landing/data/team';
+import { AuthService } from 'app/core/auth/auth.service';
 
 @Component({
   selector: 'auth-reset-password',
@@ -33,15 +35,20 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
     NgOptimizedImage
   ]
 })
-export class AuthResetPasswordComponent {
+export class AuthResetPasswordComponent implements OnDestroy {
   resetPasswordForm: FormGroup;
   isLoading = false;
   error = null;
+  team = team;
   private _formBuilder = inject(FormBuilder);
+  private _activatedRoute = inject(ActivatedRoute);
+  private _router = inject(Router);
+  private _authService = inject(AuthService);
+  token = this._activatedRoute.snapshot.queryParams['token'];
+  private _subscription: Subscription | null = null;
 
   constructor() {
     this.resetPasswordForm = this._formBuilder.group({
-      token: ['', Validators.required],
       password: ['', Validators.required],
       password_confirm: ['', Validators.required]
     });
@@ -49,6 +56,31 @@ export class AuthResetPasswordComponent {
 
   resetPassword(): void {
     if (!this.resetPasswordForm.invalid) {
+      this.isLoading = true;
+      this.error = null;
+      this.resetPasswordForm.disable();
+      const payload = {
+        token: this.token,
+        password: this.resetPasswordForm.value.password,
+        password_confirm: this.resetPasswordForm.value.password_confirm
+      };
+
+      this._subscription = this._authService.resetPassword(payload).subscribe({
+        next: ({ access_token }) => {
+          this.isLoading = false;
+          this._authService.storeToken(access_token);
+          this._router.navigate(['/']);
+        },
+        error: (err) => {
+          this.isLoading = false;
+          this.error = err.error.message;
+          this.resetPasswordForm.enable();
+        }
+      });
     }
+  }
+
+  ngOnDestroy(): void {
+    this._subscription?.unsubscribe();
   }
 }

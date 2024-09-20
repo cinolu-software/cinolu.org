@@ -46,7 +46,7 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
   private _subscription: Subscription | null = null;
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
-  token: string = this._route.snapshot.queryParams['token'];
+  private _token: string = this._route.snapshot.queryParams['token'];
 
   private resetState(): void {
     this.error = null;
@@ -60,10 +60,9 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
   }
 
   private verifyEmail() {
-    this.signInForm.disable();
-    this._subscription = this._authService.verifyEmail(this.token).subscribe({
+    this.signInForm.enable();
+    this._subscription = this._authService.verifyEmail(this._token).subscribe({
       next: ({ access_token }) => {
-        this.signInForm.enable();
         this._authService.storeToken(access_token);
         this._router.navigate(['/']);
       },
@@ -79,7 +78,7 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-    if (this.token) this.verifyEmail();
+    if (this._token) this.verifyEmail();
   }
 
   signIn(): void {
