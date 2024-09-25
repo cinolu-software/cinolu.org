@@ -53,7 +53,9 @@ export class AuthSignInComponent {
 
   signIn(): void {
     if (this.signInForm.invalid) return;
+    this.signInForm.disable();
     this._store.signIn(this.signInForm.value);
+    this.signInForm.enable();
   }
 
   signinWithGoogle(): void {
