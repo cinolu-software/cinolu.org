@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,9 +10,9 @@ import { FuseAlertComponent } from '@fuse/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { team } from 'app/pages/landing/data/team';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthService } from 'app/pages/auth/auth.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+import { ForgotPasswordStore } from './forgot-password.store';
+import { IForgotPasswordStore } from './types/forgot-password-store.type';
 
 @Component({
   selector: 'auth-forgot-password',
@@ -34,44 +34,23 @@ import { Subscription } from 'rxjs';
     NgOptimizedImage
   ]
 })
-export class AuthForgotPasswordComponent implements OnDestroy {
+export class AuthForgotPasswordComponent {
   forgotPasswordForm: FormGroup;
-  isLoading = false;
-  error = null;
-  success = null;
+  state$: Observable<IForgotPasswordStore>;
   team = team;
   private _formBuilder = inject(FormBuilder);
-  private _authService = inject(AuthService);
-  private _subscription: Subscription | null = null;
+  private _store = inject(ForgotPasswordStore);
 
   constructor() {
     this.forgotPasswordForm = this._formBuilder.group({
       email: ['musanziwilfried@gmail.com', [Validators.required, Validators.email]]
     });
+    this.state$ = this._store.state$;
   }
 
   submitForgotPassword(): void {
     if (!this.forgotPasswordForm.invalid) {
-      this.isLoading = true;
-      this.error = null;
-      this.success = null;
-      this.forgotPasswordForm.disable();
-      this._subscription = this._authService.forgotPassword(this.forgotPasswordForm.value).subscribe({
-        next: () => {
-          this.isLoading = false;
-          this.forgotPasswordForm.enable();
-          this.success = 'Un email vous a été envoyé avec les instructions pour réinitialiser votre mot de passe.';
-        },
-        error: (error: HttpErrorResponse) => {
-          this.isLoading = false;
-          this.error = error.error['message'];
-          this.forgotPasswordForm.enable();
-        }
-      });
+      this._store.forgotPassword(this.forgotPasswordForm.value);
     }
-  }
-
-  ngOnDestroy(): void {
-    this._subscription?.unsubscribe();
   }
 }
