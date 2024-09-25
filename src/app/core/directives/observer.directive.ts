@@ -1,11 +1,11 @@
-import { AfterViewInit, Directive, ElementRef, input, OnDestroy, OnInit } from '@angular/core';
+import { afterNextRender, AfterViewInit, Directive, ElementRef, input, OnDestroy, OnInit } from '@angular/core';
 import { delay, filter, Subject } from 'rxjs';
 
 @Directive({
   selector: '[observeVisibility]',
   standalone: true
 })
-export class ObserveVisibilityDirective implements OnDestroy, OnInit, AfterViewInit {
+export class ObserveVisibilityDirective implements OnDestroy, AfterViewInit {
   debounceTime = input<number>(0);
 
   private observer: IntersectionObserver | undefined;
@@ -14,17 +14,15 @@ export class ObserveVisibilityDirective implements OnDestroy, OnInit, AfterViewI
     observer: IntersectionObserver;
   }>();
 
-  constructor(private element: ElementRef) {}
-
-  ngOnInit() {
+  constructor(private element: ElementRef) {
     this.createObserver();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.startObservingElements();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.observer) {
       this.observer.disconnect();
       this.observer = undefined;
@@ -32,7 +30,7 @@ export class ObserveVisibilityDirective implements OnDestroy, OnInit, AfterViewI
     this.subject$.unsubscribe();
   }
 
-  private isVisible(element: HTMLElement) {
+  private isVisible(element: HTMLElement): Promise<boolean> {
     return new Promise((resolve) => {
       const observer = new IntersectionObserver(([entry]) => {
         resolve(entry.intersectionRatio === 1);
@@ -42,7 +40,7 @@ export class ObserveVisibilityDirective implements OnDestroy, OnInit, AfterViewI
     });
   }
 
-  private createObserver() {
+  private createObserver(): void {
     const options = {
       rootMargin: '0px',
       threshold: 0.1
@@ -58,7 +56,7 @@ export class ObserveVisibilityDirective implements OnDestroy, OnInit, AfterViewI
     }, options);
   }
 
-  private startObservingElements() {
+  private startObservingElements(): void {
     if (!this.observer) return;
     this.observer.observe(this.element.nativeElement);
     this.subject$.pipe(delay(this.debounceTime()), filter(Boolean)).subscribe(async ({ entry, observer }) => {

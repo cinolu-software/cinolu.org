@@ -9,7 +9,7 @@ import { appRoutes } from 'app/app.routes';
 import { provideIcons } from 'app/core/icons/icons.provider';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PageTitleStrategy } from './core/strategies/page-title.strategy';
-import { authInterceptor } from './core/auth/auth.interceptor';
+import { httpInterceptor } from './core/interceptors/http.interceptor';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { authReducers } from './core/store/app.reducers';
@@ -19,7 +19,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
-    provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([httpInterceptor])),
     { provide: TitleStrategy, useClass: PageTitleStrategy },
     provideRouter(appRoutes, withPreloading(PreloadAllModules)),
     {
@@ -51,33 +51,7 @@ export const appConfig: ApplicationConfig = {
           lg: '1280px',
           xl: '1440px'
         },
-        theme: 'theme-default',
-        themes: [
-          {
-            id: 'theme-default',
-            name: 'Default'
-          },
-          {
-            id: 'theme-brand',
-            name: 'Brand'
-          },
-          {
-            id: 'theme-teal',
-            name: 'Teal'
-          },
-          {
-            id: 'theme-rose',
-            name: 'Rose'
-          },
-          {
-            id: 'theme-purple',
-            name: 'Purple'
-          },
-          {
-            id: 'theme-amber',
-            name: 'Amber'
-          }
-        ]
+        theme: 'theme-default'
       }
     }),
     provideClientHydration(),

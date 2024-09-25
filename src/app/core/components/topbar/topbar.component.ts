@@ -1,4 +1,4 @@
-import { afterNextRender, Component, HostListener, inject, signal } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ILink } from './types/link.interface';
@@ -8,7 +8,6 @@ import { IUser } from '../../types/models.interface';
 import { select, Store } from '@ngrx/store';
 import { selectUser } from '../../store/app.reducers';
 import { environment } from 'environments/environment';
-import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-topbar',
@@ -21,7 +20,6 @@ export class TopbarComponent {
   isOpen = signal(false);
   accountUrl: string;
   private _store = inject(Store);
-  private _authService = inject(AuthService);
 
   links: ILink[] = [
     {
@@ -36,7 +34,7 @@ export class TopbarComponent {
 
   constructor() {
     this.user$ = this._store.pipe(select(selectUser));
-    this.accountUrl = environment.accountUrl + 'sign-in?token=' + this._authService.token;
+    this.accountUrl = environment.accountUrl;
   }
 
   displayProfileImage(user: IUser): string {
