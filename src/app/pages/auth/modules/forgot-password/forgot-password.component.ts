@@ -43,7 +43,7 @@ export class AuthForgotPasswordComponent {
 
   constructor() {
     this.forgotPasswordForm = this._formBuilder.group({
-      email: ['musanziwilfried@gmail.com', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]]
     });
     this.state$ = this._store.state$;
   }

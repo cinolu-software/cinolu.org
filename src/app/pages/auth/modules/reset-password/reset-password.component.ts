@@ -12,6 +12,8 @@ import { Observable, Subscription } from 'rxjs';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { team } from 'app/pages/landing/data/team';
 import { AuthService } from 'app/pages/auth/auth.service';
+import { ResetPasswordStore } from './reset-password.store';
+import { IResetPasswordStore } from './types/reset-password-store.type';
 
 @Component({
   selector: 'auth-reset-password',
@@ -33,51 +35,29 @@ import { AuthService } from 'app/pages/auth/auth.service';
     NgOptimizedImage
   ]
 })
-export class AuthResetPasswordComponent implements OnDestroy {
+export class AuthResetPasswordComponent {
   resetPasswordForm: FormGroup;
-  isLoading = false;
-  error = null;
   team = team;
+  state$: Observable<IResetPasswordStore>;
+  private _token = inject(ActivatedRoute).snapshot.queryParams['token'];
   private _formBuilder = inject(FormBuilder);
-  private _activatedRoute = inject(ActivatedRoute);
-  private _router = inject(Router);
-  private _authService = inject(AuthService);
-  token = this._activatedRoute.snapshot.queryParams['token'];
-  private _subscription: Subscription | null = null;
+  private _store = inject(ResetPasswordStore);
 
   constructor() {
     this.resetPasswordForm = this._formBuilder.group({
       password: ['', Validators.required],
       password_confirm: ['', Validators.required]
     });
+    this.state$ = this._store.state$;
   }
 
   resetPassword(): void {
     if (!this.resetPasswordForm.invalid) {
-      this.isLoading = true;
-      this.error = null;
       this.resetPasswordForm.disable();
-      const payload = {
-        token: this.token,
-        password: this.resetPasswordForm.value.password,
-        password_confirm: this.resetPasswordForm.value.password_confirm
-      };
-
-      this._subscription = this._authService.resetPassword(payload).subscribe({
-        next: () => {
-          this.isLoading = false;
-          this._router.navigate(['/sign-in']);
-        },
-        error: (err) => {
-          this.isLoading = false;
-          this.error = err.error.message;
-          this.resetPasswordForm.enable();
-        }
-      });
+      const { password, password_confirm } = this.resetPasswordForm.value;
+      const payload = { token: this._token, password, password_confirm };
+      this._store.resetPassword(payload);
+      this.resetPasswordForm.enable();
     }
-  }
-
-  ngOnDestroy(): void {
-    this._subscription?.unsubscribe();
   }
 }
