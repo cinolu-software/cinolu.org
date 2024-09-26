@@ -12,6 +12,11 @@
         {{ error }}
       </fuse-alert>
     }
+    @if (state.success && !state.error) {
+      <fuse-alert class="mt-6 w-full" appearance="soft" type="success" [showIcon]="true" [@shake]="true">
+        {{ state.success }}
+      </fuse-alert>
+    }
     <form
       class="{{ state.error ? 'transition-transform translate-y-4 duration-150' : 'mt-8 ' }}"
       [formGroup]="signInForm">

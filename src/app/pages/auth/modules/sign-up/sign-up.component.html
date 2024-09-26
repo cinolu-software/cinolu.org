@@ -1,144 +1,154 @@
-<div class="grid grid-cols-1 lg:grid-cols-2 bg-white">
-  <div class="min-h-screen flex flex-col items-start justify-center px-8 md:px-8 lg:px-32">
+<div class="grid grid-cols-1 lg:grid-cols-2 bg-white" *ngIf="state$ | async as state">
+  <div class="flex min-h-screen md:min-h-full md:py-24 flex-col items-start justify-center px-8 md:px-8 lg:px-32">
     <div class="flex flex-col items-start">
       <h2 class="text-3xl font-extrabold leading-tight tracking-tight font-satoshi">S'inscrire</h2>
       <div class="flex items-center gap-1.5">
         <p>Ou continuez avec</p>
         <button class="text-primary-500 hover:underline" (click)="signUpWithGoogle()">Google</button>
       </div>
-      @if (error) {
-        <fuse-alert class="mt-6" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
+      @if (state.error; as error) {
+        <fuse-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
           {{ error }}
         </fuse-alert>
       }
     </div>
     <form
-      class="-ml-6 {{ error ? 'transition-transform translate-y-4 duration-150' : 'mt-6' }}"
+      class="-ml-6 {{ state.error ? 'transition-transform translate-y-4 duration-150' : 'mt-6' }}"
       [formGroup]="signUpForm">
       <mat-stepper orientation="horizontal" [color]="'primary'" [linear]="true" #stepper>
         <mat-step label="Etape 1">
           <ng-template matStepContent>
-            <mat-form-field class="w-full">
-              <mat-label>Nom complet</mat-label>
-              <input autocomplete="name" id="name" matInput formControlName="name" />
-            </mat-form-field>
-            <mat-form-field class="w-full">
-              <mat-label>E-mail</mat-label>
-              <input
-                autocomplete="off"
-                id="email"
-                type="email"
-                matInput
-                formControlName="email"
-                placeholder="example@gmail.com"
-                required />
-            </mat-form-field>
-            <mat-form-field class="w-full">
-              <mat-label>Adresse</mat-label>
-              <input
-                autocomplete="off"
-                id="address"
-                matInput
-                formControlName="address"
-                placeholder="Lubumbashi, RDC."
-                required />
-            </mat-form-field>
-            <div>
-              <button
-                class="bg-primary-600 hover:bg-primary-800 duration-150 transition-colors rounded-full text-white px-6 py-2"
-                matStepperNext>
-                Suivant
-              </button>
+            <div formGroupName="firstStep">
+              <mat-form-field class="w-full">
+                <mat-label>Nom complet</mat-label>
+                <input autocomplete="name" id="name" matInput formControlName="name" />
+              </mat-form-field>
+              <mat-form-field class="w-full">
+                <mat-label>E-mail</mat-label>
+                <input
+                  autocomplete="off"
+                  id="email"
+                  type="email"
+                  matInput
+                  formControlName="email"
+                  placeholder="example@gmail.com"
+                  required />
+              </mat-form-field>
+              <mat-form-field class="w-full">
+                <mat-label>Adresse</mat-label>
+                <input
+                  autocomplete="off"
+                  id="address"
+                  matInput
+                  formControlName="address"
+                  placeholder="Lubumbashi, RDC."
+                  required />
+              </mat-form-field>
+              <div>
+                <button
+                  class="fuse-mat-button-medium mt-6 text-white"
+                  mat-flat-button
+                  color="primary"
+                  [disabled]="signUpForm.get('firstStep').invalid"
+                  (click)="stepper.next()">
+                  <span class="flex items-center gap-1">
+                    Suivant
+                    <mat-icon class="icon-size-5" svgIcon="arrow_forward"></mat-icon>
+                  </span>
+                </button>
+              </div>
             </div>
           </ng-template>
         </mat-step>
-
         <mat-step label="Etape 2">
           <ng-template matStepContent>
-            <mat-form-field class="w-full">
-              <mat-label>Numéro de téléphone </mat-label>
-              <input
-                autocomplete="off"
-                id="phone_number"
-                matInput
-                formControlName="phone_number"
-                placeholder="+243979265726"
-                required />
-            </mat-form-field>
-            <mat-form-field class="w-full">
-              <mat-label>Mot de passe</mat-label>
-              <input
-                id="password"
-                matInput
-                type="password"
-                autocomplete="off"
-                formControlName="password"
-                #passwordField />
-              <button
-                mat-icon-button
-                type="button"
-                (click)="
-                  passwordField.type === 'password' ? (passwordField.type = 'text') : (passwordField.type = 'password')
-                "
-                matSuffix>
-                @if (passwordField.type === 'password') {
-                  <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
-                }
-                @if (passwordField.type === 'text') {
-                  <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
-                }
-              </button>
-            </mat-form-field>
+            <div formGroupName="secondStep">
+              <mat-form-field class="w-full">
+                <mat-label>Numéro de téléphone </mat-label>
+                <input
+                  autocomplete="off"
+                  id="phone_number"
+                  matInput
+                  formControlName="phone_number"
+                  placeholder="+243979265726"
+                  required />
+              </mat-form-field>
+              <mat-form-field class="w-full">
+                <mat-label>Mot de passe</mat-label>
+                <input
+                  id="password"
+                  matInput
+                  type="password"
+                  autocomplete="off"
+                  formControlName="password"
+                  #passwordField />
+                <button
+                  mat-icon-button
+                  type="button"
+                  (click)="
+                    passwordField.type === 'password'
+                      ? (passwordField.type = 'text')
+                      : (passwordField.type = 'password')
+                  "
+                  matSuffix>
+                  @if (passwordField.type === 'password') {
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+                  }
+                  @if (passwordField.type === 'text') {
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
+                  }
+                </button>
+              </mat-form-field>
 
-            <mat-form-field class="w-full">
-              <mat-label>Confirmer le mot de passe</mat-label>
-              <input
-                id="password_confirm"
-                matInput
-                type="password"
-                autocomplete="off"
-                formControlName="password_confirm"
-                #passwordConfirm />
-              <button
-                mat-icon-button
-                type="button"
-                (click)="
-                  passwordConfirm.type === 'password'
-                    ? (passwordConfirm.type = 'text')
-                    : (passwordConfirm.type = 'password')
-                "
-                matSuffix>
-                @if (passwordConfirm.type === 'password') {
-                  <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
-                }
-                @if (passwordConfirm.type === 'text') {
-                  <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
-                }
-              </button>
-            </mat-form-field>
+              <mat-form-field class="w-full">
+                <mat-label>Confirmer le mot de passe</mat-label>
+                <input
+                  id="password_confirm"
+                  matInput
+                  type="password"
+                  autocomplete="off"
+                  formControlName="password_confirm"
+                  #passwordConfirm />
+                <button
+                  mat-icon-button
+                  type="button"
+                  (click)="
+                    passwordConfirm.type === 'password'
+                      ? (passwordConfirm.type = 'text')
+                      : (passwordConfirm.type = 'password')
+                  "
+                  matSuffix>
+                  @if (passwordConfirm.type === 'password') {
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+                  }
+                  @if (passwordConfirm.type === 'text') {
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
+                  }
+                </button>
+              </mat-form-field>
 
-            <div>
-              <button
-                class="fuse-mat-button-large mt-6 w-full text-white"
-                mat-flat-button
-                [color]="'primary'"
-                [disabled]="isLoading || signUpForm.invalid"
-                (click)="signUp()">
-                @if (!isLoading && !signUpForm.invalid) {
-                  <span>S'inscrire</span>
-                }
-                @if (isLoading) {
-                  <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'"></mat-progress-spinner>
-                }
-              </button>
+              <div>
+                <button
+                  class="fuse-mat-button-large mt-6 w-full text-white"
+                  mat-flat-button
+                  [color]="'primary'"
+                  [disabled]="state.isLoading || signUpForm.invalid"
+                  (click)="signUp()">
+                  @if (!state.isLoading && !signUpForm.invalid) {
+                    <span>S'inscrire</span>
+                  }
+                  @if (state.isLoading) {
+                    <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
+                  }
+                </button>
+              </div>
             </div>
           </ng-template>
         </mat-step>
       </mat-stepper>
     </form>
   </div>
-  <div
-    class="relative min-h-screen hidden items-center justify-center overflow-hidden bg-green-800 p-16 md:flex lg:px-28">
+  <div class="relative hidden items-center justify-center overflow-hidden bg-green-800 p-16 md:flex lg:px-28">
     <svg
       class="absolute inset-0 pointer-events-none"
       viewBox="0 0 960 540"

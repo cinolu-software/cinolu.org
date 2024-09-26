@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -7,15 +7,15 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
-import { NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
-import { Subscription } from 'rxjs';
-import { AuthService } from 'app/pages/auth/auth.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { team } from 'app/pages/landing/data/team';
+import { SignupStore } from './sign-up.store';
+import { Observable } from 'rxjs';
+import { ISignupStore } from './types/sign-up-store.type';
 
 @Component({
   standalone: true,
@@ -34,64 +34,42 @@ import { team } from 'app/pages/landing/data/team';
     MatCheckboxModule,
     MatProgressSpinnerModule,
     MatStepperModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    CommonModule
   ]
 })
-export class AuthSignUpComponent implements OnInit, OnDestroy {
+export class AuthSignUpComponent {
   signUpForm: FormGroup;
-  isLoading = false;
-  error: string | null = null;
   team = team;
+  state$: Observable<ISignupStore>;
   private _formBuilder = inject(FormBuilder);
-  private _authService = inject(AuthService);
-  private _router = inject(Router);
-  private _subscription: Subscription | null = null;
-
-  private resetState(): void {
-    this.error = null;
-    this.isLoading = false;
-    this.signUpForm.enable();
-  }
-
-  private enableLoading(): void {
-    this.isLoading = true;
-    this.signUpForm.disable();
-  }
+  private _store = inject(SignupStore);
 
   ngOnInit(): void {
     this.signUpForm = this._formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      address: ['', Validators.required],
-      phone_number: ['', Validators.required],
-      password: ['', Validators.required],
-      password_confirm: ['', [Validators.required]]
+      firstStep: this._formBuilder.group({
+        name: ['', Validators.required],
+        email: ['', Validators.required],
+        address: ['', Validators.required]
+      }),
+      secondStep: this._formBuilder.group({
+        phone_number: ['', Validators.required],
+        password: ['', Validators.required],
+        password_confirm: ['', [Validators.required]]
+      })
     });
+    this.state$ = this._store.state$;
   }
 
   signUp(): void {
     if (this.signUpForm.invalid) return;
-    this.enableLoading();
-    this._subscription = this._authService.signUp(this.signUpForm.value).subscribe({
-      next: () => {
-        this.resetState();
-        this._router.navigate(['/confirmation-required'], {
-          queryParams: { email: this.signUpForm.value.email }
-        });
-      },
-      error: (error: HttpErrorResponse) => {
-        this.resetState();
-        this.error = error.error.message;
-        this.signUpForm.enable();
-      }
-    });
+    this.signUpForm.disable();
+    const payload = { ...this.signUpForm.get('firstStep').value, ...this.signUpForm.get('secondStep').value };
+    this._store.signUp(payload);
+    this.signUpForm.enable();
   }
 
   signUpWithGoogle(): void {
     window.location.replace(environment.apiUrl + 'auth/sign-up');
-  }
-
-  ngOnDestroy(): void {
-    if (this._subscription) this._subscription.unsubscribe();
   }
 }

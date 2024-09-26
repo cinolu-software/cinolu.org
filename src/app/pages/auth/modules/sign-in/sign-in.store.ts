@@ -20,18 +20,19 @@ export class SignInStore extends ComponentStore<ISigninStore> {
   private _router = inject(Router);
 
   constructor() {
-    super({ isLoading: false, error: null });
+    super({ isLoading: false, error: null, success: null });
   }
 
   setIsLoading = this.updater((state, isLoading: boolean) => ({ ...state, isLoading }));
   setError = this.updater((state, error: string | null) => ({ ...state, error }));
+  setSuccess = this.updater((state, success: string | null) => ({ ...state, success }));
 
   verifyEmail = this.effect((payload$: Observable<string>) =>
     payload$.pipe(
       switchMap((token) =>
         this._authService.verifyEmail(token).pipe(
           tapResponse({
-            next: () => this.setIsLoading(false),
+            next: () => this.setSuccess('Votre email a été vérifié avec succès.'),
             error: (error: HttpErrorResponse) => this.setError(error.error.message),
             finalize: () => this.setIsLoading(false)
           })

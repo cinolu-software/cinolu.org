@@ -1,17 +1,17 @@
 import { inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { AuthService } from '../../auth.service';
-import { IResetPasswordStore } from './types/reset-password-store.type';
 import { Observable, switchMap, tap } from 'rxjs';
-import { IResetPassword } from './types/reset-password.type';
+import { ISignUp } from './types/sign-up.type';
 import { tapResponse } from '@ngrx/operators';
+import { ISignupStore } from './types/sign-up-store.type';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ResetPasswordStore extends ComponentStore<IResetPasswordStore> {
+export class SignupStore extends ComponentStore<ISignupStore> {
   state$ = this.state$;
   private _authService = inject(AuthService);
   private _router = inject(Router);
@@ -23,13 +23,16 @@ export class ResetPasswordStore extends ComponentStore<IResetPasswordStore> {
   setIsLoading = this.updater((state, isLoading: boolean) => ({ ...state, isLoading }));
   setError = this.updater((state, error: string | null) => ({ ...state, error }));
 
-  resetPassword = this.effect((payload$: Observable<IResetPassword>) =>
+  signUp = this.effect((payload$: Observable<ISignUp>) =>
     payload$.pipe(
       tap(() => this.setIsLoading(true)),
       switchMap((payload) =>
-        this._authService.resetPassword(payload).pipe(
+        this._authService.signUp(payload).pipe(
           tapResponse({
-            next: () => this._router.navigate(['/sign-in']),
+            next: () =>
+              this._router.navigate(['/confirmation-required'], {
+                queryParams: { email: payload.email }
+              }),
             error: (error: HttpErrorResponse) => this.setError(error.error.message),
             finalize: () => this.setIsLoading(false)
           })

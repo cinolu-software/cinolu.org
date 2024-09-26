@@ -35,6 +35,10 @@ export class AuthService {
     return this._httpClient.post<{ data: IUser }>('auth/reset-password', payload).pipe(map((res) => res.data));
   }
 
+  resendEmailVerification(email: string) {
+    return this._httpClient.post<void>('auth/verify-email/resend-token', { email }).pipe(map(() => null));
+  }
+
   verifyEmail(token: string): Observable<IUser> {
     return this._httpClient.post<{ data: IUser }>('auth/verify-email', { token }).pipe(map((res) => res.data));
   }

@@ -8,7 +8,7 @@ export const auhtRoutes: Routes = [
   },
   {
     path: 'confirmation-required',
-    title: 'Confirm Password',
+    title: 'Confirm Email',
     loadComponent: () =>
       import('./modules/confirmation-required/confirmation-required.component').then(
         (c) => c.AuthConfirmationRequiredComponent

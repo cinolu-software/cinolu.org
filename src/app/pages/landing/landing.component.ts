@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HeroComponent } from './components/hero/hero.component';
 import { AboutComponent } from './components/about/about.component';
 import { TeamComponent } from './components/team/team.component';
@@ -8,6 +8,8 @@ import { ProblemStatementComponent } from './components/problem-statement/proble
 import { OurAimComponent } from './components/our-aim/our-aim.component';
 import { OurVisionComponent } from './components/our-vision/our-vision.component';
 import { OfferingsComponent } from './components/offerings/offerings.component';
+import { Store } from '@ngrx/store';
+import { authActions } from 'app/core/store/app.actions';
 
 @Component({
   selector: 'app-landing',
@@ -25,4 +27,10 @@ import { OfferingsComponent } from './components/offerings/offerings.component';
   ],
   templateUrl: './landing.component.html'
 })
-export class LandingComponent {}
+export class LandingComponent implements OnInit {
+  private _store = inject(Store);
+
+  ngOnInit(): void {
+    this._store.dispatch(authActions.authentication());
+  }
+}

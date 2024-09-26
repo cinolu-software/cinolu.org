@@ -52,12 +52,11 @@ export class AuthResetPasswordComponent {
   }
 
   resetPassword(): void {
-    if (!this.resetPasswordForm.invalid) {
-      this.resetPasswordForm.disable();
-      const { password, password_confirm } = this.resetPasswordForm.value;
-      const payload = { token: this._token, password, password_confirm };
-      this._store.resetPassword(payload);
-      this.resetPasswordForm.enable();
-    }
+    if (this.resetPasswordForm.invalid) return;
+    this.resetPasswordForm.disable();
+    const { password, password_confirm } = this.resetPasswordForm.value;
+    const payload = { token: this._token, password, password_confirm };
+    this._store.resetPassword(payload);
+    this.resetPasswordForm.enable();
   }
 }
