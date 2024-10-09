@@ -7,10 +7,7 @@
 
     <div class="relative grid gap-6 grid-cols-1 md:grid-cols-4">
       @for (member of team; track $index) {
-        <div
-          class="group relative rounded-xl space-y-6 overflow-hidden hidde"
-          observeVisibility
-          [debounceTime]="$index * 100">
+        <div class="group relative rounded-xl space-y-6 overflow-hidden hidde" observeVisibility>
           <div class="relative w-full h-[380px]">
             <img
               class="object-cover transition duration-500 group-hover:scale-105"

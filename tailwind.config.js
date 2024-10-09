@@ -63,7 +63,11 @@ const config = {
       lg: '1280px',
       xl: '1440px'
     },
+
     extend: {
+      backgroundImage: {
+        hero: 'url("/images/slides/slide-2.webp")'
+      },
       animation: {
         'spin-slow': 'spin 3s linear infinite'
       },

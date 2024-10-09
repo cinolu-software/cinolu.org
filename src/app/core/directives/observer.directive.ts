@@ -6,8 +6,6 @@ import { delay, filter, Subject } from 'rxjs';
   standalone: true
 })
 export class ObserveVisibilityDirective implements OnDestroy, AfterViewInit {
-  debounceTime = input<number>(0);
-
   private observer: IntersectionObserver | undefined;
   private subject$ = new Subject<{
     entry: IntersectionObserverEntry;
@@ -59,7 +57,7 @@ export class ObserveVisibilityDirective implements OnDestroy, AfterViewInit {
   private startObservingElements(): void {
     if (!this.observer) return;
     this.observer.observe(this.element.nativeElement);
-    this.subject$.pipe(delay(this.debounceTime()), filter(Boolean)).subscribe(async ({ entry, observer }) => {
+    this.subject$.subscribe(async ({ entry, observer }) => {
       const target = entry.target as HTMLElement;
       target.classList.replace('hidde', 'show');
       const isStillVisible = await this.isVisible(target);
