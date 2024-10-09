@@ -5,7 +5,7 @@ import { compact, fromPairs } from 'lodash-es';
 
 @Injectable({ providedIn: 'root' })
 export class FuseMockApiService {
-    private _handlers: { [key: string]: Map<string, FuseMockApiHandler> } = {
+    private _handlers: Record<string, Map<string, FuseMockApiHandler>> = {
         get: new Map<string, FuseMockApiHandler>(),
         post: new Map<string, FuseMockApiHandler>(),
         patch: new Map<string, FuseMockApiHandler>(),
@@ -32,12 +32,12 @@ export class FuseMockApiService {
         url: string
     ): {
         handler: FuseMockApiHandler | undefined;
-        urlParams: { [key: string]: string };
+        urlParams: Record<string, string>;
     } {
         // Prepare the return object
         const matchingHandler: {
             handler: FuseMockApiHandler | undefined;
-            urlParams: { [key: string]: string };
+            urlParams: Record<string, string>;
         } = {
             handler: undefined,
             urlParams: {},

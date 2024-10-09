@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ObserveVisibilityDirective } from 'app/core/directives/observer.directive';
+import { ObserveVisibilityDirective } from 'app/common/directives/observer.directive';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'problem-statement',
+  selector: 'app-problem-statement',
   standalone: true,
   imports: [CommonModule, ObserveVisibilityDirective, MatIconModule],
   templateUrl: './problem-statement.component.html'

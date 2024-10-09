@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { ObserveVisibilityDirective } from 'app/core/directives/observer.directive';
+import { ObserveVisibilityDirective } from 'app/common/directives/observer.directive';
 import { offerings } from './data/offerings';
 
 @Component({
-  selector: 'our-offerings',
+  selector: 'app-our-offerings',
   standalone: true,
   imports: [ObserveVisibilityDirective, MatIconModule],
   templateUrl: './offerings.component.html'

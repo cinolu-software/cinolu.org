@@ -44,7 +44,7 @@ import { FuseUtilsService } from '@fuse/services/utils/utils.service';
 import { delay, filter, merge, ReplaySubject, Subject, Subscription, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'fuse-vertical-navigation',
+  selector: 'app-fuse-vertical-navigation',
   templateUrl: './vertical.component.html',
   styleUrls: ['./vertical.component.scss'],
   animations: fuseAnimations,
@@ -63,11 +63,9 @@ import { delay, filter, merge, ReplaySubject, Subject, Subscription, takeUntil }
   ]
 })
 export class FuseVerticalNavigationComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy {
-  /* eslint-disable @typescript-eslint/naming-convention */
   static ngAcceptInputType_inner: BooleanInput;
   static ngAcceptInputType_opened: BooleanInput;
   static ngAcceptInputType_transparentOverlay: BooleanInput;
-  /* eslint-enable @typescript-eslint/naming-convention */
 
   private _animationBuilder = inject(AnimationBuilder);
   private _changeDetectorRef = inject(ChangeDetectorRef);
@@ -80,14 +78,14 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
   private _fuseUtilsService = inject(FuseUtilsService);
 
   @Input() appearance: FuseVerticalNavigationAppearance = 'default';
-  @Input() autoCollapse: boolean = true;
-  @Input() inner: boolean = false;
+  @Input() autoCollapse = true;
+  @Input() inner = false;
   @Input() mode: FuseVerticalNavigationMode = 'side';
   @Input() name: string = this._fuseUtilsService.randomId();
   @Input() navigation: FuseNavigationItem[];
-  @Input() opened: boolean = true;
+  @Input() opened = true;
   @Input() position: FuseVerticalNavigationPosition = 'left';
-  @Input() transparentOverlay: boolean = false;
+  @Input() transparentOverlay = false;
   @Output()
   readonly appearanceChanged: EventEmitter<FuseVerticalNavigationAppearance> =
     new EventEmitter<FuseVerticalNavigationAppearance>();
@@ -103,18 +101,18 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
   onCollapsableItemCollapsed: ReplaySubject<FuseNavigationItem> = new ReplaySubject<FuseNavigationItem>(1);
   onCollapsableItemExpanded: ReplaySubject<FuseNavigationItem> = new ReplaySubject<FuseNavigationItem>(1);
   onRefreshed: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
-  private _animationsEnabled: boolean = false;
+  private _animationsEnabled = false;
   private _asideOverlay: HTMLElement;
-  private readonly _handleAsideOverlayClick: any;
-  private readonly _handleOverlayClick: any;
-  private _hovered: boolean = false;
+  private readonly _handleAsideOverlayClick: () => unknown;
+  private readonly _handleOverlayClick: () => unknown;
+  private _hovered = false;
   private _mutationObserver: MutationObserver;
   private _overlay: HTMLElement;
   private _player: AnimationPlayer;
   private _scrollStrategy: ScrollStrategy = this._scrollStrategyOptions.block();
   private _fuseScrollbarDirectives!: QueryList<FuseScrollbarDirective>;
   private _fuseScrollbarDirectivesSubscription: Subscription;
-  private _unsubscribeAll: Subject<any> = new Subject<any>();
+  private _unsubscribeAll: Subject<unknown> = new Subject<unknown>();
 
   /**
    * Constructor
@@ -135,8 +133,7 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
   /**
    * Host binding for component classes
    */
-  @HostBinding('class') get classList(): any {
-    /* eslint-disable @typescript-eslint/naming-convention */
+  @HostBinding('class') get classList(): unknown {
     return {
       'fuse-vertical-navigation-animations-enabled': this._animationsEnabled,
       [`fuse-vertical-navigation-appearance-${this.appearance}`]: true,
@@ -148,13 +145,12 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
       'fuse-vertical-navigation-position-left': this.position === 'left',
       'fuse-vertical-navigation-position-right': this.position === 'right'
     };
-    /* eslint-enable @typescript-eslint/naming-convention */
   }
 
   /**
    * Host binding for component inline styles
    */
-  @HostBinding('style') get styleList(): any {
+  @HostBinding('style') get styleList(): unknown {
     return {
       visibility: this.opened ? 'visible' : 'hidden'
     };
@@ -535,8 +531,8 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
    * @param index
    * @param item
    */
-  trackByFn(index: number, item: any): any {
-    return item.id || index;
+  trackByFn(index: number, item: unknown) {
+    return item['id'] || index;
   }
 
   // -----------------------------------------------------------------------------------------------------

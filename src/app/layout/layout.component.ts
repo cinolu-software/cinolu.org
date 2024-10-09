@@ -9,7 +9,7 @@ import { Subject, combineLatest, filter, map, takeUntil } from 'rxjs';
 import { EmptyLayoutComponent } from './layouts/empty/empty.component';
 
 @Component({
-  selector: 'layout',
+  selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -21,14 +21,14 @@ export class LayoutComponent implements OnInit, OnDestroy {
   layout: string;
   scheme: 'dark' | 'light';
   theme: string;
-  private _unsubscribeAll: Subject<any> = new Subject<any>();
+  private _unsubscribeAll = new Subject();
 
   /**
    * Constructor
    */
   constructor(
     private _activatedRoute: ActivatedRoute,
-    @Inject(DOCUMENT) private _document: any,
+    @Inject(DOCUMENT) private _document: Document,
     private _renderer2: Renderer2,
     private _router: Router,
     private _fuseConfigService: FuseConfigService,
@@ -49,11 +49,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
         takeUntil(this._unsubscribeAll),
         map(([config, mql]) => {
           const options = {
-            scheme: config.scheme,
-            theme: config.theme
+            scheme: config['scheme'],
+            theme: config['theme']
           };
 
-          if (config.scheme === 'auto') {
+          if (config['scheme'] === 'auto') {
             options.scheme = mql.breakpoints['(prefers-color-scheme: dark)'] ? 'dark' : 'light';
           }
 

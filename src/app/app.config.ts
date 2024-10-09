@@ -6,14 +6,14 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { PreloadAllModules, provideRouter, TitleStrategy, withPreloading } from '@angular/router';
 import { provideFuse } from '@fuse';
 import { appRoutes } from 'app/app.routes';
-import { provideIcons } from 'app/core/icons/icons.provider';
+import { provideIcons } from 'app/common/icons/icons.provider';
 import { provideClientHydration } from '@angular/platform-browser';
-import { PageTitleStrategy } from './core/strategies/page-title.strategy';
-import { httpInterceptor } from './core/interceptors/http.interceptor';
+import { PageTitleStrategy } from './common/strategies/page-title.strategy';
+import { httpInterceptor } from './common/interceptors/http.interceptor';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
-import { authReducers } from './core/store/app.reducers';
-import { AuthEffects } from './core/store/app.effects';
+import { authReducers } from './common/store/app.reducers';
+import { AuthEffects } from './common/store/app.effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {

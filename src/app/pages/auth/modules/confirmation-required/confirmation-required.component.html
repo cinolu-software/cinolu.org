@@ -2,15 +2,15 @@
   <div class="flex min-h-screen flex-col items-start justify-center px-8 md:px-8 lg:px-32">
     <div class="mx-auto w-full max-w-80 sm:mx-0 sm:w-80">
       <div class="text-3xl font-extrabold leading-tight tracking-tight">Confirmation recquise</div>
-      @if (state.error; as error) {
-        <fuse-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
-          {{ error }}
-        </fuse-alert>
+      @if (state.error && !state.sucess) {
+        <app-fuse-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
+          {{ state.error }}
+        </app-fuse-alert>
       }
       @if (state.sucess && !state.error) {
-        <fuse-alert class="mt-6 w-full" appearance="soft" type="success" [showIcon]="true" [@shake]="true">
+        <app-fuse-alert class="mt-6 w-full" appearance="soft" type="success" [showIcon]="true" [@shake]="true">
           {{ state.sucess }}
-        </fuse-alert>
+        </app-fuse-alert>
       }
       <div class="mt-4">
         Un courrier de confirmation contenant des instructions a été envoyé à votre adresse électronique. Suivez ces
@@ -18,9 +18,6 @@
         <button (click)="resendEmailVerification()">
           <span class="text-primary-500 underline">Renvoyer le mail</span>
         </button>
-      </div>
-      <div class="text-secondary mt-4 text-md font-medium">
-        <a class="ml-1 text-primary-500 hover:underline" [routerLink]="['/sign-in']"> Connectez-vous !</a>
       </div>
     </div>
   </div>
@@ -67,6 +64,7 @@
               <img
                 class="h-10 w-10 flex-0 rounded-full object-cover ring-4 ring-primary-900 ring-offset-1 ring-offset-primary-900"
                 [ngSrc]="member.image"
+                [alt]="member.image"
                 fill />
             </div>
           }

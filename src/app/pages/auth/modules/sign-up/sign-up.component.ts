@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -19,7 +19,7 @@ import { ISignupStore } from './types/sign-up-store.type';
 
 @Component({
   standalone: true,
-  selector: 'auth-sign-up',
+  selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   animations: fuseAnimations,
   imports: [
@@ -38,7 +38,7 @@ import { ISignupStore } from './types/sign-up-store.type';
     CommonModule
   ]
 })
-export class AuthSignUpComponent {
+export class AuthSignUpComponent implements OnInit {
   signUpForm: FormGroup;
   team = team;
   state$: Observable<ISignupStore>;
@@ -47,16 +47,12 @@ export class AuthSignUpComponent {
 
   ngOnInit(): void {
     this.signUpForm = this._formBuilder.group({
-      firstStep: this._formBuilder.group({
-        name: ['', Validators.required],
-        email: ['', Validators.required],
-        address: ['', Validators.required]
-      }),
-      secondStep: this._formBuilder.group({
-        phone_number: ['', Validators.required],
-        password: ['', Validators.required],
-        password_confirm: ['', [Validators.required]]
-      })
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      address: ['', Validators.required],
+      phone_number: ['', Validators.required],
+      password: ['', Validators.required],
+      password_confirm: ['', [Validators.required]]
     });
     this.state$ = this._store.state$;
   }

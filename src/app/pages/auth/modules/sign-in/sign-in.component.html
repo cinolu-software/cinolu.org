@@ -8,14 +8,14 @@
       </div>
     </div>
     @if (state.error; as error) {
-      <fuse-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
+      <app-fuse-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
         {{ error }}
-      </fuse-alert>
+      </app-fuse-alert>
     }
     @if (state.success && !state.error) {
-      <fuse-alert class="mt-6 w-full" appearance="soft" type="success" [showIcon]="true" [@shake]="true">
+      <app-fuse-alert class="mt-6 w-full" appearance="soft" type="success" [showIcon]="true" [@shake]="true">
         {{ state.success }}
-      </fuse-alert>
+      </app-fuse-alert>
     }
     <form
       class="{{ state.error ? 'transition-transform translate-y-4 duration-150' : 'mt-8 ' }}"
@@ -129,6 +129,7 @@
               <img
                 class="h-10 w-10 flex-0 rounded-full object-cover ring-4 ring-primary-900 ring-offset-1 ring-offset-primary-900"
                 [ngSrc]="member.image"
+                [alt]="member.image"
                 fill />
             </div>
           }

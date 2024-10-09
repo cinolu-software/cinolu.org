@@ -12,12 +12,12 @@ import { FusePlatformService } from '@fuse/services/platform';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen';
 import { FuseUtilsService } from '@fuse/services/utils';
 
-export type FuseProviderConfig = {
+export interface FuseProviderConfig {
   fuse: FuseConfig;
-};
+}
 
-export const provideFuse = (config: FuseProviderConfig): Array<Provider | EnvironmentProviders> => {
-  const providers: Array<Provider | EnvironmentProviders> = [
+export const provideFuse = (config: FuseProviderConfig): (Provider | EnvironmentProviders)[] => {
+  const providers: (Provider | EnvironmentProviders)[] = [
     {
       provide: MATERIAL_SANITY_CHECKS,
       useValue: {

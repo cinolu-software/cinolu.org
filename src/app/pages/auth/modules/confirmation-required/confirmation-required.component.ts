@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { IConfirmationRequiredStore } from './types/confirmation-required-store.type';
 
 @Component({
-  selector: 'auth-confirmation-required',
+  selector: 'app-confirmation-required',
   templateUrl: './confirmation-required.component.html',
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations,

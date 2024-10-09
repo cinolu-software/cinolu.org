@@ -1,8 +1,8 @@
-import { afterNextRender, AfterViewInit, Directive, ElementRef, input, OnDestroy, OnInit } from '@angular/core';
-import { delay, filter, Subject } from 'rxjs';
+import { AfterViewInit, Directive, ElementRef, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Directive({
-  selector: '[observeVisibility]',
+  selector: '[appObserveVisibility]',
   standalone: true
 })
 export class ObserveVisibilityDirective implements OnDestroy, AfterViewInit {
@@ -41,7 +41,7 @@ export class ObserveVisibilityDirective implements OnDestroy, AfterViewInit {
   private createObserver(): void {
     const options = {
       rootMargin: '0px',
-      threshold: 0.1
+      threshold: 0.15
     };
     if (typeof window === 'undefined') return;
     const isIntersecting = (entry: IntersectionObserverEntry) => entry.isIntersecting || entry.intersectionRatio > 0;

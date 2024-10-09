@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, of, map } from 'rxjs';
-import { IUser } from '../../core/types/models.interface';
+import { IUser } from '../../common/types/models.interface';
 import { ISignInPayload } from './modules/sign-in/types/sign-in.type';
 import { ISignUp } from './modules/sign-up/types/sign-up.type';
 import { IResetPassword } from './modules/reset-password/types/reset-password.type';

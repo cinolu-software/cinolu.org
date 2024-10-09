@@ -15,7 +15,7 @@ import { ForgotPasswordStore } from './forgot-password.store';
 import { IForgotPasswordStore } from './types/forgot-password-store.type';
 
 @Component({
-  selector: 'auth-forgot-password',
+  selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations,

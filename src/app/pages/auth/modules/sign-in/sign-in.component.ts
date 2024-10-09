@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 import { ISigninStore } from './types/sing-in-store.type';
 
 @Component({
-  selector: 'auth-sign-in',
+  selector: 'app-sign-in',
   standalone: true,
   templateUrl: './sign-in.component.html',
   animations: fuseAnimations,

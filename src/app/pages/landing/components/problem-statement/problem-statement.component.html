@@ -3,18 +3,18 @@
     <div class="gap-4 bg-primary-950 bg-opacity-90 py-28 px-8 md:px-32 text-white">
       <div class="grid grid-cols-1 md:grid-cols-2 items-center">
         <div class="flex flex-col gap-8">
-          <h1 class="font-satoshi font-bold text-2xl md:text-4xl hidde" observeVisibility>
+          <h1 class="font-satoshi font-bold text-2xl md:text-4xl hidde" appObserveVisibility>
             Pourquoi nous
-            <span class="text-green-600 hidde" observeVisibility>existons</span>
+            <span class="text-green-600 hidde" appObserveVisibility>existons</span>
           </h1>
-          <p class="font-satoshi font-bold text-2xl mb-5 hidde" observeVisibility>
+          <p class="font-satoshi font-bold text-2xl mb-5 hidde" appObserveVisibility>
             Votre
-            <span class="text-green-600 hidde" observeVisibility>“One Stop Ecosystem Support” </span>
+            <span class="text-green-600 hidde" appObserveVisibility>“One Stop Ecosystem Support” </span>
           </p>
         </div>
         <div class="flex flex-col gap-3">
           @for (i of innovationEcosystems; track $index) {
-            <div class="flex items-center gap-3 hidde" observeVisibility>
+            <div class="flex items-center gap-3 hidde" appObserveVisibility>
               <mat-icon class="icon-size-3 fill-green-600" svgIcon="check"></mat-icon>
               <h4 class="font-light">
                 {{ i.title }}

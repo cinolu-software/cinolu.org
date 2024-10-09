@@ -1,4 +1,4 @@
-<section class="px-8 md:px-28 mt-20 mb-10">
+<section class="px-8 md:px-28 mt-20 mb-16">
   <h1 class="font-satoshi font-bold text-3xl md:text-5xl mb-10">
     Ce que nous
     <span class="text-green-600">offrons</span>
@@ -6,7 +6,7 @@
 
   <div class="grid md:grid-cols-3 gap-10 mt-16">
     @for (s of offerings; track $index) {
-      <div class="flex gap-4 items-start flex-col hidde" observeVisibility>
+      <div class="flex gap-4 items-start flex-col hidde" appObserveVisibility>
         <span class="bg-primary-950/90 px-3 py-2.5 rounded-full">
           <mat-icon class="icon-size-5 fill-white" [svgIcon]="s.icon"></mat-icon>
         </span>

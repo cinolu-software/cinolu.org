@@ -15,7 +15,7 @@ import { FuseLoadingService } from '@fuse/services/loading';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'fuse-loading-bar',
+  selector: 'app-fuse-loading-bar',
   templateUrl: './loading-bar.component.html',
   styleUrls: ['./loading-bar.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -26,11 +26,11 @@ import { Subject, takeUntil } from 'rxjs';
 export class FuseLoadingBarComponent implements OnChanges, OnInit, OnDestroy {
   private _fuseLoadingService = inject(FuseLoadingService);
 
-  @Input() autoMode: boolean = true;
+  @Input() autoMode = true;
   mode: 'determinate' | 'indeterminate';
-  progress: number = 0;
-  show: boolean = false;
-  private _unsubscribeAll: Subject<any> = new Subject<any>();
+  progress = 0;
+  show = false;
+  private _unsubscribeAll = new Subject();
 
   // -----------------------------------------------------------------------------------------------------
   // @ Lifecycle hooks

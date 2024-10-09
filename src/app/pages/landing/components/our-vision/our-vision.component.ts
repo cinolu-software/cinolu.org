@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ObserveVisibilityDirective } from 'app/core/directives/observer.directive';
+import { ObserveVisibilityDirective } from 'app/common/directives/observer.directive';
 
 @Component({
-  selector: 'our-vision',
+  selector: 'app-our-vision',
   standalone: true,
   imports: [CommonModule, ObserveVisibilityDirective],
   templateUrl: './our-vision.component.html'

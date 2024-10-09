@@ -8,7 +8,7 @@ import { tapResponse } from '@ngrx/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { authActions } from 'app/core/store/app.actions';
+import { authActions } from 'app/common/store/app.actions';
 
 @Injectable({
   providedIn: 'root'
