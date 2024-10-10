@@ -7,24 +7,28 @@ import { ISignUp } from './types/sign-up.interface';
 import { IResetPassword } from './types/reset-password.interface';
 import { IForgotPassword } from './types/forgot-password.interface';
 import { injectMutation, injectQuery, MutationResult } from '@ngneat/query';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private _httpClient = inject(HttpClient);
+  private _router = inject(Router);
   private _mutation = injectMutation();
   private _queryClient = injectQuery();
 
-  getProfile() {
-    return this._queryClient({
-      queryKey: ['profile'] as const,
-      queryFn: () => this._httpClient.get<{ data: IUser }>('auth/profile').pipe(map((res) => res.data))
+  signUp(): MutationResult<IUser, Error, unknown> {
+    return this._mutation({
+      mutationFn: (payload: ISignUp) =>
+        this._httpClient.post<{ data: IUser }>('auth/sign-up', payload).pipe(map((res) => res.data)),
+      onSuccess: () => this._router.navigate(['/sign-in'])
     });
   }
 
   signIn(): MutationResult<IUser, Error, unknown> {
     return this._mutation({
       mutationFn: (payload: ISignInPayload): Observable<IUser> =>
-        this._httpClient.post<{ data: IUser }>('auth/sign-in', payload).pipe(map((res) => res.data))
+        this._httpClient.post<{ data: IUser }>('auth/sign-in', payload).pipe(map((res) => res.data)),
+      onSuccess: () => this._router.navigate(['/'])
     });
   }
 
@@ -34,23 +38,18 @@ export class AuthService {
     });
   }
 
-  signUp(): MutationResult<IUser, Error, unknown> {
-    return this._mutation({
-      mutationFn: (payload: ISignUp) =>
-        this._httpClient.post<{ data: IUser }>('auth/sign-up', payload).pipe(map((res) => res.data))
-    });
-  }
-
   forgotPassword(): MutationResult<void, Error, unknown> {
     return this._mutation({
-      mutationFn: (email: IForgotPassword) => this._httpClient.post<void>('auth/forgot-password', email)
+      mutationFn: (email: IForgotPassword) => this._httpClient.post<void>('auth/forgot-password', email),
+      onSuccess: () => this._router.navigate(['/reset-password'])
     });
   }
 
   resetPassword(): MutationResult<IUser, Error, unknown> {
     return this._mutation({
       mutationFn: (payload: IResetPassword) =>
-        this._httpClient.post<{ data: IUser }>('auth/reset-password', payload).pipe(map((res) => res.data))
+        this._httpClient.post<{ data: IUser }>('auth/reset-password', payload).pipe(map((res) => res.data)),
+      onSuccess: () => this._router.navigate(['/sign-in'])
     });
   }
 
@@ -63,7 +62,15 @@ export class AuthService {
   verifyEmail(): MutationResult<IUser, Error, unknown> {
     return this._mutation({
       mutationFn: (token: string) =>
-        this._httpClient.post<{ data: IUser }>('auth/verify-email', { token }).pipe(map((res) => res.data))
+        this._httpClient.post<{ data: IUser }>('auth/verify-email', { token }).pipe(map((res) => res.data)),
+      onSuccess: () => this._router.navigate(['/sign-in'])
+    });
+  }
+
+  getProfile() {
+    return this._queryClient({
+      queryKey: ['profile'] as const,
+      queryFn: () => this._httpClient.get<{ data: IUser }>('auth/profile').pipe(map((res) => res.data))
     });
   }
 }
