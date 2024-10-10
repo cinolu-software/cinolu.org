@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { IUser } from '../../common/types/models.interface';
-import { ISignInPayload } from './types/sign-in.interface';
+import { ISignInPayload } from './modules/sign-in/types/sign-in.interface';
 import { ISignUp } from './types/sign-up.interface';
-import { IResetPassword } from './types/reset-password.interface';
-import { IForgotPassword } from './types/forgot-password.interface';
-import { injectMutation, injectQuery, MutationResult } from '@ngneat/query';
+import { IResetPassword } from './modules/reset-password/types/reset-password.interface';
+import { IForgotPassword } from './modules/forgot-password/types/forgot-password.interface';
+import { injectMutation, injectQuery, MutationResult, QueryObserverResult } from '@ngneat/query';
 import { Router } from '@angular/router';
+import { authActions } from '../../common/store/app.actions';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -26,9 +27,12 @@ export class AuthService {
 
   signIn(): MutationResult<IUser, Error, unknown> {
     return this._mutation({
-      mutationFn: (payload: ISignInPayload): Observable<IUser> =>
+      mutationFn: (payload: ISignInPayload) =>
         this._httpClient.post<{ data: IUser }>('auth/sign-in', payload).pipe(map((res) => res.data)),
-      onSuccess: () => this._router.navigate(['/'])
+      onSuccess: (user) => {
+        authActions.authenticateUser({ user });
+        this._router.navigate(['/']);
+      }
     });
   }
 
@@ -67,10 +71,10 @@ export class AuthService {
     });
   }
 
-  getProfile() {
+  getProfile(): Observable<QueryObserverResult<IUser, Error>> {
     return this._queryClient({
       queryKey: ['profile'] as const,
       queryFn: () => this._httpClient.get<{ data: IUser }>('auth/profile').pipe(map((res) => res.data))
-    });
+    }).result$;
   }
 }

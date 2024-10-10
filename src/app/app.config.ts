@@ -1,4 +1,4 @@
-import { HttpErrorResponse, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, isDevMode } from '@angular/core';
 import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
@@ -15,25 +15,18 @@ import { provideStore } from '@ngrx/store';
 import { authReducers } from './common/store/app.reducers';
 import { AuthEffects } from './common/store/app.effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { provideQueryClientOptions, QueryCache, QueryClientConfigFn } from '@ngneat/query';
-
-const ngneatConfigFn: QueryClientConfigFn = () => {
-  return {
-    queryCache: new QueryCache({
-      onError: (error: HttpErrorResponse) => error.error.message
-    }),
-    defaultOptions: {
-      queries: {
-        staleTime: 3000
-      }
-    }
-  };
-};
+import { provideQueryClientOptions } from '@ngneat/query';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
-    provideQueryClientOptions(ngneatConfigFn),
+    provideQueryClientOptions({
+      defaultOptions: {
+        queries: {
+          staleTime: 3000
+        }
+      }
+    }),
     provideHttpClient(withFetch(), withInterceptors([httpInterceptor])),
     { provide: TitleStrategy, useClass: PageTitleStrategy },
     provideRouter(appRoutes, withPreloading(PreloadAllModules)),

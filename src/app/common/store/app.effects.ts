@@ -14,7 +14,7 @@ export class AuthEffects {
     this._actions$.pipe(
       ofType(authActions.authentication),
       exhaustMap(() =>
-        this._authService.getProfile().result$.pipe(
+        this._authService.getProfile().pipe(
           map(({ data }) => authActions.authenticateUser({ user: data })),
           catchError(() => of())
         )
