@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 lg:grid-cols-2 bg-white" *ngIf="state$ | async as state">
+<div class="grid grid-cols-1 lg:grid-cols-2 bg-white" *ngIf="signUp.result$ | async as signUpResult">
   <div class="min-h-screen flex flex-col items-start justify-center px-8 md:px-8 lg:px-32 py-30">
     <div class="flex flex-col items-start">
       <h2 class="text-3xl font-extrabold leading-tight tracking-tight font-satoshi">S'inscrire</h2>
@@ -6,15 +6,16 @@
         <p>Ou continuez avec</p>
         <button class="text-primary-500 hover:underline" (click)="signUpWithGoogle()">Google</button>
       </div>
-      @if (state.error; as error) {
+      @if (signUpResult.isError) {
         <app-fuse-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
-          {{ error }}
+          {{ signUpResult.error['error'].message }}
         </app-fuse-alert>
       }
     </div>
     <form
-      class="{{ state.error ? 'transition-transform translate-y-4 duration-150' : 'mt-6' }}"
-      [formGroup]="signUpForm">
+      class="{{ signUpResult.error ? 'transition-transform translate-y-4 duration-150' : 'mt-6' }}"
+      [formGroup]="signUpForm"
+      (ngSubmit)="onSignUp()">
       <mat-form-field class="w-full">
         <mat-label>Nom complet</mat-label>
         <input autocomplete="name" id="name" matInput formControlName="name" />
@@ -98,13 +99,13 @@
       <button
         class="fuse-mat-button-large mt-6 w-full text-white"
         mat-flat-button
-        [color]="'primary'"
-        [disabled]="state.isLoading || signUpForm.invalid"
-        (click)="signUp()">
-        @if (!state.isLoading && !signUpForm.invalid) {
+        color="primary"
+        type="submit"
+        [disabled]="signUpResult.isPending || signUpForm.invalid">
+        @if (!signUpResult.isPending && !signUpForm.invalid) {
           <span>S'inscrire</span>
         }
-        @if (state.isLoading) {
+        @if (signUpResult.isPending) {
           <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
         }
       </button>

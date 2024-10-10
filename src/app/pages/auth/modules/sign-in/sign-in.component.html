@@ -1,5 +1,7 @@
-<div class="grid grid-cols-1 lg:grid-cols-2 bg-white" *ngIf="state$ | async as state">
-  <div class="min-h-screen flex flex-col items-start justify-center px-8 md:px-8 lg:px-32">
+<div class="grid grid-cols-1 lg:grid-cols-2 bg-white" *ngIf="signIn.result$ | async as signInResult">
+  <div
+    class="min-h-screen flex flex-col items-start justify-center px-8 md:px-8 py-20 lg:px-32"
+    *ngIf="verifyEmail.result$ | async as verifyEmailResult">
     <div class="flex flex-col items-start">
       <h2 class="text-3xl font-extrabold leading-tight tracking-tight font-satoshi">Se connecter</h2>
       <div class="flex items-center gap-1.5">
@@ -7,18 +9,24 @@
         <a class="text-primary-500 hover:underline" [routerLink]="['/sign-up']">S'inscrire</a>
       </div>
     </div>
-    @if (state.error; as error) {
-      <app-fuse-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
-        {{ error }}
+    @if (signInResult.isError) {
+      <app-fuse-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
+        {{ signInResult.error['error'].message }}
       </app-fuse-alert>
     }
-    @if (state.success && !state.error) {
-      <app-fuse-alert class="mt-6 w-full" appearance="soft" type="success" [showIcon]="true" [@shake]="true">
-        {{ state.success }}
+    @if (verifyEmailResult.isError) {
+      <app-fuse-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
+        {{ verifyEmailResult.error['error'].message }}
+      </app-fuse-alert>
+    }
+    @if (verifyEmailResult.isSuccess) {
+      <app-fuse-alert class="mt-6 w-full" type="success" [showIcon]="true" [@shake]="true">
+        Votre email a été vérifié avec succès.
       </app-fuse-alert>
     }
     <form
-      class="{{ state.error ? 'transition-transform translate-y-4 duration-150' : 'mt-8 ' }}"
+      class="{{ signInResult.error ? 'transition-transform translate-y-4 duration-150' : 'mt-8 ' }}"
+      (ngSubmit)="onSignIn()"
       [formGroup]="signInForm">
       <mat-form-field class="w-full">
         <mat-label>Adresse e-mail</mat-label>
@@ -58,13 +66,13 @@
       <button
         class="fuse-mat-button-large mt-6 w-full text-white"
         mat-flat-button
-        [color]="'primary'"
-        [disabled]="state.isLoading || signInForm.invalid || signInForm.disabled"
-        (click)="signIn()">
-        @if (!state.isLoading && !signInForm.invalid) {
+        color="primary"
+        type="submit"
+        [disabled]="signInResult.isPending || signInForm.invalid || signInForm.disabled">
+        @if (!signInResult.isPending && !signInForm.invalid) {
           <span>Se connecter</span>
         }
-        @if (state.isLoading) {
+        @if (signInResult.isPending) {
           <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
         }
       </button>

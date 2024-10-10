@@ -47,6 +47,9 @@ importers:
       '@angular/ssr':
         specifier: ^18.2.2
         version: 18.2.2(@angular/common@18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))
+      '@ngneat/query':
+        specifier: ^3.0.0
+        version: 3.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(@tanstack/query-core@5.59.6)
       '@ngrx/component-store':
         specifier: ^18.0.2
         version: 18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
@@ -1655,6 +1658,12 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@ngneat/query@3.0.0':
+    resolution: {integrity: sha512-gWL+X/fGGTbx6jDgxEhLobZvx6RA/KYsQyMluZK9gc8T6NC091CTtr3vL1DPhsdYieynCe1aXl1xWkTYRMsxBA==}
+    peerDependencies:
+      '@angular/core': '>=16.0.0 <19.0.0'
+      '@tanstack/query-core': ^5.4.3
+
   '@ngrx/component-store@18.0.2':
     resolution: {integrity: sha512-IB7ZKFqjDt4duQbfYqXxAOKf9Si9O1HFodqbNCSgi7gnovK/frf/H429a+lYOyItPcpno3ECom6/1k8pE8fWlg==}
     peerDependencies:
@@ -1950,6 +1959,9 @@ packages:
     resolution: {integrity: sha512-AqhlCXl+8grUz8uqExv5OTtgpjuVIwFTSXTrh8y9/pw6q2ek7fJ+Y8ZEVw7EB2DCcuCOtEjf9w3+J3rzts01uA==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders || >=4.0.0-alpha.20'
+
+  '@tanstack/query-core@5.59.6':
+    resolution: {integrity: sha512-g58YTHe4ClRrjJ50GY9fas/0zARJVozY0Hs+hcSBOmwZaeKY+to0/LX8wKnnH/EJiLYcC1sHmE11CAS3ncfZBg==}
 
   '@tsconfig/node10@1.0.11':
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}
@@ -6993,6 +7005,12 @@ snapshots:
   '@msgpackr-extract/msgpackr-extract-win32-x64@3.0.3':
     optional: true
 
+  '@ngneat/query@3.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(@tanstack/query-core@5.59.6)':
+    dependencies:
+      '@angular/core': 18.2.2(rxjs@7.8.1)(zone.js@0.14.10)
+      '@tanstack/query-core': 5.59.6
+      tslib: 2.7.0
+
   '@ngrx/component-store@18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)':
     dependencies:
       '@angular/core': 18.2.2(rxjs@7.8.1)(zone.js@0.14.10)
@@ -7263,6 +7281,8 @@ snapshots:
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.10(ts-node@10.9.1(@types/node@22.5.1)(typescript@5.5.4))
+
+  '@tanstack/query-core@5.59.6': {}
 
   '@tsconfig/node10@1.0.11':
     optional: true

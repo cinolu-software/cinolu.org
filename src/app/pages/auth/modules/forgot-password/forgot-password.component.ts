@@ -10,9 +10,8 @@ import { FuseAlertComponent } from '@fuse/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { team } from 'app/pages/landing/data/team';
 import { MatIconModule } from '@angular/material/icon';
-import { Observable } from 'rxjs';
-import { ForgotPasswordStore } from './forgot-password.store';
-import { IForgotPasswordStore } from './types/forgot-password-store.type';
+import { AuthService } from '../../auth.service';
+import { MutationResult } from '@ngneat/query';
 
 @Component({
   selector: 'app-forgot-password',
@@ -36,21 +35,21 @@ import { IForgotPasswordStore } from './types/forgot-password-store.type';
 })
 export class AuthForgotPasswordComponent {
   forgotPasswordForm: FormGroup;
-  state$: Observable<IForgotPasswordStore>;
   team = team;
   private _formBuilder = inject(FormBuilder);
-  private _store = inject(ForgotPasswordStore);
+  private _authService = inject(AuthService);
+  forgotPassword: MutationResult<void, Error, unknown>;
 
   constructor() {
     this.forgotPasswordForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]]
     });
-    this.state$ = this._store.state$;
+    this.forgotPassword = this._authService.forgotPassword();
   }
 
   submitForgotPassword(): void {
     if (!this.forgotPasswordForm.invalid) {
-      this._store.forgotPassword(this.forgotPasswordForm.value);
+      this.forgotPassword.mutate(this.forgotPasswordForm.value);
     }
   }
 }

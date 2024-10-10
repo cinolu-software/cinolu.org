@@ -8,11 +8,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
-import { Observable } from 'rxjs';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { team } from 'app/pages/landing/data/team';
-import { ResetPasswordStore } from './reset-password.store';
-import { IResetPasswordStore } from './types/reset-password-store.type';
+import { AuthService } from '../../auth.service';
+import { MutationResult } from '@ngneat/query';
+import { IUser } from '../../../../common/types/models.interface';
 
 @Component({
   selector: 'app-reset-password',
@@ -36,25 +36,25 @@ import { IResetPasswordStore } from './types/reset-password-store.type';
 export class AuthResetPasswordComponent {
   resetPasswordForm: FormGroup;
   team = team;
-  state$: Observable<IResetPasswordStore>;
   private _token = inject(ActivatedRoute).snapshot.queryParams['token'];
   private _formBuilder = inject(FormBuilder);
-  private _store = inject(ResetPasswordStore);
+  private _authService = inject(AuthService);
+  resetPassword: MutationResult<IUser, Error, unknown>;
 
   constructor() {
     this.resetPasswordForm = this._formBuilder.group({
       password: ['', Validators.required],
       password_confirm: ['', Validators.required]
     });
-    this.state$ = this._store.state$;
+    this.resetPassword = this._authService.resetPassword();
   }
 
-  resetPassword(): void {
+  onResetPassword(): void {
     if (this.resetPasswordForm.invalid) return;
     this.resetPasswordForm.disable();
     const { password, password_confirm } = this.resetPasswordForm.value;
     const payload = { token: this._token, password, password_confirm };
-    this._store.resetPassword(payload);
+    this.resetPassword.mutate(payload);
     this.resetPasswordForm.enable();
   }
 }

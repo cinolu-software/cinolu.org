@@ -3,10 +3,9 @@ import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { team } from 'app/pages/landing/data/team';
-import { ConfirmationRequiredStore } from './confirmation-required.store';
 import { FuseAlertComponent } from '@fuse/components/alert';
-import { Observable } from 'rxjs';
-import { IConfirmationRequiredStore } from './types/confirmation-required-store.type';
+import { AuthService } from '../../auth.service';
+import { MutationResult } from '@ngneat/query';
 
 @Component({
   selector: 'app-confirmation-required',
@@ -18,15 +17,15 @@ import { IConfirmationRequiredStore } from './types/confirmation-required-store.
 })
 export class AuthConfirmationRequiredComponent {
   team = team;
-  state$: Observable<IConfirmationRequiredStore>;
-  private _store = inject(ConfirmationRequiredStore);
+  private _authService = inject(AuthService);
   private _email = inject(ActivatedRoute).snapshot.queryParams['email'];
+  resendEmailVerification: MutationResult<void, Error, unknown>;
 
   constructor() {
-    this.state$ = this._store.state$;
+    this.resendEmailVerification = this._authService.resendEmailVerification();
   }
 
-  resendEmailVerification() {
-    this._store.resendEmailVerification(this._email);
+  onResendEmailVerification() {
+    this.resendEmailVerification.mutate(this._email);
   }
 }

@@ -11,9 +11,7 @@ import { FuseAlertComponent } from '@fuse/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
 import { team } from 'app/pages/landing/data/team';
-import { SignInStore } from './sign-in.store';
-import { Observable } from 'rxjs';
-import { ISigninStore } from './types/sing-in-store.type';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -37,24 +35,25 @@ import { ISigninStore } from './types/sing-in-store.type';
 export class AuthSignInComponent {
   signInForm: FormGroup;
   team = team;
-  state$: Observable<ISigninStore>;
+  state$: unknown;
   private _formBuilder: FormBuilder = inject(FormBuilder);
-  private _store = inject(SignInStore);
+  private _authService = inject(AuthService);
   private _token: string = inject(ActivatedRoute).snapshot.queryParams['token'];
+  signIn = this._authService.signIn();
+  verifyEmail = this._authService.verifyEmail();
 
   constructor() {
     this.signInForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-    if (this._token) this._store.verifyEmail(this._token);
-    this.state$ = this._store.state$;
+    if (this._token) this.verifyEmail.mutate(this._token);
   }
 
-  signIn(): void {
+  onSignIn(): void {
     if (this.signInForm.invalid) return;
     this.signInForm.disable();
-    this._store.signIn(this.signInForm.value);
+    this.signIn.mutate(this.signInForm.value);
     this.signInForm.enable();
   }
 

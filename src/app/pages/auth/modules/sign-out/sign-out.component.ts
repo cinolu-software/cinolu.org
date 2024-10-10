@@ -18,7 +18,7 @@ export class AuthSignOutComponent implements OnInit, OnDestroy {
   private _unsubscribeAll = new Subject();
 
   ngOnInit(): void {
-    this._authService.signOut();
+    this._authService.signOut().mutate({});
     timer(1000, 1000)
       .pipe(
         finalize(() => {

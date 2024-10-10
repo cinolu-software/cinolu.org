@@ -1,45 +1,69 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, of, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { IUser } from '../../common/types/models.interface';
-import { ISignInPayload } from './modules/sign-in/types/sign-in.type';
-import { ISignUp } from './modules/sign-up/types/sign-up.type';
-import { IResetPassword } from './modules/reset-password/types/reset-password.type';
-import { IForgotPassword } from './modules/forgot-password/types/forgot-password.type';
+import { ISignInPayload } from './types/sign-in.interface';
+import { ISignUp } from './types/sign-up.interface';
+import { IResetPassword } from './types/reset-password.interface';
+import { IForgotPassword } from './types/forgot-password.interface';
+import { injectMutation, injectQuery, MutationResult } from '@ngneat/query';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private _httpClient = inject(HttpClient);
+  private _mutation = injectMutation();
+  private _queryClient = injectQuery();
 
-  getProfile(): Observable<{ data: IUser }> {
-    return this._httpClient.get<{ data: IUser }>('auth/profile');
+  getProfile() {
+    return this._queryClient({
+      queryKey: ['profile'] as const,
+      queryFn: () => this._httpClient.get<{ data: IUser }>('auth/profile').pipe(map((res) => res.data))
+    });
   }
 
-  signIn(payload: ISignInPayload): Observable<IUser> {
-    return this._httpClient.post<{ data: IUser }>('auth/sign-in', payload).pipe(map((res) => res.data));
+  signIn(): MutationResult<IUser, Error, unknown> {
+    return this._mutation({
+      mutationFn: (payload: ISignInPayload): Observable<IUser> =>
+        this._httpClient.post<{ data: IUser }>('auth/sign-in', payload).pipe(map((res) => res.data))
+    });
   }
 
-  signOut() {
-    return this._httpClient.post<void>('auth/sign-out', {}).pipe(map(() => of(null)));
+  signOut(): MutationResult<object, Error, unknown, unknown> {
+    return this._mutation({
+      mutationFn: () => this._httpClient.post('auth/sign-out', {})
+    });
   }
 
-  signUp(payload: ISignUp): Observable<IUser> {
-    return this._httpClient.post<{ data: IUser }>('auth/sign-up', payload).pipe(map((res) => res.data));
+  signUp(): MutationResult<IUser, Error, unknown> {
+    return this._mutation({
+      mutationFn: (payload: ISignUp) =>
+        this._httpClient.post<{ data: IUser }>('auth/sign-up', payload).pipe(map((res) => res.data))
+    });
   }
 
-  forgotPassword(email: IForgotPassword): Observable<void> {
-    return this._httpClient.post<void>('auth/forgot-password', email);
+  forgotPassword(): MutationResult<void, Error, unknown> {
+    return this._mutation({
+      mutationFn: (email: IForgotPassword) => this._httpClient.post<void>('auth/forgot-password', email)
+    });
   }
 
-  resetPassword(payload: IResetPassword): Observable<IUser> {
-    return this._httpClient.post<{ data: IUser }>('auth/reset-password', payload).pipe(map((res) => res.data));
+  resetPassword(): MutationResult<IUser, Error, unknown> {
+    return this._mutation({
+      mutationFn: (payload: IResetPassword) =>
+        this._httpClient.post<{ data: IUser }>('auth/reset-password', payload).pipe(map((res) => res.data))
+    });
   }
 
-  resendEmailVerification(email: string) {
-    return this._httpClient.post<void>('auth/verify-email/resend-token', { email }).pipe(map(() => null));
+  resendEmailVerification(): MutationResult<void, Error, unknown> {
+    return this._mutation({
+      mutationFn: (email: string) => this._httpClient.post<void>('auth/verify-email/resend-token', { email })
+    });
   }
 
-  verifyEmail(token: string): Observable<IUser> {
-    return this._httpClient.post<{ data: IUser }>('auth/verify-email', { token }).pipe(map((res) => res.data));
+  verifyEmail(): MutationResult<IUser, Error, unknown> {
+    return this._mutation({
+      mutationFn: (token: string) =>
+        this._httpClient.post<{ data: IUser }>('auth/verify-email', { token }).pipe(map((res) => res.data))
+    });
   }
 }

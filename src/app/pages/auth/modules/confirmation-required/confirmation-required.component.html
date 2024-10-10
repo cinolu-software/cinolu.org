@@ -1,21 +1,21 @@
-<div class="grid grid-cols-1 lg:grid-cols-2 bg-white" *ngIf="state$ | async as state">
+<div class="grid grid-cols-1 lg:grid-cols-2 bg-white" *ngIf="resendEmailVerification.result$ | async as result">
   <div class="flex min-h-screen flex-col items-start justify-center px-8 md:px-8 lg:px-32">
     <div class="mx-auto w-full max-w-80 sm:mx-0 sm:w-80">
       <div class="text-3xl font-extrabold leading-tight tracking-tight">Confirmation recquise</div>
-      @if (state.error && !state.sucess) {
+      @if (result.isError) {
         <app-fuse-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
-          {{ state.error }}
+          {{ result.error['error'].message }}
         </app-fuse-alert>
       }
-      @if (state.sucess && !state.error) {
+      @if (result.isSuccess) {
         <app-fuse-alert class="mt-6 w-full" appearance="soft" type="success" [showIcon]="true" [@shake]="true">
-          {{ state.sucess }}
+          Un email de vérification a été envoyé à votre adresse email.
         </app-fuse-alert>
       }
       <div class="mt-4">
         Un courrier de confirmation contenant des instructions a été envoyé à votre adresse électronique. Suivez ces
         instructions pour confirmer pour confirmer votre adresse électronique et activer votre compte.
-        <button (click)="resendEmailVerification()">
+        <button (click)="onResendEmailVerification()">
           <span class="text-primary-500 underline">Renvoyer le mail</span>
         </button>
       </div>

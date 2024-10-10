@@ -13,9 +13,7 @@ import { FuseAlertComponent } from '@fuse/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
 import { team } from 'app/pages/landing/data/team';
-import { SignupStore } from './sign-up.store';
-import { Observable } from 'rxjs';
-import { ISignupStore } from './types/sign-up-store.type';
+import { AuthService } from '../../auth.service';
 
 @Component({
   standalone: true,
@@ -41,9 +39,9 @@ import { ISignupStore } from './types/sign-up-store.type';
 export class AuthSignUpComponent implements OnInit {
   signUpForm: FormGroup;
   team = team;
-  state$: Observable<ISignupStore>;
   private _formBuilder = inject(FormBuilder);
-  private _store = inject(SignupStore);
+  private _authService = inject(AuthService);
+  signUp = this._authService.signUp();
 
   ngOnInit(): void {
     this.signUpForm = this._formBuilder.group({
@@ -54,14 +52,12 @@ export class AuthSignUpComponent implements OnInit {
       password: ['', Validators.required],
       password_confirm: ['', [Validators.required]]
     });
-    this.state$ = this._store.state$;
   }
 
-  signUp(): void {
+  onSignUp(): void {
     if (this.signUpForm.invalid) return;
     this.signUpForm.disable();
-    const payload = { ...this.signUpForm.get('firstStep').value, ...this.signUpForm.get('secondStep').value };
-    this._store.signUp(payload);
+    this.signUp.mutate(this.signUpForm.value);
     this.signUpForm.enable();
   }
 
