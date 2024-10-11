@@ -1,4 +1,4 @@
-<header class="relative z-40 text-gray-950 font-satoshi font-medium" *ngIf="profile$ | async as profile">
+<header class="relative z-40 text-gray-950 font-satoshi font-medium">
   <nav>
     <ul
       class="navbar fixed w-full top-0 left-0 right-0 translate-y-0 lg:px-20 px-10 py-3 transition-transform duration-300 bg-white shadow-sm z-20 flex items-center justify-between">
@@ -9,10 +9,10 @@
       </a>
 
       <div class="flex gap-4 items-center">
-        @if (profile.isSuccess) {
+        @if (user$ | async; as user) {
           <a [href]="accountUrl" class="flex items-center gap-2">
             <div class="relative w-8 h-8 bg-gray-200 rounded-full overflow-hidden inline-block">
-              <img [ngSrc]="displayProfileImage(profile.data)" class="object-contain" alt="profile picture" fill />
+              <img [ngSrc]="displayProfileImage(user)" class="object-contain" alt="profile picture" fill />
             </div>
             Mon compte
           </a>

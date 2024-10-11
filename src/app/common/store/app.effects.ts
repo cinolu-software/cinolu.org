@@ -7,14 +7,14 @@ import { authActions } from './app.actions';
 
 @Injectable()
 export class AuthEffects {
-  private _actions$: Actions = inject(Actions);
-  private _authService = inject(AuthService);
+  #actions$ = inject(Actions);
+  #authService = inject(AuthService);
 
   authenticate$ = createEffect(() =>
-    this._actions$.pipe(
+    this.#actions$.pipe(
       ofType(authActions.authentication),
       exhaustMap(() =>
-        this._authService.getProfile().pipe(
+        this.#authService.getProfile().pipe(
           map(({ data }) => authActions.authenticateUser({ user: data })),
           catchError(() => of())
         )

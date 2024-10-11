@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ILink } from './types/link.interface';
+import { ILink } from './types/link.type';
 import { FormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { IUser } from '../../types/models.type';
 import { environment } from 'environments/environment';
-import { AuthService } from '../../../pages/auth/auth.service';
-import { QueryObserverResult } from '@ngneat/query';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectUser } from '../../store/app.reducers';
 
 @Component({
   selector: 'app-topbar',
@@ -16,9 +16,9 @@ import { QueryObserverResult } from '@ngneat/query';
   templateUrl: './topbar.component.html'
 })
 export class TopbarComponent {
-  profile$: Observable<QueryObserverResult<IUser, Error>>;
+  #store = inject(Store);
+  user$: Observable<IUser | null>;
   accountUrl: string;
-  private _authService = inject(AuthService);
 
   links: ILink[] = [
     {
@@ -33,7 +33,7 @@ export class TopbarComponent {
 
   constructor() {
     this.accountUrl = environment.accountUrl;
-    this.profile$ = this._authService.getProfile();
+    this.user$ = this.#store.pipe(select(selectUser));
   }
 
   displayProfileImage(user: IUser): string {

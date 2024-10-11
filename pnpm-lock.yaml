@@ -49,7 +49,7 @@ importers:
         version: 18.2.2(@angular/common@18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))
       '@ngneat/query':
         specifier: ^3.0.0
-        version: 3.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(@tanstack/query-core@5.59.6)
+        version: 3.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(@tanstack/query-core@5.59.9)
       '@ngrx/component-store':
         specifier: ^18.0.2
         version: 18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
@@ -65,6 +65,9 @@ importers:
       '@ngrx/store-devtools':
         specifier: ^18.0.2
         version: 18.0.2(@ngrx/store@18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(rxjs@7.8.1)
+      '@tanstack/query-core':
+        specifier: ^5.59.9
+        version: 5.59.9
       express:
         specifier: ^4.19.2
         version: 4.19.2
@@ -86,12 +89,21 @@ importers:
       ngx-filepond:
         specifier: ^7.0.3
         version: 7.0.3(@angular/common@18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(filepond@4.31.2)
+      ngx-owl-carousel-o:
+        specifier: 18.0.0
+        version: 18.0.0(@angular/common@18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      ngx-pagination:
+        specifier: 6.0.3
+        version: 6.0.3(@angular/common@18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))
       ngx-quill:
         specifier: 26.0.8
         version: 26.0.8(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(quill@2.0.2)(rxjs@7.8.1)
       perfect-scrollbar:
         specifier: 1.5.5
         version: 1.5.5
+      query:
+        specifier: link:@types/@ngneat/query
+        version: link:@types/@ngneat/query
       quill:
         specifier: 2.0.2
         version: 2.0.2
@@ -1960,8 +1972,8 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders || >=4.0.0-alpha.20'
 
-  '@tanstack/query-core@5.59.6':
-    resolution: {integrity: sha512-g58YTHe4ClRrjJ50GY9fas/0zARJVozY0Hs+hcSBOmwZaeKY+to0/LX8wKnnH/EJiLYcC1sHmE11CAS3ncfZBg==}
+  '@tanstack/query-core@5.59.9':
+    resolution: {integrity: sha512-vFGnblfJOKlOPyTR5M0ohWKb/03eGubh5KuGyzsDfc7VQ6F0nsB75kQIoLpwp3Wfj6fKv0wGoTUX8BsIfhxDfw==}
 
   '@tsconfig/node10@1.0.11':
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}
@@ -3971,6 +3983,19 @@ packages:
       '@angular/common': '>=14.x'
       '@angular/core': '>=14.x'
       filepond: '>=4.19.1 <5.x'
+
+  ngx-owl-carousel-o@18.0.0:
+    resolution: {integrity: sha512-3ukc6mDGseUXvYrpfV+Hm2O6cBOgV0p1bT51fykQQxAMZptbnzIQJ+U6ADbeds4tkZiwAHLK2a3qItlHz5YVOg==}
+    peerDependencies:
+      '@angular/common': ' ^18.0.0-rc.0 || ^18.0.0'
+      '@angular/core': ^18.0.0-rc.0 || ^18.0.0
+      rxjs: ^6.0.1 || ^7.0.0
+
+  ngx-pagination@6.0.3:
+    resolution: {integrity: sha512-lONjTQ7hFPh1SyhwDrRd5ZwM4NMGQ7bNR6vLrs6mrU0Z8Q1zCcWbf/pvyp4DOlGyd9uyZxRy2wUsSZLeIPjbAw==}
+    peerDependencies:
+      '@angular/common': '>=13.0.0'
+      '@angular/core': '>=13.0.0'
 
   ngx-quill@26.0.8:
     resolution: {integrity: sha512-Yt35k3Tzs6hEE1XzOU10K/nSD5+pvN944zPJ13Ux/tVouM1bZ2QffEWWHrmC3fqEBsLA//ltbxmf+TfGk9rLuw==}
@@ -7005,10 +7030,10 @@ snapshots:
   '@msgpackr-extract/msgpackr-extract-win32-x64@3.0.3':
     optional: true
 
-  '@ngneat/query@3.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(@tanstack/query-core@5.59.6)':
+  '@ngneat/query@3.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(@tanstack/query-core@5.59.9)':
     dependencies:
       '@angular/core': 18.2.2(rxjs@7.8.1)(zone.js@0.14.10)
-      '@tanstack/query-core': 5.59.6
+      '@tanstack/query-core': 5.59.9
       tslib: 2.7.0
 
   '@ngrx/component-store@18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)':
@@ -7282,7 +7307,7 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.10(ts-node@10.9.1(@types/node@22.5.1)(typescript@5.5.4))
 
-  '@tanstack/query-core@5.59.6': {}
+  '@tanstack/query-core@5.59.9': {}
 
   '@tsconfig/node10@1.0.11':
     optional: true
@@ -9480,6 +9505,19 @@ snapshots:
       '@angular/common': 18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       '@angular/core': 18.2.2(rxjs@7.8.1)(zone.js@0.14.10)
       filepond: 4.31.2
+      tslib: 2.7.0
+
+  ngx-owl-carousel-o@18.0.0(@angular/common@18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1):
+    dependencies:
+      '@angular/common': 18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      '@angular/core': 18.2.2(rxjs@7.8.1)(zone.js@0.14.10)
+      rxjs: 7.8.1
+      tslib: 2.7.0
+
+  ngx-pagination@6.0.3(@angular/common@18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10)):
+    dependencies:
+      '@angular/common': 18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      '@angular/core': 18.2.2(rxjs@7.8.1)(zone.js@0.14.10)
       tslib: 2.7.0
 
   ngx-quill@26.0.8(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(quill@2.0.2)(rxjs@7.8.1):
