@@ -33,21 +33,20 @@ import { AuthService } from '../../auth.service';
   ]
 })
 export class AuthSignInComponent {
-  signInForm: FormGroup;
+  #formBuilder: FormBuilder = inject(FormBuilder);
+  #authService = inject(AuthService);
+  #token: string = inject(ActivatedRoute).snapshot.queryParams['token'];
   team = team;
-  state$: unknown;
-  private _formBuilder: FormBuilder = inject(FormBuilder);
-  private _authService = inject(AuthService);
-  private _token: string = inject(ActivatedRoute).snapshot.queryParams['token'];
-  signIn = this._authService.signIn();
-  verifyEmail = this._authService.verifyEmail();
+  signInForm: FormGroup;
+  signIn = this.#authService.signIn();
+  verifyEmail = this.#authService.verifyEmail();
 
   constructor() {
-    this.signInForm = this._formBuilder.group({
+    this.signInForm = this.#formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-    if (this._token) this.verifyEmail.mutate(this._token);
+    if (this.#token) this.verifyEmail.mutate(this.#token);
   }
 
   onSignIn(): void {

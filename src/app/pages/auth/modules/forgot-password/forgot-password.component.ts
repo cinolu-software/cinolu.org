@@ -34,17 +34,17 @@ import { MutationResult } from '@ngneat/query';
   ]
 })
 export class AuthForgotPasswordComponent {
+  #formBuilder = inject(FormBuilder);
+  #authService = inject(AuthService);
   forgotPasswordForm: FormGroup;
   team = team;
-  private _formBuilder = inject(FormBuilder);
-  private _authService = inject(AuthService);
   forgotPassword: MutationResult<void, Error, unknown>;
 
   constructor() {
-    this.forgotPasswordForm = this._formBuilder.group({
+    this.forgotPasswordForm = this.#formBuilder.group({
       email: ['', [Validators.required, Validators.email]]
     });
-    this.forgotPassword = this._authService.forgotPassword();
+    this.forgotPassword = this.#authService.forgotPassword();
   }
 
   submitForgotPassword(): void {

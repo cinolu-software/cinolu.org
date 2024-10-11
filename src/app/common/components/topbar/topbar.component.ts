@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ILink } from './types/link.interface';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { IUser } from '../../types/models.interface';
+import { IUser } from '../../types/models.type';
 import { environment } from 'environments/environment';
 import { AuthService } from '../../../pages/auth/auth.service';
 import { QueryObserverResult } from '@ngneat/query';

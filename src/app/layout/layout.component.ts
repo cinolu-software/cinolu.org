@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { FuseConfig, FuseConfigService } from '@fuse/services/config';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
@@ -17,36 +17,30 @@ import { EmptyLayoutComponent } from './layouts/empty/empty.component';
   imports: [EmptyLayoutComponent]
 })
 export class LayoutComponent implements OnInit, OnDestroy {
+  #unsubscribeAll = new Subject();
+  #activatedRoute = inject(ActivatedRoute);
+  #document = inject(DOCUMENT);
+  #router = inject(Router);
+  #fuseConfigService = inject(FuseConfigService);
+  #fuseMediaWatcherService = inject(FuseMediaWatcherService);
+  #fusePlatformService = inject(FusePlatformService);
+  #renderer2 = inject(Renderer2);
   config: FuseConfig;
   layout: string;
   scheme: 'dark' | 'light';
   theme: string;
-  private _unsubscribeAll = new Subject();
-
-  /**
-   * Constructor
-   */
-  constructor(
-    private _activatedRoute: ActivatedRoute,
-    @Inject(DOCUMENT) private _document: Document,
-    private _renderer2: Renderer2,
-    private _router: Router,
-    private _fuseConfigService: FuseConfigService,
-    private _fuseMediaWatcherService: FuseMediaWatcherService,
-    private _fusePlatformService: FusePlatformService
-  ) {}
 
   ngOnInit(): void {
     // Set the theme and scheme based on the configuration
     combineLatest([
-      this._fuseConfigService.config$,
-      this._fuseMediaWatcherService.onMediaQueryChange$([
+      this.#fuseConfigService.config$,
+      this.#fuseMediaWatcherService.onMediaQueryChange$([
         '(prefers-color-scheme: dark)',
         '(prefers-color-scheme: light)'
       ])
     ])
       .pipe(
-        takeUntil(this._unsubscribeAll),
+        takeUntil(this.#unsubscribeAll),
         map(([config, mql]) => {
           const options = {
             scheme: config['scheme'],
@@ -71,7 +65,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
       });
 
     // Subscribe to config changes
-    this._fuseConfigService.config$.pipe(takeUntil(this._unsubscribeAll)).subscribe((config: FuseConfig) => {
+    this.#fuseConfigService.config$.pipe(takeUntil(this.#unsubscribeAll)).subscribe((config: FuseConfig) => {
       // Store the config
       this.config = config;
 
@@ -80,10 +74,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
     });
 
     // Subscribe to NavigationEnd event
-    this._router.events
+    this.#router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
-        takeUntil(this._unsubscribeAll)
+        takeUntil(this.#unsubscribeAll)
       )
       .subscribe(() => {
         // Update the layout
@@ -91,10 +85,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
       });
 
     // Set the app version
-    this._renderer2.setAttribute(this._document.querySelector('[ng-version]'), 'fuse-version', FUSE_VERSION);
+    this.#renderer2.setAttribute(this.#document.querySelector('[ng-version]'), 'fuse-version', FUSE_VERSION);
 
     // Set the OS name
-    this._renderer2.addClass(this._document.body, this._fusePlatformService.osName);
+    this.#renderer2.addClass(this.#document.body, this.#fusePlatformService.osName);
   }
 
   /**
@@ -102,13 +96,13 @@ export class LayoutComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
-    this._unsubscribeAll.next(null);
-    this._unsubscribeAll.complete();
+    this.#unsubscribeAll.next(null);
+    this.#unsubscribeAll.complete();
   }
 
   private _updateLayout(): void {
     // Get the current activated route
-    let route = this._activatedRoute;
+    let route = this.#activatedRoute;
     while (route.firstChild) {
       route = route.firstChild;
     }
@@ -159,10 +153,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
    */
   private _updateScheme(): void {
     // Remove class names for all schemes
-    this._document.body.classList.remove('light', 'dark');
+    this.#document.body.classList.remove('light', 'dark');
 
     // Add class name for the currently selected scheme
-    this._document.body.classList.add(this.scheme);
+    this.#document.body.classList.add(this.scheme);
   }
 
   /**
@@ -174,6 +168,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
     // Find the class name for the previously selected theme and remove it
 
     // Add class name for the currently selected theme
-    this._document.body.classList.add(this.theme);
+    this.#document.body.classList.add(this.theme);
   }
 }

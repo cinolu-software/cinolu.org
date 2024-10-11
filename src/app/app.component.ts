@@ -10,9 +10,9 @@ import { authActions } from './common/store/app.actions';
   imports: [RouterOutlet]
 })
 export class AppComponent implements OnInit {
-  private _store = inject(Store);
+  #store = inject(Store);
 
   ngOnInit(): void {
-    this._store.dispatch(authActions.authentication());
+    this.#store.dispatch(authActions.authentication());
   }
 }

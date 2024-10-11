@@ -37,14 +37,14 @@ import { AuthService } from '../../auth.service';
   ]
 })
 export class AuthSignUpComponent implements OnInit {
-  signUpForm: FormGroup;
+  #formBuilder = inject(FormBuilder);
+  #authService = inject(AuthService);
   team = team;
-  private _formBuilder = inject(FormBuilder);
-  private _authService = inject(AuthService);
-  signUp = this._authService.signUp();
+  signUpForm: FormGroup;
+  signUp = this.#authService.signUp();
 
   ngOnInit(): void {
-    this.signUpForm = this._formBuilder.group({
+    this.signUpForm = this.#formBuilder.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
       address: ['', Validators.required],

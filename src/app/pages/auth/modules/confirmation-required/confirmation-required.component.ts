@@ -16,16 +16,16 @@ import { MutationResult } from '@ngneat/query';
   imports: [RouterLink, CommonModule, NgOptimizedImage, FuseAlertComponent, CommonModule]
 })
 export class AuthConfirmationRequiredComponent {
+  #authService = inject(AuthService);
+  #email = inject(ActivatedRoute).snapshot.queryParams['email'];
   team = team;
-  private _authService = inject(AuthService);
-  private _email = inject(ActivatedRoute).snapshot.queryParams['email'];
   resendEmailVerification: MutationResult<void, Error, unknown>;
 
   constructor() {
-    this.resendEmailVerification = this._authService.resendEmailVerification();
+    this.resendEmailVerification = this.#authService.resendEmailVerification();
   }
 
   onResendEmailVerification() {
-    this.resendEmailVerification.mutate(this._email);
+    this.resendEmailVerification.mutate(this.#email);
   }
 }

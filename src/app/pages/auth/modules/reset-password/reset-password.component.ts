@@ -12,7 +12,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { team } from 'app/pages/landing/data/team';
 import { AuthService } from '../../auth.service';
 import { MutationResult } from '@ngneat/query';
-import { IUser } from '../../../../common/types/models.interface';
+import { IUser } from '../../../../common/types/models.type';
 
 @Component({
   selector: 'app-reset-password',
@@ -34,26 +34,26 @@ import { IUser } from '../../../../common/types/models.interface';
   ]
 })
 export class AuthResetPasswordComponent {
+  #token = inject(ActivatedRoute).snapshot.queryParams['token'];
+  #formBuilder = inject(FormBuilder);
+  #authService = inject(AuthService);
   resetPasswordForm: FormGroup;
   team = team;
-  private _token = inject(ActivatedRoute).snapshot.queryParams['token'];
-  private _formBuilder = inject(FormBuilder);
-  private _authService = inject(AuthService);
   resetPassword: MutationResult<IUser, Error, unknown>;
 
   constructor() {
-    this.resetPasswordForm = this._formBuilder.group({
+    this.resetPasswordForm = this.#formBuilder.group({
       password: ['', Validators.required],
       password_confirm: ['', Validators.required]
     });
-    this.resetPassword = this._authService.resetPassword();
+    this.resetPassword = this.#authService.resetPassword();
   }
 
   onResetPassword(): void {
     if (this.resetPasswordForm.invalid) return;
     this.resetPasswordForm.disable();
     const { password, password_confirm } = this.resetPasswordForm.value;
-    const payload = { token: this._token, password, password_confirm };
+    const payload = { token: this.#token, password, password_confirm };
     this.resetPassword.mutate(payload);
     this.resetPasswordForm.enable();
   }

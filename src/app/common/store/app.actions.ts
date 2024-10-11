@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { IUser } from '../types/models.interface';
+import { IUser } from '../types/models.type';
 
 export const authActions = createActionGroup({
   source: 'auth',
