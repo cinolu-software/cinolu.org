@@ -11,10 +11,10 @@ export class TeamService {
   #http = inject(HttpClient);
   #queryClient = injectQuery();
 
-  getTeamMember(role: string): Observable<QueryObserverResult<IUser, Error>> {
+  getTeamMember(role: string): Observable<QueryObserverResult<IUser[], Error>> {
     return this.#queryClient({
       queryKey: ['team', role] as const,
-      queryFn: () => this.#http.get<{ data: IUser }>(`users/with-role/${role}`).pipe(map((res) => res.data))
+      queryFn: () => this.#http.get<{ data: IUser[] }>(`users/with-role/${role}`).pipe(map((res) => res.data))
     }).result$;
   }
 }

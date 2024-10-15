@@ -1,9 +1,7 @@
 export interface IUser {
-  id: number;
+  id: string;
   email: string;
-  first_name: string;
   name: string;
-  last_name: string;
   password: string;
   phone_number: string;
   address: string;
@@ -19,7 +17,7 @@ export interface IUser {
 }
 
 export interface IProject {
-  id: number;
+  id: string;
   name: string;
   description: string;
   start_at: Date;
@@ -33,7 +31,7 @@ export interface IProject {
 }
 
 export interface IProgram {
-  id: number;
+  id: string;
   name: string;
   description: string;
   start_at: Date;
@@ -45,7 +43,7 @@ export interface IProgram {
 }
 
 export interface IAttachment {
-  id: number;
+  id: string;
   name: string;
   created_at: Date;
   updated_at: Date;
@@ -54,7 +52,7 @@ export interface IAttachment {
 }
 
 export interface ICategory {
-  id: number;
+  id: string;
   name: string;
   created_at: Date;
   updated_at: Date;
@@ -62,7 +60,7 @@ export interface ICategory {
 }
 
 export interface IProgram {
-  id: number;
+  id: string;
   name: string;
   description: string;
   start_at: Date;
@@ -74,7 +72,7 @@ export interface IProgram {
 }
 
 export interface IProject {
-  id: number;
+  id: string;
   name: string;
   description: string;
   start_at: Date;
@@ -88,7 +86,7 @@ export interface IProject {
 }
 
 export interface IStatus {
-  id: number;
+  id: string;
   name: string;
   created_at: Date;
   updated_at: Date;
@@ -96,7 +94,7 @@ export interface IStatus {
 }
 
 export interface IRoles {
-  id: number;
+  id: string;
   name: string;
   created_at: Date;
   updated_at: Date;

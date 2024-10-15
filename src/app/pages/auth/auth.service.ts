@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { IUser } from '../../common/types/models.type';
-import { ISignInPayload } from './modules/sign-in/types/sign-in.type';
+import { ISignInPayload } from './types/sign-in.type';
 import { ISignUp } from './types/sign-up.type';
 import { IResetPassword } from './modules/reset-password/types/reset-password.type';
 import { IForgotPassword } from './modules/forgot-password/types/forgot-password.type';
-import { injectMutation, injectQuery, MutationResult, QueryObserverResult } from '@ngneat/query';
+import { injectMutation, MutationResult } from '@ngneat/query';
 import { Router } from '@angular/router';
 import { authActions } from '../../common/store/app.actions';
 
@@ -15,7 +15,6 @@ export class AuthService {
   #httpClient = inject(HttpClient);
   #router = inject(Router);
   #mutation = injectMutation();
-  #queryClient = injectQuery();
 
   signUp(): MutationResult<IUser, Error, unknown> {
     return this.#mutation({
@@ -72,10 +71,7 @@ export class AuthService {
     });
   }
 
-  getProfile(): Observable<QueryObserverResult<IUser, Error>> {
-    return this.#queryClient({
-      queryKey: ['profile'] as const,
-      queryFn: () => this.#httpClient.get<{ data: IUser }>('auth/profile').pipe(map((res) => res.data))
-    }).result$;
+  getProfile(): Observable<IUser> {
+    return this.#httpClient.get<{ data: IUser }>('auth/profile').pipe(map((res) => res.data));
   }
 }
