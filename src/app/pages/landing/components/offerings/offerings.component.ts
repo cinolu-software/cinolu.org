@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ObserveVisibilityDirective } from 'app/common/directives/observer.directive';
-import { offerings } from './data/offerings';
+import { offerings } from './utils/data/offerings';
 
 @Component({
   selector: 'app-our-offerings',
