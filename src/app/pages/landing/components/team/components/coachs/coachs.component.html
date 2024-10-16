@@ -1,0 +1,34 @@
+<section class="bg-white text-gray-800 px-8 md:px-32 mb-20" id="coachs" *ngIf="coachs$ | async as coachs">
+  <h1 class="font-satoshi font-bold text-2xl md:text-5xl mb-8">
+    Nos
+    <span class="text-green-600">coachs</span>
+  </h1>
+
+  <div class="relative grid gap-6 grid-cols-1 md:grid-cols-4">
+    @if (coachs.isFetching) {
+      @for (item of [1, 2, 3, 4]; track $index) {
+        <app-team-card-skeleton />
+      }
+    }
+  </div>
+
+  @if (coachs.data; as coachs) {
+    <ngu-carousel #carousel [inputs]="carouselTile" [dataSource]="coachs" class="relative">
+      <ngu-tile *nguCarouselDef="let item; let i = index">
+        <app-team-card [user]="item" />
+      </ngu-tile>
+      <button
+        class="absolute -left-10 z-10 top-1/3 bg-white shadow-md rounded-full px-3 py-2"
+        *ngIf="!carousel.isFirst()"
+        NguCarouselPrev>
+        <mat-icon class="icon-size-4 text-black" svgIcon="heroicons_outline:arrow-left"></mat-icon>
+      </button>
+      <button
+        class="absolute -right-8 top-1/3 bg-white shadow-md rounded-full px-3 py-2"
+        *ngIf="!carousel.isLast()"
+        NguCarouselNext>
+        <mat-icon class="icon-size-4 text-black" svgIcon="heroicons_outline:arrow-right"></mat-icon>
+      </button>
+    </ngu-carousel>
+  }
+</section>

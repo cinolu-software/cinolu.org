@@ -1,0 +1,15 @@
+<div class="px-6 py-8 rounded-lg border border-primary-800 shadow-md bg-white mr-2">
+  <div class="flex flex-col gap-5">
+    <div class="relative h-10 w-10">
+      <img
+        class="h-10 w-10 flex-0 rounded-full object-cover ring-4 ring-primary-900 ring-offset-1 ring-offset-primary-900"
+        [ngSrc]="displayProfileImage(user())"
+        [alt]="user().name"
+        fill />
+    </div>
+    <div class="flex flex-col gap-1.5">
+      <h4 class="text-gray-950">{{ user().name }}</h4>
+      <span class="block text-gray-700 lowercase text-xs">{{ user().email }}</span>
+    </div>
+  </div>
+</div>

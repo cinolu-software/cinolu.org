@@ -2,7 +2,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
-import { team } from 'app/pages/landing/data/team';
+import { team } from 'app/pages/landing/utils/data/team';
 import { FuseAlertComponent } from '@fuse/components/alert';
 import { AuthService } from '../../auth.service';
 import { MutationResult } from '@ngneat/query';

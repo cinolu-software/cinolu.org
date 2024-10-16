@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { team } from 'app/pages/landing/data/team';
+import { team } from 'app/pages/landing/utils/data/team';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../auth.service';
 import { MutationResult } from '@ngneat/query';

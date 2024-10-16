@@ -40,6 +40,15 @@ export interface IProgram {
   updated_at: Date;
   user: IUser;
   attachments: IAttachment[];
+  types: IType[];
+}
+
+export interface IType {
+  id: string;
+  name: string;
+  description: string;
+  created_at: Date;
+  updated_at: Date;
 }
 
 export interface IAttachment {

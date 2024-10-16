@@ -10,7 +10,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
-import { team } from 'app/pages/landing/data/team';
+import { team } from 'app/pages/landing/utils/data/team';
 import { AuthService } from '../../auth.service';
 
 @Component({

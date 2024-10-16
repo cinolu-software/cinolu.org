@@ -1,5 +1,21 @@
-@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
-@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+::-webkit-scrollbar-thumb {
+  @apply bg-green-400/70 w-2 rounded-md;
+}
+
+.pg .ngx-pagination .current {
+  @apply bg-green-500 bg-opacity-70 rounded-sm m-0 px-2 py-0.5;
+}
+.pg .ngx-pagination a {
+  @apply bg-gray-200/40 text-gray-700 mx-1 shadow-sm shadow-gray-300 bg-opacity-70 rounded-sm m-0 px-2 py-0.5;
+}
+
+.ngucarousel {
+  @apply h-auto static #{!important};
+}
+
+.tile {
+  @apply border-none bg-none shadow-none #{!important};
+}
 
 .mat-step-icon-content {
   @apply text-white font-bold;
