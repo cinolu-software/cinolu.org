@@ -3,9 +3,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ObserveVisibilityDirective } from 'app/common/directives/observer.directive';
 import { Observable } from 'rxjs';
 import { QueryObserverResult } from '@ngneat/query';
-import { IUser } from '../../../../../../common/types/models.type';
-import { TeamCardSkeletonComponent } from '../../utils/components/team-card-skeleton/team-card-skeleton.component';
-import { TeamCardComponent } from '../../utils/components/team-card/team-card.component';
+import { IUser } from 'app/common/types/models.type';
+import { TeamCardSkeletonComponent } from '../../utils/slots/team-card-skeleton/team-card-skeleton.component';
+import { TeamCardComponent } from '../../utils/slots/team-card/team-card.component';
 import { CoachService } from './coachs.service';
 import {
   NguCarousel,

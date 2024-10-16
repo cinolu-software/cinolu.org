@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { HeroComponent } from './components/hero/hero.component';
-import { AboutComponent } from './components/about/about.component';
-import { TeamComponent } from './components/team/team.component';
+import { HeroComponent } from './slots/hero/hero.component';
+import { AboutComponent } from './slots/about/about.component';
+import { TeamComponent } from './slots/team/team.component';
 import { FooterComponent } from 'app/common/components/footer/footer.component';
-import { ProblemStatementComponent } from './components/problem-statement/problem-statement.component';
-import { OurAimComponent } from './components/our-aim/our-aim.component';
-import { OurVisionComponent } from './components/our-vision/our-vision.component';
-import { OfferingsComponent } from './components/offerings/offerings.component';
+import { ProblemStatementComponent } from './slots/problem-statement/problem-statement.component';
+import { OurAimComponent } from './slots/our-aim/our-aim.component';
+import { OurVisionComponent } from './slots/our-vision/our-vision.component';
+import { OfferingsComponent } from './slots/offerings/offerings.component';
 
 @Component({
   selector: 'app-landing',
