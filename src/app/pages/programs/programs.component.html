@@ -18,77 +18,40 @@
   <div class="flex flex-auto p-6 sm:p-10">
     <div class="mx-auto flex w-full max-w-xs flex-auto flex-col sm:max-w-5xl">
       <!-- Filters -->
-      <div class="flex w-full max-w-xs flex-col items-center justify-between sm:max-w-none sm:flex-row">
+      <div
+        class="flex w-full max-w-xs flex-col items-center justify-between sm:max-w-none sm:flex-row"
+        *ngIf="type$ | async as typesResult">
         <mat-form-field class="w-full sm:w-60" [subscriptSizing]="'dynamic'">
-          <mat-select [value]="'all'">
+          <mat-select (selectionChange)="onTypeChange($event)" placeholder="Filtrez par type">
             <mat-option [value]="'all'">Tous</mat-option>
-            @if (result.data) {
-              @for (program of result.data.programs; track $index) {
-                @for (type of program.types; track $index) {
-                  <mat-option [value]="type.id">{{ type.name }}</mat-option>
-                }
+            @if (typesResult.data; as types) {
+              @for (type of types; track $index) {
+                <mat-option [value]="type.name">{{ type.name }}</mat-option>
               }
             }
           </mat-select>
         </mat-form-field>
-        <!--   <mat-form-field class="mt-4 w-full sm:ml-4 sm:mt-0 sm:w-72" [subscriptSizing]="'dynamic'">
-          <mat-icon matPrefix class="icon-size-5" [svgIcon]="'heroicons_solid:magnifying-glass'"></mat-icon>
-          <input placeholder="Recherchez (titre ou description)" matInput #query />
-         <input (input)="filterByQuery(query.value)" placeholder="Search by title or description" matInput #query /> 
-        </mat-form-field> -->
+
         <mat-slide-toggle class="mt-8 sm:ml-auto sm:mt-0" [color]="'primary'">
           Cacher les programmes finis
         </mat-slide-toggle>
       </div>
-      <!-- Courses -->
-      @if (result.data) {
+
+      @if (result.isFetching) {
+        <div class="mt-8 grid grid-cols-1 gap-8 sm:mt-10 sm:grid-cols-2 lg:grid-cols-3">
+          @for (program of skeletonArray; track $index) {
+            <app-program-card-skeleton />
+          }
+        </div>
+      } @else if (result.data) {
         @if (result.data.programs; as programs) {
           <div class="mt-8 grid grid-cols-1 gap-8 sm:mt-10 sm:grid-cols-2 lg:grid-cols-3">
             @for (
-              program of programs | paginate: { itemsPerPage: 9, currentPage, totalItems: result.data.count };
+              program of programs
+                | paginate: { itemsPerPage: 9, currentPage: queryParams.page, totalItems: result.data.count };
               track program.id
             ) {
-              <!-- Course -->
-              <div class="bg-card flex flex-col overflow-hidden rounded-2xl shadow">
-                <div class="flex flex-col p-7">
-                  <div class="flex items-center justify-between">
-                    <!-- Course category -->
-                    <div class="flex items-center gap-1">
-                      @for (type of program.types; track $index) {
-                        <div class="rounded-full px-3 py-0.5 text-xs font-semibold bg-green-100 text-green-800">
-                          {{ type.name }}
-                        </div>
-                      }
-                    </div>
-                    <div class="flex items-center">
-                      @if (isEnded(program)) {
-                        <mat-icon
-                          class="text-green-600 icon-size-5"
-                          [svgIcon]="'heroicons_solid:check-badge'"
-                          [matTooltip]="'Ce programme est fini'"></mat-icon>
-                      }
-                    </div>
-                  </div>
-                  <!-- Course title & description -->
-                  <div class="mt-4 text-lg font-medium">
-                    {{ program.name }}
-                  </div>
-                  <div class="text-secondary mt-0.5 line-clamp-2">
-                    {{ program.description }}
-                  </div>
-                  <div class="my-6 h-1 w-12 border-t-2"></div>
-                  <!-- Course time -->
-                  <div class="text-secondary flex items-center text-md leading-5">
-                    <mat-icon class="text-hint icon-size-5" [svgIcon]="'event'"></mat-icon>
-                    <div class="ml-1.5">Débute le, {{ program.start_at | date: 'longDate' }}</div>
-                  </div>
-                  <div class="text-secondary flex items-center text-md leading-5 mt-2">
-                    <mat-icon class="text-hint icon-size-5" [svgIcon]="'event_busy'"></mat-icon>
-                    <div class="ml-1.5">Fini le, {{ program.end_at | date: 'longDate' }}</div>
-                  </div>
-                </div>
-                <!-- Footer -->
-              </div>
+              <app-program-card [program]="program" />
             }
           </div>
 

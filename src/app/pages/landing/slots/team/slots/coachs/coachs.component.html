@@ -1,19 +1,17 @@
-<section class="bg-white text-gray-800 px-8 md:px-32 mb-20" id="coachs" *ngIf="coachs$ | async as coachs">
+<section class="bg-white text-gray-800 px-8 md:px-32 mb-20" id="coachs" *ngIf="coachs$ | async as result">
   <h1 class="font-satoshi font-bold text-2xl md:text-5xl mb-8">
     Nos
     <span class="text-green-600">coachs</span>
   </h1>
 
-  <div class="relative grid gap-6 grid-cols-1 md:grid-cols-4">
-    @if (coachs.isFetching) {
+  @if (result.isFetching) {
+    <div class="relative grid gap-6 grid-cols-1 md:grid-cols-4">
       @for (item of [1, 2, 3, 4]; track $index) {
         <app-team-card-skeleton />
       }
-    }
-  </div>
-
-  @if (coachs.data; as coachs) {
-    <ngu-carousel #carousel [inputs]="carouselTile" [dataSource]="coachs" class="relative">
+    </div>
+  } @else if (result.data) {
+    <ngu-carousel #carousel [inputs]="carouselTile" [dataSource]="result.data" class="relative">
       <ngu-tile *nguCarouselDef="let item; let i = index">
         <app-team-card [user]="item" />
       </ngu-tile>
