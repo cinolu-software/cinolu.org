@@ -15,14 +15,17 @@
   </div>
 
   <!-- Main -->
-  <div class="flex flex-auto p-6 sm:p-10">
+  <div class="flex flex-auto p-6 sm:p-10 min-h-[90vh]">
     <div class="mx-auto flex w-full max-w-xs flex-auto flex-col sm:max-w-5xl">
       <!-- Filters -->
       <div
         class="flex w-full max-w-xs flex-col items-center justify-between sm:max-w-none sm:flex-row"
         *ngIf="type$ | async as typesResult">
         <mat-form-field class="w-full sm:w-60" [subscriptSizing]="'dynamic'">
-          <mat-select (selectionChange)="onTypeChange($event)" placeholder="Filtrez par type">
+          <mat-select
+            [value]="queryParams.type || 'all'"
+            (selectionChange)="onTypeChange($event)"
+            placeholder="Filtrez par type">
             <mat-option [value]="'all'">Tous</mat-option>
             @if (typesResult.data; as types) {
               @for (type of types; track $index) {
@@ -32,7 +35,11 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-slide-toggle class="mt-8 sm:ml-auto sm:mt-0" [color]="'primary'">
+        <mat-slide-toggle
+          class="mt-8 sm:ml-auto sm:mt-0"
+          [checked]="queryParams.hideFinished"
+          (toggleChange)="toogleFinished()"
+          [color]="'primary'">
           Cacher les programmes finis
         </mat-slide-toggle>
       </div>
@@ -43,7 +50,13 @@
             <app-program-card-skeleton />
           }
         </div>
-      } @else if (result.data) {
+      }
+
+      @if (result.isError || result.data?.programs.length <= 0) {
+        <h2 class="mt-8 text-2xl font-semibold">Aucun programme trouvé !</h2>
+      }
+
+      @if (result.data) {
         @if (result.data.programs; as programs) {
           <div class="mt-8 grid grid-cols-1 gap-8 sm:mt-10 sm:grid-cols-2 lg:grid-cols-3">
             @for (
@@ -66,11 +79,6 @@
             </pagination-controls>
           </div>
         }
-      } @else {
-        <div class="h-40 flex flex-auto flex-col items-center justify-center bg-gray-100 mt-8">
-          <mat-icon class="icon-size-24" svgIcon="search"></mat-icon>
-          <div class="text-secondary mt-6 text-2xl font-semibold tracking-tight">Aucun programme !</div>
-        </div>
       }
     </div>
   </div>

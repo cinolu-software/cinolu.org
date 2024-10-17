@@ -17,6 +17,8 @@ import { ProgramCardComponent } from './utils/slots/program-card/program-card.co
 import { ProgramCardSkeletonComponent } from './utils/slots/program-card-skeleton/program-card-skeleton.component';
 import { QueryParams } from './types/query-params.type';
 
+const SKELETON_ITEM_COUNT = 20;
+
 @Component({
   selector: 'app-programs',
   standalone: true,
@@ -38,15 +40,16 @@ import { QueryParams } from './types/query-params.type';
   templateUrl: './programs.component.html'
 })
 export class ProgramsComponent implements OnInit {
-  skeletonArray = Array(20).fill(0);
+  skeletonArray = Array(SKELETON_ITEM_COUNT).fill(0);
   programs$: ObservableQueryResult<{ programs: IProgram[]; count: number }, Error>;
   type$: ObservableQueryResult<IType[], Error>;
   #programService = inject(ProgramsService);
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   queryParams: QueryParams = {
-    page: +this.#route.snapshot.queryParams['page'] || null,
-    type: this.#route.snapshot.queryParams['type'] || null
+    page: Number(this.#route.snapshot.queryParams?.page) || null,
+    type: this.#route.snapshot.queryParams?.type || null,
+    hideFinished: !!this.#route.snapshot.queryParams?.hideFinished
   };
 
   ngOnInit(): void {
@@ -60,18 +63,31 @@ export class ProgramsComponent implements OnInit {
     this.updateRouteAndPrograms();
   }
 
+  toogleFinished(): void {
+    this.queryParams.page = null;
+    this.queryParams.hideFinished = !this.queryParams.hideFinished;
+    this.updateRouteAndPrograms();
+  }
+
   onPageChange(currentPage: number): void {
-    this.queryParams.page = currentPage;
+    this.queryParams.page = currentPage === 1 ? null : currentPage;
     this.updateRouteAndPrograms();
     window.scrollTo({ top: 0 });
   }
 
-  private loadPrograms(): void {
+  loadPrograms(): void {
     this.programs$ = this.#programService.getPrograms(this.queryParams);
   }
 
-  private updateRouteAndPrograms(): void {
-    this.#router.navigate(['/programs'], { queryParams: this.queryParams });
+  updateRoute(): void {
+    const { page, type, hideFinished } = this.queryParams;
+    const queryParams = { page, type };
+    if (hideFinished) queryParams['hideFinished'] = hideFinished;
+    this.#router.navigate(['/programs'], { queryParams });
+  }
+
+  updateRouteAndPrograms(): void {
+    this.updateRoute();
     this.loadPrograms();
   }
 }

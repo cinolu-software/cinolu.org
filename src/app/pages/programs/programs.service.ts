@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { injectQuery, ObservableQueryResult } from '@ngneat/query';
 import { IProgram, IType } from '../../common/types/models.type';
@@ -20,16 +20,21 @@ export class ProgramsService {
   }
 
   getPrograms(queryParams: QueryParams): ObservableQueryResult<{ programs: IProgram[]; count: number }, Error> {
-    const params = {};
-    if (queryParams.page) params['page'] = queryParams.page;
-    if (queryParams.type) params['type'] = queryParams.type;
-    console.log(params);
+    const params = this.buildQueryParams(queryParams);
     return this.#query({
-      queryKey: ['programs'] as const,
+      queryKey: ['programs', queryParams] as const,
       queryFn: () =>
         this.#http
           .get<{ data: { programs: IProgram[]; count: number } }>('programs', { params })
           .pipe(map((res) => res.data))
     }).result$;
+  }
+
+  private buildQueryParams(queryParams: QueryParams): HttpParams {
+    let params = new HttpParams();
+    if (queryParams.page) params = params.set('page', queryParams.page.toString());
+    if (queryParams.type) params = params.set('type', queryParams.type);
+    if (queryParams.hideFinished) params = params.set('hideFinished', queryParams.hideFinished);
+    return params;
   }
 }
