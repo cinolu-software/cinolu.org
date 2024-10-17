@@ -4,12 +4,6 @@
     <span class="text-green-600">équipe</span>
   </h1>
 
-  <div class="relative grid gap-6 grid-cols-1 md:grid-cols-4">
-    @for (item of [1, 2, 3, 4]; track $index) {
-      <app-team-card-skeleton />
-    }
-  </div>
-
   @if (staff.isFetching) {
     <div class="relative grid gap-6 grid-cols-1 md:grid-cols-4">
       @for (item of [1, 2, 3, 4]; track $index) {
