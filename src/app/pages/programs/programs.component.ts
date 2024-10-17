@@ -17,7 +17,7 @@ import { ProgramCardComponent } from './utils/slots/program-card/program-card.co
 import { ProgramCardSkeletonComponent } from './utils/slots/program-card-skeleton/program-card-skeleton.component';
 import { QueryParams } from './types/query-params.type';
 
-const SKELETON_ITEM_COUNT = 20;
+const SKELETON_ITEM_COUNT = 9;
 
 @Component({
   selector: 'app-programs',
