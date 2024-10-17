@@ -10,8 +10,7 @@
         <app-team-card-skeleton />
       }
     </div>
-  }
-  @if (staff.data) {
+  } @else if (staff.data) {
     <ngu-carousel #carousel [inputs]="carouselTile" [dataSource]="staff.data" class="relative">
       <ngu-tile *nguCarouselDef="let item; let i = index">
         <app-team-card [user]="item" />
