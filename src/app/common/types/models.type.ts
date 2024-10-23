@@ -34,8 +34,8 @@ export interface IProgram {
   id: string;
   name: string;
   description: string;
-  start_at: Date;
-  end_at: Date;
+  started_at: Date;
+  ended_at: Date;
   created_at: Date;
   updated_at: Date;
   user: IUser;

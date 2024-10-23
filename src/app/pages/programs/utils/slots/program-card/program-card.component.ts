@@ -12,4 +12,8 @@ import { IProgram } from 'app/common/types/models.type';
 })
 export class ProgramCardComponent {
   program = input.required<IProgram>();
+
+  isFinished(program: IProgram): boolean {
+    return new Date(program.ended_at) <= new Date();
+  }
 }

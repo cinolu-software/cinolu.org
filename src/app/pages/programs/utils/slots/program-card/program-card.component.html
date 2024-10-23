@@ -9,8 +9,13 @@
           </div>
         }
       </div>
+
       <div class="flex items-center">
-        <mat-icon class="text-green-600 icon-size-5" [svgIcon]="'heroicons_solid:check-badge'"></mat-icon>
+        @if (isFinished(program())) {
+          <mat-icon class="text-green-600 icon-size-5" [svgIcon]="'heroicons_solid:check-badge'"></mat-icon>
+        } @else {
+          <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:clock'"></mat-icon>
+        }
       </div>
     </div>
     <!-- Course title & description -->
@@ -24,11 +29,11 @@
     <!-- Course time -->
     <div class="text-secondary flex items-center text-md leading-5">
       <mat-icon class="text-hint icon-size-5" [svgIcon]="'event'"></mat-icon>
-      <div class="ml-1.5">Début, le {{ program().start_at | date: 'longDate' }}</div>
+      <div class="ml-1.5">Début, le {{ program().started_at | date: 'longDate' }}</div>
     </div>
     <div class="text-secondary flex items-center text-md leading-5 mt-2">
       <mat-icon class="text-hint icon-size-5" [svgIcon]="'event_busy'"></mat-icon>
-      <div class="ml-1.5">Fin, le {{ program().end_at | date: 'longDate' }}</div>
+      <div class="ml-1.5">Fin, le {{ program().ended_at | date: 'longDate' }}</div>
     </div>
   </div>
 </div>
