@@ -13,7 +13,7 @@
         <div class="h-[1px] w-6 bg-current transition-transform duration-300"></div>
       </button>
       <!-- Desktop navbar -->
-      <div class="hidden lg:flex gap-5">
+      <div class="hidden lg:flex items-center gap-5">
         @if (user$ | async; as user) {
           @for (link of commonLinks; track $index) {
             <a
@@ -24,11 +24,14 @@
               {{ link.name }}
             </a>
           }
-          <a
-            routerLink="/auth/profile"
-            class="hover:text-primary-400 transition-colors duration-300"
-            routerLinkActive="text-primary-500"
-            [routerLinkActiveOptions]="{ exact: true }">
+          <a [href]="accountUrl" class="flex items-center gap-2">
+            <div class="relative w-8 h-8">
+              <img
+                [ngSrc]="displayProfileImage(user)"
+                class="rounded-full object-cover ring-1 ring-primary-400 ring-offset-1 ring-offset-primary-400"
+                alt="profile picture"
+                fill />
+            </div>
             {{ trimName(user.name) }}
           </a>
         } @else {

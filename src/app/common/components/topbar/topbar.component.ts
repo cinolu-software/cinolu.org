@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { IUser } from '../../types/models.type';
 import { selectUser } from '../../store/app.reducers';
 import { ILink } from './types/link.type';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-topbar',
@@ -17,6 +18,7 @@ import { ILink } from './types/link.type';
 export class TopbarComponent implements OnInit {
   user$: Observable<IUser | null>;
   isOpen = signal(false);
+  accountUrl = environment.accountUrl;
   #store = inject(Store);
 
   ngOnInit(): void {
@@ -49,6 +51,12 @@ export class TopbarComponent implements OnInit {
 
   toogleMenu(): void {
     this.isOpen.update((value) => !value);
+  }
+
+  displayProfileImage(user: IUser): string {
+    return user.profile
+      ? `${environment.accountUrl}uploads/profiles/${user.profile}`
+      : user.google_image || '/images/avatar-default.webp';
   }
 
   @HostListener('document:click', ['$event'])
