@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -11,9 +11,10 @@ import { RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { environment } from 'environments/environment';
-import { team } from 'app/pages/landing/utils/data/team';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../auth.service';
+import { AuthCardComponent } from '../slots/auth-card/auth-card.component';
+import { environment } from '../../../../environments/environment';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
   standalone: true,
@@ -21,6 +22,7 @@ import { AuthService } from '../../auth.service';
   templateUrl: './sign-up.component.html',
   animations: fuseAnimations,
   imports: [
+    MatProgressBar,
     RouterLink,
     FuseAlertComponent,
     FormsModule,
@@ -33,25 +35,40 @@ import { AuthService } from '../../auth.service';
     MatProgressSpinnerModule,
     MatStepperModule,
     NgOptimizedImage,
-    CommonModule
+    CommonModule,
+    AuthCardComponent
   ]
 })
-export class AuthSignUpComponent implements OnInit {
+export class AuthSignUpComponent {
   #formBuilder = inject(FormBuilder);
   #authService = inject(AuthService);
-  team = team;
+  currentStep = 1;
   signUpForm: FormGroup;
   signUp = this.#authService.signUp();
 
-  ngOnInit(): void {
+  constructor() {
     this.signUpForm = this.#formBuilder.group({
-      name: ['', Validators.required],
       email: ['', Validators.required],
-      address: ['', Validators.required],
+      name: ['', Validators.required],
       phone_number: ['', Validators.required],
+      address: ['', Validators.required],
       password: ['', Validators.required],
       password_confirm: ['', [Validators.required]]
     });
+  }
+
+  goToStep(step: number): void {
+    this.currentStep = step;
+  }
+
+  goToNextStep(): void {
+    if (this.currentStep === 3) return;
+    this.goToStep(this.currentStep + 1);
+  }
+
+  goToPreviousStep(): void {
+    if (this.currentStep === 1) return;
+    this.goToStep(this.currentStep - 1);
   }
 
   onSignUp(): void {

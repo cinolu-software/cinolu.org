@@ -26,7 +26,6 @@
     "@angular/router": "18.2.2",
     "@angular/ssr": "^18.2.2",
     "@ngneat/query": "^3.0.0",
-    "@ngrx/component-store": "^18.0.2",
     "@ngrx/effects": "^18.0.2",
     "@ngrx/operators": "^18.0.2",
     "@ngrx/store": "^18.0.2",

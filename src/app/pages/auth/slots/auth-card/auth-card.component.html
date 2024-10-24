@@ -1,0 +1,62 @@
+<app-topbar />
+<div class="grid grid-cols-1 lg:grid-cols-2 bg-white">
+  <div class="flex min-h-screen flex-col items-start justify-center px-8 md:px-8 lg:px-32">
+    <div class="mx-auto w-full max-w-80 sm:mx-0 sm:w-80">
+      <ng-content />
+    </div>
+  </div>
+  <div class="hidden fixed md:block right-0 w-1/2">
+    <div class="relative min-h-screen items-center justify-center overflow-hidden bg-green-800 p-16 md:flex lg:px-28">
+      <svg
+        class="absolute inset-0 pointer-events-none"
+        viewBox="0 0 960 540"
+        width="100%"
+        height="100%"
+        preserveAspectRatio="xMidYMax slice"
+        xmlns="http://www.w3.org/2000/svg">
+        <g class="text-green-700 opacity-25" fill="none" stroke="currentColor" stroke-width="100">
+          <circle r="234" cx="196" cy="23"></circle>
+          <circle r="234" cx="790" cy="491"></circle>
+        </g>
+      </svg>
+
+      <svg class="absolute -top-16 -right-16 text-green-700" viewBox="0 0 220 192" width="220" height="192" fill="none">
+        <defs>
+          <pattern
+            id="837c3e70-6c3a-44e6-8854-cc48c737b659"
+            x="0"
+            y="0"
+            width="20"
+            height="20"
+            patternUnits="userSpaceOnUse">
+            <rect x="0" y="0" width="4" height="4" fill="currentColor"></rect>
+          </pattern>
+        </defs>
+        <rect width="220" height="192" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)"></rect>
+      </svg>
+      <!-- Content -->
+      <div class="relative z-10 w-full max-w-2xl">
+        <div class="text-4xl font-bold leading-none text-gray-100">
+          <h4>{{ title() }}</h4>
+        </div>
+        <div class="mt-6 text-lg leading-6 tracking-tight text-gray-400">
+          <p>{{ description() }}</p>
+        </div>
+        <div class="mt-8 flex gap-3 items-center">
+          <div class="flex items-center -space-x-1.5">
+            @for (member of team; track $index) {
+              <div class="relative h-10 w-10">
+                <img
+                  class="h-10 w-10 flex-0 rounded-full object-cover ring-4 ring-primary-900 ring-offset-1 ring-offset-primary-900"
+                  [ngSrc]="member.image"
+                  [alt]="member.name"
+                  fill />
+              </div>
+            }
+          </div>
+          <p class="font-medium tracking-tight text-green-400">Plus de 1000 utilisateurs</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

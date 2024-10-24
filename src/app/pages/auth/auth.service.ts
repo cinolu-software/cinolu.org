@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { IUser } from '../../common/types/models.type';
-import { ISignInPayload } from './types/sign-in.type';
+import { ISignIn } from './types/sign-in.type';
 import { ISignUp } from './types/sign-up.type';
-import { IResetPassword } from './modules/reset-password/types/reset-password.type';
-import { IForgotPassword } from './modules/forgot-password/types/forgot-password.type';
+import { IResetPassword } from './reset-password/types/reset-password.type';
+import { IForgotPassword } from './forgot-password/types/forgot-password.type';
 import { injectMutation, MutationResult } from '@ngneat/query';
 import { Router } from '@angular/router';
 import { authActions } from '../../common/store/app.actions';
@@ -26,7 +26,7 @@ export class AuthService {
 
   signIn(): MutationResult<IUser, Error, unknown> {
     return this.#mutation({
-      mutationFn: (payload: ISignInPayload) =>
+      mutationFn: (payload: ISignIn) =>
         this.#httpClient.post<{ data: IUser }>('auth/sign-in', payload).pipe(map((res) => res.data)),
       onSuccess: (user) => {
         authActions.authenticateUser({ user });

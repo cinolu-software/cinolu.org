@@ -10,6 +10,7 @@ import { OurVisionComponent } from './slots/our-vision/our-vision.component';
 import { OfferingsComponent } from './slots/offerings/offerings.component';
 import { Store } from '@ngrx/store';
 import { authActions } from 'app/common/store/app.actions';
+import { TopbarComponent } from '../../common/components/topbar/topbar.component';
 
 @Component({
   selector: 'app-landing',
@@ -23,7 +24,8 @@ import { authActions } from 'app/common/store/app.actions';
     FooterComponent,
     ProblemStatementComponent,
     OurAimComponent,
-    OurVisionComponent
+    OurVisionComponent,
+    TopbarComponent
   ],
   templateUrl: './landing.component.html'
 })

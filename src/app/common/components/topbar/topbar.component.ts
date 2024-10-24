@@ -1,13 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ILink } from './types/link.type';
-import { FormsModule } from '@angular/forms';
-import { IUser } from '../../types/models.type';
-import { environment } from 'environments/environment';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { IUser } from '../../types/models.type';
 import { selectUser } from '../../store/app.reducers';
+import { ILink } from './types/link.type';
 
 @Component({
   selector: 'app-topbar',
@@ -15,12 +14,23 @@ import { selectUser } from '../../store/app.reducers';
   imports: [CommonModule, RouterModule, NgOptimizedImage, FormsModule],
   templateUrl: './topbar.component.html'
 })
-export class TopbarComponent {
-  #store = inject(Store);
+export class TopbarComponent implements OnInit {
   user$: Observable<IUser | null>;
-  accountUrl: string;
+  isOpen = signal(false);
+  #store = inject(Store);
 
-  links: ILink[] = [
+  ngOnInit(): void {
+    this.user$ = this.#store.pipe(select(selectUser));
+  }
+
+  commonLinks: ILink[] = [
+    {
+      name: 'Programmes',
+      path: '/programs'
+    }
+  ];
+
+  authLinks: ILink[] = [
     {
       name: 'Se connecter',
       path: '/sign-in'
@@ -31,14 +41,20 @@ export class TopbarComponent {
     }
   ];
 
-  constructor() {
-    this.accountUrl = environment.accountUrl;
-    this.user$ = this.#store.pipe(select(selectUser));
+  unAuthenticatedUserLinks: ILink[] = [...this.commonLinks, ...this.authLinks];
+
+  trimName(name: string): string {
+    return name.length > 15 ? name.substring(0, 15) + '...' : name;
   }
 
-  displayProfileImage(user: IUser): string {
-    return user.profile
-      ? `${environment.accountUrl}uploads/profiles/${user.profile}`
-      : user.google_image || '/images/avatar-default.webp';
+  toogleMenu(): void {
+    this.isOpen.update((value) => !value);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const isNavbar = target.closest('.navbar');
+    if (!isNavbar) this.isOpen.set(false);
   }
 }
