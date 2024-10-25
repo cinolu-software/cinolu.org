@@ -2,23 +2,27 @@
   title="Confirmation recquise"
   description="Rejoignez notre communauté de plus de 1000 utilisateurs et profitez de nos services au quotidien.">
   <ng-container *ngIf="resendEmailVerification.result$ | async as result">
-    <div class="text-3xl font-extrabold leading-tight tracking-tight">Confirmation recquise</div>
     @if (result.isError) {
-      <app-fuse-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
+      <app-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
         {{ result.error['error'].message }}
-      </app-fuse-alert>
+      </app-alert>
     }
     @if (result.isSuccess) {
-      <app-fuse-alert class="mt-6 w-full" appearance="soft" type="success" [showIcon]="true" [@shake]="true">
+      <app-alert class="mt-6 w-full" appearance="soft" type="success" [showIcon]="true">
         Un email de vérification a été envoyé à votre adresse email.
-      </app-fuse-alert>
+      </app-alert>
     }
-    <div class="mt-4">
-      Un courrier de confirmation contenant des instructions a été envoyé à votre adresse électronique. Suivez ces
-      instructions pour confirmer pour confirmer votre adresse électronique et activer votre compte.
-      <button (click)="onResendEmailVerification()">
-        <span class="text-primary-500 underline">Renvoyer le mail</span>
-      </button>
+    <div [ngClass]="(result.isError || result.isSuccess) && 'transition-transform translate-y-4 duration-150'">
+      <h2 class="text-3xl font-extrabold leading-tight tracking-tight">Confirmation recquise</h2>
+      <div class="mt-4">
+        <p>
+          Un courrier de confirmation contenant des instructions a été envoyé à votre adresse électronique. Suivez ces
+          instructions pour confirmer pour confirmer votre adresse électronique et activer votre compte.
+        </p>
+        <button (click)="onResendEmailVerification()">
+          <span class="text-primary-500 underline">Renvoyer le mail</span>
+        </button>
+      </div>
     </div>
   </ng-container>
 </app-auth-card>

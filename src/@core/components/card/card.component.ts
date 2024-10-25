@@ -1,24 +1,23 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Component, HostBinding, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { Animations } from '@core/animations';
-import { FuseCardFace } from '@core/components/card/card.types';
+import { CardFace } from '@core/components/card/card.types';
 
 @Component({
-  selector: 'app-fuse-card',
+  selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: Animations,
-  exportAs: 'fuseCard',
   standalone: true,
   imports: []
 })
-export class FuseCardComponent implements OnChanges {
+export class CardComponent implements OnChanges {
   static ngAcceptInputType_expanded: BooleanInput;
   static ngAcceptInputType_flippable: BooleanInput;
 
   @Input() expanded = false;
-  @Input() face: FuseCardFace = 'front';
+  @Input() face: CardFace = 'front';
   @Input() flippable = false;
 
   // -----------------------------------------------------------------------------------------------------
@@ -30,10 +29,10 @@ export class FuseCardComponent implements OnChanges {
    */
   @HostBinding('class') get classList() {
     return {
-      'fuse-card-expanded': this.expanded,
-      'fuse-card-face-back': this.flippable && this.face === 'back',
-      'fuse-card-face-front': this.flippable && this.face === 'front',
-      'fuse-card-flippable': this.flippable
+      'card-expanded': this.expanded,
+      'card-face-back': this.flippable && this.face === 'back',
+      'card-face-front': this.flippable && this.face === 'front',
+      'card-flippable': this.flippable
     };
   }
 

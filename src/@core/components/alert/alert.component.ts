@@ -18,38 +18,35 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Animations } from '@core/animations';
 import { AlertService } from '@core/components/alert/alert.service';
-import { FuseAlertAppearance, FuseAlertType } from '@core/components/alert/alert.types';
+import { AlertAppearance, AlertType } from '@core/components/alert/alert.types';
 import { UtilsService } from '@core/services/utils/utils.service';
 import { Subject, filter, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-fuse-alert',
+  standalone: true,
+  selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: Animations,
-  exportAs: 'fuseAlert',
-  standalone: true,
   imports: [MatIconModule, MatButtonModule]
 })
 export class AlertComponent implements OnChanges, OnInit, OnDestroy {
   static ngAcceptInputType_dismissible: BooleanInput;
   static ngAcceptInputType_dismissed: BooleanInput;
   static ngAcceptInputType_showIcon: BooleanInput;
+  #unsubscribeAll = new Subject();
+  #changeDetectorRef = inject(ChangeDetectorRef);
+  #alertService = inject(AlertService);
+  #utilsService = inject(UtilsService);
 
-  private _changeDetectorRef = inject(ChangeDetectorRef);
-  private _fuseAlertService = inject(AlertService);
-  private _fuseUtilsService = inject(UtilsService);
-
-  @Input() appearance: FuseAlertAppearance = 'soft';
+  @Input() appearance: AlertAppearance = 'soft';
   @Input() dismissed = false;
   @Input() dismissible = false;
-  @Input() name: string = this._fuseUtilsService.randomId();
+  @Input() name: string = this.#utilsService.randomId();
   @Input() showIcon = true;
-  @Input() type: FuseAlertType = 'primary';
+  @Input() type: AlertType = 'primary';
   @Output() readonly dismissedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  private _unsubscribeAll = new Subject();
 
   // -----------------------------------------------------------------------------------------------------
   // @ Accessors
@@ -60,21 +57,21 @@ export class AlertComponent implements OnChanges, OnInit, OnDestroy {
    */
   @HostBinding('class') get classList() {
     return {
-      'fuse-alert-appearance-border': this.appearance === 'border',
-      'fuse-alert-appearance-fill': this.appearance === 'fill',
-      'fuse-alert-appearance-outline': this.appearance === 'outline',
-      'fuse-alert-appearance-soft': this.appearance === 'soft',
-      'fuse-alert-dismissed': this.dismissed,
-      'fuse-alert-dismissible': this.dismissible,
-      'fuse-alert-show-icon': this.showIcon,
-      'fuse-alert-type-primary': this.type === 'primary',
-      'fuse-alert-type-accent': this.type === 'accent',
-      'fuse-alert-type-warn': this.type === 'warn',
-      'fuse-alert-type-basic': this.type === 'basic',
-      'fuse-alert-type-info': this.type === 'info',
-      'fuse-alert-type-success': this.type === 'success',
-      'fuse-alert-type-warning': this.type === 'warning',
-      'fuse-alert-type-error': this.type === 'error'
+      'alert-appearance-border': this.appearance === 'border',
+      'alert-appearance-fill': this.appearance === 'fill',
+      'alert-appearance-outline': this.appearance === 'outline',
+      'alert-appearance-soft': this.appearance === 'soft',
+      'alert-dismissed': this.dismissed,
+      'alert-dismissible': this.dismissible,
+      'alert-show-icon': this.showIcon,
+      'alert-type-primary': this.type === 'primary',
+      'alert-type-accent': this.type === 'accent',
+      'alert-type-warn': this.type === 'warn',
+      'alert-type-basic': this.type === 'basic',
+      'alert-type-info': this.type === 'info',
+      'alert-type-success': this.type === 'success',
+      'alert-type-warning': this.type === 'warning',
+      'alert-type-error': this.type === 'error'
     };
   }
 
@@ -115,10 +112,10 @@ export class AlertComponent implements OnChanges, OnInit, OnDestroy {
    */
   ngOnInit(): void {
     // Subscribe to the dismiss calls
-    this._fuseAlertService.onDismiss
+    this.#alertService.onDismiss
       .pipe(
         filter((name) => this.name === name),
-        takeUntil(this._unsubscribeAll)
+        takeUntil(this.#unsubscribeAll)
       )
       .subscribe(() => {
         // Dismiss the alert
@@ -126,10 +123,10 @@ export class AlertComponent implements OnChanges, OnInit, OnDestroy {
       });
 
     // Subscribe to the show calls
-    this._fuseAlertService.onShow
+    this.#alertService.onShow
       .pipe(
         filter((name) => this.name === name),
-        takeUntil(this._unsubscribeAll)
+        takeUntil(this.#unsubscribeAll)
       )
       .subscribe(() => {
         // Show the alert
@@ -142,8 +139,8 @@ export class AlertComponent implements OnChanges, OnInit, OnDestroy {
    */
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
-    this._unsubscribeAll.next(null);
-    this._unsubscribeAll.complete();
+    this.#unsubscribeAll.next(null);
+    this.#unsubscribeAll.complete();
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -199,6 +196,6 @@ export class AlertComponent implements OnChanges, OnInit, OnDestroy {
     this.dismissedChanged.next(this.dismissed);
 
     // Notify the change detector
-    this._changeDetectorRef.markForCheck();
+    this.#changeDetectorRef.markForCheck();
   }
 }

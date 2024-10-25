@@ -1,1 +1,1 @@
-export * from '@fuse/components/card/card.component';
+export * from '@core/components/card/card.component';

@@ -6,25 +6,22 @@ import { Observable, ReplaySubject, map, switchMap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MediaWatcherService {
-  private _breakpointObserver = inject(BreakpointObserver);
-  private _fuseConfigService = inject(ConfigService);
+  #breakpointObserver = inject(BreakpointObserver);
+  #configService = inject(ConfigService);
 
   private _onMediaChange: ReplaySubject<{
     matchingAliases: string[];
     matchingQueries: unknown;
   }> = new ReplaySubject<{ matchingAliases: string[]; matchingQueries: unknown }>(1);
 
-  /**
-   * Constructor
-   */
   constructor() {
-    this._fuseConfigService.config$
+    this.#configService.config$
       .pipe(
         map((config) =>
           fromPairs(Object.entries(config['screens']).map(([alias, screen]) => [alias, `(min-width: ${screen})`]))
         ),
         switchMap((screens) =>
-          this._breakpointObserver.observe(Object.values(screens)).pipe(
+          this.#breakpointObserver.observe(Object.values(screens)).pipe(
             map((state) => {
               // Prepare the observable values and set their defaults
               const matchingAliases: string[] = [];
@@ -55,30 +52,11 @@ export class MediaWatcherService {
       .subscribe();
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Accessors
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * Getter for _onMediaChange
-   */
-  get onMediaChange$(): Observable<{
-    matchingAliases: string[];
-    matchingQueries: unknown;
-  }> {
+  get onMediaChange$(): Observable<{ matchingAliases: string[]; matchingQueries: unknown }> {
     return this._onMediaChange.asObservable();
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Public methods
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * On media query change
-   *
-   * @param query
-   */
   onMediaQueryChange$(query: string | string[]): Observable<BreakpointState> {
-    return this._breakpointObserver.observe(query);
+    return this.#breakpointObserver.observe(query);
   }
 }

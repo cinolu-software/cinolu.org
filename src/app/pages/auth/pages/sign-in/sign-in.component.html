@@ -1,99 +1,98 @@
 <app-auth-card
   title="Se connecter"
   description="Connectez-vous et accéder à votre compte et continuer à explorer notre plateforme.">
-  <ng-container *ngIf="signIn.result$ | async as signInResult">
-    <h2 class="text-3xl font-extrabold leading-tight tracking-tight font-satoshi">Se connecter</h2>
-    <div class="flex items-center gap-1.5">
-      <p>Vous n'avez pas de compte?</p>
-      <a class="text-primary-500 hover:underline" [routerLink]="['/sign-up']">S'inscrire</a>
-    </div>
-
-    @if (signInResult.isError) {
-      <app-fuse-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
-        {{ signInResult.error['error'].message }}
-      </app-fuse-alert>
+  <ng-container *ngIf="signIn.result$ | async as result">
+    @if (result.isError) {
+      <app-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
+        {{ result.error['error'].message }}
+      </app-alert>
     }
 
-    <ng-container *ngIf="verifyEmail.result$ | async as verifyEmailResult">
-      @if (verifyEmailResult.isError) {
-        <app-fuse-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
-          {{ verifyEmailResult.error['error'].message }}
-        </app-fuse-alert>
-      }
-      @if (verifyEmailResult.isSuccess) {
-        <app-fuse-alert class="mt-6 w-full" type="success" [showIcon]="true" [@shake]="true">
-          Votre email a été vérifié avec succès.
-        </app-fuse-alert>
-      }
-    </ng-container>
+    <div [ngClass]="result.isError && 'transition-transform translate-y-4 duration-150'">
+      <h2 class="text-3xl font-extrabold leading-tight tracking-tight font-satoshi">Se connecter</h2>
+      <div class="flex items-center gap-1.5">
+        <p>Vous n'avez pas de compte?</p>
+        <a class="text-primary-500 hover:underline" [routerLink]="['/sign-up']">S'inscrire</a>
+      </div>
 
-    <form
-      class="{{ signInResult.error ? 'transition-transform translate-y-4 duration-150' : 'mt-8 ' }}"
-      (ngSubmit)="onSignIn()"
-      [formGroup]="signInForm">
-      <mat-form-field class="w-full">
-        <mat-label>Adresse e-mail</mat-label>
-        <input id="email" type="email" matInput autocomplete="email" [formControlName]="'email'" />
-      </mat-form-field>
+      <ng-container *ngIf="verifyEmail.result$ | async as verifyEmailResult">
+        @if (verifyEmailResult.isError) {
+          <app-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
+            {{ verifyEmailResult.error['error'].message }}
+          </app-alert>
+        }
+        @if (verifyEmailResult.isSuccess) {
+          <app-alert class="mt-6 w-full" type="success" [showIcon]="true" [@shake]="true">
+            Votre email a été vérifié avec succès.
+          </app-alert>
+        }
+      </ng-container>
 
-      <mat-form-field class="w-full">
-        <mat-label>Mot de passe</mat-label>
-        <input
-          id="password"
-          matInput
-          type="password"
-          autocomplete="off"
-          [formControlName]="'password'"
-          #passwordField />
+      <form class="mt-6" (ngSubmit)="onSignIn()" [formGroup]="signInForm">
+        <mat-form-field class="w-full">
+          <mat-label>Adresse e-mail</mat-label>
+          <input id="email" type="email" matInput autocomplete="email" [formControlName]="'email'" />
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Mot de passe</mat-label>
+          <input
+            id="password"
+            matInput
+            type="password"
+            autocomplete="off"
+            [formControlName]="'password'"
+            #passwordField />
+          <button
+            mat-icon-button
+            type="button"
+            (click)="
+              passwordField.type === 'password' ? (passwordField.type = 'text') : (passwordField.type = 'password')
+            "
+            matSuffix>
+            @if (passwordField.type === 'password') {
+              <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+            }
+            @if (passwordField.type === 'text') {
+              <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
+            }
+          </button>
+        </mat-form-field>
+        <div class="inline-flex w-full items-center justify-between">
+          Mot de passe oublié?
+          <a class="text-md font-medium text-primary-500 hover:underline" [routerLink]="['/forgot-password']">
+            Réinitialiser
+          </a>
+        </div>
         <button
-          mat-icon-button
-          type="button"
-          (click)="
-            passwordField.type === 'password' ? (passwordField.type = 'text') : (passwordField.type = 'password')
-          "
-          matSuffix>
-          @if (passwordField.type === 'password') {
-            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+          class="mt-6 w-full text-white"
+          mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="result.isPending || signInForm.invalid || signInForm.disabled">
+          @if (!result.isPending && !signInForm.invalid) {
+            <span>Se connecter</span>
           }
-          @if (passwordField.type === 'text') {
-            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
+          @if (result.isPending) {
+            <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
           }
         </button>
-      </mat-form-field>
-      <div class="inline-flex w-full items-center justify-between">
-        Mot de passe oublié?
-        <a class="text-md font-medium text-primary-500 hover:underline" [routerLink]="['/forgot-password']">
-          Réinitialiser
-        </a>
-      </div>
-      <button
-        class="fuse-mat-button-large mt-6 w-full text-white"
-        mat-flat-button
-        color="primary"
-        type="submit"
-        [disabled]="signInResult.isPending || signInForm.invalid || signInForm.disabled">
-        @if (!signInResult.isPending && !signInForm.invalid) {
-          <span>Se connecter</span>
-        }
-        @if (signInResult.isPending) {
-          <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
-        }
-      </button>
-      <div class="mt-8 flex items-center">
-        <div class="mt-px flex-auto border-t"></div>
-        <div class="text-secondary mx-2">Ou continuer avec</div>
-        <div class="mt-px flex-auto border-t"></div>
-      </div>
-      <div class="mt-8 flex items-center space-x-4">
-        <button class="flex-auto" type="button" mat-stroked-button (click)="signinWithGoogle()">
-          <div class="flex items-center gap-1.5">
-            <div class="relative h-5 w-5">
-              <img ngSrc="/images/logo/google.svg" alt="Google" fill />
+        <div class="mt-4 flex items-center">
+          <div class="mt-px flex-auto border-t"></div>
+          <div class="text-secondary mx-2">Ou continuer avec</div>
+          <div class="mt-px flex-auto border-t"></div>
+        </div>
+        <div class="mt-4 flex items-center space-x-4">
+          <button class="flex-auto" type="button" mat-stroked-button (click)="signinWithGoogle()">
+            <div class="flex items-center gap-1.5">
+              <div class="relative h-5 w-5">
+                <img ngSrc="/images/logo/google.svg" alt="Google" fill />
+              </div>
+              Google
             </div>
-            Google
-          </div>
-        </button>
-      </div>
-    </form>
+          </button>
+        </div>
+      </form>
+    </div>
   </ng-container>
 </app-auth-card>

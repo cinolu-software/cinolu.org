@@ -8,7 +8,6 @@ import { APP_CONFIG } from '@core/services/config/config.constants';
 import { ConfirmationService } from '@core/services/confirmation';
 import { LoadingService, LoadingInterceptor } from '@core/services/loading';
 import { MediaWatcherService } from '@core/services/media-watcher';
-import { PlatformService } from '@core/services/platform';
 import { SplashScreenService } from '@core/services/splash-screen';
 import { UtilsService } from '@core/services/utils';
 
@@ -55,11 +54,6 @@ export const provideApp = (config: ProviderConfig): (Provider | EnvironmentProvi
     {
       provide: ENVIRONMENT_INITIALIZER,
       useValue: () => inject(MediaWatcherService),
-      multi: true
-    },
-    {
-      provide: ENVIRONMENT_INITIALIZER,
-      useValue: () => inject(PlatformService),
       multi: true
     },
     {

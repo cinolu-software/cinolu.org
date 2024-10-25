@@ -1,8 +1,8 @@
-app-fuse-alert {
+app-alert {
   display: block;
 
   /* Common */
-  .fuse-alert-container {
+  .alert-container {
     position: relative;
     display: flex;
     padding: 16px;
@@ -15,12 +15,12 @@ app-fuse-alert {
     }
 
     /* Icon */
-    .fuse-alert-icon {
+    .alert-icon {
       display: flex;
       align-items: flex-start;
 
-      .fuse-alert-custom-icon,
-      .fuse-alert-default-icon {
+      .alert-custom-icon,
+      .alert-default-icon {
         display: none;
         align-items: center;
         justify-content: center;
@@ -32,19 +32,19 @@ app-fuse-alert {
         }
       }
 
-      .fuse-alert-default-icon {
+      .alert-default-icon {
         .mat-icon {
           @apply icon-size-5;
         }
       }
 
-      .fuse-alert-custom-icon {
+      .alert-custom-icon {
         display: none;
 
         &:not(:empty) {
           display: flex;
 
-          + .fuse-alert-default-icon {
+          + .alert-default-icon {
             display: none;
           }
         }
@@ -52,14 +52,14 @@ app-fuse-alert {
     }
 
     /* Content */
-    .fuse-alert-content {
+    .alert-content {
       display: flex;
       flex-direction: column;
       justify-content: center;
       line-height: 1;
 
       /* Title */
-      .fuse-alert-title {
+      .alert-title {
         display: none;
         font-weight: 600;
         line-height: 20px;
@@ -68,7 +68,7 @@ app-fuse-alert {
           display: block;
 
           /* Alert that comes after the title */
-          + .fuse-alert-message {
+          + .alert-message {
             &:not(:empty) {
               margin-top: 4px;
             }
@@ -77,7 +77,7 @@ app-fuse-alert {
       }
 
       /* Alert */
-      .fuse-alert-message {
+      .alert-message {
         display: none;
         line-height: 20px;
 
@@ -88,7 +88,7 @@ app-fuse-alert {
     }
 
     /* Dismiss button */
-    .fuse-alert-dismiss-button {
+    .alert-dismiss-button {
       position: absolute;
       top: 10px;
       right: 10px;
@@ -105,31 +105,31 @@ app-fuse-alert {
   }
 
   /* Dismissible */
-  &.fuse-alert-dismissible {
-    .fuse-alert-container {
-      .fuse-alert-content {
+  &.alert-dismissible {
+    .alert-container {
+      .alert-content {
         margin-right: 32px;
       }
     }
   }
 
-  &:not(.fuse-alert-dismissible) {
-    .fuse-alert-container {
-      .fuse-alert-dismiss-button {
+  &:not(.alert-dismissible) {
+    .alert-container {
+      .alert-dismiss-button {
         display: none !important;
       }
     }
   }
 
   /* Border */
-  &.fuse-alert-appearance-border {
-    .fuse-alert-container {
+  &.alert-appearance-border {
+    .alert-container {
       position: relative;
       overflow: hidden;
       border-radius: 6px;
       @apply bg-card shadow-md;
 
-      .fuse-alert-border {
+      .alert-border {
         position: absolute;
         left: 0;
         top: 0;
@@ -137,36 +137,36 @@ app-fuse-alert {
         width: 4px;
       }
 
-      .fuse-alert-message {
+      .alert-message {
         @apply text-gray-600;
       }
     }
 
     /* Primary */
-    &.fuse-alert-type-primary {
-      .fuse-alert-container {
-        .fuse-alert-border {
+    &.alert-type-primary {
+      .alert-container {
+        .alert-border {
           @apply bg-primary;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-icon {
+        .alert-title,
+        .alert-icon {
           @apply text-primary;
         }
 
         .dark & {
           @apply bg-gray-700;
 
-          .fuse-alert-border {
+          .alert-border {
             @apply bg-primary-400;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-icon {
+          .alert-title,
+          .alert-icon {
             @apply text-primary-400;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-gray-300;
           }
 
@@ -178,30 +178,30 @@ app-fuse-alert {
     }
 
     /* Accent */
-    &.fuse-alert-type-accent {
-      .fuse-alert-container {
-        .fuse-alert-border {
+    &.alert-type-accent {
+      .alert-container {
+        .alert-border {
           @apply bg-accent;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-icon {
+        .alert-title,
+        .alert-icon {
           @apply text-accent;
         }
 
         .dark & {
           @apply bg-gray-700;
 
-          .fuse-alert-border {
+          .alert-border {
             @apply bg-accent-400;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-icon {
+          .alert-title,
+          .alert-icon {
             @apply text-accent-400;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-gray-300;
           }
 
@@ -213,30 +213,30 @@ app-fuse-alert {
     }
 
     /* Warn */
-    &.fuse-alert-type-warn {
-      .fuse-alert-container {
-        .fuse-alert-border {
+    &.alert-type-warn {
+      .alert-container {
+        .alert-border {
           @apply bg-warn;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-icon {
+        .alert-title,
+        .alert-icon {
           @apply text-warn;
         }
 
         .dark & {
           @apply bg-gray-700;
 
-          .fuse-alert-border {
+          .alert-border {
             @apply bg-warn-400;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-icon {
+          .alert-title,
+          .alert-icon {
             @apply text-warn-400;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-gray-300;
           }
 
@@ -248,30 +248,30 @@ app-fuse-alert {
     }
 
     /* Basic */
-    &.fuse-alert-type-basic {
-      .fuse-alert-container {
-        .fuse-alert-border {
+    &.alert-type-basic {
+      .alert-container {
+        .alert-border {
           @apply bg-gray-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-icon {
+        .alert-title,
+        .alert-icon {
           @apply text-gray-600;
         }
 
         .dark & {
           @apply bg-gray-700;
 
-          .fuse-alert-border {
+          .alert-border {
             @apply bg-gray-400;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-icon {
+          .alert-title,
+          .alert-icon {
             @apply text-gray-400;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-gray-300;
           }
 
@@ -283,30 +283,30 @@ app-fuse-alert {
     }
 
     /* Info */
-    &.fuse-alert-type-info {
-      .fuse-alert-container {
-        .fuse-alert-border {
+    &.alert-type-info {
+      .alert-container {
+        .alert-border {
           @apply bg-blue-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-icon {
+        .alert-title,
+        .alert-icon {
           @apply text-blue-700;
         }
 
         .dark & {
           @apply bg-gray-700;
 
-          .fuse-alert-border {
+          .alert-border {
             @apply bg-blue-400;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-icon {
+          .alert-title,
+          .alert-icon {
             @apply text-blue-400;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-gray-300;
           }
 
@@ -318,30 +318,30 @@ app-fuse-alert {
     }
 
     /* Success */
-    &.fuse-alert-type-success {
-      .fuse-alert-container {
-        .fuse-alert-border {
+    &.alert-type-success {
+      .alert-container {
+        .alert-border {
           @apply bg-green-500;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-icon {
+        .alert-title,
+        .alert-icon {
           @apply text-green-500;
         }
 
         .dark & {
           @apply bg-gray-700;
 
-          .fuse-alert-border {
+          .alert-border {
             @apply bg-green-400;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-icon {
+          .alert-title,
+          .alert-icon {
             @apply text-green-400;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-gray-300;
           }
 
@@ -353,30 +353,30 @@ app-fuse-alert {
     }
 
     /* Warning */
-    &.fuse-alert-type-warning {
-      .fuse-alert-container {
-        .fuse-alert-border {
+    &.alert-type-warning {
+      .alert-container {
+        .alert-border {
           @apply bg-amber-500;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-icon {
+        .alert-title,
+        .alert-icon {
           @apply text-amber-500;
         }
 
         .dark & {
           @apply bg-gray-700;
 
-          .fuse-alert-border {
+          .alert-border {
             @apply bg-amber-400;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-icon {
+          .alert-title,
+          .alert-icon {
             @apply text-amber-400;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-gray-300;
           }
 
@@ -388,30 +388,30 @@ app-fuse-alert {
     }
 
     /* Error */
-    &.fuse-alert-type-error {
-      .fuse-alert-container {
-        .fuse-alert-border {
+    &.alert-type-error {
+      .alert-container {
+        .alert-border {
           @apply bg-red-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-icon {
+        .alert-title,
+        .alert-icon {
           @apply text-red-700;
         }
 
         .dark & {
           @apply bg-gray-700;
 
-          .fuse-alert-border {
+          .alert-border {
             @apply bg-red-400;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-icon {
+          .alert-title,
+          .alert-icon {
             @apply text-red-400;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-gray-300;
           }
 
@@ -424,29 +424,29 @@ app-fuse-alert {
   }
 
   /* Fill */
-  &.fuse-alert-appearance-fill {
-    .fuse-alert-container {
+  &.alert-appearance-fill {
+    .alert-container {
       border-radius: 6px;
 
-      .fuse-alert-dismiss-button {
+      .alert-dismiss-button {
         @apply text-white;
       }
     }
 
     /* Primary */
-    &.fuse-alert-type-primary {
-      .fuse-alert-container {
+    &.alert-type-primary {
+      .alert-container {
         @apply bg-primary-600;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-white;
         }
 
-        .fuse-alert-title {
+        .alert-title {
           @apply text-white;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-primary-100;
         }
 
@@ -457,19 +457,19 @@ app-fuse-alert {
     }
 
     /* Accent */
-    &.fuse-alert-type-accent {
-      .fuse-alert-container {
+    &.alert-type-accent {
+      .alert-container {
         @apply bg-accent-600;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-white;
         }
 
-        .fuse-alert-title {
+        .alert-title {
           @apply text-white;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-accent-100;
         }
 
@@ -480,19 +480,19 @@ app-fuse-alert {
     }
 
     /* Warn */
-    &.fuse-alert-type-warn {
-      .fuse-alert-container {
+    &.alert-type-warn {
+      .alert-container {
         @apply bg-warn-600;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-white;
         }
 
-        .fuse-alert-title {
+        .alert-title {
           @apply text-white;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-warn-100;
         }
 
@@ -503,19 +503,19 @@ app-fuse-alert {
     }
 
     /* Basic */
-    &.fuse-alert-type-basic {
-      .fuse-alert-container {
+    &.alert-type-basic {
+      .alert-container {
         @apply bg-gray-600;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-white;
         }
 
-        .fuse-alert-title {
+        .alert-title {
           @apply text-white;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-gray-100;
         }
 
@@ -526,19 +526,19 @@ app-fuse-alert {
     }
 
     /* Info */
-    &.fuse-alert-type-info {
-      .fuse-alert-container {
+    &.alert-type-info {
+      .alert-container {
         @apply bg-blue-600;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-white;
         }
 
-        .fuse-alert-title {
+        .alert-title {
           @apply text-white;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-blue-100;
         }
 
@@ -549,19 +549,19 @@ app-fuse-alert {
     }
 
     /* Success */
-    &.fuse-alert-type-success {
-      .fuse-alert-container {
+    &.alert-type-success {
+      .alert-container {
         @apply bg-green-600;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-white;
         }
 
-        .fuse-alert-title {
+        .alert-title {
           @apply text-white;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-green-100;
         }
 
@@ -572,19 +572,19 @@ app-fuse-alert {
     }
 
     /* Warning */
-    &.fuse-alert-type-warning {
-      .fuse-alert-container {
+    &.alert-type-warning {
+      .alert-container {
         @apply bg-amber-500;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-white;
         }
 
-        .fuse-alert-title {
+        .alert-title {
           @apply text-white;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-amber-100;
         }
 
@@ -595,19 +595,19 @@ app-fuse-alert {
     }
 
     /* Error */
-    &.fuse-alert-type-error {
-      .fuse-alert-container {
+    &.alert-type-error {
+      .alert-container {
         @apply bg-red-600;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-white;
         }
 
-        .fuse-alert-title {
+        .alert-title {
           @apply text-white;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-red-100;
         }
 
@@ -619,26 +619,26 @@ app-fuse-alert {
   }
 
   /* Outline */
-  &.fuse-alert-appearance-outline {
-    .fuse-alert-container {
+  &.alert-appearance-outline {
+    .alert-container {
       border-radius: 6px;
     }
 
     /* Primary */
-    &.fuse-alert-type-primary {
-      .fuse-alert-container {
+    &.alert-type-primary {
+      .alert-container {
         @apply bg-primary-50 ring-1 ring-inset ring-primary-400;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-primary-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-primary-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-primary-700;
         }
 
@@ -649,16 +649,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-primary-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-primary-200;
           }
         }
@@ -666,20 +666,20 @@ app-fuse-alert {
     }
 
     /* Accent */
-    &.fuse-alert-type-accent {
-      .fuse-alert-container {
+    &.alert-type-accent {
+      .alert-container {
         @apply bg-accent-100 ring-1 ring-inset ring-accent-400;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-accent-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-accent-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-accent-700;
         }
 
@@ -690,16 +690,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-accent-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-accent-200;
           }
         }
@@ -707,20 +707,20 @@ app-fuse-alert {
     }
 
     /* Warn */
-    &.fuse-alert-type-warn {
-      .fuse-alert-container {
+    &.alert-type-warn {
+      .alert-container {
         @apply bg-warn-50 ring-1 ring-inset ring-warn-400;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-warn-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-warn-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-warn-700;
         }
 
@@ -731,16 +731,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-warn-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-warn-200;
           }
         }
@@ -748,20 +748,20 @@ app-fuse-alert {
     }
 
     /* Basic */
-    &.fuse-alert-type-basic {
-      .fuse-alert-container {
+    &.alert-type-basic {
+      .alert-container {
         @apply bg-gray-100 ring-1 ring-inset ring-gray-400;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-gray-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-gray-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-gray-700;
         }
 
@@ -772,16 +772,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-gray-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-gray-200;
           }
         }
@@ -789,20 +789,20 @@ app-fuse-alert {
     }
 
     /* Info */
-    &.fuse-alert-type-info {
-      .fuse-alert-container {
+    &.alert-type-info {
+      .alert-container {
         @apply bg-blue-50 ring-1 ring-inset ring-blue-400;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-blue-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-blue-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-blue-700;
         }
 
@@ -813,16 +813,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-blue-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-blue-200;
           }
         }
@@ -830,20 +830,20 @@ app-fuse-alert {
     }
 
     /* Success */
-    &.fuse-alert-type-success {
-      .fuse-alert-container {
+    &.alert-type-success {
+      .alert-container {
         @apply bg-green-50 ring-1 ring-inset ring-green-400;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-green-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-green-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-green-700;
         }
 
@@ -854,16 +854,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-green-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-green-200;
           }
         }
@@ -871,20 +871,20 @@ app-fuse-alert {
     }
 
     /* Warning */
-    &.fuse-alert-type-warning {
-      .fuse-alert-container {
+    &.alert-type-warning {
+      .alert-container {
         @apply bg-amber-50 ring-1 ring-inset ring-amber-400;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-amber-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-amber-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-amber-700;
         }
 
@@ -895,16 +895,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-amber-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-amber-200;
           }
         }
@@ -912,20 +912,20 @@ app-fuse-alert {
     }
 
     /* Error */
-    &.fuse-alert-type-error {
-      .fuse-alert-container {
+    &.alert-type-error {
+      .alert-container {
         @apply bg-red-50 ring-1 ring-inset ring-red-400;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-red-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-red-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-red-700;
         }
 
@@ -936,16 +936,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-red-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-red-200;
           }
         }
@@ -954,26 +954,26 @@ app-fuse-alert {
   }
 
   /* Soft */
-  &.fuse-alert-appearance-soft {
-    .fuse-alert-container {
+  &.alert-appearance-soft {
+    .alert-container {
       border-radius: 6px;
     }
 
     /* Primary */
-    &.fuse-alert-type-primary {
-      .fuse-alert-container {
+    &.alert-type-primary {
+      .alert-container {
         @apply bg-primary-50;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-primary-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-primary-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-primary-700;
         }
 
@@ -984,16 +984,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-primary-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-primary-200;
           }
         }
@@ -1001,20 +1001,20 @@ app-fuse-alert {
     }
 
     /* Accent */
-    &.fuse-alert-type-accent {
-      .fuse-alert-container {
+    &.alert-type-accent {
+      .alert-container {
         @apply bg-accent-100;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-accent-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-accent-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-accent-700;
         }
 
@@ -1025,16 +1025,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-accent-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-accent-200;
           }
         }
@@ -1042,20 +1042,20 @@ app-fuse-alert {
     }
 
     /* Warn */
-    &.fuse-alert-type-warn {
-      .fuse-alert-container {
+    &.alert-type-warn {
+      .alert-container {
         @apply bg-warn-50;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-warn-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-warn-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-warn-700;
         }
 
@@ -1066,16 +1066,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-warn-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-warn-200;
           }
         }
@@ -1083,20 +1083,20 @@ app-fuse-alert {
     }
 
     /* Basic */
-    &.fuse-alert-type-basic {
-      .fuse-alert-container {
+    &.alert-type-basic {
+      .alert-container {
         @apply bg-gray-100;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-gray-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-gray-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-gray-700;
         }
 
@@ -1107,16 +1107,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-gray-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-gray-200;
           }
         }
@@ -1124,20 +1124,20 @@ app-fuse-alert {
     }
 
     /* Info */
-    &.fuse-alert-type-info {
-      .fuse-alert-container {
+    &.alert-type-info {
+      .alert-container {
         @apply bg-blue-50;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-blue-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-blue-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-blue-700;
         }
 
@@ -1148,16 +1148,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-blue-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-blue-200;
           }
         }
@@ -1165,20 +1165,20 @@ app-fuse-alert {
     }
 
     /* Success */
-    &.fuse-alert-type-success {
-      .fuse-alert-container {
+    &.alert-type-success {
+      .alert-container {
         @apply bg-green-50;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-green-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-green-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-green-700;
         }
 
@@ -1189,16 +1189,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-green-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-green-200;
           }
         }
@@ -1206,20 +1206,20 @@ app-fuse-alert {
     }
 
     /* Warning */
-    &.fuse-alert-type-warning {
-      .fuse-alert-container {
+    &.alert-type-warning {
+      .alert-container {
         @apply bg-amber-50;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-amber-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-amber-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-amber-700;
         }
 
@@ -1230,16 +1230,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-amber-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-amber-200;
           }
         }
@@ -1247,20 +1247,20 @@ app-fuse-alert {
     }
 
     /* Error */
-    &.fuse-alert-type-error {
-      .fuse-alert-container {
+    &.alert-type-error {
+      .alert-container {
         @apply bg-red-50;
 
-        .fuse-alert-icon {
+        .alert-icon {
           @apply text-red-600;
         }
 
-        .fuse-alert-title,
-        .fuse-alert-dismiss-button {
+        .alert-title,
+        .alert-dismiss-button {
           @apply text-red-900;
         }
 
-        .fuse-alert-message {
+        .alert-message {
           @apply text-red-700;
         }
 
@@ -1271,16 +1271,16 @@ app-fuse-alert {
         .dark & {
           @apply bg-red-600;
 
-          .fuse-alert-icon {
+          .alert-icon {
             @apply text-white;
           }
 
-          .fuse-alert-title,
-          .fuse-alert-dismiss-button {
+          .alert-title,
+          .alert-dismiss-button {
             @apply text-white;
           }
 
-          .fuse-alert-message {
+          .alert-message {
             @apply text-red-200;
           }
         }

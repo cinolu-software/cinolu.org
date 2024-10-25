@@ -1,1 +1,1 @@
-export * from '@fuse/components/loading-bar/loading-bar.component';
+export * from '@core/components/loading-bar/loading-bar.component';

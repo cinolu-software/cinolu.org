@@ -1,1 +1,1 @@
-export * from '@fuse/components/loading-bar/public-api';
+export * from '@core/components/loading-bar/public-api';

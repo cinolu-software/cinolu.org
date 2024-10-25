@@ -1,9 +1,8 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AppConfig, ConfigService } from '@core/services/config';
 import { MediaWatcherService } from '@core/services/media-watcher';
-import { PlatformService } from '@core/services/platform';
 import { Subject, combineLatest, filter, map, takeUntil } from 'rxjs';
 import { EmptyLayoutComponent } from './layouts/empty/empty.component';
 
@@ -20,10 +19,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
   #activatedRoute = inject(ActivatedRoute);
   #document = inject(DOCUMENT);
   #router = inject(Router);
-  #fuseConfigService = inject(ConfigService);
-  #fuseMediaWatcherService = inject(MediaWatcherService);
-  #fusePlatformService = inject(PlatformService);
-  #renderer2 = inject(Renderer2);
+  #configService = inject(ConfigService);
+  #mediaWatcherService = inject(MediaWatcherService);
   config: AppConfig;
   layout: string;
   scheme: 'dark' | 'light';
@@ -32,11 +29,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Set the theme and scheme based on the configuration
     combineLatest([
-      this.#fuseConfigService.config$,
-      this.#fuseMediaWatcherService.onMediaQueryChange$([
-        '(prefers-color-scheme: dark)',
-        '(prefers-color-scheme: light)'
-      ])
+      this.#configService.config$,
+      this.#mediaWatcherService.onMediaQueryChange$(['(prefers-color-scheme: dark)', '(prefers-color-scheme: light)'])
     ])
       .pipe(
         takeUntil(this.#unsubscribeAll),
@@ -64,7 +58,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
       });
 
     // Subscribe to config changes
-    this.#fuseConfigService.config$.pipe(takeUntil(this.#unsubscribeAll)).subscribe((config: AppConfig) => {
+    this.#configService.config$.pipe(takeUntil(this.#unsubscribeAll)).subscribe((config: AppConfig) => {
       // Store the config
       this.config = config;
 
@@ -82,8 +76,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
         // Update the layout
         this._updateLayout();
       });
-
-    this.#renderer2.addClass(this.#document.body, this.#fusePlatformService.osName);
   }
 
   ngOnDestroy(): void {

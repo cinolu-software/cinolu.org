@@ -3,14 +3,14 @@ import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { FuseConfirmationConfig } from '@core/services/confirmation/confirmation.types';
+import { ConfirmationConfig } from '@core/services/confirmation/confirmation.types';
 
 @Component({
-  selector: 'app-fuse-confirmation-dialog',
+  selector: 'app-confirmation-dialog',
   templateUrl: './dialog.component.html',
   styles: [
     `
-      .fuse-confirmation-dialog-panel {
+      .confirmation-dialog-panel {
         @screen md {
           @apply w-128;
         }
@@ -27,6 +27,6 @@ import { FuseConfirmationConfig } from '@core/services/confirmation/confirmation
   standalone: true,
   imports: [MatButtonModule, MatDialogModule, MatIconModule, NgClass]
 })
-export class FuseConfirmationDialogComponent {
-  data: FuseConfirmationConfig = inject(MAT_DIALOG_DATA);
+export class ConfirmationDialogComponent {
+  data: ConfirmationConfig = inject(MAT_DIALOG_DATA);
 }

@@ -1,13 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { FuseConfirmationConfig } from '@core/services/confirmation/confirmation.types';
-import { FuseConfirmationDialogComponent } from '@core/services/confirmation/dialog/dialog.component';
+import { ConfirmationConfig } from '@core/services/confirmation/confirmation.types';
+import { ConfirmationDialogComponent } from '@core/services/confirmation/dialog/dialog.component';
 import { merge } from 'lodash-es';
 
 @Injectable({ providedIn: 'root' })
 export class ConfirmationService {
   private _matDialog: MatDialog = inject(MatDialog);
-  private _defaultConfig: FuseConfirmationConfig = {
+  private _defaultConfig: ConfirmationConfig = {
     title: 'Confirm action',
     message: 'Are you sure you want to confirm this action?',
     icon: {
@@ -33,16 +33,16 @@ export class ConfirmationService {
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------
 
-  open(config: FuseConfirmationConfig = {}): MatDialogRef<FuseConfirmationDialogComponent> {
+  open(config: ConfirmationConfig = {}): MatDialogRef<ConfirmationDialogComponent> {
     // Merge the user config with the default config
     const userConfig = merge({}, this._defaultConfig, config);
 
     // Open the dialog
-    return this._matDialog.open(FuseConfirmationDialogComponent, {
+    return this._matDialog.open(ConfirmationDialogComponent, {
       autoFocus: false,
       disableClose: !userConfig.dismissible,
       data: userConfig,
-      panelClass: 'fuse-confirmation-dialog-panel'
+      panelClass: 'confirmation-dialog-panel'
     });
   }
 }

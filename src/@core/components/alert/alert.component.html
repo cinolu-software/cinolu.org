@@ -1,20 +1,20 @@
 @if (!dismissible || (dismissible && !dismissed)) {
-  <div class="fuse-alert-container" [@fadeIn]="!dismissed" [@fadeOut]="!dismissed">
+  <div class="alert-container" [@fadeIn]="!dismissed" [@fadeOut]="!dismissed">
     <!-- Border -->
     @if (appearance === 'border') {
-      <div class="fuse-alert-border"></div>
+      <div class="alert-border"></div>
     }
 
     <!-- Icon -->
     @if (showIcon) {
-      <div class="fuse-alert-icon">
+      <div class="alert-icon">
         <!-- Custom icon -->
-        <div class="fuse-alert-custom-icon">
-          <ng-content select="[fuseAlertIcon]"></ng-content>
+        <div class="alert-custom-icon">
+          <ng-content select="[AlertIcon]"></ng-content>
         </div>
 
         <!-- Default icons -->
-        <div class="fuse-alert-default-icon">
+        <div class="alert-default-icon">
           @if (type === 'primary') {
             <mat-icon [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
           }
@@ -51,18 +51,18 @@
     }
 
     <!-- Content -->
-    <div class="fuse-alert-content">
-      <div class="fuse-alert-title">
-        <ng-content select="[fuseAlertTitle]"></ng-content>
+    <div class="alert-content">
+      <div class="alert-title">
+        <ng-content select="[AlertTitle]"></ng-content>
       </div>
 
-      <div class="fuse-alert-message">
+      <div class="alert-message">
         <ng-content></ng-content>
       </div>
     </div>
 
     <!-- Dismiss button -->
-    <button class="fuse-alert-dismiss-button" mat-icon-button (click)="dismiss()">
+    <button class="alert-dismiss-button" mat-icon-button (click)="dismiss()">
       <mat-icon [svgIcon]="'heroicons_solid:x-mark'"></mat-icon>
     </button>
   </div>
