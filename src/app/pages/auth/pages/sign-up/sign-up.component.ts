@@ -11,9 +11,9 @@ import { RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent } from '@fuse/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { AuthService } from '../auth.service';
-import { AuthCardComponent } from '../slots/auth-card/auth-card.component';
-import { environment } from '../../../../environments/environment';
+import { AuthService } from '../../auth.service';
+import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
+import { environment } from '../../../../../environments/environment';
 import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({

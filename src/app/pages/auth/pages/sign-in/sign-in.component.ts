@@ -11,9 +11,9 @@ import { FuseAlertComponent } from '@fuse/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
 import { team } from 'app/pages/landing/utils/data/team';
-import { AuthService } from '../auth.service';
-import { TopbarComponent } from '../../../common/components/topbar/topbar.component';
-import { AuthCardComponent } from '../slots/auth-card/auth-card.component';
+import { AuthService } from '../../auth.service';
+import { TopbarComponent } from '../../../../common/components/topbar/topbar.component';
+import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
 
 @Component({
   selector: 'app-sign-in',

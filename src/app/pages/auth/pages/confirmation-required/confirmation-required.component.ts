@@ -4,10 +4,10 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { team } from 'app/pages/landing/utils/data/team';
 import { FuseAlertComponent } from '@fuse/components/alert';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../auth.service';
 import { MutationResult } from '@ngneat/query';
-import { TopbarComponent } from '../../../common/components/topbar/topbar.component';
-import { AuthCardComponent } from '../slots/auth-card/auth-card.component';
+import { TopbarComponent } from '../../../../common/components/topbar/topbar.component';
+import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
 
 @Component({
   selector: 'app-confirmation-required',
