@@ -4,9 +4,9 @@ import { Store } from '@ngrx/store';
 import { authActions } from './common/store/app.actions';
 
 @Component({
+  standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
-  standalone: true,
   imports: [RouterOutlet]
 })
 export class AppComponent implements OnInit {

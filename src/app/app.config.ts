@@ -1,10 +1,8 @@
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, isDevMode, LOCALE_ID } from '@angular/core';
-import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
-import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { PreloadAllModules, provideRouter, TitleStrategy, withPreloading } from '@angular/router';
-import { provideFuse } from '@fuse';
+import { provideRouter, TitleStrategy, withInMemoryScrolling } from '@angular/router';
+import { provideApp } from '@core';
 import { appRoutes } from 'app/app.routes';
 import { provideIcons } from 'app/common/icons/icons.provider';
 import { provideClientHydration } from '@angular/platform-browser';
@@ -15,7 +13,6 @@ import { provideStore } from '@ngrx/store';
 import { authReducers } from './common/store/app.reducers';
 import { AuthEffects } from './common/store/app.effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { provideQueryClientOptions } from '@ngneat/query';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 
@@ -25,37 +22,12 @@ export const appConfig: ApplicationConfig = {
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
     provideAnimations(),
-    provideQueryClientOptions({
-      defaultOptions: {
-        queries: {
-          staleTime: 3000
-        }
-      }
-    }),
     provideHttpClient(withFetch(), withInterceptors([httpInterceptor])),
     { provide: TitleStrategy, useClass: PageTitleStrategy },
-    provideRouter(appRoutes, withPreloading(PreloadAllModules)),
-    {
-      provide: DateAdapter,
-      useClass: LuxonDateAdapter
-    },
-    {
-      provide: MAT_DATE_FORMATS,
-      useValue: {
-        parse: {
-          dateInput: 'D'
-        },
-        display: {
-          dateInput: 'DDD',
-          monthYearLabel: 'LLL yyyy',
-          dateA11yLabel: 'DD',
-          monthYearA11yLabel: 'LLLL yyyy'
-        }
-      }
-    },
+    provideRouter(appRoutes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
     provideIcons(),
-    provideFuse({
-      fuse: {
+    provideApp({
+      app: {
         layout: 'empty',
         scheme: 'light',
         screens: {

@@ -1,25 +1,25 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { fuseAnimations } from '@fuse/animations';
+import { Animations } from '@core/animations';
 import { team } from 'app/pages/landing/utils/data/team';
-import { FuseAlertComponent } from '@fuse/components/alert';
+import { AlertComponent } from '@core/components/alert';
 import { AuthService } from '../../auth.service';
 import { MutationResult } from '@ngneat/query';
-import { TopbarComponent } from '../../../../common/components/topbar/topbar.component';
+import { TopbarComponent } from 'app/common/components/topbar/topbar.component';
 import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
 
 @Component({
   selector: 'app-confirmation-required',
   templateUrl: './confirmation-required.component.html',
   encapsulation: ViewEncapsulation.None,
-  animations: fuseAnimations,
+  animations: Animations,
   standalone: true,
   imports: [
     RouterLink,
     CommonModule,
     NgOptimizedImage,
-    FuseAlertComponent,
+    AlertComponent,
     CommonModule,
     TopbarComponent,
     AuthCardComponent

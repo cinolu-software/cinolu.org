@@ -8,8 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterLink } from '@angular/router';
-import { fuseAnimations } from '@fuse/animations';
-import { FuseAlertComponent } from '@fuse/components/alert';
+import { Animations } from '@core/animations';
+import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { AuthService } from '../../auth.service';
 import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
@@ -20,11 +20,11 @@ import { MatProgressBar } from '@angular/material/progress-bar';
   standalone: true,
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  animations: fuseAnimations,
+  animations: Animations,
   imports: [
     MatProgressBar,
     RouterLink,
-    FuseAlertComponent,
+    AlertComponent,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,

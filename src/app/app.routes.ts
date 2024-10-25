@@ -16,7 +16,7 @@ export const appRoutes: Route[] = [
     children: auhtRoutes
   },
   {
-    path: '',
+    path: 'programs',
     component: LayoutComponent,
     children: programsRoutes
   },

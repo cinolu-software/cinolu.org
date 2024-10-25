@@ -5,24 +5,24 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterLink } from '@angular/router';
-import { fuseAnimations } from '@fuse/animations';
-import { FuseAlertComponent } from '@fuse/components/alert';
+import { Animations } from '@core/animations';
+import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { team } from 'app/pages/landing/utils/data/team';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../auth.service';
 import { MutationResult } from '@ngneat/query';
-import { TopbarComponent } from '../../../../common/components/topbar/topbar.component';
+import { TopbarComponent } from 'app/common/components/topbar/topbar.component';
 import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   encapsulation: ViewEncapsulation.None,
-  animations: fuseAnimations,
+  animations: Animations,
   standalone: true,
   imports: [
-    FuseAlertComponent,
+    AlertComponent,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,

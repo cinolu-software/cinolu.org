@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FuseLoadingBarComponent } from '@fuse/components/loading-bar';
+import { FuseLoadingBarComponent } from '@core/components/loading-bar/loading-bar.component';
 
 @Component({
   selector: 'app-empty-layout',

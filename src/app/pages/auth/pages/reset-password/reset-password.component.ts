@@ -6,8 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { fuseAnimations } from '@fuse/animations';
-import { FuseAlertComponent } from '@fuse/components/alert';
+import { Animations } from '@core/animations';
+import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { team } from 'app/pages/landing/utils/data/team';
 import { AuthService } from '../../auth.service';
@@ -19,10 +19,10 @@ import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  animations: fuseAnimations,
+  animations: Animations,
   standalone: true,
   imports: [
-    FuseAlertComponent,
+    AlertComponent,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,

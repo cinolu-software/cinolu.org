@@ -34,6 +34,7 @@ export interface IProgram {
   id: string;
   name: string;
   description: string;
+  image: string;
   started_at: Date;
   ended_at: Date;
   created_at: Date;

@@ -53,7 +53,7 @@ export class TopbarComponent implements OnInit {
     this.isOpen.update((value) => !value);
   }
 
-  displayProfileImage(user: IUser): string {
+  getProfile(user: IUser): string {
     return user.profile
       ? `${environment.apiUrl}uploads/profiles/${user.profile}`
       : user.google_image || '/images/avatar-default.webp';

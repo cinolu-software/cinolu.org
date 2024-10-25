@@ -6,8 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { fuseAnimations } from '@fuse/animations';
-import { FuseAlertComponent } from '@fuse/components/alert';
+import { Animations } from '@core/animations';
+import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
 import { team } from 'app/pages/landing/utils/data/team';
@@ -19,10 +19,10 @@ import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
   selector: 'app-sign-in',
   standalone: true,
   templateUrl: './sign-in.component.html',
-  animations: fuseAnimations,
+  animations: Animations,
   imports: [
     RouterLink,
-    FuseAlertComponent,
+    AlertComponent,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
