@@ -66,7 +66,6 @@ export class ListProgramsComponent implements OnInit {
   onPageChange(currentPage: number): void {
     this.queryParams.page = currentPage === 1 ? null : currentPage;
     this.updateRouteAndPrograms();
-    window.scrollTo({ top: 0 });
   }
 
   loadPrograms(): void {

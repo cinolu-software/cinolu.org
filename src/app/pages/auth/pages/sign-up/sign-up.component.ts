@@ -79,6 +79,6 @@ export class AuthSignUpComponent {
   }
 
   signUpWithGoogle(): void {
-    window.location.replace(environment.apiUrl + 'auth/sign-up');
+    window.location.replace(environment.apiUrl + 'auth/sign-in');
   }
 }

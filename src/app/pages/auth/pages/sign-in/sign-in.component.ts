@@ -12,8 +12,8 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
 import { team } from 'app/pages/landing/utils/data/team';
 import { AuthService } from '../../auth.service';
-import { TopbarComponent } from '../../../../common/components/topbar/topbar.component';
 import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
+import { TopbarComponent } from 'app/common/components/topbar/topbar.component';
 
 @Component({
   selector: 'app-sign-in',
