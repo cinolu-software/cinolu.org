@@ -1,13 +1,12 @@
-<app-topbar />
 <section class="">
   <div class="relative py-72 bg-[url('/images/programs.webp')] bg-cover flex flex-col overflow-hidden">
     <div
-      class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center bg-primary-950/70 gap-6 text-2xl md:text-4xl px-8 md:px-32 text-white">
-      <div class="relative z-10 flex flex-col items-center py-16">
+      class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-primary-950/70 gap-6 text-2xl md:text-4xl px-8 md:px-32 text-white">
+      <div class="relative z-10 flex flex-col items-start py-16">
         <div class="mt-1 text-center text-xl font-extrabold leading-tight tracking-tight md:text-3xl lg:text-5xl">
-          Que voulez-vous apprendre aujourd'hui ?
+          Que voulez-vous apprendre ?
         </div>
-        <div class="text-gray-300 mt-6 text-lg max-w-2xl text-center tracking-tight md:text-2xl">
+        <div class="mt-6 text-lg max-w-2xl tracking-tight md:text-2xl">
           Découvrez nos programmes et laissez-vous accompagner par les meilleurs coachs pour garantir la réussite de
           votre projet.
         </div>
@@ -72,8 +71,6 @@
             </pagination-controls>
           </div>
         }
-      } @else if (result.isError || result.data?.programs.length <= 0) {
-        <h2 class="mt-8 text-2xl font-semibold">Aucun programme trouvé !</h2>
       }
     </div>
   </div>

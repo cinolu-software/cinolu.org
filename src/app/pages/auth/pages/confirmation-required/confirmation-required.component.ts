@@ -1,12 +1,11 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Animations } from '@core/animations';
-import { team } from 'app/pages/landing/utils/data/team';
+import { team } from 'app/pages/auth/slots/auth-card/team';
 import { AlertComponent } from '@core/components/alert';
 import { AuthService } from '../../auth.service';
 import { MutationResult } from '@ngneat/query';
-import { TopbarComponent } from 'app/common/components/topbar/topbar.component';
 import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
 
 @Component({
@@ -15,15 +14,7 @@ import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
   encapsulation: ViewEncapsulation.None,
   animations: Animations,
   standalone: true,
-  imports: [
-    RouterLink,
-    CommonModule,
-    NgOptimizedImage,
-    AlertComponent,
-    CommonModule,
-    TopbarComponent,
-    AuthCardComponent
-  ]
+  imports: [RouterLink, CommonModule, AlertComponent, CommonModule, AuthCardComponent]
 })
 export class AuthConfirmationRequiredComponent {
   #authService = inject(AuthService);

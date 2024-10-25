@@ -6,16 +6,16 @@
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-1">
         @for (type of program().types; track $index) {
-          <div class="rounded-full px-3 py-0.5 text-xs font-semibold bg-gray-100 text-gray-800">
+          <p class="rounded-full px-3 py-0.5 text-xs font-semibold bg-gray-100 text-gray-800">
             {{ type.name }}
-          </div>
+          </p>
         }
       </div>
       <div class="flex items-center">
         @if (isFinished(program())) {
-          <mat-icon class="text-green-600 icon-size-5" [svgIcon]="'heroicons_solid:check-badge'"></mat-icon>
+          <mat-icon class="text-primary-600 icon-size-5" [svgIcon]="'heroicons_solid:check-badge'" />
         } @else {
-          <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:clock'"></mat-icon>
+          <mat-icon class="icon-size-5 text-teal-600" [svgIcon]="'heroicons_solid:clock'" />
         }
       </div>
     </div>
@@ -27,11 +27,11 @@
     </div>
     <div class="my-6 h-1 w-12 border-t-2"></div>
     <div class="text-secondary flex items-center text-md leading-5">
-      <mat-icon class="text-hint icon-size-5" [svgIcon]="'event'"></mat-icon>
+      <mat-icon class="text-hint icon-size-5" [svgIcon]="'event'" />
       <div class="ml-1.5">Début, le {{ program().started_at | date: 'longDate' }}</div>
     </div>
     <div class="text-secondary flex items-center text-md leading-5 mt-2">
-      <mat-icon class="text-hint icon-size-5" [svgIcon]="'event_busy'"></mat-icon>
+      <mat-icon class="text-hint icon-size-5" [svgIcon]="'event_busy'" />
       <div class="ml-1.5">Fin, le {{ program().ended_at | date: 'longDate' }}</div>
     </div>
   </div>

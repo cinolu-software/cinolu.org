@@ -1,30 +1,28 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ObservableQueryResult } from '@ngneat/query';
 import { IProgram, IType } from 'app/common/types/models.type';
 import { DetailsProgramsService } from './details.service';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { ProgramCardComponent } from '../../slots/program-card/program-card.component';
 import { ProgramCardSkeletonComponent } from '../../slots/program-card-skeleton/program-card-skeleton.component';
-import { TopbarComponent } from '../../../../common/components/topbar/topbar.component';
+import { environment } from '../../../../../environments/environment';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 const SKELETON_ITEM_COUNT = 9;
 
 @Component({
-  selector: 'app-programs',
+  selector: 'app-program',
   standalone: true,
   imports: [
     CommonModule,
-    MatIconModule,
-    MatTooltipModule,
     RouterLink,
-    NgxPaginationModule,
     ProgramCardComponent,
+    MatIconModule,
+    MatButtonModule,
     ProgramCardSkeletonComponent,
-    TopbarComponent
+    NgOptimizedImage
   ],
   templateUrl: './details.component.html'
 })
@@ -34,9 +32,18 @@ export class DetailsProgramsComponent implements OnInit {
   type$: ObservableQueryResult<IType[], Error>;
   #detailsProgramService = inject(DetailsProgramsService);
   #activatedRoute = inject(ActivatedRoute);
+  #location = inject(Location);
 
   ngOnInit(): void {
     const id = this.#activatedRoute.snapshot.paramMap.get('id');
     this.program$ = this.#detailsProgramService.getProgram(id);
+  }
+
+  getImage(program: IProgram): string {
+    return program.image ? `${environment.apiUrl}uploads/programs/${program.image}` : '/images/no-image.jpg';
+  }
+
+  back(): void {
+    this.#location.back();
   }
 }

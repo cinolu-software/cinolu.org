@@ -1,12 +1,11 @@
 import { Component, input } from '@angular/core';
-import { team } from '../../../landing/utils/data/team';
+import { team } from 'app/pages/auth/slots/auth-card/team';
 import { NgOptimizedImage } from '@angular/common';
-import { TopbarComponent } from '../../../../common/components/topbar/topbar.component';
 
 @Component({
   selector: 'app-auth-card',
   standalone: true,
-  imports: [NgOptimizedImage, TopbarComponent],
+  imports: [NgOptimizedImage],
   templateUrl: './auth-card.component.html'
 })
 export class AuthCardComponent {

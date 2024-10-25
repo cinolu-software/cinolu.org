@@ -11,7 +11,6 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProgramCardComponent } from '../../slots/program-card/program-card.component';
 import { ProgramCardSkeletonComponent } from '../../slots/program-card-skeleton/program-card-skeleton.component';
-import { TopbarComponent } from '../../../../common/components/topbar/topbar.component';
 import { QueryParams } from '../../types/query-params.type';
 
 const SKELETON_ITEM_COUNT = 9;
@@ -28,8 +27,7 @@ const SKELETON_ITEM_COUNT = 9;
     RouterLink,
     NgxPaginationModule,
     ProgramCardComponent,
-    ProgramCardSkeletonComponent,
-    TopbarComponent
+    ProgramCardSkeletonComponent
   ],
   templateUrl: './list.component.html'
 })

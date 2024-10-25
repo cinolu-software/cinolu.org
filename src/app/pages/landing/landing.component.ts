@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { HeroComponent } from './slots/hero/hero.component';
 import { AboutComponent } from './slots/about/about.component';
@@ -8,13 +7,11 @@ import { ProblemStatementComponent } from './slots/problem-statement/problem-sta
 import { OurAimComponent } from './slots/our-aim/our-aim.component';
 import { OurVisionComponent } from './slots/our-vision/our-vision.component';
 import { OfferingsComponent } from './slots/offerings/offerings.component';
-import { TopbarComponent } from '../../common/components/topbar/topbar.component';
 
 @Component({
   selector: 'app-landing',
   standalone: true,
   imports: [
-    CommonModule,
     HeroComponent,
     AboutComponent,
     OfferingsComponent,
@@ -22,8 +19,7 @@ import { TopbarComponent } from '../../common/components/topbar/topbar.component
     FooterComponent,
     ProblemStatementComponent,
     OurAimComponent,
-    OurVisionComponent,
-    TopbarComponent
+    OurVisionComponent
   ],
   templateUrl: './landing.component.html'
 })

@@ -10,10 +10,9 @@ import { Animations } from '@core/animations';
 import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
-import { team } from 'app/pages/landing/utils/data/team';
+import { team } from 'app/pages/auth/slots/auth-card/team';
 import { AuthService } from '../../auth.service';
 import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
-import { TopbarComponent } from 'app/common/components/topbar/topbar.component';
 
 @Component({
   selector: 'app-sign-in',
@@ -32,7 +31,6 @@ import { TopbarComponent } from 'app/common/components/topbar/topbar.component';
     MatProgressSpinnerModule,
     NgOptimizedImage,
     CommonModule,
-    TopbarComponent,
     AuthCardComponent
   ]
 })

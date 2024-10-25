@@ -12,22 +12,15 @@ export interface IUser {
   created_at: Date;
   updated_at: Date;
   roles: IRoles[];
-  projects: IProject[];
   programs: IProgram[];
 }
 
-export interface IProject {
+export interface IRequiremnt {
   id: string;
   name: string;
   description: string;
-  start_at: Date;
-  end_at: Date;
   created_at: Date;
   updated_at: Date;
-  user: IUser;
-  status: IStatus;
-  attachments: IAttachment[];
-  categories: ICategory[];
 }
 
 export interface IProgram {
@@ -42,6 +35,7 @@ export interface IProgram {
   user: IUser;
   attachments: IAttachment[];
   types: IType[];
+  requirements: IRequiremnt[];
 }
 
 export interface IType {
@@ -57,7 +51,6 @@ export interface IAttachment {
   name: string;
   created_at: Date;
   updated_at: Date;
-  project: IProject;
   program: IProgram;
 }
 
@@ -66,41 +59,6 @@ export interface ICategory {
   name: string;
   created_at: Date;
   updated_at: Date;
-  projects: IProject[];
-}
-
-export interface IProgram {
-  id: string;
-  name: string;
-  description: string;
-  start_at: Date;
-  end_at: Date;
-  created_at: Date;
-  updated_at: Date;
-  user: IUser;
-  attachments: IAttachment[];
-}
-
-export interface IProject {
-  id: string;
-  name: string;
-  description: string;
-  start_at: Date;
-  end_at: Date;
-  created_at: Date;
-  updated_at: Date;
-  user: IUser;
-  status: IStatus;
-  attachments: IAttachment[];
-  categories: ICategory[];
-}
-
-export interface IStatus {
-  id: string;
-  name: string;
-  created_at: Date;
-  updated_at: Date;
-  projects: IProject[];
 }
 
 export interface IRoles {

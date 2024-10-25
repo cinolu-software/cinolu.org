@@ -9,11 +9,10 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Animations } from '@core/animations';
 import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { team } from 'app/pages/landing/utils/data/team';
+import { team } from 'app/pages/auth/slots/auth-card/team';
 import { AuthService } from '../../auth.service';
 import { MutationResult } from '@ngneat/query';
 import { IUser } from '../../../../common/types/models.type';
-import { TopbarComponent } from '../../../../common/components/topbar/topbar.component';
 import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
 
 @Component({
@@ -33,7 +32,6 @@ import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
     RouterLink,
     CommonModule,
     NgOptimizedImage,
-    TopbarComponent,
     AuthCardComponent
   ]
 })
