@@ -41,7 +41,7 @@ export class ObserveVisibilityDirective implements OnDestroy, AfterViewInit {
   private createObserver(): void {
     const options = {
       rootMargin: '0px',
-      threshold: 0.15
+      threshold: 0.17
     };
     if (typeof window === 'undefined') return;
     const isIntersecting = (entry: IntersectionObserverEntry) => entry.isIntersecting || entry.intersectionRatio > 0;

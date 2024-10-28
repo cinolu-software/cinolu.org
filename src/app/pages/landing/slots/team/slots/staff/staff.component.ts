@@ -4,7 +4,7 @@ import { ObserveVisibilityDirective } from '@core/directives/observer.directive'
 import { Observable } from 'rxjs';
 import { QueryObserverResult } from '@ngneat/query';
 import { IUser } from '@core/types/models.type';
-import { StaffMembersService } from './staff-members.service';
+import { StaffService } from './staff.service';
 import { TeamCardSkeletonComponent } from '../../utils/slots/team-card-skeleton/team-card-skeleton.component';
 import { TeamCardComponent } from '../../utils/slots/team-card/team-card.component';
 import {
@@ -19,7 +19,7 @@ import {
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-staff-members',
+  selector: 'app-staff',
   standalone: true,
   imports: [
     NgOptimizedImage,
@@ -37,10 +37,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
     NguItemComponent
   ],
-  templateUrl: './staff-members.component.html'
+  templateUrl: './staff.component.html'
 })
-export class StaffMembersComponent implements OnInit {
-  #staffMembersService = inject(StaffMembersService);
+export class StaffComponent implements OnInit {
+  #staffMembersService = inject(StaffService);
   staff$: Observable<QueryObserverResult<IUser[], Error>>;
   coachs$: Observable<QueryObserverResult<IUser[], Error>>;
   carouselTile: NguCarouselConfig = {

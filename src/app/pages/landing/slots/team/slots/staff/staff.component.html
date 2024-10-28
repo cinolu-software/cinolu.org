@@ -4,13 +4,14 @@
     <span class="text-green-600">équipe</span>
   </h1>
 
-  @if (staff.isFetching) {
+  @if (staff.isLoading) {
     <div class="relative grid gap-6 grid-cols-1 md:grid-cols-4">
       @for (item of [1, 2, 3, 4]; track $index) {
         <app-team-card-skeleton />
       }
     </div>
-  } @else if (staff.data) {
+  }
+  @if (staff.data) {
     <ngu-carousel #carousel [inputs]="carouselTile" [dataSource]="staff.data" class="relative">
       <ngu-tile *nguCarouselDef="let item; let i = index">
         <app-team-card [user]="item" />

@@ -4,8 +4,7 @@ import { AboutComponent } from './slots/about/about.component';
 import { TeamComponent } from './slots/team/team.component';
 import { FooterComponent } from '@core/components/footer/footer.component';
 import { ProblemStatementComponent } from './slots/problem-statement/problem-statement.component';
-import { OurAimComponent } from './slots/our-aim/our-aim.component';
-import { OurVisionComponent } from './slots/our-vision/our-vision.component';
+import { VisionComponent } from './slots/vision/vision.component';
 import { ServicesComponent } from './slots/services/services.component';
 
 @Component({
@@ -18,8 +17,7 @@ import { ServicesComponent } from './slots/services/services.component';
     TeamComponent,
     FooterComponent,
     ProblemStatementComponent,
-    OurAimComponent,
-    OurVisionComponent
+    VisionComponent
   ],
   templateUrl: './landing.component.html'
 })

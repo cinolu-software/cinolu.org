@@ -7,14 +7,14 @@ import { map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class StaffMembersService {
+export class StaffService {
   #http = inject(HttpClient);
   #queryClient = injectQuery();
 
   getStaffMembers(): ObservableQueryResult<IUser[], Error> {
     return this.#queryClient({
       queryKey: ['staff'] as const,
-      queryFn: () => this.#http.get<{ data: IUser[] }>('users/staff-members').pipe(map((res) => res.data))
+      queryFn: () => this.#http.get<{ data: IUser[] }>('users/staff').pipe(map((res) => res.data))
     }).result$;
   }
 }
