@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { IUser } from '../../common/types/models.type';
+import { IUser } from '../../../@core/types/models.type';
 import { ISignIn } from './types/sign-in.type';
 import { ISignUp } from './types/sign-up.type';
 import { IResetPassword } from './types/reset-password.type';
 import { IForgotPassword } from './types/forgot-password.type';
 import { injectMutation, MutationResult } from '@ngneat/query';
 import { Router } from '@angular/router';
-import { authActions } from '../../common/store/app.actions';
+import { authActions } from '../../../@core/store/app.actions';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

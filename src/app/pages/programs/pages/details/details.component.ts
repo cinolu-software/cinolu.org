@@ -1,7 +1,7 @@
 import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ObservableQueryResult } from '@ngneat/query';
-import { IProgram, IType } from 'app/common/types/models.type';
+import { IProgram, IType } from '@core/types/models.type';
 import { DetailsProgramsService } from './details.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProgramCardComponent } from '../../slots/program-card/program-card.component';

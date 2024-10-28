@@ -1,7 +1,7 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { ObserveVisibilityDirective } from 'app/common/directives/observer.directive';
-import { IUser } from '../../../../../../../common/types/models.type';
+import { ObserveVisibilityDirective } from '@core/directives/observer.directive';
+import { IUser } from '../../../../../../../../@core/types/models.type';
 import { environment } from '../../../../../../../../environments/environment';
 
 @Component({

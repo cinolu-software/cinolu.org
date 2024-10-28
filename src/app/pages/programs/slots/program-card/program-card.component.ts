@@ -2,7 +2,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { IProgram } from 'app/common/types/models.type';
+import { IProgram } from '@core/types/models.type';
 import { environment } from '../../../../../environments/environment';
 import { RouterLink } from '@angular/router';
 

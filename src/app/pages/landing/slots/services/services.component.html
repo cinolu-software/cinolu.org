@@ -1,21 +1,21 @@
 <section class="px-8 md:px-28 mt-20 mb-16">
   <h1 class="font-satoshi font-bold text-3xl md:text-5xl mb-10">
     Ce que nous
-    <span class="text-green-600">offrons</span>
+    <span class="text-green-600">faisons</span>
   </h1>
 
-  <div class="grid md:grid-cols-3 gap-10 mt-16">
-    @for (s of offerings; track $index) {
+  <div class="grid md:grid-cols-2 gap-10 mt-16">
+    @for (service of services; track $index) {
       <div class="flex gap-4 items-start flex-col hidde" appObserveVisibility>
         <span class="bg-primary-950/90 px-3 py-2.5 rounded-full">
-          <mat-icon class="icon-size-5 fill-white" [svgIcon]="s.icon"></mat-icon>
+          <mat-icon class="icon-size-5 fill-white" [svgIcon]="service.icon"></mat-icon>
         </span>
         <div>
           <h3 class="font-semibold text-xl mb-1.5">
-            {{ s.title }}
+            {{ service.title }}
           </h3>
           <p class="mt-1 text-gray-500">
-            {{ s.description }}
+            {{ service.description }}
           </p>
         </div>
       </div>

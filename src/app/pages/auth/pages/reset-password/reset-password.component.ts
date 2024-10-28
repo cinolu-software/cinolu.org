@@ -12,7 +12,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { team } from 'app/pages/auth/slots/auth-card/team';
 import { AuthService } from '../../auth.service';
 import { MutationResult } from '@ngneat/query';
-import { IUser } from '../../../../common/types/models.type';
+import { IUser } from '../../../../../@core/types/models.type';
 import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
 
 @Component({

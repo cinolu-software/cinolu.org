@@ -1,6 +1,6 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
-import { ObserveVisibilityDirective } from 'app/common/directives/observer.directive';
+import { ObserveVisibilityDirective } from '@core/directives/observer.directive';
 
 @Component({
   selector: 'app-team-card-skeleton',

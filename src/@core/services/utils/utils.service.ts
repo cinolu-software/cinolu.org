@@ -3,13 +3,6 @@ import { IsActiveMatchOptions } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class UtilsService {
-  // -----------------------------------------------------------------------------------------------------
-  // @ Accessors
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * Get the equivalent "IsActiveMatchOptions" options for "exact = true".
-   */
   get exactMatchOptions(): IsActiveMatchOptions {
     return {
       paths: 'exact',
@@ -19,9 +12,6 @@ export class UtilsService {
     };
   }
 
-  /**
-   * Get the equivalent "IsActiveMatchOptions" options for "exact = false".
-   */
   get subsetMatchOptions(): IsActiveMatchOptions {
     return {
       paths: 'subset',
@@ -31,15 +21,6 @@ export class UtilsService {
     };
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Public methods
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * Generates a random id
-   *
-   * @param length
-   */
   randomId(): string {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let name = '';

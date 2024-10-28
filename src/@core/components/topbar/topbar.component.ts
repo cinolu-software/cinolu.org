@@ -5,9 +5,9 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { IUser } from '../../types/models.type';
-import { selectUser } from '../../store/app.reducers';
 import { ILink } from './types/link.type';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
+import { selectUser } from '../../store/app.reducers';
 
 @Component({
   selector: 'app-topbar',

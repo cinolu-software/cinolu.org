@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ObserveVisibilityDirective } from 'app/common/directives/observer.directive';
+import { ObserveVisibilityDirective } from '@core/directives/observer.directive';
 
 @Component({
   selector: 'app-our-vision',

@@ -2,7 +2,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { ObserveVisibilityDirective } from 'app/common/directives/observer.directive';
+import { ObserveVisibilityDirective } from '@core/directives/observer.directive';
 import { stakeholders } from './utils/data/stakeholders';
 
 @Component({

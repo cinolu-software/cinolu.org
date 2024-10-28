@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { authActions } from './common/store/app.actions';
+import { authActions } from '../@core/store/app.actions';
 
 @Component({
   standalone: true,
