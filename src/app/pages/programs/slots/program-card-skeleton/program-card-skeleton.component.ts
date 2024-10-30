@@ -1,11 +1,10 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
-import { ObserveVisibilityDirective } from '@core/directives/observer.directive';
 
 @Component({
   selector: 'app-program-card-skeleton',
   standalone: true,
-  imports: [NgOptimizedImage, ObserveVisibilityDirective, CommonModule],
+  imports: [NgOptimizedImage, CommonModule],
   templateUrl: './program-card-skeleton.component.html'
 })
 export class ProgramCardSkeletonComponent {}

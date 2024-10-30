@@ -6,7 +6,7 @@ import { DetailsProgramsService } from './details.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProgramCardComponent } from '../../slots/program-card/program-card.component';
 import { ProgramCardSkeletonComponent } from '../../slots/program-card-skeleton/program-card-skeleton.component';
-import { environment } from '../../../../../environments/environment';
+import { environment } from 'environments/environment';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
