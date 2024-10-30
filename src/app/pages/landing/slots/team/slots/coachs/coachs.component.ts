@@ -8,6 +8,7 @@ import { TeamCardSkeletonComponent } from '../../utils/slots/team-card-skeleton/
 import { TeamCardComponent } from '../../utils/slots/team-card/team-card.component';
 import { CoachService } from './coachs.service';
 import { MatIconModule } from '@angular/material/icon';
+import { team } from '../../../../../auth/slots/auth-card/team';
 
 @Component({
   selector: 'app-coachs',
@@ -24,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './coachs.component.html'
 })
 export class CoachComponent implements OnInit {
+  team = team;
   #coachervice = inject(CoachService);
   coachs$: Observable<QueryObserverResult<IUser[], Error>>;
 

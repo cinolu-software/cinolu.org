@@ -4,15 +4,16 @@ import { RouterModule } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import { IUser } from '../../types/models.type';
+import { IUser } from '@core/types/models.type';
 import { ILink } from './types/link.type';
-import { environment } from '../../../environments/environment';
-import { selectUser } from '../../store/app.reducers';
+import { environment } from 'environments/environment';
+import { selectUser } from '@core/store/app.reducers';
+import { ImgPipe } from '../../pipes/img.pipe';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [CommonModule, RouterModule, NgOptimizedImage, FormsModule],
+  imports: [CommonModule, RouterModule, NgOptimizedImage, FormsModule, ImgPipe],
   templateUrl: './topbar.component.html'
 })
 export class TopbarComponent implements OnInit {
@@ -51,12 +52,6 @@ export class TopbarComponent implements OnInit {
 
   toogleMenu(): void {
     this.isOpen.update((value) => !value);
-  }
-
-  getProfile(user: IUser): string {
-    return user.profile
-      ? `${environment.apiUrl}uploads/profiles/${user.profile}`
-      : user.google_image || '/images/avatar-default.webp';
   }
 
   @HostListener('document:click', ['$event'])

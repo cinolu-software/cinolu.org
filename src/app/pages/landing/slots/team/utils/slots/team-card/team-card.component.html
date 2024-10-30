@@ -1,0 +1,16 @@
+<div class="relative">
+  <div class="group absolute lg:w-full w-11/12 h-full bg-blue-900 bg-opacity-20 rounded-xl transition-all duration-500">
+    <div class="h-full w-full relative">
+      <div class="absolute p-6 left-0 bottom-6 w-full transition-all duration-300 rounded-b-3xl">
+        <div
+          class="text-center bg-gray-800 opacity-0 group-hover:opacity-100 group-focus:opacity-100 -mb-10 p-4 rounded-2xl transition-opacity duration-300">
+          <div itemprop="name" class="text-white text-2xl font-semibold team-name">Atthie Mulongo</div>
+          <span itemprop="jobTitle" class="text-green-500">Marketing</span>
+          <div
+            class="flex w-max m-auto opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity delay-150 duration-300"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <img [ngSrc]="user() | apiIMG" width="640" height="800" [alt]="'profile de' + user().name" />
+</div>
