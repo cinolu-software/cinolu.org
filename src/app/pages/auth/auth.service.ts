@@ -1,20 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { IUser } from '../../../@core/types/models.type';
+import { IUser } from '@core/types/models.type';
 import { ISignIn } from './types/sign-in.type';
 import { ISignUp } from './types/sign-up.type';
 import { IResetPassword } from './types/reset-password.type';
 import { IForgotPassword } from './types/forgot-password.type';
-import { injectMutation, MutationResult } from '@ngneat/query';
+import { injectMutation, injectQuery, MutationResult, ObservableQueryResult } from '@ngneat/query';
 import { Router } from '@angular/router';
-import { authActions } from '../../../@core/store/app.actions';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  #mutation = injectMutation();
+  #query = injectQuery();
   #httpClient = inject(HttpClient);
   #router = inject(Router);
-  #mutation = injectMutation();
 
   signUp(): MutationResult<IUser, Error, unknown> {
     return this.#mutation({
@@ -28,10 +28,7 @@ export class AuthService {
     return this.#mutation({
       mutationFn: (payload: ISignIn) =>
         this.#httpClient.post<{ data: IUser }>('auth/sign-in', payload).pipe(map((res) => res.data)),
-      onSuccess: (user) => {
-        authActions.authenticateUser({ user });
-        this.#router.navigate(['/']);
-      }
+      onSuccess: () => this.#router.navigate(['/'])
     });
   }
 
@@ -69,6 +66,13 @@ export class AuthService {
         this.#httpClient.post<{ data: IUser }>('auth/verify-email', { token }).pipe(map((res) => res.data)),
       onSuccess: () => this.#router.navigate(['/sign-in'])
     });
+  }
+
+  getUser(): ObservableQueryResult<IUser, Error> {
+    return this.#query({
+      queryKey: ['user'] as const,
+      queryFn: () => this.#httpClient.get<{ data: IUser }>('auth/profile').pipe(map((res) => res.data))
+    }).result$;
   }
 
   getProfile(): Observable<IUser> {

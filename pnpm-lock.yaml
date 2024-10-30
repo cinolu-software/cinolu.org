@@ -50,18 +50,6 @@ importers:
       '@ngneat/query':
         specifier: ^3.0.0
         version: 3.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(@tanstack/query-core@5.59.9)
-      '@ngrx/effects':
-        specifier: ^18.0.2
-        version: 18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(@ngrx/store@18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(rxjs@7.8.1)
-      '@ngrx/operators':
-        specifier: ^18.0.2
-        version: 18.0.2(rxjs@7.8.1)
-      '@ngrx/store':
-        specifier: ^18.0.2
-        version: 18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
-      '@ngrx/store-devtools':
-        specifier: ^18.0.2
-        version: 18.0.2(@ngrx/store@18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(rxjs@7.8.1)
       express:
         specifier: ^4.19.2
         version: 4.19.2
@@ -1651,35 +1639,6 @@ packages:
     peerDependencies:
       '@angular/core': '>=16.0.0 <19.0.0'
       '@tanstack/query-core': ^5.4.3
-
-  '@ngrx/effects@18.0.2':
-    resolution: {integrity: sha512-YojXcOD9Lsq4kl2HCjENccyUM/mOlgBdtddsg9j/ojzSUgu3ZuBVKLN3atrL2TJYkbMX1MN0RzafSkL3TPGFIA==}
-    peerDependencies:
-      '@angular/core': ^18.0.0
-      '@ngrx/store': 18.0.2
-      rxjs: ^6.5.3 || ^7.5.0
-
-  '@ngrx/operators@18.0.1':
-    resolution: {integrity: sha512-M+QMrHNKgcuiLaRGZxJ4aQi5/OCRfKC4+T/63dsHyLFZ53/FFpF6a/ytSO1Q+tzOplZ5o99S+i8FVaZqNQ3LmQ==}
-    peerDependencies:
-      rxjs: ^6.5.3 || ^7.4.0
-
-  '@ngrx/operators@18.0.2':
-    resolution: {integrity: sha512-4dyNkVKBw9ZqECMJu6bT2t21p3ANaMC+ZkcfiBfv5OUEFtB9HhN5uCem9tcgYeNBK8XQFA7/1tzd1T3KaiBY8A==}
-    peerDependencies:
-      rxjs: ^6.5.3 || ^7.4.0
-
-  '@ngrx/store-devtools@18.0.2':
-    resolution: {integrity: sha512-NcfVGUOGNvl1luV+Lt8KDqqwuwNYYaSbEuGi4mq70Hb4ws3sO6BFL9v+AeHLCQ51vKccL/cYqDNMYe4QMD7UaA==}
-    peerDependencies:
-      '@ngrx/store': 18.0.2
-      rxjs: ^6.5.3 || ^7.5.0
-
-  '@ngrx/store@18.0.2':
-    resolution: {integrity: sha512-ajwv0+njsO4vzArp9esnFvs1wyUb1U1W8E8LSCKrcW2hWWo9o1Pezj+JRsdQwatxHfrrPFuTDyajsl6GQM/JSA==}
-    peerDependencies:
-      '@angular/core': ^18.0.0
-      rxjs: ^6.5.3 || ^7.5.0
 
   '@ngtools/webpack@18.2.2':
     resolution: {integrity: sha512-YhADmc+lVjLt3kze07A+yLry2yzcghdclu+7D3EDfa6fG2Pk33HK3MY2I0Z0BO+Ivoq7cV7yxm+naR+Od0Y5ng==}
@@ -6977,36 +6936,6 @@ snapshots:
     dependencies:
       '@angular/core': 18.2.2(rxjs@7.8.1)(zone.js@0.14.10)
       '@tanstack/query-core': 5.59.9
-      tslib: 2.7.0
-
-  '@ngrx/effects@18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(@ngrx/store@18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(rxjs@7.8.1)':
-    dependencies:
-      '@angular/core': 18.2.2(rxjs@7.8.1)(zone.js@0.14.10)
-      '@ngrx/operators': 18.0.1(rxjs@7.8.1)
-      '@ngrx/store': 18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
-      rxjs: 7.8.1
-      tslib: 2.7.0
-
-  '@ngrx/operators@18.0.1(rxjs@7.8.1)':
-    dependencies:
-      rxjs: 7.8.1
-      tslib: 2.7.0
-
-  '@ngrx/operators@18.0.2(rxjs@7.8.1)':
-    dependencies:
-      rxjs: 7.8.1
-      tslib: 2.7.0
-
-  '@ngrx/store-devtools@18.0.2(@ngrx/store@18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(rxjs@7.8.1)':
-    dependencies:
-      '@ngrx/store': 18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
-      rxjs: 7.8.1
-      tslib: 2.7.0
-
-  '@ngrx/store@18.0.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)':
-    dependencies:
-      '@angular/core': 18.2.2(rxjs@7.8.1)(zone.js@0.14.10)
-      rxjs: 7.8.1
       tslib: 2.7.0
 
   '@ngtools/webpack@18.2.2(@angular/compiler-cli@18.2.2(@angular/compiler@18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(typescript@5.5.4)(webpack@5.94.0(esbuild@0.23.0))':

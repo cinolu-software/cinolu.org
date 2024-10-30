@@ -1,5 +1,5 @@
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { ApplicationConfig, isDevMode, LOCALE_ID } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, TitleStrategy, withInMemoryScrolling } from '@angular/router';
 import { provideApp } from '@core';
@@ -7,14 +7,9 @@ import { appRoutes } from 'app/app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PageTitleStrategy } from '../@core/strategies/page-title.strategy';
 import { httpInterceptor } from '../@core/interceptors/http.interceptor';
-import { provideEffects } from '@ngrx/effects';
-import { provideStore } from '@ngrx/store';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
-import { AuthEffects } from '../@core/store/app.effects';
-import { authReducers } from '../@core/store/app.reducers';
-import { provideIcons } from '../@core/services/icons/icons.provider';
+import { provideIcons } from '@core/services/icons/icons.provider';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -39,14 +34,6 @@ export const appConfig: ApplicationConfig = {
         theme: 'theme-default'
       }
     }),
-    provideClientHydration(),
-    provideEffects([AuthEffects]),
-    provideStore({
-      auth: authReducers
-    }),
-    provideStoreDevtools({
-      maxAge: 25,
-      logOnly: !isDevMode()
-    })
+    provideClientHydration()
   ]
 };

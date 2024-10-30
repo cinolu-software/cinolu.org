@@ -1,14 +1,13 @@
 import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { IUser } from '@core/types/models.type';
 import { ILink } from './types/link.type';
 import { environment } from 'environments/environment';
-import { selectUser } from '@core/store/app.reducers';
-import { ImgPipe } from '../../pipes/img.pipe';
+import { ImgPipe } from '@core/pipes/img.pipe';
+import { ObservableQueryResult } from '@ngneat/query';
+import { AuthService } from 'app/pages/auth/auth.service';
 
 @Component({
   selector: 'app-topbar',
@@ -17,13 +16,13 @@ import { ImgPipe } from '../../pipes/img.pipe';
   templateUrl: './topbar.component.html'
 })
 export class TopbarComponent implements OnInit {
-  user$: Observable<IUser | null>;
   isOpen = signal(false);
   accountUrl = environment.accountUrl;
-  #store = inject(Store);
+  result$: ObservableQueryResult<IUser | null>;
+  #authService = inject(AuthService);
 
   ngOnInit(): void {
-    this.user$ = this.#store.pipe(select(selectUser));
+    this.result$ = this.#authService.getUser();
   }
 
   commonLinks: ILink[] = [
