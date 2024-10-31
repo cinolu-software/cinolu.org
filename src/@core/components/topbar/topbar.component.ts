@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
+import { Component, HostListener, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +7,10 @@ import { ILink } from './types/link.type';
 import { environment } from 'environments/environment';
 import { ImgPipe } from '@core/pipes/img.pipe';
 import { ObservableQueryResult } from '@ngneat/query';
-import { AuthService } from 'app/pages/auth/auth.service';
+import { Subscription } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { selectUser } from '../../store/auth/auth.reducers';
+import { authActions } from '../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-topbar',
@@ -15,14 +18,17 @@ import { AuthService } from 'app/pages/auth/auth.service';
   imports: [CommonModule, RouterModule, NgOptimizedImage, FormsModule, ImgPipe],
   templateUrl: './topbar.component.html'
 })
-export class TopbarComponent implements OnInit {
+export class TopbarComponent implements OnInit, OnDestroy {
   isOpen = signal(false);
   accountUrl = environment.accountUrl;
+  user: IUser | null;
   result$: ObservableQueryResult<IUser | null>;
-  #authService = inject(AuthService);
+  #store = inject(Store);
+  #subscription: Subscription;
 
   ngOnInit(): void {
-    this.result$ = this.#authService.getUser();
+    this.#store.dispatch(authActions.authentication());
+    this.#subscription = this.#store.pipe(select(selectUser)).subscribe((user: IUser | null) => (this.user = user));
   }
 
   commonLinks: ILink[] = [
@@ -58,5 +64,9 @@ export class TopbarComponent implements OnInit {
     const target = event.target as HTMLElement;
     const isNavbar = target.closest('.navbar');
     if (!isNavbar) this.isOpen.set(false);
+  }
+
+  ngOnDestroy(): void {
+    this.#subscription.unsubscribe();
   }
 }

@@ -10,6 +10,10 @@ import { httpInterceptor } from '../@core/interceptors/http.interceptor';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { provideIcons } from '@core/services/icons/icons.provider';
+import { provideEffects } from '@ngrx/effects';
+import { provideStore } from '@ngrx/store';
+import { authReducers } from '@core/store/auth/auth.reducers';
+import { AuthEffects } from '../@core/store/auth/auth.effects';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -34,6 +38,10 @@ export const appConfig: ApplicationConfig = {
         theme: 'theme-default'
       }
     }),
-    provideClientHydration()
+    provideClientHydration(),
+    provideEffects(AuthEffects),
+    provideStore({
+      auth: authReducers
+    })
   ]
 };

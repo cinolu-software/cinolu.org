@@ -1,16 +1,16 @@
-<div class="relative">
-  <div class="group absolute lg:w-full w-11/12 h-full bg-blue-900 bg-opacity-20 rounded-xl transition-all duration-500">
-    <div class="h-full w-full relative">
-      <div class="absolute p-6 left-0 bottom-6 w-full transition-all duration-300 rounded-b-3xl">
-        <div
-          class="text-center bg-gray-800 opacity-0 group-hover:opacity-100 group-focus:opacity-100 -mb-10 p-4 rounded-2xl transition-opacity duration-300">
-          <div itemprop="name" class="text-white text-2xl font-semibold team-name">Atthie Mulongo</div>
-          <span itemprop="jobTitle" class="text-green-500">Marketing</span>
-          <div
-            class="flex w-max m-auto opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity delay-150 duration-300"></div>
-        </div>
+<div class="relative w-full max-w-[350px]">
+  <img [src]="user() | apiIMG" [alt]="'image ' + user().name" class="w-full rounded-lg" fill />
+  <div class="absolute bottom-5 left-0 w-full text-center">
+    <div class="relative mx-5 overflow-hidden rounded-lg bg-white py-5 px-3">
+      <h3 class="text-dark text-base font-semibold">{{ user().name }}</h3>
+      <p class="text-body-color text-xs">{{ user().roles[0].name }}</p>
+      <div>
+        <span class="absolute left-0 bottom-0">
+          <svg width="61" height="30" viewBox="0 0 61 30" xmlns="http://www.w3.org/2000/svg" class="fill-primary-600">
+            <circle cx="16" cy="45" r="45" fill="#13C296" fill-opacity="0.11" />
+          </svg>
+        </span>
       </div>
     </div>
   </div>
-  <img [ngSrc]="user() | apiIMG" width="640" height="800" [alt]="'profile de' + user().name" />
 </div>
