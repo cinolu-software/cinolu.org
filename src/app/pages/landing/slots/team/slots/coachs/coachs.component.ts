@@ -4,12 +4,11 @@ import { ObserveVisibilityDirective } from '@core/directives/observer.directive'
 import { Observable } from 'rxjs';
 import { QueryObserverResult } from '@ngneat/query';
 import { IUser } from '@core/types/models.type';
-import { TeamCardSkeletonComponent } from '../../utils/slots/team-card-skeleton/team-card-skeleton.component';
-import { TeamCardComponent } from '../../utils/slots/team-card/team-card.component';
 import { CoachService } from './coachs.service';
 import { MatIconModule } from '@angular/material/icon';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { team } from '../../../../../auth/slots/auth-card/team';
+import { TeamCardSkeletonComponent } from '../../utils/slots/team-card-skeleton/team-card-skeleton.component';
+import { TeamCardComponent } from '../../utils/slots/team-card/team-card.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-coachs',
@@ -21,13 +20,11 @@ import { team } from '../../../../../auth/slots/auth-card/team';
     TeamCardSkeletonComponent,
     TeamCardComponent,
     MatIconModule,
-    SlickCarouselModule
+    CarouselModule
   ],
   templateUrl: './coachs.component.html'
 })
 export class CoachComponent implements OnInit {
-  slides = team;
-  slideConfig = { slidesToShow: 3, slidesToScroll: 1 };
   #coachervice = inject(CoachService);
   coachs$: Observable<QueryObserverResult<IUser[], Error>>;
 

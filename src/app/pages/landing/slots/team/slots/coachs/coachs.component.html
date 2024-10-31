@@ -3,29 +3,34 @@
     Nos
     <span class="text-primary-600">coachs</span>
   </h1>
-
-  @if (result.data; as coachs) {
-    <div class="relative">
-      <ngx-slick-carousel class="caroussel" #slickModal="slick-carousel" [config]="slideConfig">
-        @for (coach of coachs; track $index) {
-          <div ngxSlickItem class="slide mr-4">
-            <app-team-card [user]="coach" />
-          </div>
+  <div class="relative">
+    @if (result.data; as coachs) {
+      <owl-carousel-o
+        #owlCaroussel
+        [options]="{
+          loop: true,
+          dots: false,
+          nav: false
+        }">
+        @for (coach of coachs; track coach.id) {
+          <ng-template carouselSlide>
+            <div class="mr-3">
+              <app-team-card [user]="coach" />
+            </div>
+          </ng-template>
         }
-      </ngx-slick-carousel>
+      </owl-carousel-o>
 
-      <div class="">
-        <button
-          (click)="slickModal.slickPrev()"
-          class="rounded-full flex flex-col items-center justify-center h-10 w-10 absolute top-1/2 -left-14 border hover:text-white hover:bg-primary-600 transition-colors duration-500">
-          <mat-icon class="icon-size-4" svgIcon="heroicons_solid:chevron-left"></mat-icon>
-        </button>
-        <button
-          (click)="slickModal.slickNext()"
-          class="rounded-full flex flex-col items-center justify-center h-10 w-10 absolute top-1/2 -right-10 border hover:text-white hover:bg-primary-600 transition-colors duration-500">
-          <mat-icon class="icon-size-4" svgIcon="heroicons_solid:chevron-right"></mat-icon>
-        </button>
-      </div>
-    </div>
-  }
+      <button
+        (click)="owlCaroussel.prev()"
+        class="rounded-full flex flex-col items-center justify-center h-10 w-10 absolute top-1/2 -left-14 border hover:text-white hover:bg-primary-600 transition-colors duration-500">
+        <mat-icon class="icon-size-4" svgIcon="heroicons_solid:chevron-left"></mat-icon>
+      </button>
+      <button
+        (click)="owlCaroussel.next()"
+        class="rounded-full flex flex-col items-center justify-center h-10 w-10 absolute top-1/2 -right-10 border hover:text-white hover:bg-primary-600 transition-colors duration-500">
+        <mat-icon class="icon-size-4" svgIcon="heroicons_solid:chevron-right"></mat-icon>
+      </button>
+    }
+  </div>
 </section>
