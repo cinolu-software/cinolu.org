@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { afterNextRender, Component, inject, OnInit, signal } from '@angular/core';
 import { ObserveVisibilityDirective } from '@core/directives/observer.directive';
 import { Observable } from 'rxjs';
 import { QueryObserverResult } from '@ngneat/query';
@@ -8,7 +8,7 @@ import { CoachService } from './coachs.service';
 import { MatIconModule } from '@angular/material/icon';
 import { TeamCardSkeletonComponent } from '../../utils/slots/team-card-skeleton/team-card-skeleton.component';
 import { TeamCardComponent } from '../../utils/slots/team-card/team-card.component';
-import { CarouselModule } from 'ngx-owl-carousel-o';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-coachs',
@@ -25,8 +25,33 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
   templateUrl: './coachs.component.html'
 })
 export class CoachComponent implements OnInit {
-  #coachervice = inject(CoachService);
   coachs$: Observable<QueryObserverResult<IUser[], Error>>;
+  options: OwlOptions;
+  isBrowser = signal<boolean>(false);
+  #coachervice = inject(CoachService);
+
+  constructor() {
+    afterNextRender(() => this.isBrowser.set(true));
+    this.options = {
+      loop: true,
+      dots: false,
+      nav: false,
+      margin: 10,
+      center: true,
+      slideBy: 1,
+      responsive: {
+        0: {
+          items: 1
+        },
+        400: {
+          items: 2
+        },
+        740: {
+          items: 4
+        }
+      }
+    };
+  }
 
   ngOnInit(): void {
     this.coachs$ = this.#coachervice.getCoachs();

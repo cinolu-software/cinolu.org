@@ -1,36 +1,29 @@
-<section class="bg-white text-gray-800 mb-20 px-8 md:px-32" id="coachs" *ngIf="coachs$ | async as result">
-  <h1 class="font-satoshi font-bold text-2xl md:text-5xl mb-8">
-    Nos
-    <span class="text-primary-600">coachs</span>
-  </h1>
-  <div class="relative">
-    @if (result.data; as coachs) {
-      <owl-carousel-o
-        #owlCaroussel
-        [options]="{
-          loop: true,
-          dots: false,
-          nav: false
-        }">
-        @for (coach of coachs; track coach.id) {
-          <ng-template carouselSlide>
-            <div class="mr-3">
-              <app-team-card [user]="coach" />
-            </div>
-          </ng-template>
-        }
-      </owl-carousel-o>
-
-      <button
-        (click)="owlCaroussel.prev()"
-        class="rounded-full flex flex-col items-center justify-center h-10 w-10 absolute top-1/2 -left-14 border hover:text-white hover:bg-primary-600 transition-colors duration-500">
-        <mat-icon class="icon-size-4" svgIcon="heroicons_solid:chevron-left"></mat-icon>
-      </button>
-      <button
-        (click)="owlCaroussel.next()"
-        class="rounded-full flex flex-col items-center justify-center h-10 w-10 absolute top-1/2 -right-10 border hover:text-white hover:bg-primary-600 transition-colors duration-500">
-        <mat-icon class="icon-size-4" svgIcon="heroicons_solid:chevron-right"></mat-icon>
-      </button>
-    }
-  </div>
+<section class="bg-white text-gray-800 mb-20 relative" id="coachs" *ngIf="coachs$ | async as result">
+  <ng-container *ngIf="isBrowser() && result.data">
+    <h1 class="font-satoshi font-bold text-2xl md:text-5xl mb-8 px-8 md:px-32">
+      Nos
+      <span class="text-primary-600">coachs</span>
+    </h1>
+    <owl-carousel-o #owlCaroussel [options]="options">
+      @for (coach of result.data; track $index) {
+        <ng-template carouselSlide>
+          <app-team-card [user]="coach" />
+        </ng-template>
+      }
+    </owl-carousel-o>
+    <div class="flex flex-col items-center">
+      <div class="flex items-center gap-2 mt-6">
+        <button
+          (click)="owlCaroussel.prev()"
+          class="rounded-full flex flex-col items-center justify-center h-10 w-10 border text-black hover:text-white hover:bg-primary-600 transition-colors duration-500">
+          <mat-icon class="icon-size-4" svgIcon="heroicons_solid:chevron-left"></mat-icon>
+        </button>
+        <button
+          (click)="owlCaroussel.next()"
+          class="rounded-full flex flex-col items-center justify-center h-10 w-10 border bg-white text-black hover:text-white hover:bg-primary-600 transition-colors duration-500">
+          <mat-icon class="icon-size-4" svgIcon="heroicons_solid:chevron-right"></mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
 </section>

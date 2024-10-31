@@ -1,33 +1,30 @@
-<!-- <section class="bg-white text-gray-800 px-8 md:px-32 mt-20 mb-12" id="staff-members" *ngIf="staff$ | async as staff">
-  <h1 class="font-satoshi font-bold text-2xl md:text-5xl mb-6">
-    Notre
-    <span class="text-primary-600">équipe</span>
-  </h1>
+<section class="bg-white text-gray-800 mb-20" id="coachs" *ngIf="staff$ | async as result">
+  <ng-container *ngIf="isBrowser() && result.data">
+    <h1 class="font-satoshi font-bold text-2xl md:text-5xl mb-8 px-8 md:px-32">
+      Notre
+      <span class="text-primary-600">staff</span>
+    </h1>
 
-  @if (staff.isLoading) {
-    <div class="relative grid gap-6 grid-cols-1 md:grid-cols-4">
-      @for (item of [1, 2, 3, 4]; track $index) {
-        <app-team-card-skeleton />
+    <owl-carousel-o #owlCaroussel [options]="options">
+      @for (coach of result.data; track $index) {
+        <ng-template carouselSlide>
+          <app-team-card [user]="coach" />
+        </ng-template>
       }
+    </owl-carousel-o>
+    <div class="flex flex-col items-center">
+      <div class="flex items-center gap-2 mt-6">
+        <button
+          (click)="owlCaroussel.prev()"
+          class="rounded-full flex flex-col items-center justify-center h-10 w-10 border text-black hover:text-white hover:bg-primary-600 transition-colors duration-500">
+          <mat-icon class="icon-size-4" svgIcon="heroicons_solid:chevron-left"></mat-icon>
+        </button>
+        <button
+          (click)="owlCaroussel.next()"
+          class="rounded-full flex flex-col items-center justify-center h-10 w-10 border bg-white text-black hover:text-white hover:bg-primary-600 transition-colors duration-500">
+          <mat-icon class="icon-size-4" svgIcon="heroicons_solid:chevron-right"></mat-icon>
+        </button>
+      </div>
     </div>
-  }
-  @if (staff.data) {
-    <ngu-carousel #carousel [inputs]="carouselTile" [dataSource]="staff.data" class="relative">
-      <ngu-tile *nguCarouselDef="let item; let i = index">
-        <app-team-card [user]="item" />
-      </ngu-tile>
-      <button
-        class="absolute -left-10 z-10 top-1/3 bg-white shadow-md rounded-full px-3 py-2"
-        *ngIf="!carousel.isFirst()"
-        NguCarouselPrev>
-        <mat-icon class="icon-size-4 text-black" svgIcon="heroicons_outline:arrow-left"></mat-icon>
-      </button>
-      <button
-        class="absolute -right-8 top-1/3 bg-white shadow-md rounded-full px-3 py-2"
-        *ngIf="!carousel.isLast()"
-        NguCarouselNext>
-        <mat-icon class="icon-size-4 text-black" svgIcon="heroicons_outline:arrow-right"></mat-icon>
-      </button>
-    </ngu-carousel>
-  }
-</section> -->
+  </ng-container>
+</section>

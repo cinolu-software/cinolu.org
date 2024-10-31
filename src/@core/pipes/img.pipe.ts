@@ -10,7 +10,7 @@ export class ImgPipe implements PipeTransform {
     if ('profile' in value) {
       return value['profile']
         ? `${environment.apiUrl}uploads/profiles/${value['profile']}`
-        : (value['google_image'] ?? '/images/avatar-default.webp');
+        : (value['google_image'] ?? 'https://placehold.co/600x700');
     }
     if ('image' in value) {
       return value['image'] ? `${environment.apiUrl}uploads/programs/${value['image']}` : '/images/no-image.jpg';

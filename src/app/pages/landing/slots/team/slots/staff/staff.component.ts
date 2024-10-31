@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { afterNextRender, Component, inject, OnInit, signal } from '@angular/core';
 import { ObserveVisibilityDirective } from '@core/directives/observer.directive';
 import { Observable } from 'rxjs';
 import { QueryObserverResult } from '@ngneat/query';
@@ -8,6 +8,7 @@ import { StaffService } from './staff.service';
 import { TeamCardSkeletonComponent } from '../../utils/slots/team-card-skeleton/team-card-skeleton.component';
 import { TeamCardComponent } from '../../utils/slots/team-card/team-card.component';
 import { MatIconModule } from '@angular/material/icon';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-staff',
@@ -19,13 +20,40 @@ import { MatIconModule } from '@angular/material/icon';
     TeamCardSkeletonComponent,
     TeamCardComponent,
     TeamCardComponent,
-    MatIconModule
+    MatIconModule,
+    CarouselModule
   ],
   templateUrl: './staff.component.html'
 })
 export class StaffComponent implements OnInit {
-  #staffMembersService = inject(StaffService);
   staff$: Observable<QueryObserverResult<IUser[], Error>>;
+  options: OwlOptions;
+  isBrowser = signal<boolean>(false);
+  #staffMembersService = inject(StaffService);
+
+  constructor() {
+    afterNextRender(() => this.isBrowser.set(true));
+    this.options = {
+      items: 4,
+      loop: true,
+      dots: false,
+      nav: false,
+      margin: 10,
+      center: true,
+      slideBy: 1,
+      responsive: {
+        0: {
+          items: 1
+        },
+        400: {
+          items: 2
+        },
+        740: {
+          items: 4
+        }
+      }
+    };
+  }
 
   ngOnInit(): void {
     this.staff$ = this.#staffMembersService.getStaffMembers();
