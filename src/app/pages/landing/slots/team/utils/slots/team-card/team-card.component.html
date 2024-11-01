@@ -1,3 +1,24 @@
-<div class="relative h-90">
-  <img [ngSrc]="user() | apiIMG" [alt]="'image ' + user().name" class="rounded-lg" fill />
+<div class="group relative rounded-lg overflow-hidden mr-1.5">
+  <img
+    class="mx-auto h-[28rem] w-full object-cover object-top ransition duration-500 group-hover:scale-105"
+    [src]="user() | apiIMG"
+    [alt]="'Profile de ' + user().name"
+    loading="lazy"
+    width="640"
+    height="805" />
+  <div
+    class="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-gray-800 dark:bg-white translate-y-20 transition duration-300 ease-in-out group-hover:translate-y-0">
+    <div>
+      <h4 class="text-xl font-semibold dark:text-gray-700 text-white line-clamp-1">
+        {{ user().name }}
+      </h4>
+      <span class="block text-sm text-gray-500 line-clamp-1">
+        {{ user().email }}
+      </span>
+    </div>
+    <p class="mt-8 text-gray-300 dark:text-gray-600 line-clamp-2">
+      {{ user().phone_number }} <br />
+      {{ user().address }}
+    </p>
+  </div>
 </div>
