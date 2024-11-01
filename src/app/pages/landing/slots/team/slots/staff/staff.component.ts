@@ -36,7 +36,18 @@ export class StaffComponent implements OnInit {
     this.options = {
       loop: true,
       dots: false,
-      nav: false
+      nav: false,
+      responsive: {
+        0: {
+          items: 1
+        },
+        740: {
+          items: 2
+        },
+        940: {
+          items: 3
+        }
+      }
     };
   }
 
