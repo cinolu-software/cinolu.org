@@ -1,4 +1,4 @@
-<section class="relative min-h-screen">
+<section class="relative h-screen w-full">
   <ng-container *ngIf="isBrowser()">
     <owl-carousel-o #owlCaroussel [options]="options">
       <ng-template carouselSlide>
@@ -14,12 +14,12 @@
 
     <button
       (click)="owlCaroussel.prev()"
-      class="absolute top-[45%] left-10 z-10 transition-transform duration-200 hover:scale-110 rounded-full flex flex-col items-center justify-center h-10 w-10 text-white bg-secondary-700 shadow-md">
+      class="absolute top-[80%] md:top-[45%] z-10 left-10 transition-transform duration-200 hover:scale-110 rounded-full flex flex-col items-center justify-center h-10 w-10 text-white bg-secondary-700 shadow-md">
       <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_left"></mat-icon>
     </button>
     <button
       (click)="owlCaroussel.next()"
-      class="absolute top-[45%] right-10 z-10 transition-transform duration-200 hover:scale-110 rounded-full flex flex-col items-center justify-center h-10 w-10 text-white bg-secondary-700 shadow-md">
+      class="absolute top-[80%] md:top-[45%] right-10 z-10 transition-transform duration-200 hover:scale-110 rounded-full flex flex-col items-center justify-center h-10 w-10 text-white bg-secondary-700 shadow-md">
       <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_right"></mat-icon>
     </button>
 
