@@ -33,7 +33,6 @@ export class CoachComponent implements OnInit {
   constructor() {
     afterNextRender(() => this.isBrowser.set(true));
     this.options = {
-      items: 4,
       loop: true,
       dots: false,
       nav: false

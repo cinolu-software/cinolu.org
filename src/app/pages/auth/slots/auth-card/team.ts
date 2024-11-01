@@ -10,11 +10,6 @@ export const team: { name: string; role: string; image: string }[] = [
     image: '/images/team/ls.webp'
   },
   {
-    name: 'Berry Numbi',
-    role: 'Managing Director',
-    image: '/images/team/bn.webp'
-  },
-  {
     name: 'Megan Madia',
     role: 'Support Manager',
     image: '/images/team/mm.webp'
@@ -23,10 +18,5 @@ export const team: { name: string; role: string; image: string }[] = [
     name: 'Joyce Mishika',
     role: 'Planning Manager',
     image: '/images/team/jm.webp'
-  },
-  {
-    name: 'Berry Numbi',
-    role: 'Managing Director',
-    image: '/images/team/bn.webp'
   }
 ];
