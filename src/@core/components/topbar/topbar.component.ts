@@ -35,6 +35,10 @@ export class TopbarComponent implements OnInit, OnDestroy {
     {
       name: 'Programmes',
       path: '/programs'
+    },
+    {
+      name: 'Accueil',
+      path: '/'
     }
   ];
 
