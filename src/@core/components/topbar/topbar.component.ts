@@ -33,23 +33,27 @@ export class TopbarComponent implements OnInit, OnDestroy {
 
   commonLinks: ILink[] = [
     {
-      name: 'Programmes',
-      path: '/programs'
+      name: 'Accueil',
+      path: '/',
+      exactUrl: true
     },
     {
-      name: 'Accueil',
-      path: '/'
+      name: 'Programmes',
+      path: '/programs',
+      exactUrl: false
     }
   ];
 
   authLinks: ILink[] = [
     {
       name: 'Se connecter',
-      path: '/sign-in'
+      path: '/sign-in',
+      exactUrl: true
     },
     {
       name: "S'inscrire",
-      path: '/sign-up'
+      path: '/sign-up',
+      exactUrl: true
     }
   ];
 

@@ -4,14 +4,19 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const generatePalette = require(path.resolve(__dirname, 'src/@core/tailwind/utils/generate-palette'));
 
 const customPalettes = {
-  brand: generatePalette('#2196F3')
+  primary: generatePalette('#a4c73b'),
+  secondary: generatePalette('#508c3c')
 };
 
 const themes = {
   default: {
     primary: {
-      ...colors.green,
-      DEFAULT: colors.green[600]
+      ...customPalettes.secondary,
+      DEFAULT: customPalettes.secondary[600]
+    },
+    secondary: {
+      ...customPalettes.primary,
+      DEFAULT: customPalettes.primary[600]
     },
     accent: {
       ...colors.slate,
@@ -24,9 +29,6 @@ const themes = {
     'on-warn': {
       500: colors.red['50']
     }
-  },
-  brand: {
-    primary: customPalettes.brand
   },
   teal: {
     primary: {

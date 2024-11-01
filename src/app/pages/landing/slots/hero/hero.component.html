@@ -1,42 +1,44 @@
-<section class="">
-  <div class="relative min-h-screen py-96 w-full flex flex-col bg-hero bg-cover bg-no-repeat">
-    <div
-      class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/50 to-primary-800/60 gap-6 text-2xl md:text-4xl px-8 md:px-32 text-white">
-      <div class="max-w-screen-md flex flex-col items-start justify-center md:-mt-16 font-medium">
-        <h1 class="font-extrabold block text-3xl md:text-5xl hyphens-none">Co-créons votre projet !</h1>
-        <p class="text-lg mb-8 mt-10 md:text-xl max-w-screen-sm">
-          Nous vous accompagnons avec les compétences, les ressources et le réseau qu'il vous faut pour vous lancer et
-          croitre.
-        </p>
+<section class="relative min-h-screen">
+  <ng-container *ngIf="isBrowser()">
+    <owl-carousel-o #owlCaroussel [options]="options">
+      <ng-template carouselSlide>
+        <app-hero-slide-one />
+      </ng-template>
+      <ng-template carouselSlide>
+        <app-hero-slide-two />
+      </ng-template>
+      <ng-template carouselSlide>
+        <app-hero-slide-three />
+      </ng-template>
+    </owl-carousel-o>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base text-center">
-          <a
-            routerLink="/programs"
-            class="border border-white rounded-md px-6 py-2 text-white hover:bg-white hover:text-primary-700 transition-colors duration-500">
-            Nos programmes
-          </a>
-          <a href="/auth/register" class="bg-primary-700 rounded-md px-6 py-2 text-white hover:bg-primary-900">
-            Rejoignez-nous
-          </a>
+    <button
+      (click)="owlCaroussel.prev()"
+      class="absolute top-[45%] left-10 z-10 transition-transform duration-200 hover:scale-110 rounded-full flex flex-col items-center justify-center h-10 w-10 text-white bg-secondary-700 shadow-md">
+      <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_left"></mat-icon>
+    </button>
+    <button
+      (click)="owlCaroussel.next()"
+      class="absolute top-[45%] right-10 z-10 transition-transform duration-200 hover:scale-110 rounded-full flex flex-col items-center justify-center h-10 w-10 text-white bg-secondary-700 shadow-md">
+      <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_right"></mat-icon>
+    </button>
+
+    <div class="-mt-10 z-10 px-8 md:px-20 relative grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
+      @for (p of stakeholdersPurposes; track $index) {
+        <div
+          class="p-8 bg-white rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-3 transition-transform duration-500">
+          <span
+            class="bg-secondary-900/90 text-center h-10 w-10 flex flex-col items-center justify-center mb-3 rounded-full">
+            <mat-icon class="icon-size-5 fill-white" [svgIcon]="p.icon"></mat-icon>
+          </span>
+          <h1 class="font-satoshi font-bold text-xl mb-4 line-clamp-1">
+            {{ p.title }}
+          </h1>
+          <p class="line-clamp-3">
+            {{ p.description }}
+          </p>
         </div>
-      </div>
+      }
     </div>
-  </div>
-
-  <div class="-mt-20 px-8 md:px-20 relative grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
-    @for (p of stakeholdersPurposes; track $index) {
-      <div
-        class="p-8 bg-white rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-3 transition-transform duration-500">
-        <span class="inline-block bg-primary-900/90 text-center px-3 py-2 text-lg mb-3 rounded-full">
-          <mat-icon class="icon-size-5 fill-white" [svgIcon]="p.icon"></mat-icon>
-        </span>
-        <h1 class="font-satoshi font-bold text-xl mb-4 line-clamp-1">
-          {{ p.title }}
-        </h1>
-        <p class="line-clamp-3">
-          {{ p.description }}
-        </p>
-      </div>
-    }
-  </div>
+  </ng-container>
 </section>
