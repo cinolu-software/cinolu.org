@@ -19,7 +19,7 @@
             <a
               [routerLink]="link.path"
               [routerLinkActiveOptions]="{ exact: link.exactUrl }"
-              class="hover:text-primary-500 transition-colors duration-300"
+              class="hover:text-primary-800 transition-colors duration-300"
               routerLinkActive="text-primary-500">
               {{ link.name }}
             </a>
@@ -36,7 +36,7 @@
             <a
               [routerLinkActiveOptions]="{ exact: link.exactUrl }"
               [routerLink]="link.path"
-              class="hover:text-primary-400 transition-colors duration-300"
+              class="hover:text-primary-800 transition-colors duration-300"
               routerLinkActive="text-primary-500">
               {{ link.name }}
             </a>
@@ -46,7 +46,7 @@
     </ul>
     <!-- Mobile navbar -->
     <div
-      class="lg:hidden fixed top-14 left-0 right-16 backdrop-blur-lg bottom-0 bg-white z-40 transition-transform duration-300"
+      class="lg:hidden fixed top-14 left-0 right-16 backdrop-blur-lg bottom-0 bg-white z-40 transition-transform duration-300 text-lg"
       [ngClass]="isOpen() ? 'translate-x-0' : '-translate-x-[200%]'">
       <div class="flex flex-col gap-5 p-20 py-40">
         @if (user) {
@@ -54,7 +54,7 @@
             <a
               [routerLinkActiveOptions]="{ exact: link.exactUrl }"
               [routerLink]="link.path"
-              class="hover:text-primary-500 transition-colors duration-300"
+              class="hover:text-primary-800 transition-colors duration-300"
               routerLinkActive="text-primary-500">
               {{ link.name }}
             </a>
@@ -70,7 +70,7 @@
           @for (link of unAuthenticatedUserLinks; track $index) {
             <a
               [routerLink]="link.path"
-              class="hover:text-primary-400 transition-colors duration-300"
+              class="hover:text-primary-800 transition-colors duration-300"
               routerLinkActive="text-primary-500">
               {{ link.name }}
             </a>
