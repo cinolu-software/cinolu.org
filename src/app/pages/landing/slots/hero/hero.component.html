@@ -12,15 +12,11 @@
       </ng-template>
     </owl-carousel-o>
 
-    <button
-      (click)="owlCaroussel.prev()"
-      class="absolute top-[80%] md:top-[45%] z-10 left-10 transition-transform duration-200 hover:scale-110 rounded-full flex flex-col items-center justify-center h-10 w-10 text-white bg-secondary-700 shadow-md">
-      <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_left"></mat-icon>
+    <button (click)="owlCaroussel.prev()" class="nav-btn absolute top-[80%] md:top-[45%] z-10 left-10">
+      <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_left" />
     </button>
-    <button
-      (click)="owlCaroussel.next()"
-      class="absolute top-[80%] md:top-[45%] right-10 z-10 transition-transform duration-200 hover:scale-110 rounded-full flex flex-col items-center justify-center h-10 w-10 text-white bg-secondary-700 shadow-md">
-      <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_right"></mat-icon>
+    <button (click)="owlCaroussel.next()" class="nav-btn absolute top-[80%] md:top-[45%] right-10 z-10">
+      <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_right" />
     </button>
 
     <div class="-mt-10 z-10 px-8 md:px-20 relative grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
@@ -29,7 +25,7 @@
           class="p-8 bg-white rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-3 transition-transform duration-500">
           <span
             class="bg-secondary-900/90 text-center h-10 w-10 flex flex-col items-center justify-center mb-3 rounded-full">
-            <mat-icon class="icon-size-5 fill-white" [svgIcon]="p.icon"></mat-icon>
+            <mat-icon class="icon-size-5 fill-white" [svgIcon]="p.icon" />
           </span>
           <h1 class="font-satoshi font-bold text-xl mb-4 line-clamp-1">
             {{ p.title }}
