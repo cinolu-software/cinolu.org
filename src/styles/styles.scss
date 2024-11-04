@@ -2,18 +2,6 @@ html {
   @apply scroll-smooth hyphens-auto;
 }
 
-app-root.open-nav {
-  @apply overflow-hidden;
-}
-
-.nav-open div:first-child {
-  @apply rotate-45 translate-y-1.5;
-}
-
-.nav-open div:last-child {
-  @apply -rotate-45 -translate-y-1;
-}
-
 ::selection {
   @apply text-white bg-primary-600;
 }
@@ -29,10 +17,28 @@ app-root.open-nav {
   @apply bg-gray-200/40 text-gray-700 mx-1 shadow-sm shadow-gray-300 bg-opacity-70 rounded-sm m-0 px-2 py-0.5;
 }
 
-.hidde {
-  @apply opacity-0 translate-y-6;
-}
+@layer utilities {
+  app-root.open-nav {
+    @apply overflow-hidden;
+  }
 
-.show {
-  @apply opacity-100 translate-y-0 transition-transform duration-300 ease-linear;
+  .nav-open div:first-child {
+    @apply rotate-45 translate-y-1.5;
+  }
+
+  .nav-open div:last-child {
+    @apply -rotate-45 -translate-y-1;
+  }
+
+  .hidde {
+    @apply opacity-0 translate-y-6;
+  }
+
+  .show {
+    @apply opacity-100 translate-y-0 transition-transform duration-300 ease-linear;
+  }
+
+  .nav-btn {
+    @apply transition-transform duration-200 hover:scale-110 rounded-full flex flex-col items-center justify-center h-10 w-10 text-white bg-secondary-700 shadow-md;
+  }
 }
