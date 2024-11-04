@@ -35,6 +35,7 @@ export interface IProgram {
   user: IUser;
   attachments: IAttachment[];
   types: IType[];
+  categories: ICategory[];
   requirements: IRequiremnt[];
 }
 
@@ -46,19 +47,19 @@ export interface IType {
   updated_at: Date;
 }
 
+export interface ICategory {
+  id: string;
+  name: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
 export interface IAttachment {
   id: string;
   name: string;
   created_at: Date;
   updated_at: Date;
   program: IProgram;
-}
-
-export interface ICategory {
-  id: string;
-  name: string;
-  created_at: Date;
-  updated_at: Date;
 }
 
 export interface IRoles {

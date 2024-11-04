@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { injectQuery, ObservableQueryResult } from '@ngneat/query';
-import { IProgram, IType } from '@core/types/models.type';
+import { ICategory, IProgram, IType } from '@core/types/models.type';
 import { map } from 'rxjs';
 import { QueryParams } from '../../types/query-params.type';
 
@@ -16,6 +16,13 @@ export class ListProgramsService {
     return this.#query({
       queryKey: ['types'] as const,
       queryFn: () => this.#http.get<{ data: IType[] }>('types').pipe(map((res) => res.data))
+    }).result$;
+  }
+
+  getCategories(): ObservableQueryResult<ICategory[], Error> {
+    return this.#query({
+      queryKey: ['categories'] as const,
+      queryFn: () => this.#http.get<{ data: ICategory[] }>('categories').pipe(map((res) => res.data))
     }).result$;
   }
 
@@ -34,6 +41,7 @@ export class ListProgramsService {
     let params = new HttpParams();
     if (queryParams.page) params = params.set('page', queryParams.page.toString());
     if (queryParams.type) params = params.set('type', queryParams.type);
+    if (queryParams.category) params = params.set('category', queryParams.category);
     if (queryParams.hideFinished) params = params.set('hideFinished', queryParams.hideFinished);
     return params;
   }

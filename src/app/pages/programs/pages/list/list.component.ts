@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ObservableQueryResult } from '@ngneat/query';
-import { IProgram, IType } from '@core/types/models.type';
+import { ICategory, IProgram, IType } from '@core/types/models.type';
 import { ListProgramsService } from './list.service';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -34,24 +34,27 @@ const SKELETON_ITEM_COUNT = 9;
 export class ListProgramsComponent implements OnInit {
   skeletonArray = Array(SKELETON_ITEM_COUNT).fill(0);
   programs$: ObservableQueryResult<{ programs: IProgram[]; count: number }, Error>;
-  type$: ObservableQueryResult<IType[], Error>;
+  types$: ObservableQueryResult<IType[], Error>;
+  categories$: ObservableQueryResult<ICategory[], Error>;
   #listProgramService = inject(ListProgramsService);
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   queryParams: QueryParams = {
     page: Number(this.#route.snapshot.queryParams?.page) || null,
     type: this.#route.snapshot.queryParams?.type || null,
+    category: this.#route.snapshot.queryParams?.category || null,
     hideFinished: !!this.#route.snapshot.queryParams?.hideFinished
   };
 
   ngOnInit(): void {
     this.loadPrograms();
-    this.type$ = this.#listProgramService.getTypes();
+    this.types$ = this.#listProgramService.getTypes();
+    this.categories$ = this.#listProgramService.getCategories();
   }
 
-  onTypeChange(event: MatSelectChange): void {
+  onFilterChange(event: MatSelectChange, filter: string): void {
     this.queryParams.page = null;
-    this.queryParams.type = event.value === 'all' ? null : event.value;
+    this.queryParams[filter] = event.value === 'all' ? null : event.value;
     this.updateRouteAndPrograms();
   }
 
@@ -71,8 +74,8 @@ export class ListProgramsComponent implements OnInit {
   }
 
   updateRoute(): void {
-    const { page, type, hideFinished } = this.queryParams;
-    const queryParams = { page, type };
+    const { page, type, category, hideFinished } = this.queryParams;
+    const queryParams = { page, type, category };
     if (hideFinished) queryParams['hideFinished'] = hideFinished;
     this.#router.navigate(['/programs'], { queryParams });
   }

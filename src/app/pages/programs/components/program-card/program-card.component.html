@@ -4,20 +4,27 @@
   </div>
   <div class="flex flex-col p-7">
     <div class="flex items-center justify-between">
-      <div class="flex items-center gap-1">
+      <div class="flex items-center flex-wrap gap-1">
         @for (type of program().types; track $index) {
-          <p class="rounded-full px-3 py-0.5 text-xs font-semibold bg-primary-100 text-primary-800">
+          <p class="rounded-full px-3 py-0.5 text-xs font-semibold bg-primary-100 text-primary-900">
             {{ type.name }}
           </p>
         }
       </div>
-      <div class="flex items-center">
+      <div class="flex items-center mt-4">
         @if (isFinished(program())) {
           <mat-icon class="text-primary-600 icon-size-5" [svgIcon]="'heroicons_solid:check-badge'" />
         } @else {
-          <mat-icon class="icon-size-5 text-teal-600" [svgIcon]="'heroicons_solid:clock'" />
+          <mat-icon class="icon-size-5 text-primary-900" [svgIcon]="'heroicons_solid:clock'" />
         }
       </div>
+    </div>
+    <div class="flex items-center flex-wrap gap-1 mb-1.5">
+      @for (category of program().categories; track $index) {
+        <p class="rounded-full px-3 py-0.5 text-xs font-semibold bg-secondary-100 text-secondary-900">
+          {{ category.name }}
+        </p>
+      }
     </div>
     <h4 class="mt-4 mb-2 text-lg group-hover:text-primary-900 transition-colors duration-200 font-medium line-clamp-1">
       {{ program().name }}

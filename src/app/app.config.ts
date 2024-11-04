@@ -14,17 +14,23 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { authReducers } from '@core/store/auth/auth.reducers';
 import { AuthEffects } from '../@core/store/auth/auth.effects';
+import { provideQueryClientOptions } from '@ngneat/query';
 
 registerLocaleData(localeFr, 'fr');
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    { provide: LOCALE_ID, useValue: 'fr' },
     provideAnimations(),
-    provideHttpClient(withFetch(), withInterceptors([httpInterceptor])),
-    { provide: TitleStrategy, useClass: PageTitleStrategy },
-    provideRouter(appRoutes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
+    provideClientHydration(),
     provideIcons(),
+    { provide: TitleStrategy, useClass: PageTitleStrategy },
+    { provide: LOCALE_ID, useValue: 'fr' },
+    provideHttpClient(withFetch(), withInterceptors([httpInterceptor])),
+    provideRouter(appRoutes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
+    provideEffects(AuthEffects),
+    provideStore({
+      auth: authReducers
+    }),
     provideApp({
       app: {
         layout: 'empty',
@@ -38,10 +44,12 @@ export const appConfig: ApplicationConfig = {
         theme: 'theme-default'
       }
     }),
-    provideClientHydration(),
-    provideEffects(AuthEffects),
-    provideStore({
-      auth: authReducers
+    provideQueryClientOptions({
+      defaultOptions: {
+        queries: {
+          staleTime: 3000
+        }
+      }
     })
   ]
 };
