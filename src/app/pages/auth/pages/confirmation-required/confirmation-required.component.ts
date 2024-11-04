@@ -2,11 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Animations } from '@core/animations';
-import { team } from 'app/pages/auth/slots/auth-card/team';
 import { AlertComponent } from '@core/components/alert';
 import { AuthService } from '../../auth.service';
 import { MutationResult } from '@ngneat/query';
-import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
+import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 
 @Component({
   selector: 'app-confirmation-required',
@@ -19,7 +18,6 @@ import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
 export class AuthConfirmationRequiredComponent {
   #authService = inject(AuthService);
   #email = inject(ActivatedRoute).snapshot.queryParams['email'];
-  team = team;
   resendEmailVerification: MutationResult<void, Error, unknown>;
 
   constructor() {

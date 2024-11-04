@@ -12,8 +12,8 @@ import { Animations } from '@core/animations';
 import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { AuthService } from '../../auth.service';
-import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
-import { environment } from '../../../../../environments/environment';
+import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
+import { environment } from 'environments/environment';
 import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({

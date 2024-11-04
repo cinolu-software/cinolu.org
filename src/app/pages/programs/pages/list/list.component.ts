@@ -9,8 +9,8 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ProgramCardComponent } from '../../slots/program-card/program-card.component';
-import { ProgramCardSkeletonComponent } from '../../slots/program-card-skeleton/program-card-skeleton.component';
+import { ProgramCardComponent } from '../../components/program-card/program-card.component';
+import { ProgramCardSkeletonComponent } from '../../components/program-card-skeleton/program-card-skeleton.component';
 import { QueryParams } from '../../types/query-params.type';
 
 const SKELETON_ITEM_COUNT = 9;

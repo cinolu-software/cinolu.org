@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { HeroComponent } from './slots/hero/hero.component';
-import { AboutComponent } from './slots/about/about.component';
-import { TeamComponent } from './slots/team/team.component';
+import { HeroComponent } from './components/hero/hero.component';
+import { AboutComponent } from './components/about/about.component';
+import { TeamComponent } from './components/team/team.component';
 import { FooterComponent } from '@core/components/footer/footer.component';
-import { ProblemStatementComponent } from './slots/problem-statement/problem-statement.component';
-import { VisionComponent } from './slots/vision/vision.component';
-import { ServicesComponent } from './slots/services/services.component';
+import { ProblemStatementComponent } from './components/problem-statement/problem-statement.component';
+import { VisionComponent } from './components/vision/vision.component';
+import { ServicesComponent } from './components/services/services.component';
 
 @Component({
   selector: 'app-landing',

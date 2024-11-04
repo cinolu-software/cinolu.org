@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { team } from 'app/pages/auth/slots/auth-card/team';
+import { team } from './team';
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CoachComponent } from './slots/coachs/coachs.component';
-import { StaffComponent } from './slots/staff/staff.component';
+import { CoachComponent } from './components/coachs/coachs.component';
+import { StaffComponent } from './components/staff/staff.component';
 
 @Component({
   selector: 'app-team',

@@ -8,11 +8,10 @@ import { RouterLink } from '@angular/router';
 import { Animations } from '@core/animations';
 import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { team } from 'app/pages/auth/slots/auth-card/team';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../auth.service';
 import { MutationResult } from '@ngneat/query';
-import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
+import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 
 @Component({
   selector: 'app-forgot-password',
@@ -39,7 +38,6 @@ export class AuthForgotPasswordComponent {
   #formBuilder = inject(FormBuilder);
   #authService = inject(AuthService);
   forgotPasswordForm: FormGroup;
-  team = team;
   forgotPassword: MutationResult<void, Error, unknown>;
 
   constructor() {

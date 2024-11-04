@@ -10,9 +10,8 @@ import { Animations } from '@core/animations';
 import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
-import { team } from 'app/pages/auth/slots/auth-card/team';
 import { AuthService } from '../../auth.service';
-import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
+import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 
 @Component({
   selector: 'app-sign-in',
@@ -38,7 +37,6 @@ export class AuthSignInComponent {
   #formBuilder: FormBuilder = inject(FormBuilder);
   #authService = inject(AuthService);
   #token: string = inject(ActivatedRoute).snapshot.queryParams['token'];
-  team = team;
   signInForm: FormGroup;
   signIn = this.#authService.signIn();
   verifyEmail = this.#authService.verifyEmail();

@@ -9,11 +9,10 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Animations } from '@core/animations';
 import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { team } from 'app/pages/auth/slots/auth-card/team';
 import { AuthService } from '../../auth.service';
 import { MutationResult } from '@ngneat/query';
 import { IUser } from '@core/types/models.type';
-import { AuthCardComponent } from '../../slots/auth-card/auth-card.component';
+import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 
 @Component({
   selector: 'app-reset-password',
@@ -40,7 +39,6 @@ export class AuthResetPasswordComponent {
   #formBuilder = inject(FormBuilder);
   #authService = inject(AuthService);
   resetPasswordForm: FormGroup;
-  team = team;
   resetPassword: MutationResult<IUser, Error, unknown>;
 
   constructor() {

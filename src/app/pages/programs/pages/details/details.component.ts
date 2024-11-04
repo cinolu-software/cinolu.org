@@ -7,8 +7,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ImgPipe } from '@core/pipes/img.pipe';
-import { ProgramCardComponent } from '../../slots/program-card/program-card.component';
-import { ProgramCardSkeletonComponent } from '../../slots/program-card-skeleton/program-card-skeleton.component';
+import { ProgramCardComponent } from '../../components/program-card/program-card.component';
+import { ProgramCardSkeletonComponent } from '../../components/program-card-skeleton/program-card-skeleton.component';
 
 @Component({
   selector: 'app-program',
