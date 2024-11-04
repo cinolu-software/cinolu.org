@@ -34,6 +34,8 @@ export class StaffComponent implements OnInit {
   constructor() {
     afterNextRender(() => this.isBrowser.set(true));
     this.options = {
+      mouseDrag: false,
+      touchDrag: false,
       loop: true,
       dots: false,
       nav: false,
@@ -45,7 +47,7 @@ export class StaffComponent implements OnInit {
           items: 2
         },
         940: {
-          items: 3
+          items: 4
         }
       }
     };

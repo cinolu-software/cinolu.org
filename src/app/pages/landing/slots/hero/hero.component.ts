@@ -33,11 +33,12 @@ export class HeroComponent {
   constructor() {
     afterNextRender(() => this.isBrowser.set(true));
     this.options = {
+      mouseDrag: false,
+      touchDrag: false,
       loop: true,
       dots: false,
       nav: false,
-      items: 1,
-      autoplay: true
+      items: 1
     };
   }
 }
