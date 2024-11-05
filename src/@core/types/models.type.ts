@@ -1,5 +1,11 @@
-export interface IUser {
+interface IBase {
   id: string;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at: Date;
+}
+
+export interface IUser extends IBase {
   email: string;
   name: string;
   password: string;
@@ -9,29 +15,44 @@ export interface IUser {
   google_image: string;
   profile: string;
   verified_at: Date | null;
-  created_at: Date;
-  updated_at: Date;
   roles: IRoles[];
   programs: IProgram[];
+  detail: IDetail;
 }
 
-export interface IRequiremnt {
-  id: string;
+export interface IDetail extends IBase {
+  bio: string;
+  social: ISocial;
+  positions: IPosition[];
+  expertises: IExpertise[];
+}
+
+export interface ISocial {
+  name: string;
+  link: string;
+}
+
+export interface IExpertise extends IBase {
   name: string;
   description: string;
-  created_at: Date;
-  updated_at: Date;
 }
 
-export interface IProgram {
-  id: string;
+export interface IPosition extends IBase {
+  name: string;
+  description: string;
+}
+
+export interface IRequiremnt extends IBase {
+  name: string;
+  description: string;
+}
+
+export interface IProgram extends IBase {
   name: string;
   description: string;
   image: string;
   started_at: Date;
   ended_at: Date;
-  created_at: Date;
-  updated_at: Date;
   user: IUser;
   attachments: IAttachment[];
   types: IType[];
@@ -39,32 +60,20 @@ export interface IProgram {
   requirements: IRequiremnt[];
 }
 
-export interface IType {
-  id: string;
+export interface IType extends IBase {
   name: string;
   description: string;
-  created_at: Date;
-  updated_at: Date;
 }
 
-export interface ICategory {
-  id: string;
+export interface ICategory extends IBase {
   name: string;
-  created_at: Date;
-  updated_at: Date;
 }
 
-export interface IAttachment {
-  id: string;
+export interface IAttachment extends IBase {
   name: string;
-  created_at: Date;
-  updated_at: Date;
   program: IProgram;
 }
 
-export interface IRoles {
-  id: string;
+export interface IRoles extends IBase {
   name: string;
-  created_at: Date;
-  updated_at: Date;
 }
