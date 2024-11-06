@@ -1,8 +1,8 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { ObserveVisibilityDirective } from '@core/directives/observer.directive';
-import { ImgPipe } from '@core/pipes/img.pipe';
-import { IUser } from '@core/types/models.type';
+import { ObserveVisibilityDirective } from 'app/common/directives/observer.directive';
+import { ImgPipe } from 'app/common/pipes/img.pipe';
+import { IUser } from 'app/common/types/models.type';
 
 @Component({
   selector: 'app-team-card',

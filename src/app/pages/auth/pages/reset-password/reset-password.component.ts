@@ -9,9 +9,9 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Animations } from '@core/animations';
 import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../../../../@core/auth/auth.service';
 import { MutationResult } from '@ngneat/query';
-import { IUser } from '@core/types/models.type';
+import { IUser } from 'app/common/types/models.type';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 
 @Component({

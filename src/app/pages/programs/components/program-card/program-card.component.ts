@@ -2,9 +2,9 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { IProgram } from '@core/types/models.type';
+import { IProgram } from 'app/common/types/models.type';
 import { RouterLink } from '@angular/router';
-import { ImgPipe } from '@core/pipes/img.pipe';
+import { ImgPipe } from 'app/common/pipes/img.pipe';
 
 @Component({
   selector: 'app-program-card',

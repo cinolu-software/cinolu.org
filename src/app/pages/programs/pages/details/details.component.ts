@@ -1,12 +1,12 @@
 import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ObservableQueryResult } from '@ngneat/query';
-import { IProgram } from '@core/types/models.type';
+import { IProgram } from 'app/common/types/models.type';
 import { DetailsProgramsService } from './details.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { ImgPipe } from '@core/pipes/img.pipe';
+import { ImgPipe } from 'app/common/pipes/img.pipe';
 import { ProgramCardComponent } from '../../components/program-card/program-card.component';
 import { ProgramCardSkeletonComponent } from '../../components/program-card-skeleton/program-card-skeleton.component';
 

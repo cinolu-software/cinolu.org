@@ -1,9 +1,9 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, inject, OnInit, signal } from '@angular/core';
-import { ObserveVisibilityDirective } from '@core/directives/observer.directive';
+import { ObserveVisibilityDirective } from 'app/common/directives/observer.directive';
 import { Observable } from 'rxjs';
 import { QueryObserverResult } from '@ngneat/query';
-import { IUser } from '@core/types/models.type';
+import { IUser } from 'app/common/types/models.type';
 import { CoachService } from './coachs.service';
 import { MatIconModule } from '@angular/material/icon';
 import { TeamCardSkeletonComponent } from '../../utils/slots/team-card-skeleton/team-card-skeleton.component';

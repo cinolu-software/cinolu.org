@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ObserveVisibilityDirective } from '@core/directives/observer.directive';
+import { ObserveVisibilityDirective } from 'app/common/directives/observer.directive';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({

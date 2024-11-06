@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { injectQuery, ObservableQueryResult } from '@ngneat/query';
-import { ICategory, IProgram, IType } from '@core/types/models.type';
+import { ICategory, IProgram, IType } from 'app/common/types/models.type';
 import { map } from 'rxjs';
 import { QueryParams } from '../../types/query-params.type';
 

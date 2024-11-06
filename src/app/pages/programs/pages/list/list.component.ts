@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ObservableQueryResult } from '@ngneat/query';
-import { ICategory, IProgram, IType } from '@core/types/models.type';
+import { ICategory, IProgram, IType } from 'app/common/types/models.type';
 import { ListProgramsService } from './list.service';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';

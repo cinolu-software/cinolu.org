@@ -9,7 +9,7 @@ import { Animations } from '@core/animations';
 import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../../../../@core/auth/auth.service';
 import { MutationResult } from '@ngneat/query';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 

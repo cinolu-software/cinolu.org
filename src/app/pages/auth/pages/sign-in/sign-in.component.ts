@@ -10,7 +10,7 @@ import { Animations } from '@core/animations';
 import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../../../../@core/auth/auth.service';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 
 @Component({
