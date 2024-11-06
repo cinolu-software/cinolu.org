@@ -4,11 +4,11 @@ export const programsRoutes: Routes = [
   {
     path: '',
     title: 'Programs',
-    loadComponent: () => import('./pages/list/list.component').then((c) => c.ListProgramsComponent)
+    loadComponent: () => import('./pages/list/programs.component').then((c) => c.ProgramsComponent)
   },
   {
     path: ':id',
     title: 'Programs - Details',
-    loadComponent: () => import('./pages/details/details.component').then((c) => c.DetailsProgramsComponent)
+    loadComponent: () => import('./pages/details/program.component').then((c) => c.ProgramComponent)
   }
 ];

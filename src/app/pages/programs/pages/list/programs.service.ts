@@ -8,7 +8,7 @@ import { QueryParams } from '../../types/query-params.type';
 @Injectable({
   providedIn: 'root'
 })
-export class ListProgramsService {
+export class ProgramsService {
   #http = inject(HttpClient);
   #query = injectQuery();
 

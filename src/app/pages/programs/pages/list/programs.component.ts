@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ObservableQueryResult } from '@ngneat/query';
 import { ICategory, IProgram, IType } from 'app/common/types/models.type';
-import { ListProgramsService } from './list.service';
+import { ProgramsService } from './programs.service';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
@@ -29,14 +29,14 @@ const SKELETON_ITEM_COUNT = 9;
     ProgramCardComponent,
     ProgramCardSkeletonComponent
   ],
-  templateUrl: './list.component.html'
+  templateUrl: './programs.component.html'
 })
-export class ListProgramsComponent implements OnInit {
+export class ProgramsComponent implements OnInit {
   skeletonArray = Array(SKELETON_ITEM_COUNT).fill(0);
   programs$: ObservableQueryResult<{ programs: IProgram[]; count: number }, Error>;
   types$: ObservableQueryResult<IType[], Error>;
   categories$: ObservableQueryResult<ICategory[], Error>;
-  #listProgramService = inject(ListProgramsService);
+  #listProgramService = inject(ProgramsService);
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   queryParams: QueryParams = {

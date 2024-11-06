@@ -7,7 +7,7 @@ import { map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class DetailsProgramsService {
+export class ProgramService {
   #http = inject(HttpClient);
   #query = injectQuery();
 

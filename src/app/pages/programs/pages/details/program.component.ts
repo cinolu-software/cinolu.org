@@ -2,7 +2,7 @@ import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ObservableQueryResult } from '@ngneat/query';
 import { IProgram } from 'app/common/types/models.type';
-import { DetailsProgramsService } from './details.service';
+import { ProgramService } from './program.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,11 +23,11 @@ import { ProgramCardSkeletonComponent } from '../../components/program-card-skel
     NgOptimizedImage,
     ImgPipe
   ],
-  templateUrl: './details.component.html'
+  templateUrl: './program.component.html'
 })
-export class DetailsProgramsComponent implements OnInit {
+export class ProgramComponent implements OnInit {
   program$: ObservableQueryResult<IProgram, Error>;
-  #detailsProgramService = inject(DetailsProgramsService);
+  #detailsProgramService = inject(ProgramService);
   #activatedRoute = inject(ActivatedRoute);
   #location = inject(Location);
 

@@ -3,7 +3,7 @@ import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Animations } from '@core/animations';
 import { AlertComponent } from '@core/components/alert';
-import { AuthService } from '../../../../../@core/auth/auth.service';
+import { AuthService } from '@core/auth/auth.service';
 import { MutationResult } from '@ngneat/query';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 

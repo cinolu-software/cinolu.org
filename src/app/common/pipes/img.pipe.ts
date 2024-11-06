@@ -10,15 +10,11 @@ type Key = 'user' | 'program';
 export class ImgPipe implements PipeTransform {
   transform(value: object, key: Key): string {
     const apiUrl = environment.apiUrl;
-    const defaultImages = {
-      user: '/images/avatar-default.webp',
-      default: 'https://placehold.co/620x700'
-    };
 
     if (key === 'user') {
       return value['profile']
         ? `${apiUrl}uploads/profiles/${value['profile']}`
-        : (value['google_image'] ?? defaultImages.user);
+        : (value['google_image'] ?? '/images/avatar-default.webp');
     }
 
     if (key === 'program') {
