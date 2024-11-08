@@ -10,6 +10,7 @@ import { injectMutation, MutationResult } from '@ngneat/query';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { authActions } from './auth.actions';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -17,6 +18,7 @@ export class AuthService {
   #http = inject(HttpClient);
   #router = inject(Router);
   #store = inject(Store);
+  #toast = inject(HotToastService);
 
   signUp(): MutationResult<IUser, Error, unknown> {
     return this.#mutation({
@@ -31,8 +33,10 @@ export class AuthService {
     return this.#mutation({
       mutationKey: ['sign-in'] as const,
       mutationFn: (payload: ISignIn) =>
-        this.#http.post<{ data: IUser }>('auth/login', payload).pipe(map((res) => res.data)),
+        this.#http.post<{ data: IUser }>('auth/sign-in', payload).pipe(map((res) => res.data)),
+
       onSuccess: (user) => {
+        this.#toast.success('Bienvenue ' + user.name);
         this.#store.dispatch(authActions.signIn({ user }));
         this.#router.navigate(['/']);
       }
@@ -43,7 +47,10 @@ export class AuthService {
     return this.#mutation({
       mutationKey: ['forgot-password'] as const,
       mutationFn: (email: IForgotPassword) => this.#http.post<void>('auth/forgot-password', email),
-      onSuccess: () => this.#router.navigate(['/reset-password'])
+      onSuccess: () => {
+        this.#toast.success('Un email vous a été envoyé');
+        this.#router.navigate(['/reset-password']);
+      }
     });
   }
 
@@ -52,7 +59,10 @@ export class AuthService {
       mutationKey: ['reset-password'] as const,
       mutationFn: (payload: IResetPassword) =>
         this.#http.post<{ data: IUser }>('auth/reset-password', payload).pipe(map((res) => res.data)),
-      onSuccess: () => this.#router.navigate(['/sign-in'])
+      onSuccess: () => {
+        this.#toast.success('Réinitialisation réussie');
+        this.#router.navigate(['/sign-in']);
+      }
     });
   }
 

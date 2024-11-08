@@ -20,7 +20,9 @@ registerLocaleData(localeFr, 'fr');
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHotToastConfig(),
+    provideHotToastConfig({
+      position: 'top-right'
+    }),
     provideAnimations(),
     provideClientHydration(),
     provideIcons(),
