@@ -47,6 +47,9 @@ importers:
       '@angular/ssr':
         specifier: ^18.2.2
         version: 18.2.2(@angular/common@18.2.2(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))
+      '@ngneat/hot-toast':
+        specifier: ^7.0.0
+        version: 7.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(@ngneat/overview@6.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10)))
       '@ngneat/query':
         specifier: ^3.0.0
         version: 3.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(@tanstack/query-core@5.59.9)
@@ -1645,6 +1648,17 @@ packages:
     resolution: {integrity: sha512-x0fWaQtYp4E6sktbsdAqnehxDgEc/VwM7uLsRCYWaiGu0ykYdZPiS8zCWdnjHwyiumousxfBm4SO31eXqwEZhQ==}
     cpu: [x64]
     os: [win32]
+
+  '@ngneat/hot-toast@7.0.0':
+    resolution: {integrity: sha512-t/7msPgtZT534HBxAPjvr6dovP0jyf/intibceUq6i+woa4gnt44jSMsAmI3WVz8UoOmwG1wBwJOKu0zdLmCOA==}
+    peerDependencies:
+      '@angular/core': '>= 17.0.0 < 18.0.0'
+      '@ngneat/overview': 6.0.0
+
+  '@ngneat/overview@6.0.0':
+    resolution: {integrity: sha512-pm4bAEYtnUl8q82dwjh5NN9HF0WTFEI58VtR12izp9Oaa2dtseX82VUArfb4fadmlbHpPMUwXHrsm0ORyWii2A==}
+    peerDependencies:
+      '@angular/core': '>=17'
 
   '@ngneat/query@3.0.0':
     resolution: {integrity: sha512-gWL+X/fGGTbx6jDgxEhLobZvx6RA/KYsQyMluZK9gc8T6NC091CTtr3vL1DPhsdYieynCe1aXl1xWkTYRMsxBA==}
@@ -6968,6 +6982,17 @@ snapshots:
 
   '@msgpackr-extract/msgpackr-extract-win32-x64@3.0.3':
     optional: true
+
+  '@ngneat/hot-toast@7.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(@ngneat/overview@6.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10)))':
+    dependencies:
+      '@angular/core': 18.2.2(rxjs@7.8.1)(zone.js@0.14.10)
+      '@ngneat/overview': 6.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))
+      tslib: 2.7.0
+
+  '@ngneat/overview@6.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))':
+    dependencies:
+      '@angular/core': 18.2.2(rxjs@7.8.1)(zone.js@0.14.10)
+      tslib: 2.7.0
 
   '@ngneat/query@3.0.0(@angular/core@18.2.2(rxjs@7.8.1)(zone.js@0.14.10))(@tanstack/query-core@5.59.9)':
     dependencies:

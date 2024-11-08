@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { environment } from 'environments/environment';
 
-type Key = 'user' | 'program';
+type Key = 'user' | 'program' | 'event';
 
 @Pipe({
   standalone: true,
@@ -19,6 +19,10 @@ export class ImgPipe implements PipeTransform {
 
     if (key === 'program') {
       return value['image'] ? `${apiUrl}uploads/programs/${value['image']}` : '/images/no-image.jpg';
+    }
+
+    if (key === 'event') {
+      return value['image'] ? `${apiUrl}uploads/events/${value['image']}` : '/images/no-image.jpg';
     }
     return '/images/no-image.jpg';
   }

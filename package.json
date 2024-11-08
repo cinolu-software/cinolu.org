@@ -25,6 +25,7 @@
     "@angular/platform-server": "18.2.2",
     "@angular/router": "18.2.2",
     "@angular/ssr": "^18.2.2",
+    "@ngneat/hot-toast": "^7.0.0",
     "@ngneat/query": "^3.0.0",
     "@ngrx/effects": "^18.0.1",
     "@ngrx/operators": "18.0.1",

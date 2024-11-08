@@ -4,6 +4,7 @@ import { AboutComponent } from './components/about/about.component';
 import { TeamComponent } from './components/team/team.component';
 import { ProblemStatementComponent } from './components/problem-statement/problem-statement.component';
 import { VisionComponent } from './components/vision/vision.component';
+import { FooterComponent } from 'app/common/components/footer/footer.component';
 import { ServicesComponent } from './components/services/services.component';
 
 @Component({
@@ -15,7 +16,8 @@ import { ServicesComponent } from './components/services/services.component';
     ServicesComponent,
     TeamComponent,
     ProblemStatementComponent,
-    VisionComponent
+    VisionComponent,
+    FooterComponent
   ],
   templateUrl: './landing.component.html'
 })

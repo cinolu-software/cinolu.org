@@ -1,14 +1,14 @@
-<section *ngIf="programs$ | async as result">
-  <div class="relative py-72 bg-[url('/images/programs.webp')] bg-cover flex flex-col overflow-hidden mb-12">
+<section *ngIf="events$ | async as result">
+  <div class="relative py-72 bg-[url('/images/slides/slide-2.webp')] bg-cover flex flex-col overflow-hidden mb-12">
     <div
       class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/60 to-primary-900/70 gap-6 text-2xl md:text-4xl px-8 md:px-32 text-white">
       <div class="relative z-10 flex flex-col items-start py-16">
-        <div class="mt-1 text-center text-2xl font-extrabold leading-tight tracking-tight md:text-3xl lg:text-5xl">
-          Que voulez-vous apprendre ?
+        <div class="mt-1 text-2xl font-extrabold leading-tight tracking-tight md:text-3xl lg:text-4xl w-2/3">
+          Restez informé sur nos différents événements et partipez !
         </div>
-        <div class="mt-6 text-xl max-w-2xl tracking-tight md:text-2xl">
-          Découvrez nos programmes et laissez-vous accompagner par les meilleurs coachs pour garantir la réussite de
-          votre projet.
+        <div class="mt-6 text-xl max-w-2xl tracking-tight">
+          Faites le tour de événements en cours, passés et a venir ! Réjoignez nous pour un moment de partage, de
+          apprentissage, de croissance et de réseautage
         </div>
       </div>
     </div>
@@ -17,7 +17,7 @@
   <div class="px-8 md:px-32 flex flex-auto min-h-[90vh]">
     <div class="flex flex-auto flex-col">
       <div class="flex flex-col md:flex-row md:justify-between" *ngIf="types$ | async as typesResult">
-        <div class="flex flex-col gap-3 md:flex-row" *ngIf="categories$ | async as categoriesResult">
+        <div class="flex flex-col gap-3 md:flex-row">
           <mat-form-field class="w-full sm:w-60" [subscriptSizing]="'dynamic'">
             <mat-select
               [value]="queryParams.type"
@@ -31,46 +31,25 @@
               }
             </mat-select>
           </mat-form-field>
-
-          <mat-form-field class="w-full sm:w-60" [subscriptSizing]="'dynamic'">
-            <mat-select
-              [value]="queryParams.category"
-              (selectionChange)="onFilterChange($event, 'category')"
-              placeholder="Filtrez par catégorie">
-              <mat-option [value]="'all'">Tous</mat-option>
-              @if (categoriesResult.data; as categories) {
-                @for (category of categories; track $index) {
-                  <mat-option [value]="category.name">{{ category.name }}</mat-option>
-                }
-              }
-            </mat-select>
-          </mat-form-field>
         </div>
-        <mat-slide-toggle
-          class="mt-4"
-          [checked]="queryParams.hideFinished"
-          (toggleChange)="toogleFinished()"
-          [color]="'primary'">
-          Programmes en cours
-        </mat-slide-toggle>
       </div>
 
       @if (result.isFetching) {
         <div class="mt-8 grid grid-cols-1 gap-8 sm:mt-10 sm:grid-cols-2 lg:grid-cols-3">
-          @for (program of skeletonArray; track $index) {
-            <app-program-card-skeleton />
+          @for (event of skeletonArray; track $index) {
+            <app-event-card-skeleton />
           }
         </div>
       }
       @if (result.data) {
-        @if (result.data.programs; as programs) {
+        @if (result.data.events; as events) {
           <div class="mt-8 grid grid-cols-1 gap-8 sm:mt-10 sm:grid-cols-2 lg:grid-cols-3">
             @for (
-              program of programs
+              event of events
                 | paginate: { itemsPerPage: 9, currentPage: queryParams.page, totalItems: result.data.count };
-              track program.id
+              track event.id
             ) {
-              <app-program-card [program]="program" />
+              <app-event-card [event]="event" />
             }
           </div>
 
@@ -86,8 +65,8 @@
           </div>
         }
       }
-      @if (result.isError || (result.data && result.data?.programs.length === 0)) {
-        <h2 class="text-3xl font-semibold -mt-16">Aucun programme!</h2>
+      @if (result.isError || (result.data && result.data?.events.length === 0)) {
+        <h2 class="text-3xl font-semibold -mt-16">Aucun événements!</h2>
       }
     </div>
   </div>

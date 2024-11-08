@@ -23,5 +23,10 @@ export const commonLinks: ILink[] = [
     name: 'Programmes',
     path: '/programs',
     exactUrl: false
+  },
+  {
+    name: 'Evénements',
+    path: '/events',
+    exactUrl: false
   }
 ];

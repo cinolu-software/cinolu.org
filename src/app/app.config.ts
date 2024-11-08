@@ -13,12 +13,14 @@ import { provideIcons } from '@core/services/icons/icons.provider';
 import { provideStore } from '@ngrx/store';
 import { authReducers } from '@core/auth/auth.reducers';
 import { provideQueryClientOptions } from '@ngneat/query';
-import { provideAuth } from '../@core/auth/auth.provider';
+import { provideAuth } from '@core/auth/auth.provider';
+import { provideHotToastConfig } from '@ngneat/hot-toast';
 
 registerLocaleData(localeFr, 'fr');
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHotToastConfig(),
     provideAnimations(),
     provideClientHydration(),
     provideIcons(),

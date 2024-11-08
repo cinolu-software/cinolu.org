@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ObservableQueryResult } from '@ngneat/query';
-import { ICategory, IProgram, IType } from 'app/common/types/models.type';
+import { IProgramCategory, IProgram, IProgramType } from 'app/common/types/models.type';
 import { ProgramsService } from './programs.service';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -34,9 +34,9 @@ const SKELETON_ITEM_COUNT = 9;
 export class ProgramsComponent implements OnInit {
   skeletonArray = Array(SKELETON_ITEM_COUNT).fill(0);
   programs$: ObservableQueryResult<{ programs: IProgram[]; count: number }, Error>;
-  types$: ObservableQueryResult<IType[], Error>;
-  categories$: ObservableQueryResult<ICategory[], Error>;
-  #listProgramService = inject(ProgramsService);
+  types$: ObservableQueryResult<IProgramType[], Error>;
+  categories$: ObservableQueryResult<IProgramCategory[], Error>;
+  #programsService = inject(ProgramsService);
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   queryParams: QueryParams = {
@@ -48,8 +48,8 @@ export class ProgramsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPrograms();
-    this.types$ = this.#listProgramService.getTypes();
-    this.categories$ = this.#listProgramService.getCategories();
+    this.types$ = this.#programsService.getTypes();
+    this.categories$ = this.#programsService.getCategories();
   }
 
   onFilterChange(event: MatSelectChange, filter: string): void {
@@ -70,7 +70,7 @@ export class ProgramsComponent implements OnInit {
   }
 
   loadPrograms(): void {
-    this.programs$ = this.#listProgramService.getPrograms(this.queryParams);
+    this.programs$ = this.#programsService.getPrograms(this.queryParams);
   }
 
   updateRoute(): void {

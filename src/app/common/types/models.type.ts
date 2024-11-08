@@ -55,17 +55,36 @@ export interface IProgram extends IBase {
   ended_at: Date;
   user: IUser;
   attachments: IAttachment[];
-  types: IType[];
-  categories: ICategory[];
+  types: IProgramType[];
+  categories: IProgramCategory[];
   requirements: IRequiremnt[];
 }
 
-export interface IType extends IBase {
+export interface IEvent extends IBase {
+  name: string;
+  description: string;
+  location: string;
+  attendees_total: number;
+  attendees_number: number;
+  image: string;
+  started_at: Date;
+  ended_at: Date;
+  responsible: IUser;
+  attachments: IAttachment[];
+  types: IEventType[];
+}
+
+export interface IProgramType extends IBase {
   name: string;
   description: string;
 }
 
-export interface ICategory extends IBase {
+export interface IEventType extends IBase {
+  name: string;
+  description: string;
+}
+
+export interface IProgramCategory extends IBase {
   name: string;
 }
 
