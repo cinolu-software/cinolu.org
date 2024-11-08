@@ -30,8 +30,11 @@ export class EventsService {
 
   #buildQueryParams(queryParams: QueryParams): HttpParams {
     let params = new HttpParams();
-    if (queryParams.page) params = params.set('page', queryParams.page.toString());
-    if (queryParams.type) params = params.set('type', queryParams.type);
+    Object.keys(queryParams).forEach((key) => {
+      const value = queryParams[key];
+      if (!value) return;
+      params = params.set(key, value);
+    });
     return params;
   }
 }

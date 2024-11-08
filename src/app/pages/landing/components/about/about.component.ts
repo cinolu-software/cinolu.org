@@ -1,11 +1,9 @@
-import { NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
-import { ObserveVisibilityDirective } from 'app/common/directives/observer.directive';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [NgOptimizedImage, ObserveVisibilityDirective],
+  imports: [],
   templateUrl: './about.component.html'
 })
 export class AboutComponent {}

@@ -34,7 +34,6 @@ export class AuthService {
       mutationKey: ['sign-in'] as const,
       mutationFn: (payload: ISignIn) =>
         this.#http.post<{ data: IUser }>('auth/sign-in', payload).pipe(map((res) => res.data)),
-
       onSuccess: (user) => {
         this.#toast.success('Bienvenue ' + user.name);
         this.#store.dispatch(authActions.signIn({ user }));

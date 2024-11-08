@@ -31,6 +31,19 @@
               }
             </mat-select>
           </mat-form-field>
+
+          <mat-form-field class="w-full sm:w-60" [subscriptSizing]="'dynamic'">
+            <mat-select
+              [value]="queryParams.type"
+              (selectionChange)="onFilterChange($event, 'eventType')"
+              placeholder="Filtrez format">
+              <mat-option [value]="'all'">Tous</mat-option>
+
+              @for (type of eventTypes; track $index) {
+                <mat-option [value]="type.value">{{ type.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
 

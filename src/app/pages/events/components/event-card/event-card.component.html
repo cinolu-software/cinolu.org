@@ -3,7 +3,7 @@
     <img [ngSrc]="event() | apiIMG: 'event'" [alt]="event().name" class="object-cover" fill />
   </div>
   <div class="flex flex-col p-7">
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between flex-wrap">
       <div class="flex items-center flex-wrap gap-1">
         @for (type of event().types; track $index) {
           <p class="rounded-full px-3 py-0.5 text-xs font-semibold bg-primary-100 text-primary-900">
@@ -11,6 +11,13 @@
           </p>
         }
       </div>
+      <p class="rounded-full px-3 py-0.5 mt-1.5 text-xs font-semibold bg-secondary-100 text-secondary-900">
+        @if (event().event_type === 'physical') {
+          Physique
+        } @else {
+          En ligne
+        }
+      </p>
     </div>
 
     <h4 class="mt-4 mb-2 text-lg group-hover:text-primary-900 transition-colors duration-200 font-medium line-clamp-1">

@@ -1,8 +1,6 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { afterNextRender, Component, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
-import { ObserveVisibilityDirective } from 'app/common/directives/observer.directive';
 import { stakeholders } from './utils/data/stakeholders';
 import { OwlOptions, CarouselModule } from 'ngx-owl-carousel-o';
 import { SlideOneComponent } from './slides/slide-one/slide-one.component';
@@ -12,17 +10,7 @@ import { SlideThreeComponent } from './slides/slide-three/slide-three.component'
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [
-    RouterLink,
-    NgOptimizedImage,
-    MatIconModule,
-    ObserveVisibilityDirective,
-    CommonModule,
-    CarouselModule,
-    SlideOneComponent,
-    SlideTwoComponent,
-    SlideThreeComponent
-  ],
+  imports: [MatIconModule, CommonModule, CarouselModule, SlideOneComponent, SlideTwoComponent, SlideThreeComponent],
   templateUrl: './hero.component.html'
 })
 export class HeroComponent {

@@ -7,7 +7,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProgramCardComponent } from '../../components/program-card/program-card.component';
 import { ProgramCardSkeletonComponent } from '../../components/program-card-skeleton/program-card-skeleton.component';
@@ -24,7 +24,6 @@ const SKELETON_ITEM_COUNT = 9;
     MatOptionModule,
     MatIconModule,
     MatSlideToggleModule,
-    RouterLink,
     NgxPaginationModule,
     ProgramCardComponent,
     ProgramCardSkeletonComponent

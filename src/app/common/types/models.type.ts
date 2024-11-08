@@ -64,7 +64,9 @@ export interface IEvent extends IBase {
   name: string;
   description: string;
   location: string;
-  attendees_total: number;
+  attendees: number;
+  online_link: string;
+  event_type: string;
   attendees_number: number;
   image: string;
   started_at: Date;

@@ -6,7 +6,7 @@
 
   <div class="grid md:grid-cols-2 gap-10">
     @for (service of services; track $index) {
-      <div class="flex gap-4 items-start flex-col hidde" appObserveVisibility>
+      <div class="flex gap-4 items-start flex-col">
         <span class="bg-secondary-800 h-8 w-8 flex flex-col items-center justify-center rounded-full">
           <mat-icon class="icon-size-5 fill-white" [svgIcon]="service.icon"></mat-icon>
         </span>

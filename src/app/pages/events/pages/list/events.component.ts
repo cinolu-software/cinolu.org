@@ -3,17 +3,14 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ObservableQueryResult } from '@ngneat/query';
 import { EventsService } from './events.service';
 import { MatOptionModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EventCardComponent } from '../../components/event-card/event-card.component';
 import { EventCardSkeletonComponent } from '../../components/event-card-skeleton/event-card-skeleton.component';
 import { QueryParams } from '../../types/query-params.type';
-import { IEvent, IEventType } from '../../../../common/types/models.type';
-
-const SKELETON_ITEM_COUNT = 9;
+import { IEvent, IEventType } from 'app/common/types/models.type';
 
 @Component({
   selector: 'app-programs',
@@ -22,9 +19,7 @@ const SKELETON_ITEM_COUNT = 9;
     CommonModule,
     MatSelectModule,
     MatOptionModule,
-    MatIconModule,
     MatSlideToggleModule,
-    RouterLink,
     NgxPaginationModule,
     EventCardComponent,
     EventCardSkeletonComponent
@@ -32,7 +27,7 @@ const SKELETON_ITEM_COUNT = 9;
   templateUrl: './events.component.html'
 })
 export class EventsComponent implements OnInit {
-  skeletonArray = Array(SKELETON_ITEM_COUNT).fill(0);
+  skeletonArray = Array(6).fill(0);
   events$: ObservableQueryResult<{ events: IEvent[]; count: number }, Error>;
   types$: ObservableQueryResult<IEventType[], Error>;
   #eventsService = inject(EventsService);
@@ -40,8 +35,13 @@ export class EventsComponent implements OnInit {
   #route = inject(ActivatedRoute);
   queryParams: QueryParams = {
     page: Number(this.#route.snapshot.queryParams?.page) || null,
-    type: this.#route.snapshot.queryParams?.type || null
+    type: this.#route.snapshot.queryParams?.type || null,
+    eventType: this.#route.snapshot.queryParams?.eventType || null
   };
+  eventTypes = [
+    { name: 'Physique', value: 'physical' },
+    { name: 'En ligne', value: 'online' }
+  ];
 
   ngOnInit(): void {
     this.#loadEvents();
@@ -69,8 +69,8 @@ export class EventsComponent implements OnInit {
   }
 
   #updateRoute(): void {
-    const { page, type } = this.queryParams;
-    const queryParams = { page, type };
+    const { page, type, eventType } = this.queryParams;
+    const queryParams = { page, type, eventType };
     this.#router.navigate(['/events'], { queryParams });
   }
 

@@ -9,10 +9,10 @@ import { map } from 'rxjs';
 })
 export class CoachService {
   #http = inject(HttpClient);
-  #queryClient = injectQuery();
+  #query = injectQuery();
 
   getCoachs(): ObservableQueryResult<IUser[], Error> {
-    return this.#queryClient({
+    return this.#query({
       queryKey: ['coachs'] as const,
       queryFn: () => this.#http.get<{ data: IUser[] }>('users/coachs').pipe(map((res) => res.data))
     }).result$;
