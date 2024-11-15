@@ -57,6 +57,14 @@ export interface IProgram extends IBase {
   attachments: IAttachment[];
   types: IProgramType[];
   categories: IProgramCategory[];
+  phases: IPhase[];
+}
+
+export interface IPhase extends IBase {
+  name: string;
+  description: string;
+  started_at: Date;
+  ended_at: Date;
   requirements: IRequiremnt[];
 }
 
@@ -72,7 +80,6 @@ export interface IEvent extends IBase {
   started_at: Date;
   ended_at: Date;
   responsible: IUser;
-  attachments: IAttachment[];
   types: IEventType[];
 }
 
