@@ -12,56 +12,65 @@
           <div class="mt-1 text-center text-xl font-extrabold leading-tight tracking-tight md:text-3xl lg:text-5xl">
             {{ program.name }}
           </div>
-          <div class="text-gray-300 mt-6 text-lg max-w-2xl tracking-tight md:text-xl">
+          <div class="text-gray-300 mt-6 text-lg max-w-2xl tracking-tight md:text-xl line-clamp-2">
             {{ program.description }}
           </div>
         </div>
       </div>
     </div>
 
-    <div class="grid grid-cols-3 gap-10 mx-auto max-w-screen-md px-6 pt-6" *ngIf="program$ | async as result">
-      <div class="col-span-2">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 gap-10 mx-auto max-w-screen-md px-6 pt-6"
+      *ngIf="program$ | async as result">
+      <div>
         <button class="text-primary-500 hover:underline flex items-center gap-1.5 mb-4" (click)="back()">
           <mat-icon class="text-primary-500" [svgIcon]="'heroicons_outline:arrow-long-left'"></mat-icon>
           <span class="inline-block">Revenir</span>
         </button>
 
         <div class="mb-8">
-          <h2 class="text-lg font-medium">
-            Commence le {{ program.started_at | date: 'longDate' }} et fini le
-            {{ program.ended_at | date: 'longDate' }}
-          </h2>
+          <h2 class="text-xl font-semibold mb-2">Description</h2>
+          <p class="mb-1.5">{{ program.description }}</p>
         </div>
 
         <div class="mb-8">
-          <h2 class="text-2xl font-semibold mb-2">Public ciblé</h2>
+          <h2 class="text-xl font-semibold mb-2">Dates</h2>
+          <p class="mb-1.5">Commence le, {{ program.started_at | date: 'longDate' }}</p>
+          <p class="mb-1.5">Fini le, {{ program.ended_at | date: 'longDate' }}</p>
+        </div>
+
+        <div class="mb-8">
+          <h2 class="text-xl font-semibold mb-2">Public ciblé</h2>
           <p class="mb-8">{{ program.targeted_audience }}</p>
         </div>
+
         <div class="mb-8">
-          <h2 class="text-2xl font-semibold mb-2">Catégories</h2>
+          <h2 class="text-xl font-semibold mb-2">Catégories</h2>
           @for (category of program.categories; track $index) {
-            <p class="last:mb-8">&mdash; {{ category.name }}</p>
+            <p class="mb-1.5">&mdash; {{ category.name }}</p>
           }
         </div>
+
         <div class="mb-8">
-          <h2 class="text-2xl font-semibold mb-2">Types</h2>
+          <h2 class="text-xl font-semibold mb-2">Types</h2>
           @for (type of program.types; track $index) {
-            <p class="last:mb-8">&mdash; {{ type.name }}</p>
+            <p class="mb-1.5">&mdash; {{ type.name }}</p>
           }
         </div>
+
         <div class="mb-8">
-          <h2 class="text-2xl font-semibold mb-3">Partenaires</h2>
+          <h2 class="text-xl font-semibold mb-3">Partenaires</h2>
           @for (partner of program.partners; track $index) {
-            <p class="last:mb-8">&mdash; {{ partner.name }}</p>
+            <p>&mdash; {{ partner.name }}</p>
           }
         </div>
         <div class="mb-8">
-          <h2 class="text-2xl font-semibold mb-3">Phases</h2>
+          <h2 class="text-xl font-semibold mb-3">Phases</h2>
           @for (phase of program.phases; track $index) {
             <div class="flex gap-1 mb-6">
               <p>&mdash;</p>
               <div class="flex flex-col gap-1.5">
-                <p class="font-medium mb-4">{{ phase.name }}</p>
+                <p class="font-medium mb-2">{{ phase.name }}</p>
                 <p class="mb-1">{{ phase.description }}</p>
                 <p>Commence le {{ phase.started_at | date: 'longDate' }}</p>
                 <p>Fini le {{ phase.ended_at | date: 'longDate' }}</p>
@@ -72,7 +81,41 @@
       </div>
 
       <div class="">
-        <h3>Postulez</h3>
+        <div class="bg-gray-50 px-6 py-8 rounded-md">
+          <h3 class="font-medium text-lg">Postulez</h3>
+          <form class="mt-6">
+            @for (input of generateInputsArray(program.phases[0].form); track $index) {
+              @if (input.type === 'textarea') {
+                <div class="mb-6">
+                  <label for="message" class="block mb-2 text-sm font-medium">
+                    {{ input.label }}
+                  </label>
+                  <textarea
+                    id="message"
+                    rows="4"
+                    class="block p-2.5 h-40 w-full text-sm bg-white rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
+                    placeholder="Ecrire ici..."></textarea>
+                </div>
+              }
+
+              @if (input.type !== 'textarea') {
+                <mat-form-field class="w-full">
+                  <mat-label>{{ input.label }}</mat-label>
+                  <input [id]="input.name" [type]="input.type" matInput autocomplete="off" />
+                </mat-form-field>
+              }
+            }
+
+            <button class="mt-6 w-full text-white" mat-flat-button color="primary" type="submit" [disabled]="false">
+              @if (!false) {
+                <span>Candidater</span>
+              }
+              @if (result.isPending) {
+                <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
+              }
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   }
