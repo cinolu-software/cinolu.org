@@ -46,13 +46,6 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <mat-slide-toggle
-          class="mt-4"
-          [checked]="queryParams.hideFinished"
-          (toggleChange)="toogleFinished()"
-          [color]="'primary'">
-          Programmes en cours
-        </mat-slide-toggle>
       </div>
 
       @if (result.isFetching) {

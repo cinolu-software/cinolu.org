@@ -16,13 +16,13 @@ import { ImgPipe } from 'app/common/pipes/img.pipe';
 })
 export class ProgramComponent implements OnInit {
   program$: ObservableQueryResult<IProgram, Error>;
-  #detailsProgramService = inject(ProgramService);
+  #programService = inject(ProgramService);
   #activatedRoute = inject(ActivatedRoute);
   #location = inject(Location);
 
   ngOnInit(): void {
     const id = this.#activatedRoute.snapshot.paramMap.get('id');
-    this.program$ = this.#detailsProgramService.getProgram(id);
+    this.program$ = this.#programService.getProgram(id);
   }
 
   back(): void {

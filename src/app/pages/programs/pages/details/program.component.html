@@ -19,31 +19,60 @@
       </div>
     </div>
 
-    <div class="px-6 pt-6 max-w-screen-md mx-auto" *ngIf="program$ | async as result">
-      <button class="text-primary-500 hover:underline flex items-center gap-1.5 mb-4" (click)="back()">
-        <mat-icon class="text-primary-500" [svgIcon]="'heroicons_outline:arrow-long-left'"></mat-icon>
-        <span class="inline-block">Revenir aux programmes</span>
-      </button>
+    <div class="grid grid-cols-3 gap-10 mx-auto max-w-screen-md px-6 pt-6" *ngIf="program$ | async as result">
+      <div class="col-span-2">
+        <button class="text-primary-500 hover:underline flex items-center gap-1.5 mb-4" (click)="back()">
+          <mat-icon class="text-primary-500" [svgIcon]="'heroicons_outline:arrow-long-left'"></mat-icon>
+          <span class="inline-block">Revenir</span>
+        </button>
 
-      <div class="flex flex-col gap-10">
-        <div>
-          <h2 class="text-2xl font-semibold mb-3">Date butoire</h2>
-          <p class="flex items-center gap-2">
-            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:clock'" />
-            Le {{ program.ended_at | date: 'longDate' }}
-          </p>
+        <div class="mb-8">
+          <h2 class="text-lg font-medium">
+            Commence le {{ program.started_at | date: 'longDate' }} et fini le
+            {{ program.ended_at | date: 'longDate' }}
+          </h2>
         </div>
 
-        <div>
-          <h2 class="text-2xl font-semibold mb-3">Catégories</h2>
-          <div class="flex items-center gap-2">
-            @for (type of program.types; track $index) {
-              <span class="rounded-full px-3 py-0.5 font-semibold bg-primary-50 text-primary-800">
-                {{ type.name }}
-              </span>
-            }
-          </div>
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-2">Public ciblé</h2>
+          <p class="mb-8">{{ program.targeted_audience }}</p>
         </div>
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-2">Catégories</h2>
+          @for (category of program.categories; track $index) {
+            <p class="last:mb-8">&mdash; {{ category.name }}</p>
+          }
+        </div>
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-2">Types</h2>
+          @for (type of program.types; track $index) {
+            <p class="last:mb-8">&mdash; {{ type.name }}</p>
+          }
+        </div>
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-3">Partenaires</h2>
+          @for (partner of program.partners; track $index) {
+            <p class="last:mb-8">&mdash; {{ partner.name }}</p>
+          }
+        </div>
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-3">Phases</h2>
+          @for (phase of program.phases; track $index) {
+            <div class="flex gap-1 mb-6">
+              <p>&mdash;</p>
+              <div class="flex flex-col gap-1.5">
+                <p class="font-medium mb-4">{{ phase.name }}</p>
+                <p class="mb-1">{{ phase.description }}</p>
+                <p>Commence le {{ phase.started_at | date: 'longDate' }}</p>
+                <p>Fini le {{ phase.ended_at | date: 'longDate' }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="">
+        <h3>Postulez</h3>
       </div>
     </div>
   }

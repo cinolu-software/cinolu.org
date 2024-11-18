@@ -53,11 +53,13 @@ export interface IProgram extends IBase {
   image: string;
   started_at: Date;
   ended_at: Date;
+  targeted_audience: string;
   user: IUser;
   attachments: IAttachment[];
   types: IProgramType[];
   categories: IProgramCategory[];
   phases: IPhase[];
+  partners: IPartners[];
 }
 
 export interface IPhase extends IBase {
@@ -66,6 +68,13 @@ export interface IPhase extends IBase {
   started_at: Date;
   ended_at: Date;
   requirements: IRequiremnt[];
+  form: { name: string; type: string }[];
+}
+
+export interface IPartners extends IBase {
+  name: string;
+  website_link: string;
+  profile: string;
 }
 
 export interface IEvent extends IBase {
