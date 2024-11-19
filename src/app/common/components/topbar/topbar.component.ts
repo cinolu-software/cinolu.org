@@ -5,11 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { IUser } from 'app/common/types/models.type';
 import { environment } from 'environments/environment';
 import { ImgPipe } from 'app/common/pipes/img.pipe';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { selectUser } from '@core/auth/auth.reducers';
 import { authLinks, commonLinks } from './links';
-import { IAPIResponse } from '@core/services/api/types/api-response.type';
 
 @Component({
   selector: 'app-topbar',
@@ -21,7 +20,6 @@ export class TopbarComponent implements OnInit, OnDestroy {
   isOpen = signal(false);
   accountUrl = environment.accountUrl;
   user: IUser | null;
-  result$: Observable<IAPIResponse<IUser>>;
   commonLinks = commonLinks;
   authLinks = authLinks;
   #store = inject(Store);
