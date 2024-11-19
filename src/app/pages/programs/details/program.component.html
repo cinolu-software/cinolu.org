@@ -6,7 +6,8 @@
         [ngSrc]="program | apiIMG: 'program'"
         [alt]="'Photo de couverture ' + program.name"
         class="object-cover"
-        fill />
+        fill
+        priority />
       <div
         class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-primary-800/70 gap-6 text-2xl md:text-4xl px-8 md:px-32 text-white">
         <div class="relative z-10 flex flex-col items-start py-16">
@@ -20,106 +21,11 @@
       </div>
     </div>
 
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 gap-10 mx-auto max-w-screen-md px-6 pt-6"
-      *ngIf="program$ | async as result">
-      <div>
-        <button class="text-primary-500 hover:underline flex items-center gap-1.5 mb-4" (click)="back()">
-          <mat-icon class="text-primary-500" [svgIcon]="'heroicons_outline:arrow-long-left'"></mat-icon>
-          <span class="inline-block">Revenir</span>
-        </button>
-
-        <div class="mb-8">
-          <h2 class="text-xl font-semibold mb-2">Description</h2>
-          <p class="mb-1.5">{{ program.description }}</p>
-        </div>
-
-        <div class="mb-8">
-          <h2 class="text-xl font-semibold mb-2">Dates</h2>
-          <p class="mb-1.5">Commence le, {{ program.started_at | date: 'longDate' }}</p>
-          <p class="mb-1.5">Fini le, {{ program.ended_at | date: 'longDate' }}</p>
-        </div>
-
-        <div class="mb-8">
-          <h2 class="text-xl font-semibold mb-2">Public ciblé</h2>
-          <p class="mb-8">{{ program.targeted_audience }}</p>
-        </div>
-
-        <div class="mb-8">
-          <h2 class="text-xl font-semibold mb-2">Catégories</h2>
-          @for (category of program.categories; track $index) {
-            <p class="mb-1.5">&mdash; {{ category.name }}</p>
-          }
-        </div>
-
-        <div class="mb-8">
-          <h2 class="text-xl font-semibold mb-2">Types</h2>
-          @for (type of program.types; track $index) {
-            <p class="mb-1.5">&mdash; {{ type.name }}</p>
-          }
-        </div>
-
-        <div class="mb-8">
-          <h2 class="text-xl font-semibold mb-3">Partenaires</h2>
-          @for (partner of program.partners; track $index) {
-            <p>&mdash; {{ partner.name }}</p>
-          }
-        </div>
-        <div class="mb-8">
-          <h2 class="text-xl font-semibold mb-3">Phases</h2>
-          @for (phase of program.phases; track $index) {
-            <div class="flex gap-1 mb-6">
-              <p>&mdash;</p>
-              <div class="flex flex-col gap-1.5">
-                <p class="font-medium mb-2">{{ phase.name }}</p>
-                <p class="mb-1">{{ phase.description }}</p>
-                <p>Commence le {{ phase.started_at | date: 'longDate' }}</p>
-                <p>Fini le {{ phase.ended_at | date: 'longDate' }}</p>
-              </div>
-            </div>
-          }
-        </div>
-      </div>
-
-      <div class="">
-        <div class="bg-gray-50 px-6 py-8 rounded-md">
-          <h3 class="font-medium text-lg">Postulez</h3>
-          <form class="mt-6" #applicationForm="ngForm" (ngSubmit)="onSubmit($event)">
-            @if (program.phases[0].form) {
-              @for (input of generateInputsArray(program.phases[0].form); track $index) {
-                <mat-form-field class="w-full">
-                  <mat-label>{{ input.label }}</mat-label>
-                  @if (input.type === 'textarea') {
-                    <textarea matInput rows="3" [id]="input.name" [required]="input.required"> </textarea>
-                  }
-                  @if (input.type !== 'textarea') {
-                    <input
-                      matInput
-                      autocomplete="off"
-                      [id]="input.name"
-                      [type]="input.type"
-                      [required]="input.required" />
-                  }
-                </mat-form-field>
-              }
-            }
-
-            <button
-              class="mt-6 w-full text-white"
-              mat-flat-button
-              color="primary"
-              type="submit"
-              [disabled]="!applicationForm.invalid">
-              @if (!applicationForm.invalid) {
-                <span>Candidater</span>
-              }
-              @if (result.isLoading) {
-                <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
-              }
-            </button>
-          </form>
-        </div>
-      </div>
+    <div class="mx-auto max-w-screen-md py-10">
+      <app-program-overview [program]="program" />
+      @if (program.phases[0].form; as form) {
+        <app-program-application [jsonData]="form" />
+      }
     </div>
   }
   @if (result.error) {

@@ -1,4 +1,4 @@
-import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { IProgram } from 'app/common/types/models.type';
 import { ProgramService } from './program.service';
@@ -12,6 +12,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TopbarComponent } from '../../../common/components/topbar/topbar.component';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { ProgramOverviewComponent } from './components/overview/overview.component';
+import { ApplicationComponent } from './components/application/application.component';
 
 @Component({
   selector: 'app-program',
@@ -25,7 +27,9 @@ import { IAPIResponse } from '@core/services/api/types/api-response.type';
     NgOptimizedImage,
     FormsModule,
     ImgPipe,
-    TopbarComponent
+    TopbarComponent,
+    ProgramOverviewComponent,
+    ApplicationComponent
   ],
   templateUrl: './program.component.html'
 })
@@ -33,30 +37,9 @@ export class ProgramComponent implements OnInit {
   program$: Observable<IAPIResponse<IProgram>>;
   #programService = inject(ProgramService);
   #activatedRoute = inject(ActivatedRoute);
-  #location = inject(Location);
 
   ngOnInit(): void {
     const id = this.#activatedRoute.snapshot.paramMap.get('id');
     this.program$ = this.#programService.getProgram(id);
-  }
-
-  back(): void {
-    this.#location.back();
-  }
-
-  generateInputsArray(jsonData: string): { required: true; label: string; name: string; type: string }[] {
-    const parsedData = JSON.parse(jsonData);
-    return (
-      parsedData?.iputs.map((input: unknown) => ({
-        required: input['required'] ?? true,
-        label: input['label'],
-        name: input['name'],
-        type: input['type']
-      })) || null
-    );
-  }
-
-  onSubmit(event: Event): void {
-    console.log(event);
   }
 }
