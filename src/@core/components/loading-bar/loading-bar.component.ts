@@ -1,9 +1,8 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-
 import {
+  ChangeDetectorRef,
   Component,
   inject,
-  Input,
   OnChanges,
   OnDestroy,
   OnInit,
@@ -25,52 +24,36 @@ import { LoadingService } from '@core/services/loading/loading.service';
 export class LoadingBarComponent implements OnChanges, OnInit, OnDestroy {
   #loadingService = inject(LoadingService);
   #unsubscribeAll = new Subject();
+  #cdr = inject(ChangeDetectorRef);
 
-  @Input() autoMode = true;
   mode: 'determinate' | 'indeterminate';
   progress = 0;
   show = false;
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Lifecycle hooks
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * On changes
-   *
-   * @param changes
-   */
   ngOnChanges(changes: SimpleChanges): void {
-    // Auto mode
     if ('autoMode' in changes) {
-      // Set the auto mode in the service
       this.#loadingService.setAutoMode(coerceBooleanProperty(changes.autoMode.currentValue));
     }
   }
 
-  /**
-   * On init
-   */
   ngOnInit(): void {
-    // Subscribe to the service
     this.#loadingService.mode$.pipe(takeUntil(this.#unsubscribeAll)).subscribe((value) => {
       this.mode = value;
+      this.#cdr.detectChanges();
     });
 
     this.#loadingService.progress$.pipe(takeUntil(this.#unsubscribeAll)).subscribe((value) => {
       this.progress = value;
+      this.#cdr.detectChanges();
     });
 
     this.#loadingService.show$.pipe(takeUntil(this.#unsubscribeAll)).subscribe((value) => {
       this.show = value;
+      this.#cdr.detectChanges();
     });
   }
 
-  /**
-   * On destroy
-   */
   ngOnDestroy(): void {
-    // Unsubscribe from all subscriptions
     this.#unsubscribeAll.next(null);
     this.#unsubscribeAll.complete();
   }
