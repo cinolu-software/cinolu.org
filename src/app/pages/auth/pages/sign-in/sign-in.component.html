@@ -1,27 +1,27 @@
 <app-auth-card
   title="Se connecter"
   description="Connectez-vous et accéder à votre compte et continuer à explorer notre plateforme.">
-  <ng-container *ngIf="signIn.result$ | async as result">
-    @if (result.isError) {
+  <ng-container *ngIf="result$ | async as result">
+    @if (result.error) {
       <app-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
-        {{ result.error['error'].message }}
+        {{ result.error }}
       </app-alert>
     }
 
-    <div [ngClass]="result.isError && 'transition-transform translate-y-4 duration-150'">
+    <div [ngClass]="result.error && 'transition-transform translate-y-4 duration-150'">
       <h2 class="text-3xl font-extrabold leading-tight tracking-tight font-satoshi">Se connecter</h2>
       <div class="flex items-center gap-1.5">
         <p>Vous n'avez pas de compte?</p>
         <a class="text-primary-500 hover:underline" [routerLink]="['/sign-up']">S'inscrire</a>
       </div>
 
-      <ng-container *ngIf="verifyEmail.result$ | async as verifyEmailResult">
-        @if (verifyEmailResult.isError) {
+      <ng-container *ngIf="verifyEmail$ | async as verifyEmailResult">
+        @if (verifyEmailResult.error) {
           <app-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
-            {{ verifyEmailResult.error['error'].message }}
+            {{ verifyEmailResult.error }}
           </app-alert>
         }
-        @if (verifyEmailResult.isSuccess) {
+        @if (verifyEmailResult.data) {
           <app-alert class="mt-6 w-full" type="success" [showIcon]="true" [@shake]="true">
             Votre email a été vérifié avec succès.
           </app-alert>
@@ -69,11 +69,11 @@
           mat-flat-button
           color="primary"
           type="submit"
-          [disabled]="result.isPending || signInForm.invalid || signInForm.disabled">
-          @if (!result.isPending && !signInForm.invalid) {
+          [disabled]="result.isLoading || signInForm.invalid || signInForm.disabled">
+          @if (!result.isLoading && !signInForm.invalid) {
             <span>Se connecter</span>
           }
-          @if (result.isPending) {
+          @if (result.isLoading) {
             <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
           }
         </button>

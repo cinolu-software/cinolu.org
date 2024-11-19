@@ -5,13 +5,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Animations } from '@core/animations';
 import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
 import { AuthService } from '@core/auth/auth.service';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
+import { RouterLink, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IAPIResponse, createInitialApiResponse } from '@core/services/api/types/api-response.type';
+import { IUser } from '../../../../common/types/models.type';
 
 @Component({
   selector: 'app-sign-in',
@@ -38,21 +41,21 @@ export class AuthSignInComponent {
   #authService = inject(AuthService);
   #token: string = inject(ActivatedRoute).snapshot.queryParams['token'];
   signInForm: FormGroup;
-  signIn = this.#authService.signIn();
-  verifyEmail = this.#authService.verifyEmail();
+  result$: Observable<IAPIResponse<IUser>> = createInitialApiResponse();
+  verifyEmail$: Observable<IAPIResponse<IUser>> = createInitialApiResponse();
 
   constructor() {
     this.signInForm = this.#formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-    if (this.#token) this.verifyEmail.mutate(this.#token);
+    if (this.#token) this.verifyEmail$ = this.#authService.verifyEmail(this.#token);
   }
 
   onSignIn(): void {
     if (this.signInForm.invalid) return;
     this.signInForm.disable();
-    this.signIn.mutate(this.signInForm.value);
+    this.result$ = this.#authService.signIn(this.signInForm.value);
     this.signInForm.enable();
   }
 

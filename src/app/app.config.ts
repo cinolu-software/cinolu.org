@@ -12,17 +12,13 @@ import { registerLocaleData } from '@angular/common';
 import { provideIcons } from '@core/services/icons/icons.provider';
 import { provideStore } from '@ngrx/store';
 import { authReducers } from '@core/auth/auth.reducers';
-import { provideQueryClientOptions } from '@ngneat/query';
 import { provideAuth } from '@core/auth/auth.provider';
-import { provideHotToastConfig } from '@ngneat/hot-toast';
 
 registerLocaleData(localeFr, 'fr');
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHotToastConfig({
-      position: 'top-left'
-    }),
+    provideAuth(),
     provideAnimations(),
     provideClientHydration(),
     provideIcons(),
@@ -30,7 +26,6 @@ export const appConfig: ApplicationConfig = {
     { provide: LOCALE_ID, useValue: 'fr' },
     provideHttpClient(withFetch(), withInterceptors([httpInterceptor])),
     provideRouter(appRoutes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
-    provideAuth(),
     provideStore({
       auth: authReducers
     }),
@@ -45,13 +40,6 @@ export const appConfig: ApplicationConfig = {
           xl: '1440px'
         },
         theme: 'theme-default'
-      }
-    }),
-    provideQueryClientOptions({
-      defaultOptions: {
-        queries: {
-          staleTime: 3000
-        }
       }
     })
   ]

@@ -1,3 +1,4 @@
+<app-topbar />
 <section *ngIf="programs$ | async as result">
   <div class="relative py-72 bg-[url('/images/programs.webp')] bg-cover flex flex-col overflow-hidden mb-12">
     <div
@@ -48,7 +49,7 @@
         </div>
       </div>
 
-      @if (result.isFetching) {
+      @if (result.isLoading) {
         <div class="mt-8 grid grid-cols-1 gap-8 sm:mt-10 sm:grid-cols-2 lg:grid-cols-3">
           @for (program of skeletonArray; track $index) {
             <app-program-card-skeleton />
@@ -79,7 +80,7 @@
           </div>
         }
       }
-      @if (result.isError || (result.data && result.data?.programs.length === 0)) {
+      @if (result.error || (result.data && result.data?.programs.length === 0)) {
         <h2 class="text-3xl font-semibold -mt-16">Aucun programme!</h2>
       }
     </div>

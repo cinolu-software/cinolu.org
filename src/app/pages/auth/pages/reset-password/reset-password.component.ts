@@ -5,14 +5,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Animations } from '@core/animations';
 import { AlertComponent } from '@core/components/alert';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '@core/auth/auth.service';
-import { MutationResult } from '@ngneat/query';
 import { IUser } from 'app/common/types/models.type';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
+import { TopbarComponent } from '../../../../common/components/topbar/topbar.component';
+import { Observable } from 'rxjs';
+import { IAPIResponse } from '@core/services/api/types/api-response.type';
 
 @Component({
   selector: 'app-reset-password',
@@ -28,10 +30,9 @@ import { AuthCardComponent } from '../../components/auth-card/auth-card.componen
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    RouterLink,
     CommonModule,
-    NgOptimizedImage,
-    AuthCardComponent
+    AuthCardComponent,
+    TopbarComponent
   ]
 })
 export class AuthResetPasswordComponent {
@@ -39,14 +40,13 @@ export class AuthResetPasswordComponent {
   #formBuilder = inject(FormBuilder);
   #authService = inject(AuthService);
   resetPasswordForm: FormGroup;
-  resetPassword: MutationResult<IUser, Error, unknown>;
+  resetPassword$: Observable<IAPIResponse<IUser>>;
 
   constructor() {
     this.resetPasswordForm = this.#formBuilder.group({
       password: ['', Validators.required],
       password_confirm: ['', Validators.required]
     });
-    this.resetPassword = this.#authService.resetPassword();
   }
 
   onResetPassword(): void {
@@ -54,7 +54,7 @@ export class AuthResetPasswordComponent {
     this.resetPasswordForm.disable();
     const { password, password_confirm } = this.resetPasswordForm.value;
     const payload = { token: this.#token, password, password_confirm };
-    this.resetPassword.mutate(payload);
+    this.resetPassword$ = this.#authService.resetPassword(payload);
     this.resetPasswordForm.enable();
   }
 }

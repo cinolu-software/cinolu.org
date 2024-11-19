@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { ObservableQueryResult } from '@ngneat/query';
 import { IProgramCategory, IProgram, IProgramType } from 'app/common/types/models.type';
 import { ProgramsService } from './programs.service';
 import { MatOptionModule } from '@angular/material/core';
@@ -9,9 +8,12 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ProgramCardComponent } from '../../components/program-card/program-card.component';
-import { ProgramCardSkeletonComponent } from '../../components/program-card-skeleton/program-card-skeleton.component';
-import { QueryParams } from '../../types/query-params.type';
+import { ProgramCardComponent } from './components/program-card/program-card.component';
+import { ProgramCardSkeletonComponent } from './components/program-card-skeleton/program-card-skeleton.component';
+import { QueryParams } from './types/query-params.type';
+import { TopbarComponent } from '../../../common/components/topbar/topbar.component';
+import { Observable } from 'rxjs';
+import { IAPIResponse } from '@core/services/api/types/api-response.type';
 
 const SKELETON_ITEM_COUNT = 9;
 
@@ -26,15 +28,16 @@ const SKELETON_ITEM_COUNT = 9;
     MatSlideToggleModule,
     NgxPaginationModule,
     ProgramCardComponent,
-    ProgramCardSkeletonComponent
+    ProgramCardSkeletonComponent,
+    TopbarComponent
   ],
   templateUrl: './programs.component.html'
 })
 export class ProgramsComponent implements OnInit {
   skeletonArray = Array(SKELETON_ITEM_COUNT).fill(0);
-  programs$: ObservableQueryResult<{ programs: IProgram[]; count: number }, Error>;
-  types$: ObservableQueryResult<IProgramType[], Error>;
-  categories$: ObservableQueryResult<IProgramCategory[], Error>;
+  programs$: Observable<IAPIResponse<{ programs: IProgram[]; count: number }>>;
+  types$: Observable<IAPIResponse<IProgramType[]>>;
+  categories$: Observable<IAPIResponse<IProgramCategory[]>>;
   #programsService = inject(ProgramsService);
   #router = inject(Router);
   #route = inject(ActivatedRoute);

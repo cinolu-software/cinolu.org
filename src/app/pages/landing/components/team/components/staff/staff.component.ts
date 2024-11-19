@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { afterNextRender, Component, inject, OnInit, signal } from '@angular/core';
 import { Observable } from 'rxjs';
-import { QueryObserverResult } from '@ngneat/query';
 import { IUser } from 'app/common/types/models.type';
 import { StaffService } from './staff.service';
 import { TeamCardComponent } from '../../utils/slots/team-card/team-card.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { IAPIResponse } from '@core/services/api/types/api-response.type';
 
 @Component({
   selector: 'app-staff',
@@ -15,9 +15,9 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
   templateUrl: './staff.component.html'
 })
 export class StaffComponent implements OnInit {
-  staff$: Observable<QueryObserverResult<IUser[], Error>>;
+  staff$: Observable<IAPIResponse<IUser[]>>;
   options: OwlOptions;
-  isBrowser = signal<boolean>(false);
+  isBrowser = signal(false);
   #staffMembersService = inject(StaffService);
 
   constructor() {

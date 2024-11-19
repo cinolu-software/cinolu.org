@@ -1,91 +1,72 @@
-import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IUser } from 'app/common/types/models.type';
 import { ISignIn } from '../../app/pages/auth/types/sign-in.type';
 import { ISignUp } from '../../app/pages/auth/types/sign-up.type';
 import { IResetPassword } from '../../app/pages/auth/types/reset-password.type';
 import { IForgotPassword } from '../../app/pages/auth/types/forgot-password.type';
-import { injectMutation, MutationResult } from '@ngneat/query';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { authActions } from './auth.actions';
 import { HotToastService } from '@ngneat/hot-toast';
+import { APIService } from '../services/api/api.service';
+import { IAPIResponse } from '../services/api/types/api-response.type';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  #mutation = injectMutation();
-  #http = inject(HttpClient);
   #router = inject(Router);
   #store = inject(Store);
   #toast = inject(HotToastService);
+  #apiService = inject(APIService);
 
-  signUp(): MutationResult<IUser, Error, unknown> {
-    return this.#mutation({
-      mutationKey: ['sign-up'] as const,
-      mutationFn: (payload: ISignUp) =>
-        this.#http.post<{ data: IUser }>('auth/sign-up', payload).pipe(map((res) => res.data)),
-      onSuccess: () => this.#router.navigate(['/sign-in'])
-    });
+  signUp(payload: ISignUp): Observable<IAPIResponse<IUser>> {
+    const onSuccess = () => {
+      this.#toast.success('Inscription réussie');
+      this.#router.navigate(['/sign-in']);
+    };
+    return this.#apiService.postData('auth/sign-up', payload, onSuccess);
   }
 
-  signIn(): MutationResult<IUser, Error, unknown> {
-    return this.#mutation({
-      mutationKey: ['sign-in'] as const,
-      mutationFn: (payload: ISignIn) =>
-        this.#http.post<{ data: IUser }>('auth/sign-in', payload).pipe(map((res) => res.data)),
-      onSuccess: (user) => {
-        this.#toast.success('Bienvenue ' + user.name);
-        this.#store.dispatch(authActions.signIn({ user }));
-        this.#router.navigate(['/']);
-      }
-    });
+  signIn(payload: ISignIn): Observable<IAPIResponse<IUser>> {
+    const onSuccess = (user: IUser) => {
+      this.#toast.success('Bienvenue ' + user.name);
+      this.#store.dispatch(authActions.signIn({ user }));
+      this.#router.navigate(['/']);
+    };
+    return this.#apiService.postData('auth/sign-in', payload, onSuccess);
   }
 
-  forgotPassword(): MutationResult<void, Error, unknown> {
-    return this.#mutation({
-      mutationKey: ['forgot-password'] as const,
-      mutationFn: (email: IForgotPassword) => this.#http.post<void>('auth/forgot-password', email),
-      onSuccess: () => {
-        this.#toast.success('Un email vous a été envoyé');
-        this.#router.navigate(['/reset-password']);
-      }
-    });
+  forgotPassword(payload: IForgotPassword): Observable<IAPIResponse<IUser>> {
+    const onSuccess = () => {
+      this.#toast.success('Un email vous a été envoyé');
+      this.#router.navigate(['/reset-password']);
+    };
+    return this.#apiService.postData('auth/forgot-password', payload, onSuccess);
   }
 
-  resetPassword(): MutationResult<IUser, Error, unknown> {
-    return this.#mutation({
-      mutationKey: ['reset-password'] as const,
-      mutationFn: (payload: IResetPassword) =>
-        this.#http.post<{ data: IUser }>('auth/reset-password', payload).pipe(map((res) => res.data)),
-      onSuccess: () => {
-        this.#toast.success('Réinitialisation réussie');
-        this.#router.navigate(['/sign-in']);
-      }
-    });
+  resetPassword(payload: IResetPassword): Observable<IAPIResponse<IUser>> {
+    const onSuccess = () => {
+      this.#toast.success('Réinitialisation réussie');
+      this.#router.navigate(['/sign-in']);
+    };
+    return this.#apiService.postData('auth/reset-password', payload, onSuccess);
   }
 
-  resendEmailVerification(): MutationResult<void, Error, unknown> {
-    return this.#mutation({
-      mutationKey: ['resend-token'] as const,
-      mutationFn: (email: string) => this.#http.post<void>('auth/verify-email/resend-token', { email })
-    });
+  resendEmailVerification(email: string): Observable<IAPIResponse<void>> {
+    return this.#apiService.postData('auth/verify-email/resend-token', { email });
   }
 
-  verifyEmail(): MutationResult<IUser, Error, unknown> {
-    return this.#mutation({
-      mutationKey: ['verify-email'] as const,
-      mutationFn: (token: string) =>
-        this.#http.post<{ data: IUser }>('auth/verify-email', { token }).pipe(map((res) => res.data)),
-      onSuccess: () => this.#router.navigate(['/sign-in'])
-    });
+  verifyEmail(token: string): Observable<IAPIResponse<IUser>> {
+    const onSuccess = function () {
+      this.#router.navigate(['/sign-in']);
+    };
+    return this.#apiService.postData('auth/verify-email', { token }, onSuccess);
   }
 
-  getProfile(): Observable<IUser> {
-    return this.#http.get<{ data: IUser }>('auth/profile').pipe(
-      map((res) => res.data),
-      tap((user) => this.#store.dispatch(authActions.signIn({ user }))),
-      catchError(() => of())
-    );
+  getProfile(): Observable<IAPIResponse<IUser>> {
+    const onSuccess = (user: IUser) => {
+      this.#store.dispatch(authActions.signIn({ user }));
+    };
+    return this.#apiService.fetchData('auth/profile', null, onSuccess);
   }
 }

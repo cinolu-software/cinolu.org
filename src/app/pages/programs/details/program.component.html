@@ -1,6 +1,7 @@
+<app-topbar />
 <section *ngIf="program$ | async as result">
   @if (result.data; as program) {
-    <div class="relative min-h-[75vh] py-30 w-full">
+    <div class="relative min-h-[75vh] py-50 w-full">
       <img
         [ngSrc]="program | apiIMG: 'program'"
         [alt]="'Photo de couverture ' + program.name"
@@ -83,34 +84,36 @@
       <div class="">
         <div class="bg-gray-50 px-6 py-8 rounded-md">
           <h3 class="font-medium text-lg">Postulez</h3>
-          <form class="mt-6">
-            @for (input of generateInputsArray(program.phases[0].form); track $index) {
-              @if (input.type === 'textarea') {
-                <div class="mb-6">
-                  <label for="message" class="block mb-2 text-sm font-medium">
-                    {{ input.label }}
-                  </label>
-                  <textarea
-                    id="message"
-                    rows="4"
-                    class="block p-2.5 h-40 w-full text-sm bg-white rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
-                    placeholder="Ecrire ici..."></textarea>
-                </div>
-              }
-
-              @if (input.type !== 'textarea') {
+          <form class="mt-6" #applicationForm="ngForm" (ngSubmit)="onSubmit($event)">
+            @if (program.phases[0].form) {
+              @for (input of generateInputsArray(program.phases[0].form); track $index) {
                 <mat-form-field class="w-full">
                   <mat-label>{{ input.label }}</mat-label>
-                  <input [id]="input.name" [type]="input.type" matInput autocomplete="off" />
+                  @if (input.type === 'textarea') {
+                    <textarea matInput rows="3" [id]="input.name" [required]="input.required"> </textarea>
+                  }
+                  @if (input.type !== 'textarea') {
+                    <input
+                      matInput
+                      autocomplete="off"
+                      [id]="input.name"
+                      [type]="input.type"
+                      [required]="input.required" />
+                  }
                 </mat-form-field>
               }
             }
 
-            <button class="mt-6 w-full text-white" mat-flat-button color="primary" type="submit" [disabled]="false">
-              @if (!false) {
+            <button
+              class="mt-6 w-full text-white"
+              mat-flat-button
+              color="primary"
+              type="submit"
+              [disabled]="!applicationForm.invalid">
+              @if (!applicationForm.invalid) {
                 <span>Candidater</span>
               }
-              @if (result.isPending) {
+              @if (result.isLoading) {
                 <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
               }
             </button>
@@ -119,7 +122,7 @@
       </div>
     </div>
   }
-  @if (result.isError) {
+  @if (result.error) {
     <div class="relative min-h-[75vh] w-full flex flex-col justify-center">
       <h2 class="text-3xl font-semibold">Aucune solution avec cet identifiant !</h2>
     </div>

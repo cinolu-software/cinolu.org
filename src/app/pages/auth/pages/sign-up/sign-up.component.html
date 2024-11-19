@@ -1,17 +1,17 @@
 <app-auth-card
   title="S'inscrire"
   description="Rejoignez notre communauté de plus de 1000 utilisateurs et profitez de nos services au quotidien">
-  <ng-container *ngIf="signUp.result$ | async as result">
-    @if (result.isError) {
+  <ng-container *ngIf="signUp$ | async as result">
+    @if (result.error) {
       <app-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
-        {{ result.error['error'].message }}
+        {{ result.error }}
       </app-alert>
     }
     <div [ngClass]="result.error && 'transition-transform translate-y-4 duration-150'">
       <h2 class="text-3xl font-extrabold leading-tight tracking-tight font-satoshi pt-24">S'inscrire</h2>
-      @if (result.isError) {
+      @if (result.error) {
         <app-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
-          {{ result.error['error'].message }}
+          {{ result.error }}
         </app-alert>
       }
       <form class="mt-6 mb-10" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
@@ -102,11 +102,11 @@
           mat-flat-button
           color="primary"
           type="submit"
-          [disabled]="result.isPending || signUpForm.invalid">
-          @if (!result.isPending && !signUpForm.invalid) {
+          [disabled]="result.isLoading || signUpForm.invalid">
+          @if (!result.isLoading && !signUpForm.invalid) {
             <span>S'inscrire</span>
           }
-          @if (result.isPending) {
+          @if (result.isLoading) {
             <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
           }
         </button>

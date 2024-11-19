@@ -1,20 +1,16 @@
-import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { injectQuery, ObservableQueryResult } from '@ngneat/query';
 import { IUser } from 'app/common/types/models.type';
-import { map } from 'rxjs';
+import { Observable } from 'rxjs';
+import { APIService } from '@core/services/api/api.service';
+import { IAPIResponse } from '@core/services/api/types/api-response.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StaffService {
-  #http = inject(HttpClient);
-  #queryClient = injectQuery();
+  #apiService = inject(APIService);
 
-  getStaffMembers(): ObservableQueryResult<IUser[], Error> {
-    return this.#queryClient({
-      queryKey: ['staff'] as const,
-      queryFn: () => this.#http.get<{ data: IUser[] }>('users/staff').pipe(map((res) => res.data))
-    }).result$;
+  getStaffMembers(): Observable<IAPIResponse<IUser[]>> {
+    return this.#apiService.fetchData<IUser[]>('users/staff');
   }
 }

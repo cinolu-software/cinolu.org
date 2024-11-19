@@ -1,15 +1,17 @@
 import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { ObservableQueryResult } from '@ngneat/query';
 import { IProgram } from 'app/common/types/models.type';
 import { ProgramService } from './program.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ImgPipe } from 'app/common/pipes/img.pipe';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TopbarComponent } from '../../../common/components/topbar/topbar.component';
+import { Observable } from 'rxjs';
+import { IAPIResponse } from '@core/services/api/types/api-response.type';
 
 @Component({
   selector: 'app-program',
@@ -21,14 +23,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressSpinnerModule,
     MatButtonModule,
     NgOptimizedImage,
-    ReactiveFormsModule,
-    ImgPipe
+    FormsModule,
+    ImgPipe,
+    TopbarComponent
   ],
   templateUrl: './program.component.html'
 })
 export class ProgramComponent implements OnInit {
-  program$: ObservableQueryResult<IProgram, Error>;
-  form: FormGroup;
+  program$: Observable<IAPIResponse<IProgram>>;
   #programService = inject(ProgramService);
   #activatedRoute = inject(ActivatedRoute);
   #location = inject(Location);
@@ -42,14 +44,19 @@ export class ProgramComponent implements OnInit {
     this.#location.back();
   }
 
-  generateInputsArray(jsonData: string): { label: string; name: string; type: string }[] {
+  generateInputsArray(jsonData: string): { required: true; label: string; name: string; type: string }[] {
     const parsedData = JSON.parse(jsonData);
     return (
       parsedData?.iputs.map((input: unknown) => ({
+        required: input['required'] ?? true,
         label: input['label'],
         name: input['name'],
         type: input['type']
       })) || null
     );
+  }
+
+  onSubmit(event: Event): void {
+    console.log(event);
   }
 }

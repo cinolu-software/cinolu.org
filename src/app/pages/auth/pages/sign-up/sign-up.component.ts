@@ -7,14 +7,15 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { RouterLink } from '@angular/router';
 import { Animations } from '@core/animations';
 import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { AuthService } from '@core/auth/auth.service';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 import { environment } from 'environments/environment';
-import { MatProgressBar } from '@angular/material/progress-bar';
+import { createInitialApiResponse, IAPIResponse } from '@core/services/api/types/api-response.type';
+import { Observable } from 'rxjs';
+import { IUser } from '../../../../common/types/models.type';
 
 @Component({
   standalone: true,
@@ -22,8 +23,6 @@ import { MatProgressBar } from '@angular/material/progress-bar';
   templateUrl: './sign-up.component.html',
   animations: Animations,
   imports: [
-    MatProgressBar,
-    RouterLink,
     AlertComponent,
     FormsModule,
     ReactiveFormsModule,
@@ -44,7 +43,7 @@ export class AuthSignUpComponent {
   #authService = inject(AuthService);
   currentStep = 1;
   signUpForm: FormGroup;
-  signUp = this.#authService.signUp();
+  signUp$: Observable<IAPIResponse<IUser>> = createInitialApiResponse();
 
   constructor() {
     this.signUpForm = this.#formBuilder.group({
@@ -57,24 +56,10 @@ export class AuthSignUpComponent {
     });
   }
 
-  goToStep(step: number): void {
-    this.currentStep = step;
-  }
-
-  goToNextStep(): void {
-    if (this.currentStep === 3) return;
-    this.goToStep(this.currentStep + 1);
-  }
-
-  goToPreviousStep(): void {
-    if (this.currentStep === 1) return;
-    this.goToStep(this.currentStep - 1);
-  }
-
   onSignUp(): void {
     if (this.signUpForm.invalid) return;
     this.signUpForm.disable();
-    this.signUp.mutate(this.signUpForm.value);
+    this.signUp$ = this.#authService.signUp(this.signUpForm.value);
     this.signUpForm.enable();
   }
 

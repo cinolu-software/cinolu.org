@@ -1,3 +1,4 @@
+<app-topbar />
 <section *ngIf="event$ | async as result">
   @if (result.data; as event) {
     <div class="relative min-h-[75vh] py-30 w-full">
@@ -43,7 +44,7 @@
       </div>
     </div>
   }
-  @if (result.isError) {
+  @if (result.error) {
     <div class="relative min-h-[75vh] w-full flex flex-col justify-center">
       <h2 class="text-3xl font-semibold">Aucune événement avec cet identifiant !</h2>
     </div>

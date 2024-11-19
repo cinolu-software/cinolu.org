@@ -4,14 +4,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { RouterLink } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { Animations } from '@core/animations';
 import { AlertComponent } from '@core/components/alert';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '@core/auth/auth.service';
-import { MutationResult } from '@ngneat/query';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
+import { Observable } from 'rxjs';
+import { createInitialApiResponse, IAPIResponse } from '@core/services/api/types/api-response.type';
+import { IUser } from '../../../../common/types/models.type';
 
 @Component({
   selector: 'app-forgot-password',
@@ -28,9 +30,8 @@ import { AuthCardComponent } from '../../components/auth-card/auth-card.componen
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    RouterLink,
+    RouterModule,
     CommonModule,
-    NgOptimizedImage,
     AuthCardComponent
   ]
 })
@@ -38,18 +39,17 @@ export class AuthForgotPasswordComponent {
   #formBuilder = inject(FormBuilder);
   #authService = inject(AuthService);
   forgotPasswordForm: FormGroup;
-  forgotPassword: MutationResult<void, Error, unknown>;
+  forgotPassword$: Observable<IAPIResponse<IUser>> = createInitialApiResponse();
 
   constructor() {
     this.forgotPasswordForm = this.#formBuilder.group({
       email: ['', [Validators.required, Validators.email]]
     });
-    this.forgotPassword = this.#authService.forgotPassword();
   }
 
   submitForgotPassword(): void {
     if (!this.forgotPasswordForm.invalid) {
-      this.forgotPassword.mutate(this.forgotPasswordForm.value);
+      this.forgotPassword$ = this.#authService.forgotPassword(this.forgotPasswordForm.value);
     }
   }
 }

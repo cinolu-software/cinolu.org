@@ -1,32 +1,23 @@
 import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { ObservableQueryResult } from '@ngneat/query';
 import { IEvent } from 'app/common/types/models.type';
 import { EventService } from './event.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ImgPipe } from 'app/common/pipes/img.pipe';
-import { EventCardComponent } from '../../components/event-card/event-card.component';
-import { EventCardSkeletonComponent } from '../../components/event-card-skeleton/event-card-skeleton.component';
+import { TopbarComponent } from '../../../common/components/topbar/topbar.component';
+import { Observable } from 'rxjs';
+import { IAPIResponse } from '@core/services/api/types/api-response.type';
 
 @Component({
   selector: 'app-program',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    EventCardComponent,
-    MatIconModule,
-    MatButtonModule,
-    EventCardSkeletonComponent,
-    NgOptimizedImage,
-    ImgPipe
-  ],
+  imports: [CommonModule, MatIconModule, MatButtonModule, NgOptimizedImage, ImgPipe, TopbarComponent],
   templateUrl: './event.component.html'
 })
 export class EventComponent implements OnInit {
-  event$: ObservableQueryResult<IEvent, Error>;
+  event$: Observable<IAPIResponse<IEvent>>;
   #detailsProgramService = inject(EventService);
   #activatedRoute = inject(ActivatedRoute);
   #location = inject(Location);
