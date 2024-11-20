@@ -5,7 +5,7 @@
         <div class="flex flex-col gap-3">
           <h5 class="font-satoshi font-extrabold mb-3 text-lg">{{ link.title }}</h5>
           @for (url of link.urls; track $index) {
-            <a class="" [href]="url.path">{{ url.name }}</a>
+            <a class="" [href]="''">{{ url.name }}</a>
           }
         </div>
       }

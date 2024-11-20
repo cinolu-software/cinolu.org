@@ -6,6 +6,7 @@ import { ProblemStatementComponent } from './components/problem-statement/proble
 import { VisionComponent } from './components/vision/vision.component';
 import { FooterComponent } from 'app/common/components/footer/footer.component';
 import { ServicesComponent } from './components/services/services.component';
+import { StatsComponent } from './components/stats/stats.component';
 
 @Component({
   selector: 'app-landing',
@@ -16,7 +17,8 @@ import { ServicesComponent } from './components/services/services.component';
     TeamComponent,
     ProblemStatementComponent,
     VisionComponent,
-    FooterComponent
+    FooterComponent,
+    StatsComponent
   ],
   templateUrl: './landing.component.html'
 })
