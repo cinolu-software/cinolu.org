@@ -5,15 +5,14 @@ import { EventService } from './event.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { ImgPipe } from 'app/common/pipes/img.pipe';
+import { APIImgPipe } from 'app/common/pipes/api-img.pipe';
 import { TopbarComponent } from '../../../common/components/topbar/topbar.component';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from '@core/services/api/types/api-response.type';
 
 @Component({
   selector: 'app-program',
-  standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, NgOptimizedImage, ImgPipe, TopbarComponent],
+  imports: [CommonModule, MatIconModule, MatButtonModule, NgOptimizedImage, APIImgPipe, TopbarComponent],
   templateUrl: './event.component.html'
 })
 export class EventComponent implements OnInit {

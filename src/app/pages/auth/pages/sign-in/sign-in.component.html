@@ -1,98 +1,92 @@
 <app-auth-card
   title="Se connecter"
   description="Connectez-vous et accéder à votre compte et continuer à explorer notre plateforme.">
-  <ng-container *ngIf="result$ | async as result">
-    @if (result.error) {
+  @let result = result$ | async;
+  @if (result?.error) {
+    <app-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
+      {{ result.error }}
+    </app-alert>
+  }
+
+  <div [ngClass]="result?.error && 'transition-transform translate-y-4 duration-150'">
+    <h2 class="text-3xl font-extrabold leading-tight tracking-tight font-satoshi">Se connecter</h2>
+    <div class="flex items-center gap-1.5">
+      <p>Vous n'avez pas de compte?</p>
+      <a class="text-primary-500 hover:underline" [routerLink]="['/sign-up']">S'inscrire</a>
+    </div>
+
+    @let verifyEmailResult = verifyEmail$ | async;
+    @if (verifyEmailResult?.error) {
       <app-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
-        {{ result.error }}
+        {{ verifyEmailResult.error }}
+      </app-alert>
+    }
+    @if (verifyEmailResult?.data) {
+      <app-alert class="mt-6 w-full" type="success" [showIcon]="true" [@shake]="true">
+        Votre email a été vérifié avec succès.
       </app-alert>
     }
 
-    <div [ngClass]="result.error && 'transition-transform translate-y-4 duration-150'">
-      <h2 class="text-3xl font-extrabold leading-tight tracking-tight font-satoshi">Se connecter</h2>
-      <div class="flex items-center gap-1.5">
-        <p>Vous n'avez pas de compte?</p>
-        <a class="text-primary-500 hover:underline" [routerLink]="['/sign-up']">S'inscrire</a>
-      </div>
+    <form class="mt-6" (ngSubmit)="onSignIn()" [formGroup]="signInForm">
+      <mat-form-field class="w-full">
+        <mat-label>Adresse e-mail</mat-label>
+        <input id="email" type="email" matInput autocomplete="email" [formControlName]="'email'" />
+      </mat-form-field>
 
-      <ng-container *ngIf="verifyEmail$ | async as verifyEmailResult">
-        @if (verifyEmailResult.error) {
-          <app-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
-            {{ verifyEmailResult.error }}
-          </app-alert>
-        }
-        @if (verifyEmailResult.data) {
-          <app-alert class="mt-6 w-full" type="success" [showIcon]="true" [@shake]="true">
-            Votre email a été vérifié avec succès.
-          </app-alert>
-        }
-      </ng-container>
-
-      <form class="mt-6" (ngSubmit)="onSignIn()" [formGroup]="signInForm">
-        <mat-form-field class="w-full">
-          <mat-label>Adresse e-mail</mat-label>
-          <input id="email" type="email" matInput autocomplete="email" [formControlName]="'email'" />
-        </mat-form-field>
-
-        <mat-form-field class="w-full">
-          <mat-label>Mot de passe</mat-label>
-          <input
-            id="password"
-            matInput
-            type="password"
-            autocomplete="off"
-            [formControlName]="'password'"
-            #passwordField />
-          <button
-            mat-icon-button
-            type="button"
-            (click)="
-              passwordField.type === 'password' ? (passwordField.type = 'text') : (passwordField.type = 'password')
-            "
-            matSuffix>
-            @if (passwordField.type === 'password') {
-              <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
-            }
-            @if (passwordField.type === 'text') {
-              <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
-            }
-          </button>
-        </mat-form-field>
-        <div class="inline-flex w-full items-center justify-between">
-          Mot de passe oublié?
-          <a class="text-md font-medium text-primary-500 hover:underline" [routerLink]="['/forgot-password']">
-            Réinitialiser
-          </a>
-        </div>
+      <mat-form-field class="w-full">
+        <mat-label>Mot de passe</mat-label>
+        <input
+          id="password"
+          matInput
+          type="password"
+          autocomplete="off"
+          [formControlName]="'password'"
+          #passwordField />
         <button
-          class="mt-6 w-full text-white"
-          mat-flat-button
-          color="primary"
-          type="submit"
-          [disabled]="result.isLoading || signInForm.invalid || signInForm.disabled">
-          @if (!result.isLoading && !signInForm.invalid) {
-            <span>Se connecter</span>
+          mat-icon-button
+          type="button"
+          (click)="
+            passwordField.type === 'password' ? (passwordField.type = 'text') : (passwordField.type = 'password')
+          "
+          matSuffix>
+          @if (passwordField.type === 'password') {
+            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
           }
-          @if (result.isLoading) {
-            <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
+          @if (passwordField.type === 'text') {
+            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
           }
         </button>
-        <div class="mt-4 flex items-center">
-          <div class="mt-px flex-auto border-t"></div>
-          <div class="text-secondary mx-2">Ou continuer avec</div>
-          <div class="mt-px flex-auto border-t"></div>
-        </div>
-        <div class="mt-4 flex items-center space-x-4">
-          <button class="flex-auto" type="button" mat-stroked-button (click)="signinWithGoogle()">
-            <div class="flex items-center gap-1.5">
-              <div class="relative h-5 w-5">
-                <img ngSrc="/images/logo/google.svg" alt="Google" fill />
-              </div>
-              Google
+      </mat-form-field>
+      <div class="inline-flex w-full items-center justify-between">
+        Mot de passe oublié?
+        <a class="text-md font-medium text-primary-500 hover:underline" [routerLink]="['/forgot-password']">
+          Réinitialiser
+        </a>
+      </div>
+
+      <button class="mt-6 w-full" mat-flat-button type="submit" [disabled]="result?.isLoading || signInForm.invalid">
+        @if (!result?.isLoading && !signInForm.invalid) {
+          <span>Se connecter</span>
+        }
+        @if (result?.isLoading) {
+          <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
+        }
+      </button>
+      <div class="mt-4 flex items-center">
+        <div class="mt-px flex-auto border-t"></div>
+        <div class="text-secondary mx-2">Ou continuer avec</div>
+        <div class="mt-px flex-auto border-t"></div>
+      </div>
+      <div class="mt-4 flex items-center space-x-4">
+        <button class="flex-auto" type="button" mat-stroked-button (click)="signinWithGoogle()">
+          <div class="flex items-center gap-1.5">
+            <div class="relative h-5 w-5">
+              <img ngSrc="/images/logo/google.svg" alt="Google" fill />
             </div>
-          </button>
-        </div>
-      </form>
-    </div>
-  </ng-container>
+            Google
+          </div>
+        </button>
+      </div>
+    </form>
+  </div>
 </app-auth-card>

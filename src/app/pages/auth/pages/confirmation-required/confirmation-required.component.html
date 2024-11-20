@@ -1,28 +1,29 @@
 <app-auth-card
   title="Confirmation recquise"
   description="Rejoignez notre communauté de plus de 1000 utilisateurs et profitez de nos services au quotidien.">
-  <ng-container *ngIf="resendEmailVerification$ | async as result">
-    @if (result.error) {
-      <app-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
-        {{ result.error }}
-      </app-alert>
-    }
-    @if (!result.error && !result.isLoading) {
-      <app-alert class="mt-6 w-full" appearance="soft" type="success" [showIcon]="true">
-        Un email de vérification a été envoyé à votre adresse email.
-      </app-alert>
-    }
-    <div [ngClass]="(result.error || result.isLoading) && 'transition-transform translate-y-4 duration-150'">
-      <h2 class="text-3xl font-extrabold leading-tight tracking-tight">Confirmation recquise</h2>
-      <div class="mt-4">
-        <p>
-          Un courrier de confirmation contenant des instructions a été envoyé à votre adresse électronique. Suivez ces
-          instructions pour confirmer pour confirmer votre adresse électronique et activer votre compte.
-        </p>
-        <button (click)="onResendEmailVerification()">
-          <span class="text-primary-500 underline">Renvoyer le mail</span>
-        </button>
-      </div>
+  @let result = resendEmailVerification$ | async;
+  @if (result?.error) {
+    <app-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
+      {{ result.error }}
+    </app-alert>
+  }
+  @if (!result?.error && !result?.isLoading) {
+    <app-alert class="mt-6 w-full" appearance="soft" type="success" [showIcon]="true">
+      Un email de vérification a été envoyé à votre adresse email.
+    </app-alert>
+  }
+  <div
+    class="mt-4"
+    [ngClass]="(result?.error || result?.isLoading) && 'transition-transform translate-y-4 duration-150'">
+    <h2 class="text-3xl font-extrabold leading-tight tracking-tight">Confirmation recquise</h2>
+    <div class="mt-4">
+      <p>
+        Un courrier de confirmation contenant des instructions a été envoyé à votre adresse électronique. Suivez ces
+        instructions pour confirmer pour confirmer votre adresse électronique et activer votre compte.
+      </p>
+      <button (click)="onResendEmailVerification()">
+        <span class="text-primary-500 underline">Renvoyer le mail</span>
+      </button>
     </div>
-  </ng-container>
+  </div>
 </app-auth-card>

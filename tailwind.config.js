@@ -4,19 +4,19 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const generatePalette = require(path.resolve(__dirname, 'src/@core/tailwind/utils/generate-palette'));
 
 const customPalettes = {
-  primary: generatePalette('#a4c73b'),
-  secondary: generatePalette('#508c3c')
+  primary: generatePalette('#508c3c'),
+  secondary: generatePalette('#a4c73b')
 };
 
 const themes = {
   default: {
     primary: {
-      ...customPalettes.secondary,
-      DEFAULT: customPalettes.secondary[600]
-    },
-    secondary: {
       ...customPalettes.primary,
       DEFAULT: customPalettes.primary[600]
+    },
+    secondary: {
+      ...customPalettes.secondary,
+      DEFAULT: customPalettes.secondary[600]
     },
     accent: {
       ...colors.slate,
@@ -59,12 +59,6 @@ const config = {
   important: true,
   theme: {
     fontSize: defaultTheme.fontSize,
-    screens: {
-      sm: '600px',
-      md: '960px',
-      lg: '1280px',
-      xl: '1440px'
-    },
 
     extend: {
       backgroundImage: {

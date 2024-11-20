@@ -4,10 +4,9 @@ import { DatePipe, Location } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-program-overview',
-  standalone: true,
-  imports: [MatIconModule, DatePipe],
-  templateUrl: './overview.component.html'
+    selector: 'app-program-overview',
+    imports: [MatIconModule, DatePipe],
+    templateUrl: './overview.component.html'
 })
 export class ProgramOverviewComponent {
   program = input.required<IProgram>();

@@ -9,10 +9,9 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { IAPIResponse } from '@core/services/api/types/api-response.type';
 
 @Component({
-  selector: 'app-staff',
-  standalone: true,
-  imports: [CommonModule, TeamCardComponent, MatIconModule, CarouselModule],
-  templateUrl: './staff.component.html'
+    selector: 'app-staff',
+    imports: [CommonModule, TeamCardComponent, MatIconModule, CarouselModule],
+    templateUrl: './staff.component.html'
 })
 export class StaffComponent implements OnInit {
   staff$: Observable<IAPIResponse<IUser[]>>;

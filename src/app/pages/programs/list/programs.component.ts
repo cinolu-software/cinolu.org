@@ -18,20 +18,19 @@ import { IAPIResponse } from '@core/services/api/types/api-response.type';
 const SKELETON_ITEM_COUNT = 9;
 
 @Component({
-  selector: 'app-programs',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    NgxPaginationModule,
-    ProgramCardComponent,
-    ProgramCardSkeletonComponent,
-    TopbarComponent
-  ],
-  templateUrl: './programs.component.html'
+    selector: 'app-programs',
+    imports: [
+        CommonModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatIconModule,
+        MatSlideToggleModule,
+        NgxPaginationModule,
+        ProgramCardComponent,
+        ProgramCardSkeletonComponent,
+        TopbarComponent
+    ],
+    templateUrl: './programs.component.html'
 })
 export class ProgramsComponent implements OnInit {
   skeletonArray = Array(SKELETON_ITEM_COUNT).fill(0);

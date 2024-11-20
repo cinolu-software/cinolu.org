@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-problem-statement',
-  standalone: true,
-  imports: [],
-  templateUrl: './problem-statement.component.html'
+    selector: 'app-problem-statement',
+    imports: [],
+    templateUrl: './problem-statement.component.html'
 })
 export class ProblemStatementComponent {
   innovationEcosystems: { title: string; description: string }[] = [

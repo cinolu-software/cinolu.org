@@ -1,5 +1,6 @@
 <app-topbar />
-<section *ngIf="program$ | async as result">
+<section>
+  @let result = program$ | async;
   @if (result.data; as program) {
     <div class="relative min-h-[75vh] py-50 w-full">
       <img

@@ -6,21 +6,20 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 import { Animations } from '@core/animations';
-import { AlertComponent } from '@core/components/alert';
+import { AlertComponent } from '@core/components/alert/alert.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '@core/auth/auth.service';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 import { Observable } from 'rxjs';
-import { createInitialApiResponse, IAPIResponse } from '@core/services/api/types/api-response.type';
-import { IUser } from '../../../../common/types/models.type';
+import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { IUser } from 'app/common/types/models.type';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   encapsulation: ViewEncapsulation.None,
   animations: Animations,
-  standalone: true,
   imports: [
     AlertComponent,
     FormsModule,
@@ -39,7 +38,7 @@ export class AuthForgotPasswordComponent {
   #formBuilder = inject(FormBuilder);
   #authService = inject(AuthService);
   forgotPasswordForm: FormGroup;
-  forgotPassword$: Observable<IAPIResponse<IUser>> = createInitialApiResponse();
+  forgotPassword$: Observable<IAPIResponse<IUser>>;
 
   constructor() {
     this.forgotPasswordForm = this.#formBuilder.group({

@@ -1,5 +1,6 @@
 <app-topbar />
-<section *ngIf="events$ | async as result">
+<section>
+  @let events = events$ | async;
   <div class="relative py-72 bg-[url('/images/slides/slide-2.webp')] bg-cover flex flex-col overflow-hidden mb-12">
     <div
       class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/60 to-primary-900/70 gap-6 text-2xl md:text-4xl px-8 md:px-32 text-white">
@@ -17,7 +18,8 @@
 
   <div class="px-8 md:px-32 flex flex-auto min-h-[90vh]">
     <div class="flex flex-auto flex-col">
-      <div class="flex flex-col md:flex-row md:justify-between" *ngIf="types$ | async as typesResult">
+      <div class="flex flex-col md:flex-row md:justify-between">
+        @let types = types$ | async;
         <div class="flex flex-col gap-3 md:flex-row">
           <mat-form-field class="w-full sm:w-60" [subscriptSizing]="'dynamic'">
             <mat-select
@@ -25,7 +27,7 @@
               (selectionChange)="onFilterChange($event, 'type')"
               placeholder="Filtrez par type">
               <mat-option [value]="'all'">Tous</mat-option>
-              @if (typesResult.data; as types) {
+              @if (types.data; as types) {
                 @for (type of types; track $index) {
                   <mat-option [value]="type.name">{{ type.name }}</mat-option>
                 }
@@ -48,19 +50,18 @@
         </div>
       </div>
 
-      @if (result.isLoading) {
+      @if (events.isLoading) {
         <div class="mt-8 grid grid-cols-1 gap-8 sm:mt-10 sm:grid-cols-2 lg:grid-cols-3">
           @for (event of skeletonArray; track $index) {
             <app-event-card-skeleton />
           }
         </div>
       }
-      @if (result.data) {
-        @if (result.data.events; as events) {
+      @if (events.data; as data) {
+        @if (data.events; as events) {
           <div class="mt-8 grid grid-cols-1 gap-8 sm:mt-10 sm:grid-cols-2 lg:grid-cols-3">
             @for (
-              event of events
-                | paginate: { itemsPerPage: 9, currentPage: queryParams.page, totalItems: result.data.count };
+              event of events | paginate: { itemsPerPage: 9, currentPage: queryParams.page, totalItems: data.count };
               track event.id
             ) {
               <app-event-card [event]="event" />
@@ -79,7 +80,7 @@
           </div>
         }
       }
-      @if (result.error || (result.data && result.data?.events.length === 0)) {
+      @if (events.error || (events.data && events.data?.events.length === 0)) {
         <h2 class="text-3xl font-semibold -mt-16">Aucun événements!</h2>
       }
     </div>

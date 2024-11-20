@@ -1,14 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { environment } from 'environments/environment';
 
-type Key = 'user' | 'program' | 'event';
-
 @Pipe({
   standalone: true,
   name: 'apiIMG'
 })
-export class ImgPipe implements PipeTransform {
-  transform(value: object, key: Key): string {
+export class APIImgPipe implements PipeTransform {
+  transform(value: object, key: string): string {
     const apiUrl = environment.apiUrl;
 
     if (key === 'user') {

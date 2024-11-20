@@ -18,14 +18,12 @@ import { LoadingService } from '@core/services/loading/loading.service';
   templateUrl: './loading-bar.component.html',
   styleUrls: ['./loading-bar.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [MatProgressBarModule]
 })
 export class LoadingBarComponent implements OnChanges, OnInit, OnDestroy {
   #loadingService = inject(LoadingService);
   #unsubscribeAll = new Subject();
   #cdr = inject(ChangeDetectorRef);
-
   mode: 'determinate' | 'indeterminate';
   progress = 0;
   show = false;

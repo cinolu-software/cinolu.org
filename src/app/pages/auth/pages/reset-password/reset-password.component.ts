@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
 import { Animations } from '@core/animations';
-import { AlertComponent } from '@core/components/alert';
+import { AlertComponent } from '@core/components/alert/alert.component';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '@core/auth/auth.service';
 import { IUser } from 'app/common/types/models.type';
@@ -20,7 +20,6 @@ import { IAPIResponse } from '@core/services/api/types/api-response.type';
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   animations: Animations,
-  standalone: true,
   imports: [
     AlertComponent,
     FormsModule,

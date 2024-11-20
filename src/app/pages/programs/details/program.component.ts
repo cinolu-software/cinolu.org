@@ -5,7 +5,7 @@ import { ProgramService } from './program.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { ImgPipe } from 'app/common/pipes/img.pipe';
+import { APIImgPipe } from 'app/common/pipes/api-img.pipe';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -17,7 +17,6 @@ import { ApplicationComponent } from './components/application/application.compo
 
 @Component({
   selector: 'app-program',
-  standalone: true,
   imports: [
     CommonModule,
     MatIconModule,
@@ -26,7 +25,7 @@ import { ApplicationComponent } from './components/application/application.compo
     MatButtonModule,
     NgOptimizedImage,
     FormsModule,
-    ImgPipe,
+    APIImgPipe,
     TopbarComponent,
     ProgramOverviewComponent,
     ApplicationComponent

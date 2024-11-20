@@ -15,19 +15,18 @@ import { Observable } from 'rxjs';
 import { IAPIResponse } from '@core/services/api/types/api-response.type';
 
 @Component({
-  selector: 'app-programs',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatSlideToggleModule,
-    NgxPaginationModule,
-    EventCardComponent,
-    EventCardSkeletonComponent,
-    TopbarComponent
-  ],
-  templateUrl: './events.component.html'
+    selector: 'app-programs',
+    imports: [
+        CommonModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatSlideToggleModule,
+        NgxPaginationModule,
+        EventCardComponent,
+        EventCardSkeletonComponent,
+        TopbarComponent
+    ],
+    templateUrl: './events.component.html'
 })
 export class EventsComponent implements OnInit {
   skeletonArray = Array(6).fill(0);

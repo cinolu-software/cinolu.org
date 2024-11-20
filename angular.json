@@ -27,12 +27,10 @@
             ],
 
             "styles": [
-              "src/@core/styles/tailwind.scss",
-              "src/@core/styles/themes.scss",
-              "src/styles/vendors.scss",
               "src/@core/styles/main.scss",
-              "src/styles/styles.scss",
-              "src/styles/tailwind.scss"
+              "src/styles/vendors.scss",
+              "src/styles/tailwind.scss",
+              "src/styles/styles.scss"
             ],
             "scripts": [],
             "server": "src/main.server.ts",

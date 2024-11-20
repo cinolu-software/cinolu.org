@@ -12,35 +12,22 @@ import { registerLocaleData } from '@angular/common';
 import { provideIcons } from '@core/services/icons/icons.provider';
 import { provideStore } from '@ngrx/store';
 import { authReducers } from '@core/auth/auth.reducers';
-import { provideAuth } from '@core/auth/auth.provider';
+import { LoadingInterceptor } from '../@core/services/loading';
 
 registerLocaleData(localeFr, 'fr');
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAuth(),
+    provideApp(),
     provideAnimations(),
     provideClientHydration(),
     provideIcons(),
     { provide: TitleStrategy, useClass: PageTitleStrategy },
     { provide: LOCALE_ID, useValue: 'fr' },
-    provideHttpClient(withFetch(), withInterceptors([httpInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([httpInterceptor, LoadingInterceptor])),
     provideRouter(appRoutes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
     provideStore({
       auth: authReducers
-    }),
-    provideApp({
-      app: {
-        layout: 'empty',
-        scheme: 'light',
-        screens: {
-          sm: '600px',
-          md: '960px',
-          lg: '1280px',
-          xl: '1440px'
-        },
-        theme: 'theme-default'
-      }
     })
   ]
 };

@@ -4,10 +4,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-program-application',
-  standalone: true,
-  imports: [FormsModule, MatInputModule, MatProgressSpinnerModule],
-  templateUrl: './application.component.html'
+    selector: 'app-program-application',
+    imports: [FormsModule, MatInputModule, MatProgressSpinnerModule],
+    templateUrl: './application.component.html'
 })
 export class ApplicationComponent {
   formData: Record<string, string | number | boolean> = {};

@@ -8,17 +8,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Animations } from '@core/animations';
-import { AlertComponent } from '@core/components/alert';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { AuthService } from '@core/auth/auth.service';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 import { environment } from 'environments/environment';
-import { createInitialApiResponse, IAPIResponse } from '@core/services/api/types/api-response.type';
+import { IAPIResponse } from '@core/services/api/types/api-response.type';
 import { Observable } from 'rxjs';
-import { IUser } from '../../../../common/types/models.type';
+import { IUser } from 'app/common/types/models.type';
+import { AlertComponent } from '@core/components/alert/alert.component';
 
 @Component({
-  standalone: true,
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   animations: Animations,
@@ -33,9 +32,9 @@ import { IUser } from '../../../../common/types/models.type';
     MatCheckboxModule,
     MatProgressSpinnerModule,
     MatStepperModule,
-    NgOptimizedImage,
     CommonModule,
-    AuthCardComponent
+    AuthCardComponent,
+    NgOptimizedImage
   ]
 })
 export class AuthSignUpComponent {
@@ -43,7 +42,7 @@ export class AuthSignUpComponent {
   #authService = inject(AuthService);
   currentStep = 1;
   signUpForm: FormGroup;
-  signUp$: Observable<IAPIResponse<IUser>> = createInitialApiResponse();
+  signUp$: Observable<IAPIResponse<IUser>>;
 
   constructor() {
     this.signUpForm = this.#formBuilder.group({

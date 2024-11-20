@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-about',
-  standalone: true,
-  imports: [],
-  templateUrl: './about.component.html'
+    selector: 'app-about',
+    imports: [],
+    templateUrl: './about.component.html'
 })
 export class AboutComponent {}

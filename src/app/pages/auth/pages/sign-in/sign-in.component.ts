@@ -6,19 +6,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Animations } from '@core/animations';
-import { AlertComponent } from '@core/components/alert';
+import { AlertComponent } from '@core/components/alert/alert.component';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
 import { AuthService } from '@core/auth/auth.service';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { IAPIResponse, createInitialApiResponse } from '@core/services/api/types/api-response.type';
-import { IUser } from '../../../../common/types/models.type';
+import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { IUser } from 'app/common/types/models.type';
 
 @Component({
   selector: 'app-sign-in',
-  standalone: true,
   templateUrl: './sign-in.component.html',
   animations: Animations,
   imports: [
@@ -41,8 +40,8 @@ export class AuthSignInComponent {
   #authService = inject(AuthService);
   #token: string = inject(ActivatedRoute).snapshot.queryParams['token'];
   signInForm: FormGroup;
-  result$: Observable<IAPIResponse<IUser>> = createInitialApiResponse();
-  verifyEmail$: Observable<IAPIResponse<IUser>> = createInitialApiResponse();
+  result$: Observable<IAPIResponse<IUser>>;
+  verifyEmail$: Observable<IAPIResponse<IUser>>;
 
   constructor() {
     this.signInForm = this.#formBuilder.group({

@@ -1,5 +1,6 @@
 <app-topbar />
-<section *ngIf="event$ | async as result">
+<section>
+  @let result = event$ | async;
   @if (result.data; as event) {
     <div class="relative min-h-[75vh] py-30 w-full">
       <img [ngSrc]="event | apiIMG: 'program'" [alt]="'Photo de couverture ' + event.name" class="object-cover" fill />
@@ -21,7 +22,6 @@
         <mat-icon class="text-primary-500" [svgIcon]="'heroicons_outline:arrow-long-left'"></mat-icon>
         <span class="inline-block">Revenir aux événements</span>
       </button>
-
       <div class="flex flex-col gap-10">
         <div>
           <h2 class="text-2xl font-semibold mb-3">Date butoire</h2>
@@ -30,7 +30,6 @@
             Le {{ event.ended_at | date: 'longDate' }}
           </p>
         </div>
-
         <div>
           <h2 class="text-2xl font-semibold mb-3">Catégories</h2>
           <div class="flex items-center gap-2">
