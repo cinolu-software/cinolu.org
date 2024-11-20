@@ -2,7 +2,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { environment } from 'environments/environment';
 
 @Pipe({
-  standalone: true,
   name: 'apiIMG'
 })
 export class APIImgPipe implements PipeTransform {

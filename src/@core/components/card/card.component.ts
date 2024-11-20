@@ -9,7 +9,6 @@ import { CardFace } from '@core/components/card/card.types';
   styleUrls: ['./card.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: Animations,
-  standalone: true,
   imports: []
 })
 export class CardComponent implements OnChanges {
