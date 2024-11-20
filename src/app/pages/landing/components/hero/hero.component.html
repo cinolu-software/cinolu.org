@@ -1,40 +1,43 @@
-<section class="relative h-screen w-full mb-80">
-  <ng-container *ngIf="isBrowser()">
-    <owl-carousel-o #owlCaroussel [options]="options">
-      <ng-template carouselSlide>
-        <app-hero-slide-one />
-      </ng-template>
-      <ng-template carouselSlide>
-        <app-hero-slide-two />
-      </ng-template>
-      <ng-template carouselSlide>
-        <app-hero-slide-three />
-      </ng-template>
-    </owl-carousel-o>
+<section class="h-screen w-full mb-80">
+  @if (isBrowser()) {
+    <div class="relative" *ngIf="isBrowser()">
+      <owl-carousel-o #owlCaroussel [options]="options">
+        <ng-template carouselSlide>
+          <app-hero-slide-one />
+        </ng-template>
+        <ng-template carouselSlide>
+          <app-hero-slide-two />
+        </ng-template>
+        <ng-template carouselSlide>
+          <app-hero-slide-three />
+        </ng-template>
+      </owl-carousel-o>
 
-    <button (click)="owlCaroussel.prev()" class="nav-btn absolute top-[80%] md:top-[45%] z-10 left-10">
-      <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_left" />
-    </button>
-    <button (click)="owlCaroussel.next()" class="nav-btn absolute top-[80%] md:top-[45%] right-10 z-10">
-      <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_right" />
-    </button>
-
-    <div class="-mt-10 z-10 px-8 md:px-26 relative grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
-      @for (p of stakeholdersPurposes; track $index) {
-        <div
-          class="p-8 bg-white rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-3 transition-transform duration-500">
-          <span
-            class="bg-secondary-900/90 text-center h-10 w-10 flex flex-col items-center justify-center mb-3 rounded-full">
-            <mat-icon class="icon-size-5 fill-white" [svgIcon]="p.icon" />
-          </span>
-          <h1 class="font-satoshi font-bold text-xl mb-4 line-clamp-1">
-            {{ p.title }}
-          </h1>
-          <p class="line-clamp-3">
-            {{ p.description }}
-          </p>
-        </div>
-      }
+      <button (click)="owlCaroussel.prev()" class="nav-btn absolute top-[80%] md:top-[45%] z-10 left-10">
+        <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_left" />
+      </button>
+      <button (click)="owlCaroussel.next()" class="nav-btn absolute top-[80%] md:top-[45%] right-10 z-10">
+        <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_right" />
+      </button>
+      <div class="-mt-10 z-10 px-8 md:px-26 relative grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
+        @for (p of stakeholdersPurposes; track $index) {
+          <div
+            class="p-8 bg-white rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-3 transition-transform duration-500">
+            <span
+              class="bg-secondary-900/90 text-center h-10 w-10 flex flex-col items-center justify-center mb-3 rounded-full">
+              <mat-icon class="icon-size-5 fill-white" [svgIcon]="p.icon" />
+            </span>
+            <h1 class="font-satoshi font-bold text-xl mb-4 line-clamp-1">
+              {{ p.title }}
+            </h1>
+            <p class="line-clamp-3">
+              {{ p.description }}
+            </p>
+          </div>
+        }
+      </div>
     </div>
-  </ng-container>
+  } @else {
+    <app-hero-slide-one />
+  }
 </section>
