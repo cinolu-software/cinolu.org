@@ -1,4 +1,10 @@
-import { EnvironmentProviders, importProvidersFrom, inject, provideEnvironmentInitializer } from '@angular/core';
+import {
+  EnvironmentProviders,
+  importProvidersFrom,
+  inject,
+  provideAppInitializer,
+  provideEnvironmentInitializer
+} from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationService } from '@core/services/confirmation';
 import { LoadingService } from '@core/services/loading';
@@ -9,7 +15,7 @@ export const provideApp = (): EnvironmentProviders[] => {
     importProvidersFrom(MatDialogModule),
     provideEnvironmentInitializer(() => inject(ConfirmationService)),
     provideEnvironmentInitializer(() => inject(LoadingService)),
-    provideEnvironmentInitializer(() => {
+    provideAppInitializer(() => {
       const authService = inject(AuthService);
       return authService.getProfile();
     })
