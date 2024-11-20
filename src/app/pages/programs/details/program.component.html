@@ -22,9 +22,30 @@
     </div>
 
     <div class="mx-auto max-w-screen-md py-10">
-      <app-program-overview [program]="program" />
-      @if (program.phases[0].form; as form) {
-        <app-program-application [jsonData]="form" />
+      <div class="flex items-center gap-7 mb-8 font-medium border-b border-dashed">
+        <button
+          [ngClass]="activeTab() === 'overview' && 'border-b border-primary-700'"
+          class="py-2"
+          (click)="setActiveTab('overview')">
+          Resumé
+        </button>
+
+        <button
+          [ngClass]="activeTab() === 'application' && 'border-b border-primary-700'"
+          class="py-2"
+          (click)="setActiveTab('application')">
+          Postuler
+        </button>
+      </div>
+
+      @if (activeTab() === 'overview') {
+        <app-program-overview [program]="program" />
+      }
+
+      @if (activeTab() === 'application') {
+        @if (program.phases[0].form; as form) {
+          <app-program-application [jsonData]="form" />
+        }
       }
     </div>
   }

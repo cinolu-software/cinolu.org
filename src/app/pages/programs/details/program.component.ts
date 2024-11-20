@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { IProgram } from 'app/common/types/models.type';
 import { ProgramService } from './program.service';
 import { ActivatedRoute } from '@angular/router';
@@ -37,9 +37,14 @@ export class ProgramComponent implements OnInit {
   program$: Observable<IAPIResponse<IProgram>>;
   #programService = inject(ProgramService);
   #activatedRoute = inject(ActivatedRoute);
+  activeTab = signal<'overview' | 'application'>('overview');
 
   ngOnInit(): void {
     const id = this.#activatedRoute.snapshot.paramMap.get('id');
     this.program$ = this.#programService.getProgram(id);
+  }
+
+  setActiveTab(tab: 'overview' | 'application'): void {
+    this.activeTab.set(tab);
   }
 }
