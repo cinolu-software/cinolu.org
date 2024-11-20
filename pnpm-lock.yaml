@@ -29,9 +29,6 @@ importers:
       '@angular/material':
         specifier: 19.0.0
         version: 19.0.0(2bzxc2ic5id365qpbi3j4l5rra)
-      '@angular/material-luxon-adapter':
-        specifier: 19.0.0
-        version: 19.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(@angular/material@19.0.0(2bzxc2ic5id365qpbi3j4l5rra))(luxon@3.5.0)
       '@angular/platform-browser':
         specifier: 19.0.0
         version: 19.0.0(@angular/animations@19.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0)))(@angular/common@19.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))
@@ -68,24 +65,12 @@ importers:
       lodash-es:
         specifier: 4.17.21
         version: 4.17.21
-      luxon:
-        specifier: 3.5.0
-        version: 3.5.0
       ngx-owl-carousel-o:
         specifier: ^18.0.0
         version: 18.0.0(@angular/common@19.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1)
       ngx-pagination:
         specifier: 6.0.3
         version: 6.0.3(@angular/common@19.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))
-      ngx-quill:
-        specifier: 26.0.10
-        version: 26.0.10(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(quill@2.0.2)(rxjs@7.8.1)
-      perfect-scrollbar:
-        specifier: 1.5.6
-        version: 1.5.6
-      quill:
-        specifier: 2.0.2
-        version: 2.0.2
       rxjs:
         specifier: 7.8.1
         version: 7.8.1
@@ -138,15 +123,9 @@ importers:
       '@types/lodash-es':
         specifier: 4.17.12
         version: 4.17.12
-      '@types/luxon':
-        specifier: 3.4.2
-        version: 3.4.2
       '@types/node':
         specifier: ^22.9.1
         version: 22.9.1
-      '@types/ws':
-        specifier: ^8.5.13
-        version: 8.5.13
       angular-eslint:
         specifier: 18.4.1
         version: 18.4.1(@angular-devkit/core@19.0.0(chokidar@4.0.1))(@angular-devkit/schematics@19.0.0(chokidar@4.0.1))(@typescript-eslint/types@8.15.0)(@typescript-eslint/utils@8.15.0(eslint@9.15.0(jiti@1.21.6))(typescript@5.6.3))(eslint@9.15.0(jiti@1.21.6))(typescript-eslint@8.15.0(eslint@9.15.0(jiti@1.21.6))(typescript@5.6.3))(typescript@5.6.3)
@@ -413,13 +392,6 @@ packages:
       '@angular/core': 19.0.0
       '@angular/platform-browser': 19.0.0
       rxjs: ^6.5.3 || ^7.4.0
-
-  '@angular/material-luxon-adapter@19.0.0':
-    resolution: {integrity: sha512-sEdw+rfid7XXhVk+4FHMONobvr4OlzGof6PohzGVIp34Nh295pwK7HcgSafq1w8jeJwNPW2obaGa6Zz+uLbW3g==}
-    peerDependencies:
-      '@angular/core': ^19.0.0 || ^20.0.0
-      '@angular/material': 19.0.0
-      luxon: ^3.0.0
 
   '@angular/material@19.0.0':
     resolution: {integrity: sha512-j7dDFUh8dqiysuWu32biukDTHScajUYHFR9Srhn98kBwnXMob5y1paMoOx5RQO5DU4KCxKaKx8HcHJBJeTKHjw==}
@@ -2099,9 +2071,6 @@ packages:
   '@types/lodash@4.17.13':
     resolution: {integrity: sha512-lfx+dftrEZcdBPczf9d0Qv0x+j/rfNCMuC6OcfXmO8gkfeNAY88PgKUbvG56whcN23gc27yenwF6oJZXGFpYxg==}
 
-  '@types/luxon@3.4.2':
-    resolution: {integrity: sha512-TifLZlFudklWlMBfhubvgqTXRzLDI5pCbGa4P8a3wPyUQSW+1xQ5eDsreP9DWHX3tjq1ke96uYG/nwundroWcA==}
-
   '@types/mime@1.3.5':
     resolution: {integrity: sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==}
 
@@ -3034,9 +3003,6 @@ packages:
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
 
-  fast-diff@1.3.0:
-    resolution: {integrity: sha512-VxPP4NqbUjj6MaAOafWeUn2cXWLcCtljklUtZf0Ind4XQ+QPtmA0b18zZy0jIQx+ExRVCR/ZQpBmik5lXshNsw==}
-
   fast-glob@3.3.2:
     resolution: {integrity: sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow==}
     engines: {node: '>=8.6.0'}
@@ -3694,14 +3660,8 @@ packages:
   lodash.castarray@4.4.0:
     resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
 
-  lodash.clonedeep@4.5.0:
-    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
-
   lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
-
-  lodash.isequal@4.5.0:
-    resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
 
   lodash.isplainobject@4.0.6:
     resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
@@ -3747,10 +3707,6 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
-
-  luxon@3.5.0:
-    resolution: {integrity: sha512-rh+Zjr6DNfUYR3bPwJEnuwDdqMbxZW7LOQfUN4B54+Cl+0o5zaU9RJ6bcidfDtC1cWCZXQ+nvX8bf6bAji37QQ==}
-    engines: {node: '>=12'}
 
   magic-string@0.30.12:
     resolution: {integrity: sha512-Ea8I3sQMVXr8JhN4z+H/d8zwo+tYDgHE9+5G4Wnrwhs0gaK9fXTKx0Tw5Xwsd/bCPTTZNRAdpyzvoeORe9LYpw==}
@@ -3984,14 +3940,6 @@ packages:
       '@angular/common': '>=13.0.0'
       '@angular/core': '>=13.0.0'
 
-  ngx-quill@26.0.10:
-    resolution: {integrity: sha512-P+WHt8vjFv9Ze4Lu/VLV/I56nNrvz6NXUQs6FzThaoiVz9foPYb2KifFjowyO946x5EXvVw2CspqC2ukOaLPtg==}
-    engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
-    peerDependencies:
-      '@angular/core': ^18.0.0
-      quill: ^2.0.0
-      rxjs: ^7.0.0
-
   node-addon-api@6.1.0:
     resolution: {integrity: sha512-+eawOlIgy680F0kBzPUNFhMZGtJ1YmqM6l4+Crf4IkImjYrO/mqPwRMh352g23uIaQKFItcQ64I7KMaJxHgAVA==}
 
@@ -4155,9 +4103,6 @@ packages:
     engines: {node: ^18.17.0 || >=20.5.0}
     hasBin: true
 
-  parchment@3.0.0:
-    resolution: {integrity: sha512-HUrJFQ/StvgmXRcQ1ftY6VEZUq3jA2t9ncFN4F84J/vN0/FPpQF+8FKXb3l6fLces6q0uOHj6NJn+2xvZnxO6A==}
-
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
@@ -4212,9 +4157,6 @@ packages:
   path-type@5.0.0:
     resolution: {integrity: sha512-5HviZNaZcfqP95rwpv+1HDgUamezbqdSYTyzjTvwtJSnIH+3vnbmWsItli8OFEndS984VT55M3jduxZbX351gg==}
     engines: {node: '>=12'}
-
-  perfect-scrollbar@1.5.6:
-    resolution: {integrity: sha512-rixgxw3SxyJbCaSpo1n35A/fwI1r2rdwMKOTCg/AcG+xOEyZcE8UHVjpZMFCVImzsFoCZeJTT+M/rdEIQYO2nw==}
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -4456,14 +4398,6 @@ packages:
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
-
-  quill-delta@5.1.0:
-    resolution: {integrity: sha512-X74oCeRI4/p0ucjb5Ma8adTXd9Scumz367kkMK5V/IatcX6A0vlgLgKbzXWy5nZmCGeNJm2oQX0d2Eqj+ZIlCA==}
-    engines: {node: '>= 12.0.0'}
-
-  quill@2.0.2:
-    resolution: {integrity: sha512-QfazNrhMakEdRG57IoYFwffUIr04LWJxbS/ZkidRFXYCQt63c1gK6Z7IHUXMx/Vh25WgPBU42oBaNzQ0K1R/xw==}
-    engines: {npm: '>=8.2.3'}
 
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
@@ -4994,9 +4928,6 @@ packages:
         optional: true
       '@swc/wasm':
         optional: true
-
-  tslib@2.7.0:
-    resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
 
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
@@ -5667,13 +5598,6 @@ snapshots:
       '@angular/core': 19.0.0(rxjs@7.8.1)(zone.js@0.15.0)
       '@angular/platform-browser': 19.0.0(@angular/animations@19.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0)))(@angular/common@19.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))
       rxjs: 7.8.1
-      tslib: 2.8.1
-
-  '@angular/material-luxon-adapter@19.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(@angular/material@19.0.0(2bzxc2ic5id365qpbi3j4l5rra))(luxon@3.5.0)':
-    dependencies:
-      '@angular/core': 19.0.0(rxjs@7.8.1)(zone.js@0.15.0)
-      '@angular/material': 19.0.0(2bzxc2ic5id365qpbi3j4l5rra)
-      luxon: 3.5.0
       tslib: 2.8.1
 
   '@angular/material@19.0.0(2bzxc2ic5id365qpbi3j4l5rra)':
@@ -7003,7 +6927,7 @@ snapshots:
   '@ngneat/overview@6.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))':
     dependencies:
       '@angular/core': 19.0.0(rxjs@7.8.1)(zone.js@0.15.0)
-      tslib: 2.7.0
+      tslib: 2.8.1
 
   '@ngrx/effects@18.1.1(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(@ngrx/store@18.1.1(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(rxjs@7.8.1)':
     dependencies:
@@ -7394,8 +7318,6 @@ snapshots:
       '@types/lodash': 4.17.13
 
   '@types/lodash@4.17.13': {}
-
-  '@types/luxon@3.4.2': {}
 
   '@types/mime@1.3.5': {}
 
@@ -8490,8 +8412,6 @@ snapshots:
 
   fast-deep-equal@3.1.3: {}
 
-  fast-diff@1.3.0: {}
-
   fast-glob@3.3.2:
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -9173,11 +9093,7 @@ snapshots:
 
   lodash.castarray@4.4.0: {}
 
-  lodash.clonedeep@4.5.0: {}
-
   lodash.debounce@4.0.8: {}
-
-  lodash.isequal@4.5.0: {}
 
   lodash.isplainobject@4.0.6: {}
 
@@ -9225,8 +9141,6 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
-
-  luxon@3.5.0: {}
 
   magic-string@0.30.12:
     dependencies:
@@ -9463,13 +9377,6 @@ snapshots:
       '@angular/core': 19.0.0(rxjs@7.8.1)(zone.js@0.15.0)
       tslib: 2.8.1
 
-  ngx-quill@26.0.10(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(quill@2.0.2)(rxjs@7.8.1):
-    dependencies:
-      '@angular/core': 19.0.0(rxjs@7.8.1)(zone.js@0.15.0)
-      quill: 2.0.2
-      rxjs: 7.8.1
-      tslib: 2.8.1
-
   node-addon-api@6.1.0:
     optional: true
 
@@ -9675,8 +9582,6 @@ snapshots:
       - bluebird
       - supports-color
 
-  parchment@3.0.0: {}
-
   parent-module@1.0.1:
     dependencies:
       callsites: 3.1.0
@@ -9724,8 +9629,6 @@ snapshots:
   path-to-regexp@0.1.10: {}
 
   path-type@5.0.0: {}
-
-  perfect-scrollbar@1.5.6: {}
 
   picocolors@1.1.1: {}
 
@@ -9877,19 +9780,6 @@ snapshots:
       side-channel: 1.0.6
 
   queue-microtask@1.2.3: {}
-
-  quill-delta@5.1.0:
-    dependencies:
-      fast-diff: 1.3.0
-      lodash.clonedeep: 4.5.0
-      lodash.isequal: 4.5.0
-
-  quill@2.0.2:
-    dependencies:
-      eventemitter3: 5.0.1
-      lodash-es: 4.17.21
-      parchment: 3.0.0
-      quill-delta: 5.1.0
 
   randombytes@2.1.0:
     dependencies:
@@ -10524,8 +10414,6 @@ snapshots:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     optional: true
-
-  tslib@2.7.0: {}
 
   tslib@2.8.1: {}
 

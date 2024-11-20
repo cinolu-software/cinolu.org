@@ -25,7 +25,6 @@
                 "input": "public"
               }
             ],
-
             "styles": [
               "src/@core/styles/main.scss",
               "src/styles/vendors.scss",

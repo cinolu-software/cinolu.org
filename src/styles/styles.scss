@@ -6,10 +6,6 @@ html {
   @apply text-white bg-primary-600;
 }
 
-::-webkit-scrollbar-thumb {
-  @apply bg-primary-900/70 w-1 rounded-md;
-}
-
 .pg .ngx-pagination .current {
   @apply bg-primary-500 bg-opacity-70 rounded-sm m-0 px-2 py-0.5;
 }

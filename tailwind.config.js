@@ -59,7 +59,12 @@ const config = {
   important: true,
   theme: {
     fontSize: defaultTheme.fontSize,
-
+    screens: {
+      sm: '600px',
+      md: '960px',
+      lg: '1280px',
+      xl: '1440px'
+    },
     extend: {
       backgroundImage: {
         hero: 'url("/images/slides/slide-2.webp")'

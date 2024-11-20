@@ -4,15 +4,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
-    selector: 'app-program-application',
-    imports: [FormsModule, MatInputModule, MatProgressSpinnerModule],
-    templateUrl: './application.component.html'
+  selector: 'app-program-application',
+  imports: [FormsModule, MatInputModule, MatProgressSpinnerModule],
+  templateUrl: './application.component.html'
 })
 export class ApplicationComponent {
   formData: Record<string, string | number | boolean> = {};
   jsonData = input.required<string>();
 
-  generateInputsArray(jsonData: string): { required: true; label: string; name: string; type: string }[] {
+  generateInputsArray(jsonData: string): { required: boolean; label: string; name: string; type: string }[] {
     const parsedData = JSON.parse(jsonData);
     return parsedData?.iputs.map((input: unknown) => input) || null;
   }

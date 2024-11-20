@@ -2,7 +2,6 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { ApplicationConfig, LOCALE_ID } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, TitleStrategy, withInMemoryScrolling } from '@angular/router';
-import { provideApp } from '@core';
 import { appRoutes } from 'app/app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PageTitleStrategy } from '../@core/strategies/page-title.strategy';
@@ -12,7 +11,8 @@ import { registerLocaleData } from '@angular/common';
 import { provideIcons } from '@core/services/icons/icons.provider';
 import { provideStore } from '@ngrx/store';
 import { authReducers } from '@core/auth/auth.reducers';
-import { LoadingInterceptor } from '../@core/services/loading';
+import { LoadingInterceptor } from '@core/services/loading';
+import { provideApp } from '@core/core.provider';
 
 registerLocaleData(localeFr, 'fr');
 

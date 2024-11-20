@@ -30,4 +30,8 @@ export class TopbarComponent implements OnInit {
   toogleMenu(): void {
     this.isOpen.update((value) => !value);
   }
+
+  trimName(name: string): string {
+    return name.length > 15 ? name.substring(0, 15) + '...' : name;
+  }
 }
