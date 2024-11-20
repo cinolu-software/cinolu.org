@@ -1,6 +1,6 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { IProgram } from 'app/common/types/models.type';
+import { IProgram, IUser } from 'app/common/types/models.type';
 import { ProgramService } from './program.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,6 +14,8 @@ import { Observable } from 'rxjs';
 import { IAPIResponse } from '@core/services/api/types/api-response.type';
 import { ProgramOverviewComponent } from './components/overview/overview.component';
 import { ApplicationComponent } from './components/application/application.component';
+import { Store } from '@ngrx/store';
+import { selectUser } from '@core/auth/auth.reducers';
 
 @Component({
   selector: 'app-program',
@@ -34,16 +36,19 @@ import { ApplicationComponent } from './components/application/application.compo
 })
 export class ProgramComponent implements OnInit {
   program$: Observable<IAPIResponse<IProgram>>;
+  user$: Observable<IUser>;
   #programService = inject(ProgramService);
   #activatedRoute = inject(ActivatedRoute);
-  activeTab = signal<'overview' | 'application'>('overview');
+  #store = inject(Store);
+  activeTab = signal('overview');
 
   ngOnInit(): void {
+    this.user$ = this.#store.select(selectUser);
     const id = this.#activatedRoute.snapshot.paramMap.get('id');
     this.program$ = this.#programService.getProgram(id);
   }
 
-  setActiveTab(tab: 'overview' | 'application'): void {
+  setActiveTab(tab: string): void {
     this.activeTab.set(tab);
   }
 }

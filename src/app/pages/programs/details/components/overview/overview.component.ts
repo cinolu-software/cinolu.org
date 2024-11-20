@@ -4,9 +4,9 @@ import { DatePipe, Location } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    selector: 'app-program-overview',
-    imports: [MatIconModule, DatePipe],
-    templateUrl: './overview.component.html'
+  selector: 'app-program-overview',
+  imports: [MatIconModule, DatePipe],
+  templateUrl: './overview.component.html'
 })
 export class ProgramOverviewComponent {
   program = input.required<IProgram>();
@@ -14,5 +14,9 @@ export class ProgramOverviewComponent {
 
   back(): void {
     this.#location.back();
+  }
+
+  join(arr: unknown[]): string {
+    return arr.map((a) => a['name']).join(', ');
   }
 }

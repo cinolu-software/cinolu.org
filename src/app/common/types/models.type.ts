@@ -4,6 +4,27 @@ interface IBase {
   updated_at: Date;
   deleted_at: Date;
 }
+export interface IApplication extends IBase {
+  answers: JSON;
+  reviews: IReview[];
+  program: IProgram;
+  applicant: IUser;
+}
+
+export enum ReviewStatus {
+  PENDING = 'pending',
+  SHORTLISTED = 'shortlisted',
+  ACCEPTED = 'accepted',
+  REJECTED = 'rejected'
+}
+
+export interface IReview extends IBase {
+  status: ReviewStatus;
+  note: number;
+  comment: string;
+  application: IApplication;
+  reviewer: IUser;
+}
 
 export interface IUser extends IBase {
   email: string;

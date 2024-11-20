@@ -1,55 +1,51 @@
-<button class="text-primary-500 hover:underline flex items-center gap-1.5 mb-8" (click)="back()">
-  <mat-icon class="text-primary-500" [svgIcon]="'heroicons_outline:arrow-long-left'"></mat-icon>
-  <span class="inline-block">Revenir</span>
-</button>
+<div class="flex flex-col gap-8">
+  <button class="text-primary-500 hover:underline flex items-center gap-1.5" (click)="back()">
+    <mat-icon class="text-primary-500" [svgIcon]="'heroicons_outline:arrow-long-left'"></mat-icon>
+    <span class="inline-block">Revenir</span>
+  </button>
 
-<div class="mb-8">
-  <h2 class="text-xl font-semibold mb-2">Description</h2>
-  <p class="mb-1.5">{{ program().description }}</p>
-</div>
+  <div class="">
+    <h2 class="text-xl font-semibold mb-2">Description</h2>
+    <p class="mb-1.5">{{ program().description }}</p>
+  </div>
 
-<div class="mb-8">
-  <h2 class="text-xl font-semibold mb-2">Dates</h2>
-  <p class="mb-1.5">Commence le, {{ program().started_at | date: 'longDate' }}</p>
-  <p class="mb-1.5">Fini le, {{ program().ended_at | date: 'longDate' }}</p>
-</div>
+  <div class="">
+    <h2 class="text-xl font-semibold mb-2">Dates</h2>
+    <p class="mb-1.5">Commence le, {{ program().started_at | date: 'longDate' }}</p>
+    <p class="mb-1.5">Fini le, {{ program().ended_at | date: 'longDate' }}</p>
+  </div>
 
-<div class="mb-8">
-  <h2 class="text-xl font-semibold mb-2">Public ciblé</h2>
-  <p class="mb-8">{{ program().targeted_audience }}</p>
-</div>
+  <div class="flex items-center gap-4">
+    <h2 class="text-xl font-semibold">Public ciblé</h2>
+    <p>{{ program().targeted_audience }}</p>
+  </div>
 
-<div class="mb-8">
-  <h2 class="text-xl font-semibold mb-2">Catégories</h2>
-  @for (category of program().categories; track $index) {
-    <p class="mb-1.5">&mdash; {{ category.name }}</p>
-  }
-</div>
+  <div class="flex items-center gap-4">
+    <h2 class="text-xl font-semibold">Catégories</h2>
+    <p class="mb-1.5">{{ join(program().categories) }}</p>
+  </div>
 
-<div class="mb-8">
-  <h2 class="text-xl font-semibold mb-2">Types</h2>
-  @for (type of program().types; track $index) {
-    <p class="mb-1.5">&mdash; {{ type.name }}</p>
-  }
-</div>
+  <div class="flex items-center gap-4">
+    <h2 class="text-xl font-semibold mb-2">Types</h2>
+    <p class="mb-1.5">{{ join(program().types) }}</p>
+  </div>
 
-<div class="mb-8">
-  <h2 class="text-xl font-semibold mb-3">Partenaires</h2>
-  @for (partner of program().partners; track $index) {
-    <p>&mdash; {{ partner.name }}</p>
-  }
-</div>
-<div class="mb-8">
-  <h2 class="text-xl font-semibold mb-3">Phases</h2>
-  @for (phase of program().phases; track $index) {
-    <div class="flex gap-1 mb-6">
-      <p>&mdash;</p>
-      <div class="flex flex-col gap-1.5">
-        <p class="font-medium mb-2">{{ phase.name }}</p>
-        <p class="mb-1">{{ phase.description }}</p>
-        <p>Commence le {{ phase.started_at | date: 'longDate' }}</p>
-        <p>Fini le {{ phase.ended_at | date: 'longDate' }}</p>
+  <div class="">
+    <h2 class="text-xl font-semibold mb-3">Partenaires</h2>
+    <p class="mb-1.5">{{ join(program().partners) }}</p>
+  </div>
+  <div class="">
+    <h2 class="text-xl font-semibold mb-3">Phases</h2>
+    @for (phase of program().phases; track $index) {
+      <div class="flex gap-1 mb-6">
+        <p>&mdash;</p>
+        <div class="flex flex-col gap-1.5">
+          <p class="font-medium mb-2">{{ phase.name }}</p>
+          <p class="mb-1">{{ phase.description }}</p>
+          <p>Commence le {{ phase.started_at | date: 'longDate' }}</p>
+          <p>Fini le {{ phase.ended_at | date: 'longDate' }}</p>
+        </div>
       </div>
-    </div>
-  }
+    }
+  </div>
 </div>

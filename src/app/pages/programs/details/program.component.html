@@ -1,6 +1,7 @@
 <app-topbar />
 <section>
   @let result = program$ | async;
+  @let user = user$ | async;
   @if (result.data; as program) {
     <div class="relative min-h-[75vh] py-50 w-full">
       <img
@@ -25,15 +26,16 @@
     <div class="mx-auto max-w-screen-md py-10">
       <div class="flex items-center gap-7 mb-8 font-medium border-b border-dashed">
         <button
-          [ngClass]="activeTab() === 'overview' && 'border-b border-primary-700'"
+          [ngClass]="activeTab() === 'overview' && 'border-b border-primary-700 text-primary-700'"
           class="py-2"
           (click)="setActiveTab('overview')">
           Resumé
         </button>
 
         <button
-          [ngClass]="activeTab() === 'application' && 'border-b border-primary-700'"
-          class="py-2"
+          [disabled]="!user"
+          [ngClass]="activeTab() === 'application' && 'border-b border-primary-700 text-primary-700'"
+          class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed"
           (click)="setActiveTab('application')">
           Postuler
         </button>
@@ -44,9 +46,7 @@
       }
 
       @if (activeTab() === 'application') {
-        @if (program.phases[0].form; as form) {
-          <app-program-application [jsonData]="form" />
-        }
+        <app-program-application [program]="program" />
       }
     </div>
   }
