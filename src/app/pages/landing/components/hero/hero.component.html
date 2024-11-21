@@ -1,30 +1,29 @@
-<section class="relative h-screen w-full mb-80">
-  @if (isBrowser()) {
-    <ng-container *ngIf="isBrowser()">
-      <owl-carousel-o #owlCaroussel [options]="options">
-        <ng-template carouselSlide>
-          <app-hero-slide-one />
-        </ng-template>
-        <ng-template carouselSlide>
-          <app-hero-slide-two />
-        </ng-template>
-        <ng-template carouselSlide>
-          <app-hero-slide-three />
-        </ng-template>
-      </owl-carousel-o>
+<section class="mb-10">
+  <div class="relative min-h-screen py-96 w-full flex flex-col bg-[url('/images/slides/1.jpg')] bg-cover bg-no-repeat">
+    <div
+      class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/40 to-primary-900/50 gap-6 text-2xl md:text-4xl px-8 md:px-32 text-white">
+      <div class="max-w-screen-md flex flex-col items-start justify-center md:-mt-16 font-medium">
+        <h1 class="font-extrabold block text-3xl md:text-5xl hyphens-none">Co-créons votre projet</h1>
+        <p class="text-lg mb-8 mt-10 md:text-xl max-w-screen-sm">
+          Nous vous accompagnons avec les compétences, les ressources et le réseau qu'il vous faut pour vous lancer et
+          croitre.
+        </p>
 
-      <button (click)="owlCaroussel.prev()" class="nav-btn absolute top-[80%] md:top-[45%] z-10 left-10">
-        <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_left" />
-      </button>
-      <button (click)="owlCaroussel.next()" class="nav-btn absolute top-[80%] md:top-[45%] right-10 z-10">
-        <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_right" />
-      </button>
-    </ng-container>
-  } @else {
-    <app-hero-slide-one />
-  }
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base text-center">
+          <a
+            routerLink="/programs"
+            class="border border-white rounded-md px-6 py-2 text-white hover:bg-white hover:text-secondary-700 transition-colors duration-500">
+            Nos programmes
+          </a>
+          <a routerLink="/sign-up" class="bg-secondary-700 rounded-md px-6 py-2 text-white hover:bg-secondary-900">
+            Rejoignez-nous
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <div class="-mt-10 z-10 px-8 md:px-26 relative grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
+  <div class="px-8 md:px-30 grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4 -translate-y-16 z-10">
     @for (p of stakeholdersPurposes; track $index) {
       <div
         class="p-8 bg-white rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-3 transition-transform duration-500">
