@@ -27,7 +27,7 @@ export class ApplicationComponent {
 
   generateInputsArray(jsonData: string): { required: boolean; label: string; name: string; type: string }[] {
     const parsedData = JSON.parse(jsonData);
-    return parsedData?.iputs.map((input: unknown) => input) || null;
+    return parsedData?.inputs.map((input: unknown) => input) || null;
   }
 
   #disableForm(): void {
