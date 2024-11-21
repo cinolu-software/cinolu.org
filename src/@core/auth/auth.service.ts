@@ -22,7 +22,7 @@ export class AuthService {
   signUp(payload: ISignUp): Observable<IAPIResponse<IUser>> {
     const onSuccess = () => {
       this.#toast.success('Inscription réussie');
-      this.#router.navigate(['/sign-in']);
+      this.#router.navigate(['/confirmation-required', { email: payload.email }]);
     };
     return this.#apiService.postData('auth/sign-up', payload, onSuccess);
   }
@@ -36,12 +36,8 @@ export class AuthService {
     return this.#apiService.postData('auth/sign-in', payload, onSuccess);
   }
 
-  forgotPassword(payload: IForgotPassword): Observable<IAPIResponse<IUser>> {
-    const onSuccess = () => {
-      this.#toast.success('Un email vous a été envoyé');
-      this.#router.navigate(['/reset-password']);
-    };
-    return this.#apiService.postData('auth/forgot-password', payload, onSuccess);
+  forgotPassword(payload: IForgotPassword): Observable<IAPIResponse<void>> {
+    return this.#apiService.postData('auth/forgot-password', payload);
   }
 
   resetPassword(payload: IResetPassword): Observable<IAPIResponse<IUser>> {
@@ -57,7 +53,7 @@ export class AuthService {
   }
 
   verifyEmail(token: string): Observable<IAPIResponse<IUser>> {
-    const onSuccess = function () {
+    const onSuccess = () => {
       this.#router.navigate(['/sign-in']);
     };
     return this.#apiService.postData('auth/verify-email', { token }, onSuccess);

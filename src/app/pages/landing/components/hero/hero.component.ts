@@ -8,9 +8,9 @@ import { SlideTwoComponent } from './slides/slide-two/slide-two.component';
 import { SlideThreeComponent } from './slides/slide-three/slide-three.component';
 
 @Component({
-    selector: 'app-hero',
-    imports: [MatIconModule, CommonModule, CarouselModule, SlideOneComponent, SlideTwoComponent, SlideThreeComponent],
-    templateUrl: './hero.component.html'
+  selector: 'app-hero',
+  imports: [MatIconModule, CommonModule, CarouselModule, SlideOneComponent, SlideTwoComponent, SlideThreeComponent],
+  templateUrl: './hero.component.html'
 })
 export class HeroComponent {
   stakeholdersPurposes = stakeholders;

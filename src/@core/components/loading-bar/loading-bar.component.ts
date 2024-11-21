@@ -17,6 +17,7 @@ import { LoadingService } from '@core/services/loading/loading.service';
   selector: 'app-loading-bar',
   templateUrl: './loading-bar.component.html',
   encapsulation: ViewEncapsulation.None,
+  styleUrl: './loading-bar.component.scss',
   imports: [MatProgressBarModule]
 })
 export class LoadingBarComponent implements OnChanges, OnInit, OnDestroy {

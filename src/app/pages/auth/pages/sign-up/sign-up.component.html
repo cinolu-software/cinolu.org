@@ -2,11 +2,7 @@
   title="S'inscrire"
   description="Rejoignez notre communauté de plus de 1000 utilisateurs et profitez de nos services au quotidien">
   @let result = signUp$ | async;
-  @if (result?.error) {
-    <app-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
-      {{ result.error }}
-    </app-alert>
-  }
+
   <div [ngClass]="result?.error && 'transition-transform translate-y-4 duration-150'">
     <h2 class="text-3xl font-extrabold leading-tight tracking-tight font-satoshi pt-24">S'inscrire</h2>
     @if (result?.error) {
@@ -21,35 +17,16 @@
       </mat-form-field>
       <mat-form-field class="w-full">
         <mat-label>E-mail</mat-label>
-        <input
-          autocomplete="off"
-          id="email"
-          type="email"
-          matInput
-          formControlName="email"
-          placeholder="example@gmail.com"
-          required />
+        <input autocomplete="off" id="email" type="email" matInput formControlName="email" required />
       </mat-form-field>
       <mat-form-field class="w-full">
         <mat-label>Adresse</mat-label>
-        <input
-          autocomplete="off"
-          id="address"
-          matInput
-          formControlName="address"
-          placeholder="Lubumbashi, RDC."
-          required />
+        <input autocomplete="off" id="address" matInput formControlName="address" required />
       </mat-form-field>
 
       <mat-form-field class="w-full">
         <mat-label>Numéro de téléphone </mat-label>
-        <input
-          autocomplete="off"
-          id="phone_number"
-          matInput
-          formControlName="phone_number"
-          placeholder="+243979265726"
-          required />
+        <input autocomplete="off" id="phone_number" matInput formControlName="phone_number" required />
       </mat-form-field>
       <mat-form-field class="w-full">
         <mat-label>Mot de passe</mat-label>
@@ -95,7 +72,7 @@
         </button>
       </mat-form-field>
 
-      <button class="mt-6 w-full" mat-flat-button type="submit" [disabled]="result?.isLoading || signUpForm.invalid">
+      <button class="my-4 w-full" mat-flat-button type="submit" [disabled]="result?.isLoading || signUpForm.invalid">
         @if (!result?.isLoading && !signUpForm.invalid) {
           <span>S'inscrire</span>
         }
@@ -104,9 +81,9 @@
         }
       </button>
 
-      <div class="mt-4 flex items-center">
+      <div class="flex items-center mb-3">
         <div class="mt-px flex-auto border-t"></div>
-        <div class="text-gray-700 mx-2">Ou continuer avec</div>
+        <div class="text-secondary-700 mx-2">Ou continuer avec</div>
         <div class="mt-px flex-auto border-t"></div>
       </div>
       <div class="mt-4 flex items-center space-x-4">

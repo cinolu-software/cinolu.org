@@ -7,7 +7,7 @@
       {{ result.error }}
     </app-alert>
   }
-  @if (!result?.error && !result?.isLoading) {
+  @if (!result?.error) {
     <app-alert class="mt-6 w-full" appearance="soft" type="success" [showIcon]="true">
       Un email de vérification a été envoyé à votre adresse email.
     </app-alert>

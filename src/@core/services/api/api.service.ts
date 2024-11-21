@@ -12,19 +12,19 @@ export class APIService {
 
   fetchData<T>(url: string, params: HttpParams = null, onSuccess?: (data?: T) => void): Observable<IAPIResponse<T>> {
     return this.#http.get<{ data: T }>(url, { params }).pipe(
-      map(({ data }) => ({ isLoading: false, data, error: null })),
-      tap((res) => onSuccess && onSuccess(res.data)),
-      catchError((err) => of({ isLoading: false, data: null, error: err.error['message'] })),
-      startWith({ isLoading: true, data: null, error: null })
+      map((res) => ({ isLoading: false, data: res?.data, error: null, isSuccess: true })),
+      tap((res) => onSuccess && onSuccess(res?.data)),
+      catchError((err) => of({ isLoading: false, data: null, error: err.error['message'], isSuccess: false })),
+      startWith({ isLoading: true, data: null, error: null, isSuccess: false })
     );
   }
 
   postData<U, T>(url: string, payload: U, onSuccess?: (data?: T) => void): Observable<IAPIResponse<T>> {
     return this.#http.post<{ data: T }>(url, payload).pipe(
-      map(({ data }) => ({ isLoading: false, data, error: null })),
-      tap((res) => onSuccess && onSuccess(res.data)),
-      catchError((err) => of({ isLoading: false, data: null, error: err.error['message'] })),
-      startWith({ isLoading: true, data: null, error: null })
+      map((res) => ({ isLoading: false, data: res?.data, error: null, isSuccess: true })),
+      tap((res) => onSuccess && onSuccess(res?.data)),
+      catchError((err) => of({ isLoading: false, data: null, error: err.error['message'], isSuccess: false })),
+      startWith({ isLoading: true, data: null, error: null, isSuccess: false })
     );
   }
 }

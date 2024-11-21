@@ -13,7 +13,6 @@ import { AuthService } from '@core/auth/auth.service';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from '@core/services/api/types/api-response.type';
-import { IUser } from 'app/common/types/models.type';
 
 @Component({
   selector: 'app-forgot-password',
@@ -38,12 +37,16 @@ export class AuthForgotPasswordComponent {
   #formBuilder = inject(FormBuilder);
   #authService = inject(AuthService);
   forgotPasswordForm: FormGroup;
-  forgotPassword$: Observable<IAPIResponse<IUser>>;
+  forgotPassword$: Observable<IAPIResponse<void>>;
 
   constructor() {
     this.forgotPasswordForm = this.#formBuilder.group({
       email: ['', [Validators.required, Validators.email]]
     });
+  }
+
+  disbleForm(isSucess: boolean): void {
+    if (isSucess) this.forgotPasswordForm.disable();
   }
 
   submitForgotPassword(): void {

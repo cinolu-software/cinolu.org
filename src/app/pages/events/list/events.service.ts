@@ -12,6 +12,10 @@ import { IAPIResponse } from '@core/services/api/types/api-response.type';
 export class EventsService {
   #apiService = inject(APIService);
 
+  getIds(): Observable<IAPIResponse<{ id: string }[]>> {
+    return this.#apiService.fetchData('ids');
+  }
+
   getTypes(): Observable<IAPIResponse<IEventType[]>> {
     return this.#apiService.fetchData('event-types');
   }
