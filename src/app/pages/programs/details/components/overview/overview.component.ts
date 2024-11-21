@@ -1,6 +1,6 @@
-import { Component, inject, input } from '@angular/core';
-import { IProgram } from '../../../../../common/types/models.type';
-import { DatePipe, Location } from '@angular/common';
+import { Component, input } from '@angular/core';
+import { IProgram } from 'app/common/types/models.type';
+import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -10,11 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ProgramOverviewComponent {
   program = input.required<IProgram>();
-  #location = inject(Location);
-
-  back(): void {
-    this.#location.back();
-  }
 
   join(arr: unknown[]): string {
     return arr.map((a) => a['name']).join(', ');

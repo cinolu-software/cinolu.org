@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-hero-slide-one',
-    imports: [],
-    templateUrl: './slide-one.component.html'
+  selector: 'app-hero-slide-one',
+  imports: [],
+  templateUrl: './slide-one.component.html'
 })
 export class SlideOneComponent {}

@@ -1,4 +1,3 @@
-<app-topbar />
 <section>
   @let result = program$ | async;
   @let user = user$ | async;
@@ -13,6 +12,15 @@
       <div
         class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-primary-800/70 gap-6 text-2xl md:text-4xl px-8 md:px-32 text-white">
         <div class="relative z-10 flex flex-col items-start py-16">
+          <button
+            class="text-white-500 group underline flex items-center gap-1.5 text-lg mb-8 font-semibold"
+            (click)="back()">
+            <mat-icon
+              [svgIcon]="'heroicons_outline:arrow-long-left'"
+              class="group-hover:-translate-x-1.5 transition-transform duration-300" />
+            <span class="inline-block">Revenir</span>
+          </button>
+
           <div class="mt-1 text-center text-xl font-extrabold leading-tight tracking-tight md:text-3xl lg:text-5xl">
             {{ program.name }}
           </div>
@@ -27,17 +35,19 @@
       <div class="flex items-center gap-7 mb-8 font-medium border-b border-dashed">
         <button
           [ngClass]="activeTab() === 'overview' && 'border-b border-primary-700 text-primary-700'"
-          class="py-2"
+          class="py-2 flex items-center gap-1.5"
           (click)="setActiveTab('overview')">
           Resumé
+          <mat-icon svgIcon="description" class="icon-size-3" />
         </button>
 
         <button
           [disabled]="!user"
           [ngClass]="activeTab() === 'application' && 'border-b border-primary-700 text-primary-700'"
-          class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed"
+          class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
           (click)="setActiveTab('application')">
           Postuler
+          <mat-icon svgIcon="send" class="icon-size-3 -rotate-15" />
         </button>
       </div>
 
@@ -49,6 +59,9 @@
         <app-program-application [program]="program" />
       }
     </div>
+  }
+  @if (result.isLoading) {
+    <app-program-skeleton />
   }
   @if (result.error) {
     <div class="relative min-h-[75vh] w-full flex flex-col justify-center">

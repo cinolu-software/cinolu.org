@@ -16,7 +16,6 @@ import { LoadingService } from '@core/services/loading/loading.service';
 @Component({
   selector: 'app-loading-bar',
   templateUrl: './loading-bar.component.html',
-  styleUrls: ['./loading-bar.component.scss'],
   encapsulation: ViewEncapsulation.None,
   imports: [MatProgressBarModule]
 })

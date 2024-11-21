@@ -6,23 +6,23 @@ import { eventsRoutes } from './pages/events/events.routes';
 
 export const appRoutes: Route[] = [
   {
-    path: '',
-    children: landingRoutes
-  },
-  {
-    path: '',
-    children: auhtRoutes
-  },
-  {
     path: 'programs',
-    children: programsRoutes
+    loadChildren: () => programsRoutes
   },
   {
     path: 'events',
-    children: eventsRoutes
+    loadChildren: () => eventsRoutes
+  },
+  {
+    path: '',
+    loadChildren: () => landingRoutes
+  },
+  {
+    path: '',
+    loadChildren: () => auhtRoutes
   },
   {
     path: '**',
-    children: landingRoutes
+    loadChildren: () => landingRoutes
   }
 ];
