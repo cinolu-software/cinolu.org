@@ -1,23 +1,14 @@
 <a [routerLink]="['/programs', program().id]" class="bg-card group flex flex-col overflow-hidden rounded-2xl shadow">
-  <div class="h-50 w-full relative bg-gray-100">
+  <div class="h-60 w-full relative bg-gray-100">
     <img [ngSrc]="program() | apiIMG: 'program'" [alt]="program().name" class="object-cover" fill />
   </div>
   <div class="flex flex-col p-7">
-    <div class="flex items-center justify-between">
-      <div class="flex items-center flex-wrap gap-1">
-        @for (type of program().types; track $index) {
-          <p class="rounded-full px-3 py-0.5 text-xs font-semibold bg-primary-100 text-primary-900">
-            {{ type.name }}
-          </p>
-        }
-      </div>
-      <div class="flex items-center mt-4">
-        @if (isFinished(program())) {
-          <mat-icon class="text-primary-600 icon-size-5" [svgIcon]="'heroicons_solid:check-badge'" />
-        } @else {
-          <mat-icon class="icon-size-5 text-primary-900" [svgIcon]="'heroicons_solid:clock'" />
-        }
-      </div>
+    <div class="flex items-center gap-1 mb-2">
+      @for (type of program().types; track $index) {
+        <p class="rounded-full px-3 py-0.5 text-xs font-semibold bg-primary-100 text-primary-900">
+          {{ type.name }}
+        </p>
+      }
     </div>
     <div class="flex items-center flex-wrap gap-1 mb-1.5">
       @for (category of program().categories; track $index) {
@@ -35,11 +26,11 @@
     <div class="my-6 h-1 w-12 border-t-2"></div>
     <div class="text-gray-600 flex items-center text-md leading-5">
       <mat-icon class="text-hint icon-size-5" [svgIcon]="'event'" />
-      <div class="ml-1.5">Début, le {{ program().started_at | date: 'longDate' }}</div>
+      <div class="ml-1.5">Début le {{ program().started_at | date: 'longDate' }}</div>
     </div>
     <div class="text-gray-600 flex items-center text-md leading-5 mt-2">
       <mat-icon class="text-hint icon-size-5" [svgIcon]="'event_busy'" />
-      <div class="ml-1.5">Fin, le {{ program().ended_at | date: 'longDate' }}</div>
+      <div class="ml-1.5">Fin le {{ program().ended_at | date: 'longDate' }}</div>
     </div>
   </div>
 </a>
