@@ -1,14 +1,14 @@
 <section class="mb-20 bg-primary-900 py-20 text-white" id="team">
   <div class="px-8 md:px-26 lg:px-32 xl:px-40">
-    <h1 class="font-satoshi font-bold text-3xl md:text-5xl mb-14">
+    <h1 class="font-satoshi font-bold text-3xl md:text-6xl mb-14">
       Nos
       <span class="text-secondary-600">Chiffres</span>
     </h1>
     <div class="font-thin grid grid-cols-2 gap-10 md:grid-cols-4 lg:grid-cols-5">
       @for (s of stats; track $index) {
         <div class="flex flex-col">
-          <h2 class="font-medium text-2xl md:text-4xl">{{ s.value }}+</h2>
-          <p class="md:text-xl">{{ s.label }}+</p>
+          <h2 class="font-medium text-2xl md:text-5xl">{{ s.value }}+</h2>
+          <p class="text-xl">{{ s.label }}</p>
         </div>
       }
     </div>
