@@ -9,9 +9,9 @@ import { CommonModule } from '@angular/common';
 import { IAPIResponse } from '@core/services/api/types/api-response.type';
 
 @Component({
-    selector: 'app-coachs',
-    imports: [CommonModule, CarouselModule, MatIconModule, TeamCardComponent],
-    templateUrl: './coachs.component.html'
+  selector: 'app-coachs',
+  imports: [CommonModule, CarouselModule, MatIconModule, TeamCardComponent],
+  templateUrl: './coachs.component.html'
 })
 export class CoachComponent implements OnInit {
   coachs$: Observable<IAPIResponse<IUser[]>>;
@@ -36,6 +36,9 @@ export class CoachComponent implements OnInit {
         },
         940: {
           items: 4
+        },
+        1040: {
+          items: 5
         }
       }
     };
