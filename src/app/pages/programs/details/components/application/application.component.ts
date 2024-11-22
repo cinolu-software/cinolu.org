@@ -23,10 +23,6 @@ export class ApplicationComponent {
   application$: Observable<IAPIResponse<IApplication>>;
   #applicationService = inject(ApplicationService);
 
-  parseJSON(jsonData: string): { name: string; label: string; required: boolean }[] {
-    return JSON.parse(jsonData)['inputs'];
-  }
-
   onSubmit(): void {
     this.application$ = this.#applicationService.apply({ program: this.program().id, answers: this.formData as JSON });
   }

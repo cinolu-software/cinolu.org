@@ -1,41 +1,39 @@
 @if (program().phases[0].form; as form) {
   @let application = application$ | async;
-
   @if (application?.error) {
     <app-alert class="w-full" type="error" [showIcon]="true" [@shake]="true">
       {{ application.error }}
     </app-alert>
   }
-
   <form
     [ngClass]="application?.error && 'transition-transform translate-y-6 duration-150'"
     class="flex flex-col gap-4 w-3/4"
     #applicationForm="ngForm"
     (ngSubmit)="onSubmit()">
-    @for (input of parseJSON(form); track $index) {
-      @if (input['type'] === 'textarea') {
+    @for (input of form['inputs']; track $index) {
+      @if (input.type === 'textarea') {
         <mat-form-field class="w-full">
-          <mat-label>{{ input['label'] }}</mat-label>
+          <mat-label>{{ input.label }}</mat-label>
           <textarea
             matInput
             rows="8"
-            [id]="input['name']"
-            [name]="input['name']"
-            [(ngModel)]="formData[input['name']]"
-            [required]="input['required']">
+            [id]="input.name"
+            [name]="input.name"
+            [(ngModel)]="formData[input.name]"
+            [required]="input.required">
           </textarea>
         </mat-form-field>
       } @else {
         <mat-form-field class="w-full">
-          <mat-label>{{ input['label'] }}</mat-label>
+          <mat-label>{{ input.label }}</mat-label>
           <input
             matInput
             autocomplete="off"
-            [id]="input['name']"
-            [type]="input['type']"
-            [name]="input['name']"
-            [(ngModel)]="formData[input['name']]"
-            [required]="input['required']" />
+            [id]="input.name"
+            [type]="input.type"
+            [name]="input.name"
+            [(ngModel)]="formData[input.name]"
+            [required]="input.required" />
         </mat-form-field>
       }
     }

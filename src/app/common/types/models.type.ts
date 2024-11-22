@@ -89,7 +89,7 @@ export interface IPhase extends IBase {
   started_at: Date;
   ended_at: Date;
   requirements: IRequiremnt[];
-  form: string;
+  form: JSON;
 }
 
 export interface IPartners extends IBase {
