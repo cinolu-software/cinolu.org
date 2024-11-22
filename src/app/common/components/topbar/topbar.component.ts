@@ -31,10 +31,6 @@ export class TopbarComponent implements OnInit {
     this.isOpen.update((value) => !value);
   }
 
-  closeMenu(): void {
-    this.isOpen.set(false);
-  }
-
   trimName(name: string): string {
     return name.length > 15 ? name.substring(0, 15) + '...' : name;
   }
