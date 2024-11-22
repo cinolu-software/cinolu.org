@@ -76,7 +76,6 @@ export interface IProgram extends IBase {
   ended_at: Date;
   targeted_audience: string;
   user: IUser;
-  attachments: IAttachment[];
   types: IProgramType[];
   categories: IProgramCategory[];
   phases: IPhase[];
