@@ -11,26 +11,24 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ProgramCardComponent } from './components/program-card/program-card.component';
 import { ProgramCardSkeletonComponent } from './components/program-card-skeleton/program-card-skeleton.component';
 import { QueryParams } from './types/query-params.type';
-import { TopbarComponent } from '../../../common/components/topbar/topbar.component';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from '@core/services/api/types/api-response.type';
 
 const SKELETON_ITEM_COUNT = 9;
 
 @Component({
-    selector: 'app-programs',
-    imports: [
-        CommonModule,
-        MatSelectModule,
-        MatOptionModule,
-        MatIconModule,
-        MatSlideToggleModule,
-        NgxPaginationModule,
-        ProgramCardComponent,
-        ProgramCardSkeletonComponent,
-        TopbarComponent
-    ],
-    templateUrl: './programs.component.html'
+  selector: 'app-programs',
+  imports: [
+    CommonModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    NgxPaginationModule,
+    ProgramCardComponent,
+    ProgramCardSkeletonComponent
+  ],
+  templateUrl: './programs.component.html'
 })
 export class ProgramsComponent implements OnInit {
   skeletonArray = Array(SKELETON_ITEM_COUNT).fill(0);
