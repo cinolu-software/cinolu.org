@@ -32,7 +32,7 @@ export class TopbarComponent implements OnInit {
   }
 
   closeMenu(): void {
-    this.isOpen.set(true);
+    this.isOpen.set(false);
   }
 
   trimName(name: string): string {
