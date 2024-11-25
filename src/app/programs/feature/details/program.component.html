@@ -2,13 +2,9 @@
   @let result = program$ | async;
   @let user = user$ | async;
   @if (result.data; as program) {
-    <div class="relative min-h-[70%] py-50 w-full">
-      <img
-        [ngSrc]="program | apiIMG: 'program'"
-        [alt]="'Photo de couverture ' + program.name"
-        class="object-cover"
-        fill
-        priority />
+    <div class="relative py-72 min-h-[75%] flex flex-col overflow-hidden">
+      <img [ngSrc]="program | apiIMG: 'program'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
+
       <div
         class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-primary-800/70 gap-6 text-2xl md:text-4xl px-8 md:px-32 lg:px-40 text-white">
         <div class="relative z-10 flex flex-col items-start py-16">

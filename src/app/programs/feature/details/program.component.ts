@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage, Location } from '@angular/common';
+import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { IProgram, IUser } from 'app/shared/utils/types/models.type';
 import { ActivatedRoute } from '@angular/router';
@@ -21,11 +21,11 @@ import { ProgramsService } from '../../data-access/programs.service';
   selector: 'app-program',
   imports: [
     CommonModule,
+    NgOptimizedImage,
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
     MatButtonModule,
-    NgOptimizedImage,
     FormsModule,
     APIImgPipe,
     ProgramOverviewComponent,
