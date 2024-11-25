@@ -2,7 +2,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { IProgram } from 'app/shared/types/models.type';
+import { IProgram } from 'app/shared/utils/types/models.type';
 import { RouterLink } from '@angular/router';
 import { APIImgPipe } from 'app/shared/pipes/api-img.pipe';
 

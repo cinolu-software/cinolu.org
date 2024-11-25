@@ -1,13 +1,13 @@
 import { inject, Injectable } from '@angular/core';
-import { IApplication, IProgram, IProgramCategory, IProgramType } from 'app/shared/types/models.type';
+import { IApplication, IProgram, IProgramCategory, IProgramType } from 'app/shared/utils/types/models.type';
 import { Observable } from 'rxjs';
-import { APIService } from '@core/services/api/api.service';
-import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { APIService } from 'app/shared/services/api/api.service';
+import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { QueryParams } from '../utils/types/query-params.type';
 import { HttpParams } from '@angular/common/http';
 import { HotToastService } from '@ngneat/hot-toast';
-import { Router } from 'express';
 import { IApplicationPayload } from '../utils/types/application-payload.type';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'

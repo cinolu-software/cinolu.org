@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { IProgramCategory, IProgram, IProgramType } from 'app/shared/types/models.type';
+import { IProgramCategory, IProgram, IProgramType } from 'app/shared/utils/types/models.type';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
@@ -11,10 +11,8 @@ import { ProgramCardComponent } from '../../ui/program-card/program-card.compone
 import { ProgramCardSkeletonComponent } from '../../ui/program-card-skeleton/program-card-skeleton.component';
 import { QueryParams } from '../../utils/types/query-params.type';
 import { Observable } from 'rxjs';
-import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { ProgramsService } from '../../data-access/programs.service';
-
-const SKELETON_ITEM_COUNT = 9;
 
 @Component({
   selector: 'app-programs',
@@ -31,13 +29,13 @@ const SKELETON_ITEM_COUNT = 9;
   templateUrl: './programs.component.html'
 })
 export class ProgramsComponent implements OnInit {
-  skeletonArray = Array(SKELETON_ITEM_COUNT).fill(0);
+  skeletonArray = Array(9).fill(0);
   programs$: Observable<IAPIResponse<{ programs: IProgram[]; count: number }>>;
   types$: Observable<IAPIResponse<IProgramType[]>>;
   categories$: Observable<IAPIResponse<IProgramCategory[]>>;
-  #programsService = inject(ProgramsService);
   #router = inject(Router);
   #route = inject(ActivatedRoute);
+  #programsService = inject(ProgramsService);
   queryParams: QueryParams = {
     page: Number(this.#route.snapshot.queryParams?.page) || null,
     type: this.#route.snapshot.queryParams?.type || null,

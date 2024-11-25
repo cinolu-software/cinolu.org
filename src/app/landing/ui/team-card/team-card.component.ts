@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { APIImgPipe } from 'app/shared/pipes/api-img.pipe';
-import { IUser } from 'app/shared/types/models.type';
+import { IUser } from 'app/shared/utils/types/models.type';
 
 @Component({
   selector: 'app-team-card',

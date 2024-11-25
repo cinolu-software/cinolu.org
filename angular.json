@@ -25,12 +25,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/@core/styles/main.scss",
-              "src/styles/vendors.scss",
-              "src/styles/tailwind.scss",
-              "src/styles/styles.scss"
-            ],
+            "styles": ["src/styles/main.scss", "src/styles/vendors.scss", "src/styles/styles.scss"],
             "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,

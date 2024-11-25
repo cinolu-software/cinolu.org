@@ -5,16 +5,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Animations } from '@core/animations';
-import { AlertComponent } from '@core/components/alert/alert.component';
+import { Animations } from 'app/shared/utils/animations';
+import { AlertComponent } from 'app/shared/ui/alert/alert.component';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
-import { AuthService } from '@core/auth/auth.service';
+import { AuthService } from 'app/auth/data-access/auth.service';
 import { AuthCardComponent } from '../../ui/auth-card/auth-card.component';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { IAPIResponse } from '@core/services/api/types/api-response.type';
-import { IUser } from 'app/shared/types/models.type';
+import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
+import { IUser } from 'app/shared/utils/types/models.type';
 
 @Component({
   selector: 'app-sign-in',

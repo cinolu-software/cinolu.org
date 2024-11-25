@@ -7,15 +7,15 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Animations } from '@core/animations';
+import { Animations } from 'app/shared/utils/animations';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { AuthService } from '@core/auth/auth.service';
+import { AuthService } from 'app/auth/data-access/auth.service';
 import { AuthCardComponent } from '../../ui/auth-card/auth-card.component';
 import { environment } from 'environments/environment';
-import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { Observable } from 'rxjs';
-import { IUser } from 'app/shared/types/models.type';
-import { AlertComponent } from '@core/components/alert/alert.component';
+import { IUser } from 'app/shared/utils/types/models.type';
+import { AlertComponent } from 'app/shared/ui/alert/alert.component';
 
 @Component({
   selector: 'app-sign-up',

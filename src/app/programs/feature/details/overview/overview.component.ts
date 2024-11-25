@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { IProgram } from 'app/shared/types/models.type';
+import { IProgram } from 'app/shared/utils/types/models.type';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 

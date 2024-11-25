@@ -1,9 +1,9 @@
 import { HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IEvent, IEventType } from 'app/shared/types/models.type';
-import { APIService } from '@core/services/api/api.service';
-import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { IEvent, IEventType } from 'app/shared/utils/types/models.type';
+import { APIService } from 'app/shared/services/api/api.service';
+import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { QueryParams } from '../utils/types/query-params.type';
 
 @Injectable({

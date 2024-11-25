@@ -1,7 +1,7 @@
 const path = require('path');
 const colors = require('tailwindcss/colors');
 const defaultTheme = require('tailwindcss/defaultTheme');
-const generatePalette = require(path.resolve(__dirname, 'src/@core/tailwind/utils/generate-palette'));
+const generatePalette = require(path.resolve(__dirname, 'src/styles/tailwind/utils/generate-palette'));
 
 const customPalettes = {
   primary: generatePalette('#508c3c'),
@@ -257,9 +257,9 @@ const config = {
     verticalAlign: false
   },
   plugins: [
-    require(path.resolve(__dirname, 'src/@core/tailwind/plugins/utilities')),
-    require(path.resolve(__dirname, 'src/@core/tailwind/plugins/icon-size')),
-    require(path.resolve(__dirname, 'src/@core/tailwind/plugins/theming'))({
+    require(path.resolve(__dirname, 'src/styles/tailwind/plugins/utilities')),
+    require(path.resolve(__dirname, 'src/styles/tailwind/plugins/icon-size')),
+    require(path.resolve(__dirname, 'src/styles/tailwind/plugins/theming'))({
       themes
     }),
 

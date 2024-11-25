@@ -6,15 +6,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
-import { Animations } from '@core/animations';
-import { AlertComponent } from '@core/components/alert/alert.component';
+import { Animations } from 'app/shared/utils/animations';
+import { AlertComponent } from 'app/shared/ui/alert/alert.component';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '@core/auth/auth.service';
-import { IUser } from 'app/shared/types/models.type';
+import { AuthService } from 'app/auth/data-access/auth.service';
+import { IUser } from 'app/shared/utils/types/models.type';
 import { AuthCardComponent } from '../../ui/auth-card/auth-card.component';
 import { TopbarComponent } from 'app/shared/ui/topbar/topbar.component';
 import { Observable } from 'rxjs';
-import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 
 @Component({
   selector: 'app-reset-password',

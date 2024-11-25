@@ -1,13 +1,13 @@
 import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { IEvent } from 'app/shared/types/models.type';
+import { IEvent } from 'app/shared/utils/types/models.type';
 import { ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { APIImgPipe } from 'app/shared/pipes/api-img.pipe';
 import { TopbarComponent } from '../../../shared/ui/topbar/topbar.component';
 import { Observable } from 'rxjs';
-import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { EventsService } from '../../data-access/events.service';
 
 @Component({

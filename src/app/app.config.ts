@@ -4,15 +4,15 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, TitleStrategy, withInMemoryScrolling } from '@angular/router';
 import { appRoutes } from 'app/app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { PageTitleStrategy } from '../@core/strategies/page-title.strategy';
-import { httpInterceptor } from '../@core/interceptors/http.interceptor';
+import { PageTitleStrategy } from './shared/strategies/page-title.strategy';
+import { httpInterceptor } from './shared/interceptors/http.interceptor';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
-import { provideIcons } from '@core/services/icons/icons.provider';
+import { provideIcons } from 'app/shared/services/icons/icons.provider';
 import { provideStore } from '@ngrx/store';
-import { authReducers } from '@core/auth/auth.reducers';
-import { LoadingInterceptor } from '@core/services/loading';
-import { provideApp } from '@core/core.provider';
+import { authReducers } from 'app/shared/data-access/auth/auth.reducers';
+import { LoadingInterceptor } from 'app/shared/services/loading';
+import { provideApp } from 'app/shared/providers/app.provider';
 
 registerLocaleData(localeFr, 'fr');
 

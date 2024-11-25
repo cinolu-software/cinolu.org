@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { IUser } from 'app/shared/types/models.type';
+import { IUser } from 'app/shared/utils/types/models.type';
 import { Observable } from 'rxjs';
-import { APIService } from '@core/services/api/api.service';
-import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { APIService } from 'app/shared/services/api/api.service';
+import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 
 @Injectable({
   providedIn: 'root'

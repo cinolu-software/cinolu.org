@@ -5,14 +5,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
-import { Animations } from '@core/animations';
-import { AlertComponent } from '@core/components/alert/alert.component';
+import { Animations } from 'app/shared/utils/animations';
+import { AlertComponent } from 'app/shared/ui/alert/alert.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthService } from '@core/auth/auth.service';
+import { AuthService } from 'app/auth/data-access/auth.service';
 import { AuthCardComponent } from '../../ui/auth-card/auth-card.component';
 import { Observable } from 'rxjs';
-import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 
 @Component({
   selector: 'app-forgot-password',

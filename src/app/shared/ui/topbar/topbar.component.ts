@@ -2,11 +2,11 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { IUser } from 'app/shared/types/models.type';
+import { IUser } from 'app/shared/utils/types/models.type';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
-import { selectUser } from '@core/auth/auth.reducers';
+import { selectUser } from 'app/shared/data-access/auth/auth.reducers';
 import { authLinks, commonLinks } from './links';
 import { APIImgPipe } from '../../pipes/api-img.pipe';
 

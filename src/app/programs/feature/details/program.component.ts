@@ -1,6 +1,6 @@
 import { CommonModule, NgOptimizedImage, Location } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { IProgram, IUser } from 'app/shared/types/models.type';
+import { IProgram, IUser } from 'app/shared/utils/types/models.type';
 import { ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,11 +9,11 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Observable } from 'rxjs';
-import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { ProgramOverviewComponent } from './overview/overview.component';
 import { ApplicationComponent } from './application/application.component';
 import { Store } from '@ngrx/store';
-import { selectUser } from '@core/auth/auth.reducers';
+import { selectUser } from 'app/shared/data-access/auth/auth.reducers';
 import { ProgramSkeletonComponent } from '../../ui/program-skeleton/program-skeleton.component';
 import { ProgramsService } from '../../data-access/programs.service';
 

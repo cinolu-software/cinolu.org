@@ -2,7 +2,7 @@
   @let result = program$ | async;
   @let user = user$ | async;
   @if (result.data; as program) {
-    <div class="relative min-h-[75vh] py-50 w-full">
+    <div class="relative min-h-[70%] py-50 w-full">
       <img
         [ngSrc]="program | apiIMG: 'program'"
         [alt]="'Photo de couverture ' + program.name"
@@ -64,7 +64,7 @@
     <app-program-skeleton />
   }
   @if (result.error) {
-    <div class="relative min-h-[75vh] w-full flex flex-col justify-center">
+    <div class="relative min-h-[75vh] w-full flex flex-col justify-center items-center">
       <h2 class="text-3xl font-semibold">Aucune solution avec cet identifiant !</h2>
     </div>
   }

@@ -8,9 +8,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { EventCardComponent } from '../../ui/event-card/event-card.component';
 import { EventCardSkeletonComponent } from '../../ui/event-card-skeleton/event-card-skeleton.component';
 import { QueryParams } from '../../utils/types/query-params.type';
-import { IEvent, IEventType } from 'app/shared/types/models.type';
+import { IEvent, IEventType } from 'app/shared/utils/types/models.type';
 import { Observable } from 'rxjs';
-import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { EventsService } from '../../data-access/events.service';
 
 @Component({

@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Animations } from '@core/animations';
-import { AlertComponent } from '@core/components/alert/alert.component';
-import { AuthService } from '@core/auth/auth.service';
+import { Animations } from 'app/shared/utils/animations';
+import { AlertComponent } from 'app/shared/ui/alert/alert.component';
+import { AuthService } from 'app/auth/data-access/auth.service';
 import { AuthCardComponent } from '../../ui/auth-card/auth-card.component';
 import { Observable } from 'rxjs';
-import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 
 @Component({
   selector: 'app-confirmation-required',

@@ -3,12 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { IApplication, IProgram } from 'app/shared/types/models.type';
+import { IApplication, IProgram } from 'app/shared/utils/types/models.type';
 import { Observable } from 'rxjs';
-import { IAPIResponse } from '@core/services/api/types/api-response.type';
+import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { CommonModule } from '@angular/common';
-import { AlertComponent } from '@core/components/alert/alert.component';
-import { Animations } from '@core/animations';
+import { AlertComponent } from 'app/shared/ui/alert/alert.component';
+import { Animations } from 'app/shared/utils/animations';
 import { ProgramsService } from '../../../data-access/programs.service';
 
 @Component({
