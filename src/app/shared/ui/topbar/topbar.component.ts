@@ -27,8 +27,12 @@ export class TopbarComponent implements OnInit {
     this.user$ = this.#store.pipe(select(selectUser));
   }
 
-  toogleMenu(): void {
-    this.isOpen.update((value) => !value);
+  openMenu(): void {
+    this.isOpen.set(true);
+  }
+
+  closeMenu(): void {
+    this.isOpen.set(true);
   }
 
   trimName(name: string): string {

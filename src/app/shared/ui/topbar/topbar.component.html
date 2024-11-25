@@ -12,7 +12,7 @@
       <button
         class="flex flex-col gap-2 lg:hidden cursor-pointer"
         [ngClass]="isOpen() ? 'nav-open' : ''"
-        (click)="toogleMenu()">
+        (click)="isOpen() ? closeMenu() : openMenu()">
         <div class="h-[1px] w-6 bg-current transition-transform duration-300"></div>
         <div class="h-[1px] w-6 bg-current transition-transform duration-300"></div>
       </button>
@@ -24,6 +24,7 @@
             [routerLink]="link.path"
             class="hover:text-secondary-700 transition-colors duration-300"
             routerLinkActive="text-secondary-700"
+            (click)="closeMenu()"
             [routerLinkActiveOptions]="{ exact: link.exactUrl }">
             {{ link.name }}
           </a>
@@ -35,6 +36,7 @@
               [routerLink]="link.path"
               class="hover:text-secondary-700 transition-colors duration-300"
               routerLinkActive="text-secondary-700"
+              (click)="closeMenu()"
               [routerLinkActiveOptions]="{ exact: link.exactUrl }">
               {{ link.name }}
             </a>
@@ -53,6 +55,7 @@
             [routerLink]="link.path"
             class="hover:text-secondary-700 transition-colors duration-300"
             routerLinkActive="text-secondary-700"
+            (click)="closeMenu()"
             [routerLinkActiveOptions]="{ exact: link.exactUrl }">
             {{ link.name }}
           </a>
@@ -64,6 +67,7 @@
               [routerLink]="link.path"
               class="hover:text-secondary-700 transition-colors duration-300"
               routerLinkActive="text-secondary-700"
+              (click)="closeMenu()"
               [routerLinkActiveOptions]="{ exact: link.exactUrl }">
               {{ link.name }}
             </a>
@@ -73,7 +77,10 @@
     </div>
 
     <ng-template #authLinksTemplate>
-      <a [href]="accountUrl" class="flex items-center gap-2 hover:text-secondary-700 transition-colors duration-300">
+      <a
+        [href]="accountUrl"
+        class="flex items-center gap-2 hover:text-secondary-700 transition-colors duration-300"
+        (click)="closeMenu()">
         <img
           [src]="user | apiIMG: 'user'"
           class="rounded-full object-cover w-8 h-8 ring-1 ring-secondary-400 ring-offset-1 ring-offset-secondary-400"
