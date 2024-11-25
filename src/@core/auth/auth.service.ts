@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IUser } from 'app/common/types/models.type';
-import { ISignIn } from '../../app/pages/auth/types/sign-in.type';
-import { ISignUp } from '../../app/pages/auth/types/sign-up.type';
-import { IResetPassword } from '../../app/pages/auth/types/reset-password.type';
-import { IForgotPassword } from '../../app/pages/auth/types/forgot-password.type';
+import { IUser } from 'app/shared/types/models.type';
+import { ISignIn } from '../../app/auth/utils/types/sign-in.type';
+import { ISignUp } from '../../app/auth/utils/types/sign-up.type';
+import { IResetPassword } from '../../app/auth/utils/types/reset-password.type';
+import { IForgotPassword } from '../../app/auth/utils/types/forgot-password.type';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { authActions } from './auth.actions';

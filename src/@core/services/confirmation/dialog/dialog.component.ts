@@ -6,10 +6,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { ConfirmationConfig } from '@core/services/confirmation/confirmation.types';
 
 @Component({
-    selector: 'app-confirmation-dialog',
-    templateUrl: './dialog.component.html',
-    styles: [
-        `
+  selector: 'app-confirmation-dialog',
+  templateUrl: './dialog.component.html',
+  styles: [
+    `
       .confirmation-dialog-panel {
         @screen md {
           @apply w-128;
@@ -22,9 +22,9 @@ import { ConfirmationConfig } from '@core/services/confirmation/confirmation.typ
         }
       }
     `
-    ],
-    encapsulation: ViewEncapsulation.None,
-    imports: [MatButtonModule, MatDialogModule, MatIconModule, NgClass]
+  ],
+  encapsulation: ViewEncapsulation.None,
+  imports: [MatButtonModule, MatDialogModule, MatIconModule, NgClass]
 })
 export class ConfirmationDialogComponent {
   data: ConfirmationConfig = inject(MAT_DIALOG_DATA);

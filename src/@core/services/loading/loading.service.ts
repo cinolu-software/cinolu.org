@@ -3,13 +3,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class LoadingService {
-  private _auto$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  private _mode$: BehaviorSubject<'determinate' | 'indeterminate'> = new BehaviorSubject<
-    'determinate' | 'indeterminate'
-  >('indeterminate');
-  private _progress$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(0);
-  private _show$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private _urlMap: Map<string, boolean> = new Map<string, boolean>();
+  #auto$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  #mode$: BehaviorSubject<'determinate' | 'indeterminate'> = new BehaviorSubject<'determinate' | 'indeterminate'>(
+    'indeterminate'
+  );
+  #progress$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(0);
+  #show$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  #urlMap: Map<string, boolean> = new Map<string, boolean>();
 
   // -----------------------------------------------------------------------------------------------------
   // @ Accessors
@@ -19,28 +19,28 @@ export class LoadingService {
    * Getter for auto mode
    */
   get auto$(): Observable<boolean> {
-    return this._auto$.asObservable();
+    return this.#auto$.asObservable();
   }
 
   /**
    * Getter for mode
    */
   get mode$(): Observable<'determinate' | 'indeterminate'> {
-    return this._mode$.asObservable();
+    return this.#mode$.asObservable();
   }
 
   /**
    * Getter for progress
    */
   get progress$(): Observable<number> {
-    return this._progress$.asObservable();
+    return this.#progress$.asObservable();
   }
 
   /**
    * Getter for show
    */
   get show$(): Observable<boolean> {
-    return this._show$.asObservable();
+    return this.#show$.asObservable();
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -51,14 +51,14 @@ export class LoadingService {
    * Show the loading bar
    */
   show(): void {
-    this._show$.next(true);
+    this.#show$.next(true);
   }
 
   /**
    * Hide the loading bar
    */
   hide(): void {
-    this._show$.next(false);
+    this.#show$.next(false);
   }
 
   /**
@@ -67,7 +67,7 @@ export class LoadingService {
    * @param value
    */
   setAutoMode(value: boolean): void {
-    this._auto$.next(value);
+    this.#auto$.next(value);
   }
 
   /**
@@ -76,7 +76,7 @@ export class LoadingService {
    * @param value
    */
   setMode(value: 'determinate' | 'indeterminate'): void {
-    this._mode$.next(value);
+    this.#mode$.next(value);
   }
 
   /**
@@ -90,7 +90,7 @@ export class LoadingService {
       return;
     }
 
-    this._progress$.next(value);
+    this.#progress$.next(value);
   }
 
   /**
@@ -107,15 +107,15 @@ export class LoadingService {
     }
 
     if (status === true) {
-      this._urlMap.set(url, status);
-      this._show$.next(true);
-    } else if (status === false && this._urlMap.has(url)) {
-      this._urlMap.delete(url);
+      this.#urlMap.set(url, status);
+      this.#show$.next(true);
+    } else if (status === false && this.#urlMap.has(url)) {
+      this.#urlMap.delete(url);
     }
 
     // Only set the status to 'false' if all outgoing requests are completed
-    if (this._urlMap.size === 0) {
-      this._show$.next(false);
+    if (this.#urlMap.size === 0) {
+      this.#show$.next(false);
     }
   }
 }
