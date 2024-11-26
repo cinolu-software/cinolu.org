@@ -1,6 +1,4 @@
-<a
-  [routerLink]="['/programs', program().id]"
-  class="bg-card group flex flex-col overflow-hidden rounded-2xl shadow lowercase">
+<a [routerLink]="['/programs', program().id]" class="bg-card group flex flex-col overflow-hidden rounded-2xl shadow">
   <div class="h-60 w-full relative bg-gray-100">
     <img [ngSrc]="program() | apiIMG: 'program'" [alt]="program().name" class="object-cover" fill />
   </div>
@@ -20,10 +18,10 @@
       }
     </div>
     <h4
-      class="mt-4 mb-2 text-lg group-hover:text-primary-900 transition-colors duration-200 font-medium line-clamp-1 first-letter:uppercase">
+      class="mt-4 mb-2 text-lg group-hover:text-primary-900 transition-colors duration-200 font-medium line-clamp-1 lowercase first-letter:uppercase">
       {{ program().name }}
     </h4>
-    <div class="text-gray-600 mt-0.5 line-clamp-2 first-letter:uppercase">
+    <div class="text-gray-600 mt-0.5 line-clamp-2 lowercase first-letter:uppercase">
       {{ program().description }}
     </div>
     <div class="my-6 h-1 w-12 border-t-2"></div>
