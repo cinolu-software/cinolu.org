@@ -6,14 +6,14 @@
       <img [ngSrc]="program | apiIMG: 'program'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
 
       <div
-        class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-primary-600/80 gap-6 text-2xl md:text-4xl px-8 md:px-32 lg:px-40 text-white">
+        class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-primary-600/80 gap-6 text-2xl md:text-4xl px-8 text-white">
         <div class="relative z-10 flex flex-col items-start py-10">
           <div
             class="mt-1 text-center text-lg font-extrabold leading-tight tracking-tight md:text-2xl lg:text-4xl lowercase first-letter:uppercase">
             {{ program.name }}
           </div>
           <div
-            class="text-gray-300 mt-6 tracking-tight md:text-lg line-clamp-3 md:line-clamp-2 lowercase first-letter:uppercase text-base lg:text-lg">
+            class="text-gray-300 w-2/3 mt-6 tracking-tight md:text-lg line-clamp-3 md:line-clamp-2 lowercase first-letter:uppercase text-base lg:text-lg">
             {{ program.description }}
           </div>
         </div>
