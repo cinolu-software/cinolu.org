@@ -53,7 +53,7 @@
         <app-program-overview [program]="program" />
       }
 
-      @if (activeTab() === 'application') {
+      @if (activeTab() === 'application' && program?.phases[0]?.form) {
         <app-program-application [program]="program" />
       }
     </div>
