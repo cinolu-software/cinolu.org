@@ -13,7 +13,7 @@ import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { ProgramOverviewComponent } from './overview/overview.component';
 import { ApplicationComponent } from './application/application.component';
 import { Store } from '@ngrx/store';
-import { selectUser } from 'app/shared/data-access/auth/auth.reducers';
+import { selectUser } from 'app/shared/store/auth/auth.reducers';
 import { ProgramSkeletonComponent } from '../../ui/program-skeleton/program-skeleton.component';
 import { ProgramsService } from '../../data-access/programs.service';
 

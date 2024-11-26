@@ -7,7 +7,7 @@ import { IResetPassword } from '../utils/types/reset-password.type';
 import { IForgotPassword } from '../utils/types/forgot-password.type';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { authActions } from '../../shared/data-access/auth/auth.actions';
+import { authActions } from '../../shared/store/auth/auth.actions';
 import { HotToastService } from '@ngneat/hot-toast';
 import { APIService } from '../../shared/services/api/api.service';
 import { IAPIResponse } from '../../shared/services/api/types/api-response.type';

@@ -10,7 +10,7 @@ import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { provideIcons } from 'app/shared/services/icons/icons.provider';
 import { provideStore } from '@ngrx/store';
-import { authReducers } from 'app/shared/data-access/auth/auth.reducers';
+import { authReducers } from 'app/shared/store/auth/auth.reducers';
 import { LoadingInterceptor } from 'app/shared/services/loading';
 import { provideApp } from 'app/shared/providers/app.provider';
 

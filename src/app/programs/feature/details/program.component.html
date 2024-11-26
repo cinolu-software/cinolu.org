@@ -2,11 +2,11 @@
   @let result = program$ | async;
   @let user = user$ | async;
   @if (result.data; as program) {
-    <div class="relative h-100 mt-22 w-full rounded-md overflow-hidden">
+    <div class="relative h-120 mt-22 w-full rounded-md overflow-hidden">
       <img [ngSrc]="program | apiIMG: 'program'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
 
       <div
-        class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-secondary-700/70 gap-6 text-2xl md:text-4xl px-8 md:px-32 lg:px-40 text-white">
+        class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-secondary-600/80 gap-6 text-2xl md:text-4xl px-8 md:px-32 lg:px-40 text-white">
         <div class="relative z-10 flex flex-col items-start py-10">
           <button
             class="text-gray-100 text-sm group underline flex items-center gap-1 mb-8 font-semibold"
@@ -30,13 +30,13 @@
     </div>
 
     <div class="py-10">
-      <div class="flex items-center gap-7 mb-8 font-medium border-b border-dashed">
+      <div class="flex items-center gap-7 mb-8 font-medium border-b border-dashed xl:text-lg">
         <button
           [ngClass]="activeTab() === 'overview' && 'border-b border-primary-700 text-primary-700'"
           class="py-2 flex items-center gap-1.5"
           (click)="setActiveTab('overview')">
           Resumé
-          <mat-icon svgIcon="description" class="icon-size-3" />
+          <mat-icon svgIcon="description" class="icon-size-3 xl:icon-size-4" />
         </button>
 
         <button
@@ -45,7 +45,7 @@
           class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
           (click)="setActiveTab('application')">
           Postuler
-          <mat-icon svgIcon="send" class="icon-size-3 -rotate-15" />
+          <mat-icon svgIcon="send" class="icon-size-3 xl:icon-size-4" />
         </button>
       </div>
 

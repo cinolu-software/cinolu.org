@@ -6,7 +6,7 @@ import { IUser } from 'app/shared/utils/types/models.type';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
-import { selectUser } from 'app/shared/data-access/auth/auth.reducers';
+import { selectUser } from 'app/shared/store/auth/auth.reducers';
 import { authLinks, commonLinks } from './links';
 import { APIImgPipe } from '../../pipes/api-img.pipe';
 
