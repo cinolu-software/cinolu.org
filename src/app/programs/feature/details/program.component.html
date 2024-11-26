@@ -2,7 +2,7 @@
   @let result = program$ | async;
   @let user = user$ | async;
   @if (result.data; as program) {
-    <div class="relative h-120 mt-22 w-full rounded-md overflow-hidden">
+    <div class="relative h-60 md:h-120 xl:min-h-140 mt-22 w-full rounded-md overflow-hidden">
       <img [ngSrc]="program | apiIMG: 'program'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
 
       <div
