@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-8">
   <div>
     <h2 class="text-xl font-semibold mb-2">Description</h2>
-    <p class="mb-1.5">{{ program().description }}</p>
+    <p class="mb-1.5 lowercase first-letter:uppercase">{{ program().description }}</p>
   </div>
 
   <div class="">
@@ -10,39 +10,43 @@
     <p class="mb-1.5">Fini le, {{ program().ended_at | date: 'longDate' }}</p>
   </div>
 
-  <div class="">
-    <h2 class="text-xl font-semibold mb-3">Partenaires</h2>
-    <p class="mb-1.5">{{ join(program().partners) }}</p>
-  </div>
+  @if (program().partners?.length) {
+    <div class="">
+      <h2 class="text-xl font-semibold mb-3">Partenaires</h2>
+      <p class="mb-1.5">{{ join(program().partners) }}</p>
+    </div>
+  }
 
-  <div class="">
-    <h2 class="text-xl font-semibold mb-3">Phases</h2>
-    @for (phase of program().phases; track $index) {
-      <div class="flex gap-1 mb-6">
-        <p>&mdash;</p>
-        <div class="flex flex-col gap-1.5">
-          <p class="font-bold mb-2 text-lg">{{ phase.name }}</p>
-          <div class="flex flex-col gap-1.5 mb-4">
-            <h2 class="font-medium underline">Description</h2>
-            <p class="">{{ phase.description }}</p>
-          </div>
-
-          @if (phase.requirements?.length) {
-            <div class="flex flex-col gap-1.5">
-              <h2 class="font-medium underline">Prérecquis</h2>
-              @for (req of phase.requirements; track $index) {
-                <div class="flex flex-col gap-2.5 mb-6">
-                  <p class="font-medium">{{ req.name }}</p>
-                  <p class="mb-2">{{ req.description }}</p>
-                </div>
-              }
+  @if (program().phases?.length) {
+    <div class="">
+      <h2 class="text-xl font-semibold mb-3">Phases</h2>
+      @for (phase of program().phases; track $index) {
+        <div class="flex gap-1 mb-6">
+          <p>&mdash;</p>
+          <div class="flex flex-col gap-1.5">
+            <p class="font-bold mb-2 text-lg">{{ phase.name }}</p>
+            <div class="flex flex-col gap-1.5 mb-4">
+              <h2 class="font-medium underline">Description</h2>
+              <p class="lowercase first-letter:uppercase">{{ phase.description }}</p>
             </div>
-          }
 
-          <p>Commence le {{ phase.started_at | date: 'longDate' }}</p>
-          <p>Fini le {{ phase.ended_at | date: 'longDate' }}</p>
+            @if (phase.requirements?.length) {
+              <div class="flex flex-col gap-1.5">
+                <h2 class="font-medium underline">Prérecquis</h2>
+                @for (req of phase.requirements; track $index) {
+                  <div class="flex flex-col gap-2.5 mb-6">
+                    <p class="font-medium">{{ req.name }}</p>
+                    <p class="mb-2 lowercase first-letter:uppercase">{{ req.description }}</p>
+                  </div>
+                }
+              </div>
+            }
+
+            <p>Commence le {{ phase.started_at | date: 'longDate' }}</p>
+            <p>Fini le {{ phase.ended_at | date: 'longDate' }}</p>
+          </div>
         </div>
-      </div>
-    }
-  </div>
+      }
+    </div>
+  }
 </div>
