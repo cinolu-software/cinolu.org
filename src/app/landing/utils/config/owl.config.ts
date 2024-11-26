@@ -18,6 +18,12 @@ export const owlOptionsTeam: OwlOptions = {
     },
     1040: {
       items: 5
+    },
+    1240: {
+      items: 6
+    },
+    1440: {
+      items: 7
     }
   }
 };
