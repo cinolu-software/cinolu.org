@@ -9,12 +9,12 @@ import { Animations } from 'app/shared/utils/animations';
 import { AlertComponent } from 'app/shared/ui/alert/alert.component';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
-import { AuthService } from 'app/auth/data-access/auth.service';
 import { AuthCardComponent } from '../../ui/auth-card/auth-card.component';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { IUser } from 'app/shared/utils/types/models.type';
+import { AuthService } from '../../data-access/auth.service';
 
 @Component({
   selector: 'app-sign-in',

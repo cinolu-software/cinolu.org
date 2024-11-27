@@ -9,13 +9,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Animations } from 'app/shared/utils/animations';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { AuthService } from 'app/auth/data-access/auth.service';
 import { AuthCardComponent } from '../../ui/auth-card/auth-card.component';
 import { environment } from 'environments/environment';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { Observable } from 'rxjs';
 import { IUser } from 'app/shared/utils/types/models.type';
 import { AlertComponent } from 'app/shared/ui/alert/alert.component';
+import { AuthService } from '../../data-access/auth.service';
 
 @Component({
   selector: 'app-sign-up',
