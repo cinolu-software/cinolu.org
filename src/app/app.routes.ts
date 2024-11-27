@@ -1,8 +1,8 @@
 import { Route } from '@angular/router';
-import { auhtRoutes } from './modules/auth/auth.routes';
-import { eventsRoutes } from './modules/events/events.routes';
-import { landingRoutes } from './modules/landing/landing.routes';
-import { programsRoutes } from './modules/programs/programs.routes';
+import { auhtRoutes } from './features/auth/auth.routes';
+import { eventsRoutes } from './features/events/events.routes';
+import { landingRoutes } from './features/landing/landing.routes';
+import { programsRoutes } from './features/programs/programs.routes';
 
 export const appRoutes: Route[] = [
   { path: 'programs', loadChildren: () => programsRoutes },
