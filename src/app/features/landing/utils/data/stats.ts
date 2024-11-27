@@ -12,11 +12,11 @@ export const stats: { value: number; label: string }[] = [
     label: 'Partenaires'
   },
   {
-    value: 15,
-    label: 'Mentors & Coachs'
-  },
-  {
     value: 8,
     label: 'Programmes'
+  },
+  {
+    value: 15,
+    label: 'Mentors & Coachs'
   }
 ];
