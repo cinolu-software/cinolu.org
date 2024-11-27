@@ -10,8 +10,9 @@
       </button>
     </div>
 
-    <div class="relative h-64 md:h-120 xl:min-h-140 w-full overflow-hidden">
-      <img [ngSrc]="program | apiIMG: 'program'" [alt]="'Photo de couverture'" class="object-center" fill priority />
+    <div
+      class="relative h-64 md:h-120 xl:min-h-140 w-full overflow-hidden ring-1 ring-secondary-400 ring-offset-1 ring-offset-secondary-400 rounded-sm">
+      <img [ngSrc]="program | apiIMG: 'program'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
     </div>
 
     <div class="py-10">
