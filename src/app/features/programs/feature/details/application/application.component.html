@@ -7,7 +7,7 @@
   }
   <form
     [ngClass]="application?.error && 'transition-transform translate-y-6 duration-150'"
-    class="flex flex-col gap-4 w-full m:w-3/4"
+    class="flex flex-col gap-4 w-full md:w-3/4"
     #applicationForm="ngForm"
     (ngSubmit)="onSubmit()">
     @for (input of form['inputs']; track $index) {
