@@ -1,25 +1,39 @@
 <div class="flex flex-col gap-8 xl:text-lg">
   <div>
-    <h2 class="text-xl font-semibold mb-2">Description</h2>
+    <div class="flex items-center gap-1 text-lg mb-2">
+      <mat-icon svgIcon="description" class="icon-size-4" />
+      <h2 class="font-semibold">Description</h2>
+    </div>
     <p class="mb-1.5 lowercase first-letter:uppercase">{{ program().description }}</p>
   </div>
 
-  <div class="">
-    <h2 class="text-xl font-semibold mb-2">Dates</h2>
+  <div>
+    <div class="flex items-center gap-1 text-lg mb-2">
+      <mat-icon svgIcon="event" class="icon-size-4" />
+      <h2 class="font-semibold">Dates</h2>
+    </div>
     <p class="mb-1.5">Commence le, {{ program().started_at | date: 'longDate' }}</p>
     <p class="mb-1.5">Fini le, {{ program().ended_at | date: 'longDate' }}</p>
   </div>
 
   @if (program().partners?.length) {
-    <div class="">
-      <h2 class="text-xl font-semibold mb-3">Partenaires</h2>
+    <div>
+      <div class="flex items-center gap-1 text-xl mb-2">
+        <mat-icon svgIcon="group" class="icon-size-4" />
+        <h2 class="font-semibold">Partenaires</h2>
+      </div>
+
       <p class="mb-1.5">{{ join(program().partners) }}</p>
     </div>
   }
 
   @if (program().phases?.length) {
-    <div class="">
-      <h2 class="text-xl font-semibold mb-3">Phases</h2>
+    <div>
+      <div class="flex items-center gap-1 text-xl mb-2">
+        <mat-icon svgIcon="timeline" class="icon-size-4" />
+        <h2 class="font-semibold">Phases</h2>
+      </div>
+
       @for (phase of program().phases; track $index) {
         <div class="flex gap-1 mb-6">
           <p>&mdash;</p>
