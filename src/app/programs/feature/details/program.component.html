@@ -2,22 +2,16 @@
   @let result = program$ | async;
   @let user = user$ | async;
   @if (result.data; as program) {
-    <div class="relative h-60 md:h-120 xl:min-h-140 mt-22 w-full rounded-md overflow-hidden">
-      <img [ngSrc]="program | apiIMG: 'program'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
+    <div class="flex flex-col gap-2 mb-8 mt-22">
+      <h2 class="text-lg md:text-xl font-semibold capitalize">{{ program.name }}</h2>
+      <button class="text-secondary-700 underline flex items-center gap-1" (click)="back()">
+        <mat-icon svgIcon="heroicons_outline:arrow-left" class="icon-size-3" />
+        Back
+      </button>
+    </div>
 
-      <div
-        class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-primary-600/80 gap-6 text-2xl md:text-4xl px-8 text-white">
-        <div class="relative z-10 flex flex-col items-start py-10">
-          <div
-            class="mt-1 text-center text-lg font-extrabold leading-tight tracking-tight md:text-2xl lg:text-4xl lowercase first-letter:uppercase">
-            {{ program.name }}
-          </div>
-          <div
-            class="text-gray-300 w-2/3 mt-6 tracking-tight md:text-lg line-clamp-3 md:line-clamp-2 lowercase first-letter:uppercase text-base lg:text-lg">
-            {{ program.description }}
-          </div>
-        </div>
-      </div>
+    <div class="relative h-64 md:h-120 xl:min-h-140 w-full overflow-hidden">
+      <img [ngSrc]="program | apiIMG: 'program'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
     </div>
 
     <div class="py-10">
