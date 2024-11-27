@@ -16,12 +16,12 @@
     </div>
 
     @let verifyEmailResult = verifyEmail$ | async;
-    @if (verifyEmailResult?.error) {
+    @if (verifyEmailResult?.error && !result?.error) {
       <app-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
         {{ verifyEmailResult.error }}
       </app-alert>
     }
-    @if (verifyEmailResult?.data) {
+    @if (verifyEmailResult?.data && !result?.error) {
       <app-alert class="mt-6 w-full" type="success" [showIcon]="true" [@shake]="true">
         Votre email a été vérifié avec succès.
       </app-alert>
