@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-program-overview',
-  imports: [MatIconModule, DatePipe],
+  imports: [MatIconModule, DatePipe, MatIconModule],
   templateUrl: './overview.component.html'
 })
 export class ProgramOverviewComponent {
