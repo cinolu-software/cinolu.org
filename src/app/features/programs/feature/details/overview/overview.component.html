@@ -16,7 +16,7 @@
     <p class="mb-1.5">Fini le, {{ program().ended_at | date: 'longDate' }}</p>
   </div>
 
-  @if (program().partners?.length) {
+  @if (program()?.partners.length) {
     <div>
       <div class="flex items-center gap-1 text-xl mb-2 text-secondary-800">
         <mat-icon svgIcon="group" class="icon-size-4" />
