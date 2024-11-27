@@ -1,4 +1,4 @@
-<a [routerLink]="['/programs', program().id]" class="bg-card group flex flex-col overflow-hidden rounded-2xl shadow">
+<!-- <a [routerLink]="['/programs', program().id]" class="bg-card group flex flex-col overflow-hidden rounded-2xl shadow">
   <div class="h-60 w-full relative bg-gray-100">
     <img [ngSrc]="program() | apiIMG: 'program'" [alt]="program().name" class="object-cover" fill />
   </div>
@@ -33,5 +33,13 @@
       <mat-icon class="text-hint icon-size-5" [svgIcon]="'event_busy'" />
       <div class="ml-1.5">Fin le {{ program().ended_at | date: 'longDate' }}</div>
     </div>
+  </div>
+</a> -->
+
+<a [routerLink]="['/programs', program().id]" class="rounded-sm">
+  <div class="h-80 w-full relative bg-gray-100">
+    <img [ngSrc]="program() | apiIMG: 'program'" [alt]="program().name" class="object-cover" fill />
+
+    <div class="absolute top-0 left-0 right-0 bottom-0 bg-primary-800/60"></div>
   </div>
 </a>

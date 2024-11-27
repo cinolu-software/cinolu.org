@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { IProgramCategory, IProgram, IProgramType } from 'app/shared/utils/types/models.type';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,12 +36,12 @@ export class ProgramsComponent implements OnInit {
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   #programsService = inject(ProgramsService);
-  queryParams: QueryParams = {
+  queryParams = signal<QueryParams>({
     page: Number(this.#route.snapshot.queryParams?.page) || null,
     type: this.#route.snapshot.queryParams?.type || null,
     category: this.#route.snapshot.queryParams?.category || null,
     hideFinished: !!this.#route.snapshot.queryParams?.hideFinished
-  };
+  });
 
   ngOnInit(): void {
     this.loadPrograms();
@@ -50,28 +50,28 @@ export class ProgramsComponent implements OnInit {
   }
 
   onFilterChange(event: MatSelectChange, filter: string): void {
-    this.queryParams.page = null;
-    this.queryParams[filter] = event.value === 'all' ? null : event.value;
+    this.queryParams().page = null;
+    this.queryParams()[filter] = event.value === 'all' ? null : event.value;
     this.updateRouteAndPrograms();
   }
 
   toogleFinished(): void {
-    this.queryParams.page = null;
-    this.queryParams.hideFinished = !this.queryParams.hideFinished;
+    this.queryParams().page = null;
+    this.queryParams().hideFinished = !this.queryParams().hideFinished;
     this.updateRouteAndPrograms();
   }
 
   onPageChange(currentPage: number): void {
-    this.queryParams.page = currentPage === 1 ? null : currentPage;
+    this.queryParams().page = currentPage === 1 ? null : currentPage;
     this.updateRouteAndPrograms();
   }
 
   loadPrograms(): void {
-    this.programs$ = this.#programsService.getPrograms(this.queryParams);
+    this.programs$ = this.#programsService.getPrograms(this.queryParams());
   }
 
   updateRoute(): void {
-    const { page, type, category, hideFinished } = this.queryParams;
+    const { page, type, category, hideFinished } = this.queryParams();
     const queryParams = { page, type, category };
     if (hideFinished) queryParams['hideFinished'] = hideFinished;
     this.#router.navigate(['/programs'], { queryParams });
