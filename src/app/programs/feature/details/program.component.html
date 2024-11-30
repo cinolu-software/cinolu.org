@@ -6,12 +6,12 @@
       <h2 class="text-lg md:text-xl font-semibold capitalize">{{ program.name }}</h2>
       <button class="text-secondary-700 underline flex items-center gap-1 text-base" (click)="back()">
         <mat-icon svgIcon="heroicons_outline:arrow-left" class="icon-size-3" />
-        Back
+        Retour
       </button>
     </div>
 
-    <div class="relative h-64 md:h-80 md:w-2/4 xl:min-h-100 w-full overflow-hidden">
-      <img [ngSrc]="program | apiIMG: 'program'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
+    <div class="relative mb-4 h-96 w-full aspect-video">
+      <img [ngSrc]="program | apiIMG: 'program'" [alt]="'Photo de couverture'" class="object-fill" fill />
     </div>
 
     <div class="py-10">

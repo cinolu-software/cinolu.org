@@ -1,28 +1,27 @@
-<section>
+<section class="mb-10">
   @let result = programs$ | async;
+  @let types = types$ | async;
+  @let categories = categories$ | async;
   <div
     class="relative py-72 min-h-[75%] bg-[url('/images/programs.webp')] bg-cover flex flex-col overflow-hidden mb-12">
     <div
       class="px-8 md:px-32 xl:px-48 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/60 to-primary-900/70 gap-6 text-2xl md:text-4xl text-white">
       <div class="relative z-10 flex flex-col items-start py-16">
-        <div
-          class="mt-1 text-center text-xl font-extrabold leading-tight tracking-tight md:text-3xl lg:text-5xl xl:6xl">
+        <h1 class="mt-1 text-center text-xl font-extrabold leading-tight tracking-tight md:text-3xl lg:text-5xl xl:6xl">
           Que voulez-vous apprendre ?
-        </div>
-        <div class="mt-6 max-w-2xl tracking-tight lg:text-xl font-ligh">
+        </h1>
+        <p class="mt-6 text-base max-w-2xl tracking-tight lg:text-xl font-ligh">
           Découvrez nos programmes et laissez-vous accompagner par les meilleurs coachs pour garantir la réussite de
           votre projet.
-        </div>
+        </p>
       </div>
     </div>
   </div>
 
-  <div class="px-8 md:px-26 py-6 flex flex-auto min-h-40">
+  <div class="px-8 md:px-26 flex flex-auto min-h-40">
     <div class="flex flex-auto flex-col">
       <div class="flex flex-col md:flex-row md:justify-between mb-8">
         <div class="flex flex-col gap-3 md:flex-row">
-          @let types = types$ | async;
-          @let categories = categories$ | async;
           <mat-form-field class="w-full sm:w-60" [subscriptSizing]="'dynamic'">
             <mat-select
               [value]="queryParams().type"
@@ -76,7 +75,6 @@
             <pagination-controls
               nextLabel=""
               previousLabel=""
-              [autoHide]="true"
               [maxSize]="5"
               (pageChange)="onPageChange($event)"
               class="pg">

@@ -1,15 +1,13 @@
 <div class="group relative rounded-lg bg-gray-200 overflow-hidden mr-1.5">
   <img
-    class="mx-auto h-[28rem] md:h-[18rem] w-full object-cover object-top ransition duration-500 group-hover:scale-105"
+    class="mx-auto h-[28rem] md:h-[19rem] w-full object-cover object-top ransition duration-500 group-hover:scale-105"
     [src]="user() | apiIMG: 'user'"
     [alt]="'Profile de ' + user().name"
-    loading="lazy"
-    width="640"
-    height="805" />
+    loading="lazy" />
   <div
     class="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-primary-800 translate-y-20 transition duration-300 ease-in-out group-hover:translate-y-0">
     <div>
-      <h4 class="text-xl font-semibold text-white line-clamp-1">
+      <h4 class="text-lg font-semibold text-white line-clamp-1">
         {{ user().name }}
       </h4>
       <span class="block text-sm text-gray-100 line-clamp-1">

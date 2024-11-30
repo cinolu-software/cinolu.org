@@ -1,4 +1,4 @@
-<header class="relative h-full text-sm font-medium">
+<header class="relative h-full text-sm font-semibold font-satoshi">
   @let user = user$ | async;
   <nav [ngClass]="isOpen() ? 'lg:static fixed inset-0 bg-white/75 z-40' : ''">
     <ul
@@ -82,7 +82,7 @@
         class="flex items-center gap-2 hover:text-secondary-700 transition-colors duration-300"
         (click)="closeMenu()">
         <img
-          [src]="user | apiIMG: 'user'"
+          [ngSrc]="user | apiIMG: 'user'"
           class="rounded-full object-cover w-8 h-8 ring-1 ring-secondary-400 ring-offset-1 ring-offset-secondary-400"
           alt="profile picture" />
         {{ trimName(user.name) }}

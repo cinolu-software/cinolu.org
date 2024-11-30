@@ -8,7 +8,7 @@ import {
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationService } from 'app/shared/services/confirmation';
 import { LoadingService } from 'app/shared/services/loading';
-import { AuthService } from '../../features/auth/data-access/auth.service';
+import { AuthService } from '../../auth/data-access/auth.service';
 
 export const provideApp = (): EnvironmentProviders[] => {
   const providers: EnvironmentProviders[] = [
