@@ -1,41 +1,27 @@
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
-  imports: [],
+  imports: [CommonModule, RouterLink, NgOptimizedImage],
   templateUrl: './footer.component.html'
 })
 export class FooterComponent {
-  links: { title: string; urls: { name: string; path: string }[] }[] = [
+  links = [
     {
       title: 'Découvrir',
       urls: [
-        { name: 'Les programmes', path: '/' },
-        { name: 'Evénements', path: '/' }
-      ]
-    },
-    {
-      title: 'À propos de',
-      urls: [
-        { name: 'Notre équipe', path: '/#team' },
-        { name: 'Blog', path: '/' }
-      ]
-    },
-    {
-      title: 'Aide',
-      urls: [
-        { name: 'Outils de demande', path: '/' },
-        { name: "Conditions d'utilisation", path: '/' },
-        { name: 'Avis de non-responsabilité', path: '/' },
-        { name: 'Lignes directrices', path: '/' }
+        { name: 'Les programmes', path: '/programs', external: false },
+        { name: 'Evénements', path: '/events', external: false }
       ]
     },
     {
       title: 'Socials',
       urls: [
-        { name: 'Facebook', path: '/' },
-        { name: 'Twitter', path: '/' },
-        { name: 'LinkedIn', path: '/' }
+        { name: 'Facebook', path: 'https://www.facebook.com/share/15cR36qNs8/?mibextid=kFxxJD', external: true },
+        { name: 'Twitter', path: 'https://x.com/Lubumdigital?t=MYcaQ_OEdCO3KZDCQzMoeQ&s=09', external: true },
+        { name: 'LinkedIn', path: 'https://www.linkedin.com/company/cinolu/', external: true }
       ]
     }
   ];
