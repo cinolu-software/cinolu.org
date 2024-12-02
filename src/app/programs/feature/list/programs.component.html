@@ -41,7 +41,7 @@
               [value]="queryParams().category"
               (selectionChange)="onFilterChange($event, 'category')"
               placeholder="Filtrez par catégorie">
-              <mat-option [value]="'all'">Tous</mat-option>
+              <mat-option [value]="'all'">Tous </mat-option>
               @if (categories.data; as categories) {
                 @for (category of categories; track $index) {
                   <mat-option [value]="category.name">{{ category.name }}</mat-option>
@@ -71,15 +71,17 @@
             }
           </div>
 
-          <div class="flex items-center justify-center mt-16">
-            <pagination-controls
-              nextLabel=""
-              previousLabel=""
-              [maxSize]="5"
-              (pageChange)="onPageChange($event)"
-              class="pg">
-            </pagination-controls>
-          </div>
+          @if (data.count > 9) {
+            <div class="flex justify-center mt-16">
+              <pagination-controls
+                nextLabel=""
+                previousLabel=""
+                [maxSize]="5"
+                (pageChange)="onPageChange($event)"
+                class="pg">
+              </pagination-controls>
+            </div>
+          }
         }
       }
       @if (result.error || (result.data && result.data?.programs.length === 0)) {
