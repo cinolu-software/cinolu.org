@@ -6,9 +6,7 @@ import { APIService } from 'app/shared/services/api/api.service';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { QueryParams } from '../utils/types/query-params.type';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EventsService {
   #apiService = inject(APIService);
 

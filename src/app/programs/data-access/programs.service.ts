@@ -9,9 +9,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { IApplicationPayload } from '../utils/types/application-payload.type';
 import { Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProgramsService {
   #apiService = inject(APIService);
   #toast = inject(HotToastService);

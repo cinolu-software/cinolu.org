@@ -15,6 +15,7 @@ import { EventsService } from '../../data-access/events.service';
 
 @Component({
   selector: 'app-programs',
+  providers: [EventsService],
   imports: [
     CommonModule,
     MatSelectModule,

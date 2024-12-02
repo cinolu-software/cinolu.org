@@ -11,6 +11,7 @@ import { EventsService } from '../../data-access/events.service';
 
 @Component({
   selector: 'app-program',
+  providers: [EventsService],
   imports: [CommonModule, MatIconModule, MatButtonModule, NgOptimizedImage, ApiImgPipe],
   templateUrl: './event.component.html'
 })

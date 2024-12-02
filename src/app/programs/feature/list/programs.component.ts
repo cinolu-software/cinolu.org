@@ -16,6 +16,7 @@ import { ProgramsService } from '../../data-access/programs.service';
 
 @Component({
   selector: 'app-programs',
+  providers: [ProgramsService],
   imports: [
     CommonModule,
     MatSelectModule,

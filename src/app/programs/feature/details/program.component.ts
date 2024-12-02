@@ -19,6 +19,7 @@ import { ProgramsService } from '../../data-access/programs.service';
 
 @Component({
   selector: 'app-program',
+  providers: [ProgramsService],
   imports: [
     CommonModule,
     NgOptimizedImage,
