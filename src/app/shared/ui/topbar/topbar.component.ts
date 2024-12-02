@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { selectUser } from 'app/shared/store/auth/auth.reducers';
 import { authLinks, commonLinks } from './links';
-import { APIImgPipe } from '../../pipes/api-img.pipe';
+import { ApiImgPipe } from '../../pipes/api-img.pipe';
 
 @Component({
   selector: 'app-topbar',
-  imports: [CommonModule, RouterModule, FormsModule, APIImgPipe, NgOptimizedImage],
+  imports: [CommonModule, RouterModule, FormsModule, ApiImgPipe, NgOptimizedImage],
   templateUrl: './topbar.component.html'
 })
 export class TopbarComponent implements OnInit {

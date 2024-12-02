@@ -4,14 +4,14 @@ import { IEvent } from 'app/shared/utils/types/models.type';
 import { ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { APIImgPipe } from 'app/shared/pipes/api-img.pipe';
+import { ApiImgPipe } from 'app/shared/pipes/api-img.pipe';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { EventsService } from '../../data-access/events.service';
 
 @Component({
   selector: 'app-program',
-  imports: [CommonModule, MatIconModule, MatButtonModule, NgOptimizedImage, APIImgPipe],
+  imports: [CommonModule, MatIconModule, MatButtonModule, NgOptimizedImage, ApiImgPipe],
   templateUrl: './event.component.html'
 })
 export class EventComponent implements OnInit {

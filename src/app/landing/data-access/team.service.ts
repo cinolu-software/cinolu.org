@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 import { APIService } from 'app/shared/services/api/api.service';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TeamService {
   #apiService = inject(APIService);
 

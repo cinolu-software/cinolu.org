@@ -79,7 +79,7 @@ export interface IProgram extends IBase {
   types: IProgramType[];
   categories: IProgramCategory[];
   phases: IPhase[];
-  partners: IPartners[];
+  partners: IPartner[];
 }
 
 export interface IPhase extends IBase {
@@ -91,7 +91,7 @@ export interface IPhase extends IBase {
   form: JSON;
 }
 
-export interface IPartners extends IBase {
+export interface IPartner extends IBase {
   name: string;
   website_link: string;
   profile: string;

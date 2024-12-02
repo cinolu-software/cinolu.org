@@ -11,6 +11,7 @@ import { TeamCardComponent } from '../../ui/team-card/team-card.component';
 
 @Component({
   selector: 'app-team',
+  providers: [TeamService],
   imports: [CommonModule, CarouselModule, MatIconModule, TeamCardComponent],
   templateUrl: './team.component.html'
 })

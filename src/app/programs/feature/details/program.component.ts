@@ -4,7 +4,7 @@ import { IProgram, IUser } from 'app/shared/utils/types/models.type';
 import { ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { APIImgPipe } from 'app/shared/pipes/api-img.pipe';
+import { ApiImgPipe } from 'app/shared/pipes/api-img.pipe';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -27,7 +27,7 @@ import { ProgramsService } from '../../data-access/programs.service';
     MatProgressSpinnerModule,
     MatButtonModule,
     FormsModule,
-    APIImgPipe,
+    ApiImgPipe,
     ProgramOverviewComponent,
     ApplicationComponent,
     ProgramSkeletonComponent

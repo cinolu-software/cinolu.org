@@ -4,11 +4,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { IProgram } from 'app/shared/utils/types/models.type';
 import { RouterLink } from '@angular/router';
-import { APIImgPipe } from 'app/shared/pipes/api-img.pipe';
+import { ApiImgPipe } from 'app/shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-program-card',
-  imports: [MatIconModule, MatTooltipModule, CommonModule, NgOptimizedImage, RouterLink, APIImgPipe],
+  imports: [MatIconModule, MatTooltipModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe],
   templateUrl: './program-card.component.html'
 })
 export class ProgramCardComponent {

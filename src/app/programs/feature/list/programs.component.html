@@ -29,7 +29,7 @@
               placeholder="Filtrez par type">
               <mat-option [value]="'all'">Tous</mat-option>
               @if (types.data; as types) {
-                @for (type of types; track $index) {
+                @for (type of types; track type.id) {
                   <mat-option [value]="type.name">{{ type.name }}</mat-option>
                 }
               }
@@ -43,7 +43,7 @@
               placeholder="Filtrez par catégorie">
               <mat-option [value]="'all'">Tous </mat-option>
               @if (categories.data; as categories) {
-                @for (category of categories; track $index) {
+                @for (category of categories; track category.id) {
                   <mat-option [value]="category.name">{{ category.name }}</mat-option>
                 }
               }

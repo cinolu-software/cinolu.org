@@ -4,7 +4,7 @@ import { environment } from 'environments/environment';
 @Pipe({
   name: 'apiIMG'
 })
-export class APIImgPipe implements PipeTransform {
+export class ApiImgPipe implements PipeTransform {
   transform(value: object, key: string): string {
     const apiUrl = environment.apiUrl;
 
@@ -16,6 +16,10 @@ export class APIImgPipe implements PipeTransform {
 
     if (key === 'program') {
       return value['image'] ? `${apiUrl}uploads/programs/${value['image']}` : '/images/no-image.jpg';
+    }
+
+    if (key === 'partner') {
+      return value['profile'] ? `${apiUrl}uploads/partners/${value['profile']}` : '/images/no-image.jpg';
     }
 
     if (key === 'event') {
