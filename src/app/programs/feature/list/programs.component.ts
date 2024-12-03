@@ -3,7 +3,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { IProgramCategory, IProgram, IProgramType } from 'app/shared/utils/types/models.type';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -19,13 +19,13 @@ import { ProgramsService } from '../../data-access/programs.service';
   providers: [ProgramsService],
   imports: [
     CommonModule,
-    MatSelectModule,
     MatOptionModule,
     MatIconModule,
     MatSlideToggleModule,
     NgxPaginationModule,
     ProgramCardComponent,
-    ProgramCardSkeletonComponent
+    ProgramCardSkeletonComponent,
+    MatChipsModule
   ],
   templateUrl: './programs.component.html'
 })
@@ -50,9 +50,9 @@ export class ProgramsComponent implements OnInit {
     this.categories$ = this.#programsService.getCategories();
   }
 
-  onFilterChange(event: MatSelectChange, filter: string): void {
+  onFilterChange(event: MatChipListboxChange, filter: string): void {
     this.queryParams().page = null;
-    this.queryParams()[filter] = event.value === 'all' ? null : event.value;
+    this.queryParams()[filter] = event.value === 'Tous' ? null : event.value;
     this.updateRouteAndPrograms();
   }
 
