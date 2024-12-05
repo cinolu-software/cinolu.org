@@ -1,0 +1,52 @@
+<div class="py-20 px-8 md:px-32 xl:px-48">
+  @let user = user$ | async;
+
+  <div class="flex flex-col md:flex-row md:items-center md:gap-6 gap-3 mb-12 mt-6">
+    <div class="relative h-22 w-22 rounded-full overflow-hidden">
+      <img [ngSrc]="user | apiIMG: 'user'" alt="Photo de profil" class="object-cover" fill />
+    </div>
+    <div class="flex flex-col gap-2">
+      <h5 class="font-semibold text-lg">{{ user.name }}</h5>
+      <p class="font-medium text-gray-600">
+        Inscrit le <span class="font-semibold">{{ user.created_at | date: 'longDate' }}</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-2.5 my-4">
+    <div class="bg-primary-900 rounded-full p-1 flex flex-col items-center justify-center">
+      <mat-icon svgIcon="mat_solid:settings" class="icon-size-4 text-white" />
+    </div>
+    <h1 class="text-xl font-semibold">Mon compte</h1>
+  </div>
+
+  <div class="py-5">
+    <div class="flex items-center gap-7 font-medium border-b xl:text-lg mb-10">
+      <button
+        [ngClass]="activeTab() === 'info' && 'border-b border-primary-700 text-primary-700'"
+        class="py-2 flex items-center gap-1.5"
+        (click)="setActiveTab('info')">
+        <mat-icon svgIcon="info" class="icon-size-4" />
+        Mes informations
+      </button>
+      <button
+        [ngClass]="activeTab() === 'applications' && 'border-b border-primary-700 text-primary-700'"
+        class="py-2 flex items-center gap-1.5"
+        (click)="setActiveTab('applications')">
+        <mat-icon svgIcon="assignment" class="icon-size-4" />
+        Mes candidatures
+      </button>
+    </div>
+
+    @if (activeTab() === 'info') {
+      <div class="flex flex-col gap-20 md:w-3/4">
+        <app-update-info [user]="user" />
+        <app-update-password />
+      </div>
+    }
+
+    @if (activeTab() === 'applications') {
+      <app-applications />
+    }
+  </div>
+</div>

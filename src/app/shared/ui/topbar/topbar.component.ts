@@ -3,21 +3,19 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { IUser } from 'app/shared/utils/types/models.type';
-import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { selectUser } from 'app/shared/store/auth/auth.reducers';
 import { authLinks, commonLinks } from './links';
-import { ApiImgPipe } from '../../pipes/api-img.pipe';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-topbar',
-  imports: [CommonModule, RouterModule, FormsModule, ApiImgPipe, NgOptimizedImage],
+  imports: [CommonModule, RouterModule, FormsModule, NgOptimizedImage, MatIconModule],
   templateUrl: './topbar.component.html'
 })
 export class TopbarComponent implements OnInit {
   isOpen = signal(false);
-  accountUrl = environment.accountUrl;
   commonLinks = commonLinks;
   authLinks = authLinks;
   user$: Observable<IUser>;

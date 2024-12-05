@@ -1,0 +1,63 @@
+<div class="flex items-center gap-1.5 text-lg mb-6">
+  <mat-icon svgIcon="mat_outline:account_circle" />
+  <h3 class="font-semibold text-gray-800">Modifier mes informations</h3>
+</div>
+<form [formGroup]="form" (ngSubmit)="updateInfo()">
+  <div formGroupName="info" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <mat-form-field class="w-full">
+      <mat-label>Nom complet</mat-label>
+      <input type="text" autocomplete="off" name="name" matInput [formControlName]="'name'" />
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>E-mail</mat-label>
+      <input type="text" autocomplete="off" name="email" matInput [formControlName]="'email'" />
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Numéro téléphonique</mat-label>
+      <input type="text" autocomplete="off" name="phone_number" matInput [formControlName]="'phone_number'" />
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Adresse</mat-label>
+      <input autocomplete="off" type="text" name="address" matInput [formControlName]="'address'" />
+    </mat-form-field>
+  </div>
+
+  <div class="flex flex-col gap-3" formGroupName="details">
+    <mat-form-field class="w-full">
+      <mat-label>Bio</mat-label>
+      <textarea matInput rows="8" [formControlName]="'bio'"> </textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>LinkedIn</mat-label>
+      <img matPrefix [src]="'/images/logo/linkdin.png'" alt="linkdin's logo" class="w-8 h-8" />
+      <input matInput [formControlName]="'linkedin'" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Facebook</mat-label>
+      <img matPrefix [src]="'/images/logo/facebook.jpeg'" alt="Facebook's logo" class="w-8 h-8" />
+      <input matInput [formControlName]="'facebook'" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Instagram</mat-label>
+      <img matPrefix [src]="'/images/logo/instagram.avif'" alt="Instagram's logo" class="w-7 h-7" />
+      <input matInput [formControlName]="'instagram'" />
+    </mat-form-field>
+  </div>
+
+  <div class="w-1/2 md:w-1/4">
+    <button class="w-full text-white" mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+      @if (!form.invalid) {
+        <span> Mettre à jour</span>
+      }
+      @if (false) {
+        <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
+      }
+    </button>
+  </div>
+</form>
