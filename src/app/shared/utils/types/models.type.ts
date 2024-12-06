@@ -36,7 +36,7 @@ export interface IUser extends IBase {
   google_image: string;
   profile: string;
   verified_at: Date | null;
-  roles: IRoles[];
+  roles: string[];
   programs: IProgram[];
   detail: IDetail;
 }

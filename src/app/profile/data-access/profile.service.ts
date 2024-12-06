@@ -31,6 +31,14 @@ export class ProfileService {
     return this.#apiService.post('users/add-details', payload, onSuccess);
   }
 
+  updateImage(file: FormData): Observable<IAPIResponse<IUser>> {
+    const onSuccess = (user: IUser): void => {
+      this.#toast.success('Photo de profil mis à jour !');
+      this.#store.dispatch(authActions.signIn({ user }));
+    };
+    return this.#apiService.post(`users/image-profile`, file, onSuccess);
+  }
+
   updatePassword(payload: IUpdatePassword): Observable<IAPIResponse<IUser>> {
     const onSuccess = (user: IUser): void => {
       this.#store.dispatch(authActions.signIn({ user }));

@@ -1,22 +1,54 @@
 <div class="py-20 px-8 md:px-32 xl:px-48">
   @let user = user$ | async;
+  @let result = update$ | async;
   <div class="flex flex-col md:flex-row md:items-center md:gap-6 gap-3 mb-12 mt-6">
-    <div class="relative h-22 w-22 rounded-full overflow-hidden">
-      <img [ngSrc]="user | apiIMG: 'user'" alt="Photo de profil" class="object-cover" fill />
+    <div class="relative h-22 w-22">
+      <img [ngSrc]="user | apiIMG: 'user'" class="rounded-full object-cover" [alt]="user.name" fill priority />
+      <button
+        type="button"
+        (click)="file.click()"
+        class="absolute bg-gray-100 rounded-full shadow-lg -bottom-2 text-primary-700 h-10 w-10 flex items-center justify-center right-0">
+        @if (result?.isLoading) {
+          <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
+        } @else {
+          <mat-icon class="icon-size-4" svgIcon="heroicons_outline:camera" />
+        }
+        <input
+          id="thumb"
+          name="thumb"
+          type="file"
+          class="hidden"
+          accept="image/*"
+          (change)="onImageChange($event)"
+          #file />
+      </button>
     </div>
-    <div class="flex flex-col gap-2">
-      <h5 class="font-semibold text-lg">{{ user.name }}</h5>
-      <p class="font-medium text-gray-600">
-        Inscrit le <span class="font-semibold">{{ user.created_at | date: 'longDate' }}</span>
-      </p>
+    <div class="flex flex-col md:flex-row md:items-center gap-8">
+      <div class="flex flex-col gap-2">
+        <h5 class="font-semibold text-lg">{{ user.name }}</h5>
+        <p class="font-medium text-gray-600">
+          Inscrit le <span class="font-semibold">{{ user.created_at | date: 'longDate' }}</span>
+        </p>
+      </div>
     </div>
   </div>
 
-  <div class="flex items-center gap-2.5 my-4">
-    <div class="bg-primary-900 rounded-full p-1 flex flex-col items-center justify-center">
-      <mat-icon svgIcon="mat_solid:settings" class="icon-size-4 text-white" />
+  <div class="mb-4">
+    <div class="flex items-center gap-2.5 mb-4">
+      <div class="bg-primary-900 rounded-full p-1 flex flex-col items-center justify-center">
+        <mat-icon svgIcon="mat_solid:settings" class="icon-size-4 text-white" />
+      </div>
+      <h1 class="text-xl font-semibold">Mon compte</h1>
     </div>
-    <h1 class="text-xl font-semibold">Mon compte</h1>
+
+    @if (hasRequiredRole(user)) {
+      <p class="font-medium">
+        Vous avez le rôle requis pour accéder au tableau de bord
+        <a [href]="appUrl" target="_blank" class="font-semibold underline text-primary-600">{{ appUrl }}</a>
+      </p>
+    } @else {
+      <p class="font-medium">Veillez à enregistrer vos modifications après chaque mise à jour.</p>
+    }
   </div>
 
   <div class="py-5">
