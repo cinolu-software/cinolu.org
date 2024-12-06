@@ -3,8 +3,8 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ApplicationsComponent } from './features/applications/applications.component';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { IUser } from '../shared/utils/types/models.type';
+import { combineLatest, Observable } from 'rxjs';
+import { IEvent, IProgram, IUser } from '../shared/utils/types/models.type';
 import { selectUser } from '../shared/store/auth/auth.reducers';
 import { ApiImgPipe } from '../shared/pipes/api-img.pipe';
 import { UpdateInfoComponent } from './features/account/update-info/update-info.component';
@@ -13,6 +13,7 @@ import { environment } from 'environments/environment';
 import { ProfileService } from './data-access/profile.service';
 import { IAPIResponse } from '../shared/services/api/types/api-response.type';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -25,7 +26,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ApplicationsComponent,
     UpdateInfoComponent,
     UpdatePasswordComponent,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    RouterModule
   ],
   templateUrl: './profile.component.html'
 })
@@ -36,8 +38,13 @@ export class ProfileComponent implements OnInit {
   user$: Observable<IUser | null>;
   update$: Observable<IAPIResponse<IUser>>;
   appUrl = environment.accountUrl;
+  latests$: Observable<[IAPIResponse<IEvent[]>, IAPIResponse<IProgram[]>]>;
 
   ngOnInit(): void {
+    this.latests$ = combineLatest([
+      this.#profileService.findLatestsEvents(),
+      this.#profileService.findLatestsPrograms()
+    ]);
     this.user$ = this.#store.pipe(select(selectUser));
   }
 

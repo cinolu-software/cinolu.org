@@ -1,6 +1,7 @@
 <div class="py-20 px-8 md:px-32 xl:px-48">
   @let user = user$ | async;
-  @let result = update$ | async;
+  @let update = update$ | async;
+  @let latests = latests$ | async;
   <div class="flex flex-col md:flex-row md:items-center md:gap-6 gap-3 mb-12 mt-6">
     <div class="relative h-22 w-22">
       <img [ngSrc]="user | apiIMG: 'user'" class="rounded-full object-cover" [alt]="user.name" fill priority />
@@ -8,7 +9,7 @@
         type="button"
         (click)="file.click()"
         class="absolute bg-gray-100 rounded-full shadow-lg -bottom-2 text-primary-700 h-10 w-10 flex items-center justify-center right-0">
-        @if (result?.isLoading) {
+        @if (update?.isLoading) {
           <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
         } @else {
           <mat-icon class="icon-size-4" svgIcon="heroicons_outline:camera" />
@@ -52,7 +53,8 @@
   </div>
 
   <div class="py-5">
-    <div class="flex items-center gap-7 font-medium border-b xl:text-lg mb-10 no-scrollbar overflow-x-scroll">
+    <div
+      class="flex items-center gap-7 font-medium border-b border-primary-300 xl:text-lg mb-10 no-scrollbar overflow-x-scroll">
       <button
         [ngClass]="activeTab() === 'info' && 'border-b border-primary-700 text-primary-700'"
         class="py-2 flex items-center gap-1.5"
@@ -77,19 +79,52 @@
       </button>
     </div>
 
-    @if (activeTab() === 'info') {
-      <div class="flex flex-col gap-20 md:w-3/4">
-        <app-update-info [user]="user" />
+    <div class="flex flex-col gap-6 md:gap-3 md:justify-between md:flex-row md:flex-wrap">
+      <div class="w-3/6">
+        @if (activeTab() === 'info') {
+          <app-update-info [user]="user" />
+        }
+        @if (activeTab() === 'security') {
+          <app-update-password />
+        }
+        @if (activeTab() === 'applications') {
+          <app-applications />
+        }
       </div>
-    }
-    @if (activeTab() === 'security') {
-      <div class="flex flex-col gap-20 md:w-3/4">
-        <app-update-password />
-      </div>
-    }
 
-    @if (activeTab() === 'applications') {
-      <app-applications />
-    }
+      <div class="flex flex-col w-2/5">
+        @if (latests?.[1].data?.length) {
+          <div class="mb-6 border rounded-md p-4">
+            <h5 class="mb-4 text-lg text-primary-900 font-semibold">Récents programmes</h5>
+            <div class="flex flex-col gap-1.5">
+              @for (program of latests?.[1].data; track program.id) {
+                <a
+                  [routerLink]="['/programs', program.id]"
+                  class="flex items-center gap-1.5 text-sm font-medium underline hover:text-primary-800 transition-colors duration-300">
+                  <mat-icon svgIcon="mat_outline:chevron_right" class="icon-size-4 text-primary-700" />
+                  {{ program.name }}
+                </a>
+              }
+            </div>
+          </div>
+        }
+
+        @if (latests?.[0].data?.length) {
+          <div class="mb-6">
+            <h5 class="mb-4 text-lg font-semibold">Récents événements</h5>
+            <div class="flex flex-col gap-1.5 border-2 border-primary-700 rounded-md p-4">
+              @for (event of latests?.[0].data; track event.id) {
+                <a
+                  [routerLink]="['/events', event.id]"
+                  class="text-sm font-bold underline hover:text-primary-800 transition-colors duration-300">
+                  <!-- <mat-icon svgIcon="mat_outline:chevron_right"></mat-icon> -->
+                  {{ event.name }}
+                </a>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
   </div>
 </div>

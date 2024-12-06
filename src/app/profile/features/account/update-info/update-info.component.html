@@ -13,7 +13,7 @@
     </app-alert>
   }
 
-  <div formGroupName="info" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div formGroupName="info" class="flex flex-col gap-1.5">
     <mat-form-field class="w-full">
       <mat-label>Nom complet</mat-label>
       <input type="text" autocomplete="off" name="name" matInput [formControlName]="'name'" />
@@ -41,22 +41,20 @@
       <textarea matInput rows="8" [formControlName]="'bio'"> </textarea>
     </mat-form-field>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <mat-form-field appearance="fill">
-        <mat-label>LinkedIn</mat-label>
-        <img matPrefix [src]="'/images/logo/linkdin.png'" alt="linkdin's logo" class="w-8 h-8" />
-        <input matInput [formControlName]="'linkedin'" />
-      </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>LinkedIn</mat-label>
+      <img matPrefix [src]="'/images/logo/linkdin.png'" alt="linkdin's logo" class="w-8 h-8" />
+      <input matInput [formControlName]="'linkedin'" />
+    </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Facebook</mat-label>
-        <img matPrefix [src]="'/images/logo/facebook.jpeg'" alt="Facebook's logo" class="w-8 h-8" />
-        <input matInput [formControlName]="'facebook'" />
-      </mat-form-field>
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Facebook</mat-label>
+      <img matPrefix [src]="'/images/logo/facebook.jpeg'" alt="Facebook's logo" class="w-8 h-8" />
+      <input matInput [formControlName]="'facebook'" />
+    </mat-form-field>
   </div>
 
-  <div class="w-1/2 md:w-1/4">
+  <div class="w-1/2 md:w-2/4">
     <button
       class="w-full text-white"
       mat-flat-button
