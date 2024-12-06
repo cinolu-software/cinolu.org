@@ -11,7 +11,7 @@ export class ApiImgPipe implements PipeTransform {
     if (key === 'user') {
       return value['profile']
         ? `${apiUrl}uploads/profiles/${value['profile']}`
-        : (value['google_image'] ?? 'https://placehold.co/620x700');
+        : (value['google_image'] ?? '/images/avatar-default.webp');
     }
 
     if (key === 'program') {

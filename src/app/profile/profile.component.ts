@@ -14,10 +14,12 @@ import { ProfileService } from './data-access/profile.service';
 import { IAPIResponse } from '../shared/services/api/types/api-response.type';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
+import { ProgramsService } from '../programs/data-access/programs.service';
+import { EventsService } from '../events/data-access/events.service';
 
 @Component({
   selector: 'app-profile',
-  providers: [ProfileService],
+  providers: [ProfileService, ProgramsService, EventsService],
   imports: [
     MatIconModule,
     CommonModule,
@@ -35,6 +37,8 @@ export class ProfileComponent implements OnInit {
   activeTab = signal('info');
   #store = inject(Store);
   #profileService = inject(ProfileService);
+  #programsService = inject(ProgramsService);
+  #eventsService = inject(EventsService);
   user$: Observable<IUser | null>;
   update$: Observable<IAPIResponse<IUser>>;
   appUrl = environment.accountUrl;
@@ -42,8 +46,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.latests$ = combineLatest([
-      this.#profileService.findLatestsEvents(),
-      this.#profileService.findLatestsPrograms()
+      this.#eventsService.findLatestsEvents(),
+      this.#programsService.findLatestsPrograms()
     ]);
     this.user$ = this.#store.pipe(select(selectUser));
   }

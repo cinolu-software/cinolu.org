@@ -27,6 +27,10 @@ export class EventsService {
     return this.#apiService.get(`events/${id}`);
   }
 
+  findLatestsEvents(): Observable<IAPIResponse<IEvent[]>> {
+    return this.#apiService.get('events/find-latest');
+  }
+
   #buildQueryParams(queryParams: QueryParams): HttpParams {
     let params = new HttpParams();
     Object.keys(queryParams).forEach((key) => {
