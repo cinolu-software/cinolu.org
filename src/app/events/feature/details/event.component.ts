@@ -8,11 +8,12 @@ import { ApiImgPipe } from 'app/shared/pipes/api-img.pipe';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { EventsService } from '../../data-access/events.service';
+import { FooterComponent } from '../../../shared/ui/footer/footer.component';
 
 @Component({
   selector: 'app-program',
   providers: [EventsService],
-  imports: [CommonModule, MatIconModule, MatButtonModule, NgOptimizedImage, ApiImgPipe],
+  imports: [CommonModule, MatIconModule, MatButtonModule, NgOptimizedImage, ApiImgPipe, FooterComponent],
   templateUrl: './event.component.html'
 })
 export class EventComponent implements OnInit {

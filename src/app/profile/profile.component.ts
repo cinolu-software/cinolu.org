@@ -16,6 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 import { ProgramsService } from '../programs/data-access/programs.service';
 import { EventsService } from '../events/data-access/events.service';
+import { FooterComponent } from '../shared/ui/footer/footer.component';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +30,8 @@ import { EventsService } from '../events/data-access/events.service';
     UpdateInfoComponent,
     UpdatePasswordComponent,
     MatProgressSpinnerModule,
-    RouterModule
+    RouterModule,
+    FooterComponent
   ],
   templateUrl: './profile.component.html'
 })

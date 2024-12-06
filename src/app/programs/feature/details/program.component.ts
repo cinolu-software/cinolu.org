@@ -16,6 +16,7 @@ import { Store } from '@ngrx/store';
 import { selectUser } from 'app/shared/store/auth/auth.reducers';
 import { ProgramSkeletonComponent } from '../../ui/program-skeleton/program-skeleton.component';
 import { ProgramsService } from '../../data-access/programs.service';
+import { FooterComponent } from '../../../shared/ui/footer/footer.component';
 
 @Component({
   selector: 'app-program',
@@ -31,7 +32,8 @@ import { ProgramsService } from '../../data-access/programs.service';
     ApiImgPipe,
     ProgramOverviewComponent,
     ApplicationComponent,
-    ProgramSkeletonComponent
+    ProgramSkeletonComponent,
+    FooterComponent
   ],
   templateUrl: './program.component.html'
 })
