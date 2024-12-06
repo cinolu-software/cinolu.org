@@ -111,16 +111,18 @@
 
         @if (latests?.[0].data?.length) {
           <div class="mb-6">
-            <h5 class="mb-4 text-lg font-semibold">Récents événements</h5>
-            <div class="flex flex-col gap-1.5 border-2 border-primary-700 rounded-md p-4">
-              @for (event of latests?.[0].data; track event.id) {
-                <a
-                  [routerLink]="['/events', event.id]"
-                  class="text-sm font-bold underline hover:text-primary-800 transition-colors duration-300">
-                  <!-- <mat-icon svgIcon="mat_outline:chevron_right"></mat-icon> -->
-                  {{ event.name }}
-                </a>
-              }
+            <div class="mb-6 border rounded-md p-4">
+              <h5 class="mb-4 text-lg text-primary-900 font-semibold">Récents programmes</h5>
+              <div class="flex flex-col gap-1.5">
+                @for (event of latests?.[0].data; track event.id) {
+                  <a
+                    [routerLink]="['/events', event.id]"
+                    class="flex items-center gap-1.5 text-sm font-medium underline hover:text-primary-800 transition-colors duration-300">
+                    <mat-icon svgIcon="mat_outline:chevron_right" class="icon-size-4 text-primary-700" />
+                    {{ event.name }}
+                  </a>
+                }
+              </div>
             </div>
           </div>
         }
