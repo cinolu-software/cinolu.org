@@ -1,4 +1,4 @@
-<section class="px-8 md:px-32 xl:px-40 mt-8">
+<section class="px-8 md:px-32 xl:px-40 mt-8 mb-12">
   @let result = program$ | async;
   @let user = user$ | async;
   @if (result.data; as program) {
@@ -53,3 +53,4 @@
     </div>
   }
 </section>
+<app-footer />
