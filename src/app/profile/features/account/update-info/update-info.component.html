@@ -1,8 +1,18 @@
-<div class="flex items-center gap-1.5 text-lg mb-6">
-  <mat-icon svgIcon="mat_outline:account_circle" />
-  <h3 class="font-semibold text-gray-800">Modifier mes informations</h3>
-</div>
 <form [formGroup]="form" (ngSubmit)="updateInfo()">
+  @let result = update$ | async;
+
+  @if (result?.[0].error) {
+    <app-alert class="mb-6 w-2/3" type="error" [showIcon]="true" [@shake]="true">
+      {{ result?.[0].error }}
+    </app-alert>
+  }
+
+  @if (result?.[1].error) {
+    <app-alert class="mb-6 w-2/3" type="error" [showIcon]="true" [@shake]="true">
+      {{ result?.[1].error }}
+    </app-alert>
+  }
+
   <div formGroupName="info" class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <mat-form-field class="w-full">
       <mat-label>Nom complet</mat-label>
@@ -31,31 +41,32 @@
       <textarea matInput rows="8" [formControlName]="'bio'"> </textarea>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>LinkedIn</mat-label>
-      <img matPrefix [src]="'/images/logo/linkdin.png'" alt="linkdin's logo" class="w-8 h-8" />
-      <input matInput [formControlName]="'linkedin'" />
-    </mat-form-field>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <mat-form-field appearance="fill">
+        <mat-label>LinkedIn</mat-label>
+        <img matPrefix [src]="'/images/logo/linkdin.png'" alt="linkdin's logo" class="w-8 h-8" />
+        <input matInput [formControlName]="'linkedin'" />
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Facebook</mat-label>
-      <img matPrefix [src]="'/images/logo/facebook.jpeg'" alt="Facebook's logo" class="w-8 h-8" />
-      <input matInput [formControlName]="'facebook'" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Instagram</mat-label>
-      <img matPrefix [src]="'/images/logo/instagram.avif'" alt="Instagram's logo" class="w-7 h-7" />
-      <input matInput [formControlName]="'instagram'" />
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Facebook</mat-label>
+        <img matPrefix [src]="'/images/logo/facebook.jpeg'" alt="Facebook's logo" class="w-8 h-8" />
+        <input matInput [formControlName]="'facebook'" />
+      </mat-form-field>
+    </div>
   </div>
 
   <div class="w-1/2 md:w-1/4">
-    <button class="w-full text-white" mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
-      @if (!form.invalid) {
+    <button
+      class="w-full text-white"
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid || result?.[0].isLoading || result?.[1].isLoading">
+      @if (!form.invalid && !result?.[0].isLoading && !result?.[1].isLoading) {
         <span> Mettre à jour</span>
       }
-      @if (false) {
+      @if (result?.[0].isLoading || result?.[1].isLoading) {
         <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'" />
       }
     </button>

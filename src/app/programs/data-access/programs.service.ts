@@ -16,11 +16,11 @@ export class ProgramsService {
   #router = inject(Router);
 
   getTypes(): Observable<IAPIResponse<IProgramType[]>> {
-    return this.#apiService.fetchData('program-types');
+    return this.#apiService.get('program-types');
   }
 
   getCategories(): Observable<IAPIResponse<IProgramCategory[]>> {
-    return this.#apiService.fetchData('program-categories');
+    return this.#apiService.get('program-categories');
   }
 
   apply(payload: IApplicationPayload): Observable<IAPIResponse<IApplication>> {
@@ -28,16 +28,16 @@ export class ProgramsService {
       this.#toast.success('Candidature soumise !');
       this.#router.navigate(['/programs']);
     };
-    return this.#apiService.postData('program-applications', payload, onSuccess);
+    return this.#apiService.post('program-applications', payload, onSuccess);
   }
 
   getPrograms(queryParams: QueryParams): Observable<IAPIResponse<{ programs: IProgram[]; count: number }>> {
     const params = this.#buildQueryParams(queryParams);
-    return this.#apiService.fetchData('programs', params);
+    return this.#apiService.get('programs', params);
   }
 
   getProgram(id: string): Observable<IAPIResponse<IProgram>> {
-    return this.#apiService.fetchData(`programs/${id}`);
+    return this.#apiService.get(`programs/${id}`);
   }
 
   #buildQueryParams(queryParams: QueryParams): HttpParams {

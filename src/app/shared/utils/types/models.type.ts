@@ -43,14 +43,14 @@ export interface IUser extends IBase {
 
 export interface IDetail extends IBase {
   bio: string;
-  social: ISocial;
+  socials: ISocial;
   positions: IPosition[];
   expertises: IExpertise[];
 }
 
 export interface ISocial {
-  name: string;
-  link: string;
+  LinkedIn: string;
+  Facebook: string;
 }
 
 export interface IExpertise extends IBase {

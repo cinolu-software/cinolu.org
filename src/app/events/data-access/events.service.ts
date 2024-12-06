@@ -11,20 +11,20 @@ export class EventsService {
   #apiService = inject(APIService);
 
   getIds(): Observable<IAPIResponse<{ id: string }[]>> {
-    return this.#apiService.fetchData('ids');
+    return this.#apiService.get('ids');
   }
 
   getTypes(): Observable<IAPIResponse<IEventType[]>> {
-    return this.#apiService.fetchData('event-types');
+    return this.#apiService.get('event-types');
   }
 
   getEvents(queryParams: QueryParams): Observable<IAPIResponse<{ events: IEvent[]; count: number }>> {
     const params = this.#buildQueryParams(queryParams);
-    return this.#apiService.fetchData('events', params);
+    return this.#apiService.get('events', params);
   }
 
   getEvent(id: string): Observable<IAPIResponse<IEvent>> {
-    return this.#apiService.fetchData(`events/${id}`);
+    return this.#apiService.get(`events/${id}`);
   }
 
   #buildQueryParams(queryParams: QueryParams): HttpParams {

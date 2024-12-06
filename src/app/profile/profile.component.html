@@ -1,6 +1,5 @@
 <div class="py-20 px-8 md:px-32 xl:px-48">
   @let user = user$ | async;
-
   <div class="flex flex-col md:flex-row md:items-center md:gap-6 gap-3 mb-12 mt-6">
     <div class="relative h-22 w-22 rounded-full overflow-hidden">
       <img [ngSrc]="user | apiIMG: 'user'" alt="Photo de profil" class="object-cover" fill />
@@ -21,7 +20,7 @@
   </div>
 
   <div class="py-5">
-    <div class="flex items-center gap-7 font-medium border-b xl:text-lg mb-10">
+    <div class="flex items-center gap-7 font-medium border-b xl:text-lg mb-10 no-scrollbar overflow-x-scroll">
       <button
         [ngClass]="activeTab() === 'info' && 'border-b border-primary-700 text-primary-700'"
         class="py-2 flex items-center gap-1.5"
@@ -30,9 +29,17 @@
         Mes informations
       </button>
       <button
-        [ngClass]="activeTab() === 'applications' && 'border-b border-primary-700 text-primary-700'"
+        [ngClass]="activeTab() === 'security' && 'border-b border-primary-700 text-primary-700'"
         class="py-2 flex items-center gap-1.5"
-        (click)="setActiveTab('applications')">
+        (click)="setActiveTab('security')">
+        <mat-icon svgIcon="mat_outline:lock" class="icon-size-4" />
+        Sécurité
+      </button>
+      <button
+        [ngClass]="activeTab() === 'applications' && 'border-b border-primary-700 text-primary-700'"
+        class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
+        (click)="setActiveTab('applications')"
+        [disabled]="true">
         <mat-icon svgIcon="assignment" class="icon-size-4" />
         Mes candidatures
       </button>
@@ -41,6 +48,10 @@
     @if (activeTab() === 'info') {
       <div class="flex flex-col gap-20 md:w-3/4">
         <app-update-info [user]="user" />
+      </div>
+    }
+    @if (activeTab() === 'security') {
+      <div class="flex flex-col gap-20 md:w-3/4">
         <app-update-password />
       </div>
     }

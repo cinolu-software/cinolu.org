@@ -9,10 +9,10 @@ export class TeamService {
   #apiService = inject(APIService);
 
   getCoachs(): Observable<IAPIResponse<IUser[]>> {
-    return this.#apiService.fetchData<IUser[]>('users/coachs');
+    return this.#apiService.get<IUser[]>('users/coachs');
   }
 
   getStaffMembers(): Observable<IAPIResponse<IUser[]>> {
-    return this.#apiService.fetchData<IUser[]>('users/staff');
+    return this.#apiService.get<IUser[]>('users/staff');
   }
 }

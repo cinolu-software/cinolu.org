@@ -9,6 +9,6 @@ export class PartnersService {
   #apiService = inject(APIService);
 
   getPartners(): Observable<IAPIResponse<IPartner[]>> {
-    return this.#apiService.fetchData<IPartner[]>('partners');
+    return this.#apiService.get<IPartner[]>('partners');
   }
 }

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  @apply no-scrollbar;
+}
+
 html {
   @apply scroll-smooth hyphens-auto;
 }
@@ -19,6 +23,14 @@ html {
 
 app-root.open-nav {
   @apply overflow-hidden;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .nav-open div:first-child {

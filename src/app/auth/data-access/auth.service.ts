@@ -24,20 +24,20 @@ export class AuthService {
       this.#toast.success('Inscription réussie');
       this.#router.navigate(['/confirmation-required', { email: payload.email }]);
     };
-    return this.#apiService.postData('auth/sign-up', payload, onSuccess);
+    return this.#apiService.post('auth/sign-up', payload, onSuccess);
   }
 
   signIn(payload: ISignIn): Observable<IAPIResponse<IUser>> {
     const onSuccess = (user: IUser) => {
       this.#toast.success('Bienvenue ' + user.name);
       this.#store.dispatch(authActions.signIn({ user }));
-      this.#router.navigate(['/']);
+      this.#router.navigate(['/me']);
     };
-    return this.#apiService.postData('auth/sign-in', payload, onSuccess);
+    return this.#apiService.post('auth/sign-in', payload, onSuccess);
   }
 
   forgotPassword(payload: IForgotPassword): Observable<IAPIResponse<void>> {
-    return this.#apiService.postData('auth/forgot-password', payload);
+    return this.#apiService.post('auth/forgot-password', payload);
   }
 
   resetPassword(payload: IResetPassword): Observable<IAPIResponse<IUser>> {
@@ -45,24 +45,20 @@ export class AuthService {
       this.#toast.success('Réinitialisation réussie');
       this.#router.navigate(['/sign-in']);
     };
-    return this.#apiService.postData('auth/reset-password', payload, onSuccess);
+    return this.#apiService.post('auth/reset-password', payload, onSuccess);
   }
 
   resendEmailVerification(email: string): Observable<IAPIResponse<void>> {
-    return this.#apiService.postData('auth/verify-email/resend-token', { email });
+    return this.#apiService.post('auth/verify-email/resend-token', { email });
   }
 
   verifyEmail(token: string): Observable<IAPIResponse<IUser>> {
-    const onSuccess = () => {
-      this.#router.navigate(['/sign-in']);
-    };
-    return this.#apiService.postData('auth/verify-email', { token }, onSuccess);
+    const onSuccess = () => this.#router.navigate(['/sign-in']);
+    return this.#apiService.post('auth/verify-email', { token }, onSuccess);
   }
 
   getProfile(): Observable<IAPIResponse<IUser>> {
-    const onSuccess = (user: IUser) => {
-      this.#store.dispatch(authActions.signIn({ user }));
-    };
-    return this.#apiService.fetchData('auth/profile', null, onSuccess);
+    const onSuccess = (user: IUser) => this.#store.dispatch(authActions.signIn({ user }));
+    return this.#apiService.get('auth/profile', null, onSuccess);
   }
 }
