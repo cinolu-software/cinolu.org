@@ -44,7 +44,7 @@ export class UpdateInfoComponent implements OnInit {
         phone_number: ['', Validators.required]
       }),
       details: this.#fb.group({
-        bio: [''],
+        bio: ['', Validators.required],
         linkedin: [''],
         facebook: ['']
       })

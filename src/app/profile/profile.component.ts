@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
   }
 
   hasRequiredRole(user: IUser): boolean {
-    return user.roles.includes('admin') || user.roles.includes('staff');
+    return user.roles.includes('admin') || user.roles.includes('staff') || user.roles.includes('coach');
   }
 
   onImageChange(event: Event): void {
