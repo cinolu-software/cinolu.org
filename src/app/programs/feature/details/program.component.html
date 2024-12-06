@@ -2,7 +2,7 @@
   @let result = program$ | async;
   @let user = user$ | async;
   @if (result.data; as program) {
-    <div class="flex flex-col gap-2 mb-8 mt-22">
+    <div class="flex flex-col gap-2 mb-8">
       <h2 class="text-lg md:text-xl font-semibold capitalize">{{ program.name }}</h2>
       <button class="text-secondary-700 underline flex items-center gap-1 text-base" (click)="back()">
         <mat-icon svgIcon="heroicons_outline:arrow-left" class="icon-size-3" />
