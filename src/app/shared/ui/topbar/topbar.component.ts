@@ -35,6 +35,7 @@ export class TopbarComponent implements OnInit {
   }
 
   trimName(name: string): string {
-    return name.length > 15 ? name.substring(0, 15) + '...' : name;
+    const firstname = name.split(' ')[0];
+    return firstname.length > 10 ? firstname.split(' ')[0].substring(0, 10) + '...' : firstname;
   }
 }
