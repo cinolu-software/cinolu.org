@@ -8,10 +8,11 @@ import { select, Store } from '@ngrx/store';
 import { selectUser } from 'app/shared/store/auth/auth.reducers';
 import { authLinks, commonLinks } from './links';
 import { MatIconModule } from '@angular/material/icon';
+import { ApiImgPipe } from '../../pipes/api-img.pipe';
 
 @Component({
   selector: 'app-topbar',
-  imports: [CommonModule, RouterModule, FormsModule, NgOptimizedImage, MatIconModule],
+  imports: [CommonModule, RouterModule, FormsModule, NgOptimizedImage, MatIconModule, ApiImgPipe],
   templateUrl: './topbar.component.html'
 })
 export class TopbarComponent implements OnInit {
