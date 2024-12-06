@@ -45,8 +45,8 @@ export class UpdateInfoComponent implements OnInit {
       }),
       details: this.#fb.group({
         bio: ['', Validators.required],
-        linkedin: [''],
-        facebook: ['']
+        linkedin: ['', Validators.pattern(/^(https?:\/\/)?((www|\w\w)\.)?linkedin\.com\/.*$/i)],
+        facebook: ['', Validators.pattern(/^(https?:\/\/)?((www|\w\w)\.)?facebook\.com\/.*$/i)]
       })
     });
   }
