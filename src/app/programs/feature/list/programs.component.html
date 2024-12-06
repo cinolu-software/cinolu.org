@@ -21,7 +21,7 @@
     <div class="flex flex-col">
       @if (types.data) {
         <mat-chip-listbox (change)="onFilterChange($event, 'type')">
-          <div class="flex gap-1.5 overflow-x-scroll">
+          <div class="flex gap-1.5 no-scrollbar overflow-x-scroll">
             @for (type of types.data; track type.id) {
               <mat-chip-option [selected]="queryParams().type === type.name">{{ type.name }}</mat-chip-option>
             }
