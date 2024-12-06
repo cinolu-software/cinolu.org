@@ -1,8 +1,8 @@
-<div class="py-20 px-8 md:px-32 xl:px-48">
+<div class="py-10 px-8 md:px-32 xl:px-48">
   @let user = user$ | async;
   @let update = update$ | async;
   @let latests = latests$ | async;
-  <div class="flex flex-col md:flex-row md:items-center md:gap-6 gap-3 mb-12 mt-6">
+  <div class="flex flex-col md:flex-row md:items-center md:gap-6 gap-5 mb-6 md:mb-8 mt-10">
     <div class="relative h-22 w-22">
       <img [ngSrc]="user | apiIMG: 'user'" class="rounded-full object-cover" [alt]="user.name" fill priority />
       <button
@@ -24,18 +24,16 @@
           #file />
       </button>
     </div>
-    <div class="flex flex-col md:flex-row md:items-center gap-8">
-      <div class="flex flex-col gap-2">
-        <h5 class="font-semibold text-lg">{{ user.name }}</h5>
-        <p class="font-medium text-gray-600">
-          Inscrit le <span class="font-semibold">{{ user.created_at | date: 'longDate' }}</span>
-        </p>
-      </div>
+    <div class="flex flex-col">
+      <h5 class="font-semibold text-lg">{{ user.name }}</h5>
+      <p class="font-medium text-gray-600">
+        Inscrit le <span class="font-semibold text-gray-950">{{ user.created_at | date: 'longDate' }}</span>
+      </p>
     </div>
   </div>
 
   <div class="mb-4">
-    <div class="flex items-center gap-2.5 mb-4">
+    <div class="flex items-center gap-2.5 mb-2">
       <div class="bg-primary-900 rounded-full p-1 flex flex-col items-center justify-center">
         <mat-icon svgIcon="mat_solid:settings" class="icon-size-4 text-white" />
       </div>
@@ -54,7 +52,7 @@
 
   <div class="py-5">
     <div
-      class="flex items-center gap-7 font-medium border-b border-primary-300 xl:text-lg mb-10 no-scrollbar overflow-x-scroll">
+      class="flex items-center gap-7 font-medium border-b text-nowrap hyphens-none border-primary-300 xl:text-lg mb-10 no-scrollbar overflow-scroll">
       <button
         [ngClass]="activeTab() === 'info' && 'border-b border-primary-700 text-primary-700'"
         class="py-2 flex items-center gap-1.5"
@@ -80,7 +78,7 @@
     </div>
 
     <div class="flex flex-col gap-6 md:gap-3 md:justify-between md:flex-row md:flex-wrap">
-      <div class="w-3/6">
+      <div class="w-full md:w-3/6">
         @if (activeTab() === 'info') {
           <app-update-info [user]="user" />
         }
@@ -92,7 +90,7 @@
         }
       </div>
 
-      <aside class="flex flex-col w-2/5">
+      <aside class="flex flex-col mt-10 md:mt-0 md:w-2/5">
         @if (latests?.[1].data?.length) {
           <div class="mb-6 border rounded-md p-4">
             <h5 class="mb-4 text-lg text-primary-900 font-semibold">Récents programmes</h5>
