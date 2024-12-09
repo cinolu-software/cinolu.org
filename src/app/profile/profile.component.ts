@@ -47,10 +47,7 @@ export class ProfileComponent implements OnInit {
   latests$: Observable<[IAPIResponse<IEvent[]>, IAPIResponse<IProgram[]>]>;
 
   ngOnInit(): void {
-    this.latests$ = combineLatest([
-      this.#eventsService.findLatestsEvents(),
-      this.#programsService.findLatestsPrograms()
-    ]);
+    this.latests$ = combineLatest([this.#eventsService.findLatests(), this.#programsService.findRecent()]);
     this.user$ = this.#store.pipe(select(selectUser));
   }
 

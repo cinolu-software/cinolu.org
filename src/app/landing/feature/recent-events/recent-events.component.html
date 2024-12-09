@@ -1,10 +1,22 @@
 @let result = events$ | async;
 @if (result?.data?.length) {
   <section class="mb-26 px-8 md:px-32 xl:px-48">
-    <h1 class="font-satoshi font-bold text-3xl md:text-4xl mb-14">
+    <h1 class="font-satoshi font-bold text-3xl md:text-4xl">
       Nos récents
       <span class="text-secondary-600">événements</span>
     </h1>
+    <p class="mb-8">
+      Restez informé sur différents événements et partipez
+      <a
+        routerLink="/programs"
+        class="underline inline-flex items-center text-end gap-0.5 text-primary-800 transition-colors duration-300 group">
+        voir plus
+        <mat-icon
+          svgIcon="mat_outline:chevron_right"
+          class="icon-size-3 group-hover:translate-x-0.5 transition-transform duration-300" />
+      </a>
+    </p>
+
     <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       @for (event of result?.data?.slice(0, 3); track event.id) {
         <app-event-card [event]="event" />
@@ -18,14 +30,5 @@
         }
       </div>
     }
-
-    <a
-      routerLink="/eventsG"
-      class="rounded-md px-6 py-2 mt-8 inline-flex items-center text-end gap-1 border text-primary-700 text-sm border-primary-700 hover:bg-primary-700 hover:text-white transition-colors duration-300 group">
-      Dévouvrez plus
-      <mat-icon
-        svgIcon="mat_outline:chevron_right"
-        class="icon-size-4 group-hover:translate-x-1 transition-transform duration-300" />
-    </a>
   </section>
 }

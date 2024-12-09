@@ -33,15 +33,15 @@ export class ProgramsService {
 
   getPrograms(queryParams: QueryParams): Observable<IAPIResponse<{ programs: IProgram[]; count: number }>> {
     const params = this.#buildQueryParams(queryParams);
-    return this.#apiService.get('programs', params);
+    return this.#apiService.get('programs/find-published', params);
   }
 
   getProgram(id: string): Observable<IAPIResponse<IProgram>> {
     return this.#apiService.get(`programs/${id}`);
   }
 
-  findLatestsPrograms(): Observable<IAPIResponse<IProgram[]>> {
-    return this.#apiService.get('programs/find-latest');
+  findRecent(): Observable<IAPIResponse<IProgram[]>> {
+    return this.#apiService.get('programs/find-recent');
   }
 
   #buildQueryParams(queryParams: QueryParams): HttpParams {

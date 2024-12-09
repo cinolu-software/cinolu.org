@@ -10,16 +10,16 @@ import { EventCardComponent } from '../../../shared/ui/event-card/event-card.com
 import { EventCardSkeletonComponent } from '../../../shared/ui/event-card-skeleton/event-card-skeleton.component';
 
 @Component({
-  selector: 'app-latest-events',
+  selector: 'app-recent-events',
   providers: [EventsService],
   imports: [CommonModule, EventCardComponent, EventCardSkeletonComponent, RouterModule, MatIconModule],
-  templateUrl: './latest-events.component.html'
+  templateUrl: './recent-events.component.html'
 })
-export class LatestEventsComponent implements OnInit {
+export class RecentEventsComponent implements OnInit {
   events$: Observable<IAPIResponse<IEvent[]>>;
   #eventsService = inject(EventsService);
 
   ngOnInit(): void {
-    this.events$ = this.#eventsService.findLatestsEvents();
+    this.events$ = this.#eventsService.findLatests();
   }
 }

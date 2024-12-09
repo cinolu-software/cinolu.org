@@ -10,16 +10,16 @@ import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-latest-programs',
+  selector: 'app-recent-programs',
   providers: [ProgramsService],
   imports: [CommonModule, ProgramCardComponent, ProgramCardSkeletonComponent, RouterModule, MatIconModule],
-  templateUrl: './latest-programs.component.html'
+  templateUrl: './recent-programs.component.html'
 })
-export class LatestProgramsComponent implements OnInit {
+export class RecentProgramsComponent implements OnInit {
   programs$: Observable<IAPIResponse<IProgram[]>>;
   #programsService = inject(ProgramsService);
 
   ngOnInit(): void {
-    this.programs$ = this.#programsService.findLatestsPrograms();
+    this.programs$ = this.#programsService.findRecent();
   }
 }

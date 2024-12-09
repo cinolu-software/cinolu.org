@@ -8,8 +8,8 @@ import { ServicesComponent } from './feature/services/services.component';
 import { StatsComponent } from './feature/stats/stats.component';
 import { StatementComponent } from './feature/statement/statement.component';
 import { PartnersComponent } from './feature/partners/partners.component';
-import { LatestProgramsComponent } from './feature/latest-programs/latest-programs.component';
-import { LatestEventsComponent } from './feature/latest-events/latest-events.component';
+import { RecentProgramsComponent } from './feature/recent-programs/recent-programs.component';
+import { RecentEventsComponent } from './feature/recent-events/recent-events.component';
 
 @Component({
   selector: 'app-landing',
@@ -23,8 +23,8 @@ import { LatestEventsComponent } from './feature/latest-events/latest-events.com
     FooterComponent,
     StatsComponent,
     PartnersComponent,
-    LatestProgramsComponent,
-    LatestEventsComponent
+    RecentProgramsComponent,
+    RecentEventsComponent
   ],
   templateUrl: './landing.component.html'
 })

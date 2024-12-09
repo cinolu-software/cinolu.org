@@ -20,15 +20,15 @@ export class EventsService {
 
   getEvents(queryParams: QueryParams): Observable<IAPIResponse<{ events: IEvent[]; count: number }>> {
     const params = this.#buildQueryParams(queryParams);
-    return this.#apiService.get('events', params);
+    return this.#apiService.get('events/find-published', params);
   }
 
   getEvent(id: string): Observable<IAPIResponse<IEvent>> {
     return this.#apiService.get(`events/${id}`);
   }
 
-  findLatestsEvents(): Observable<IAPIResponse<IEvent[]>> {
-    return this.#apiService.get('events/find-latest');
+  findLatests(): Observable<IAPIResponse<IEvent[]>> {
+    return this.#apiService.get('events/find-recent');
   }
 
   #buildQueryParams(queryParams: QueryParams): HttpParams {
