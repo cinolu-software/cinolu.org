@@ -52,6 +52,10 @@ export class ProgramsComponent implements OnInit {
     this.categories$ = this.#programsService.getCategories();
   }
 
+  getTypeId(types: IProgramType[], type: string): string {
+    return types.find((t) => t.name === type)?.id;
+  }
+
   onFilterChange(event: MatChipListboxChange, filter: string): void {
     this.queryParams().page = null;
     this.queryParams()[filter] = event.value === 'Tous' ? null : event.value;
