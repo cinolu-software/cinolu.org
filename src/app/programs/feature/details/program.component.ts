@@ -1,7 +1,7 @@
 import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { IProgram, IUser } from 'app/shared/utils/types/models.type';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ApiImgPipe } from 'app/shared/pipes/api-img.pipe';
@@ -41,19 +41,27 @@ export class ProgramComponent implements OnInit {
   program$: Observable<IAPIResponse<IProgram>>;
   user$: Observable<IUser>;
   #programsService = inject(ProgramsService);
-  #activatedRoute = inject(ActivatedRoute);
+  #route = inject(ActivatedRoute);
+  #router = inject(Router);
   #store = inject(Store);
   #location = inject(Location);
-  activeTab = signal('overview');
+  activeTab = signal<string | null>(null);
+  #id: string;
+
+  constructor() {
+    this.#id = this.#route.snapshot.paramMap.get('id');
+    this.user$ = this.#store.select(selectUser);
+    this.activeTab.set(this.#route.snapshot.queryParams?.tab);
+  }
 
   ngOnInit(): void {
-    this.user$ = this.#store.select(selectUser);
-    const id = this.#activatedRoute.snapshot.paramMap.get('id');
-    this.program$ = this.#programsService.getProgram(id);
+    this.program$ = this.#programsService.getProgram(this.#id);
   }
 
   setActiveTab(tab: string): void {
     this.activeTab.set(tab);
+    const queryParams = { tab };
+    this.#router.navigate(['/programs', this.#id], { queryParams });
   }
 
   back(): void {
