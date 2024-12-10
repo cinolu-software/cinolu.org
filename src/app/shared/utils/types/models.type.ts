@@ -26,6 +26,24 @@ export interface IReview extends IBase {
   reviewer: IUser;
 }
 
+export interface IVenture extends IBase {
+  name: string;
+  image: string;
+  pitch: string;
+  is_published: boolean;
+  founding_date: Date;
+  address: string;
+  stage: string;
+  socials: JSON;
+  sectors: ISector[];
+  user: IUser;
+}
+
+export interface ISector extends IBase {
+  name: string;
+  ventures: ISector[];
+}
+
 export interface IUser extends IBase {
   email: string;
   name: string;
@@ -39,6 +57,7 @@ export interface IUser extends IBase {
   roles: string[];
   programs: IProgram[];
   detail: IDetail;
+  ventures: IVenture[];
 }
 
 export interface IDetail extends IBase {
