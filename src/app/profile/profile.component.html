@@ -1,4 +1,4 @@
-<div class="mb-12 px-8 md:px-32 xl:px-48">
+<div class="mb-20 px-8 md:px-32 xl:px-48">
   @let user = user$ | async;
   @let update = update$ | async;
   @let latests = latests$ | async;
@@ -54,9 +54,9 @@
     <div
       class="flex items-center gap-7 font-medium border-b text-nowrap border-primary-300 xl:text-lg mb-10 no-scrollbar overflow-x-scroll">
       <button
-        [ngClass]="activeTab() === 'info' && 'border-b border-primary-700 text-primary-700'"
+        [ngClass]="!activeTab() && 'border-b border-primary-700 text-primary-700'"
         class="py-2 flex items-center gap-1.5"
-        (click)="setActiveTab('info')">
+        (click)="setActiveTab(null)">
         <mat-icon svgIcon="info" class="icon-size-4" />
         Mes informations
       </button>
@@ -68,25 +68,24 @@
         Sécurité
       </button>
       <button
-        [ngClass]="activeTab() === 'applications' && 'border-b border-primary-700 text-primary-700'"
+        [ngClass]="activeTab() === 'projects' && 'border-b border-primary-700 text-primary-700'"
         class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
-        (click)="setActiveTab('applications')"
-        [disabled]="true">
+        (click)="setActiveTab('projects')">
         <mat-icon svgIcon="assignment" class="icon-size-4" />
-        Mes candidatures
+        Mes projets
       </button>
     </div>
 
     <div class="flex flex-col gap-6 md:gap-3 md:justify-between md:flex-row md:flex-wrap">
       <div class="w-full md:w-3/6">
-        @if (activeTab() === 'info') {
+        @if (!activeTab()) {
           <app-update-info [user]="user" />
         }
         @if (activeTab() === 'security') {
           <app-update-password />
         }
-        @if (activeTab() === 'applications') {
-          <app-applications />
+        @if (activeTab() === 'projects') {
+          <app-projects [projects]="user.ventures" />
         }
       </div>
 
