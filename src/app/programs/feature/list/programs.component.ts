@@ -58,12 +58,6 @@ export class ProgramsComponent implements OnInit {
     this.updateRouteAndPrograms();
   }
 
-  toogleFinished(): void {
-    this.queryParams().page = null;
-    this.queryParams().hideFinished = !this.queryParams().hideFinished;
-    this.updateRouteAndPrograms();
-  }
-
   onPageChange(currentPage: number): void {
     this.queryParams().page = currentPage === 1 ? null : currentPage;
     this.updateRouteAndPrograms();
