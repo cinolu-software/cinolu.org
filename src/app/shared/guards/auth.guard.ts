@@ -13,7 +13,7 @@ export const authGuard: CanActivateFn = () => {
 
   const subscription = user.subscribe((currentUser) => {
     isAuthenticated = !!currentUser;
-    if (!isAuthenticated) router.navigate(['/login']);
+    if (!isAuthenticated) router.navigate(['/sign-in']);
   });
 
   subscription.unsubscribe();
