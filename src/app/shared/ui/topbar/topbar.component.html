@@ -81,6 +81,7 @@
         routerLink="/me"
         routerLinkActive="text-secondary-700"
         class="flex items-center gap-2 hover:text-secondary-700 transition-colors duration-300"
+        [routerLinkActiveOptions]="{ exact: false }"
         (click)="closeMenu()">
         <img
           [src]="user | apiIMG: 'user'"
