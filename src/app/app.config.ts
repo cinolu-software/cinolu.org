@@ -1,5 +1,5 @@
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { ApplicationConfig, LOCALE_ID } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, TitleStrategy, withInMemoryScrolling } from '@angular/router';
 import { appRoutes } from 'app/app.routes';
@@ -18,6 +18,7 @@ registerLocaleData(localeFr, 'fr');
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideExperimentalZonelessChangeDetection(),
     provideApp(),
     provideAnimations(),
     provideClientHydration(),

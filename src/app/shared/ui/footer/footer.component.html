@@ -10,15 +10,15 @@
           <h5 class="font-satoshi font-bold mb-3 text-gray-200 text-lg">{{ link.title }}</h5>
           @for (url of link.urls; track $index) {
             @if (url.external) {
-              <a class="" [href]="url.path">{{ url.name }}</a>
+              <a target="_blank" [href]="url.path">{{ url.name }}</a>
             } @else {
-              <a class="" [routerLink]="url.path">{{ url.name }}</a>
+              <a [routerLink]="url.path">{{ url.name }}</a>
             }
           }
         </div>
       }
 
-      <p>&copy; {{ getYear() }} Centre d'innovation de Lubumbashi</p>
+      <p>&copy; {{ getYear() }} CINOLU</p>
     </div>
   </div>
 </footer>

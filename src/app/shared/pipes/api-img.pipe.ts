@@ -18,6 +18,10 @@ export class ApiImgPipe implements PipeTransform {
       return value['image'] ? `${apiUrl}uploads/programs/${value['image']}` : '/images/no-image.jpg';
     }
 
+    if (key === 'venture') {
+      return value['image'] ? `${apiUrl}uploads/ventures/${value['image']}` : '/images/no-image.jpg';
+    }
+
     if (key === 'partner') {
       return value['profile'] ? `${apiUrl}uploads/partners/${value['profile']}` : '/images/no-image.jpg';
     }

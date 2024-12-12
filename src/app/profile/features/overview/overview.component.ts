@@ -1,60 +1,52 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { ProjectsComponent } from './features/projects/projects.component';
 import { select, Store } from '@ngrx/store';
-import { combineLatest, Observable } from 'rxjs';
-import { IEvent, IProgram, IUser } from '../shared/utils/types/models.type';
-import { selectUser } from '../shared/store/auth/auth.reducers';
-import { ApiImgPipe } from '../shared/pipes/api-img.pipe';
-import { UpdateInfoComponent } from './features/account/update-info/update-info.component';
-import { UpdatePasswordComponent } from './features/account/update-password/update-password.component';
+import { Observable } from 'rxjs';
+import { IUser } from '../../../shared/utils/types/models.type';
+import { selectUser } from '../../../shared/store/auth/auth.reducers';
+import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
+import { UpdateInfoComponent } from '../update-info/update-info.component';
+import { UpdatePasswordComponent } from '../update-password/update-password.component';
 import { environment } from 'environments/environment';
-import { ProfileService } from './data-access/profile.service';
-import { IAPIResponse } from '../shared/services/api/types/api-response.type';
+import { ProfileService } from '../../data-access/profile.service';
+import { IAPIResponse } from '../../../shared/services/api/types/api-response.type';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ProgramsService } from '../programs/data-access/programs.service';
-import { EventsService } from '../events/data-access/events.service';
-import { FooterComponent } from '../shared/ui/footer/footer.component';
+import { FooterComponent } from '../../../shared/ui/footer/footer.component';
+import { UserVenturesComponent } from '../ventures/ventures.component';
 
 @Component({
   selector: 'app-profile',
-  providers: [ProfileService, ProgramsService, EventsService],
+  providers: [ProfileService],
   imports: [
     MatIconModule,
     CommonModule,
     ApiImgPipe,
     NgOptimizedImage,
-    ProjectsComponent,
+    UserVenturesComponent,
     UpdateInfoComponent,
     UpdatePasswordComponent,
     MatProgressSpinnerModule,
     RouterModule,
     FooterComponent
   ],
-  templateUrl: './profile.component.html'
+  templateUrl: './overview.component.html'
 })
-export class ProfileComponent implements OnInit {
+export class OverviewComponent {
   #store = inject(Store);
   #profileService = inject(ProfileService);
-  #programsService = inject(ProgramsService);
-  #eventsService = inject(EventsService);
+
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   activeTab = signal<string | null>(null);
   user$: Observable<IUser | null>;
   update$: Observable<IAPIResponse<IUser>>;
   appUrl = environment.accountUrl;
-  latests$: Observable<[IAPIResponse<IEvent[]>, IAPIResponse<IProgram[]>]>;
 
   constructor() {
     this.user$ = this.#store.pipe(select(selectUser));
     this.activeTab.set(this.#route.snapshot.queryParams?.tab);
-  }
-
-  ngOnInit(): void {
-    this.latests$ = combineLatest([this.#eventsService.findLatests(), this.#programsService.findRecent()]);
   }
 
   hasRequiredRole(user: IUser): boolean {

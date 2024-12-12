@@ -4,6 +4,6 @@ export const landingRoutes: Routes = [
   {
     path: '',
     title: 'Home',
-    loadComponent: () => import('./landing.component').then((c) => c.LandingComponent)
+    loadComponent: () => import('./feature/home/home.component').then((c) => c.HomeComponent)
   }
 ];

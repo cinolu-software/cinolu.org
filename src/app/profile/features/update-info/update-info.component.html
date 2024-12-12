@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="updateInfo()">
+<form [formGroup]="form" (ngSubmit)="updateInfo()" class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
   @let result = update$ | async;
 
   @if (result?.[0].error) {
@@ -35,26 +35,28 @@
     </mat-form-field>
   </div>
 
-  <div class="flex flex-col gap-3" formGroupName="details">
+  <div formGroupName="details">
     <mat-form-field class="w-full">
       <mat-label>Bio</mat-label>
-      <textarea matInput rows="8" [formControlName]="'bio'"> </textarea>
+      <textarea matInput rows="6" [formControlName]="'bio'"> </textarea>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>LinkedIn</mat-label>
-      <img matPrefix [src]="'/images/logo/linkdin.png'" alt="linkdin's logo" class="w-8 h-8" />
-      <input matInput [formControlName]="'linkedin'" />
-    </mat-form-field>
+    <div class="flex items-center gap-3">
+      <mat-form-field class="w-full">
+        <mat-label>LinkedIn</mat-label>
+        <!-- <img matPrefix [src]="'/images/logo/linkdin.png'" alt="linkdin's logo" class="w-8 h-8" /> -->
+        <input matInput [formControlName]="'linkedin'" />
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Facebook</mat-label>
-      <img matPrefix [src]="'/images/logo/facebook.jpeg'" alt="Facebook's logo" class="w-8 h-8" />
-      <input matInput [formControlName]="'facebook'" />
-    </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label>Facebook</mat-label>
+        <!-- <img matPrefix [src]="'/images/logo/facebook.jpeg'" alt="Facebook's logo" class="w-8 h-8" /> -->
+        <input matInput [formControlName]="'facebook'" />
+      </mat-form-field>
+    </div>
   </div>
 
-  <div class="w-full md:w-2/4">
+  <div class="w-full mt-6 md:w-2/4">
     <button
       class="w-full text-white"
       mat-flat-button

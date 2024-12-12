@@ -1,7 +1,6 @@
 <div class="mb-20 px-8 md:px-32 xl:px-48">
   @let user = user$ | async;
   @let update = update$ | async;
-  @let latests = latests$ | async;
   <div class="flex flex-col md:flex-row md:items-center md:gap-6 gap-5 my-8">
     <div class="relative h-22 w-22">
       <img [ngSrc]="user | apiIMG: 'user'" class="rounded-full object-cover" [alt]="user.name" fill priority />
@@ -46,7 +45,10 @@
         <a [href]="appUrl" target="_blank" class="font-semibold underline text-primary-600">{{ appUrl }}</a>
       </p>
     } @else {
-      <p class="font-medium">Veillez à enregistrer vos modifications après chaque mise à jour.</p>
+      <p class="font-medium">
+        Veillez à enregistrer vos modifications après chaque mise à jour
+        <a routerLink="/ventures/add" class="font-semibold underline text-primary-600"> ajouter un projet </a>
+      </p>
     }
   </div>
 
@@ -55,8 +57,15 @@
       class="flex items-center gap-7 font-medium border-b text-nowrap border-primary-300 xl:text-lg mb-10 no-scrollbar overflow-x-scroll">
       <button
         [ngClass]="!activeTab() && 'border-b border-primary-700 text-primary-700'"
-        class="py-2 flex items-center gap-1.5"
+        class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
         (click)="setActiveTab(null)">
+        <mat-icon svgIcon="assignment" class="icon-size-4" />
+        Mes projets
+      </button>
+      <button
+        [ngClass]="activeTab() === 'info' && 'border-b border-primary-700 text-primary-700'"
+        class="py-2 flex items-center gap-1.5"
+        (click)="setActiveTab('info')">
         <mat-icon svgIcon="info" class="icon-size-4" />
         Mes informations
       </button>
@@ -67,63 +76,18 @@
         <mat-icon svgIcon="mat_outline:lock" class="icon-size-4" />
         Sécurité
       </button>
-      <button
-        [ngClass]="activeTab() === 'projects' && 'border-b border-primary-700 text-primary-700'"
-        class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
-        (click)="setActiveTab('projects')">
-        <mat-icon svgIcon="assignment" class="icon-size-4" />
-        Mes projets
-      </button>
     </div>
 
-    <div class="flex flex-col gap-6 md:gap-3 md:justify-between md:flex-row md:flex-wrap">
-      <div class="w-full md:w-3/6">
-        @if (!activeTab()) {
-          <app-update-info [user]="user" />
-        }
-        @if (activeTab() === 'security') {
-          <app-update-password />
-        }
-        @if (activeTab() === 'projects') {
-          <app-projects [projects]="user.ventures" />
-        }
-      </div>
-
-      <aside class="flex flex-col mt-10 md:mt-0 md:w-2/5">
-        @if (latests?.[1].data?.length) {
-          <div class="mb-6 border rounded-md p-4">
-            <h5 class="mb-4 text-lg text-primary-900 font-semibold">Récents programmes</h5>
-            <div class="flex flex-col gap-1.5">
-              @for (program of latests?.[1].data; track program.id) {
-                <a
-                  [routerLink]="['/programs', program.id]"
-                  class="flex items-center gap-1.5 text-sm font-medium underline hover:text-primary-800 transition-colors duration-300">
-                  <mat-icon svgIcon="mat_outline:chevron_right" class="icon-size-4 text-primary-700" />
-                  {{ program.name }}
-                </a>
-              }
-            </div>
-          </div>
-        }
-
-        @if (latests?.[0].data?.length) {
-          <div class="mb-6">
-            <div class="mb-6 border rounded-md p-4">
-              <h5 class="mb-4 text-lg text-primary-900 font-semibold">Récents programmes</h5>
-              <div class="flex flex-col gap-1.5">
-                @for (event of latests?.[0].data; track event.id) {
-                  <a
-                    [routerLink]="['/events', event.id]"
-                    class="flex items-center gap-1.5 text-sm font-medium underline hover:text-primary-800 transition-colors duration-300">
-                    <mat-icon svgIcon="mat_outline:chevron_right" class="icon-size-4 text-primary-700" />
-                    {{ event.name }}
-                  </a>
-                }
-              </div>
-            </div>
-          </div>
-        }
-      </aside>
+    <div class="w-full">
+      @if (!activeTab()) {
+        <app-user-ventures [ventures]="user.ventures" />
+      }
+      @if (activeTab() === 'info') {
+        <app-update-info [user]="user" />
+      }
+      @if (activeTab() === 'security') {
+        <app-update-password />
+      }
     </div>
   </div>
 </div>

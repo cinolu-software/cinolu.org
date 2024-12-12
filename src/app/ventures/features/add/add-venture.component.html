@@ -1,0 +1,71 @@
+<div class="px-8 mx-auto max-w-screen-md py-10">
+  @let project = project$ | async;
+  @let sectors = sectors$ | async;
+
+  <button class="tunderline flex items-center gap-1 text-base underline mb-6" (click)="back()">
+    <mat-icon svgIcon="heroicons_outline:arrow-left" class="icon-size-3" />
+    Retour
+  </button>
+
+  <h3 class="font-medium text-2xl mb-2">Créer votre projet</h3>
+  <p class="mb-8">La création d'un projet est simple et ne prend que 5 minutes.</p>
+
+  @if (project?.error) {
+    <app-alert class="w-full md:w-4/5" type="error" [showIcon]="true" [@shake]="true">
+      {{ project.error }}
+    </app-alert>
+  }
+
+  <form
+    [formGroup]="form"
+    [ngClass]="project?.error && 'transition-transform translate-y-6 duration-150'"
+    class="flex flex-col gap-4 w-full md:w-4/5"
+    (ngSubmit)="onSubmit()">
+    <mat-form-field class="w-full">
+      <mat-label>Nom du projet</mat-label>
+      <input matInput autocomplete="off" id="name" name="name" formControlName="name" />
+    </mat-form-field>
+
+    <p>Choisir le secteur</p>
+    <mat-form-field>
+      <mat-select multiple (selectionChange)="onSectorsChange($event)">
+        @for (s of sectors.data; track s.id) {
+          <mat-option [value]="s.id">{{ s.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Date de création</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="founding_date" />
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Adresse</mat-label>
+      <input matInput autocomplete="off" id="address" name="address" formControlName="address" />
+    </mat-form-field>
+
+    <p>Phase du projet</p>
+    <mat-radio-group class="flex items-center gap-2 flex-wrap mb-4" (change)="onStageSelection($event)">
+      @for (s of stages; track $index) {
+        <mat-radio-button [value]="s">{{ s }}</mat-radio-button>
+      }
+    </mat-radio-group>
+
+    <mat-form-field class="w-full">
+      <mat-label>Pitch</mat-label>
+      <textarea matInput rows="8" id="pitch" name="pitch" formControlName="pitch"> </textarea>
+    </mat-form-field>
+
+    <button class="w-2/3 md:w-1/3" mat-flat-button type="submit" [disabled]="project?.isLoading || form.invalid">
+      @if (!project?.isLoading && !form.invalid) {
+        <span>Soumettre</span>
+      }
+      @if (project?.isLoading) {
+        <mat-progress-spinner class="text-white" [diameter]="24" [mode]="'indeterminate'" />
+      }
+    </button>
+  </form>
+</div>
