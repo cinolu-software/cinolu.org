@@ -13,5 +13,11 @@ export const ventureRoutes: Routes = [
     title: 'Ventures - Detail',
     canActivate: [authGuard],
     loadComponent: () => import('./features/details/venture.component').then((c) => c.VentureComponent)
+  },
+  {
+    path: 'update/:id',
+    title: 'Ventures - Update',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/update/update-venture.component').then((c) => c.UpdateVentureComponent)
   }
 ];

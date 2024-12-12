@@ -80,7 +80,7 @@
 
     <div class="w-full">
       @if (!activeTab()) {
-        <app-user-ventures [ventures]="user.ventures" />
+        <app-user-ventures />
       }
       @if (activeTab() === 'info') {
         <app-update-info [user]="user" />

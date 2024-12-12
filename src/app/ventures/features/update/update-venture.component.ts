@@ -1,6 +1,6 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { IAPIResponse } from '../../../shared/services/api/types/api-response.type';
 import { ISector, IVenture } from '../../../shared/utils/types/models.type';
 import { AlertComponent } from '../../../shared/ui/alert/alert.component';
@@ -16,9 +16,10 @@ import { StageEnum } from '../../utils/enums/stage.enum';
 import { VenturesService } from '../../data-access/ventures.service';
 import { MatIconModule } from '@angular/material/icon';
 import { Animations } from '../../../shared/utils/animations';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-ventures',
+  selector: 'app-projects',
   animations: Animations,
   providers: [provideNativeDateAdapter(), VenturesService],
   imports: [
@@ -33,11 +34,12 @@ import { Animations } from '../../../shared/utils/animations';
     MatSelectModule,
     MatIconModule
   ],
-  templateUrl: './add-venture.component.html'
+  templateUrl: './update-venture.component.html'
 })
-export class AddVentureComponent implements OnInit {
+export class UpdateVentureComponent implements OnInit, OnDestroy {
   sectors$: Observable<IAPIResponse<ISector[]>>;
   venture$: Observable<IAPIResponse<IVenture>>;
+  image$: Observable<IAPIResponse<IVenture>>;
   stages = [StageEnum.Idea, StageEnum.startup, StageEnum.Growth, StageEnum.Mature];
   sectors = signal<string[]>([]);
   stage = signal<string>('');
@@ -45,8 +47,12 @@ export class AddVentureComponent implements OnInit {
   #fb = inject(FormBuilder);
   #venturesService = inject(VenturesService);
   #location = inject(Location);
+  #route = inject(ActivatedRoute);
+  #subscription: Subscription | null = null;
+  #id: string;
 
   constructor() {
+    this.#id = this.#route.snapshot.paramMap.get('id');
     this.form = this.#fb.group({
       name: ['', [Validators.required]],
       pitch: ['', [Validators.required]],
@@ -57,6 +63,16 @@ export class AddVentureComponent implements OnInit {
 
   ngOnInit(): void {
     this.sectors$ = this.#venturesService.getSectors();
+    this.#subscription = this.#venturesService.getVenture(this.#id).subscribe(({ data: v }) => {
+      this.stage.set(v?.stage);
+      this.sectors.set(v?.sectors?.map((s) => s.id));
+      this.form.patchValue({
+        name: v?.name,
+        pitch: v?.pitch,
+        founding_date: v?.founding_date,
+        address: v?.address
+      });
+    });
   }
 
   back(): void {
@@ -73,6 +89,20 @@ export class AddVentureComponent implements OnInit {
 
   onSubmit(): void {
     const payload = { ...this.form.value, sectors: this.sectors(), stage: this.stage() };
-    this.venture$ = this.#venturesService.createVenture(payload);
+    this.venture$ = this.#venturesService.updateVenture(this.#id, payload);
+  }
+
+  onImageChange(event: Event): void {
+    const fileInput: HTMLInputElement = event.target as HTMLInputElement;
+    const file: File | undefined = fileInput.files?.[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('thumb', file);
+      this.image$ = this.#venturesService.addImage(this.#id, formData);
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.#subscription) this.#subscription.unsubscribe();
   }
 }

@@ -1,7 +1,7 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { ISector, IVenture } from 'app/shared/utils/types/models.type';
-import { ActivatedRoute } from '@angular/router';
+import { ISector, IUser, IVenture } from 'app/shared/utils/types/models.type';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ApiImgPipe } from 'app/shared/pipes/api-img.pipe';
@@ -11,12 +11,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { FooterComponent } from '../../../shared/ui/footer/footer.component';
-import { venturesService } from '../../data-access/ventures.service';
+import { VenturesService } from '../../data-access/ventures.service';
 import { VentureSkeletonComponent } from '../../ui/venture-skeleton/venture-skeleton.component';
+import { select, Store } from '@ngrx/store';
+import { selectUser } from '../../../shared/store/auth/auth.reducers';
 
 @Component({
   selector: 'app-venture',
-  providers: [venturesService],
+  providers: [VenturesService],
   imports: [
     CommonModule,
     NgOptimizedImage,
@@ -26,6 +28,7 @@ import { VentureSkeletonComponent } from '../../ui/venture-skeleton/venture-skel
     MatButtonModule,
     FormsModule,
     ApiImgPipe,
+    RouterLink,
     FooterComponent,
     VentureSkeletonComponent
   ],
@@ -33,10 +36,13 @@ import { VentureSkeletonComponent } from '../../ui/venture-skeleton/venture-skel
 })
 export class VentureComponent implements OnInit {
   venture$: Observable<IAPIResponse<IVenture>>;
-  #venturesService = inject(venturesService);
+  user$: Observable<IUser>;
+  #venturesService = inject(VenturesService);
   #route = inject(ActivatedRoute);
+  #store = inject(Store);
 
   ngOnInit(): void {
+    this.user$ = this.#store.pipe(select(selectUser));
     const id = this.#route.snapshot.paramMap.get('id');
     this.venture$ = this.#venturesService.getVenture(id);
   }

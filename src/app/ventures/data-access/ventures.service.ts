@@ -8,7 +8,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class venturesService {
+export class VenturesService {
   #apiService = inject(APIService);
   #toast = inject(HotToastService);
   #router = inject(Router);
@@ -17,12 +17,32 @@ export class venturesService {
     return this.#apiService.get<ISector[]>('sectors');
   }
 
+  findByUser(): Observable<IAPIResponse<IVenture[]>> {
+    return this.#apiService.get<IVenture[]>('ventures/find-by-user');
+  }
+
   createVenture(payload: IProjectPayload): Observable<IAPIResponse<IVenture>> {
     const onSuccess = (): void => {
       this.#toast.success('Projet soumis !');
       this.#router.navigate(['/me'], { queryParams: { tab: 'projects' } });
     };
     return this.#apiService.post<IProjectPayload, IVenture>('ventures', payload, onSuccess);
+  }
+
+  updateVenture(id: string, payload: IProjectPayload): Observable<IAPIResponse<IVenture>> {
+    const onSuccess = (venture: IVenture): void => {
+      this.#toast.success('Projet mis à jour !');
+      this.#router.navigate(['/ventures', venture.id]);
+    };
+    return this.#apiService.patch<IProjectPayload, IVenture>('ventures/' + id, payload, onSuccess);
+  }
+
+  addImage(id: string, file: FormData): Observable<IAPIResponse<IVenture>> {
+    const onSuccess = (venture: IVenture): void => {
+      this.#toast.success('Photo de couverture mis à jour !');
+      this.#router.navigate(['/ventures', venture.id]);
+    };
+    return this.#apiService.post(`ventures/image/${id}`, file, onSuccess);
   }
 
   getVenture(id: string): Observable<IAPIResponse<IVenture>> {

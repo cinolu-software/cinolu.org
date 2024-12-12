@@ -1,11 +1,21 @@
 <section>
-  @if (ventures()?.length) {
+  @let res = ventures$ | async;
+  @if (res.data?.length) {
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      @for (v of ventures(); track v.id) {
+      @for (v of res.data; track v.id) {
         <app-venture-card [venture]="v" />
       }
     </div>
-  } @else {
+  }
+  @if (res.isLoading) {
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      @for (v of [1, 2, 3]; track $index) {
+        <div class="inline-block h-60 w-full relative rounded-xl overflow-hidden bg-gray-100"></div>
+      }
+    </div>
+  }
+
+  @if (res.error || !res.data?.length) {
     <h2 class="text-2xl font-semibold">Pas de projets</h2>
   }
 </section>
