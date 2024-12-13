@@ -67,6 +67,10 @@ export class EventsComponent implements OnInit {
     this.#updateRouteAndEvents();
   }
 
+  getTypeId(types: IEventType[], type: string): string {
+    return types.find((t) => t.name === type)?.id;
+  }
+
   #loadEvents(): void {
     this.events$ = this.#eventsService.getEvents(this.queryParams());
   }

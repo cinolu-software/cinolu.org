@@ -18,54 +18,54 @@
   @let result = events$ | async;
   @let types = types$ | async;
 
-  <div class="px-8 md:px-32 xl:px-48 py-6 flex flex-auto">
-    <div class="flex flex-auto flex-col">
-      @if (types.data?.length) {
-        <div class="flex flex-col gap-1.5 mb-6">
-          <mat-chip-listbox (change)="onFilterChange($event, 'type')">
-            <div class="flex flex-wrap gap-1.5">
-              @for (type of types.data; track type.id) {
-                <mat-chip-option [selected]="queryParams().type === type.name">{{ type.name }}</mat-chip-option>
-              }
-            </div>
-          </mat-chip-listbox>
-        </div>
+  <div class="px-8 md:px-26">
+    <div class="flex flex-col">
+      @if (types.data) {
+        <mat-chip-listbox (change)="onFilterChange($event, 'type')">
+          <div class="flex gap-1.5 flex-wrap">
+            @for (type of types.data; track type.id) {
+              <mat-chip-option [selected]="getTypeId(types.data, queryParams().type) === type.name">
+                {{ type.name }}
+              </mat-chip-option>
+            }
+          </div>
+        </mat-chip-listbox>
       }
 
-      @if (result?.isLoading) {
-        <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          @for (event of skeletonArray; track $index) {
+      @if (result.data; as data) {
+        @if (data?.events; as events) {
+          <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            @for (
+              e of events | paginate: { itemsPerPage: 9, currentPage: queryParams().page, totalItems: data.count };
+              track e.id
+            ) {
+              <app-event-card [event]="e" />
+            }
+          </div>
+
+          @if (data.count > 9) {
+            <div class="flex justify-center mt-16">
+              <pagination-controls
+                nextLabel=""
+                previousLabel=""
+                [maxSize]="5"
+                (pageChange)="onPageChange($event)"
+                class="pg">
+              </pagination-controls>
+            </div>
+          }
+        }
+      }
+      @if (result.error || (result.data && result.data?.events.length === 0)) {
+        <h2 class="text-3xl font-semibold">Aucun événement !</h2>
+      }
+
+      @if (result.isLoading) {
+        <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          @for (program of skeletonArray; track $index) {
             <app-event-card-skeleton />
           }
         </div>
-      }
-
-      @if (result?.data?.events; as events) {
-        <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          @for (
-            event of events
-              | paginate: { itemsPerPage: 9, currentPage: queryParams().page, totalItems: result.data.count };
-            track event.id
-          ) {
-            <app-event-card [event]="event" />
-          }
-        </div>
-
-        @if (events?.length > 9) {
-          <div class="flex items-center justify-center mt-16">
-            <pagination-controls
-              nextLabel=""
-              previousLabel=""
-              [autoHide]="true"
-              [maxSize]="5"
-              (pageChange)="onPageChange($event)"
-              class="pg">
-            </pagination-controls>
-          </div>
-        }
-      }
-      @if (result.error || !result.data?.events?.length) {
-        <h2 class="text-3xl font-semibold -mt-16">Aucun événement !</h2>
       }
     </div>
   </div>
