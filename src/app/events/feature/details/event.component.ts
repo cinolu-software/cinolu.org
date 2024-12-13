@@ -9,11 +9,20 @@ import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { EventsService } from '../../data-access/events.service';
 import { FooterComponent } from '../../../shared/ui/footer/footer.component';
+import { EventSkeletonComponent } from '../../ui/event-skeleton/event-skeleton.component';
 
 @Component({
-  selector: 'app-program',
+  selector: 'app-event',
   providers: [EventsService],
-  imports: [CommonModule, MatIconModule, MatButtonModule, NgOptimizedImage, ApiImgPipe, FooterComponent],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    EventSkeletonComponent,
+    MatButtonModule,
+    NgOptimizedImage,
+    ApiImgPipe,
+    FooterComponent
+  ],
   templateUrl: './event.component.html'
 })
 export class EventComponent implements OnInit {
