@@ -18,7 +18,7 @@
     </p>
 
     <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      @for (event of result?.data?.slice(0, 3); track event.id) {
+      @for (event of result?.data; track event.id) {
         <app-event-card [event]="event" />
       }
     </div>
