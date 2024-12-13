@@ -18,14 +18,14 @@
       </a>
     </p>
 
-    <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
       @for (program of result?.data; track program.id) {
         <app-program-card [program]="program" />
       }
     </div>
 
     @if (result.isLoading) {
-      <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
         @for (program of [1, 2, 3]; track $index) {
           <app-program-card-skeleton />
         }
