@@ -1,29 +1,32 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { IUser } from 'app/shared/utils/types/models.type';
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { selectUser } from 'app/shared/store/auth/auth.reducers';
-import { authLinks, commonLinks } from './links';
+import { explorationLinks, myCinoluLinks } from './links';
 import { MatIconModule } from '@angular/material/icon';
-import { ApiImgPipe } from '../../pipes/api-img.pipe';
 
 @Component({
   selector: 'app-topbar',
-  imports: [CommonModule, RouterModule, FormsModule, NgOptimizedImage, MatIconModule, ApiImgPipe],
+  imports: [CommonModule, RouterModule, MatIconModule, NgOptimizedImage],
   templateUrl: './topbar.component.html'
 })
 export class TopbarComponent implements OnInit {
   isOpen = signal(false);
-  commonLinks = commonLinks;
-  authLinks = authLinks;
+  explorationLinks = explorationLinks;
+  myCinoluLinks = myCinoluLinks;
   user$: Observable<IUser>;
   #store = inject(Store);
+  activeTab = signal<string | null>(null);
 
   ngOnInit(): void {
     this.user$ = this.#store.pipe(select(selectUser));
+  }
+
+  setActiveTab(tab: string): void {
+    this.activeTab.set(tab);
   }
 
   openMenu(): void {
@@ -34,8 +37,13 @@ export class TopbarComponent implements OnInit {
     this.isOpen.set(false);
   }
 
-  trimName(name: string): string {
-    const firstname = name.split(' ')[0];
-    return firstname.length > 10 ? firstname.split(' ')[0].substring(0, 10) + '...' : firstname;
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent): void {
+    const navBox = document.querySelector('.nav-active');
+    const target = event.target as Node;
+    if (navBox && target.nodeName !== 'BUTTON' && target.parentElement.nodeName !== 'BUTTON') {
+      this.activeTab.set(null);
+      this.isOpen.set(false);
+    }
   }
 }

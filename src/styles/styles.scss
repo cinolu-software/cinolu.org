@@ -2,53 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  @apply no-scrollbar;
-}
+@layer components {
+  :root {
+    @apply no-scrollbar;
+  }
 
-html {
-  @apply scroll-smooth hyphens-auto;
-}
+  html {
+    @apply scroll-smooth hyphens-auto;
+  }
 
-::selection {
-  @apply text-white bg-primary-600;
-}
+  ::selection {
+    @apply text-white bg-primary-600;
+  }
 
-.pg .ngx-pagination .current {
-  @apply bg-primary-500 bg-opacity-70 rounded-sm m-0 px-2 py-0.5;
-}
-.pg .ngx-pagination a {
-  @apply bg-gray-200/40 text-gray-700 mx-1 shadow-sm shadow-gray-300 bg-opacity-70 rounded-sm m-0 px-2 py-0.5;
-}
+  .pg .ngx-pagination .current {
+    @apply bg-primary-500 bg-opacity-70 rounded-sm m-0 px-2 py-0.5;
+  }
+  .pg .ngx-pagination a {
+    @apply bg-gray-200/40 text-gray-700 mx-1 shadow-sm shadow-gray-300 bg-opacity-70 rounded-sm m-0 px-2 py-0.5;
+  }
 
-app-root.open-nav {
-  @apply overflow-hidden;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-.nav-open div:first-child {
-  @apply rotate-45 translate-y-1.5;
-}
-
-.nav-open div:last-child {
-  @apply -rotate-45 -translate-y-1;
-}
-
-.hidde {
-  @apply opacity-0 translate-y-8;
-}
-
-.show {
-  @apply opacity-100 translate-y-0 transition-transform duration-400 ease-in;
-}
-
-.nav-btn {
-  @apply transition-transform duration-200 hover:scale-110 rounded-full flex flex-col items-center justify-center h-10 w-10 text-white bg-secondary-700 shadow-md;
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }

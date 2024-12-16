@@ -7,7 +7,7 @@
 
       @for (link of links; track $index) {
         <div class="flex flex-col gap-3">
-          <h5 class="font-satoshi font-bold mb-3 text-gray-200 text-lg">{{ link.title }}</h5>
+          <h5 class="font-bold mb-3 text-gray-200 text-lg">{{ link.title }}</h5>
           @for (url of link.urls; track $index) {
             @if (url.external) {
               <a target="_blank" [href]="url.path">{{ url.name }}</a>

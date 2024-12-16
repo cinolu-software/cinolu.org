@@ -4,7 +4,7 @@
   @let result = signUp$ | async;
 
   <div [ngClass]="result?.error && 'transition-transform translate-y-4 duration-150'">
-    <h2 class="text-3xl font-extrabold leading-tight tracking-tight font-satoshi pt-24">S'inscrire</h2>
+    <h2 class="text-3xl font-extrabold leading-tight tracking-tight pt-24">S'inscrire</h2>
     @if (result?.error) {
       <app-alert class="mt-6 w-full" appearance="soft" type="error" [showIcon]="true" [@shake]="true">
         {{ result.error }}
