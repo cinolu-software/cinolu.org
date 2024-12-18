@@ -76,7 +76,8 @@ const config = {
         0: '0 0 auto'
       },
       fontFamily: {
-        poppins: ['Montserrat', 'sans-serif']
+        generalSans: ['General Sans', 'sans-serif'],
+        satoshi: ['Satoshi', 'sans-serif']
       },
       opacity: {
         12: '0.12',
