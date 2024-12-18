@@ -4,17 +4,17 @@
   <div class="grid md:grid-cols-2 gap-10">
     @for (service of services; track $index) {
       <div class="flex gap-4 items-start flex-col">
-        <span class="bg-secondary-800 h-8 w-8 flex flex-col items-center justify-center rounded-full">
-          <mat-icon class="icon-size-5 fill-white" [svgIcon]="service.icon"></mat-icon>
-        </span>
-        <div>
-          <h3 class="font-semibold text-xl md:text-2xl mb-1.5">
+        <div class="flex items-center gap-3">
+          <span class="bg-secondary-800 h-8 w-8 flex flex-col items-center justify-center rounded-full">
+            <mat-icon class="icon-size-5 fill-white" [svgIcon]="service.icon"></mat-icon>
+          </span>
+          <h3 class="font-semibold font-satoshi text-xl md:text-2xl mb-1.5">
             {{ service.title }}
           </h3>
-          <p class="mt-1 text-gray-500 xl:text-lg">
-            {{ service.description }}
-          </p>
         </div>
+        <p class="mt-1 text-gray-500 xl:text-lg">
+          {{ service.description }}
+        </p>
       </div>
     }
   </div>

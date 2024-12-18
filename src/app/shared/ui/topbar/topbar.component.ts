@@ -7,10 +7,14 @@ import { select, Store } from '@ngrx/store';
 import { selectUser } from 'app/shared/store/auth/auth.reducers';
 import { explorationLinks, myCinoluLinks } from './links';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { ApiImgPipe } from '../../pipes/api-img.pipe';
+import { ILink } from './types/link.type';
 
 @Component({
   selector: 'app-topbar',
-  imports: [CommonModule, RouterModule, MatIconModule, NgOptimizedImage],
+  imports: [CommonModule, RouterModule, MatIconModule, NgOptimizedImage, MatMenuModule, MatButtonModule, ApiImgPipe],
   templateUrl: './topbar.component.html'
 })
 export class TopbarComponent implements OnInit {
@@ -34,14 +38,25 @@ export class TopbarComponent implements OnInit {
   }
 
   closeMenu(): void {
+    console.log('closed');
     this.isOpen.set(false);
+  }
+
+  trimName(name: string): string {
+    return name.length > 15 ? name.slice(0, 15) + '...' : name;
+  }
+
+  getLinks(tab: string): ILink[] {
+    if (tab === 'explore') return this.explorationLinks;
+    if (tab === 'my-cinolu') return this.myCinoluLinks;
   }
 
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent): void {
     const navBox = document.querySelector('.nav-active');
     const target = event.target as Node;
-    if (navBox && target.nodeName !== 'BUTTON' && target.parentElement.nodeName !== 'BUTTON') {
+    if (navBox && target.nodeName !== 'BUTTON') {
+      console.log(target);
       this.activeTab.set(null);
       this.isOpen.set(false);
     }

@@ -1,145 +1,112 @@
-<header class="navbar fixed w-full top-0 px-10 h-16 lg:px-20 py-3 bg-white shadow-sm z-20">
-  <nav class="lg:hidden flex items-center justify-between">
-    <a routerLink="/" class="inline-block" aria-label="logo" (click)="closeMenu()">
+<header class="navbar fixed w-full top-0 px-10 lg:px-20 py-3 bg-white shadow-sm z-20 font-satoshi">
+  @let user = user$ | async;
+  <nav class="flex items-center justify-between lg:hidden">
+    <a routerLink="/" aria-label="logo" class="inline-block" (click)="closeMenu()">
       <img ngSrc="images/logo/logo-g.png" alt="logo" class="w-6 h-7 cursor-pointer" width="64" height="68" priority />
     </a>
-    @if (!isOpen()) {
-      <button (click)="openMenu()">
-        <mat-icon svgIcon="mat_outline:menu" class="icon-size-5 text-gray-700" />
-      </button>
-    } @else {
-      <button>
-        <mat-icon svgIcon="mat_outline:close" class="icon-size-5 text-gray-700" />
-      </button>
-    }
+    <button (click)="isOpen() ? closeMenu() : openMenu()">
+      <mat-icon [svgIcon]="isOpen() ? 'mat_outline:close' : 'mat_outline:menu'" class="icon-size-5 text-gray-700" />
+    </button>
 
     <div
-      class="fixed top-14 left-0 right-10 bottom-0 bg-white backdrop-blur-lg z-20 transition-transform duration-300 {{
+      class="menu-wrapper fixed top-10 left-0 right-10 bottom-0 bg-white backdrop-blur-lg transition-transform duration-300 {{
         isOpen() ? 'translate-x-0' : '-translate-x-full'
-      }} ">
-      <div class="flex flex-col justify-between py-16 px-10 h-full w-full menu">
-        <div class="flex flex-col gap-6 font-medium text-lg">
-          <button class="flex items-center justify-between" (click)="setActiveTab('explore')">
-            Explorer
-            <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5 text-gray-700" />
-          </button>
-
-          <button class="flex items-center justify-between" (click)="setActiveTab('my-cinolu')">
-            My Cinolu
-            <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5 text-gray-700" />
-          </button>
+      }}">
+      <div class="flex flex-col justify-between py-16 px-10 h-full">
+        <div class="flex flex-col gap-6 font-bold text-lg">
+          @for (tab of ['explore', 'my-cinolu']; track $index) {
+            <button class="flex items-center justify-between" (click)="setActiveTab(tab)">
+              {{ tab | titlecase }}
+              <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5 text-gray-700"></mat-icon>
+            </button>
+          }
         </div>
-        <a
-          routerLink="/sign-in"
-          class="inline-block bg-primary-600 text-white rounded-sm hover:bg-primary-800 transition-colors duration-200 py-2 text-center">
-          Se connecter
-        </a>
+
+        @if (user) {
+          <a
+            routerLink="/me"
+            class="flex items-center gap-2 hover:text-secondary-700 font-medium transition-colors duration-300"
+            (click)="closeMenu()">
+            <img
+              [src]="user | apiIMG: 'user'"
+              class="rounded-full w-8 h-8 object-cover ring-1 ring-secondary-400 ring-offset-1"
+              alt="profile picture" />
+            {{ trimName(user.name) }}
+          </a>
+        } @else {
+          <a routerLink="/sign-in" class="login-link flex items-center gap-1.5 font-medium text-base">Se connecter</a>
+        }
       </div>
     </div>
 
     <ul
-      class=" fixed top-14 left-0 right-8 bottom-0 bg-white backdrop-blur-lg z-30 transition-transform duration-300 {{
+      class=" fixed top-10 left-0 right-8 bottom-0 bg-white backdrop-blur-lg z-30 transition-transform duration-300 {{
         activeTab() && isOpen() ? 'translate-x-0 nav-active' : '-translate-x-full'
       }}">
-      <div class="flex flex-col gap-7 font-medium py-16 px-10 h-full w-full">
-        <button class="text-sm font-semibold text-gray-800 flex items-center gap-1 m-4" (click)="setActiveTab(null)">
-          <mat-icon svgIcon="mat_outline:keyboard_arrow_left" class="icon-size-4" />
+      <div class="flex flex-col gap-7 font-medium py-16 px-10 h-full">
+        <button
+          class="back-button text-sm font-semibold text-gray-800 flex items-center gap-1 m-4"
+          (click)="setActiveTab(null)">
+          <mat-icon svgIcon="mat_outline:keyboard_arrow_left" class="icon-size-4"></mat-icon>
           Go back
         </button>
-        @if (activeTab() === 'explore') {
-          @for (link of explorationLinks; track $index) {
-            <a [routerLink]="link.path" class="flex items-center gap-2.5">
-              <span class="h-8 w-8 flex flex-col items-center justify-center bg-secondary-600 rounded-full">
-                <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white" />
-              </span>
-              <p class="flex flex-col gap-0.5">
-                {{ link.name }}
-                <span class="inline-block text-gray-700 text-xs">
-                  {{ link.description }}
-                </span>
-              </p>
-            </a>
-          }
-        }
-        @if (activeTab() === 'my-cinolu') {
-          @for (link of myCinoluLinks; track $index) {
-            <a [routerLink]="link.path" class="flex items-center gap-2.5">
-              <span class="h-8 w-8 flex flex-col items-center justify-center bg-secondary-600 rounded-full">
-                <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white" />
-              </span>
-              <p class="flex flex-col gap-0.5">
-                {{ link.name }}
-                <span class="inline-block text-gray-700 text-xs">
-                  {{ link.description }}
-                </span>
-              </p>
-            </a>
-          }
+
+        @for (link of getLinks(activeTab()); track $index) {
+          <a [routerLink]="link.path" [fragment]="link.fragment" class="link-item flex items-center gap-2.5">
+            <span class="icon-wrapper h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
+              <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white"></mat-icon>
+            </span>
+            <p class="flex flex-col gap-0.5">
+              {{ link.name }}
+              <span class="description text-gray-700 text-xs">{{ link.description }}</span>
+            </p>
+          </a>
         }
       </div>
     </ul>
   </nav>
 
   <nav class="hidden lg:flex items-center justify-between">
-    <a routerLink="/" class="inline-block" aria-label="logo" (click)="closeMenu()">
+    <a routerLink="/" aria-label="logo" class="inline-block" (click)="closeMenu()">
       <img ngSrc="images/logo/logo-g.png" alt="logo" class="w-6 h-7 cursor-pointer" width="64" height="68" priority />
     </a>
-    <div class="flex items-center gap-6 font-medium text-base menu">
-      <button class="flex items-center gap-1" (click)="setActiveTab('explore')">
-        Explorer
-        <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5 text-gray-700" />
-      </button>
-      <button class="flex items-center gap-1" (click)="setActiveTab('my-cinolu')">
-        My Cinolu
-        <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5 text-gray-700" />
-      </button>
+    <div class="menu-links flex items-center gap-6 text-base font-medium">
+      @for (tab of ['explore', 'my-cinolu']; track $index) {
+        <button class="relative flex items-center gap-1" (click)="setActiveTab(tab)">
+          {{ tab | titlecase }}
+          <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-4 text-gray-700"></mat-icon>
+          <div
+            class="absolute top-4 w-120 pt-8 pb-5 px-6 grid grid-cols-2 gap-6 text-sm text-nowrap text-start hyphens-none font-normal z-20 bg-white shadow-md opacity-0 translate-y-4 transition-transform duration-300"
+            [ngClass]="activeTab() === tab && 'opacity-100 z-40 translate-y-0 nav-active'">
+            @for (link of getLinks(activeTab()); track $index) {
+              <a [routerLink]="link.path" [fragment]="link.fragment" class="flex items-center gap-2.5">
+                <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
+                  <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white"></mat-icon>
+                </span>
+                <p class="flex flex-col gap-0.5 font-medium">
+                  {{ link.name }}
+                  <span class="description text-gray-700 text-xs">{{ link.description }}</span>
+                </p>
+              </a>
+            }
+          </div>
+        </button>
+      }
     </div>
-    <a
-      routerLink="/sign-in"
-      class="inline-block bg-primary-600 text-white rounded-sm hover:bg-primary-800 transition-colors duration-200 py-2 px-6 text-center">
-      Se connecter
-    </a>
 
-    <ul
-      class="fixed top-16 left-0 right-0 bottom-0 bg-black/60 z-30 transition-opacity duration-300 {{
-        activeTab() ? 'opacity-100 nav-active' : 'opacity-0'
-      }}">
-      <div
-        class="py-8 px-10 flex flex-col gap-8 mx-auto max-w-screen-sm bg-white transition-transform duration-200 {{
-          activeTab() ? 'translate-y-0' : 'translate-y-2'
-        }}">
-        @if (activeTab() === 'explore') {
-          @for (link of explorationLinks; track $index) {
-            <a [routerLink]="link.path" class="flex items-center gap-2.5">
-              <span class="h-8 w-8 flex flex-col items-center justify-center bg-secondary-600 rounded-full">
-                <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white" />
-              </span>
-              <p class="flex flex-col gap-0.5">
-                {{ link.name }}
-                <span class="inline-block text-gray-700 text-xs">
-                  {{ link.description }}
-                </span>
-              </p>
-            </a>
-          }
-        }
-
-        @if (activeTab() === 'my-cinolu') {
-          @for (link of myCinoluLinks; track $index) {
-            <a [routerLink]="link.path" class="flex items-center gap-2.5">
-              <span class="h-8 w-8 flex flex-col items-center justify-center bg-secondary-600 rounded-full">
-                <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white" />
-              </span>
-              <p class="flex flex-col gap-0.5">
-                {{ link.name }}
-                <span class="inline-block text-gray-700 text-xs">
-                  {{ link.description }}
-                </span>
-              </p>
-            </a>
-          }
-        }
-      </div>
-    </ul>
+    @if (user) {
+      <a
+        routerLink="/me"
+        class="flex items-center gap-2 hover:text-secondary-700 font-medium transition-colors duration-300"
+        (click)="closeMenu()">
+        <img
+          [src]="user | apiIMG: 'user'"
+          class="rounded-full w-8 h-8 object-cover ring-1 ring-secondary-400 ring-offset-1"
+          alt="profile picture" />
+        {{ trimName(user.name) }}
+      </a>
+    } @else {
+      <a routerLink="/sign-in" class="login-link flex items-center gap-1.5 font-medium text-base">Se connecter</a>
+    }
   </nav>
 </header>
