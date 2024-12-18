@@ -26,7 +26,10 @@ export const appConfig: ApplicationConfig = {
     { provide: TitleStrategy, useClass: PageTitleStrategy },
     { provide: LOCALE_ID, useValue: 'fr' },
     provideHttpClient(withFetch(), withInterceptors([httpInterceptor, LoadingInterceptor])),
-    provideRouter(appRoutes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
+    provideRouter(
+      appRoutes,
+      withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' })
+    ),
     provideStore({
       auth: authReducers
     })
