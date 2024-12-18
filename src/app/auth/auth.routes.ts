@@ -4,7 +4,6 @@ export const auhtRoutes: Routes = [
   {
     path: 'sign-up',
     title: 'Sign Up',
-
     loadComponent: () => import('./feature/sign-up/sign-up.component').then((c) => c.AuthSignUpComponent)
   },
   {
