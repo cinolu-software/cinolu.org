@@ -17,7 +17,7 @@
           @for (tab of ['explore', 'my-cinolu']; track $index) {
             <button class="flex items-center justify-between" (click)="setActiveTab(tab)">
               {{ tab | titlecase }}
-              <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5 text-gray-700"></mat-icon>
+              <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5 text-gray-700" />
             </button>
           }
         </div>
@@ -47,14 +47,14 @@
         <button
           class="back-button text-sm font-semibold text-gray-800 flex items-center gap-1 m-4"
           (click)="setActiveTab(null)">
-          <mat-icon svgIcon="mat_outline:keyboard_arrow_left" class="icon-size-4"></mat-icon>
+          <mat-icon svgIcon="mat_outline:keyboard_arrow_left" class="icon-size-4" />
           Go back
         </button>
 
         @for (link of getLinks(activeTab()); track $index) {
           <a [routerLink]="link.path" [fragment]="link.fragment" class="link-item flex items-center gap-2.5">
             <span class="icon-wrapper h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
-              <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white"></mat-icon>
+              <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white" />
             </span>
             <p class="flex flex-col gap-0.5">
               {{ link.name }}
@@ -74,14 +74,14 @@
       @for (tab of ['explore', 'my-cinolu']; track $index) {
         <button class="relative flex items-center gap-1" (click)="setActiveTab(tab)">
           {{ tab | titlecase }}
-          <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-4 text-gray-700"></mat-icon>
+          <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-4 text-gray-700" />
           <div
-            class="absolute top-4 w-120 pt-8 pb-5 px-6 grid grid-cols-2 gap-6 text-sm text-nowrap text-start hyphens-none font-normal z-20 bg-white shadow-md opacity-0 translate-y-4 transition-transform duration-300"
+            class="absolute top-4 w-120 pt-8 pb-5 px-6 grid grid-cols-2 gap-6 text-sm text-start font-normal z-20 bg-white shadow-md opacity-0 translate-y-4 transition-transform duration-300"
             [ngClass]="activeTab() === tab && 'opacity-100 z-40 translate-y-0 nav-active'">
             @for (link of getLinks(activeTab()); track $index) {
               <a [routerLink]="link.path" [fragment]="link.fragment" class="flex items-center gap-2.5">
                 <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
-                  <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white"></mat-icon>
+                  <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white" />
                 </span>
                 <p class="flex flex-col gap-0.5 font-medium">
                   {{ link.name }}
