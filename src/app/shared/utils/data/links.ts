@@ -1,4 +1,4 @@
-import { ILink } from './types/link.type';
+import { ILink } from '../../ui/topbar/types/link.type';
 
 export const explorationLinks: ILink[] = [
   {

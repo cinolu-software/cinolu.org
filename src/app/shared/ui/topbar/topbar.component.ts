@@ -5,7 +5,7 @@ import { IUser } from 'app/shared/utils/types/models.type';
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { selectUser } from 'app/shared/store/auth/auth.reducers';
-import { explorationLinks, myCinoluLinks } from './links';
+import { explorationLinks, myCinoluLinks } from '../../utils/data/links';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
