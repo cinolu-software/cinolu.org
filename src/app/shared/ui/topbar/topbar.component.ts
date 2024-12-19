@@ -46,8 +46,8 @@ export class TopbarComponent implements OnInit {
 
   getLinks(tab: string): ILink[] {
     const links = {
-      explore: explorationLinks,
-      'my-cinolu': myCinoluLinks
+      Parcourir: explorationLinks,
+      'My cinolu': myCinoluLinks
     };
     return links[tab];
   }

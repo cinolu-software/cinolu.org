@@ -14,29 +14,26 @@
       }}">
       <div class="flex flex-col justify-between py-16 px-10 h-full">
         <div class="flex flex-col gap-6 font-bold text-xl">
-          @for (tab of ['explore', 'my-cinolu']; track $index) {
+          @for (tab of ['Parcourir', 'My cinolu']; track $index) {
             <button class="flex items-center justify-between" (click)="setActiveTab(tab)">
-              {{ tab | titlecase }}
+              {{ tab }}
               <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5 text-gray-700" />
             </button>
           }
         </div>
 
         @if (user) {
-          <a
-            routerLink="/me"
-            class="flex items-center gap-2 hover:text-secondary-700 font-medium transition-colors duration-300"
-            (click)="closeMenu()">
+          <a routerLink="/me" class="flex items-center gap-1.5 text-sm font-semibold" (click)="closeMenu()">
             <img
               [src]="user | apiIMG: 'user'"
-              class="rounded-full w-8 h-8 object-cover ring-1 ring-secondary-400 ring-offset-1"
+              class="rounded-full w-8 h-8 object-cover ring-2 ring-secondary-800 ring-offset-1"
               alt="profile picture" />
             {{ trimName(user.name) }}
           </a>
         } @else {
           <a
             routerLink="/sign-in"
-            class="flex items-center justify-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium text-base"
+            class="flex items-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium text-base"
             (click)="closeMenu()">
             Se connecter
           </a>
@@ -74,12 +71,12 @@
       <img ngSrc="images/logo/logo-g.png" alt="logo" class="w-6 h-7 cursor-pointer" width="64" height="68" priority />
     </a>
     <div class="flex items-center gap-6 xl:text-lg font-medium">
-      @for (tab of ['explore', 'my-cinolu']; track $index) {
+      @for (tab of ['Parcourir', 'My cinolu']; track $index) {
         <button class="relative flex items-center gap-1" (click)="setActiveTab(tab)">
-          {{ tab | titlecase }}
+          {{ tab }}
           <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-4 text-gray-700" />
           <div
-            class="absolute top-11 w-[30rem] animate-fadeInUp py-8 px-6 gap-6 text-sm text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
+            class="absolute top-9 w-[30rem] animate-fadeInUp py-8 px-6 gap-6 text-sm text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
             [ngClass]="activeTab() === tab ? 'block nav-active' : 'hidden'">
             <div class="grid grid-cols-2 gap-x-8 gap-y-6 text-sm xl:text-base">
               @for (link of getLinks(activeTab()); track $index) {
@@ -100,13 +97,10 @@
     </div>
 
     @if (user) {
-      <a
-        routerLink="/me"
-        class="flex items-center gap-2 hover:text-secondary-700 font-medium transition-colors duration-300"
-        (click)="closeMenu()">
+      <a routerLink="/me" class="flex items-center gap-1.5 text-sm font-semibold" (click)="closeMenu()">
         <img
           [src]="user | apiIMG: 'user'"
-          class="rounded-full w-8 h-8 object-cover ring-1 ring-secondary-400 ring-offset-1"
+          class="rounded-full w-8 h-8 object-cover ring-2 ring-secondary-800 ring-offset-1"
           alt="profile picture" />
         {{ trimName(user.name) }}
       </a>
