@@ -1,6 +1,6 @@
-<header class="navbar fixed w-full top-0 px-10 lg:px-20 py-3 bg-white shadow-sm z-20 font-satoshi">
+<header class="navbar fixed w-full top-0 py-3 bg-white shadow-sm z-20 font-satoshi">
   @let user = user$ | async;
-  <nav class="flex items-center justify-between lg:hidden">
+  <nav class="flex items-center justify-between lg:hidden px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
     <a routerLink="/" aria-label="logo" class="inline-block" (click)="closeMenu()">
       <img ngSrc="images/logo/logo-g.png" alt="logo" class="w-6 h-7 cursor-pointer" width="64" height="68" priority />
     </a>
@@ -66,7 +66,7 @@
     </ul>
   </nav>
 
-  <nav class="hidden lg:flex items-center justify-between">
+  <nav class="hidden lg:flex items-center justify-between px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
     <a routerLink="/" aria-label="logo" class="inline-block" (click)="closeMenu()">
       <img ngSrc="images/logo/logo-g.png" alt="logo" class="w-6 h-7 cursor-pointer" width="64" height="68" priority />
     </a>

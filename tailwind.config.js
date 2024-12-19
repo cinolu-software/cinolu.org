@@ -37,7 +37,7 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        generalSans: ['General Sans', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
         satoshi: ['Satoshi', 'sans-serif']
       }
     }
