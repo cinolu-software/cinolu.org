@@ -1,33 +1,34 @@
-<section class="px-8 md:px-32 xl:px-40 mb-12">
+<section class="px-8 md:px-32 xl:px-40 mb-12 mt-24">
   @let result = event$ | async;
   @if (result.data; as event) {
-    <div class="relative mb-6 h-60 w-full md:h-120 bg-gray-50">
+    <button class="underline mb-4 flex items-center gap-1" (click)="back()">
+      <mat-icon svgIcon="heroicons_outline:arrow-left" class="icon-size-3" />
+      Retour
+    </button>
+
+    <h1 class="font-bold block text-xl md:text-2xl mb-12 lg:text-4xl">
+      {{ event.name | titlecase }}
+    </h1>
+
+    <div class="relative mb-6 h-60 w-full md:h-96 bg-gray-50">
       <img [ngSrc]="event | apiIMG: 'event'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
       <div
-        class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-end py-20 bg-gradient-to-b from-transparent to-primary-900/90 gap-2 px-8 md:px-32 text-white">
-        <h1 class="font-extrabold block text-2xl md:text-4xl xl:text-6xl capitalize">
-          {{ event.name.toLowerCase() }}
-        </h1>
-        <button class="text-gray-50 underline flex items-center gap-1 text-base" (click)="back()">
-          <mat-icon svgIcon="heroicons_outline:arrow-left" class="icon-size-3" />
-          Retour
-        </button>
-      </div>
+        class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-end py-20 bg-gradient-to-b from-transparent to-primary-900/90 gap-2 px-8 md:px-32 text-white"></div>
     </div>
     <div class="py-10">
-      <div class="flex flex-col gap-8 xl:text-lg">
+      <div class="flex flex-col gap-8">
         <div>
-          <div class="flex items-center gap-1 text-lg mb-2 text-secondary-800">
+          <div class="flex items-center gap-1 mb-2 text-secondary-800">
             <mat-icon svgIcon="description" class="icon-size-4" />
-            <h2 class="font-semibold">Description</h2>
+            <h2 class="font-semibold text-lg">Description</h2>
           </div>
           <p class="mb-1.5 lowercase first-letter:uppercase">{{ event.description }}</p>
         </div>
 
         <div>
-          <div class="flex items-center gap-1 text-lg mb-2 text-secondary-800">
+          <div class="flex items-center gap-1 mb-2 text-secondary-800">
             <mat-icon svgIcon="event" class="icon-size-4" />
-            <h2 class="font-semibold">Dates</h2>
+            <h2 class="font-semibold text-lg">Dates</h2>
           </div>
           <p class="mb-1.5">Commence le {{ event.started_at | date: 'longDate' }}</p>
           <p class="mb-1.5">Fini le {{ event.ended_at | date: 'longDate' }}</p>

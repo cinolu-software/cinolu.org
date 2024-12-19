@@ -2,7 +2,7 @@
   <div class="h-60 w-full relative bg-gray-100">
     <img [ngSrc]="event() | apiIMG: 'event'" [alt]="event().name" class="object-cover" fill />
   </div>
-  <div class="flex flex-col p-7">
+  <div class="flex flex-col p-6">
     <div class="flex items-center justify-between flex-wrap">
       <div class="flex items-center flex-wrap gap-1">
         @for (type of event().types; track $index) {
@@ -26,18 +26,16 @@
     <div class="text-gray-600 mt-0.5 line-clamp-2 lowercase first-letter:uppercase">
       {{ event().description }}
     </div>
-    <div class="my-6 h-1 w-12 border-t-2"></div>
-    <div class="text-gray-600 flex items-center text-md leading-5 mb-2">
-      <mat-icon class="text-hint icon-size-5" svgIcon="mat_outline:location_on" />
-      <div class="ml-1.5">Lieu {{ event().location }}</div>
-    </div>
-    <div class="text-gray-600 flex items-center text-md leading-5 mb-2">
-      <mat-icon class="text-hint icon-size-5" [svgIcon]="'event'" />
-      <div class="ml-1.5">Début le {{ event().started_at | date: 'longDate' }}</div>
-    </div>
-    <div class="text-gray-600 flex items-center text-md leading-5">
-      <mat-icon class="text-hint icon-size-5" [svgIcon]="'event_busy'" />
-      <div class="ml-1.5">Fin le {{ event().ended_at | date: 'longDate' }}</div>
+    <div class="my-3 h-1 w-12 border-t"></div>
+    <div class="font-medium text-sm">
+      <div class="flex items-center text-md leading-5 mb-2">
+        <mat-icon class="text-hint icon-size-5" svgIcon="mat_outline:location_on" />
+        <div class="ml-1.5">{{ event().location | titlecase }}</div>
+      </div>
+      <div class="flex items-center text-md leading-5 mb-2">
+        <mat-icon class="text-hint icon-size-5" [svgIcon]="'event'" />
+        <div class="ml-1.5">{{ event().started_at | date: 'longDate' }}</div>
+      </div>
     </div>
   </div>
 </a>

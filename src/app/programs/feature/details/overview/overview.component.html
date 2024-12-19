@@ -2,7 +2,7 @@
   <div>
     <div class="flex items-center gap-1 mb-2 text-secondary-800">
       <mat-icon svgIcon="description" class="icon-size-4" />
-      <h2 class="font-semibold">Description</h2>
+      <h2 class="font-semibold text-lg">Description</h2>
     </div>
     <p class="mb-1.5 lowercase first-letter:uppercase">{{ program().description }}</p>
   </div>
@@ -10,7 +10,7 @@
   <div>
     <div class="flex items-center gap-1 mb-2 text-secondary-800">
       <mat-icon svgIcon="event" class="icon-size-4" />
-      <h2 class="font-semibold">Dates</h2>
+      <h2 class="font-semibold text-lg">Dates</h2>
     </div>
     <p class="mb-1.5">Commence le {{ program().started_at | date: 'longDate' }}</p>
     <p class="mb-1.5">Fini le {{ program().ended_at | date: 'longDate' }}</p>
@@ -20,7 +20,7 @@
     <div>
       <div class="flex items-center gap-1 mb-2 text-secondary-800">
         <mat-icon svgIcon="group" class="icon-size-4" />
-        <h2 class="font-semibold">Partenaires</h2>
+        <h2 class="font-semibold text-lg">Partenaires</h2>
       </div>
       <p class="mb-1.5">{{ join(program().partners) }}</p>
     </div>
@@ -30,7 +30,7 @@
     <div>
       <div class="flex items-center gap-1 mb-2 text-secondary-800">
         <mat-icon svgIcon="timeline" class="icon-size-4" />
-        <h2 class="font-semibold">Phases</h2>
+        <h2 class="font-semibold text-lg">Phases</h2>
       </div>
 
       @for (phase of program().phases; track $index) {

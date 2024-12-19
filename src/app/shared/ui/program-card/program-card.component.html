@@ -22,11 +22,7 @@
     <div class="text-sm font-medium">
       <div class="t flex items-center text-md leading-5">
         <mat-icon class="text-hint icon-size-5" [svgIcon]="'event'" />
-        <div class="ml-1.5">Début le {{ program().started_at | date: 'longDate' }}</div>
-      </div>
-      <div class="t flex items-center text-md leading-5 mt-2">
-        <mat-icon class="text-hint icon-size-5" [svgIcon]="'event_busy'" />
-        <div class="ml-1.5">Fin le {{ program().ended_at | date: 'longDate' }}</div>
+        <div class="ml-1.5">{{ program().started_at | date: 'longDate' }}</div>
       </div>
     </div>
   </div>
