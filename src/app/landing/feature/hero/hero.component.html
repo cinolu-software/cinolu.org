@@ -1,15 +1,15 @@
 <section class="mb-8">
-  <div class="relative py-90 h-[120%] w-full flex flex-col bg-[url('/images/hero.jpg')] bg-cover bg-no-repeat">
+  <div class="relative py-90 min-h-screen w-full flex flex-col bg-[url('/images/hero.jpg')] bg-cover bg-no-repeat">
     <div
-      class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/40 to-primary-900/50 gap-6 px-8 md:px-32 text-white">
+      class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/40 to-primary-900/50 gap-6 px-8 md:px-28 xl:px-36 text-white">
       <div class="flex flex-col items-start justify-center md:-mt-16 font-medium">
-        <h1 class="font-extrabold block text-2xl md:text-6xl xl:text-8xl">Co-créons votre projet</h1>
-        <p class="text-base mb-8 mt-10 md:text-xl leading-relaxed lg:text-2xl xl:text-3xl font-light w-full md:w-3/4">
+        <h1 class="font-extrabold block text-2xl md:text-4xl xl:text-6xl">Co-créons votre projet</h1>
+        <p class="mb-8 mt-10 text-lg md:text-xl leading-relaxed lg:text-2xl xl:text-3xl font-light w-full md:w-3/4">
           De l'idée au projet, bénéficiez de nos outils, mentors et ressources pour donner vie à votre vision et
           impacter le monde.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base text-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <a
             routerLink="/programs"
             class="border border-white rounded-md px-6 py-2 text-white hover:bg-white hover:text-secondary-700 transition-colors duration-500">
@@ -23,8 +23,7 @@
     </div>
   </div>
 
-  <div
-    class="px-8 md:px-26 lg:px-26 xl:px-40 grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4 -translate-y-16 z-10">
+  <div class="px-8 md:px-28 xl:px-36 grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4 -translate-y-16 z-10">
     @for (p of stakeholdersPurposes; track $index) {
       <div
         class="p-8 bg-white rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-3 transition-transform duration-500">

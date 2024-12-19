@@ -6,8 +6,8 @@
       <img [ngSrc]="program | apiIMG: 'program'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
       <div
         class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-end py-20 bg-gradient-to-b from-transparent to-primary-900/90 gap-2 px-8 md:px-32 text-white">
-        <h1 class="font-extrabold block text-2xl md:text-4xl xl:text-6xl capitalize">
-          {{ program.name.toLowerCase() }}
+        <h1 class="font-extrabold block text-2xl md:text-4xl xl:text-6xl">
+          {{ program.name | titlecase }}
         </h1>
         <button class="text-gray-50 underline flex items-center gap-1 text-base" (click)="back()">
           <mat-icon svgIcon="heroicons_outline:arrow-left" class="icon-size-3" />

@@ -19,8 +19,6 @@ import { ILink } from './types/link.type';
 })
 export class TopbarComponent implements OnInit {
   isOpen = signal(false);
-  explorationLinks = explorationLinks;
-  myCinoluLinks = myCinoluLinks;
   user$: Observable<IUser>;
   #store = inject(Store);
   activeTab = signal<string | null>(null);
@@ -47,8 +45,11 @@ export class TopbarComponent implements OnInit {
   }
 
   getLinks(tab: string): ILink[] {
-    if (tab === 'explore') return this.explorationLinks;
-    if (tab === 'my-cinolu') return this.myCinoluLinks;
+    const links = {
+      explore: explorationLinks,
+      'my-cinolu': myCinoluLinks
+    };
+    return links[tab];
   }
 
   @HostListener('document:click', ['$event'])
@@ -56,7 +57,6 @@ export class TopbarComponent implements OnInit {
     const navBox = document.querySelector('.nav-active');
     const target = event.target as Node;
     if (navBox && target.nodeName !== 'BUTTON') {
-      console.log(target);
       this.activeTab.set(null);
       this.isOpen.set(false);
     }
