@@ -1,5 +1,5 @@
 @if (isBrowser()) {
-  <section class="px-8 mx-auto max-w-screen-lg md:px-0 mb-20">
+  <section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl md:px-0 mb-20">
     @let team = team$ | async;
     @if (team[0].data?.length) {
       <h2 class="font-semibold text-4xl md:text-5xl mb-4" id="team">
