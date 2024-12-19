@@ -6,9 +6,11 @@
           <h5 class="font-semibold mb-3 text-gray-200 text-lg">{{ link.title }}</h5>
           @for (url of link.urls; track $index) {
             @if (url.external) {
-              <a target="_blank" class="text-satoshi text-sm" [href]="url.path">{{ url.name }}</a>
+              <a target="_blank" class="text-satoshi text-sm md:text-base" [href]="url.path">{{ url.name }}</a>
             } @else {
-              <a [fragment]="url.fragment" class="text-satoshi text-sm" [routerLink]="url.path">{{ url.name }}</a>
+              <a [fragment]="url.fragment" class="text-satoshi text-sm md:text-base" [routerLink]="url.path">{{
+                url.name
+              }}</a>
             }
           }
         </div>
