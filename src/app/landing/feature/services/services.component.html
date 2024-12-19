@@ -7,10 +7,8 @@
   <div class="grid md:grid-cols-2 gap-x-14 gap-y-16">
     @for (service of services; track $index) {
       <div class="flex gap-3 items-start flex-col">
-        <div class="flex items-center gap-3">
-          <span class="bg-secondary-600 h-8 w-8 flex flex-col items-center justify-center rounded-full">
-            <mat-icon class="icon-size-5 fill-white" [svgIcon]="service.icon"></mat-icon>
-          </span>
+        <div class="flex items-center gap-2">
+          <mat-icon class="icon-size-5 fill-white" [svgIcon]="service.icon"></mat-icon>
           <h3 class="font-semibold font-satoshi text-xl md:text-2xl">
             {{ service.title }}
           </h3>
