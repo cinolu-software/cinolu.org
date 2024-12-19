@@ -1,24 +1,25 @@
 <footer class="border-t bg-primary-900 text-white py-10">
-  <div class="px-8 md:px-32">
+  <div class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-2xl md:px-0">
     <div class="flex gap-4 items-start justify-between flex-wrap">
-      <a routerLink="/" class="flex items-center gap-3 cursor-pointer">
-        <img ngSrc="images/logo/logo-w.png" alt="logo" class="w-14 cursor-pointer" width="64" height="68" priority />
-      </a>
+      <div class="flex flex-col gap-3">
+        <a routerLink="/" class="flex items-center gap-3 cursor-pointer">
+          <img ngSrc="images/logo/logo-w.png" alt="logo" class="w-14 cursor-pointer" width="64" height="68" priority />
+        </a>
+        <p>&copy; {{ getYear() }} CINOLU</p>
+      </div>
 
       @for (link of links; track $index) {
         <div class="flex flex-col gap-3">
-          <h5 class="font-bold mb-3 text-gray-200 text-lg">{{ link.title }}</h5>
+          <h5 class="font-semibold mb-3 text-gray-200 text-lg">{{ link.title }}</h5>
           @for (url of link.urls; track $index) {
             @if (url.external) {
-              <a target="_blank" [href]="url.path">{{ url.name }}</a>
+              <a target="_blank" class="text-satoshi" [href]="url.path">{{ url.name }}</a>
             } @else {
-              <a [routerLink]="url.path">{{ url.name }}</a>
+              <a [fragment]="url.fragment" class="text-satoshi" [routerLink]="url.path">{{ url.name }}</a>
             }
           }
         </div>
       }
-
-      <p>&copy; {{ getYear() }} CINOLU</p>
     </div>
   </div>
 </footer>

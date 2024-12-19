@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { ApiImgPipe } from '../../pipes/api-img.pipe';
-import { ILink } from './types/link.type';
+import { ILink } from '../../utils/types/link.type';
 
 @Component({
   selector: 'app-topbar',
