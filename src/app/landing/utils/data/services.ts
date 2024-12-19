@@ -8,15 +8,15 @@ export const services: IService[] = [
     icon: 'lightbulb'
   },
   {
-    title: 'Ecosystème Building & Engagment',
+    title: 'Ecosystème Building',
     description:
-      "Nous formulons des projets et des plaidoyers pour des politiques publiques en faveur des acteurs de l'entreprenariat innovant en ligne avec les ODD5,8,11",
+      "Nous formulons des projets et des plaidoyers pour des politiques publiques en faveur des acteurs de l'entreprenariat innovant.",
     icon: 'public'
   },
   {
     title: 'Capacity Building',
     description:
-      'Nous mettons a disposition une gamme variée de  workshops et activités adaptés aux jeunes  entrepreneurs, aux mentors et coachs',
+      'Nous mettons a disposition une gamme variée de  workshops et activités adaptés aux jeunes  entrepreneurs, aux mentors.',
     icon: 'verified'
   },
   {

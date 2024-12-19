@@ -1,28 +1,25 @@
-<section class="mb-12">
+<section class="mb-12 mt-14">
   @let result = programs$ | async;
   @let types = types$ | async;
   <div
-    class="relative pt-40 pb-72 -mt-6 h-[50%] lg:h-[65%] bg-[url('/images/programs.webp')] bg-cover flex flex-col justify-center overflow-hidden mb-8">
+    class="relative py-52 md:py-64 bg-[url('/images/programs.jpg')] bg-cover flex flex-col justify-center overflow-hidden mb-8">
     <div
-      class="px-8 md:px-32 xl:px-48 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/60 to-primary-900/70 gap-6 text-white">
+      class="px-8 md:px-28 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/60 to-primary-900/70 gap-6 text-white">
       <div class="relative z-10 flex flex-col items-start py-16">
-        <div
-          class="mt-1 text-xl font-extrabold leading-tight tracking-tight md:text-3xl lg:text-5xl xl:6xl w-full md:w-2/3">
-          Découvrez nos programmes et laissez-vous accompagner.
-        </div>
-        <div class="mt-6 max-w-3xl tracking-tight lg:text-lg">
+        <h1 class="font-extrabold block text-2xl mb-6 hyphens-none md:text-6xl">Découvrez nos programmes</h1>
+        <p class="mb-8 md:text-2xl leading-relaxed font-light w-full md:w-3/4">
           Transformez vos idées en réalités impactantes grâce à nos programmes innovants ! Rejoignez un écosystème conçu
           pour vous inspirer, vous former et vous accompagner.
-        </div>
+        </p>
       </div>
     </div>
   </div>
 
-  <div class="px-8 md:px-26">
+  <div class="px-8 md:px-28">
     <div class="flex flex-col">
       @if (types.data) {
         <mat-chip-listbox (change)="onFilterChange($event, 'type')">
-          <div class="flex gap-1.5 flex-wrap">
+          <div class="flex gap-1.5 flex-wrap text-sm">
             @for (type of types.data; track type.id) {
               <mat-chip-option [selected]="getTypeId(types.data, queryParams().type) === type.name">
                 {{ type.name }}
@@ -34,7 +31,7 @@
 
       @if (result.data; as data) {
         @if (data?.programs; as programs) {
-          <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             @for (
               program of programs
                 | paginate: { itemsPerPage: 9, currentPage: queryParams().page, totalItems: data.count };
@@ -62,7 +59,7 @@
       }
 
       @if (result.isLoading) {
-        <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           @for (program of skeletonArray; track $index) {
             <app-program-card-skeleton />
           }

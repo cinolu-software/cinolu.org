@@ -1,11 +1,11 @@
 @if (isBrowser()) {
-  <section class="px-8 md:px-32 xl:px-48 mb-28">
+  <section class="px-8 md:px-28 xl:px-36 mb-20">
     @let team = team$ | async;
     @if (team[0].data?.length) {
-      <h1 class="font-bold text-2xl md:text-5xl mb-4" id="team">
+      <h2 class="font-semibold text-4xl md:text-5xl mb-4" id="team">
         Notre
         <span class="text-primary-600">équipe</span>
-      </h1>
+      </h2>
       <div class="relative mb-16">
         <owl-carousel-o #staffCarousel [options]="owlOptions">
           @for (coach of team[0].data; track $index) {
@@ -25,10 +25,10 @@
     }
 
     @if (team[1].data?.length) {
-      <h1 class="font-bold text-2xl md:text-5xl mb-4" id="coachs">
+      <h2 class="font-semibold text-4xl md:text-5xl mb-4" id="team">
         Coachs et
         <span class="text-primary-600">mentors</span>
-      </h1>
+      </h2>
       <div class="relative">
         <owl-carousel-o #coachCarousel [options]="owlOptions">
           @for (coach of team[1].data; track $index) {

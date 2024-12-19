@@ -1,6 +1,6 @@
-<div class="flex flex-col gap-8 xl:text-lg">
+<div class="flex flex-col gap-8">
   <div>
-    <div class="flex items-center gap-1 text-lg mb-2 text-secondary-800">
+    <div class="flex items-center gap-1 mb-2 text-secondary-800">
       <mat-icon svgIcon="description" class="icon-size-4" />
       <h2 class="font-semibold">Description</h2>
     </div>
@@ -8,7 +8,7 @@
   </div>
 
   <div>
-    <div class="flex items-center gap-1 text-lg mb-2 text-secondary-800">
+    <div class="flex items-center gap-1 mb-2 text-secondary-800">
       <mat-icon svgIcon="event" class="icon-size-4" />
       <h2 class="font-semibold">Dates</h2>
     </div>
@@ -18,7 +18,7 @@
 
   @if (program()?.partners.length) {
     <div>
-      <div class="flex items-center gap-1 text-xl mb-2 text-secondary-800">
+      <div class="flex items-center gap-1 mb-2 text-secondary-800">
         <mat-icon svgIcon="group" class="icon-size-4" />
         <h2 class="font-semibold">Partenaires</h2>
       </div>
@@ -28,13 +28,13 @@
 
   @if (program()?.phases?.length) {
     <div>
-      <div class="flex items-center gap-1 text-xl mb-2 text-secondary-800">
+      <div class="flex items-center gap-1 mb-2 text-secondary-800">
         <mat-icon svgIcon="timeline" class="icon-size-4" />
         <h2 class="font-semibold">Phases</h2>
       </div>
 
       @for (phase of program().phases; track $index) {
-        <button class="flex items-center text-lg mb-2" (click)="expand(phase.id)">
+        <button class="flex items-center mb-2" (click)="expand(phase.id)">
           <mat-icon
             svgIcon="mat_outline:arrow_right"
             class="text-primary-700"
