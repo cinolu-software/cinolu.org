@@ -8,7 +8,7 @@
     <div class="flex items-center gap-6 flex-wrap">
       @for (partner of partners; track partner.id) {
         @if (partner.website_link !== 'https://cinolu.org/') {
-          <a [href]="partner.website_link" target="_blank" class="relative p-6 h-14 w-16 inline-block bg-gray-50">
+          <a [href]="partner.website_link" target="_blank" class="relative p-6 h-20 w-28 inline-block bg-gray-50">
             <img [ngSrc]="partner | apiIMG: 'partner'" class="object-contain" [alt]="'Image' + partner.name" fill />
           </a>
         }
