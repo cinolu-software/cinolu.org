@@ -20,6 +20,6 @@ export class RecentEventsComponent implements OnInit {
   #eventsService = inject(EventsService);
 
   ngOnInit(): void {
-    this.events$ = this.#eventsService.findLatests();
+    this.events$ = this.#eventsService.findRecent();
   }
 }

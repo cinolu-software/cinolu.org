@@ -48,15 +48,6 @@ export class AuthService {
     return this.#apiService.post('auth/reset-password', payload, onSuccess);
   }
 
-  resendEmailVerification(email: string): Observable<IAPIResponse<void>> {
-    return this.#apiService.post('auth/verify-email/resend-token', { email });
-  }
-
-  verifyEmail(token: string): Observable<IAPIResponse<IUser>> {
-    const onSuccess = () => this.#router.navigate(['/sign-in']);
-    return this.#apiService.post('auth/verify-email', { token }, onSuccess);
-  }
-
   getProfile(): Observable<IAPIResponse<IUser>> {
     const onSuccess = (user: IUser) => this.#store.dispatch(authActions.signIn({ user }));
     return this.#apiService.get('auth/profile', null, onSuccess);

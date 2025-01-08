@@ -1,6 +1,6 @@
 import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { IProgram, IUser } from 'app/shared/utils/types/models.type';
+import { IProject, IUser } from 'app/shared/utils/types/models.type';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,12 +15,12 @@ import { ApplicationComponent } from './application/application.component';
 import { Store } from '@ngrx/store';
 import { selectUser } from 'app/shared/store/auth/auth.reducers';
 import { ProgramSkeletonComponent } from '../../ui/program-skeleton/program-skeleton.component';
-import { ProgramsService } from '../../data-access/programs.service';
+import { ProjectsService } from '../../data-access/projects.service';
 import { FooterComponent } from '../../../shared/ui/footer/footer.component';
 
 @Component({
-  selector: 'app-program',
-  providers: [ProgramsService],
+  selector: 'app-project',
+  providers: [ProjectsService],
   imports: [
     CommonModule,
     NgOptimizedImage,
@@ -35,12 +35,12 @@ import { FooterComponent } from '../../../shared/ui/footer/footer.component';
     ProgramSkeletonComponent,
     FooterComponent
   ],
-  templateUrl: './program.component.html'
+  templateUrl: './project.component.html'
 })
-export class ProgramComponent implements OnInit {
-  program$: Observable<IAPIResponse<IProgram>>;
+export class ProjectComponent implements OnInit {
+  program$: Observable<IAPIResponse<IProject>>;
   user$: Observable<IUser>;
-  #programsService = inject(ProgramsService);
+  #projectsService = inject(ProjectsService);
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   #store = inject(Store);
@@ -55,7 +55,7 @@ export class ProgramComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.program$ = this.#programsService.getProgram(this.#id);
+    this.program$ = this.#projectsService.getProgram(this.#id);
   }
 
   setActiveTab(tab: string): void {

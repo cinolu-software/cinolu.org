@@ -39,11 +39,11 @@
       </div>
 
       @if (!activeTab()) {
-        <app-program-overview [program]="program" />
+        <app-project-overview [project]="program" />
       }
 
       @if (activeTab() === 'application' && program?.phases[0]?.form) {
-        <app-program-application [program]="program" />
+        <app-project-application [project]="program" />
       }
     </div>
   }

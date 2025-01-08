@@ -27,7 +27,7 @@ export class EventsService {
     return this.#apiService.get(`events/${id}`);
   }
 
-  findLatests(): Observable<IAPIResponse<IEvent[]>> {
+  findRecent(): Observable<IAPIResponse<IEvent[]>> {
     return this.#apiService.get('events/find-recent');
   }
 

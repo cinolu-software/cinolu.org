@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { IApplication, IProgram, IProgramCategory, IProgramType } from 'app/shared/utils/types/models.type';
+import { IApplication, IProject, IProgramCategory, IProgramType } from 'app/shared/utils/types/models.type';
 import { Observable } from 'rxjs';
 import { APIService } from 'app/shared/services/api/api.service';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
@@ -10,38 +10,38 @@ import { IApplicationPayload } from '../utils/types/application-payload.type';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class ProgramsService {
+export class ProjectsService {
   #apiService = inject(APIService);
   #toast = inject(HotToastService);
   #router = inject(Router);
 
   getTypes(): Observable<IAPIResponse<IProgramType[]>> {
-    return this.#apiService.get('program-types');
+    return this.#apiService.get('project-types');
   }
 
   getCategories(): Observable<IAPIResponse<IProgramCategory[]>> {
-    return this.#apiService.get('program-categories');
+    return this.#apiService.get('project-categories');
   }
 
   apply(payload: IApplicationPayload): Observable<IAPIResponse<IApplication>> {
     const onSuccess = (): void => {
       this.#toast.success('Candidature soumise !');
-      this.#router.navigate(['/programs']);
+      this.#router.navigate(['/projects']);
     };
     return this.#apiService.post('program-applications', payload, onSuccess);
   }
 
-  getPrograms(queryParams: QueryParams): Observable<IAPIResponse<{ programs: IProgram[]; count: number }>> {
+  getPrograms(queryParams: QueryParams): Observable<IAPIResponse<{ programs: IProject[]; count: number }>> {
     const params = this.#buildQueryParams(queryParams);
-    return this.#apiService.get('programs/find-published', params);
+    return this.#apiService.get('projects/find-published', params);
   }
 
-  getProgram(id: string): Observable<IAPIResponse<IProgram>> {
-    return this.#apiService.get(`programs/${id}`);
+  getProgram(id: string): Observable<IAPIResponse<IProject>> {
+    return this.#apiService.get(`projects/${id}`);
   }
 
-  findRecent(): Observable<IAPIResponse<IProgram[]>> {
-    return this.#apiService.get('programs/find-recent');
+  findRecent(): Observable<IAPIResponse<IProject[]>> {
+    return this.#apiService.get('projects/find-recent');
   }
 
   #buildQueryParams(queryParams: QueryParams): HttpParams {

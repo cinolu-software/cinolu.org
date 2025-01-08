@@ -1,15 +1,15 @@
 import { Component, input, signal } from '@angular/core';
-import { IProgram } from 'app/shared/utils/types/models.type';
+import { IProject } from 'app/shared/utils/types/models.type';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-program-overview',
+  selector: 'app-project-overview',
   imports: [MatIconModule, DatePipe, MatIconModule, CommonModule],
   templateUrl: './overview.component.html'
 })
 export class ProgramOverviewComponent {
-  program = input.required<IProgram>();
+  project = input.required<IProject>();
   expanded = signal<string | null>(null);
 
   join(arr: unknown[]): string {

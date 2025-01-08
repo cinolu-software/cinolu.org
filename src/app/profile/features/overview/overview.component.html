@@ -38,51 +38,28 @@
       </div>
       <h1 class="text-xl font-semibold">Mon compte</h1>
     </div>
-
-    @if (hasRequiredRole(user)) {
-      <p class="font-medium">
-        Vous avez le rôle requis pour accéder au tableau de bord
-        <a [href]="appUrl" target="_blank" class="font-semibold underline text-primary-600">{{ appUrl }}</a>
-      </p>
-    } @else {
-      <p class="font-medium">
-        Veillez à enregistrer vos modifications après chaque mise à jour
-        <a routerLink="/ventures/add" class="font-semibold underline text-primary-600"> ajouter un projet </a>
-      </p>
-    }
+    <p class="font-medium">Veillez à enregistrer vos modifications après chaque mise à jour</p>
   </div>
 
   <div class="py-5">
     <div
       class="flex items-center gap-7 font-medium border-b text-nowrap border-primary-300 mb-10 no-scrollbar overflow-x-scroll">
-      <button
-        [ngClass]="!activeTab() && 'border-b border-primary-700 text-primary-700'"
-        class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
-        (click)="setActiveTab(null)">
-        <mat-icon svgIcon="assignment" class="icon-size-4" />
-        Mes projets
-      </button>
-      <button
-        [ngClass]="activeTab() === 'info' && 'border-b border-primary-700 text-primary-700'"
-        class="py-2 flex items-center gap-1.5"
-        (click)="setActiveTab('info')">
-        <mat-icon svgIcon="info" class="icon-size-4" />
-        Mes informations
-      </button>
-      <button
-        [ngClass]="activeTab() === 'security' && 'border-b border-primary-700 text-primary-700'"
-        class="py-2 flex items-center gap-1.5"
-        (click)="setActiveTab('security')">
-        <mat-icon svgIcon="mat_outline:lock" class="icon-size-4" />
-        Sécurité
-      </button>
+      @for (tab of tabs; track $index) {
+        <button
+          [ngClass]="activeTab() === tab.key && 'border-b  border-primary-700 text-primary-700'"
+          class="py-2 disabled:text-gray-500 text-sm disabled:cursor-not-allowed flex items-center gap-1.5"
+          (click)="setActiveTab(tab.key)"
+          [disabled]="tab.disabled">
+          <mat-icon [svgIcon]="tab.icon" class="icon-size-4" />
+          {{ tab.name }}
+        </button>
+      }
     </div>
-
-    <div class="w-full">
+    <div class="w-full text-sm min-h-[60vh]">
       @if (!activeTab()) {
         <app-user-ventures />
       }
-      @if (activeTab() === 'info') {
+      @if (activeTab() === 'my-informations') {
         <app-update-info [user]="user" />
       }
       @if (activeTab() === 'security') {
@@ -91,4 +68,3 @@
     </div>
   </div>
 </div>
-<app-footer />

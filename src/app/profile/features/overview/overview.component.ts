@@ -13,8 +13,8 @@ import { ProfileService } from '../../data-access/profile.service';
 import { IAPIResponse } from '../../../shared/services/api/types/api-response.type';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { FooterComponent } from '../../../shared/ui/footer/footer.component';
 import { UserVenturesComponent } from '../ventures/ventures.component';
+import { tabs } from '../../utils/data/tabs';
 
 @Component({
   selector: 'app-profile',
@@ -28,21 +28,20 @@ import { UserVenturesComponent } from '../ventures/ventures.component';
     UpdateInfoComponent,
     UpdatePasswordComponent,
     MatProgressSpinnerModule,
-    RouterModule,
-    FooterComponent
+    RouterModule
   ],
   templateUrl: './overview.component.html'
 })
 export class OverviewComponent {
   #store = inject(Store);
   #profileService = inject(ProfileService);
-
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   activeTab = signal<string | null>(null);
   user$: Observable<IUser | null>;
   update$: Observable<IAPIResponse<IUser>>;
   appUrl = environment.accountUrl;
+  tabs = tabs;
 
   constructor() {
     this.user$ = this.#store.pipe(select(selectUser));
@@ -50,7 +49,8 @@ export class OverviewComponent {
   }
 
   hasRequiredRole(user: IUser): boolean {
-    return user.roles.includes('admin') || user.roles.includes('staff') || user.roles.includes('coach');
+    const requiredRoles = ['admin', 'staff', 'coach'];
+    return user.roles.some((role) => requiredRoles.includes(role));
   }
 
   onImageChange(event: Event): void {

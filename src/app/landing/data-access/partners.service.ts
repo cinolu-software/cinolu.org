@@ -8,7 +8,7 @@ import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 export class PartnersService {
   #apiService = inject(APIService);
 
-  getPartners(): Observable<IAPIResponse<IPartner[]>> {
-    return this.#apiService.get<IPartner[]>('partners');
+  getPartners(): Observable<IAPIResponse<Record<string, IPartner[]>>> {
+    return this.#apiService.get<Record<string, IPartner[]>>('partners');
   }
 }

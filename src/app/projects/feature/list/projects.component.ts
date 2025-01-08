@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { IProgramCategory, IProgram, IProgramType } from 'app/shared/utils/types/models.type';
+import { IProgramCategory, IProject, IProgramType } from 'app/shared/utils/types/models.type';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
@@ -12,12 +12,12 @@ import { ProgramCardSkeletonComponent } from '../../../shared/ui/program-card-sk
 import { QueryParams } from '../../utils/types/query-params.type';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
-import { ProgramsService } from '../../data-access/programs.service';
+import { ProjectsService } from '../../data-access/projects.service';
 import { FooterComponent } from '../../../shared/ui/footer/footer.component';
 
 @Component({
-  selector: 'app-programs',
-  providers: [ProgramsService],
+  selector: 'app-projects',
+  providers: [ProjectsService],
   imports: [
     CommonModule,
     MatOptionModule,
@@ -29,16 +29,16 @@ import { FooterComponent } from '../../../shared/ui/footer/footer.component';
     MatChipsModule,
     FooterComponent
   ],
-  templateUrl: './programs.component.html'
+  templateUrl: './projects.component.html'
 })
-export class ProgramsComponent implements OnInit {
+export class ProjectsComponent implements OnInit {
   skeletonArray = Array(9).fill(0);
-  programs$: Observable<IAPIResponse<{ programs: IProgram[]; count: number }>>;
+  programs$: Observable<IAPIResponse<{ programs: IProject[]; count: number }>>;
   types$: Observable<IAPIResponse<IProgramType[]>>;
   categories$: Observable<IAPIResponse<IProgramCategory[]>>;
   #router = inject(Router);
   #route = inject(ActivatedRoute);
-  #programsService = inject(ProgramsService);
+  #projectsService = inject(ProjectsService);
   queryParams = signal<QueryParams>({
     page: Number(this.#route.snapshot.queryParams?.page) || null,
     type: this.#route.snapshot.queryParams?.type || null,
@@ -48,8 +48,8 @@ export class ProgramsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPrograms();
-    this.types$ = this.#programsService.getTypes();
-    this.categories$ = this.#programsService.getCategories();
+    this.types$ = this.#projectsService.getTypes();
+    this.categories$ = this.#projectsService.getCategories();
   }
 
   getTypeId(types: IProgramType[], type: string): string {
@@ -68,7 +68,7 @@ export class ProgramsComponent implements OnInit {
   }
 
   loadPrograms(): void {
-    this.programs$ = this.#programsService.getPrograms(this.queryParams());
+    this.programs$ = this.#projectsService.getPrograms(this.queryParams());
   }
 
   updateRoute(): void {

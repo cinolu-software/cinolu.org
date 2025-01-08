@@ -7,8 +7,8 @@
     Retour
   </button>
 
-  <h3 class="font-medium text-2xl mb-2">Créer votre projet</h3>
-  <p class="mb-8">La création d'un projet est simple et ne prend que 5 minutes.</p>
+  <h3 class="font-medium text-2xl mb-2">Créer votre entreprise</h3>
+  <p class="mb-8">La création d'une entreprise est simple et ne prend que 5 minutes.</p>
 
   @if (venture?.error) {
     <app-alert class="w-full md:w-4/5" type="error" [showIcon]="true" [@shake]="true">
@@ -22,7 +22,7 @@
     class="flex flex-col gap-4 w-full md:w-4/5"
     (ngSubmit)="onSubmit()">
     <mat-form-field class="w-full">
-      <mat-label>Nom du projet</mat-label>
+      <mat-label>Nom</mat-label>
       <input matInput autocomplete="off" id="name" name="name" formControlName="name" />
     </mat-form-field>
 
@@ -47,7 +47,7 @@
       <input matInput autocomplete="off" id="address" name="address" formControlName="address" />
     </mat-form-field>
 
-    <p>Phase du projet</p>
+    <p>Phase</p>
     <mat-radio-group class="flex items-center gap-2 flex-wrap mb-4" (change)="onStageSelection($event)">
       @for (s of stages; track $index) {
         <mat-radio-button [value]="s">{{ s }}</mat-radio-button>

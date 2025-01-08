@@ -13,10 +13,14 @@ import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
   templateUrl: './partners.component.html'
 })
 export class PartnersComponent implements OnInit {
-  partners: Observable<IAPIResponse<IPartner[]>>;
+  partners: Observable<IAPIResponse<Record<string, IPartner[]>>>;
   #partnersService = inject(PartnersService);
 
   ngOnInit(): void {
     this.partners = this.#partnersService.getPartners();
+  }
+
+  removeCinolu(partners: IPartner[]): IPartner[] {
+    return partners.filter((p) => p.website_link !== 'https://cinolu.org/');
   }
 }

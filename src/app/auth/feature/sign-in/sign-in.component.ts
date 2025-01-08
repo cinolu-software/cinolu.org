@@ -10,7 +10,7 @@ import { AlertComponent } from 'app/shared/ui/alert/alert.component';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { environment } from 'environments/environment';
 import { AuthCardComponent } from '../../ui/auth-card/auth-card.component';
-import { RouterLink, ActivatedRoute } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { IUser } from 'app/shared/utils/types/models.type';
@@ -38,17 +38,14 @@ import { AuthService } from '../../data-access/auth.service';
 export class AuthSignInComponent {
   #formBuilder: FormBuilder = inject(FormBuilder);
   #authService = inject(AuthService);
-  #token: string = inject(ActivatedRoute).snapshot.queryParams['token'];
   signInForm: FormGroup;
   result$: Observable<IAPIResponse<IUser>>;
-  verifyEmail$: Observable<IAPIResponse<IUser>>;
 
   constructor() {
     this.signInForm = this.#formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-    if (this.#token) this.verifyEmail$ = this.#authService.verifyEmail(this.#token);
   }
 
   onSignIn(): void {

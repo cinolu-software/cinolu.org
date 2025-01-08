@@ -2,7 +2,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { IProgram } from 'app/shared/utils/types/models.type';
+import { IProject } from 'app/shared/utils/types/models.type';
 import { RouterLink } from '@angular/router';
 import { ApiImgPipe } from 'app/shared/pipes/api-img.pipe';
 
@@ -12,9 +12,9 @@ import { ApiImgPipe } from 'app/shared/pipes/api-img.pipe';
   templateUrl: './program-card.component.html'
 })
 export class ProgramCardComponent {
-  program = input.required<IProgram>();
+  program = input.required<IProject>();
 
-  isFinished(program: IProgram): boolean {
+  isFinished(program: IProject): boolean {
     return new Date(program.ended_at) <= new Date();
   }
 }

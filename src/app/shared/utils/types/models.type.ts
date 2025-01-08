@@ -7,7 +7,7 @@ interface IBase {
 export interface IApplication extends IBase {
   answers: JSON;
   reviews: IReview[];
-  program: IProgram;
+  program: IProject;
   applicant: IUser;
 }
 
@@ -55,7 +55,7 @@ export interface IUser extends IBase {
   profile: string;
   verified_at: Date | null;
   roles: string[];
-  programs: IProgram[];
+  programs: IProject[];
   detail: IDetail;
   ventures: IVenture[];
 }
@@ -87,7 +87,7 @@ export interface IRequiremnt extends IBase {
   description: string;
 }
 
-export interface IProgram extends IBase {
+export interface IProject extends IBase {
   name: string;
   description: string;
   image: string;
@@ -147,7 +147,7 @@ export interface IProgramCategory extends IBase {
 
 export interface IAttachment extends IBase {
   name: string;
-  program: IProgram;
+  program: IProject;
 }
 
 export interface IRoles extends IBase {

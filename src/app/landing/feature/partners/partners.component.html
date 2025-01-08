@@ -5,14 +5,17 @@
       Nos
       <span class="text-primary-600">partenaires</span>
     </h1>
-    <div class="flex items-center gap-6 flex-wrap">
-      @for (partner of partners; track partner.id) {
-        @if (partner.website_link !== 'https://cinolu.org/') {
-          <a [href]="partner.website_link" target="_blank" class="relative p-6 h-20 w-28 inline-block bg-gray-50">
-            <img [ngSrc]="partner | apiIMG: 'partner'" class="object-contain" [alt]="'Image' + partner.name" fill />
-          </a>
-        }
+
+    @for (p of partners | keyvalue; track p.key) {
+      @if (removeCinolu(p.value).length > 0) {
+        <div class="flex items-center gap-6 flex-wrap mb-12">
+          @for (partner of removeCinolu(p.value); track partner.id) {
+            <a [href]="partner.website_link" target="_blank" class="relative p-6 h-20 w-28 inline-block bg-gray-50">
+              <img [ngSrc]="partner | apiIMG: 'partner'" class="object-contain" [alt]="'Image' + partner.name" fill />
+            </a>
+          }
+        </div>
       }
-    </div>
+    }
   </section>
 }

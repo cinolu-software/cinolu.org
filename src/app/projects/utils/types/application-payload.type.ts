@@ -1,4 +1,4 @@
 export interface IApplicationPayload {
   answers: JSON;
-  program: string;
+  project: string;
 }

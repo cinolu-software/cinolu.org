@@ -8,24 +8,8 @@
     </app-alert>
   }
 
-  <div [ngClass]="result?.error && 'transition-transform translate-y-4 duration-150'">
+  <div [ngClass]="result?.error && 'transition-transform translate-y-4 duration-150 '">
     <h2 class="text-3xl font-extrabold leading-tight tracking-tight font-satoshi">Se connecter</h2>
-    <div class="flex items-center gap-1.5">
-      <p>Vous n'avez pas de compte?</p>
-      <a class="text-primary-500 hover:underline" [routerLink]="['/sign-up']">S'inscrire</a>
-    </div>
-
-    @let verifyEmailResult = verifyEmail$ | async;
-    @if (verifyEmailResult?.error && !result?.error) {
-      <app-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
-        {{ verifyEmailResult.error }}
-      </app-alert>
-    }
-    @if (verifyEmailResult?.data && !result?.error) {
-      <app-alert class="mt-6 w-full" type="success" [showIcon]="true" [@shake]="true">
-        Votre email a été vérifié avec succès.
-      </app-alert>
-    }
 
     <form class="mt-6" (ngSubmit)="onSignIn()" [formGroup]="signInForm">
       <mat-form-field class="w-full">
