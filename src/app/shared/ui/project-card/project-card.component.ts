@@ -7,11 +7,11 @@ import { RouterLink } from '@angular/router';
 import { ApiImgPipe } from 'app/shared/pipes/api-img.pipe';
 
 @Component({
-  selector: 'app-program-card',
+  selector: 'app-project-card',
   imports: [MatIconModule, MatTooltipModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe],
-  templateUrl: './program-card.component.html'
+  templateUrl: './project-card.component.html'
 })
-export class ProgramCardComponent {
+export class ProjectCardComponent {
   program = input.required<IProject>();
 
   isFinished(program: IProject): boolean {

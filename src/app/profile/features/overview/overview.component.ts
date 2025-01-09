@@ -8,7 +8,6 @@ import { selectUser } from '../../../shared/store/auth/auth.reducers';
 import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
 import { UpdateInfoComponent } from '../update-info/update-info.component';
 import { UpdatePasswordComponent } from '../update-password/update-password.component';
-import { environment } from 'environments/environment';
 import { ProfileService } from '../../data-access/profile.service';
 import { IAPIResponse } from '../../../shared/services/api/types/api-response.type';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -40,17 +39,11 @@ export class OverviewComponent {
   activeTab = signal<string | null>(null);
   user$: Observable<IUser | null>;
   update$: Observable<IAPIResponse<IUser>>;
-  appUrl = environment.accountUrl;
   tabs = tabs;
 
   constructor() {
     this.user$ = this.#store.pipe(select(selectUser));
     this.activeTab.set(this.#route.snapshot.queryParams?.tab);
-  }
-
-  hasRequiredRole(user: IUser): boolean {
-    const requiredRoles = ['admin', 'staff', 'coach'];
-    return user.roles.some((role) => requiredRoles.includes(role));
   }
 
   onImageChange(event: Event): void {

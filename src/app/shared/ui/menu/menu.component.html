@@ -1,6 +1,7 @@
 <header class="navbar fixed w-full top-0 py-3 bg-white shadow-sm z-20 font-satoshi">
   @let user = user$ | async;
-  <nav class="flex items-center justify-between lg:hidden px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
+  @let result = logout$ | async;
+  <nav class="flex items-center justify-between lg:hidden px-8">
     <a routerLink="/" aria-label="logo" class="inline-block" (click)="closeMenu()">
       <img ngSrc="images/logo/logo-g.png" alt="logo" class="w-6 h-7 cursor-pointer" width="64" height="68" priority />
     </a>
@@ -13,7 +14,7 @@
         isOpen() ? 'translate-x-0 nav-active' : '-translate-x-full'
       }}">
       <div class="flex flex-col justify-between py-16 px-10 h-full">
-        <div class="flex flex-col gap-6 font-bold text-xl">
+        <div class="flex flex-col gap-6 font-bold text-xl font-inter">
           @for (tab of ['Parcourir', 'My cinolu']; track $index) {
             <button class="flex items-center justify-between" (click)="setActiveTab(tab)">
               {{ tab }}
@@ -23,13 +24,31 @@
         </div>
 
         @if (user) {
-          <a routerLink="/me" class="flex items-center gap-1.5 font-semibold" (click)="closeMenu()">
-            <img
-              [src]="user | apiIMG: 'user'"
-              class="rounded-full w-8 h-8 object-cover ring-2 ring-secondary-800 ring-offset-1"
-              alt="profile picture" />
-            {{ trimName(user.name) }}
-          </a>
+          <div class="flex flex-col gap-8">
+            @if (user && hasRequiredRole(user)) {
+              <a [href]="accUrl" target="_blank" class="flex items-center gap-2.5">
+                <img
+                  [src]="user | apiIMG: 'user'"
+                  class="rounded-full w-7 h-7 object-cover ring-2 ring-secondary-800 ring-offset-1"
+                  alt="profile picture" />
+                Dashboard
+              </a>
+            } @else {
+              <a [routerLink]="'/me'" class="flex items-center gap-2.5">
+                <img
+                  [src]="user | apiIMG: 'user'"
+                  class="rounded-full w-7 h-7 object-cover ring-2 ring-secondary-800 ring-offset-1"
+                  alt="profile picture" />
+                Mon compte
+              </a>
+            }
+            <button
+              class="flex items-center text-white justify-center text-center px-6 py-2 bg-red-800 rounded-sm hover:bg-red-900 disabled:bg-red-800/30 transition-colors duration-300 gap-1.5 font-medium text-base"
+              (click)="signOut()"
+              [disabled]="result?.isLoading">
+              Se déconnecter
+            </button>
+          </div>
         } @else {
           <a
             routerLink="/sign-in"
@@ -66,17 +85,19 @@
     </ul>
   </nav>
 
-  <nav class="hidden lg:flex items-center justify-between px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
+  <nav class="hidden lg:flex items-center justify-between px-8 md:px-28 2xl:px-36">
     <a routerLink="/" aria-label="logo" class="inline-block" (click)="closeMenu()">
       <img ngSrc="images/logo/logo-g.png" alt="logo" class="w-6 h-7 cursor-pointer" width="64" height="68" priority />
     </a>
     <div class="flex items-center gap-6 xl:text-lg font-medium">
       @for (tab of ['Parcourir', 'My cinolu']; track $index) {
         <button class="relative flex items-center gap-1" (click)="setActiveTab(tab)">
-          {{ tab }}
-          <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-4 text-gray-700" />
+          <span class="font-inter">
+            {{ tab }}
+          </span>
+          <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5 text-gray-700" />
           <div
-            class="absolute top-9 w-[30rem] animate-fadeInUp py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
+            class="absolute top-9 w-[27rem] animate-fadeInUp py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
             [ngClass]="activeTab() === tab ? 'block nav-active' : 'hidden'">
             <div class="grid grid-cols-2 gap-x-8 gap-y-6 xl:text-base">
               @for (link of getLinks(activeTab()); track $index) {
@@ -84,7 +105,7 @@
                   <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
                     <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white" />
                   </span>
-                  <p class="flex flex-col gap-0.5 font-medium">
+                  <p class="flex flex-col gap-0.5">
                     {{ link.name }}
                     <span class="description text-gray-700 text-xs">{{ link.description }}</span>
                   </p>
@@ -97,13 +118,42 @@
     </div>
 
     @if (user) {
-      <a routerLink="/me" class="flex items-center gap-1.5 font-semibold" (click)="closeMenu()">
-        <img
-          [src]="user | apiIMG: 'user'"
-          class="rounded-full w-8 h-8 object-cover ring-2 ring-secondary-800 ring-offset-1"
-          alt="profile picture" />
-        {{ trimName(user.name) }}
-      </a>
+      <div class="flex items-center gap-3">
+        <button class="relative flex items-center gap-2" (click)="setActiveTab('account')">
+          <img
+            [src]="user | apiIMG: 'user'"
+            class="rounded-full w-7 h-7 object-cover ring-2 ring-secondary-800 ring-offset-1"
+            alt="profile picture" />
+          <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5 text-gray-700" />
+          <div
+            class="absolute top-9 w-[18rem] right-0 animate-fadeInUp py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
+            [ngClass]="activeTab() === 'account' ? 'block nav-active' : 'hidden'">
+            <div class="grid grid-cols-1 gap-x-8 gap-y-6 xl:text-base">
+              @if (user && hasRequiredRole(user)) {
+                <a [href]="accUrl" target="_blank" class="flex items-center gap-2.5">
+                  <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
+                    <mat-icon [svgIcon]="'dashboard'" class="icon-size-4 text-white" />
+                  </span>
+                  Dashboard
+                </a>
+              } @else {
+                <a [routerLink]="'/me'" class="flex items-center gap-2.5">
+                  <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
+                    <mat-icon [svgIcon]="'dashboard'" class="icon-size-4 text-white" />
+                  </span>
+                  Mon compte
+                </a>
+              }
+              <button class="flex items-center gap-2.5" (click)="signOut()" [disabled]="result?.isLoading">
+                <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
+                  <mat-icon [svgIcon]="'mat_solid:logout'" class="icon-size-4 text-white" />
+                </span>
+                Se déconnecter
+              </button>
+            </div>
+          </div>
+        </button>
+      </div>
     } @else {
       <a
         routerLink="/sign-in"

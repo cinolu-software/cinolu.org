@@ -41,6 +41,7 @@ export const myCinoluLinks: ILink[] = [
     icon: 'mat_outline:info',
     exactUrl: false
   },
+
   {
     name: 'Equipe',
     path: '/about-us',

@@ -52,4 +52,12 @@ export class AuthService {
     const onSuccess = (user: IUser) => this.#store.dispatch(authActions.signIn({ user }));
     return this.#apiService.get('auth/profile', null, onSuccess);
   }
+
+  signOut(): Observable<IAPIResponse<void>> {
+    const onSuccess = (): void => {
+      this.#store.dispatch(authActions.signIn({ user: null }));
+      this.#router.navigate(['/sign-in']);
+    };
+    return this.#apiService.post('auth/sign-out', {}, onSuccess);
+  }
 }
