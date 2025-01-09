@@ -23,13 +23,13 @@ import { environment } from 'environments/environment';
 })
 export class MenuComponent implements OnInit {
   isOpen = signal(false);
-  user$: Observable<IUser>;
-  #store = inject(Store);
   activeTab = signal<string | null>(null);
-  #authService = inject(AuthService);
-  #element = inject(ElementRef);
+  user$: Observable<IUser>;
   logout$: Observable<IAPIResponse<void>>;
   accUrl = environment.accountUrl;
+  #store = inject(Store);
+  #authService = inject(AuthService);
+  #element = inject(ElementRef);
 
   ngOnInit(): void {
     this.user$ = this.#store.pipe(select(selectUser));
@@ -49,12 +49,14 @@ export class MenuComponent implements OnInit {
   }
 
   closeMenu(): void {
+    this.setActiveTab(null);
     this.isOpen.set(false);
+    console.log('closed');
   }
 
   signOut(): void {
-    this.setActiveTab(null);
     this.logout$ = this.#authService.signOut();
+    this.closeMenu();
   }
 
   getLinks(tab: string): ILink[] {
@@ -66,9 +68,8 @@ export class MenuComponent implements OnInit {
   }
 
   onClickOutside(event: MouseEvent): void {
-    if (!this.#element.nativeElement.contains(event.target)) {
-      this.activeTab.set(null);
-      this.isOpen.set(false);
+    if ((this.activeTab() || this.isOpen()) && !this.#element.nativeElement.contains(event.target)) {
+      this.closeMenu();
     }
   }
 }
