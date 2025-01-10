@@ -17,7 +17,7 @@ import { ProjectsService } from '../../../data-access/projects.service';
   imports: [CommonModule, FormsModule, MatButtonModule, MatInputModule, MatProgressSpinnerModule, AlertComponent],
   templateUrl: './application.component.html'
 })
-export class ApplicationComponent {
+export class ProjectApplicationComponent {
   project = input.required<IProject>();
   formData = {};
   application$: Observable<IAPIResponse<IApplication>>;
