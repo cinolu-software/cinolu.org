@@ -10,13 +10,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
-import { ProgramOverviewComponent } from './overview/overview.component';
-import { ApplicationComponent } from './application/application.component';
+import { ProjectOverviewComponent } from './overview/overview.component';
+import { ProjectApplicationComponent } from './application/application.component';
 import { Store } from '@ngrx/store';
 import { selectUser } from 'app/shared/store/auth/auth.reducers';
-import { ProgramSkeletonComponent } from '../../ui/program-skeleton/program-skeleton.component';
 import { ProjectsService } from '../../data-access/projects.service';
 import { FooterComponent } from '../../../shared/ui/footer/footer.component';
+import { ProjectSkeletonComponent } from '../../ui/project-skeleton/project-skeleton.component';
 
 @Component({
   selector: 'app-project',
@@ -30,15 +30,15 @@ import { FooterComponent } from '../../../shared/ui/footer/footer.component';
     MatButtonModule,
     FormsModule,
     ApiImgPipe,
-    ProgramOverviewComponent,
-    ApplicationComponent,
-    ProgramSkeletonComponent,
-    FooterComponent
+    ProjectApplicationComponent,
+    FooterComponent,
+    ProjectOverviewComponent,
+    ProjectSkeletonComponent
   ],
   templateUrl: './project.component.html'
 })
 export class ProjectComponent implements OnInit {
-  program$: Observable<IAPIResponse<IProject>>;
+  project$: Observable<IAPIResponse<IProject>>;
   user$: Observable<IUser>;
   #projectsService = inject(ProjectsService);
   #route = inject(ActivatedRoute);
@@ -55,13 +55,13 @@ export class ProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.program$ = this.#projectsService.getProject(this.#id);
+    this.project$ = this.#projectsService.getProject(this.#id);
   }
 
   setActiveTab(tab: string): void {
     this.activeTab.set(tab);
     const queryParams = { tab };
-    this.#router.navigate(['/programs', this.#id], { queryParams });
+    this.#router.navigate(['/projects', this.#id], { queryParams });
   }
 
   back(): void {
