@@ -51,7 +51,6 @@ export class MenuComponent implements OnInit {
   closeMenu(): void {
     this.setActiveTab(null);
     this.isOpen.set(false);
-    console.log('closed');
   }
 
   signOut(): void {
