@@ -55,7 +55,7 @@ export class ProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.program$ = this.#projectsService.getProgram(this.#id);
+    this.program$ = this.#projectsService.getProject(this.#id);
   }
 
   setActiveTab(tab: string): void {

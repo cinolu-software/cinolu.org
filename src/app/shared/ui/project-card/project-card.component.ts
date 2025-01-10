@@ -12,9 +12,9 @@ import { ApiImgPipe } from 'app/shared/pipes/api-img.pipe';
   templateUrl: './project-card.component.html'
 })
 export class ProjectCardComponent {
-  program = input.required<IProject>();
+  project = input.required<IProject>();
 
-  isFinished(program: IProject): boolean {
-    return new Date(program.ended_at) <= new Date();
+  isFinished(project: IProject): boolean {
+    return new Date(project.ended_at) <= new Date();
   }
 }

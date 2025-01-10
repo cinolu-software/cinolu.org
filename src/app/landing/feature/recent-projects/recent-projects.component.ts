@@ -10,16 +10,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProjectsService } from '../../../projects/data-access/projects.service';
 
 @Component({
-  selector: 'app-recent-programs',
+  selector: 'app-recent-projects',
   providers: [ProjectsService],
   imports: [CommonModule, ProjectCardComponent, ProgramCardSkeletonComponent, RouterModule, MatIconModule],
   templateUrl: './recent-projects.component.html'
 })
-export class RecentProgramsComponent implements OnInit {
-  programs$: Observable<IAPIResponse<IProject[]>>;
+export class RecentProjectsComponent implements OnInit {
+  projects$: Observable<IAPIResponse<IProject[]>>;
   #projectsService = inject(ProjectsService);
 
   ngOnInit(): void {
-    this.programs$ = this.#projectsService.findRecent();
+    this.projects$ = this.#projectsService.findRecent();
   }
 }

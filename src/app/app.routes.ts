@@ -10,7 +10,7 @@ import { authGuard } from './shared/guards/auth.guard';
 import { projectsRoutes } from './projects/projects.routes';
 
 export const appRoutes: Route[] = [
-  { path: 'programs', loadChildren: () => projectsRoutes },
+  { path: 'projects', loadChildren: () => projectsRoutes },
   { path: 'events', loadChildren: () => eventsRoutes },
   { path: 'ventures', loadChildren: () => ventureRoutes },
   { path: 'about-us', loadChildren: () => aboutRoutes },

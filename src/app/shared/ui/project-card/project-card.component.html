@@ -1,10 +1,10 @@
-<a [routerLink]="['/programs', program().id]" class="bg-card group flex flex-col overflow-hidden rounded-2xl shadow">
+<a [routerLink]="['/projects', project().id]" class="bg-card group flex flex-col overflow-hidden rounded-2xl shadow">
   <div class="h-60 w-full relative bg-gray-100">
-    <img [ngSrc]="program() | apiIMG: 'program'" [alt]="program().name" class="object-cover" fill />
+    <img [ngSrc]="project() | apiIMG: 'project'" [alt]="project().name" class="object-cover" fill />
   </div>
   <div class="flex flex-col p-6">
     <div class="flex items-center gap-1 mb-2">
-      @for (type of program().types; track $index) {
+      @for (type of project().types; track $index) {
         <span
           class="rounded-full line-clamp-1 px-3 py-0.5 text-xs font-semibold lowercase bg-primary-100 text-primary-900">
           {{ type.name }}
@@ -13,16 +13,16 @@
     </div>
 
     <h4 class="mt-3 mb-2 text-lg group-hover:text-primary-900 font-bold transition-colors duration-200 line-clamp-1">
-      {{ program().name | titlecase }}
+      {{ project().name | titlecase }}
     </h4>
     <div class="text-sm mt-0.5 line-clamp-2 lowercase font-medium first-letter:uppercase">
-      {{ program().description }}
+      {{ project().description }}
     </div>
     <div class="my-3 h-1 w-12 border-t"></div>
     <div class="text-sm font-medium">
       <div class="t flex items-center text-md leading-5">
         <mat-icon class="text-hint icon-size-5" [svgIcon]="'event'" />
-        <div class="ml-1.5">{{ program().started_at | date: 'longDate' }}</div>
+        <div class="ml-1.5">{{ project().started_at | date: 'longDate' }}</div>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { IApplication, IProject, IProgramCategory, IProgramType } from 'app/shared/utils/types/models.type';
+import { IApplication, IProject, IProjectType } from 'app/shared/utils/types/models.type';
 import { Observable } from 'rxjs';
 import { APIService } from 'app/shared/services/api/api.service';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
@@ -15,12 +15,8 @@ export class ProjectsService {
   #toast = inject(HotToastService);
   #router = inject(Router);
 
-  getTypes(): Observable<IAPIResponse<IProgramType[]>> {
+  getTypes(): Observable<IAPIResponse<IProjectType[]>> {
     return this.#apiService.get('project-types');
-  }
-
-  getCategories(): Observable<IAPIResponse<IProgramCategory[]>> {
-    return this.#apiService.get('project-categories');
   }
 
   apply(payload: IApplicationPayload): Observable<IAPIResponse<IApplication>> {
@@ -31,12 +27,12 @@ export class ProjectsService {
     return this.#apiService.post('program-applications', payload, onSuccess);
   }
 
-  getPrograms(queryParams: QueryParams): Observable<IAPIResponse<{ programs: IProject[]; count: number }>> {
+  getProjects(queryParams: QueryParams): Observable<IAPIResponse<{ projects: IProject[]; count: number }>> {
     const params = this.#buildQueryParams(queryParams);
     return this.#apiService.get('projects/find-published', params);
   }
 
-  getProgram(id: string): Observable<IAPIResponse<IProject>> {
+  getProject(id: string): Observable<IAPIResponse<IProject>> {
     return this.#apiService.get(`projects/${id}`);
   }
 

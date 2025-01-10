@@ -1,15 +1,15 @@
 <section class="mb-12 mt-14">
-  @let result = programs$ | async;
+  @let result = projects$ | async;
   @let types = types$ | async;
   <div
-    class="relative py-52 md:py-64 bg-[url('/images/programs.jpg')] bg-cover flex flex-col justify-center overflow-hidden mb-8">
+    class="relative py-52 md:py-64 bg-[url('/images/projects.jpg')] bg-cover flex flex-col justify-center overflow-hidden mb-8">
     <div
       class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/60 to-primary-900/70 gap-6 text-white">
       <div
         class="relative z-10 flex flex-col items-start py-16 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
-        <h1 class="font-extrabold block text-xl mb-6 md:text-4xl xl:text-6xl">Découvrez nos programmes</h1>
+        <h1 class="font-extrabold block text-xl mb-6 md:text-4xl xl:text-6xl">Découvrez nos projets</h1>
         <p class="mb-8 md:text-lg text-sm leading-relaxed font-light w-full md:w-3/4">
-          Transformez vos idées en réalités impactantes grâce à nos programmes innovants ! Rejoignez un écosystème conçu
+          Transformez vos idées en réalités impactantes grâce à nos projets innovants ! Rejoignez un écosystème conçu
           pour vous inspirer, vous former et vous accompagner.
         </p>
       </div>
@@ -31,14 +31,14 @@
       }
 
       @if (result.data; as data) {
-        @if (data?.programs; as programs) {
+        @if (data?.projects; as projects) {
           <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             @for (
-              program of programs
+              project of projects
                 | paginate: { itemsPerPage: 9, currentPage: queryParams().page, totalItems: data.count };
-              track program.id
+              track project.id
             ) {
-              <app-project-card [program]="program" />
+              <app-project-card [project]="project" />
             }
           </div>
 
@@ -55,13 +55,13 @@
           }
         }
       }
-      @if (result.error || (result.data && result.data?.programs.length === 0)) {
-        <h2 class="text-3xl font-semibold">Aucun programme!</h2>
+      @if (result.error || (result.data && result.data?.projects.length === 0)) {
+        <h2 class="text-3xl font-semibold">Aucun projet!</h2>
       }
 
       @if (result.isLoading) {
         <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-          @for (program of skeletonArray; track $index) {
+          @for (project of skeletonArray; track $index) {
             <app-project-card-skeleton />
           }
         </div>

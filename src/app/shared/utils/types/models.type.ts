@@ -95,8 +95,8 @@ export interface IProject extends IBase {
   ended_at: Date;
   targeted_audience: string;
   user: IUser;
-  types: IProgramType[];
-  categories: IProgramCategory[];
+  types: IProjectType[];
+  categories: IProjectCategory[];
   phases: IPhase[];
   partners: IPartner[];
 }
@@ -131,7 +131,7 @@ export interface IEvent extends IBase {
   types: IEventType[];
 }
 
-export interface IProgramType extends IBase {
+export interface IProjectType extends IBase {
   name: string;
   description: string;
 }
@@ -141,7 +141,7 @@ export interface IEventType extends IBase {
   description: string;
 }
 
-export interface IProgramCategory extends IBase {
+export interface IProjectCategory extends IBase {
   name: string;
 }
 

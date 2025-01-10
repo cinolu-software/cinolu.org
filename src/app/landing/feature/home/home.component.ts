@@ -3,7 +3,7 @@ import { FooterComponent } from '../../../shared/ui/footer/footer.component';
 import { HeroComponent } from '../hero/hero.component';
 import { PartnersComponent } from '../partners/partners.component';
 import { RecentEventsComponent } from '../recent-events/recent-events.component';
-import { RecentProgramsComponent } from '../recent-projects/recent-projects.component';
+import { RecentProjectsComponent } from '../recent-projects/recent-projects.component';
 import { ServicesComponent } from '../services/services.component';
 import { StatementComponent } from '../statement/statement.component';
 import { StatsComponent } from '../stats/stats.component';
@@ -17,7 +17,7 @@ import { StatsComponent } from '../stats/stats.component';
     FooterComponent,
     StatsComponent,
     PartnersComponent,
-    RecentProgramsComponent,
+    RecentProjectsComponent,
     RecentEventsComponent
   ],
   templateUrl: './home.component.html'

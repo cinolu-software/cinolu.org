@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { IProgramCategory, IProject, IProgramType } from 'app/shared/utils/types/models.type';
+import { IProject, IProjectType } from 'app/shared/utils/types/models.type';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
@@ -33,53 +33,48 @@ import { FooterComponent } from '../../../shared/ui/footer/footer.component';
 })
 export class ProjectsComponent implements OnInit {
   skeletonArray = Array(9).fill(0);
-  programs$: Observable<IAPIResponse<{ programs: IProject[]; count: number }>>;
-  types$: Observable<IAPIResponse<IProgramType[]>>;
-  categories$: Observable<IAPIResponse<IProgramCategory[]>>;
+  projects$: Observable<IAPIResponse<{ projects: IProject[]; count: number }>>;
+  types$: Observable<IAPIResponse<IProjectType[]>>;
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   #projectsService = inject(ProjectsService);
   queryParams = signal<QueryParams>({
     page: Number(this.#route.snapshot.queryParams?.page) || null,
-    type: this.#route.snapshot.queryParams?.type || null,
-    category: this.#route.snapshot.queryParams?.category || null,
-    hideFinished: !!this.#route.snapshot.queryParams?.hideFinished
+    type: this.#route.snapshot.queryParams?.type || null
   });
 
   ngOnInit(): void {
-    this.loadPrograms();
+    this.loadProjects();
     this.types$ = this.#projectsService.getTypes();
-    this.categories$ = this.#projectsService.getCategories();
   }
 
-  getTypeId(types: IProgramType[], type: string): string {
+  getTypeId(types: IProjectType[], type: string): string {
     return types.find((t) => t.name === type)?.id;
   }
 
   onFilterChange(event: MatChipListboxChange, filter: string): void {
     this.queryParams().page = null;
     this.queryParams()[filter] = event.value === 'Tous' ? null : event.value;
-    this.updateRouteAndPrograms();
+    this.updateRouteAndprojects();
   }
 
   onPageChange(currentPage: number): void {
     this.queryParams().page = currentPage === 1 ? null : currentPage;
-    this.updateRouteAndPrograms();
+    this.updateRouteAndprojects();
   }
 
-  loadPrograms(): void {
-    this.programs$ = this.#projectsService.getPrograms(this.queryParams());
+  loadProjects(): void {
+    this.projects$ = this.#projectsService.getProjects(this.queryParams());
   }
 
   updateRoute(): void {
-    const { page, type, category, hideFinished } = this.queryParams();
-    const queryParams = { page, type, category };
-    if (hideFinished) queryParams['hideFinished'] = hideFinished;
-    this.#router.navigate(['/programs'], { queryParams });
+    const { page, type } = this.queryParams();
+    const queryParams = { page, type };
+    this.#router.navigate(['/projects'], { queryParams });
   }
 
-  updateRouteAndPrograms(): void {
+  updateRouteAndprojects(): void {
     this.updateRoute();
-    this.loadPrograms();
+    this.loadProjects();
   }
 }
