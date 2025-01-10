@@ -9,9 +9,9 @@ export const explorationLinks: ILink[] = [
     exactUrl: true
   },
   {
-    name: 'Projets',
+    name: 'Programmes',
     path: '/projects',
-    description: 'Voir nos projets',
+    description: 'Voir nos programmes',
     icon: 'mat_outline:assignment',
     exactUrl: false
   },

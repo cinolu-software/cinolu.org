@@ -1,4 +1,4 @@
-<a [routerLink]="['/events', event().id]" class="bg-card group flex flex-col overflow-hidden rounded-2xl shadow">
+<a [routerLink]="['/events', event().id]" class="bg-card mb-4 group flex flex-col overflow-hidden rounded-2xl shadow">
   <div class="h-60 w-full relative bg-gray-100">
     <img [ngSrc]="event() | apiIMG: 'event'" [alt]="event().name" class="object-cover" fill />
   </div>

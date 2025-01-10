@@ -1,4 +1,6 @@
-<a [routerLink]="['/projects', project().id]" class="bg-card group flex flex-col overflow-hidden rounded-2xl shadow">
+<a
+  [routerLink]="['/projects', project().id]"
+  class="bg-card group flex flex-col mb-4 overflow-hidden rounded-2xl shadow">
   <div class="h-60 w-full relative bg-gray-100">
     <img [ngSrc]="project() | apiIMG: 'project'" [alt]="project().name" class="object-cover" fill />
   </div>

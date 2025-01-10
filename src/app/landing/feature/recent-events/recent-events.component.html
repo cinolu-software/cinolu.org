@@ -1,6 +1,6 @@
 @let result = events$ | async;
-@if (result?.data?.length) {
-  <section class="mb-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
+@if (result?.data?.length && isBrowser()) {
+  <section class="mb-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0" id="events">
     <h2 class="font-semibold text-xl md:text-4xl mb-2">
       Nos récents
       <span class="text-secondary-600">événements</span>
@@ -18,10 +18,21 @@
       </a>
     </p>
 
-    <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-      @for (event of result?.data; track event.id) {
-        <app-event-card [event]="event" />
-      }
+    <div class="relative mb-16">
+      <owl-carousel-o #recentEvents [options]="owlOptions">
+        @for (event of result?.data; track $index) {
+          <ng-template carouselSlide>
+            <app-event-card [event]="event" />
+          </ng-template>
+        }
+      </owl-carousel-o>
+
+      <button (click)="recentEvents.prev()" class="nav-btn absolute top-[45%] -left-5 z-10">
+        <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_left"></mat-icon>
+      </button>
+      <button (click)="recentEvents.next()" class="nav-btn absolute top-[45%] -right-5 z-10">
+        <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_right"></mat-icon>
+      </button>
     </div>
 
     @if (result.isLoading) {
