@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [MatIconModule, DatePipe, MatIconModule, CommonModule],
   templateUrl: './overview.component.html'
 })
-export class ProgramOverviewComponent {
+export class ProjectOverviewComponent {
   project = input.required<IProject>();
   expanded = signal<string | null>(null);
 
