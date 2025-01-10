@@ -9,6 +9,6 @@ export class PartnersService {
   #apiService = inject(APIService);
 
   getPartners(): Observable<IAPIResponse<Record<string, IPartner[]>>> {
-    return this.#apiService.get<Record<string, IPartner[]>>('partners');
+    return this.#apiService.get<Record<string, IPartner[]>>('partners/find-grouped');
   }
 }
