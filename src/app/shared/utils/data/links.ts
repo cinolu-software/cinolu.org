@@ -26,7 +26,7 @@ export const explorationLinks: ILink[] = [
     name: 'Partenaires',
     path: '/',
     fragment: 'partners',
-    description: 'Voir nos événements',
+    description: 'Voir nos partenaires',
     icon: 'mat_outline:groups',
     exactUrl: true
   }
