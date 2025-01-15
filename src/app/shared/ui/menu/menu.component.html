@@ -91,9 +91,9 @@
     <div class="hidden lg:flex justify-between w-2/3">
       <div class="flex items-center gap-6 xl:text-lg font-medium">
         @for (tab of ['Parcourir', 'My cinolu']; track $index) {
-          <button class="relative flex items-center" (click)="setActiveTab(tab)">
-            {{ tab }}
-            <mat-icon [svgIcon]="'mat_outline:keyboard_arrow_down'" class="icon-size-5 text-gray-700" />
+          <button class="relative flex items-center gap-0.5" (click)="setActiveTab(tab)">
+            <span class="uppercase text-sm font-semibold">{{ tab }}</span>
+            <mat-icon [svgIcon]="'mat_outline:keyboard_arrow_down'" class="icon-size-6 text-gray-700" />
             <div
               class="absolute top-9 w-[30rem] animate-fadeInUp py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
               [ngClass]="activeTab() === tab ? 'block ' : 'hidden'">
@@ -113,6 +113,29 @@
             </div>
           </button>
         }
+
+        <button class="relative flex items-center gap-0.5" (click)="setActiveTab('language')">
+          <span class="uppercase text-sm font-semibold">Langues</span>
+          <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-6 text-gray-700" />
+          <div
+            class="absolute top-9 w-[10rem] left-0 animate-fadeInUp py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
+            [ngClass]="activeTab() === 'language' ? 'block ' : 'hidden'">
+            <div class="grid grid-cols-1 gap-x-8 gap-y-6 xl:text-base font-medium">
+              <button class="flex items-center gap-3" (click)="switchLanguage('fr')">
+                <img src="/images/flags/fr.png" class="w-6 h-6" alt="Englend picture" />
+                Francais
+              </button>
+              <button class="flex items-center gap-3" (click)="switchLanguage('en')">
+                <img src="/images/flags/en.png" class="w-6 h-6 object-cover" alt="Englend picture" />
+                English
+              </button>
+              <button class="flex items-center gap-3" (click)="switchLanguage('sw')">
+                <img src="/images/flags/rdc.png" class="w-4 h-4 object-cover" alt="Englend picture" />
+                Swahili
+              </button>
+            </div>
+          </div>
+        </button>
       </div>
 
       @if (user) {
@@ -122,7 +145,7 @@
               [src]="user | apiIMG: 'user'"
               class="rounded-full w-7 h-7 object-cover ring-2 ring-secondary-800 ring-offset-1"
               alt="profile picture" />
-            <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5 text-gray-700" />
+            <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-6 text-gray-700" />
             <div
               class="absolute top-9 w-[18rem] right-0 animate-fadeInUp py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
               [ngClass]="activeTab() === 'account' ? 'block ' : 'hidden'">
@@ -155,7 +178,7 @@
       } @else {
         <a
           routerLink="/sign-in"
-          class="flex items-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium text-base">
+          class="flex items-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium text-sm">
           Se connecter
         </a>
       }

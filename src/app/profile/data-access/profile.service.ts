@@ -4,17 +4,17 @@ import { IUpdateProfile } from '../utils/types/update-profile.type';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from '../../shared/services/api/types/api-response.type';
 import { IUser } from '../../shared/utils/types/models.type';
-import { HotToastService } from '@ngneat/hot-toast';
 import { IUpdatePassword } from '../utils/types/update-password.type';
 import { IAddDetails } from '../utils/types/add-detail.type';
 import { Store } from '@ngrx/store';
 import { authActions } from '../../shared/store/auth/auth.actions';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ProfileService {
   #apiService = inject(APIService);
-  #toast = inject(HotToastService);
+  #toast = inject(ToastrService);
   #store = inject(Store);
   #router = inject(Router);
 

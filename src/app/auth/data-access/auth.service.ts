@@ -2,30 +2,21 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IUser } from 'app/shared/utils/types/models.type';
 import { ISignIn } from '../utils/types/sign-in.type';
-import { ISignUp } from '../utils/types/sign-up.type';
 import { IResetPassword } from '../utils/types/reset-password.type';
 import { IForgotPassword } from '../utils/types/forgot-password.type';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { HotToastService } from '@ngneat/hot-toast';
 import { APIService } from '../../shared/services/api/api.service';
 import { IAPIResponse } from '../../shared/services/api/types/api-response.type';
 import { authActions } from '../../shared/store/auth/auth.actions';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   #router = inject(Router);
   #store = inject(Store);
-  #toast = inject(HotToastService);
+  #toast = inject(ToastrService);
   #apiService = inject(APIService);
-
-  signUp(payload: ISignUp): Observable<IAPIResponse<IUser>> {
-    const onSuccess = () => {
-      this.#toast.success('Inscription réussie');
-      this.#router.navigate(['/confirmation-required', { email: payload.email }]);
-    };
-    return this.#apiService.post('auth/sign-up', payload, onSuccess);
-  }
 
   signIn(payload: ISignIn): Observable<IAPIResponse<IUser>> {
     const onSuccess = (user: IUser) => {

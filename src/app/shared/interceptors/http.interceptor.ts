@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 export const httpInterceptor = (req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
   let newReq = req.clone();
-  if (req.url.includes('icons')) return next(newReq);
+  if (req.url.includes('icons') || req.url.includes('i18n')) return next(newReq);
   newReq = req.clone({
     url: environment.apiUrl + req.url,
     withCredentials: true

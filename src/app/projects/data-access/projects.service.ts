@@ -5,14 +5,14 @@ import { APIService } from 'app/shared/services/api/api.service';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { QueryParams } from '../utils/types/query-params.type';
 import { HttpParams } from '@angular/common/http';
-import { HotToastService } from '@ngneat/hot-toast';
 import { IApplicationPayload } from '../utils/types/application-payload.type';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ProjectsService {
   #apiService = inject(APIService);
-  #toast = inject(HotToastService);
+  #toast = inject(ToastrService);
   #router = inject(Router);
 
   getTypes(): Observable<IAPIResponse<IProjectType[]>> {

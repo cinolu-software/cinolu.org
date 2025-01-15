@@ -4,13 +4,13 @@ import { ISector, IVenture } from '../../shared/utils/types/models.type';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from '../../shared/services/api/types/api-response.type';
 import { IProjectPayload } from '../utils/types/project-payload.type';
-import { HotToastService } from '@ngneat/hot-toast';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class VenturesService {
   #apiService = inject(APIService);
-  #toast = inject(HotToastService);
+  #toast = inject(ToastrService);
   #router = inject(Router);
 
   getSectors(): Observable<IAPIResponse<ISector[]>> {
