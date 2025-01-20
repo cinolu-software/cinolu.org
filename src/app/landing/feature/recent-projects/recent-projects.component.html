@@ -20,7 +20,7 @@
 
     <div class="relative mb-16">
       <owl-carousel-o #recentProjects [options]="owlOptions">
-        @for (project of result?.data; track $index) {
+        @for (project of result?.data; track project.id) {
           <ng-template carouselSlide>
             <app-project-card [project]="project" />
           </ng-template>

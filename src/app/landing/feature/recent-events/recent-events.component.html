@@ -20,7 +20,7 @@
 
     <div class="relative mb-16">
       <owl-carousel-o #recentEvents [options]="owlOptions">
-        @for (event of result?.data; track $index) {
+        @for (event of result?.data; track event.id) {
           <ng-template carouselSlide>
             <app-event-card [event]="event" />
           </ng-template>
@@ -37,7 +37,7 @@
 
     @if (result.isLoading) {
       <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-        @for (event of [1, 2, 3]; track $index) {
+        @for (i of [1, 2, 3]; track i) {
           <app-event-card-skeleton />
         }
       </div>

@@ -44,17 +44,12 @@ export class MenuComponent implements OnInit {
     this.activeTab.set(tab);
   }
 
-  hasRequiredRole(user: IUser): boolean {
-    const requiredRoles = ['admin', 'staff', 'coach'];
-    return user.roles.some((role) => requiredRoles.includes(role));
-  }
-
   openMenu(): void {
     this.isOpen.set(true);
   }
 
   closeMenu(): void {
-    this.setActiveTab(null);
+    this.activeTab.set(null);
     this.isOpen.set(false);
   }
 
@@ -72,7 +67,9 @@ export class MenuComponent implements OnInit {
   }
 
   onClickOutside(event: MouseEvent): void {
-    if ((this.activeTab() || this.isOpen()) && !this.#element.nativeElement.contains(event.target)) {
+    const target = event.target as HTMLElement;
+    const ref = this.#element.nativeElement as HTMLElement;
+    if ((this.activeTab() || this.isOpen()) && !ref.contains(target)) {
       this.closeMenu();
     }
   }
