@@ -1,12 +1,12 @@
 @let result = events$ | async;
 @if (result?.data?.length && isBrowser()) {
   <section class="mb-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0" id="events">
-    <h2 class="font-semibold text-xl md:text-4xl mb-2">
+    <h2 class="font-semibold text-xl md:text-4xl mb-2" i18n>
       Nos récents
       <span class="text-secondary-600">événements</span>
     </h2>
 
-    <p class="mb-8">
+    <p class="mb-8" i18n>
       Restez informé sur différents événements et partipez
       <a
         routerLink="/events"

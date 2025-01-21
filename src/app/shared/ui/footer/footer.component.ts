@@ -10,7 +10,7 @@ import { explorationLinks, myCinoluLinks, socialLinks } from '../../utils/data/l
 })
 export class FooterComponent {
   links = [
-    { title: 'Parcourir', urls: explorationLinks },
+    { title: $localize`Parcourir`, urls: explorationLinks },
     { title: 'My cinolu', urls: myCinoluLinks },
     { title: 'Socials', urls: socialLinks }
   ];

@@ -13,12 +13,20 @@ import { AuthService } from '../../../auth/data-access/auth.service';
 import { IAPIResponse } from '../../services/api/types/api-response.type';
 import { explorationLinks, myCinoluLinks } from '../../utils/data/links';
 import { environment } from 'environments/environment';
-import { TranslocoService } from '@jsverse/transloco';
+import { LoadingBarComponent } from '../loading-bar/loading-bar.component';
 
 @Component({
   selector: 'app-topbar',
   host: { '(document:click)': 'onClickOutside($event)' },
-  imports: [CommonModule, RouterLink, MatIconModule, NgOptimizedImage, MatButtonModule, ApiImgPipe],
+  imports: [
+    CommonModule,
+    RouterLink,
+    MatIconModule,
+    NgOptimizedImage,
+    MatButtonModule,
+    ApiImgPipe,
+    LoadingBarComponent
+  ],
   templateUrl: './menu.component.html'
 })
 export class MenuComponent implements OnInit {
@@ -30,11 +38,6 @@ export class MenuComponent implements OnInit {
   #store = inject(Store);
   #authService = inject(AuthService);
   #element = inject(ElementRef);
-  #translocoService = inject(TranslocoService);
-
-  switchLanguage(language: string) {
-    this.#translocoService.setActiveLang(language);
-  }
 
   ngOnInit(): void {
     this.user$ = this.#store.pipe(select(selectUser));

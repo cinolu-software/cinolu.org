@@ -2,7 +2,7 @@
   @let result = project$ | async;
   @let user = user$ | async;
   @if (result.data; as project) {
-    <button class="underline mb-4 flex items-center gap-1" (click)="back()">
+    <button class="underline mb-4 flex items-center gap-1" (click)="back()" i18n>
       <mat-icon svgIcon="heroicons_outline:arrow-left" class="icon-size-3" />
       Retour
     </button>
@@ -21,7 +21,8 @@
         <button
           [ngClass]="!activeTab() && 'border-b border-primary-700 text-primary-700'"
           class="py-2 flex items-center gap-1.5"
-          (click)="setActiveTab(null)">
+          (click)="setActiveTab(null)"
+          i18n>
           Resumé
           <mat-icon svgIcon="description" class="icon-size-3 xl:icon-size-4" />
         </button>
@@ -30,7 +31,8 @@
           [disabled]="!user || !project?.phases[0]?.form"
           [ngClass]="activeTab() === 'application' && 'border-b border-primary-700 text-primary-700'"
           class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
-          (click)="setActiveTab('application')">
+          (click)="setActiveTab('application')"
+          i18n>
           Postuler
           <mat-icon svgIcon="send" class="icon-size-3 xl:icon-size-4" />
         </button>
@@ -50,7 +52,7 @@
   }
   @if (result.error) {
     <div class="relative min-h-[75vh] w-full flex flex-col justify-center items-center">
-      <h2 class="text-3xl font-semibold">Aucun programme avec cet identifiant !</h2>
+      <h2 class="text-3xl font-semibold" i18n>Aucun programme avec cet identifiant !</h2>
     </div>
   }
 </section>

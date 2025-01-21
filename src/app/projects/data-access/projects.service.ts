@@ -24,7 +24,7 @@ export class ProjectsService {
       this.#toast.success('Candidature soumise !');
       this.#router.navigate(['/projects']);
     };
-    return this.#apiService.post('program-applications', payload, onSuccess);
+    return this.#apiService.post('project-applications', payload, onSuccess);
   }
 
   getProjects(queryParams: QueryParams): Observable<IAPIResponse<{ projects: IProject[]; count: number }>> {

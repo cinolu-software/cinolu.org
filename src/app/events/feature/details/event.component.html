@@ -1,7 +1,7 @@
 <section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 mb-12 mt-24">
   @let result = event$ | async;
   @if (result.data; as event) {
-    <button class="underline mb-4 flex items-center gap-1" (click)="back()">
+    <button class="underline mb-4 flex items-center gap-1" (click)="back()" i18n>
       <mat-icon svgIcon="heroicons_outline:arrow-left" class="icon-size-3" />
       Retour
     </button>
@@ -18,7 +18,7 @@
         <div>
           <div class="flex items-center gap-1 mb-2 text-secondary-800">
             <mat-icon svgIcon="description" class="icon-size-4" />
-            <h2 class="font-semibold text-lg">Description</h2>
+            <h2 class="font-semibold text-lg" i18n>Description</h2>
           </div>
           <p class="mb-1.5 lowercase first-letter:uppercase">{{ event.description }}</p>
         </div>
@@ -26,10 +26,10 @@
         <div>
           <div class="flex items-center gap-1 mb-2 text-secondary-800">
             <mat-icon svgIcon="event" class="icon-size-4" />
-            <h2 class="font-semibold text-lg">Dates</h2>
+            <h2 class="font-semibold text-lg" i18n>Dates</h2>
           </div>
-          <p class="mb-1.5">Commence le {{ event.started_at | date: 'longDate' }}</p>
-          <p class="mb-1.5">Fini le {{ event.ended_at | date: 'longDate' }}</p>
+          <p class="mb-1.5" i18n>Commence le {{ event.started_at | date: 'longDate' }}</p>
+          <p class="mb-1.5" i18n>Fini le {{ event.ended_at | date: 'longDate' }}</p>
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
   }
   @if (result.error) {
     <div class="relative min-h-[75vh] w-full flex flex-col justify-center items-center">
-      <h2 class="text-3xl font-semibold">Aucun événement avec cet identifiant !</h2>
+      <h2 class="text-3xl font-semibold" i18n>Aucun événement avec cet identifiant !</h2>
     </div>
   }
 </section>

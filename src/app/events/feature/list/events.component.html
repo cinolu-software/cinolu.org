@@ -6,10 +6,10 @@
       class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/60 to-primary-900/70 gap-6 text-white">
       <div
         class="relative z-10 flex flex-col items-start py-16 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
-        <h1 class="font-extrabold block text-xl mb-6 md:text-4xl xl:text-6xl">
+        <h1 class="font-extrabold block text-xl mb-6 md:text-4xl xl:text-6xl" i18n>
           Restez informé sur différents événements
         </h1>
-        <p class="mb-8 md:text-lg text-sm leading-relaxed font-light w-full md:w-3/4">
+        <p class="mb-8 md:text-lg text-sm leading-relaxed font-light w-full md:w-3/4" i18n>
           Faites le tour de événements en cours, passés et a venir ! Réjoignez nous pour un moment de partage, de
           apprentissage, de croissance et de réseautage
         </p>
@@ -56,7 +56,7 @@
         }
       }
       @if (result.error || (result.data && result.data?.events.length === 0)) {
-        <h2 class="text-3xl font-semibold">Aucun événement !</h2>
+        <h2 class="text-3xl font-semibold" i18n>Aucun événement !</h2>
       }
 
       @if (result.isLoading) {

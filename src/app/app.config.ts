@@ -12,9 +12,9 @@ import { authReducers } from 'app/shared/store/auth/auth.reducers';
 import { LoadingInterceptor } from 'app/shared/services/loading';
 import { provideApp } from 'app/shared/providers/app.provider';
 import { provideToastr } from 'ngx-toastr';
-// import localeFr from '@angular/common/locales/fr';
-// import { registerLocaleData } from '@angular/common';
-// registerLocaleData(localeFr, 'fr');
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeFr, 'fr');
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,8 +23,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideClientHydration(),
     provideIcons(),
-    { provide: TitleStrategy, useClass: PageTitleStrategy },
     { provide: LOCALE_ID, useValue: 'fr' },
+    { provide: TitleStrategy, useClass: PageTitleStrategy },
     provideToastr({ positionClass: 'toast-bottom-right', progressBar: true }),
     provideHttpClient(withFetch(), withInterceptors([httpInterceptor, LoadingInterceptor])),
     provideRouter(
