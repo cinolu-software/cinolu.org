@@ -38,6 +38,7 @@ export class MenuComponent implements OnInit {
   #store = inject(Store);
   #authService = inject(AuthService);
   #element = inject(ElementRef);
+  tabs = [$localize`Parcourir`, 'My cinolu'];
 
   ngOnInit(): void {
     this.user$ = this.#store.pipe(select(selectUser));
@@ -61,12 +62,16 @@ export class MenuComponent implements OnInit {
     this.closeMenu();
   }
 
+  getTabName(tab: string): string {
+    return tab?.toLowerCase() === 'browse' ? 'Parcourir' : tab;
+  }
+
   getLinks(tab: string): ILink[] {
     const links = {
       Parcourir: explorationLinks,
       'My cinolu': myCinoluLinks
     };
-    return links[tab];
+    return links[this.getTabName(tab)];
   }
 
   onClickOutside(event: MouseEvent): void {
