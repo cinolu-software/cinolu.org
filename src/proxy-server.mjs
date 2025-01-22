@@ -7,7 +7,7 @@ function run() {
   const port = process.env.PORT || 3000;
   const server = express();
 
-  server.use('/', serverFr());
+  server.use('', serverFr());
   server.use('/en', serverEn());
   server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
