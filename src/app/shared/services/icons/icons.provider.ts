@@ -2,7 +2,5 @@ import { EnvironmentProviders, inject, Provider, provideEnvironmentInitializer }
 import { IconsService } from './icons.service';
 
 export const provideIcons = (): (Provider | EnvironmentProviders)[] => {
-  return [
-    provideEnvironmentInitializer(() => inject(IconsService))
-  ];
+  return [provideEnvironmentInitializer(() => inject(IconsService))];
 };

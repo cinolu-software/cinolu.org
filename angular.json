@@ -5,10 +5,11 @@
   "projects": {
     "cinolu.org": {
       "i18n": {
-        "sourceLocale": "fr-CA",
+        "sourceLocale": "fr",
         "locales": {
-          "en-US": {
-            "translation": "src/locales/messages.en.json"
+          "en": {
+            "translation": "src/locales/messages.en.json",
+            "subPath": "en"
           }
         }
       },
@@ -21,7 +22,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "localize": ["en-US"],
+            "localize": true,
             "outputPath": "dist/cinolu.org",
             "index": "src/index.html",
             "browser": "src/main.ts",
