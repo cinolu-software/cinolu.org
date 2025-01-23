@@ -10,17 +10,8 @@ import { REQUEST, RESPONSE } from './src/express.tokens';
 export function app(): express.Express {
   const server = express();
   const serverDistFolder = dirname(fileURLToPath(import.meta.url));
-  /**
-   * Get the language from the corresponding folder
-   */
   const lang = basename(serverDistFolder);
-  /**
-   * Set the route for static content and APP_BASE_HREF
-   */
   const langPath = `/${lang}/`;
-  /**
-   * Note that the 'browser' folder is located two directories above 'server/{lang}/'
-   */
   const browserDistFolder = resolve(serverDistFolder, `../../browser/${lang}`);
   const indexHtml = join(serverDistFolder, 'index.server.html');
 
@@ -29,10 +20,6 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 
-  // Example Express Rest API endpoints
-  // server.get('/api/**', (req, res) => { });
-  // Serve static files from /browser
-  // Complete the route for static content by concatenating the language.
   server.get(
     '*.*',
     express.static(browserDistFolder, {
@@ -40,7 +27,6 @@ export function app(): express.Express {
     })
   );
 
-  // All regular routes use the Angular engine
   server.get('*', (req, res, next) => {
     /**
      * Discard baseUrl as we will provide it with langPath
@@ -51,7 +37,7 @@ export function app(): express.Express {
         bootstrap,
         documentFilePath: indexHtml,
         url: `${protocol}://${headers.host}${originalUrl}`,
-        publicPath: resolve(serverDistFolder, `../../browser/`), // publicPath does not need to concatenate the language.
+        publicPath: browserDistFolder,
         providers: [
           { provide: APP_BASE_HREF, useValue: langPath },
           { provide: LOCALE_ID, useValue: lang },

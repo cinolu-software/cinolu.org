@@ -57,7 +57,7 @@
               "extractLicenses": false,
               "sourceMap": true,
               "localize": ["fr"],
-              "baseHref": "/fr/",
+              "baseHref": "",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
