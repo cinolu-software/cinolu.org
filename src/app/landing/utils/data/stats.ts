@@ -1,22 +1,22 @@
 export const stats: { value: number; label: string }[] = [
   {
     value: 7000,
-    label: $localize`Bénéficiaires`
+    label: 'Bénéficiaires'
   },
   {
     value: 150,
-    label: $localize`Projets`
+    label: 'Projets'
   },
   {
     value: 40,
-    label: $localize`Partenaires`
+    label: 'Partenaires'
   },
   {
     value: 8,
-    label: $localize`Programmes`
+    label: 'Programmes'
   },
   {
     value: 15,
-    label: $localize`Mentors & Coachs`
+    label: 'Mentors & Coachs'
   }
 ];

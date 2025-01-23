@@ -6,7 +6,7 @@
     <p class="font-bold font-satoshi mb-1.5 text-2xl md:text-4xl mt-5">
       {{ venture.name }}
     </p>
-    <p class="mb-8" i18n>
+    <p class="mb-8">
       Créée le {{ venture.created_at | date: 'longDate' }}
       @if (venture.user.id === user.id) {
         <a [routerLink]="['/ventures/update', venture.id]" class="font-semibold underline text-primary-600">modifier</a>
@@ -21,7 +21,7 @@
         <div>
           <div class="flex items-center gap-1 text-lg mb-2 text-secondary-800">
             <mat-icon svgIcon="description" class="icon-size-4" />
-            <h2 class="font-semibold" i18n>Pitch</h2>
+            <h2 class="font-semibold">Pitch</h2>
           </div>
           <p class="mb-1.5 lowercase first-letter:uppercase">{{ venture.pitch }}</p>
         </div>
@@ -29,19 +29,19 @@
         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
           <tbody>
             <tr class="even:bg-gray-50 border-y">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" i18n>Secteurs</th>
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Secteurs</th>
               <td class="px-6 py-4">{{ getSectors(venture.sectors) }}</td>
             </tr>
             <tr class="even:bg-gray-50 border-y">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" i18n>Localisation</th>
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Localisation</th>
               <td class="px-6 py-4">{{ venture.address }}</td>
             </tr>
             <tr class="even:bg-gray-50 border-y">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" i18n>Phase</th>
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Phase</th>
               <td class="px-6 py-4">{{ venture.stage }}</td>
             </tr>
             <tr class="even:bg-gray-50 border-y">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" i18n>Date de création</th>
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Date de création</th>
               <td class="px-6 py-4">{{ venture.founding_date | date: 'longDate' }}</td>
             </tr>
           </tbody>
@@ -55,7 +55,7 @@
 
   @if (result.error) {
     <div class="relative min-h-[75vh] w-full flex flex-col justify-center items-center">
-      <h2 class="text-3xl font-semibold" i18n>Aucun projet avec cet identifiant !</h2>
+      <h2 class="text-3xl font-semibold">Aucun projet avec cet identifiant !</h2>
     </div>
   }
 </section>

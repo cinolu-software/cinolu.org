@@ -4,14 +4,6 @@
   "newProjectRoot": "projects",
   "projects": {
     "cinolu.org": {
-      "i18n": {
-        "sourceLocale": "fr",
-        "locales": {
-          "en": {
-            "translation": "src/locales/messages.en.json"
-          }
-        }
-      },
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -21,11 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "localize": true,
             "outputPath": "dist/cinolu.org",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": ["@angular/localize/init"],
+            "polyfills": [],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "externalDependencies": [""],
@@ -56,8 +47,6 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
-              "localize": ["fr"],
-              "baseHref": "",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -83,7 +72,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": ["@angular/localize/init"],
+            "polyfills": [],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               {

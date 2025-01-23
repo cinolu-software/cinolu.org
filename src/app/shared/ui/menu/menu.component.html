@@ -40,16 +40,14 @@
               <button
                 class="flex items-center text-white justify-center text-center px-6 py-2 bg-red-800 rounded-sm hover:bg-red-900 disabled:bg-red-800/30 transition-colors duration-300 gap-1.5 font-medium text-base"
                 (click)="signOut()"
-                [disabled]="result?.isLoading"
-                i18n>
+                [disabled]="result?.isLoading">
                 Se déconnecter
               </button>
             </div>
           } @else {
             <a
               routerLink="/sign-in"
-              class="flex items-center justify-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium text-base"
-              i18n>
+              class="flex items-center justify-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium text-base">
               Se connecter
             </a>
           }
@@ -128,7 +126,7 @@
                   Dashboard
                 </a>
 
-                <button class="flex items-center gap-2.5" (click)="signOut()" [disabled]="result?.isLoading" i18n>
+                <button class="flex items-center gap-2.5" (click)="signOut()" [disabled]="result?.isLoading">
                   <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
                     <mat-icon [svgIcon]="'mat_solid:logout'" class="icon-size-4 text-white" />
                   </span>
@@ -141,8 +139,7 @@
       } @else {
         <a
           routerLink="/sign-in"
-          class="flex items-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium"
-          i18n>
+          class="flex items-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium">
           Se connecter
         </a>
       }

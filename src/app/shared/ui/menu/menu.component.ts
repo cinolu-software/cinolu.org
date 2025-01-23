@@ -38,7 +38,7 @@ export class MenuComponent implements OnInit {
   #store = inject(Store);
   #authService = inject(AuthService);
   #element = inject(ElementRef);
-  tabs = [$localize`Parcourir`, 'My cinolu'];
+  tabs = ['Parcourir', 'My cinolu'];
 
   ngOnInit(): void {
     this.user$ = this.#store.pipe(select(selectUser));

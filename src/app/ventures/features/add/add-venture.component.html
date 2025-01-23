@@ -2,13 +2,13 @@
   @let venture = venture$ | async;
   @let sectors = sectors$ | async;
 
-  <button class="tunderline flex items-center gap-1 text-base underline mb-6" (click)="back()" i18n>
+  <button class="tunderline flex items-center gap-1 text-base underline mb-6" (click)="back()">
     <mat-icon svgIcon="heroicons_outline:arrow-left" class="icon-size-3" />
     Retour
   </button>
 
-  <h3 class="font-medium text-2xl mb-2" i18n>Créer votre entreprise</h3>
-  <p class="mb-8" i18n>La création d'une entreprise est simple et ne prend que 5 minutes.</p>
+  <h3 class="font-medium text-2xl mb-2">Créer votre entreprise</h3>
+  <p class="mb-8">La création d'une entreprise est simple et ne prend que 5 minutes.</p>
 
   @if (venture?.error) {
     <app-alert class="w-full md:w-4/5" type="error" [showIcon]="true" [@shake]="true">
@@ -22,11 +22,11 @@
     class="flex flex-col gap-4 w-full md:w-4/5"
     (ngSubmit)="onSubmit()">
     <mat-form-field class="w-full">
-      <mat-label i18n>Nom</mat-label>
+      <mat-label>Nom</mat-label>
       <input matInput autocomplete="off" id="name" name="name" formControlName="name" />
     </mat-form-field>
 
-    <p i18n>Choisir le secteur</p>
+    <p>Choisir le secteur</p>
     <mat-form-field>
       <mat-select multiple (selectionChange)="onSectorsChange($event)">
         @for (s of sectors.data; track s.id) {
@@ -36,18 +36,18 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label i18n>Date de création</mat-label>
+      <mat-label>Date de création</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="founding_date" />
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="w-full">
-      <mat-label i18n>Adresse</mat-label>
+      <mat-label>Adresse</mat-label>
       <input matInput autocomplete="off" id="address" name="address" formControlName="address" />
     </mat-form-field>
 
-    <p i18n>Phase</p>
+    <p>Phase</p>
     <mat-radio-group class="flex items-center gap-2 flex-wrap mb-4" (change)="onStageSelection($event)">
       @for (s of stages; track $index) {
         <mat-radio-button [value]="s">{{ s }}</mat-radio-button>
@@ -55,13 +55,13 @@
     </mat-radio-group>
 
     <mat-form-field class="w-full">
-      <mat-label i18n>Pitch</mat-label>
+      <mat-label>Pitch</mat-label>
       <textarea matInput rows="8" id="pitch" name="pitch" formControlName="pitch"> </textarea>
     </mat-form-field>
 
     <button class="w-2/3 md:w-1/3" mat-flat-button type="submit" [disabled]="venture?.isLoading || form.invalid">
       @if (!venture?.isLoading && !form.invalid) {
-        <span i18n>Soumettre</span>
+        <span>Soumettre</span>
       }
       @if (venture?.isLoading) {
         <mat-progress-spinner class="text-white" [diameter]="24" [mode]="'indeterminate'" />

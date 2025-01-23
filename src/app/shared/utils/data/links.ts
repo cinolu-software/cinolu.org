@@ -2,31 +2,31 @@ import { ILink } from '../types/link.type';
 
 export const explorationLinks: ILink[] = [
   {
-    name: $localize`Accueil`,
+    name: 'Accueil',
     path: '/',
-    description: $localize`Découvez la plateforme`,
+    description: 'Découvez la plateforme',
     icon: 'mat_outline:home',
     exactUrl: true
   },
   {
-    name: $localize`Programmes`,
+    name: 'Programmes',
     path: '/projects',
-    description: $localize`Voir nos programmes`,
+    description: 'Voir nos programmes',
     icon: 'mat_outline:assignment',
     exactUrl: false
   },
   {
-    name: $localize`Evénements`,
+    name: 'Evénements',
     path: '/events',
-    description: $localize`Voir nos événements`,
+    description: 'Voir nos événements',
     icon: 'mat_outline:event',
     exactUrl: false
   },
   {
-    name: $localize`Partenaires`,
+    name: 'Partenaires',
     path: '/',
     fragment: 'partners',
-    description: $localize`Voir nos partenaires`,
+    description: 'Voir nos partenaires',
     icon: 'mat_outline:groups',
     exactUrl: true
   }
@@ -34,35 +34,35 @@ export const explorationLinks: ILink[] = [
 
 export const myCinoluLinks: ILink[] = [
   {
-    name: $localize`A propos`,
+    name: 'A propos',
     path: '/about-us',
     fragment: 'about',
-    description: $localize`A propos de nous`,
+    description: 'A propos de nous',
     icon: 'mat_outline:info',
     exactUrl: false
   },
 
   {
-    name: $localize`Equipe`,
+    name: 'Equipe',
     path: '/about-us',
     fragment: 'team',
-    description: $localize`Voir notre équipe`,
+    description: 'Voir notre équipe',
     icon: 'mat_outline:groups',
     exactUrl: false
   },
   {
-    name: $localize`Coachs & mentors`,
+    name: 'Coachs & mentors',
     path: '/about-us',
     fragment: 'coachs',
-    description: $localize`Voir nos mentors`,
+    description: 'Voir nos mentors',
     icon: 'mat_outline:support_agent',
     exactUrl: false
   },
   {
-    name: $localize`Vision`,
+    name: 'Vision',
     path: '/about-us',
     fragment: 'vision',
-    description: $localize`Voir notre vision`,
+    description: 'Voir notre vision',
     icon: 'mat_outline:insights',
     exactUrl: false
   }

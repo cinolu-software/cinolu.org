@@ -93,9 +93,6 @@ importers:
       '@angular/compiler-cli':
         specifier: 19.1.1
         version: 19.1.1(@angular/compiler@19.1.1(@angular/core@19.1.1(rxjs@7.8.1)(zone.js@0.15.0)))(typescript@5.6.3)
-      '@angular/localize':
-        specifier: 19.1.1
-        version: 19.1.1(@angular/compiler-cli@19.1.1(@angular/compiler@19.1.1(@angular/core@19.1.1(rxjs@7.8.1)(zone.js@0.15.0)))(typescript@5.6.3))(@angular/compiler@19.1.1(@angular/core@19.1.1(rxjs@7.8.1)(zone.js@0.15.0)))
       '@commitlint/cli':
         specifier: ^19.6.1
         version: 19.6.1(@types/node@22.10.6)(typescript@5.6.3)
@@ -5473,6 +5470,7 @@ snapshots:
       yargs: 17.7.2
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   '@angular/material@19.1.0(s53k32teoatxwqscz2w7bnuxti)':
     dependencies:
@@ -7011,19 +7009,23 @@ snapshots:
       '@types/babel__generator': 7.6.8
       '@types/babel__template': 7.4.4
       '@types/babel__traverse': 7.20.6
+    optional: true
 
   '@types/babel__generator@7.6.8':
     dependencies:
       '@babel/types': 7.26.5
+    optional: true
 
   '@types/babel__template@7.4.4':
     dependencies:
       '@babel/parser': 7.26.5
       '@babel/types': 7.26.5
+    optional: true
 
   '@types/babel__traverse@7.20.6':
     dependencies:
       '@babel/types': 7.26.5
+    optional: true
 
   '@types/body-parser@1.19.5':
     dependencies:

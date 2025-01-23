@@ -1,12 +1,12 @@
 @let result = projects$ | async;
 @if (result?.data?.length && isBrowser()) {
   <section class="mb-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0" id="projects">
-    <h2 class="font-semibold text-xl md:text-4xl mb-2" i18n>
+    <h2 class="font-semibold text-xl md:text-4xl mb-2">
       Nos programmes
       <span class="text-secondary-600">récents</span>
     </h2>
 
-    <p class="mb-8" i18n>
+    <p class="mb-8">
       Découvrez nos programmes et laissez-vous accompagner
       <a
         routerLink="/projects"
