@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 lg:grid-cols-2 mt-16">
+<div class="grid grid-cols-1 lg:grid-cols-2 mt-16" *transloco="let t">
   <div class="min-h-[110vh] mt-28 px-8 md:px-32 xl:px-36 2xl:px-40">
     <ng-content />
   </div>
@@ -39,10 +39,10 @@
       <!-- Content -->
       <div class="relative z-10 w-full max-w-2xl">
         <div class="text-4xl font-bold leading-none text-gray-100">
-          <h4>{{ title() }}</h4>
+          <h4>{{ t(title()) }}</h4>
         </div>
         <div class="mt-6 text-lg leading-6 tracking-tight text-gray-400">
-          <p>{{ description() }}</p>
+          <p>{{ t(description()) }}</p>
         </div>
         <div class="mt-8 flex gap-3 items-center">
           <div class="flex items-center -space-x-1.5">
@@ -56,7 +56,9 @@
               </div>
             }
           </div>
-          <p class="font-medium tracking-tight text-primary-400">Plus de 1000 utilisateurs</p>
+          <p class="font-medium tracking-tight text-primary-400">
+            {{ t('Plus de 1000 utilisateurs') }}
+          </p>
         </div>
       </div>
     </div>

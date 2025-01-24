@@ -77,8 +77,8 @@ export class MenuComponent implements OnInit {
   onClickOutside(event: MouseEvent): void {
     const target = event.target as HTMLElement;
     const activeNav = document.querySelector('.active-nav');
-    if (target.closest('.menu')) return;
-    if (((this.activeTab() || this.isOpen()) && activeNav) || activeNav.contains(target)) {
+    if (target?.closest('.menu')) return;
+    if (((this.activeTab() || this.isOpen()) && activeNav) || activeNav?.contains(target)) {
       this.closeMenu();
     }
   }

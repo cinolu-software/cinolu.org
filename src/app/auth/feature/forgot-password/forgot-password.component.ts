@@ -13,6 +13,7 @@ import { AuthCardComponent } from '../../ui/auth-card/auth-card.component';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { AuthService } from '../../data-access/auth.service';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-forgot-password',
@@ -30,7 +31,8 @@ import { AuthService } from '../../data-access/auth.service';
     MatProgressSpinnerModule,
     RouterModule,
     CommonModule,
-    AuthCardComponent
+    AuthCardComponent,
+    TranslocoDirective
   ]
 })
 export class AuthForgotPasswordComponent {

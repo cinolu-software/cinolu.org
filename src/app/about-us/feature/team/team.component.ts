@@ -8,11 +8,12 @@ import { IUser } from 'app/shared/utils/types/models.type';
 import { TeamService } from '../../data-access/team.service';
 import { owlOptionsTeam } from '../../utils/config/owl.config';
 import { TeamCardComponent } from '../../ui/team-card/team-card.component';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-team',
   providers: [TeamService],
-  imports: [CommonModule, CarouselModule, MatIconModule, TeamCardComponent],
+  imports: [CommonModule, CarouselModule, MatIconModule, TeamCardComponent, TranslocoDirective],
   templateUrl: './team.component.html'
 })
 export class TeamComponent implements OnInit {

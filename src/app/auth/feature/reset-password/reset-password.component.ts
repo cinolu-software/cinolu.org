@@ -15,6 +15,7 @@ import { MenuComponent } from 'app/shared/ui/menu/menu.component';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { AuthService } from '../../data-access/auth.service';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-reset-password',
@@ -31,7 +32,8 @@ import { AuthService } from '../../data-access/auth.service';
     MatProgressSpinnerModule,
     CommonModule,
     AuthCardComponent,
-    MenuComponent
+    MenuComponent,
+    TranslocoDirective
   ]
 })
 export class AuthResetPasswordComponent {
