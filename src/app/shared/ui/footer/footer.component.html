@@ -1,16 +1,16 @@
-<footer class="border-t bg-primary-900 text-white py-10">
+<footer class="border-t bg-primary-900 text-white py-10" *transloco="let t">
   <div class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
     <div class="flex gap-8 items-start justify-between flex-wrap">
       @for (link of links; track $index) {
         <div class="flex flex-col gap-3 mb-6">
-          <h5 class="font-semibold mb-3 text-gray-200 text-lg">{{ link.title }}</h5>
+          <h5 class="font-semibold mb-3 text-gray-200 text-lg">{{ t(link.title) }}</h5>
           @for (url of link.urls; track $index) {
             @if (url.external) {
-              <a target="_blank" class="text-satoshi text-sm md:text-base" [href]="url.path">{{ url.name }}</a>
+              <a target="_blank" class="text-satoshi text-sm md:text-base" [href]="url.path">{{ t(url.name) }}</a>
             } @else {
-              <a [fragment]="url.fragment" class="text-satoshi text-sm md:text-base" [routerLink]="url.path">{{
-                url.name
-              }}</a>
+              <a [fragment]="url.fragment" class="text-satoshi text-sm md:text-base" [routerLink]="url.path">
+                {{ t(url.name) }}
+              </a>
             }
           }
         </div>

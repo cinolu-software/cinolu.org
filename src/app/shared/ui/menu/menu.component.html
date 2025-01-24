@@ -1,5 +1,4 @@
-<app-loading-bar />
-<header class="navbar fixed w-full top-0 py-3 bg-white shadow-sm z-20 font-satoshi">
+<header class="navbar fixed w-full top-0 py-3 bg-white shadow-sm z-20 font-satoshi" *transloco="let t">
   @let user = user$ | async;
   @let result = logout$ | async;
   <!-- Mobile Nav -->
@@ -18,7 +17,7 @@
         <div class="flex flex-col gap-6 font-bold text-xl menu">
           @for (tab of tabs; track $index) {
             <button class="flex items-center justify-between" (click)="setActiveTab(tab)">
-              {{ tab }}
+              {{ t(tab) }}
               <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5 text-gray-700" />
             </button>
           }
@@ -30,20 +29,20 @@
                 [src]="user | apiIMG: 'user'"
                 class="rounded-full w-7 h-7 object-cover ring-2 ring-secondary-800 ring-offset-1"
                 alt="profile picture" />
-              Dashboard
+              {{ t('Tableau de bord') }}
             </a>
             <button
               class="flex items-center text-white justify-center text-center px-6 py-2 bg-red-800 rounded-sm hover:bg-red-900 disabled:bg-red-800/30 transition-colors duration-300 gap-1.5 font-medium text-base"
               (click)="signOut()"
               [disabled]="result?.isLoading">
-              Se déconnecter
+              {{ t('Se déconnecter') }}
             </button>
           </div>
         } @else {
           <a
             routerLink="/sign-in"
             class="flex items-center justify-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium text-base">
-            Se connecter
+            {{ t('Se connecter') }}
           </a>
         }
       </div>
@@ -56,7 +55,7 @@
       <div class="flex flex-col gap-7 font-medium py-16 px-10 h-full">
         <button class="font-semibold text-gray-800 flex items-center gap-1 m-4" (click)="setActiveTab(null)">
           <mat-icon svgIcon="mat_outline:keyboard_arrow_left" class="icon-size-4" />
-          Go back
+          {{ t('Retour') }}
         </button>
 
         @for (link of getLinks(activeTab()); track $index) {
@@ -65,8 +64,8 @@
               <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white" />
             </span>
             <p class="flex flex-col gap-0.5 font-medium">
-              {{ link.name }}
-              <span class="description text-gray-700 text-sm">{{ link.description }}</span>
+              {{ t(link.name) }}
+              <span class="description text-gray-700 text-sm">{{ t(link.description) }}</span>
             </p>
           </a>
         }
@@ -84,7 +83,7 @@
         @for (tab of tabs; track $index) {
           <button class="relative" (click)="setActiveTab(tab)">
             <div class="menu flex items-center gap-0.5">
-              <span class="uppercase font-semibold">{{ tab }}</span>
+              <span class="uppercase font-semibold">{{ t(tab) }}</span>
               <mat-icon [svgIcon]="'mat_outline:keyboard_arrow_down'" class="icon-size-6 text-gray-700" />
             </div>
             <div
@@ -97,8 +96,8 @@
                       <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white" />
                     </span>
                     <p class="flex flex-col gap-0.5 font-medium">
-                      {{ link.name }}
-                      <span class="description text-gray-700 text-sm">{{ link.description }}</span>
+                      {{ t(link.name) }}
+                      <span class="description text-gray-700 text-sm">{{ t(link.description) }}</span>
                     </p>
                   </a>
                 }
@@ -106,6 +105,26 @@
             </div>
           </button>
         }
+        <button class="relative" (click)="setActiveTab('langs')">
+          <div class="menu flex items-center gap-0.5">
+            <span class="uppercase font-semibold">{{ selectedLang() }}</span>
+            <mat-icon [svgIcon]="'mat_outline:keyboard_arrow_down'" class="icon-size-6 text-gray-700" />
+          </div>
+          <div
+            class="absolute top-9 w-[5rem] animate-fadeInUp py-4 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
+            [ngClass]="activeTab() === 'langs' ? 'block active-nav' : 'hidden'">
+            <div class="grid grid-cols-1 gap-y-4 xl:text-base">
+              @for (lang of langs(); track $index) {
+                <button
+                  class="uppercase font-medium disabled:text-gray-400 disabled:font-normal disabled:cursor-not-allowed"
+                  (click)="switchLang(lang)"
+                  [disabled]="lang === selectedLang()">
+                  {{ t(lang) }}
+                </button>
+              }
+            </div>
+          </div>
+        </button>
       </div>
       @if (user) {
         <div class="flex items-center gap-3">
@@ -123,13 +142,13 @@
                   <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
                     <mat-icon [svgIcon]="'dashboard'" class="icon-size-4 text-white" />
                   </span>
-                  Dashboard
+                  {{ t('Tableau de bord') }}
                 </a>
                 <button class="flex items-center gap-2.5" (click)="signOut()" [disabled]="result?.isLoading">
                   <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
                     <mat-icon [svgIcon]="'mat_solid:logout'" class="icon-size-4 text-white" />
                   </span>
-                  Se déconnecter
+                  {{ t('Se déconnecter') }}
                 </button>
               </div>
             </div>
@@ -139,7 +158,7 @@
         <a
           routerLink="/sign-in"
           class="flex items-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium">
-          Se connecter
+          {{ t('Se connecter') }}
         </a>
       }
     </div>

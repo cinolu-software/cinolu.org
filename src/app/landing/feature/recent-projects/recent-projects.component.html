@@ -1,17 +1,19 @@
 @let result = projects$ | async;
 @if (result?.data?.length && isBrowser()) {
-  <section class="mb-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0" id="projects">
+  <section class="mb-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0" id="projects" *transloco="let t">
     <h2 class="font-semibold text-xl md:text-4xl mb-2">
-      Nos programmes
-      <span class="text-secondary-600">récents</span>
+      {{ t('Nos programmes') }}
+      <span class="text-secondary-600">
+        {{ t('récents') }}
+      </span>
     </h2>
 
     <p class="mb-8">
-      Découvrez nos programmes et laissez-vous accompagner
+      {{ t('Découvrez nos programmes et laissez-vous accompagner') }}
       <a
         routerLink="/projects"
         class="underline inline-flex items-center text-end gap-0.5 text-primary-800 transition-colors duration-300 group">
-        voir plus
+        {{ t('Voir plus') }}
         <mat-icon
           svgIcon="mat_outline:chevron_right"
           class="icon-size-3 group-hover:translate-x-0.5 transition-transform duration-300" />

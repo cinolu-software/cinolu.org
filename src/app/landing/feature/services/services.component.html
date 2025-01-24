@@ -1,8 +1,10 @@
-<section class="mb-20 bg-primary-900 py-16 text-white">
+<section class="mb-20 bg-primary-900 py-16 text-white" *transloco="let t">
   <div class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
     <h2 class="font-semibold text-3xl md:text-4xl mb-10 block">
-      Ce que nous
-      <span class="text-secondary-600">faisons</span>
+      {{ t('Ce que nous') }}
+      <span class="text-secondary-600">
+        {{ t('faisons') }}
+      </span>
     </h2>
 
     <div class="grid md:grid-cols-2 gap-x-14 gap-y-16">
@@ -11,11 +13,11 @@
           <div class="flex items-center gap-2">
             <mat-icon class="icon-size-5 fill-white" [svgIcon]="service.icon"></mat-icon>
             <h3 class="font-semibold font-satoshi text-xl md:text-2xl">
-              {{ service.title }}
+              {{ t(service.title) }}
             </h3>
           </div>
           <p class="text-gray-100 text-sm md:text-base font-light">
-            {{ service.description }}
+            {{ t(service.description) }}
           </p>
         </div>
       }

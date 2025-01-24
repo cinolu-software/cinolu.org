@@ -1,9 +1,11 @@
 @let result = partners | async;
 @if (result?.data; as partners) {
-  <section class="mb-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0" id="partners">
+  <section class="mb-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0" id="partners" *transloco="let t">
     <h1 class="font-bold text-2xl md:text-5xl mb-8">
-      Nos
-      <span class="text-primary-600">partenaires</span>
+      {{ t('Nos') }}
+      <span class="text-primary-600">
+        {{ t('partenaires') }}
+      </span>
     </h1>
 
     @for (p of partners | keyvalue; track p.key) {

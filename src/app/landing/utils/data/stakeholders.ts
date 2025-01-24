@@ -5,7 +5,7 @@ export const stakeholders: { title: string; description: string; icon: string }[
     icon: 'lightbulb'
   },
   {
-    title: ' SAEI &  ESOs',
+    title: 'SAEI &  ESOs',
     description: "Renforçons notre impact et réseau dans l'écosystème entrepreneurial global.",
     icon: 'travel_explore'
   },

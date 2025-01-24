@@ -13,20 +13,12 @@ import { AuthService } from '../../../auth/data-access/auth.service';
 import { IAPIResponse } from '../../services/api/types/api-response.type';
 import { explorationLinks, myCinoluLinks } from '../../utils/data/links';
 import { environment } from 'environments/environment';
-import { LoadingBarComponent } from '../loading-bar/loading-bar.component';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-topbar',
   host: { '(document:click)': 'onClickOutside($event)' },
-  imports: [
-    CommonModule,
-    RouterLink,
-    MatIconModule,
-    NgOptimizedImage,
-    MatButtonModule,
-    ApiImgPipe,
-    LoadingBarComponent
-  ],
+  imports: [CommonModule, RouterLink, MatIconModule, NgOptimizedImage, MatButtonModule, ApiImgPipe, TranslocoDirective],
   templateUrl: './menu.component.html'
 })
 export class MenuComponent implements OnInit {
@@ -37,10 +29,19 @@ export class MenuComponent implements OnInit {
   accUrl = environment.accountUrl;
   #store = inject(Store);
   #authService = inject(AuthService);
+  #transloco = inject(TranslocoService);
   tabs = ['Parcourir', 'My cinolu'];
+  langs = signal(['fr', 'en']);
+  selectedLang = signal('fr');
 
   ngOnInit(): void {
+    this.selectedLang.set(this.#transloco.getActiveLang());
     this.user$ = this.#store.pipe(select(selectUser));
+  }
+
+  switchLang(lang: string): void {
+    this.selectedLang.set(lang);
+    this.#transloco.setActiveLang(lang);
   }
 
   setActiveTab(tab: string): void {
