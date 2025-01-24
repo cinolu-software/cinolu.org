@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { IUser } from 'app/shared/utils/types/models.type';
@@ -37,7 +37,6 @@ export class MenuComponent implements OnInit {
   accUrl = environment.accountUrl;
   #store = inject(Store);
   #authService = inject(AuthService);
-  #element = inject(ElementRef);
   tabs = ['Parcourir', 'My cinolu'];
 
   ngOnInit(): void {
@@ -76,8 +75,9 @@ export class MenuComponent implements OnInit {
 
   onClickOutside(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    const ref = this.#element.nativeElement as HTMLElement;
-    if ((this.activeTab() || this.isOpen()) && !ref.contains(target)) {
+    const activeNav = document.querySelector('.active-nav');
+    if (target.closest('.menu')) return;
+    if (((this.activeTab() || this.isOpen()) && activeNav) || activeNav.contains(target)) {
       this.closeMenu();
     }
   }
