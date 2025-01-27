@@ -13,6 +13,7 @@ import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { EventsService } from '../../data-access/events.service';
 import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
 import { FooterComponent } from '../../../shared/ui/footer/footer.component';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-programs',
@@ -25,7 +26,8 @@ import { FooterComponent } from '../../../shared/ui/footer/footer.component';
     EventCardComponent,
     EventCardSkeletonComponent,
     MatChipsModule,
-    FooterComponent
+    FooterComponent,
+    TranslocoDirective
   ],
   templateUrl: './events.component.html'
 })
