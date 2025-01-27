@@ -35,15 +35,16 @@ export const appConfig: ApplicationConfig = {
     ),
     provideStore({
       auth: authReducers
-    }), provideHttpClient(), provideTransloco({
-        config: { 
-          availableLangs: ['en', 'fr'],
-          defaultLang: 'en',
-          // Remove this option if your application doesn't support changing language in runtime.
-          reRenderOnLangChange: true,
-          prodMode: !isDevMode(),
-        },
-        loader: TranslocoHttpLoader
-      })
+    }),
+    provideHttpClient(),
+    provideTransloco({
+      config: {
+        availableLangs: ['en', 'fr'],
+        defaultLang: 'fr',
+        reRenderOnLangChange: true,
+        prodMode: !isDevMode()
+      },
+      loader: TranslocoHttpLoader
+    })
   ]
 };
