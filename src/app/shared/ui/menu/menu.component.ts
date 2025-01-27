@@ -30,12 +30,11 @@ export class MenuComponent implements OnInit {
   #store = inject(Store);
   #authService = inject(AuthService);
   #transloco = inject(TranslocoService);
-  tabs = ['Parcourir', 'My cinolu'];
   langs = signal(['fr', 'en']);
-  selectedLang = signal('fr');
+  selectedLang = signal(this.#transloco.getActiveLang());
+  tabs = signal<string[]>(['Parcourir', 'My cinolu']);
 
   ngOnInit(): void {
-    this.selectedLang.set(this.#transloco.getActiveLang());
     this.user$ = this.#store.pipe(select(selectUser));
   }
 
