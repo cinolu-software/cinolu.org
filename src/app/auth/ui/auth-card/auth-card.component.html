@@ -1,6 +1,11 @@
-<div class="grid grid-cols-1 lg:grid-cols-2 mt-16" *transloco="let t">
-  <div class="min-h-[110vh] mt-28 px-8 md:px-32 xl:px-36 2xl:px-40">
-    <ng-content />
+<div class="grid grid-cols-1 lg:grid-cols-2" *transloco="let t">
+  <div class="flex flex-col items-center justify-center min-h-screen">
+    <div class="w-3/6">
+      <h2 class="text-3xl font-semibold font-satoshi">
+        {{ t(title()) }}
+      </h2>
+      <ng-content />
+    </div>
   </div>
   <div class="hidden fixed md:block right-0 w-1/2">
     <div class="relative min-h-screen items-center justify-center overflow-hidden bg-primary-800 p-16 md:flex lg:px-28">

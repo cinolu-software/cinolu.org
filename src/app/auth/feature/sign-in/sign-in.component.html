@@ -1,6 +1,7 @@
 <app-auth-card
   title="Se connecter"
-  description="Connectez-vous et accéder à votre compte et continuer à explorer notre plateforme.">
+  description="Connectez-vous et accéder à votre compte et continuer à explorer notre plateforme."
+  *transloco="let t">
   @let result = result$ | async;
   @if (result?.error) {
     <app-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
@@ -8,11 +9,7 @@
     </app-alert>
   }
 
-  <div [ngClass]="result?.error && 'transition-transform translate-y-4 duration-150 '" *transloco="let t">
-    <h2 class="text-3xl font-extrabold leading-tight tracking-tight font-satoshi">
-      {{ t('Se connecter') }}
-    </h2>
-
+  <div [ngClass]="result?.error && 'transition-transform translate-y-4 duration-150 '">
     <form class="mt-6" (ngSubmit)="onSignIn()" [formGroup]="signInForm">
       <mat-form-field class="w-full">
         <mat-label>
