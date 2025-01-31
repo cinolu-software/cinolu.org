@@ -18,7 +18,7 @@ export class EventsService {
     return this.#apiService.get('event-types');
   }
 
-  getEvents(queryParams: QueryParams): Observable<IAPIResponse<{ events: IEvent[]; count: number }>> {
+  getEvents(queryParams: QueryParams): Observable<IAPIResponse<[IEvent[], number]>> {
     const params = this.#buildQueryParams(queryParams);
     return this.#apiService.get('events/find-published', params);
   }

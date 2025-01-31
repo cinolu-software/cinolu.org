@@ -1,5 +1,5 @@
 <section class="mb-12 mt-14" *transloco="let t">
-  @let result = events$ | async;
+  @let events = events$ | async;
   @let types = types$ | async;
   <div class="relative py-52 md:py-64 bg-[url('/images/events.jpg')] bg-cover flex flex-col mb-8">
     <div
@@ -34,37 +34,36 @@
         </mat-chip-listbox>
       }
 
-      @if (result.data; as data) {
-        @if (data?.events; as events) {
-          <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-            @for (
-              e of events | paginate: { itemsPerPage: 9, currentPage: queryParams().page, totalItems: data.count };
-              track e.id
-            ) {
-              <app-event-card [event]="e" />
-            }
-          </div>
-
-          @if (data.count > 9) {
-            <div class="flex justify-center mt-16">
-              <pagination-controls
-                nextLabel=""
-                previousLabel=""
-                [maxSize]="5"
-                (pageChange)="onPageChange($event)"
-                class="pg">
-              </pagination-controls>
-            </div>
+      @if (events?.data?.[0]) {
+        <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+          @for (
+            e of events.data[0]
+              | paginate: { itemsPerPage: 9, currentPage: queryParams().page, totalItems: events.data[1] };
+            track e.id
+          ) {
+            <app-event-card [event]="e" />
           }
+        </div>
+
+        @if (events.data[1] > 9) {
+          <div class="flex justify-center mt-16">
+            <pagination-controls
+              nextLabel=""
+              previousLabel=""
+              [maxSize]="5"
+              (pageChange)="onPageChange($event)"
+              class="pg">
+            </pagination-controls>
+          </div>
         }
       }
-      @if (result.error || (result.data && result.data?.events.length === 0)) {
+      @if (events.error || events?.data?.[1] === 0) {
         <h2 class="text-3xl font-semibold">
           {{ t('Aucun événement !') }}
         </h2>
       }
 
-      @if (result.isLoading) {
+      @if (events.isLoading) {
         <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           @for (program of skeletonArray; track $index) {
             <app-event-card-skeleton />

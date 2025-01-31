@@ -33,7 +33,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
 })
 export class EventsComponent implements OnInit {
   skeletonArray = Array(6).fill(0);
-  events$: Observable<IAPIResponse<{ events: IEvent[]; count: number }>>;
+  events$: Observable<IAPIResponse<[IEvent[], number]>>;
   types$: Observable<IAPIResponse<IEventType[]>>;
   #eventsService = inject(EventsService);
   #router = inject(Router);

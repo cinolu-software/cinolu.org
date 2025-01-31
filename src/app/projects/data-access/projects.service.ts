@@ -27,7 +27,7 @@ export class ProjectsService {
     return this.#apiService.post('project-applications', payload, onSuccess);
   }
 
-  getProjects(queryParams: QueryParams): Observable<IAPIResponse<{ projects: IProject[]; count: number }>> {
+  getProjects(queryParams: QueryParams): Observable<IAPIResponse<[IProject[], number]>> {
     const params = this.#buildQueryParams(queryParams);
     return this.#apiService.get('projects/find-published', params);
   }

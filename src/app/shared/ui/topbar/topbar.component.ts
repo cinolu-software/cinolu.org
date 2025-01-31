@@ -19,9 +19,9 @@ import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
   selector: 'app-topbar',
   host: { '(document:click)': 'onClickOutside($event)' },
   imports: [CommonModule, RouterLink, MatIconModule, NgOptimizedImage, MatButtonModule, ApiImgPipe, TranslocoDirective],
-  templateUrl: './menu.component.html'
+  templateUrl: './topbar.component.html'
 })
-export class MenuComponent implements OnInit {
+export class TopbarComponent implements OnInit {
   isOpen = signal(false);
   activeTab = signal<string | null>(null);
   user$: Observable<IUser>;

@@ -35,7 +35,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
 })
 export class ProjectsComponent implements OnInit {
   skeletonArray = Array(9).fill(0);
-  projects$: Observable<IAPIResponse<{ projects: IProject[]; count: number }>>;
+  projects$: Observable<IAPIResponse<[IProject[], number]>>;
   types$: Observable<IAPIResponse<IProjectType[]>>;
   #router = inject(Router);
   #route = inject(ActivatedRoute);
