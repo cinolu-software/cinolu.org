@@ -1,25 +1,23 @@
-<section class="mb-8" *transloco="let t">
+<section class="mb-8">
   <div class="relative min-h-[80vh] py-80 w-full flex flex-col bg-[url('/images/hero.jpg')] bg-cover bg-no-repeat">
     <div
       class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/40 to-primary-900/50 gap-6 text-white">
       <div
         class="flex flex-col items-start justify-center font-medium px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
-        <h1 class="font-black block text-2xl mb-6 hyphens-none md:text-2xl xl:text-6xl md:w-3/4">
-          {{ t("Votre plateforme d'innovation One Stop!") }}
+        <h1 class="font-black block text-2xl mb-6 hyphens-none md:text-2xl xl:text-6xl">
+          One stop ecosystem support plateform !
         </h1>
         <p class="mb-8 md:text-2xl 2xl:text-3xl leading-relaxed font-light w-full md:w-3/4">
-          {{
-            t("De l'idée au projet, bénéficiez de nos outils, mentors et ressources pour donner vie à votre vision.")
-          }}
+          De l'idée au projet, bénéficiez de nos outils, mentors et ressources pour donner vie à votre vision.
         </p>
         <div class="flex flex-col md:flex-row gap-4">
           <a
             routerLink="/projects"
             class="border border-white rounded-md px-6 py-2 text-white hover:bg-white hover:text-secondary-700 transition-colors duration-500">
-            {{ t('Nos programmes') }}
+            {{ 'Nos programmes' }}
           </a>
           <a routerLink="/sign-in" class="bg-secondary-700 rounded-md px-6 py-2 text-white hover:bg-secondary-900">
-            {{ t('Rejoignez-nous') }}
+            {{ 'Rejoignez-nous' }}
           </a>
         </div>
       </div>
@@ -35,11 +33,11 @@
           class="bg-secondary-900/90 text-center h-10 w-10 flex flex-col items-center justify-center mb-3 rounded-full">
           <mat-icon class="icon-size-5 fill-white" [svgIcon]="p.icon" />
         </span>
-        <p class="font-bold text-xl mb-4 font-satoshi line-clamp-1">
-          {{ t(p.title) }}
+        <p class="font-bold text-xl mb-2.5 font-satoshi line-clamp-1">
+          {{ p.title }}
         </p>
-        <p class="line-clamp-3 text-sm md:text-base">
-          {{ t(p.description) }}
+        <p class="text-sm">
+          {{ p.description }}
         </p>
       </div>
     }

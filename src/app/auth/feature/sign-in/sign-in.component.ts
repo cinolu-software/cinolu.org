@@ -15,7 +15,6 @@ import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { IUser } from 'app/shared/utils/types/models.type';
 import { AuthService } from '../../data-access/auth.service';
-import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-sign-in',
@@ -33,8 +32,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
     MatProgressSpinnerModule,
     NgOptimizedImage,
     CommonModule,
-    AuthCardComponent,
-    TranslocoDirective
+    AuthCardComponent
   ]
 })
 export class AuthSignInComponent {

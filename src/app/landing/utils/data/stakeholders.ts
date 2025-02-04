@@ -16,7 +16,7 @@ export const stakeholders: { title: string; description: string; icon: string }[
   },
   {
     title: 'Institutions',
-    description: "Élaborez des politiques favorables à l'innovation et soutenez le développement.",
+    description: "Politiques favorables à l'innovation et soutenez le développement.",
     icon: 'flag'
   }
 ];

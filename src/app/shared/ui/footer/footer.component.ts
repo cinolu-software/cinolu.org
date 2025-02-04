@@ -2,11 +2,10 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { explorationLinks, myCinoluLinks, socialLinks } from '../../utils/data/links';
-import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-footer',
-  imports: [CommonModule, RouterLink, NgOptimizedImage, TranslocoDirective],
+  imports: [CommonModule, RouterLink, NgOptimizedImage],
   templateUrl: './footer.component.html'
 })
 export class FooterComponent {

@@ -1,7 +1,6 @@
 <app-auth-card
   title="Se connecter"
-  description="Connectez-vous et accéder à votre compte et continuer à explorer notre plateforme."
-  *transloco="let t">
+  description="Connectez-vous et accéder à votre compte et continuer à explorer notre plateforme.">
   @let result = result$ | async;
   @if (result?.error) {
     <app-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
@@ -12,16 +11,12 @@
   <div [ngClass]="result?.error && 'transition-transform translate-y-4 duration-150 '">
     <form class="mt-6" (ngSubmit)="onSignIn()" [formGroup]="signInForm">
       <mat-form-field class="w-full">
-        <mat-label>
-          {{ t('Adresse e-mail') }}
-        </mat-label>
+        <mat-label> Adresse e-mail </mat-label>
         <input id="email" type="email" matInput autocomplete="email" [formControlName]="'email'" />
       </mat-form-field>
 
       <mat-form-field class="w-full">
-        <mat-label>
-          {{ t('Mot de passe') }}
-        </mat-label>
+        <mat-label> Mot de passe </mat-label>
         <input
           id="password"
           matInput
@@ -45,17 +40,15 @@
         </button>
       </mat-form-field>
       <div class="inline-flex w-full items-center justify-between">
-        {{ t('Mot de passe oublié?') }}
+        Mot de passe oublié?
         <a class="text-md font-medium text-primary-500 hover:underline" [routerLink]="['/forgot-password']">
-          {{ t('Réinitialiser') }}
+          Réinitialiser
         </a>
       </div>
 
       <button class="mt-6 w-full" mat-flat-button type="submit" [disabled]="result?.isLoading || signInForm.invalid">
         @if (!result?.isLoading && !signInForm.invalid) {
-          <span>
-            {{ t('Se connecter') }}
-          </span>
+          <span> Se connecter </span>
         }
         @if (result?.isLoading) {
           <mat-progress-spinner class="text-white" [diameter]="24" [mode]="'indeterminate'" />
@@ -63,9 +56,7 @@
       </button>
       <div class="mt-4 flex items-center">
         <div class="mt-px flex-auto border-t"></div>
-        <div class="text-gray-700 mx-2">
-          {{ t('Ou continuer avec') }}
-        </div>
+        <div class="text-gray-700 mx-2">Ou continuer avec</div>
         <div class="mt-px flex-auto border-t"></div>
       </div>
       <div class="mt-4 flex items-center space-x-4">

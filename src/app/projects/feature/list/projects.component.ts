@@ -14,7 +14,6 @@ import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { ProjectsService } from '../../data-access/projects.service';
 import { FooterComponent } from '../../../shared/ui/footer/footer.component';
-import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-projects',
@@ -28,8 +27,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
     ProjectCardComponent,
     ProgramCardSkeletonComponent,
     MatChipsModule,
-    FooterComponent,
-    TranslocoDirective
+    FooterComponent
   ],
   templateUrl: './projects.component.html'
 })

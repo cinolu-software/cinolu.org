@@ -1,4 +1,4 @@
-<header class="navbar fixed w-full top-0 py-3 bg-white shadow-sm z-20 font-satoshi" *transloco="let t">
+<header class="navbar fixed w-full top-0 flex flex-col justify-center bg-white shadow-sm z-20 h-14 font-satoshi">
   @let user = user$ | async;
   @let result = logout$ | async;
   <!-- Mobile Nav -->
@@ -17,14 +17,10 @@
         <div class="flex flex-col gap-6 font-bold text-xl menu">
           @for (tab of tabs(); track $index) {
             <button class="flex items-center justify-between" (click)="setActiveTab(tab)">
-              {{ t(tab) }}
+              {{ tab }}
               <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5 text-gray-700" />
             </button>
           }
-          <button class="flex items-center justify-between capitalize" (click)="setActiveTab('langs')">
-            {{ selectedLang() }}
-            <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5 text-gray-700" />
-          </button>
         </div>
         @if (user) {
           <div class="flex flex-col gap-8">
@@ -33,20 +29,20 @@
                 [src]="user | apiIMG: 'user'"
                 class="rounded-full w-7 h-7 object-cover ring-2 ring-secondary-800 ring-offset-1"
                 alt="profile picture" />
-              {{ t('Tableau de bord') }}
+              Dashboard
             </a>
             <button
               class="flex items-center text-white justify-center text-center px-6 py-2 bg-red-800 rounded-sm hover:bg-red-900 disabled:bg-red-800/30 transition-colors duration-300 gap-1.5 font-medium text-base"
               (click)="signOut()"
               [disabled]="result?.isLoading">
-              {{ t('Se déconnecter') }}
+              Se déconnecter
             </button>
           </div>
         } @else {
           <a
             routerLink="/sign-in"
             class="flex items-center justify-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium text-base">
-            {{ t('Se connecter') }}
+            Se connecter
           </a>
         }
       </div>
@@ -56,35 +52,22 @@
       class="fixed text-base top-10 left-0 right-8 bottom-0 bg-white backdrop-blur-lg z-30 transition-transform duration-300 {{
         activeTab() && isOpen() ? 'translate-x-0 active-nav' : '-translate-x-full'
       }}">
-      <div class="flex flex-col items-start justify-start gap-7 font-medium py-16 px-10 h-full">
+      <div class="flex flex-col items-start justify-start gap-7 font-medium py-16 px-10 h-full menu">
         <button class="font-semibold text-gray-800 flex items-center gap-1 m-4" (click)="setActiveTab(null)">
           <mat-icon svgIcon="mat_outline:keyboard_arrow_left" class="icon-size-4" />
-          {{ t('Retour') }}
+          Retour
         </button>
-
         @for (link of getLinks(activeTab()); track $index) {
           <a [routerLink]="link.path" [fragment]="link.fragment" class="flex items-center gap-2.5">
             <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
               <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white" />
             </span>
             <p class="flex flex-col gap-0.5 font-medium">
-              {{ t(link.name) }}
-              <span class="description text-gray-700 text-sm">{{ t(link.description) }}</span>
+              {{ link.name }}
+              <span class="description text-gray-700 text-sm">{{ link.description }}</span>
             </p>
           </a>
         }
-        <div class="px-10 flex flex-col gap-3">
-          @if (activeTab() === 'langs') {
-            @for (lang of langs(); track $index) {
-              <button
-                class="uppercase font-medium disabled:text-gray-400 disabled:font-normal disabled:cursor-not-allowed"
-                (click)="switchLang(lang)"
-                [disabled]="lang === selectedLang()">
-                {{ t(lang) }}
-              </button>
-            }
-          }
-        </div>
       </div>
     </ul>
   </nav>
@@ -94,16 +77,20 @@
     <a routerLink="/" aria-label="logo" class="inline-block">
       <img ngSrc="images/logo/logo-g.png" alt="logo" class="w-6 h-7 cursor-pointer" width="64" height="68" priority />
     </a>
-    <div class="hidden lg:flex justify-between w-2/3">
+    <div class="hidden lg:flex justify-between">
       <div class="flex items-center gap-6 font-medium">
         @for (tab of tabs(); track $index) {
           <button class="relative" (click)="setActiveTab(tab)">
             <div class="menu flex items-center gap-0.5">
-              <span class="uppercase font-semibold">{{ t(tab) }}</span>
-              <mat-icon [svgIcon]="'mat_outline:keyboard_arrow_down'" class="icon-size-6 text-gray-700" />
+              <span class="font-medium text-lg">{{ tab }}</span>
+              <mat-icon
+                [svgIcon]="'mat_outline:keyboard_arrow_down'"
+                class="icon-size-5 text-gray-700 transition-transform duration-300 {{
+                  activeTab() === tab && 'rotate-180'
+                }}" />
             </div>
             <div
-              class="absolute top-9 w-[30rem] animate-fadeInUp py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
+              class="absolute top-9 w-[30rem] right-0 animate-fadeInUp py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
               [ngClass]="activeTab() === tab ? 'block active-nav' : 'hidden'">
               <div class="grid grid-cols-2 gap-x-8 gap-y-6 xl:text-base">
                 @for (link of getLinks(activeTab()); track $index) {
@@ -112,8 +99,8 @@
                       <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white" />
                     </span>
                     <p class="flex flex-col gap-0.5 font-medium">
-                      {{ t(link.name) }}
-                      <span class="description text-gray-700 text-sm">{{ t(link.description) }}</span>
+                      {{ link.name }}
+                      <span class="description text-gray-700 text-sm">{{ link.description }}</span>
                     </p>
                   </a>
                 }
@@ -121,62 +108,46 @@
             </div>
           </button>
         }
-        <button class="relative" (click)="setActiveTab('langs')">
-          <div class="menu flex items-center gap-0.5">
-            <span class="uppercase font-semibold">{{ selectedLang() }}</span>
-            <mat-icon [svgIcon]="'mat_outline:keyboard_arrow_down'" class="icon-size-6 text-gray-700" />
-          </div>
-          <div
-            class="absolute top-9 w-[5rem] animate-fadeInUp py-4 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
-            [ngClass]="activeTab() === 'langs' ? 'block active-nav' : 'hidden'">
-            <div class="grid grid-cols-1 gap-y-4 xl:text-base">
-              @for (lang of langs(); track $index) {
-                <button
-                  class="uppercase font-medium disabled:text-gray-400 disabled:font-normal disabled:cursor-not-allowed"
-                  (click)="switchLang(lang)"
-                  [disabled]="lang === selectedLang()">
-                  {{ t(lang) }}
-                </button>
-              }
-            </div>
-          </div>
-        </button>
-      </div>
-      @if (user) {
-        <div class="flex items-center gap-3">
-          <button class="relative flex items-center gap-2" (click)="setActiveTab('account')">
-            <img
-              [src]="user | apiIMG: 'user'"
-              class="rounded-full w-7 h-7 object-cover ring-2 ring-secondary-800 ring-offset-1"
-              alt="profile picture" />
-            <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-6 text-gray-700" />
-            <div
-              class="absolute top-9 w-[18rem] right-0 animate-fadeInUp py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
-              [ngClass]="activeTab() === 'account' ? 'block ' : 'hidden'">
-              <div class="grid grid-cols-1 gap-x-8 gap-y-6 xl:text-base font-medium">
-                <a [href]="accUrl" target="_blank" class="flex items-center gap-2.5">
-                  <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
-                    <mat-icon [svgIcon]="'dashboard'" class="icon-size-4 text-white" />
-                  </span>
-                  {{ t('Tableau de bord') }}
-                </a>
-                <button class="flex items-center gap-2.5" (click)="signOut()" [disabled]="result?.isLoading">
-                  <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
-                    <mat-icon [svgIcon]="'mat_solid:logout'" class="icon-size-4 text-white" />
-                  </span>
-                  {{ t('Se déconnecter') }}
-                </button>
+        @if (user) {
+          <div class="flex items-center gap-3">
+            <button class="relative flex items-center gap-2" (click)="setActiveTab('account')">
+              <img
+                [src]="user | apiIMG: 'user'"
+                class="rounded-full w-7 h-7 object-cover ring-2 ring-secondary-800 ring-offset-1"
+                alt="profile picture" />
+              <mat-icon
+                [svgIcon]="'mat_outline:keyboard_arrow_down'"
+                class="icon-size-5 text-gray-700 transition-transform duration-300 {{
+                  activeTab() === 'account' && 'rotate-180'
+                }}" />
+              <div
+                class="absolute top-9 w-[18rem] right-0 animate-fadeInUp py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
+                [ngClass]="activeTab() === 'account' ? 'block active-nav' : 'hidden'">
+                <div class="grid grid-cols-1 gap-x-8 gap-y-6 xl:text-base font-medium">
+                  <a [href]="accUrl" target="_blank" class="flex items-center gap-2.5">
+                    <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
+                      <mat-icon [svgIcon]="'dashboard'" class="icon-size-4 text-white" />
+                    </span>
+                    Dashboard
+                  </a>
+                  <button class="flex items-center gap-2.5" (click)="signOut()" [disabled]="result?.isLoading">
+                    <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
+                      <mat-icon [svgIcon]="'mat_solid:logout'" class="icon-size-4 text-white" />
+                    </span>
+                    Se déconnecter
+                  </button>
+                </div>
               </div>
-            </div>
-          </button>
-        </div>
-      } @else {
-        <a
-          routerLink="/sign-in"
-          class="flex items-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium">
-          {{ t('Se connecter') }}
-        </a>
-      }
+            </button>
+          </div>
+        } @else {
+          <a
+            routerLink="/sign-in"
+            class="flex items-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium">
+            Se connecter
+          </a>
+        }
+      </div>
     </div>
   </nav>
 </header>

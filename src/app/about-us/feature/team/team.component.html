@@ -1,12 +1,10 @@
 @if (isBrowser()) {
-  <section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 mb-20" *transloco="let t">
+  <section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 mb-20">
     @let team = team$ | async;
     @if (team[0].data?.length) {
       <h2 class="font-semibold text-xl md:text-5xl mb-4" id="team">
-        {{ t('Notre') }}
-        <span class="text-primary-600">
-          {{ t('équipe') }}
-        </span>
+        Notre
+        <span class="text-primary-600"> équipe </span>
       </h2>
       <div class="relative mb-16">
         <owl-carousel-o #staffCarousel [options]="owlOptions">
@@ -28,10 +26,8 @@
 
     @if (team[1].data?.length) {
       <h2 class="font-semibold text-xl md:text-5xl mb-4" id="coachs">
-        {{ t('Coachs et') }}
-        <span class="text-primary-600">
-          {{ t('mentors') }}
-        </span>
+        Coachs et
+        <span class="text-primary-600"> mentors </span>
       </h2>
       <div class="relative">
         <owl-carousel-o #coachCarousel [options]="owlOptions">

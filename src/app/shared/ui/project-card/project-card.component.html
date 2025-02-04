@@ -5,9 +5,9 @@
     <img [ngSrc]="project() | apiIMG: 'project'" [alt]="project().name" class="object-cover" fill />
   </div>
   <div class="flex flex-col p-6">
-    <div class="flex items-center gap-1 mb-2">
+    <div class="flex items-center gap-1.5 flex-wrap mb-2">
       @for (type of project().types; track $index) {
-        <span class="rounded-full line-clamp-1 px-3 py-0.5 text-xs font-semibold bg-primary-100 text-primary-900">
+        <span class="rounded-full px-3 py-0.5 text-xs font-semibold bg-primary-100 text-primary-900">
           {{ type.name }}
         </span>
       }

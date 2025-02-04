@@ -13,12 +13,11 @@ import { AuthService } from '../../../auth/data-access/auth.service';
 import { IAPIResponse } from '../../services/api/types/api-response.type';
 import { explorationLinks, myCinoluLinks } from '../../utils/data/links';
 import { environment } from 'environments/environment';
-import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-topbar',
   host: { '(document:click)': 'onClickOutside($event)' },
-  imports: [CommonModule, RouterLink, MatIconModule, NgOptimizedImage, MatButtonModule, ApiImgPipe, TranslocoDirective],
+  imports: [CommonModule, RouterLink, MatIconModule, NgOptimizedImage, MatButtonModule, ApiImgPipe],
   templateUrl: './topbar.component.html'
 })
 export class TopbarComponent implements OnInit {
@@ -29,18 +28,10 @@ export class TopbarComponent implements OnInit {
   accUrl = environment.accountUrl;
   #store = inject(Store);
   #authService = inject(AuthService);
-  #transloco = inject(TranslocoService);
-  langs = signal(['fr', 'en']);
-  selectedLang = signal(this.#transloco.getActiveLang());
   tabs = signal<string[]>(['Parcourir', 'My cinolu']);
 
   ngOnInit(): void {
     this.user$ = this.#store.pipe(select(selectUser));
-  }
-
-  switchLang(lang: string): void {
-    this.selectedLang.set(lang);
-    this.#transloco.setActiveLang(lang);
   }
 
   setActiveTab(tab: string): void {

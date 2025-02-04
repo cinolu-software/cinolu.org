@@ -10,7 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProjectsService } from '../../../projects/data-access/projects.service';
 import { owlOptionsRecent } from '../../utils/config/owl.config';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-recent-projects',
@@ -21,8 +20,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
     CarouselModule,
     ProgramCardSkeletonComponent,
     RouterModule,
-    MatIconModule,
-    TranslocoDirective
+    MatIconModule
   ],
   templateUrl: './recent-projects.component.html'
 })

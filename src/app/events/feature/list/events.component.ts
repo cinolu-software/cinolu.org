@@ -13,7 +13,6 @@ import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { EventsService } from '../../data-access/events.service';
 import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
 import { FooterComponent } from '../../../shared/ui/footer/footer.component';
-import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-programs',
@@ -26,8 +25,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
     EventCardComponent,
     EventCardSkeletonComponent,
     MatChipsModule,
-    FooterComponent,
-    TranslocoDirective
+    FooterComponent
   ],
   templateUrl: './events.component.html'
 })
@@ -43,10 +41,6 @@ export class EventsComponent implements OnInit {
     type: this.#route.snapshot.queryParams?.type || null,
     eventType: this.#route.snapshot.queryParams?.eventType || null
   });
-  eventTypes = [
-    { name: 'Physique', value: 'physical' },
-    { name: 'En ligne', value: 'online' }
-  ];
 
   ngOnInit(): void {
     this.#loadEvents();

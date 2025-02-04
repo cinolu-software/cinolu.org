@@ -1,25 +1,19 @@
 export const innovationEcosystems: { title: string; description: string }[] = [
   {
-    title: 'Écosystème non structuré et non cartographié',
-    description: "L'écosystème d'innovation est encore désorganisé et n'a pas été clairement défini ou cartographié."
+    title: 'Idéation',
+    description: 'Affinez votre idée, explorez les opportunités et définissez une vision claire de votre projet.'
   },
   {
-    title: "Manque d'organisations spécialisées de soutien à l'innovation (ISO)",
+    title: 'Pré-incubation',
+    description: "Développez un prototype, validez votre concept et préparez-vous à l'incubation."
+  },
+  {
+    title: 'Incubation',
     description:
-      "Il y a un manque d'organisations spécialisées pour la génération et le développement d'idées. Les rares incubateurs, accélérateurs, espaces de coworking et centres de transfert technologique existants sont encore à leurs débuts."
+      "Bénéficiez d'un accompagnement personnalisé pour structurer votre projet et accéder aux ressources essentielles."
   },
   {
-    title: "Faible connaissance de l'entrepreneuriat structuré",
-    description:
-      "Il existe une faible compréhension de l'entrepreneuriat structuré par discipline et du fonctionnement d'un écosystème startup."
-  },
-  {
-    title: 'Manque de cadre politique et réglementaire',
-    description:
-      "Il n'existe pas de cadre politique et réglementaire adéquat pour soutenir l'innovation et l'entrepreneuriat axé sur l'innovation. Le premier StartupAct a été introduit en 2022."
-  },
-  {
-    title: "Absence d'un réseau structuré d'écosystèmes",
-    description: "Il manque un réseau structuré reliant les différentes parties de l'écosystème d'innovation."
+    title: 'Accélération',
+    description: 'Optimisez votre croissance, développez votre réseau et accédez à des financements stratégiques.'
   }
 ];

@@ -10,20 +10,11 @@ import { EventCardComponent } from '../../../shared/ui/event-card/event-card.com
 import { EventCardSkeletonComponent } from '../../../shared/ui/event-card-skeleton/event-card-skeleton.component';
 import { owlOptionsRecent } from '../../utils/config/owl.config';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-recent-events',
   providers: [EventsService],
-  imports: [
-    CommonModule,
-    EventCardComponent,
-    CarouselModule,
-    EventCardSkeletonComponent,
-    RouterModule,
-    MatIconModule,
-    TranslocoDirective
-  ],
+  imports: [CommonModule, EventCardComponent, CarouselModule, EventCardSkeletonComponent, RouterModule, MatIconModule],
   templateUrl: './recent-events.component.html'
 })
 export class RecentEventsComponent implements OnInit {

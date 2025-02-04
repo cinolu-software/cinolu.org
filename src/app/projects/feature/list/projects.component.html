@@ -1,4 +1,4 @@
-<section class="mb-12 mt-14" *transloco="let t">
+<section class="mb-12 mt-14">
   @let projects = projects$ | async;
   @let types = types$ | async;
   <div
@@ -7,15 +7,10 @@
       class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/60 to-primary-900/70 gap-6 text-white">
       <div
         class="relative z-10 flex flex-col items-start py-16 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
-        <h1 class="font-extrabold block text-xl mb-6 md:text-4xl xl:text-6xl">
-          {{ t('Découvrez nos programmes') }}
-        </h1>
+        <h1 class="font-extrabold block text-xl mb-6 md:text-4xl xl:text-6xl md:w-5/6">Découvrez nos programmes</h1>
         <p class="mb-8 md:text-lg text-sm leading-relaxed font-light w-full md:w-3/4">
-          {{
-            t(
-              'Transformez vos idées en réalités impactantes grâce à nos projets innovants ! Rejoignez un écosystème conçu pour vous inspirer, vous former et vous accompagner.'
-            )
-          }}
+          Transformez vos idées en réalités impactantes grâce à nos projets innovants ! Rejoignez un écosystème conçu
+          pour vous inspirer, vous former et vous accompagner.
         </p>
       </div>
     </div>
@@ -57,9 +52,7 @@
         }
       }
       @if (projects.error || projects?.data?.[1] === 0) {
-        <h2 class="text-3xl font-semibold">
-          {{ t('Aucun programme!') }}
-        </h2>
+        <h2 class="text-3xl font-semibold">Aucun programme!</h2>
       }
       @if (projects?.isLoading) {
         <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">

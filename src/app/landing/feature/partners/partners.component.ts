@@ -5,12 +5,11 @@ import { IAPIResponse } from '../../../shared/services/api/types/api-response.ty
 import { IPartner } from '../../../shared/utils/types/models.type';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
-import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-partners',
   providers: [PartnersService],
-  imports: [CommonModule, NgOptimizedImage, ApiImgPipe, TranslocoDirective],
+  imports: [CommonModule, NgOptimizedImage, ApiImgPipe],
   templateUrl: './partners.component.html'
 })
 export class PartnersComponent implements OnInit {

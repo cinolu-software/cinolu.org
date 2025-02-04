@@ -1,26 +1,23 @@
-<section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 mb-20" *transloco="let t">
-  <h2 class="font-semibold text-xl lg:text-3xl mb-10">
-    {{ t('Votre') }}
-    <span class="text-secondary-600">
-      {{ t('“One Stop Ecosystem Support”') }}
-    </span>
-  </h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 items-center">
-    <div class="relative h-60 md:h-72 xl:h-80 mb-6 md:mb-0 bg-gray-100 rounded-lg overflow-hidden">
-      <img class="object-cover" ngSrc="/images/ps.webp" alt="Statement" fill />
-    </div>
-
-    <div class="rounded-lg md:bg-white md:px-6 md:py-4 md:-translate-x-6 md:shadow-xl z-10">
-      <h5 class="font-medium mb-3 text-xl font-satoshi">
-        {{ t('Rejoignez un écosystème dynamique et innovant') }}
-      </h5>
-      <p class="text-gray-700 text-sm">
-        {{
-          t(
-            "Vous cherchez à rejoindre un tech hub, un incubateur ou un accélérateur ? Ne cherchez plus ! Rejoignez notre hub d'innovation, conçu pour vous inspirer, échanger, développer vos compétences et concrétiser vos projets, le tout en un seul endroit. Nous offrons un parcours complet de formation et d'accompagnement, adapté à chaque étape de votre projet. De l'idéation à la croissance, en passant par la Pré-incubation, Incubation et l'Accélération, notre plateforme unique vous permet de vous concentrer pleinement sur votre développement et celui de votre projet."
-          )
-        }}
+<section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 mb-20">
+  <div class="grid grid-cols-1 gap-10 md:grid-cols-2 items-center">
+    <div class="rounded-md">
+      <h5 class="font-medium mb-3 text-xl md:text-2xl font-satoshi">Rejoignez un écosystème innovant</h5>
+      <p class="text-gray-700 text-sm mb-8">
+        Notre hub d'innovation est conçu pour vous inspirer, échanger, développer vos compétences et concrétiser vos
+        projets. Nous proposons un parcours complet de formation et d'accompagnement, adapté à chaque étape de votre
+        projet, de l'idéation à la croissance.
       </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+        @for (s of innovationEcosystems; track $index) {
+          <div class="flex flex-col gap-1">
+            <h5 class="border-t-2 border-primary-700 text-lg font-bold py-2 text-gray-600">{{ s.title }}</h5>
+            <p class="text-sm">{{ s.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+    <div class="relative h-60 md:h-72 xl:h-[500px] mb-6 md:mb-0 bg-gray-100 rounded-sm overflow-hidden">
+      <img class="object-cover" ngSrc="/images/ps.webp" alt="Statement" fill />
     </div>
   </div>
 </section>
