@@ -1,5 +1,5 @@
 <a class="flex flex-col gap-4" [routerLink]="['/blog', post().id]">
-  <div class="h-60 w-full relative bg-gray-100 mb-2">
+  <div class="h-60 md:h-52 w-full relative bg-gray-100 mb-2">
     <img [ngSrc]="post() | apiIMG: 'post'" [alt]="post().title" class="object-cover" fill />
   </div>
   <p class="font-medium">
@@ -9,6 +9,6 @@
     {{ post().content }}
   </p>
   <p class="rounded-full text-sm py-1.5 px-2 font-medium border">
-    {{ post().category }}
+    {{ post().category.name }}
   </p>
 </a>
