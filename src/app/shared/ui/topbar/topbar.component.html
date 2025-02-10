@@ -50,13 +50,18 @@
 
     <ul
       class="fixed text-base top-10 left-0 right-8 bottom-0 bg-white backdrop-blur-lg z-30 transition-transform duration-300 {{
-        activeTab() && isOpen() ? 'translate-x-0 active-nav' : '-translate-x-full'
+        activeTab() && isOpen() ? 'translate-x-0' : '-translate-x-full'
       }}">
-      <div class="flex flex-col items-start justify-start gap-7 font-medium py-16 px-10 h-full menu">
-        <button class="font-semibold text-gray-800 flex items-center gap-1 m-4" (click)="setActiveTab(null)">
-          <mat-icon svgIcon="mat_outline:keyboard_arrow_left" class="icon-size-4" />
-          Retour
-        </button>
+      <div
+        class="flex flex-col items-start justify-start gap-7 font-medium py-16 px-10 h-full  {{
+          activeTab() && isOpen() && 'active-nav'
+        }}">
+        <div class="menu">
+          <button class="font-semibold text-gray-800 flex items-center gap-1 m-4" (click)="setActiveTab(null)">
+            <mat-icon svgIcon="mat_outline:keyboard_arrow_left" class="icon-size-4" />
+            Retour
+          </button>
+        </div>
         @for (link of getLinks(activeTab()); track $index) {
           <a [routerLink]="link.path" [fragment]="link.fragment" class="flex items-center gap-2.5">
             <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
