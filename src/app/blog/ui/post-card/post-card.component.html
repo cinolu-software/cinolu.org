@@ -1,8 +1,8 @@
-<a class="flex flex-col gap-4" [routerLink]="['/blog', post().id]">
+<a class="inline-block" [routerLink]="['/blog', post().id]">
   <div class="h-60 md:h-52 w-full relative bg-gray-100 mb-2">
     <img [ngSrc]="post() | apiIMG: 'post'" [alt]="post().title" class="object-cover" fill />
   </div>
-  <p class="font-medium">
+  <p class="font-medium mb-4">
     {{ post().created_at | date: 'longDate' }}
   </p>
   <p class="line-clamp-2 mb-1.5">
