@@ -11,7 +11,7 @@ export const explorationLinks: ILink[] = [
   {
     name: 'Blog',
     path: '/blog',
-    description: 'La salle de discussion',
+    description: 'Le blog',
     icon: 'mat_outline:forum',
     exactUrl: false
   },
