@@ -13,6 +13,7 @@ export class ApiImgPipe implements PipeTransform {
         : (value['google_image'] ?? '/images/avatar-default.webp'),
       project: value['image'] ? `${apiUrl}uploads/projects/${value['image']}` : '/images/no-image.jpg',
       venture: value['image'] ? `${apiUrl}uploads/ventures/${value['image']}` : '/images/no-image.jpg',
+      post: value['image'] ? `${apiUrl}uploads/posts/${value['image']}` : '/images/no-image.jpg',
       partner: value['profile'] ? `${apiUrl}uploads/partners/${value['profile']}` : '/images/no-image.jpg',
       event: value['image'] ? `${apiUrl}uploads/events/${value['image']}` : '/images/no-image.jpg'
     };

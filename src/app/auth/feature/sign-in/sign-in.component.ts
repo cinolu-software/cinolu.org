@@ -39,7 +39,7 @@ export class AuthSignInComponent {
   #formBuilder: FormBuilder = inject(FormBuilder);
   #authService = inject(AuthService);
   signInForm: FormGroup;
-  result$: Observable<IAPIResponse<IUser>>;
+  signIn$: Observable<IAPIResponse<[IUser, string]>>;
 
   constructor() {
     this.signInForm = this.#formBuilder.group({
@@ -51,7 +51,7 @@ export class AuthSignInComponent {
   onSignIn(): void {
     if (this.signInForm.invalid) return;
     this.signInForm.disable();
-    this.result$ = this.#authService.signIn(this.signInForm.value);
+    this.signIn$ = this.#authService.signIn(this.signInForm.value);
     this.signInForm.enable();
   }
 

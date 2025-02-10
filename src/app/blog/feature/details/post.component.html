@@ -1,0 +1,39 @@
+<section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 mb-12 mt-24">
+  @let post = post$ | async;
+  @if (post.data; as post) {
+    <button class="underline mb-4 flex items-center gap-1" (click)="back()">
+      <mat-icon svgIcon="heroicons_outline:arrow-left" class="icon-size-3" />
+      Retour
+    </button>
+
+    <p class="mb-2 font-medium text-gray-600">Commence le {{ post.created_at | date: 'longDate' }}</p>
+
+    <h1 class="font-bold block text-xl md:text-2xl mb-12 lg:text-4xl">
+      {{ post.title | titlecase }}
+    </h1>
+
+    <div class="relative mb-6 h-60 w-full md:h-96 bg-gray-50">
+      <img [ngSrc]="post | apiIMG: 'post'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
+    </div>
+    <div class="py-10">
+      <div class="flex flex-col gap-8">
+        <div>
+          <div class="flex items-center gap-1 mb-2 text-secondary-800">
+            <mat-icon svgIcon="description" class="icon-size-4" />
+            <h2 class="font-semibold text-lg">Description</h2>
+          </div>
+          <p class="mb-1.5 lowercase first-letter:uppercase" [innerHTML]="post.content"></p>
+        </div>
+      </div>
+    </div>
+  }
+  @if (post.isLoading) {
+    <app-post-skeleton />
+  }
+  @if (post.error) {
+    <div class="relative min-h-[75vh] w-full flex flex-col justify-center items-center">
+      <h2 class="text-3xl font-semibold">Aucun événement avec cet identifiant !</h2>
+    </div>
+  }
+</section>
+<app-footer />

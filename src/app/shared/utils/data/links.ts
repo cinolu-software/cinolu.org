@@ -9,6 +9,13 @@ export const explorationLinks: ILink[] = [
     exactUrl: true
   },
   {
+    name: 'Blog',
+    path: '/blog',
+    description: 'La salle de discussion',
+    icon: 'mat_outline:forum',
+    exactUrl: false
+  },
+  {
     name: 'Programmes',
     path: '/projects',
     description: 'Voir nos programmes',

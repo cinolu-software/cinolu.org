@@ -18,11 +18,12 @@ export class AuthService {
   #toast = inject(ToastrService);
   #apiService = inject(APIService);
 
-  signIn(payload: ISignIn): Observable<IAPIResponse<IUser>> {
-    const onSuccess = (user: IUser) => {
+  signIn(payload: ISignIn): Observable<IAPIResponse<[IUser, string]>> {
+    const onSuccess = (data: [IUser, string]) => {
+      const [user] = data;
       this.#toast.success('Bienvenue ' + user.name);
       this.#store.dispatch(authActions.signIn({ user }));
-      this.#router.navigate(['/me']);
+      this.#router.navigate(['/']);
     };
     return this.#apiService.post('auth/sign-in', payload, onSuccess);
   }

@@ -26,6 +26,25 @@ export interface IReview extends IBase {
   reviewer: IUser;
 }
 
+export interface IBlogCategory extends IBase {
+  name: string;
+}
+
+export interface IPost extends IBase {
+  title: string;
+  content: string;
+  image: string;
+  comments: IComment[];
+  category: IBlogCategory;
+  author: IUser;
+}
+
+export interface IComment extends IBase {
+  content: string;
+  by: IUser;
+  post: IPost;
+}
+
 export interface IVenture extends IBase {
   name: string;
   image: string;

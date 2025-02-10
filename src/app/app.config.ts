@@ -26,6 +26,7 @@ export const appConfig: ApplicationConfig = {
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: TitleStrategy, useClass: PageTitleStrategy },
     provideToastr({ positionClass: 'toast-bottom-right', progressBar: true }),
+
     provideHttpClient(withFetch(), withInterceptors([httpInterceptor, LoadingInterceptor])),
     provideRouter(
       appRoutes,

@@ -1,14 +1,14 @@
 <app-auth-card
   title="Se connecter"
   description="Connectez-vous et accéder à votre compte et continuer à explorer notre plateforme.">
-  @let result = result$ | async;
-  @if (result?.error) {
+  @let signIn = signIn$ | async;
+  @if (signIn?.error) {
     <app-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
-      {{ result.error }}
+      {{ signIn.error }}
     </app-alert>
   }
 
-  <div [ngClass]="result?.error && 'transition-transform translate-y-4 duration-150 '">
+  <div [ngClass]="signIn?.error && 'transition-transform translate-y-4 duration-150 '">
     <form class="mt-6" (ngSubmit)="onSignIn()" [formGroup]="signInForm">
       <mat-form-field class="w-full">
         <mat-label> Adresse e-mail </mat-label>
@@ -46,11 +46,11 @@
         </a>
       </div>
 
-      <button class="mt-6 w-full" mat-flat-button type="submit" [disabled]="result?.isLoading || signInForm.invalid">
-        @if (!result?.isLoading && !signInForm.invalid) {
+      <button class="mt-6 w-full" mat-flat-button type="submit" [disabled]="signIn?.isLoading || signInForm.invalid">
+        @if (!signIn?.isLoading && !signInForm.invalid) {
           <span> Se connecter </span>
         }
-        @if (result?.isLoading) {
+        @if (signIn?.isLoading) {
           <mat-progress-spinner class="text-white" [diameter]="24" [mode]="'indeterminate'" />
         }
       </button>
