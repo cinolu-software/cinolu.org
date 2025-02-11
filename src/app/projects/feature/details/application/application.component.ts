@@ -7,14 +7,13 @@ import { IApplication, IProject } from 'app/shared/utils/types/models.type';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { CommonModule } from '@angular/common';
-import { AlertComponent } from 'app/shared/ui/alert/alert.component';
 import { Animations } from 'app/shared/utils/animations';
 import { ProjectsService } from '../../../data-access/projects.service';
 
 @Component({
   selector: 'app-project-application',
   animations: Animations,
-  imports: [CommonModule, FormsModule, MatButtonModule, MatInputModule, MatProgressSpinnerModule, AlertComponent],
+  imports: [CommonModule, FormsModule, MatButtonModule, MatInputModule, MatProgressSpinnerModule],
   templateUrl: './application.component.html'
 })
 export class ProjectApplicationComponent {
