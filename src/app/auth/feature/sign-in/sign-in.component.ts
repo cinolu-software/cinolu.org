@@ -39,7 +39,7 @@ export class AuthSignInComponent {
   #formBuilder: FormBuilder = inject(FormBuilder);
   #authService = inject(AuthService);
   signInForm: FormGroup;
-  signIn$: Observable<IAPIResponse<[IUser, string]>>;
+  signIn$: Observable<IAPIResponse<IUser>>;
 
   constructor() {
     this.signInForm = this.#formBuilder.group({
