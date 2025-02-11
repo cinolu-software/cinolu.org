@@ -1,7 +1,6 @@
 @if (includForm(project()?.phases)) {
   @for (p of project()?.phases; track p.id) {
     @if (p?.form; as form) {
-      <h2 class="text-2xl font-medium text-gray-700">{{ p.name }}</h2>
       @for (input of form['inputs']; track $index) {
         <p class="text-lg text-gray-700 font-medium mb-4">
           {{ input.label }}

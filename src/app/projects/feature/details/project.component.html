@@ -26,7 +26,7 @@
         </button>
 
         <button
-          [disabled]="!project?.phases[0]?.form"
+          [disabled]="project?.phases?.length === 0"
           [ngClass]="activeTab() === 'application' && 'border-b border-primary-700 text-primary-700'"
           class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
           (click)="setActiveTab('application')">
