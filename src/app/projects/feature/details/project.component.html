@@ -1,6 +1,5 @@
 <section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 mt-24 mb-12">
   @let result = project$ | async;
-  @let user = user$ | async;
   @if (result.data; as project) {
     <button class="underline mb-4 flex items-center gap-1" (click)="back()">
       <mat-icon svgIcon="heroicons_outline:arrow-left" class="icon-size-3" />
@@ -27,7 +26,7 @@
         </button>
 
         <button
-          [disabled]="!user || !project?.phases[0]?.form"
+          [disabled]="!project?.phases[0]?.form"
           [ngClass]="activeTab() === 'application' && 'border-b border-primary-700 text-primary-700'"
           class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
           (click)="setActiveTab('application')">
