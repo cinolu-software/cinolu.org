@@ -1,14 +1,11 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { IApplication, IProject } from 'app/shared/utils/types/models.type';
-import { Observable } from 'rxjs';
-import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
+import { IPhase, IProject } from 'app/shared/utils/types/models.type';
 import { CommonModule } from '@angular/common';
 import { Animations } from 'app/shared/utils/animations';
-import { ProjectsService } from '../../../data-access/projects.service';
 
 @Component({
   selector: 'app-project-application',
@@ -18,11 +15,8 @@ import { ProjectsService } from '../../../data-access/projects.service';
 })
 export class ProjectApplicationComponent {
   project = input.required<IProject>();
-  formData = {};
-  application$: Observable<IAPIResponse<IApplication>>;
-  #projectsService = inject(ProjectsService);
 
-  onSubmit(): void {
-    this.application$ = this.#projectsService.apply({ project: this.project().id, answers: this.formData as JSON });
+  includForm(phases: IPhase[]): IPhase {
+    return phases.find((p) => p.form !== null);
   }
 }
