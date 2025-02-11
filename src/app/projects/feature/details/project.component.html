@@ -39,7 +39,7 @@
         <app-project-overview [project]="project" />
       }
 
-      @if (activeTab() === 'application' && project?.phases[0]?.form) {
+      @if (activeTab() === 'application' && project?.phases?.length > 0) {
         <app-project-application [project]="project" />
       }
     </div>
