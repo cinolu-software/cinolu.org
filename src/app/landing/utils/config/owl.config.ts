@@ -22,3 +22,13 @@ export const owlOptionsRecent: OwlOptions = {
     }
   }
 };
+
+export const owlOptionsStatements: OwlOptions = {
+  mouseDrag: true,
+  touchDrag: true,
+  loop: true,
+  dots: false,
+  autoplay: true,
+  nav: false,
+  items: 1
+};
