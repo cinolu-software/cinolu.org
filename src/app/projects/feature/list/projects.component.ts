@@ -48,10 +48,6 @@ export class ProjectsComponent implements OnInit {
     this.types$ = this.#projectsService.getTypes();
   }
 
-  getTypeId(types: IProjectType[], type: string): string {
-    return types.find((t) => t.name === type)?.id;
-  }
-
   onFilterChange(event: MatChipListboxChange, filter: string): void {
     this.queryParams().page = null;
     this.queryParams()[filter] = event.value === 'Tous' ? null : event.value;

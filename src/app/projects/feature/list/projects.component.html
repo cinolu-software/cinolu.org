@@ -1,4 +1,4 @@
-<section class="mb-12 mt-14">
+<section class="mb-12 mt-10">
   @let projects = projects$ | async;
   @let types = types$ | async;
   <div
@@ -7,7 +7,9 @@
       class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/60 to-primary-900/70 gap-6 text-white">
       <div
         class="relative z-10 flex flex-col items-start py-16 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
-        <h1 class="font-extrabold block text-xl mb-6 md:text-4xl xl:text-6xl md:w-5/6">Découvrez nos programmes</h1>
+        <h1 class="font-bold text-xl mb-6 md:text-4xl xl:text-6xl hyphens-none font-satoshi">
+          Tenez-vous au courant de tous nos événements !
+        </h1>
         <p class="mb-8 md:text-lg text-sm leading-relaxed font-light w-full md:w-3/4">
           Transformez vos idées en réalités impactantes grâce à nos projets innovants ! Rejoignez un écosystème conçu
           pour vous inspirer, vous former et vous accompagner.
@@ -21,7 +23,7 @@
         <mat-chip-listbox (change)="onFilterChange($event, 'type')">
           <div class="flex gap-1.5 flex-wrap text-sm">
             @for (type of types.data; track type.id) {
-              <mat-chip-option [selected]="getTypeId(types.data, queryParams().type) === type.name">
+              <mat-chip-option [value]="type.id" [selected]="queryParams().type === type.id">
                 {{ type.name }}
               </mat-chip-option>
             }

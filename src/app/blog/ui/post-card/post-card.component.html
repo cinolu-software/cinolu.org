@@ -2,13 +2,11 @@
   <div class="h-60 md:h-52 w-full relative bg-gray-100 mb-2">
     <img [ngSrc]="post() | apiIMG: 'post'" [alt]="post().title" class="object-cover" fill />
   </div>
-  <p class="font-medium mb-4">
+  <p class="font-medium my-4">
     {{ post().created_at | date: 'longDate' }}
   </p>
-  <p class="line-clamp-2 mb-1.5">
-    {{ post().content }}
-  </p>
-  <span class="rounded-full inline-block text-sm py-1.5 px-3 font-medium border">
+  <p class="line-clamp-2 mb-1.5" [innerHTML]="post().content"></p>
+  <span class="rounded-full inline-block text-xs py-1 px-3 font-medium border">
     {{ post().category.name }}
   </span>
 </a>

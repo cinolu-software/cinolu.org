@@ -37,7 +37,7 @@ export class PostsComponent implements OnInit {
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   queryParams = signal<QueryParams>({
-    page: Number(this.#route.snapshot.queryParams?.page) || null,
+    page: +this.#route.snapshot.queryParams?.page || null,
     category: this.#route.snapshot.queryParams?.category || null
   });
 
@@ -52,18 +52,9 @@ export class PostsComponent implements OnInit {
     this.#updateRouteAndEvents();
   }
 
-  toogleFinished(): void {
-    this.queryParams().page = null;
-    this.#updateRouteAndEvents();
-  }
-
   onPageChange(currentPage: number): void {
     this.queryParams().page = currentPage === 1 ? null : currentPage;
     this.#updateRouteAndEvents();
-  }
-
-  getCategoryId(types: IBlogCategory[], type: string): string {
-    return types.find((t) => t.name === type)?.id;
   }
 
   #loadPosts(): void {
