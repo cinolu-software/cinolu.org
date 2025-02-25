@@ -11,23 +11,27 @@
 
     <p class="mb-8">Découvrez nos programmes et laissez-vous accompagner</p>
 
-    <div class="relative mb-16">
-      <owl-carousel-o #recentProjects [options]="owlOptions">
+    <div class="flex flex-col gap-5">
+      <owl-carousel-o #carousel [options]="owlOptions">
         @for (project of result?.data; track project.id) {
           <ng-template carouselSlide>
             <app-project-card [project]="project" />
           </ng-template>
         }
       </owl-carousel-o>
-
-      <button (click)="recentProjects.prev()" class="nav-btn absolute top-[45%] -left-5 z-10">
-        <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_left"></mat-icon>
-      </button>
-      <button (click)="recentProjects.next()" class="nav-btn absolute top-[45%] -right-5 z-10">
-        <mat-icon class="icon-size-4" svgIcon="mat_solid:chevron_right"></mat-icon>
-      </button>
+      <div class="flex items-center gap-4 place-self-center">
+        <button
+          (click)="carousel.prev()"
+          class="h-8 w-8 flex flex-col items-center justify-center border border-secondary-700 hover:bg-secondary-700 hover:text-white transition-colors duration-300 rounded-full">
+          &larr;
+        </button>
+        <button
+          (click)="carousel.next()"
+          class="h-8 w-8 flex flex-col items-center justify-center border border-secondary-700 hover:bg-secondary-700 hover:text-white transition-colors duration-300 rounded-full">
+          &rarr;
+        </button>
+      </div>
     </div>
-
     @if (result.isLoading) {
       <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
         @for (program of [1, 2, 3]; track $index) {
