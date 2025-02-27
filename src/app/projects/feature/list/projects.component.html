@@ -31,7 +31,7 @@
         </mat-chip-listbox>
       }
       @if (projects?.data?.[0]) {
-        <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
           @for (
             project of projects?.data?.[0]
               | paginate: { itemsPerPage: 9, currentPage: queryParams().page, totalItems: projects.data[1] };
@@ -57,7 +57,7 @@
         <h2 class="text-3xl font-semibold">Aucun programme!</h2>
       }
       @if (projects?.isLoading) {
-        <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
           @for (project of skeletonArray; track $index) {
             <app-project-card-skeleton />
           }

@@ -31,7 +31,7 @@
         </mat-chip-listbox>
       }
       @if (events?.data?.[0]) {
-        <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
           @for (
             e of events.data[0]
               | paginate: { itemsPerPage: 9, currentPage: queryParams().page, totalItems: events.data[1] };
@@ -56,7 +56,7 @@
         <h2 class="text-3xl font-semibold">Aucun événement !</h2>
       }
       @if (events.isLoading) {
-        <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
           @for (program of skeletonArray; track $index) {
             <app-event-card-skeleton />
           }
