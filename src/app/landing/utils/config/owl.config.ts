@@ -16,9 +16,6 @@ export const owlOptionsRecent: OwlOptions = {
     },
     940: {
       items: 3
-    },
-    1040: {
-      items: 4
     }
   }
 };
