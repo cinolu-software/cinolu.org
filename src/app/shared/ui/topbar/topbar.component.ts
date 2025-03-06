@@ -11,7 +11,7 @@ import { ApiImgPipe } from '../../pipes/api-img.pipe';
 import { ILink } from '../../utils/types/link.type';
 import { AuthService } from '../../../auth/data-access/auth.service';
 import { IAPIResponse } from '../../services/api/types/api-response.type';
-import { explorationLinks, myCinoluLinks } from '../../utils/data/links';
+import { EXPLORATION_LINKS, MY_CINOLU_LINKS } from '../../utils/data/links';
 import { environment } from 'environments/environment';
 
 @Component({
@@ -58,8 +58,8 @@ export class TopbarComponent implements OnInit {
 
   getLinks(tab: string): ILink[] {
     const links = {
-      Parcourir: explorationLinks,
-      'My cinolu': myCinoluLinks
+      Parcourir: EXPLORATION_LINKS,
+      'My cinolu': MY_CINOLU_LINKS
     };
     return links[this.getTabName(tab)];
   }

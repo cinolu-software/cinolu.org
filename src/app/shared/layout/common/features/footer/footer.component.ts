@@ -1,17 +1,17 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { EXPLORATION_LINKS, MY_CINOLU_LINKS, SOCIAL_LINKS } from '../../utils/data/links';
+import { NgOptimizedImage } from '@angular/common';
+import { EXPLORATION_LINKS, MY_CINOLU_LINKS, SOCIAL_LINKS } from '../../../../utils/data/links';
 
 @Component({
   selector: 'app-footer',
-  imports: [CommonModule, RouterLink, NgOptimizedImage],
+  imports: [RouterLink, NgOptimizedImage],
   templateUrl: './footer.component.html'
 })
 export class FooterComponent {
   links = [
     { title: 'Parcourir', urls: EXPLORATION_LINKS },
-    { title: 'My cinolu', urls: MY_CINOLU_LINKS },
+    { title: 'My Cinolu', urls: MY_CINOLU_LINKS },
     { title: 'Socials', urls: SOCIAL_LINKS }
   ];
 

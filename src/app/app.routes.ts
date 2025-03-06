@@ -5,13 +5,49 @@ import { landingRoutes } from './landing/landing.routes';
 import { aboutRoutes } from './about-us/about-us.routes';
 import { projectsRoutes } from './projects/projects.routes';
 import { blogRoutes } from './blog/blog.routes';
+import { LayoutComponent } from './shared/layout/layout.component';
 
 export const appRoutes: Route[] = [
-  { path: 'projects', loadChildren: () => projectsRoutes },
-  { path: 'events', loadChildren: () => eventsRoutes },
-  { path: 'about-us', loadChildren: () => aboutRoutes },
-  { path: 'blog', loadChildren: () => blogRoutes },
-  { path: '', loadChildren: () => landingRoutes },
-  { path: '', loadChildren: () => auhtRoutes },
-  { path: '**', loadChildren: () => landingRoutes }
+  {
+    path: 'projects',
+    component: LayoutComponent,
+    data: { layout: 'primary' },
+    loadChildren: () => projectsRoutes
+  },
+  {
+    path: 'events',
+    component: LayoutComponent,
+    data: { layout: 'primary' },
+    loadChildren: () => eventsRoutes
+  },
+  {
+    path: 'about-us',
+    component: LayoutComponent,
+    data: { layout: 'primary' },
+    loadChildren: () => aboutRoutes
+  },
+  {
+    path: 'blog',
+    component: LayoutComponent,
+    data: { layout: 'primary' },
+    loadChildren: () => blogRoutes
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    data: { layout: 'primary' },
+    loadChildren: () => landingRoutes
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    data: { layout: 'primary' },
+    loadChildren: () => auhtRoutes
+  },
+  {
+    path: '**',
+    component: LayoutComponent,
+    data: { layout: 'primary' },
+    loadChildren: () => landingRoutes
+  }
 ];

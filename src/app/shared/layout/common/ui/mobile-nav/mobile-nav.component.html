@@ -1,0 +1,72 @@
+<nav class="flex items-center justify-between lg:hidden px-8">
+  <a routerLink="/" class="flex items-center gap-3 cursor-pointer" aria-label="logo">
+    <h1 class="font-bold text-2xl">fikiri<span class="text-secondary-500 animate-ping">.</span></h1>
+  </a>
+  <button (click)="toogleNav()">
+    <mat-icon [svgIcon]="isOpen() ? 'mat_outline:close' : 'mat_outline:menu'" class="icon-size-5" />
+  </button>
+  <div
+    class="fixed top-24 left-10 right-10 bottom-20 bg-white backdrop-blur-lg rounded-lg transition-transform duration-300 {{
+      isOpen() ? 'translate-x-0 active-nav' : '-translate-x-[120vw]'
+    }}">
+    <div class="flex flex-col justify-between py-16 px-10 h-full text-gray-900">
+      <div class="flex flex-col gap-6 font-bold text-xl menu">
+        @for (tab of tabs(); track $index) {
+          <button class="flex items-center justify-between" (click)="setActiveTab(tab)">
+            {{ tab }}
+            <mat-icon svgIcon="mat_outline:keyboard_arrow_down" class="icon-size-5" />
+          </button>
+        }
+      </div>
+      @if (user()) {
+        <div class="flex flex-col gap-8 text-gray-900">
+          <a [href]="accountUrl()" target="_blank" class="flex items-center gap-2.5">
+            <img
+              [src]="user() | apiIMG: 'user'"
+              class="rounded-full w-7 h-7 object-cover ring-2 ring-secondary-800 ring-offset-1"
+              alt="profile picture" />
+            Dashboard
+          </a>
+          <button
+            class="flex items-center text-white justify-center text-center px-6 py-2 bg-red-800 rounded-sm hover:bg-red-900 disabled:bg-red-800/30 transition-colors duration-300 gap-1.5 font-medium text-base"
+            (click)="handleSignOut()">
+            Se déconnecter
+          </button>
+        </div>
+      } @else {
+        <a
+          routerLink="/sign-in"
+          class="flex items-center justify-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium text-base">
+          Se connecter
+        </a>
+      }
+    </div>
+  </div>
+  <ul
+    class="text-base text-gray-800 fixed top-24 left-10 right-10 rounded-lg bottom-20 bg-white backdrop-blur-lg z-30 transition-transform duration-300 {{
+      activeTab() && isOpen() ? 'translate-x-0' : '-translate-x-[120vw]'
+    }}">
+    <div
+      class="flex flex-col items-start justify-start gap-7 font-medium py-16 px-10 h-full  {{
+        activeTab() && isOpen() && 'active-nav'
+      }}">
+      <div class="menu">
+        <button class="font-semibold text-gray-800 flex items-center gap-1 m-4" (click)="setActiveTab(null)">
+          <mat-icon svgIcon="mat_outline:keyboard_arrow_left" class="icon-size-4" />
+          Retour
+        </button>
+      </div>
+      @for (link of links() | getLinks: activeTab(); track $index) {
+        <a [routerLink]="link.path" [fragment]="link.fragment" class="flex items-center gap-2.5">
+          <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
+            <mat-icon [svgIcon]="link.icon" class="icon-size-4 text-white" />
+          </span>
+          <p class="flex flex-col gap-0.5 font-medium">
+            {{ link.name }}
+            <span class="description text-gray-700 text-sm">{{ link.description }}</span>
+          </p>
+        </a>
+      }
+    </div>
+  </ul>
+</nav>

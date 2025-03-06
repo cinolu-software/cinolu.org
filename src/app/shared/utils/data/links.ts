@@ -1,6 +1,6 @@
 import { ILink } from '../types/link.type';
 
-export const explorationLinks: ILink[] = [
+export const EXPLORATION_LINKS: ILink[] = [
   {
     name: 'Accueil',
     path: '/',
@@ -39,7 +39,7 @@ export const explorationLinks: ILink[] = [
   }
 ];
 
-export const myCinoluLinks: ILink[] = [
+export const MY_CINOLU_LINKS: ILink[] = [
   {
     name: 'A propos',
     path: '/about-us',
@@ -75,7 +75,7 @@ export const myCinoluLinks: ILink[] = [
   }
 ];
 
-export const socialLinks: ILink[] = [
+export const SOCIAL_LINKS: ILink[] = [
   { name: 'Facebook', path: 'https://www.facebook.com/share/15cR36qNs8/?mibextid=kFxxJD', external: true },
   { name: 'Twitter', path: 'https://x.com/Lubumdigital?t=MYcaQ_OEdCO3KZDCQzMoeQ&s=09', external: true },
   { name: 'LinkedIn', path: 'https://www.linkedin.com/company/cinolu/', external: true }
