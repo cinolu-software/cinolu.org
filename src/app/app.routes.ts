@@ -41,7 +41,7 @@ export const appRoutes: Route[] = [
   {
     path: '',
     component: LayoutComponent,
-    data: { layout: 'primary' },
+    data: { layout: 'secondary' },
     loadChildren: () => auhtRoutes
   },
   {

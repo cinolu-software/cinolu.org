@@ -1,6 +1,6 @@
 @let user = user$ | async;
 <header
-  class="navbar animate-fadeInUp fixed h-16 shadow-md text-gray-950 py-6 bg-white w-full top-0 right-0 left-0 flex flex-col justify-center z-20 font-satoshi px-8 md:px-32 2xl:px-48">
+  class="navbar fixed h-16 shadow-md text-gray-950 py-6 bg-white w-full top-0 right-0 left-0 flex flex-col justify-center z-20 font-satoshi px-8 md:px-32 2xl:px-48">
   <app-mobile-nav [user]="user" [accountUrl]="accUrl" [tabs]="tabs()" [links]="links()" (singOut)="signOut()" />
   <app-desktop-nav [user]="user" [accountUrl]="accUrl" [tabs]="tabs()" [links]="links()" (singOut)="signOut()" />
 </header>

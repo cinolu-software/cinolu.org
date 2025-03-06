@@ -1,7 +1,7 @@
 import { Component, input, output, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { IUser } from '../../../../utils/types/models.type';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../pipes/api-img.pipe';
 import { RouterModule } from '@angular/router';
 import { ILink } from '../../../../utils/types/link.type';
@@ -13,7 +13,7 @@ import { GetLinksPipe } from '../../../../pipes/get-links.pipe';
     '(document:click)': 'onClickOutside($event)'
   },
   templateUrl: './mobile-nav.component.html',
-  imports: [MatIconModule, RouterModule, CommonModule, ApiImgPipe, GetLinksPipe]
+  imports: [MatIconModule, RouterModule, NgOptimizedImage, CommonModule, ApiImgPipe, GetLinksPipe]
 })
 export class MobileNavComponent {
   user = input.required<IUser>();

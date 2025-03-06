@@ -8,7 +8,6 @@ import { IBlogCategory, IPost } from 'app/shared/utils/types/models.type';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
-import { FooterComponent } from '../../../shared/ui/footer/footer.component';
 import { BlogService } from '../../data-access/blog.service';
 import { QueryParams } from '../../utils/types/query-params.type';
 import { PostCardComponent } from '../../ui/post-card/post-card.component';
@@ -23,7 +22,6 @@ import { PostComponent } from '../../ui/post-card-skeleton/post-card-skeleton.co
     MatSlideToggleModule,
     NgxPaginationModule,
     MatChipsModule,
-    FooterComponent,
     PostCardComponent,
     PostComponent
   ],

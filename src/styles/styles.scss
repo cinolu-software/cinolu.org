@@ -12,10 +12,10 @@
   }
 
   .pg .ngx-pagination .current {
-    @apply bg-primary-500 bg-opacity-70 rounded-sm m-0 px-2 py-0.5;
+    @apply bg-primary-700 mr-1.5 text-sm inline-flex font-bold rounded-full items-center justify-center h-8 w-8;
   }
   .pg .ngx-pagination a {
-    @apply bg-gray-200/40 text-gray-700 mx-1 shadow-sm shadow-gray-300 bg-opacity-70 rounded-sm m-0 px-2 py-0.5;
+    @apply bg-white border text-sm border-primary-700 mr-1.5 inline-flex font-medium rounded-full items-center justify-center h-8 w-8 hover:bg-primary-700 hover:text-white transition-colors duration-300;
   }
 
   :root {
@@ -41,19 +41,6 @@
       border-radius: 20px;
       box-shadow: inset 0 0 0 20px rgba(0, 0, 0, 0.37);
     }
-  }
-
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-
-  .nav-btn {
-    @apply transition-transform duration-200 hover:scale-110 rounded-full flex flex-col items-center justify-center h-10 w-10 text-white bg-secondary-700 shadow-md;
   }
 
   @keyframes fadeInUp {

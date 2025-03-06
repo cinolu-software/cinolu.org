@@ -1,36 +1,25 @@
-<footer class="border-t border-dashed py-10">
+<footer class="border-t bg-primary-900 text-white py-10">
   <div class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
     <div class="flex gap-8 items-start justify-between flex-wrap">
       @for (link of links; track $index) {
         <div class="flex flex-col gap-3 mb-6">
-          <h5 class="font-semibold mb-3 text-gray-900 text-lg border-r pr-3">{{ link.title }}</h5>
-          <ul class="list-disc flex flex-col gap-3">
-            @for (url of link.urls; track $index) {
-              <li class="ml-4">
-                @if (url.external) {
-                  <a target="_blank" class="text-satoshi text-sm md:text-base hover:underline" [href]="url.path">{{
-                    url.name
-                  }}</a>
-                } @else {
-                  <a
-                    [fragment]="url.fragment"
-                    class="text-satoshi text-sm md:text-base hover:underline"
-                    [routerLink]="url.path">
-                    {{ url.name }}
-                  </a>
-                }
-              </li>
+          <h5 class="font-semibold mb-3 text-gray-200 text-lg">{{ link.title }}</h5>
+          @for (url of link.urls; track $index) {
+            @if (url.external) {
+              <a target="_blank" class="text-satoshi text-sm md:text-base" [href]="url.path">{{ url.name }}</a>
+            } @else {
+              <a [fragment]="url.fragment" class="text-satoshi text-sm md:text-base" [routerLink]="url.path">
+                {{ url.name }}
+              </a>
             }
-          </ul>
+          }
         </div>
       }
-      <div class="flex flex-col gap-2 md:col-span-1">
-        <a routerLink="/" class="flex items-center gap-3 cursor-pointer mb-4" aria-label="logo">
-          <img ngSrc="/images/favicon.png" alt="logo" class="cursor-pointer w-8" width="64" height="68" priority />
-          <h1 class="font-bold text-2xl">fikiri<span class="text-blue-400 animate-ping">.</span></h1>
+      <div class="flex flex-col gap-3">
+        <a routerLink="/" class="flex items-center gap-3 cursor-pointer">
+          <img ngSrc="images/logo/logo-w.png" alt="logo" class="w-14 cursor-pointer" width="64" height="68" priority />
         </a>
-        <h5 class="font-semibold mb-4">Copyright</h5>
-        <p class="">&copy; PNUD {{ getYear() }}. Tous droits réservés</p>
+        <p class="text-sm">&copy; {{ getYear() }} CINOLU</p>
       </div>
     </div>
   </div>

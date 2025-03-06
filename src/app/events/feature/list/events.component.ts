@@ -12,7 +12,6 @@ import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { EventsService } from '../../data-access/events.service';
 import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
-import { FooterComponent } from '../../../shared/ui/footer/footer.component';
 
 @Component({
   selector: 'app-programs',
@@ -24,8 +23,7 @@ import { FooterComponent } from '../../../shared/ui/footer/footer.component';
     NgxPaginationModule,
     EventCardComponent,
     EventCardSkeletonComponent,
-    MatChipsModule,
-    FooterComponent
+    MatChipsModule
   ],
   templateUrl: './events.component.html'
 })

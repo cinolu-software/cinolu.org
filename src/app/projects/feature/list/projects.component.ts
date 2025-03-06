@@ -13,7 +13,6 @@ import { QueryParams } from '../../utils/types/query-params.type';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { ProjectsService } from '../../data-access/projects.service';
-import { FooterComponent } from '../../../shared/ui/footer/footer.component';
 
 @Component({
   selector: 'app-projects',
@@ -26,8 +25,7 @@ import { FooterComponent } from '../../../shared/ui/footer/footer.component';
     NgxPaginationModule,
     ProjectCardComponent,
     ProgramCardSkeletonComponent,
-    MatChipsModule,
-    FooterComponent
+    MatChipsModule
   ],
   templateUrl: './projects.component.html'
 })

@@ -15,7 +15,6 @@ import { ProjectApplicationComponent } from './application/application.component
 import { Store } from '@ngrx/store';
 import { selectUser } from 'app/shared/store/auth/auth.reducers';
 import { ProjectsService } from '../../data-access/projects.service';
-import { FooterComponent } from '../../../shared/ui/footer/footer.component';
 import { ProjectSkeletonComponent } from '../../ui/project-skeleton/project-skeleton.component';
 
 @Component({
@@ -31,7 +30,6 @@ import { ProjectSkeletonComponent } from '../../ui/project-skeleton/project-skel
     FormsModule,
     ApiImgPipe,
     ProjectApplicationComponent,
-    FooterComponent,
     ProjectOverviewComponent,
     ProjectSkeletonComponent
   ],

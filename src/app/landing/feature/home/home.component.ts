@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FooterComponent } from '../../../shared/ui/footer/footer.component';
 import { HeroComponent } from '../hero/hero.component';
 import { PartnersComponent } from '../partners/partners.component';
 import { RecentEventsComponent } from '../recent-events/recent-events.component';
@@ -14,7 +13,6 @@ import { StatsComponent } from '../stats/stats.component';
     HeroComponent,
     ServicesComponent,
     StatementComponent,
-    FooterComponent,
     StatsComponent,
     PartnersComponent,
     RecentProjectsComponent,
