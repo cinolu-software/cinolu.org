@@ -1,7 +1,7 @@
 @let result = projects$ | async;
 @if (result?.data?.length && isBrowser()) {
   <section class="mb-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0" id="projects">
-    <a routerLink="/projects" class="group font-semibold text-xl md:text-4xl mb-2">
+    <a routerLink="/projects" class="group font-semibold text-xl md:text-4xl mb-2 autoShowX">
       Nos programmes
       <span class="text-secondary-600"> récents </span>
       <mat-icon
@@ -9,9 +9,9 @@
         class="text-secondary-600 group-hover:-rotate-45 transition-transform duration-200" />
     </a>
 
-    <p class="mb-8">Découvrez nos programmes et laissez-vous accompagner</p>
+    <p class="mb-8 autoShowX">Découvrez nos programmes et laissez-vous accompagner</p>
 
-    <div class="flex flex-col gap-5">
+    <div class="flex flex-col gap-5 autoShowY">
       <owl-carousel-o #carousel [options]="owlOptions">
         @for (project of result?.data; track project.id) {
           <ng-template carouselSlide>
