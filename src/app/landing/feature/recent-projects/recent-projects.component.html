@@ -1,7 +1,7 @@
 @let result = projects$ | async;
 @if (result?.data?.length && isBrowser()) {
   <section class="mb-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0" id="projects">
-    <a routerLink="/projects" class="group font-semibold text-xl md:text-4xl mb-2 fadeInRight">
+    <a routerLink="/projects" class="group font-semibold text-xl md:text-4xl mb-2 fadeInUp">
       Nos programmes
       <span class="text-secondary-600"> récents </span>
       <mat-icon
@@ -9,7 +9,7 @@
         class="text-secondary-600 group-hover:-rotate-45 transition-transform duration-200" />
     </a>
 
-    <p class="mb-8 fadeInRight">Découvrez nos programmes et laissez-vous accompagner</p>
+    <p class="mb-8 fadeInUp">Découvrez nos programmes et laissez-vous accompagner</p>
 
     <div class="flex flex-col gap-5 fadeInUp">
       <owl-carousel-o #carousel [options]="owlOptions">

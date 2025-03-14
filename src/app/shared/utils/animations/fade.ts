@@ -135,7 +135,7 @@ const fadeInLeft = trigger('fadeInLeft', [
 // -----------------------------------------------------------------------------------------------------
 // @ Fade in right
 // -----------------------------------------------------------------------------------------------------
-const fadeInRight = trigger('fadeInRight', [
+const fadeInUp = trigger('fadeInUp', [
   state(
     'void',
     style({
@@ -320,7 +320,7 @@ export {
   fadeIn,
   fadeInBottom,
   fadeInLeft,
-  fadeInRight,
+  fadeInUp,
   fadeInTop,
   fadeOut,
   fadeOutBottom,

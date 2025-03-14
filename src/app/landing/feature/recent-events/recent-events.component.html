@@ -1,7 +1,7 @@
 @let result = events$ | async;
 @if (result?.data?.length && isBrowser()) {
   <section class="mb-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0" id="events">
-    <a routerLink="/events" class="group font-semibold text-xl md:text-4xl mb-2 fadeInRight">
+    <a routerLink="/events" class="group font-semibold text-xl md:text-4xl mb-2 fadeInUp">
       Nos récents
       <span class="text-secondary-600"> événements </span>
       <mat-icon
@@ -9,7 +9,7 @@
         class="text-secondary-600 group-hover:-rotate-45 transition-transform duration-200" />
     </a>
 
-    <p class="mb-8 fadeInRight">Restez informé sur différents événements et partipez</p>
+    <p class="mb-8 fadeInUp">Restez informé sur différents événements et partipez</p>
 
     <div class="flex flex-col gap-5 fadeInUp">
       <owl-carousel-o #carousel [options]="owlOptions">
