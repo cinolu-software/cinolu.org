@@ -1,4 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, query, stagger, state, style, transition, trigger } from '@angular/animations';
 import { AnimationCurves, AnimationDurations } from 'app/shared/utils/animations/defaults';
 
 // -----------------------------------------------------------------------------------------------------
@@ -28,6 +28,15 @@ const fadeIn = trigger('fadeIn', [
       timings: `${AnimationDurations.entering} ${AnimationCurves.deceleration}`
     }
   })
+]);
+
+const fadeInStagger = trigger('fadeInStagger', [
+  transition(':enter', [
+    query('.fade-item', [
+      style({ opacity: 0, transform: 'translateY(20px)' }),
+      stagger(300, [animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))])
+    ])
+  ])
 ]);
 
 // -----------------------------------------------------------------------------------------------------
@@ -317,5 +326,6 @@ export {
   fadeOutBottom,
   fadeOutLeft,
   fadeOutRight,
-  fadeOutTop
+  fadeOutTop,
+  fadeInStagger
 };

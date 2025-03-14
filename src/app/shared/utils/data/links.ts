@@ -2,20 +2,6 @@ import { ILink } from '../types/link.type';
 
 export const EXPLORATION_LINKS: ILink[] = [
   {
-    name: 'Accueil',
-    path: '/',
-    description: 'Découvez la plateforme',
-    icon: 'mat_outline:home',
-    exactUrl: true
-  },
-  {
-    name: 'Blog',
-    path: '/blog',
-    description: 'Le blog',
-    icon: 'mat_outline:forum',
-    exactUrl: false
-  },
-  {
     name: 'Programmes',
     path: '/projects',
     description: 'Voir nos programmes',
@@ -30,11 +16,25 @@ export const EXPLORATION_LINKS: ILink[] = [
     exactUrl: false
   },
   {
-    name: 'Partenaires',
+    name: 'Ecosysteme',
     path: '/',
     fragment: 'partners',
     description: 'Voir nos partenaires',
     icon: 'mat_outline:groups',
+    exactUrl: true
+  },
+  {
+    name: 'Notre Blog',
+    path: '/blog',
+    description: 'Le blog',
+    icon: 'mat_outline:forum',
+    exactUrl: false
+  },
+  {
+    name: 'Accueil',
+    path: '/',
+    description: 'Découvez la plateforme',
+    icon: 'mat_outline:home',
     exactUrl: true
   }
 ];

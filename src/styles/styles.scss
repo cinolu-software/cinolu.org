@@ -14,6 +14,7 @@
   .pg .ngx-pagination .current {
     @apply bg-primary-700 mr-1.5 text-sm inline-flex font-bold rounded-full items-center justify-center h-8 w-8;
   }
+
   .pg .ngx-pagination a {
     @apply bg-white border text-sm border-primary-700 mr-1.5 inline-flex font-medium rounded-full items-center justify-center h-8 w-8 hover:bg-primary-700 hover:text-white transition-colors duration-300;
   }
@@ -43,67 +44,33 @@
     }
   }
 
-  @keyframes fadeInUp {
+  .fadeIn {
+    animation: fadeIn 300ms ease-in-out;
+  }
+
+  .fadeInUp {
+    animation: fadeInUp both;
+    animation-timeline: view(70% 5%);
+  }
+
+  .fadeInRight {
+    animation: fadeInRight both;
+    animation-timeline: view(70% 5%);
+  }
+
+  @keyframes fadeIn {
     0% {
       opacity: 0;
-      -webkit-transform: translate3d(0, 1rem, 0);
       transform: translate3d(0, 1rem, 0);
     }
 
     100% {
       opacity: 1;
-      -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
     }
   }
 
-  .animate-fadeInUp {
-    animation: fadeInUp 300ms ease-in-out;
-  }
-  .autoBLur {
-    animation: autoBLurAnimation linear both;
-    animation-timeline: view();
-  }
-
-  @keyframes autoBLurAnimation {
-    0% {
-      filter: blur(40px);
-    }
-    45%,
-    55% {
-      filter: blur(0px);
-    }
-    100% {
-      filter: blur(40px);
-    }
-  }
-
   @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fadeInUp {
-    animation: fadeInUp 300ms ease-in;
-  }
-
-  .autoShowY {
-    animation: autoShowAnimationY both;
-    animation-timeline: view(70% 5%);
-  }
-
-  .autoShowX {
-    animation: autoShowAnimationX both;
-    animation-timeline: view(70% 5%);
-  }
-
-  @keyframes autoShowAnimationY {
     from {
       opacity: 0;
       transform: translateY(200px);
@@ -114,7 +81,7 @@
     }
   }
 
-  @keyframes autoShowAnimationX {
+  @keyframes fadeInRight {
     from {
       opacity: 0;
       transform: translateX(150px);
