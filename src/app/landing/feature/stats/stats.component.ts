@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { stats } from '../../utils/data/stats';
+import { stats } from '../../utils/data/stats.data';
 
 @Component({
   selector: 'app-stats',

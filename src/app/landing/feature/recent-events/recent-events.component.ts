@@ -1,31 +1,26 @@
-import { afterNextRender, Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from '../../../shared/services/api/types/api-response.type';
 import { IEvent } from '../../../shared/utils/types/models.type';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
 import { EventsService } from '../../../events/data-access/events.service';
-import { EventCardComponent } from '../../../shared/ui/event-card/event-card.component';
-import { EventCardSkeletonComponent } from '../../../shared/ui/event-card-skeleton/event-card-skeleton.component';
-import { owlOptionsRecent } from '../../utils/config/owl.config';
-import { CarouselModule } from 'ngx-owl-carousel-o';
+import { EventCardComponent } from '../../../events/ui/event-card/event-card.component';
+import { EventCardSkeletonComponent } from '../../../events/ui/event-card-skeleton/event-card-skeleton.component';
+import { carouselConfig } from '../../utils/config/carousel.config';
+import { NgIcon } from '@ng-icons/core';
+import { CarouselModule } from 'primeng/carousel';
 
 @Component({
   selector: 'app-recent-events',
   providers: [EventsService],
-  imports: [CommonModule, EventCardComponent, CarouselModule, EventCardSkeletonComponent, RouterModule, MatIconModule],
+  imports: [CommonModule, EventCardComponent, CarouselModule, EventCardSkeletonComponent, RouterModule, NgIcon],
   templateUrl: './recent-events.component.html'
 })
 export class RecentEventsComponent implements OnInit {
   events$: Observable<IAPIResponse<IEvent[]>>;
   #eventsService = inject(EventsService);
-  isBrowser = signal<boolean>(false);
-  owlOptions = owlOptionsRecent;
-
-  constructor() {
-    afterNextRender(() => this.isBrowser.set(true));
-  }
+  carouselOptions = carouselConfig;
 
   ngOnInit(): void {
     this.events$ = this.#eventsService.findRecent();

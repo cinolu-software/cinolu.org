@@ -1,11 +1,11 @@
 import { Component, input, signal } from '@angular/core';
 import { IProject } from 'app/shared/utils/types/models.type';
 import { CommonModule, DatePipe } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
+import { NgIcon } from '@ng-icons/core';
 
 @Component({
   selector: 'app-project-overview',
-  imports: [MatIconModule, DatePipe, MatIconModule, CommonModule],
+  imports: [NgIcon, DatePipe, CommonModule],
   templateUrl: './overview.component.html'
 })
 export class ProjectOverviewComponent {

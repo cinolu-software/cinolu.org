@@ -10,30 +10,46 @@ import { IAPIResponse } from './types/api-response.type';
 export class APIService {
   #http = inject(HttpClient);
 
-  get<T>(url: string, params: HttpParams = null, onSuccess?: (data?: T) => void): Observable<IAPIResponse<T>> {
+  get<T>(url: string, params?: HttpParams, onSuccess?: (data?: T) => void): Observable<IAPIResponse<T>> {
     return this.#http.get<{ data: T }>(url, { params }).pipe(
-      map((res) => ({ isLoading: false, data: res?.data, error: null, isSuccess: true })),
+      map((res) => ({ isLoading: false, data: res?.data, isSuccess: true })),
       tap((res) => onSuccess && onSuccess(res?.data)),
-      catchError((err) => of({ isLoading: false, data: null, error: err.error['message'], isSuccess: false })),
-      startWith({ isLoading: true, data: null, error: null, isSuccess: false })
+      catchError(() => of({ isLoading: false, data: null, isSuccess: false })),
+      startWith({ isLoading: true, data: null, isSuccess: false })
     );
   }
 
-  post<U, T>(url: string, payload: U, onSuccess?: (data?: T) => void): Observable<IAPIResponse<T>> {
+  post<U, T>(
+    url: string,
+    payload: U,
+    onSuccess?: (data?: T) => void,
+    onError?: (err: string) => void
+  ): Observable<IAPIResponse<T>> {
     return this.#http.post<{ data: T }>(url, payload).pipe(
-      map((res) => ({ isLoading: false, data: res?.data, error: null, isSuccess: true })),
+      map((res) => ({ isLoading: false, data: res?.data, isSuccess: true })),
       tap((res) => onSuccess && onSuccess(res?.data)),
-      catchError((err) => of({ isLoading: false, data: null, error: err.error['message'], isSuccess: false })),
-      startWith({ isLoading: true, data: null, error: null, isSuccess: false })
+      catchError((err) => {
+        if (err) onError(err.error['message']);
+        return of({ isLoading: false, data: null, isSuccess: false });
+      }),
+      startWith({ isLoading: true, data: null, isSuccess: false })
     );
   }
 
-  patch<U, T>(url: string, payload: U, onSuccess?: (data?: T) => void): Observable<IAPIResponse<T>> {
+  patch<U, T>(
+    url: string,
+    payload: U,
+    onSuccess?: (data?: T) => void,
+    onError?: (err: string) => void
+  ): Observable<IAPIResponse<T>> {
     return this.#http.patch<{ data: T }>(url, payload).pipe(
-      map((res) => ({ isLoading: false, data: res?.data, error: null, isSuccess: true })),
+      map((res) => ({ isLoading: false, data: res?.data, isSuccess: true })),
       tap((res) => onSuccess && onSuccess(res?.data)),
-      catchError((err) => of({ isLoading: false, data: null, error: err.error['message'], isSuccess: false })),
-      startWith({ isLoading: true, data: null, error: null, isSuccess: false })
+      catchError((err) => {
+        if (err) onError(err.error['message']);
+        return of({ isLoading: false, data: null, isSuccess: false });
+      }),
+      startWith({ isLoading: true, data: null, isSuccess: false })
     );
   }
 }

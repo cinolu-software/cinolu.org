@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-loader',
   imports: [],
   templateUrl: './loader.component.html',
-  styleUrl: './loader.component.scss'
+  styleUrl: './loader.component.css'
 })
 export class LoaderComponent {}

@@ -1,14 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { IProject, IProjectType } from 'app/shared/utils/types/models.type';
-import { MatOptionModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { IProject } from 'app/shared/utils/types/models.type';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ProjectCardComponent } from '../../../shared/ui/project-card/project-card.component';
-import { ProgramCardSkeletonComponent } from '../../../shared/ui/project-card-skeleton/project-card-skeleton.component';
+import { ProjectCardComponent } from '../../ui/project-card/project-card.component';
+import { ProgramCardSkeletonComponent } from '../../ui/project-card-skeleton/project-card-skeleton.component';
 import { QueryParams } from '../../utils/types/query-params.type';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
@@ -17,22 +13,12 @@ import { ProjectsService } from '../../data-access/projects.service';
 @Component({
   selector: 'app-projects',
   providers: [ProjectsService],
-  imports: [
-    CommonModule,
-    MatOptionModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    NgxPaginationModule,
-    ProjectCardComponent,
-    ProgramCardSkeletonComponent,
-    MatChipsModule
-  ],
+  imports: [CommonModule, NgxPaginationModule, ProjectCardComponent, ProgramCardSkeletonComponent],
   templateUrl: './projects.component.html'
 })
 export class ProjectsComponent implements OnInit {
   skeletonArray = Array(9).fill(0);
   projects$: Observable<IAPIResponse<[IProject[], number]>>;
-  types$: Observable<IAPIResponse<IProjectType[]>>;
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   #projectsService = inject(ProjectsService);
@@ -43,14 +29,13 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProjects();
-    this.types$ = this.#projectsService.getTypes();
   }
 
-  onFilterChange(event: MatChipListboxChange, filter: string): void {
-    this.queryParams().page = null;
-    this.queryParams()[filter] = event.value === 'Tous' ? null : event.value;
-    this.updateRouteAndprojects();
-  }
+  // onFilterChange(event: MatChipListboxChange, filter: string): void {
+  //   this.queryParams().page = null;
+  //   this.queryParams()[filter] = event.value === 'Tous' ? null : event.value;
+  //   this.updateRouteAndprojects();
+  // }
 
   onPageChange(currentPage: number): void {
     this.queryParams().page = currentPage === 1 ? null : currentPage;

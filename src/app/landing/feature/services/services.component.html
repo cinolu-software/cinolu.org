@@ -1,15 +1,15 @@
 <section class="mb-20 bg-primary-900 py-16 text-white">
   <div class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
-    <h2 class="font-semibold text-3xl md:text-4xl mb-10 block fadeInUp">
+    <h2 class="font-semibold text-3xl md:text-4xl mb-8 block">
       Ce que nous
       <span class="text-secondary-600">faisons</span>
     </h2>
 
     <div class="grid md:grid-cols-2 gap-x-14 gap-y-16">
       @for (service of services; track $index) {
-        <div class="flex gap-3 items-start flex-col fadeInUp">
+        <div class="flex gap-3 items-start flex-col">
           <div class="flex items-center gap-2">
-            <mat-icon class="icon-size-5 fill-white" [svgIcon]="service.icon"></mat-icon>
+            <ng-icon class="size-5! text-white" [name]="service.icon" />
             <h3 class="font-semibold font-satoshi text-xl md:text-2xl">
               {{ service.title }}
             </h3>

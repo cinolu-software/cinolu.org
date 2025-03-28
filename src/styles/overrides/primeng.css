@@ -1,0 +1,61 @@
+/* Loading bar  */
+.loading-bar .p-progressbar {
+  @apply fixed top-0 w-full h-1 z-[999] rounded-none;
+}
+
+/* Progess Bar */
+.p-progressbar {
+  @apply bg-primary-100 rounded-none;
+}
+
+.p-progressbar-value {
+  @apply bg-primary-500;
+}
+
+/* Card */
+.p-card {
+  @apply w-auto h-auto  overflow-hidden bg-white text-gray-800;
+}
+
+/* Form */
+.p-inputtext {
+  @apply bg-white text-gray-800 w-full py-2.5 border-gray-200 focus:border-primary-500;
+}
+
+.p-password {
+  @apply w-full;
+}
+
+.p-inputtext.ng-touched.ng-invalid {
+  @apply border-red-400;
+}
+
+/* Buttons */
+.p-button {
+  @apply text-white font-medium w-full;
+}
+
+.p-button-outlined.p-button-info {
+  @apply text-primary-400 border-primary-300 w-full;
+}
+
+/* Toast */
+.p-toast {
+  @apply px-7 md:px-0;
+}
+
+.p-toast-close-button {
+  @apply hover:bg-red-400/80 transition-colors duration-300;
+}
+
+.p-toast-message-error {
+  @apply bg-red-600 border-red-600 text-white;
+}
+
+.p-toast-message-success {
+  @apply bg-green-600 border-green-600 text-white;
+}
+
+.p-toast-close-icon {
+  @apply size-3.5;
+}

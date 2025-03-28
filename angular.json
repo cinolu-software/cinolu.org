@@ -13,32 +13,40 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "allowedCommonJsDependencies": ["aos"],
             "outputPath": "dist/cinolu.org",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [],
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "inlineStyleLanguage": "css",
             "externalDependencies": [""],
-            "assets": [{ "glob": "**/*", "input": "public" }],
-            "styles": ["src/styles/main.scss", "src/styles/vendors.scss", "src/styles/styles.scss"],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": ["src/styles/styles.css", "node_modules/aos/dist/aos.css"],
             "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,
-            "ssr": { "entry": "server.ts" }
+            "ssr": {
+              "entry": "server.ts"
+            }
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1MB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "5MB",
+                  "maximumError": "5MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "1MB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "5MB",
+                  "maximumError": "5MB"
                 }
               ],
               "outputHashing": "all"
@@ -80,7 +88,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.css"],
+            "styles": ["src/styles/styles.css", "node_modules/aos/dist/aos.css"],
             "scripts": []
           }
         },
@@ -95,6 +103,6 @@
   },
   "cli": {
     "analytics": "da434d68-c66c-490a-af25-36de5019d29a",
-    "schematicCollections": ["@angular-eslint/schematics", "@angular-eslint/schematics"]
+    "schematicCollections": ["angular-eslint"]
   }
 }

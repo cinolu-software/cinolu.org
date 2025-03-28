@@ -1,0 +1,7 @@
+.pg .ngx-pagination .current {
+  @apply bg-primary-800 mr-1.5 text-sm inline-flex font-bold rounded-full items-center justify-center h-8 w-8;
+}
+
+.pg .ngx-pagination a {
+  @apply bg-white border text-sm text-primary-800 border-primary-800 mr-1.5 inline-flex rounded-full items-center justify-center h-8 w-8 hover:bg-primary-800 hover:text-white transition-colors duration-300;
+}

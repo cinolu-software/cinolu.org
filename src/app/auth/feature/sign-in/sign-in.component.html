@@ -1,74 +1,46 @@
 <app-auth-card
-  title="Se connecter"
-  description="Connectez-vous et accéder à votre compte et continuer à explorer notre plateforme.">
+  description="Connectez-vous et accéder à votre compte et continuer à explorer notre plateforme."
+  title="Se connecter">
   @let signIn = signIn$ | async;
-  @if (signIn?.error) {
-    <app-alert class="mt-6 w-full" type="error" [showIcon]="true" [@shake]="true">
-      {{ signIn.error }}
-    </app-alert>
-  }
-
-  <div [ngClass]="signIn?.error && 'transition-transform translate-y-4 duration-150 '">
-    <form class="mt-6" (ngSubmit)="onSignIn()" [formGroup]="signInForm">
-      <mat-form-field class="w-full">
-        <mat-label> Adresse e-mail </mat-label>
-        <input id="email" type="email" matInput autocomplete="email" [formControlName]="'email'" />
-      </mat-form-field>
-
-      <mat-form-field class="w-full">
-        <mat-label> Mot de passe </mat-label>
-        <input
-          id="password"
-          matInput
-          type="password"
-          autocomplete="off"
-          [formControlName]="'password'"
-          #passwordField />
-        <button
-          mat-icon-button
-          type="button"
-          (click)="
-            passwordField.type === 'password' ? (passwordField.type = 'text') : (passwordField.type = 'password')
-          "
-          matSuffix>
-          @if (passwordField.type === 'password') {
-            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
-          }
-          @if (passwordField.type === 'text') {
-            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
-          }
-        </button>
-      </mat-form-field>
-      <div class="inline-flex w-full items-center justify-between">
-        Mot de passe oublié?
-        <a class="text-md font-medium text-primary-500 hover:underline" [routerLink]="['/forgot-password']">
-          Réinitialiser
-        </a>
+  <form class="mt-6 flex flex-col gap-4" (ngSubmit)="onSignIn()" [formGroup]="signInForm">
+    <div class="flex flex-col gap-1.5">
+      <label for="email" class="font-medium">Adresse e-mail</label>
+      <input pInputText type="email" id="email" name="email" formControlName="email" autocomplete="none" />
+    </div>
+    <div class="flex flex-col gap-1.5">
+      <label for="passwordInput" class="font-medium">Mot de passe</label>
+      <p-password
+        id="password"
+        name="password"
+        [feedback]="false"
+        formControlName="password"
+        [toggleMask]="true"
+        autocomplete="none"
+        inputId="passwordInput" />
+    </div>
+    <div class="inline-flex -mt-2 w-full items-center justify-between">
+      Mot de passe oublié?
+      <a class="text-md font-medium text-primary-400 hover:underline" [routerLink]="['/forgot-password']">
+        Réinitialiser!
+      </a>
+    </div>
+    <p-button
+      [loading]="signIn?.isLoading"
+      [disabled]="signIn?.isLoading || signInForm.invalid"
+      class="mt-4"
+      type="submit">
+      Se connecter
+    </p-button>
+    <div class="mt-2.5 flex items-center">
+      <div class="mt-px flex-auto border-t border-gray-200"></div>
+      <div class="text-gray-700 mx-2">Ou continuer avec</div>
+      <div class="mt-px flex-auto border-t border-gray-200"></div>
+    </div>
+    <p-button [outlined]="true" [severity]="'info'">
+      <div class="relative h-5 w-5">
+        <img ngSrc="/images/google.svg" alt="Google" fill />
       </div>
-
-      <button class="mt-6 w-full" mat-flat-button type="submit" [disabled]="signIn?.isLoading || signInForm.invalid">
-        @if (!signIn?.isLoading && !signInForm.invalid) {
-          <span> Se connecter </span>
-        }
-        @if (signIn?.isLoading) {
-          <mat-progress-spinner class="text-white" [diameter]="24" [mode]="'indeterminate'" />
-        }
-      </button>
-      <div class="mt-4 flex items-center">
-        <div class="mt-px flex-auto border-t"></div>
-        <div class="text-gray-700 mx-2">Ou continuer avec</div>
-        <div class="mt-px flex-auto border-t"></div>
-      </div>
-      <div class="mt-4 flex items-center space-x-4">
-        <button class="flex-auto" type="button" mat-stroked-button (click)="signinWithGoogle()">
-          <div class="flex items-center gap-1.5">
-            <div class="relative h-5 w-5">
-              <img ngSrc="/images/logo/google.svg" alt="Google" fill />
-            </div>
-            Google
-          </div>
-        </button>
-      </div>
-    </form>
-  </div>
+      Google
+    </p-button>
+  </form>
 </app-auth-card>

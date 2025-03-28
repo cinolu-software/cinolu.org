@@ -1,0 +1,70 @@
+<div class="hidden lg:flex justify-between">
+  <div class="flex items-center gap-6 font-medium">
+    @for (tab of tabs(); track $index) {
+      <button class="relative" (click)="setActiveTab(tab)">
+        <div class="menu flex items-center gap-0.5">
+          <span class="font-medium text-lg">{{ tab }}</span>
+          <ng-icon
+            [name]="'matKeyboardArrowDownOutline'"
+            class="size-5! transition-transform duration-300"
+            [ngClass]="activeTab() === tab && 'rotate-180'" />
+        </div>
+        <div
+          class="absolute top-9 w-[30rem] right-0 animate-fadeInUp py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
+          [ngClass]="activeTab() === tab ? 'block active-nav' : 'hidden'">
+          <div class="grid grid-cols-2 gap-x-8 gap-y-6 xl:text-base">
+            @for (link of getLinks(links(), activeTab()); track $index) {
+              <a [routerLink]="link.path" [fragment]="link.fragment" class="flex items-center gap-2.5">
+                <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
+                  <ng-icon [name]="link.icon" class="size-4! text-white!" />
+                </span>
+                <p class="flex flex-col gap-0.5 font-medium">
+                  {{ link.name }}
+                  <span class="description text-gray-700 text-sm">{{ link.description }}</span>
+                </p>
+              </a>
+            }
+          </div>
+        </div>
+      </button>
+    }
+    @if (user()) {
+      <div class="flex items-center gap-3">
+        <button class="relative flex items-center gap-2" (click)="setActiveTab('account')">
+          <img
+            [src]="user | apiIMG: 'user'"
+            class="rounded-full w-7 h-7 object-cover ring-2 ring-secondary-800 ring-offset-1"
+            alt="profile picture" />
+          <ng-icon
+            [name]="'mat_outline:keyboard_arrow_down'"
+            class="size-5! text-gray-900 transition-transform duration-300"
+            [ngClass]="activeTab() === 'account' && 'rotate-180'" />
+          <div
+            class="absolute top-9 w-[18rem] right-0 animate-fadeInUp py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
+            [ngClass]="activeTab() === 'account' ? 'block active-nav' : 'hidden'">
+            <div class="grid grid-cols-1 gap-x-8 gap-y-6 xl:text-base font-medium">
+              <a [href]="accountUrl()" target="_blank" class="flex items-center gap-2.5">
+                <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
+                  <ng-icon [name]="'matDashboardOutline'" class="size-4! text-white" />
+                </span>
+                Dashboard
+              </a>
+              <button class="flex items-center gap-2.5" (click)="handleSignOut()">
+                <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
+                  <ng-icon [name]="'matLogOutOutline'" class="size-4! text-white" />
+                </span>
+                Se déconnecter
+              </button>
+            </div>
+          </div>
+        </button>
+      </div>
+    } @else {
+      <a
+        routerLink="/sign-in"
+        class="flex items-center text-white px-6 py-2 rounded-sm bg-secondary-600 hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium">
+        Se connecter
+      </a>
+    }
+  </div>
+</div>

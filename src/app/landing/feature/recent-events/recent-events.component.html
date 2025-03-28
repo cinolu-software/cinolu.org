@@ -1,44 +1,48 @@
-@let result = events$ | async;
-@if (result?.data?.length && isBrowser()) {
-  <section class="mb-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0" id="events">
-    <a routerLink="/events" class="group font-semibold text-xl md:text-4xl mb-2 fadeInUp">
-      Nos récents
-      <span class="text-secondary-600"> événements </span>
-      <mat-icon
-        svgIcon="mat_outline:arrow_right_alt"
-        class="text-secondary-600 group-hover:-rotate-45 transition-transform duration-200" />
-    </a>
+@let events = events$ | async;
+<section class="mb-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0" id="events">
+  @if (events?.data) {
+    <div class="mb-4">
+      <a routerLink="/events" class="group font-semibold text-xl md:text-4xl mb-2">
+        Nos récents
+        <span class="text-secondary-600"> événements </span>
+      </a>
+      <p class="mb-8">Restez informé sur différents événements et partipez</p>
+    </div>
 
-    <p class="mb-8 fadeInUp">Restez informé sur différents événements et partipez</p>
-
-    <div class="flex flex-col gap-5 fadeInUp">
-      <owl-carousel-o #carousel [options]="owlOptions">
-        @for (event of result?.data; track event.id) {
-          <ng-template carouselSlide>
-            <app-event-card [event]="event" />
+    <div class="flex flex-col gap-5">
+      <p-carousel
+        #carousel
+        [value]="events.data"
+        [numVisible]="3"
+        [numScroll]="1"
+        [showIndicators]="false"
+        [showNavigators]="false"
+        [circular]="true"
+        [responsiveOptions]="carouselOptions">
+        @for (event of events.data; track event.id) {
+          <ng-template let-product #item>
+            <div class="mr-3.5" data-aos="fade-left">
+              <app-event-card [event]="event" />
+            </div>
           </ng-template>
         }
-      </owl-carousel-o>
-      <div class="flex items-center gap-4 place-self-center">
-        <button
-          (click)="carousel.prev()"
-          class="h-8 w-8 flex flex-col items-center justify-center border border-secondary-700 hover:bg-secondary-700 hover:text-white transition-colors duration-300 rounded-full">
-          &larr;
+      </p-carousel>
+      <div class="flex items-center gap-4 place-self-end">
+        <button (click)="carousel.navBackward($event)" class="carousel-nav-btn">
+          <ng-icon name="matArrowBackOutline" class="size-3.5!" />
         </button>
-        <button
-          (click)="carousel.next()"
-          class="h-8 w-8 flex flex-col items-center justify-center border border-secondary-700 hover:bg-secondary-700 hover:text-white transition-colors duration-300 rounded-full">
-          &rarr;
+        <button (click)="carousel.navForward($event)" class="carousel-nav-btn">
+          <ng-icon name="matArrowForwardOutline" class="size-3.5!" />
         </button>
       </div>
     </div>
+  }
 
-    @if (result.isLoading) {
-      <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-        @for (i of [1, 2, 3]; track i) {
-          <app-event-card-skeleton />
-        }
-      </div>
-    }
-  </section>
-}
+  @if (events.isLoading) {
+    <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+      @for (i of [1, 2, 3]; track i) {
+        <app-event-card-skeleton />
+      }
+    </div>
+  }
+</section>

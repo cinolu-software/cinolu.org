@@ -1,8 +1,8 @@
 <section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 mt-24 mb-12">
-  @let result = project$ | async;
-  @if (result.data; as project) {
+  @let project = project$ | async;
+  @if (project.data; as project) {
     <button class="underline mb-4 flex items-center gap-1" (click)="back()">
-      <mat-icon svgIcon="heroicons_outline:arrow-left" class="icon-size-3" />
+      <ng-icon name="matTurnLeftOutline" class="size-4!" />
       Retour
     </button>
 
@@ -22,7 +22,7 @@
           class="py-2 flex items-center gap-1.5"
           (click)="setActiveTab(null)">
           Resumé
-          <mat-icon svgIcon="description" class="icon-size-3 xl:icon-size-4" />
+          <ng-icon name="description" class="icon-size-3 xl:icon-size-4" />
         </button>
 
         <button
@@ -31,7 +31,7 @@
           class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
           (click)="setActiveTab('application')">
           Postuler
-          <mat-icon svgIcon="send" class="icon-size-3 xl:icon-size-4" />
+          <ng-icon name="send" class="icon-size-3 xl:icon-size-4" />
         </button>
       </div>
 
@@ -39,15 +39,15 @@
         <app-project-overview [project]="project" />
       }
 
-      @if (activeTab() === 'application' && project?.phases?.length > 0) {
+      <!-- @if (activeTab() === 'application' && project?.phases?.length > 0) {
         <app-project-application [project]="project" />
-      }
+      } -->
     </div>
   }
-  @if (result.isLoading) {
+  @if (project.isLoading) {
     <app-project-skeleton />
   }
-  @if (result.error) {
+  @if (!project.isLoading && !project.isSuccess) {
     <div class="relative min-h-[75vh] w-full flex flex-col justify-center items-center">
       <h2 class="text-3xl font-semibold">Aucun programme avec cet identifiant !</h2>
     </div>

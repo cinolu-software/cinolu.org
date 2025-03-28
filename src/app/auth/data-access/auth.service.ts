@@ -9,34 +9,46 @@ import { Store } from '@ngrx/store';
 import { APIService } from '../../shared/services/api/api.service';
 import { IAPIResponse } from '../../shared/services/api/types/api-response.type';
 import { authActions } from '../../shared/store/auth/auth.actions';
-import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   #router = inject(Router);
   #store = inject(Store);
-  #toast = inject(ToastrService);
+  #toast = inject(MessageService);
   #apiService = inject(APIService);
 
-  signIn(payload: ISignIn): Observable<IAPIResponse<IUser>> {
+  signIn(payload: ISignIn, redirectUrl: string): Observable<IAPIResponse<IUser>> {
     const onSuccess = (user: IUser) => {
-      this.#toast.success('Bienvenue ' + user.name);
+      this.#toast.add({ severity: 'success', summary: `Bienvenue ${user.name}` });
       this.#store.dispatch(authActions.signIn({ user }));
-      this.#router.navigate(['/']);
+      this.#router.navigateByUrl(redirectUrl);
     };
-    return this.#apiService.post('auth/sign-in', payload, onSuccess);
+    const onError = (error: string) => {
+      this.#toast.add({ severity: 'error', summary: error });
+    };
+    return this.#apiService.post('auth/sign-in', payload, onSuccess, onError);
   }
 
   forgotPassword(payload: IForgotPassword): Observable<IAPIResponse<void>> {
-    return this.#apiService.post('auth/forgot-password', payload);
+    const onSuccess = () => {
+      this.#toast.add({ severity: 'success', summary: 'Lien est envoyé à par e-mail' });
+    };
+    const onError = (error: string) => {
+      this.#toast.add({ severity: 'error', summary: error });
+    };
+    return this.#apiService.post('auth/forgot-password', payload, onSuccess, onError);
   }
 
   resetPassword(payload: IResetPassword): Observable<IAPIResponse<IUser>> {
     const onSuccess = () => {
-      this.#toast.success('Réinitialisation réussie');
+      this.#toast.add({ severity: 'success', summary: 'Réinitialisation réussie' });
       this.#router.navigate(['/sign-in']);
     };
-    return this.#apiService.post('auth/reset-password', payload, onSuccess);
+    const onError = (error: string) => {
+      this.#toast.add({ severity: 'error', summary: error });
+    };
+    return this.#apiService.post('auth/reset-password', payload, onSuccess, onError);
   }
 
   getProfile(): Observable<IAPIResponse<IUser>> {
@@ -46,9 +58,13 @@ export class AuthService {
 
   signOut(): Observable<IAPIResponse<void>> {
     const onSuccess = (): void => {
+      this.#toast.add({ severity: 'success', summary: 'Déconnexion réussie' });
       this.#store.dispatch(authActions.signIn({ user: null }));
       this.#router.navigate(['/sign-in']);
     };
-    return this.#apiService.post('auth/sign-out', {}, onSuccess);
+    const onError = (error: string) => {
+      this.#toast.add({ severity: 'error', summary: error });
+    };
+    return this.#apiService.post('auth/sign-out', {}, onSuccess, onError);
   }
 }

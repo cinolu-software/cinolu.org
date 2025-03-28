@@ -1,16 +1,16 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
-import { EmptyLayoutComponent } from './layouts/empty/empty.component';
-import { PrimaryLayoutComponent } from './layouts/primary/primary.component';
-import { SecondaryLayoutComponent } from './layouts/secondary/secondary.component';
 import { AppConfig } from '../services/config/config.types';
 import { AppConfigService } from '../services/config/config.service';
+import { PrimaryLayoutComponent } from './feature/primary/primary.component';
+import { EmptyLayoutComponent } from './feature/empty/empty.component';
+import { SecondaryLayoutComponent } from './feature/secondary/secondary.component';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  imports: [EmptyLayoutComponent, PrimaryLayoutComponent, SecondaryLayoutComponent]
+  imports: [PrimaryLayoutComponent, EmptyLayoutComponent, SecondaryLayoutComponent]
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   config: AppConfig;

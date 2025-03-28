@@ -1,60 +1,71 @@
-@if (isBrowser()) {
-  <section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 mb-20">
-    @let team = team$ | async;
-    @if (team[0].data?.length) {
-      <h2 class="font-semibold text-xl md:text-5xl mb-4" id="team">
-        Notre
-        <span class="text-primary-600"> équipe </span>
-      </h2>
-      <div class="relative mb-8">
-        <owl-carousel-o #staffCarousel [options]="owlOptions">
-          @for (coach of team[0].data; track $index) {
-            <ng-template carouselSlide>
-              <app-team-card [user]="coach" />
-            </ng-template>
-          }
-        </owl-carousel-o>
-      </div>
-      <div class="flex items-center gap-4 place-self-center mb-16">
-        <button
-          (click)="staffCarousel.prev()"
-          class="h-8 w-8 flex flex-col items-center justify-center border border-secondary-700 hover:bg-secondary-700 hover:text-white transition-colors duration-300 rounded-full">
-          &larr;
+<section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 mb-20">
+  @let team = team$ | async;
+  @if (team[0].data?.length) {
+    <h2 class="font-semibold text-xl md:text-5xl mb-4" id="team">
+      Notre
+      <span class="text-primary-600"> équipe </span>
+    </h2>
+    <div class="flex flex-col gap-5">
+      <p-carousel
+        #team
+        [value]="team[0].data"
+        [numVisible]="3"
+        [numScroll]="1"
+        [showIndicators]="false"
+        [showNavigators]="false"
+        [circular]="true"
+        [responsiveOptions]="carouselConfig">
+        @for (s of team[0].data; track s.id) {
+          <ng-template let-product #item>
+            <div class="mr-3.5" data-aos="fade-left">
+              <app-team-card [user]="s" />
+            </div>
+          </ng-template>
+        }
+      </p-carousel>
+      <div class="flex items-center gap-4 place-self-end">
+        <button (click)="team.navBackward($event)" class="carousel-nav-btn">
+          <ng-icon name="matArrowBackOutline" class="size-3.5!" />
         </button>
-        <button
-          (click)="staffCarousel.next()"
-          class="h-8 w-8 flex flex-col items-center justify-center border border-secondary-700 hover:bg-secondary-700 hover:text-white transition-colors duration-300 rounded-full">
-          &rarr;
+        <button (click)="team.navForward($event)" class="carousel-nav-btn">
+          <ng-icon name="matArrowForwardOutline" class="size-3.5!" />
         </button>
       </div>
-    }
+    </div>
+  }
 
-    @if (team[1].data?.length) {
-      <h2 class="font-semibold text-xl md:text-5xl mb-4" id="coachs">
-        Coachs et
-        <span class="text-primary-600"> mentors </span>
-      </h2>
-      <div class="relative mb-8">
-        <owl-carousel-o #coachCarousel [options]="owlOptions">
-          @for (coach of team[1].data; track $index) {
-            <ng-template carouselSlide>
-              <app-team-card [user]="coach" />
-            </ng-template>
-          }
-        </owl-carousel-o>
-      </div>
-      <div class="flex items-center gap-4 place-self-center">
-        <button
-          (click)="coachCarousel.prev()"
-          class="h-8 w-8 flex flex-col items-center justify-center border border-secondary-700 hover:bg-secondary-700 hover:text-white transition-colors duration-300 rounded-full">
-          &larr;
+  @if (team[1].data?.length) {
+    <h2 class="font-semibold text-xl md:text-5xl mb-4" id="coachs">
+      Coachs et
+      <span class="text-primary-600"> mentors </span>
+    </h2>
+
+    <div class="flex flex-col gap-5">
+      <p-carousel
+        #coachCarousel
+        [value]="team[1].data"
+        [numVisible]="3"
+        [numScroll]="1"
+        [showIndicators]="false"
+        [showNavigators]="false"
+        [circular]="true"
+        [responsiveOptions]="carouselConfig">
+        @for (c of team[1].data; track c.id) {
+          <ng-template let-product #item>
+            <div class="mr-3.5" data-aos="fade-left">
+              <app-team-card [user]="c" />
+            </div>
+          </ng-template>
+        }
+      </p-carousel>
+      <div class="flex items-center gap-4 place-self-end">
+        <button (click)="coachCarousel.navBackward($event)" class="carousel-nav-btn">
+          <ng-icon name="matArrowBackOutline" class="size-3.5!" />
         </button>
-        <button
-          (click)="coachCarousel.next()"
-          class="h-8 w-8 flex flex-col items-center justify-center border border-secondary-700 hover:bg-secondary-700 hover:text-white transition-colors duration-300 rounded-full">
-          &rarr;
+        <button (click)="coachCarousel.navForward($event)" class="carousel-nav-btn">
+          <ng-icon name="matArrowForwardOutline" class="size-3.5!" />
         </button>
       </div>
-    }
-  </section>
-}
+    </div>
+  }
+</section>

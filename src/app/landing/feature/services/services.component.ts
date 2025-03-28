@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { services } from '../../utils/data/services';
+import { services } from '../../utils/data/services.data';
+import { NgIcon } from '@ng-icons/core';
 
 @Component({
   selector: 'app-our-services',
-  imports: [MatIconModule],
+  imports: [NgIcon],
   templateUrl: './services.component.html'
 })
 export class ServicesComponent {

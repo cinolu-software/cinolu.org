@@ -9,16 +9,16 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Subject, takeUntil } from 'rxjs';
 import { LoadingService } from 'app/shared/services/loading/loading.service';
+import { CommonModule } from '@angular/common';
+import { ProgressBar } from 'primeng/progressbar';
 
 @Component({
   selector: 'app-loading-bar',
   templateUrl: './loading-bar.component.html',
   encapsulation: ViewEncapsulation.None,
-  styleUrl: './loading-bar.component.scss',
-  imports: [MatProgressBarModule]
+  imports: [ProgressBar, CommonModule]
 })
 export class LoadingBarComponent implements OnChanges, OnInit, OnDestroy {
   #loadingService = inject(LoadingService);

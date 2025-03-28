@@ -2,20 +2,16 @@ import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { IProject, IUser } from 'app/shared/utils/types/models.type';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { ApiImgPipe } from 'app/shared/pipes/api-img.pipe';
 import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { ProjectOverviewComponent } from './overview/overview.component';
-import { ProjectApplicationComponent } from './application/application.component';
 import { Store } from '@ngrx/store';
 import { selectUser } from 'app/shared/store/auth/auth.reducers';
 import { ProjectsService } from '../../data-access/projects.service';
 import { ProjectSkeletonComponent } from '../../ui/project-skeleton/project-skeleton.component';
+import { NgIcon } from '@ng-icons/core';
 
 @Component({
   selector: 'app-project',
@@ -23,15 +19,11 @@ import { ProjectSkeletonComponent } from '../../ui/project-skeleton/project-skel
   imports: [
     CommonModule,
     NgOptimizedImage,
-    MatIconModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatButtonModule,
     FormsModule,
     ApiImgPipe,
-    ProjectApplicationComponent,
     ProjectOverviewComponent,
-    ProjectSkeletonComponent
+    ProjectSkeletonComponent,
+    NgIcon
   ],
   templateUrl: './project.component.html'
 })

@@ -1,6 +1,5 @@
 <section class="mb-12 mt-10">
   @let projects = projects$ | async;
-  @let types = types$ | async;
   <div
     class="relative py-52 md:py-64 bg-[url('/images/projects.jpg')] bg-cover flex flex-col justify-center overflow-hidden mb-8">
     <div
@@ -19,8 +18,7 @@
   </div>
   <div class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
     <div class="flex flex-col">
-      @if (types.data) {
-        <mat-chip-listbox (change)="onFilterChange($event, 'type')">
+      <!-- <mat-chip-listbox (change)="onFilterChange($event, 'type')">
           <div class="flex gap-1.5 flex-wrap text-sm">
             @for (type of types.data; track type.id) {
               <mat-chip-option [value]="type.id" [selected]="queryParams().type === type.id">
@@ -28,8 +26,7 @@
               </mat-chip-option>
             }
           </div>
-        </mat-chip-listbox>
-      }
+        </mat-chip-listbox> -->
       @if (projects?.data?.[0]) {
         <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
           @for (
@@ -53,7 +50,7 @@
           </div>
         }
       }
-      @if (projects.error || projects?.data?.[1] === 0) {
+      @if (!projects.isLoading || projects?.data?.[1] === 0) {
         <h2 class="text-3xl font-semibold">Aucun programme!</h2>
       }
       @if (projects?.isLoading) {

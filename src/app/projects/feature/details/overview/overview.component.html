@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-8">
   <div>
     <div class="flex items-center gap-1 mb-2 text-secondary-800">
-      <mat-icon svgIcon="description" class="icon-size-4" />
+      <ng-icon name="matDescriptionOutline" class="size-5!" />
       <h2 class="font-semibold text-lg">Description</h2>
     </div>
     <p class="mb-1.5 lowercase first-letter:uppercase">{{ project().description }}</p>
@@ -9,34 +9,31 @@
 
   <div>
     <div class="flex items-center gap-1 mb-2 text-secondary-800">
-      <mat-icon svgIcon="event" class="icon-size-4" />
+      <ng-icon name="matEventNoteOutline" class="size-5!" />
       <h2 class="font-semibold text-lg">Dates</h2>
     </div>
     <p class="mb-1.5">Commence le {{ project().started_at | date: 'longDate' }}</p>
     <p class="mb-1.5">Fini le {{ project().ended_at | date: 'longDate' }}</p>
   </div>
 
-  @if (project()?.partners.length) {
-    <div>
-      <div class="flex items-center gap-1 mb-2 text-secondary-800">
-        <mat-icon svgIcon="group" class="icon-size-4" />
-        <h2 class="font-semibold text-lg">Partenaires</h2>
-      </div>
-      <p class="mb-1.5">{{ join(project().partners) }}</p>
+  <div>
+    <div class="flex items-center gap-1 mb-2 text-secondary-800">
+      <ng-icon name="matGroupOutline" class="size-5!" />
+      <h2 class="font-semibold text-lg">Partenaires</h2>
     </div>
-  }
+  </div>
 
   @if (project()?.phases?.length) {
     <div>
       <div class="flex items-center gap-1 mb-2 text-secondary-800">
-        <mat-icon svgIcon="timeline" class="icon-size-4" />
+        <ng-icon name="matTimelineOutline" class="size-5!" />
         <h2 class="font-semibold text-lg">Phases</h2>
       </div>
 
       @for (phase of project().phases; track $index) {
         <button class="flex items-center mb-2" (click)="expand(phase.id)">
           <mat-icon
-            svgIcon="mat_outline:arrow_right"
+            svgIcon="matArrowRightAltOutline"
             class="text-primary-700"
             [ngClass]="expanded() === phase.id && 'rotate-90 transition-transform duration-300'" />
           <h2 class="font-medium">{{ phase.name }}</h2>

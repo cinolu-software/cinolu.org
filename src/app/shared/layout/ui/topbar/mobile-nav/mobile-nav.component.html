@@ -1,0 +1,67 @@
+<div class="lg:hidden">
+  <button (click)="toogleNav()">
+    <ng-icon [name]="isOpen() ? 'matCloseOutline' : 'matMenuOutline'" class="size-5!" />
+  </button>
+  <div
+    class="fixed top-20 left-0 right-10 bottom-0 bg-white backdrop-blur-lg transition-transform duration-300"
+    [ngClass]="isOpen() ? 'translate-x-0 active-nav' : '-translate-x-full'">
+    <div class="flex flex-col justify-between py-16 px-10 h-full text-gray-900">
+      <div class="flex flex-col gap-6 font-bold text-xl menu">
+        @for (tab of tabs(); track $index) {
+          <button class="flex items-center justify-between" (click)="setActiveTab(tab)">
+            {{ tab }}
+            <ng-icon name="matKeyboardArrowDownOutline" class="size-5!" />
+          </button>
+        }
+      </div>
+      @if (user()) {
+        <div class="flex flex-col gap-8 text-gray-900">
+          <a [href]="accountUrl()" target="_blank" class="flex items-center gap-2.5">
+            <img
+              [src]="user() | apiIMG: 'user'"
+              class="rounded-full w-7 h-7 object-cover ring-2 ring-secondary-800 ring-offset-1"
+              alt="profile picture" />
+            Dashboard
+          </a>
+          <button
+            class="flex items-center text-white justify-center text-center px-6 py-2 bg-red-800 rounded-sm hover:bg-red-900 disabled:bg-red-800/30 transition-colors duration-300 gap-1.5 font-medium text-base"
+            (click)="handleSignOut()">
+            Se déconnecter
+          </button>
+        </div>
+      } @else {
+        <a
+          routerLink="/sign-in"
+          class="flex items-center justify-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium text-base">
+          Se connecter
+        </a>
+      }
+    </div>
+  </div>
+  <ul
+    class="fixed text-base top-10 left-0 right-8 bottom-0 bg-white backdrop-blur-lg z-30 transition-transform duration-300"
+    [ngClass]="activeTab() && isOpen() ? 'translate-x-0' : '-translate-x-full'">
+    <div
+      class="flex flex-col items-start justify-start gap-7 font-medium py-16 px-10 h-full  {{
+        activeTab() && isOpen() && 'active-nav'
+      }}">
+      <div class="menu">
+        <button class="font-semibold text-gray-800 flex items-center gap-1 m-4" (click)="setActiveTab(null)">
+          <ng-icon name="matTurnSlightLeftOutline" class="size-5!" />
+          Retour
+        </button>
+      </div>
+      @for (link of getLinks(links(), activeTab()); track $index) {
+        <a [routerLink]="link.path" [fragment]="link.fragment" class="flex items-center gap-2.5">
+          <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
+            <ng-icon name="link.icon" class="size-5! text-white" />
+          </span>
+          <p class="flex flex-col gap-0.5 font-medium">
+            {{ link.name }}
+            <span class="description text-gray-700 text-sm">{{ link.description }}</span>
+          </p>
+        </a>
+      }
+    </div>
+  </ul>
+</div>

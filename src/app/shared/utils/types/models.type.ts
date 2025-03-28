@@ -4,38 +4,30 @@ interface IBase {
   updated_at: Date;
   deleted_at: Date;
 }
-export interface IApplication extends IBase {
-  answers: JSON;
-  reviews: IReview[];
-  program: IProject;
-  applicant: IUser;
-}
 
-export enum ReviewStatus {
-  PENDING = 'pending',
-  SHORTLISTED = 'shortlisted',
-  ACCEPTED = 'accepted',
-  REJECTED = 'rejected'
-}
-
-export interface IReview extends IBase {
-  status: ReviewStatus;
-  note: number;
-  comment: string;
-  application: IApplication;
-  reviewer: IUser;
-}
-
-export interface IBlogCategory extends IBase {
+export interface IUser extends IBase {
+  email: string;
   name: string;
+  password?: string;
+  biography?: string;
+  phone_number?: string;
+  address?: string;
+  google_image?: string;
+  profile?: string;
+  posts: IPost[];
+  roles: IRole[];
+  projects: IProject[];
+  positions: IPosition[];
+  expertises: IExpertise[];
 }
 
 export interface IPost extends IBase {
   title: string;
+  slug: string;
   content: string;
   image: string;
   comments: IComment[];
-  category: IBlogCategory;
+  category: ICategory;
   author: IUser;
 }
 
@@ -45,79 +37,30 @@ export interface IComment extends IBase {
   post: IPost;
 }
 
-export interface IVenture extends IBase {
+interface IField {
+  type: string;
   name: string;
-  image: string;
-  pitch: string;
-  is_published: boolean;
-  founding_date: Date;
-  address: string;
-  stage: string;
-  socials: JSON;
-  sectors: ISector[];
-  user: IUser;
-}
-
-export interface ISector extends IBase {
-  name: string;
-  ventures: ISector[];
-}
-
-export interface IUser extends IBase {
-  email: string;
-  name: string;
-  password: string;
-  phone_number: string;
-  address: string;
-  token: string;
-  google_image: string;
-  profile: string;
-  verified_at: Date | null;
-  roles: string[];
-  programs: IProject[];
-  detail: IDetail;
-  ventures: IVenture[];
-}
-
-export interface IDetail extends IBase {
-  bio: string;
-  socials: ISocial;
-  positions: IPosition[];
-  expertises: IExpertise[];
-}
-
-export interface ISocial {
-  LinkedIn: string;
-  Facebook: string;
-}
-
-export interface IExpertise extends IBase {
-  name: string;
-  description: string;
-}
-
-export interface IPosition extends IBase {
-  name: string;
-  description: string;
-}
-
-export interface IRequiremnt extends IBase {
-  name: string;
-  description: string;
+  label: string;
+  placeholder: string;
+  required: boolean;
+  options: string[];
 }
 
 export interface IProject extends IBase {
   name: string;
+  slug: string;
+  image?: string;
   description: string;
-  image: string;
   started_at: Date;
   ended_at: Date;
-  targeted_audience: string;
-  user: IUser;
-  types: IProjectType[];
-  categories: IProjectCategory[];
+  form?: IField[];
+  report?: JSON;
+  is_published: boolean;
+  place?: string;
   phases: IPhase[];
-  partners: IPartner[];
+  applications: IApplication[];
+  program: IProgram;
+  categories: ICategory[];
 }
 
 export interface IPhase extends IBase {
@@ -125,50 +68,77 @@ export interface IPhase extends IBase {
   description: string;
   started_at: Date;
   ended_at: Date;
-  requirements: IRequiremnt[];
-  form: JSON;
+  requirements: IRequirement[];
+  documents: IDocument[];
+  project: IProject;
 }
 
-export interface IPartner extends IBase {
+export interface IDocument extends IBase {
+  title: string;
+  description: string;
+  file_name: string;
+  phase: IPhase;
+}
+
+export interface IRequirement extends IBase {
   name: string;
-  website_link: string;
-  profile: string;
+  description: string;
+}
+
+export interface IApplication extends IBase {
+  answers: JSON;
+  reviews: IReview[];
+  project: IProject;
+  applicant: IUser;
+}
+
+export enum IReviewStatus {
+  PENDING = 'PENDING',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED'
+}
+
+export interface IReview extends IBase {
+  status: IReviewStatus;
+  note: number;
+  comment: string;
+  application: IApplication;
+  reviewer: IUser;
+}
+
+export interface IProgram extends IBase {
+  name: string;
+  description: string;
+  projects: IProject[];
+  events: IEvent[];
 }
 
 export interface IEvent extends IBase {
   name: string;
-  description: string;
-  location: string;
-  attendees: number;
-  online_link: string;
-  event_type: string;
-  attendees_number: number;
+  slug: string;
   image: string;
+  place: string;
+  description: string;
   started_at: Date;
+  is_published: boolean;
+  link: string;
   ended_at: Date;
-  responsible: IUser;
-  types: IEventType[];
+  program: IProgram;
+  categories: ICategory[];
 }
 
-export interface IProjectType extends IBase {
-  name: string;
-  description: string;
-}
-
-export interface IEventType extends IBase {
-  name: string;
-  description: string;
-}
-
-export interface IProjectCategory extends IBase {
+export interface ICategory extends IBase {
   name: string;
 }
 
-export interface IAttachment extends IBase {
+export interface IRole extends IBase {
   name: string;
-  program: IProject;
 }
 
-export interface IRoles extends IBase {
+export interface IPosition extends IBase {
+  name: string;
+}
+
+export interface IExpertise extends IBase {
   name: string;
 }
