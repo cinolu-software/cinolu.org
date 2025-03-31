@@ -2,6 +2,13 @@ import { ILink } from '../types/link.type';
 
 export const EXPLORATION_LINKS: ILink[] = [
   {
+    name: 'Accueil',
+    path: '/',
+    description: 'Découvez la plateforme',
+    icon: 'matHomeOutline',
+    exactUrl: true
+  },
+  {
     name: 'Programmes',
     path: '/projects',
     description: 'Voir nos programmes',
@@ -16,7 +23,7 @@ export const EXPLORATION_LINKS: ILink[] = [
     exactUrl: false
   },
   {
-    name: 'Ecosysteme',
+    name: 'Ecosystème',
     path: '/',
     fragment: 'partners',
     description: 'Voir nos partenaires',
@@ -29,13 +36,6 @@ export const EXPLORATION_LINKS: ILink[] = [
     description: 'Le blog',
     icon: 'matForumOutline',
     exactUrl: false
-  },
-  {
-    name: 'Accueil',
-    path: '/',
-    description: 'Découvez la plateforme',
-    icon: 'matHomeOutline',
-    exactUrl: true
   }
 ];
 
