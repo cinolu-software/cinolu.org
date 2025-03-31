@@ -21,7 +21,7 @@
         [circular]="true"
         [responsiveOptions]="carouselOptions">
         @for (event of events.data; track event.id) {
-          <ng-template let-product #item>
+          <ng-template #item>
             <div class="mr-3.5" data-aos="fade-left">
               <app-event-card [event]="event" />
             </div>
