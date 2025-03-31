@@ -22,7 +22,7 @@
         [circular]="true"
         [responsiveOptions]="carouselConfig">
         @for (project of projects.data; track project.id) {
-          <ng-template let-product #item>
+          <ng-template #item>
             <div class="mr-3.5" data-aos="fade-left">
               <app-project-card [project]="project" />
             </div>
