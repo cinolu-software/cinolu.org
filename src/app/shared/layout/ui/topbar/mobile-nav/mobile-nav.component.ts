@@ -9,10 +9,6 @@ import { getLinks } from 'app/shared/utils/helpers/get-links.fn';
 
 @Component({
   selector: 'app-mobile-nav',
-  host: {
-    '(document:click)': 'onClickOutside($event)',
-    '(window:scroll)': 'onWindowScroll()'
-  },
   templateUrl: './mobile-nav.component.html',
   imports: [NgIcon, RouterModule, CommonModule, ApiImgPipe]
 })
@@ -23,7 +19,7 @@ export class MobileNavComponent {
   links = input.required<Record<string, ILink[]>>();
   singOut = output<void>();
   isOpen = signal<boolean>(false);
-  activeTab = signal<string>('');
+  activeTab = signal<string | null>(null);
   getLinks = getLinks;
 
   toogleNav(): void {
@@ -38,21 +34,8 @@ export class MobileNavComponent {
     this.singOut.emit();
   }
 
-  closeMenu(): void {
+  closeNav(): void {
     this.isOpen.set(false);
     this.activeTab.set(null);
-  }
-
-  onClickOutside(event: MouseEvent): void {
-    const target = event.target as HTMLElement;
-    const activeNav = document.querySelector('.active-nav');
-    if (target?.closest('.menu')) return;
-    if (((this.activeTab() || this.isOpen()) && activeNav) || activeNav?.contains(target)) {
-      this.closeMenu();
-    }
-  }
-
-  onWindowScroll(): void {
-    if (this.activeTab() || this.isOpen()) this.closeMenu();
   }
 }
