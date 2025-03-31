@@ -7,12 +7,15 @@
             <h5 class="font-black font-satoshi mb-3 text-white text-lg">{{ link.title }}</h5>
             @for (url of link.urls; track $index) {
               @if (url.external) {
-                <a target="_blank" class="text-satoshi flex items-center gap-1.5" [href]="url.path"
+                <a target="_blank" class="text-satoshi hover:underline flex items-center gap-1.5" [href]="url.path"
                   >{{ url.name }}
                   <ng-icon name="matCallMadeOutline" class="size-3!" />
                 </a>
               } @else {
-                <a [fragment]="url.fragment" class="text-satoshi flex items-center gap-1.5" [routerLink]="url.path">
+                <a
+                  [fragment]="url.fragment"
+                  class="text-satoshi flex hover:underline items-center gap-1.5"
+                  [routerLink]="url.path">
                   <ng-icon name="matArrowRightOutline" class="size-4!" />
                   {{ url.name }}
                 </a>
