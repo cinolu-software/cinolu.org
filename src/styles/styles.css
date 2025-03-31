@@ -59,7 +59,7 @@
 
 @layer components {
   .carousel-nav-btn {
-    @apply h-8 w-8  text-primary-500 flex flex-col items-center justify-center border border-primary-500 hover:bg-primary-500 hover:text-white transition-colors duration-300 rounded-full;
+    @apply h-8 w-8  text-secondary-500 flex flex-col items-center justify-center border border-secondary-500 hover:bg-secondary-500 hover:text-white transition-colors duration-300 rounded-full;
   }
 
   .primary-link {

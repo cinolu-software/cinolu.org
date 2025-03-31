@@ -1,19 +1,24 @@
-export const innovationEcosystems: { title: string; description: string }[] = [
+export const statements: { title: string; icon: string; description: string }[] = [
   {
     title: 'Idéation',
-    description: 'Affinez votre idée, explorez les opportunités et définissez une vision claire de votre projet.'
+    icon: 'matTipsAndUpdatesOutline',
+    description: 'Générez des idées innovantes et explorez les tendances du marché.'
   },
   {
     title: 'Pré-incubation',
-    description: "Développez un prototype, validez votre concept et préparez-vous à l'incubation."
+    icon: 'matPendingActionsOutline',
+    description: "Développez votre concept, validez votre idée et préparez-vous à l'incubation."
   },
   {
     title: 'Incubation',
+    icon: 'matLocalFloristOutline',
     description:
-      "Bénéficiez d'un accompagnement personnalisé pour structurer votre projet et accéder aux ressources essentielles."
+      "Bénéficiez d'un accompagnement personnalisé, de ressources et d'un réseau pour faire grandir votre projet."
   },
   {
     title: 'Accélération',
-    description: 'Optimisez votre croissance, développez votre réseau et accédez à des financements stratégiques.'
+    icon: 'matTrendingUpOutline',
+    description:
+      ' Accélérez la croissance de votre startup avec des mentors, des investisseurs et des opportunités de mise en réseau.'
   }
 ];

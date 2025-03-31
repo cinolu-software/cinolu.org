@@ -1,22 +1,23 @@
 <div class="hidden lg:flex justify-between">
-  <div class="flex items-center gap-6 font-medium">
+  <div class="flex items-center gap-6">
     @for (tab of tabs(); track $index) {
       <button class="relative" (click)="setActiveTab(tab)">
-        <div class="menu flex items-center gap-0.5">
-          <span class="font-medium text-lg">{{ tab }}</span>
+        <div class="menu flex items-center font-medium text-lg">
+          {{ tab }}
           <ng-icon
-            [name]="'matKeyboardArrowDownOutline'"
-            class="size-5! transition-transform duration-300"
+            name="matKeyboardArrowDownOutline"
+            class="transition-transform duration-300 size-5! fill-black!"
             [ngClass]="activeTab() === tab && 'rotate-180'" />
         </div>
         <div
-          class="absolute top-9 w-[30rem] right-0 animate-fadeInUp py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
-          [ngClass]="activeTab() === tab ? 'block active-nav' : 'hidden'">
-          <div class="grid grid-cols-2 gap-x-8 gap-y-6 xl:text-base">
+          class="absolute top-10 w-[16rem] text-gray-800 right-0 animate-Up py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-lg rounded-lg transition-transform duration-300"
+          [ngClass]="activeTab() === tab ? 'block active-nav animate-fadeInUp' : 'hidden'">
+          <div class="grid grid-cols-1 gap-x-8 gap-y-6">
             @for (link of getLinks(links(), activeTab()); track $index) {
-              <a [routerLink]="link.path" [fragment]="link.fragment" class="flex items-center gap-2.5">
-                <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
-                  <ng-icon [name]="link.icon" class="size-4! text-white!" />
+              <a [routerLink]="link.path" [fragment]="link.fragment" class="group flex items-center gap-2.5">
+                <span
+                  class="h-8 w-8 flex items-center justify-center bg-primary-600 text-white rounded-full transition-transform duration-200 group-hover:scale-110">
+                  <ng-icon [name]="link.icon" class="size-4!" />
                 </span>
                 <p class="flex flex-col gap-0.5 font-medium">
                   {{ link.name }}
@@ -30,28 +31,32 @@
     }
     @if (user()) {
       <div class="flex items-center gap-3">
-        <button class="relative flex items-center gap-2" (click)="setActiveTab('account')">
+        <button class="relative menu flex items-center gap-0.5" (click)="setActiveTab('account')">
           <img
-            [src]="user | apiIMG: 'user'"
-            class="rounded-full w-7 h-7 object-cover ring-2 ring-secondary-800 ring-offset-1"
-            alt="profile picture" />
+            [ngSrc]="user | apiIMG: 'user'"
+            class="object-cover w-8 h-8 rounded-full ring-2 ring-primary-600"
+            alt="Profile picture"
+            height="8"
+            width="8" />
           <ng-icon
-            [name]="'mat_outline:keyboard_arrow_down'"
-            class="size-5! text-gray-900 transition-transform duration-300"
+            name="matKeyboardArrowDownOutline"
+            class="transition-transform duration-300 size-5! fill-black!"
             [ngClass]="activeTab() === 'account' && 'rotate-180'" />
           <div
-            class="absolute top-9 w-[18rem] right-0 animate-fadeInUp py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-md transition-transform duration-300"
-            [ngClass]="activeTab() === 'account' ? 'block active-nav' : 'hidden'">
-            <div class="grid grid-cols-1 gap-x-8 gap-y-6 xl:text-base font-medium">
-              <a [href]="accountUrl()" target="_blank" class="flex items-center gap-2.5">
-                <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
-                  <ng-icon [name]="'matDashboardOutline'" class="size-4! text-white" />
+            class="absolute top-10 w-[13rem] right-0 animate-Up py-8 px-6 gap-6 z-30 bg-white shadow-lg rounded-lg transition-transform duration-300"
+            [ngClass]="activeTab() === 'account' ? 'block active-nav animate-fadeInUp' : 'hidden'">
+            <div class="grid grid-cols-1 gap-x-8 gap-y-6 font-medium text-gray-900">
+              <a [href]="accountUrl()" target="_blank" class="group flex items-center gap-2.5">
+                <span
+                  class="h-8 w-8 flex items-center justify-center transition-transform duration-200 group-hover:scale-110 text-white bg-primary-600 rounded-full">
+                  <ng-icon [name]="'matDashboardOutline'" class="size-4!" />
                 </span>
                 Dashboard
               </a>
-              <button class="flex items-center gap-2.5" (click)="handleSignOut()">
-                <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
-                  <ng-icon [name]="'matLogOutOutline'" class="size-4! text-white" />
+              <button class="group flex items-center gap-2.5" (click)="handleSignOut()">
+                <span
+                  class="h-8 w-8 flex items-center transition-transform duration-200 group-hover:scale-110 justify-center text-white bg-primary-600 rounded-full">
+                  <ng-icon [name]="'matLogOutOutline'" class="size-4!" />
                 </span>
                 Se déconnecter
               </button>
@@ -60,11 +65,7 @@
         </button>
       </div>
     } @else {
-      <a
-        routerLink="/sign-in"
-        class="flex items-center text-white px-6 py-2 rounded-sm bg-secondary-600 hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium">
-        Se connecter
-      </a>
+      <a routerLink="/sign-in" pButton class="primary-link">Se connecter</a>
     }
   </div>
 </div>

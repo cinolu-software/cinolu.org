@@ -1,5 +1,5 @@
 import { Component, input, output, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { ApiImgPipe } from '../../../../pipes/api-img.pipe';
@@ -10,7 +10,7 @@ import { getLinks } from 'app/shared/utils/helpers/get-links.fn';
 @Component({
   selector: 'app-desktop-nav',
   templateUrl: './desktop-nav.component.html',
-  imports: [CommonModule, RouterModule, ApiImgPipe, NgIcon]
+  imports: [CommonModule, NgOptimizedImage, RouterModule, ApiImgPipe, NgIcon]
 })
 export class DesktopNavComponent {
   user = input.required<IUser>();

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { stakeholders } from '../../utils/data/stakeholders.data';
 import { RouterLink } from '@angular/router';
-import { fadeInStagger } from '../../../shared/utils/animations/fade';
+import { fadeInStagger } from '../../../shared/animations/fade';
 
 @Component({
   selector: 'app-hero',

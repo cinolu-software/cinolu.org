@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { EXPLORATION_LINKS, MY_CINOLU_LINKS, SOCIAL_LINKS } from '../../utils/data/links';
+import { NgIcon } from '@ng-icons/core';
 
 @Component({
   selector: 'app-footer',
-  imports: [RouterLink, NgOptimizedImage],
+  imports: [RouterLink, NgOptimizedImage, NgIcon],
   templateUrl: './footer.component.html'
 })
 export class FooterComponent {

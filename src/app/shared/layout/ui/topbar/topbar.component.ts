@@ -45,14 +45,13 @@ export class TopbarComponent implements OnInit {
     this.logout$ = this.#authService.signOut();
   }
 
-  close(): void {
+  closeNav(): void {
     this.desktopNav()?.closeNav();
     this.mobileNav()?.closeNav();
   }
 
   onWindowScroll(): void {
-    this.desktopNav()?.closeNav();
-    this.mobileNav()?.closeNav();
+    this.closeNav();
   }
 
   onClickOutside(event: Event) {
@@ -60,7 +59,7 @@ export class TopbarComponent implements OnInit {
       (this.desktopNav()?.activeTab() || this.mobileNav()?.isOpen()) &&
       !this.elementRef.nativeElement.contains(event.target)
     ) {
-      this.close();
+      this.closeNav();
     }
   }
 }

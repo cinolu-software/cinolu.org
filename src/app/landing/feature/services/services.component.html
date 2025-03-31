@@ -1,24 +1,21 @@
-<section class="mb-20 bg-primary-900 py-16 text-white">
-  <div class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
-    <h2 class="font-semibold text-3xl md:text-4xl mb-8 block">
-      Ce que nous
-      <span class="text-secondary-600">faisons</span>
-    </h2>
-
-    <div class="grid md:grid-cols-2 gap-x-14 gap-y-16">
-      @for (service of services; track $index) {
-        <div class="flex gap-3 items-start flex-col">
-          <div class="flex items-center gap-2">
-            <ng-icon class="size-5! text-white" [name]="service.icon" />
-            <h3 class="font-semibold font-satoshi text-xl md:text-2xl">
-              {{ service.title }}
-            </h3>
-          </div>
-          <p class="text-gray-100 text-sm md:text-base font-light">
-            {{ service.description }}
-          </p>
+<section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 pt-20">
+  <div class="mb-10" data-aos="fade-up">
+    <h2 class="font-black font-satoshi mb-2 text-2xl md:text-4xl">Our Work</h2>
+    <p class="mb-4 text-secondary-600 font-satoshi">Ce que nous faisons</p>
+  </div>
+  <div class="grid md:grid-cols-2 gap-x-14 gap-y-16">
+    @for (service of services; track $index) {
+      <div class="flex gap-3 items-start flex-col" data-aos="zoom-in">
+        <div class="flex items-center gap-2 text-secondary-600">
+          <ng-icon class="size-6!" [name]="service.icon" />
+          <h3 class="font-semibold font-satoshi text-xl md:text-2xl text-black">
+            {{ service.title }}
+          </h3>
         </div>
-      }
-    </div>
+        <p class="font-medium">
+          {{ service.description }}
+        </p>
+      </div>
+    }
   </div>
 </section>
