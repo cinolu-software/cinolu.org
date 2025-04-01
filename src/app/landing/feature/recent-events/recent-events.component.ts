@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { EventsService } from '../../../events/data-access/events.service';
 import { EventCardComponent } from '../../../events/ui/event-card/event-card.component';
-import { EventCardSkeletonComponent } from '../../../events/ui/event-card-skeleton/event-card-skeleton.component';
 import { carouselConfig } from '../../utils/config/carousel.config';
 import { NgIcon } from '@ng-icons/core';
 import { CarouselModule } from 'primeng/carousel';
@@ -14,7 +13,7 @@ import { CarouselModule } from 'primeng/carousel';
 @Component({
   selector: 'app-recent-events',
   providers: [EventsService],
-  imports: [CommonModule, EventCardComponent, CarouselModule, EventCardSkeletonComponent, RouterModule, NgIcon],
+  imports: [CommonModule, EventCardComponent, CarouselModule, RouterModule, NgIcon],
   templateUrl: './recent-events.component.html'
 })
 export class RecentEventsComponent implements OnInit {
