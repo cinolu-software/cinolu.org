@@ -13,7 +13,7 @@
 
     <div class="flex flex-col gap-5">
       <p-carousel
-        #carousel
+        #recentProjectsCarousel
         [value]="projects.data"
         [numVisible]="3"
         [numScroll]="1"
@@ -21,19 +21,17 @@
         [showNavigators]="false"
         [circular]="true"
         [responsiveOptions]="carouselConfig">
-        @for (project of projects.data; track project.id) {
-          <ng-template #item>
-            <div class="mr-3.5" data-aos="fade-left">
-              <app-project-card [project]="project" />
-            </div>
-          </ng-template>
-        }
+        <ng-template let-project #item>
+          <div class="mr-3.5" data-aos="fade-left">
+            <app-project-card [project]="project" />
+          </div>
+        </ng-template>
       </p-carousel>
       <div class="flex items-center gap-4 place-self-end">
-        <button (click)="carousel.navBackward($event)" class="carousel-nav-btn">
+        <button (click)="recentProjectsCarousel.navBackward($event)" class="carousel-nav-btn">
           <ng-icon name="matArrowBackOutline" class="size-3.5!" />
         </button>
-        <button (click)="carousel.navForward($event)" class="carousel-nav-btn">
+        <button (click)="recentProjectsCarousel.navForward($event)" class="carousel-nav-btn">
           <ng-icon name="matArrowForwardOutline" class="size-3.5!" />
         </button>
       </div>

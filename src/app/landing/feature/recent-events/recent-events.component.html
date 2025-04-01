@@ -20,13 +20,11 @@
         [showNavigators]="false"
         [circular]="true"
         [responsiveOptions]="carouselOptions">
-        @for (event of events.data; track event.id) {
-          <ng-template #item>
-            <div class="mr-3.5" data-aos="fade-left">
-              <app-event-card [event]="event" />
-            </div>
-          </ng-template>
-        }
+        <ng-template let-event #item>
+          <div class="mr-3.5" data-aos="fade-left">
+            <app-event-card [event]="event" />
+          </div>
+        </ng-template>
       </p-carousel>
       <div class="flex items-center gap-4 place-self-end">
         <button (click)="carousel.navBackward($event)" class="carousel-nav-btn">
