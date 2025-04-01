@@ -18,11 +18,5 @@ export const services: IService[] = [
     description:
       "Nous mettons à disposition une gamme variée de workshops et d'activités adaptés aux jeunes entrepreneurs et aux mentors.",
     icon: 'matVerifiedOutline'
-  },
-  {
-    title: 'Incubation',
-    description:
-      "Nous offrons un accompagnement en pré-incubation, incubation et post-incubation avec des méthodes accréditées à l'international.",
-    icon: 'matSchoolOutline'
   }
 ];

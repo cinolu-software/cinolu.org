@@ -3,7 +3,7 @@
     <ng-icon [name]="isOpen() ? 'matCloseOutline' : 'matMenuOutline'" class="size-5!" />
   </button>
   <div
-    class="fixed top-20 left-0 right-10 bottom-0 bg-white backdrop-blur-lg transition-transform duration-300"
+    class="fixed top-14 left-0 right-10 bottom-0 bg-white backdrop-blur-lg transition-transform duration-300"
     [ngClass]="isOpen() ? 'translate-x-0 active-nav' : '-translate-x-full'">
     <div class="flex flex-col justify-between py-16 px-10 h-full text-gray-900">
       <div class="flex flex-col gap-6 font-bold text-xl menu">
@@ -16,11 +16,11 @@
       </div>
       @if (user()) {
         <div class="flex flex-col gap-8 text-gray-900">
-          <a [href]="accountUrl()" target="_blank" class="flex items-center gap-2.5">
-            <img
-              [src]="user() | apiIMG: 'user'"
-              class="rounded-full w-7 h-7 object-cover ring-2 ring-secondary-800 ring-offset-1"
-              alt="profile picture" />
+          <a
+            [href]="accountUrl()"
+            target="_blank"
+            class="relative w-7 h-7 ring-2 ring-secondary-800 ring-offset-1 flex items-center gap-2.5">
+            <img [ngSrc]="user() | apiIMG: 'user'" class="rounded-full object-cover" alt="profile picture" fill />
             Dashboard
           </a>
           <button
@@ -39,7 +39,7 @@
     </div>
   </div>
   <ul
-    class="fixed text-base top-10 left-0 right-8 bottom-0 bg-white backdrop-blur-lg z-30 transition-transform duration-300"
+    class="fixed text-base top-14 left-0 right-8 bottom-0 bg-white backdrop-blur-lg z-30 transition-transform duration-300"
     [ngClass]="activeTab() && isOpen() ? 'translate-x-0' : '-translate-x-full'">
     <div
       class="flex flex-col items-start justify-start gap-7 font-medium py-16 px-10 h-full  {{
@@ -47,14 +47,15 @@
       }}">
       <div class="menu">
         <button class="font-semibold text-gray-800 flex items-center gap-1 m-4" (click)="setActiveTab(null)">
-          <ng-icon name="matTurnSlightLeftOutline" class="size-5!" />
+          <ng-icon name="matArrowBackOutline" class="size-5!" />
           Retour
         </button>
       </div>
       @for (link of getLinks(links(), activeTab()); track $index) {
-        <a [routerLink]="link.path" [fragment]="link.fragment" class="flex items-center gap-2.5">
-          <span class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full">
-            <ng-icon name="link.icon" class="size-5! text-white" />
+        <a [routerLink]="link.path" [fragment]="link.fragment" class="flex items-center gap-2.5 group">
+          <span
+            class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full transition-transform duration-200 group-hover:scale-110 text-white">
+            <ng-icon [name]="link.icon" class="size-4!" />
           </span>
           <p class="flex flex-col gap-0.5 font-medium">
             {{ link.name }}
