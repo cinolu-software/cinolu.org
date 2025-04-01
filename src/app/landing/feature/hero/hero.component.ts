@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 import { stakeholders } from '../../utils/data/stakeholders.data';
 import { RouterLink } from '@angular/router';
 import { fadeInStagger } from '../../../shared/animations/fade';
+import { NgIcon } from '@ng-icons/core';
 
 @Component({
   selector: 'app-hero',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, NgIcon],
   templateUrl: './hero.component.html',
   animations: [fadeInStagger]
 })
