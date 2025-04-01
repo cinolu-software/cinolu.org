@@ -1,6 +1,6 @@
 /* Loading bar  */
 .loading-bar .p-progressbar {
-  @apply fixed top-0 w-full h-1.5 z-[999] rounded-none;
+  @apply fixed top-0 w-full h-1 z-[999] rounded-none;
 }
 
 /* Progess Bar */
