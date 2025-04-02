@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IEvent } from 'app/shared/utils/types/models.type';
+import { ICategory, IEvent } from 'app/shared/utils/types/models.type';
 import { APIService } from 'app/shared/services/api/api.service';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { QueryParams } from '../utils/types/query-params.type';
@@ -14,9 +14,9 @@ export class EventsService {
     return this.#apiService.get('ids');
   }
 
-  // getTypes(): Observable<IAPIResponse<IEventType[]>> {
-  //   return this.#apiService.get('event-types');
-  // }
+  getCategories(): Observable<IAPIResponse<ICategory[]>> {
+    return this.#apiService.get('project-categories');
+  }
 
   getEvents(queryParams: QueryParams): Observable<IAPIResponse<[IEvent[], number]>> {
     const params = this.#buildQueryParams(queryParams);

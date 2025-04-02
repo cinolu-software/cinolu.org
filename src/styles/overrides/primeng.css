@@ -19,7 +19,7 @@
 
 /* Form */
 .p-inputtext {
-  @apply bg-white text-gray-800 w-full py-2.5 border-gray-200 focus:border-primary-500;
+  @apply bg-white text-gray-800 w-full py-2 border-gray-200 focus:border-primary-500;
 }
 
 .p-password {
