@@ -1,54 +1,59 @@
-<section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 mt-24 mb-12">
+<section class="">
+  <app-project-skeleton />
+
   @let project = project$ | async;
   @if (project.data; as project) {
-    <button class="underline mb-4 flex items-center gap-1" (click)="back()">
-      <ng-icon name="matTurnLeftOutline" class="size-4!" />
-      Retour
-    </button>
+    <div class="mx-8 pt-20 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl border-x border-dashed border-gray-200">
+      <div class="px-4 pt-4 pb-8">
+        <h2 class="font-black font-satoshi mb-1 text-2xl md:text-4xl">{{ project.name | titlecase }}</h2>
+        <button class="underline flex items-center gap-1 pb-4 text-secondary-700" (click)="back()">
+          <ng-icon name="matArrowBackOutline" class="size-4!" />
+          Retour
+        </button>
+      </div>
+    </div>
 
-    <h1 class="font-bold block text-xl md:text-2xl mb-12 lg:text-4xl">
-      {{ project.name | titlecase }}
-    </h1>
-
-    <div class="relative mb-6 h-60 w-full md:h-96 bg-gray-50">
+    <div class="relative pb-10 h-60 w-full md:h-96 bg-gray-50 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl">
       <img [ngSrc]="project | apiIMG: 'project'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
     </div>
 
-    <div class="mb-10">
-      <div
-        class="flex items-center gap-7 text-nowrap border-primary-300 mb-10 no-scrollbar overflow-x-scroll border-b border-dashed">
-        <button
-          [ngClass]="!activeTab() && 'border-b border-primary-700 text-primary-700'"
-          class="py-2 flex items-center gap-1.5"
-          (click)="setActiveTab(null)">
-          Resumé
-          <ng-icon name="description" class="icon-size-3 xl:icon-size-4" />
-        </button>
+    <div class="mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl border-x border-dashed border-gray-200 pb-10">
+      <div class="px-4">
+        <div
+          class="flex items-center gap-7 text-nowrap border-primary-300 pt-8 mb-10 no-scrollbar overflow-x-scroll border-b border-dashed">
+          <button
+            [ngClass]="!activeTab() && 'border-b border-primary-700 text-primary-700'"
+            class="py-2 flex items-center gap-1.5"
+            (click)="setActiveTab(null)">
+            Resumé
+            <ng-icon name="matDescriptionOutline" class="icon-size-3 xl:icon-size-4" />
+          </button>
+          <button
+            [disabled]="project?.phases?.length === 0"
+            [ngClass]="activeTab() === 'application' && 'border-b border-primary-700 text-primary-700'"
+            class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
+            (click)="setActiveTab('application')">
+            Postuler
+            <ng-icon name="matSendOutline" class="icon-size-3 xl:icon-size-4" />
+          </button>
+        </div>
 
-        <button
-          [disabled]="project?.phases?.length === 0"
-          [ngClass]="activeTab() === 'application' && 'border-b border-primary-700 text-primary-700'"
-          class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
-          (click)="setActiveTab('application')">
-          Postuler
-          <ng-icon name="send" class="icon-size-3 xl:icon-size-4" />
-        </button>
-      </div>
+        @if (!activeTab()) {
+          <app-project-overview [project]="project" />
+        }
 
-      @if (!activeTab()) {
-        <app-project-overview [project]="project" />
-      }
-
-      <!-- @if (activeTab() === 'application' && project?.phases?.length > 0) {
+        <!-- @if (activeTab() === 'application' && project?.phases?.length > 0) {
         <app-project-application [project]="project" />
       } -->
+      </div>
     </div>
   }
   @if (project.isLoading) {
     <app-project-skeleton />
   }
   @if (!project.isLoading && !project.isSuccess) {
-    <div class="relative min-h-[75vh] w-full flex flex-col justify-center items-center">
+    <div
+      class="relative min-h-[75vh] w-full flex flex-col justify-center items-center mx-8 pt-20 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl border-x border-dashed border-gray-200 px-5">
       <h2 class="text-3xl font-semibold">Aucun programme avec cet identifiant !</h2>
     </div>
   }

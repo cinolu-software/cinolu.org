@@ -17,9 +17,8 @@
       @if (categories?.data) {
         <div class="px-4 pb-2 pt-10 flex flex-wrap gap-4">
           <p-multiselect
-            [id]="'categoriesFilter'"
-            [name]="'categoriesFilter'"
-            [autocomplete]="'none'"
+            [inputId]="'categoriesFilter'"
+            [autocomplete]="'off'"
             [showHeader]="false"
             (onChange)="onFilterChange($event, 'categories')"
             (onClear)="onClear()"
