@@ -31,7 +31,7 @@
               {{ phase.description }}
             </p>
             @if (phase.requirements?.length) {
-              <div class="flex flex-col gap-1.5 mt-4">
+              <div class="flex flex-col gap-1 mt-4">
                 @for (req of phase.requirements; track $index) {
                   <h5 class="font-medium">* {{ req.name }}</h5>
                   <p class="px-4 mb-4">{{ req.description }}</p>
