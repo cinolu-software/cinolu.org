@@ -3,21 +3,21 @@
   @let categories = categories$ | async;
   <div class="pt-14">
     <div class="mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 border-x border-dashed border-gray-200">
-      <div class="px-5 py-10">
+      <div class="px-4 py-10">
         <h2 class="font-black font-satoshi mb-1 text-2xl md:text-4xl">Our Events</h2>
         <p class="text-secondary-500">Tous les événemens</p>
       </div>
     </div>
     <div
-      class="relative h-60 md:h-96 w-full bg-gray-200 pb-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 border-x border-dashed border-gray-200">
+      class="relative h-60 md:h-96 w-full bg-gray-200 pb-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl border-x border-dashed border-gray-200">
       <img ngSrc="/images/events.jpg" alt="events" class="object-cover h-full opacity-90" fill priority />
     </div>
     <div
       class="flex flex-col mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 border-x border-dashed border-gray-200">
       @if (categories?.data) {
-        <div class="px-4 pb-2 pt-10">
+        <div class="px-4 pb-2 pt-10 flex flex-wrap gap-4">
           <p-multiselect
-            [inputId]="'events'"
+            [inputId]="'categoriesFilter'"
             [autocomplete]="'off'"
             [showHeader]="false"
             (onChange)="onFilterChange($event, 'categories')"
@@ -34,11 +34,11 @@
       @if (events?.data?.[1] > 0) {
         <div class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10">
           @for (
-            project of events?.data?.[0]
+            event of events?.data?.[0]
               | paginate: { itemsPerPage: 9, currentPage: queryParams().page, totalItems: events.data[1] };
-            track project.id
+            track event.id
           ) {
-            <app-event-card [event]="project" />
+            <app-event-card [event]="event" />
           }
         </div>
         @if (events.data[1] > 9) {
@@ -66,7 +66,7 @@
 
       @if (events?.isLoading) {
         <div class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10">
-          @for (project of skeletonArray; track $index) {
+          @for (event of skeletonArray; track $index) {
             <app-event-card-skeleton />
           }
         </div>

@@ -22,8 +22,8 @@ export class EventComponent implements OnInit {
   #location = inject(Location);
 
   ngOnInit(): void {
-    const id = this.#activatedRoute.snapshot.paramMap.get('id');
-    this.event$ = this.#eventsService.getEvent(id);
+    const slug = this.#activatedRoute.snapshot.paramMap.get('slug');
+    this.event$ = this.#eventsService.getEvent(slug);
   }
 
   back(): void {

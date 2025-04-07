@@ -5,6 +5,7 @@ import { ICategory, IEvent } from 'app/shared/utils/types/models.type';
 import { APIService } from 'app/shared/services/api/api.service';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { QueryParams } from '../utils/types/query-params.type';
+import { buildQueryParams } from 'app/shared/utils/helpers/build-query-params.fn';
 
 @Injectable()
 export class EventsService {
@@ -15,29 +16,19 @@ export class EventsService {
   }
 
   getCategories(): Observable<IAPIResponse<ICategory[]>> {
-    return this.#apiService.get('project-categories');
+    return this.#apiService.get('event-categories');
   }
 
   getEvents(queryParams: QueryParams): Observable<IAPIResponse<[IEvent[], number]>> {
-    const params = this.#buildQueryParams(queryParams);
+    const params = buildQueryParams(queryParams);
     return this.#apiService.get('events/find-published', params);
   }
 
-  getEvent(id: string): Observable<IAPIResponse<IEvent>> {
-    return this.#apiService.get(`events/${id}`);
+  getEvent(slug: string): Observable<IAPIResponse<IEvent>> {
+    return this.#apiService.get(`events/slug/${slug}`);
   }
 
   findRecent(): Observable<IAPIResponse<IEvent[]>> {
     return this.#apiService.get('events/find-recent');
-  }
-
-  #buildQueryParams(queryParams: QueryParams): HttpParams {
-    let params = new HttpParams();
-    Object.keys(queryParams).forEach((key) => {
-      const value = queryParams[key];
-      if (!value) return;
-      params = params.set(key, value);
-    });
-    return params;
   }
 }
