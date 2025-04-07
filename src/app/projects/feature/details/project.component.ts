@@ -12,6 +12,7 @@ import { selectUser } from 'app/shared/store/auth/auth.reducers';
 import { ProjectsService } from '../../data-access/projects.service';
 import { ProjectSkeletonComponent } from '../../ui/project-skeleton/project-skeleton.component';
 import { NgIcon } from '@ng-icons/core';
+import { ProjectApplicationComponent } from './application/application.component';
 
 @Component({
   selector: 'app-project',
@@ -23,7 +24,8 @@ import { NgIcon } from '@ng-icons/core';
     ApiImgPipe,
     ProjectOverviewComponent,
     ProjectSkeletonComponent,
-    NgIcon
+    NgIcon,
+    ProjectApplicationComponent
   ],
   templateUrl: './project.component.html'
 })

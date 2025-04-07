@@ -1,29 +1,33 @@
-<section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 mb-12 mt-24">
+<section>
   @let event = event$ | async;
   @if (event.data; as event) {
-    <button class="underline mb-4 flex items-center gap-1" (click)="back()">
-      <ng-icon name="matSubdirectoryArrowLeftOutline" class="size-5!" />
-      Retour
-    </button>
-    <h1 class="font-bold block text-xl md:text-2xl mb-12 lg:text-4xl">
-      {{ event.name | titlecase }}
-    </h1>
-    <div class="relative mb-6 h-60 w-full md:h-96 bg-gray-50">
+    <div class="mx-8 pt-20 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl border-x border-dashed border-gray-200">
+      <div class="px-4 pt-4 pb-8">
+        <h2 class="font-black font-satoshi mb-1 text-2xl md:text-4xl">{{ event.name | titlecase }}</h2>
+        <button class="underline flex items-center gap-1 pb-4 text-secondary-700" (click)="back()">
+          <ng-icon name="matArrowBackOutline" class="size-4!" />
+          Retour
+        </button>
+      </div>
+    </div>
+
+    <div class="relative pb-10 h-60 w-full md:h-96 bg-gray-50 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl">
       <img [ngSrc]="event | apiIMG: 'event'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
     </div>
-    <div class="py-10">
-      <div class="flex flex-col gap-8">
-        <div>
+
+    <div class="mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl border-x border-dashed border-gray-200 py-10">
+      <div class="px-4">
+        <div class="mb-6">
           <div class="flex items-center gap-1 mb-2 text-secondary-800">
-            <ng-icon name="matDescriptionOutline" class="size-4!" />
+            <ng-icon name="matDescriptionOutline" class="size-5!" />
             <h2 class="font-semibold text-lg">Description</h2>
           </div>
           <p class="mb-1.5 lowercase first-letter:uppercase">{{ event.description }}</p>
         </div>
 
-        <div>
+        <div class="mb-4">
           <div class="flex items-center gap-1 mb-2 text-secondary-800">
-            <ng-icon name="matEventNoteOutline" class="size-4!" />
+            <ng-icon name="matEventNoteOutline" class="size-5!" />
             <h2 class="font-semibold text-lg">Dates</h2>
           </div>
           <p class="mb-1.5">Commence le {{ event.started_at | date: 'longDate' }}</p>
@@ -32,13 +36,12 @@
       </div>
     </div>
   }
-
   @if (event.isLoading) {
     <app-event-skeleton />
   }
-
   @if (!event.isLoading && !event.isSuccess) {
-    <div class="relative min-h-[75vh] w-full flex flex-col justify-center items-center">
+    <div
+      class="relative min-h-[75vh] w-full flex flex-col justify-center items-center mx-8 pt-20 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl border-x border-dashed border-gray-200 px-5">
       <h2 class="text-3xl font-semibold">Aucun événement avec cet identifiant !</h2>
     </div>
   }

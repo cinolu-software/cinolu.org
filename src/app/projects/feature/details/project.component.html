@@ -40,9 +40,9 @@
           <app-project-overview [project]="project" />
         }
 
-        <!-- @if (activeTab() === 'application' && project?.phases?.length > 0) {
-        <app-project-application [project]="project" />
-      } -->
+        @if (activeTab() === 'application' && project?.phases?.length > 0) {
+          <app-project-application [fields]="project.form" />
+        }
       </div>
     </div>
   }

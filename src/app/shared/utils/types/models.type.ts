@@ -37,7 +37,7 @@ export interface IComment extends IBase {
   post: IPost;
 }
 
-interface IField {
+export interface IField {
   type: string;
   name: string;
   label: string;

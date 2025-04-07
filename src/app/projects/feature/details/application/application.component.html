@@ -1,0 +1,40 @@
+@let application = application$ | async;
+<form class="mt-6 md:w-3/4 lg:w-2/4 flex flex-col gap-8" [formGroup]="form" (ngSubmit)="submitForm()">
+  @for (f of fields(); track $index) {
+    @if (f.type !== 'textarea' && f.type !== 'select') {
+      <div class="flex flex-col gap-1.5">
+        <label [for]="f.name" class="font-medium capitalize">{{ f.label }}</label>
+        <input
+          pInputText
+          [id]="f.name"
+          [name]="f.label"
+          [required]="f.required"
+          [formControlName]="f.label"
+          [type]="f.type"
+          autocomplete="none" />
+      </div>
+    }
+    @if (f.type === 'textarea') {
+      <div class="flex flex-col gap-1.5">
+        <label [for]="f.name" class="font-medium capitalize">{{ f.label }}</label>
+        <textarea
+          [id]="f.name"
+          [required]="f.required"
+          [formControlName]="f.label"
+          rows="5"
+          cols="30"
+          pTextarea
+          autocomplete="none"></textarea>
+      </div>
+    }
+    @if (f.type === 'select') {
+      <div class="flex flex-col gap-1.5">
+        <p class="font-medium capitalize">{{ f.label }}</p>
+        <p-select [options]="f.options" [formControlName]="f.label" placeholder="Choisir une option" class="w-full" />
+      </div>
+    }
+  }
+  <p-button [loading]="application?.isLoading" [disabled]="application?.isLoading || form.invalid" type="submit">
+    Soumettre
+  </p-button>
+</form>
