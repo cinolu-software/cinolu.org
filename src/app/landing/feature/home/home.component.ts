@@ -5,6 +5,7 @@ import { RecentProjectsComponent } from '../recent-projects/recent-projects.comp
 import { ServicesComponent } from '../services/services.component';
 import { StatementComponent } from '../statement/statement.component';
 import { StatsComponent } from '../stats/stats.component';
+import { EcosytemComponent } from '../ecosystem/ecosystem.component';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,8 @@ import { StatsComponent } from '../stats/stats.component';
     StatementComponent,
     StatsComponent,
     RecentProjectsComponent,
-    RecentEventsComponent
+    RecentEventsComponent,
+    EcosytemComponent
   ],
   templateUrl: './home.component.html'
 })

@@ -72,6 +72,14 @@ export interface IPhase extends IBase {
   documents: IDocument[];
   project: IProject;
 }
+export interface IMember extends IBase {
+  name: string;
+  website: string;
+  description: string;
+  logo: string;
+  location: string;
+  categories: ICategory[];
+}
 
 export interface IDocument extends IBase {
   title: string;
