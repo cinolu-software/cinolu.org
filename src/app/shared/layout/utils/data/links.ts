@@ -25,7 +25,7 @@ export const EXPLORATION_LINKS: ILink[] = [
   {
     name: 'Ecosystème',
     path: '/',
-    fragment: 'partners',
+    fragment: 'ecosystem',
     description: 'Voir nos partenaires',
     icon: 'matGroups2Outline',
     exactUrl: true
