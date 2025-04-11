@@ -7,7 +7,7 @@
       <h2 class="font-black font-satoshi mb-2 text-2xl md:text-4xl">Our Ecosystem</h2>
       <p class="mb-4 text-primary-600 font-satoshi">Notre écosystème</p>
     </div>
-    <div class="flex overflow-x-auto gap-4 font-medium pb-2.5 whitespace-nowrap w-auto">
+    <div class="flex overflow-x-auto gap-4 font-medium pb-2.5 whitespace-nowrap" data-aos="fade-down">
       <button
         class="rounded-md text-gray-700 transition-colors duration-300 bg-primary-50/50 px-3 py-1.5"
         [ngClass]="{
@@ -57,26 +57,26 @@
 
       @if (members?.data?.length > 0) {
         @for (member of members?.data; track member.id) {
-          <a
-            [href]="member.website"
-            target="_blank"
-            class="p-8 bg-white rounded-lg shadow-sm hover:scale-105 transition-transform duration-500 border border-gray-100">
-            <div class="flex items-center justify-between mb-4">
-              <div class="relative h-12 w-12 rounded-sm overflow-hidden mb-5">
-                <img [ngSrc]="member | apiIMG: 'member'" alt="Member's logo" fill />
+          <a [href]="member.website" target="_blank" data-aos="zoom-in">
+            <div
+              class="p-8 bg-white rounded-lg shadow-sm border border-gray-100 hover:scale-105 transition-transform duration-300">
+              <div class="flex items-center justify-between mb-4">
+                <div class="relative h-12 w-12 rounded-sm overflow-hidden mb-5">
+                  <img [ngSrc]="member | apiIMG: 'member'" alt="Member's logo" fill />
+                </div>
+                <span
+                  class="px-3 py-1 inline-block justify-self-end rounded-full text-xs font-semibold bg-primary-100 text-primary-800">
+                  {{ member?.categories[0]?.name }}
+                </span>
               </div>
-              <span
-                class="px-3 py-1 inline-block justify-self-end rounded-full text-xs font-semibold bg-primary-100 text-primary-800">
-                {{ member?.categories[0]?.name }}
-              </span>
-            </div>
 
-            <p class="font-bold text-xl mb-2.5 font-satoshi line-clamp-1">
-              {{ member.name | titlecase }}
-            </p>
-            <div class="flex items-center text-md leading-5 mb-2">
-              <ng-icon class="text-hint size-5!" name="matLocationOnOutline" />
-              <div class="ml-1.5">{{ member.location | titlecase }}</div>
+              <p class="font-bold text-xl mb-2.5 font-satoshi line-clamp-1">
+                {{ member.name | titlecase }}
+              </p>
+              <div class="flex items-center text-md leading-5 mb-2">
+                <ng-icon class="text-hint size-5!" name="matLocationOnOutline" />
+                <div class="ml-1.5">{{ member.location | titlecase }}</div>
+              </div>
             </div>
           </a>
         }
