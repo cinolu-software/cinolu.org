@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { statements } from '../../utils/data/statements.data';
+import { statements } from '../../utils/data/statements';
 
 @Component({
   selector: 'app-statement',
