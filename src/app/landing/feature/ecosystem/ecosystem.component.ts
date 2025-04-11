@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { EcosystemService } from 'app/landing/data-access/ecosystem.service';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
@@ -20,15 +20,20 @@ export class EcosytemComponent implements OnInit {
   activeTab = signal<string>('Tous');
   icons = {
     Startups: 'matLightbulbOutline',
-    'SAEI & ESOs': 'matLocationCityOutline',
-    Corporates: 'matMonetizationOnOutline',
+    'SAEI & ESOs': 'matTravelExploreOutline',
+    Corporates: 'matLocationCityOutline',
     Institutions: 'matEmojiFlagsOutline',
     Partners: 'matAllInclusiveOutline'
   };
 
+  constructor() {
+    effect(() => {
+      this.getMembersByCategory(this.activeTab());
+    });
+  }
+
   setActiveTab(tab: string) {
     this.activeTab.set(tab);
-    this.getMembersByCategory(tab);
   }
 
   getMembersByCategory(category: string) {

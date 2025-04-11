@@ -1,4 +1,4 @@
-<section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 pt-24 mb-20" id="ecosystem">
+<section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 pt-28 mb-20" id="ecosystem">
   @let categories = categories$ | async;
   @let members = members$ | async;
 
@@ -7,9 +7,9 @@
       <h2 class="font-black font-satoshi mb-2 text-2xl md:text-4xl">Our Ecosystem</h2>
       <p class="mb-4 text-primary-600 font-satoshi">Notre écosystème</p>
     </div>
-    <div class="flex flex-wrap gap-4 font-medium">
+    <div class="flex overflow-x-auto gap-4 font-medium pb-2.5 whitespace-nowrap w-auto">
       <button
-        class="rounded-md text-gray-700 transition-colors duration-300 bg-primary-50/60 px-3 py-1.5"
+        class="rounded-md text-gray-700 transition-colors duration-300 bg-primary-50/50 px-3 py-1.5"
         [ngClass]="{
           'bg-primary-600 text-white': activeTab() === 'Tous'
         }"
@@ -18,7 +18,7 @@
       </button>
       @for (category of categories.data; track $index) {
         <button
-          class="flex items-center gap-1.5 transition-colors duration-300 rounded-md text-gray-700 bg-primary-50/60 px-3 py-1.5"
+          class="flex items-center gap-1.5 transition-colors duration-300 rounded-md text-gray-900 bg-primary-50/50 px-3 py-1.5"
           [ngClass]="{
             'bg-primary-600 text-white': activeTab() === category.name
           }"
@@ -60,7 +60,7 @@
           <a
             [href]="member.website"
             target="_blank"
-            class="p-8 bg-white rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-transform duration-500 border border-gray-100">
+            class="p-8 bg-white rounded-lg shadow-sm hover:scale-105 transition-transform duration-500 border border-gray-100">
             <div class="flex items-center justify-between mb-4">
               <div class="relative h-12 w-12 rounded-sm overflow-hidden mb-5">
                 <img [ngSrc]="member | apiIMG: 'member'" alt="Member's logo" fill />
