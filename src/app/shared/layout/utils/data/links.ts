@@ -10,7 +10,7 @@ export const EXPLORATION_LINKS: ILink[] = [
   },
   {
     name: 'Programmes',
-    path: '/projects',
+    path: '/programs',
     description: 'Voir nos programmes',
     icon: 'matAssignmentOutline',
     exactUrl: false

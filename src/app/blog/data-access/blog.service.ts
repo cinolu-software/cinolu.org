@@ -11,19 +11,19 @@ export class BlogService {
   #apiService = inject(APIService);
 
   getCategories(): Observable<IAPIResponse<ICategory[]>> {
-    return this.#apiService.get('posts/blog-categories');
+    return this.#apiService.get('blog-categories');
   }
 
   getRecentPosts(): Observable<IAPIResponse<IPost[]>> {
-    return this.#apiService.get('posts/recent');
+    return this.#apiService.get('blog-posts/recent');
   }
 
   getPost(slug: string): Observable<IAPIResponse<IPost>> {
-    return this.#apiService.get(`posts/slug/${slug}`);
+    return this.#apiService.get(`blog-posts/slug/${slug}`);
   }
 
-  getPosts(queryParams: QueryParams): Observable<IAPIResponse<IPost[]>> {
+  getPosts(queryParams: QueryParams): Observable<IAPIResponse<[IPost[], number]>> {
     const params = buildQueryParams(queryParams);
-    return this.#apiService.get('posts', params);
+    return this.#apiService.get('blog-posts', params);
   }
 }

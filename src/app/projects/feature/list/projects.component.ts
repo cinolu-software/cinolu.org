@@ -69,7 +69,7 @@ export class ProjectsComponent implements OnInit {
   updateRoute(): void {
     const { page, categories } = this.queryParams();
     const queryParams = { page, categories };
-    this.#router.navigate(['/projects'], { queryParams });
+    this.#router.navigate(['/programs'], { queryParams });
   }
 
   updateRouteAndprojects(): void {

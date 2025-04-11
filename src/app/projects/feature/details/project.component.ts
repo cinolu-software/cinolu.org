@@ -53,7 +53,7 @@ export class ProjectComponent implements OnInit {
   setActiveTab(tab: string): void {
     this.activeTab.set(tab);
     const queryParams = { tab };
-    this.#router.navigate(['/projects', this.#id], { queryParams });
+    this.#router.navigate(['/programs', this.#id], { queryParams });
   }
 
   back(): void {

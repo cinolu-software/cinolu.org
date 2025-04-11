@@ -9,7 +9,7 @@ import { blogRoutes } from './blog/blog.routes';
 
 export const appRoutes: Route[] = [
   {
-    path: 'projects',
+    path: 'programs',
     component: LayoutComponent,
     data: { layout: 'primary' },
     loadChildren: () => projectsRoutes
