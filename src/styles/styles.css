@@ -47,6 +47,18 @@
     @apply scroll-smooth hyphens-auto;
   }
 
+  ::-webkit-scrollbar {
+    @apply w-1.5 h-1;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply shadow-md bg-secondary-200/30;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-secondary-400;
+  }
+
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;
