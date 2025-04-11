@@ -17,6 +17,7 @@ export class EcosytemComponent implements OnInit {
   #ecosystemService = inject(EcosystemService);
   categories$: Observable<IAPIResponse<ICategory[]>>;
   members$: Observable<IAPIResponse<IMember[]>>;
+  skeletonArray = new Array(24);
   activeTab = signal<string>('Tous');
   icons = {
     Startups: 'matLightbulbOutline',
