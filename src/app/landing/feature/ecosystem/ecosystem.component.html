@@ -1,86 +1,56 @@
 <section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 pt-28 mb-20" id="ecosystem">
-  @let categories = categories$ | async;
-  @let members = members$ | async;
+  @let categoryCounts = categoryCounts$ | async;
 
-  @if (categories?.data?.length > 0) {
+  @if (categoryCounts?.data) {
     <div class="mb-10" data-aos="fade-up">
       <h2 class="font-black font-satoshi mb-2 text-2xl md:text-4xl">Our Ecosystem</h2>
-      <p class="mb-4 text-primary-600 font-satoshi">Notre écosystème</p>
+      <p class="text-primary-600 font-satoshi">Notre écosystème</p>
     </div>
-    <div class="flex overflow-x-auto gap-4 font-medium pb-2.5 whitespace-nowrap" data-aos="fade-up">
-      <button
-        class="rounded-md text-gray-700 transition-colors duration-300 bg-primary-50/50 px-3 py-1.5"
-        [ngClass]="{
-          'bg-primary-600 text-white': activeTab() === 'Tous'
-        }"
-        (click)="setActiveTab('Tous')">
-        Tous
-      </button>
-      @for (category of categories.data; track $index) {
+
+    <div
+      class="flex overflow-x-auto gap-5 border-b border-dashed border-primary-200 font-medium pt-4 whitespace-nowrap">
+      @for (c of categoryCounts?.data; track $index) {
         <button
-          class="flex items-center gap-1.5 transition-colors duration-300 rounded-md text-gray-900 bg-primary-50/50 px-3 py-1.5"
+          class="flex items-center gap-2 pr-0.5 pb-2.5 py-1.5 text-gray-700 transition-colors duration-300"
+          (click)="setActiveTab(c.category)"
           [ngClass]="{
-            'bg-primary-600 text-white': activeTab() === category.name
-          }"
-          (click)="setActiveTab(category.name)">
-          <ng-icon
-            [name]="icons[category.name]"
-            class="size-4! text-gray-700"
-            [ngClass]="{
-              'text-primary-50!': activeTab() === category.name
-            }" />
-          {{ category.name }}
+            'border-b border-secondary-600': activeTab() === c.category
+          }">
+          {{ c.category }}
+
+          <div
+            class="flex flex-col items-center justify-center h-7 w-7 rounded-full bg-secondary-600 text-white text-xs z-20">
+            {{ c.count }}
+          </div>
         </button>
       }
     </div>
-
-    @if (members?.data?.length === 0) {
-      <div class="text-gray-500">
-        <ng-icon name="matInfoOutline" class="size-5!" />
-        Aucun membre trouvé
-      </div>
-    }
-
-    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
-      @if (members?.isLoading) {
-        @for (s of skeletonArray; track $index) {
-          <div class="p-5 h-[180px] flex flex-col gap-2 shadow-md border border-gray-200 rounded-md animate-pulse mb-4">
-            <div class="flex items-center justify-between mb-4">
-              <div class="relative h-12 w-12 rounded-sm overflow-hidden bg-gray-100"></div>
-              <div class="h-4 w-10 mb-3 rounded-full bg-gray-100"></div>
-            </div>
-            <div class="h-6 w-32 rounded-sm mb-2 bg-gray-100"></div>
-            <div class="h-4 w-32 rounded-sm bg-gray-100"></div>
-          </div>
-        }
-      }
-
-      @if (members?.data?.length > 0) {
-        @for (member of members?.data; track member.id) {
-          <a [href]="member.website" target="_blank" data-aos="zoom-in">
-            <div
-              class="p-8 bg-white rounded-lg shadow-sm border border-gray-100 hover:scale-105 transition-transform duration-300">
-              <div class="flex items-center justify-between mb-4">
-                <div class="relative h-12 w-12 rounded-sm overflow-hidden mb-5">
-                  <img [ngSrc]="member | apiIMG: 'member'" alt="Member's logo" fill />
-                </div>
-                <span
-                  class="px-3 py-1 inline-block justify-self-end rounded-full text-xs font-semibold bg-primary-100 text-primary-800">
-                  {{ member?.categories[0]?.name }}
-                </span>
-              </div>
-
-              <p class="font-bold text-xl mb-2.5 font-satoshi line-clamp-1">
-                {{ member.name | titlecase }}
-              </p>
-              <div class="flex items-center text-md leading-5 mb-2">
-                <ng-icon class="text-hint size-5!" name="matLocationOnOutline" />
-                <div class="ml-1.5">{{ member.location | titlecase }}</div>
-              </div>
-            </div>
-          </a>
-        }
-      }
-    </div>
   }
+
+  <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
+    @for (organization of filteredOrganizations(); track organization.id) {
+      <a [href]="organization.website" target="_blank">
+        <div
+          class="p-8 bg-white rounded-lg shadow-sm border border-gray-100 hover:scale-105 transition-transform duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <div class="relative h-12 w-12 rounded-sm overflow-hidden mb-5">
+              <img [ngSrc]="organization | apiIMG: 'organization'" alt="organization's logo" fill />
+            </div>
+            <span
+              class="px-3 py-1 inline-block justify-self-end rounded-full text-xs font-semibold bg-primary-100 text-primary-800">
+              {{ organization?.categories[0]?.name }}
+            </span>
+          </div>
+
+          <p class="font-bold text-xl mb-2.5 font-satoshi line-clamp-1">
+            {{ organization.name | titlecase }}
+          </p>
+          <div class="flex items-center text-md leading-5 mb-2">
+            <ng-icon class="text-hint size-5!" name="matLocationOnOutline" />
+            <div class="ml-1.5">{{ organization.location | titlecase }}</div>
+          </div>
+        </div>
+      </a>
+    }
+  </div>
 </section>

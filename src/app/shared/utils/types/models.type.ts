@@ -24,6 +24,7 @@ export interface IUser extends IBase {
 export interface IPost extends IBase {
   title: string;
   slug: string;
+  views: number;
   content: string;
   image: string;
   comments: IComment[];
@@ -72,9 +73,10 @@ export interface IPhase extends IBase {
   documents: IDocument[];
   project: IProject;
 }
-export interface IMember extends IBase {
+export interface IOrganization extends IBase {
   name: string;
   website: string;
+  is_approved: boolean;
   description: string;
   logo: string;
   location: string;

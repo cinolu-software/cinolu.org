@@ -3,9 +3,10 @@ import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { EcosystemService } from 'app/landing/data-access/ecosystem.service';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
-import { ICategory, IMember } from 'app/shared/utils/types/models.type';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
+import { IOrganization } from 'app/shared/utils/types/models.type';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-ecosystem',
@@ -15,21 +16,29 @@ import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
 })
 export class EcosytemComponent implements OnInit {
   #ecosystemService = inject(EcosystemService);
-  categories$: Observable<IAPIResponse<ICategory[]>>;
-  members$: Observable<IAPIResponse<IMember[]>>;
+  categoryCounts$: Observable<IAPIResponse<{ category: string; count: number }[]>>;
+  organizations = signal<IOrganization[]>([]);
+  filteredOrganizations = signal<IOrganization[]>([]);
+  subscrption: Subscription;
   skeletonArray = new Array(24);
-  activeTab = signal<string>('Tous');
-  icons = {
-    Startups: 'matLightbulbOutline',
-    'SAEI & ESOs': 'matTravelExploreOutline',
-    Corporates: 'matLocationCityOutline',
-    Institutions: 'matEmojiFlagsOutline',
-    Partners: 'matAllInclusiveOutline'
-  };
+  activeTab = signal<string>('Total');
 
   constructor() {
+    this.#ecosystemService
+      .getOrganizations()
+      .pipe(takeUntilDestroyed())
+      .subscribe((res) => {
+        this.organizations.set(res.data);
+      });
+
     effect(() => {
-      this.getMembersByCategory(this.activeTab());
+      const category = this.activeTab();
+      const organizations = this.organizations();
+      this.filteredOrganizations.set(
+        category === 'Total'
+          ? organizations
+          : organizations.filter((org) => org.categories?.some((cat) => cat.name === category))
+      );
     });
   }
 
@@ -37,13 +46,7 @@ export class EcosytemComponent implements OnInit {
     this.activeTab.set(tab);
   }
 
-  getMembersByCategory(category: string) {
-    this.members$ =
-      category === 'Tous' ? this.#ecosystemService.getMembers() : this.#ecosystemService.getMembersByCategory(category);
-  }
-
-  ngOnInit() {
-    this.categories$ = this.#ecosystemService.getCategories();
-    this.members$ = this.#ecosystemService.getMembers();
+  ngOnInit(): void {
+    this.categoryCounts$ = this.#ecosystemService.getCategoryCount();
   }
 }
