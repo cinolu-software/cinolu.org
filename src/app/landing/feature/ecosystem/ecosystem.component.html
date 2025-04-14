@@ -8,7 +8,8 @@
     </div>
 
     <div
-      class="flex overflow-x-auto gap-5 border-b border-dashed border-primary-200 font-medium pt-4 whitespace-nowrap">
+      class="flex overflow-x-auto gap-5 border-b border-dashed border-primary-200 font-medium pt-4 whitespace-nowrap"
+      data-aos="fade-up">
       @for (c of categoryCounts?.data; track $index) {
         <button
           class="flex items-center gap-2 pr-0.5 pb-2.5 py-1.5 text-gray-700 transition-colors duration-300"
@@ -29,7 +30,7 @@
 
   <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
     @for (organization of filteredOrganizations(); track organization.id) {
-      <a [href]="organization.website" target="_blank">
+      <a [href]="organization.website" target="_blank" data-aos="fade-up">
         <div
           class="p-8 bg-white rounded-lg shadow-sm border border-gray-100 hover:scale-105 transition-transform duration-300">
           <div class="flex items-center justify-between mb-4">
@@ -47,7 +48,7 @@
           </p>
           <div class="flex items-center text-md leading-5 mb-2">
             <ng-icon class="text-hint size-5!" name="matLocationOnOutline" />
-            <div class="ml-1.5">{{ organization.location | titlecase }}</div>
+            <div class="ml-1.5 line-clamp-1">{{ organization.location | titlecase }}</div>
           </div>
         </div>
       </a>
