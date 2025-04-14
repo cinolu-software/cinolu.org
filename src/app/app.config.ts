@@ -1,5 +1,5 @@
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideExperimentalZonelessChangeDetection, LOCALE_ID } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, TitleStrategy, withInMemoryScrolling } from '@angular/router';
 import { appRoutes } from 'app/app.routes';
@@ -14,6 +14,11 @@ import { providePrimeNG } from 'primeng/config';
 import { provideIcons } from '@ng-icons/core';
 import * as matIconOutline from '@ng-icons/material-icons/outline';
 import { primeNGPreset } from './shared/utils/config/primeng.config';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+
+// Register French locale
+registerLocaleData(localeFr, 'fr');
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,6 +27,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideClientHydration(),
     provideHttpClient(withFetch(), withInterceptors([httpInterceptor, LoadingInterceptor])),
+    { provide: LOCALE_ID, useValue: 'fr' },
     { provide: TitleStrategy, useClass: PageTitleStrategy },
     provideIcons({ ...matIconOutline }),
     providePrimeNG({

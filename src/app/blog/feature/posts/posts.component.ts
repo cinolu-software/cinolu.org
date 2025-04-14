@@ -1,18 +1,20 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from 'app/blog/data-access/blog.service';
+import { carouselConfig } from 'app/blog/utils/config/carousel.config';
 import { QueryParams } from 'app/blog/utils/types/query-params.type';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { ICategory, IPost } from 'app/shared/utils/types/models.type';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { MultiSelect, MultiSelectChangeEvent } from 'primeng/multiselect';
+import { Carousel } from 'primeng/carousel';
 import { Observable } from 'rxjs';
+import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-posts',
   providers: [BlogService],
-  imports: [CommonModule, MultiSelect, NgxPaginationModule],
+  imports: [CommonModule, NgxPaginationModule, NgOptimizedImage, Carousel, ApiImgPipe],
   templateUrl: './posts.component.html'
 })
 export class PostsComponent implements OnInit {
@@ -22,9 +24,10 @@ export class PostsComponent implements OnInit {
   categories$: Observable<IAPIResponse<ICategory[]>>;
   #route = inject(ActivatedRoute);
   #router = inject(Router);
+  carouselConfig = carouselConfig;
   queryParams = signal<QueryParams>({
     page: Number(this.#route.snapshot.queryParams?.page) || null,
-    categories: this.#route.snapshot.queryParams?.category || null,
+    category: this.#route.snapshot.queryParams?.category || null,
     views: Number(this.#route.snapshot.queryParams?.views) || null,
     search: this.#route.snapshot.queryParams?.search || null
   });
@@ -42,13 +45,13 @@ export class PostsComponent implements OnInit {
 
   onClear(): void {
     this.queryParams().page = null;
-    this.queryParams().categories = null;
+    this.queryParams().category = null;
     this.updateRouteAndposts();
   }
 
-  onFilterChange(post: MultiSelectChangeEvent, filter: string): void {
+  onFilterChange(filter: string): void {
     this.queryParams().page = null;
-    this.queryParams()[filter] = post.value;
+    this.queryParams()['category'] = filter === 'Tous' ? null : filter;
     this.updateRouteAndposts();
   }
 
@@ -57,9 +60,9 @@ export class PostsComponent implements OnInit {
   }
 
   updateRoute(): void {
-    const { page, categories } = this.queryParams();
-    const queryParams = { page, categories };
-    this.#router.navigate(['/posts'], { queryParams });
+    const { page, category } = this.queryParams();
+    const queryParams = { page, category };
+    this.#router.navigate(['/blog'], { queryParams });
   }
 
   updateRouteAndposts(): void {
