@@ -10,11 +10,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Carousel } from 'primeng/carousel';
 import { Observable } from 'rxjs';
 import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
+import { PostsSkeletonComponent } from '../../ui/posts-skeleton/posts.component';
 
 @Component({
   selector: 'app-posts',
   providers: [BlogService],
-  imports: [CommonModule, NgxPaginationModule, NgOptimizedImage, Carousel, ApiImgPipe],
+  imports: [CommonModule, NgxPaginationModule, NgOptimizedImage, Carousel, ApiImgPipe, PostsSkeletonComponent],
   templateUrl: './posts.component.html'
 })
 export class PostsComponent implements OnInit {

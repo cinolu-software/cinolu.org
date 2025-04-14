@@ -3,82 +3,91 @@
   @let recentPost = recentPosts$ | async;
   @let categories = categories$ | async;
 
-  <div class="pt-14">
-    <div
-      class="mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 border-x border-dashed border-gray-200 overflow-hidden">
-      @if (recentPost?.data?.length > 0) {
-        <p-carousel
-          #carousel
-          [value]="recentPost.data"
-          [numVisible]="1"
-          [autoplayInterval]="5000"
-          [numScroll]="1"
-          [showIndicators]="false"
-          [showNavigators]="false"
-          [circular]="true"
-          [responsiveOptions]="carouselConfig">
-          <ng-template let-post #item>
-            <div class="relative h-60 md:h-96 w-full bg-gray-200 pb-8">
-              <img [ngSrc]="post | apiIMG: 'post'" alt="Posts" class="object-cover h-full opacity-90" fill priority />
-              <div
-                class="flex flex-col justify-end absolute inset-0 bg-gradient-to-t from-secondary-900 to-transparent">
-                <div class="px-6 py-10 text-white">
-                  <h2 class="font-black font-satoshi mb-1 text-2xl md:text-4xl">
-                    {{ post.title }}
-                  </h2>
-                  <p>Le {{ post.created_at | date: 'longDate' }}</p>
+  @if (posts?.isLoading) {
+    <app-posts-skeleton />
+  }
+
+  @if (posts?.data?.[1] > 0) {
+    <div class="pt-14">
+      <div
+        class="mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 border-x border-dashed border-gray-200 overflow-hidden">
+        @if (recentPost?.data?.length > 0) {
+          <p-carousel
+            #carousel
+            [value]="recentPost.data"
+            [numVisible]="1"
+            [autoplayInterval]="5000"
+            [numScroll]="1"
+            [showIndicators]="false"
+            [showNavigators]="false"
+            [circular]="true"
+            [responsiveOptions]="carouselConfig">
+            <ng-template let-post #item>
+              <div class="relative h-60 md:h-96 w-full bg-gray-200 pb-8">
+                <img [ngSrc]="post | apiIMG: 'post'" alt="Posts" class="object-cover h-full opacity-90" fill priority />
+                <div
+                  class="flex flex-col justify-end absolute inset-0 bg-gradient-to-t from-secondary-900 to-transparent">
+                  <div class="px-6 py-10 text-white">
+                    <h2 class="font-black font-satoshi mb-1 text-2xl md:text-4xl">
+                      {{ post.title }}
+                    </h2>
+                    <p>Le {{ post.created_at | date: 'longDate' }}</p>
+                  </div>
                 </div>
               </div>
+            </ng-template>
+          </p-carousel>
+        }
+        <div class="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3 my-10 px-4 md:px-0">
+          <div class="overflow-x-auto whitespace-nowrap md:whitespace-normal md:overflow-hidden">
+            <div class="flex items-center md:items-start md:flex-col gap-5 md:gap-2.5 place-self-start justify-start">
+              <button
+                class="pb-3 md:pb-0 md:px-4"
+                [ngClass]="{
+                  'md:border-l border-primary-500 font-semibold text-primary-800': !queryParams().category
+                }"
+                (click)="onFilterChange('Tous')">
+                Tous
+              </button>
+              @for (cat of categories?.data; track cat.id) {
+                <button
+                  class="pb-3 md:pb-0 md:px-4"
+                  [ngClass]="{
+                    'md:border-l border-primary-500 font-semibold text-primary-800': queryParams().category === cat.name
+                  }"
+                  (click)="onFilterChange(cat.name)">
+                  {{ cat.name }}
+                </button>
+              }
             </div>
-          </ng-template>
-        </p-carousel>
-      }
-      <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 my-10">
-        <div class="flex flex-col gap-3 place-self-start items-start justify-start">
-          <button
-            class="px-4"
-            [ngClass]="{
-              'border-l border-primary-500 font-semibold': !queryParams().category
-            }"
-            (click)="onFilterChange('Tous')">
-            Tous
-          </button>
-          @for (cat of categories?.data; track cat.id) {
-            <button
-              class="px-4"
-              [ngClass]="{
-                'border-l border-primary-500 font-semibold': queryParams().category === cat.name
-              }"
-              (click)="onFilterChange(cat.name)">
-              {{ cat.name }}
-            </button>
-          }
-        </div>
-        <div class="place-self-start items-start justify-start col-span-2">
-          @for (
-            post of posts?.data?.[0]
-              | paginate: { itemsPerPage: 12, currentPage: queryParams().page, totalItems: posts.data[1] };
-            track $index
-          ) {
-            <div class="mb-6">
-              <h2 class="font-black font-satoshi mb-1 text-2xl md:text-2xl">{{ post.title }}</h2>
-              <p class="line-clamp-3 mb-6">{{ post.content }}</p>
-            </div>
-          }
+          </div>
 
-          @if (posts?.data?.[1] > 9) {
-            <div class="flex justify-center pb-8">
-              <pagination-controls
-                nextLabel=""
-                previousLabel=""
-                [maxSize]="5"
-                (pageChange)="onPageChange($event)"
-                class="pg">
-              </pagination-controls>
-            </div>
-          }
+          <div class="place-self-start items-start justify-start col-span-2">
+            @for (
+              post of posts?.data?.[0]
+                | paginate: { itemsPerPage: 12, currentPage: queryParams().page, totalItems: posts?.data?.[1] };
+              track $index
+            ) {
+              <div class="mb-6">
+                <h2 class="font-black font-satoshi mb-1 text-2xl md:text-2xl">{{ post.title }}</h2>
+                <p class="line-clamp-3 mb-6">{{ post.content }}</p>
+              </div>
+            }
+
+            @if (posts?.data?.[1] > 9) {
+              <div class="flex justify-center pb-8">
+                <pagination-controls
+                  nextLabel=""
+                  previousLabel=""
+                  [maxSize]="5"
+                  (pageChange)="onPageChange($event)"
+                  class="pg">
+                </pagination-controls>
+              </div>
+            }
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  }
 </section>
