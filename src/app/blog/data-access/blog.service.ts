@@ -3,7 +3,7 @@ import { APIService } from '../../shared/services/api/api.service';
 import { QueryParams } from '../utils/types/query-params.type';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
-import { ICategory, IPost } from 'app/shared/utils/types/models.type';
+import { ICategory, IComment, IPost } from 'app/shared/utils/types/models.type';
 import { buildQueryParams } from 'app/shared/utils/helpers/build-query-params.fn';
 
 @Injectable()
@@ -16,6 +16,10 @@ export class BlogService {
 
   getRecentPosts(): Observable<IAPIResponse<IPost[]>> {
     return this.#apiService.get('blog-posts/recent');
+  }
+
+  getComments(postId: string): Observable<IAPIResponse<[IComment[], number]>> {
+    return this.#apiService.get(`post-comments/${postId}`);
   }
 
   getPost(slug: string): Observable<IAPIResponse<IPost>> {

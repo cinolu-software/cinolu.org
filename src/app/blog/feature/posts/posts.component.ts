@@ -1,6 +1,6 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BlogService } from 'app/blog/data-access/blog.service';
 import { carouselConfig } from 'app/blog/utils/config/carousel.config';
 import { QueryParams } from 'app/blog/utils/types/query-params.type';
@@ -10,12 +10,20 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Carousel } from 'primeng/carousel';
 import { Observable } from 'rxjs';
 import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
-import { PostsSkeletonComponent } from '../../ui/posts-skeleton/posts.component';
+import { PostsSkeletonComponent } from '../../ui/posts-skeleton/posts-skeleton.component';
 
 @Component({
   selector: 'app-posts',
   providers: [BlogService],
-  imports: [CommonModule, NgxPaginationModule, NgOptimizedImage, Carousel, ApiImgPipe, PostsSkeletonComponent],
+  imports: [
+    CommonModule,
+    NgxPaginationModule,
+    NgOptimizedImage,
+    Carousel,
+    ApiImgPipe,
+    PostsSkeletonComponent,
+    RouterLink
+  ],
   templateUrl: './posts.component.html'
 })
 export class PostsComponent implements OnInit {
@@ -34,9 +42,9 @@ export class PostsComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.posts$ = this.#blogService.getPosts(this.queryParams());
     this.recentPosts$ = this.#blogService.getRecentPosts();
     this.categories$ = this.#blogService.getCategories();
-    this.loadPosts();
   }
 
   onPageChange(currentPage: number): void {

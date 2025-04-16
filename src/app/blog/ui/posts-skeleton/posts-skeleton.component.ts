@@ -3,6 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-posts-skeleton',
   imports: [],
-  templateUrl: './posts.component.html'
+  templateUrl: './posts-skeleton.component.html'
 })
 export class PostsSkeletonComponent {}

@@ -27,7 +27,7 @@ export const appRoutes: Route[] = [
     loadChildren: () => aboutRoutes
   },
   {
-    path: 'blog',
+    path: 'posts',
     component: LayoutComponent,
     data: { layout: 'primary' },
     loadChildren: () => blogRoutes

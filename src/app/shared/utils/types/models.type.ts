@@ -28,8 +28,8 @@ export interface IPost extends IBase {
   content: string;
   image: string;
   comments: IComment[];
-  category: ICategory;
-  author: IUser;
+  categories: ICategory[];
+  by: IUser;
 }
 
 export interface IComment extends IBase {

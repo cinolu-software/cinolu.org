@@ -32,7 +32,7 @@ export const EXPLORATION_LINKS: ILink[] = [
   },
   {
     name: 'Notre Blog',
-    path: '/blog',
+    path: '/posts',
     description: 'Le blog',
     icon: 'matForumOutline',
     exactUrl: false

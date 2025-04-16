@@ -1,5 +1,7 @@
 <section>
   @let project = project$ | async;
+  @let user = user$ | async;
+
   @if (project.data; as project) {
     <div class="mx-8 pt-20 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl border-x border-dashed border-gray-200">
       <div class="px-4 pt-4 pb-8">
@@ -27,7 +29,7 @@
             <ng-icon name="matDescriptionOutline" class="icon-size-3 xl:icon-size-4" />
           </button>
           <button
-            [disabled]="project?.phases?.length === 0"
+            [disabled]="!user"
             [ngClass]="activeTab() === 'application' && 'border-b border-primary-700 text-primary-700'"
             class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
             (click)="setActiveTab('application')">
