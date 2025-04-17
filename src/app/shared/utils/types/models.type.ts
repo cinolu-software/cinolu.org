@@ -27,6 +27,9 @@ export interface IPost extends IBase {
   views: number;
   content: string;
   image: string;
+  likesCount: 29;
+  commentsCount: 28;
+  viewsCount: 30;
   comments: IComment[];
   categories: ICategory[];
   by: IUser;

@@ -1,6 +1,6 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from 'app/blog/data-access/blog.service';
 import { carouselConfig } from 'app/blog/utils/config/carousel.config';
 import { QueryParams } from 'app/blog/utils/types/query-params.type';
@@ -10,7 +10,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Carousel } from 'primeng/carousel';
 import { Observable } from 'rxjs';
 import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
-import { PostsSkeletonComponent } from '../../ui/posts-skeleton/posts-skeleton.component';
+import { PostCardComponent } from 'app/blog/ui/posts-card/post-card.component';
+import { PostCardSkeletonComponent } from '../../ui/posts-card-skeleton/posts-card-skeleton.component';
 
 @Component({
   selector: 'app-posts',
@@ -21,8 +22,8 @@ import { PostsSkeletonComponent } from '../../ui/posts-skeleton/posts-skeleton.c
     NgOptimizedImage,
     Carousel,
     ApiImgPipe,
-    PostsSkeletonComponent,
-    RouterLink
+    PostCardComponent,
+    PostCardSkeletonComponent
   ],
   templateUrl: './posts.component.html'
 })
@@ -71,7 +72,7 @@ export class PostsComponent implements OnInit {
   updateRoute(): void {
     const { page, category } = this.queryParams();
     const queryParams = { page, category };
-    this.#router.navigate(['/blog'], { queryParams });
+    this.#router.navigate(['/posts'], { queryParams });
   }
 
   updateRouteAndposts(): void {

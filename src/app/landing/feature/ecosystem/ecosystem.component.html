@@ -35,7 +35,11 @@
           class="p-8 bg-white rounded-lg shadow-sm border border-gray-100 hover:scale-105 transition-transform duration-300">
           <div class="flex items-center justify-between mb-4">
             <div class="relative h-12 w-12 rounded-sm overflow-hidden mb-5">
-              <img [ngSrc]="organization | apiIMG: 'organization'" alt="organization's logo" fill />
+              <img
+                [ngSrc]="organization | apiIMG: 'organization'"
+                alt="organization's logo"
+                class="object-cover"
+                fill />
             </div>
             <span
               class="px-3 py-1 inline-block justify-self-end rounded-full text-xs font-semibold bg-primary-100 text-primary-800">
