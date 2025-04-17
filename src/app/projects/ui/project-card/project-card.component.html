@@ -19,11 +19,11 @@
     <div class="text-sm font-medium">
       <div class="t flex items-center text-md leading-5 mb-2">
         <ng-icon class="text-white size-5!" [name]="'matEventAvailableOutline'" />
-        <div class="ml-1.5">{{ project().started_at | date: 'longDate' }}</div>
+        <div class="ml-1.5">Début: Le {{ project().started_at | date: 'longDate' }}</div>
       </div>
       <div class="t flex items-center text-md leading-5">
         <ng-icon class="text-white size-5!" [name]="'matEventBusyOutline'" />
-        <div class="ml-1.5">{{ project().ended_at | date: 'longDate' }}</div>
+        <div class="ml-1.5">Fin: Le {{ project().ended_at | date: 'longDate' }}</div>
       </div>
     </div>
   </div>
