@@ -13,12 +13,10 @@
           <h2 class="font-black mb-10 text-2xl md:text-4xl w-full md:w-2/3">
             {{ p.title }}
           </h2>
-
           <div class="flex flex-col md:flex-row md:items-center gap-6 mb-12">
             <div class="relative h-16 w-16">
               <img [ngSrc]="p.author | apiIMG: 'user'" alt="Author Image" class="object-cover rounded-full" fill />
             </div>
-
             <div class="flex flex-col gap-1">
               <p class="text-gray-500">
                 Lecture {{ estimateReadingTime(p.content) }} · {{ p.created_at | date: 'longDate' }}
@@ -35,17 +33,13 @@
                 <p class="text-gray-700">{{ p.viewsCount | shortNumber }}</p>
               </div>
               <div class="flex items-center gap-1">
-                <ng-icon name="matFavoriteOutline" class="size-4" />
-                <p class="text-gray-700">{{ p.likesCount | shortNumber }}</p>
-              </div>
-              <div class="flex items-center gap-1">
                 <ng-icon name="matChatBubbleOutlineOutline" class="size-4" />
                 <p class="text-gray-700">{{ p.commentsCount | shortNumber }}</p>
               </div>
             </div>
             <div class="flex flex-wrap gap-1">
               @for (category of p.categories; track category.name) {
-                <div class="text-sm rounded-full font-semibold px-2 py-0.5 bg-primary-50 text-primary-800">
+                <div class="text-sm rounded-full font-medium px-2 py-0.5 bg-primary-50 text-primary-700">
                   {{ category.name }}
                 </div>
               }
@@ -79,7 +73,7 @@
 
             <h2 class="font-black mb-6 text-2xl md:text-4xl w-full md:w-2/3">Commentaires</h2>
             @if (comments().length === 0) {
-              <p class="text-gray-500">Aucun commentaire pour le moment.</p>
+              <p class="text-gray-500 mb-4">Aucun commentaire pour le moment.</p>
             }
             @for (c of comments(); track $index) {
               <div class="flex flex-col gap-3 mb-6 w-full md:w-3/4">
@@ -98,7 +92,7 @@
               </div>
             }
 
-            @if (!loadMore()) {
+            @if (comments().length > 0 && !loadMore()) {
               <button
                 pButton
                 class="text-sm font-semibold py-2 px-3 border border-gray-200 hover:bg-gray-100 transition-colors duration-300 rounded-md"

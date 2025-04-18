@@ -33,8 +33,8 @@ export class PostComponent implements OnInit, OnDestroy {
   post$: Observable<IAPIResponse<IPost>>;
   comments = signal<IComment[]>([]);
   loadMore = signal<boolean>(false);
-  #route = inject(ActivatedRoute);
   user$: Observable<IUser>;
+  #route = inject(ActivatedRoute);
   #store = inject(Store);
   #blogService = inject(BlogService);
   #slug = this.#route.snapshot.paramMap.get('slug');
@@ -57,6 +57,7 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.#subscription = this.#blogService.viewPost(this.#slug).subscribe();
     this.post$ = this.#blogService.getPost(this.#slug);
   }
 

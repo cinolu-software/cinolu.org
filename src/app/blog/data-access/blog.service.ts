@@ -10,6 +10,18 @@ import { buildQueryParams } from 'app/shared/utils/helpers/build-query-params.fn
 export class BlogService {
   #apiService = inject(APIService);
 
+  viewPost(slug: string): Observable<IAPIResponse<IPost>> {
+    return this.#apiService.post(`blog-posts/view/${slug}`, {});
+  }
+
+  likePost(slug: string): Observable<IAPIResponse<IPost>> {
+    return this.#apiService.post(`blog-posts/like/${slug}`, {});
+  }
+
+  dislikePost(slug: string): Observable<IAPIResponse<IPost>> {
+    return this.#apiService.post(`blog-posts/dislike/${slug}`, {});
+  }
+
   getCategories(): Observable<IAPIResponse<ICategory[]>> {
     return this.#apiService.get('blog-categories');
   }
