@@ -1,12 +1,8 @@
-<a [routerLink]="['/posts', post().slug]" class="flex flex-col gap-2">
-  <div class="relative h-40 w-full">
-    <img
-      [ngSrc]="post() | apiIMG: 'post'"
-      alt="Post Image"
-      class="object-cover w-full h-full rounded-md shadow-md"
-      fill />
+<a [routerLink]="['/posts', post().slug]" class="flex flex-col gap-2 p-1">
+  <div class="relative h-48 w-full">
+    <img [ngSrc]="post() | apiIMG: 'post'" alt="Post Image" class="object-cover w-full h-full rounded-md" fill />
   </div>
-  <div class="flex flex-col gap-1.5">
+  <div class="flex flex-col gap-1.5 p-1">
     <div class="flex justify-between">
       <p class="text-sm text-gray-700">{{ estimateReadingTime(post().content) }}</p>
       <div class="flex items-center gap-2">

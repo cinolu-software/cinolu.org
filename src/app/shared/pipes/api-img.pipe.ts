@@ -11,10 +11,10 @@ export class ApiImgPipe implements PipeTransform {
       user: value['profile']
         ? `${apiUrl}uploads/profiles/${value['profile']}`
         : (value['google_image'] ?? '/images/avatar-default.webp'),
-      project: value['image'] ? `${apiUrl}uploads/projects/${value['image']}` : '/images/defaults/program.jpg',
-      post: value['image'] ? `${apiUrl}uploads/posts/${value['image']}` : '/images/defaults/blog.jpg',
-      organization: value['member'] ? `${apiUrl}uploads/members/${value['logo']}` : '/images/defaults/org.jpg',
-      event: value['image'] ? `${apiUrl}uploads/events/${value['image']}` : '/images/defaults/event.jpg'
+      project: value['image'] ? `${apiUrl}uploads/projects/${value['image']}` : '/images/no-image.jpg',
+      post: value['image'] ? `${apiUrl}uploads/posts/${value['image']}` : '/images/no-image.jpg',
+      organization: value['member'] ? `${apiUrl}uploads/members/${value['logo']}` : '/images/no-image.jpg',
+      event: value['image'] ? `${apiUrl}uploads/events/${value['image']}` : '/images/no-image.jpg'
     };
     return images[key];
   }

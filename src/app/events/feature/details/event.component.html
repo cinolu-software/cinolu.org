@@ -22,7 +22,7 @@
             <ng-icon name="matDescriptionOutline" class="size-5!" />
             <h2 class="font-semibold text-lg">Description</h2>
           </div>
-          <p class="mb-1.5 lowercase first-letter:uppercase">{{ event.description }}</p>
+          <p class="mb-1.5 lowercase first-letter:uppercase" [innerHTML]="event.description"></p>
         </div>
 
         <div class="mb-4">

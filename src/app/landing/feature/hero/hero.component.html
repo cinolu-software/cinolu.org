@@ -3,7 +3,7 @@
     class="relative min-h-[85vh] py-80 w-full flex flex-col bg-[url('/images/hero.jpg')] bg-cover bg-center bg-no-repeat mt-14">
     <div
       @fadeInStagger
-      class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-primary-900/50 gap-6 text-white">
+      class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-secondary-950/35 gap-6 text-white">
       <div
         class="flex flex-col items-start justify-center font-medium px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
         <h1 class="fade-item font-black block text-3xl mb-6 hyphens-none md:text-4xl xl:text-6xl">
@@ -32,7 +32,7 @@
     class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4 -translate-y-16 z-10">
     @for (p of stakeholdersPurposes; track $index) {
       <div
-        class="fade-item p-8 bg-secondary-900/90 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-3 transition-transform duration-500 text-white">
+        class="fade-item p-8 bg-secondary-50/30 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-3 transition-transform duration-500">
         <span
           class="bg-secondary-900/90 text-center h-10 w-10 flex flex-col items-center justify-center mb-3 rounded-full text-white">
           <ng-icon class="size-5!" [name]="p.icon" />

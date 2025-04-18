@@ -32,7 +32,7 @@ export interface IPost extends IBase {
   viewsCount: 30;
   comments: IComment[];
   categories: ICategory[];
-  by: IUser;
+  author: IUser;
 }
 
 export interface IComment extends IBase {

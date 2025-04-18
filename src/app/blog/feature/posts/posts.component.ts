@@ -10,8 +10,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Carousel } from 'primeng/carousel';
 import { Observable } from 'rxjs';
 import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
-import { PostCardComponent } from 'app/blog/ui/posts-card/post-card.component';
-import { PostCardSkeletonComponent } from '../../ui/posts-card-skeleton/posts-card-skeleton.component';
+import { PostCardComponent } from 'app/blog/ui/post-card/post-card.component';
+import { PostCardSkeletonComponent } from '../../ui/post-card-skeleton/post-card-skeleton.component';
 
 @Component({
   selector: 'app-posts',

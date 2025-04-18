@@ -1,56 +1,114 @@
 <section>
   @let post = post$ | async;
-  @let comments = comments$ | async;
+  @let user = user$ | async;
   <div class="pt-14">
-    @if (post.data; as post) {
-      <div
-        class="mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 border-x border-dashed border-gray-200 overflow-hidden">
-        <div class="relative h-60 md:h-96 w-full bg-gray-200 pb-8">
-          <img [ngSrc]="post | apiIMG: 'post'" alt="Posts" class="object-cover h-full opacity-90" fill priority />
-        </div>
-        <div class="py-6 px-8">
-          <div class="mb-4">
-            <h2 class="font-black font-satoshi mb-1 text-2xl md:text-4xl">
-              {{ post.title }}
-            </h2>
-            <div class="flex items-center gap-1">
-              <ng-icon [name]="'matRemoveRedEyeOutline'" class="size-6! text-primary-600!" />
-              <p class="text-gray-950 font-semibold">{{ post.views }}</p>
+    <div
+      class="mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 border-x border-dashed border-gray-200 overflow-hidden">
+      <div class="px-4 md:px-12 py-10">
+        @if (post?.isLoading) {
+          <app-post-skeleton />
+        }
+
+        @if (post?.data; as p) {
+          <h2 class="font-black mb-10 text-2xl md:text-4xl w-full md:w-2/3">
+            {{ p.title }}
+          </h2>
+
+          <div class="flex flex-col md:flex-row md:items-center gap-6 mb-12">
+            <div class="relative h-16 w-16">
+              <img [ngSrc]="p.author | apiIMG: 'user'" alt="Author Image" class="object-cover rounded-full" fill />
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <p class="text-gray-500">
+                Lecture {{ estimateReadingTime(p.content) }} · {{ p.created_at | date: 'longDate' }}
+              </p>
+              <p class="text-gray-900">{{ p.author.name }} · {{ p.author.email }}</p>
             </div>
           </div>
 
-          <div class="mb-12">
-            <p class="text-gray-600" [innerHTML]="post.content"></p>
+          <div
+            class="border-y border-gray-200 py-2.5 flex justify-between flex-col md:flex-row gap-4 md:items-center mb-10">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1">
+                <ng-icon name="matVisibilityOutline" class="size-4" />
+                <p class="text-gray-700">{{ p.viewsCount | shortNumber }}</p>
+              </div>
+              <div class="flex items-center gap-1">
+                <ng-icon name="matFavoriteOutline" class="size-4" />
+                <p class="text-gray-700">{{ p.likesCount | shortNumber }}</p>
+              </div>
+              <div class="flex items-center gap-1">
+                <ng-icon name="matChatBubbleOutlineOutline" class="size-4" />
+                <p class="text-gray-700">{{ p.commentsCount | shortNumber }}</p>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-1">
+              @for (category of p.categories; track category.name) {
+                <div class="text-sm rounded-full font-semibold px-2 py-0.5 bg-primary-50 text-primary-800">
+                  {{ category.name }}
+                </div>
+              }
+            </div>
           </div>
 
-          @for (comment of comments?.data?.[0]; track comment.id) {
-            <div class="flex items-center gap-3 mb-6">
-              <div class="relative h-10 w-10 rounded-full overflow-hidden mb-2.5 bg-gray-200">
-                <img [ngSrc]="comment.by | apiIMG: 'user'" alt="Img user" class="object-cover" fill />
+          <div class="relative h-60 md:h-96 w-full bg-gray-200 rounded-md mb-10 overflow-hidden">
+            <img [ngSrc]="p | apiIMG: 'post'" alt="Post Image" class="object-cover h-full opacity-90" fill priority />
+          </div>
+
+          <div class="mb-10">
+            <p class="text-gray-700" [innerHTML]="p.content"></p>
+          </div>
+
+          <div class="mb-10">
+            @if (user) {
+              <div class="flex items-center gap-6 mb-6">
+                <div class="relative h-10 w-10">
+                  <img [ngSrc]="user | apiIMG: 'user'" alt="User Image" class="object-cover rounded-full" fill />
+                </div>
+                <p class="text-gray-900">{{ user.name }} · {{ user.email }}</p>
               </div>
-              <div class="flex flex-col gap-1">
-                <p class="text-gray-950 font-semibold">{{ comment.by.name }}</p>
-                <p class="text-gray-600">
-                  {{ comment.content }}
+
+              <form class="flex flex-col gap-1.5 mb-10">
+                <textarea pTextarea name="" id="" class="h-40 w-full md:w-[550px]"></textarea>
+                <div class="w-full md:w-32">
+                  <p-button class="text-sm font-semibold">Commenter</p-button>
+                </div>
+              </form>
+            }
+
+            <h2 class="font-black mb-6 text-2xl md:text-4xl w-full md:w-2/3">Commentaires</h2>
+            @if (comments().length === 0) {
+              <p class="text-gray-500">Aucun commentaire pour le moment.</p>
+            }
+            @for (c of comments(); track $index) {
+              <div class="flex flex-col gap-3 mb-6 w-full md:w-3/4">
+                <div class="flex flex-col md:flex-row md:items-center gap-6">
+                  <div class="relative h-10 w-10">
+                    <img [ngSrc]="c.by | apiIMG: 'user'" alt="Comment Image" class="object-cover rounded-full" fill />
+                  </div>
+                  <div class="flex flex-col md:flex-row md:items-center gap-1.5 text-sm mb-1.5">
+                    <p class="text-gray-900">{{ c.by.name }} · {{ c.by.email }}</p>
+                    <p class="text-gray-500">{{ c.created_at | date: 'longDate' }}</p>
+                  </div>
+                </div>
+                <p class="text-gray-700">
+                  {{ c.content }}
                 </p>
               </div>
-            </div>
-          }
+            }
 
-          <!-- @if (user) {
-            <form class="flex gap-4">
-              <div class="relative h-10 w-10 rounded-full overflow-hidden mb-2.5 bg-gray-200">
-                <img [ngSrc]="user | apiIMG: 'user'" alt="Img user" class="object-cover" fill />
-              </div>
-
-              <div class="flex flex-col gap-1 w-2/3">
-                <textarea class="w-full h-28 p-2" pTextarea></textarea>
-                <p-button class="mt-4 w-1/3" type="submit">Commenter </p-button>
-              </div>
-            </form>
-          } -->
-        </div>
+            @if (!loadMore()) {
+              <button
+                pButton
+                class="text-sm font-semibold py-2 px-3 border border-gray-200 hover:bg-gray-100 transition-colors duration-300 rounded-md"
+                (click)="loadMoreComments()">
+                Charger plus de commentaires
+              </button>
+            }
+          </div>
+        }
       </div>
-    }
+    </div>
   </div>
 </section>

@@ -18,8 +18,9 @@ export class BlogService {
     return this.#apiService.get('blog-posts/recent');
   }
 
-  getComments(postId: string): Observable<IAPIResponse<[IComment[], number]>> {
-    return this.#apiService.get(`post-comments/${postId}`);
+  getComments(postId: string, loadMore: boolean): Observable<IAPIResponse<[IComment[], number]>> {
+    const params = buildQueryParams({ loadMore });
+    return this.#apiService.get(`post-comments/${postId}`, params);
   }
 
   getPost(slug: string): Observable<IAPIResponse<IPost>> {

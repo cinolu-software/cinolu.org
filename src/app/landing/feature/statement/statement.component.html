@@ -3,19 +3,20 @@
     <h2 class="font-black font-satoshi mb-2 text-2xl md:text-4xl">Our Statements</h2>
     <p class="mb-4 text-secondary-600 font-satoshi">Nos déclarations</p>
   </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
     @for (s of statements; track $index) {
-      <div class="relative flex flex-col gap-1 p-4 border rounded-md border-gray-200" data-aos="zoom-in">
+      <div data-aos="zoom-in">
         <div
-          class="absolute -top-3 -right-3 h-8 w-8 flex items-center justify-center rounded-full bg-secondary-100 text-secondary-700 font-bold text-lg">
-          {{ $index + 1 }}
+          class="relative shadow-sm bg-secondary-50/10 flex flex-col gap-1 p-4 border rounded-md border-secondary-50 hover:scale-105 transition-transform duration-300">
+          <div
+            class="absolute -top-3 -left-3 h-8 w-8 bg-secondary-900/90 text-center flex flex-col items-center justify-center mb-3 rounded-full text-white font-bold">
+            {{ $index + 1 }}
+          </div>
+          <h5 class="font-medium font-satoshi flex items-center text-xl gap-1.5 mb-4 text-primary-800">
+            {{ s.title }}
+          </h5>
+          <p class="text-gray-700 text-sm font-medium">{{ s.description }}</p>
         </div>
-
-        <h5 class="font-medium font-satoshi flex items-center text-xl gap-1.5 mb-4 text-primary-800">
-          {{ s.title }}
-        </h5>
-        <p class="text-gray-700 text-sm font-medium">{{ s.description }}</p>
       </div>
     }
   </div>
