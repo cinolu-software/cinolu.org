@@ -31,7 +31,7 @@ import { ShortNumberPipe } from '../../../shared/pipes/short-number.pipe';
 })
 export class PostComponent implements OnInit, OnDestroy {
   post$: Observable<IAPIResponse<IPost>>;
-  comments = signal<IComment[]>([]);
+  comments$: Observable<IAPIResponse<[IComment[], number]>>;
   loadMore = signal<boolean>(false);
   user$: Observable<IUser>;
   #route = inject(ActivatedRoute);
@@ -43,17 +43,8 @@ export class PostComponent implements OnInit, OnDestroy {
   constructor() {
     this.user$ = this.#store.select(selectUser);
     effect(() => {
-      this.#subscription?.unsubscribe();
-      this.#subscription = this.#blogService.getComments(this.#slug, this.loadMore()).subscribe(({ data: res }) => {
-        if (res && res[1] > 0) {
-          this.comments.update((prev) => [...prev, ...res[0]]);
-        }
-      });
+      this.comments$ = this.#blogService.getComments(this.#slug, this.loadMore());
     });
-  }
-
-  loadMoreComments(): void {
-    this.loadMore.set(true);
   }
 
   ngOnInit(): void {
@@ -64,6 +55,10 @@ export class PostComponent implements OnInit, OnDestroy {
   estimateReadingTime(words: string): string {
     const minutes = Math.ceil(words.trim().split(/\s+/).length / 200);
     return `${minutes} Min`;
+  }
+
+  loadMoreComments(): void {
+    this.loadMore.set(true);
   }
 
   ngOnDestroy(): void {
