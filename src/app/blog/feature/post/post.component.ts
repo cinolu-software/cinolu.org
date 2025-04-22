@@ -1,10 +1,10 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BlogService } from 'app/blog/data-access/blog.service';
+import { PostsService } from 'app/blog/data-access/posts.service';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { IComment, IPost, IUser } from 'app/shared/utils/types/models.type';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
 import { NgIcon } from '@ng-icons/core';
 import { Store } from '@ngrx/store';
@@ -13,10 +13,13 @@ import { Textarea } from 'primeng/textarea';
 import { Button } from 'primeng/button';
 import { PostSkeletonComponent } from '../../ui/post-skeleton/post-skeleton.component';
 import { ShortNumberPipe } from '../../../shared/pipes/short-number.pipe';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-post',
-  providers: [BlogService],
+  providers: [PostsService, ConfirmationService],
   imports: [
     CommonModule,
     ApiImgPipe,
@@ -25,31 +28,36 @@ import { ShortNumberPipe } from '../../../shared/pipes/short-number.pipe';
     NgOptimizedImage,
     NgIcon,
     PostSkeletonComponent,
-    ShortNumberPipe
+    ShortNumberPipe,
+    ReactiveFormsModule,
+    ConfirmPopupModule
   ],
   templateUrl: './post.component.html'
 })
-export class PostComponent implements OnInit, OnDestroy {
+export class PostComponent implements OnInit {
   post$: Observable<IAPIResponse<IPost>>;
-  comments$: Observable<IAPIResponse<[IComment[], number]>>;
-  loadMore = signal<boolean>(false);
+  comments$: Observable<IAPIResponse<IComment[]>>;
+  comment$: Observable<IAPIResponse<IComment>>;
   user$: Observable<IUser>;
+  fb = inject(FormBuilder);
+  form: FormGroup;
   #route = inject(ActivatedRoute);
   #store = inject(Store);
-  #blogService = inject(BlogService);
+  #postsService = inject(PostsService);
   #slug = this.#route.snapshot.paramMap.get('slug');
-  #subscription: Subscription;
+  #confirmationService = inject(ConfirmationService);
 
   constructor() {
-    this.user$ = this.#store.select(selectUser);
-    effect(() => {
-      this.comments$ = this.#blogService.getComments(this.#slug, this.loadMore());
+    this.form = this.fb.group({
+      content: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    this.#subscription = this.#blogService.viewPost(this.#slug).subscribe();
-    this.post$ = this.#blogService.getPost(this.#slug);
+    this.user$ = this.#store.select(selectUser);
+    this.#postsService.viewPost(this.#slug);
+    this.comments$ = this.#postsService.getComments(this.#slug);
+    this.post$ = this.#postsService.getPost(this.#slug);
   }
 
   estimateReadingTime(words: string): string {
@@ -57,11 +65,38 @@ export class PostComponent implements OnInit, OnDestroy {
     return `${minutes} Min`;
   }
 
-  loadMoreComments(): void {
-    this.loadMore.set(true);
+  onComment(post: string): void {
+    if (this.form.invalid) return;
+    const comment = {
+      post,
+      content: this.form.value.content
+    };
+    this.comment$ = this.#postsService.commentPost(comment);
   }
 
-  ngOnDestroy(): void {
-    this.#subscription?.unsubscribe();
+  deleteComment(id: string): void {
+    this.#postsService.deleteComment(id);
+  }
+
+  confirmDelete(event: Event, id: string): void {
+    this.#confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Voulez-vous vraiment supprimer ce commentaire ?',
+      header: 'Confirmation',
+      icon: 'pi pi-info-circle',
+      rejectButtonProps: {
+        label: 'Annuler',
+        severity: 'secondary',
+        outlined: true
+      },
+      acceptButtonProps: {
+        label: 'Supprimer',
+        icon: 'pi pi-check',
+        severity: 'danger'
+      },
+      accept: () => {
+        this.deleteComment(id);
+      }
+    });
   }
 }

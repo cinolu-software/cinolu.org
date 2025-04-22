@@ -31,12 +31,17 @@
 }
 
 /* Buttons */
+
 .p-button {
+  @apply font-medium w-full;
+}
+
+.p-button-filled {
   @apply text-white font-medium w-full;
 }
 
-.p-button-outlined.p-button-info {
-  @apply text-primary-400 border-primary-300 w-full;
+.p-button-outlined {
+  @apply font-medium w-full;
 }
 
 /* Toast */

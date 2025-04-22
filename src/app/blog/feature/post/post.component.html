@@ -2,6 +2,7 @@
   @let post = post$ | async;
   @let user = user$ | async;
   @let comments = comments$ | async;
+  @let comment = comment$ | async;
 
   <div class="pt-14">
     <div
@@ -53,55 +54,73 @@
           </div>
 
           <div class="mb-10">
-            <p class="text-gray-700" [innerHTML]="p.content"></p>
+            <p class="text-gray-700 text-justify" [innerHTML]="p.content"></p>
           </div>
 
           <div class="mb-10">
             @if (user) {
-              <div class="flex items-center gap-6 mb-6">
+              <div class="flex items-center gap-6 mb-3">
                 <div class="relative h-10 w-10">
                   <img [ngSrc]="user | apiIMG: 'user'" alt="User Image" class="object-cover rounded-full" fill />
                 </div>
                 <p class="text-gray-900">{{ user.name }} · {{ user.email }}</p>
               </div>
 
-              <form class="flex flex-col gap-1.5 mb-10">
-                <textarea pTextarea name="" id="" class="h-40 w-full md:w-[550px]"></textarea>
-                <div class="w-full md:w-32">
-                  <p-button class="text-sm font-semibold">Commenter</p-button>
+              <form class="flex flex-col gap-1.5 mb-10" (ngSubmit)="onComment(p.id)" [formGroup]="form">
+                <label for="comment" class="font-medium">Laissez un commentaire</label>
+                <textarea [id]="'comment'" rows="5" cols="30" pTextarea [autoResize]="true" formControlName="content">
+                </textarea>
+
+                <div class="w-full md:w-40">
+                  <p-button
+                    [disabled]="comment?.isLoading || form.invalid"
+                    [type]="'submit'"
+                    [loading]="comment?.isLoading"
+                    class="text-sm font-semibold mt-2">
+                    Commenter
+                  </p-button>
                 </div>
               </form>
             }
 
             <h2 class="font-black mb-6 text-2xl md:text-4xl w-full md:w-2/3">Commentaires</h2>
-            @if (comments?.data?.[1] === 0) {
+            @if (comments?.data?.length === 0) {
               <p class="text-gray-500 mb-4">Aucun commentaire pour le moment.</p>
             }
 
-            @for (c of comments?.data?.[0]; track $index) {
+            @for (c of comments?.data; track $index) {
               <div class="flex flex-col gap-3 mb-6 w-full md:w-3/4">
                 <div class="flex flex-col md:flex-row md:items-center gap-3">
                   <div class="relative h-10 w-10 bg-gray-200 rounded-full">
-                    <img [ngSrc]="c.by | apiIMG: 'user'" alt="Comment Image" class="object-cover rounded-full" fill />
+                    <img
+                      [ngSrc]="c.by | apiIMG: 'user'"
+                      alt="Commentator Image"
+                      class="object-cover rounded-full"
+                      fill />
                   </div>
                   <div class="flex flex-col md:flex-row md:items-center gap-1.5 text-sm mb-1.5">
                     <p class="text-gray-900">{{ c.by.name }} · {{ c.by.email }}</p>
                     <p class="text-gray-500">{{ c.created_at | date: 'longDate' }}</p>
+
+                    <div class="flex items-center gap-0.5" *ngIf="user?.id === c.by.id">
+                      <div class="card flex justify-center gap-2">
+                        <p-confirmpopup />
+                        <!-- <p-button (onClick)="confirm1($event)" label="Save" [outlined]="true" /> -->
+                        <p-button
+                          (onClick)="confirmDelete($event, c.id)"
+                          class="text-gray-800!"
+                          severity="danger"
+                          [outlined]="true">
+                          Supprimer
+                        </p-button>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <p class="text-gray-700">
                   {{ c.content }}
                 </p>
               </div>
-            }
-
-            @if (comments?.data?.length > 0 && !loadMore()) {
-              <button
-                pButton
-                class="text-sm font-semibold py-2 px-3 border border-gray-200 hover:bg-gray-100 transition-colors duration-300 rounded-md"
-                (click)="loadMoreComments()">
-                Charger plus de commentaires
-              </button>
             }
           </div>
         }

@@ -1,7 +1,7 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BlogService } from 'app/blog/data-access/blog.service';
+import { PostsService } from 'app/blog/data-access/posts.service';
 import { carouselConfig } from 'app/blog/utils/config/carousel.config';
 import { QueryParams } from 'app/blog/utils/types/query-params.type';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
@@ -15,7 +15,7 @@ import { PostCardSkeletonComponent } from '../../ui/post-card-skeleton/post-card
 
 @Component({
   selector: 'app-posts',
-  providers: [BlogService],
+  providers: [PostsService],
   imports: [
     CommonModule,
     NgxPaginationModule,
@@ -28,7 +28,7 @@ import { PostCardSkeletonComponent } from '../../ui/post-card-skeleton/post-card
   templateUrl: './posts.component.html'
 })
 export class PostsComponent implements OnInit {
-  #blogService = inject(BlogService);
+  #postsService = inject(PostsService);
   posts$: Observable<IAPIResponse<[IPost[], number]>>;
   recentPosts$: Observable<IAPIResponse<IPost[]>>;
   categories$: Observable<IAPIResponse<ICategory[]>>;
@@ -43,9 +43,9 @@ export class PostsComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.posts$ = this.#blogService.getPosts(this.queryParams());
-    this.recentPosts$ = this.#blogService.getRecentPosts();
-    this.categories$ = this.#blogService.getCategories();
+    this.posts$ = this.#postsService.getPosts(this.queryParams());
+    this.recentPosts$ = this.#postsService.getRecentPosts();
+    this.categories$ = this.#postsService.getCategories();
   }
 
   onPageChange(currentPage: number): void {
@@ -66,7 +66,7 @@ export class PostsComponent implements OnInit {
   }
 
   loadPosts(): void {
-    this.posts$ = this.#blogService.getPosts(this.queryParams());
+    this.posts$ = this.#postsService.getPosts(this.queryParams());
   }
 
   updateRoute(): void {
