@@ -46,11 +46,11 @@
 
 /* Toast */
 .p-toast {
-  @apply px-7 md:px-0;
+  @apply px-7 md:px-0 w-auto;
 }
 
 .p-toast-close-button {
-  @apply hover:bg-red-400/80 transition-colors duration-300;
+  @apply hover:text-red-400 transition-colors duration-300;
 }
 
 .p-toast-message-error {

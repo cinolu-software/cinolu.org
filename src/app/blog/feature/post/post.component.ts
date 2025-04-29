@@ -14,9 +14,9 @@ import { Button } from 'primeng/button';
 import { PostSkeletonComponent } from '../../ui/post-skeleton/post-skeleton.component';
 import { ShortNumberPipe } from '../../../shared/pipes/short-number.pipe';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 @Component({
   selector: 'app-post',
@@ -49,6 +49,7 @@ export class PostComponent implements OnInit, OnDestroy {
   #subscription = new Subscription();
   isLoadingMore = signal(false);
   isCommenting = signal(false);
+  isDeleting = signal(false);
   page = signal(1);
   comments = signal<[IComment[], number]>([[], 0]);
   form: FormGroup;
@@ -57,7 +58,6 @@ export class PostComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       content: ['', [Validators.required, Validators.minLength(5)]]
     });
-
     effect(() => {
       this.isLoadingMore.set(true);
       this.#postsService
@@ -106,7 +106,16 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   deleteComment(id: string): void {
-    this.#postsService.deleteComment(id);
+    this.isDeleting.set(true);
+    this.#subscription = this.#postsService.deleteComment(id).subscribe({
+      next: () => {
+        this.comments.update((prev) => [prev[0].filter((comment) => comment.id !== id), prev[1]]);
+        this.isDeleting.set(false);
+      },
+      error: () => {
+        this.isCommenting.set(false);
+      }
+    });
   }
 
   loadMoreComments(): void {
@@ -115,23 +124,21 @@ export class PostComponent implements OnInit, OnDestroy {
 
   confirmDelete(event: Event, id: string): void {
     this.#confirmationService.confirm({
-      target: event.target as EventTarget,
+      target: event.currentTarget as EventTarget,
       message: 'Voulez-vous vraiment supprimer ce commentaire ?',
       header: 'Confirmation',
-      icon: 'pi pi-info-circle',
       rejectButtonProps: {
         label: 'Annuler',
-        severity: 'secondary',
-        outlined: true
+        severity: 'secondary'
       },
       acceptButtonProps: {
         label: 'Supprimer',
-        icon: 'pi pi-check',
         severity: 'danger'
       },
       accept: () => {
         this.deleteComment(id);
-      }
+      },
+      reject: () => {}
     });
   }
 
