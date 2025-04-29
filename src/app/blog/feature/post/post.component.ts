@@ -137,8 +137,7 @@ export class PostComponent implements OnInit, OnDestroy {
       },
       accept: () => {
         this.deleteComment(id);
-      },
-      reject: () => {}
+      }
     });
   }
 
