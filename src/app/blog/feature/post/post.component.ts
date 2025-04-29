@@ -1,10 +1,10 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostsService } from 'app/blog/data-access/posts.service';
 import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
 import { IComment, IPost, IUser } from 'app/shared/utils/types/models.type';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
 import { NgIcon } from '@ng-icons/core';
 import { Store } from '@ngrx/store';
@@ -16,6 +16,7 @@ import { ShortNumberPipe } from '../../../shared/pipes/short-number.pipe';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-post',
@@ -34,29 +35,55 @@ import { ConfirmationService } from 'primeng/api';
   ],
   templateUrl: './post.component.html'
 })
-export class PostComponent implements OnInit {
+export class PostComponent implements OnInit, OnDestroy {
   post$: Observable<IAPIResponse<IPost>>;
-  comments$: Observable<IAPIResponse<IComment[]>>;
+  comments$: Observable<IAPIResponse<[IComment[], number]>>;
   comment$: Observable<IAPIResponse<IComment>>;
   user$: Observable<IUser>;
   fb = inject(FormBuilder);
-  form: FormGroup;
   #route = inject(ActivatedRoute);
   #store = inject(Store);
   #postsService = inject(PostsService);
   #slug = this.#route.snapshot.paramMap.get('slug');
   #confirmationService = inject(ConfirmationService);
+  #subscription = new Subscription();
+  isLoadingMore = signal(false);
+  isCommenting = signal(false);
+  page = signal(1);
+  comments = signal<[IComment[], number]>([[], 0]);
+  form: FormGroup;
 
-  constructor() {
+  constructor(destroyRef: DestroyRef) {
     this.form = this.fb.group({
-      content: ['', Validators.required]
+      content: ['', [Validators.required, Validators.minLength(5)]]
+    });
+
+    effect(() => {
+      this.isLoadingMore.set(true);
+      this.#postsService
+        .getComments(this.#slug, { page: this.page() })
+        .pipe(takeUntilDestroyed(destroyRef))
+        .subscribe({
+          next: (res) => {
+            this.comments.update((prev) => {
+              const prevComments = prev?.[0] ?? [];
+              const prevTotal = prev?.[1] ?? 0;
+              const newComments = res?.data?.[0] ?? [];
+              const total = res?.data?.[1] ?? prevTotal;
+              return [[...prevComments, ...newComments], total];
+            });
+            this.isLoadingMore.set(false);
+          },
+          error: () => {
+            this.isLoadingMore.set(false);
+          }
+        });
     });
   }
 
   ngOnInit(): void {
     this.user$ = this.#store.select(selectUser);
-    this.#postsService.viewPost(this.#slug);
-    this.comments$ = this.#postsService.getComments(this.#slug);
+    this.#subscription = this.#postsService.viewPost(this.#slug).subscribe();
     this.post$ = this.#postsService.getPost(this.#slug);
   }
 
@@ -66,16 +93,29 @@ export class PostComponent implements OnInit {
   }
 
   onComment(post: string): void {
-    if (this.form.invalid) return;
-    const comment = {
-      post,
-      content: this.form.value.content
-    };
-    this.comment$ = this.#postsService.commentPost(comment);
+    this.isCommenting.set(true);
+    const comment = { post, content: this.form.value.content };
+    this.#subscription = this.#postsService.commentPost(comment).subscribe({
+      next: (res) => {
+        if (!res?.data) return;
+        this.comments.update((prev) => {
+          return [[res.data, ...prev[0]], prev[1]];
+        });
+        this.form.reset();
+        this.isCommenting.set(false);
+      },
+      error: () => {
+        this.isCommenting.set(false);
+      }
+    });
   }
 
   deleteComment(id: string): void {
     this.#postsService.deleteComment(id);
+  }
+
+  loadMoreComments(): void {
+    this.page.update((prev) => ++prev);
   }
 
   confirmDelete(event: Event, id: string): void {
@@ -98,5 +138,9 @@ export class PostComponent implements OnInit {
         this.deleteComment(id);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.#subscription?.unsubscribe();
   }
 }

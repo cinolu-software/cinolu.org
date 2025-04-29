@@ -1,8 +1,8 @@
 <section>
   @let event = event$ | async;
   @if (event.data; as event) {
-    <div class="mx-8 pt-20 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl border-x border-dashed border-gray-200">
-      <div class="px-4 pt-4 pb-8">
+    <div class="mx-8 pt-20 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl">
+      <div class="pt-4 pb-8">
         <h2 class="font-black font-satoshi mb-1 text-2xl md:text-4xl">{{ event.name | titlecase }}</h2>
         <button class="underline flex items-center gap-1 pb-4 text-secondary-700" (click)="back()">
           <ng-icon name="matArrowBackOutline" class="size-4!" />
@@ -15,7 +15,7 @@
       <img [ngSrc]="event | apiIMG: 'event'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
     </div>
 
-    <div class="mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl border-x border-dashed border-gray-200 py-10">
+    <div class="mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl py-10">
       <div class="px-4">
         <div class="mb-6">
           <div class="flex items-center gap-1 mb-2 text-secondary-800">
@@ -41,7 +41,7 @@
   }
   @if (!event.isLoading && !event.isSuccess) {
     <div
-      class="relative min-h-[75vh] w-full flex flex-col justify-center items-center mx-8 pt-20 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl border-x border-dashed border-gray-200 px-5">
+      class="relative min-h-[75vh] w-full flex flex-col justify-center items-center mx-8 pt-20 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl px-5">
       <h2 class="text-3xl font-semibold">Aucun événement avec cet identifiant !</h2>
     </div>
   }

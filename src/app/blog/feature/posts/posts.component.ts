@@ -36,10 +36,7 @@ export class PostsComponent implements OnInit {
   #router = inject(Router);
   carouselConfig = carouselConfig;
   queryParams = signal<QueryParams>({
-    page: Number(this.#route.snapshot.queryParams?.page) || null,
-    category: this.#route.snapshot.queryParams?.category || null,
-    views: Number(this.#route.snapshot.queryParams?.views) || null,
-    search: this.#route.snapshot.queryParams?.search || null
+    page: Number(this.#route.snapshot.queryParams?.page) || null
   });
 
   ngOnInit(): void {
@@ -53,25 +50,13 @@ export class PostsComponent implements OnInit {
     this.updateRouteAndposts();
   }
 
-  onClear(): void {
-    this.queryParams().page = null;
-    this.queryParams().category = null;
-    this.updateRouteAndposts();
-  }
-
-  onFilterChange(filter: string): void {
-    this.queryParams().page = null;
-    this.queryParams()['category'] = filter === 'Tous' ? null : filter;
-    this.updateRouteAndposts();
-  }
-
   loadPosts(): void {
     this.posts$ = this.#postsService.getPosts(this.queryParams());
   }
 
   updateRoute(): void {
-    const { page, category } = this.queryParams();
-    const queryParams = { page, category };
+    const { page } = this.queryParams();
+    const queryParams = { page };
     this.#router.navigate(['/posts'], { queryParams });
   }
 

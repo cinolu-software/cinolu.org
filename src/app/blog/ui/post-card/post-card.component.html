@@ -1,4 +1,4 @@
-<a [routerLink]="['/posts', post().slug]" class="flex flex-col gap-2 p-1">
+<a [routerLink]="['/posts', post().slug]" class="flex flex-col gap-2">
   <div class="relative h-48 w-full">
     <img [ngSrc]="post() | apiIMG: 'post'" alt="Post Image" class="object-cover w-full h-full rounded-md" fill />
   </div>
