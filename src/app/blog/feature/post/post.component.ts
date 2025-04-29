@@ -65,13 +65,8 @@ export class PostComponent implements OnInit, OnDestroy {
         .pipe(takeUntilDestroyed(destroyRef))
         .subscribe({
           next: (res) => {
-            this.comments.update((prev) => {
-              const prevComments = prev?.[0] ?? [];
-              const prevTotal = prev?.[1] ?? 0;
-              const newComments = res?.data?.[0] ?? [];
-              const total = res?.data?.[1] ?? prevTotal;
-              return [[...prevComments, ...newComments], total];
-            });
+            if (!res?.data) return;
+            this.comments.update((prev) => [[...prev[0], ...res.data[0]], res.data[1]]);
             this.isLoadingMore.set(false);
           },
           error: () => {
