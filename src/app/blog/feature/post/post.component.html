@@ -94,11 +94,36 @@
                     <p class="text-gray-900">{{ c.by.name }} · {{ c.by.email }}</p>
                     <p class="text-gray-500">{{ c.created_at | date: 'longDate' }}</p>
                   </div>
-                  @if (user?.id === c.by.id) {
+                  @if (user?.id === c?.by.id) {
                     <p-confirmpopup />
-                    <button (click)="confirmDelete($event, c.id)">
-                      <ng-icon name="matDeleteOutlineOutline" class="size-5! text-red-400!" />
-                    </button>
+                    <p-dialog
+                      header="Modifier le commentaire"
+                      [modal]="true"
+                      [(visible)]="modalIsOpen"
+                      [style]="{ width: '25rem' }">
+                      <form
+                        class="flex flex-col gap-1.5 mb-10 card justify-center"
+                        (ngSubmit)="onComment(p.id)"
+                        [formGroup]="editForm">
+                        <textarea [id]="'comment'" rows="5" cols="30" pTextarea formControlName="content"></textarea>
+                        <div class="flex justify-end gap-2 text-sm!">
+                          <p-button label="Annuler" severity="secondary" (click)="closeModal()" />
+                          <p-button
+                            label="Modifier"
+                            [disabled]="editForm.invalid || isUpdating()"
+                            [loading]="isUpdating()"
+                            (onClick)="onUpdateComment(c.id)" />
+                        </div>
+                      </form>
+                    </p-dialog>
+                    <div class="flex items-center gap-0.5">
+                      <button (click)="openModal(c.content)">
+                        <ng-icon name="matEditOutline" class="size-5! text-primary-900!" />
+                      </button>
+                      <button (click)="confirmDelete($event, c.id)">
+                        <ng-icon name="matDeleteOutlineOutline" class="size-5! text-red-400!" />
+                      </button>
+                    </div>
                   }
                 </div>
                 <p class="text-gray-700">

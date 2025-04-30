@@ -17,6 +17,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ConfirmationService } from 'primeng/api';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-post',
@@ -28,10 +30,12 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
     Button,
     NgOptimizedImage,
     NgIcon,
+    InputTextModule,
     PostSkeletonComponent,
     ShortNumberPipe,
     ReactiveFormsModule,
-    ConfirmPopupModule
+    ConfirmPopupModule,
+    DialogModule
   ],
   templateUrl: './post.component.html'
 })
@@ -40,7 +44,7 @@ export class PostComponent implements OnInit, OnDestroy {
   comments$: Observable<IAPIResponse<[IComment[], number]>>;
   comment$: Observable<IAPIResponse<IComment>>;
   user$: Observable<IUser>;
-  fb = inject(FormBuilder);
+  #fb = inject(FormBuilder);
   #route = inject(ActivatedRoute);
   #store = inject(Store);
   #postsService = inject(PostsService);
@@ -48,14 +52,20 @@ export class PostComponent implements OnInit, OnDestroy {
   #confirmationService = inject(ConfirmationService);
   #subscription = new Subscription();
   isLoadingMore = signal(false);
+  isUpdating = signal(false);
   isCommenting = signal(false);
   isDeleting = signal(false);
+  modalIsOpen = signal(false);
   page = signal(1);
   comments = signal<[IComment[], number]>([[], 0]);
   form: FormGroup;
+  editForm: FormGroup;
 
   constructor(destroyRef: DestroyRef) {
-    this.form = this.fb.group({
+    this.form = this.#fb.group({
+      content: ['', [Validators.required, Validators.minLength(5)]]
+    });
+    this.editForm = this.#fb.group({
       content: ['', [Validators.required, Validators.minLength(5)]]
     });
     effect(() => {
@@ -80,6 +90,39 @@ export class PostComponent implements OnInit, OnDestroy {
     this.user$ = this.#store.select(selectUser);
     this.#subscription = this.#postsService.viewPost(this.#slug).subscribe();
     this.post$ = this.#postsService.getPost(this.#slug);
+  }
+
+  closeModal(): void {
+    this.modalIsOpen.set(false);
+  }
+
+  openModal(content: string): void {
+    this.modalIsOpen.set(true);
+    this.editForm = this.#fb.group({
+      content: [content, [Validators.required, Validators.minLength(5)]]
+    });
+  }
+
+  onUpdateComment(id: string): void {
+    this.isUpdating.set(true);
+    const dto = { content: this.editForm.value.content };
+    this.#subscription = this.#postsService.updateComment(id, dto).subscribe({
+      next: (res) => {
+        if (!res?.data) return;
+        this.comments.update((prev) => {
+          const [commentList, other] = prev;
+          const updatedList = commentList
+            .map((comment) => (comment.id === id ? res.data : comment))
+            .filter((comment) => comment.id !== id);
+          return [[res.data, ...updatedList], other];
+        });
+        this.modalIsOpen.set(false);
+        this.isUpdating.set(false);
+      },
+      error: () => {
+        this.isUpdating.set(false);
+      }
+    });
   }
 
   estimateReadingTime(words: string): string {

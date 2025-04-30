@@ -7,6 +7,7 @@ import { ICategory, IComment, IPost } from 'app/shared/utils/types/models.type';
 import { buildQueryParams } from 'app/shared/utils/helpers/build-query-params.fn';
 import { IAddComment } from '../utils/types/add-comment.type';
 import { MessageService } from 'primeng/api';
+import { IEditComment } from '../utils/types/edit-comment.type';
 
 @Injectable()
 export class PostsService {
@@ -64,6 +65,24 @@ export class PostsService {
       });
     };
     return this.#apiService.delete(`post-comments/${id}`, onSuccess, onError);
+  }
+
+  updateComment(id: string, dto: IEditComment): Observable<IAPIResponse<IComment>> {
+    const onSuccess = () => {
+      this.#toast.add({
+        severity: 'success',
+        summary: 'Commentaire mis à jour avec succès',
+        life: 3000
+      });
+    };
+    const onError = () => {
+      this.#toast.add({
+        severity: 'error',
+        summary: 'Une erreur est survenue ',
+        life: 3000
+      });
+    };
+    return this.#apiService.patch(`post-comments/${id}`, dto, onSuccess, onError);
   }
 
   getPost(slug: string): Observable<IAPIResponse<IPost>> {
