@@ -43,7 +43,11 @@
             </div>
             <span
               class="px-3 py-1 inline-block justify-self-end rounded-full text-xs font-semibold bg-primary-100 text-primary-800">
-              {{ organization?.categories[0]?.name }}
+              @if (activeTab() !== 'Total') {
+                {{ activeTab() | titlecase }}
+              } @else {
+                {{ organization?.categories[0]?.name | titlecase }}
+              }
             </span>
           </div>
 
