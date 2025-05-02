@@ -3,7 +3,7 @@
   @let user = user$ | async;
 
   @if (project.data; as project) {
-    <div class="mx-8 pt-20 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl">
+    <div class="mx-8 pt-20 md:mx-auto md:max-w-screen-lg">
       <div class="pt-4 pb-8">
         <h2 class="font-black font-satoshi mb-1 text-2xl md:text-4xl">{{ project.name | titlecase }}</h2>
         <button class="underline flex items-center gap-1 pb-4 text-secondary-700" (click)="back()">
@@ -13,11 +13,11 @@
       </div>
     </div>
 
-    <div class="relative pb-10 h-60 w-full md:h-96 bg-gray-50 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl">
+    <div class="relative pb-10 h-60 w-full md:h-96 bg-gray-50 md:mx-auto md:max-w-screen-lg">
       <img [ngSrc]="project | apiIMG: 'project'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
     </div>
 
-    <div class="mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl pb-10">
+    <div class="mx-8 md:mx-auto md:max-w-screen-lg pb-10">
       <div
         class="flex items-center gap-7 text-nowrap border-primary-300 pt-8 mb-10 no-scrollbar overflow-x-auto whitespace-nowrap border-b border-dashed">
         <button
@@ -51,7 +51,7 @@
   }
   @if (!project.isLoading && !project.isSuccess) {
     <div
-      class="relative min-h-[75vh] w-full flex flex-col justify-center items-center mx-8 pt-20 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl px-5">
+      class="relative min-h-[75vh] w-full flex flex-col justify-center items-center mx-8 pt-20 md:mx-auto md:max-w-screen-lg px-5">
       <h2 class="text-3xl font-semibold">Aucun programme avec cet identifiant !</h2>
     </div>
   }
