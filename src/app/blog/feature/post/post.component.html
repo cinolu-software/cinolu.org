@@ -107,7 +107,7 @@
                         [formGroup]="editForm">
                         <textarea [id]="'comment'" rows="5" cols="30" pTextarea formControlName="content"></textarea>
                         <div class="flex justify-end gap-2 text-sm!">
-                          <p-button label="Annuler" severity="secondary" (click)="closeModal()" />
+                          <p-button label="Annuler" severity="primary" (click)="closeModal()" />
                           <p-button
                             label="Modifier"
                             [disabled]="editForm.invalid || isUpdating()"

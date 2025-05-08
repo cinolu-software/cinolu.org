@@ -18,22 +18,10 @@
   --color-primary-900: #2b4225;
   --color-primary-950: #142310;
 
-  --color-secondary-50: #f8fbea;
-  --color-secondary-100: #eef5d2;
-  --color-secondary-200: #ddecaa;
-  --color-secondary-300: #c6de78;
-  --color-secondary-400: #a4c73b;
-  --color-secondary-500: #90b230;
-  --color-secondary-600: #6f8d23;
-  --color-secondary-700: #556c1f;
-  --color-secondary-800: #45561e;
-  --color-secondary-900: #3b4a1d;
-  --color-secondary-950: #1e280b;
-
   @keyframes fadeInUp {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(5px);
     }
     to {
       opacity: 1;
@@ -52,11 +40,11 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply shadow-md bg-secondary-200/30;
+    @apply shadow-md bg-primary-200/30;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-secondary-400;
+    @apply rounded-full bg-primary-400;
   }
 
   button:not(:disabled),
@@ -71,7 +59,7 @@
 
 @layer components {
   .carousel-nav-btn {
-    @apply h-8 w-8  text-secondary-500 flex flex-col items-center justify-center border border-secondary-500 hover:bg-secondary-500 hover:text-white transition-colors duration-300 rounded-full;
+    @apply h-8 w-8  text-primary-500 flex flex-col items-center justify-center border border-primary-500 hover:bg-primary-500 hover:text-white transition-colors duration-300 rounded-full;
   }
 
   .primary-link {

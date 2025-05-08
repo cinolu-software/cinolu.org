@@ -1,22 +1,22 @@
-export const stats: { value: number; label: string }[] = [
+export const stats: { value: number; label: string; icon: string }[] = [
   {
     value: 7000,
-    label: 'Bénéficiaires'
+    label: 'Bénéficiaires',
+    icon: 'matGroupWorkOutline'
   },
   {
     value: 150,
-    label: 'Projets'
+    label: 'Projets',
+    icon: 'matLightbulbOutline'
   },
   {
     value: 40,
-    label: 'Partenaires'
+    label: 'Partenaires',
+    icon: 'matHandshakeOutline'
   },
   {
     value: 8,
-    label: 'Programmes'
-  },
-  {
-    value: 15,
-    label: 'Mentors & Coachs'
+    label: 'Programmes',
+    icon: 'matHubOutline'
   }
 ];

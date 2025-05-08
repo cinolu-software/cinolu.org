@@ -3,7 +3,7 @@
     <ng-icon [name]="isOpen() ? 'matCloseOutline' : 'matMenuOutline'" class="size-5!" />
   </button>
   <div
-    class="fixed top-14 left-0 right-10 bottom-0 bg-white backdrop-blur-lg transition-transform duration-300 text-lg"
+    class="fixed top-16 left-0 right-10 bottom-0 bg-white backdrop-blur-lg transition-transform duration-300 text-lg"
     [ngClass]="isOpen() ? 'translate-x-0 active-nav' : '-translate-x-full'">
     <div class="flex flex-col justify-between py-16 px-10 h-full text-gray-900">
       <div class="flex flex-col gap-6 font-bold text-xl menu">
@@ -19,7 +19,7 @@
           <a [href]="accountUrl()" target="_blank" class="flex items-center gap-2.5">
             <img
               [ngSrc]="user() | apiIMG: 'user'"
-              class="rounded-full object-cover w-8 h-8 ring-2 ring-secondary-800 ring-offset-1"
+              class="rounded-full object-cover w-8 h-8 ring-2 ring-primary-800 ring-offset-1"
               alt="profile picture"
               width="20"
               height="20" />
@@ -34,14 +34,14 @@
       } @else {
         <a
           routerLink="/sign-in"
-          class="flex items-center justify-center text-white px-6 py-2 bg-secondary-600 rounded-sm hover:bg-secondary-700 transition-colors duration-300 gap-1.5 font-medium text-base">
+          class="flex items-center justify-center text-white px-6 py-2 bg-primary-600 rounded-sm hover:bg-primary-700 transition-colors duration-300 gap-1.5 font-medium text-base">
           Se connecter
         </a>
       }
     </div>
   </div>
   <ul
-    class="fixed text-base top-14 left-0 right-8 bottom-0 bg-white backdrop-blur-lg z-30 transition-transform duration-300"
+    class="fixed text-base top-16 left-0 right-8 bottom-0 bg-white backdrop-blur-lg z-30 transition-transform duration-300"
     [ngClass]="activeTab() && isOpen() ? 'translate-x-0' : '-translate-x-full'">
     <div
       class="flex flex-col items-start justify-start gap-7 font-medium py-16 px-10 h-full  {{
@@ -56,10 +56,10 @@
       @for (link of getLinks(links(), activeTab()); track $index) {
         <a [routerLink]="link.path" [fragment]="link.fragment" class="flex items-center gap-2.5 group">
           <span
-            class="h-8 w-8 flex items-center justify-center bg-secondary-600 rounded-full transition-transform duration-200 group-hover:scale-110 text-white">
+            class="h-8 w-8 flex items-center justify-center bg-primary-600 rounded-full transition-transform duration-200 group-hover:scale-110 text-white">
             <ng-icon [name]="link.icon" class="size-4!" />
           </span>
-          <p class="flex flex-col gap-0.5 font-medium">
+          <p class="flex flex-col gap-0.5 font-medium text-gray-900">
             {{ link.name }}
             <span class="description text-gray-700 text-sm">{{ link.description }}</span>
           </p>

@@ -15,12 +15,12 @@
           class="flex items-center gap-2 pr-0.5 pb-2.5 py-1.5 text-gray-700 transition-colors duration-300"
           (click)="setActiveTab(c.category)"
           [ngClass]="{
-            'border-b border-secondary-600': activeTab() === c.category
+            'border-b border-primary-600': activeTab() === c.category
           }">
           {{ c.category }}
 
           <div
-            class="h-6 w-6 font-semibold text-xs z-20 bg-secondary-900/90 text-center flex flex-col items-center justify-center rounded-full text-white">
+            class="h-6 w-6 font-semibold text-xs z-20 bg-primary-900/90 text-center flex flex-col items-center justify-center rounded-full text-white">
             {{ c.count }}
           </div>
         </button>

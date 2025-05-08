@@ -1,10 +1,16 @@
 @let user = user$ | async;
 <header
-  class="h-16 py-6 w-full fixed right-0 left-0 z-50 shadow-md bg-white text-gray-800 flex flex-col text-base justify-center font-satoshi">
+  class="w-full right-0 left-0 flex flex-col text-base justify-center z-20 font-satoshi"
+  [ngClass]="{
+    'fixed bg-white text-gray-800 py-3': isFixed() || fixed(),
+    'animate-fadeInUp shadow-md': isFixed() && !fixed(),
+    'shadow-md': isFixed(),
+    'absolute top-6 text-white': !(isFixed() || fixed())
+  }">
   <nav class="flex justify-between items-center w-full px-8 md:mx-auto md:max-w-screen-lg md:px-0">
     <a routerLink="/" aria-label="logo" class="inline-block">
       <img
-        [ngSrc]="'images/logo/logo-g.png'"
+        [ngSrc]="isFixed() || fixed() ? 'images/logo/logo-g.png' : 'images/logo/logo-w.png'"
         alt="logo"
         class="w-9 h-10 cursor-pointer"
         width="64"
