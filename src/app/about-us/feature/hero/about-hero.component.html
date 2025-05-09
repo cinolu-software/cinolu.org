@@ -1,14 +1,20 @@
-<section class="mb-10 mt-14">
-  <div class="relative py-64 md:py-80 w-full flex flex-col bg-[url('/images/about.jpg')] bg-cover bg-no-repeat">
+<section class="relative min-h-[70vh] pt-40 pb-20 flex" @fadeInStagger>
+  <div class="absolute inset-0 bg-[url('/images/about.jpg')] bg-cover bg-center bg-no-repeat">
+    <div class="absolute inset-0 bg-primary-950/85"></div>
+  </div>
+  <div class="px-8 fade-item relative z-10 mx-auto md:max-w-screen-lg xl:px-0">
     <div
-      class="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-start justify-center bg-gradient-to-b from-primary-900/40 to-primary-900/50 gap-6 text-white">
-      <div class="flex flex-col items-start justify-center px-8 mx-auto md:max-w-screen-lg xl:px-0">
-        <h1 class="font-extrabold block text-3xl md:text-4xl xl:text-6xl">À propos de nous</h1>
-        <p class="mb-8 mt-10 md:text-xl font-light leading-relaxed w-full md:w-3/4">
-          Découvrez notre histoire, notre mission et rencontrez notre équipe dévouée. Nous sommes passionnés par ce que
-          nous faisons et nous nous engageons à fournir le meilleur service possible.
-        </p>
-      </div>
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/20 backdrop-blur-sm mb-4 text-primary-50 font-medium font-satoshi">
+      <ng-icon name="matInfoOutline" class="size-5! text-primary-50!" />
+      About us
     </div>
+    <h1 class="fade-item font-satoshi text-4xl sm:text-5xl md:text-6xl font-black mb-6 text-white">
+      À propos de nous
+      <span class="text-primary-400">Cinolu</span>
+    </h1>
+    <p class="fade-item text-lg sm:text-xl text-primary-100 mb-12">
+      Découvrez notre histoire, notre mission et rencontrez notre équipe dévouée. Nous sommes passionnés par ce que nous
+      faisons et nous nous engageons à fournir le meilleur service possible.
+    </p>
   </div>
 </section>
