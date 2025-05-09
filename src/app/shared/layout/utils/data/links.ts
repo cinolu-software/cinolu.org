@@ -48,23 +48,22 @@ export const MY_CINOLU_LINKS: ILink[] = [
     icon: 'matInfoOutline',
     exactUrl: false
   },
-
-  {
-    name: 'Equipe',
-    path: '/about-us',
-    fragment: 'team',
-    description: 'Voir notre équipe',
-    icon: 'matGroupWorkOutline:',
-    exactUrl: false
-  },
-  {
-    name: 'Coachs & mentors',
-    path: '/about-us',
-    fragment: 'coachs',
-    description: 'Voir nos mentors',
-    icon: 'matSupportAgentOutline',
-    exactUrl: false
-  },
+  // {
+  //   name: 'Equipe',
+  //   path: '/about-us',
+  //   fragment: 'team',
+  //   description: 'Voir notre équipe',
+  //   icon: 'matGroupWorkOutline:',
+  //   exactUrl: false
+  // },
+  // {
+  //   name: 'Coachs & mentors',
+  //   path: '/about-us',
+  //   fragment: 'coachs',
+  //   description: 'Voir nos mentors',
+  //   icon: 'matSupportAgentOutline',
+  //   exactUrl: false
+  // },
   {
     name: 'Vision',
     path: '/about-us',
