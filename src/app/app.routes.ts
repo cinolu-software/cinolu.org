@@ -23,7 +23,7 @@ export const appRoutes: Route[] = [
   {
     path: 'about-us',
     component: LayoutComponent,
-    data: { layout: 'primary' },
+    data: { layout: 'empty' },
     loadChildren: () => aboutRoutes
   },
   {
