@@ -1,22 +1,19 @@
 @let user = user$ | async;
 <header
-  class="w-full right-0 left-0 flex flex-col text-base justify-center z-20 font-satoshi"
-  [ngClass]="{
-    'fixed bg-white text-gray-800 py-3': isFixed() || fixed(),
-    'animate-fadeInUp shadow-md': isFixed() && !fixed(),
-    'shadow-md': isFixed(),
-    'absolute top-6 text-white': !(isFixed() || fixed())
-  }">
+  class="w-full right-0 fixed shadow-md py-3 bg-white left-0 flex flex-col text-base justify-center z-20 font-satoshi">
   <nav class="flex justify-between items-center w-full px-8 md:mx-auto md:max-w-screen-lg md:px-0">
-    <a routerLink="/" aria-label="logo" class="inline-block">
-      <img
-        [ngSrc]="isFixed() || fixed() ? 'images/logo/logo-g.png' : 'images/logo/logo-w.png'"
-        alt="logo"
-        class="w-9 h-10 cursor-pointer"
-        width="64"
-        height="68"
-        priority />
-    </a>
+    <div class="flex gap-3 items-center">
+      <a routerLink="/" aria-label="logo" class="inline-block">
+        <img
+          [ngSrc]="'images/logo/logo-g.png'"
+          alt="logo"
+          class="w-9 h-10 cursor-pointer"
+          width="64"
+          height="68"
+          priority />
+      </a>
+      <a href="" class="inline-block"> </a>
+    </div>
     <div>
       <app-mobile-nav [user]="user" [accountUrl]="accUrl" [tabs]="tabs()" [links]="links()" (singOut)="signOut()" />
       <app-desktop-nav [user]="user" [accountUrl]="accUrl" [tabs]="tabs()" [links]="links()" (singOut)="signOut()" />

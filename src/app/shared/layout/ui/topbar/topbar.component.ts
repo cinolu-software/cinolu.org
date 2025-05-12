@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, input, OnDestroy, OnInit, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnDestroy, OnInit, signal, viewChild } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { IUser } from 'app/shared/utils/types/models.type';
 import { Observable, Subscription } from 'rxjs';
@@ -26,12 +26,10 @@ export class TopbarComponent implements OnInit, OnDestroy {
   logout$: Observable<IAPIResponse<void>>;
   accUrl = environment.accountUrl;
   tabs = signal<string[]>(['Parcourir', 'My Cinolu']);
-  isFixed = signal<boolean>(false);
-  fixed = input<boolean>(false);
   mobileNav = viewChild(MobileNavComponent);
   desktopNav = viewChild(DesktopNavComponent);
   elementRef = inject(ElementRef);
-  subscription: Subscription;
+  subscription = new Subscription();
   links = signal<Record<string, ILink[]>>({
     Parcourir: EXPLORATION_LINKS,
     'My Cinolu': MY_CINOLU_LINKS
@@ -60,11 +58,10 @@ export class TopbarComponent implements OnInit, OnDestroy {
   }
 
   onWindowScroll(): void {
-    this.isFixed.set(window.scrollY > 30);
     if (this.desktopNav()?.activeTab() || this.mobileNav()?.isOpen()) this.closeNav();
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) this.subscription.unsubscribe();
+    this.subscription?.unsubscribe();
   }
 }
