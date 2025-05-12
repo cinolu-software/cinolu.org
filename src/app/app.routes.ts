@@ -23,7 +23,7 @@ export const appRoutes: Route[] = [
   {
     path: 'about-us',
     component: LayoutComponent,
-    data: { layout: 'empty' },
+    data: { layout: 'primary' },
     loadChildren: () => aboutRoutes
   },
   {
@@ -35,7 +35,7 @@ export const appRoutes: Route[] = [
   {
     path: '',
     component: LayoutComponent,
-    data: { layout: 'empty' },
+    data: { layout: 'primary' },
     loadChildren: () => landingRoutes
   },
   {
