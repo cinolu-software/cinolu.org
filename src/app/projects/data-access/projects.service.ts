@@ -10,10 +10,6 @@ import { buildQueryParams } from 'app/shared/utils/helpers/build-query-params.fn
 export class ProjectsService {
   #apiService = inject(APIService);
 
-  // apply(call: string, data: any): Observable<IAPIResponse<IProject>> {
-  //   return this.#apiService.post(`project-applications`, data);
-  // }
-
   getCategories(): Observable<IAPIResponse<ICategory[]>> {
     return this.#apiService.get('project-categories');
   }
@@ -27,7 +23,7 @@ export class ProjectsService {
     return this.#apiService.get(`projects/slug/${slug}`);
   }
 
-  findRecent(): Observable<IAPIResponse<IProject[]>> {
+  getRecent(): Observable<IAPIResponse<IProject[]>> {
     return this.#apiService.get('projects/find-recent');
   }
 }

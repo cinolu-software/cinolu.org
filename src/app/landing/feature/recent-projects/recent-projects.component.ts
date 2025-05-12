@@ -22,6 +22,6 @@ export class RecentProjectsComponent implements OnInit {
   carouselConfig = carouselConfig;
 
   ngOnInit(): void {
-    this.projects$ = this.#projectsService.findRecent();
+    this.projects$ = this.#projectsService.getRecent();
   }
 }
