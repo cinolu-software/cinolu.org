@@ -1,0 +1,11 @@
+{
+  "routes": [
+    "/",
+    "/confirmation-required",
+    "/forgot-password",
+    "/reset-password",
+    "/sign-in",
+    "/sign-out",
+    "/sign-up"
+  ]
+}
