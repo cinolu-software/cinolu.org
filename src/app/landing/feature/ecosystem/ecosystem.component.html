@@ -1,12 +1,10 @@
 <section class="px-8 mx-auto md:max-w-screen-lg xl:px-0 pt-28 mb-20" id="ecosystem">
   @let categoryCounts = categoryCounts$ | async;
-
   @if (categoryCounts?.data) {
     <div class="mb-10" data-aos="fade-up">
       <h2 class="font-black font-satoshi mb-2 text-2xl md:text-4xl">Our Ecosystem</h2>
       <p class="text-primary-600 font-satoshi">Notre écosystème</p>
     </div>
-
     <div
       class="flex overflow-x-auto gap-5 border-b border-dashed border-primary-200 font-medium pt-4 whitespace-nowrap"
       data-aos="fade-up">
@@ -15,7 +13,7 @@
           class="flex items-center gap-2 pr-0.5 pb-2.5 py-1.5 text-gray-700 transition-colors duration-300"
           (click)="setActiveTab(c.category)"
           [ngClass]="{
-            'border-b border-primary-600': activeTab() === c.category
+            'border-b border-primary-600': activeTab() === c.category,
           }">
           {{ c.category }}
 
@@ -46,7 +44,7 @@
               @if (activeTab() !== 'Total') {
                 {{ activeTab() | titlecase }}
               } @else {
-                {{ organization?.categories[0]?.name | titlecase }}
+                {{ organization.categories[0].name | titlecase }}
               }
             </span>
           </div>

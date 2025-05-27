@@ -14,10 +14,10 @@ import { CarouselModule } from 'primeng/carousel';
   selector: 'app-recent-events',
   providers: [EventsService],
   imports: [CommonModule, EventCardComponent, CarouselModule, RouterModule, NgIcon],
-  templateUrl: './recent-events.component.html'
+  templateUrl: './recent-events.component.html',
 })
 export class RecentEventsComponent implements OnInit {
-  events$: Observable<IAPIResponse<IEvent[]>>;
+  events$: Observable<IAPIResponse<IEvent[]>> | undefined;
   #eventsService = inject(EventsService);
   carouselOptions = carouselConfig;
 

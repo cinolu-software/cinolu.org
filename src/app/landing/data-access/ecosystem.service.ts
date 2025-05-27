@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { APIService } from 'app/shared/services/api/api.service';
-import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
-import { IOrganization } from 'app/shared/utils/types/models.type';
+import { APIService } from '../../shared/services/api/api.service';
+import { IAPIResponse } from '../../shared/services/api/types/api-response.type';
+import { IOrganization } from '../../shared/utils/types/models.type';
 
 @Injectable()
 export class EcosystemService {

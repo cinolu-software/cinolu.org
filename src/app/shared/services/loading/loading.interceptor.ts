@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { LoadingService } from 'app/shared/services/loading/loading.service';
 import { Observable, finalize, take } from 'rxjs';
+import { LoadingService } from './loading.service';
 
 export const LoadingInterceptor = (req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
   const loadingService = inject(LoadingService);

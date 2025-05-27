@@ -4,11 +4,11 @@ import { Subject } from 'rxjs';
 import { TopbarComponent } from '../../ui/topbar/topbar.component';
 
 @Component({
-  selector: 'app-secondary-layout',
-  templateUrl: './secondary.component.html',
-  imports: [RouterOutlet, TopbarComponent]
+  selector: 'app-with-topbar-layout',
+  templateUrl: './with-topbar.component.html',
+  imports: [RouterOutlet, TopbarComponent],
 })
-export class SecondaryLayoutComponent implements OnDestroy {
+export class WithTopbarLayoutComponent implements OnDestroy {
   #unsubscribeAll = new Subject();
 
   ngOnDestroy(): void {

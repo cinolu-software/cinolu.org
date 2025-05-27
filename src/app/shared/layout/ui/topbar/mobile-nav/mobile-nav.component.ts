@@ -1,19 +1,19 @@
 import { Component, input, output, signal } from '@angular/core';
-import { IUser } from '../../../../utils/types/models.type';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../pipes/api-img.pipe';
 import { RouterModule } from '@angular/router';
 import { ILink } from '../../../utils/types/link.type';
 import { NgIcon } from '@ng-icons/core';
-import { getLinks } from 'app/shared/utils/helpers/get-links.fn';
+import { IUser } from '../../../../utils/types/models.type';
+import { getLinks } from '../../../../utils/helpers/get-links.fn';
 
 @Component({
   selector: 'app-mobile-nav',
   templateUrl: './mobile-nav.component.html',
-  imports: [NgIcon, NgOptimizedImage, RouterModule, CommonModule, ApiImgPipe]
+  imports: [NgIcon, NgOptimizedImage, RouterModule, CommonModule, ApiImgPipe],
 })
 export class MobileNavComponent {
-  user = input.required<IUser>();
+  user = input.required<IUser | null>();
   accountUrl = input.required<string>();
   tabs = input.required<string[]>();
   links = input.required<Record<string, ILink[]>>();

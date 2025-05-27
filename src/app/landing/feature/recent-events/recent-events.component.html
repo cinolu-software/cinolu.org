@@ -22,7 +22,7 @@
     <div class="flex flex-col gap-5">
       <p-carousel
         #carousel
-        [value]="events.data"
+        [value]="events?.data ?? []"
         [numVisible]="3"
         [numScroll]="1"
         [showIndicators]="false"

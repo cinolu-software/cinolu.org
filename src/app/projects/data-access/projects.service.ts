@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { ICategory, IProject } from 'app/shared/utils/types/models.type';
 import { Observable } from 'rxjs';
-import { APIService } from 'app/shared/services/api/api.service';
-import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
+import { APIService } from '../../shared/services/api/api.service';
+import { IAPIResponse } from '../../shared/services/api/types/api-response.type';
+import { buildQueryParams } from '../../shared/utils/helpers/build-query-params.fn';
+import { ICategory, IProject } from '../../shared/utils/types/models.type';
 import { QueryParams } from '../utils/types/query-params.type';
-import { buildQueryParams } from 'app/shared/utils/helpers/build-query-params.fn';
 
 @Injectable()
 export class ProjectsService {
@@ -15,7 +15,7 @@ export class ProjectsService {
   }
 
   getProjects(queryParams: QueryParams): Observable<IAPIResponse<[IProject[], number]>> {
-    const params = buildQueryParams(queryParams);
+    const params = buildQueryParams(queryParams as unknown as Record<string, string>);
     return this.#apiService.get('projects/find-published', params);
   }
 

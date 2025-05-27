@@ -1,36 +1,25 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import {
-  ChangeDetectorRef,
-  Component,
-  inject,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-  ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { LoadingService } from 'app/shared/services/loading/loading.service';
-import { CommonModule } from '@angular/common';
 import { ProgressBar } from 'primeng/progressbar';
+import { CommonModule } from '@angular/common';
+import { LoadingService } from '../../services/loading';
 
 @Component({
   selector: 'app-loading-bar',
-  templateUrl: './loading-bar.component.html',
-  encapsulation: ViewEncapsulation.None,
-  imports: [ProgressBar, CommonModule]
+  imports: [ProgressBar, CommonModule],
+  templateUrl: './loading-bar.component.html'
 })
 export class LoadingBarComponent implements OnChanges, OnInit, OnDestroy {
   #loadingService = inject(LoadingService);
   #unsubscribeAll = new Subject();
   #cdr = inject(ChangeDetectorRef);
-  mode: 'determinate' | 'indeterminate';
+  mode: 'determinate' | 'indeterminate' = 'indeterminate';
   progress = 0;
   show = false;
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('autoMode' in changes) {
-      this.#loadingService.setAutoMode(coerceBooleanProperty(changes.autoMode.currentValue));
+      this.#loadingService.setAutoMode(changes['autoMode'].currentValue);
     }
   }
 
@@ -41,6 +30,7 @@ export class LoadingBarComponent implements OnChanges, OnInit, OnDestroy {
     });
 
     this.#loadingService.progress$.pipe(takeUntil(this.#unsubscribeAll)).subscribe((value) => {
+      if (!value) return;
       this.progress = value;
       this.#cdr.detectChanges();
     });

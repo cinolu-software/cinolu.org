@@ -1,9 +1,8 @@
 <app-loading-bar />
 <div class="overflow-x-hidden">
   @defer {
-    <p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }" />
-    <router-outlet />
+  <router-outlet />
   } @placeholder {
-    <app-loader />
+  <app-loader />
   }
 </div>

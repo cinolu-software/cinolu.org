@@ -20,7 +20,7 @@
             [showHeader]="false"
             (onChange)="onFilterChange($event, 'categories')"
             (onClear)="onClear()"
-            [options]="categories.data"
+            [options]="categories?.data || []"
             [optionValue]="'id'"
             [optionLabel]="'name'"
             [showClear]="true"
@@ -29,17 +29,18 @@
           </p-multiselect>
         </div>
       }
-      @if (projects?.data?.[1] > 0) {
+      @if (projects?.data?.[1]) {
         <div class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10">
           @for (
-            project of projects?.data?.[0]
-              | paginate: { itemsPerPage: 9, currentPage: queryParams().page, totalItems: projects.data[1] };
+            project of projects?.data?.[0] ?? []
+              | paginate
+                : { itemsPerPage: 9, currentPage: queryParams().page ?? 1, totalItems: projects?.data?.[1] ?? 1 };
             track project.id
           ) {
             <app-project-card [project]="project" />
           }
         </div>
-        @if (projects.data[1] > 9) {
+        @if ((projects?.data?.[1] || 1) > 9) {
           <div class="flex justify-center pb-8">
             <pagination-controls
               nextLabel=""
@@ -52,7 +53,7 @@
         }
       }
 
-      @if (!projects.isLoading && projects?.data?.[1] === 0) {
+      @if (!projects?.isLoading && projects?.data?.[1] === 0) {
         <h2 class="text-3xl font-semibold px-4 pt-6 pb-14">Pas de programme!</h2>
       }
 

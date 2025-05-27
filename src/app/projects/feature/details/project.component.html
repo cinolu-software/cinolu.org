@@ -1,8 +1,7 @@
 <section>
   @let project = project$ | async;
   @let user = user$ | async;
-
-  @if (project.data; as project) {
+  @if (project?.data; as project) {
     <div class="mx-8 pt-20 md:mx-auto md:max-w-screen-lg">
       <div class="pt-4 pb-8">
         <h2 class="font-black font-satoshi mb-1 text-2xl md:text-4xl">{{ project.name | titlecase }}</h2>
@@ -21,15 +20,19 @@
       <div
         class="flex items-center gap-7 text-nowrap border-primary-300 pt-8 mb-10 no-scrollbar overflow-x-auto whitespace-nowrap border-b border-dashed">
         <button
-          [ngClass]="!activeTab() && 'border-b border-primary-700 text-primary-700'"
+          [ngClass]="{
+            'border-b border-primary-700 text-primary-700': !activeTab(),
+          }"
           class="py-2 flex items-center gap-1.5"
-          (click)="setActiveTab(null)">
+          (click)="setActiveTab('')">
           Resumé
           <ng-icon name="matDescriptionOutline" class="icon-size-3 xl:icon-size-4" />
         </button>
         <button
           [disabled]="!user"
-          [ngClass]="activeTab() === 'application' && 'border-b border-primary-700 text-primary-700'"
+          [ngClass]="{
+            'border-b border-primary-700 text-primary-700': activeTab() === 'application',
+          }"
           class="py-2 disabled:text-gray-500 disabled:cursor-not-allowed flex items-center gap-1.5"
           (click)="setActiveTab('application')">
           Postuler
@@ -41,15 +44,15 @@
         <app-project-overview [project]="project" />
       }
 
-      @if (activeTab() === 'application' && project?.phases?.length > 0) {
+      @if (activeTab() === 'application' && project?.phases?.length) {
         <app-project-application [fields]="project.form" />
       }
     </div>
   }
-  @if (project.isLoading) {
+  @if (project?.isLoading) {
     <app-project-skeleton />
   }
-  @if (!project.isLoading && !project.isSuccess) {
+  @if (!project?.isLoading && !project?.isSuccess) {
     <div
       class="relative min-h-[75vh] w-full flex flex-col justify-center items-center mx-8 pt-20 md:mx-auto md:max-w-screen-lg px-5">
       <h2 class="text-3xl font-semibold">Aucun programme avec cet identifiant !</h2>

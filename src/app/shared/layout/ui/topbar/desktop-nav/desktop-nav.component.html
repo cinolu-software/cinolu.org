@@ -1,5 +1,5 @@
 <div class="hidden lg:flex justify-between">
-  <div class="flex items-center gap-6">
+  <div class="flex items-center gap-3">
     @for (tab of tabs(); track $index) {
       <button class="relative" (click)="setActiveTab(tab)">
         <div class="menu flex items-center font-medium text-lg">
@@ -7,10 +7,12 @@
           <ng-icon
             name="matKeyboardArrowDownOutline"
             class="transition-transform duration-300 size-5! fill-black!"
-            [ngClass]="activeTab() === tab && 'rotate-180'" />
+            [ngClass]="{
+              'rotate-180': activeTab() === tab,
+            }" />
         </div>
         <div
-          class="absolute top-10 w-[16rem] text-gray-800 right-0 animate-Up py-8 px-6 gap-6 text-start font-normal z-30 bg-white shadow-lg rounded-lg transition-transform duration-300"
+          class="absolute top-10 w-[16rem] text-gray-800 right-0 animate-Up py-8 px-6 gap-4 text-start font-normal z-30 bg-white shadow-lg rounded-lg transition-transform duration-300"
           [ngClass]="activeTab() === tab ? 'block active-nav animate-fadeInUp' : 'hidden'">
           <div class="grid grid-cols-1 gap-x-8 gap-y-6">
             @for (link of getLinks(links(), activeTab()); track $index) {
@@ -43,7 +45,9 @@
           <ng-icon
             name="matKeyboardArrowDownOutline"
             class="transition-transform duration-300 size-5! fill-black!"
-            [ngClass]="activeTab() === 'account' && 'rotate-180'" />
+            [ngClass]="{
+              'rotate-180': activeTab() === 'account',
+            }" />
           <div
             class="absolute top-10 w-[13rem] right-0 animate-Up py-8 px-6 gap-6 z-30 bg-white shadow-lg rounded-lg transition-transform duration-300"
             [ngClass]="activeTab() === 'account' ? 'block active-nav animate-fadeInUp' : 'hidden'">

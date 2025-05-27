@@ -4,50 +4,50 @@ import { eventsRoutes } from './events/events.routes';
 import { landingRoutes } from './landing/landing.routes';
 import { aboutRoutes } from './about-us/about-us.routes';
 import { projectsRoutes } from './projects/projects.routes';
-import { LayoutComponent } from './shared/layout/layout.component';
 import { blogRoutes } from './blog/blog.routes';
+import { LayoutComponent } from './shared/layout/layout.component';
 
-export const appRoutes: Route[] = [
+export const routes: Route[] = [
   {
     path: 'programs',
     component: LayoutComponent,
-    data: { layout: 'primary' },
-    loadChildren: () => projectsRoutes
+    data: { layout: 'with-topbar' },
+    loadChildren: () => projectsRoutes,
   },
   {
     path: 'events',
     component: LayoutComponent,
-    data: { layout: 'primary' },
-    loadChildren: () => eventsRoutes
+    data: { layout: 'with-topbar' },
+    loadChildren: () => eventsRoutes,
   },
   {
     path: 'about-us',
     component: LayoutComponent,
-    data: { layout: 'primary' },
-    loadChildren: () => aboutRoutes
+    data: { layout: 'full-layout' },
+    loadChildren: () => aboutRoutes,
   },
   {
     path: 'posts',
     component: LayoutComponent,
-    data: { layout: 'primary' },
-    loadChildren: () => blogRoutes
+    data: { layout: 'with-topbar' },
+    loadChildren: () => blogRoutes,
   },
   {
     path: '',
     component: LayoutComponent,
-    data: { layout: 'primary' },
-    loadChildren: () => landingRoutes
+    data: { layout: 'full-layout' },
+    loadChildren: () => landingRoutes,
   },
   {
     path: '',
     component: LayoutComponent,
-    data: { layout: 'secondary' },
-    loadChildren: () => auhtRoutes
+    data: { layout: 'with-topbar' },
+    loadChildren: () => auhtRoutes,
   },
   {
     path: '**',
     component: LayoutComponent,
-    data: { layout: 'primary' },
-    loadChildren: () => landingRoutes
-  }
+    data: { layout: 'full-layout' },
+    loadChildren: () => landingRoutes,
+  },
 ];

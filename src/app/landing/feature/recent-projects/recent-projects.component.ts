@@ -8,16 +8,16 @@ import { RouterModule } from '@angular/router';
 import { ProjectsService } from '../../../projects/data-access/projects.service';
 import { CarouselModule } from 'primeng/carousel';
 import { NgIcon } from '@ng-icons/core';
-import { carouselConfig } from 'app/landing/utils/config/carousel.config';
+import { carouselConfig } from '../../utils/config/carousel.config';
 
 @Component({
   selector: 'app-recent-projects',
   providers: [ProjectsService],
   imports: [CommonModule, ProjectCardComponent, CarouselModule, RouterModule, NgIcon],
-  templateUrl: './recent-projects.component.html'
+  templateUrl: './recent-projects.component.html',
 })
 export class RecentProjectsComponent implements OnInit {
-  projects$: Observable<IAPIResponse<IProject[]>>;
+  projects$: Observable<IAPIResponse<IProject[]>> | undefined;
   #projectsService = inject(ProjectsService);
   carouselConfig = carouselConfig;
 

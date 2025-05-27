@@ -13,18 +13,18 @@ import { IField, IApplication } from '../../../../shared/utils/types/models.type
   selector: 'app-project-application',
   providers: [],
   imports: [ReactiveFormsModule, CommonModule, InputTextModule, TextareaModule, ButtonModule, SelectModule],
-  templateUrl: './application.component.html'
+  templateUrl: './application.component.html',
 })
 export class ProjectApplicationComponent implements OnInit {
-  application$: Observable<IAPIResponse<IApplication>>;
+  application$: Observable<IAPIResponse<IApplication>> | undefined;
   fields = input<IField[]>();
   call = input<string>();
-  form: FormGroup;
-  // #callsService = inject(CallsService);
+  form: FormGroup = new FormGroup({});
 
   buildForm(): void {
-    const group = {};
-    this.fields().forEach((field) => {
+    const group: Record<string, FormControl> = {};
+    this.fields()?.forEach((field) => {
+      if (!field) return;
       group[field.label] = new FormControl('', field.required ? { nonNullable: true } : {});
     });
     this.form = new FormGroup(group);

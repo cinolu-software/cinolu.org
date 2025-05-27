@@ -1,8 +1,5 @@
 <section>
   @let posts = posts$ | async;
-  @let recentPost = recentPosts$ | async;
-  <!-- @let categories = categories$ | async; -->
-
   <div class="pt-14">
     <div class="px-8 md:mx-auto md:max-w-screen-lg xl:px-0 overflow-hidden">
       <div class="py-10">
@@ -10,54 +7,26 @@
         <p class="text-primary-500">Notre Blog</p>
       </div>
 
-      @if (recentPost?.isLoading) {
-        <div class="relative h-60 md:h-96 w-full bg-gray-200 mb-10 overflow-hidden"></div>
-      }
-
-      @if (recentPost?.data?.length > 0) {
-        <p-carousel
-          #carousel
-          [value]="recentPost.data"
-          [numVisible]="1"
-          [autoplayInterval]="5000"
-          [numScroll]="1"
-          [showIndicators]="false"
-          [showNavigators]="false"
-          [circular]="true"
-          [responsiveOptions]="carouselConfig">
-          <ng-template let-post #item>
-            <div class="relative h-60 md:h-96 w-full bg-gray-200 pb-8">
-              <img [ngSrc]="post | apiIMG: 'post'" alt="Posts" class="object-cover h-full opacity-90" fill priority />
-              <div class="flex flex-col justify-end absolute inset-0 bg-gradient-to-t from-primary-900 to-transparent">
-                <div class="px-6 py-10 text-white">
-                  <h2 class="font-black font-satoshi mb-1 text-2xl md:text-4xl">
-                    {{ post.title }}
-                  </h2>
-                  <p>Le {{ post.created_at | date: 'longDate' }}</p>
-                </div>
-              </div>
-            </div>
-          </ng-template>
-        </p-carousel>
-      }
-      <div class="grid grid-cols-1 gap-x-4 gap-y-7 md:grid-cols-2 lg:grid-cols-4 my-10">
+      <div class="grid grid-cols-1 gap-x-4 gap-y-7 md:grid-cols-2 lg:grid-cols-4 mb-10">
         @if (posts?.isLoading) {
           @for (item of [1, 2, 3, 4, 5, 5, 5, 5, 6, 6, 6, 6]; track $index) {
             <app-post-card-skeleton />
           }
         }
-
-        @if (posts?.data?.[0]?.length > 0) {
-          @for (
-            post of posts?.data?.[0]
-              | paginate: { itemsPerPage: 12, currentPage: queryParams().page, totalItems: posts?.data?.[1] };
-            track $index
-          ) {
-            <app-post-card [post]="post" />
-          }
+        @for (
+          post of posts?.data?.[0] ?? []
+            | paginate
+              : {
+                  itemsPerPage: 12,
+                  currentPage: queryParams().page ?? 1,
+                  totalItems: posts?.data?.[1] ?? 0,
+                };
+          track $index
+        ) {
+          <app-post-card [post]="post" />
         }
       </div>
-      @if (posts?.data?.[1] > 12) {
+      @if ((posts?.data?.[1] || 0) > 12) {
         <div class="flex w-full justify-center pt-4 pb-8">
           <pagination-controls
             nextLabel=""
@@ -71,3 +40,4 @@
     </div>
   </div>
 </section>
+<app-footer />

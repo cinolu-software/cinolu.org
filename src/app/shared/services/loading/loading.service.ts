@@ -32,7 +32,7 @@ export class LoadingService {
   /**
    * Getter for progress
    */
-  get progress$(): Observable<number> {
+  get progress$(): Observable<number | null> {
     return this.#progress$.asObservable();
   }
 

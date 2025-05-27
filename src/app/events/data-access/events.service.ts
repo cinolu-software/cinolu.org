@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ICategory, IEvent } from 'app/shared/utils/types/models.type';
-import { APIService } from 'app/shared/services/api/api.service';
-import { IAPIResponse } from 'app/shared/services/api/types/api-response.type';
+import { APIService } from '../../shared/services/api/api.service';
+import { IAPIResponse } from '../../shared/services/api/types/api-response.type';
+import { buildQueryParams } from '../../shared/utils/helpers/build-query-params.fn';
+import { ICategory, IEvent } from '../../shared/utils/types/models.type';
 import { QueryParams } from '../utils/types/query-params.type';
-import { buildQueryParams } from 'app/shared/utils/helpers/build-query-params.fn';
 
 @Injectable()
 export class EventsService {

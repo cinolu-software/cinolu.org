@@ -41,14 +41,16 @@
     </div>
   </div>
   <ul
-    class="fixed text-base top-16 left-0 right-8 bottom-0 bg-white backdrop-blur-lg z-30 transition-transform duration-300"
-    [ngClass]="activeTab() && isOpen() ? 'translate-x-0' : '-translate-x-full'">
+    class="fixed text-base top-16 left-0 right-8 bottom-0 bg-white backdrop-blur-lg z-30 transition-transform duration-300 -translate-x-full"
+    [ngClass]="{
+      'translate-x-0': activeTab() && isOpen(),
+    }">
     <div
       class="flex flex-col items-start justify-start gap-7 font-medium py-16 px-10 h-full  {{
         activeTab() && isOpen() && 'active-nav'
       }}">
       <div class="menu">
-        <button class="font-semibold text-gray-800 flex items-center gap-1 m-4" (click)="setActiveTab(null)">
+        <button class="font-semibold text-gray-800 flex items-center gap-1 m-4" (click)="setActiveTab('')">
           <ng-icon name="matArrowBackOutline" class="size-5!" />
           Retour
         </button>

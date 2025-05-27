@@ -1,7 +1,8 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { authActions } from './auth.actions';
+import { IUser } from '../../utils/types/models.type';
 
-const initialState = {
+const initialState: { user: IUser | null } = {
   user: null
 };
 

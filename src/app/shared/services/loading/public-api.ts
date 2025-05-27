@@ -1,2 +1,2 @@
-export * from 'app/shared/services/loading/loading.interceptor';
-export * from 'app/shared/services/loading/loading.service';
+export * from './loading.interceptor';
+export * from './loading.service';

@@ -16,7 +16,7 @@
     <p class="mb-1.5">Fini le {{ project().ended_at | date: 'longDate' }}</p>
   </div>
 
-  @if (project()?.phases?.length) {
+  @if (project().phases.length) {
     <div class="flex items-center gap-1 mb-2 text-primary-800">
       <ng-icon name="matTimelineOutline" class="size-5!" />
       <h2 class="font-semibold text-lg">Phases</h2>
@@ -30,7 +30,7 @@
             <p class="m-0">
               {{ phase.description }}
             </p>
-            @if (phase.requirements?.length) {
+            @if (phase.requirements.length) {
               <div class="flex flex-col gap-1 mt-4">
                 @for (req of phase.requirements; track $index) {
                   <h5 class="font-medium">* {{ req.name }}</h5>

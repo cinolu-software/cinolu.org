@@ -1,1 +1,1 @@
-export * from 'app/shared/services/loading/public-api';
+export * from './public-api';
