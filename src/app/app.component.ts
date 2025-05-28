@@ -1,4 +1,4 @@
-import { afterNextRender, Component } from '@angular/core';
+import { afterNextRender, Component, inject, NgZone } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LoaderComponent } from './shared/ui/loader/loader.component';
 import AOS from 'aos';
@@ -10,10 +10,14 @@ import { LoadingBarComponent } from './shared/ui/loading-bar/loading-bar.compone
   imports: [RouterOutlet, LoaderComponent, LoadingBarComponent],
 })
 export class AppComponent {
+  #ngZone = inject(NgZone);
+
   constructor() {
     afterNextRender(() => {
-      AOS.init({
-        offset: 50,
+      this.#ngZone.runOutsideAngular(() => {
+        AOS.init({
+          offset: 50,
+        });
       });
     });
   }
