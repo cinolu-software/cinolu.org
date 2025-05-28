@@ -1,6 +1,6 @@
-<section class="px-8 mx-auto md:max-w-screen-lg xl:px-0 pt-28 mb-20" id="ecosystem">
-  @let categoryCounts = categoryCounts$ | async;
-  @if (categoryCounts?.data) {
+@let categoryCounts = categoryCounts$ | async;
+@if (categoryCounts?.data?.[0]?.count) {
+  <section class="px-8 mx-auto md:max-w-screen-lg xl:px-0 pt-28 mb-20" id="ecosystem">
     <div class="mb-10" data-aos="fade-up">
       <h2 class="font-black font-satoshi mb-2 text-2xl md:text-4xl">Our Ecosystem</h2>
       <p class="text-primary-600 font-satoshi">Notre écosystème</p>
@@ -24,40 +24,40 @@
         </button>
       }
     </div>
-  }
 
-  <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
-    @for (organization of filteredOrganizations(); track organization.id) {
-      <a [href]="organization.website" target="_blank" data-aos="fade-up">
-        <div
-          class="p-8 bg-white rounded-lg shadow-sm border border-gray-200 hover:scale-105 transition-transform duration-300">
-          <div class="flex items-center justify-between mb-4">
-            <div class="relative h-12 w-12 rounded-sm overflow-hidden mb-5">
-              <img
-                [ngSrc]="organization | apiIMG: 'organization'"
-                alt="organization's logo"
-                class="object-cover"
-                fill />
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
+      @for (organization of filteredOrganizations(); track organization.id) {
+        <a [href]="organization.website" target="_blank" data-aos="fade-up">
+          <div
+            class="p-8 bg-white rounded-lg shadow-sm border border-gray-200 hover:scale-105 transition-transform duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <div class="relative h-12 w-12 rounded-sm overflow-hidden mb-5">
+                <img
+                  [ngSrc]="organization | apiIMG: 'organization'"
+                  alt="organization's logo"
+                  class="object-cover"
+                  fill />
+              </div>
+              <span
+                class="px-3 py-1 inline-block justify-self-end rounded-full text-xs font-semibold bg-primary-100 text-primary-800">
+                @if (activeTab() !== 'Total') {
+                  {{ activeTab() | titlecase }}
+                } @else {
+                  {{ organization.categories[0].name | titlecase }}
+                }
+              </span>
             </div>
-            <span
-              class="px-3 py-1 inline-block justify-self-end rounded-full text-xs font-semibold bg-primary-100 text-primary-800">
-              @if (activeTab() !== 'Total') {
-                {{ activeTab() | titlecase }}
-              } @else {
-                {{ organization.categories[0].name | titlecase }}
-              }
-            </span>
-          </div>
 
-          <p class="font-bold text-xl mb-2.5 font-satoshi line-clamp-1">
-            {{ organization.name | titlecase }}
-          </p>
-          <div class="flex items-center text-md leading-5 mb-2">
-            <ng-icon class="text-hint size-5!" name="matLocationOnOutline" />
-            <div class="ml-1.5 line-clamp-1">{{ organization.location | titlecase }}</div>
+            <p class="font-bold text-xl mb-2.5 font-satoshi line-clamp-1">
+              {{ organization.name | titlecase }}
+            </p>
+            <div class="flex items-center text-md leading-5 mb-2">
+              <ng-icon class="text-hint size-5!" name="matLocationOnOutline" />
+              <div class="ml-1.5 line-clamp-1">{{ organization.location | titlecase }}</div>
+            </div>
           </div>
-        </div>
-      </a>
-    }
-  </div>
-</section>
+        </a>
+      }
+    </div>
+  </section>
+}

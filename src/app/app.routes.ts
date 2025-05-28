@@ -4,7 +4,7 @@ import { eventsRoutes } from './events/events.routes';
 import { landingRoutes } from './landing/landing.routes';
 import { aboutRoutes } from './about-us/about-us.routes';
 import { projectsRoutes } from './projects/projects.routes';
-import { blogRoutes } from './blog/blog.routes';
+// import { blogRoutes } from './blog/blog.routes';
 import { LayoutComponent } from './shared/layout/layout.component';
 
 export const routes: Route[] = [
@@ -26,12 +26,12 @@ export const routes: Route[] = [
     data: { layout: 'full-layout' },
     loadChildren: () => aboutRoutes,
   },
-  {
-    path: 'posts',
-    component: LayoutComponent,
-    data: { layout: 'with-topbar' },
-    loadChildren: () => blogRoutes,
-  },
+  // {
+  //   path: 'posts',
+  //   component: LayoutComponent,
+  //   data: { layout: 'with-topbar' },
+  //   loadChildren: () => blogRoutes,
+  // },
   {
     path: '',
     component: LayoutComponent,

@@ -1,5 +1,5 @@
 @let events = events$ | async;
-@if (events?.data) {
+@if (events?.data?.length) {
   <section class="pt-20 px-8 mx-auto md:max-w-screen-lg xl:px-0" id="projects">
     <div class="flex justify-between items-center mb-6" data-aos="fade-up">
       <div>
