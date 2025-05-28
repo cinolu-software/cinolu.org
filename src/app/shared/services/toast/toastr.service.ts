@@ -1,17 +1,20 @@
-import { afterNextRender, Injectable } from '@angular/core';
+import { afterNextRender, inject, Injectable, NgZone } from '@angular/core';
 import { Notyf } from 'notyf';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ToastrService {
   #notyf: Notyf | null = null;
+  #ngZone = inject(NgZone);
 
   constructor() {
     afterNextRender(() => {
-      this.#notyf = new Notyf({
-        duration: 4000,
-        position: { x: 'right', y: 'top' }
+      this.#ngZone.runOutsideAngular(() => {
+        this.#notyf = new Notyf({
+          duration: 4000,
+          position: { x: 'right', y: 'top' },
+        });
       });
     });
   }
