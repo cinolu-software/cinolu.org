@@ -1,0 +1,1660 @@
+{
+  "version": "6.0",
+  "nxVersion": "19.6.5",
+  "deps": {
+    "@angular/animations": "18.2.2",
+    "@angular/cdk": "18.2.2",
+    "@angular/common": "18.2.2",
+    "@angular/compiler": "18.2.2",
+    "@angular/core": "18.2.2",
+    "@angular/forms": "18.2.2",
+    "@angular/material": "18.2.2",
+    "@angular/material-luxon-adapter": "18.2.2",
+    "@angular/platform-browser": "18.2.2",
+    "@angular/platform-browser-dynamic": "18.2.2",
+    "@angular/platform-server": "18.2.2",
+    "@angular/router": "18.2.2",
+    "@angular/ssr": "^18.2.2",
+    "@ngrx/component-store": "^18.0.2",
+    "@ngrx/effects": "^18.0.2",
+    "@ngrx/operators": "^18.0.2",
+    "@ngrx/store": "^18.0.2",
+    "@ngrx/store-devtools": "^18.0.2",
+    "express": "^4.19.2",
+    "filepond": "^4.31.2",
+    "filepond-plugin-file-validate-type": "^1.2.9",
+    "filepond-plugin-image-preview": "^4.6.12",
+    "lodash-es": "4.17.21",
+    "luxon": "3.5.0",
+    "ngx-filepond": "^7.0.3",
+    "ngx-quill": "26.0.8",
+    "perfect-scrollbar": "1.5.5",
+    "quill": "2.0.2",
+    "rxjs": "7.8.1",
+    "tslib": "2.7.0",
+    "zone.js": "~0.14.3",
+    "@angular-devkit/build-angular": "18.2.2",
+    "@angular-devkit/core": "18.2.2",
+    "@angular-devkit/schematics": "18.2.2",
+    "@angular/cli": "18.2.2",
+    "@angular/compiler-cli": "18.2.2",
+    "@nx/angular": "19.6.5",
+    "@nx/workspace": "19.6.5",
+    "@schematics/angular": "18.2.2",
+    "@tailwindcss/typography": "0.5.15",
+    "@types/chroma-js": "2.4.4",
+    "@types/express": "^4.17.21",
+    "@types/jasmine": "5.1.4",
+    "@types/lodash": "4.17.7",
+    "@types/lodash-es": "4.17.12",
+    "@types/luxon": "3.4.2",
+    "@types/node": "^22.5.1",
+    "autoprefixer": "10.4.20",
+    "chroma-js": "3.0.0",
+    "jasmine-core": "5.2.0",
+    "karma": "6.4.4",
+    "karma-chrome-launcher": "3.2.0",
+    "karma-coverage": "2.2.1",
+    "karma-jasmine": "5.1.0",
+    "karma-jasmine-html-reporter": "2.1.0",
+    "lodash": "4.17.21",
+    "nx": "19.6.5",
+    "postcss": "8.4.41",
+    "prettier": "3.3.3",
+    "prettier-plugin-organize-imports": "4.0.0",
+    "prettier-plugin-tailwindcss": "0.6.6",
+    "tailwindcss": "3.4.10",
+    "typescript": "5.5.4"
+  },
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "nonProjectFiles": [],
+    "projectFileMap": {
+      "cinolu.org": [
+        {
+          "file": ".editorconfig",
+          "hash": "6729982560532353059"
+        },
+        {
+          "file": ".gitignore",
+          "hash": "3647843334746772168"
+        },
+        {
+          "file": ".prettierrc",
+          "hash": "12050219258904090660"
+        },
+        {
+          "file": ".vscode/extensions.json",
+          "hash": "13239487146024742121"
+        },
+        {
+          "file": "README.md",
+          "hash": "6370775312108913524"
+        },
+        {
+          "file": "nx.json",
+          "hash": "7038405099078513177"
+        },
+        {
+          "file": "package.json",
+          "hash": "9146172930353249304",
+          "deps": [
+            "npm:@angular-devkit/build-angular",
+            "npm:@angular-devkit/core",
+            "npm:@angular-devkit/schematics",
+            "npm:@angular/cli",
+            "npm:@angular/compiler-cli",
+            "npm:@nx/angular",
+            "npm:@nx/workspace",
+            "npm:@schematics/angular",
+            "npm:@tailwindcss/typography",
+            "npm:@types/chroma-js",
+            "npm:@types/express",
+            "npm:@types/jasmine",
+            "npm:@types/lodash",
+            "npm:@types/lodash-es",
+            "npm:@types/luxon",
+            "npm:@types/node",
+            "npm:autoprefixer",
+            "npm:chroma-js",
+            "npm:jasmine-core",
+            "npm:karma",
+            "npm:karma-chrome-launcher",
+            "npm:karma-coverage",
+            "npm:karma-jasmine",
+            "npm:karma-jasmine-html-reporter",
+            "npm:lodash",
+            "npm:nx",
+            "npm:postcss",
+            "npm:prettier",
+            "npm:prettier-plugin-organize-imports",
+            "npm:prettier-plugin-tailwindcss",
+            "npm:tailwindcss",
+            "npm:typescript",
+            "npm:@angular/animations",
+            "npm:@angular/cdk",
+            "npm:@angular/common",
+            "npm:@angular/compiler",
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material",
+            "npm:@angular/material-luxon-adapter",
+            "npm:@angular/platform-browser",
+            "npm:@angular/platform-browser-dynamic",
+            "npm:@angular/platform-server",
+            "npm:@angular/router",
+            "npm:@angular/ssr",
+            "npm:@ngrx/component-store",
+            "npm:@ngrx/effects",
+            "npm:@ngrx/operators",
+            "npm:@ngrx/store",
+            "npm:@ngrx/store-devtools",
+            "npm:express",
+            "npm:filepond",
+            "npm:filepond-plugin-file-validate-type",
+            "npm:filepond-plugin-image-preview",
+            "npm:lodash-es",
+            "npm:luxon",
+            "npm:ngx-filepond",
+            "npm:ngx-quill",
+            "npm:perfect-scrollbar",
+            "npm:quill",
+            "npm:rxjs",
+            "npm:tslib",
+            "npm:zone.js"
+          ]
+        },
+        {
+          "file": "pnpm-lock.yaml",
+          "hash": "55101960589689758"
+        },
+        {
+          "file": "project.json",
+          "hash": "7996830869778974604"
+        },
+        {
+          "file": "public/icons/feather.svg",
+          "hash": "7535188576898634125"
+        },
+        {
+          "file": "public/icons/heroicons-mini.svg",
+          "hash": "4490825136675843054"
+        },
+        {
+          "file": "public/icons/heroicons-outline.svg",
+          "hash": "17335524454696621209"
+        },
+        {
+          "file": "public/icons/heroicons-solid.svg",
+          "hash": "4523901164501953759"
+        },
+        {
+          "file": "public/icons/material-outline.svg",
+          "hash": "8733277527709835906"
+        },
+        {
+          "file": "public/icons/material-solid.svg",
+          "hash": "2567969963546594757"
+        },
+        {
+          "file": "public/icons/material-twotone.svg",
+          "hash": "24036692367393956"
+        },
+        {
+          "file": "public/images/avatar-default.webp",
+          "hash": "14762665316963746735"
+        },
+        {
+          "file": "public/images/logo/google.svg",
+          "hash": "4297730894368586338"
+        },
+        {
+          "file": "public/images/logo/logo-g.png",
+          "hash": "12371745700243065797"
+        },
+        {
+          "file": "public/images/logo/logo-w.png",
+          "hash": "5327119075026901600"
+        },
+        {
+          "file": "public/images/slides/slide-1.webp",
+          "hash": "11895932959986636600"
+        },
+        {
+          "file": "public/images/slides/slide-2.webp",
+          "hash": "9340863448146570269"
+        },
+        {
+          "file": "public/images/slides/slide-3.webp",
+          "hash": "4216663214781923308"
+        },
+        {
+          "file": "public/images/slides/slide-4.webp",
+          "hash": "12693328519042049515"
+        },
+        {
+          "file": "public/images/slides/slide-5.webp",
+          "hash": "11428641265183660734"
+        },
+        {
+          "file": "public/images/slides/slide-6.webp",
+          "hash": "12169558751223650470"
+        },
+        {
+          "file": "public/images/slides/slide-7.webp",
+          "hash": "7642304550873847127"
+        },
+        {
+          "file": "public/images/slides/slide-8.webp",
+          "hash": "18369271120714188288"
+        },
+        {
+          "file": "public/images/slides/startup.webp",
+          "hash": "2337018318202842740"
+        },
+        {
+          "file": "public/images/team/all.jpg",
+          "hash": "14740517412589666910"
+        },
+        {
+          "file": "public/images/team/bn.webp",
+          "hash": "2674083880777789790"
+        },
+        {
+          "file": "public/images/team/jm.webp",
+          "hash": "9951081360789336698"
+        },
+        {
+          "file": "public/images/team/jv.webp",
+          "hash": "1358556370064107866"
+        },
+        {
+          "file": "public/images/team/ls.webp",
+          "hash": "199396945254554283"
+        },
+        {
+          "file": "public/images/team/mk.webp",
+          "hash": "11521480409830717541"
+        },
+        {
+          "file": "public/images/team/mm.webp",
+          "hash": "4812114228736521108"
+        },
+        {
+          "file": "public/images/team/rm.webp",
+          "hash": "1757976326495254162"
+        },
+        {
+          "file": "public/images/team/wm.webp",
+          "hash": "8054131993831810839"
+        },
+        {
+          "file": "server.ts",
+          "hash": "11045554096609743830",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/ssr",
+            "npm:express"
+          ]
+        },
+        {
+          "file": "src/@fuse/animations/defaults.ts",
+          "hash": "15294815884258272562"
+        },
+        {
+          "file": "src/@fuse/animations/expand-collapse.ts",
+          "hash": "3956691543296502421",
+          "deps": [
+            "npm:@angular/animations"
+          ]
+        },
+        {
+          "file": "src/@fuse/animations/fade.ts",
+          "hash": "1573455729823139080",
+          "deps": [
+            "npm:@angular/animations"
+          ]
+        },
+        {
+          "file": "src/@fuse/animations/index.ts",
+          "hash": "249972317308509343"
+        },
+        {
+          "file": "src/@fuse/animations/public-api.ts",
+          "hash": "7665910543974359097"
+        },
+        {
+          "file": "src/@fuse/animations/shake.ts",
+          "hash": "11863831505194264665",
+          "deps": [
+            "npm:@angular/animations"
+          ]
+        },
+        {
+          "file": "src/@fuse/animations/slide.ts",
+          "hash": "8871130008323108315",
+          "deps": [
+            "npm:@angular/animations"
+          ]
+        },
+        {
+          "file": "src/@fuse/animations/zoom.ts",
+          "hash": "18199996693375608020",
+          "deps": [
+            "npm:@angular/animations"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/alert/alert.component.html",
+          "hash": "14938362786261809303"
+        },
+        {
+          "file": "src/@fuse/components/alert/alert.component.scss",
+          "hash": "11766720136351808344"
+        },
+        {
+          "file": "src/@fuse/components/alert/alert.component.ts",
+          "hash": "11298815504103434110",
+          "deps": [
+            "npm:@angular/cdk",
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/alert/alert.service.ts",
+          "hash": "9583207898740421382",
+          "deps": [
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/alert/alert.types.ts",
+          "hash": "10840620728811833068"
+        },
+        {
+          "file": "src/@fuse/components/alert/index.ts",
+          "hash": "9643241796905756734"
+        },
+        {
+          "file": "src/@fuse/components/alert/public-api.ts",
+          "hash": "11553072028952109526"
+        },
+        {
+          "file": "src/@fuse/components/card/card.component.html",
+          "hash": "11321818701193300727"
+        },
+        {
+          "file": "src/@fuse/components/card/card.component.scss",
+          "hash": "6667954301206883651"
+        },
+        {
+          "file": "src/@fuse/components/card/card.component.ts",
+          "hash": "4314198312556782714",
+          "deps": [
+            "npm:@angular/cdk",
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/card/card.types.ts",
+          "hash": "14598758744979151260"
+        },
+        {
+          "file": "src/@fuse/components/card/index.ts",
+          "hash": "4294640873146232857"
+        },
+        {
+          "file": "src/@fuse/components/card/public-api.ts",
+          "hash": "18118095442321375993"
+        },
+        {
+          "file": "src/@fuse/components/drawer/drawer.component.html",
+          "hash": "5324540217999113425"
+        },
+        {
+          "file": "src/@fuse/components/drawer/drawer.component.scss",
+          "hash": "7963324510033783697"
+        },
+        {
+          "file": "src/@fuse/components/drawer/drawer.component.ts",
+          "hash": "11019403271235071186",
+          "deps": [
+            "npm:@angular/animations",
+            "npm:@angular/cdk",
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/drawer/drawer.service.ts",
+          "hash": "10809116692727941499",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/drawer/drawer.types.ts",
+          "hash": "16272349317906096941"
+        },
+        {
+          "file": "src/@fuse/components/drawer/index.ts",
+          "hash": "12376250808539749459"
+        },
+        {
+          "file": "src/@fuse/components/drawer/public-api.ts",
+          "hash": "18158476698171220068"
+        },
+        {
+          "file": "src/@fuse/components/fullscreen/fullscreen.component.html",
+          "hash": "4488245815964903865"
+        },
+        {
+          "file": "src/@fuse/components/fullscreen/fullscreen.component.ts",
+          "hash": "2966803387358880438",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/fullscreen/index.ts",
+          "hash": "15439082091470835798"
+        },
+        {
+          "file": "src/@fuse/components/fullscreen/public-api.ts",
+          "hash": "15754077304704295110"
+        },
+        {
+          "file": "src/@fuse/components/highlight/highlight.component.html",
+          "hash": "9871551760197404798"
+        },
+        {
+          "file": "src/@fuse/components/highlight/highlight.component.scss",
+          "hash": "12329089659202747931"
+        },
+        {
+          "file": "src/@fuse/components/highlight/highlight.component.ts",
+          "hash": "9187356760806454057",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/platform-browser"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/highlight/highlight.service.ts",
+          "hash": "9065470856979451030",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/highlight/index.ts",
+          "hash": "13900990071675437096"
+        },
+        {
+          "file": "src/@fuse/components/highlight/public-api.ts",
+          "hash": "7159336497718345753"
+        },
+        {
+          "file": "src/@fuse/components/loading-bar/index.ts",
+          "hash": "12802424307058727799"
+        },
+        {
+          "file": "src/@fuse/components/loading-bar/loading-bar.component.html",
+          "hash": "1334398531321888740"
+        },
+        {
+          "file": "src/@fuse/components/loading-bar/loading-bar.component.scss",
+          "hash": "10505207679953100266"
+        },
+        {
+          "file": "src/@fuse/components/loading-bar/loading-bar.component.ts",
+          "hash": "3928591918523435670",
+          "deps": [
+            "npm:@angular/cdk",
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/loading-bar/public-api.ts",
+          "hash": "11814447778896146160"
+        },
+        {
+          "file": "src/@fuse/components/masonry/index.ts",
+          "hash": "3300968124842788052"
+        },
+        {
+          "file": "src/@fuse/components/masonry/masonry.component.html",
+          "hash": "13722727025070316567"
+        },
+        {
+          "file": "src/@fuse/components/masonry/masonry.component.ts",
+          "hash": "5872210522854685545",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/masonry/public-api.ts",
+          "hash": "8653346882576344210"
+        },
+        {
+          "file": "src/@fuse/components/navigation/horizontal/components/basic/basic.component.html",
+          "hash": "2033519625555641090"
+        },
+        {
+          "file": "src/@fuse/components/navigation/horizontal/components/basic/basic.component.ts",
+          "hash": "2575141984663984177",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/router",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/navigation/horizontal/components/branch/branch.component.html",
+          "hash": "15987297175252954182"
+        },
+        {
+          "file": "src/@fuse/components/navigation/horizontal/components/branch/branch.component.ts",
+          "hash": "9710396534762872588",
+          "deps": [
+            "npm:@angular/cdk",
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/navigation/horizontal/components/divider/divider.component.html",
+          "hash": "4477670387423744961"
+        },
+        {
+          "file": "src/@fuse/components/navigation/horizontal/components/divider/divider.component.ts",
+          "hash": "17841882246668425279",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/navigation/horizontal/components/spacer/spacer.component.html",
+          "hash": "10809296409364222948"
+        },
+        {
+          "file": "src/@fuse/components/navigation/horizontal/components/spacer/spacer.component.ts",
+          "hash": "17868541680637095835",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/navigation/horizontal/horizontal.component.html",
+          "hash": "1808033591275332105"
+        },
+        {
+          "file": "src/@fuse/components/navigation/horizontal/horizontal.component.scss",
+          "hash": "5603949256441783332"
+        },
+        {
+          "file": "src/@fuse/components/navigation/horizontal/horizontal.component.ts",
+          "hash": "7790731094255596887",
+          "deps": [
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/navigation/index.ts",
+          "hash": "14895563194875030815"
+        },
+        {
+          "file": "src/@fuse/components/navigation/navigation.service.ts",
+          "hash": "214550740646749366",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/navigation/navigation.types.ts",
+          "hash": "13148425763145788",
+          "deps": [
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/navigation/public-api.ts",
+          "hash": "1785887341020517252"
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/components/aside/aside.component.html",
+          "hash": "17132084692456953234"
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/components/aside/aside.component.ts",
+          "hash": "4414049429119610917",
+          "deps": [
+            "npm:@angular/cdk",
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/router",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/components/basic/basic.component.html",
+          "hash": "16434197587361583100"
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/components/basic/basic.component.ts",
+          "hash": "14593583879440439383",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/router",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/components/collapsable/collapsable.component.html",
+          "hash": "14735772890349011760"
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/components/collapsable/collapsable.component.ts",
+          "hash": "6187635451851083416",
+          "deps": [
+            "npm:@angular/cdk",
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/router",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/components/divider/divider.component.html",
+          "hash": "1789227838367047034"
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/components/divider/divider.component.ts",
+          "hash": "1692307690655812510",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/components/group/group.component.html",
+          "hash": "14376232046224610851"
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/components/group/group.component.ts",
+          "hash": "12012471063282282890",
+          "deps": [
+            "npm:@angular/cdk",
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/components/spacer/spacer.component.html",
+          "hash": "15697756490322310313"
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/components/spacer/spacer.component.ts",
+          "hash": "941838864574530519",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/styles/appearances/compact.scss",
+          "hash": "14973134694819930386"
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/styles/appearances/default.scss",
+          "hash": "11713143583533866996"
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/styles/appearances/dense.scss",
+          "hash": "10411871427193663379"
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/styles/appearances/thin.scss",
+          "hash": "6592128114363199632"
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/vertical.component.html",
+          "hash": "10863541216609743555"
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/vertical.component.scss",
+          "hash": "8203433230470624840"
+        },
+        {
+          "file": "src/@fuse/components/navigation/vertical/vertical.component.ts",
+          "hash": "16718378504355929318",
+          "deps": [
+            "npm:@angular/animations",
+            "npm:@angular/cdk",
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/directives/scroll-reset/index.ts",
+          "hash": "14338229507679220164"
+        },
+        {
+          "file": "src/@fuse/directives/scroll-reset/public-api.ts",
+          "hash": "7252746230300477734"
+        },
+        {
+          "file": "src/@fuse/directives/scroll-reset/scroll-reset.directive.ts",
+          "hash": "8174771125880489924",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/directives/scrollbar/index.ts",
+          "hash": "5937759299572495819"
+        },
+        {
+          "file": "src/@fuse/directives/scrollbar/public-api.ts",
+          "hash": "3691538241287482241"
+        },
+        {
+          "file": "src/@fuse/directives/scrollbar/scrollbar.directive.ts",
+          "hash": "7539147982275532061",
+          "deps": [
+            "npm:@angular/cdk",
+            "npm:@angular/core",
+            "npm:lodash-es",
+            "npm:perfect-scrollbar",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/directives/scrollbar/scrollbar.types.ts",
+          "hash": "6893978441126548556"
+        },
+        {
+          "file": "src/@fuse/fuse.provider.ts",
+          "hash": "3450387695104813247",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
+        },
+        {
+          "file": "src/@fuse/index.ts",
+          "hash": "7719632877505588165"
+        },
+        {
+          "file": "src/@fuse/lib/mock-api/index.ts",
+          "hash": "5262689304868450722"
+        },
+        {
+          "file": "src/@fuse/lib/mock-api/mock-api.constants.ts",
+          "hash": "8493110394646198210",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/@fuse/lib/mock-api/mock-api.interceptor.ts",
+          "hash": "12958608854180660849",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/lib/mock-api/mock-api.request-handler.ts",
+          "hash": "7017926506217871127",
+          "deps": [
+            "npm:@angular/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/lib/mock-api/mock-api.service.ts",
+          "hash": "12980723210541526295",
+          "deps": [
+            "npm:@angular/core",
+            "npm:lodash-es"
+          ]
+        },
+        {
+          "file": "src/@fuse/lib/mock-api/mock-api.types.ts",
+          "hash": "15693337554415290001",
+          "deps": [
+            "npm:@angular/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/lib/mock-api/mock-api.utils.ts",
+          "hash": "1804916503590667717"
+        },
+        {
+          "file": "src/@fuse/lib/mock-api/public-api.ts",
+          "hash": "3920028660959316781"
+        },
+        {
+          "file": "src/@fuse/pipes/find-by-key/find-by-key.pipe.ts",
+          "hash": "18016329265937769861",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/@fuse/pipes/find-by-key/index.ts",
+          "hash": "8028144741999596047"
+        },
+        {
+          "file": "src/@fuse/pipes/find-by-key/public-api.ts",
+          "hash": "4631485034725976211"
+        },
+        {
+          "file": "src/@fuse/services/config/config.constants.ts",
+          "hash": "12850450129237075415",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/@fuse/services/config/config.service.ts",
+          "hash": "14006870737366874776",
+          "deps": [
+            "npm:@angular/core",
+            "npm:lodash-es",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/services/config/config.types.ts",
+          "hash": "122763955740537783"
+        },
+        {
+          "file": "src/@fuse/services/config/index.ts",
+          "hash": "18298392554804514997"
+        },
+        {
+          "file": "src/@fuse/services/config/public-api.ts",
+          "hash": "4108501699500337715"
+        },
+        {
+          "file": "src/@fuse/services/confirmation/confirmation.service.ts",
+          "hash": "1697249019834862347",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:lodash-es"
+          ]
+        },
+        {
+          "file": "src/@fuse/services/confirmation/confirmation.types.ts",
+          "hash": "7822337976937236091"
+        },
+        {
+          "file": "src/@fuse/services/confirmation/dialog/dialog.component.html",
+          "hash": "15537172590917877429"
+        },
+        {
+          "file": "src/@fuse/services/confirmation/dialog/dialog.component.ts",
+          "hash": "17499681991757940073",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
+        },
+        {
+          "file": "src/@fuse/services/confirmation/index.ts",
+          "hash": "8327068781330591863"
+        },
+        {
+          "file": "src/@fuse/services/confirmation/public-api.ts",
+          "hash": "4815675321494223997"
+        },
+        {
+          "file": "src/@fuse/services/loading/index.ts",
+          "hash": "5329717474434174164"
+        },
+        {
+          "file": "src/@fuse/services/loading/loading.interceptor.ts",
+          "hash": "7145510115328328143",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/services/loading/loading.service.ts",
+          "hash": "8426398310801506554",
+          "deps": [
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/services/loading/public-api.ts",
+          "hash": "17350846712149784510"
+        },
+        {
+          "file": "src/@fuse/services/media-watcher/index.ts",
+          "hash": "14460946595848280763"
+        },
+        {
+          "file": "src/@fuse/services/media-watcher/media-watcher.service.ts",
+          "hash": "340172484972103938",
+          "deps": [
+            "npm:@angular/cdk",
+            "npm:@angular/core",
+            "npm:lodash-es",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/services/media-watcher/public-api.ts",
+          "hash": "2316354370896676848"
+        },
+        {
+          "file": "src/@fuse/services/platform/index.ts",
+          "hash": "7021005960686365672"
+        },
+        {
+          "file": "src/@fuse/services/platform/platform.service.ts",
+          "hash": "1696650210056543217",
+          "deps": [
+            "npm:@angular/cdk",
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/@fuse/services/platform/public-api.ts",
+          "hash": "13076180091617022659"
+        },
+        {
+          "file": "src/@fuse/services/splash-screen/index.ts",
+          "hash": "7825275835830862417"
+        },
+        {
+          "file": "src/@fuse/services/splash-screen/public-api.ts",
+          "hash": "411777169198694069"
+        },
+        {
+          "file": "src/@fuse/services/splash-screen/splash-screen.service.ts",
+          "hash": "2795757407531969170",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/@fuse/services/utils/index.ts",
+          "hash": "10592195664652477185"
+        },
+        {
+          "file": "src/@fuse/services/utils/public-api.ts",
+          "hash": "12716625436491092363"
+        },
+        {
+          "file": "src/@fuse/services/utils/utils.service.ts",
+          "hash": "15509946581435336000",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/@fuse/styles/components/example-viewer.scss",
+          "hash": "15417544567857419750"
+        },
+        {
+          "file": "src/@fuse/styles/components/input.scss",
+          "hash": "7836476226721769778"
+        },
+        {
+          "file": "src/@fuse/styles/main.scss",
+          "hash": "1360815772155484557"
+        },
+        {
+          "file": "src/@fuse/styles/overrides/angular-material.scss",
+          "hash": "15748426059771262738"
+        },
+        {
+          "file": "src/@fuse/styles/overrides/highlightjs.scss",
+          "hash": "13598369389701093180"
+        },
+        {
+          "file": "src/@fuse/styles/overrides/perfect-scrollbar.scss",
+          "hash": "18087209731572783054"
+        },
+        {
+          "file": "src/@fuse/styles/overrides/quill.scss",
+          "hash": "6212823297281346728"
+        },
+        {
+          "file": "src/@fuse/styles/tailwind.scss",
+          "hash": "8051241344248683002"
+        },
+        {
+          "file": "src/@fuse/styles/themes.scss",
+          "hash": "7059958797269586281"
+        },
+        {
+          "file": "src/@fuse/styles/user-themes.scss",
+          "hash": "15439669176469037358"
+        },
+        {
+          "file": "src/@fuse/tailwind/plugins/icon-size.js",
+          "hash": "6077409942023801483",
+          "deps": [
+            "npm:tailwindcss"
+          ]
+        },
+        {
+          "file": "src/@fuse/tailwind/plugins/theming.js",
+          "hash": "2887071976169000997",
+          "deps": [
+            "npm:chroma-js",
+            "npm:lodash",
+            "npm:tailwindcss"
+          ]
+        },
+        {
+          "file": "src/@fuse/tailwind/plugins/utilities.js",
+          "hash": "16489843019131236064",
+          "deps": [
+            "npm:tailwindcss"
+          ]
+        },
+        {
+          "file": "src/@fuse/tailwind/utils/generate-contrasts.js",
+          "hash": "2336036585276760068",
+          "deps": [
+            "npm:chroma-js",
+            "npm:lodash"
+          ]
+        },
+        {
+          "file": "src/@fuse/tailwind/utils/generate-palette.js",
+          "hash": "15235132658431501963",
+          "deps": [
+            "npm:chroma-js",
+            "npm:lodash"
+          ]
+        },
+        {
+          "file": "src/@fuse/tailwind/utils/json-to-sass-map.js",
+          "hash": "9470807863589971874",
+          "deps": [
+            "npm:lodash"
+          ]
+        },
+        {
+          "file": "src/@fuse/validators/index.ts",
+          "hash": "9061438514407658016"
+        },
+        {
+          "file": "src/@fuse/validators/public-api.ts",
+          "hash": "11670583125032599972"
+        },
+        {
+          "file": "src/@fuse/validators/validators.ts",
+          "hash": "179049185996112976",
+          "deps": [
+            "npm:@angular/forms"
+          ]
+        },
+        {
+          "file": "src/@fuse/version/fuse-version.ts",
+          "hash": "1916670919802437315"
+        },
+        {
+          "file": "src/@fuse/version/index.ts",
+          "hash": "17350501503626117538"
+        },
+        {
+          "file": "src/@fuse/version/public-api.ts",
+          "hash": "12174018565402443459"
+        },
+        {
+          "file": "src/@fuse/version/version.ts",
+          "hash": "10320151491621573492"
+        },
+        {
+          "file": "src/app/app.component.html",
+          "hash": "848395303240231261"
+        },
+        {
+          "file": "src/app/app.component.ts",
+          "hash": "16356708683086609430",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "src/app/app.config.server.ts",
+          "hash": "14750464052796800194",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/platform-server"
+          ]
+        },
+        {
+          "file": "src/app/app.config.ts",
+          "hash": "12181905954406837581",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/material-luxon-adapter",
+            "npm:@angular/material",
+            "npm:@angular/platform-browser",
+            "npm:@angular/router",
+            "npm:@ngrx/effects",
+            "npm:@ngrx/store",
+            "npm:@ngrx/store-devtools"
+          ]
+        },
+        {
+          "file": "src/app/app.routes.ts",
+          "hash": "11947061229731555074",
+          "deps": [
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/app/core/auth/auth.interceptor.ts",
+          "hash": "10293616755659891789",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/app/core/auth/auth.service.ts",
+          "hash": "14170880659162941275",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/app/core/auth/types/reset-password.interface.ts",
+          "hash": "18084324143325180636"
+        },
+        {
+          "file": "src/app/core/auth/types/sign-in.interface.ts",
+          "hash": "17158340472761234209"
+        },
+        {
+          "file": "src/app/core/auth/types/sign-up.interface.ts",
+          "hash": "9593563150446187586"
+        },
+        {
+          "file": "src/app/core/components/footer/footer.component.html",
+          "hash": "6407547033854019633"
+        },
+        {
+          "file": "src/app/core/components/footer/footer.component.ts",
+          "hash": "2688327597246990328",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:@angular/common"
+          ]
+        },
+        {
+          "file": "src/app/core/components/topbar/topbar.component.html",
+          "hash": "4611273749716734890"
+        },
+        {
+          "file": "src/app/core/components/topbar/topbar.component.ts",
+          "hash": "11515331022472676357",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/router",
+            "npm:@angular/forms",
+            "npm:rxjs",
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "src/app/core/components/topbar/types/link.interface.ts",
+          "hash": "14208226019188579977"
+        },
+        {
+          "file": "src/app/core/directives/observer.directive.ts",
+          "hash": "297786337254005967",
+          "deps": [
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/app/core/directives/swiper.directive.ts",
+          "hash": "17028824781394711792",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/core/icons/icons.provider.ts",
+          "hash": "6176462276101986238",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/core/icons/icons.service.ts",
+          "hash": "15481690425055197445",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/platform-browser"
+          ]
+        },
+        {
+          "file": "src/app/core/store/app.actions.ts",
+          "hash": "8529251236400863686",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "src/app/core/store/app.effects.ts",
+          "hash": "16449081791005301341",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@ngrx/effects",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/app/core/store/app.reducers.ts",
+          "hash": "5220902439600824300",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "src/app/core/strategies/page-title.strategy.ts",
+          "hash": "16717306747417010784",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:@angular/platform-browser"
+          ]
+        },
+        {
+          "file": "src/app/core/types/models.interface.ts",
+          "hash": "13244854072955122620"
+        },
+        {
+          "file": "src/app/layout/layout.component.html",
+          "hash": "6801203860163636905"
+        },
+        {
+          "file": "src/app/layout/layout.component.scss",
+          "hash": "4684939455617624941"
+        },
+        {
+          "file": "src/app/layout/layout.component.ts",
+          "hash": "1874853285148849013",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/app/layout/layouts/empty/empty.component.html",
+          "hash": "5154062947178449425"
+        },
+        {
+          "file": "src/app/layout/layouts/empty/empty.component.ts",
+          "hash": "138380887350086729",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/app/modules/auth/auth.routes.ts",
+          "hash": "16514210720981272336",
+          "deps": [
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/app/modules/auth/confirmation-required/confirmation-required.component.html",
+          "hash": "6933449740150171261"
+        },
+        {
+          "file": "src/app/modules/auth/confirmation-required/confirmation-required.component.ts",
+          "hash": "5184745360380036361",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/app/modules/auth/forgot-password/forgot-password.component.html",
+          "hash": "719866564092098020"
+        },
+        {
+          "file": "src/app/modules/auth/forgot-password/forgot-password.component.ts",
+          "hash": "17075532514936980198",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material",
+            "npm:@angular/router",
+            "npm:@angular/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/app/modules/auth/reset-password/reset-password.component.html",
+          "hash": "16785516655465066517"
+        },
+        {
+          "file": "src/app/modules/auth/reset-password/reset-password.component.ts",
+          "hash": "8746106524781949113",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material",
+            "npm:@angular/router",
+            "npm:rxjs",
+            "npm:@angular/common"
+          ]
+        },
+        {
+          "file": "src/app/modules/auth/sign-in/sign-in.component.html",
+          "hash": "14334431947071740951"
+        },
+        {
+          "file": "src/app/modules/auth/sign-in/sign-in.component.ts",
+          "hash": "593367956855833482",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material",
+            "npm:@angular/router",
+            "npm:@angular/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/app/modules/auth/sign-out/sign-out.component.html",
+          "hash": "2874124751596067010"
+        },
+        {
+          "file": "src/app/modules/auth/sign-out/sign-out.component.ts",
+          "hash": "1096497662868710067",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/app/modules/auth/sign-out/sign-out.routes.ts",
+          "hash": "18270685947542224649",
+          "deps": [
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/app/modules/auth/sign-up/sign-up.component.html",
+          "hash": "2832088894579112602"
+        },
+        {
+          "file": "src/app/modules/auth/sign-up/sign-up.component.ts",
+          "hash": "5851933543734073636",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material",
+            "npm:@angular/router",
+            "npm:@angular/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "src/app/modules/landing/components/about/about.component.html",
+          "hash": "8855334421372338221"
+        },
+        {
+          "file": "src/app/modules/landing/components/about/about.component.ts",
+          "hash": "8163439994333665349",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/modules/landing/components/hero/hero.component.html",
+          "hash": "6972298304375734132"
+        },
+        {
+          "file": "src/app/modules/landing/components/hero/hero.component.ts",
+          "hash": "1831243250528705591",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/app/modules/landing/components/offerings/offerings.component.html",
+          "hash": "12274884312839943479"
+        },
+        {
+          "file": "src/app/modules/landing/components/offerings/offerings.component.ts",
+          "hash": "1288175255629158217",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
+        },
+        {
+          "file": "src/app/modules/landing/components/our-aim/our-aim.component.html",
+          "hash": "617177440877578825"
+        },
+        {
+          "file": "src/app/modules/landing/components/our-aim/our-aim.component.ts",
+          "hash": "17285418765053586392",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common"
+          ]
+        },
+        {
+          "file": "src/app/modules/landing/components/our-vision/our-vision.component.html",
+          "hash": "8815230899523047267"
+        },
+        {
+          "file": "src/app/modules/landing/components/our-vision/our-vision.component.ts",
+          "hash": "2543657677623264621",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common"
+          ]
+        },
+        {
+          "file": "src/app/modules/landing/components/problem-statement/problem-statement.component.html",
+          "hash": "4631685843558735541"
+        },
+        {
+          "file": "src/app/modules/landing/components/problem-statement/problem-statement.component.ts",
+          "hash": "11548883749763231241",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/material"
+          ]
+        },
+        {
+          "file": "src/app/modules/landing/components/team/team.component.html",
+          "hash": "6102052856789014179"
+        },
+        {
+          "file": "src/app/modules/landing/components/team/team.component.ts",
+          "hash": "13862459792067994729",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/modules/landing/data/purpose.ts",
+          "hash": "13103438758507363298"
+        },
+        {
+          "file": "src/app/modules/landing/data/team.ts",
+          "hash": "6852194976115448913"
+        },
+        {
+          "file": "src/app/modules/landing/landing.component.html",
+          "hash": "11801673289691738833"
+        },
+        {
+          "file": "src/app/modules/landing/landing.component.ts",
+          "hash": "7847974521968168883",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/modules/landing/landing.routes.ts",
+          "hash": "6601182251542491536",
+          "deps": [
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/app/modules/maintenance/maintenance.component.html",
+          "hash": "8968377267068647922"
+        },
+        {
+          "file": "src/app/modules/maintenance/maintenance.component.ts",
+          "hash": "4093503109090893973",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/modules/maintenance/maintenance.routes.ts",
+          "hash": "6187278686512406758",
+          "deps": [
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/environments/environment.development.ts",
+          "hash": "13594268185392910649"
+        },
+        {
+          "file": "src/environments/environment.ts",
+          "hash": "8418818007864172329"
+        },
+        {
+          "file": "src/index.html",
+          "hash": "14074311108359529423"
+        },
+        {
+          "file": "src/main.server.ts",
+          "hash": "11653607448136507287",
+          "deps": [
+            "npm:@angular/platform-browser"
+          ]
+        },
+        {
+          "file": "src/main.ts",
+          "hash": "2633615247295277217",
+          "deps": [
+            "npm:@angular/platform-browser"
+          ]
+        },
+        {
+          "file": "src/styles/styles.scss",
+          "hash": "10780260860612075042"
+        },
+        {
+          "file": "src/styles/tailwind.scss",
+          "hash": "2548842948681303551"
+        },
+        {
+          "file": "src/styles/vendors.scss",
+          "hash": "9885360314355215122"
+        },
+        {
+          "file": "tailwind.config.js",
+          "hash": "17566906860129100886",
+          "deps": [
+            "npm:tailwindcss",
+            "npm:@tailwindcss/typography"
+          ]
+        },
+        {
+          "file": "tsconfig.app.json",
+          "hash": "15098008901884505326"
+        },
+        {
+          "file": "tsconfig.json",
+          "hash": "14454418411351239817"
+        },
+        {
+          "file": "tsconfig.spec.json",
+          "hash": "10685812502644337696"
+        }
+      ]
+    }
+  }
+}

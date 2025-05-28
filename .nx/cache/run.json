@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx build",
+    "startTime": "2024-09-20T14:15:01.252Z",
+    "endTime": "2024-09-20T14:15:36.051Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "cinolu.org:build:production",
+      "target": "build",
+      "projectName": "cinolu.org",
+      "hash": "2552539209185431001",
+      "startTime": "2024-09-20T14:15:01.272Z",
+      "endTime": "2024-09-20T14:15:36.050Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    }
+  ]
+}
