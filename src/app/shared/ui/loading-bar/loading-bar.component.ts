@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component, inject, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ProgressBar } from 'primeng/progressbar';
-import { CommonModule } from '@angular/common';
+
 import { LoadingService } from '../../services/loading';
 
 @Component({
   selector: 'app-loading-bar',
-  imports: [ProgressBar, CommonModule],
+  imports: [ProgressBar],
   templateUrl: './loading-bar.component.html'
 })
 export class LoadingBarComponent implements OnChanges, OnInit, OnDestroy {
