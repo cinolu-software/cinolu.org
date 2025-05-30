@@ -2,7 +2,7 @@
   @let post = post$ | async;
   @let user = user$ | async;
   <div class="pt-14">
-    <div class="px-8 md:mx-auto md:max-w-screen-lg xl:px-0 overflow-hidden">
+    <div class="px-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 overflow-hidden">
       <div class="py-10">
         @if (post?.isLoading) {
           <app-post-skeleton />
