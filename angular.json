@@ -13,7 +13,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "allowedCommonJsDependencies": ["aos"],
+            "allowedCommonJsDependencies": [
+              "aos",
+              "filepond",
+              "filepond-plugin-image-preview",
+              "filepond-plugin-file-validate-size",
+              "filepond-plugin-file-validate-type"
+            ],
             "outputPath": "dist/cinolu.org",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -28,6 +34,8 @@
             "styles": [
               "src/styles/styles.css",
               "node_modules/notyf/notyf.min.css",
+              "node_modules/filepond/dist/filepond.min.css",
+              "node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css",
               "node_modules/aos/dist/aos.css"
             ],
             "scripts": [],
@@ -96,6 +104,8 @@
             "styles": [
               "src/styles/styles.css",
               "node_modules/notyf/notyf.min.css",
+              "node_modules/filepond/dist/filepond.min.css",
+              "node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css",
               "node_modules/aos/dist/aos.css"
             ],
             "scripts": []
