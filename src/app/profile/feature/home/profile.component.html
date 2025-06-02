@@ -1,0 +1,21 @@
+<section class="pt-10 min-h-[105vh] text-gray-600 lg:mx-auto lg:max-w-screen-lg px-8 lg:px-0">
+  @let user = user$ | async;
+  @if (user) {
+    <div class="flex flex-wrap items-center gap-4 mb-4">
+      <img
+        [src]="user | apiIMG: 'user'"
+        alt="User profile Image"
+        class="object-cover h-14 w-14 ring-2 ring-primary-600 bg-gray-200 rounded-full" />
+      <div class="flex flex-col">
+        <p class="text-gray-500">Rejoint le {{ user.created_at | date: 'longDate' }}</p>
+        <p class="text-gray-900">{{ user.name }} · {{ user.email }}</p>
+      </div>
+    </div>
+    <p class="mb-8 border-b border-gray-200 pb-2">
+      Vous pouvez modifier vos informations personnelles et votre mot de passe.
+    </p>
+    <div class="pb-10">
+      <app-profile-info [user]="user" />
+    </div>
+  }
+</section>
