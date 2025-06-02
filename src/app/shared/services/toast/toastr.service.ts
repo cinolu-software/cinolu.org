@@ -13,7 +13,7 @@ export class ToastrService {
       this.#ngZone.runOutsideAngular(() => {
         this.#notyf = new Notyf({
           duration: 4000,
-          position: { x: 'right', y: 'top' },
+          position: { x: 'right', y: 'bottom' },
         });
       });
     });
