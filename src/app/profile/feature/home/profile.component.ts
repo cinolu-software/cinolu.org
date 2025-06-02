@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
@@ -13,12 +13,12 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './profile.component.html',
   imports: [ApiImgPipe, CommonModule, ProfileInfoComponent],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
   #store = inject(Store);
   user$: Observable<IUser | null> | undefined;
   accUrl = environment.accountUrl;
 
-  ngOnInit(): void {
+  constructor() {
     this.user$ = this.#store.pipe(select(selectUser));
   }
 }
