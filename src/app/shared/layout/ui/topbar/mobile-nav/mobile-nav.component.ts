@@ -14,7 +14,6 @@ import { getLinks } from '../../../../utils/helpers/get-links.fn';
 })
 export class MobileNavComponent {
   user = input.required<IUser | null>();
-  accountUrl = input.required<string>();
   tabs = input.required<string[]>();
   links = input.required<Record<string, ILink[]>>();
   singOut = output<void>();

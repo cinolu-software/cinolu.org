@@ -1,0 +1,46 @@
+<div class="hidden lg:flex justify-between">
+  <div class="flex items-center gap-3">
+    <div class="flex items-center gap-3">
+      <button class="relative menu" (click)="setActiveTab('account')">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center gap-1.5">
+            <div class="relative w-8 h-8">
+              <img
+                [ngSrc]="user() | apiIMG: 'user'"
+                class="object-cover rounded-full ring-2 ring-primary-600"
+                alt="Profile picture"
+                fill />
+            </div>
+            <ng-icon
+              name="matKeyboardArrowDownOutline"
+              class="transition-transform duration-300 size-5! fill-black!"
+              [ngClass]="{
+                'rotate-180': activeTab() === 'account',
+              }" />
+          </div>
+          <p class="text-gray-900">{{ user()?.name }}</p>
+        </div>
+        <div
+          class="absolute top-10 w-[13rem] right-0 animate-Up py-8 px-6 gap-6 z-30 bg-white shadow-lg rounded-lg transition-transform duration-300"
+          [ngClass]="activeTab() === 'account' ? 'block active-nav animate-fadeInUp' : 'hidden'">
+          <div class="grid grid-cols-1 gap-x-8 gap-y-6 font-medium text-gray-900">
+            <a [routerLink]="'/profile'" class="group flex items-center gap-2.5">
+              <span
+                class="h-8 w-8 flex items-center justify-center transition-transform duration-200 group-hover:scale-110 text-white bg-primary-600 rounded-full">
+                <ng-icon [name]="'matDashboardOutline'" class="size-4!" />
+              </span>
+              Dashboard
+            </a>
+            <button class="group flex items-center gap-2.5" (click)="handleSignOut()">
+              <span
+                class="h-8 w-8 flex items-center transition-transform duration-200 group-hover:scale-110 justify-center text-white bg-primary-600 rounded-full">
+                <ng-icon [name]="'matLogOutOutline'" class="size-4!" />
+              </span>
+              Se déconnecter
+            </button>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

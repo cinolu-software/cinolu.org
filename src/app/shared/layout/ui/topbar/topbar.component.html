@@ -19,13 +19,8 @@
       <a href="" class="inline-block"> </a>
     </div>
     <div>
-      <app-mobile-nav [user]="user" [accountUrl]="accountUrl" [tabs]="tabs()" [links]="links()" (singOut)="signOut()" />
-      <app-desktop-nav
-        [user]="user"
-        [accountUrl]="accountUrl"
-        [tabs]="tabs()"
-        [links]="links()"
-        (singOut)="signOut()" />
+      <app-mobile-nav [user]="user" [tabs]="tabs()" [links]="links()" (singOut)="signOut()" />
+      <app-desktop-nav [user]="user" [tabs]="tabs()" [links]="links()" (singOut)="signOut()" />
     </div>
   </nav>
 </header>

@@ -4,15 +4,15 @@ import { RouterModule } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { ApiImgPipe } from '../../../../pipes/api-img.pipe';
 import { ILink } from '../../../utils/types/link.type';
-import { IUser } from '../../../../utils/types/models.type';
 import { getLinks } from '../../../../utils/helpers/get-links.fn';
+import { IUser } from '../../../../utils/types/models.type';
 
 @Component({
-  selector: 'app-desktop-nav',
-  templateUrl: './desktop-nav.component.html',
+  selector: 'app-desktop-profile-menu',
+  templateUrl: './desktop-profile-menu.component.html',
   imports: [CommonModule, NgOptimizedImage, RouterModule, ApiImgPipe, NgIcon],
 })
-export class DesktopNavComponent {
+export class DesktopProfileMenuComponent {
   user = input.required<IUser | null>();
   tabs = input.required<string[]>();
   links = input.required<Record<string, ILink[]>>();

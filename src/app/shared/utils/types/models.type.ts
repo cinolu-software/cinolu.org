@@ -15,7 +15,7 @@ export interface IUser extends IBase {
   google_image?: string;
   profile?: string;
   posts: IPost[];
-  roles: IRole[];
+  roles: string[];
   projects: IProject[];
   positions: IPosition[];
   expertises: IExpertise[];
@@ -107,7 +107,7 @@ export interface IApplication extends IBase {
 export enum IReviewStatus {
   PENDING = 'PENDING',
   APPROVED = 'APPROVED',
-  REJECTED = 'REJECTED'
+  REJECTED = 'REJECTED',
 }
 
 export interface IReview extends IBase {

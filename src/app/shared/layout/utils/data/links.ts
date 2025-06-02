@@ -6,21 +6,21 @@ export const EXPLORATION_LINKS: ILink[] = [
     path: '/',
     description: 'Découvez la plateforme',
     icon: 'matHomeOutline',
-    exactUrl: true
+    exactUrl: true,
   },
   {
     name: 'Programmes',
     path: '/programs',
     description: 'Voir nos programmes',
     icon: 'matAssignmentOutline',
-    exactUrl: false
+    exactUrl: false,
   },
   {
     name: 'Evénements',
     path: '/events',
     description: 'Voir nos événements',
     icon: 'matEventNoteOutline',
-    exactUrl: false
+    exactUrl: false,
   },
   {
     name: 'Ecosystème',
@@ -28,15 +28,15 @@ export const EXPLORATION_LINKS: ILink[] = [
     fragment: 'ecosystem',
     description: 'Voir nos partenaires',
     icon: 'matGroups2Outline',
-    exactUrl: true
+    exactUrl: true,
   },
   {
     name: 'Notre Blog',
     path: '/posts',
     description: 'Le blog',
     icon: 'matForumOutline',
-    exactUrl: false
-  }
+    exactUrl: false,
+  },
 ];
 
 export const MY_CINOLU_LINKS: ILink[] = [
@@ -46,7 +46,7 @@ export const MY_CINOLU_LINKS: ILink[] = [
     fragment: 'about',
     description: 'A propos de nous',
     icon: 'matInfoOutline',
-    exactUrl: false
+    exactUrl: false,
   },
   // {
   //   name: 'Equipe',
@@ -70,12 +70,29 @@ export const MY_CINOLU_LINKS: ILink[] = [
     fragment: 'vision',
     description: 'Voir notre vision',
     icon: 'matInsightsOutline',
-    exactUrl: false
-  }
+    exactUrl: false,
+  },
+];
+
+export const PROFILE_LINKS: ILink[] = [
+  {
+    name: 'Mon profil',
+    path: '/profile',
+    description: 'Voir mon profil',
+    icon: 'matInfoOutline',
+    exactUrl: true,
+  },
+  {
+    name: 'Mes entreprises',
+    path: '/companies',
+    description: 'Voir mes entreprises',
+    icon: 'matCampaignOutline',
+    exactUrl: true,
+  },
 ];
 
 export const SOCIAL_LINKS: ILink[] = [
   { name: 'Facebook', path: 'https://www.facebook.com/share/15cR36qNs8/?mibextid=kFxxJD', external: true },
   { name: 'Twitter', path: 'https://x.com/Lubumdigital?t=MYcaQ_OEdCO3KZDCQzMoeQ&s=09', external: true },
-  { name: 'LinkedIn', path: 'https://www.linkedin.com/company/cinolu/', external: true }
+  { name: 'LinkedIn', path: 'https://www.linkedin.com/company/cinolu/', external: true },
 ];

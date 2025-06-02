@@ -69,4 +69,13 @@
   .secondary-link {
     @apply border border-white rounded-sm px-4 py-1.5 text-white hover:bg-white hover:text-primary-500 transition-colors duration-300;
   }
+
+  .scrollbar-hide::-webkit-scrollbar {
+      @apply hidden; 
+    }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
 }

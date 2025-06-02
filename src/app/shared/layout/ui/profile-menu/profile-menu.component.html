@@ -1,0 +1,22 @@
+@let user = user$ | async;
+<header
+  class="py-4 fixed top-0 w-full right-0 left-0 flex flex-col text-base justify-center z-20 font-satoshi transition-colors duration-300 bg-white shadow-sm text-gray-800">
+  <nav class="flex justify-between items-center w-full px-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl md:px-0">
+    <div class="flex gap-3 items-center">
+      <a routerLink="/" aria-label="logo" class="inline-block">
+        <img
+          [ngSrc]="'images/logo/logo-g.png'"
+          alt="logo"
+          class="w-9 h-10 cursor-pointer"
+          width="64"
+          height="68"
+          priority />
+      </a>
+      <a href="" class="inline-block"> </a>
+    </div>
+    <div>
+      <app-mobile-profile-menu [user]="user" [tabs]="tabs()" [links]="links()" (singOut)="signOut()" />
+      <app-desktop-profile-menu [user]="user" [tabs]="tabs()" [links]="links()" (singOut)="signOut()" />
+    </div>
+  </nav>
+</header>
