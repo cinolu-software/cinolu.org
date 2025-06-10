@@ -60,62 +60,43 @@ export interface IProject extends IBase {
   report?: JSON;
   is_published: boolean;
   place?: string;
-  phases: IPhase[];
-  applications: IApplication[];
   program: IProgram;
   categories: ICategory[];
 }
 
-export interface IPhase extends IBase {
+export interface IEnterprise extends IBase {
   name: string;
+  slug: string;
   description: string;
-  started_at: Date;
-  ended_at: Date;
-  requirements: IRequirement[];
-  documents: IDocument[];
-  project: IProject;
-}
-export interface IOrganization extends IBase {
-  name: string;
-  website: string;
-  is_approved: boolean;
-  description: string;
+  problem_solved: string;
+  target_market: string;
   logo: string;
+  cover: string;
+  email: string;
+  phone_number: string;
+  website: string;
+  linkedin_url: string;
+  sector: string;
+  founded_at: Date;
   location: string;
+  stage: string;
+  products: IProduct[];
+}
+
+export interface IProduct extends IBase {
+  name: string;
+  description: string;
+  slug: string;
+  image: string;
+  price: number;
+  gallery: IProductImage[];
+  enterprise: IEnterprise;
   categories: ICategory[];
 }
 
-export interface IDocument extends IBase {
-  title: string;
-  description: string;
-  file_name: string;
-  phase: IPhase;
-}
-
-export interface IRequirement extends IBase {
-  name: string;
-  description: string;
-}
-
-export interface IApplication extends IBase {
-  answers: JSON;
-  reviews: IReview[];
-  project: IProject;
-  applicant: IUser;
-}
-
-export enum IReviewStatus {
-  PENDING = 'PENDING',
-  APPROVED = 'APPROVED',
-  REJECTED = 'REJECTED',
-}
-
-export interface IReview extends IBase {
-  status: IReviewStatus;
-  note: number;
-  comment: string;
-  application: IApplication;
-  reviewer: IUser;
+export interface IProductImage extends IBase {
+  image: string;
+  product: IProduct;
 }
 
 export interface IProgram extends IBase {

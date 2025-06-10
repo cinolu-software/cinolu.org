@@ -7,19 +7,24 @@ import { ProjectCardComponent } from '../../../projects/ui/project-card/project-
 import { RouterModule } from '@angular/router';
 import { ProjectsService } from '../../../projects/data-access/projects.service';
 import { CarouselModule } from 'primeng/carousel';
-import { NgIcon } from '@ng-icons/core';
 import { carouselConfig } from '../../utils/config/carousel.config';
+import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight } from 'lucide-angular';
 
 @Component({
   selector: 'app-recent-projects',
   providers: [ProjectsService],
-  imports: [CommonModule, ProjectCardComponent, CarouselModule, RouterModule, NgIcon],
+  imports: [CommonModule, ProjectCardComponent, CarouselModule, RouterModule, LucideAngularModule],
   templateUrl: './recent-projects.component.html',
 })
 export class RecentProjectsComponent implements OnInit {
   projects$: Observable<IAPIResponse<IProject[]>> | undefined;
   #projectsService = inject(ProjectsService);
   carouselConfig = carouselConfig;
+  icons = {
+    moveUpRight: MoveUpRight,
+    moveLeft: ArrowLeft,
+    moveRight: ArrowRight,
+  };
 
   ngOnInit(): void {
     this.projects$ = this.#projectsService.getRecent();

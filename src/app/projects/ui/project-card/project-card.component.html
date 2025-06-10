@@ -18,11 +18,11 @@
     <div class="my-3 h-1 w-14 border-t border-gray-200"></div>
     <div class="text-sm font-medium">
       <div class="t flex items-center text-md leading-5 mb-2">
-        <ng-icon class="text-white size-5!" [name]="'matEventAvailableOutline'" />
+        <i-lucide class="size-5" [name]="icons.calendarCheck" />
         <div class="ml-1.5">Début: Le {{ project().started_at | date: 'longDate' }}</div>
       </div>
       <div class="t flex items-center text-md leading-5">
-        <ng-icon class="text-white size-5!" [name]="'matEventBusyOutline'" />
+        <i-lucide class="size-5" [name]="icons.calendarX" />
         <div class="ml-1.5">Fin: Le {{ project().ended_at | date: 'longDate' }}</div>
       </div>
     </div>

@@ -3,7 +3,6 @@ import { Component, DestroyRef, effect, inject, OnDestroy, OnInit, signal } from
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
-import { NgIcon } from '@ng-icons/core';
 import { Store } from '@ngrx/store';
 import { Textarea } from 'primeng/textarea';
 import { Button } from 'primeng/button';
@@ -20,6 +19,7 @@ import { selectUser } from '../../../shared/store/auth/auth.reducers';
 import { IPost, IComment, IUser } from '../../../shared/utils/types/models.type';
 import { PostsService } from '../../data-access/posts.service';
 import { FooterComponent } from '../../../shared/layout/ui/footer/footer.component';
+import { LucideAngularModule, Eye, MessageCircle, Pencil, Trash2 } from 'lucide-angular';
 
 @Component({
   selector: 'app-post',
@@ -30,7 +30,7 @@ import { FooterComponent } from '../../../shared/layout/ui/footer/footer.compone
     Textarea,
     Button,
     NgOptimizedImage,
-    NgIcon,
+    LucideAngularModule,
     InputTextModule,
     PostSkeletonComponent,
     ShortNumberPipe,
@@ -62,6 +62,12 @@ export class PostComponent implements OnInit, OnDestroy {
   comments = signal<[IComment[], number] | undefined>([[], 0]);
   form: FormGroup;
   editForm: FormGroup;
+  icons = {
+    eye: Eye,
+    messageCircle: MessageCircle,
+    pencil: Pencil,
+    trash2: Trash2,
+  };
 
   constructor(destroyRef: DestroyRef) {
     this.form = this.#fb.group({

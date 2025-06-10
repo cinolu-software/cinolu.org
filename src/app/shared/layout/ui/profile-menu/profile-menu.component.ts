@@ -36,7 +36,7 @@ export class ProfileMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   elementRef = inject(ElementRef);
   user$: Observable<IUser | null> | undefined;
   logout$: Observable<IAPIResponse<void>> | undefined;
-  tabs = signal<string[]>(['Parcourir', 'My Cinolu']);
+  tabs = signal<string[]>(['Parcourir']);
   mobileProfileMenu = viewChild(MobileProfileMenuComponent);
   desktopProfileMenu = viewChild(DesktopProfileMenuComponent);
   links = signal<Record<string, ILink[]>>({

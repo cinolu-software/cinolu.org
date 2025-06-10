@@ -17,11 +17,11 @@
     <div class="my-3 h-1 w-14 border-t border-gray-200"></div>
     <div class="font-medium text-sm">
       <div class="flex items-center text-md leading-5 mb-2">
-        <ng-icon class="text-hint size-5!" name="matLocationOnOutline" />
+        <i-lucide [name]="icons.MapPin" class="size-5" />
         <div class="ml-1.5">Début: Le {{ event().place | titlecase }}</div>
       </div>
       <div class="flex items-center text-md leading-5 mb-2">
-        <ng-icon class="text-hint size-5!" [name]="'matEventNoteOutline'" />
+        <i-lucide [name]="icons.CalendarX" class="size-5" />
         <div class="ml-1.5">Fini: Le {{ event().started_at | date: 'longDate' }}</div>
       </div>
     </div>

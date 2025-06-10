@@ -3,14 +3,14 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../pipes/api-img.pipe';
 import { RouterModule } from '@angular/router';
 import { ILink } from '../../../utils/types/link.type';
-import { NgIcon } from '@ng-icons/core';
 import { IUser } from '../../../../utils/types/models.type';
 import { getLinks } from '../../../../utils/helpers/get-links.fn';
+import { LucideAngularModule, Menu, X, ChevronDown, ArrowLeft } from 'lucide-angular';
 
 @Component({
   selector: 'app-mobile-nav',
   templateUrl: './mobile-nav.component.html',
-  imports: [NgIcon, NgOptimizedImage, RouterModule, CommonModule, ApiImgPipe],
+  imports: [LucideAngularModule, NgOptimizedImage, RouterModule, CommonModule, ApiImgPipe],
 })
 export class MobileNavComponent {
   user = input.required<IUser | null>();
@@ -20,6 +20,12 @@ export class MobileNavComponent {
   isOpen = signal<boolean>(false);
   activeTab = signal<string | null>(null);
   getLinks = getLinks;
+  icons = {
+    menu: Menu,
+    close: X,
+    arrowDown: ChevronDown,
+    moveLeft: ArrowLeft,
+  };
 
   toogleNav(): void {
     this.isOpen.update((isOpen) => !isOpen);

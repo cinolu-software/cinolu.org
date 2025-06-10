@@ -27,11 +27,11 @@
             class="border-y border-gray-200 py-2.5 flex justify-between flex-col md:flex-row gap-4 md:items-center mb-10">
             <div class="flex items-center gap-3">
               <div class="flex items-center gap-1">
-                <ng-icon name="matVisibilityOutline" class="size-5" />
+                <i-lucide [name]="icons.eye" class="size-5" />
                 <p class="text-gray-700 text-sm">{{ p.viewsCount | shortNumber }}</p>
               </div>
               <div class="flex items-center gap-1">
-                <ng-icon name="matChatBubbleOutlineOutline" class="size-5" />
+                <i-lucide [name]="icons.messageCircle" class="size-5 text-primary-600" />
                 <p class="text-gray-700 text-sm font-light">{{ p.commentsCount | shortNumber }}</p>
               </div>
             </div>
@@ -118,10 +118,10 @@
                     </p-dialog>
                     <div class="flex items-center gap-0.5">
                       <button (click)="openModal(c.content)">
-                        <ng-icon name="matEditOutline" class="size-5! text-primary-900!" />
+                        <i-lucide [name]="icons.pencil" class="size-5" />
                       </button>
                       <button (click)="confirmDelete($event, c.id)">
-                        <ng-icon name="matDeleteOutlineOutline" class="size-5! text-red-400!" />
+                        <i-lucide [name]="icons.trash2" class="size-5" />
                       </button>
                     </div>
                   }

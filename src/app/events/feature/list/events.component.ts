@@ -11,7 +11,6 @@ import { MultiSelectModule, MultiSelectChangeEvent } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
 import { IAPIResponse } from '../../../shared/services/api/types/api-response.type';
 import { IEvent, ICategory } from '../../../shared/utils/types/models.type';
-import { FooterComponent } from '../../../shared/layout/ui/footer/footer.component';
 
 @Component({
   selector: 'app-programs',
@@ -24,7 +23,6 @@ import { FooterComponent } from '../../../shared/layout/ui/footer/footer.compone
     NgOptimizedImage,
     EventCardComponent,
     EventCardSkeletonComponent,
-    FooterComponent,
   ],
   templateUrl: './events.component.html',
 })

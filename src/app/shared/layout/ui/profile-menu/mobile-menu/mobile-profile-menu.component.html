@@ -1,6 +1,6 @@
 <div class="lg:hidden">
   <button (click)="toogleNav()">
-    <ng-icon [name]="isOpen() ? 'matCloseOutline' : 'matMenuOutline'" class="size-5!" />
+    <i-lucide [name]="isOpen() ? icons.close : icons.menu" class="size-6" />
   </button>
   <div
     class="fixed top-16 left-0 right-10 bottom-0 bg-white backdrop-blur-lg transition-transform duration-300 text-lg"
@@ -10,7 +10,7 @@
         @for (tab of tabs(); track $index) {
           <button class="flex items-center justify-between" (click)="setActiveTab(tab)">
             {{ tab }}
-            <ng-icon name="matKeyboardArrowDownOutline" class="size-5!" />
+            <i-lucide [name]="icons.arrowDown" class="size-5" />
           </button>
         }
       </div>
@@ -23,7 +23,7 @@
               alt="profile picture"
               width="20"
               height="20" />
-            Dashboard
+            {{ user()?.name }}
           </a>
           <button
             class="flex items-center text-white justify-center text-center px-6 py-2 bg-red-800 rounded-sm hover:bg-red-900 disabled:bg-red-800/30 transition-colors duration-300 gap-1.5 font-medium text-base"
@@ -51,7 +51,7 @@
       }}">
       <div class="menu">
         <button class="font-semibold text-gray-800 flex items-center gap-1 m-4" (click)="setActiveTab('')">
-          <ng-icon name="matArrowBackOutline" class="size-5!" />
+          <i-lucide [name]="icons.moveLeft" class="size-5" />
           Retour
         </button>
       </div>
@@ -59,7 +59,7 @@
         <a [routerLink]="link.path" [fragment]="link.fragment" class="flex items-center gap-2.5 group">
           <span
             class="h-8 w-8 flex items-center justify-center bg-primary-600 rounded-full transition-transform duration-200 group-hover:scale-110 text-white">
-            <ng-icon [name]="link.icon" class="size-4!" />
+            <i-lucide [name]="link.icon" class="size-4" />
           </span>
           <p class="flex flex-col gap-0.5 font-medium text-gray-900">
             {{ link.name }}

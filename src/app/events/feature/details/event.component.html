@@ -5,12 +5,11 @@
       <div class="pt-4 pb-8">
         <h2 class="font-black font-satoshi mb-1 text-2xl md:text-4xl">{{ event.name | titlecase }}</h2>
         <button class="underline flex items-center gap-1 pb-4 text-primary-700" (click)="back()">
-          <ng-icon name="matArrowBackOutline" class="size-4!" />
+          <i-lucide [name]="'matArrowBackOutline'" class="size-4" />
           Retour
         </button>
       </div>
     </div>
-
     <div class="relative pb-10 h-60 w-full md:h-96 bg-gray-50 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl">
       <img [ngSrc]="event | apiIMG: 'event'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
     </div>
@@ -19,7 +18,7 @@
       <div class="px-4">
         <div class="mb-6">
           <div class="flex items-center gap-1 mb-2 text-primary-800">
-            <ng-icon name="matDescriptionOutline" class="size-5!" />
+            <i-lucide [name]="icons.fileText" class="size-5" />
             <h2 class="font-semibold text-lg">Description</h2>
           </div>
           <p class="mb-1.5 lowercase first-letter:uppercase" [innerHTML]="event.description"></p>
@@ -27,7 +26,7 @@
 
         <div class="mb-4">
           <div class="flex items-center gap-1 mb-2 text-primary-800">
-            <ng-icon name="matEventNoteOutline" class="size-5!" />
+            <i-lucide [name]="icons.notepadText" class="size-5" />
             <h2 class="font-semibold text-lg">Dates</h2>
           </div>
           <p class="mb-1.5">Commence le {{ event.started_at | date: 'longDate' }}</p>
@@ -46,4 +45,3 @@
     </div>
   }
 </section>
-<app-footer />

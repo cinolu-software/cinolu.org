@@ -6,8 +6,6 @@ import { PageTitleStrategy } from './shared/strategies/page-title.strategy';
 import { httpInterceptor } from './shared/interceptors/http.interceptor';
 import { provideStore } from '@ngrx/store';
 import { providePrimeNG } from 'primeng/config';
-import { provideIcons } from '@ng-icons/core';
-import * as matIconOutline from '@ng-icons/material-icons/outline';
 import { primeNGPreset } from './shared/utils/config/primeng.config';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
@@ -28,12 +26,11 @@ export const appConfig: ApplicationConfig = {
       routes,
       withInMemoryScrolling({
         scrollPositionRestoration: 'enabled',
-        anchorScrolling: 'enabled'
-      })
+        anchorScrolling: 'enabled',
+      }),
     ),
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: TitleStrategy, useClass: PageTitleStrategy },
-    provideIcons({ ...matIconOutline }),
     providePrimeNG({
       theme: {
         preset: primeNGPreset,
@@ -41,14 +38,14 @@ export const appConfig: ApplicationConfig = {
           darkModeSelector: false,
           cssLayer: {
             name: 'primeng',
-            order: 'theme, base, primeng'
-          }
-        }
-      }
+            order: 'theme, base, primeng',
+          },
+        },
+      },
     }),
     provideStore({
-      auth: authReducers
+      auth: authReducers,
     }),
-    provideClientHydration(withEventReplay())
-  ]
+    provideClientHydration(withEventReplay()),
+  ],
 };

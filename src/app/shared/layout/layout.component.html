@@ -1,11 +1,11 @@
-@if (layout === 'empty-layout') {
+@if (layout === 'emptyLayout') {
   <app-empty-layout />
 }
 
-@if (layout === 'profile-layout') {
+@if (layout === 'profileLayout') {
   <app-profile-layout />
 }
 
-@if (layout === 'full-layout') {
-  <app-full-layout />
+@if (layout === 'fullLayout') {
+  <app-full-layout [fixedHeader]="fixedHeader" />
 }

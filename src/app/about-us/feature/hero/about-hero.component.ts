@@ -1,13 +1,16 @@
-
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NgIcon } from '@ng-icons/core';
 import { fadeInStagger } from '../../../shared/animations/fade';
+import { LucideAngularModule, Info } from 'lucide-angular';
 
 @Component({
   selector: 'app-about-hero',
-  imports: [RouterModule, NgIcon],
+  imports: [RouterModule, LucideAngularModule],
   animations: [fadeInStagger],
   templateUrl: './about-hero.component.html',
 })
-export class AboutHeroComponent {}
+export class AboutHeroComponent {
+  icons = {
+    info: Info,
+  };
+}

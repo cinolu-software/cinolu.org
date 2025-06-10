@@ -1,22 +1,24 @@
-export const stats: { value: number; label: string; icon: string }[] = [
+import { UserCog, Lightbulb, Handshake, Network, LucideIconData } from 'lucide-angular';
+
+export const stats: { value: number; label: string; icon: LucideIconData }[] = [
   {
     value: 7000,
     label: 'Bénéficiaires',
-    icon: 'matGroupWorkOutline'
+    icon: UserCog,
   },
   {
     value: 150,
     label: 'Projets',
-    icon: 'matLightbulbOutline'
+    icon: Lightbulb,
   },
   {
     value: 40,
     label: 'Partenaires',
-    icon: 'matHandshakeOutline'
+    icon: Handshake,
   },
   {
     value: 8,
     label: 'Programmes',
-    icon: 'matHubOutline'
-  }
+    icon: Network,
+  },
 ];

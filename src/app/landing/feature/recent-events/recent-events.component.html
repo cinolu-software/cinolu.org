@@ -3,18 +3,20 @@
   <section class="pt-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0" id="projects">
     <div class="flex justify-between items-center mb-6" data-aos="fade-up">
       <div>
-        <h2 class="font-black font-satoshi mb-2 text-2xl md:text-4xl">Our Events</h2>
+        <h2 class="font-black font-satoshi mb-2 text-2xl">Les événements récents</h2>
         <a routerLink="/events" class="inline-flex group items-center gap-0.5 text-primary-500 hover:underline">
-          Evénements récents
-          <ng-icon name="matArrowOutwardOutline" class="size-3! group-hover:rotate-45 duration-200" />
+          Liste des événements
+          <i-lucide
+            [name]="icons.moveUpRight"
+            class="h-4 w-4 duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
         </a>
       </div>
       <div class="flex items-center gap-4 place-self-end">
         <button (click)="carousel.navBackward($event)" class="carousel-nav-btn">
-          <ng-icon name="matArrowBackOutline" class="size-3.5!" />
+          <i-lucide [name]="icons.moveLeft" class="size-3.5" />
         </button>
         <button (click)="carousel.navForward($event)" class="carousel-nav-btn">
-          <ng-icon name="matArrowForwardOutline" class="size-3.5!" />
+          <i-lucide [name]="icons.moveRight" class="size-3.5" />
         </button>
       </div>
     </div>

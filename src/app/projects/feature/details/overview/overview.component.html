@@ -1,82 +1,17 @@
 <div class="flex flex-col gap-8">
   <div>
     <div class="flex items-center gap-1 mb-2 text-primary-800">
-      <ng-icon name="matDescriptionOutline" class="size-5!" />
+      <i-lucide [name]="icons.fileText" class="size-5" />
       <h2 class="font-semibold text-lg">Description</h2>
     </div>
     <p class="mb-1.5 lowercase first-letter:uppercase" [innerHTML]="project().description"></p>
   </div>
-
   <div>
     <div class="flex items-center gap-1 mb-2 text-primary-800">
-      <ng-icon name="matEventNoteOutline" class="size-5!" />
+      <i-lucide [name]="icons.notepadTextDashed" class="size-5" />
       <h2 class="font-semibold text-lg">Dates</h2>
     </div>
     <p class="mb-1.5">Commence le {{ project().started_at | date: 'longDate' }}</p>
     <p class="mb-1.5">Fini le {{ project().ended_at | date: 'longDate' }}</p>
   </div>
-
-  @if (project().phases.length) {
-    <div class="flex items-center gap-1 mb-2 text-primary-800">
-      <ng-icon name="matTimelineOutline" class="size-5!" />
-      <h2 class="font-semibold text-lg">Phases</h2>
-    </div>
-
-    <p-accordion class="w-2/4 -mt-8">
-      @for (phase of project().phases; track $index) {
-        <p-accordion-panel [value]="$index">
-          <p-accordion-header> {{ phase.name }} </p-accordion-header>
-          <p-accordion-content>
-            <p class="m-0">
-              {{ phase.description }}
-            </p>
-            @if (phase.requirements.length) {
-              <div class="flex flex-col gap-1 mt-4">
-                @for (req of phase.requirements; track $index) {
-                  <h5 class="font-medium">* {{ req.name }}</h5>
-                  <p class="px-4 mb-4">{{ req.description }}</p>
-                }
-              </div>
-            }
-            <p>Commence le {{ phase.started_at | date: 'longDate' }}</p>
-            <p>Fini le {{ phase.ended_at | date: 'longDate' }}</p>
-          </p-accordion-content>
-        </p-accordion-panel>
-      }
-    </p-accordion>
-  }
 </div>
-
-<!-- @for (phase of project().phases; track $index) {
-  <button class="flex items-center mb-2" (click)="expand(phase.id)">
-    <mat-icon
-      svgIcon="matArrowRightAltOutline"
-      class="text-primary-700"
-      [ngClass]="expanded() === phase.id && 'rotate-90 transition-transform duration-300'" />
-    <h2 class="font-medium">{{ phase.name }}</h2>
-  </button>
-
-  @if (expanded() === phase.id) {
-    <div class="px-6" [ngClass]="expanded() === phase.id && '-translate-y-2 transition-transform duration-300'">
-      <div class="flex flex-col gap-1.5">
-        <div class="flex flex-col gap-1.5 mb-4">
-          <h2 class="font-medium underline">Description</h2>
-          <p class="lowercase first-letter:uppercase">{{ phase.description }}</p>
-        </div>
-        @if (phase.requirements?.length) {
-          <div class="flex flex-col gap-1.5">
-            <h2 class="font-medium underline">Prérecquis</h2>
-            @for (req of phase.requirements; track $index) {
-              <div class="flex flex-col gap-2.5 mb-4">
-                <p class="font-medium">{{ $index + 1 }}. {{ req.name }}</p>
-                <p class="mb-2 lowercase first-letter:uppercase">{{ req.description }}</p>
-              </div>
-            }
-          </div>
-        }
-        <p>Commence le {{ phase.started_at | date: 'longDate' }}</p>
-        <p>Fini le {{ phase.ended_at | date: 'longDate' }}</p>
-      </div>
-    </div>
-  }
-} -->

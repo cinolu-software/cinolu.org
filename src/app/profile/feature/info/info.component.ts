@@ -11,19 +11,24 @@ import { IUser } from '../../../shared/utils/types/models.type';
 import { environment } from '../../../../environments/environment.development';
 import { AuthService } from '../../../auth/data-access/auth.service';
 import { IAPIResponse } from '../../../shared/services/api/types/api-response.type';
+import { select, Store } from '@ngrx/store';
+import { selectUser } from '../../../shared/store/auth/auth.reducers';
+import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-profile-info',
   templateUrl: './info.component.html',
   providers: [ProfileService],
-  imports: [ButtonModule, InputTextModule, CommonModule, ReactiveFormsModule, FileUploadComponent],
+  imports: [ButtonModule, InputTextModule, CommonModule, ReactiveFormsModule, FileUploadComponent, ApiImgPipe],
 })
 export class ProfileInfoComponent implements OnDestroy, OnInit {
-  user = input<IUser>();
   infoForm: FormGroup;
   passwordForm: FormGroup;
   updateInfo$: Observable<IAPIResponse<IUser>> | undefined;
   updatePassword$: Observable<IAPIResponse<IUser>> | undefined;
+  #store = inject(Store);
+  user: IUser | null = null;
+  accUrl = environment.accountUrl;
   url = environment.apiUrl + 'users/image-profile';
   #formBuilder = inject(FormBuilder);
   #profileService = inject(ProfileService);
@@ -44,12 +49,19 @@ export class ProfileInfoComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    this.infoForm.patchValue({
-      email: this.user()?.email,
-      address: this.user()?.address,
-      phone_number: this.user()?.phone_number,
-      name: this.user()?.name,
-    });
+    this.#store
+      .pipe(select(selectUser))
+      .pipe(takeUntil(this.#unSubscribe))
+      .subscribe((user) => {
+        if (!user) return;
+        this.user = user;
+        this.infoForm.patchValue({
+          email: user.email,
+          address: user.address,
+          phone_number: user.phone_number,
+          name: user.name,
+        });
+      });
   }
 
   handleLoaded(): void {

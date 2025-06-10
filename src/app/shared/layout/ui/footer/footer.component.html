@@ -9,14 +9,14 @@
               @if (url.external) {
                 <a target="_blank" class="text-satoshi hover:underline flex items-center gap-1.5" [href]="url.path"
                   >{{ url.name }}
-                  <ng-icon name="matCallMadeOutline" class="size-3!" />
+                  <i-lucide [name]="icons.arrowRight" class="size-4" />
                 </a>
               } @else {
                 <a
                   [fragment]="url.fragment"
                   class="text-satoshi flex hover:underline items-center gap-1.5"
                   [routerLink]="url.path">
-                  <ng-icon name="matArrowRightOutline" class="size-4!" />
+                  <i-lucide [name]="icons.arrowUpRight" class="size-4" />
                   {{ url.name }}
                 </a>
               }

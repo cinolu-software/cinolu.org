@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { services } from '../../utils/data/services.data';
-import { NgIcon } from '@ng-icons/core';
+import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-our-services',
-  imports: [NgIcon],
-  templateUrl: './services.component.html'
+  imports: [LucideAngularModule],
+  templateUrl: './services.component.html',
 })
 export class ServicesComponent {
   services = services;

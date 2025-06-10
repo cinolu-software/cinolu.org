@@ -15,6 +15,7 @@ import { ProfileLayoutComponent } from './feature/profile-layout/profile-layout.
 export class LayoutComponent implements OnInit, OnDestroy {
   config: AppConfig = {} as AppConfig;
   layout = 'full';
+  fixedHeader = false;
   #unsubscribeAll = new Subject();
   #router = inject(Router);
   #activatedRoute = inject(ActivatedRoute);
@@ -47,16 +48,19 @@ export class LayoutComponent implements OnInit, OnDestroy {
     }
     this.layout = this.config.layout;
     const layoutFromQueryParam = route.snapshot.queryParamMap.get('layout');
+    const fixedHeaderFromQueryParam = Boolean(route.snapshot.queryParamMap.get('fixedHeader'));
     if (layoutFromQueryParam) {
       this.layout = layoutFromQueryParam;
       if (this.config) {
         this.config.layout = layoutFromQueryParam;
+        this.config.fixedHeader = fixedHeaderFromQueryParam;
       }
     }
     const paths = route.pathFromRoot;
     paths.forEach((path) => {
       if (path.routeConfig && path.routeConfig.data && path.routeConfig.data['layout']) {
         this.layout = path.routeConfig.data['layout'];
+        this.fixedHeader = path.routeConfig.data['fixedHeader'];
       }
     });
   }
