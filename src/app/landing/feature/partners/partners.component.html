@@ -1,14 +1,12 @@
-<section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 py-20">
+<section class="px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0 pt-20 pb-10">
   <div class="mb-10">
     <h2 class="font-black font-satoshi mb-2 text-2xl">Nos partenaires</h2>
     <p class="mb-4 text-primary-600 font-satoshi">Ceux avec qui nous travaillons</p>
   </div>
-  <div class="mt-10 flex items-start flex-wrap gap-5 justify-start">
+  <div class="mt-10 flex flex-wrap gap-5">
     @for (p of partners; track $index) {
-      <div class="flex p-2 bg-gray-100 rounded-sm shadow-gray-100">
-        <div class="relative h-20 w-28">
-          <img [ngSrc]="p" class="object-contain" [alt]="p" fill />
-        </div>
+      <div class="flex p-3 bg-gray-100/90 rounded-sm shadow-sm shadow-gray-100">
+        <img class="h-20 w-fit" [src]="p" [alt]="p" height="20" width="auto" />
       </div>
     }
   </div>
