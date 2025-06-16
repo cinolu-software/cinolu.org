@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { fadeInStagger } from '../../../shared/animations/fade';
 import { stats } from '../../utils/data/stats';
-import { LucideAngularModule, Brain } from 'lucide-angular';
+import { LucideAngularModule, Lightbulb } from 'lucide-angular';
 
 @Component({
   selector: 'app-hero',
@@ -12,6 +12,6 @@ import { LucideAngularModule, Brain } from 'lucide-angular';
 export class HeroComponent {
   stats = stats;
   icons = {
-    brain: Brain,
+    lightbulb: Lightbulb,
   };
 }
