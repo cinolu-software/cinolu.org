@@ -1,25 +1,15 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Observable, tap, map } from 'rxjs';
-import { select, Store } from '@ngrx/store';
-import { selectUser } from '../store/auth/auth.reducers';
-import { IUser } from '../utils/types/models.type';
+import { AuthStore } from '../store/auth.store';
 
 export const authGuard: CanActivateFn = (_: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  const store = inject(Store);
+  const user = inject(AuthStore).user();
   const router = inject(Router);
-  const user: Observable<IUser | null> = store.pipe(select(selectUser));
+  const redirectUrl = state.url;
 
-  return user.pipe(
-    tap((currentUser) => {
-      const isAuthenticated = !!currentUser;
-      if (!isAuthenticated) {
-        const redirectUrl = state.url;
-        router.navigate(['/sign-in'], {
-          queryParams: { redirectUrl }
-        });
-      }
-    }),
-    map((currentUser) => !!currentUser)
-  );
+  if (user) return true;
+  router.navigate(['/sign-in'], {
+    queryParams: { redirectUrl }
+  });
+  return false;
 };

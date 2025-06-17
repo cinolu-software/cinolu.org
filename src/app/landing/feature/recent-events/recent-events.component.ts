@@ -1,32 +1,32 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IAPIResponse } from '../../../shared/services/api/types/api-response.type';
-import { IEvent } from '../../../shared/utils/types/models.type';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { EventsService } from '../../../events/data-access/events.service';
 import { EventCardComponent } from '../../../events/ui/event-card/event-card.component';
 import { carouselConfig } from '../../utils/config/carousel.config';
 import { CarouselModule } from 'primeng/carousel';
 import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight } from 'lucide-angular';
+import { RecentEventsStore } from '../../data-access/recent-events.store';
+import { EventCardSkeletonComponent } from '../../../events/ui/event-card-skeleton/event-card-skeleton.component';
 
 @Component({
   selector: 'app-recent-events',
-  providers: [EventsService],
-  imports: [CommonModule, EventCardComponent, CarouselModule, RouterModule, LucideAngularModule],
-  templateUrl: './recent-events.component.html',
+  providers: [RecentEventsStore],
+  imports: [
+    CommonModule,
+    EventCardComponent,
+    CarouselModule,
+    RouterModule,
+    LucideAngularModule,
+    EventCardSkeletonComponent
+  ],
+  templateUrl: './recent-events.component.html'
 })
-export class RecentEventsComponent implements OnInit {
-  events$: Observable<IAPIResponse<IEvent[]>> | undefined;
-  #eventsService = inject(EventsService);
+export class RecentEventsComponent {
+  store = inject(RecentEventsStore);
   carouselOptions = carouselConfig;
   icons = {
     moveUpRight: MoveUpRight,
     moveLeft: ArrowLeft,
-    moveRight: ArrowRight,
+    moveRight: ArrowRight
   };
-
-  ngOnInit(): void {
-    this.events$ = this.#eventsService.findRecent();
-  }
 }

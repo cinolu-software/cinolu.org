@@ -5,6 +5,6 @@ import { ProfileMenuComponent } from '../../ui/profile-menu/profile-menu.compone
 @Component({
   selector: 'app-profile-layout',
   templateUrl: './profile-layout.component.html',
-  imports: [RouterOutlet, ProfileMenuComponent],
+  imports: [RouterOutlet, ProfileMenuComponent]
 })
 export class ProfileLayoutComponent {}

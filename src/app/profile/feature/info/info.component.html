@@ -6,7 +6,7 @@
         alt="User profile Image"
         class="object-cover h-14 w-14 ring-2 ring-primary-600 bg-gray-200 rounded-full" />
       <div class="flex flex-col">
-        <p class="text-gray-500">Rejoint le {{ user.created_at | date: 'longDate' }}</p>
+        <p class="text-gray-500">Inscrit le {{ user.created_at | date: 'longDate' }}</p>
         <p class="text-gray-900">{{ user.name }} · {{ user.email }}</p>
       </div>
     </div>

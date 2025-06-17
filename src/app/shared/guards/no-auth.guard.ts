@@ -1,22 +1,12 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { Observable, tap, map } from 'rxjs';
-import { select, Store } from '@ngrx/store';
-import { selectUser } from '../store/auth/auth.reducers';
-import { IUser } from '../utils/types/models.type';
+import { AuthStore } from '../store/auth.store';
 
 export const unauthGuard: CanActivateFn = () => {
-  const store = inject(Store);
   const router = inject(Router);
-  const user: Observable<IUser | null> = store.pipe(select(selectUser));
+  const user = inject(AuthStore).user();
 
-  return user.pipe(
-    tap((currentUser) => {
-      const isAuthenticated = !!currentUser;
-      if (isAuthenticated) {
-        router.navigate(['/']);
-      }
-    }),
-    map((currentUser) => !currentUser)
-  );
+  if (!user) return true;
+  router.navigate(['/']);
+  return false;
 };
