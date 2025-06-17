@@ -5,17 +5,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ProjectCardComponent } from '../../ui/project-card/project-card.component';
 import { ProgramCardSkeletonComponent } from '../../ui/project-card-skeleton/project-card-skeleton.component';
 import { QueryParams } from '../../utils/types/query-params.type';
-import { Observable } from 'rxjs';
-import { ProjectsService } from '../../data-access/projects.service';
 import { MultiSelectModule, MultiSelectChangeEvent } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
 import { ChipModule } from 'primeng/chip';
-import { IAPIResponse } from '../../../shared/services/api/types/api-response.type';
-import { IProject, ICategory } from '../../../shared/utils/types/models.type';
+import { ProjectsStore } from '../../data-access/projects.store';
+import { ProjectCategoriesStore } from '../../data-access/categories.store';
 
 @Component({
   selector: 'app-projects',
-  providers: [ProjectsService],
+  providers: [ProjectsStore, ProjectCategoriesStore],
   imports: [
     CommonModule,
     NgxPaginationModule,
@@ -24,25 +22,23 @@ import { IProject, ICategory } from '../../../shared/utils/types/models.type';
     NgOptimizedImage,
     ProjectCardComponent,
     FormsModule,
-    ProgramCardSkeletonComponent,
+    ProgramCardSkeletonComponent
   ],
-  templateUrl: './projects.component.html',
+  templateUrl: './projects.component.html'
 })
 export class ProjectsComponent implements OnInit {
   #router = inject(Router);
   #route = inject(ActivatedRoute);
-  #projectsService = inject(ProjectsService);
-  skeletonArray = Array(9).fill(0);
-  projects$: Observable<IAPIResponse<[IProject[], number]>> | undefined;
-  categories$: Observable<IAPIResponse<ICategory[]>> | undefined;
+  store = inject(ProjectsStore);
+  categoriesStore = inject(ProjectCategoriesStore);
   queryParams = signal<QueryParams>({
     page: Number(this.#route.snapshot.queryParams?.['page']) || null,
-    categories: this.#route.snapshot.queryParams?.['categories'] || null,
+    categories: this.#route.snapshot.queryParams?.['categories'] || null
   });
 
   ngOnInit(): void {
-    this.loadProjects();
-    this.categories$ = this.#projectsService.getCategories();
+    this.store.loadProjects(this.queryParams());
+    this.categoriesStore.loadCategories();
   }
 
   onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'categories'): void {
@@ -62,10 +58,6 @@ export class ProjectsComponent implements OnInit {
     this.updateRouteAndprojects();
   }
 
-  loadProjects(): void {
-    this.projects$ = this.#projectsService.getProjects(this.queryParams());
-  }
-
   updateRoute(): void {
     const { page, categories } = this.queryParams();
     const queryParams = { page, categories };
@@ -74,6 +66,6 @@ export class ProjectsComponent implements OnInit {
 
   updateRouteAndprojects(): void {
     this.updateRoute();
-    this.loadProjects();
+    this.store.loadProjects(this.queryParams());
   }
 }

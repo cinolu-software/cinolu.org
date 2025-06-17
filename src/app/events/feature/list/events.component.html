@@ -1,7 +1,7 @@
 <section class="pt-14 mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
   <div class="mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
     <div class="py-10">
-      <h2 class="font-black font-satoshi mb-1 text-2xl md:text-4xl">Our Events</h2>
+      <h2 class="font-black font-satoshi mb-1 text-3xl">Voir nos événemens</h2>
       <p class="text-primary-500">Tous les événemens</p>
     </div>
   </div>
@@ -9,7 +9,7 @@
     <img ngSrc="/images/events.jpg" alt="events" class="object-cover h-full opacity-90" fill priority />
   </div>
   <div class="flex flex-col mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
-    @if (categoriesStore.categories()) {
+    @if (categoriesStore.categories().length > 0) {
       <div class="pb-2 pt-10 flex flex-wrap gap-4">
         <p-multiselect
           [inputId]="'categoriesFilter'"
@@ -26,7 +26,7 @@
         </p-multiselect>
       </div>
     }
-    @if (store.events()[1] > 0) {
+    @if (store.events()[1] > 0 && !store.isLoading()) {
       <div class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10">
         @for (
           event of store.events()[0]
@@ -36,30 +36,20 @@
           <app-event-card [event]="event" />
         }
       </div>
-      @if (store.events()[1] > 9) {
-        <div class="flex justify-center pb-8">
-          <pagination-controls
-            nextLabel=""
-            previousLabel=""
-            [maxSize]="5"
-            (pageChange)="onPageChange($event)"
-            class="pg">
-          </pagination-controls>
-        </div>
-      }
+      <div class="flex justify-center pb-8">
+        <pagination-controls nextLabel="" previousLabel="" [maxSize]="5" (pageChange)="onPageChange($event)" class="pg">
+        </pagination-controls>
+      </div>
     }
     @if (!store.isLoading() && store.events()[1] === 0) {
       <h2 class="text-3xl font-semibold px-4 pt-6 pb-14">Pas d'événement!</h2>
     }
     @if (categoriesStore.isLoading()) {
-      <div class="px-4 pb-2 pt-10">
+      <div class="px-4 pb-2 pt-10 lg:px-0">
         <div class="w-full md:w-64 bg-gray-200 rounded-md h-10 animate-pulse"></div>
       </div>
     }
     @if (store.isLoading()) {
-      <div class="px-4 pb-2 pt-10">
-        <div class="w-full md:w-64 bg-gray-200 rounded-md h-10 animate-pulse"></div>
-      </div>
       <div class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10">
         @for (event of skeletonArray; track $index) {
           <app-event-card-skeleton />

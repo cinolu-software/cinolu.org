@@ -11,7 +11,7 @@ interface ICategoriesStore {
   categories: ICategory[];
 }
 
-export const EventCategoriesStore = signalStore(
+export const ProjectCategoriesStore = signalStore(
   withState<ICategoriesStore>({
     isLoading: false,
     error: null,
@@ -22,7 +22,7 @@ export const EventCategoriesStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         exhaustMap(() => {
-          return http.get<{ data: ICategory[] }>('event-categories').pipe(
+          return http.get<{ data: ICategory[] }>('project-categories').pipe(
             map(({ data }) => patchState(store, { isLoading: false, categories: data, error: null })),
             catchError((error) => {
               patchState(store, { isLoading: false, error: error['message'], categories: [] });
