@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, input, OnDestroy, signal, viewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, input, OnDestroy, signal, viewChild } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
 import { RouterLink } from '@angular/router';
@@ -14,7 +14,7 @@ import { AuthStore } from '../../../store/auth.store';
   imports: [CommonModule, RouterLink, MobileNavComponent, DesktopNavComponent, NgOptimizedImage],
   templateUrl: './topbar.component.html'
 })
-export class TopbarComponent implements OnDestroy {
+export class TopbarComponent implements AfterViewInit, OnDestroy {
   #authService = inject(AuthService);
   #elementRef = inject(ElementRef);
   isFixed = signal(false);

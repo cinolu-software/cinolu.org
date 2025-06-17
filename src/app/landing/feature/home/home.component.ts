@@ -4,7 +4,7 @@ import { RecentEventsComponent } from '../recent-events/recent-events.component'
 import { RecentProjectsComponent } from '../recent-projects/recent-projects.component';
 import { ServicesComponent } from '../services/services.component';
 import { StatementComponent } from '../statement/statement.component';
-// import { PartnersComponent } from '../partners/partners.component';
+import { PartnersComponent } from '../partners/partners.component';
 
 @Component({
   selector: 'app-home',
@@ -13,8 +13,8 @@ import { StatementComponent } from '../statement/statement.component';
     ServicesComponent,
     StatementComponent,
     RecentProjectsComponent,
-    RecentEventsComponent
-    // PartnersComponent,
+    RecentEventsComponent,
+    PartnersComponent
   ],
   templateUrl: './home.component.html'
 })

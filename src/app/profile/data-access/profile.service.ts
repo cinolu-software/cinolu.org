@@ -1,54 +1,41 @@
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IUpdateInfo } from '../utils/types/update-info.type';
-import { IUpdatePassword } from '../utils/types/update-password.type';
-import { APIService } from '../../shared/services/api/api.service';
-import { IAPIResponse } from '../../shared/services/api/types/api-response.type';
+import { catchError, map, Observable, of } from 'rxjs';
+import { IUpdateInfoPayload } from '../utils/types/update-info.type';
+import { IUpdatePasswordPayload } from '../utils/types/update-password.type';
 import { ToastrService } from '../../shared/services/toast/toastr.service';
 import { IUser } from '../../shared/utils/types/models.type';
+import { HttpClient } from '@angular/common/http';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProfileService {
-  #apiService = inject(APIService);
+  #http = inject(HttpClient);
   #toast = inject(ToastrService);
 
-  getByOutreacher(outreacher: string | undefined): Observable<IAPIResponse<IUser[]>> {
-    return this.#apiService.get(`users/count-by-outreacher/${outreacher}`);
+  updateProfile(dto: IUpdateInfoPayload): Observable<IUser | null> {
+    return this.#http.patch<{ data: IUser }>('auth/profile', dto).pipe(
+      map((res) => {
+        this.#toast.showSuccess('Profil mis à jour');
+        return res.data;
+      }),
+      catchError(() => {
+        this.#toast.showError('Erreur lors de la mise à jour du profil');
+        return of(null);
+      })
+    );
   }
 
-  generateOutreacherLink(): Observable<IAPIResponse<IUser>> {
-    const onSuccess = (user: IUser | undefined): void => {
-      if (!user) return;
-      this.#toast.showSuccess('Lien généré');
-      // this.#store.dispatch(authActions.signIn({ user }));
-    };
-    const onError = (error: string) => {
-      this.#toast.showError(error);
-    };
-    return this.#apiService.post('users/generate-outreach-link', {}, onSuccess, onError);
-  }
-
-  updateProfile(dto: IUpdateInfo): Observable<IAPIResponse<IUser>> {
-    const onSuccess = (user: IUser | undefined): void => {
-      if (!user) return;
-      this.#toast.showSuccess('Profil mis à jour');
-      // this.#store.dispatch(authActions.signIn({ user }));
-    };
-    const onError = (error: string): void => {
-      this.#toast.showError(error);
-    };
-    return this.#apiService.patch('auth/profile', dto, onSuccess, onError);
-  }
-
-  updatePassword(dto: IUpdatePassword): Observable<IAPIResponse<IUser>> {
-    const onSuccess = (user: IUser | undefined): void => {
-      if (!user) return;
-      this.#toast.showSuccess('Mot de passe mis à jour');
-      // this.#store.dispatch(authActions.signIn({ user }));
-    };
-    const onError = (error: string) => {
-      this.#toast.showError(error);
-    };
-    return this.#apiService.patch('auth/update-password', dto, onSuccess, onError);
+  updatePassword(dto: IUpdatePasswordPayload): Observable<IUser | null> {
+    return this.#http.patch<{ data: IUser }>('auth/update-password', dto).pipe(
+      map((res) => {
+        this.#toast.showSuccess('Mot de passe mis à jour');
+        return res.data;
+      }),
+      catchError(() => {
+        this.#toast.showError('Erreur lors de la mise à jour du mot de passe');
+        return of();
+      })
+    );
   }
 }

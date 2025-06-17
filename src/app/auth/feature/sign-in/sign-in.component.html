@@ -23,7 +23,7 @@
         Réinitialiser!
       </a>
     </div>
-    <p-button [loading]="store.isLoading" [disabled]="store.isLoading || form.invalid" class="mt-4" type="submit">
+    <p-button [loading]="store.isLoading()" [disabled]="store.isLoading() || form.invalid" class="mt-4" type="submit">
       Se connecter
     </p-button>
     <div class="mt-2.5 flex items-center">

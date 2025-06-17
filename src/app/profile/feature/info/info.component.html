@@ -14,8 +14,6 @@
       Vous pouvez modifier vos informations personnelles et votre mot de passe.
     </p>
     <div class="flex flex-col gap-3 pb-10">
-      @let updateInfo = updateInfo$ | async;
-      @let updatePassword = updatePassword$ | async;
       <div class="w-full md:w-2/4">
         <p for="address" class="font-medium mb-2">Photo de profil</p>
         <app-file-upload [name]="'thumb'" [url]="url" (loaded)="handleLoaded()" />
@@ -47,14 +45,13 @@
           <input pInputText type="email" id="email" name="email" formControlName="email" autocomplete="none" />
         </div>
         <p-button
-          [loading]="updateInfo?.isLoading"
-          [disabled]="updateInfo?.isLoading || infoForm.invalid"
+          [loading]="infoStore.isLoading()"
+          [disabled]="infoStore.isLoading() || infoForm.invalid"
           class="w-full md:w-2/4"
           type="submit">
           Mettre à jour
         </p-button>
       </form>
-
       <form
         class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6 mt-10"
         (ngSubmit)="onUpdatePassword()"
@@ -74,8 +71,8 @@
             autocomplete="none" />
         </div>
         <p-button
-          [loading]="updatePassword?.isLoading"
-          [disabled]="updatePassword?.isLoading || passwordForm.invalid"
+          [loading]="passwordStore.isLoading()"
+          [disabled]="passwordStore.isLoading() || passwordForm.invalid"
           class="w-full md:w-2/4"
           type="submit">
           Modifier le mot de passe

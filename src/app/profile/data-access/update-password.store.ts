@@ -1,27 +1,27 @@
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { IUser } from '../../shared/utils/types/models.type';
 import { inject } from '@angular/core';
-import { AuthService } from './auth.service';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
-import { IResetPasswordPayload } from '../utils/types/reset-password.type';
-import { IUser } from '../../shared/utils/types/models.type';
+import { ProfileService } from './profile.service';
+import { IUpdatePasswordPayload } from '../utils/types/update-password.type';
 
-interface IResetPasswordStore {
+interface IUpdatePasswordStore {
   isLoading: boolean;
   user: IUser | null;
 }
 
-export const ResetPasswordStore = signalStore(
-  withState<IResetPasswordStore>({
+export const UpdatePasswordStore = signalStore(
+  withState<IUpdatePasswordStore>({
     isLoading: false,
     user: null
   }),
-  withMethods((store, authService = inject(AuthService)) => ({
-    resetPassword: rxMethod<IResetPasswordPayload>(
+  withMethods((store, profileService = inject(ProfileService)) => ({
+    updatePassword: rxMethod<IUpdatePasswordPayload>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((payload) => {
-          return authService.resetPassword(payload).pipe(
+          return profileService.updatePassword(payload).pipe(
             map((user) => patchState(store, { isLoading: false, user })),
             catchError(() => {
               patchState(store, { isLoading: false, user: null });
