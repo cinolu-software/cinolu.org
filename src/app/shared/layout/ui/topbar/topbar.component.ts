@@ -1,8 +1,17 @@
-import { AfterViewInit, Component, ElementRef, inject, input, OnDestroy, signal, viewChild } from '@angular/core';
+import {
+  afterNextRender,
+  Component,
+  ElementRef,
+  inject,
+  input,
+  NgZone,
+  OnDestroy,
+  signal,
+  viewChild
+} from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../../../../auth/data-access/auth.service';
 import { DesktopNavComponent } from './desktop-nav/desktop-nav.component';
 import { MobileNavComponent } from './mobile-nav/mobile-nav.component';
 import { environment } from '../../../../../environments/environment';
@@ -14,8 +23,7 @@ import { AuthStore } from '../../../store/auth.store';
   imports: [CommonModule, RouterLink, MobileNavComponent, DesktopNavComponent, NgOptimizedImage],
   templateUrl: './topbar.component.html'
 })
-export class TopbarComponent implements AfterViewInit, OnDestroy {
-  #authService = inject(AuthService);
+export class TopbarComponent implements OnDestroy {
   #elementRef = inject(ElementRef);
   isFixed = signal(false);
   tabs = signal(['Parcourir', 'My Cinolu']);
@@ -27,15 +35,20 @@ export class TopbarComponent implements AfterViewInit, OnDestroy {
   mobileNav = viewChild(MobileNavComponent);
   desktopNav = viewChild(DesktopNavComponent);
   #destroy$ = new Subject<void>();
+  #ngZone = inject(NgZone);
   accountUrl = environment.accountUrl;
   authStore = inject(AuthStore);
 
-  ngAfterViewInit(): void {
-    this.setupEventListeners();
+  constructor() {
+    afterNextRender(() => {
+      this.#ngZone.runOutsideAngular(() => {
+        this.setupEventListeners();
+      });
+    });
   }
 
   signOut(): void {
-    this.#authService.signOut().pipe(takeUntil(this.#destroy$)).subscribe();
+    this.authStore.signOut();
   }
 
   closeNav(): void {

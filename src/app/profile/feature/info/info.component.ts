@@ -25,7 +25,6 @@ export class ProfileInfoComponent implements OnInit {
   store = inject(AuthStore);
   infoStore = inject(UpdateInfoStore);
   passwordStore = inject(UpdatePasswordStore);
-  user = this.store.user();
 
   constructor() {
     this.infoForm = this.#formBuilder.group({
@@ -42,10 +41,10 @@ export class ProfileInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.infoForm.patchValue({
-      email: this.user?.email,
-      address: this.user?.address,
-      phone_number: this.user?.phone_number,
-      name: this.user?.name
+      email: this.store.user()?.email,
+      address: this.store.user()?.address,
+      phone_number: this.store.user()?.phone_number,
+      name: this.store.user()?.name
     });
   }
 

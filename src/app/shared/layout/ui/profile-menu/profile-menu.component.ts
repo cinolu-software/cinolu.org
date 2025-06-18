@@ -1,8 +1,17 @@
-import { AfterViewInit, Component, ElementRef, inject, input, OnDestroy, signal, viewChild } from '@angular/core';
+import {
+  afterNextRender,
+  Component,
+  ElementRef,
+  inject,
+  input,
+  NgZone,
+  OnDestroy,
+  signal,
+  viewChild
+} from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../../../../auth/data-access/auth.service';
 import { environment } from '../../../../../environments/environment';
 import { EXPLORATION_LINKS } from '../../utils/data/links';
 import { AuthStore } from '../../../store/auth.store';
@@ -14,8 +23,7 @@ import { MobileProfileMenuComponent } from './mobile-menu/mobile-profile-menu.co
   imports: [CommonModule, RouterLink, DesktopProfileMenuComponent, MobileProfileMenuComponent, NgOptimizedImage],
   templateUrl: './profile-menu.component.html'
 })
-export class ProfileMenuComponent implements AfterViewInit, OnDestroy {
-  #authService = inject(AuthService);
+export class ProfileMenuComponent implements OnDestroy {
   #elementRef = inject(ElementRef);
   isFixed = signal(false);
   tabs = signal(['Parcourir']);
@@ -26,15 +34,20 @@ export class ProfileMenuComponent implements AfterViewInit, OnDestroy {
   mobileNav = viewChild(MobileProfileMenuComponent);
   desktopNav = viewChild(DesktopProfileMenuComponent);
   #destroy$ = new Subject<void>();
+  #ngZone = inject(NgZone);
   accountUrl = environment.accountUrl;
   authStore = inject(AuthStore);
 
-  ngAfterViewInit(): void {
-    this.setupEventListeners();
+  constructor() {
+    afterNextRender(() => {
+      this.#ngZone.runOutsideAngular(() => {
+        this.setupEventListeners();
+      });
+    });
   }
 
   signOut(): void {
-    this.#authService.signOut().pipe(takeUntil(this.#destroy$)).subscribe();
+    this.authStore.signOut();
   }
 
   closeNav(): void {

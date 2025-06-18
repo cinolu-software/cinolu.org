@@ -1,7 +1,6 @@
 export const partners: string[] = [
   '/images/partners/1.png',
   '/images/partners/2.png',
-  '/images/partners/3.jpg',
   '/images/partners/4.jpg',
   '/images/partners/5.png',
   '/images/partners/6.png',
@@ -24,5 +23,5 @@ export const partners: string[] = [
   '/images/partners/24.jpeg',
   '/images/partners/25.jpeg',
   '/images/partners/26.jpeg',
-  '/images/partners/27.jpeg',
+  '/images/partners/27.jpeg'
 ];

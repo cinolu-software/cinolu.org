@@ -3,20 +3,17 @@
     <div class="flex items-center gap-3">
       <button class="relative menu" (click)="setActiveTab('account')">
         <div class="flex items-center gap-2">
-          <div class="relative w-8 h-8">
-            <img
-              [ngSrc]="user() | apiIMG: 'user'"
-              class="object-cover rounded-full ring-2 ring-primary-600"
-              alt="Profile picture"
-              fill />
-          </div>
+          <img
+            [src]="user() | apiIMG: 'user'"
+            alt="User profile Image"
+            class="object-cover h-8 w-8 ring-2 ring-primary-600 bg-gray-200 rounded-full" />
           <div class="flex items-center">
             <p class="text-gray-900 font-semibold text-sm">{{ user()?.name }}</p>
             <i-lucide
               [name]="icons.chevronDown"
               class="duration-300 size-4"
               [ngClass]="{
-                'rotate-180': activeTab() === 'account',
+                'rotate-180': activeTab() === 'account'
               }" />
           </div>
         </div>

@@ -8,7 +8,7 @@
             [name]="icons.chevronDown"
             class="duration-300 size-4"
             [ngClass]="{
-              'rotate-180': activeTab() === tab,
+              'rotate-180': activeTab() === tab
             }" />
         </div>
         <div
@@ -35,18 +35,16 @@
     @if (user()) {
       <div class="flex items-center gap-3">
         <button class="relative menu flex items-center gap-0.5" (click)="setActiveTab('account')">
-          <div class="relative w-8 h-8">
-            <img
-              [ngSrc]="user() | apiIMG: 'user'"
-              class="object-cover rounded-full ring-2 ring-primary-600"
-              alt="Profile picture"
-              fill />
-          </div>
+          <img
+            [src]="user() | apiIMG: 'user'"
+            class="object-cover w-8 h-8 rounded-full ring-2 ring-primary-600"
+            alt="Profile picture"
+            fill />
           <i-lucide
             [name]="icons.chevronDown"
             class="duration-300 size-4"
             [ngClass]="{
-              'rotate-180': activeTab() === 'account',
+              'rotate-180': activeTab() === 'account'
             }" />
           <div
             class="absolute top-10 w-[13rem] right-0 animate-Up py-8 px-6 gap-6 z-30 bg-white shadow-lg rounded-lg transition-transform duration-300"

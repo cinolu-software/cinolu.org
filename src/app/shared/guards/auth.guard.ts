@@ -1,15 +1,12 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthStore } from '../store/auth.store';
 
-export const authGuard: CanActivateFn = (_: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  const user = inject(AuthStore).user();
+export const authGuard: CanActivateFn = () => {
+  const authStore = inject(AuthStore);
   const router = inject(Router);
-  const redirectUrl = state.url;
 
-  if (user) return true;
-  router.navigate(['/sign-in'], {
-    queryParams: { redirectUrl }
-  });
+  if (authStore.user()) return true;
+  router.navigate(['/sign-in']);
   return false;
 };

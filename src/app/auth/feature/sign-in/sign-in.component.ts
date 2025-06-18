@@ -1,8 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { AuthCardComponent } from '../../ui/auth-card/auth-card.component';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
@@ -27,8 +27,6 @@ import { SignInStore } from '../../data-access/sign-in.store';
 })
 export class AuthSignInComponent {
   #formBuilder: FormBuilder = inject(FormBuilder);
-  #route = inject(ActivatedRoute);
-  redirectUrl = signal<string>(this.#route.snapshot.queryParams['redirectUrl'] || '/');
   form: FormGroup;
   store = inject(SignInStore);
 
@@ -42,10 +40,7 @@ export class AuthSignInComponent {
   onSignIn(): void {
     if (this.form.invalid) return;
     this.form.disable();
-    this.store.signIn({
-      payload: this.form.value,
-      redirectUrl: this.redirectUrl()
-    });
+    this.store.signIn(this.form.value);
     this.form.enable();
   }
 
