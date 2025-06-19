@@ -12,9 +12,9 @@
     <h4 class="mb-2 text-lg group-hover:text-primary-900 font-bold transition-colors duration-200 line-clamp-1">
       {{ project().name | titlecase }}
     </h4>
-    <div class="text-sm mt-0.5 line-clamp-2 lowercase font-medium first-letter:uppercase">
-      {{ project().description }}
-    </div>
+    <div
+      class="text-sm mt-0.5 line-clamp-2 lowercase font-medium first-letter:uppercase"
+      [innerHTML]="project().description"></div>
     <div class="my-3 h-1 w-14 border-t border-gray-200"></div>
     <div class="text-sm font-medium">
       <div class="t flex items-center text-md leading-5 mb-2">
