@@ -27,7 +27,7 @@ export const provideApp = (): EnvironmentProviders[] => {
         }),
         catchError(() => {
           authStore.setUser(null);
-          return of();
+          return of(null);
         })
       );
     })

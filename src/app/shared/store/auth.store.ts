@@ -27,7 +27,7 @@ export const AuthStore = signalStore(
             tap(({ data }) => patchState(store, { user: data })),
             catchError(() => {
               patchState(store, { user: null });
-              return of();
+              return of(null);
             })
           )
         )
@@ -44,7 +44,7 @@ export const AuthStore = signalStore(
             }),
             catchError(() => {
               _toast.showError('Erreur lors de la déconnexion');
-              return of();
+              return of(null);
             })
           )
         )

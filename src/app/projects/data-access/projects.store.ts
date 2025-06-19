@@ -32,7 +32,7 @@ export const ProjectsStore = signalStore(
               map(({ data }) => patchState(store, { isLoading: false, projects: data, error: null })),
               catchError((error) => {
                 patchState(store, { isLoading: false, error: error['message'], projects: [[], 0] });
-                return of();
+                return of(null);
               })
             );
         })

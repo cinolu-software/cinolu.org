@@ -33,7 +33,7 @@ export const UpdatePasswordStore = signalStore(
             catchError(() => {
               _toast.showError('Erreur lors de la mise à jour du mot de passe');
               patchState(store, { isLoading: false });
-              return of();
+              return of(null);
             })
           );
         })

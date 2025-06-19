@@ -35,7 +35,7 @@ export const ForgotPasswordStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false });
               _toast.showError('Erreur lors de la réinitialisation');
-              return of();
+              return of(null);
             })
           );
         })

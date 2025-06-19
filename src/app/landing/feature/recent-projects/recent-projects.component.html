@@ -1,7 +1,7 @@
 <section class="pt-20 px-8 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0" id="projects">
   <div class="flex justify-between items-center mb-6">
     <div>
-      <h2 class="font-black font-satoshi mb-2 text-2xl">Les programmes récents</h2>
+      <h3 class="font-black font-satoshi mb-2 text-2xl">Les programmes récents</h3>
       <a routerLink="/programs" class="inline-flex group items-center gap-0.5 text-primary-500 hover:underline">
         Liste des programmes
         <i-lucide
@@ -10,11 +10,11 @@
       </a>
     </div>
     <div class="flex items-center gap-4 place-self-end">
-      <button (click)="carousel.navBackward($event)" class="carousel-nav-btn">
-        <i-lucide [name]="icons.moveLeft" class="size-3.5" />
+      <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button" aria-label="Previous slide">
+        <i-lucide [name]="icons.moveLeft" class="size-3.5" aria-hidden="true" focusable="false"></i-lucide>
       </button>
-      <button (click)="carousel.navForward($event)" class="carousel-nav-btn">
-        <i-lucide [name]="icons.moveRight" class="size-3.5" />
+      <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button" aria-label="Next slide">
+        <i-lucide [name]="icons.moveRight" class="size-3.5" aria-hidden="true" focusable="false"></i-lucide>
       </button>
     </div>
   </div>

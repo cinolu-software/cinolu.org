@@ -33,7 +33,7 @@ export const ResetPasswordStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false });
               _toast.showError('Erreur lors de la réinitialisation du mot de passe');
-              return of();
+              return of(null);
             })
           );
         })
