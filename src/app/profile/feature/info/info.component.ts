@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FileUploadComponent } from '../../../shared/ui/file-upload/file-upload.component';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment';
 import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
 import { AuthStore } from '../../../shared/store/auth.store';
 import { UpdateInfoStore } from '../../data-access/update-info';
