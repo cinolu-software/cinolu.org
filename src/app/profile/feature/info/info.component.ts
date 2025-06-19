@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -25,6 +25,11 @@ export class ProfileInfoComponent implements OnInit {
   store = inject(AuthStore);
   infoStore = inject(UpdateInfoStore);
   passwordStore = inject(UpdatePasswordStore);
+  roles = signal<{ name: string; label: string }[]>([
+    { name: 'staff', label: 'Staff' },
+    { name: 'admin', label: 'Administrateur' },
+    { name: 'user', label: 'Utilisateur' }
+  ]);
 
   constructor() {
     this.infoForm = this.#formBuilder.group({
@@ -60,5 +65,19 @@ export class ProfileInfoComponent implements OnInit {
   onUpdatePassword(): void {
     if (!this.passwordForm.valid) return;
     this.passwordStore.updatePassword(this.passwordForm.value);
+  }
+
+  hasRole(roles: string[] | undefined): boolean {
+    if (!roles) return false;
+    const required = ['admin', 'staff', 'user'];
+    return roles.some((role) => required.includes(role));
+  }
+
+  findRoleLabel(roles: string[] | undefined): string {
+    if (!roles) return '';
+    return this.roles()
+      .filter((r) => roles.includes(r.name))
+      .map((r) => r.label)
+      .join(', ');
   }
 }

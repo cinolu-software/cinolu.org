@@ -11,7 +11,18 @@
       </div>
     </div>
     <p class="mb-8 border-b border-gray-200 pb-2">
-      Vous pouvez modifier vos informations personnelles et votre mot de passe.
+      Vous avez le.s rôle.s
+      <span class="font-medium text-primary-800">{{ findRoleLabel(user?.roles) }}</span>
+      {{ hasRole(user?.roles) ? ' et ' : ' ' }}
+      @if (hasRole(user?.roles)) {
+        voici le lien du dashboard
+        <a
+          [href]="accUrl"
+          target="_blank"
+          class="text-primary-600 hover:text-primary-800 transition-colors duration-300">
+          admin.cinolu.org
+        </a>
+      }
     </p>
     <div class="flex flex-col gap-3 pb-10">
       <div class="w-full md:w-2/4">
