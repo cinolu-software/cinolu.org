@@ -26,7 +26,7 @@ export const ProjectCategoriesStore = signalStore(
             map(({ data }) => patchState(store, { isLoading: false, categories: data, error: null })),
             catchError((error) => {
               patchState(store, { isLoading: false, error: error['message'], categories: [] });
-              return of();
+              return of(null);
             })
           );
         })

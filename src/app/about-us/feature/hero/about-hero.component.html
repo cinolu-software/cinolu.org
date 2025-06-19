@@ -1,18 +1,18 @@
-<section class="relative min-h-[70vh] pt-40 pb-20 flex" @fadeInStagger>
-  <div class="absolute inset-0 bg-[url('/images/about.jpg')] bg-cover bg-center bg-no-repeat">
-    <div class="absolute inset-0 bg-primary-950/85"></div>
+<section class="relative min-h-[70vh] pt-40 pb-20 flex" aria-label="Section À propos" role="region">
+  <div class="absolute inset-0 bg-[url('/images/about.jpg')] bg-cover bg-center bg-no-repeat" aria-hidden="true">
+    <div class="absolute inset-0 bg-primary-950/85" aria-hidden="true"></div>
   </div>
-  <div class="px-8 fade-item relative z-10 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
-    <div
+  <div class="px-8 relative z-10 mx-auto md:max-w-screen-lg 2xl:max-w-screen-xl xl:px-0">
+    <h1
       class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/20 backdrop-blur-sm mb-4 text-primary-50 font-medium font-satoshi">
-      <i-lucide [name]="icons.info" class="size-5" />
+      <i-lucide [name]="icons.info" class="size-5" aria-hidden="true" focusable="false"></i-lucide>
       About us
-    </div>
-    <h1 class="fade-item font-satoshi text-4xl sm:text-5xl md:text-6xl font-black mb-6 text-white">
+    </h1>
+    <h2 class="font-satoshi text-4xl sm:text-5xl md:text-6xl font-black mb-6 text-white">
       À propos de
       <span class="text-primary-400">nous</span>
-    </h1>
-    <p class="fade-item text-lg sm:text-xl text-primary-100 mb-12">
+    </h2>
+    <p class="text-lg sm:text-xl text-primary-100 mb-12">
       Découvrez notre histoire, notre mission et rencontrez notre équipe dévouée. Nous sommes passionnés par ce que nous
       faisons et nous nous engageons à fournir le meilleur service possible.
     </p>

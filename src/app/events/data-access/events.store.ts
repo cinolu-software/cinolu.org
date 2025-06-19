@@ -32,7 +32,7 @@ export const EventsStore = signalStore(
               map(({ data }) => patchState(store, { isLoading: false, events: data, error: null })),
               catchError((error) => {
                 patchState(store, { isLoading: false, error: error['message'], events: [[], 0] });
-                return of();
+                return of(null);
               })
             );
         })
