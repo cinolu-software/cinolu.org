@@ -11,9 +11,7 @@
     <h4 class="mt-4 mb-2 text-lg group-hover:text-primary-900 transition-colors duration-200 font-bold line-clamp-1">
       {{ event().name | titlecase }}
     </h4>
-    <div
-      class="mt-0.5 text-sm line-clamp-2 font-medium lowercase first-letter:uppercase"
-      [innerHTML]="event().description"></div>
+    <div class="mt-0.5 text-sm line-clamp-2" [innerHTML]="event().description"></div>
     <div class="my-3 h-1 w-14 border-t border-gray-200"></div>
     <div class="font-medium text-sm">
       <div class="flex items-center text-md leading-5 mb-2">
