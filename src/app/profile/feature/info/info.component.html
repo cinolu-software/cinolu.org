@@ -2,9 +2,12 @@
   @if (store.user(); as user) {
     <div class="flex flex-wrap items-center gap-4 mb-4">
       <img
-        [src]="user | apiIMG: 'user'"
+        [ngSrc]="user | apiIMG: 'user'"
         alt="User profile Image"
+        width="56"
+        height="56"
         class="object-cover h-14 w-14 ring-2 ring-primary-600 bg-gray-200 rounded-full" />
+
       <div class="flex flex-col">
         <p class="text-gray-500">Inscrit le {{ user.created_at | date: 'longDate' }}</p>
         <p class="text-gray-900">{{ user.name }} · {{ user.email }}</p>

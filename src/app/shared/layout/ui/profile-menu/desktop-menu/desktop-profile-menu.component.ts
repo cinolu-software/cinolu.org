@@ -1,5 +1,5 @@
 import { Component, input, output, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ApiImgPipe } from '../../../../pipes/api-img.pipe';
 import { ILink } from '../../../utils/types/link.type';
@@ -10,7 +10,7 @@ import { LucideAngularModule, LayoutDashboard, LogOut, ChevronDown } from 'lucid
 @Component({
   selector: 'app-desktop-profile-menu',
   templateUrl: './desktop-profile-menu.component.html',
-  imports: [CommonModule, RouterModule, ApiImgPipe, LucideAngularModule]
+  imports: [CommonModule, RouterModule, ApiImgPipe, LucideAngularModule, NgOptimizedImage]
 })
 export class DesktopProfileMenuComponent {
   user = input.required<IUser | null>();

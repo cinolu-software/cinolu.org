@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -14,7 +14,15 @@ import { UpdatePasswordStore } from '../../data-access/update-password.store';
   selector: 'app-profile-info',
   templateUrl: './info.component.html',
   providers: [UpdateInfoStore, UpdatePasswordStore],
-  imports: [ButtonModule, InputTextModule, CommonModule, ReactiveFormsModule, FileUploadComponent, ApiImgPipe]
+  imports: [
+    ButtonModule,
+    NgOptimizedImage,
+    InputTextModule,
+    CommonModule,
+    ReactiveFormsModule,
+    FileUploadComponent,
+    ApiImgPipe
+  ]
 })
 export class ProfileInfoComponent implements OnInit {
   infoForm: FormGroup;

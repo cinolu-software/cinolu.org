@@ -18,9 +18,11 @@
         <div class="flex flex-col gap-8 text-gray-900">
           <a [routerLink]="'/profile'" class="flex items-center gap-2.5">
             <img
-              [src]="user() | apiIMG: 'user'"
+              [ngSrc]="user() | apiIMG: 'user'"
               alt="User profile Image"
-              class="object-cover h-8 w-8 ring-2 ring-primary-600 bg-gray-200 rounded-full" />
+              width="32"
+              height="32"
+              class="object-cover h-10 w-10 ring-2 ring-primary-600 bg-gray-200 rounded-full" />
             {{ user()?.name }}
           </a>
           <button

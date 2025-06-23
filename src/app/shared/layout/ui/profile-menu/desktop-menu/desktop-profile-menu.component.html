@@ -4,9 +4,12 @@
       <button class="relative menu" (click)="setActiveTab('account')">
         <div class="flex items-center gap-2">
           <img
-            [src]="user() | apiIMG: 'user'"
+            [ngSrc]="user() | apiIMG: 'user'"
             alt="User profile Image"
+            width="32"
+            height="32"
             class="object-cover h-8 w-8 ring-2 ring-primary-600 bg-gray-200 rounded-full" />
+
           <div class="flex items-center">
             <p class="text-gray-900 font-semibold text-sm">{{ user()?.name }}</p>
             <i-lucide
