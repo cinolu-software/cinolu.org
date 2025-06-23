@@ -4,7 +4,7 @@
   </div>
   <div class="mt-10 flex flex-wrap gap-5">
     @for (p of partners; track $index) {
-      <div class="relative h-20 w-40 flex p-3">
+      <div class="relative h-20 w-32 flex p-3" style="position: relative; height: 60px; width: 128px">
         <img [ngSrc]="p" alt="Logo partenaire's" class="h-20 w-auto object-contain" fill />
       </div>
     }
