@@ -17,9 +17,9 @@ export const UpdateInfoStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    authStore: inject(AuthStore)
+    _authStore: inject(AuthStore)
   })),
-  withMethods(({ _http, _toast, authStore, ...store }) => ({
+  withMethods(({ _http, _toast, _authStore, ...store }) => ({
     updateInfo: rxMethod<IUpdateInfoPayload>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
@@ -28,7 +28,7 @@ export const UpdateInfoStore = signalStore(
             tap(({ data }) => {
               patchState(store, { isLoading: false });
               _toast.showSuccess('Profil mis à jour');
-              authStore.setUser(data);
+              _authStore.setUser(data);
             }),
             catchError(() => {
               patchState(store, { isLoading: false });

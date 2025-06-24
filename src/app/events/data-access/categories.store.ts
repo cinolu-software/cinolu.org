@@ -1,7 +1,7 @@
 import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { catchError, exhaustMap, map, of, pipe, tap } from 'rxjs';
+import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
 import { ICategory } from '../../shared/utils/types/models.type';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 
@@ -23,7 +23,7 @@ export const EventCategoriesStore = signalStore(
         tap(() => patchState(store, { isLoading: true, error: null })),
         exhaustMap(() => {
           return http.get<{ data: ICategory[] }>('event-categories').pipe(
-            map(({ data }) => patchState(store, { isLoading: false, categories: data, error: null })),
+            tap(({ data }) => patchState(store, { isLoading: false, categories: data, error: null })),
             catchError((error) => {
               patchState(store, { isLoading: false, error: error['message'], categories: [] });
               return of(null);

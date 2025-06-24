@@ -10,7 +10,7 @@ import { appConfig } from '../../app.config';
 import { LoadingService } from '../services/loading/loading.service';
 import { AuthStore } from '../store/auth.store';
 import { HttpClient } from '@angular/common/http';
-import { map, catchError, of } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import { IUser } from '../utils/types/models.type';
 
 export const provideApp = (): EnvironmentProviders[] => {
@@ -21,10 +21,7 @@ export const provideApp = (): EnvironmentProviders[] => {
       const authStore = inject(AuthStore);
       const http = inject(HttpClient);
       return http.get<{ data: IUser }>('auth/profile').pipe(
-        map(({ data }) => {
-          authStore.setUser(data);
-          return data;
-        }),
+        tap(({ data }) => authStore.setUser(data)),
         catchError(() => {
           authStore.setUser(null);
           return of(null);

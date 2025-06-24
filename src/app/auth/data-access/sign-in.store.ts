@@ -21,9 +21,9 @@ export const SignInStore = signalStore(
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
     _router: inject(Router),
-    authStore: inject(AuthStore)
+    _authStore: inject(AuthStore)
   })),
-  withMethods(({ _http, _toast, _router, ...store }) => ({
+  withMethods(({ _http, _toast, _authStore, _router, ...store }) => ({
     signIn: rxMethod<ISignInPayload>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
@@ -31,7 +31,7 @@ export const SignInStore = signalStore(
           return _http.post<{ data: IUser }>('auth/sign-in', payload).pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false });
-              store.authStore.setUser(data);
+              _authStore.setUser(data);
               _toast.showSuccess('Connexion réussie');
               _router.navigate(['/profile']);
             }),

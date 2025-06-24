@@ -11,10 +11,7 @@ interface IRecentEventsStore {
 }
 
 export const RecentEventsStore = signalStore(
-  withState<IRecentEventsStore>({
-    isLoading: false,
-    events: []
-  }),
+  withState<IRecentEventsStore>({ isLoading: false, events: [] }),
   withMethods((store, http = inject(HttpClient)) => ({
     loadEvents: rxMethod<void>(
       pipe(

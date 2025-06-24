@@ -24,7 +24,7 @@ export const RecentProjectsStore = signalStore(
             tap(({ data }) => patchState(store, { isLoading: false, projects: data })),
             catchError(() => {
               patchState(store, { isLoading: false, projects: [] });
-              return of([]);
+              return of(null);
             })
           );
         })
