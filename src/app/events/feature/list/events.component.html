@@ -1,14 +1,12 @@
-<section class="pt-14 mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-lg xl:px-0">
-  <div class="mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-lg xl:px-0">
-    <div class="py-10">
-      <h2 class="font-black font-satoshi mb-1 text-3xl">Voir nos événemens</h2>
-      <p class="text-primary-500">Tous les événemens</p>
-    </div>
+<section class="pt-14 mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-lg">
+  <div class="py-10">
+    <h2 class="font-black font-satoshi mb-1 text-3xl">Voir nos événemens</h2>
+    <p class="text-primary-500">Tous les événemens</p>
   </div>
   <div class="relative h-60 md:h-96 w-full bg-gray-200 pb-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-lg">
     <img ngSrc="/images/events.jpg" alt="events" class="object-cover h-full opacity-90" fill priority />
   </div>
-  <div class="flex flex-col mx-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-lg xl:px-0">
+  <div class="flex flex-col md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-lg">
     @if (categoriesStore.categories().length > 0) {
       <div class="pb-2 pt-10 flex flex-wrap gap-4">
         <p-multiselect
