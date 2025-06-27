@@ -1,4 +1,4 @@
-<aside class="pt-32">
+<aside class="border border-gray-200 rounded-md">
   @if (store.user(); as user) {
     <div class="flex flex-wrap items-center gap-4 mb-4">
       <img
@@ -25,7 +25,6 @@
         </a>
       }
     </p>
-
     <div
       class="flex items-center gap-3 overflow-x-scroll flex-nowrap text-nowrap scrollbar-hide mb-6 border-b border-gray-200">
       @for (tab of tabs(); track $index) {

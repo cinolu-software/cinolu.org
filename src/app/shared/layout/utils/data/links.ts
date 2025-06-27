@@ -49,12 +49,13 @@ export const PROFILE_LINKS: ILink[] = [
     name: 'Mes informations',
     path: '/profile',
     fragment: 'info',
-    icon: Info
+    icon: Info,
+    exactUrl: true
   },
 
   {
     name: 'Mes enteprises',
-    path: '/enterprises',
+    path: '/profile/enterprises',
     fragment: 'info',
     icon: Activity
   }
