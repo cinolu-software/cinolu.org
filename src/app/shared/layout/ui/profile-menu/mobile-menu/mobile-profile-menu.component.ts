@@ -15,7 +15,7 @@ import { LucideAngularModule, Menu, X, ChevronDown, ArrowLeft } from 'lucide-ang
 export class MobileProfileMenuComponent {
   user = input.required<IUser | null>();
   tabs = input.required<string[]>();
-  links = input.required<Record<string, ILink[]>>();
+  links = input.required<ILink[]>();
   singOut = output<void>();
   isOpen = signal<boolean>(false);
   activeTab = signal<string | null>(null);

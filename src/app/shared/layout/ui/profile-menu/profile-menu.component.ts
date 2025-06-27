@@ -13,7 +13,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
-import { EXPLORATION_LINKS } from '../../utils/data/links';
+import { EXPLORATION_LINKS, PROFILE_LINKS } from '../../utils/data/links';
 import { AuthStore } from '../../../store/auth.store';
 import { DesktopProfileMenuComponent } from './desktop-menu/desktop-profile-menu.component';
 import { MobileProfileMenuComponent } from './mobile-menu/mobile-profile-menu.component';
@@ -27,9 +27,10 @@ export class ProfileMenuComponent implements OnDestroy {
   #elementRef = inject(ElementRef);
   isFixed = signal(false);
   tabs = signal(['Parcourir']);
-  links = signal({
+  desktopLinks = signal({
     Parcourir: EXPLORATION_LINKS
   });
+  mobileLinks = signal(PROFILE_LINKS);
   fixed = input(false);
   mobileNav = viewChild(MobileProfileMenuComponent);
   desktopNav = viewChild(DesktopProfileMenuComponent);

@@ -13,8 +13,16 @@
       </a>
     </div>
     <div>
-      <app-mobile-profile-menu [user]="authStore.user()" [tabs]="tabs()" [links]="links()" (singOut)="signOut()" />
-      <app-desktop-profile-menu [user]="authStore.user()" [tabs]="tabs()" [links]="links()" (singOut)="signOut()" />
+      <app-mobile-profile-menu
+        [user]="authStore.user()"
+        [tabs]="tabs()"
+        [links]="mobileLinks()"
+        (singOut)="signOut()" />
+      <app-desktop-profile-menu
+        [user]="authStore.user()"
+        [tabs]="tabs()"
+        [links]="desktopLinks()"
+        (singOut)="signOut()" />
     </div>
   </nav>
 </header>
