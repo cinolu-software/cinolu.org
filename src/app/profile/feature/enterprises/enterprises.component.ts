@@ -16,6 +16,4 @@ import { LucideAngularModule, Plus } from 'lucide-angular';
 export class ProfileEnterprisesComponent {
   // #formBuilder = inject(FormBuilder);
   icons = { plus: Plus };
-
-  constructor() {}
 }
