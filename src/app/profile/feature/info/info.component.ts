@@ -9,6 +9,7 @@ import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
 import { AuthStore } from '../../../shared/store/auth.store';
 import { UpdateInfoStore } from '../../data-access/update-info';
 import { UpdatePasswordStore } from '../../data-access/update-password.store';
+import { LucideAngularModule, Info, Lock } from 'lucide-angular';
 
 @Component({
   selector: 'app-profile-info',
@@ -21,7 +22,8 @@ import { UpdatePasswordStore } from '../../data-access/update-password.store';
     CommonModule,
     ReactiveFormsModule,
     FileUploadComponent,
-    ApiImgPipe
+    ApiImgPipe,
+    LucideAngularModule
   ]
 })
 export class ProfileInfoComponent implements OnInit {
@@ -33,11 +35,11 @@ export class ProfileInfoComponent implements OnInit {
   store = inject(AuthStore);
   infoStore = inject(UpdateInfoStore);
   passwordStore = inject(UpdatePasswordStore);
-  roles = signal<{ name: string; label: string }[]>([
-    { name: 'staff', label: 'Staff' },
-    { name: 'admin', label: 'Administrateur' },
-    { name: 'user', label: 'Utilisateur' }
+  tabs = signal([
+    { name: 'info', icon: Info, label: 'Mes informations' },
+    { name: 'password', icon: Lock, label: 'Mon mot de passe' }
   ]);
+  activeTab = signal('info');
 
   constructor() {
     this.infoForm = this.#formBuilder.group({
@@ -61,6 +63,10 @@ export class ProfileInfoComponent implements OnInit {
     });
   }
 
+  setActiveTab(tab: string): void {
+    this.activeTab.set(tab);
+  }
+
   handleLoaded(): void {
     this.store.getProfile();
   }
@@ -79,13 +85,5 @@ export class ProfileInfoComponent implements OnInit {
     if (!roles) return false;
     const required = ['admin', 'staff', 'user'];
     return roles.some((role) => required.includes(role));
-  }
-
-  findRoleLabel(roles: string[] | undefined): string {
-    if (!roles) return '';
-    return this.roles()
-      .filter((r) => roles.includes(r.name))
-      .map((r) => r.label)
-      .join(', ');
   }
 }

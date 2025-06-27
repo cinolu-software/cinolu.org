@@ -1,5 +1,12 @@
 <app-loading-bar />
 @if (true) {
   <app-profile-menu />
-  <router-outlet />
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="col-span-1">
+      <app-profile-sidebar />
+    </div>
+    <div class="col-span-3">
+      <router-outlet />
+    </div>
+  </div>
 }

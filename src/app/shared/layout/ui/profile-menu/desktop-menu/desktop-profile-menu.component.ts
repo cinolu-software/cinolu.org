@@ -5,7 +5,7 @@ import { ApiImgPipe } from '../../../../pipes/api-img.pipe';
 import { ILink } from '../../../utils/types/link.type';
 import { getLinks } from '../../../../utils/helpers/get-links.fn';
 import { IUser } from '../../../../utils/types/models.type';
-import { LucideAngularModule, LayoutDashboard, LogOut, ChevronDown } from 'lucide-angular';
+import { LucideAngularModule, LogOut, ChevronDown } from 'lucide-angular';
 
 @Component({
   selector: 'app-desktop-profile-menu',
@@ -21,7 +21,6 @@ export class DesktopProfileMenuComponent {
   getLinks = getLinks;
   icons = {
     chevronDown: ChevronDown,
-    layoutDashboard: LayoutDashboard,
     logOut: LogOut
   };
 
