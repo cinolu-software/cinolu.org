@@ -16,7 +16,7 @@ export interface IUser extends IBase {
   profile?: string;
   posts: IPost[];
   roles: string[];
-  projects: IProject[];
+  enterprises: IEnterprise[];
   positions: IPosition[];
   expertises: IExpertise[];
 }
@@ -80,6 +80,7 @@ export interface IEnterprise extends IBase {
   founded_at: Date;
   location: string;
   stage: string;
+  owner: IUser;
   products: IProduct[];
 }
 

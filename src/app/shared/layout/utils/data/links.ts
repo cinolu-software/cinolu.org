@@ -1,5 +1,5 @@
 import { ILink } from '../types/link.type';
-import { Home, ClipboardList, NotepadTextDashed, Info, ChartNoAxesColumn } from 'lucide-angular';
+import { Home, ClipboardList, NotepadTextDashed, Info, ChartNoAxesColumn, Activity } from 'lucide-angular';
 
 export const EXPLORATION_LINKS: ILink[] = [
   {
@@ -51,13 +51,13 @@ export const PROFILE_LINKS: ILink[] = [
     fragment: 'info',
     icon: Info,
     exactUrl: true
+  },
+  {
+    name: 'Mes enteprises',
+    path: '/profile/enterprises',
+    fragment: 'info',
+    icon: Activity
   }
-  // {
-  //   name: 'Mes enteprises',
-  //   path: '/profile/enterprises',
-  //   fragment: 'info',
-  //   icon: Activity
-  // }
 ];
 
 export const SOCIAL_LINKS: ILink[] = [

@@ -35,8 +35,12 @@
         }
       </div>
       <div class="flex justify-center pb-8">
-        <pagination-controls nextLabel="" previousLabel="" [maxSize]="5" (pageChange)="onPageChange($event)" class="pg">
-        </pagination-controls>
+        <pagination-controls
+          nextLabel=""
+          previousLabel=""
+          [maxSize]="5"
+          (pageChange)="onPageChange($event)"
+          class="pg" />
       </div>
     }
     @if (!store.isLoading() && store.projects()[1] === 0) {

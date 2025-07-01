@@ -22,6 +22,10 @@
   @apply bg-white text-gray-800 w-full py-2 border-gray-200 focus:border-primary-500;
 }
 
+.p-datepicker {
+   @apply bg-white text-gray-800 w-full py-2 border-gray-200 focus:border-primary-500;
+}
+
 .p-password {
   @apply w-full;
 }

@@ -7,7 +7,7 @@ import { FileUploadComponent } from '../../../shared/ui/file-upload/file-upload.
 import { environment } from '../../../../environments/environment';
 import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
 import { AuthStore } from '../../../shared/store/auth.store';
-import { UpdateInfoStore } from '../../data-access/update-info';
+import { UpdateInfoStore } from '../../data-access/update-info.store';
 import { UpdatePasswordStore } from '../../data-access/update-password.store';
 import { LucideAngularModule, Info, Lock } from 'lucide-angular';
 

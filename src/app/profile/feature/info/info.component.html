@@ -26,7 +26,7 @@
       }
     </p>
     <div
-      class="flex items-center gap-3 overflow-x-scroll flex-nowrap text-nowrap scrollbar-hide mb-6 border-b border-gray-200">
+      class="flex items-center gap-4 overflow-x-scroll flex-nowrap text-nowrap scrollbar-hide mb-6 border-b border-gray-200">
       @for (tab of tabs(); track $index) {
         <button
           class="flex items-center gap-1 pb-2"
@@ -34,7 +34,7 @@
           [ngClass]="{
             'text-primary-600 border-b border-primary-600': activeTab() === tab.name
           }">
-          <i-lucide [name]="tab.icon" class="text-primary-600 size-4 text-base" />
+          <i-lucide [name]="tab.icon" class="text-primary-600 size-3.5 text-base" />
           <h5 class="font-medium">{{ tab.label }}</h5>
         </button>
       }
