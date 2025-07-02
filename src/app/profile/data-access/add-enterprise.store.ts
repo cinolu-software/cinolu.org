@@ -5,7 +5,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../shared/services/toast/toastr.service';
-import { IAddEnterprisePayload } from '../utils/types/add-enterprise.type';
+import { IEnterprisePayload } from '../utils/types/add-enterprise.type';
 import { Router } from '@angular/router';
 
 interface IAddEnterpriseStore {
@@ -20,7 +20,7 @@ export const AddEnterpriseStore = signalStore(
     _router: inject(Router)
   })),
   withMethods(({ _http, _toast, _router, ...store }) => ({
-    addEnterprise: rxMethod<IAddEnterprisePayload>(
+    addEnterprise: rxMethod<IEnterprisePayload>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((payload) => {
