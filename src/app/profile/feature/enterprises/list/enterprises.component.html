@@ -6,11 +6,23 @@
       Ajouter
     </a>
   </div>
-
-  @if (store.enterprises()[1] <= 0) {
+  @if (store.enterprises()[1] <= 0 && !store.isLoading()) {
     <p class="text-gray-600">
       Aucune entreprise trouvée. Vous pouvez en ajouter une en cliquant sur le bouton "Ajouter".
     </p>
+  }
+  @if (store.isLoading()) {
+    @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track $index) {
+      <div class="flex flex-col md:flex-row gap-4 mb-4">
+        <div class="h-24 w-48 bg-gray-200 animate-pulse mb-4"></div>
+        <div class="md:col-span-2">
+          <div class="animate-pulse h-4 w-full mb-4 md:w-56 rounded-md bg-gray-200"></div>
+          <div class="animate-pulse h-2 w-full mb-1 rounded-md bg-gray-200"></div>
+          <div class="animate-pulse h-2 w-full mb-1 rounded-md bg-gray-200"></div>
+          <div class="animate-pulse h-2 w-full md:w-48 rounded-md bg-gray-200"></div>
+        </div>
+      </div>
+    }
   }
   @if (store.enterprises()[0]) {
     @for (
@@ -18,27 +30,21 @@
         | paginate: { itemsPerPage: 10, currentPage: queryParams().page ?? 1, totalItems: store.enterprises()[1] };
       track enterprise.id
     ) {
-      <div class="group relative grid gap-4 pb-1 sm:grid-cols-8 sm:gap-8 md:gap-4 mb-2.5">
-        <div class="z-10 sm:order-2 sm:col-span-6">
+      <div class="flex flex-col md:flex-row gap-4 mb-4">
+        <img
+          [alt]="enterprise.name"
+          width="200"
+          height="48"
+          class="aspect-video h-24 w-48 object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 col-span-1 mb-2"
+          [ngSrc]="enterprise | apiIMG: 'enterprise'" />
+        <div class="col-span-2">
           <h3 class="inline-flex items-baseline font-medium">
             {{ enterprise.name }}
-            <!-- <i-lucide
-                    [name]="icons.moveUpRight"
-                    class="h-4 w-4 duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ml-1 translate-y-0.5" /> -->
           </h3>
           <p class="mt-2 text-base leading-normal line-clamp-3">
             {{ enterprise.description }}
           </p>
         </div>
-        <img
-          [alt]="enterprise.name"
-          loading="lazy"
-          width="200"
-          height="48"
-          decoding="async"
-          data-nimg="1"
-          class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1"
-          [src]="enterprise | apiIMG: 'enterprise'" />
       </div>
     }
     <div class="flex justify-center pb-8">

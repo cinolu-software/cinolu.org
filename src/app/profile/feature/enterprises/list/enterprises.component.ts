@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { LucideAngularModule, Plus } from 'lucide-angular';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { EnterprisesStore } from '../../../data-access/enterprises.store';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -22,30 +22,36 @@ import { QueryParams } from '../../../utils/types/query-params.type';
     ReactiveFormsModule,
     LucideAngularModule,
     ApiImgPipe,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgOptimizedImage
   ]
 })
-export class ProfileEnterprisesComponent {
+export class ProfileEnterprisesComponent implements OnInit {
   icons = { plus: Plus };
   #route = inject(ActivatedRoute);
+  #router = inject(Router);
   store = inject(EnterprisesStore);
   queryParams = signal<QueryParams>({
     page: Number(this.#route.snapshot.queryParams?.['page']) || null
   });
 
-  onPageChange(currentPage: number): void {
-    this.queryParams().page = currentPage === 1 ? null : currentPage;
-    // this.updateRouteAndprojects();
+  ngOnInit(): void {
+    this.store.loadEnterprises(this.queryParams());
   }
 
-  // updateRoute(): void {
-  //   const { page } = this.queryParams();
-  //   const queryParams = { page };
-  //   this.#router.navigate(['/programs'], { queryParams });
-  // }
+  onPageChange(currentPage: number): void {
+    this.queryParams().page = currentPage === 1 ? null : currentPage;
+    this.updateRouteAndEnterprises();
+  }
 
-  // updateRouteAndprojects(): void {
-  //   this.updateRoute();
-  //   this.store.loadProjects(this.queryParams());
-  // }
+  updateRoute(): void {
+    const { page } = this.queryParams();
+    const queryParams = { page };
+    this.#router.navigate(['/programs'], { queryParams });
+  }
+
+  updateRouteAndEnterprises(): void {
+    this.updateRoute();
+    this.store.loadEnterprises(this.queryParams());
+  }
 }
