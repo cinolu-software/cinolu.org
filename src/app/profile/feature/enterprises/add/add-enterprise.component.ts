@@ -1,13 +1,14 @@
 import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ArrowLeft, LucideAngularModule } from 'lucide-angular';
+import { ArrowLeft, LucideAngularModule, ChevronsRight, ChevronsLeft, Check } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { Textarea } from 'primeng/textarea';
 import { SelectModule } from 'primeng/select';
 import { DatePickerModule } from 'primeng/datepicker';
 import { AddEnterpriseStore } from '../../../data-access/add-enterprise.store';
+import { StepperModule } from 'primeng/stepper';
 import { SECTORS } from '../../../utils/data/sectors';
 import { STAGES } from '../../../utils/data/stage';
 
@@ -21,7 +22,8 @@ import { STAGES } from '../../../utils/data/stage';
     DatePickerModule,
     Textarea,
     LucideAngularModule,
-    InputTextModule
+    InputTextModule,
+    StepperModule
   ],
   templateUrl: './add-enterprise.component.html'
 })
@@ -29,7 +31,7 @@ export class AddEnterpriseComponent {
   #fb = inject(FormBuilder);
   #location = inject(Location);
   form: FormGroup;
-  icons = { back: ArrowLeft };
+  icons = { back: ArrowLeft, next: ChevronsRight, previous: ChevronsLeft, check: Check };
   sectors = SECTORS;
   stages = STAGES;
   store = inject(AddEnterpriseStore);
