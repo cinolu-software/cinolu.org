@@ -79,6 +79,9 @@ export class EditEnterpriseComponent {
 
   onAddEnterprise(): void {
     if (!this.form.valid) return;
-    // this.store.addEnterprise(this.form.value);
+    this.updateEnterpriseStore.updateEnterprise({
+      slug: this.enterpriseStore.enterprise()?.slug || '',
+      payload: this.form.value
+    });
   }
 }
