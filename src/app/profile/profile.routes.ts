@@ -12,21 +12,21 @@ export const profileRoutes: Routes = [
     children: [
       {
         path: '',
-        title: 'Liste des entreprises',
+        title: 'List',
         loadComponent: () =>
           import('./feature/enterprises/list/enterprises.component').then((c) => c.ProfileEnterprisesComponent)
       },
       {
         path: 'add',
-        title: 'Add Enterprise',
+        title: 'Add ',
         loadComponent: () =>
           import('./feature/enterprises/add/add-enterprise.component').then((c) => c.AddEnterpriseComponent)
       },
       {
-        path: 'udate/:slug',
-        title: 'Update Enterprise',
+        path: 'update/:slug',
+        title: 'Update',
         loadComponent: () =>
-          import('./feature/enterprises/update/update-enterprise.component').then((c) => c.UpdateEnterpriseComponent)
+          import('./feature/enterprises/edit/edit-enterprise.component').then((c) => c.EditEnterpriseComponent)
       }
     ]
   }
