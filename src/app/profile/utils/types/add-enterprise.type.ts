@@ -1,4 +1,4 @@
-export interface IAddEnterprisePayload {
+export interface IEnterprisePayload {
   name: string;
   description: string;
   problem_solved: string;
