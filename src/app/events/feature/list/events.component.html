@@ -34,14 +34,16 @@
           <app-event-card [event]="event" />
         }
       </div>
-      <div class="flex justify-center mb-8">
-        <pagination-controls
-          nextLabel=""
-          previousLabel=""
-          [maxSize]="5"
-          (pageChange)="onPageChange($event)"
-          class="pg" />
-      </div>
+      @if (store.events()[1] > 9) {
+        <div class="flex justify-center mb-8">
+          <pagination-controls
+            nextLabel=""
+            previousLabel=""
+            [maxSize]="5"
+            (pageChange)="onPageChange($event)"
+            class="pg" />
+        </div>
+      }
     }
     @if (!store.isLoading() && store.events()[1] === 0) {
       <h2 class="text-3xl font-semibold px-4 mt-6 mb-14">Pas d'événement!</h2>
