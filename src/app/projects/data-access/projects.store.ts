@@ -18,10 +18,10 @@ export const ProjectsStore = signalStore(
     loadProjects: rxMethod<QueryParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((params) => {
+        switchMap((queryParams) => {
           return http
             .get<{ data: [IProject[], number] }>('projects/find-published', {
-              params: buildQueryParams(params)
+              params: buildQueryParams(queryParams)
             })
             .pipe(
               tap(({ data }) => patchState(store, { isLoading: false, projects: data })),
