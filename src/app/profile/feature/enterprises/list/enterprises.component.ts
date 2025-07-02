@@ -3,7 +3,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { LucideAngularModule, Plus } from 'lucide-angular';
+import { LucideAngularModule, Plus, Edit, Trash } from 'lucide-angular';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { EnterprisesStore } from '../../../data-access/enterprises.store';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
@@ -27,7 +27,7 @@ import { QueryParams } from '../../../utils/types/query-params.type';
   ]
 })
 export class ProfileEnterprisesComponent implements OnInit {
-  icons = { plus: Plus };
+  icons = { plus: Plus, edit: Edit, trash: Trash };
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   store = inject(EnterprisesStore);

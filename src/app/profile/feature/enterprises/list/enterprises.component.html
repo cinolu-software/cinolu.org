@@ -1,11 +1,48 @@
 <aside class="pt-32 min-h-[110vh]">
-  <div class="flex w-full justify-between items-center mb-10">
+  <div class="flex w-full flex-wrap gap-4 justify-between items-center mb-10">
     <h1 class="text-2xl font-bold">Mes entreprises</h1>
     <a class="flex items-center gap-1 font-normal! primary-link" [routerLink]="'/profile/enterprises/add'">
       <i-lucide [name]="icons.plus" class="size-5"></i-lucide>
       Ajouter
     </a>
   </div>
+  @if (store.enterprises()[0]) {
+    @for (
+      enterprise of store.enterprises()[0]
+        | paginate: { itemsPerPage: 10, currentPage: queryParams().page ?? 1, totalItems: store.enterprises()[1] };
+      track enterprise.id
+    ) {
+      <div class="flex flex-col md:flex-row gap-4 mb-4">
+        <img
+          [alt]="enterprise.name"
+          width="200"
+          height="48"
+          class="aspect-video h-24 w-48 object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 col-span-1 mb-2"
+          [ngSrc]="enterprise | apiIMG: 'enterprise'" />
+        <div class="col-span-2">
+          <h3 class="inline-flex items-baseline font-medium">
+            {{ enterprise.name }}
+            <div class="flex items-center gap-1.5">
+              <a
+                class="ml-2 text-gray-500 hover:text-gray-700"
+                [routerLink]="['/profile/enterprises/update', enterprise.slug]">
+                <i-lucide [name]="icons.edit" class="size-4"></i-lucide>
+              </a>
+              <button>
+                <i-lucide [name]="icons.trash" class="size-4 text-red-500 hover:text-red-700" />
+              </button>
+            </div>
+          </h3>
+          <p class="mt-2 text-base leading-normal line-clamp-3">
+            {{ enterprise.description }}
+          </p>
+        </div>
+      </div>
+    }
+    <div class="flex justify-center pb-8">
+      <pagination-controls nextLabel="" previousLabel="" [maxSize]="5" (pageChange)="onPageChange($event)" class="pg" />
+    </div>
+  }
   @if (store.enterprises()[1] <= 0 && !store.isLoading()) {
     <p class="text-gray-600">
       Aucune entreprise trouvée. Vous pouvez en ajouter une en cliquant sur le bouton "Ajouter".
@@ -23,32 +60,5 @@
         </div>
       </div>
     }
-  }
-  @if (store.enterprises()[0]) {
-    @for (
-      enterprise of store.enterprises()[0]
-        | paginate: { itemsPerPage: 10, currentPage: queryParams().page ?? 1, totalItems: store.enterprises()[1] };
-      track enterprise.id
-    ) {
-      <div class="flex flex-col md:flex-row gap-4 mb-4">
-        <img
-          [alt]="enterprise.name"
-          width="200"
-          height="48"
-          class="aspect-video h-24 w-48 object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 col-span-1 mb-2"
-          [ngSrc]="enterprise | apiIMG: 'enterprise'" />
-        <div class="col-span-2">
-          <h3 class="inline-flex items-baseline font-medium">
-            {{ enterprise.name }}
-          </h3>
-          <p class="mt-2 text-base leading-normal line-clamp-3">
-            {{ enterprise.description }}
-          </p>
-        </div>
-      </div>
-    }
-    <div class="flex justify-center pb-8">
-      <pagination-controls nextLabel="" previousLabel="" [maxSize]="5" (pageChange)="onPageChange($event)" class="pg" />
-    </div>
   }
 </aside>
