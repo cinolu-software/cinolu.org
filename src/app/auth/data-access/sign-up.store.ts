@@ -6,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../shared/services/toast/toastr.service';
 import { Router } from '@angular/router';
 import { IUser } from '../../shared/utils/types/models.type';
-import { buildQueryParams } from '../../shared/utils/helpers/build-query-params.fn';
 import { ISignUpPayload } from '../utils/types/sign-up.type';
 
 interface ISignUpStore {

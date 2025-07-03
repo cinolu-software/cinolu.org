@@ -5,7 +5,6 @@ import { AuthCardComponent } from '../../ui/auth-card/auth-card.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
-import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../environments/environment.development';
 import { SignUpStore } from '../../data-access/sign-up.store';
 
@@ -25,8 +24,6 @@ import { SignUpStore } from '../../data-access/sign-up.store';
 })
 export class AuthSignUpComponent {
   #formBuilder: FormBuilder = inject(FormBuilder);
-  #route = inject(ActivatedRoute);
-  #link = this.#route.snapshot.queryParams?.['link'] || '';
   form: FormGroup;
   store = inject(SignUpStore);
 
