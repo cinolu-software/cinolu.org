@@ -1,38 +1,39 @@
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
-import { IEnterprise } from '../../shared/utils/types/models.type';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../shared/services/toast/toastr.service';
-import { IEnterprisePayload } from '../utils/types/add-enterprise.type';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { EnterprisesStore } from './enterprises.store';
 
-interface IUpdateEnterprisetore {
+interface IDeleteEnterpriseStore {
   isLoading: boolean;
 }
 
-export const UpdateEnterprisetore = signalStore(
-  withState<IUpdateEnterprisetore>({ isLoading: false }),
+export const DeleteEnterpriseStore = signalStore(
+  withState<IDeleteEnterpriseStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _router: inject(Router)
+    _route: inject(ActivatedRoute),
+    _enterprisesStore: inject(EnterprisesStore)
   })),
-  withMethods(({ _http, _toast, _router, ...store }) => ({
-    updateEnterprise: rxMethod<{ slug: string; payload: IEnterprisePayload }>(
+  withMethods(({ _http, _toast, _route, _enterprisesStore, ...store }) => ({
+    deleteEnterprise: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((params) => {
-          return _http.patch<{ data: IEnterprise }>(`enterprises/${params.slug}`, params.payload).pipe(
+        switchMap((id) => {
+          return _http.delete(`enterprises/${id}`).pipe(
             tap(() => {
               patchState(store, { isLoading: false });
-              _toast.showSuccess('Entreprise mise à jour');
-              _router.navigate(['/profile/enterprises']);
+              const page = Number(_route.snapshot.queryParams['page']) || 1;
+              _enterprisesStore.loadEnterprises({ page });
+              _toast.showSuccess('Entreprise supprimée');
             }),
             catchError(() => {
               patchState(store, { isLoading: false });
-              _toast.showError('Erreur lors de la mise à jour');
+              _toast.showError('Erreur lors de la suppression');
               return of(null);
             })
           );

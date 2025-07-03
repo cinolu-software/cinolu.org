@@ -9,11 +9,14 @@ import { EnterprisesStore } from '../../../data-access/enterprises.store';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { QueryParams } from '../../../utils/types/query-params.type';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
+import { DeleteEnterpriseStore } from '../../../data-access/delete-enterprise.store';
 
 @Component({
   selector: 'app-profile-enterprises',
   templateUrl: './enterprises.component.html',
-  providers: [EnterprisesStore],
+  providers: [EnterprisesStore, DeleteEnterpriseStore, ConfirmationService],
   imports: [
     ButtonModule,
     InputTextModule,
@@ -23,14 +26,17 @@ import { QueryParams } from '../../../utils/types/query-params.type';
     LucideAngularModule,
     ApiImgPipe,
     NgxPaginationModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    ConfirmPopupModule
   ]
 })
 export class ProfileEnterprisesComponent implements OnInit {
   icons = { plus: Plus, edit: Edit, trash: Trash };
   #route = inject(ActivatedRoute);
   #router = inject(Router);
+  #confirmationService = inject(ConfirmationService);
   store = inject(EnterprisesStore);
+  deleteStore = inject(DeleteEnterpriseStore);
   queryParams = signal<QueryParams>({
     page: Number(this.#route.snapshot.queryParams?.['page']) || null
   });
@@ -47,11 +53,30 @@ export class ProfileEnterprisesComponent implements OnInit {
   updateRoute(): void {
     const { page } = this.queryParams();
     const queryParams = { page };
-    this.#router.navigate(['/programs'], { queryParams });
+    this.#router.navigate(['/profile/enterprises'], { queryParams });
   }
 
   updateRouteAndEnterprises(): void {
     this.updateRoute();
     this.store.loadEnterprises(this.queryParams());
+  }
+
+  confirmPopup(id: string, event: Event): void {
+    this.#confirmationService.confirm({
+      target: event.currentTarget as EventTarget,
+      message: 'Etes-vous sûr?',
+      rejectButtonProps: {
+        label: 'Annuler',
+        severity: 'secondary',
+        outlined: true
+      },
+      acceptButtonProps: {
+        label: 'Confirmer',
+        severity: 'danger'
+      },
+      accept: () => {
+        this.deleteStore.deleteEnterprise(id);
+      }
+    });
   }
 }

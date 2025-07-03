@@ -32,7 +32,7 @@ export const UpdateInfoStore = signalStore(
             }),
             catchError(() => {
               patchState(store, { isLoading: false });
-              _toast.showError('Erreur lors de la mise à jour du profil');
+              _toast.showError('Erreur lors de la mise à jour');
               return of(null);
             })
           );

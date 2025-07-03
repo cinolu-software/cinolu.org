@@ -27,12 +27,12 @@ export const AddEnterpriseStore = signalStore(
           return _http.post<{ data: IEnterprise }>('enterprises', payload).pipe(
             tap(() => {
               patchState(store, { isLoading: false });
-              _toast.showSuccess('Entreprise ajoutée avec succès');
+              _toast.showSuccess('Entreprise ajoutée');
               _router.navigate(['/profile/enterprises']);
             }),
             catchError(() => {
               patchState(store, { isLoading: false });
-              _toast.showError("Erreur lors de l'ajout de l'entreprise");
+              _toast.showError("Erreur lors de l'ajout");
               return of(null);
             })
           );

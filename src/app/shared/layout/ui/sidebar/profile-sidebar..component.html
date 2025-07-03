@@ -7,7 +7,7 @@
           class="group inline-flex items-center gap-2 px-3 py-1.5 font-medium rounded-md hover:bg-primary-500 hover:text-white transition-colors duration-200"
           [routerLinkActive]="'bg-primary-500 text-white'"
           [routerLinkActiveOptions]="{ exact: link.exactUrl || false }">
-          <i-lucide [name]="link.icon" class="size-4 text-primary-300 group-hover:text-white" />
+          <i-lucide [name]="link.icon" class="size-4 text-inherit" />
           {{ link.name }}
         </a>
       }

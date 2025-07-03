@@ -22,27 +22,38 @@
                   <input pInputText type="text" id="name" name="name" formControlName="name" autocomplete="none" />
                 </div>
                 <div class="flex flex-col gap-1.5 mb-4">
-                  <p class="font-medium">Description de l'entreprise <span class="text-red-500">*</span></p>
-                  <textarea
-                    pTextarea
-                    id="description"
-                    name="description"
-                    formControlName="description"
-                    rows="5"
-                    cols="30"></textarea>
+                  <label for="email" class="font-medium">Adresse e-mail</label>
+                  <input pInputText type="email" id="email" name="email" formControlName="email" autocomplete="none" />
+                </div>
+                <div class="flex flex-col gap-1.5 mb-4">
+                  <label for="phone_number" class="font-medium">Numéro de téléphone</label>
+                  <input
+                    pInputText
+                    type="tel"
+                    id="phone_number"
+                    name="phone_number"
+                    formControlName="phone_number"
+                    autocomplete="none" />
+                </div>
+                <div class="flex flex-col gap-1.5 mb-4">
+                  <label for="website" class="font-medium">Site web</label>
+                  <input
+                    pInputText
+                    type="url"
+                    id="website"
+                    name="website"
+                    formControlName="website"
+                    autocomplete="none" />
                 </div>
                 <div class="flex flex-col gap-1.5">
-                  <p class="font-medium">
-                    Problème résolu
-                    <span class="text-red-500">*</span>
-                  </p>
-                  <textarea
-                    pTextarea
-                    id="problem_solved"
-                    name="problem_solved"
-                    formControlName="problem_solved"
-                    rows="5"
-                    cols="30"></textarea>
+                  <label for="linkedin_url" class="font-medium">URL LinkedIn</label>
+                  <input
+                    pInputText
+                    type="url"
+                    id="linkedin_url"
+                    name="linkedin_url"
+                    formControlName="linkedin_url"
+                    autocomplete="none" />
                 </div>
                 <div class="flex py-6 justify-end">
                   <p-button size="small" variant="outlined" (onClick)="activateCallback(2)">
@@ -55,68 +66,6 @@
           </p-step-panel>
           <p-step-panel [value]="2">
             <ng-template #content let-activateCallback="activateCallback">
-              <div class="flex flex-col gap-1.5 mb-4">
-                <p class="font-medium">
-                  Marché cible
-                  <span class="text-red-500">*</span>
-                </p>
-                <textarea
-                  pTextarea
-                  id="target_market"
-                  name="target_market"
-                  formControlName="target_market"
-                  rows="5"
-                  cols="30"
-                  placeholder="Marché cible de l'entreprise"></textarea>
-              </div>
-              <div class="flex flex-col gap-1.5 mb-4">
-                <label for="email" class="font-medium">Adresse e-mail</label>
-                <input pInputText type="email" id="email" name="email" formControlName="email" autocomplete="none" />
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <label for="phone_number" class="font-medium">Numéro de téléphone</label>
-                <input
-                  pInputText
-                  type="tel"
-                  id="phone_number"
-                  name="phone_number"
-                  formControlName="phone_number"
-                  autocomplete="none" />
-              </div>
-              <div class="flex py-6 justify-between">
-                <p-button size="small" variant="outlined" severity="secondary" (onClick)="activateCallback(1)">
-                  <i-lucide [name]="icons.previous" class="size-4" />
-                  Précedent
-                </p-button>
-                <p-button size="small" variant="outlined" (onClick)="activateCallback(3)">
-                  Suivant
-                  <i-lucide [name]="icons.next" class="size-4" />
-                </p-button>
-              </div>
-            </ng-template>
-          </p-step-panel>
-          <p-step-panel [value]="3">
-            <ng-template #content let-activateCallback="activateCallback">
-              <div class="flex flex-col gap-1.5 mb-4">
-                <label for="website" class="font-medium">Site web</label>
-                <input
-                  pInputText
-                  type="url"
-                  id="website"
-                  name="website"
-                  formControlName="website"
-                  autocomplete="none" />
-              </div>
-              <div class="flex flex-col gap-1.5 mb-4">
-                <label for="linkedin_url" class="font-medium">URL LinkedIn</label>
-                <input
-                  pInputText
-                  type="url"
-                  id="linkedin_url"
-                  name="linkedin_url"
-                  formControlName="linkedin_url"
-                  autocomplete="none" />
-              </div>
               <div class="flex flex-col gap-1.5 mb-4">
                 <p class="font-medium">Secteur</p>
                 <p-select
@@ -145,7 +94,7 @@
                   formControlName="location"
                   autocomplete="none" />
               </div>
-              <div class="flex flex-col gap-1.5 mb-4">
+              <div class="flex flex-col gap-1.5">
                 <p class="font-medium">Étape</p>
                 <p-select
                   inputId="stage"
@@ -153,6 +102,57 @@
                   formControlName="stage"
                   placeholder="Choisissez une étape"
                   class="w-full" />
+              </div>
+              <div class="flex py-6 justify-between">
+                <p-button size="small" variant="outlined" severity="secondary" (onClick)="activateCallback(1)">
+                  <i-lucide [name]="icons.previous" class="size-4" />
+                  Précedent
+                </p-button>
+                <p-button size="small" variant="outlined" (onClick)="activateCallback(3)">
+                  Suivant
+                  <i-lucide [name]="icons.next" class="size-4" />
+                </p-button>
+              </div>
+            </ng-template>
+          </p-step-panel>
+          <p-step-panel [value]="3">
+            <ng-template #content let-activateCallback="activateCallback">
+              <div class="flex flex-col gap-1.5 mb-4">
+                <p class="font-medium">Description de l'entreprise <span class="text-red-500">*</span></p>
+                <textarea
+                  pTextarea
+                  id="description"
+                  name="description"
+                  formControlName="description"
+                  rows="5"
+                  cols="30"></textarea>
+              </div>
+              <div class="flex flex-col gap-1.5 mb-4">
+                <p class="font-medium">
+                  Problème résolu
+                  <span class="text-red-500">*</span>
+                </p>
+                <textarea
+                  pTextarea
+                  id="problem_solved"
+                  name="problem_solved"
+                  formControlName="problem_solved"
+                  rows="5"
+                  cols="30"></textarea>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <p class="font-medium">
+                  Marché cible
+                  <span class="text-red-500">*</span>
+                </p>
+                <textarea
+                  pTextarea
+                  id="target_market"
+                  name="target_market"
+                  formControlName="target_market"
+                  rows="5"
+                  cols="30"
+                  placeholder="Marché cible de l'entreprise"></textarea>
               </div>
               <div class="flex py-6 justify-between">
                 <p-button size="small" variant="outlined" severity="secondary" (onClick)="activateCallback(2)">
