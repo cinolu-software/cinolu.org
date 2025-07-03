@@ -1,5 +1,5 @@
 import { ILink } from '../types/link.type';
-import { Home, ClipboardList, NotepadTextDashed, Info, ChartNoAxesColumn, Activity } from 'lucide-angular';
+import { Info, Activity } from 'lucide-angular';
 
 export const EXPLORATION_LINKS: ILink[] = [
   {

@@ -4,7 +4,6 @@ import { ApiImgPipe } from '../../../../pipes/api-img.pipe';
 import { RouterModule } from '@angular/router';
 import { ILink } from '../../../utils/types/link.type';
 import { IUser } from '../../../../utils/types/models.type';
-import { getLinks } from '../../../../utils/helpers/get-links.fn';
 import { LucideAngularModule, Menu, X, ChevronDown, ArrowLeft } from 'lucide-angular';
 
 @Component({
