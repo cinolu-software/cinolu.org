@@ -5,22 +5,21 @@ export const EXPLORATION_LINKS: ILink[] = [
   {
     name: 'Accueil',
     path: '/',
-    description: 'Découvez la plateforme',
-    icon: Home,
     exactUrl: true
   },
   {
     name: 'Programmes',
     path: '/programs',
-    description: 'Voir nos programmes',
-    icon: ClipboardList,
     exactUrl: false
   },
   {
     name: 'Evénements',
     path: '/events',
-    description: 'Voir nos événements',
-    icon: NotepadTextDashed,
+    exactUrl: false
+  },
+  {
+    name: 'A propos',
+    path: '/about-us',
     exactUrl: false
   }
 ];
@@ -30,16 +29,12 @@ export const MY_CINOLU_LINKS: ILink[] = [
     name: 'A propos',
     path: '/about-us',
     fragment: 'about',
-    description: 'A propos de nous',
-    icon: Info,
     exactUrl: false
   },
   {
     name: 'Vision',
     path: '/about-us',
     fragment: 'vision',
-    description: 'Voir notre vision',
-    icon: ChartNoAxesColumn,
     exactUrl: false
   }
 ];

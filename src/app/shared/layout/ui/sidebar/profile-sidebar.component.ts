@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PROFILE_LINKS } from '../../utils/data/links';
-import { LucideAngularModule, ChevronRight, LogOut } from 'lucide-angular';
+import { LucideAngularModule, ChevronRight, LogOut, ArrowLeft } from 'lucide-angular';
 import { AuthStore } from '../../../store/auth.store';
 
 @Component({
@@ -16,7 +16,8 @@ export class ProfileSidebarComponent {
   authStore = inject(AuthStore);
   icons = {
     chevronRight: ChevronRight,
-    logout: LogOut
+    logout: LogOut,
+    back: ArrowLeft
   };
 
   setActiveTab(tab: string): void {

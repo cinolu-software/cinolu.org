@@ -1,74 +1,25 @@
-<div class="hidden lg:flex justify-between">
-  <div class="flex items-center gap-3">
-    @for (tab of tabs(); track $index) {
-      <button class="relative" (click)="setActiveTab(tab)">
-        <div class="menu flex items-center font-medium text-lg">
-          {{ tab }}
-          <i-lucide
-            [name]="icons.chevronDown"
-            class="duration-300 size-4"
-            [ngClass]="{
-              'rotate-180': activeTab() === tab
-            }" />
-        </div>
-        <div
-          class="absolute top-10 w-[16rem] text-gray-800 right-0 animate-Up py-8 px-6 gap-4 text-start font-normal z-30 bg-white shadow-lg rounded-lg duration-300"
-          [ngClass]="activeTab() === tab ? 'block active-nav animate-fadeInUp' : 'hidden'">
-          <div class="grid grid-cols-1 gap-x-8 gap-y-6">
-            @for (link of getLinks(links(), activeTab()); track $index) {
-              <a [routerLink]="link.path" [fragment]="link.fragment" class="group flex items-center gap-2.5">
-                <span
-                  class="h-8 w-8 flex items-center justify-center bg-primary-600 text-white rounded-full transition-transform duration-200 group-hover:scale-110">
-                  <i-lucide [name]="link.icon" class="size-4" />
-                </span>
-                <p class="flex flex-col gap-0.5 font-medium">
-                  {{ link.name }}
-                  <span class="description text-gray-700 text-sm">{{ link.description }}</span>
-                </p>
-              </a>
-            }
-          </div>
-        </div>
-      </button>
+<div class="hidden lg:flex justify-between text-base font-semibold">
+  <div class="flex items-center gap-4">
+    @for (link of links(); track $index) {
+      <a
+        [routerLink]="link.path"
+        routerLinkActive="after:bg-primary-500"
+        [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
+        class="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 hover:after:bg-primary-500">
+        {{ link.name }}
+      </a>
     }
-
     @if (user()) {
       <div class="flex items-center gap-3">
-        <button class="relative menu flex items-center gap-0.5" (click)="setActiveTab('account')">
+        <a [routerLink]="'/profile'" class="relative menu flex items-center gap-1">
           <img
             [ngSrc]="user() | apiIMG: 'user'"
             alt="Profile picture"
             width="32"
             height="32"
             class="aspect-video object-cover w-8 h-8 rounded-full ring-2 ring-primary-600" />
-
-          <i-lucide
-            [name]="icons.chevronDown"
-            class="duration-300 size-4"
-            [ngClass]="{
-              'rotate-180': activeTab() === 'account'
-            }" />
-          <div
-            class="absolute top-10 w-[13rem] right-0 animate-Up py-8 px-6 gap-6 z-30 bg-white shadow-lg rounded-lg transition-transform duration-300"
-            [ngClass]="activeTab() === 'account' ? 'block active-nav animate-fadeInUp' : 'hidden'">
-            <div class="grid grid-cols-1 gap-x-8 gap-y-6 font-medium text-gray-900">
-              <a [routerLink]="'/profile'" class="group flex items-center gap-2.5">
-                <span
-                  class="h-8 w-8 flex items-center justify-center transition-transform duration-200 group-hover:scale-110 text-white bg-primary-600 rounded-full">
-                  <i-lucide [name]="icons.layoutDashboard" class="size-4" />
-                </span>
-                Dashboard
-              </a>
-              <button class="group flex items-center gap-2.5" (click)="handleSignOut()">
-                <span
-                  class="h-8 w-8 flex items-center transition-transform duration-200 group-hover:scale-110 justify-center text-white bg-primary-600 rounded-full">
-                  <i-lucide [name]="icons.logOut" class="size-4" />
-                </span>
-                Se déconnecter
-              </button>
-            </div>
-          </div>
-        </button>
+          <p>{{ user()?.name }}</p>
+        </a>
       </div>
     } @else {
       <a routerLink="/sign-in" pButton class="primary-link">Se connecter</a>

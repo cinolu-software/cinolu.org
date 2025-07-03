@@ -15,7 +15,7 @@ import { RouterLink } from '@angular/router';
 import { DesktopNavComponent } from './desktop-nav/desktop-nav.component';
 import { MobileNavComponent } from './mobile-nav/mobile-nav.component';
 import { environment } from '../../../../../environments/environment';
-import { EXPLORATION_LINKS, MY_CINOLU_LINKS } from '../../utils/data/links';
+import { EXPLORATION_LINKS } from '../../utils/data/links';
 import { AuthStore } from '../../../store/auth.store';
 
 @Component({
@@ -27,10 +27,7 @@ export class TopbarComponent implements OnDestroy {
   #elementRef = inject(ElementRef);
   isFixed = signal(false);
   tabs = signal(['Parcourir', 'My Cinolu']);
-  links = signal({
-    Parcourir: EXPLORATION_LINKS,
-    'My Cinolu': MY_CINOLU_LINKS
-  });
+  links = signal(EXPLORATION_LINKS);
   fixed = input(false);
   mobileNav = viewChild(MobileNavComponent);
   desktopNav = viewChild(DesktopNavComponent);
@@ -52,7 +49,6 @@ export class TopbarComponent implements OnDestroy {
   }
 
   closeNav(): void {
-    this.desktopNav()?.closeNav();
     this.mobileNav()?.closeNav();
   }
 
@@ -61,13 +57,13 @@ export class TopbarComponent implements OnDestroy {
     const scroll$ = fromEvent(window, 'scroll');
     click$.pipe(takeUntil(this.#destroy$)).subscribe((event: Event) => {
       const isInside = this.#elementRef.nativeElement.contains(event.target);
-      const isMenuOpen = this.desktopNav()?.activeTab() || this.mobileNav()?.isOpen();
+      const isMenuOpen = this.mobileNav()?.isOpen();
       if (isMenuOpen && !isInside) this.closeNav();
     });
     scroll$.pipe(takeUntil(this.#destroy$)).subscribe(() => {
       const shouldFix = window.scrollY > 20;
       if (this.isFixed() !== shouldFix) this.isFixed.set(shouldFix);
-      if (this.desktopNav()?.activeTab() || this.mobileNav()?.isOpen()) this.closeNav();
+      if (this.mobileNav()?.isOpen()) this.closeNav();
     });
   }
 

@@ -14,26 +14,11 @@ import { LucideAngularModule, LayoutDashboard, LogOut, ChevronDown } from 'lucid
 })
 export class DesktopNavComponent {
   user = input.required<IUser | null>();
-  tabs = input.required<string[]>();
-  links = input.required<Record<string, ILink[]>>();
+  links = input.required<ILink[]>();
   singOut = output<void>();
-  activeTab = signal<string | null>(null);
-  getLinks = getLinks;
   icons = {
     layoutDashboard: LayoutDashboard,
     logOut: LogOut,
     chevronDown: ChevronDown
   };
-
-  closeNav(): void {
-    this.setActiveTab(null);
-  }
-
-  setActiveTab(tab: string | null): void {
-    this.activeTab.set(tab);
-  }
-
-  handleSignOut(): void {
-    this.singOut.emit();
-  }
 }
