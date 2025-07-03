@@ -52,7 +52,6 @@ export class ProfileMenuComponent implements OnDestroy {
   }
 
   closeNav(): void {
-    this.desktopNav()?.closeNav();
     this.mobileNav()?.closeNav();
   }
 
@@ -61,13 +60,13 @@ export class ProfileMenuComponent implements OnDestroy {
     const scroll$ = fromEvent(window, 'scroll');
     click$.pipe(takeUntil(this.#destroy$)).subscribe((event: Event) => {
       const isInside = this.#elementRef.nativeElement.contains(event.target);
-      const isMenuOpen = this.desktopNav()?.activeTab() || this.mobileNav()?.isOpen();
+      const isMenuOpen = this.mobileNav()?.isOpen();
       if (isMenuOpen && !isInside) this.closeNav();
     });
     scroll$.pipe(takeUntil(this.#destroy$)).subscribe(() => {
       const shouldFix = window.scrollY > 20;
       if (this.isFixed() !== shouldFix) this.isFixed.set(shouldFix);
-      if (this.desktopNav()?.activeTab() || this.mobileNav()?.isOpen()) this.closeNav();
+      if (this.mobileNav()?.isOpen()) this.closeNav();
     });
   }
 

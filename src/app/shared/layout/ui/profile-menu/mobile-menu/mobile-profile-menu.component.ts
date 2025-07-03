@@ -14,11 +14,9 @@ import { LucideAngularModule, Menu, X, ChevronDown, ArrowLeft } from 'lucide-ang
 })
 export class MobileProfileMenuComponent {
   user = input.required<IUser | null>();
-  tabs = input.required<string[]>();
   links = input.required<ILink[]>();
   singOut = output<void>();
   isOpen = signal<boolean>(false);
-  activeTab = signal<string | null>(null);
   getLinks = getLinks;
   icons = {
     menu: Menu,
@@ -31,16 +29,11 @@ export class MobileProfileMenuComponent {
     this.isOpen.update((isOpen) => !isOpen);
   }
 
-  setActiveTab(tab: string): void {
-    this.activeTab.set(tab);
-  }
-
   handleSignOut(): void {
     this.singOut.emit();
   }
 
   closeNav(): void {
     this.isOpen.set(false);
-    this.activeTab.set(null);
   }
 }
