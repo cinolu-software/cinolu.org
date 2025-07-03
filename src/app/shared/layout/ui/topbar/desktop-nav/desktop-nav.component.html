@@ -18,7 +18,7 @@
             width="32"
             height="32"
             class="aspect-video object-cover w-8 h-8 rounded-full ring-2 ring-primary-600" />
-          <p>{{ user()?.name }}</p>
+          <p class="line-clamp-1">{{ user()?.name | titlecase }}</p>
         </a>
       </div>
     } @else {
