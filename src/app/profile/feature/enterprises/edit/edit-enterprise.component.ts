@@ -12,6 +12,8 @@ import { SECTORS } from '../../../utils/data/sectors';
 import { STAGES } from '../../../utils/data/stage';
 import { Enterprisetore } from '../../../data-access/enterprise.store';
 import { UpdateEnterprisetore } from '../../../data-access/update-enterprise.store';
+import { FileUploadComponent } from '../../../../shared/ui/file-upload/file-upload.component';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-edit-enterprise',
@@ -25,7 +27,8 @@ import { UpdateEnterprisetore } from '../../../data-access/update-enterprise.sto
     LucideAngularModule,
     InputTextModule,
     StepperModule,
-    CommonModule
+    CommonModule,
+    FileUploadComponent
   ],
   templateUrl: './edit-enterprise.component.html'
 })
@@ -38,6 +41,8 @@ export class EditEnterpriseComponent {
   stages = STAGES;
   enterpriseStore = inject(Enterprisetore);
   updateEnterpriseStore = inject(UpdateEnterprisetore);
+  logoUrl = environment.apiUrl + 'enterprises/add-logo/';
+  coverUrl = environment.apiUrl + 'enterprises/add-cover/';
 
   constructor() {
     this.form = this.#fb.group({
@@ -56,6 +61,8 @@ export class EditEnterpriseComponent {
     });
     effect(() => {
       const enterprise = this.enterpriseStore.enterprise();
+      this.logoUrl += enterprise?.id || '';
+      this.coverUrl = enterprise?.id || '';
       this.form.patchValue({
         name: enterprise?.name,
         description: enterprise?.description,
@@ -71,6 +78,10 @@ export class EditEnterpriseComponent {
         stage: enterprise?.stage
       });
     });
+  }
+
+  handleLoaded(): void {
+    this.enterpriseStore.loadEnterprise(this.enterpriseStore.enterprise()?.slug || '');
   }
 
   back(): void {

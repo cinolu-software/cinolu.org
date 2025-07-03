@@ -8,7 +8,12 @@
       </button>
     </div>
     <div class="relative h-60 w-full md:h-96 bg-gray-50">
-      <img [ngSrc]="project | apiIMG: 'project'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
+      <img
+        [ngSrc]="project | apiIMG: 'project'"
+        [alt]="'Photo de couverture'"
+        class="aspect-video object-cover"
+        fill
+        priority />
     </div>
     <div class="my-10">
       <app-project-overview [project]="project" />

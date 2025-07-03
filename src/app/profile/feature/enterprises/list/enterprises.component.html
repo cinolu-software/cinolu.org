@@ -12,12 +12,12 @@
         | paginate: { itemsPerPage: 10, currentPage: queryParams().page ?? 1, totalItems: store.enterprises()[1] };
       track enterprise.id
     ) {
-      <div class="flex flex-col md:flex-row gap-4 mb-4">
+      <div class="group flex flex-col md:flex-row gap-4 mb-4">
         <img
           [alt]="enterprise.name"
           width="200"
           height="48"
-          class="aspect-video h-28 w-52 object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 col-span-1 mb-2"
+          class="aspect-video h-28 w-52 object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 mb-2"
           [ngSrc]="enterprise | apiIMG: 'enterprise'" />
         <div class="col-span-2">
           <h3 class="inline-flex items-baseline font-medium">

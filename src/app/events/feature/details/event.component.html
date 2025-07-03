@@ -8,7 +8,12 @@
       </button>
     </div>
     <div class="relative mb-10 h-60 w-full md:h-96 bg-gray-50">
-      <img [ngSrc]="event | apiIMG: 'event'" [alt]="'Photo de couverture'" class="object-cover" fill priority />
+      <img
+        [ngSrc]="event | apiIMG: 'event'"
+        [alt]="'Photo de couverture'"
+        class="aspect-video object-cover"
+        fill
+        priority />
     </div>
     <div class="my-10">
       <div class="flex items-center gap-1 mb-2 text-primary-800">
