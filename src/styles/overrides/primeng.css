@@ -5,11 +5,11 @@
 
 /* Progess Bar */
 .p-progressbar {
-  @apply bg-primary-100 rounded-none;
+  @apply bg-primary-200 rounded-none;
 }
 
 .p-progressbar-value {
-  @apply bg-primary-500;
+  @apply bg-primary-600;
 }
 
 /* Card */

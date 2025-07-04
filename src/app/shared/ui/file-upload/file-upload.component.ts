@@ -8,18 +8,18 @@ registerPlugin(imagePreview, validateType, validateSize);
 @Component({
   selector: 'app-file-upload',
   imports: [FilePondModule],
-  templateUrl: './file-upload.component.html',
+  templateUrl: './file-upload.component.html'
 })
 export class FileUploadComponent implements OnInit {
   name = input.required<string>();
-  url = input.required<string>();
+  url = input.required<string | null>();
   loaded = output<void>();
   pondOptions: unknown;
 
   ngOnInit(): void {
     this.pondOptions = {
       name: this.name(),
-      labelIdle: 'Ajouter une image',
+      labelIdle: 'Cliquez ici',
       acceptedFileTypes: 'image/jpeg, image/png, image/webp',
       maxFileSize: '1MB',
       allowImagePreview: true,
@@ -34,9 +34,9 @@ export class FileUploadComponent implements OnInit {
           withCredentials: true,
           onload: () => {
             this.handleLoaded();
-          },
-        },
-      },
+          }
+        }
+      }
     };
   }
 

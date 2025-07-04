@@ -1,5 +1,5 @@
 import { CommonModule, Location } from '@angular/common';
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ArrowLeft, LucideAngularModule, ChevronsRight, ChevronsLeft, Check } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
@@ -13,7 +13,7 @@ import { STAGES } from '../../../utils/data/stage';
 import { Enterprisetore } from '../../../data-access/enterprise.store';
 import { UpdateEnterprisetore } from '../../../data-access/update-enterprise.store';
 import { FileUploadComponent } from '../../../../shared/ui/file-upload/file-upload.component';
-import { environment } from '../../../../../environments/environment';
+import { environment as e } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-edit-enterprise',
@@ -41,8 +41,8 @@ export class EditEnterpriseComponent {
   stages = STAGES;
   enterpriseStore = inject(Enterprisetore);
   updateEnterpriseStore = inject(UpdateEnterprisetore);
-  logoUrl = environment.apiUrl + 'enterprises/add-logo/';
-  coverUrl = environment.apiUrl + 'enterprises/add-cover/';
+  logoUrl = signal<string>('');
+  coverUrl = signal<string>('');
 
   constructor() {
     this.form = this.#fb.group({
@@ -61,27 +61,24 @@ export class EditEnterpriseComponent {
     });
     effect(() => {
       const enterprise = this.enterpriseStore.enterprise();
-      this.logoUrl += enterprise?.id || '';
-      this.coverUrl = enterprise?.id || '';
+      if (!enterprise) return;
+      this.logoUrl.set(`${e.apiUrl}enterprises/add-logo/${enterprise.id}`);
+      this.coverUrl.set(`${e.apiUrl}enterprises/add-cover/${enterprise.id}`);
       this.form.patchValue({
-        name: enterprise?.name,
-        description: enterprise?.description,
-        problem_solved: enterprise?.problem_solved,
-        target_market: enterprise?.target_market,
-        email: enterprise?.email,
-        phone_number: enterprise?.phone_number,
-        website: enterprise?.website,
-        linkedin_url: enterprise?.linkedin_url,
-        sector: enterprise?.sector,
-        founded_at: new Date(enterprise?.founded_at || ''),
-        location: enterprise?.location,
-        stage: enterprise?.stage
+        name: enterprise.name,
+        description: enterprise.description,
+        problem_solved: enterprise.problem_solved,
+        target_market: enterprise.target_market,
+        email: enterprise.email,
+        phone_number: enterprise.phone_number,
+        website: enterprise.website,
+        linkedin_url: enterprise.linkedin_url,
+        sector: enterprise.sector,
+        founded_at: new Date(enterprise.founded_at || ''),
+        location: enterprise.location,
+        stage: enterprise.stage
       });
     });
-  }
-
-  handleLoaded(): void {
-    this.enterpriseStore.loadEnterprise(this.enterpriseStore.enterprise()?.slug || '');
   }
 
   back(): void {

@@ -27,6 +27,12 @@ export const profileRoutes: Routes = [
         title: 'Update',
         loadComponent: () =>
           import('./feature/enterprises/edit/edit-enterprise.component').then((c) => c.EditEnterpriseComponent)
+      },
+      {
+        path: 'view/:slug',
+        title: 'View',
+        loadComponent: () =>
+          import('./feature/enterprises/view/view-enterprise.component').then((c) => c.ViewEnterpriseComponent)
       }
     ]
   }

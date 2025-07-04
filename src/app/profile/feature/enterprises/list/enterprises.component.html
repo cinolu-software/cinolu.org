@@ -17,23 +17,28 @@
           [alt]="enterprise.name"
           width="200"
           height="48"
-          class="aspect-video h-28 w-52 object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30 mb-2"
+          class="aspect-video h-28 w-52 object-cover rounded border-2 border-slate-200/10"
           [ngSrc]="enterprise | apiIMG: 'enterprise'" />
-        <div class="col-span-2">
-          <h3 class="inline-flex items-baseline font-medium">
-            {{ enterprise.name }}
+        <div>
+          <div class="flex items-center">
+            <h3 class="font-medium">{{ enterprise.name }}</h3>
             <div class="flex items-center gap-1.5">
               <a
-                class="ml-2 text-gray-500 hover:text-gray-700"
+                class="ml-4 inline-block text-gray-500 hover:text-gray-700"
+                [routerLink]="['/profile/enterprises/view', enterprise.slug]">
+                <i-lucide [name]="icons.eye" class="size-5 text-inherit" />
+              </a>
+              <a
+                class="text-gray-500 hover:text-gray-700"
                 [routerLink]="['/profile/enterprises/update', enterprise.slug]">
-                <i-lucide [name]="icons.edit" class="size-4"></i-lucide>
+                <i-lucide [name]="icons.edit" class="size-4 text-inheri" />
               </a>
               <button (click)="confirmPopup(enterprise.id, $event)">
                 <p-confirmpopup />
                 <i-lucide [name]="icons.trash" class="size-4 text-red-500 hover:text-red-700" />
               </button>
             </div>
-          </h3>
+          </div>
           <p class="mt-2 text-base leading-normal line-clamp-3">
             {{ enterprise.description }}
           </p>
