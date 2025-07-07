@@ -5,7 +5,7 @@
         [routerLink]="link.path"
         routerLinkActive="after:bg-primary-500"
         [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
-        class="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 hover:text-primary-300">
+        class="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 hover:text-primary-500 transition-colors duration-200">
         {{ link.name }}
       </a>
     }
