@@ -1,38 +1,38 @@
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
-import { IEnterprise } from '../../shared/utils/types/models.type';
+import { IEnterprise } from '../../../shared/utils/types/models.type';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ToastrService } from '../../shared/services/toast/toastr.service';
-import { IEnterprisePayload } from '../utils/types/add-enterprise.type';
+import { ToastrService } from '../../../shared/services/toast/toastr.service';
+import { IEnterprisePayload } from '../../utils/types/add-enterprise.type';
 import { Router } from '@angular/router';
 
-interface IUpdateEnterprisetore {
+interface IAddEnterpriseStore {
   isLoading: boolean;
 }
 
-export const UpdateEnterprisetore = signalStore(
-  withState<IUpdateEnterprisetore>({ isLoading: false }),
+export const AddEnterpriseStore = signalStore(
+  withState<IAddEnterpriseStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
     _router: inject(Router)
   })),
   withMethods(({ _http, _toast, _router, ...store }) => ({
-    updateEnterprise: rxMethod<{ slug: string; payload: IEnterprisePayload }>(
+    addEnterprise: rxMethod<IEnterprisePayload>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((params) => {
-          return _http.patch<{ data: IEnterprise }>(`enterprises/${params.slug}`, params.payload).pipe(
+        switchMap((payload) => {
+          return _http.post<{ data: IEnterprise }>('enterprises', payload).pipe(
             tap(() => {
               patchState(store, { isLoading: false });
-              _toast.showSuccess('Entreprise mise à jour');
+              _toast.showSuccess('Entreprise ajoutée');
               _router.navigate(['/profile/enterprises']);
             }),
             catchError(() => {
               patchState(store, { isLoading: false });
-              _toast.showError('Erreur lors de la mise à jour');
+              _toast.showError("Erreur lors de l'ajout");
               return of(null);
             })
           );

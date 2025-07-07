@@ -1,39 +1,16 @@
 import { Routes } from '@angular/router';
+import { enterprisesRoutes } from './feature/enterprises/enterprises.routes';
+import { productsRoutes } from './feature/products/products.routes';
 
 export const profileRoutes: Routes = [
   {
     path: '',
     title: 'Profile',
-    loadComponent: () => import('./feature/info/info.component').then((c) => c.ProfileInfoComponent)
+    loadComponent: () => import('./feature/user-info/user-info.component').then((c) => c.UserInfoComponent)
   },
   {
     path: 'enterprises',
     title: 'Mes entreprises',
-    children: [
-      {
-        path: '',
-        title: 'List',
-        loadComponent: () =>
-          import('./feature/enterprises/list/enterprises.component').then((c) => c.ProfileEnterprisesComponent)
-      },
-      {
-        path: 'add',
-        title: 'Add ',
-        loadComponent: () =>
-          import('./feature/enterprises/add/add-enterprise.component').then((c) => c.AddEnterpriseComponent)
-      },
-      {
-        path: 'update/:slug',
-        title: 'Update',
-        loadComponent: () =>
-          import('./feature/enterprises/edit/edit-enterprise.component').then((c) => c.EditEnterpriseComponent)
-      },
-      {
-        path: 'view/:slug',
-        title: 'View',
-        loadComponent: () =>
-          import('./feature/enterprises/view/view-enterprise.component').then((c) => c.ViewEnterpriseComponent)
-      }
-    ]
+    children: [...enterprisesRoutes, ...productsRoutes]
   }
 ];

@@ -7,14 +7,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Textarea } from 'primeng/textarea';
 import { SelectModule } from 'primeng/select';
 import { DatePickerModule } from 'primeng/datepicker';
-import { AddEnterpriseStore } from '../../../data-access/enterprises/add-enterprise.store';
 import { StepperModule } from 'primeng/stepper';
-import { SECTORS } from '../../../utils/data/sectors';
-import { STAGES } from '../../../utils/data/stage';
 
 @Component({
-  selector: 'app-add-enterprise',
-  providers: [AddEnterpriseStore],
+  selector: 'app-add-product',
   imports: [
     ReactiveFormsModule,
     SelectModule,
@@ -25,31 +21,20 @@ import { STAGES } from '../../../utils/data/stage';
     InputTextModule,
     StepperModule
   ],
-  templateUrl: './add-enterprise.component.html'
+  templateUrl: './add-product.component.html'
 })
-export class AddEnterpriseComponent {
+export class AddProductComponent {
   #fb = inject(FormBuilder);
   #location = inject(Location);
   form: FormGroup;
   icons = { back: ArrowLeft, next: ChevronsRight, previous: ChevronsLeft, check: Check };
-  sectors = SECTORS;
-  stages = STAGES;
-  store = inject(AddEnterpriseStore);
+  // store = inject(AddEnterpriseStore);
 
   constructor() {
     this.form = this.#fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      problem_solved: ['', Validators.required],
-      target_market: ['', Validators.required],
-      email: ['', Validators.email],
-      phone_number: [''],
-      website: [''],
-      linkedin_url: [''],
-      sector: [''],
-      founded_at: [''],
-      location: [''],
-      stage: ['']
+      price: ['', Validators.required]
     });
   }
 
@@ -59,6 +44,6 @@ export class AddEnterpriseComponent {
 
   onAddEnterprise(): void {
     if (!this.form.valid) return;
-    this.store.addEnterprise(this.form.value);
+    // this.store.addEnterprise(this.form.value);
   }
 }

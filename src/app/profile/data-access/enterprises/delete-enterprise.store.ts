@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ToastrService } from '../../shared/services/toast/toastr.service';
+import { ToastrService } from '../../../shared/services/toast/toastr.service';
 import { ActivatedRoute } from '@angular/router';
 import { EnterprisesStore } from './enterprises.store';
 

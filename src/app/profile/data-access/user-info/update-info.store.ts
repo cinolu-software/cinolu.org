@@ -1,12 +1,12 @@
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
-import { IUser } from '../../shared/utils/types/models.type';
+import { IUser } from '../../../shared/utils/types/models.type';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
-import { IUpdateInfoPayload } from '../utils/types/update-info.type';
+import { IUpdateInfoPayload } from '../../utils/types/update-info.type';
 import { HttpClient } from '@angular/common/http';
-import { ToastrService } from '../../shared/services/toast/toastr.service';
-import { AuthStore } from '../../shared/store/auth.store';
+import { ToastrService } from '../../../shared/services/toast/toastr.service';
+import { AuthStore } from '../../../shared/store/auth.store';
 
 interface IUpdateInfoStore {
   isLoading: boolean;

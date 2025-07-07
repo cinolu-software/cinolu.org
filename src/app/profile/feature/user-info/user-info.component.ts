@@ -7,13 +7,13 @@ import { FileUploadComponent } from '../../../shared/ui/file-upload/file-upload.
 import { environment } from '../../../../environments/environment';
 import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
 import { AuthStore } from '../../../shared/store/auth.store';
-import { UpdateInfoStore } from '../../data-access/update-info.store';
-import { UpdatePasswordStore } from '../../data-access/update-password.store';
+import { UpdateInfoStore } from '../../data-access/user-info/update-info.store';
+import { UpdatePasswordStore } from '../../data-access/user-info/update-password.store';
 import { LucideAngularModule, Info, Lock } from 'lucide-angular';
 
 @Component({
-  selector: 'app-profile-info',
-  templateUrl: './info.component.html',
+  selector: 'app-user-info',
+  templateUrl: './user-info.component.html',
   providers: [UpdateInfoStore, UpdatePasswordStore],
   imports: [
     ButtonModule,
@@ -26,7 +26,7 @@ import { LucideAngularModule, Info, Lock } from 'lucide-angular';
     LucideAngularModule
   ]
 })
-export class ProfileInfoComponent implements OnInit {
+export class UserInfoComponent implements OnInit {
   infoForm: FormGroup;
   passwordForm: FormGroup;
   accUrl = environment.accountUrl;

@@ -1,11 +1,11 @@
-<div class="hidden lg:flex justify-between text-base font-semibold">
+<div class="hidden lg:flex justify-between text-base font-medium">
   <div class="flex items-center gap-4">
     @for (link of links(); track $index) {
       <a
         [routerLink]="link.path"
         routerLinkActive="after:bg-primary-500"
         [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
-        class="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 hover:text-primary-500 transition-colors duration-200">
+        class="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 hover:text-primary-500 hover:transition-colors hover:duration-200">
         {{ link.name }}
       </a>
     }

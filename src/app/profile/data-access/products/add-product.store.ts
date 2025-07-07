@@ -1,11 +1,11 @@
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
-import { IEnterprise } from '../../shared/utils/types/models.type';
+import { IEnterprise } from '../../../shared/utils/types/models.type';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ToastrService } from '../../shared/services/toast/toastr.service';
-import { IEnterprisePayload } from '../utils/types/add-enterprise.type';
+import { ToastrService } from '../../../shared/services/toast/toastr.service';
+import { IEnterprisePayload } from '../../utils/types/add-enterprise.type';
 import { Router } from '@angular/router';
 
 interface IAddEnterpriseStore {

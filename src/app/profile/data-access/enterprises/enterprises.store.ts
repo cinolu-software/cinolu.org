@@ -3,9 +3,9 @@ import { inject } from '@angular/core';
 import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, switchMap } from 'rxjs';
-import { IEnterprise } from '../../shared/utils/types/models.type';
-import { QueryParams } from '../utils/types/query-params.type';
-import { buildQueryParams } from '../../shared/utils/helpers/build-query-params.fn';
+import { IEnterprise } from '../../../shared/utils/types/models.type';
+import { QueryParams } from '../../utils/types/query-params.type';
+import { buildQueryParams } from '../../../shared/utils/helpers/build-query-params.fn';
 
 interface IEnterprisesStore {
   isLoading: boolean;
