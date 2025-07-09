@@ -3,7 +3,7 @@ import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { LucideAngularModule, Plus, Edit, Trash, Eye } from 'lucide-angular';
+import { LucideAngularModule, Plus, Edit, Trash, Eye, Activity, Currency } from 'lucide-angular';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
@@ -43,7 +43,7 @@ import { environment as e } from '../../../../../../environments/environment';
 })
 export class ProductsComponent implements OnInit {
   enterprise = input.required<IEnterprise>();
-  icons = { plus: Plus, edit: Edit, trash: Trash, eye: Eye };
+  icons = { plus: Plus, edit: Edit, trash: Trash, eye: Eye, activity: Activity, currency: Currency };
   #confirmationService = inject(ConfirmationService);
   #fb = inject(FormBuilder);
   #route = inject(ActivatedRoute);
@@ -55,6 +55,7 @@ export class ProductsComponent implements OnInit {
   deleteProductStore = inject(DeleteProductStore);
   updateProductStore = inject(UpdateProducttore);
   showAddModal = signal(false);
+  showViewModal = signal(false);
   showEditModal = signal(false);
   product = signal<IProduct | null>(null);
   logoUrl = `${e.apiUrl}products/add-image/`;
@@ -93,6 +94,11 @@ export class ProductsComponent implements OnInit {
 
   onToggleAddModal(): void {
     this.showAddModal.update((v) => !v);
+  }
+
+  onToggleViewModal(product: IProduct | null = null): void {
+    this.product.set(product);
+    this.showViewModal.update((v) => !v);
   }
 
   onToggleEditModal(product: IProduct | null = null): void {

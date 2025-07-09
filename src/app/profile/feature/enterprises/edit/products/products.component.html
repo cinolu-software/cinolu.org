@@ -24,11 +24,9 @@
           <div class="flex items-center">
             <h3 class="font-bold font-satoshi text-lg">{{ product.name }}</h3>
             <div class="flex items-center gap-1.5">
-              <a
-                class="ml-4 inline-block text-gray-500 hover:text-gray-700"
-                [routerLink]="['/profile/products/view', product.slug]">
+              <button class="ml-4 inline-block text-gray-500 hover:text-gray-700" (click)="onToggleViewModal(product)">
                 <i-lucide [name]="icons.eye" class="size-5 text-inherit" />
-              </a>
+              </button>
               <button class="text-gray-500 hover:text-gray-700" (click)="onToggleEditModal(product)">
                 <i-lucide [name]="icons.edit" class="size-4 text-inheri" />
               </button>
@@ -71,6 +69,36 @@
       </div>
     }
   }
+
+  <p-dialog [(visible)]="showViewModal" [modal]="true" [style]="{ width: '28rem' }">
+    <div class="flex flex-col md:flex-row flex-wrap gap-4">
+      <div class="relative h-28 w-32 rounded bg-gray-200">
+        <img
+          [alt]="product()?.name"
+          [ngSrc]="product() | apiIMG: 'product'"
+          class="aspect-video object-cover rounded border-2 border-slate-200/10 mb-2"
+          fill />
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <div class="mb-1">
+          <h1 class="text-lg font-extrabold text-gray-900">{{ product()?.name | titlecase }}</h1>
+          <p class="text-gray-900 text-sm">
+            Créée le
+            {{ product()?.created_at | date: 'longDate' }}
+          </p>
+        </div>
+        <div class="flex items-center gap-1.5 text-gray-800 text-sm">
+          Prix :
+          {{ product()?.price | currency: 'USD' }}
+        </div>
+        <div class="flex items-center gap-1.5 text-gray-800 text-sm">
+          Entreprise :
+          {{ enterprise().name }}
+        </div>
+      </div>
+    </div>
+    <p class="text-gray-600 mt-6">{{ product()?.description }}</p>
+  </p-dialog>
 
   <!-- Add product modal -->
   <p-dialog [(visible)]="showAddModal" [modal]="true" [style]="{ width: '28rem' }">
