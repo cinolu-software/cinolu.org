@@ -17,6 +17,8 @@ import { AddProductStore } from '../../../../data-access/products/add-product.st
 import { DeleteProductStore } from '../../../../data-access/products/delete-product.store';
 import { IEnterprise, IProduct } from '../../../../../shared/utils/types/models.type';
 import { UpdateProducttore } from '../../../../data-access/products/update-product.store';
+import { FileUploadComponent } from '../../../../../shared/ui/file-upload/file-upload.component';
+import { environment as e } from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-products',
@@ -35,7 +37,8 @@ import { UpdateProducttore } from '../../../../data-access/products/update-produ
     ConfirmPopupModule,
     Dialog,
     Textarea,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FileUploadComponent
   ]
 })
 export class ProductsComponent implements OnInit {
@@ -54,6 +57,7 @@ export class ProductsComponent implements OnInit {
   showAddModal = signal(false);
   showEditModal = signal(false);
   product = signal<IProduct | null>(null);
+  logoUrl = `${e.apiUrl}products/add-image/`;
   queryParams = signal<QueryParams>({
     page: Number(this.#route.snapshot.queryParams?.['page']) || null
   });
