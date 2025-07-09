@@ -1,10 +1,10 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { LucideAngularModule, Plus, Edit, Trash, Eye } from 'lucide-angular';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
@@ -38,11 +38,13 @@ import { UpdateProducttore } from '../../../../data-access/products/update-produ
     ReactiveFormsModule
   ]
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   enterprise = input.required<IEnterprise>();
   icons = { plus: Plus, edit: Edit, trash: Trash, eye: Eye };
   #confirmationService = inject(ConfirmationService);
   #fb = inject(FormBuilder);
+  #route = inject(ActivatedRoute);
+  #router = inject(Router);
   addProductForm: FormGroup;
   editProductForm: FormGroup;
   productsStore = inject(ProductsStore);
@@ -53,7 +55,7 @@ export class ProductsComponent {
   showEditModal = signal(false);
   product = signal<IProduct | null>(null);
   queryParams = signal<QueryParams>({
-    page: null
+    page: Number(this.#route.snapshot.queryParams?.['page']) || null
   });
 
   constructor() {
@@ -67,11 +69,12 @@ export class ProductsComponent {
       description: ['', Validators.required],
       price: ['', Validators.required]
     });
-    effect(() => {
-      this.productsStore.loadProducts({
-        id: this.enterprise().id,
-        queryParams: this.queryParams()
-      });
+  }
+
+  ngOnInit(): void {
+    this.productsStore.loadProducts({
+      enterpriseId: this.enterprise().id,
+      queryParams: this.queryParams()
     });
   }
 
@@ -84,18 +87,33 @@ export class ProductsComponent {
     });
   }
 
-  onToogleAddModal(show: boolean): void {
-    this.showAddModal.set(show);
+  onToggleAddModal(): void {
+    this.showAddModal.update((v) => !v);
   }
 
-  onToogleEditModal(product: IProduct | null, show: boolean): void {
+  onToggleEditModal(product: IProduct | null = null): void {
     this.product.set(product);
     this.patchEditForm(product);
-    this.showEditModal.set(show);
+    this.showEditModal.update((v) => !v);
   }
 
   onPageChange(currentPage: number): void {
     this.queryParams().page = currentPage === 1 ? null : currentPage;
+    this.updateRouteAndProducts();
+  }
+
+  updateRoute(): void {
+    const { page } = this.queryParams();
+    const queryParams = { page, tab: 'products' };
+    this.#router.navigate(['profile/enterprises/update', this.enterprise().slug], { queryParams });
+  }
+
+  updateRouteAndProducts(): void {
+    this.updateRoute();
+    this.productsStore.loadProducts({
+      enterpriseId: this.enterprise().id,
+      queryParams: this.queryParams()
+    });
   }
 
   onAddProduct(): void {
@@ -104,19 +122,20 @@ export class ProductsComponent {
       ...this.addProductForm.value,
       enterpriseId: this.enterprise().id
     });
-    this.showAddModal.set(false);
+    this.onToggleAddModal();
   }
 
   onUpdateProduct(): void {
     if (!this.editProductForm.valid) return;
     this.updateProductStore.updateProduct({
-      id: this.product()?.id || '',
+      enterpriseId: this.enterprise().id,
+      productId: this.product()?.id || '',
       payload: this.editProductForm.value
     });
-    this.showEditModal.set(false);
+    this.onToggleEditModal();
   }
 
-  onDeleteProduct(id: string, event: Event): void {
+  onDeleteProduct(productId: string, event: Event): void {
     this.#confirmationService.confirm({
       target: event.currentTarget as EventTarget,
       message: 'Etes-vous sûr ?',
@@ -130,7 +149,7 @@ export class ProductsComponent {
         severity: 'danger'
       },
       accept: () => {
-        this.deleteProductStore.deleteProduct(id);
+        this.deleteProductStore.deleteProduct({ enterpriseId: this.enterprise().id, productId });
       }
     });
   }

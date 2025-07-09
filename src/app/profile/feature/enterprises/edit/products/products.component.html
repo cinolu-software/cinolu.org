@@ -1,7 +1,7 @@
 <div class="pb-16 mt-4">
   <div class="flex w-full flex-wrap gap-4 justify-between items-center mb-8">
     <h1 class="text-2xl font-bold">Mes produits</h1>
-    <button class="flex items-center gap-1 font-normal primary-link" (click)="onToogleAddModal(true)">
+    <button class="flex items-center gap-1 font-normal primary-link" (click)="onToggleAddModal()">
       <i-lucide [name]="icons.plus" class="size-5" />
       Ajouter
     </button>
@@ -29,7 +29,7 @@
                 [routerLink]="['/profile/products/view', product.slug]">
                 <i-lucide [name]="icons.eye" class="size-5 text-inherit" />
               </a>
-              <button class="text-gray-500 hover:text-gray-700" (click)="onToogleEditModal(product, true)">
+              <button class="text-gray-500 hover:text-gray-700" (click)="onToggleEditModal(product)">
                 <i-lucide [name]="icons.edit" class="size-4 text-inheri" />
               </button>
               <button (click)="onDeleteProduct(product.id, $event)">
@@ -95,12 +95,7 @@
         <input pInputText type="number" id="price" name="price" formControlName="price" autocomplete="none" />
       </div>
       <div class="flex justify-end gap-4 flex-wrap">
-        <p-button
-          size="small"
-          variant="outlined"
-          severity="danger"
-          class="font-satoshi"
-          (onClick)="onToogleAddModal(false)">
+        <p-button size="small" variant="outlined" severity="danger" class="font-satoshi" (onClick)="onToggleAddModal()">
           Annuler
         </p-button>
         <p-button
@@ -144,7 +139,7 @@
           variant="outlined"
           severity="danger"
           class="font-satoshi"
-          (onClick)="onToogleEditModal(null, false)">
+          (onClick)="onToggleEditModal(null)">
           Annuler
         </p-button>
         <p-button

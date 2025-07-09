@@ -12,15 +12,20 @@ interface IProductsStore {
   products: [IProduct[], number];
 }
 
+interface ILoadProductsParams {
+  enterpriseId: string | undefined;
+  queryParams: QueryParams;
+}
+
 export const ProductsStore = signalStore(
   withState<IProductsStore>({ isLoading: false, products: [[], 0] }),
   withMethods((store, http = inject(HttpClient)) => ({
-    loadProducts: rxMethod<{ id: string | undefined; queryParams: QueryParams }>(
+    loadProducts: rxMethod<ILoadProductsParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((params) => {
           return http
-            .get<{ data: [IProduct[], number] }>(`products/enterprise/${params.id}`, {
+            .get<{ data: [IProduct[], number] }>(`products/enterprise/${params.enterpriseId}`, {
               params: buildQueryParams(params.queryParams)
             })
             .pipe(
