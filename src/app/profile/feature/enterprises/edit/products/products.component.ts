@@ -1,19 +1,27 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Component, effect, inject, input, signal } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { LucideAngularModule, Plus, Edit, Trash, Eye } from 'lucide-angular';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { ConfirmationService } from 'primeng/api';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
+import { QueryParams } from '../../../../utils/types/products/query-params.type';
+import { ProductsStore } from '../../../../data-access/products/products.store';
+import { ConfirmationService } from 'primeng/api';
+import { Dialog } from 'primeng/dialog';
+import { Textarea } from 'primeng/textarea';
+import { AddProductStore } from '../../../../data-access/products/add-product.store';
+import { DeleteProductStore } from '../../../../data-access/products/delete-product.store';
+import { IEnterprise, IProduct } from '../../../../../shared/utils/types/models.type';
+import { UpdateProducttore } from '../../../../data-access/products/update-product.store';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  providers: [],
+  providers: [ProductsStore, UpdateProducttore, DeleteProductStore, AddProductStore, ConfirmationService],
   imports: [
     ButtonModule,
     InputTextModule,
@@ -24,43 +32,94 @@ import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
     ApiImgPipe,
     NgxPaginationModule,
     NgOptimizedImage,
-    ConfirmPopupModule
+    ConfirmPopupModule,
+    Dialog,
+    Textarea,
+    ReactiveFormsModule
   ]
 })
 export class ProductsComponent {
+  enterprise = input.required<IEnterprise>();
   icons = { plus: Plus, edit: Edit, trash: Trash, eye: Eye };
-  // #route = inject(ActivatedRoute);
-  // #router = inject(Router);
   #confirmationService = inject(ConfirmationService);
-  // queryParams = signal<QueryParams>({
-  //   page: Number(this.#route.snapshot.queryParams?.['page']) || null
-  // });
+  #fb = inject(FormBuilder);
+  addProductForm: FormGroup;
+  editProductForm: FormGroup;
+  productsStore = inject(ProductsStore);
+  addProductStore = inject(AddProductStore);
+  deleteProductStore = inject(DeleteProductStore);
+  updateProductStore = inject(UpdateProducttore);
+  showAddModal = signal(false);
+  showEditModal = signal(false);
+  product = signal<IProduct | null>(null);
+  queryParams = signal<QueryParams>({
+    page: null
+  });
 
-  // ngOnInit(): void {
-  //   // this.store.loadEnterprises(this.queryParams());
-  // }
+  constructor() {
+    this.addProductForm = this.#fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      price: ['', Validators.required]
+    });
+    this.editProductForm = this.#fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      price: ['', Validators.required]
+    });
+    effect(() => {
+      this.productsStore.loadProducts({
+        id: this.enterprise().id,
+        queryParams: this.queryParams()
+      });
+    });
+  }
+
+  patchEditForm(product: IProduct | null): void {
+    if (!product) return;
+    this.editProductForm.patchValue({
+      name: product?.name,
+      description: product?.description,
+      price: product?.price
+    });
+  }
+
+  onToogleAddModal(show: boolean): void {
+    this.showAddModal.set(show);
+  }
+
+  onToogleEditModal(product: IProduct | null, show: boolean): void {
+    this.product.set(product);
+    this.patchEditForm(product);
+    this.showEditModal.set(show);
+  }
 
   onPageChange(currentPage: number): void {
-    console.log(`Current page: ${currentPage}`);
-    // this.queryParams().page = currentPage === 1 ? null : currentPage;
-    this.updateRouteAndEnterprises();
+    this.queryParams().page = currentPage === 1 ? null : currentPage;
   }
 
-  updateRoute(): void {
-    // const { page } = this.queryParams();
-    // const queryParams = { page };
-    // this.#router.navigate(['/profile/enterprises'], { queryParams });
+  onAddProduct(): void {
+    if (!this.addProductForm.valid) return;
+    this.addProductStore.addProduct({
+      ...this.addProductForm.value,
+      enterpriseId: this.enterprise().id
+    });
+    this.showAddModal.set(false);
   }
 
-  updateRouteAndEnterprises(): void {
-    this.updateRoute();
-    // this.store.loadEnterprises(this.queryParams());
+  onUpdateProduct(): void {
+    if (!this.editProductForm.valid) return;
+    this.updateProductStore.updateProduct({
+      id: this.product()?.id || '',
+      payload: this.editProductForm.value
+    });
+    this.showEditModal.set(false);
   }
 
-  confirmPopup(id: string, event: Event): void {
+  onDeleteProduct(id: string, event: Event): void {
     this.#confirmationService.confirm({
       target: event.currentTarget as EventTarget,
-      message: 'Etes-vous sûr?',
+      message: 'Etes-vous sûr ?',
       rejectButtonProps: {
         label: 'Annuler',
         severity: 'secondary',
@@ -71,8 +130,7 @@ export class ProductsComponent {
         severity: 'danger'
       },
       accept: () => {
-        console.log(`Confirmed deletion of product with ID: ${id}`);
-        // this.deleteStore.deleteEnterprise(id);
+        this.deleteProductStore.deleteProduct(id);
       }
     });
   }

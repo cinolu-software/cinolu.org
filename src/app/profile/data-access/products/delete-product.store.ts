@@ -4,32 +4,26 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../shared/services/toast/toastr.service';
-import { ActivatedRoute } from '@angular/router';
-import { EnterprisesStore } from './products.store';
 
-interface IDeleteEnterpriseStore {
+interface IDeleteProductStore {
   isLoading: boolean;
 }
 
-export const DeleteEnterpriseStore = signalStore(
-  withState<IDeleteEnterpriseStore>({ isLoading: false }),
+export const DeleteProductStore = signalStore(
+  withState<IDeleteProductStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _toast: inject(ToastrService),
-    _route: inject(ActivatedRoute),
-    _enterprisesStore: inject(EnterprisesStore)
+    _toast: inject(ToastrService)
   })),
-  withMethods(({ _http, _toast, _route, _enterprisesStore, ...store }) => ({
-    deleteEnterprise: rxMethod<string>(
+  withMethods(({ _http, _toast, ...store }) => ({
+    deleteProduct: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((id) => {
-          return _http.delete(`enterprises/${id}`).pipe(
+          return _http.delete(`products/${id}`).pipe(
             tap(() => {
               patchState(store, { isLoading: false });
-              const page = Number(_route.snapshot.queryParams['page']) || 1;
-              _enterprisesStore.loadEnterprises({ page });
-              _toast.showSuccess('Entreprise supprimée');
+              _toast.showSuccess('Produit supprimée');
             }),
             catchError(() => {
               patchState(store, { isLoading: false });

@@ -1,34 +1,31 @@
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
-import { IEnterprise } from '../../../shared/utils/types/models.type';
+import { IProduct } from '../../../shared/utils/types/models.type';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../shared/services/toast/toastr.service';
-import { IEnterprisePayload } from '../../utils/types/add-enterprise.type';
-import { Router } from '@angular/router';
+import { IProductPayload } from '../../utils/types/products/add-product.type';
 
-interface IAddEnterpriseStore {
+interface IAddProductStore {
   isLoading: boolean;
 }
 
-export const AddEnterpriseStore = signalStore(
-  withState<IAddEnterpriseStore>({ isLoading: false }),
+export const AddProductStore = signalStore(
+  withState<IAddProductStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _toast: inject(ToastrService),
-    _router: inject(Router)
+    _toast: inject(ToastrService)
   })),
-  withMethods(({ _http, _toast, _router, ...store }) => ({
-    addEnterprise: rxMethod<IEnterprisePayload>(
+  withMethods(({ _http, _toast, ...store }) => ({
+    addProduct: rxMethod<IProductPayload>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((payload) => {
-          return _http.post<{ data: IEnterprise }>('enterprises', payload).pipe(
+          return _http.post<{ data: IProduct }>('products', payload).pipe(
             tap(() => {
               patchState(store, { isLoading: false });
-              _toast.showSuccess('Entreprise ajoutée');
-              _router.navigate(['/profile/enterprises']);
+              _toast.showSuccess('Produit ajouté');
             }),
             catchError(() => {
               patchState(store, { isLoading: false });

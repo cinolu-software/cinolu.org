@@ -17,6 +17,7 @@ export class ApiImgPipe implements PipeTransform {
       enterpriseCover: value['cover']
         ? `${apiUrl}uploads/enterprises/covers/${value['cover']}`
         : '/images/no-image.jpg',
+      product: value['image'] ? `${apiUrl}uploads/products/images/${value['image']}` : '/images/no-image.jpg',
       post: value['image'] ? `${apiUrl}uploads/posts/${value['image']}` : '/images/no-image.jpg',
       event: value['cover'] ? `${apiUrl}uploads/events/${value['cover']}` : '/images/no-image.jpg'
     };

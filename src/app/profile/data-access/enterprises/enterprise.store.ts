@@ -6,13 +6,13 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
-interface IEnterprisetore {
+interface IEnterpriseStore {
   isLoading: boolean;
   enterprise: IEnterprise | null;
 }
 
-export const Enterprisetore = signalStore(
-  withState<IEnterprisetore>({ isLoading: false, enterprise: null }),
+export const EnterpriseStore = signalStore(
+  withState<IEnterpriseStore>({ isLoading: false, enterprise: null }),
   withProps(() => ({
     _http: inject(HttpClient),
     _route: inject(ActivatedRoute)

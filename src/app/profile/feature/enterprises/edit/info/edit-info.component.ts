@@ -10,7 +10,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { StepperModule } from 'primeng/stepper';
 import { environment as e } from '../../../../../../environments/environment';
 import { FileUploadComponent } from '../../../../../shared/ui/file-upload/file-upload.component';
-import { Enterprisetore } from '../../../../data-access/enterprises/enterprise.store';
+import { EnterpriseStore } from '../../../../data-access/enterprises/enterprise.store';
 import { UpdateEnterprisetore } from '../../../../data-access/enterprises/update-enterprise.store';
 import { SECTORS } from '../../../../utils/data/sectors';
 import { STAGES } from '../../../../utils/data/stage';
@@ -18,7 +18,7 @@ import { IEnterprise } from '../../../../../shared/utils/types/models.type';
 
 @Component({
   selector: 'app-edit-enterprise-info',
-  providers: [Enterprisetore, UpdateEnterprisetore],
+  providers: [EnterpriseStore, UpdateEnterprisetore],
   imports: [
     ReactiveFormsModule,
     SelectModule,

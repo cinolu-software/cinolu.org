@@ -1,34 +1,31 @@
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
-import { IEnterprise } from '../../../shared/utils/types/models.type';
+import { IProduct } from '../../../shared/utils/types/models.type';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../shared/services/toast/toastr.service';
-import { IEnterprisePayload } from '../../utils/types/add-enterprise.type';
-import { Router } from '@angular/router';
+import { IProductPayload } from '../../utils/types/products/add-product.type';
 
-interface IUpdateEnterprisetore {
+interface IUpdateProducttore {
   isLoading: boolean;
 }
 
-export const UpdateEnterprisetore = signalStore(
-  withState<IUpdateEnterprisetore>({ isLoading: false }),
+export const UpdateProducttore = signalStore(
+  withState<IUpdateProducttore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _toast: inject(ToastrService),
-    _router: inject(Router)
+    _toast: inject(ToastrService)
   })),
-  withMethods(({ _http, _toast, _router, ...store }) => ({
-    updateEnterprise: rxMethod<{ slug: string; payload: IEnterprisePayload }>(
+  withMethods(({ _http, _toast, ...store }) => ({
+    updateProduct: rxMethod<{ id: string; payload: IProductPayload }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((params) => {
-          return _http.patch<{ data: IEnterprise }>(`enterprises/${params.slug}`, params.payload).pipe(
+          return _http.patch<{ data: IProduct }>(`products/${params.id}`, params.payload).pipe(
             tap(() => {
               patchState(store, { isLoading: false });
-              _toast.showSuccess('Entreprise mise à jour');
-              _router.navigate(['/profile/enterprises']);
+              _toast.showSuccess('Produit mise à jour');
             }),
             catchError(() => {
               patchState(store, { isLoading: false });

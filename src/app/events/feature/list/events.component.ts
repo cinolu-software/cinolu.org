@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EventCardComponent } from '../../ui/event-card/event-card.component';
@@ -24,21 +24,16 @@ import { EventCategoriesStore } from '../../data-access/categories.store';
   ],
   templateUrl: './events.component.html'
 })
-export class EventsComponent implements OnInit {
+export class EventsComponent {
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   skeletonArray = Array(6).fill(0);
+  store = inject(EventsStore);
+  categoriesStore = inject(EventCategoriesStore);
   queryParams = signal<QueryParams>({
     page: Number(this.#route.snapshot.queryParams?.['page']) || null,
     categories: this.#route.snapshot.queryParams?.['categories'] || null
   });
-  store = inject(EventsStore);
-  categoriesStore = inject(EventCategoriesStore);
-
-  ngOnInit(): void {
-    this.store.loadEvents(this.queryParams());
-    this.categoriesStore.loadCategories();
-  }
 
   onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'categories'): void {
     this.queryParams().page = null;

@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { enterprisesRoutes } from './feature/enterprises/enterprises.routes';
-import { productsRoutes } from './feature/products/products.routes';
 
 export const profileRoutes: Routes = [
   {
@@ -11,6 +10,6 @@ export const profileRoutes: Routes = [
   {
     path: 'enterprises',
     title: 'Mes entreprises',
-    children: [...enterprisesRoutes, ...productsRoutes]
+    children: enterprisesRoutes
   }
 ];

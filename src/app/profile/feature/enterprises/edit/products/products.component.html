@@ -1,52 +1,50 @@
-<aside class="pt-32 min-h-[110vh] w-full">
-  <div class="flex w-full flex-wrap gap-4 justify-between items-center mb-10">
+<div class="pb-16 mt-4">
+  <div class="flex w-full flex-wrap gap-4 justify-between items-center mb-8">
     <h1 class="text-2xl font-bold">Mes produits</h1>
-    <a class="flex items-center gap-1 font-normal! primary-link" [routerLink]="'/profile/enterprises/add'">
-      <i-lucide [name]="icons.plus" class="size-5"></i-lucide>
+    <button class="flex items-center gap-1 font-normal primary-link" (click)="onToogleAddModal(true)">
+      <i-lucide [name]="icons.plus" class="size-5" />
       Ajouter
-    </a>
+    </button>
   </div>
-  @if (store.enterprises()[0]) {
+  @if (productsStore.products()[0]) {
     @for (
-      enterprise of store.enterprises()[0]
-        | paginate: { itemsPerPage: 10, currentPage: queryParams().page ?? 1, totalItems: store.enterprises()[1] };
-      track enterprise.id
+      product of productsStore.products()[0]
+        | paginate: { itemsPerPage: 10, currentPage: queryParams().page ?? 1, totalItems: productsStore.products()[1] };
+      track product.id
     ) {
       <div class="flex flex-col md:flex-row gap-4 mb-4">
         <div class="relative h-28 w-52 rounded bg-gray-200">
           <img
-            [ngSrc]="enterprise | apiIMG: 'enterprise'"
-            [alt]="enterprise.name"
+            [ngSrc]="product | apiIMG: 'product'"
+            [alt]="product.name"
             class="aspect-video object-cover rounded border-2 border-slate-200/10"
             fill />
         </div>
         <div class="flex flex-col gap-1.5 w-full md:w-3/4">
           <div class="flex items-center">
-            <h3 class="font-bold font-satoshi text-lg">{{ enterprise.name }}</h3>
+            <h3 class="font-bold font-satoshi text-lg">{{ product.name }}</h3>
             <div class="flex items-center gap-1.5">
               <a
                 class="ml-4 inline-block text-gray-500 hover:text-gray-700"
-                [routerLink]="['/profile/enterprises/view', enterprise.slug]">
+                [routerLink]="['/profile/products/view', product.slug]">
                 <i-lucide [name]="icons.eye" class="size-5 text-inherit" />
               </a>
-              <a
-                class="text-gray-500 hover:text-gray-700"
-                [routerLink]="['/profile/enterprises/update', enterprise.slug]">
+              <button class="text-gray-500 hover:text-gray-700" (click)="onToogleEditModal(product, true)">
                 <i-lucide [name]="icons.edit" class="size-4 text-inheri" />
-              </a>
-              <button (click)="confirmPopup(enterprise.id, $event)">
+              </button>
+              <button (click)="onDeleteProduct(product.id, $event)">
                 <p-confirmpopup />
                 <i-lucide [name]="icons.trash" class="size-4 text-red-500 hover:text-red-700" />
               </button>
             </div>
           </div>
           <p class="text-base leading-normal line-clamp-3">
-            {{ enterprise.description }}
+            {{ product.description }}
           </p>
         </div>
       </div>
     }
-    @if (store.enterprises()[1] > 10) {
+    @if (productsStore.products()[1] > 10) {
       <div class="flex justify-center pb-8">
         <pagination-controls
           nextLabel=""
@@ -57,12 +55,10 @@
       </div>
     }
   }
-  @if (store.enterprises()[1] <= 0 && !store.isLoading()) {
-    <p class="text-gray-600">
-      Aucune entreprise trouvée. Vous pouvez en ajouter une en cliquant sur le bouton "Ajouter".
-    </p>
+  @if (productsStore.products()[1] <= 0 && !productsStore.isLoading()) {
+    <p class="text-gray-600">Aucune produits trouvé. Vous pouvez en ajouter une en cliquant sur le bouton "Ajouter".</p>
   }
-  @if (store.isLoading()) {
+  @if (productsStore.isLoading()) {
     @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track $index) {
       <div class="flex flex-col md:flex-row gap-4 mb-4">
         <div class="h-28 w-52 rounded bg-gray-200 animate-pulse mb-4"></div>
@@ -75,4 +71,92 @@
       </div>
     }
   }
-</aside>
+
+  <!-- Add product modal -->
+  <p-dialog [(visible)]="showAddModal" [modal]="true" [style]="{ width: '28rem' }">
+    <h2 class="text-lg font-medium mb-4">Ajouter un produit</h2>
+    <form class="flex flex-col gap-4" [formGroup]="addProductForm" (ngSubmit)="onAddProduct()">
+      <div class="flex flex-col gap-1.5">
+        <label for="name" class="font-medium">Nom du produit<span class="text-red-500">*</span></label>
+        <input pInputText type="text" id="name" name="name" formControlName="name" autocomplete="none" />
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <p class="font-medium">Description <span class="text-red-500">*</span></p>
+        <textarea
+          pTextarea
+          id="description"
+          name="description"
+          formControlName="description"
+          rows="5"
+          cols="30"></textarea>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="price" class="font-medium">Prix<span class="text-red-500">*</span></label>
+        <input pInputText type="number" id="price" name="price" formControlName="price" autocomplete="none" />
+      </div>
+      <div class="flex justify-end gap-4 flex-wrap">
+        <p-button
+          size="small"
+          variant="outlined"
+          severity="danger"
+          class="font-satoshi"
+          (onClick)="onToogleAddModal(false)">
+          Annuler
+        </p-button>
+        <p-button
+          size="small"
+          severity="primary"
+          class="font-satoshi"
+          [disabled]="!addProductForm.valid || addProductStore.isLoading()"
+          [loading]="addProductStore.isLoading()"
+          (onClick)="onAddProduct()">
+          Ajouter le produit
+        </p-button>
+      </div>
+    </form>
+  </p-dialog>
+
+  <!-- Edit product modal -->
+  <p-dialog [(visible)]="showEditModal" [modal]="true" [style]="{ width: '28rem' }">
+    <h2 class="text-lg font-medium mb-4">Modifier un produit</h2>
+    <form class="flex flex-col gap-4" [formGroup]="editProductForm" (ngSubmit)="onUpdateProduct()">
+      <div class="flex flex-col gap-1.5">
+        <label for="name" class="font-medium">Nom du produit<span class="text-red-500">*</span></label>
+        <input pInputText type="text" id="name" name="name" formControlName="name" autocomplete="none" />
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <p class="font-medium">Description <span class="text-red-500">*</span></p>
+        <textarea
+          pTextarea
+          id="description"
+          name="description"
+          formControlName="description"
+          rows="5"
+          cols="30"></textarea>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="price" class="font-medium">Prix<span class="text-red-500">*</span></label>
+        <input pInputText type="number" id="price" name="price" formControlName="price" autocomplete="none" />
+      </div>
+      <div class="flex justify-end gap-4 flex-wrap">
+        <p-button
+          size="small"
+          variant="outlined"
+          severity="danger"
+          class="font-satoshi"
+          (onClick)="onToogleEditModal(null, false)">
+          Annuler
+        </p-button>
+        <p-button
+          size="small"
+          severity="primary"
+          class="font-satoshi"
+          [disabled]="!editProductForm.valid || addProductStore.isLoading()"
+          [loading]="addProductStore.isLoading()"
+          (onClick)="onUpdateProduct()">
+          Modifier le produit
+        </p-button>
+      </div>
+    </form>
+  </p-dialog>
+</div>

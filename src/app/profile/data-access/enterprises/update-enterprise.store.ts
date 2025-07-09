@@ -5,7 +5,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../shared/services/toast/toastr.service';
-import { IEnterprisePayload } from '../../utils/types/add-enterprise.type';
+import { IEnterprisePayload } from '../../utils/types/enterprises/add-enterprise.type';
 import { Router } from '@angular/router';
 
 interface IUpdateEnterprisetore {

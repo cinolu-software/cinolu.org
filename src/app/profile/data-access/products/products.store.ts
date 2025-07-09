@@ -4,7 +4,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, switchMap } from 'rxjs';
 import { IProduct } from '../../../shared/utils/types/models.type';
-import { QueryParams } from '../../utils/types/query-params.type';
+import { QueryParams } from '../../utils/types/products/query-params.type';
 import { buildQueryParams } from '../../../shared/utils/helpers/build-query-params.fn';
 
 interface IProductsStore {
@@ -15,13 +15,13 @@ interface IProductsStore {
 export const ProductsStore = signalStore(
   withState<IProductsStore>({ isLoading: false, products: [[], 0] }),
   withMethods((store, http = inject(HttpClient)) => ({
-    loadProducts: rxMethod<QueryParams>(
+    loadProducts: rxMethod<{ id: string | undefined; queryParams: QueryParams }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((queryParams) => {
+        switchMap((params) => {
           return http
-            .get<{ data: [IProduct[], number] }>('products/by-user', {
-              params: buildQueryParams(queryParams)
+            .get<{ data: [IProduct[], number] }>(`products/enterprise/${params.id}`, {
+              params: buildQueryParams(params.queryParams)
             })
             .pipe(
               tap(({ data }) => patchState(store, { isLoading: false, products: data })),

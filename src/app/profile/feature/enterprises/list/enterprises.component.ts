@@ -8,7 +8,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { EnterprisesStore } from '../../../data-access/enterprises/enterprises.store';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { QueryParams } from '../../../utils/types/query-params.type';
+import { QueryParams } from '../../../utils/types/enterprises/query-params.type';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 import { DeleteEnterpriseStore } from '../../../data-access/enterprises/delete-enterprise.store';
@@ -61,7 +61,7 @@ export class UserEnterprisesComponent implements OnInit {
     this.store.loadEnterprises(this.queryParams());
   }
 
-  confirmPopup(id: string, event: Event): void {
+  onDeleteEnterprise(id: string, event: Event): void {
     this.#confirmationService.confirm({
       target: event.currentTarget as EventTarget,
       message: 'Etes-vous sûr?',

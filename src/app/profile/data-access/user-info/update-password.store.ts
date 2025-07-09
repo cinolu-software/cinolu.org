@@ -3,7 +3,7 @@ import { IUser } from '../../../shared/utils/types/models.type';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
-import { IUpdatePasswordPayload } from '../../utils/types/update-password.type';
+import { IUpdatePasswordPayload } from '../../utils/types/user-info/update-password.type';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../shared/services/toast/toastr.service';
 
