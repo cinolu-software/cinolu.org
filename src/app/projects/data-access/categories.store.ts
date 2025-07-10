@@ -1,4 +1,4 @@
-import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withHooks } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
@@ -27,5 +27,10 @@ export const ProjectCategoriesStore = signalStore(
         })
       )
     )
-  }))
+  })),
+  withHooks({
+    onInit: ({ loadCategories }) => {
+      loadCategories();
+    }
+  })
 );
