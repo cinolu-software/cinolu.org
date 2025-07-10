@@ -34,7 +34,7 @@ export const EventStore = signalStore(
   })),
   withHooks({
     onInit: ({ _route, loadEvent }) => {
-      const slug = _route.snapshot.params['slug'];
+      const slug = _route.snapshot.params['slug'] || '';
       loadEvent(slug);
     }
   })

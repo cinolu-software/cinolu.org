@@ -34,7 +34,7 @@ export const ProjectStore = signalStore(
   })),
   withHooks({
     onInit: ({ _route, loadProject }) => {
-      const slug = _route.snapshot.params['slug'];
+      const slug = _route.snapshot.params['slug'] || '';
       loadProject(slug);
     }
   })
