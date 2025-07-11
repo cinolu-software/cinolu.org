@@ -1,9 +1,10 @@
-<section class="pt-14 px-8 mx-auto md:max-w-screen-lg xl:px-0">
+<section class="pt-14 px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-32 max-w-screen-2xl mx-auto">
   <div class="py-10">
     <h2 class="font-black font-satoshi mb-2 text-3xl">Voir nos programmes</h2>
     <p class="text-primary-500">Tous les programmes</p>
   </div>
-  <div class="relative h-60 md:h-96 w-full bg-gray-200 pb-8 md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-lg">
+  <div
+    class="relative h-60 md:h-96 w-full bg-gray-200 pb-8 px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-32 max-w-screen-2xl mx-auto">
     <img
       ngSrc="/images/projects.jpg"
       alt="projects"
@@ -11,7 +12,7 @@
       fill
       priority />
   </div>
-  <div class="flex flex-col md:mx-auto md:max-w-screen-lg 2xl:max-w-screen-lg">
+  <div class="flex flex-col">
     @if (categoriesStore.categories().length > 0) {
       <div class="pb-2 pt-10 flex flex-wrap gap-4">
         <p-multiselect
