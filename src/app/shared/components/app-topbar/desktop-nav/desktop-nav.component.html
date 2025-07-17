@@ -1,0 +1,28 @@
+<div class="hidden lg:flex justify-between text-sm font-semibold">
+  <div class="flex items-center gap-4">
+    @for (link of links(); track $index) {
+      <a
+        [routerLink]="link.path"
+        routerLinkActive="after:bg-primary-500"
+        [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
+        class="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 hover:text-primary-500 hover:transition-colors hover:duration-200">
+        {{ link.name }}
+      </a>
+    }
+    @if (user()) {
+      <div class="flex items-center gap-3">
+        <a [routerLink]="'/dashboard'" class="relative menu flex items-center gap-2">
+          <img
+            [ngSrc]="user() | apiIMG: 'user'"
+            alt="Profile picture"
+            width="32"
+            height="32"
+            class="aspect-video object-cover w-8 h-8 rounded-full ring-2 ring-primary-600" />
+          <p class="line-clamp-1">{{ user()?.name | titlecase }}</p>
+        </a>
+      </div>
+    } @else {
+      <a routerLink="/sign-in" pButton class="primary-link">Se connecter</a>
+    }
+  </div>
+</div>

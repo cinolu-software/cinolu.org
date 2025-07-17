@@ -4,11 +4,11 @@ export const projectsRoutes: Routes = [
   {
     path: ':slug',
     title: 'Programmes - Details',
-    loadComponent: () => import('./feature/details/project.component').then((c) => c.ProjectComponent),
+    loadComponent: () => import('./features/details/project.component').then((c) => c.ProjectComponent)
   },
   {
     path: '',
     title: 'Programmes',
-    loadComponent: () => import('./feature/list/projects.component').then((c) => c.ProjectsComponent),
-  },
+    loadComponent: () => import('./features/list/projects.component').then((c) => c.ProjectsComponent)
+  }
 ];

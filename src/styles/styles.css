@@ -66,6 +66,10 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+   .dashboard-main-content {
+    @apply bg-white rounded-lg shadow-md px-8 py-10 my-10;
+  }
 }
 
 

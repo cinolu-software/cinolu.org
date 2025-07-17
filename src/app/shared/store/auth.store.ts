@@ -23,7 +23,7 @@ export const AuthStore = signalStore(
     getProfile: rxMethod<void>(
       pipe(
         exhaustMap(() =>
-          _http.get<{ data: IUser }>('auth/profile').pipe(
+          _http.get<{ data: IUser }>('auth/dashboard').pipe(
             tap(({ data }) => patchState(store, { user: data })),
             catchError(() => {
               patchState(store, { user: null });

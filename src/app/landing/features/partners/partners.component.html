@@ -1,0 +1,12 @@
+<section class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-10">
+  <div class="mb-10">
+    <h3 class="font-black font-satoshi mb-2 text-2xl">Nos partenaires</h3>
+  </div>
+  <div class="mt-10 flex flex-wrap gap-5">
+    @for (p of partners; track $index) {
+      <div class="relative h-20 w-32 flex p-3" style="position: relative; height: 60px; width: 128px">
+        <img [ngSrc]="p" alt="Logo partenaire's" class="h-20 w-auto object-contain" fill />
+      </div>
+    }
+  </div>
+</section>

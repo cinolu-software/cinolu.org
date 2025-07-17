@@ -1,13 +1,15 @@
-@if (layout === 'emptyLayout') {
+@if (layout === 'empty-layout') {
   <app-empty-layout />
 }
 
-@if (layout === 'profileLayout') {
-  <div class="px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-32 max-w-screen-2xl mx-auto">
-    <app-profile-layout />
-  </div>
+@if (layout === 'full-layout') {
+  <app-full-layout />
 }
 
-@if (layout === 'fullLayout') {
-  <app-full-layout [fixedHeader]="fixedHeader" />
+@if (layout === 'fixed-layout') {
+  <app-fixed-topbar-layout />
+}
+
+@if (layout === 'dashboard-layout') {
+  <app-dashboard-layout />
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LoadingBarComponent } from './shared/ui/loading-bar/loading-bar.component';
+import { LoadingBarComponent } from './shared/components/loading-bar/loading-bar.component';
 
 @Component({
   selector: 'app-root',

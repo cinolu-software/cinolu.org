@@ -7,6 +7,6 @@ export const unauthGuard: CanActivateFn = () => {
   const router = inject(Router);
 
   if (!authStore.user()) return true;
-  router.navigate(['/profile']);
+  router.navigate(['/dashboard']);
   return false;
 };

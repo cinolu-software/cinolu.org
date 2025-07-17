@@ -6,44 +6,44 @@ import { aboutRoutes } from './about-us/about-us.routes';
 import { projectsRoutes } from './projects/projects.routes';
 import { LayoutComponent } from './shared/layout/layout.component';
 import { authGuard } from './shared/guards/auth.guard';
-import { profileRoutes } from './profile/profile.routes';
+import { dashboardRoutes } from './dashboard/dashboard.routes';
 
 export const routes: Route[] = [
   {
     path: 'programs',
     component: LayoutComponent,
-    data: { layout: 'fullLayout', fixedHeader: true },
+    data: { layout: 'fixed-layout', fixedHeader: true },
     loadChildren: () => projectsRoutes
   },
   {
     path: 'events',
     component: LayoutComponent,
-    data: { layout: 'fullLayout', fixedHeader: true },
+    data: { layout: 'fixed-layout', fixedHeader: true },
     loadChildren: () => eventsRoutes
   },
   {
     path: 'about-us',
     component: LayoutComponent,
-    data: { layout: 'fullLayout' },
+    data: { layout: 'full-layout' },
     loadChildren: () => aboutRoutes
   },
   {
-    path: 'profile',
+    path: 'dashboard',
     component: LayoutComponent,
-    data: { layout: 'profileLayout' },
+    data: { layout: 'dashboard-layout' },
     canActivate: [authGuard],
-    loadChildren: () => profileRoutes
+    loadChildren: () => dashboardRoutes
   },
   {
     path: '',
     component: LayoutComponent,
-    data: { layout: 'fullLayout' },
+    data: { layout: 'full-layout' },
     loadChildren: () => landingRoutes
   },
   {
     path: '',
     component: LayoutComponent,
-    data: { layout: 'emptyLayout' },
+    data: { layout: 'empty-layout' },
     loadChildren: () => auhtRoutes
   },
   {

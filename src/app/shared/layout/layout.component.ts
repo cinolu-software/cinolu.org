@@ -1,21 +1,21 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
-import { EmptyLayoutComponent } from './feature/empty-layout/empty-layout.component';
 import { AppConfig } from '../services/config/config.types';
 import { AppConfigService } from '../services/config/config.service';
-import { FullLayoutComponent } from './feature/full-layout/full-layout.component';
-import { ProfileLayoutComponent } from './feature/profile-layout/profile-layout.component';
+import { FixedLayoutComponent } from './fixed-layout/fixed-layout.component';
+import { FullLayoutComponent } from './full-layout/full-layout.component';
+import { EmptyLayoutComponent } from './empty-layout/empty-layout.component';
+import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  imports: [EmptyLayoutComponent, FullLayoutComponent, ProfileLayoutComponent],
+  imports: [FixedLayoutComponent, EmptyLayoutComponent, FullLayoutComponent, DashboardLayoutComponent]
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   config: AppConfig = {} as AppConfig;
-  layout = 'full';
-  fixedHeader = false;
+  layout = 'full-layout';
   #unsubscribeAll = new Subject();
   #router = inject(Router);
   #activatedRoute = inject(ActivatedRoute);
@@ -29,7 +29,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.#router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
-        takeUntil(this.#unsubscribeAll),
+        takeUntil(this.#unsubscribeAll)
       )
       .subscribe(() => {
         this._updateLayout();
@@ -48,19 +48,16 @@ export class LayoutComponent implements OnInit, OnDestroy {
     }
     this.layout = this.config.layout;
     const layoutFromQueryParam = route.snapshot.queryParamMap.get('layout');
-    const fixedHeaderFromQueryParam = Boolean(route.snapshot.queryParamMap.get('fixedHeader'));
     if (layoutFromQueryParam) {
       this.layout = layoutFromQueryParam;
       if (this.config) {
         this.config.layout = layoutFromQueryParam;
-        this.config.fixedHeader = fixedHeaderFromQueryParam;
       }
     }
     const paths = route.pathFromRoot;
     paths.forEach((path) => {
       if (path.routeConfig && path.routeConfig.data && path.routeConfig.data['layout']) {
         this.layout = path.routeConfig.data['layout'];
-        this.fixedHeader = path.routeConfig.data['fixedHeader'];
       }
     });
   }
