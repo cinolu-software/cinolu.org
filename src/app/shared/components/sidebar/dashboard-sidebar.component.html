@@ -1,4 +1,4 @@
-<div class="font-satoshi fixed top-0 h-screen overflow-y-auto px-8 pt-6 w-[20vw] z-50 bg-primary-950 text-white">
+<div class="font-satoshi fixed top-0 h-screen overflow-y-auto px-8 pt-6 w-[20vw] z-50 bg-primary-900 text-white">
   <div class="flex gap-3 items-center px-2 mb-10">
     <a routerLink="/" class="flex items-center gap-1.5 cursor-pointer" aria-label="logo">
       <img ngSrc="/images/logo/logo-w.png" alt="logo" class="cursor-pointer w-9 h-10" width="64" height="68" priority />
@@ -8,9 +8,9 @@
     @for (link of links(); track $index) {
       <a
         [routerLink]="link.path"
-        class="group inline-flex items-center gap-1.5 px-2 py-1.5 font-medium rounded-md hover:bg-primary-900 transition-colors duration-200"
+        class="group inline-flex items-center gap-1.5 px-2 py-1.5 font-medium rounded-md hover:bg-primary-700 transition-colors duration-200"
         [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
-        [routerLinkActive]="'bg-primary-900'">
+        [routerLinkActive]="'bg-primary-700'">
         <i-lucide [name]="link.icon" class="size-4 text-inherit" />
         {{ link.name }}
       </a>

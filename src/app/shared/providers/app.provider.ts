@@ -20,7 +20,7 @@ export const provideApp = (): EnvironmentProviders[] => {
     provideAppInitializer(() => {
       const authStore = inject(AuthStore);
       const http = inject(HttpClient);
-      return http.get<{ data: IUser }>('auth/dashboard').pipe(
+      return http.get<{ data: IUser }>('auth/profile').pipe(
         tap(({ data }) => authStore.setUser(data)),
         catchError(() => {
           authStore.setUser(null);

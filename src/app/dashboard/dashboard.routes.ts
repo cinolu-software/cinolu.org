@@ -10,6 +10,6 @@ export const dashboardRoutes: Routes = [
   {
     path: 'enterprises',
     title: 'Mes entreprises',
-    children: enterprisesRoutes
+    loadChildren: () => enterprisesRoutes
   }
 ];
