@@ -11,5 +11,10 @@ export const dashboardRoutes: Routes = [
     path: 'enterprises',
     title: 'Mes entreprises',
     loadChildren: () => enterprisesRoutes
+  },
+  {
+    path: 'users',
+    title: 'Les utilisateurs',
+    loadComponent: () => import('./features/users/users.component').then((c) => c.DashboardUsersComponent)
   }
 ];

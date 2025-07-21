@@ -23,7 +23,7 @@ export class MobileNavComponent {
     moveLeft: ArrowLeft
   };
 
-  toogleNav(): void {
+  toggleNav(): void {
     this.isOpen.update((isOpen) => !isOpen);
   }
 

@@ -1,8 +1,7 @@
 <div class="font-satoshi fixed top-0 h-screen overflow-y-auto px-8 pt-6 w-[20vw] z-50 bg-primary-900 text-white">
-  <div class="flex gap-3 items-center px-2 mb-10">
-    <a routerLink="/" class="flex items-center gap-1.5 cursor-pointer" aria-label="logo">
-      <img ngSrc="/images/logo/logo-w.png" alt="logo" class="cursor-pointer w-9 h-10" width="64" height="68" priority />
-    </a>
+  <div class="flex items-center gap-3 mb-10 border-y border-primary-700/70 py-2">
+    <img ngSrc="/images/logo/logo-w.png" alt="logo" class="w-6 h-6" width="64" height="68" priority />
+    <span class="font-semibold uppercase">Tableau de bord </span>
   </div>
   <div class="flex flex-col gap-1.5">
     @for (link of links(); track $index) {

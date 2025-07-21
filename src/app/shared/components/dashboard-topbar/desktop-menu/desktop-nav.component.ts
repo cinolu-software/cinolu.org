@@ -13,7 +13,7 @@ import { getLinks } from '../../../utils/helpers/get-links.fn';
 })
 export class DesktopNavComponent {
   user = input.required<IUser | null>();
-  singOut = output<void>();
+  signOut = output<void>();
   activeTab = signal<string>('');
   getLinks = getLinks;
   icons = {
@@ -30,7 +30,7 @@ export class DesktopNavComponent {
   }
 
   handleSignOut(): void {
-    this.singOut.emit();
+    this.signOut.emit();
     this.setActiveTab('');
   }
 }

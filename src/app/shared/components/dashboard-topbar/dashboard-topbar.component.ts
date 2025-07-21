@@ -7,24 +7,25 @@ import {
   NgZone,
   OnDestroy,
   signal,
-  viewChild,
+  viewChild
 } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
 import { AuthStore } from '../../store/auth.store';
 import { DesktopNavComponent } from './desktop-menu/desktop-nav.component';
 import { MobileNavComponent } from './mobile-menu/mobile-nav.component';
-import { PROFILE_LINKS } from '../../utils/data/links';
+import { DASHBOARD_LINKS } from '../../utils/data/links';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-topbar',
-  imports: [CommonModule, NgOptimizedImage, DesktopNavComponent, MobileNavComponent],
-  templateUrl: './dashboard-topbar.component.html',
+  imports: [CommonModule, RouterLink, NgOptimizedImage, DesktopNavComponent, MobileNavComponent],
+  templateUrl: './dashboard-topbar.component.html'
 })
 export class DashboardTopbarComponent implements OnDestroy {
   #elementRef = inject(ElementRef);
   isFixed = signal(false);
-  links = signal(PROFILE_LINKS);
+  links = signal(DASHBOARD_LINKS);
   fixed = input(false);
   mobileNav = viewChild(MobileNavComponent);
   desktopNav = viewChild(DesktopNavComponent);
@@ -40,7 +41,7 @@ export class DashboardTopbarComponent implements OnDestroy {
     });
   }
 
-  signOut(): void {
+  handleSignOut(): void {
     this.authStore.signOut();
   }
 

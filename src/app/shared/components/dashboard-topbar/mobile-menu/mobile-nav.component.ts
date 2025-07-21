@@ -14,7 +14,7 @@ import { getLinks } from '../../../utils/helpers/get-links.fn';
 export class MobileNavComponent {
   user = input.required<IUser | null>();
   links = input.required<ILink[]>();
-  singOut = output<void>();
+  signOut = output<void>();
   isOpen = signal<boolean>(false);
   getLinks = getLinks;
   icons = {
@@ -24,12 +24,12 @@ export class MobileNavComponent {
     moveLeft: ArrowLeft
   };
 
-  toogleNav(): void {
+  toggleNav(): void {
     this.isOpen.update((isOpen) => !isOpen);
   }
 
   handleSignOut(): void {
-    this.singOut.emit();
+    this.signOut.emit();
   }
 
   closeNav(): void {

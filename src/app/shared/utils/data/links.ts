@@ -1,5 +1,5 @@
 import { ILink } from '../types/link.type';
-import { Info, Activity } from 'lucide-angular';
+import { Info, Activity, UserCheck } from 'lucide-angular';
 
 export const EXPLORATION_LINKS: ILink[] = [
   {
@@ -39,7 +39,7 @@ export const MY_CINOLU_LINKS: ILink[] = [
   }
 ];
 
-export const PROFILE_LINKS: ILink[] = [
+export const DASHBOARD_LINKS: ILink[] = [
   {
     name: 'Mes informations',
     path: '/dashboard',
@@ -52,6 +52,12 @@ export const PROFILE_LINKS: ILink[] = [
     path: '/dashboard/enterprises',
     fragment: 'info',
     icon: Activity
+  },
+  {
+    name: 'Les utilisateurs',
+    path: '/dashboard/users',
+    fragment: 'info',
+    icon: UserCheck
   }
 ];
 
