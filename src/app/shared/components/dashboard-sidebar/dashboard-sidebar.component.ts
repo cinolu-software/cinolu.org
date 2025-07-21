@@ -1,8 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { LucideAngularModule } from 'lucide-angular';
-import { AuthStore } from '../../store/auth.store';
+import { LucideAngularModule, MoveLeft, ChevronDown } from 'lucide-angular';
 import { DASHBOARD_LINKS } from '../../utils/data/links';
 
 @Component({
@@ -12,14 +11,10 @@ import { DASHBOARD_LINKS } from '../../utils/data/links';
 })
 export class DashboardSidebarComponent {
   links = signal(DASHBOARD_LINKS);
-  activeTab = signal('Mon compte');
-  authStore = inject(AuthStore);
+  icons = { chevronDown: ChevronDown, moveLeft: MoveLeft };
+  activeTab = signal<string | null>(null);
 
-  setActiveTab(tab: string): void {
-    this.activeTab.set(tab);
-  }
-
-  logout(): void {
-    this.authStore.signOut();
+  toggleTab(tab: string | null): void {
+    this.activeTab.update((currentTab) => (tab === currentTab ? null : tab));
   }
 }
