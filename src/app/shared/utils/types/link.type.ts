@@ -8,4 +8,5 @@ export interface ILink {
   icon?: LucideIconData;
   path: string;
   exactUrl?: boolean;
+  children?: ILink[];
 }

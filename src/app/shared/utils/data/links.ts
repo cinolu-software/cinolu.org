@@ -1,5 +1,5 @@
 import { ILink } from '../types/link.type';
-import { Info, Activity, UserCheck } from 'lucide-angular';
+import { Info, Activity, UserCheck, BriefcaseBusiness, Briefcase, Calendar1 } from 'lucide-angular';
 
 export const EXPLORATION_LINKS: ILink[] = [
   {
@@ -9,18 +9,15 @@ export const EXPLORATION_LINKS: ILink[] = [
   },
   {
     name: 'Programmes',
-    path: '/programs',
-    exactUrl: false
+    path: '/programs'
   },
   {
     name: 'Evénements',
-    path: '/events',
-    exactUrl: false
+    path: '/events'
   },
   {
     name: 'A propos',
-    path: '/about-us',
-    exactUrl: false
+    path: '/about-us'
   }
 ];
 
@@ -28,14 +25,12 @@ export const MY_CINOLU_LINKS: ILink[] = [
   {
     name: 'A propos',
     path: '/about-us',
-    fragment: 'about',
-    exactUrl: false
+    fragment: 'about'
   },
   {
     name: 'Vision',
     path: '/about-us',
-    fragment: 'vision',
-    exactUrl: false
+    fragment: 'vision'
   }
 ];
 
@@ -43,21 +38,54 @@ export const DASHBOARD_LINKS: ILink[] = [
   {
     name: 'Mes informations',
     path: '/dashboard',
-    fragment: 'info',
     icon: Info,
     exactUrl: true
   },
   {
     name: 'Mes enteprises',
     path: '/dashboard/enterprises',
-    fragment: 'info',
-    icon: Activity
+    icon: BriefcaseBusiness
   },
   {
     name: 'Les utilisateurs',
     path: '/dashboard/users',
-    fragment: 'info',
     icon: UserCheck
+  },
+  {
+    name: 'Les programmes',
+    path: '/dashboard/programs',
+    icon: Activity
+  },
+  {
+    name: 'Les projets',
+    path: '/dashboard/projects',
+    icon: Briefcase,
+    children: [
+      {
+        name: 'Liste',
+        path: '/dashboard/projects'
+      },
+      {
+        name: 'Catégories ',
+        path: '/dashboard/projects/categories'
+      }
+    ]
+  },
+  {
+    name: 'Les événements',
+    path: '/dashboard/events',
+    fragment: 'info',
+    icon: Calendar1,
+    children: [
+      {
+        name: 'Liste ',
+        path: '/dashboard/events'
+      },
+      {
+        name: 'Catégories',
+        path: '/dashboard/events/categories'
+      }
+    ]
   }
 ];
 
