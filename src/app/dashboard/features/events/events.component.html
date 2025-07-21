@@ -1,0 +1,148 @@
+<section class="min-h-[105vh] text-gray-600 mt-16">
+  @let isLoading = store.isLoading();
+  @let isFiltering = store.isFiltering();
+  @let hasQuery = queryParams().q;
+  @let eventCount = store.events()[1];
+  @let eventList = store.events()[0];
+
+  <div class="relative px-4 bg-white rounded-lg">
+    <!-- Header -->
+    <div class="flex flex-col gap-3 mb-10 pt-6">
+      <div class="flex flex-wrap gap-2 md:justify-between md:items-center mb-6 md:mb-0">
+        <h5 class="text-lg font-bold">
+          Liste des événements
+          <span class="text-gray-500 text-sm">
+            @if (isFiltering || isLoading) {
+              <p-progress-spinner
+                strokeWidth="5"
+                animationDuration=".5s"
+                fill="transparent"
+                [style]="{ width: '0.8rem', height: '0.8rem' }" />
+            } @else {
+              ({{ eventCount }})
+            }
+          </span>
+        </h5>
+        <!-- <p-button
+          [outlined]="true"
+          [size]="'small'"
+          [loading]="isDownloading"
+          [disabled]="isDownloading || programCount === 0"
+          (click)="onDownloadPrograms()">
+          Télécharger CSV
+          @if (!isDownloading) {
+            <i-lucide [name]="icons.download" class="size-4" />
+          }
+        </p-button> -->
+      </div>
+      <!-- Search Form -->
+      <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="flex flex-col gap-1 md:flex-row md:gap-4">
+        <input
+          class="py-1.5! md:col-span-4"
+          pInputText
+          type="text"
+          id="q"
+          name="q"
+          formControlName="q"
+          autocomplete="none"
+          placeholder="Rechercher..." />
+        <div class="flex items-center gap-1">
+          <p-button
+            class="w-4/4!"
+            type="submit"
+            [size]="'small'"
+            [loading]="isFiltering"
+            [disabled]="searchForm.invalid || isFiltering || (eventCount === 0 && !hasQuery)"
+            (click)="onSearch()">
+            @if (!isFiltering) {
+              <i-lucide [name]="icons.search" class="size-4" />
+            }
+            Rechercher
+          </p-button>
+          <p-button
+            class="w-10! h-10!"
+            [size]="'small'"
+            [outlined]="true"
+            [rounded]="true"
+            [disabled]="!hasQuery || isFiltering"
+            (click)="onResetSearch()">
+            <i-lucide [name]="icons.refresh" />
+          </p-button>
+        </div>
+      </form>
+    </div>
+    <!-- Empty State -->
+    @if (eventCount === 0 && !isLoading) {
+      <h4 class="font-medium text-gray-700 text-lg px-2 pb-8">
+        {{ hasQuery ? 'Aucun utilisateur trouvé avec ce filtre' : 'Aucun utilisateur trouvé' }}
+      </h4>
+    }
+    <!-- Skeleton Loading -->
+    @if (isFiltering || isLoading) {
+      <div class="grid grid-cols-5 overflow-x-auto">
+        @for (i of skeletonArray; track $index) {
+          <div class="border-y border-gray-200 py-3 px-2">
+            <div class="h-4 rounded-md bg-gray-200 animate-pulse mb-2"></div>
+          </div>
+        }
+      </div>
+    }
+    <!-- Users Table -->
+    @if (eventCount > 0 && !isLoading) {
+      <div class="relative flex flex-col overflow-x-auto">
+        <table class="text-sm text-left rtl:text-right text-gray-500">
+          <thead class="text-sm text-gray-700 uppercase bg-gray-50">
+            <tr>
+              <th class="px-4 py-2">Nom</th>
+              <th class="px-4 py-2">Description</th>
+              <th class="px-4 py-2">Rejoint le</th>
+              <th class="px-4 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (
+              event of eventList
+                | paginate: { itemsPerPage: 40, currentPage: queryParams().page || 1, totalItems: eventCount };
+              track event.id
+            ) {
+              <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
+                <td class="px-4 py-2 font-medium text-gray-900">
+                  {{ event.name | titlecase }}
+                </td>
+                <td class="px-4 py-2 whitespace-normal">
+                  <span class="text-gray-500 line-clamp-3">{{ event.description }}</span>
+                </td>
+                <td class="px-4 py-2">
+                  {{ event.created_at | date: 'longDate' }}
+                </td>
+                <td class="px-4 py-2">
+                  <div class="flex items-center gap-2 opacity-50 blur-[1px]">
+                    <button disabled>
+                      <i-lucide [name]="icons.edit" class="size-4" />
+                    </button>
+                    <button disabled>
+                      <i-lucide [name]="icons.trash" class="size-4" />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+    <!-- Pagination -->
+    @if (eventCount > 40) {
+      <div class="flex justify-center items-center gap-3 py-8">
+        <pagination-controls
+          nextLabel=""
+          previousLabel=""
+          [autoHide]="true"
+          [maxSize]="5"
+          (pageChange)="onPageChange($event)"
+          class="pg">
+        </pagination-controls>
+      </div>
+    }
+  </div>
+</section>
