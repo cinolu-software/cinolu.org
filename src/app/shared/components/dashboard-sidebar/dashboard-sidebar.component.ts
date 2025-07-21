@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, MoveLeft, ChevronDown } from 'lucide-angular';
 import { DASHBOARD_LINKS } from '../../utils/data/links';
 
@@ -9,12 +9,25 @@ import { DASHBOARD_LINKS } from '../../utils/data/links';
   imports: [CommonModule, NgOptimizedImage, RouterModule, LucideAngularModule],
   templateUrl: './dashboard-sidebar.component.html'
 })
-export class DashboardSidebarComponent {
+export class DashboardSidebarComponent implements OnInit {
+  #route = inject(Router);
   links = signal(DASHBOARD_LINKS);
   icons = { chevronDown: ChevronDown, moveLeft: MoveLeft };
   activeTab = signal<string | null>(null);
+  currentPath = this.#route.url.split('/')[2] || '';
+
+  ngOnInit(): void {
+    // this.activeTab.set(this.currentPath);
+    // Get tab from the current route
+    const name =
+      this.links().find((link) => {
+        return link.path.split('/')[2] === this.currentPath;
+      })?.name || null;
+    if (name) this.activeTab.set(name);
+  }
 
   toggleTab(tab: string | null): void {
-    this.activeTab.update((currentTab) => (tab === currentTab ? null : tab));
+    console.log('Toggling tab:', tab);
+    this.activeTab.set(tab);
   }
 }
