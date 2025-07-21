@@ -66,8 +66,8 @@ export const DASHBOARD_LINKS: ILink[] = [
         path: '/dashboard/projects'
       },
       {
-        name: 'Catégories ',
-        path: '/dashboard/projects/categories'
+        name: 'Catégories',
+        path: '/dashboard/project-categories'
       }
     ]
   },
@@ -83,7 +83,7 @@ export const DASHBOARD_LINKS: ILink[] = [
       },
       {
         name: 'Catégories',
-        path: '/dashboard/events/categories'
+        path: '/dashboard/event-categories'
       }
     ]
   }

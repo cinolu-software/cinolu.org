@@ -28,8 +28,22 @@ export const dashboardRoutes: Routes = [
     loadComponent: () => import('./features/projects/projects.component').then((c) => c.DashboardProjectsComponent)
   },
   {
+    path: 'project-categories',
+    title: 'Les catégories de projets',
+    loadComponent: () =>
+      import('./features/project-categories/project-categories.component').then(
+        (c) => c.DashboardProjectCategoriesComponent
+      )
+  },
+  {
     path: 'events',
     title: 'Les événements',
     loadComponent: () => import('./features/events/events.component').then((c) => c.DashboardEventsComponent)
+  },
+  {
+    path: 'event-categories',
+    title: "Les catégories d'événements",
+    loadComponent: () =>
+      import('./features/event-categories/event-categories.component').then((c) => c.DashboardEventCategoriesComponent)
   }
 ];

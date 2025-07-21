@@ -2,15 +2,15 @@
   @let isLoading = store.isLoading();
   @let isFiltering = store.isFiltering();
   @let hasQuery = queryParams().q;
-  @let programCount = store.programs()[1];
-  @let programList = store.programs()[0];
+  @let categoryCount = store.categories()[1];
+  @let categoryList = store.categories()[0];
 
   <div class="relative px-4 bg-white rounded-lg">
     <!-- Header -->
     <div class="flex flex-col gap-3 mb-10 pt-6">
       <div class="flex flex-wrap gap-2 md:justify-between md:items-center mb-6 md:mb-0">
         <h5 class="text-lg font-bold">
-          Liste des programmes
+          Liste des catégories d'événements
           <span class="text-gray-500 text-sm">
             @if (isFiltering || isLoading) {
               <p-progress-spinner
@@ -19,7 +19,7 @@
                 fill="transparent"
                 [style]="{ width: '0.8rem', height: '0.8rem' }" />
             } @else {
-              ({{ programCount }})
+              ({{ categoryCount }})
             }
           </span>
         </h5>
@@ -52,7 +52,7 @@
             type="submit"
             [size]="'small'"
             [loading]="isFiltering"
-            [disabled]="searchForm.invalid || isFiltering || (programCount === 0 && !hasQuery)"
+            [disabled]="searchForm.invalid || isFiltering || (categoryCount === 0 && !hasQuery)"
             (click)="onSearch()">
             @if (!isFiltering) {
               <i-lucide [name]="icons.search" class="size-4" />
@@ -72,7 +72,7 @@
       </form>
     </div>
     <!-- Empty State -->
-    @if (programCount === 0 && !isLoading) {
+    @if (categoryCount === 0 && !isLoading) {
       <h4 class="font-medium text-gray-700 text-lg px-2 pb-8">
         {{ hasQuery ? 'Aucun utilisateur trouvé avec ce filtre' : 'Aucun utilisateur trouvé' }}
       </h4>
@@ -88,32 +88,29 @@
       </div>
     }
     <!-- Users Table -->
-    @if (programCount > 0 && !isLoading) {
+    @if (categoryCount > 0 && !isLoading) {
       <div class="relative flex flex-col overflow-x-auto">
         <table class="text-sm text-left rtl:text-right text-gray-500">
           <thead class="text-sm text-gray-700 uppercase bg-gray-50">
             <tr>
               <th class="px-4 py-2">Nom</th>
-              <th class="px-4 py-2">Description</th>
               <th class="px-4 py-2">Créé le</th>
               <th class="px-4 py-2">Actions</th>
             </tr>
           </thead>
           <tbody>
             @for (
-              program of programList
-                | paginate: { itemsPerPage: 40, currentPage: queryParams().page || 1, totalItems: programCount };
-              track program.id
+              event of categoryList
+                | paginate: { itemsPerPage: 40, currentPage: queryParams().page || 1, totalItems: categoryCount };
+              track event.id
             ) {
               <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
                 <td class="px-4 py-2 font-medium text-gray-900">
-                  {{ program.name | titlecase }}
+                  {{ event.name | titlecase }}
                 </td>
-                <td class="px-4 py-2 whitespace-normal">
-                  <span class="text-gray-500 line-clamp-3">{{ program.description }}</span>
-                </td>
+
                 <td class="px-4 py-2">
-                  {{ program.created_at | date: 'longDate' }}
+                  {{ event.created_at | date: 'longDate' }}
                 </td>
                 <td class="px-4 py-2">
                   <div class="flex items-center gap-2 opacity-50 blur-[1px]">
@@ -132,7 +129,7 @@
       </div>
     }
     <!-- Pagination -->
-    @if (programCount > 40) {
+    @if (categoryCount > 40) {
       <div class="flex justify-center items-center gap-3 py-8">
         <pagination-controls
           nextLabel=""

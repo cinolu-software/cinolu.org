@@ -1,10 +1,10 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ApiImgPipe } from '../../../pipes/api-img.pipe';
 import { IUser } from '../../../utils/types/models.type';
-import { LucideAngularModule, ChevronDown, LayoutGrid, LogOut } from 'lucide-angular';
 import { ILink } from '../../../utils/types/link.type';
+import { LucideAngularModule, ChevronDown, LayoutGrid, LogOut } from 'lucide-angular';
 
 @Component({
   selector: 'app-desktop-nav',
@@ -14,10 +14,23 @@ import { ILink } from '../../../utils/types/link.type';
 export class DesktopNavComponent {
   user = input.required<IUser | null>();
   links = input.required<ILink[]>();
-  singOut = output<void>();
+  signOut = output<void>();
+  activeTab = signal<string | null>(null);
   icons = {
-    layoutDashboard: LayoutGrid,
-    logOut: LogOut,
-    chevronDown: ChevronDown
+    chevronDown: ChevronDown,
+    dashboard: LayoutGrid,
+    logOut: LogOut
   };
+
+  closeNav(): void {
+    this.setActiveTab(null);
+  }
+
+  setActiveTab(tab: string | null): void {
+    this.activeTab.set(tab);
+  }
+
+  handleSignOut(): void {
+    this.signOut.emit();
+  }
 }
