@@ -54,7 +54,8 @@
           [routerLink]="link.path"
           class="group inline-flex items-center gap-1.5 px-2 py-1.5 font-medium rounded-md hover:bg-primary-700 transition-colors duration-200"
           [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
-          [routerLinkActive]="'bg-primary-700'">
+          [routerLinkActive]="'bg-primary-700'"
+          (click)="toggleTab(null)">
           <i-lucide [name]="link.icon" class="size-4 text-inherit" />
           {{ link.name }}
         </a>

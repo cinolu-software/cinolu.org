@@ -1,5 +1,5 @@
 import { ILink } from '../types/link.type';
-import { Info, Activity, UserCheck, BriefcaseBusiness, Briefcase, Calendar1 } from 'lucide-angular';
+import { Info, Activity, UserCheck, BriefcaseBusiness, Briefcase, Calendar1, Columns3Cog } from 'lucide-angular';
 
 export const EXPLORATION_LINKS: ILink[] = [
   {
@@ -86,6 +86,11 @@ export const DASHBOARD_LINKS: ILink[] = [
         path: '/dashboard/event-categories'
       }
     ]
+  },
+  {
+    name: 'Les rôles',
+    path: '/dashboard/roles',
+    icon: Columns3Cog
   }
 ];
 

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, MoveLeft, ChevronDown } from 'lucide-angular';
 import { DASHBOARD_LINKS } from '../../utils/data/links';
 
@@ -17,8 +17,6 @@ export class DashboardSidebarComponent implements OnInit {
   currentPath = this.#route.url.split('/')[2] || '';
 
   ngOnInit(): void {
-    // this.activeTab.set(this.currentPath);
-    // Get tab from the current route
     const name =
       this.links().find((link) => {
         return link.path.split('/')[2] === this.currentPath;

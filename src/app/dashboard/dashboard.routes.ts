@@ -45,5 +45,10 @@ export const dashboardRoutes: Routes = [
     title: "Les catégories d'événements",
     loadComponent: () =>
       import('./features/event-categories/event-categories.component').then((c) => c.DashboardEventCategoriesComponent)
+  },
+  {
+    path: 'roles',
+    title: 'Les rôles',
+    loadComponent: () => import('./features/roles/roles.component').then((c) => c.DashboardRolesComponent)
   }
 ];
