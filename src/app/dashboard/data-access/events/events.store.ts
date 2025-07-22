@@ -1,4 +1,4 @@
-import { patchState, signalStore, withHooks, withMethods, withProps, withState } from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { IProgram } from '../../../shared/utils/types/models.type';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
