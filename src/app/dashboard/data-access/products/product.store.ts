@@ -2,7 +2,7 @@ import { patchState, signalStore, withMethods, withProps, withState } from '@ngr
 import { IProduct } from '../../../shared/utils/types/models.type';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, of, pipe, switchMap, tap } from 'rxjs';
+import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
@@ -23,7 +23,7 @@ export const ProductStore = signalStore(
         tap(() => patchState(store, { isLoading: true, product: null })),
         switchMap((id) => {
           return _http.get<{ data: IProduct }>(`products/${id}`).pipe(
-            tap(({ data }) => {
+            map(({ data }) => {
               patchState(store, { isLoading: false, product: data });
             }),
             catchError(() => {

@@ -6,7 +6,6 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../shared/services/toast/toastr.service';
 import { IProductPayload } from '../../utils/types/products/add-product.type';
-import { ActivatedRoute } from '@angular/router';
 import { ProductsStore } from './products.store';
 
 interface IUpdateProducttore {
@@ -14,9 +13,9 @@ interface IUpdateProducttore {
 }
 
 interface IUpdateProductParams {
-  enterpriseId: string;
   productId: string;
   payload: IProductPayload;
+  onSuccess: () => void;
 }
 
 export const UpdateProducttore = signalStore(
@@ -24,26 +23,23 @@ export const UpdateProducttore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _route: inject(ActivatedRoute),
     _productsStore: inject(ProductsStore)
   })),
-  withMethods(({ _http, _toast, _route, _productsStore, ...store }) => ({
+  withMethods(({ _http, _toast, _productsStore, ...store }) => ({
     updateProduct: rxMethod<IUpdateProductParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((params) => {
-          return _http.patch<{ data: IProduct }>(`products/${params.productId}`, params.payload).pipe(
-            tap(() => {
-              const queryParams = {
-                page: _route.snapshot.queryParams['page'] || null
-              };
-              _productsStore.loadProducts({ enterpriseId: params.enterpriseId, queryParams });
-              patchState(store, { isLoading: false });
+        switchMap(({ productId, payload, onSuccess }) => {
+          return _http.patch<{ data: IProduct }>(`products/${productId}`, payload).pipe(
+            tap(({ data }) => {
+              _productsStore.updateProduct(data);
               _toast.showSuccess('Produit mise à jour');
+              patchState(store, { isLoading: false });
+              onSuccess();
             }),
             catchError(() => {
-              patchState(store, { isLoading: false });
               _toast.showError('Erreur lors de la mise à jour');
+              patchState(store, { isLoading: false });
               return of(null);
             })
           );

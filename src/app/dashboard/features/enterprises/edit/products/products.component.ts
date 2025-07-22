@@ -129,21 +129,20 @@ export class ProductsComponent implements OnInit {
   onAddProduct(): void {
     if (!this.addProductForm.valid) return;
     this.addProductStore.addProduct({
-      ...this.addProductForm.value,
-      enterpriseId: this.enterprise().id,
-      onSuccess: () => {
-        this.onToggleAddModal();
-        this.updateRouteAndProducts();
-      }
+      payload: {
+        enterpriseId: this.enterprise().id,
+        ...this.addProductForm.value
+      },
+      onSuccess: () => this.onToggleAddModal()
     });
   }
 
   onUpdateProduct(): void {
     if (!this.editProductForm.valid) return;
     this.updateProductStore.updateProduct({
-      enterpriseId: this.enterprise().id,
       productId: this.product()?.id || '',
-      payload: this.editProductForm.value
+      payload: this.editProductForm.value,
+      onSuccess: () => this.onToggleEditModal(null)
     });
   }
 

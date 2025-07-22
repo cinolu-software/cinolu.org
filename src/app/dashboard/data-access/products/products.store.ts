@@ -23,20 +23,32 @@ export const ProductsStore = signalStore(
     loadProducts: rxMethod<ILoadProductsParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((params) => {
-          return http
-            .get<{ data: [IProduct[], number] }>(`products/enterprise/${params.enterpriseId}`, {
-              params: buildQueryParams(params.queryParams)
+        switchMap(({ enterpriseId, queryParams }) => {
+          const params = buildQueryParams(queryParams);
+          return http.get<{ data: [IProduct[], number] }>(`products/enterprise/${enterpriseId}`, { params }).pipe(
+            tap(({ data }) => patchState(store, { isLoading: false, products: data })),
+            catchError(() => {
+              patchState(store, { isLoading: false, products: [[], 0] });
+              return of([]);
             })
-            .pipe(
-              tap(({ data }) => patchState(store, { isLoading: false, products: data })),
-              catchError(() => {
-                patchState(store, { isLoading: false, products: [[], 0] });
-                return of([]);
-              })
-            );
+          );
         })
       )
-    )
+    ),
+    addProduct: (product: IProduct): void => {
+      const currentProducts = store.products()[0];
+      const countProducts = store.products()[1];
+      patchState(store, { products: [[...currentProducts, product], countProducts + 1] });
+    },
+    updateProduct: (product: IProduct): void => {
+      const currentProducts = store.products()[0];
+      const updatedProducts = currentProducts.map((p) => (p.id === product.id ? product : p));
+      patchState(store, { products: [updatedProducts, store.products()[1]] });
+    },
+    deleteProduct: (productId: string): void => {
+      const currentProducts = store.products()[0];
+      const updatedProducts = currentProducts.filter((p) => p.id !== productId);
+      patchState(store, { products: [updatedProducts, store.products()[1] - 1] });
+    }
   }))
 );

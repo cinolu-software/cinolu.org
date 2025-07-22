@@ -70,38 +70,37 @@
     }
   }
 
-  <!-- View product modal -->
   <p-dialog [(visible)]="showViewModal" [modal]="true" [style]="{ width: '28rem' }">
-    <div class="flex flex-col md:flex-row flex-wrap gap-4">
-      <div class="relative h-28 w-32 rounded bg-gray-200">
-        <img
-          [alt]="product()?.name"
-          [ngSrc]="product() | apiIMG: 'product'"
-          class="aspect-video object-cover rounded border-2 border-slate-200/10 mb-2"
-          fill />
+    @if (product()) {
+      <div class="flex flex-col md:flex-row flex-wrap gap-4">
+        <div class="relative h-28 w-32 rounded bg-gray-200">
+          <img
+            [alt]="product()?.name"
+            [ngSrc]="product() | apiIMG: 'product'"
+            class="aspect-video object-cover rounded border-2 border-slate-200/10 mb-2"
+            fill
+            priority />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <div class="mb-1">
+            <h1 class="text-lg font-extrabold text-gray-900">{{ product()?.name | titlecase }}</h1>
+            <p class="text-gray-900 text-sm">
+              Créée le
+              {{ product()?.created_at | date: 'longDate' }}
+            </p>
+          </div>
+          <div class="flex items-center gap-1.5 font-semibold text-gray-800 text-sm">
+            {{ product()?.price | currency: 'USD' }}
+          </div>
+          <div class="flex items-center gap-1.5 font-semibold text-gray-800 text-sm">
+            {{ enterprise().name }}
+          </div>
+        </div>
       </div>
-      <div class="flex flex-col gap-1.5">
-        <div class="mb-1">
-          <h1 class="text-lg font-extrabold text-gray-900">{{ product()?.name | titlecase }}</h1>
-          <p class="text-gray-900 text-sm">
-            Créée le
-            {{ product()?.created_at | date: 'longDate' }}
-          </p>
-        </div>
-        <div class="flex items-center gap-1.5 text-gray-800 text-sm">
-          Prix :
-          {{ product()?.price | currency: 'USD' }}
-        </div>
-        <div class="flex items-center gap-1.5 text-gray-800 text-sm">
-          Entreprise :
-          {{ enterprise().name }}
-        </div>
-      </div>
-    </div>
-    <p class="text-gray-600 mt-6">{{ product()?.description }}</p>
+      <p class="text-gray-600 mt-6">{{ product()?.description }}</p>
+    }
   </p-dialog>
 
-  <!-- Add product modal -->
   <p-dialog [(visible)]="showAddModal" [closable]="false" [modal]="true" [style]="{ width: '25rem' }">
     <form class="flex flex-col gap-4" [formGroup]="addProductForm" (ngSubmit)="onAddProduct()">
       <div class="flex flex-col gap-1.5">
@@ -139,12 +138,8 @@
     </form>
   </p-dialog>
 
-  <!-- Edit product modal -->
   <p-dialog [(visible)]="showEditModal" [closable]="false" [modal]="true" [style]="{ width: '25rem' }">
-    <div class="w-full">
-      <p class="font-medium mb-1.5">Ajouter un logo</p>
-      <app-file-upload [name]="'image'" [url]="logoUrl + product()?.id" />
-    </div>
+    <app-file-upload [name]="'image'" [url]="logoUrl + product()?.id" />
     <form class="flex flex-col gap-4" [formGroup]="editProductForm" (ngSubmit)="onUpdateProduct()">
       <div class="flex flex-col gap-1.5">
         <label for="name" class="font-medium">Nom du produit<span class="text-red-500">*</span></label>
