@@ -14,14 +14,14 @@ interface IEventStore {
 export const EventStore = signalStore(
   withState<IEventStore>({ isLoading: false, event: null }),
   withProps(() => ({
-    _route: inject(ActivatedRoute)
+    _http: inject(HttpClient)
   })),
-  withMethods((store, http = inject(HttpClient)) => ({
+  withMethods(({ _http, ...store }) => ({
     loadEvent: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((slug) => {
-          return http.get<{ data: IEvent }>(`events/slug/${slug}`).pipe(
+          return _http.get<{ data: IEvent }>(`events/slug/${slug}`).pipe(
             tap(({ data }) => patchState(store, { isLoading: false, event: data })),
             catchError(() => {
               patchState(store, { isLoading: false });
@@ -31,11 +31,5 @@ export const EventStore = signalStore(
         })
       )
     )
-  })),
-  withHooks({
-    onInit: ({ _route, loadEvent }) => {
-      const slug = _route.snapshot.params['slug'] || '';
-      loadEvent(slug);
-    }
-  })
+  }))
 );

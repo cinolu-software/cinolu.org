@@ -14,14 +14,14 @@ interface IProjectStore {
 export const ProjectStore = signalStore(
   withState<IProjectStore>({ isLoading: false, project: null }),
   withProps(() => ({
-    _route: inject(ActivatedRoute)
+    _http: inject(HttpClient)
   })),
-  withMethods((store, http = inject(HttpClient)) => ({
+  withMethods(({ _http, ...store }) => ({
     loadProject: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((slug) => {
-          return http.get<{ data: IProject }>(`projects/slug/${slug}`).pipe(
+          return _http.get<{ data: IProject }>(`projects/slug/${slug}`).pipe(
             tap(({ data }) => patchState(store, { isLoading: false, project: data })),
             catchError(() => {
               patchState(store, { isLoading: false });
@@ -31,11 +31,5 @@ export const ProjectStore = signalStore(
         })
       )
     )
-  })),
-  withHooks({
-    onInit: ({ _route, loadProject }) => {
-      const slug = _route.snapshot.params['slug'] || '';
-      loadProject(slug);
-    }
-  })
+  }))
 );

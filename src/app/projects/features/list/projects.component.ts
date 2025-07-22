@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProjectCardComponent } from '../../ui/project-card/project-card.component';
@@ -26,7 +26,7 @@ import { ProjectCategoriesStore } from '../../data-access/categories.store';
   ],
   templateUrl: './projects.component.html'
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements OnInit {
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   store = inject(ProjectsStore);
@@ -35,6 +35,10 @@ export class ProjectsComponent {
     page: Number(this.#route.snapshot.queryParams?.['page']) || null,
     categories: this.#route.snapshot.queryParams?.['categories'] || null
   });
+
+  ngOnInit(): void {
+    this.store.loadProjects(this.queryParams());
+  }
 
   onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'categories'): void {
     this.queryParams().page = null;

@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EventCardComponent } from '../../ui/event-card/event-card.component';
@@ -11,7 +11,7 @@ import { EventsStore } from '../../data-access/events.store';
 import { EventCategoriesStore } from '../../data-access/categories.store';
 
 @Component({
-  selector: 'app-programs',
+  selector: 'app-events',
   providers: [EventsStore, EventCategoriesStore],
   imports: [
     CommonModule,
@@ -24,16 +24,20 @@ import { EventCategoriesStore } from '../../data-access/categories.store';
   ],
   templateUrl: './events.component.html'
 })
-export class EventsComponent {
+export class EventsComponent implements OnInit {
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   skeletonArray = Array(6).fill(0);
   store = inject(EventsStore);
   categoriesStore = inject(EventCategoriesStore);
   queryParams = signal<QueryParams>({
-    page: Number(this.#route.snapshot.queryParams?.['page']) || null,
-    categories: this.#route.snapshot.queryParams?.['categories'] || null
+    page: this.#route.snapshot.queryParams?.['page'],
+    categories: this.#route.snapshot.queryParams?.['categories']
   });
+
+  ngOnInit(): void {
+    this.store.loadEvents(this.queryParams());
+  }
 
   onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'categories'): void {
     this.queryParams().page = null;
@@ -53,7 +57,7 @@ export class EventsComponent {
   }
 
   onPageChange(currentPage: number): void {
-    this.queryParams().page = currentPage === 1 ? null : currentPage;
+    this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
     this.updateRouteAndEvents();
   }
 
