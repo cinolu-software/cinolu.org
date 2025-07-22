@@ -1,4 +1,5 @@
 <section class="min-h-[105vh] text-gray-600 mt-16">
+  <!-- All roles store -->
   @let isLoading = store.isLoading();
   @let isFiltering = store.isFiltering();
   @let hasQuery = queryParams().q;
@@ -6,7 +7,6 @@
   @let roleList = store.roles()[0];
 
   <div class="relative px-4 bg-white rounded-lg">
-    <!-- Header -->
     <div class="flex flex-col gap-3 mb-10 pt-6">
       <div class="flex flex-wrap gap-2 md:justify-between md:items-center mb-6 md:mb-0">
         <h5 class="text-lg font-bold">
@@ -23,19 +23,11 @@
             }
           </span>
         </h5>
-        <!-- <p-button
-          [outlined]="true"
-          [size]="'small'"
-          [loading]="isDownloading"
-          [disabled]="isDownloading || programCount === 0"
-          (click)="onDownloadPrograms()">
-          Télécharger CSV
-          @if (!isDownloading) {
-            <i-lucide [name]="icons.download" class="size-4" />
-          }
-        </p-button> -->
+        <p-button [outlined]="true" [size]="'small'" (click)="onToggleAddModal()">
+          <i-lucide [name]="icons.plus" class="size-4" />
+          Ajouter un rôle
+        </p-button>
       </div>
-      <!-- Search Form -->
       <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="flex flex-col gap-1 md:flex-row md:gap-4">
         <input
           class="py-1.5! md:col-span-4"
@@ -71,15 +63,13 @@
         </div>
       </form>
     </div>
-    <!-- Empty State -->
     @if (roleCount === 0 && !isLoading) {
       <h4 class="font-medium text-gray-700 text-lg px-2 pb-8">
         {{ hasQuery ? 'Aucun utilisateur trouvé avec ce filtre' : 'Aucun utilisateur trouvé' }}
       </h4>
     }
-    <!-- Skeleton Loading -->
     @if (isFiltering || isLoading) {
-      <div class="grid grid-cols-5 overflow-x-auto">
+      <div class="grid grid-cols-3 overflow-x-auto">
         @for (i of skeletonArray; track $index) {
           <div class="border-y border-gray-200 py-3 px-2">
             <div class="h-4 rounded-md bg-gray-200 animate-pulse mb-2"></div>
@@ -87,7 +77,6 @@
         }
       </div>
     }
-    <!-- Users Table -->
     @if (roleCount > 0 && !isLoading) {
       <div class="relative flex flex-col overflow-x-auto">
         <table class="text-sm text-left rtl:text-right text-gray-500">
@@ -100,24 +89,24 @@
           </thead>
           <tbody>
             @for (
-              event of roleList
+              role of roleList
                 | paginate: { itemsPerPage: 40, currentPage: queryParams().page || 1, totalItems: roleCount };
-              track event.id
+              track role.id
             ) {
               <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
                 <td class="px-4 py-2 font-medium text-gray-900">
-                  {{ event.name | titlecase }}
-                </td>
-
-                <td class="px-4 py-2">
-                  {{ event.created_at | date: 'longDate' }}
+                  {{ role.name | titlecase }}
                 </td>
                 <td class="px-4 py-2">
-                  <div class="flex items-center gap-2 opacity-50 blur-[1px]">
-                    <button disabled>
+                  {{ role.created_at | date: 'longDate' }}
+                </td>
+                <td class="px-4 py-2">
+                  <div class="flex items-center gap-2">
+                    <button class="text-primary-600" (click)="onToggleEditModal(role)">
                       <i-lucide [name]="icons.edit" class="size-4" />
                     </button>
-                    <button disabled>
+                    <button class="text-red-700" (click)="onDeleteRole(role.id, $event)">
+                      <p-confirmpopup />
                       <i-lucide [name]="icons.trash" class="size-4" />
                     </button>
                   </div>
@@ -128,7 +117,6 @@
         </table>
       </div>
     }
-    <!-- Pagination -->
     @if (roleCount > 40) {
       <div class="flex justify-center items-center gap-3 py-8">
         <pagination-controls
@@ -142,4 +130,55 @@
       </div>
     }
   </div>
+
+  <p-dialog [(visible)]="showAddModal" [closable]="false" [modal]="true" [style]="{ width: '25rem' }">
+    <form class="flex flex-col gap-4" [formGroup]="addRoleForm" (ngSubmit)="onAddRole()">
+      <div class="flex flex-col gap-1.5">
+        <label for="name" class="font-medium">Nom du rôle<span class="text-red-500">*</span></label>
+        <input pInputText type="text" id="name" name="name" formControlName="name" autocomplete="none" />
+      </div>
+      <div class="flex justify-end gap-4 flex-wrap">
+        <p-button size="small" variant="outlined" severity="danger" class="font-satoshi" (onClick)="onToggleAddModal()">
+          Annuler
+        </p-button>
+        <p-button
+          size="small"
+          severity="primary"
+          class="font-satoshi"
+          [disabled]="!addRoleForm.valid || addRoleStore.isLoading()"
+          [loading]="addRoleStore.isLoading()"
+          (onClick)="onAddRole()">
+          Ajouter le rôle
+        </p-button>
+      </div>
+    </form>
+  </p-dialog>
+
+  <p-dialog [(visible)]="showEditModal" [closable]="false" [modal]="true" [style]="{ width: '25rem' }">
+    <form class="flex flex-col gap-4" [formGroup]="updateRoleForm" (ngSubmit)="onUpdateRole()">
+      <div class="flex flex-col gap-1.5">
+        <label for="name" class="font-medium">Nom du rôle<span class="text-red-500">*</span></label>
+        <input pInputText type="text" id="name" name="name" formControlName="name" autocomplete="none" />
+      </div>
+      <div class="flex justify-end gap-4 flex-wrap">
+        <p-button
+          size="small"
+          variant="outlined"
+          severity="danger"
+          class="font-satoshi"
+          (onClick)="onToggleEditModal(null)">
+          Annuler
+        </p-button>
+        <p-button
+          size="small"
+          severity="primary"
+          class="font-satoshi"
+          [disabled]="!updateRoleForm.valid || updateRoleStore.isLoading()"
+          [loading]="updateRoleStore.isLoading()"
+          (onClick)="onUpdateRole()">
+          Modifier le rôle
+        </p-button>
+      </div>
+    </form>
+  </p-dialog>
 </section>
