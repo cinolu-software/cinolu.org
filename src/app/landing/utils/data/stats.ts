@@ -4,21 +4,26 @@ export const stats: { value: number; label: string; icon: LucideIconData }[] = [
   {
     value: 7000,
     label: 'Bénéficiaires',
-    icon: UserCog,
+    icon: UserCog
   },
   {
-    value: 150,
-    label: 'Projets',
-    icon: Lightbulb,
+    value: 500,
+    label: 'Entrepreneurs accompagnés',
+    icon: Network
+  },
+  {
+    value: 10000,
+    label: 'Femmes formées & inspirées avec F360',
+    icon: Network
+  },
+  {
+    value: 5,
+    label: 'Programmes et forums d’innovation régionale',
+    icon: Lightbulb
   },
   {
     value: 40,
-    label: 'Partenaires',
-    icon: Handshake,
-  },
-  {
-    value: 8,
-    label: 'Programmes',
-    icon: Network,
-  },
+    label: 'Un réseau de partenaires stratégique',
+    icon: Handshake
+  }
 ];

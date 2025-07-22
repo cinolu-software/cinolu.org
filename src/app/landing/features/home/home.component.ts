@@ -5,6 +5,7 @@ import { RecentProjectsComponent } from '../recent-projects/recent-projects.comp
 import { ServicesComponent } from '../services/services.component';
 import { StatementComponent } from '../statement/statement.component';
 import { PartnersComponent } from '../partners/partners.component';
+import { WhyJoinUsComponent } from '../why-join-us/why-join-us.component';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,8 @@ import { PartnersComponent } from '../partners/partners.component';
     StatementComponent,
     RecentProjectsComponent,
     RecentEventsComponent,
-    PartnersComponent
+    PartnersComponent,
+    WhyJoinUsComponent
   ],
   templateUrl: './home.component.html'
 })
