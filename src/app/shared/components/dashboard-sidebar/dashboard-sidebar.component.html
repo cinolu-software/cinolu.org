@@ -3,24 +3,21 @@
     <img ngSrc="/images/logo/logo-w.png" alt="logo" class="w-6 h-6" width="64" height="68" priority />
     <span class="font-semibold text-white uppercase">Tableau de bord</span>
   </div>
-
-  <!-- Home link -->
   <a
     class="group inline-flex items-center gap-1.5 px-2 py-1.5 text-sm text-white mb-6 hover:underline"
     [routerLink]="'/'">
-    <i-lucide [name]="icons.moveLeft" class="size-4 text-inherit" />
+    <i-lucide [name]="icons.moveLeft" class="size-3 text-inherit" />
     Revenir à l'accueil
   </a>
-
   <div class="flex flex-col gap-2">
     @for (link of links(); track $index) {
       @if ((link?.children?.length || 0) > 0) {
         <button
           class="flex justify-between items-center px-2 py-1.5 font-medium rounded-md hover:bg-primary-700 hover:text-white"
-          (click)="toggleTab(link.name)"
+          (click)="onToggleTab(link.name)"
           [ngClass]="{
-            'bg-primary-700 text-white ': activeTab() === link.name,
-            'text-gray-300': activeTab() !== link.name
+            'bg-primary-700 text-white': isTabOpen(link.name),
+            'text-gray-300': !isTabOpen(link.name)
           }">
           <div class="group inline-flex gap-1.5 items-center">
             <i-lucide [name]="link.icon" class="size-4 text-inherit" />
@@ -30,11 +27,11 @@
             [name]="icons.chevronDown"
             class="size-3.5 transition-transform duration-300 -rotate-45"
             [ngClass]="{
-              'rotate-45 text-white': activeTab() === link.name,
-              'text-gray-400': activeTab() !== link.name
+              'rotate-45 text-white': isTabOpen(link.name),
+              'text-gray-400': !isTabOpen(link.name)
             }" />
         </button>
-        @if (activeTab() === link.name) {
+        @if (isTabOpen(link.name)) {
           <div class="mx-4 border-l border-gray-500 flex flex-col gap-3">
             @for (child of link.children; track $index) {
               <a
@@ -55,7 +52,7 @@
           class="group inline-flex items-center gap-1.5 px-2 py-1.5 font-medium rounded-md hover:bg-primary-700 transition-colors duration-200"
           [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
           [routerLinkActive]="'bg-primary-700'"
-          (click)="toggleTab(null)">
+          (click)="onToggleTab(link.name)">
           <i-lucide [name]="link.icon" class="size-4 text-inherit" />
           {{ link.name }}
         </a>

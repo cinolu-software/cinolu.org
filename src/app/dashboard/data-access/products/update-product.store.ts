@@ -12,6 +12,7 @@ import { ProductsStore } from './products.store';
 interface IUpdateProducttore {
   isLoading: boolean;
 }
+
 interface IUpdateProductParams {
   enterpriseId: string;
   productId: string;

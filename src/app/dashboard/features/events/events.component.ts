@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LucideAngularModule, RefreshCcw, Edit, Trash, Download, Search } from 'lucide-angular';
 import { TableModule } from 'primeng/table';
@@ -9,12 +9,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { QueryParams } from '../../utils/types/query-params.type';
-import { DashboardEventsStore } from '../../data-access/events/events.store';
+import { EventsStore } from '../../data-access/events/events.store';
 
 @Component({
   selector: 'app-dashboard-events',
   templateUrl: './events.component.html',
-  providers: [DashboardEventsStore],
+  providers: [EventsStore],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -26,18 +26,22 @@ import { DashboardEventsStore } from '../../data-access/events/events.store';
     ReactiveFormsModule
   ]
 })
-export class DashboardEventsComponent {
+export class EventsComponent implements OnInit {
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   #fb = inject(FormBuilder);
   searchForm: FormGroup;
-  store = inject(DashboardEventsStore);
+  store = inject(EventsStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, download: Download, search: Search };
   queryParams = signal<QueryParams>({
     page: this.#route.snapshot.queryParamMap.get('page'),
     q: this.#route.snapshot.queryParamMap.get('q')
   });
+
+  ngOnInit(): void {
+    this.loadEvents();
+  }
 
   constructor() {
     this.searchForm = this.#fb.group({

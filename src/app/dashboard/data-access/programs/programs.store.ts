@@ -1,24 +1,22 @@
-import { patchState, signalStore, withHooks, withMethods, withProps, withState } from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { QueryParams } from '../../utils/types/query-params.type';
-import { ActivatedRoute } from '@angular/router';
 import { buildQueryParams } from '../../../shared/utils/helpers/build-query-params.fn';
 import { IProject } from '../../../shared/utils/types/models.type';
 
-interface IDashboardProgramsStore {
+interface IProgramsStore {
   isLoading: boolean;
   isFiltering: boolean;
   programs: [IProject[], number];
 }
 
-export const DashboardProgramsStore = signalStore(
-  withState<IDashboardProgramsStore>({ isLoading: false, isFiltering: false, programs: [[], 0] }),
+export const ProgramsStore = signalStore(
+  withState<IProgramsStore>({ isLoading: false, isFiltering: false, programs: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
-    _route: inject(ActivatedRoute)
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadPrograms: rxMethod<QueryParams>(
@@ -39,14 +37,5 @@ export const DashboardProgramsStore = signalStore(
         })
       )
     )
-  })),
-  withHooks({
-    onInit({ loadPrograms, _route }) {
-      const queryParams = {
-        page: _route.snapshot.queryParamMap.get('page'),
-        q: _route.snapshot.queryParamMap.get('q')
-      };
-      loadPrograms(queryParams);
-    }
-  })
+  }))
 );

@@ -1,7 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LucideAngularModule, RefreshCcw, Edit, Trash, Download, Search } from 'lucide-angular';
-import { DashboardUsersStore } from '../../data-access/users/users.store';
+import { UsersStore } from '../../data-access/users/users.store';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -17,7 +17,7 @@ import { QueryParams } from '../../utils/types/query-params.type';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  providers: [DashboardUsersStore, DownloadUsersStore],
+  providers: [UsersStore, DownloadUsersStore],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -31,12 +31,12 @@ import { QueryParams } from '../../utils/types/query-params.type';
     ReactiveFormsModule
   ]
 })
-export class DashboardUsersComponent {
+export class UsersComponent implements OnInit {
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   #fb = inject(FormBuilder);
   searchForm: FormGroup;
-  store = inject(DashboardUsersStore);
+  store = inject(UsersStore);
   downloadStore = inject(DownloadUsersStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, download: Download, search: Search };
@@ -49,6 +49,10 @@ export class DashboardUsersComponent {
     this.searchForm = this.#fb.group({
       q: [this.queryParams().q || '', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    this.loadUsers();
   }
 
   loadUsers(): void {

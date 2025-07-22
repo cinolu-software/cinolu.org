@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LucideAngularModule, RefreshCcw, Edit, Trash, Download, Search } from 'lucide-angular';
 import { TableModule } from 'primeng/table';
@@ -9,12 +9,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { QueryParams } from '../../utils/types/query-params.type';
-import { DashboardProgramsStore } from '../../data-access/programs/programs.store';
+import { ProgramsStore } from '../../data-access/programs/programs.store';
 
 @Component({
   selector: 'app-dashboard-programs',
   templateUrl: './programs.component.html',
-  providers: [DashboardProgramsStore],
+  providers: [ProgramsStore],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -26,12 +26,12 @@ import { DashboardProgramsStore } from '../../data-access/programs/programs.stor
     ReactiveFormsModule
   ]
 })
-export class DashboardProgramsComponent {
+export class ProgramsComponent implements OnInit {
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   #fb = inject(FormBuilder);
   searchForm: FormGroup;
-  store = inject(DashboardProgramsStore);
+  store = inject(ProgramsStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, download: Download, search: Search };
   queryParams = signal<QueryParams>({
@@ -43,6 +43,10 @@ export class DashboardProgramsComponent {
     this.searchForm = this.#fb.group({
       q: [this.queryParams().q || '', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    this.loadPrograms();
   }
 
   loadPrograms(): void {

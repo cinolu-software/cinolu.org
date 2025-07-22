@@ -3,38 +3,38 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { RolesStore } from './roles.store';
 import { ToastrService } from '../../../shared/services/toast/toastr.service';
+import { CategoriesStore } from './categories.store';
 
-interface IDeleteRoleStore {
+interface IDeleteCategoryStore {
   isLoading: boolean;
 }
 
-interface IDeleteRoleParams {
+interface IDeleteCategoryParams {
   id: string;
 }
 
-export const DeleteRoleStore = signalStore(
-  withState<IDeleteRoleStore>({ isLoading: false }),
+export const DeleteCategoryStore = signalStore(
+  withState<IDeleteCategoryStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _rolesStore: inject(RolesStore)
+    _categoriesStore: inject(CategoriesStore)
   })),
-  withMethods(({ _http, _rolesStore, _toast, ...store }) => ({
-    deleteRole: rxMethod<IDeleteRoleParams>(
+  withMethods(({ _http, _categoriesStore, _toast, ...store }) => ({
+    deleteCategory: rxMethod<IDeleteCategoryParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ id }) => {
-          return _http.delete<void>(`roles/${id}`).pipe(
+          return _http.delete<void>(`project-categories/${id}`).pipe(
             map(() => {
               patchState(store, { isLoading: false });
-              _rolesStore.deleteRole(id);
-              _toast.showSuccess('Rôle supprimé avec succès');
+              _categoriesStore.deleteCategory(id);
+              _toast.showSuccess('Catégorie supprimée avec succès');
             }),
             catchError(() => {
               patchState(store, { isLoading: false });
-              _toast.showError('Échec de la suppression du rôle');
+              _toast.showError('Échec de la suppression de la catégorie');
               return of(null);
             })
           );

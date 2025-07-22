@@ -19,17 +19,14 @@ export const EnterprisesStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
-          return http
-            .get<{ data: [IEnterprise[], number] }>('enterprises/by-user', {
-              params: buildQueryParams(queryParams)
+          const params = buildQueryParams(queryParams);
+          return http.get<{ data: [IEnterprise[], number] }>('enterprises/by-user', { params }).pipe(
+            tap(({ data }) => patchState(store, { isLoading: false, enterprises: data })),
+            catchError(() => {
+              patchState(store, { isLoading: false, enterprises: [[], 0] });
+              return of([]);
             })
-            .pipe(
-              tap(({ data }) => patchState(store, { isLoading: false, enterprises: data })),
-              catchError(() => {
-                patchState(store, { isLoading: false, enterprises: [[], 0] });
-                return of([]);
-              })
-            );
+          );
         })
       )
     )

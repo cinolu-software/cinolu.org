@@ -1,4 +1,4 @@
-import { patchState, signalStore, withHooks, withMethods, withProps, withState } from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { IUser } from '../../../shared/utils/types/models.type';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -8,14 +8,14 @@ import { QueryParams } from '../../utils/types/query-params.type';
 import { ActivatedRoute } from '@angular/router';
 import { buildQueryParams } from '../../../shared/utils/helpers/build-query-params.fn';
 
-interface IDashboardUsersStore {
+interface IUsersStore {
   isLoading: boolean;
   isFiltering: boolean;
   users: [IUser[], number];
 }
 
-export const DashboardUsersStore = signalStore(
-  withState<IDashboardUsersStore>({ isLoading: false, isFiltering: false, users: [[], 0] }),
+export const UsersStore = signalStore(
+  withState<IUsersStore>({ isLoading: false, isFiltering: false, users: [[], 0] }),
   withProps(() => ({
     _http: inject(HttpClient),
     _route: inject(ActivatedRoute)
@@ -38,16 +38,6 @@ export const DashboardUsersStore = signalStore(
           );
         })
       )
-    ),
-    setUsers: (users: [IUser[], number]) => patchState(store, { users })
-  })),
-  withHooks({
-    onInit({ loadUsers, _route }) {
-      const queryParams = {
-        page: _route.snapshot.queryParamMap.get('page'),
-        q: _route.snapshot.queryParamMap.get('q')
-      };
-      loadUsers(queryParams);
-    }
-  })
+    )
+  }))
 );

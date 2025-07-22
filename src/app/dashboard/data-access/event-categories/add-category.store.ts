@@ -3,41 +3,41 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IRole } from '../../../shared/utils/types/models.type';
-import { IRolePayload } from '../../utils/types/roles/role.type';
+import { ICategory } from '../../../shared/utils/types/models.type';
 import { ToastrService } from '../../../shared/services/toast/toastr.service';
-import { RolesStore } from './roles.store';
+import { CategoriesStore } from './categories.store';
+import { ICategoryPayload } from '../../utils/types/categories/category.type';
 
-interface IAddRoleStore {
+interface IAddCategoryStore {
   isLoading: boolean;
 }
 
-interface IAddRoleParams {
-  payload: IRolePayload;
+interface IAddCategoryParams {
+  payload: ICategoryPayload;
   onSuccess: () => void;
 }
 
-export const AddRoleStore = signalStore(
-  withState<IAddRoleStore>({ isLoading: false }),
+export const AddCategoryStore = signalStore(
+  withState<IAddCategoryStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _rolesStore: inject(RolesStore),
+    _categoriesStore: inject(CategoriesStore),
     _toast: inject(ToastrService)
   })),
-  withMethods(({ _http, _rolesStore, _toast, ...store }) => ({
-    addRole: rxMethod<IAddRoleParams>(
+  withMethods(({ _http, _categoriesStore, _toast, ...store }) => ({
+    addCategory: rxMethod<IAddCategoryParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ payload, onSuccess }) => {
-          return _http.post<{ data: IRole }>('roles', payload).pipe(
+          return _http.post<{ data: ICategory }>('event-categories', payload).pipe(
             map(({ data }) => {
-              _rolesStore.addRole(data);
-              _toast.showSuccess('Rôle ajouté avec succès');
+              _categoriesStore.addCategory(data);
+              _toast.showSuccess('Catégorie ajoutée avec succès');
               patchState(store, { isLoading: false });
               onSuccess();
             }),
             catchError(() => {
-              _toast.showError("Échec de l'ajout du rôle");
+              _toast.showError("Échec de l'ajout de la catégorie");
               patchState(store, { isLoading: false });
               return of(null);
             })

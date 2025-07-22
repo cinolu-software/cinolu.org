@@ -15,40 +15,38 @@ export const dashboardRoutes: Routes = [
   {
     path: 'users',
     title: 'Les utilisateurs',
-    loadComponent: () => import('./features/users/users.component').then((c) => c.DashboardUsersComponent)
+    loadComponent: () => import('./features/users/users.component').then((c) => c.UsersComponent)
   },
   {
     path: 'programs',
     title: 'Les programmes',
-    loadComponent: () => import('./features/programs/programs.component').then((c) => c.DashboardProgramsComponent)
+    loadComponent: () => import('./features/programs/programs.component').then((c) => c.ProgramsComponent)
   },
   {
     path: 'projects',
     title: 'Les projets',
-    loadComponent: () => import('./features/projects/projects.component').then((c) => c.DashboardProjectsComponent)
+    loadComponent: () => import('./features/projects/projects.component').then((c) => c.ProjectsComponent)
   },
   {
     path: 'project-categories',
     title: 'Les catégories de projets',
     loadComponent: () =>
-      import('./features/project-categories/project-categories.component').then(
-        (c) => c.DashboardProjectCategoriesComponent
-      )
+      import('./features/project-categories/categories.component').then((c) => c.ProjectCategoriesComponent)
   },
   {
     path: 'events',
     title: 'Les événements',
-    loadComponent: () => import('./features/events/events.component').then((c) => c.DashboardEventsComponent)
+    loadComponent: () => import('./features/events/events.component').then((c) => c.EventsComponent)
   },
   {
     path: 'event-categories',
     title: "Les catégories d'événements",
     loadComponent: () =>
-      import('./features/event-categories/event-categories.component').then((c) => c.DashboardEventCategoriesComponent)
+      import('./features/event-categories/categories.component').then((c) => c.EventCategoriesComponent)
   },
   {
     path: 'roles',
     title: 'Les rôles',
-    loadComponent: () => import('./features/roles/roles.component').then((c) => c.DashboardRolesComponent)
+    loadComponent: () => import('./features/roles/roles.component').then((c) => c.RolesComponent)
   }
 ];

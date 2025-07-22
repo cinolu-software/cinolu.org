@@ -9,19 +9,19 @@ import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { QueryParams } from '../../utils/types/query-params.type';
-import { RolesStore } from '../../data-access/roles/roles.store';
-import { AddRoleStore } from '../../data-access/roles/add-role.store';
 import { ConfirmationService } from 'primeng/api';
-import { DeleteRoleStore } from '../../data-access/roles/delete-role.store';
-import { UpdateRoleStore } from '../../data-access/roles/update-role.store';
-import { IRole } from '../../../shared/utils/types/models.type';
+import { ICategory } from '../../../shared/utils/types/models.type';
 import { Dialog } from 'primeng/dialog';
 import { ConfirmPopup } from 'primeng/confirmpopup';
+import { CategoriesStore } from '../../data-access/event-categories/categories.store';
+import { AddCategoryStore } from '../../data-access/event-categories/add-category.store';
+import { DeleteCategoryStore } from '../../data-access/event-categories/delete-category.store';
+import { UpdateCategoryStore } from '../../data-access/event-categories/update-category.store';
 
 @Component({
-  selector: 'app-dashboard-roles',
-  templateUrl: './roles.component.html',
-  providers: [RolesStore, AddRoleStore, UpdateRoleStore, DeleteRoleStore, ConfirmationService],
+  selector: 'app-dashboard-event-categories',
+  templateUrl: './categories.component.html',
+  providers: [CategoriesStore, AddCategoryStore, UpdateCategoryStore, DeleteCategoryStore, ConfirmationService],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -35,18 +35,18 @@ import { ConfirmPopup } from 'primeng/confirmpopup';
     ConfirmPopup
   ]
 })
-export class RolesComponent implements OnInit {
+export class EventCategoriesComponent implements OnInit {
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   #fb = inject(FormBuilder);
   #confirmationService = inject(ConfirmationService);
   searchForm: FormGroup;
-  addRoleForm: FormGroup;
-  updateRoleForm: FormGroup;
-  store = inject(RolesStore);
-  addRoleStore = inject(AddRoleStore);
-  deleteRoleStore = inject(DeleteRoleStore);
-  updateRoleStore = inject(UpdateRoleStore);
+  addCategoryForm: FormGroup;
+  updateCategoryForm: FormGroup;
+  store = inject(CategoriesStore);
+  addCategoryStore = inject(AddCategoryStore);
+  deleteCategoryStore = inject(DeleteCategoryStore);
+  updateCategoryStore = inject(UpdateCategoryStore);
   showAddModal = signal(false);
   showEditModal = signal(false);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
@@ -60,81 +60,81 @@ export class RolesComponent implements OnInit {
     this.searchForm = this.#fb.group({
       q: [this.queryParams().q || '', Validators.required]
     });
-    this.addRoleForm = this.#fb.group({
+    this.addCategoryForm = this.#fb.group({
       name: ['', Validators.required]
     });
-    this.updateRoleForm = this.#fb.group({
+    this.updateCategoryForm = this.#fb.group({
       id: [''],
       name: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    this.loadRoles();
+    this.loadCategories();
   }
 
-  loadRoles(): void {
-    this.store.loadRoles(this.queryParams());
+  loadCategories(): void {
+    this.store.loadCategories(this.queryParams());
   }
 
   onToggleAddModal(): void {
     this.showAddModal.set(!this.showAddModal());
-    if (this.showAddModal()) this.addRoleForm.reset();
+    if (this.showAddModal()) this.addCategoryForm.reset();
   }
 
-  onToggleEditModal(role: IRole | null): void {
-    this.updateRoleForm.patchValue({
-      id: role?.id || '',
-      name: role?.name || ''
+  onToggleEditModal(category: ICategory | null): void {
+    this.updateCategoryForm.patchValue({
+      id: category?.id || '',
+      name: category?.name || ''
     });
     this.showEditModal.update((v) => !v);
   }
 
   onPageChange(currentPage: number): void {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
-    this.updateRouteAndRoles();
+    this.updateRouteAndCategories();
   }
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/roles'], { queryParams });
+    this.#router.navigate(['/dashboard/event-categories'], { queryParams });
   }
 
-  updateRouteAndRoles(): void {
+  updateRouteAndCategories(): void {
     this.updateRoute();
-    this.loadRoles();
+    this.loadCategories();
   }
 
   onResetSearch(): void {
     this.searchForm.reset();
     this.queryParams.set({ page: null, q: null });
-    this.updateRouteAndRoles();
+    this.updateRouteAndCategories();
   }
 
   onSearch(): void {
     const searchValue = this.searchForm.value.q;
     this.queryParams.set({ page: null, q: searchValue });
-    this.updateRouteAndRoles();
+    this.updateRouteAndCategories();
   }
 
-  onAddRole(): void {
-    if (this.addRoleForm.invalid) return;
-    this.addRoleStore.addRole({
-      payload: this.addRoleForm.value,
+  onAddCategory(): void {
+    if (this.addCategoryForm.invalid) return;
+    this.addCategoryStore.addCategory({
+      payload: this.addCategoryForm.value,
       onSuccess: () => this.onToggleAddModal()
     });
   }
 
-  onUpdateRole(): void {
-    if (this.updateRoleForm.invalid) return;
-    this.updateRoleStore.updateRole({
-      id: this.updateRoleForm.value.id,
-      payload: this.updateRoleForm.value,
+  onUpdateCategory(): void {
+    if (this.updateCategoryForm.invalid) return;
+    this.updateCategoryStore.updateCategory({
+      id: this.updateCategoryForm.value.id,
+      payload: this.updateCategoryForm.value,
       onSuccess: () => this.onToggleEditModal(null)
     });
   }
 
-  onDeleteRole(roleId: string, event: Event): void {
+  onDeleteCategory(categoryId: string, event: Event): void {
     this.#confirmationService.confirm({
       target: event.currentTarget as EventTarget,
       message: 'Etes-vous sûr ?',
@@ -148,7 +148,7 @@ export class RolesComponent implements OnInit {
         severity: 'danger'
       },
       accept: () => {
-        this.deleteRoleStore.deleteRole({ id: roleId });
+        this.deleteCategoryStore.deleteCategory({ id: categoryId });
       }
     });
   }

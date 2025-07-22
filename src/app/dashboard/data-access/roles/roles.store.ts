@@ -7,14 +7,14 @@ import { QueryParams } from '../../utils/types/query-params.type';
 import { buildQueryParams } from '../../../shared/utils/helpers/build-query-params.fn';
 import { IRole } from '../../../shared/utils/types/models.type';
 
-interface IDashboardRolesStore {
+interface IRolesStore {
   isLoading: boolean;
   isFiltering: boolean;
   roles: [IRole[], number];
 }
 
-export const DashboardRolesStore = signalStore(
-  withState<IDashboardRolesStore>({ isLoading: false, isFiltering: false, roles: [[], 0] }),
+export const RolesStore = signalStore(
+  withState<IRolesStore>({ isLoading: false, isFiltering: false, roles: [[], 0] }),
   withProps(() => ({
     _http: inject(HttpClient)
   })),

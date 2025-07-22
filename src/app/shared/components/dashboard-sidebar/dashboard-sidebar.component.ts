@@ -1,31 +1,41 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, MoveLeft, ChevronDown } from 'lucide-angular';
 import { DASHBOARD_LINKS } from '../../utils/data/links';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-sidebar',
   imports: [CommonModule, NgOptimizedImage, RouterModule, LucideAngularModule],
   templateUrl: './dashboard-sidebar.component.html'
 })
-export class DashboardSidebarComponent implements OnInit {
-  #route = inject(Router);
+export class DashboardSidebarComponent {
+  #router = inject(Router);
   links = signal(DASHBOARD_LINKS);
   icons = { chevronDown: ChevronDown, moveLeft: MoveLeft };
-  activeTab = signal<string | null>(null);
-  currentPath = this.#route.url.split('/')[2] || '';
+  currentUrl = signal(this.#router.url);
+  toggleTab = signal<string | null>(null);
+  activeTab = computed(() => {
+    const url = this.currentUrl();
+    return (
+      this.links().find((link) => link.path === url || link.children?.some((child) => url.startsWith(child.path)))
+        ?.name ?? null
+    );
+  });
 
-  ngOnInit(): void {
-    const name =
-      this.links().find((link) => {
-        return link.path.split('/')[2] === this.currentPath;
-      })?.name || null;
-    if (name) this.activeTab.set(name);
+  constructor() {
+    this.#router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+      this.currentUrl.set(event.urlAfterRedirects);
+    });
   }
 
-  toggleTab(tab: string | null): void {
-    console.log('Toggling tab:', tab);
-    this.activeTab.set(tab);
+  onToggleTab(name: string): void {
+    const isOpen = this.toggleTab() === name;
+    this.toggleTab.set(isOpen ? null : name);
+  }
+
+  isTabOpen(name: string): boolean {
+    return this.activeTab() === name || this.toggleTab() === name;
   }
 }

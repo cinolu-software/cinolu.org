@@ -5,20 +5,18 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { QueryParams } from '../../utils/types/query-params.type';
-import { ActivatedRoute } from '@angular/router';
 import { buildQueryParams } from '../../../shared/utils/helpers/build-query-params.fn';
 
-interface IDashboardEventsStore {
+interface IEventsStore {
   isLoading: boolean;
   isFiltering: boolean;
   events: [IProgram[], number];
 }
 
-export const DashboardEventsStore = signalStore(
-  withState<IDashboardEventsStore>({ isLoading: false, isFiltering: false, events: [[], 0] }),
+export const EventsStore = signalStore(
+  withState<IEventsStore>({ isLoading: false, isFiltering: false, events: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
-    _route: inject(ActivatedRoute)
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadEvents: rxMethod<QueryParams>(
@@ -39,14 +37,5 @@ export const DashboardEventsStore = signalStore(
         })
       )
     )
-  })),
-  withHooks({
-    onInit({ loadEvents, _route }) {
-      const queryParams = {
-        page: _route.snapshot.queryParamMap.get('page'),
-        q: _route.snapshot.queryParamMap.get('q')
-      };
-      loadEvents(queryParams);
-    }
-  })
+  }))
 );

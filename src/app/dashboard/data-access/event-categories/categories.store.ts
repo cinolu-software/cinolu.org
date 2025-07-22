@@ -1,24 +1,22 @@
-import { patchState, signalStore, withHooks, withMethods, withProps, withState } from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ICategory } from '../../../shared/utils/types/models.type';
-import { ActivatedRoute } from '@angular/router';
 import { QueryParams } from '../../utils/types/query-params.type';
 import { buildQueryParams } from '../../../shared/utils/helpers/build-query-params.fn';
+import { ICategory } from '../../../shared/utils/types/models.type';
 
-interface IDashboardProjectCategoriesStore {
+interface ICategoriesStore {
   isLoading: boolean;
   isFiltering: boolean;
   categories: [ICategory[], number];
 }
 
-export const DashboardProjectCategoriesStore = signalStore(
-  withState<IDashboardProjectCategoriesStore>({ isLoading: false, isFiltering: false, categories: [[], 0] }),
+export const CategoriesStore = signalStore(
+  withState<ICategoriesStore>({ isLoading: false, isFiltering: false, categories: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
-    _route: inject(ActivatedRoute)
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadCategories: rxMethod<QueryParams>(
@@ -27,7 +25,7 @@ export const DashboardProjectCategoriesStore = signalStore(
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
           if (queryParams.page || queryParams.q) patchState(store, { isFiltering: true });
-          return _http.get<{ data: [ICategory[], number] }>('project-categories/paginated', { params }).pipe(
+          return _http.get<{ data: [ICategory[], number] }>('event-categories/paginated', { params }).pipe(
             map(({ data }) => {
               patchState(store, { isLoading: false, isFiltering: false, categories: data });
             }),
@@ -38,15 +36,20 @@ export const DashboardProjectCategoriesStore = signalStore(
           );
         })
       )
-    )
-  })),
-  withHooks({
-    onInit({ loadCategories, _route }) {
-      const queryParams = {
-        page: _route.snapshot.queryParamMap.get('page'),
-        q: _route.snapshot.queryParamMap.get('q')
-      };
-      loadCategories(queryParams);
+    ),
+    addCategory: (category: ICategory): void => {
+      const [categories, count] = store.categories();
+      patchState(store, { categories: [[category, ...categories], count + 1] });
+    },
+    updateCategory: (category: ICategory): void => {
+      const [categories, count] = store.categories();
+      const updated = categories.map((c) => (c.id === category.id ? category : c));
+      patchState(store, { categories: [updated, count] });
+    },
+    deleteCategory: (id: string): void => {
+      const [categories, count] = store.categories();
+      const filtered = categories.filter((category) => category.id !== id);
+      patchState(store, { categories: [filtered, count - 1] });
     }
-  })
+  }))
 );

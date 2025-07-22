@@ -3,34 +3,33 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IRole } from '../../../shared/utils/types/models.type';
-import { IRolePayload } from '../../utils/types/roles/role.type';
-import { RolesStore } from './roles.store';
+import { ICategory } from '../../../shared/utils/types/models.type';
+import { CategoriesStore } from './categories.store';
 
-interface IUpdateRoleStore {
+interface IUpdateCategoryStore {
   isLoading: boolean;
 }
 
-interface IUpdateRoleParams {
+interface IUpdateCategoryParams {
   id: string;
-  payload: IRolePayload;
+  payload: ICategory;
   onSuccess: () => void;
 }
 
-export const UpdateRoleStore = signalStore(
-  withState<IUpdateRoleStore>({ isLoading: false }),
+export const UpdateCategoryStore = signalStore(
+  withState<IUpdateCategoryStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _rolesStore: inject(RolesStore)
+    _categoriesStore: inject(CategoriesStore)
   })),
-  withMethods(({ _http, _rolesStore, ...store }) => ({
-    updateRole: rxMethod<IUpdateRoleParams>(
+  withMethods(({ _http, _categoriesStore, ...store }) => ({
+    updateCategory: rxMethod<IUpdateCategoryParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ id, payload, onSuccess }) => {
-          return _http.patch<{ data: IRole }>(`roles/${id}`, payload).pipe(
+          return _http.patch<{ data: ICategory }>(`event-categories/${id}`, payload).pipe(
             map(({ data }) => {
-              _rolesStore.updateRole(data);
+              _categoriesStore.updateCategory(data);
               patchState(store, { isLoading: false });
               onSuccess();
             }),
