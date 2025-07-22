@@ -1,0 +1,48 @@
+<section
+  class="relative min-h-screen flex flex-col justify-center items-center gap-10 px-4 sm:px-8 md:px-16 lg:px-32 py-15"
+  aria-label="Pourquoi rejoindre Cinolu ?"
+  role="region">
+  <div class="text-center">
+    <h3 class="text-gree-400 font-black sm:text-3xl lg:text-5xl lg:py-4">Pourquoi rejoindre Cinolu ?</h3>
+    <p class="max-w-5xl text-gray-500 mt-4 mx-auto md:mx-0 text-base font-extralight leading-relaxed">
+      Cinolu est un Hub d’innovation basé à Lubumbashi en RDC, dédié à l’autonomisation des jeunes, des femmes et des
+      innovateurs à travers l’innovation, la technologie, l’entrepreneuriat, le développement durable et la
+      collaboration, et ce depuis 2015
+    </p>
+  </div>
+
+  <div>
+    <h4 class="text-2xl sm:text-2xl mb-6 text-gray-600 font-extrabold pb-3 text-left">Notre impact en chiffres :</h4>
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
+      role="list"
+      aria-label="Statistiques de notre plateforme">
+      @for (s of stats; track $index) {
+        <div
+          class="relative gap-2.5 md : 4 justify-center items-start p-6 rounded-lg hover:bg-black-700/20 bg-black-400/20 backdrop-blur-[1px] border border-neutral-400/30 w-full"
+          role="listitem">
+          <i-lucide
+            [name]="s.icon"
+            class="absolute -left-2 -top-2 h-15 w-15 text-primary-400 text-sm bg-white rounded-full border border-primary-400/20 p-2"
+            aria-hidden="true"
+            focusable="false"></i-lucide>
+          <div class="text-2xl text-center sm:text-3xl lg:text-5xl font-black text-gray-600 mb-1">{{ s.value }}+</div>
+          <div class="text-sm sm:text-base text-primary-400">
+            {{ s.label }}
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+  <div>
+    <p
+      class="text-gray-500 text-base text-center leading-relaxed max-w-3xl mx-auto mt-6 border border-neutral-300 p-6 shadow-md hover:shadow-xl transition-shadow duration-30 rounded-lg">
+      Rejoignez un écosystème dynamique et contribuez à façonner l'avenir de la région avec d’autres change-makers comme
+      vous !
+    </p>
+
+    <div class="flex justify-center mt-6">
+      <p-button label="En savoir plus sur Cinolu" variant="outlined" severity="secondary" />
+    </div>
+  </div>
+</section>
