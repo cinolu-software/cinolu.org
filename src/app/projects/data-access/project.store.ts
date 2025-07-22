@@ -1,10 +1,9 @@
-import { signalStore, withState, withMethods, patchState, withProps, withHooks } from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withProps } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { IProject } from '../../shared/utils/types/models.type';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
 
 interface IProjectStore {
   isLoading: boolean;
