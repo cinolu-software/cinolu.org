@@ -130,9 +130,12 @@ export class ProductsComponent implements OnInit {
     if (!this.addProductForm.valid) return;
     this.addProductStore.addProduct({
       ...this.addProductForm.value,
-      enterpriseId: this.enterprise().id
+      enterpriseId: this.enterprise().id,
+      onSuccess: () => {
+        this.onToggleAddModal();
+        this.updateRouteAndProducts();
+      }
     });
-    this.onToggleAddModal();
   }
 
   onUpdateProduct(): void {
@@ -142,7 +145,6 @@ export class ProductsComponent implements OnInit {
       productId: this.product()?.id || '',
       payload: this.editProductForm.value
     });
-    this.onToggleEditModal(null);
   }
 
   onDeleteProduct(productId: string, event: Event): void {

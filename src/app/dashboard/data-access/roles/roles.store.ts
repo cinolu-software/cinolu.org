@@ -1,10 +1,9 @@
-import { patchState, signalStore, withHooks, withMethods, withProps, withState } from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { QueryParams } from '../../utils/types/query-params.type';
-import { ActivatedRoute } from '@angular/router';
 import { buildQueryParams } from '../../../shared/utils/helpers/build-query-params.fn';
 import { IRole } from '../../../shared/utils/types/models.type';
 
@@ -17,8 +16,7 @@ interface IDashboardRolesStore {
 export const DashboardRolesStore = signalStore(
   withState<IDashboardRolesStore>({ isLoading: false, isFiltering: false, roles: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
-    _route: inject(ActivatedRoute)
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadRoles: rxMethod<QueryParams>(
@@ -38,15 +36,20 @@ export const DashboardRolesStore = signalStore(
           );
         })
       )
-    )
-  })),
-  withHooks({
-    onInit({ loadRoles, _route }) {
-      const queryParams = {
-        page: _route.snapshot.queryParamMap.get('page'),
-        q: _route.snapshot.queryParamMap.get('q')
-      };
-      loadRoles(queryParams);
+    ),
+    addRole: (role: IRole): void => {
+      const [roles, count] = store.roles();
+      patchState(store, { roles: [[role, ...roles], count + 1] });
+    },
+    updateRole: (role: IRole): void => {
+      const [roles, count] = store.roles();
+      const updated = roles.map((r) => (r.id === role.id ? role : r));
+      patchState(store, { roles: [updated, count] });
+    },
+    deleteRole: (id: string): void => {
+      const [roles, count] = store.roles();
+      const filtered = roles.filter((role) => role.id !== id);
+      patchState(store, { roles: [filtered, count - 1] });
     }
-  })
+  }))
 );

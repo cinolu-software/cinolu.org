@@ -5,39 +5,40 @@ import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IRole } from '../../../shared/utils/types/models.type';
 import { IRolePayload } from '../../utils/types/roles/role.type';
+import { ToastrService } from '../../../shared/services/toast/toastr.service';
 import { DashboardRolesStore } from './roles.store';
-import { QueryParams } from '../../utils/types/query-params.type';
 
 interface IDashboardAddRoleStore {
   isLoading: boolean;
-  role: IRole | null;
 }
 
 interface IAddRoleParams {
   payload: IRolePayload;
-  queryParams: QueryParams;
   onSuccess: () => void;
 }
 
 export const DashboardAddRoleStore = signalStore(
-  withState<IDashboardAddRoleStore>({ isLoading: false, role: null }),
+  withState<IDashboardAddRoleStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _rolesStore: inject(DashboardRolesStore)
+    _rolesStore: inject(DashboardRolesStore),
+    _toast: inject(ToastrService)
   })),
-  withMethods(({ _http, _rolesStore, ...store }) => ({
+  withMethods(({ _http, _rolesStore, _toast, ...store }) => ({
     addRole: rxMethod<IAddRoleParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(({ payload, queryParams, onSuccess }) => {
+        switchMap(({ payload, onSuccess }) => {
           return _http.post<{ data: IRole }>('roles', payload).pipe(
             map(({ data }) => {
-              patchState(store, { isLoading: false, role: data });
-              _rolesStore.loadRoles(queryParams);
+              _rolesStore.addRole(data);
+              _toast.showSuccess('Rôle ajouté avec succès');
+              patchState(store, { isLoading: false });
               onSuccess();
             }),
             catchError(() => {
-              patchState(store, { isLoading: false, role: null });
+              _toast.showError("Échec de l'ajout du rôle");
+              patchState(store, { isLoading: false });
               return of(null);
             })
           );

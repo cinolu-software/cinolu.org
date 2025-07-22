@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LucideAngularModule, RefreshCcw, Edit, Plus, Trash, Search } from 'lucide-angular';
 import { TableModule } from 'primeng/table';
@@ -41,7 +41,7 @@ import { ConfirmPopup } from 'primeng/confirmpopup';
     ConfirmPopup
   ]
 })
-export class DashboardRolesComponent {
+export class DashboardRolesComponent implements OnInit {
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   #fb = inject(FormBuilder);
@@ -73,6 +73,10 @@ export class DashboardRolesComponent {
       id: [''],
       name: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    this.loadRoles();
   }
 
   loadRoles(): void {
@@ -123,7 +127,6 @@ export class DashboardRolesComponent {
     if (this.addRoleForm.invalid) return;
     this.addRoleStore.addRole({
       payload: this.addRoleForm.value,
-      queryParams: this.queryParams(),
       onSuccess: () => this.onToggleAddModal()
     });
   }
@@ -133,7 +136,6 @@ export class DashboardRolesComponent {
     this.updateRoleStore.updateRole({
       id: this.updateRoleForm.value.id,
       payload: this.updateRoleForm.value,
-      queryParams: this.queryParams(),
       onSuccess: () => this.onToggleEditModal(null)
     });
   }
@@ -152,10 +154,7 @@ export class DashboardRolesComponent {
         severity: 'danger'
       },
       accept: () => {
-        this.deleteRoleStore.deleteRole({
-          id: roleId,
-          queryParams: this.queryParams()
-        });
+        this.deleteRoleStore.deleteRole({ id: roleId });
       }
     });
   }
