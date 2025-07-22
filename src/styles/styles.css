@@ -70,6 +70,33 @@
    .dashboard-main-content {
     @apply bg-white rounded-lg shadow-md px-8 py-10 my-10;
   }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    80% {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+
+  .ring-pulse::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 9999px;
+    border: 2px solid rgba(34, 197, 94, 0.5); 
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    z-index: -1;
+  }
 }
 
 

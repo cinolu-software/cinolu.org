@@ -6,33 +6,44 @@
     <div class="absolute inset-0 bg-primary-950/85" aria-hidden="true"></div>
   </div>
 
-  <div class="px-8 relative z-10 sm:px-6 lg:px-12 xl:px-20 2xl:px-32 max-w-screen-2xl mx-auto pt-10">
+  <div class="relative z-10 px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-32 max-w-screen-2xl mx-auto pt-10">
     <h1
-      class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/20 backdrop-blur-sm mb-2 text-primary-50 font-medium font-satoshi">
+      class="inline-flex text-left gap-2 px-4 py-2 my-2 rounded-full bg-neutral-300/20 backdrop-blur-[1px] border borber-neutral-400/20 hover:bg-neutral-300/30 mb-2 text-primary-50 font-medium font-satoshi text-sm sm:text-base">
       <i-lucide [name]="icons.lightbulb" class="size-5" aria-hidden="true" focusable="false"></i-lucide>
       Innovons ensemble !
     </h1>
-    <h2 class="font-satoshi text-4xl md:text-5xl font-black mb-6 text-white">
-      Votre plateforme
-      <span class="text-primary-400">d'innovation One Stop</span>
-    </h2>
-    <p class="text-xl text-white mb-12 font-light">
-      Rejoignez notre communauté d'experts et de passionnés pour transformer vos idées en réalité. Ensemble, nous
-      construisons un avenir meilleur.
-    </p>
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
-      role="list"
-      aria-label="Statistiques de notre plateforme">
-      @for (s of stats; track $index) {
-        <div class="flex flex-col gap-2.5 justify-center p-6 rounded-lg bg-primary-50/10" role="listitem">
-          <i-lucide [name]="s.icon" class="size-8 text-white" aria-hidden="true" focusable="false"></i-lucide>
-          <div class="text-2xl md:text-4xl font-bold text-white mb-1">{{ s.value }}+</div>
-          <div class="text-sm md:text-base text-primary-200">
-            {{ s.label }}
-          </div>
+
+    <div class="flex justify-center flex-col items-center text-center">
+      <h2 class="font-satoshi font-black text-white text-3xl text-left sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+        Accélérons les talents,<br />
+        <span class="text-primary-400">connectons les opportunités.</span>
+      </h2>
+
+      <p
+        class="text-white font-light text-sm sm:text-base lg:text-lg max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl my-5">
+        Le Centre d’Innovation de Lubumbashi vous accueille dans son espace numérique, Un guichet unique pour accéder à
+        nos programmes, ressources, communautés et opportunités d’impact à travers la RDC et l’Afrique
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-10">
+        <div class="relative inline-flex ring-pulse mt-6">
+          <button
+            type="button"
+            class="group relative z-10 flex text-white items-center justify-center gap-2 px-6 py-2 border rounded-full border-primary-400 hover:bg-green-800 duration-300">
+            Devenir membre
+            <i-lucide [name]="icons.arrowFlesh" class="mt-0.5 group-hover:translate-x-1 transition-all" />
+          </button>
         </div>
-      }
+
+        <div class="relative inline-flex mt-6">
+          <button
+            type="button"
+            class="group relative z-10 flex text-white items-center justify-center gap-2 px-6 py-2 border rounded-full border-primary-400 bg-green-700/60 hover:bg-green-800 duration-300">
+            Faire un don
+            <i-lucide [name]="icons.donate" class="mt-0.5 group-hover:translate-x-1 transition-all" />
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
