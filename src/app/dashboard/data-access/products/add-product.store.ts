@@ -6,8 +6,6 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../shared/services/toast/toastr.service';
 import { IProductPayload } from '../../utils/types/products/add-product.type';
-import { ProductsStore } from './products.store';
-import { QueryParams } from '../../utils/types/products/query-params.type';
 
 interface IAddProductStore {
   isLoading: boolean;
