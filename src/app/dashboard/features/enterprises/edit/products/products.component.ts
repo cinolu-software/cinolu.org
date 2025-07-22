@@ -96,12 +96,12 @@ export class ProductsComponent implements OnInit {
     this.showAddModal.update((v) => !v);
   }
 
-  onToggleViewModal(product: IProduct | null = null): void {
+  onToggleViewModal(product: IProduct | null): void {
     this.product.set(product);
     this.showViewModal.update((v) => !v);
   }
 
-  onToggleEditModal(product: IProduct | null = null): void {
+  onToggleEditModal(product: IProduct | null): void {
     this.product.set(product);
     this.patchEditForm(product);
     this.showEditModal.update((v) => !v);
@@ -142,7 +142,7 @@ export class ProductsComponent implements OnInit {
       productId: this.product()?.id || '',
       payload: this.editProductForm.value
     });
-    this.onToggleEditModal();
+    this.onToggleEditModal(null);
   }
 
   onDeleteProduct(productId: string, event: Event): void {
