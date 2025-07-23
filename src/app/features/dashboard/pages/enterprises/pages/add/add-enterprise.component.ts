@@ -7,10 +7,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Textarea } from 'primeng/textarea';
 import { SelectModule } from 'primeng/select';
 import { DatePickerModule } from 'primeng/datepicker';
-import { AddEnterpriseStore } from '../../store/add-enterprise.store';
+import { AddEnterpriseStore } from '../../store/enterprises/add-enterprise.store';
 import { StepperModule } from 'primeng/stepper';
-import { SECTORS } from '../../../../utils/data/sectors';
-import { STAGES } from '../../../../utils/data/stage';
+import { SECTORS } from '../../data/sectors.data';
+import { STAGES } from '../../data/stage.data';
 
 @Component({
   selector: 'app-add-enterprise',

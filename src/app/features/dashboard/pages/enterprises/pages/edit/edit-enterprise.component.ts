@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { ArrowLeft, LucideAngularModule, Info, Box } from 'lucide-angular';
 import { EditEnterpriseInfoComponent } from './info/edit-info.component';
-import { EnterpriseStore } from '../../store/enterprise.store';
+import { EnterpriseStore } from '../../store/enterprises/enterprise.store';
 import { ProductsComponent } from './products/products.component';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 

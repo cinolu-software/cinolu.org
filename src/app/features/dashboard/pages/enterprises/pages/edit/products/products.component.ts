@@ -7,18 +7,18 @@ import { LucideAngularModule, Plus, Edit, Trash, Eye, Activity, Currency } from 
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { QueryParams } from '../../../../../utils/types/products/query-params.type';
-import { ProductsStore } from '../../../../../data-access/products/products.store';
+import { ProductsStore } from '../../../store/products/products.store';
 import { ConfirmationService } from 'primeng/api';
 import { Dialog } from 'primeng/dialog';
 import { Textarea } from 'primeng/textarea';
-import { AddProductStore } from '../../../../../data-access/products/add-product.store';
-import { DeleteProductStore } from '../../../../../data-access/products/delete-product.store';
-import { UpdateProducttore } from '../../../../../data-access/products/update-product.store';
+import { AddProductStore } from '../../../store/products/add-product.store';
+import { DeleteProductStore } from '../../../store/products/delete-product.store';
+import { UpdateProducttore } from '../../../store/products/update-product.store';
 import { FileUploadComponent } from '../../../../../../../shared/components/file-upload/file-upload.component';
 import { ApiImgPipe } from '../../../../../../../shared/pipes/api-img.pipe';
 import { IEnterprise, IProduct } from '../../../../../../../shared/models/entities';
 import { environment } from '../../../../../../../../environments/environment';
+import { QueryParams } from '../../../../../dto/query-params.dto';
 
 @Component({
   selector: 'app-products',
@@ -60,7 +60,8 @@ export class ProductsComponent implements OnInit {
   product = signal<IProduct | null>(null);
   logoUrl = `${environment.apiUrl}products/add-image/`;
   queryParams = signal<QueryParams>({
-    page: Number(this.#route.snapshot.queryParams?.['page']) || null
+    page: this.#route.snapshot.queryParams?.['page'],
+    q: this.#route.snapshot.queryParams?.['q']
   });
 
   constructor() {
@@ -108,7 +109,7 @@ export class ProductsComponent implements OnInit {
   }
 
   onPageChange(currentPage: number): void {
-    this.queryParams().page = currentPage === 1 ? null : currentPage;
+    this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
     this.updateRouteAndProducts();
   }
 

@@ -2,7 +2,7 @@ import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ArrowLeft, LucideAngularModule, MapPin, MailCheck, PhoneCall } from 'lucide-angular';
 import { SelectModule } from 'primeng/select';
-import { EnterpriseStore } from '../../store/enterprise.store';
+import { EnterpriseStore } from '../../store/enterprises/enterprise.store';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 
 @Component({

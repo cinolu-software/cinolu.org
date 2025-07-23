@@ -5,11 +5,11 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { LucideAngularModule, Plus, Edit, Trash, Eye } from 'lucide-angular';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { EnterprisesStore } from '../../store/enterprises.store';
+import { EnterprisesStore } from '../../store/enterprises/enterprises.store';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
-import { DeleteEnterpriseStore } from '../../store/delete-enterprise.store';
+import { DeleteEnterpriseStore } from '../../store/enterprises/delete-enterprise.store';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { EnterprisesQueryParams } from '../../dto/query-params.dto';
 

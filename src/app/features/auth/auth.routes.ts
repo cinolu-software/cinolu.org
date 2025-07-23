@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { unauthGuard } from '../../core/guards/no-auth.guard';
 
-export const auhtRoutes: Routes = [
+export const authRoutes: Routes = [
   {
     path: 'sign-in',
     title: 'Sign In',

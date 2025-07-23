@@ -1,55 +1,49 @@
 import { Route } from '@angular/router';
-import { auhtRoutes } from './features/auth/auth.routes';
-import { aboutRoutes } from './features/about-us/about-us.routes';
 import { authGuard } from './core/guards/auth.guard';
-import { dashboardRoutes } from './features/dashboard/dashboard.routes';
-import { landingRoutes } from './features/landing/landing.routes';
 import { LayoutComponent } from './layout/layout.component';
-import { eventsRoutes } from './features/events/events.routes';
-import { projectsRoutes } from './features/projects/projects.routes';
 
 export const routes: Route[] = [
   {
     path: 'programs',
     component: LayoutComponent,
     data: { layout: 'fixed-layout' },
-    loadChildren: () => projectsRoutes
+    loadChildren: () => import('./features/projects/projects.routes').then((m) => m.projectsRoutes)
   },
   {
     path: 'events',
     component: LayoutComponent,
     data: { layout: 'fixed-layout' },
-    loadChildren: () => eventsRoutes
+    loadChildren: () => import('./features/events/events.routes').then((m) => m.eventsRoutes)
   },
   {
     path: 'about-us',
     component: LayoutComponent,
     data: { layout: 'full-layout' },
-    loadChildren: () => aboutRoutes
+    loadChildren: () => import('./features/about-us/about-us.routes').then((m) => m.aboutRoutes)
   },
   {
     path: 'dashboard',
     component: LayoutComponent,
     data: { layout: 'dashboard-layout' },
     canActivate: [authGuard],
-    loadChildren: () => dashboardRoutes
+    loadChildren: () => import('./features/dashboard/dashboard.routes').then((m) => m.dashboardRoutes)
   },
   {
     path: '',
     component: LayoutComponent,
     data: { layout: 'full-layout' },
-    loadChildren: () => landingRoutes
+    loadChildren: () => import('./features/landing/landing.routes').then((m) => m.landingRoutes)
   },
   {
     path: '',
     component: LayoutComponent,
     data: { layout: 'empty-layout' },
-    loadChildren: () => auhtRoutes
+    loadChildren: () => import('./features/auth/auth.routes').then((m) => m.authRoutes)
   },
   {
     path: '**',
     component: LayoutComponent,
     data: { layout: 'full-layout' },
-    loadChildren: () => landingRoutes
+    loadChildren: () => import('./features/landing/landing.routes').then((m) => m.landingRoutes)
   }
 ];

@@ -1,51 +1,32 @@
 import { Routes } from '@angular/router';
-import { enterprisesRoutes } from './pages/enterprises/enterprises.routes';
 
 export const dashboardRoutes: Routes = [
   {
     path: '',
-    title: 'Profile',
-    loadComponent: () => import('./pages/account/pages/account.component').then((c) => c.AccountComponent)
+    loadChildren: () => import('./pages/account/account.routes').then((c) => c.accountRoutes)
   },
   {
-    path: 'enterprises',
-    title: 'Mes entreprises',
-    loadChildren: () => enterprisesRoutes
+    path: '',
+    loadChildren: () => import('./pages/enterprises/enterprises.routes').then((c) => c.enterprisesRoutes)
   },
   {
-    path: 'users',
-    title: 'Les utilisateurs',
-    loadComponent: () => import('./pages/users/users.component').then((c) => c.UsersComponent)
+    path: '',
+    loadChildren: () => import('./pages/users/users.routes').then((c) => c.usersRoutes)
   },
   {
-    path: 'programs',
-    title: 'Les programmes',
-    loadComponent: () => import('./pages/programs/programs.component').then((c) => c.ProgramsComponent)
+    path: '',
+    loadChildren: () => import('./pages/programs/programs.routes').then((c) => c.programsRoutes)
   },
   {
-    path: 'projects',
-    title: 'Les projets',
-    loadComponent: () => import('./pages/projects/projects.component').then((c) => c.ProjectsComponent)
+    path: '',
+    loadChildren: () => import('./pages/projects/projects.routes').then((c) => c.projectsRoutes)
   },
   {
-    path: 'project-categories',
-    title: 'Les catégories de projets',
-    loadComponent: () =>
-      import('./pages/project-categories/categories.component').then((c) => c.ProjectCategoriesComponent)
+    path: '',
+    loadChildren: () => import('./pages/events/events.routes').then((c) => c.eventsRoutes)
   },
   {
-    path: 'events',
-    title: 'Les événements',
-    loadComponent: () => import('./pages/events/events.component').then((c) => c.EventsComponent)
-  },
-  {
-    path: 'event-categories',
-    title: "Les catégories d'événements",
-    loadComponent: () => import('./pages/event-categories/categories.component').then((c) => c.EventCategoriesComponent)
-  },
-  {
-    path: 'roles',
-    title: 'Les rôles',
-    loadComponent: () => import('./pages/roles/roles.component').then((c) => c.RolesComponent)
+    path: '',
+    loadChildren: () => import('./pages/roles/roles.routes').then((c) => c.rolesRoutes)
   }
 ];

@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const enterprisesRoutes: Routes = [
   {
-    path: '',
+    path: 'enterprises',
     title: 'Mes entreprises',
     children: [
       {
