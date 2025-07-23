@@ -13,7 +13,7 @@ import { QueryParams } from '../../../../dto/query-params.dto';
 
 @Component({
   selector: 'app-dashboard-events',
-  templateUrl: './events.component.html',
+  templateUrl: './events-list.component.html',
   providers: [EventsStore],
   imports: [
     LucideAngularModule,

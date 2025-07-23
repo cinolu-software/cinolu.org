@@ -31,8 +31,8 @@ export const AddEnterpriseStore = signalStore(
               _router.navigate(['/dashboard/enterprises']);
             }),
             catchError(() => {
-              patchState(store, { isLoading: false });
               _toast.showError("Erreur lors de l'ajout");
+              patchState(store, { isLoading: false });
               return of(null);
             })
           );

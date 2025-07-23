@@ -30,7 +30,7 @@ import { EnterprisesQueryParams } from '../../dto/query-params.dto';
     ConfirmPopupModule
   ]
 })
-export class UserEnterprisesComponent implements OnInit {
+export class EnterprisesListComponent implements OnInit {
   icons = { plus: Plus, edit: Edit, trash: Trash, eye: Eye };
   #route = inject(ActivatedRoute);
   #router = inject(Router);

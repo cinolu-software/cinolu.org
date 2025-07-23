@@ -8,7 +8,7 @@ export const enterprisesRoutes: Routes = [
       {
         path: '',
         title: 'List',
-        loadComponent: () => import('./pages/list/enterprises.component').then((c) => c.UserEnterprisesComponent)
+        loadComponent: () => import('./pages/list/enterprises.component').then((c) => c.EnterprisesListComponent)
       },
       {
         path: 'add',
