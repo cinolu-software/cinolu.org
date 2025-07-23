@@ -2,9 +2,9 @@ import { Component, input, output, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ApiImgPipe } from '../../../pipes/api-img.pipe';
-import { IUser } from '../../../utils/types/models.type';
-import { ILink } from '../../../utils/types/link.type';
+import { IUser } from '../../../models/entities';
 import { LucideAngularModule, ChevronDown, LayoutGrid, LogOut } from 'lucide-angular';
+import { ILink } from '../../../data/links.data';
 
 @Component({
   selector: 'app-desktop-nav',

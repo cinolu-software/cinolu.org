@@ -2,16 +2,16 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { ApplicationConfig, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, TitleStrategy, withInMemoryScrolling } from '@angular/router';
-import { PageTitleStrategy } from './shared/strategies/page-title.strategy';
-import { httpInterceptor } from './shared/interceptors/http.interceptor';
+import { PageTitleStrategy } from './core/strategies/page-title.strategy';
+import { httpInterceptor } from './core/interceptors/http.interceptor';
 import { providePrimeNG } from 'primeng/config';
-import { primeNGPreset } from './shared/utils/config/primeng.config';
+import { primeNGPreset } from './shared/data/primeng.config';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { LoadingInterceptor } from './shared/services/loading/loading.interceptor';
-import { provideApp } from './shared/providers/app.provider';
+import { LoadingInterceptor } from './core/services/loading/loading.interceptor';
+import { provideApp } from './core/providers/app.provider';
 registerLocaleData(localeFr, 'fr');
 
 export const appConfig: ApplicationConfig = {

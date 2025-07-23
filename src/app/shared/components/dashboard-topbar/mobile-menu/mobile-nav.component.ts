@@ -1,10 +1,9 @@
 import { Component, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { IUser } from '../../../utils/types/models.type';
+import { IUser } from '../../../models/entities';
 import { LucideAngularModule, Menu, X, ChevronDown, ArrowLeft } from 'lucide-angular';
-import { ILink } from '../../../utils/types/link.type';
-import { getLinks } from '../../../utils/helpers/get-links.fn';
+import { ILink } from '../../../data/links.data';
 
 @Component({
   selector: 'app-mobile-nav',
@@ -16,7 +15,6 @@ export class MobileNavComponent {
   links = input.required<ILink[]>();
   signOut = output<void>();
   isOpen = signal<boolean>(false);
-  getLinks = getLinks;
   icons = {
     menu: Menu,
     close: X,

@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, inject, OnChanges, OnDestroy, OnInit, Sim
 import { Subject, takeUntil } from 'rxjs';
 import { ProgressBar } from 'primeng/progressbar';
 
-import { LoadingService } from '../../services/loading';
+import { LoadingService } from '../../../core/services/loading';
 
 @Component({
   selector: 'app-loading-bar',

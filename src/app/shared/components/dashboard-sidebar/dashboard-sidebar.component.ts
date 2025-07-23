@@ -2,7 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, MoveLeft, ChevronDown } from 'lucide-angular';
-import { DASHBOARD_LINKS } from '../../utils/data/links';
+import { DASHBOARD_LINKS } from '../../data/links.data';
 import { filter } from 'rxjs';
 
 @Component({

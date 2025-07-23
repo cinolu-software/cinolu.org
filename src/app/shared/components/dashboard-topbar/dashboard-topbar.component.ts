@@ -11,11 +11,11 @@ import {
 } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
-import { AuthStore } from '../../store/auth.store';
 import { DesktopNavComponent } from './desktop-menu/desktop-nav.component';
 import { MobileNavComponent } from './mobile-menu/mobile-nav.component';
-import { DASHBOARD_LINKS } from '../../utils/data/links';
+import { DASHBOARD_LINKS } from '../../data/links.data';
 import { RouterLink } from '@angular/router';
+import { AuthStore } from '../../../core/store/auth.store';
 
 @Component({
   selector: 'app-dashboard-topbar',
