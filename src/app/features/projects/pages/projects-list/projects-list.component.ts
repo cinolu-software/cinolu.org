@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { ChipModule } from 'primeng/chip';
 import { ProjectsStore } from '../../store/projects.store';
 import { ProjectCategoriesStore } from '../../store/categories.store';
-import { ProjectsQueryParams } from '../../models/projects-query.params';
+import { ProjectsQueryParams } from '../../dto/projects-query.params';
 
 @Component({
   selector: 'app-projects-list',

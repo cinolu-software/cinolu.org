@@ -5,7 +5,7 @@ import { provideRouter, TitleStrategy, withInMemoryScrolling } from '@angular/ro
 import { PageTitleStrategy } from './core/strategies/page-title.strategy';
 import { httpInterceptor } from './core/interceptors/http.interceptor';
 import { providePrimeNG } from 'primeng/config';
-import { primeNGPreset } from './shared/data/primeng.config';
+import { primeNGPreset } from './shared/config/primeng.config';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { routes } from './app.routes';

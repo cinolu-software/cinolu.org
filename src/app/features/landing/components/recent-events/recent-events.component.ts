@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { carouselConfig } from '../../data/carousel.config';
+import { carouselConfig } from '../../config/carousel.config';
 import { CarouselModule } from 'primeng/carousel';
 import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight } from 'lucide-angular';
 import { EventCardSkeletonComponent } from '../../../events/components/event-card-skeleton/event-card-skeleton.component';

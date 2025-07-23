@@ -5,7 +5,7 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { buildQueryParams } from '../../../shared/helpers/build-query-params';
 import { IProject } from '../../../shared/models/entities';
-import { ProjectsQueryParams } from '../models/projects-query.params';
+import { ProjectsQueryParams } from '../dto/projects-query.params';
 
 interface IProjectsStore {
   isLoading: boolean;

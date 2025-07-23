@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from '../../../core/services/toast/toastr.service';
 import { IUser } from '../../../shared/models/entities';
-import { ForgotPasswordDto } from '../models/forgot-password.dto';
+import { ForgotPasswordDto } from '../dto/forgot-password.dto';
 
 interface IForgotPasswordStore {
   isLoading: boolean;

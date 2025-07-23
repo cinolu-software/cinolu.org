@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from '../../../core/services/toast/toastr.service';
 import { IUser } from '../../../shared/models/entities';
-import { SignInDto } from '../models/sign-in.dto';
+import { SignInDto } from '../dto/sign-in.dto';
 import { AuthStore } from '../../../core/store/auth.store';
 
 interface ISignInStore {

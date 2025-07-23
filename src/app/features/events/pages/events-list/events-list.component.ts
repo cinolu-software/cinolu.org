@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EventCardComponent } from '../../components/event-card/event-card.component';
 import { EventCardSkeletonComponent } from '../../components/event-card-skeleton/event-card-skeleton.component';
-import { EventsQueryParams } from '../../models/events-query.params';
+import { EventsQueryParams } from '../../dto/events-query.params';
 import { MultiSelectModule, MultiSelectChangeEvent } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
 import { EventsStore } from '../../store/events.store';

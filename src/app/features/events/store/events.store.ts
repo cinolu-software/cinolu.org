@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { EventsQueryParams } from '../models/events-query.params';
+import { EventsQueryParams } from '../dto/events-query.params';
 import { buildQueryParams } from '../../../shared/helpers/build-query-params';
 import { IEvent } from '../../../shared/models/entities';
 

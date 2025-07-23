@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from '../../../core/services/toast/toastr.service';
 import { IUser } from '../../../shared/models/entities';
-import { ResetPasswordDto } from '../models/reset-password.dto';
+import { ResetPasswordDto } from '../dto/reset-password.dto';
 
 interface IResetPasswordStore {
   isLoading: boolean;
