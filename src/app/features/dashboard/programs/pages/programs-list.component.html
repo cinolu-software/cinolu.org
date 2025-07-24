@@ -1,17 +1,16 @@
 <section class="min-h-[105vh] text-gray-600 mt-16">
   @let isLoading = store.isLoading();
-  @let isFiltering = store.isFiltering();
   @let hasQuery = queryParams().q;
   @let programCount = store.programs()[1];
   @let programList = store.programs()[0];
 
-  <div class="relative px-4 bg-white rounded-lg">
+  <div class="relative bg-white rounded-lg">
     <div class="flex flex-col gap-3 mb-10 pt-6">
-      <div class="flex flex-wrap gap-2 md:justify-between md:items-center mb-6 md:mb-0">
+      <div class="px-6 flex flex-col md:flex-row gap-2 md:justify-between md:items-center mb-6 md:mb-0">
         <h5 class="text-lg font-bold">
           Liste des programmes
           <span class="text-gray-500 text-sm">
-            @if (isFiltering || isLoading) {
+            @if (isLoading) {
               <p-progress-spinner
                 strokeWidth="5"
                 animationDuration=".5s"
@@ -27,7 +26,7 @@
           Ajouter un programme
         </p-button>
       </div>
-      <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="flex flex-col gap-1 md:flex-row md:gap-4">
+      <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
         <input
           class="py-1.5! md:col-span-4"
           pInputText
@@ -39,38 +38,39 @@
           placeholder="Rechercher..." />
         <div class="flex items-center gap-1">
           <p-button
-            class="w-4/4!"
             type="submit"
             [size]="'small'"
-            [loading]="isFiltering"
-            [disabled]="searchForm.invalid || isFiltering || (programCount === 0 && !hasQuery)"
+            [loading]="isLoading"
+            [disabled]="searchForm.invalid || isLoading || (programCount === 0 && !hasQuery)"
             (click)="onSearch()">
-            @if (!isFiltering) {
+            Rechercher
+            @if (!isLoading) {
               <i-lucide [name]="icons.search" class="size-4" />
             }
-            Rechercher
           </p-button>
           <p-button
-            class="w-10! h-10!"
             [size]="'small'"
             [outlined]="true"
-            [rounded]="true"
-            [disabled]="!hasQuery || isFiltering"
+            [loading]="isLoading"
+            [disabled]="isLoading || !hasQuery"
             (click)="onResetSearch()">
-            <i-lucide [name]="icons.refresh" />
+            Réinitialiser
+            @if (!isLoading) {
+              <i-lucide [name]="icons.refresh" class="size-4" />
+            }
           </p-button>
         </div>
       </form>
     </div>
     @if (programCount === 0 && !isLoading) {
-      <h4 class="font-medium text-gray-700 text-lg px-2 pb-8">
+      <h4 class="font-medium text-gray-700 text-lg px-6 pb-8">
         {{ hasQuery ? 'Aucun programme trouvé avec ce filtre' : 'Aucun programme trouvé' }}
       </h4>
     }
-    @if (isFiltering || isLoading) {
+    @if (isLoading) {
       <div class="grid grid-cols-5 overflow-x-auto">
         @for (i of skeletonArray; track $index) {
-          <div class="border-y border-gray-200 py-3 px-2">
+          <div class="border-y border-gray-200 py-3 px-6">
             <div class="h-4 rounded-md bg-gray-200 animate-pulse mb-2"></div>
           </div>
         }
@@ -79,12 +79,12 @@
     @if (programCount > 0 && !isLoading) {
       <div class="relative flex flex-col overflow-x-auto">
         <table class="text-sm text-left rtl:text-right text-gray-500">
-          <thead class="text-sm text-gray-700 uppercase bg-gray-50">
+          <thead class="font-black text-gray-800 border-y border-gray-200">
             <tr>
-              <th class="px-4 py-2">Nom</th>
-              <th class="px-4 py-2">Description</th>
-              <th class="px-4 py-2">Créé le</th>
-              <th class="px-4 py-2">Actions</th>
+              <th class="px-6 py-3">Nom</th>
+              <th class="px-6 py-3">Description</th>
+              <th class="px-6 py-3">Créé le</th>
+              <th class="px-6 py-3">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -94,18 +94,18 @@
               track program.id
             ) {
               <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
-                <td class="px-4 py-2 font-medium text-gray-900">
+                <td class="px-6 py-2 font-medium text-gray-900">
                   {{ program.name | titlecase }}
                 </td>
-                <td class="px-4 py-2 whitespace-normal">
+                <td class="px-6 py-2 whitespace-normal">
                   <span class="text-gray-500 line-clamp-3">{{ program.description }}</span>
                 </td>
-                <td class="px-4 py-2">
+                <td class="px-6 py-2">
                   {{ program.created_at | date: 'longDate' }}
                 </td>
-                <td class="px-4 py-2">
+                <td class="px-6 py-2">
                   <div class="flex items-center gap-2">
-                    <button class="text-gray-600" (click)="onToggleEditModal(program)">
+                    <button class="text-gray-500" (click)="onToggleEditModal(program)">
                       <i-lucide [name]="icons.edit" class="size-4" />
                     </button>
                     <button class="text-red-700" (click)="onDeleteRole(program.id, $event)">

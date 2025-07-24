@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LucideAngularModule, RefreshCcw, Edit, Trash, Download, Search } from 'lucide-angular';
-import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,7 +17,6 @@ import { FilterEventsDto } from '../../dto/filter-events.dto';
   imports: [
     LucideAngularModule,
     CommonModule,
-    TableModule,
     ButtonModule,
     InputTextModule,
     ProgressSpinnerModule,

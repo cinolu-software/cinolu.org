@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LucideAngularModule, RefreshCcw, Edit, Plus, Trash, Search } from 'lucide-angular';
-import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,13 +18,12 @@ import { FilterEventCategoriesDto } from '../../dto/filter-categories';
 import { ICategory } from '../../../../../shared/models/entities';
 
 @Component({
-  selector: 'app-dashboard-event-categories',
-  templateUrl: './categories.component.html',
+  selector: 'app-event-categories',
+  templateUrl: './event-categories.component.html',
   providers: [CategoriesStore, AddCategoryStore, UpdateCategoryStore, DeleteCategoryStore, ConfirmationService],
   imports: [
     LucideAngularModule,
     CommonModule,
-    TableModule,
     ButtonModule,
     InputTextModule,
     ProgressSpinnerModule,

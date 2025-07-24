@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { LucideAngularModule, RefreshCcw, Edit, Trash, Download, Search } from 'lucide-angular';
-import { TableModule } from 'primeng/table';
+import { LucideAngularModule, RefreshCcw, Edit, Trash, Search } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,7 +17,6 @@ import { FilterProjectsDto } from '../../dto/filter-projects.dto';
   imports: [
     LucideAngularModule,
     CommonModule,
-    TableModule,
     ButtonModule,
     InputTextModule,
     ProgressSpinnerModule,
@@ -33,7 +31,7 @@ export class ProjectsComponent implements OnInit {
   searchForm: FormGroup;
   store = inject(ProjectsStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
-  icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, download: Download, search: Search };
+  icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, search: Search };
   queryParams = signal<FilterProjectsDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
     q: this.#route.snapshot.queryParamMap.get('q')

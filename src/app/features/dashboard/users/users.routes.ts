@@ -4,6 +4,11 @@ export const usersRoutes: Routes = [
   {
     path: '',
     title: 'Les utilisateurs',
-    loadComponent: () => import('./pages/users-list.component').then((c) => c.UsersListComponent)
+    loadComponent: () => import('./pages/users-list/users-list.component').then((c) => c.UsersListComponent)
+  },
+  {
+    path: 'edit/:email',
+    title: "Modifier l'utilisateur",
+    loadComponent: () => import('./pages/user-edit/user-edit.component').then((c) => c.UserEditComponent)
   }
 ];

@@ -9,12 +9,11 @@ import { buildQueryParams } from '../../../../../shared/helpers/build-query-para
 
 interface IProjectsStore {
   isLoading: boolean;
-  isFiltering: boolean;
   projects: [IProject[], number];
 }
 
 export const ProjectsStore = signalStore(
-  withState<IProjectsStore>({ isLoading: false, isFiltering: false, projects: [[], 0] }),
+  withState<IProjectsStore>({ isLoading: false, projects: [[], 0] }),
   withProps(() => ({
     _http: inject(HttpClient)
   })),
@@ -24,13 +23,12 @@ export const ProjectsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          if (queryParams.page || queryParams.q) patchState(store, { isFiltering: true });
           return _http.get<{ data: [IProject[], number] }>('projects', { params }).pipe(
             map(({ data }) => {
-              patchState(store, { isLoading: false, isFiltering: false, projects: data });
+              patchState(store, { isLoading: false, projects: data });
             }),
             catchError(() => {
-              patchState(store, { isLoading: false, isFiltering: false, projects: [[], 0] });
+              patchState(store, { isLoading: false, projects: [[], 0] });
               return of(null);
             })
           );

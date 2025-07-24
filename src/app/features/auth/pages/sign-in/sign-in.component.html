@@ -1,7 +1,6 @@
 <app-auth-card
   description="Connectez-vous et accéder à votre compte et continuer à explorer notre plateforme."
   title="Se connecter">
-  <!-- Signup link -->
   <div class="inline-flex items-center gap-1 justify-between">
     <span class="text-gray-700">Pas encore de compte?</span>
     <a class="text-md font-medium text-primary-400 hover:underline" [routerLink]="['/sign-up']">S'inscrire!</a>
@@ -17,7 +16,6 @@
       <p-password
         id="password"
         name="password"
-        [feedback]="false"
         formControlName="password"
         [toggleMask]="true"
         autocomplete="none"
@@ -37,7 +35,7 @@
       <div class="text-gray-700 mx-2">Ou continuer avec</div>
       <div class="mt-px flex-auto border-t border-gray-200"></div>
     </div>
-    <p-button [outlined]="true" [severity]="'primary'" (click)="signinWithGoogle()">
+    <p-button [outlined]="true" [severity]="'primary'" class="w-full" (click)="signinWithGoogle()">
       <div class="relative h-5 w-5">
         <img ngSrc="/images/google.svg" alt="Google" fill />
       </div>

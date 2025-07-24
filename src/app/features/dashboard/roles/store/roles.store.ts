@@ -9,12 +9,11 @@ import { buildQueryParams } from '../../../../shared/helpers/build-query-params'
 
 interface IRolesStore {
   isLoading: boolean;
-  isFiltering: boolean;
   roles: [IRole[], number];
 }
 
 export const RolesStore = signalStore(
-  withState<IRolesStore>({ isLoading: false, isFiltering: false, roles: [[], 0] }),
+  withState<IRolesStore>({ isLoading: false, roles: [[], 0] }),
   withProps(() => ({
     _http: inject(HttpClient)
   })),
@@ -24,13 +23,12 @@ export const RolesStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          if (queryParams.page || queryParams.q) patchState(store, { isFiltering: true });
           return _http.get<{ data: [IRole[], number] }>('roles/paginated', { params }).pipe(
             map(({ data }) => {
-              patchState(store, { isLoading: false, isFiltering: false, roles: data });
+              patchState(store, { isLoading: false, roles: data });
             }),
             catchError(() => {
-              patchState(store, { isLoading: false, isFiltering: false, roles: [[], 0] });
+              patchState(store, { isLoading: false, roles: [[], 0] });
               return of(null);
             })
           );

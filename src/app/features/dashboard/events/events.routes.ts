@@ -9,6 +9,7 @@ export const eventsRoutes: Routes = [
   {
     path: 'categories',
     title: "Les catégories d'événements",
-    loadComponent: () => import('./pages/event-categories/categories.component').then((c) => c.EventCategoriesComponent)
+    loadComponent: () =>
+      import('./pages/event-categories/event-categories.component').then((c) => c.EventCategoriesComponent)
   }
 ];

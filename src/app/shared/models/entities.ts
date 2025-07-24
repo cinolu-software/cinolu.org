@@ -15,7 +15,7 @@ export interface IUser extends IBase {
   google_image?: string;
   profile?: string;
   posts: IPost[];
-  roles: string[];
+  roles: IRole[];
   enterprises: IEnterprise[];
   positions: IPosition[];
   expertises: IExpertise[];

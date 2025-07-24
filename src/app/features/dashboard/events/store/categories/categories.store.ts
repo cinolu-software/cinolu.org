@@ -9,12 +9,11 @@ import { ICategory } from '../../../../../shared/models/entities';
 
 interface ICategoriesStore {
   isLoading: boolean;
-  isFiltering: boolean;
   categories: [ICategory[], number];
 }
 
 export const CategoriesStore = signalStore(
-  withState<ICategoriesStore>({ isLoading: false, isFiltering: false, categories: [[], 0] }),
+  withState<ICategoriesStore>({ isLoading: false, categories: [[], 0] }),
   withProps(() => ({
     _http: inject(HttpClient)
   })),
@@ -24,13 +23,12 @@ export const CategoriesStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          if (queryParams.page || queryParams.q) patchState(store, { isFiltering: true });
           return _http.get<{ data: [ICategory[], number] }>('event-categories/paginated', { params }).pipe(
             map(({ data }) => {
-              patchState(store, { isLoading: false, isFiltering: false, categories: data });
+              patchState(store, { isLoading: false, categories: data });
             }),
             catchError(() => {
-              patchState(store, { isLoading: false, isFiltering: false, categories: [[], 0] });
+              patchState(store, { isLoading: false, categories: [[], 0] });
               return of(null);
             })
           );

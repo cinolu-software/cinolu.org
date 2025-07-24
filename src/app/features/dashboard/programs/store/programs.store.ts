@@ -9,12 +9,11 @@ import { IProgram } from '../../../../shared/models/entities';
 
 interface IProgramsStore {
   isLoading: boolean;
-  isFiltering: boolean;
   programs: [IProgram[], number];
 }
 
 export const ProgramsStore = signalStore(
-  withState<IProgramsStore>({ isLoading: false, isFiltering: false, programs: [[], 0] }),
+  withState<IProgramsStore>({ isLoading: false, programs: [[], 0] }),
   withProps(() => ({
     _http: inject(HttpClient)
   })),
@@ -24,13 +23,12 @@ export const ProgramsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          if (queryParams.page || queryParams.q) patchState(store, { isFiltering: true });
           return _http.get<{ data: [IProgram[], number] }>('programs', { params }).pipe(
             map(({ data }) => {
-              patchState(store, { isLoading: false, isFiltering: false, programs: data });
+              patchState(store, { isLoading: false, programs: data });
             }),
             catchError(() => {
-              patchState(store, { isLoading: false, isFiltering: false, programs: [[], 0] });
+              patchState(store, { isLoading: false, programs: [[], 0] });
               return of(null);
             })
           );

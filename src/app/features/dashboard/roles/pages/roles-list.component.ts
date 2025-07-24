@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LucideAngularModule, RefreshCcw, Edit, Plus, Trash, Search } from 'lucide-angular';
-import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,7 +24,6 @@ import { IRole } from '../../../../shared/models/entities';
   imports: [
     LucideAngularModule,
     CommonModule,
-    TableModule,
     ButtonModule,
     InputTextModule,
     ProgressSpinnerModule,
