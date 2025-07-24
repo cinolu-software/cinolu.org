@@ -12,7 +12,7 @@ import { WhyJoinUsComponent } from '../components/why-join-us/why-join-us.compon
   imports: [
     HeroComponent,
     ServicesComponent,
-    StatementComponent,
+    // StatementComponent,
     RecentProjectsComponent,
     RecentEventsComponent,
     PartnersComponent,
