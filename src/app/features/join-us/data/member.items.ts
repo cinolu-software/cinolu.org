@@ -4,6 +4,7 @@ interface IMemberItem {
   title: string;
   description: string;
   icon: LucideIconData;
+  path?: string;
 }
 export const MEMBER_ITEMS: IMemberItem[] = [
   {
@@ -17,7 +18,7 @@ export const MEMBER_ITEMS: IMemberItem[] = [
     icon: GraduationCap
   },
   {
-    title: 'Je suis Mentor / Coach / Expert',
+    title: 'Je suis Mentor / Coach',
     description: 'Contribuez à l’accompagnement des entrepreneurs et étudiants.',
     icon: UserCheck
   },
