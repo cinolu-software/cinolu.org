@@ -1,9 +1,9 @@
 <section
-  class="relative min-h-screen flex flex-col justify-center items-center gap-10 px-4 sm:px-8 md:px-16 lg:px-32 py-15"
+  class="relative bg-grid min-h-screen flex flex-col justify-center items-center gap-10 px-4 sm:px-8 md:px-16 lg:px-32 py-15"
   aria-label="Pourquoi rejoindre Cinolu ?"
   role="region">
   <div class="text-center">
-    <h3 class="text-gree-400 font-black sm:text-3xl lg:text-5xl lg:py-4">Pourquoi rejoindre Cinolu ?</h3>
+    <h3 class="font-black sm:text-3xl lg:text-5xl lg:py-4">Pourquoi rejoindre Cinolu ?</h3>
     <p class="max-w-5xl text-gray-500 mt-4 mx-auto md:mx-0 text-base font-extralight leading-relaxed">
       Cinolu est un Hub d’innovation basé à Lubumbashi en RDC, dédié à l’autonomisation des jeunes, des femmes et des
       innovateurs à travers l’innovation, la technologie, l’entrepreneuriat, le développement durable et la
@@ -19,7 +19,7 @@
       aria-label="Statistiques de notre plateforme">
       @for (s of stats; track $index) {
         <div
-          class="relative gap-2.5 md : 4 justify-center items-start p-6 rounded-lg hover:bg-black-700/20 bg-black-400/20 backdrop-blur-[1px] border border-neutral-400/30 w-full"
+          class="relative gap-2.5 md : 4 justify-center items-start p-6 rounded-lg hover:bg-black-700/20 bg-neutral-300/20 backdrop-blur-[1px] border border-neutral-400/30 w-full"
           role="listitem">
           <i-lucide
             [name]="s.icon"
