@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { ChipModule } from 'primeng/chip';
 import { ProjectsStore } from '../../store/projects.store';
 import { ProjectCategoriesStore } from '../../store/categories.store';
-import { ProjectsQueryParams } from '../../dto/projects-query.params';
+import { FilterProjectsDto } from '../../dto/filter-projects.dto';
 
 @Component({
   selector: 'app-projects-list',
@@ -31,7 +31,7 @@ export class ProjectsListComponent implements OnInit {
   #route = inject(ActivatedRoute);
   store = inject(ProjectsStore);
   categoriesStore = inject(ProjectCategoriesStore);
-  queryParams = signal<ProjectsQueryParams>({
+  queryParams = signal<FilterProjectsDto>({
     page: this.#route.snapshot.queryParams?.['page'],
     categories: this.#route.snapshot.queryParams?.['categories']
   });

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { EventsQueryParams } from '../dto/events-query.params';
+import { FilterEventsDto } from '../dto/filter-events.dto';
 import { buildQueryParams } from '../../../shared/helpers/build-query-params';
 import { IEvent } from '../../../shared/models/entities';
 
@@ -18,7 +18,7 @@ export const EventsStore = signalStore(
     _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
-    loadEvents: rxMethod<EventsQueryParams>(
+    loadEvents: rxMethod<FilterEventsDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {

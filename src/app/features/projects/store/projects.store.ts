@@ -5,7 +5,7 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { buildQueryParams } from '../../../shared/helpers/build-query-params';
 import { IProject } from '../../../shared/models/entities';
-import { ProjectsQueryParams } from '../dto/projects-query.params';
+import { FilterProjectsDto } from '../dto/filter-projects.dto';
 
 interface IProjectsStore {
   isLoading: boolean;
@@ -18,7 +18,7 @@ export const ProjectsStore = signalStore(
     _http: inject(HttpClient)
   })),
   withMethods((store, http = inject(HttpClient)) => ({
-    loadProjects: rxMethod<ProjectsQueryParams>(
+    loadProjects: rxMethod<FilterProjectsDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {

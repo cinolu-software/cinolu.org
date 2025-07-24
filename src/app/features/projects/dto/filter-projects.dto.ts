@@ -1,4 +1,4 @@
-export interface EventsQueryParams {
+export interface FilterProjectsDto {
   page: string | null;
   categories: string | null;
 }

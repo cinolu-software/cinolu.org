@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EventCardComponent } from '../../components/event-card/event-card.component';
 import { EventCardSkeletonComponent } from '../../components/event-card-skeleton/event-card-skeleton.component';
-import { EventsQueryParams } from '../../dto/events-query.params';
+import { FilterEventsDto } from '../../dto/filter-events.dto';
 import { MultiSelectModule, MultiSelectChangeEvent } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
 import { EventsStore } from '../../store/events.store';
@@ -30,7 +30,7 @@ export class EventsListComponent implements OnInit {
   skeletonArray = Array(6).fill(0);
   store = inject(EventsStore);
   categoriesStore = inject(EventCategoriesStore);
-  queryParams = signal<EventsQueryParams>({
+  queryParams = signal<FilterEventsDto>({
     page: this.#route.snapshot.queryParams?.['page'],
     categories: this.#route.snapshot.queryParams?.['categories']
   });
