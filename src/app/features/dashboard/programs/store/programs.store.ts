@@ -5,12 +5,12 @@ import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterProgramsDto } from '../dto/filter-programs.dto';
 import { buildQueryParams } from '../../../../shared/helpers/build-query-params';
-import { IProject } from '../../../../shared/models/entities';
+import { IProgram } from '../../../../shared/models/entities';
 
 interface IProgramsStore {
   isLoading: boolean;
   isFiltering: boolean;
-  programs: [IProject[], number];
+  programs: [IProgram[], number];
 }
 
 export const ProgramsStore = signalStore(
@@ -25,7 +25,7 @@ export const ProgramsStore = signalStore(
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
           if (queryParams.page || queryParams.q) patchState(store, { isFiltering: true });
-          return _http.get<{ data: [IProject[], number] }>('programs', { params }).pipe(
+          return _http.get<{ data: [IProgram[], number] }>('programs', { params }).pipe(
             map(({ data }) => {
               patchState(store, { isLoading: false, isFiltering: false, programs: data });
             }),
@@ -36,6 +36,20 @@ export const ProgramsStore = signalStore(
           );
         })
       )
-    )
+    ),
+    addProgram: (program: IProgram): void => {
+      const [programs, count] = store.programs();
+      patchState(store, { programs: [[program, ...programs], count + 1] });
+    },
+    updateProgram: (program: IProgram): void => {
+      const [programs, count] = store.programs();
+      const updated = programs.map((p) => (p.id === program.id ? program : p));
+      patchState(store, { programs: [updated, count] });
+    },
+    deleteProgram: (id: string): void => {
+      const [programs, count] = store.programs();
+      const filtered = programs.filter((program) => program.id !== id);
+      patchState(store, { programs: [filtered, count - 1] });
+    }
   }))
 );

@@ -1,5 +1,4 @@
 <section class="min-h-[105vh] text-gray-600 mt-16">
-  <!-- All roles store -->
   @let isLoading = store.isLoading();
   @let isFiltering = store.isFiltering();
   @let hasQuery = queryParams().q;
@@ -102,7 +101,7 @@
                 </td>
                 <td class="px-4 py-2">
                   <div class="flex items-center gap-2">
-                    <button class="text-primary-600" (click)="onToggleEditModal(role)">
+                    <button class="text-gray-600" (click)="onToggleEditModal(role)">
                       <i-lucide [name]="icons.edit" class="size-4" />
                     </button>
                     <button class="text-red-700" (click)="onDeleteRole(role.id, $event)">

@@ -79,7 +79,6 @@ export class RolesListComponent implements OnInit {
 
   onToggleAddModal(): void {
     this.showAddModal.set(!this.showAddModal());
-    if (this.showAddModal()) this.addRoleForm.reset();
   }
 
   onToggleEditModal(role: IRole | null): void {
@@ -121,7 +120,10 @@ export class RolesListComponent implements OnInit {
     if (this.addRoleForm.invalid) return;
     this.addRoleStore.addRole({
       payload: this.addRoleForm.value,
-      onSuccess: () => this.onToggleAddModal()
+      onSuccess: () => {
+        this.onToggleAddModal();
+        this.addRoleForm.reset();
+      }
     });
   }
 

@@ -38,7 +38,7 @@
                 class="group flex items-center gap-2 text-gray-400/90 text-sm tracking-wider"
                 [routerLink]="child.path"
                 [routerLinkActive]="'text-white active-link'"
-                [routerLinkActiveOptions]="{ exact: child.exactUrl || false }">
+                [routerLinkActiveOptions]="{ exact: true }">
                 <div
                   class="relative group-[.active-link]:bg-gray-50 group-[.active-link]:after:bg-gray-50 group-hover:bg-gray-100 group-hover:after:bg-gray-100 transition-colors duration-300 h-[1px] mr-1 w-1/6 bg-gray-500 after:absolute after:-top-0.5 after:-right-1 after:w-1.5 after:bg-gray-500/90 after:h-1.5 after:rounded-full after:z-40"></div>
                 {{ child.name }}

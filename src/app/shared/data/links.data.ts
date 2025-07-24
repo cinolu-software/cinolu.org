@@ -19,6 +19,7 @@ export interface ILink {
   exactUrl?: boolean;
   children?: ILink[];
 }
+
 export const EXPLORATION_LINKS: ILink[] = [
   {
     name: 'Accueil',
@@ -85,7 +86,7 @@ export const DASHBOARD_LINKS: ILink[] = [
       },
       {
         name: 'Catégories',
-        path: '/dashboard/project-categories'
+        path: '/dashboard/projects/categories'
       }
     ]
   },
@@ -101,7 +102,7 @@ export const DASHBOARD_LINKS: ILink[] = [
       },
       {
         name: 'Catégories',
-        path: '/dashboard/event-categories'
+        path: '/dashboard/events/categories'
       }
     ]
   },
