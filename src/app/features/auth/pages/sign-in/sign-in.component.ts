@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
-import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { environment } from '../../../../../environments/environment';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 import { SignInStore } from '../../store/sign-in.store';
+import { Password } from 'primeng/password';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,7 +16,7 @@ import { SignInStore } from '../../store/sign-in.store';
   imports: [
     RouterLink,
     InputTextModule,
-    PasswordModule,
+    Password,
     ButtonModule,
     FormsModule,
     ReactiveFormsModule,

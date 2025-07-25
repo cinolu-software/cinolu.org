@@ -10,3 +10,11 @@
 .p-progressbar-value {
   @apply bg-primary-600;
 }
+
+.p-password {
+  @apply w-full;
+}
+
+.p-password input {
+  @apply w-full;
+}

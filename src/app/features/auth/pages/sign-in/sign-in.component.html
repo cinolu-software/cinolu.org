@@ -9,17 +9,19 @@
   <form class="mt-6 flex flex-col gap-4" (ngSubmit)="onSignIn()" [formGroup]="form">
     <div class="flex flex-col gap-1.5">
       <label for="email" class="font-medium">Adresse e-mail</label>
-      <input pInputText type="email" id="email" name="email" formControlName="email" autocomplete="none" />
+      <input pInputText type="email" id="email" name="email" formControlName="email" />
     </div>
     <div class="flex flex-col gap-1.5">
       <label for="passwordInput" class="font-medium">Mot de passe</label>
       <p-password
-        id="password"
+        class="w-full!"
+        id="passwordInput"
         name="password"
         formControlName="password"
+        [feedback]="false"
         [toggleMask]="true"
-        autocomplete="none"
-        inputId="passwordInput" />
+        [inputId]="'passwordInput'">
+      </p-password>
     </div>
     <div class="inline-flex -mt-2 w-full items-center justify-between">
       Mot de passe oublié?
@@ -27,19 +29,24 @@
         Réinitialiser!
       </a>
     </div>
-    <p-button [loading]="store.isLoading()" [disabled]="store.isLoading() || form.invalid" class="mt-4" type="submit">
+    <button
+      pButton
+      class="w-full"
+      [loading]="store.isLoading()"
+      [disabled]="store.isLoading() || form.invalid"
+      type="submit">
       Se connecter
-    </p-button>
+    </button>
     <div class="mt-2.5 flex items-center">
       <div class="mt-px flex-auto border-t border-gray-200"></div>
       <div class="text-gray-700 mx-2">Ou continuer avec</div>
       <div class="mt-px flex-auto border-t border-gray-200"></div>
     </div>
-    <p-button [outlined]="true" [severity]="'primary'" class="w-full" (click)="signinWithGoogle()">
+    <button pButton class="w-full" [outlined]="true" [severity]="'primary'" class="w-full" (click)="signinWithGoogle()">
       <div class="relative h-5 w-5">
         <img ngSrc="/images/google.svg" alt="Google" fill />
       </div>
       <p class="-ml-2">oogle</p>
-    </p-button>
+    </button>
   </form>
 </app-auth-card>
