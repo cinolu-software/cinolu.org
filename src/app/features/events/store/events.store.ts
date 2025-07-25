@@ -5,7 +5,7 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { FilterEventsDto } from '../dto/filter-events.dto';
 import { buildQueryParams } from '../../../shared/helpers/build-query-params';
-import { IEvent } from '../../../shared/models/entities';
+import { IEvent } from '../../../shared/models/entities.models';
 
 interface IEventsStore {
   isLoading: boolean;

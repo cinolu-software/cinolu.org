@@ -5,7 +5,7 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from '../../../core/services/toast/toastr.service';
-import { IUser } from '../../../shared/models/entities';
+import { IUser } from '../../../shared/models/entities.models';
 import { ForgotPasswordDto } from '../dto/forgot-password.dto';
 
 interface IForgotPasswordStore {

@@ -10,7 +10,7 @@
     Revenir à l'accueil
   </a>
   <div class="flex flex-col gap-2">
-    @for (link of links(); track $index) {
+    @for (link of visibleLinks; track $index) {
       @if ((link?.children?.length || 0) > 0) {
         <button
           class="flex justify-between items-center px-2 py-1.5 font-medium rounded-md hover:bg-primary-700 hover:text-white"

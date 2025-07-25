@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterRolesDto } from '../dto/filter-role.dto';
-import { IRole } from '../../../../shared/models/entities';
+import { IRole } from '../../../../shared/models/entities.models';
 import { buildQueryParams } from '../../../../shared/helpers/build-query-params';
 
 interface IRolesStore {

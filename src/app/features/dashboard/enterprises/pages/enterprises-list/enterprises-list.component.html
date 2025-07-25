@@ -2,10 +2,11 @@
   <div class="dashboard-main-content">
     <div class="flex w-full flex-wrap gap-4 justify-between items-center mb-10">
       <h1 class="text-2xl font-bold">Mes entreprises</h1>
-      <a class="primary-link flex items-center gap-1 font-normal!" [routerLink]="'/dashboard/enterprises/add'">
-        <i-lucide [name]="icons.plus" class="size-5"></i-lucide>
-        Ajouter
-      </a>
+
+      <p-button [routerLink]="'/dashboard/enterprises/add'" [size]="'small'" variant="outlined">
+        <i-lucide [name]="icons.plus" class="size-4" />
+        Ajouter une entreprise
+      </p-button>
     </div>
     @if (store.enterprises()[0]) {
       @for (

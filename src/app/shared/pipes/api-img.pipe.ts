@@ -10,7 +10,7 @@ export class ApiImgPipe implements PipeTransform {
     const value = v as Record<string, string>;
     const images: Record<string, string> = {
       user: value['profile']
-        ? `${apiUrl}uploads/dashboards/${value['profile']}`
+        ? `${apiUrl}uploads/profiles/${value['profile']}`
         : (value['google_image'] ?? '/images/avatar-default.webp'),
       project: value['cover'] ? `${apiUrl}uploads/projects/${value['cover']}` : '/images/no-image.jpg',
       enterprise: value['logo'] ? `${apiUrl}uploads/enterprises/logos/${value['logo']}` : '/images/no-image.jpg',

@@ -15,7 +15,7 @@ import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-user-enterprises',
-  templateUrl: './enterprises.component.html',
+  templateUrl: './enterprises-list.component.html',
   providers: [EnterprisesStore, DeleteEnterpriseStore, ConfirmationService],
   imports: [
     ButtonModule,

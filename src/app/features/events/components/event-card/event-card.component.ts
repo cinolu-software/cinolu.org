@@ -3,7 +3,7 @@ import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, MapPin, CalendarX } from 'lucide-angular';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-import { IEvent } from '../../../../shared/models/entities';
+import { IEvent } from '../../../../shared/models/entities.models';
 
 @Component({
   selector: 'app-event-card',

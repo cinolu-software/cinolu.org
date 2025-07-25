@@ -15,7 +15,7 @@ import { AddCategoryStore } from '../../store/categories/add-category.store';
 import { DeleteCategoryStore } from '../../store/categories/delete-category.store';
 import { UpdateCategoryStore } from '../../store/categories/update-category.store';
 import { FilterEventCategoriesDto } from '../../dto/filter-categories';
-import { ICategory } from '../../../../../shared/models/entities';
+import { ICategory } from '../../../../../shared/models/entities.models';
 
 @Component({
   selector: 'app-event-categories',

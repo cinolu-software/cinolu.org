@@ -4,7 +4,7 @@ import { signalStore, withState, withMethods, patchState, withProps } from '@ngr
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, switchMap } from 'rxjs';
 import { FilterEnterprisesDto } from '../../dto/filter-enterprises.dto';
-import { IEnterprise } from '../../../../../shared/models/entities';
+import { IEnterprise } from '../../../../../shared/models/entities.models';
 import { buildQueryParams } from '../../../../../shared/helpers/build-query-params';
 
 interface IEnterprisesStore {

@@ -5,7 +5,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, switchMap } from 'rxjs';
 import { FilterProductsDto } from '../../dto/filter-products.dto';
 import { buildQueryParams } from '../../../../../shared/helpers/build-query-params';
-import { IProduct } from '../../../../../shared/models/entities';
+import { IProduct } from '../../../../../shared/models/entities.models';
 
 interface IProductsStore {
   isLoading: boolean;

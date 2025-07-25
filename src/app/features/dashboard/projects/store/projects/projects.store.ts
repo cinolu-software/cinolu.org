@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterProjectCategoriesDto } from '../../dto/filter-categories';
-import { IProject } from '../../../../../shared/models/entities';
+import { IProject } from '../../../../../shared/models/entities.models';
 import { buildQueryParams } from '../../../../../shared/helpers/build-query-params';
 
 interface IProjectsStore {

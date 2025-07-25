@@ -15,7 +15,7 @@ import { DesktopNavComponent } from './desktop-menu/desktop-nav.component';
 import { MobileNavComponent } from './mobile-menu/mobile-nav.component';
 import { DASHBOARD_LINKS } from '../../data/links.data';
 import { RouterLink } from '@angular/router';
-import { AuthStore } from '../../../core/store/auth.store';
+import { AuthStore } from '../../../core/auth/auth.store';
 
 @Component({
   selector: 'app-dashboard-topbar',

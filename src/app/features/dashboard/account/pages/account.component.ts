@@ -7,7 +7,7 @@ import { LucideAngularModule } from 'lucide-angular';
 import { UpdateInfoStore } from '../store/update-info.store';
 import { UpdatePasswordStore } from '../store/update-password.store';
 import { environment } from '../../../../../environments/environment';
-import { AuthStore } from '../../../../core/store/auth.store';
+import { AuthStore } from '../../../../core/auth/auth.store';
 import { FileUploadComponent } from '../../../../shared/components/file-upload/file-upload.component';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 
@@ -40,7 +40,7 @@ export class AccountComponent implements OnInit {
     this.infoForm = this.#formBuilder.group({
       email: ['', Validators.email],
       address: ['', [Validators.required, Validators.minLength(3)]],
-      phone_number: ['', [Validators.minLength(10), Validators.pattern(/^\+?[1-9]\d{1,14}$/)]],
+      phone_number: ['', [Validators.minLength(10)]],
       name: ['', Validators.minLength(3)]
     });
     this.passwordForm = this.#formBuilder.group({

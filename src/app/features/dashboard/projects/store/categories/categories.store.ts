@@ -5,7 +5,7 @@ import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterProjectCategoriesDto } from '../../dto/filter-categories';
 import { buildQueryParams } from '../../../../../shared/helpers/build-query-params';
-import { ICategory } from '../../../../../shared/models/entities';
+import { ICategory } from '../../../../../shared/models/entities.models';
 
 interface ICategoriesStore {
   isLoading: boolean;

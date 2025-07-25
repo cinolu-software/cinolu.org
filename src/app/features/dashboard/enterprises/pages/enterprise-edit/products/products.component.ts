@@ -16,7 +16,7 @@ import { DeleteProductStore } from '../../../store/products/delete-product.store
 import { UpdateProducttore } from '../../../store/products/update-product.store';
 import { environment } from '../../../../../../../environments/environment';
 import { FileUploadComponent } from '../../../../../../shared/components/file-upload/file-upload.component';
-import { IEnterprise, IProduct } from '../../../../../../shared/models/entities';
+import { IEnterprise, IProduct } from '../../../../../../shared/models/entities.models';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { FilterProductsDto } from '../../../dto/filter-products.dto';
 

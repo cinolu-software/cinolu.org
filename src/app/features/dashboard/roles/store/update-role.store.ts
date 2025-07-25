@@ -5,7 +5,7 @@ import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RoleDto } from '../dto/role.dto';
 import { RolesStore } from './roles.store';
-import { IRole } from '../../../../shared/models/entities';
+import { IRole } from '../../../../shared/models/entities.models';
 
 interface IUpdateRoleStore {
   isLoading: boolean;

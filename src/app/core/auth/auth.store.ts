@@ -1,11 +1,11 @@
 import { signalStore, withState, withMethods, patchState, withProps } from '@ngrx/signals';
-import { IUser } from '../../shared/models/entities';
+import { IUser } from '../../shared/models/entities.models';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, exhaustMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from '../../core/services/toast/toastr.service';
+import { ToastrService } from '../services/toast/toastr.service';
 
 interface IAuthStore {
   user: IUser | null;
@@ -23,7 +23,7 @@ export const AuthStore = signalStore(
     getProfile: rxMethod<void>(
       pipe(
         exhaustMap(() =>
-          _http.get<{ data: IUser }>('auth/dashboard').pipe(
+          _http.get<{ data: IUser }>('auth/profile').pipe(
             tap(({ data }) => patchState(store, { user: data })),
             catchError(() => {
               patchState(store, { user: null });

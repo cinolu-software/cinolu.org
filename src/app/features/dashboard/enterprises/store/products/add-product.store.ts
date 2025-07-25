@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProductDto } from '../../dto/product.dto';
 import { ProductsStore } from './products.store';
 import { ToastrService } from '../../../../../core/services/toast/toastr.service';
-import { IProduct } from '../../../../../shared/models/entities';
+import { IProduct } from '../../../../../shared/models/entities.models';
 
 interface IAddProductStore {
   isLoading: boolean;

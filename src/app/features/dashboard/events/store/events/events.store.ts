@@ -5,7 +5,7 @@ import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterEventsDto } from '../../dto/filter-events.dto';
 import { buildQueryParams } from '../../../../../shared/helpers/build-query-params';
-import { IProgram } from '../../../../../shared/models/entities';
+import { IProgram } from '../../../../../shared/models/entities.models';
 
 interface IEventsStore {
   isLoading: boolean;

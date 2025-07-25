@@ -4,7 +4,7 @@ import { inject } from '@angular/core';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { buildQueryParams } from '../../../shared/helpers/build-query-params';
-import { IProject } from '../../../shared/models/entities';
+import { IProject } from '../../../shared/models/entities.models';
 import { FilterProjectsDto } from '../dto/filter-projects.dto';
 
 interface IProjectsStore {

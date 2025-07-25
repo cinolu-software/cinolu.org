@@ -5,8 +5,8 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UpdateInfoDto } from '../dto/update-info.dto';
 import { ToastrService } from '../../../../core/services/toast/toastr.service';
-import { AuthStore } from '../../../../core/store/auth.store';
-import { IUser } from '../../../../shared/models/entities';
+import { AuthStore } from '../../../../core/auth/auth.store';
+import { IUser } from '../../../../shared/models/entities.models';
 
 interface IUpdateInfoStore {
   isLoading: boolean;
@@ -24,7 +24,7 @@ export const UpdateInfoStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((payload) => {
-          return _http.patch<{ data: IUser }>('auth/dashboard', payload).pipe(
+          return _http.patch<{ data: IUser }>('auth/profile', payload).pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false });
               _toast.showSuccess('Profil mis à jour');

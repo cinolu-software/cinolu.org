@@ -5,7 +5,7 @@ import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterUsersDto } from '../dto/filter-user.dto';
 import { buildQueryParams } from '../../../../shared/helpers/build-query-params';
-import { IUser } from '../../../../shared/models/entities';
+import { IUser } from '../../../../shared/models/entities.models';
 
 interface IUsersStore {
   isLoading: boolean;

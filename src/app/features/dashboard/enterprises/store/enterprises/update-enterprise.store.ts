@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { EnterpriseDto } from '../../dto/enterprise.dto';
 import { ToastrService } from '../../../../../core/services/toast/toastr.service';
-import { IEnterprise } from '../../../../../shared/models/entities';
+import { IEnterprise } from '../../../../../shared/models/entities.models';
 
 interface IUpdateEnterprisetore {
   isLoading: boolean;

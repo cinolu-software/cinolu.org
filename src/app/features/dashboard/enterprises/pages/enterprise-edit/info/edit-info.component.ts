@@ -14,7 +14,7 @@ import { SECTORS } from '../../../data/sectors.data';
 import { STAGES } from '../../../data/stage.data';
 import { environment } from '../../../../../../../environments/environment';
 import { FileUploadComponent } from '../../../../../../shared/components/file-upload/file-upload.component';
-import { IEnterprise } from '../../../../../../shared/models/entities';
+import { IEnterprise } from '../../../../../../shared/models/entities.models';
 
 @Component({
   selector: 'app-edit-enterprise-info',

@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { RoleDto } from '../dto/role.dto';
 import { RolesStore } from './roles.store';
 import { ToastrService } from '../../../../core/services/toast/toastr.service';
-import { IRole } from '../../../../shared/models/entities';
+import { IRole } from '../../../../shared/models/entities.models';
 
 interface IAddRoleStore {
   isLoading: boolean;

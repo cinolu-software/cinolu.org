@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { CategoriesStore } from './categories.store';
 import { EventCategoryDto } from '../../dto/event-category.dto';
 import { ToastrService } from '../../../../../core/services/toast/toastr.service';
-import { ICategory } from '../../../../../shared/models/entities';
+import { ICategory } from '../../../../../shared/models/entities.models';
 
 interface IAddCategoryStore {
   isLoading: boolean;

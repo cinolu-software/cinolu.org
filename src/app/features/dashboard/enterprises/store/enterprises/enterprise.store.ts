@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { IEnterprise } from '../../../../../shared/models/entities';
+import { IEnterprise } from '../../../../../shared/models/entities.models';
 
 interface IEnterpriseStore {
   isLoading: boolean;

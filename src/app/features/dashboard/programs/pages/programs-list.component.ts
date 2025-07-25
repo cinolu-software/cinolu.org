@@ -12,7 +12,7 @@ import { FilterProgramsDto } from '../dto/filter-programs.dto';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 import { Dialog } from 'primeng/dialog';
-import { IProgram } from '../../../../shared/models/entities';
+import { IProgram } from '../../../../shared/models/entities.models';
 import { AddProgramStore } from '../store/add-program.store';
 import { Textarea } from 'primeng/textarea';
 import { UpdateProgramStore } from '../store/update-program.store';

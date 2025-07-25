@@ -15,7 +15,7 @@ import { EXPLORATION_LINKS } from '../../data/links.data';
 import { DesktopNavComponent } from './desktop-nav/desktop-nav.component';
 import { MobileNavComponent } from './mobile-nav/mobile-nav.component';
 import { RouterLink } from '@angular/router';
-import { AuthStore } from '../../../core/store/auth.store';
+import { AuthStore } from '../../../core/auth/auth.store';
 
 @Component({
   selector: 'app-topbar',

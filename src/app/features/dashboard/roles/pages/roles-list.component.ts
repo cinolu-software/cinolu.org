@@ -15,7 +15,7 @@ import { UpdateRoleStore } from '../store/update-role.store';
 import { Dialog } from 'primeng/dialog';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { FilterRolesDto } from '../dto/filter-role.dto';
-import { IRole } from '../../../../shared/models/entities';
+import { IRole } from '../../../../shared/models/entities.models';
 
 @Component({
   selector: 'app-roles-list',

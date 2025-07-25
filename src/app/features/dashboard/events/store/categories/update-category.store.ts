@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CategoriesStore } from './categories.store';
-import { ICategory } from '../../../../../shared/models/entities';
+import { ICategory } from '../../../../../shared/models/entities.models';
 import { ToastrService } from '../../../../../core/services/toast/toastr.service';
 
 interface IUpdateCategoryStore {
