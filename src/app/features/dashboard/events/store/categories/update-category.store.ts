@@ -5,6 +5,7 @@ import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CategoriesStore } from './categories.store';
 import { ICategory } from '../../../../../shared/models/entities';
+import { ToastrService } from '../../../../../core/services/toast/toastr.service';
 
 interface IUpdateCategoryStore {
   isLoading: boolean;
@@ -20,20 +21,23 @@ export const UpdateCategoryStore = signalStore(
   withState<IUpdateCategoryStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
+    _toast: inject(ToastrService),
     _categoriesStore: inject(CategoriesStore)
   })),
-  withMethods(({ _http, _categoriesStore, ...store }) => ({
+  withMethods(({ _http, _categoriesStore, _toast, ...store }) => ({
     updateCategory: rxMethod<IUpdateCategoryParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ id, payload, onSuccess }) => {
           return _http.patch<{ data: ICategory }>(`event-categories/${id}`, payload).pipe(
             map(({ data }) => {
+              _toast.showSuccess('Catégorie mise à jour');
               _categoriesStore.updateCategory(data);
               patchState(store, { isLoading: false });
               onSuccess();
             }),
             catchError(() => {
+              _toast.showError('Échec de la mise à jour');
               patchState(store, { isLoading: false });
               return of(null);
             })

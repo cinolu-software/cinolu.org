@@ -18,3 +18,10 @@
 .p-password input {
   @apply w-full;
 }
+
+.p-multiselect {
+  @apply w-full;
+}
+.p-multiselect input {
+  @apply w-full;
+}

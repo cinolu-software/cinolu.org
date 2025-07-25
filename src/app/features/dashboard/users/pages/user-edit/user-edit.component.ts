@@ -11,11 +11,12 @@ import { UserStore } from '../../store/user.store';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { UnpaginatedRolesStore } from '../../../roles/store/unpaginated-roles.store';
+import { UpdateUserStore } from '../../store/update-user.store';
 
 @Component({
-  selector: 'app-users-edit',
+  selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
-  providers: [UserStore, UnpaginatedRolesStore],
+  providers: [UserStore, UpdateUserStore, UnpaginatedRolesStore],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -35,21 +36,24 @@ export class UserEditComponent {
   #location = inject(Location);
   updateUserForm: FormGroup;
   store = inject(UserStore);
+  updateStore = inject(UpdateUserStore);
   rolesStore = inject(UnpaginatedRolesStore);
   icons = { save: Save, back: MoveLeft, locate: Locate, alert: TriangleAlert, phone: Phone, email: Mail };
 
   constructor() {
     this.updateUserForm = this.#fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      name: ['', Validators.required],
-      phone_number: ['', Validators.required],
-      address: ['', Validators.required],
+      id: ['', Validators.required],
+      email: [{ value: '', disabled: true }, [Validators.required]],
+      name: [{ value: '', disabled: true }, Validators.required],
+      phone_number: [{ value: '', disabled: true }, Validators.required],
+      address: [{ value: '', disabled: true }, Validators.required],
       roles: ['', Validators.required]
     });
     effect(() => {
       const user = this.store.user();
       if (!user) return;
       this.updateUserForm.patchValue({
+        id: user.id,
         email: user.email,
         name: user.name,
         phone_number: user.phone_number,
@@ -60,10 +64,10 @@ export class UserEditComponent {
   }
 
   onUpdateUser(): void {
-    if (this.updateUserForm.invalid) {
-      this.updateUserForm.markAllAsTouched();
-      return;
-    }
+    this.updateStore.updateUser({
+      ...this.updateUserForm.value,
+      roles: this.updateUserForm.value?.roles?.map((id: string) => id)
+    });
   }
 
   onGoBack(): void {

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { LucideAngularModule, RefreshCcw, Edit, Trash, Download, Search } from 'lucide-angular';
+import { LucideAngularModule, RefreshCw, Edit, Trash, Download, Search, Plus } from 'lucide-angular';
 import { UsersStore } from '../../store/users.store';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -44,7 +44,7 @@ export class UsersListComponent implements OnInit {
   deleteStore = inject(DeleteUserStore);
   downloadStore = inject(DownloadUsersStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
-  icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, download: Download, search: Search };
+  icons = { refresh: RefreshCw, edit: Edit, trash: Trash, download: Download, search: Search, plus: Plus };
   queryParams = signal<FilterUsersDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
     q: this.#route.snapshot.queryParamMap.get('q')

@@ -10,5 +10,10 @@ export const usersRoutes: Routes = [
     path: 'edit/:email',
     title: "Modifier l'utilisateur",
     loadComponent: () => import('./pages/user-edit/user-edit.component').then((c) => c.UserEditComponent)
+  },
+  {
+    path: 'add',
+    title: 'Ajouter un utilisateur',
+    loadComponent: () => import('./pages/user-add/user-add.component').then((c) => c.AddUserComponent)
   }
 ];
