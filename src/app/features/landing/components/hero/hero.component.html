@@ -30,7 +30,6 @@
           <a
             [routerLink]="'/join-us'"
             type="submit"
-            type="button"
             class="group relative z-10 flex text-white items-center justify-center gap-2 px-6 py-2 border rounded-full border-primary-400 hover:bg-green-800 duration-300">
             Devenir membre
             <i-lucide [name]="icons.arrowFlesh" class="mt-0.5 group-hover:translate-x-1 transition-all" />
@@ -39,7 +38,8 @@
 
         <div class="relative inline-flex mt-6">
           <button
-            type="button"
+            [routerLink]="'/donation'"
+            type="submit"
             class="group relative z-10 flex text-white items-center justify-center gap-2 px-6 py-2 border rounded-full border-primary-400 bg-green-700/60 hover:bg-green-800 duration-300">
             Faire un don
             <i-lucide [name]="icons.donate" class="mt-0.5 group-hover:translate-x-1 transition-all" />

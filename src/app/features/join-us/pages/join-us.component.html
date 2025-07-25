@@ -1,13 +1,37 @@
-<section class="min-h-screen w-full flex flex-col items-center justify-center bg-neutral-50 bg-grid py-10 lg:px-64">
-  <h1 class="text-3xl font-bold">
-    Vous souhaitez faire partie d’un réseau dynamique d’entrepreneurs et d’innovateurs, de coachs et mentors, de
-    décideurs et d’experts ?
-  </h1>
-  <p class="mt-4 text-lg">
-    Vous souhaitez faire partie d’un réseau dynamique d’entrepreneurs et d’innovateurs, de coachs et mentors, de
-    décideurs et d’experts ?
-  </p>
-  <a routerLink="/programs" class="mt-6 inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-    Explore Programs
-  </a>
+<section class="min-h-[83.33vh] bg-grid sm:px-8 mt-5 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14">
+  <h3 class="text-center font-black text-gray-700 text-3xl sm:text-4xl lg:text-5xl mb-10 lg:mt-13">Rejoignez-nous</h3>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+    <div class="relative w-full h-80 sm:h-96 lg:h-[32rem] overflow-hidden rounded-xl">
+      <img
+        src="/images/joinUs.jpg"
+        alt="Join Us"
+        class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+    </div>
+
+    <div>
+      <h1 class="text-xl sm:text-2xl font-bold text-gray-800">
+        Vous souhaitez faire partie d’un réseau dynamique d’entrepreneurs et d’innovateurs, de coachs et mentors, de
+        décideurs et d’experts ?
+      </h1>
+
+      <p class="mt-4 text-base sm:text-lg text-gray-600">
+        Rejoignez une communauté inspirante, bénéficiez de ressources exclusives et connectez-vous avec des esprits
+        brillants pour faire grandir vos projets.
+      </p>
+
+      <div class="flex flex-wrap gap-4 mt-6 justify-center lg:justify-start">
+        @for (item of memberItems; track $index) {
+          <a
+            [routerLink]="item.path ? item.path : '/'"
+            class="group flex items-center gap-3 px-5 py-2 border border-gray-300 rounded-full text-gray-600 hover:bg-green-700 hover:text-white cursor-pointer transition duration-300">
+            <i-lucide [name]="item.icon" class="text-2xl"></i-lucide>
+            <p class="font-semibold text-base">
+              {{ item.title }}
+            </p>
+          </a>
+        }
+      </div>
+    </div>
+  </div>
 </section>

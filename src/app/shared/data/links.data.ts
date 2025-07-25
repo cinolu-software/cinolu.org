@@ -39,6 +39,10 @@ export const EXPLORATION_LINKS: ILink[] = [
   {
     name: 'A propos',
     path: '/about-us'
+  },
+  {
+    name: 'Contact',
+    path: '/contact-us'
   }
 ];
 

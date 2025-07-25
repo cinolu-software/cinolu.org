@@ -2,7 +2,8 @@ import { Route } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { LayoutComponent } from './layout/layout.component';
 import { joinUsRoutes } from './features/join-us/join-us.routes';
-import { aboutRoutes } from './features/about-us/about-us.routes';
+import { donationRoutes } from './features/donation/donation.routes';
+import { contactUsRoutes } from './features/contact-us/contact-us.route';
 
 export const routes: Route[] = [
   {
@@ -30,22 +31,17 @@ export const routes: Route[] = [
     loadChildren: () => joinUsRoutes
   },
   {
-    path: 'join-us',
+    path: 'donation',
     component: LayoutComponent,
     data: { layout: 'full-layout' },
-    loadChildren: () => aboutRoutes
+    loadChildren: () => donationRoutes
   },
+
   {
-    path: 'join-us',
+    path: 'contact-us',
     component: LayoutComponent,
-    data: { layout: 'full-layout' },
-    loadChildren: () => joinUsRoutes
-  },
-  {
-    path: 'join-us',
-    component: LayoutComponent,
-    data: { layout: 'full-layout' },
-    loadChildren: () => aboutRoutes
+    data: { layout: 'fixed-layout' },
+    loadChildren: () => contactUsRoutes
   },
   {
     path: 'dashboard',
