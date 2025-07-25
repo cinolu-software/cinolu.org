@@ -1,0 +1,29 @@
+<section class="min-h-[83.33vh] bg-grid sm:px-8 mt-5 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14">
+  <h3 class="text-center font-black text-gray-700 text-3xl sm:text-4xl lg:text-5xl mb-10 lg:mt-13">Contactez-Nous</h3>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+    <div class="relative w-full h-80 sm:h-96 lg:h-[32rem] overflow-hidden rounded-xl">
+      <form action=""></form>
+      <img
+        src="/images/joinUs.jpg"
+        alt="Join Us"
+        class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+    </div>
+
+    <div>
+      <h3>Pour nous joindre</h3>
+      <div>
+        @for (item of contactItems; track $index) {
+          <div class="flex gap-2">
+            <i-lucide [name]="item.icon"></i-lucide>
+            <p>{{ item.title }}</p>
+          </div>
+          <p>{{ item.description }}</p>
+          @for (child of item.children; track $index) {
+            <p>{{ child.label }} {{ child.value }}</p>
+          }
+        }
+      </div>
+    </div>
+  </div>
+</section>
