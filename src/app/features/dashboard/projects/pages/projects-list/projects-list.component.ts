@@ -1,9 +1,9 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { LucideAngularModule, RefreshCcw, Edit, Trash, Search } from 'lucide-angular';
+import { LucideAngularModule, RefreshCcw, Edit, Trash, Search, Plus } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,7 +11,7 @@ import { ProjectsStore } from '../../store/projects/projects.store';
 import { FilterProjectsDto } from '../../dto/filter-projects.dto';
 
 @Component({
-  selector: 'app-dashboard-projects-list',
+  selector: 'app-project-add',
   templateUrl: './projects-list.component.html',
   providers: [ProjectsStore],
   imports: [
@@ -21,7 +21,8 @@ import { FilterProjectsDto } from '../../dto/filter-projects.dto';
     InputTextModule,
     ProgressSpinnerModule,
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ]
 })
 export class ProjectsComponent implements OnInit {
@@ -31,7 +32,7 @@ export class ProjectsComponent implements OnInit {
   searchForm: FormGroup;
   store = inject(ProjectsStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
-  icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, search: Search };
+  icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, search: Search, plus: Plus };
   queryParams = signal<FilterProjectsDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
     q: this.#route.snapshot.queryParamMap.get('q')

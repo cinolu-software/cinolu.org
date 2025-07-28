@@ -53,7 +53,7 @@ export class EnterpriseAddComponent {
     });
   }
 
-  back(): void {
+  onGoBack(): void {
     this.#location.back();
   }
 

@@ -43,11 +43,11 @@ export class UserEditComponent {
   constructor() {
     this.updateUserForm = this.#fb.group({
       id: ['', Validators.required],
-      email: [{ value: '', disabled: true }, [Validators.required]],
-      name: [{ value: '', disabled: true }, Validators.required],
-      phone_number: [{ value: '', disabled: true }, Validators.required],
-      address: [{ value: '', disabled: true }, Validators.required],
-      roles: ['', Validators.required]
+      email: ['', [Validators.required]],
+      name: ['', Validators.required],
+      phone_number: ['', Validators.required],
+      address: ['', Validators.required],
+      roles: [[], Validators.required]
     });
     effect(() => {
       const user = this.store.user();
@@ -64,10 +64,7 @@ export class UserEditComponent {
   }
 
   onUpdateUser(): void {
-    this.updateStore.updateUser({
-      ...this.updateUserForm.value,
-      roles: this.updateUserForm.value?.roles?.map((id: string) => id)
-    });
+    this.updateStore.updateUser(this.updateUserForm.value);
   }
 
   onGoBack(): void {

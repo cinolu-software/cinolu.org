@@ -23,7 +23,7 @@ export const ProgramsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          return _http.get<{ data: [IProgram[], number] }>('programs', { params }).pipe(
+          return _http.get<{ data: [IProgram[], number] }>('programs/paginated', { params }).pipe(
             map(({ data }) => {
               patchState(store, { isLoading: false, programs: data });
             }),

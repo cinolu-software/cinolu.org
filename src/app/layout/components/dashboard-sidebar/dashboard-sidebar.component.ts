@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, MoveLeft, ChevronDown } from 'lucide-angular';
 import { DASHBOARD_LINKS, ILink } from '../../data/links.data';
@@ -7,10 +7,11 @@ import { filter } from 'rxjs';
 import { RightsService } from '../../../core/auth/rights.service';
 import { AuthStore } from '../../../core/auth/auth.store';
 import { RolesEnum } from '../../../core/auth/roles.enum';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-dashboard-sidebar',
-  imports: [CommonModule, NgOptimizedImage, RouterModule, LucideAngularModule],
+  imports: [CommonModule, ButtonModule, RouterModule, LucideAngularModule],
   templateUrl: './dashboard-sidebar.component.html'
 })
 export class DashboardSidebarComponent {

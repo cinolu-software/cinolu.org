@@ -41,7 +41,7 @@ export class AddUserComponent {
       name: ['', Validators.required],
       phone_number: ['', Validators.required],
       address: ['', Validators.required],
-      roles: ['', Validators.required]
+      roles: [[], Validators.required]
     });
   }
 

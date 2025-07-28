@@ -59,7 +59,7 @@
         (ngSubmit)="onUpdateUser()">
         <div class="flex flex-col gap-1.5">
           <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-          <input pInputText id="email" formControlName="email" />
+          <input pInputText [disabled]="true" id="email" formControlName="email" />
         </div>
         <div class="flex flex-col gap-1.5">
           <label for="name" class="block text-sm font-medium text-gray-700">Nom</label>
@@ -67,11 +67,11 @@
         </div>
         <div class="flex flex-col gap-1.5">
           <label for="phone_number" class="block text-sm font-medium text-gray-700">Numéro de téléphone</label>
-          <input pInputText id="phone_number" formControlName="phone_number" />
+          <input pInputText [disabled]="true" id="phone_number" formControlName="phone_number" />
         </div>
         <div class="flex flex-col gap-1.5">
           <label for="address" class="block text-sm font-medium text-gray-700">Adresse</label>
-          <input pInputText id="address" formControlName="address" />
+          <input pInputText [disabled]="true" id="address" formControlName="address" />
         </div>
         <div class="flex flex-col gap-1.5">
           <label for="role" class="block text-sm font-medium text-gray-700">Rôle</label>

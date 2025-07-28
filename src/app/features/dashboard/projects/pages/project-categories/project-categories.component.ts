@@ -14,7 +14,7 @@ import { CategoriesStore } from '../../store/categories/categories.store';
 import { AddCategoryStore } from '../../store/categories/add-category.store';
 import { DeleteCategoryStore } from '../../store/categories/delete-category.store';
 import { UpdateCategoryStore } from '../../store/categories/update-category.store';
-import { FilterProjectCategoriesDto } from '../../dto/filter-categories';
+import { FilterProjectCategoriesDto } from '../../dto/filter-categories.dto';
 import { ICategory } from '../../../../../shared/models/entities.models';
 
 @Component({

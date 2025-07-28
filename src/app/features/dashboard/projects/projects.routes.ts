@@ -3,8 +3,19 @@ import { Routes } from '@angular/router';
 export const projectsRoutes: Routes = [
   {
     path: '',
-    title: 'Les projets',
-    loadComponent: () => import('./pages/projects-list/projects-list.component').then((c) => c.ProjectsComponent)
+    title: '',
+    children: [
+      {
+        path: '',
+        title: 'Projects List',
+        loadComponent: () => import('./pages/projects-list/projects-list.component').then((c) => c.ProjectsComponent)
+      },
+      {
+        path: 'add',
+        title: 'Create Project',
+        loadComponent: () => import('./pages/project-add/project-add.component').then((c) => c.ProjectAddComponent)
+      }
+    ]
   },
   {
     path: 'categories',

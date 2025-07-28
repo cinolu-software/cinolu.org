@@ -21,6 +21,15 @@
             }
           </span>
         </h5>
+        <a
+          pButton
+          [outlined]="true"
+          [size]="'small'"
+          [routerLink]="['/dashboard/projects/add']"
+          class="flex items-center gap-2">
+          <i-lucide [name]="icons.plus" class="size-4" />
+          Ajouter un projet
+        </a>
       </div>
       <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
         <input

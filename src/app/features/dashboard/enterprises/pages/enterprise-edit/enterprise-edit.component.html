@@ -1,9 +1,12 @@
 <section class="pt-32 min-h-[110vh] dashboard-main-content flex flex-col gap-4">
   @let enterprise = store.enterprise();
-  <a [routerLink]="'/dashboard/enterprises'" class="text-primary-400 hover:underline flex items-center gap-2">
-    <i-lucide [name]="icons.back" class="size-4" />
-    Revenir en arrière
-  </a>
+  <div class="mb-4">
+    <a [routerLink]="'/dashboard/enterprises'" class="text-primary-400 hover:underline flex items-center gap-2">
+      <i-lucide [name]="icons.back" class="size-4" />
+      Revenir en arrière
+    </a>
+    <h5 class="text-2xl font-bold">Modifier l'entreprise</h5>
+  </div>
   <div class="flex items-center gap-4 border-b border-gray-200 overflow-x-scroll scrollbar-hide w-full md:w-2/3">
     @for (tab of tabs(); track $index) {
       <button

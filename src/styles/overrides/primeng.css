@@ -1,4 +1,3 @@
-/* Loading bar  */
 .loading-bar .p-progressbar {
   @apply fixed top-0 w-full h-1 z-[999] rounded-none;
 }
@@ -15,13 +14,16 @@
   @apply w-full;
 }
 
-.p-password input {
+.p-password-input {
   @apply w-full;
 }
 
 .p-multiselect {
   @apply w-full;
 }
-.p-multiselect input {
-  @apply w-full;
+
+.p-datepicker {
+  @apply w-full!;
 }
+
+
