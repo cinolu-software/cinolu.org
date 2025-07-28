@@ -6,7 +6,7 @@ import { DASHBOARD_LINKS, ILink } from '../../data/links.data';
 import { filter } from 'rxjs';
 import { RightsService } from '../../../core/auth/rights.service';
 import { AuthStore } from '../../../core/auth/auth.store';
-import { RolesEnum } from '../../enums/roles.enum';
+import { RolesEnum } from '../../../core/auth/roles.enum';
 
 @Component({
   selector: 'app-dashboard-sidebar',

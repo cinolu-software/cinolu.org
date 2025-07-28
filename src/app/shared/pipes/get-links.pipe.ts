@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ILink } from '../data/links.data';
+import { ILink } from '../../layout/data/links.data';
 
 @Pipe({
   name: 'getLinks'

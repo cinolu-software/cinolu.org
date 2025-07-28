@@ -6,12 +6,12 @@ import { EnterpriseStore } from '../../store/enterprises/enterprise.store';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 
 @Component({
-  selector: 'app-view-enterprise',
+  selector: 'app-enterprise-detail',
   providers: [EnterpriseStore],
   imports: [SelectModule, LucideAngularModule, NgOptimizedImage, CommonModule, ApiImgPipe],
-  templateUrl: './view-enterprise.component.html'
+  templateUrl: './enterprise-detail.component.html'
 })
-export class ViewEnterpriseComponent {
+export class EnterpriseDetailComponent {
   #location = inject(Location);
   icons = { back: ArrowLeft, locate: MapPin, phone: PhoneCall, email: MailCheck };
   store = inject(EnterpriseStore);

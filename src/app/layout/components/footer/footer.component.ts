@@ -15,10 +15,7 @@ export class FooterComponent {
     { title: 'My Cinolu', urls: MY_CINOLU_LINKS },
     { title: 'Socials', urls: SOCIAL_LINKS }
   ];
-  icons = {
-    arrowUpRight: ChevronRight,
-    arrowRight: ArrowUpRight
-  };
+  icons = { arrowUpRight: ChevronRight, arrowRight: ArrowUpRight };
 
   getYear(): number {
     return new Date().getFullYear();

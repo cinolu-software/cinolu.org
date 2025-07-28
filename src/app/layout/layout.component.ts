@@ -1,12 +1,12 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
-import { FixedLayoutComponent } from './fixed-layout/fixed-layout.component';
-import { FullLayoutComponent } from './full-layout/full-layout.component';
-import { EmptyLayoutComponent } from './empty-layout/empty-layout.component';
-import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
 import { AppConfigService } from '../core/services/config/config.service';
 import { AppConfig } from '../core/services/config/config.types';
+import { DashboardLayoutComponent } from './pages/dashboard-layout/dashboard-layout.component';
+import { EmptyLayoutComponent } from './pages/empty-layout/empty-layout.component';
+import { FixedLayoutComponent } from './pages/fixed-layout/fixed-layout.component';
+import { FullLayoutComponent } from './pages/full-layout/full-layout.component';
 
 @Component({
   selector: 'app-layout',

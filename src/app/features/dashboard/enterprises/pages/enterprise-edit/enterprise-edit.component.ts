@@ -1,18 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { ArrowLeft, LucideAngularModule, Info, Box } from 'lucide-angular';
-import { EditEnterpriseInfoComponent } from './info/edit-info.component';
+import { EditEnterpriseInfoComponent } from './edit-info/edit-info.component';
 import { EnterpriseStore } from '../../store/enterprises/enterprise.store';
-import { ProductsComponent } from './products/products.component';
+import { ProductsListComponent } from './products-list/products-list.component';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-edit-enterprise',
   providers: [EnterpriseStore],
-  imports: [LucideAngularModule, RouterLink, CommonModule, EditEnterpriseInfoComponent, ProductsComponent],
-  templateUrl: './edit-enterprise.component.html'
+  imports: [LucideAngularModule, RouterLink, CommonModule, EditEnterpriseInfoComponent, ProductsListComponent],
+  templateUrl: './enterprise-edit.component.html'
 })
-export class EditEnterpriseComponent {
+export class EnterpriseEditComponent {
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   icons = { back: ArrowLeft };

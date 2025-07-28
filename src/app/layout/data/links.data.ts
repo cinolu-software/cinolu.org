@@ -8,7 +8,7 @@ import {
   Calendar1,
   Columns3Cog
 } from 'lucide-angular';
-import { RolesEnum } from '../enums/roles.enum';
+import { RolesEnum } from '../../core/auth/roles.enum';
 
 export interface ILink {
   name: string;

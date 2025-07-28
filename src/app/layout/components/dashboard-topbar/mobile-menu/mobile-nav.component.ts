@@ -1,9 +1,9 @@
 import { Component, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { IUser } from '../../../models/entities.models';
 import { LucideAngularModule, Menu, X, ChevronDown, ArrowLeft } from 'lucide-angular';
 import { ILink } from '../../../data/links.data';
+import { IUser } from '../../../../shared/models/entities.models';
 
 @Component({
   selector: 'app-mobile-nav',

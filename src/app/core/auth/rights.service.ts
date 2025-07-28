@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { RolesEnum } from '../../shared/enums/roles.enum';
+import { RolesEnum } from './roles.enum';
 
-export interface IAuthorizedParams {
+interface IAuthorizedParams {
   currentRoles: RolesEnum[];
   requiredRole: RolesEnum;
 }
 
-export interface Ihierarchy {
+interface Ihierarchy {
   role: string;
   priority: number;
 }

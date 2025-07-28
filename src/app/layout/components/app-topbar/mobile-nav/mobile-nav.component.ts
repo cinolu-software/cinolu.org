@@ -1,10 +1,10 @@
 import { Component, input, output, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ApiImgPipe } from '../../../pipes/api-img.pipe';
-import { IUser } from '../../../models/entities.models';
 import { LucideAngularModule, ChevronDown, Menu, X, ArrowLeft } from 'lucide-angular';
 import { ILink } from '../../../data/links.data';
+import { IUser } from '../../../../shared/models/entities.models';
+import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-mobile-nav',

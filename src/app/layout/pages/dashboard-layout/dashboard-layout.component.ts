@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DashboardSidebarComponent } from '../../shared/components/dashboard-sidebar/dashboard-sidebar.component';
-import { DashboardTopbarComponent } from '../../shared/components/dashboard-topbar/dashboard-topbar.component';
+import { DashboardSidebarComponent } from '../../components/dashboard-sidebar/dashboard-sidebar.component';
+import { DashboardTopbarComponent } from '../../components/dashboard-topbar/dashboard-topbar.component';
 
 @Component({
   selector: 'app-dashboard-layout',

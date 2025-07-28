@@ -21,8 +21,8 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { FilterProductsDto } from '../../../dto/filter-products.dto';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
+  selector: 'app-products-list',
+  templateUrl: './products-list.component.html',
   providers: [ProductsStore, UpdateProducttore, DeleteProductStore, AddProductStore, ConfirmationService],
   imports: [
     ButtonModule,
@@ -41,7 +41,7 @@ import { FilterProductsDto } from '../../../dto/filter-products.dto';
     FileUploadComponent
   ]
 })
-export class ProductsComponent implements OnInit {
+export class ProductsListComponent implements OnInit {
   enterprise = input.required<IEnterprise>();
   icons = { plus: Plus, edit: Edit, trash: Trash, eye: Eye, activity: Activity, currency: Currency };
   #confirmationService = inject(ConfirmationService);

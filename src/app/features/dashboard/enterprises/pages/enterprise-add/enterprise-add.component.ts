@@ -13,7 +13,7 @@ import { SECTORS } from '../../data/sectors.data';
 import { STAGES } from '../../data/stage.data';
 
 @Component({
-  selector: 'app-add-enterprise',
+  selector: 'app-enterprise-add',
   providers: [AddEnterpriseStore],
   imports: [
     ReactiveFormsModule,
@@ -25,9 +25,9 @@ import { STAGES } from '../../data/stage.data';
     InputTextModule,
     StepperModule
   ],
-  templateUrl: './add-enterprise.component.html'
+  templateUrl: './enterprise-add.component.html'
 })
-export class AddEnterpriseComponent {
+export class EnterpriseAddComponent {
   #fb = inject(FormBuilder);
   #location = inject(Location);
   form: FormGroup;

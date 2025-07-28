@@ -14,7 +14,7 @@ import { FilterEnterprisesDto } from '../../dto/filter-enterprises.dto';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 
 @Component({
-  selector: 'app-user-enterprises',
+  selector: 'app-enterprises-list',
   templateUrl: './enterprises-list.component.html',
   providers: [EnterprisesStore, DeleteEnterpriseStore, ConfirmationService],
   imports: [
