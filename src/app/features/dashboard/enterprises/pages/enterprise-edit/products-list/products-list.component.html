@@ -105,7 +105,7 @@
     <form class="flex flex-col gap-4" [formGroup]="addProductForm" (ngSubmit)="onAddProduct()">
       <div class="flex flex-col gap-1.5">
         <label for="name" class="font-medium">Nom du produit<span class="text-red-500">*</span></label>
-        <input pInputText type="text" id="name" name="name" formControlName="name" autocomplete="none" />
+        <input pInputText type="text" id="name" name="name" formControlName="name" />
       </div>
       <div class="flex flex-col gap-1.5">
         <p class="font-medium">Description <span class="text-red-500">*</span></p>
@@ -119,7 +119,7 @@
       </div>
       <div class="flex flex-col gap-1.5">
         <label for="price" class="font-medium">Prix<span class="text-red-500">*</span></label>
-        <input pInputText type="number" id="price" name="price" formControlName="price" autocomplete="none" />
+        <input pInputText type="number" id="price" name="price" formControlName="price" />
       </div>
       <div class="flex justify-end gap-4 flex-wrap">
         <p-button size="small" variant="outlined" severity="danger" class="font-satoshi" (onClick)="onToggleAddModal()">
@@ -143,7 +143,7 @@
     <form class="flex flex-col gap-4" [formGroup]="editProductForm" (ngSubmit)="onUpdateProduct()">
       <div class="flex flex-col gap-1.5">
         <label for="name" class="font-medium">Nom du produit<span class="text-red-500">*</span></label>
-        <input pInputText type="text" id="name" name="name" formControlName="name" autocomplete="none" />
+        <input pInputText type="text" id="name" name="name" formControlName="name" />
       </div>
       <div class="flex flex-col gap-1.5">
         <p class="font-medium">Description <span class="text-red-500">*</span></p>
@@ -157,7 +157,7 @@
       </div>
       <div class="flex flex-col gap-1.5">
         <label for="price" class="font-medium">Prix<span class="text-red-500">*</span></label>
-        <input pInputText type="number" id="price" name="price" formControlName="price" autocomplete="none" />
+        <input pInputText type="number" id="price" name="price" formControlName="price" />
       </div>
       <div class="flex justify-end gap-4 flex-wrap">
         <p-button

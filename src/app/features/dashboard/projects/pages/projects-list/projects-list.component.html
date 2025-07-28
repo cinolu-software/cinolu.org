@@ -32,15 +32,7 @@
         </a>
       </div>
       <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
-        <input
-          class="py-1.5! md:col-span-4"
-          pInputText
-          type="text"
-          id="q"
-          name="q"
-          formControlName="q"
-          autocomplete="none"
-          placeholder="Rechercher..." />
+        <input pInputText class="py-1.5!" formControlName="q" placeholder="Rechercher..." />
         <div class="flex items-center gap-1">
           <p-button
             type="submit"
@@ -86,6 +78,7 @@
         <table class="text-sm text-left rtl:text-right text-gray-500">
           <thead class="font-black text-gray-800 border-y border-gray-200">
             <tr>
+              <th class="px-6 py-3">Image</th>
               <th class="px-6 py-3">Nom</th>
               <th class="px-6 py-3">Description</th>
               <th class="px-6 py-3">Créé le</th>
@@ -99,6 +92,9 @@
               track project.id
             ) {
               <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
+                <td class="px-6 py-2">
+                  <p-avatar [image]="project | apiIMG: 'project'" />
+                </td>
                 <td class="px-6 py-2 font-medium text-gray-900">
                   {{ project.name | titlecase }}
                 </td>
@@ -109,11 +105,12 @@
                   {{ project.created_at | date: 'longDate' }}
                 </td>
                 <td class="px-6 py-2">
-                  <div class="flex items-center gap-2 opacity-50 blur-[1px]">
-                    <button disabled>
+                  <div class="flex items-center gap-2">
+                    <a [routerLink]="['/dashboard/projects/edit', project.slug]">
                       <i-lucide [name]="icons.edit" class="size-4" />
-                    </button>
-                    <button disabled>
+                    </a>
+                    <button class="text-red-500" (click)="onDeleteProject(project.id, $event)">
+                      <p-confirmpopup />
                       <i-lucide [name]="icons.trash" class="size-4" />
                     </button>
                   </div>

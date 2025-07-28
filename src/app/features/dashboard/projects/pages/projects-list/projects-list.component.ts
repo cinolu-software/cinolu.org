@@ -9,11 +9,16 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProjectsStore } from '../../store/projects/projects.store';
 import { FilterProjectsDto } from '../../dto/filter-projects.dto';
+import { ConfirmationService } from 'primeng/api';
+import { DeleteProjectStore } from '../../store/projects/delete-project.store';
+import { ConfirmPopup } from 'primeng/confirmpopup';
+import { AvatarModule } from 'primeng/avatar';
+import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-project-add',
   templateUrl: './projects-list.component.html',
-  providers: [ProjectsStore],
+  providers: [ProjectsStore, DeleteProjectStore, ConfirmationService],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -22,15 +27,20 @@ import { FilterProjectsDto } from '../../dto/filter-projects.dto';
     ProgressSpinnerModule,
     NgxPaginationModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    ConfirmPopup,
+    AvatarModule,
+    ApiImgPipe
   ]
 })
 export class ProjectsComponent implements OnInit {
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   #fb = inject(FormBuilder);
+  #confirmationService = inject(ConfirmationService);
   searchForm: FormGroup;
   store = inject(ProjectsStore);
+  deleteProjectStore = inject(DeleteProjectStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, search: Search, plus: Plus };
   queryParams = signal<FilterProjectsDto>({
@@ -77,5 +87,24 @@ export class ProjectsComponent implements OnInit {
     const searchValue = this.searchForm.value.q;
     this.queryParams.set({ page: null, q: searchValue });
     this.updateRouteAndProjects();
+  }
+
+  onDeleteProject(projectId: string, event: Event): void {
+    this.#confirmationService.confirm({
+      target: event.currentTarget as EventTarget,
+      message: 'Etes-vous sûr ?',
+      rejectButtonProps: {
+        label: 'Annuler',
+        severity: 'secondary',
+        outlined: true
+      },
+      acceptButtonProps: {
+        label: 'Confirmer',
+        severity: 'danger'
+      },
+      accept: () => {
+        this.deleteProjectStore.deleteProject(projectId);
+      }
+    });
   }
 }

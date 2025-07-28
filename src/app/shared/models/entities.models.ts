@@ -52,7 +52,7 @@ export interface IField {
 export interface IProject extends IBase {
   name: string;
   slug: string;
-  image?: string;
+  cover?: string;
   description: string;
   started_at: Date;
   ended_at: Date;

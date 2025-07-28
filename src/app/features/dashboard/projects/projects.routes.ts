@@ -14,6 +14,11 @@ export const projectsRoutes: Routes = [
         path: 'add',
         title: 'Create Project',
         loadComponent: () => import('./pages/project-add/project-add.component').then((c) => c.ProjectAddComponent)
+      },
+      {
+        path: 'edit/:slug',
+        title: 'Edit Project',
+        loadComponent: () => import('./pages/project-edit/project-edit.component').then((c) => c.ProjectEditComponent)
       }
     ]
   },

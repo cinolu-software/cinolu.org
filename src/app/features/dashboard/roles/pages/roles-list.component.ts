@@ -80,10 +80,7 @@ export class RolesListComponent implements OnInit {
   }
 
   onToggleEditModal(role: IRole | null): void {
-    this.updateRoleForm.patchValue({
-      id: role?.id || '',
-      name: role?.name || ''
-    });
+    this.updateRoleForm.patchValue({ ...role });
     this.showEditModal.update((v) => !v);
   }
 

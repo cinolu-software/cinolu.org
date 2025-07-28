@@ -34,6 +34,11 @@ export const ProjectsStore = signalStore(
           );
         })
       )
-    )
+    ),
+    deleteProject: (id: string) => {
+      const [projects, count] = store.projects();
+      const filtered = projects.filter((project) => project.id !== id);
+      patchState(store, { projects: [filtered, count - 1] });
+    }
   }))
 );

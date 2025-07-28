@@ -41,15 +41,7 @@
         </div>
       </div>
       <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
-        <input
-          class="py-1.5! md:col-span-4"
-          pInputText
-          type="text"
-          id="q"
-          name="q"
-          formControlName="q"
-          autocomplete="none"
-          placeholder="Rechercher..." />
+        <input pInputText class="py-1.5!" formControlName="q" placeholder="Rechercher..." />
         <div class="flex items-center gap-1">
           <p-button
             type="submit"

@@ -60,25 +60,12 @@ export class EditEnterpriseInfoComponent {
       stage: ['']
     });
     effect(() => {
-      this.patchForm(this.enterprise());
-    });
-  }
-
-  patchForm(enterprise: IEnterprise | null): void {
-    if (!enterprise) return;
-    this.form.patchValue({
-      name: enterprise.name,
-      description: enterprise.description,
-      problem_solved: enterprise.problem_solved,
-      target_market: enterprise.target_market,
-      email: enterprise.email,
-      phone_number: enterprise.phone_number,
-      website: enterprise.website,
-      linkedin_url: enterprise.linkedin_url,
-      sector: enterprise.sector,
-      founded_at: new Date(enterprise.founded_at || ''),
-      location: enterprise.location,
-      stage: enterprise.stage
+      const enterprise = this.enterprise();
+      if (!enterprise) return;
+      this.form.patchValue({
+        ...enterprise,
+        founded_at: new Date(enterprise.founded_at)
+      });
     });
   }
 
