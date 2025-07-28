@@ -1,29 +1,110 @@
-<section class="min-h-[83.33vh] bg-grid sm:px-8 mt-5 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14">
-  <h3 class="text-center font-black text-gray-700 text-3xl sm:text-4xl lg:text-5xl mb-10 lg:mt-13">Contactez-Nous</h3>
+<section
+  class="min-h-[83.33vh] bg-grid px-6 sm:px-8 md:px-10 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 mt-10">
+  <h3 class="text-center font-black text-gray-700 text-3xl sm:text-4xl lg:text-5xl mb-10">Contactez-Nous</h3>
 
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-    <div class="relative w-full h-80 sm:h-96 lg:h-[32rem] overflow-hidden rounded-xl">
-      <form action=""></form>
-      <img
-        src="/images/joinUs.jpg"
-        alt="Join Us"
-        class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
-    </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+    <form action="" class="space-y-5 w-full" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="flex flex-col gap-2">
+          <label for="fullname" class="text-sm font-medium text-gray-700">Votre nom</label>
+          <input
+            type="text"
+            id="fullname"
+            name="fullname"
+            [(ngModel)]="formData.fullname"
+            placeholder="Entrez votre nom"
+            class="p-3 bg-[#F6F6F6] border border-transparent focus:outline-none focus:border-primary-500 transition" />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="email" class="text-sm font-medium text-gray-700">Adresse email</label>
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="formData.email"
+            id="email"
+            placeholder="exemple@domaine.com"
+            class="p-3 bg-[#F6F6F6] border border-transparent focus:outline-none focus:border-primary-500 transition" />
+        </div>
+      </div>
 
-    <div>
-      <h3>Pour nous joindre</h3>
-      <div>
-        @for (item of contactItems; track $index) {
-          <div class="flex gap-2">
-            <i-lucide [name]="item.icon"></i-lucide>
-            <p>{{ item.title }}</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="flex flex-col gap-2">
+          <label for="countryCode" class="text-sm font-medium text-gray-700">Pays</label>
+          <div class="flex">
+            <select
+              required
+              id="countryCode"
+              name="countryCode"
+              [(ngModel)]="formData.countryCode"
+              class="p-3 bg-[#F6F6F6] border border-transparent focus:outline-none focus:border-primary-500 transition text-gray-700 w-full"
+              aria-label="Code pays">
+              <option value="">-- Choisissez votre pays --</option>
+              @for (item of countryItems; track $index) {
+                <option [value]="item.code" [selected]="item.code === '+243'">({{ item.code }}) {{ item.name }}</option>
+              }
+            </select>
           </div>
-          <p>{{ item.description }}</p>
-          @for (child of item.children; track $index) {
-            <p>{{ child.label }} {{ child.value }}</p>
-          }
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="phone" class="text-sm font-medium text-gray-700">Téléphone</label>
+          <input
+            [(ngModel)]="formData.phone"
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Entrez votre numéro"
+            class="p-3 bg-[#F6F6F6] border border-transparent focus:outline-none focus:border-primary-500 transition" />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="message" class="text-sm font-medium text-gray-700">Votre message</label>
+        <textarea
+          id="message"
+          name="message"
+          [(ngModel)]="formData.message"
+          rows="5"
+          placeholder="Saisissez votre message"
+          class="p-3 bg-[#F6F6F6] border border-transparent focus:outline-none focus:border-primary-500 transition resize-none"></textarea>
+      </div>
+
+      <div class="pt-2 flex justify-center sm:justify-start">
+        <button
+          type="submit"
+          class="w-full sm:w-1/2 bg-primary-500 hover:bg-primary-600 transition text-white font-semibold px-6 py-3">
+          Envoyez
+        </button>
+      </div>
+    </form>
+
+    <div class="bg-neutral-300/20 backdrop-blur-sm hover:bg-neutral-300/30 p-6 space-y-5">
+      <h3 class="text-2xl font-extrabold text-gray-800">Restons connectés !</h3>
+      <div class="space-y-4">
+        @for (item of contactItems; track $index) {
+          <div class="space-y-1">
+            <div class="flex items-center gap-3">
+              <div class="text-white rounded-full p-2 bg-primary-500">
+                <i-lucide [name]="item.icon" class=""></i-lucide>
+              </div>
+              <p class="font-bold text-lg text-gray-700">{{ item.title }}</p>
+            </div>
+            @for (child of item.children; track $index) {
+              <p class="ml-13 text-primary-500 text-base">{{ child.value }}</p>
+            }
+          </div>
         }
       </div>
     </div>
+  </div>
+
+  <div class="mt-14 w-full h-80 sm:h-96 md:h-[28rem] overflow-hidden">
+    <iframe
+      class="w-full h-full border-0"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps/place/centre+d'innovation+de+lubumbashi/@-11.6746111,27.4779568,16.5z/data=!4m6!3m5!1s0x19723f8f4deda58d:0xaa54c84125205d12!8m2!3d-11.6744098!4d27.479604!16s%2Fg%2F11gy75k3nv?entry=ttu&g_ep=EgoyMDI1MDcyMy4wIKXMDSoASAFQAw%3D%3D">
+    </iframe>
   </div>
 </section>
