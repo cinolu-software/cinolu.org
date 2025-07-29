@@ -18,9 +18,7 @@ import { titlesItems } from '../../data/title.data';
       ]),
       transition(':leave', [animate('700ms ease-in-out', style({ opacity: 0, transform: 'translateY(-10px)' }))])
     ])
-  ],
-
-  standalone: true
+  ]
 })
 export class HeroComponent implements OnInit, OnDestroy {
   stats = STATS;
