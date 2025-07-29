@@ -1,6 +1,6 @@
 <section class="min-h-[110vh] w-full">
   <div class="dashboard-main-content">
-    <div class="flex w-full flex-wrap gap-4 justify-between items-center mb-10">
+    <div class="flex w-full flex-wrap gap-4 justify-between items-center mb-6">
       <h1 class="text-2xl font-bold">Mes entreprises</h1>
       <p-button [routerLink]="'/dashboard/enterprises/add'" [size]="'small'" variant="outlined">
         <i-lucide [name]="icons.plus" class="size-4" />
@@ -14,7 +14,7 @@
         track enterprise.id
       ) {
         <div class="flex flex-col md:flex-row gap-4 mb-4">
-          <div class="relative h-28 w-52 rounded bg-gray-200">
+          <div class="relative h-28 w-40 rounded bg-gray-200">
             <img
               [ngSrc]="enterprise | apiIMG: 'enterprise'"
               [alt]="enterprise.name"
@@ -41,7 +41,7 @@
                 </button>
               </div>
             </div>
-            <p class="text-base leading-normal line-clamp-3">
+            <p class="text-sm w-full md:w-2/3 leading-normal line-clamp-3">
               {{ enterprise.description }}
             </p>
           </div>

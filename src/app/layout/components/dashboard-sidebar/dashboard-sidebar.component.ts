@@ -4,27 +4,26 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, ChevronDown, Home } from 'lucide-angular';
 import { DASHBOARD_LINKS, ILink } from '../../data/links.data';
 import { filter } from 'rxjs';
-import { RightsService } from '../../../core/auth/rights.service';
 import { AuthStore } from '../../../core/auth/auth.store';
-import { RolesEnum } from '../../../core/auth/roles.enum';
 import { ButtonModule } from 'primeng/button';
+import { HasRoleDirective } from '../../../shared/directives/has-role.directive';
 
 @Component({
   selector: 'app-dashboard-sidebar',
-  imports: [CommonModule, ButtonModule, RouterModule, LucideAngularModule],
+  imports: [CommonModule, ButtonModule, HasRoleDirective, RouterModule, LucideAngularModule],
   templateUrl: './dashboard-sidebar.component.html'
 })
 export class DashboardSidebarComponent {
   #router = inject(Router);
-  #rightsService = inject(RightsService);
   icons = { chevronDown: ChevronDown, home: Home };
+  links = signal<ILink[]>(DASHBOARD_LINKS);
   currentUrl = signal(this.#router.url);
   toggleTab = signal<string | null>(null);
   authStore = inject(AuthStore);
   activeTab = computed(() => {
     const url = this.currentUrl();
     return (
-      DASHBOARD_LINKS.find((link) => link.path === url || link.children?.some((child) => url.startsWith(child.path)))
+      this.links().find((link) => link.path === url || link.children?.some((child) => url.startsWith(child.path)))
         ?.name ?? null
     );
   });
@@ -33,18 +32,6 @@ export class DashboardSidebarComponent {
     this.#router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
       this.currentUrl.set(event.urlAfterRedirects);
     });
-  }
-
-  get visibleLinks(): ILink[] {
-    const userRoles = this.authStore.user()?.roles || [];
-    return DASHBOARD_LINKS.filter(
-      (link) =>
-        !link.role ||
-        this.#rightsService.isAuthorized({
-          currentRoles: userRoles as unknown as RolesEnum[],
-          requiredRole: link.role as RolesEnum
-        })
-    );
   }
 
   onToggleTab(name: string): void {

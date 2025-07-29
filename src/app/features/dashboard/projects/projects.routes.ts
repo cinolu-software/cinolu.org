@@ -25,7 +25,7 @@ export const projectsRoutes: Routes = [
   },
   {
     path: 'categories',
-    title: 'Les catégories de projets',
+    title: 'Project Categories',
     loadComponent: () =>
       import('./pages/project-categories/project-categories.component').then((c) => c.ProjectCategoriesComponent)
   }

@@ -7,24 +7,24 @@ export const eventsRoutes: Routes = [
     children: [
       {
         path: '',
-        title: 'Projects List',
+        title: 'Events List',
         loadComponent: () => import('./pages/events-list/events-list.component').then((c) => c.EventsListComponent)
       },
       {
         path: 'add',
-        title: 'Create Project',
+        title: 'Create Event',
         loadComponent: () => import('./pages/event-add/event-add.component').then((c) => c.AddEventComponent)
       },
       {
         path: 'edit/:slug',
-        title: 'Edit Project',
+        title: 'Edit Event',
         loadComponent: () => import('./pages/event-edit/event-edit.component').then((c) => c.EditEventComponent)
       }
     ]
   },
   {
     path: 'categories',
-    title: 'Les catégories de projets',
+    title: 'Event Categories',
     loadComponent: () =>
       import('./pages/event-categories/event-categories.component').then((c) => c.EventCategoriesComponent)
   }

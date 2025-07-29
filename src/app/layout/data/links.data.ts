@@ -8,7 +8,7 @@ import {
   Calendar1,
   Columns3Cog
 } from 'lucide-angular';
-import { RolesEnum } from '../../core/auth/roles.enum';
+import { RoleEnum } from '../../core/auth/role.enum';
 
 export interface ILink {
   name: string;
@@ -18,7 +18,7 @@ export interface ILink {
   icon?: LucideIconData;
   path: string;
   exactUrl?: boolean;
-  role?: string;
+  requiredRole?: RoleEnum;
   children?: ILink[];
 }
 
@@ -64,32 +64,32 @@ export const DASHBOARD_LINKS: ILink[] = [
     name: 'Mes informations',
     path: '/dashboard',
     icon: Info,
-    role: RolesEnum.User,
+    requiredRole: RoleEnum.User,
     exactUrl: true
   },
   {
     name: 'Mes enteprises',
     path: '/dashboard/enterprises',
-    role: RolesEnum.User,
+    requiredRole: RoleEnum.User,
     icon: BriefcaseBusiness
   },
   {
     name: 'Les utilisateurs',
     path: '/dashboard/users',
-    role: RolesEnum.Staff,
+    requiredRole: RoleEnum.Staff,
     icon: UserCheck
   },
   {
     name: 'Les programmes',
     path: '/dashboard/programs',
-    role: RolesEnum.Staff,
+    requiredRole: RoleEnum.Staff,
     icon: Activity
   },
   {
     name: 'Les projets',
     path: '/dashboard/projects',
     icon: Briefcase,
-    role: RolesEnum.Staff,
+    requiredRole: RoleEnum.Staff,
     children: [
       {
         name: 'Liste',
@@ -105,7 +105,7 @@ export const DASHBOARD_LINKS: ILink[] = [
     name: 'Les événements',
     path: '/dashboard/events',
     icon: Calendar1,
-    role: RolesEnum.Staff,
+    requiredRole: RoleEnum.Staff,
     children: [
       {
         name: 'Liste ',
@@ -120,7 +120,7 @@ export const DASHBOARD_LINKS: ILink[] = [
   {
     name: 'Les rôles',
     path: '/dashboard/roles',
-    role: RolesEnum.Staff,
+    requiredRole: RoleEnum.Staff,
     icon: Columns3Cog
   }
 ];

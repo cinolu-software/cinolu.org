@@ -37,8 +37,7 @@
             type="submit"
             [size]="'small'"
             [loading]="isLoading"
-            [disabled]="searchForm.invalid || isLoading || (eventCount === 0 && !hasQuery)"
-            (click)="onSearch()">
+            [disabled]="searchForm.invalid || isLoading || (eventCount === 0 && !hasQuery)">
             Rechercher
             @if (!isLoading) {
               <i-lucide [name]="icons.search" class="size-4" />
