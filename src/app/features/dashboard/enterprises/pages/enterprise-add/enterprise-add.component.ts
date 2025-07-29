@@ -27,7 +27,7 @@ import { STAGES } from '../../data/stage.data';
   ],
   templateUrl: './enterprise-add.component.html'
 })
-export class EnterpriseAddComponent {
+export class AddEnterpriseComponent {
   #fb = inject(FormBuilder);
   #location = inject(Location);
   form: FormGroup;

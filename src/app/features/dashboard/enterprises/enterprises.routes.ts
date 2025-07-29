@@ -15,13 +15,13 @@ export const enterprisesRoutes: Routes = [
         path: 'add',
         title: 'Add ',
         loadComponent: () =>
-          import('./pages/enterprise-add/enterprise-add.component').then((c) => c.EnterpriseAddComponent)
+          import('./pages/enterprise-add/enterprise-add.component').then((c) => c.AddEnterpriseComponent)
       },
       {
         path: 'update/:slug',
         title: 'Update',
         loadComponent: () =>
-          import('./pages/enterprise-edit/enterprise-edit.component').then((c) => c.EnterpriseEditComponent)
+          import('./pages/enterprise-edit/enterprise-edit.component').then((c) => c.EditEnterpriseComponent)
       },
       {
         path: 'view/:slug',

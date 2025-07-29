@@ -12,7 +12,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
   imports: [LucideAngularModule, RouterLink, CommonModule, EditEnterpriseInfoComponent, ProductsListComponent],
   templateUrl: './enterprise-edit.component.html'
 })
-export class EnterpriseEditComponent {
+export class EditEnterpriseComponent {
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   icons = { back: ArrowLeft };
