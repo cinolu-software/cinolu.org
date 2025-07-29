@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { LucideAngularModule, MoveLeft, ChevronDown } from 'lucide-angular';
+import { LucideAngularModule, ChevronDown, Home } from 'lucide-angular';
 import { DASHBOARD_LINKS, ILink } from '../../data/links.data';
 import { filter } from 'rxjs';
 import { RightsService } from '../../../core/auth/rights.service';
@@ -17,7 +17,7 @@ import { ButtonModule } from 'primeng/button';
 export class DashboardSidebarComponent {
   #router = inject(Router);
   #rightsService = inject(RightsService);
-  icons = { chevronDown: ChevronDown, moveLeft: MoveLeft };
+  icons = { chevronDown: ChevronDown, home: Home };
   currentUrl = signal(this.#router.url);
   toggleTab = signal<string | null>(null);
   authStore = inject(AuthStore);
