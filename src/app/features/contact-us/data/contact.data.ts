@@ -4,6 +4,12 @@ interface IContactChildren {
   label?: string;
   value: string;
 }
+
+// interface ISocialMedia {
+//   label: string;
+//   link: string;
+//   icon: LucideIconData;
+// }
 interface IContact {
   title: string;
   icon: LucideIconData;
@@ -18,12 +24,8 @@ export const CONTACT_ITEMS: IContact[] = [
     description: 'Nous vous répondons dans les plus brefs délais.',
     children: [
       {
-        label: 'Email principal',
-        value: 'contact@entreprise.com'
-      },
-      {
         label: 'Support client',
-        value: 'support@entreprise.com'
+        value: 'info@cinolu.org '
       }
     ]
   },
@@ -33,12 +35,8 @@ export const CONTACT_ITEMS: IContact[] = [
     description: 'Notre équipe est disponible pour vos appels du lundi au samedi.',
     children: [
       {
-        label: 'Téléphone (WhatsApp)',
-        value: '+243 970 000 001'
-      },
-      {
-        label: 'Téléphone (Appels)',
-        value: '+243 820 000 002'
+        label: 'Téléphone',
+        value: '+243 976 807 000 '
       }
     ]
   },
@@ -49,7 +47,7 @@ export const CONTACT_ITEMS: IContact[] = [
     children: [
       {
         label: 'Adresse',
-        value: '10, Avenue de l’Industrie, Gombe, Kinshasa, RDC'
+        value: ' 221, Av. des usines, Makomeno, Lubumbashi, Haut-Katanga-RDC'
       }
     ]
   },
@@ -61,10 +59,6 @@ export const CONTACT_ITEMS: IContact[] = [
       {
         label: 'Lundi - Vendredi',
         value: '08h00 - 17h00'
-      },
-      {
-        label: 'Samedi',
-        value: '09h00 - 13h00'
       }
     ]
   },
@@ -79,7 +73,19 @@ export const CONTACT_ITEMS: IContact[] = [
       },
       {
         label: 'Instagram',
-        value: 'https://instagram.com/entreprise'
+        value: 'https://www.instagram.com/centredinnovationdelubumbashi/?utm_source=ig_web_button_share_sheet'
+      },
+      {
+        label: 'twitter',
+        value: 'https://x.com/Lubumdigital'
+      },
+      {
+        label: 'tiktok',
+        value: 'https://www.tiktok.com/@cinolu'
+      },
+      {
+        label: 'linkedin',
+        value: 'https://www.linkedin.com/company/cinolu'
       }
     ]
   }
