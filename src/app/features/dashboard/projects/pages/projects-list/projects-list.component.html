@@ -25,7 +25,7 @@
           pButton
           [outlined]="true"
           [size]="'small'"
-          [routerLink]="['/dashboard/projects/add']"
+          [routerLink]="['/dashboard/projects/list/add']"
           class="flex items-center gap-2">
           <i-lucide [name]="icons.plus" class="size-4" />
           Ajouter un projet
@@ -122,7 +122,7 @@
                         <i-lucide [name]="icons.eye" class="size-5" />
                       }
                     </button>
-                    <a [routerLink]="['/dashboard/projects/edit', project.slug]">
+                    <a [routerLink]="['/dashboard/projects/list/edit', project.slug]">
                       <i-lucide [name]="icons.edit" class="size-4" />
                     </a>
                     <button class="text-red-500" (click)="onDeleteProject(project.id, $event)">

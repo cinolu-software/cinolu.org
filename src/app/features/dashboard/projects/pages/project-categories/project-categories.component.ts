@@ -95,7 +95,7 @@ export class ProjectCategoriesComponent implements OnInit {
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/projects/categories'], { queryParams });
+    this.#router.navigate(['/dashboard/project-categories'], { queryParams });
   }
 
   updateRouteAndCategories(): void {

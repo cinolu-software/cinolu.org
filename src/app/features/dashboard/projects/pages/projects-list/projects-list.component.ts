@@ -71,7 +71,7 @@ export class ProjectsComponent implements OnInit {
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/projects'], { queryParams });
+    this.#router.navigate(['/dashboard/projects/list'], { queryParams });
   }
 
   updateRouteAndProjects(): void {
