@@ -32,7 +32,7 @@
         </a>
       </div>
       <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
-        <input pInputText class="py-1.5!" formControlName="q" placeholder="Rechercher..." />
+        <input pInputText class="py-1.5!" id="search" formControlName="q" placeholder="Rechercher..." />
         <div class="flex items-center gap-1">
           <p-button
             type="submit"
@@ -81,6 +81,7 @@
               <th class="px-6 py-3">Image</th>
               <th class="px-6 py-3">Nom</th>
               <th class="px-6 py-3">Description</th>
+              <th class="px-6 py-3">Status</th>
               <th class="px-6 py-3">Créé le</th>
               <th class="px-6 py-3">Actions</th>
             </tr>
@@ -99,13 +100,28 @@
                   {{ project.name | titlecase }}
                 </td>
                 <td class="px-6 py-2 whitespace-normal">
-                  <span class="text-gray-500 line-clamp-3">{{ project.description }}</span>
+                  <div class="text-gray-500 line-clamp-2" [innerHTML]="project.description"></div>
+                </td>
+                <td class="px-6 py-2 text-xs capitalize font-medium">
+                  @if (project.is_published) {
+                    <span class="text-primary-500 bg-primary-400/20 rounded py-1 px-1.5">publié</span>
+                  } @else {
+                    <span class="text-red-500 bg-red-400/20 rounded py-1 px-2">dépublié</span>
+                  }
                 </td>
                 <td class="px-6 py-2">
-                  {{ project.created_at | date: 'longDate' }}
+                  {{ project.created_at | date: 'shortDate' }}
                 </td>
                 <td class="px-6 py-2">
                   <div class="flex items-center gap-2">
+                    <button class="text-primary-600" (click)="onPublishProject(project.id)">
+                      <p-confirmpopup />
+                      @if (!project.is_published) {
+                        <i-lucide [name]="icons.eyeOff" class="size-5" />
+                      } @else {
+                        <i-lucide [name]="icons.eye" class="size-5" />
+                      }
+                    </button>
                     <a [routerLink]="['/dashboard/projects/edit', project.slug]">
                       <i-lucide [name]="icons.edit" class="size-4" />
                     </a>

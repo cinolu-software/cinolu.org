@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { LucideAngularModule, RefreshCcw, Edit, Trash, Search, Plus } from 'lucide-angular';
+import { LucideAngularModule, RefreshCcw, Edit, Trash, Search, Plus, Eye, EyeOff } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -14,11 +14,12 @@ import { DeleteProjectStore } from '../../store/projects/delete-project.store';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { AvatarModule } from 'primeng/avatar';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
+import { PublishProjectStore } from '../../store/projects/publish-project.store';
 
 @Component({
   selector: 'app-project-add',
   templateUrl: './projects-list.component.html',
-  providers: [ProjectsStore, DeleteProjectStore, ConfirmationService],
+  providers: [ProjectsStore, PublishProjectStore, DeleteProjectStore, ConfirmationService],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -41,8 +42,9 @@ export class ProjectsComponent implements OnInit {
   searchForm: FormGroup;
   store = inject(ProjectsStore);
   deleteProjectStore = inject(DeleteProjectStore);
+  publishProjectStore = inject(PublishProjectStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
-  icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, search: Search, plus: Plus };
+  icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, search: Search, plus: Plus, eye: Eye, eyeOff: EyeOff };
   queryParams = signal<FilterProjectsDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
     q: this.#route.snapshot.queryParamMap.get('q')
@@ -87,6 +89,10 @@ export class ProjectsComponent implements OnInit {
     const searchValue = this.searchForm.value.q;
     this.queryParams.set({ page: null, q: searchValue });
     this.updateRouteAndProjects();
+  }
+
+  onPublishProject(projectId: string): void {
+    this.publishProjectStore.publishProject(projectId);
   }
 
   onDeleteProject(projectId: string, event: Event): void {
