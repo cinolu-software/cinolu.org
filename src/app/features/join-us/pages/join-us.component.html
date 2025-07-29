@@ -1,6 +1,5 @@
 <section class="bg-grid sm:px-8 mt-5 px-8 lg:px-16 xl:px-24 2xl:px-32 space-y-20 max-w-screen-2xl mx-auto py-14">
   <h3 class="text-center font-black text-gray-700 text-3xl sm:text-4xl lg:text-5xl mb-10 lg:mt-13">Rejoignez-nous</h3>
-
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
     <div class="relative w-full h-80 sm:h-96 lg:h-[32rem] overflow-hidden rounded-xl">
       <img
@@ -8,13 +7,11 @@
         alt="Join Us"
         class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
     </div>
-
     <div>
       <h1 class="text-xl sm:text-2xl font-bold text-gray-800">
         Vous souhaitez faire partie d’un réseau dynamique d’entrepreneurs et d’innovateurs, de coachs et mentors, de
         décideurs et d’experts ?
       </h1>
-
       <p class="mt-4 text-base sm:text-lg text-gray-600">
         Rejoignez une communauté inspirante, bénéficiez de ressources exclusives et connectez-vous avec des esprits
         brillants pour faire grandir vos projets.
@@ -34,7 +31,6 @@
       </div>
     </div>
   </div>
-
   <div class="flex justify-center">
     <p-stepper [value]="1" class="basis-[50rem]">
       <p-step-list>
@@ -42,89 +38,77 @@
         <p-step [value]="2">Etape II</p-step>
         <p-step [value]="3">Etape II</p-step>
       </p-step-list>
-
       <p class="text-base text-center text-gray-600">Vous vous inscrivez entant que Mentor</p>
       <p-step-panels>
         <p-step-panel [value]="1">
           <ng-template #content let-activateCallback="activateCallback">
-            <div class="flex flex-col h-96">
-              <div
-                class="w-full border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
-                <form action="" class="gap-4 flex flex-col gap-4 md:space-x-4">
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 col-span-1">
-                    <p-floatlabel class="w-full md:w-60" variant="on">
-                      <input pInputText id="fullname" autocomplete="off" />
-                      <label for="fullname">Nom Complet</label>
-                    </p-floatlabel>
-                    <p-floatlabel class="w-full md:w-60" variant="on">
-                      <input pInputText id="email" autocomplete="off" />
-                      <label for="email">Adresse email </label>
-                    </p-floatlabel>
-                  </div>
-
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <p-floatlabel class="w-full md:w-60" variant="on">
-                      <input pInputText id="phone" autocomplete="off" />
-                      <label for="phone">Numéro de téléphone </label>
-                    </p-floatlabel>
-
-                    <p-floatlabel class="w-full md:w-60" variant="on">
-                      <p-password inputId="password" promptLabel="Entrez votre mot de passe" feedback="true" />
-                      <label for="password">Mot de passe</label>
-                    </p-floatlabel>
-                  </div>
-
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <p-select
-                      [options]="genderItems"
-                      [checkmark]="true"
-                      optionLabel="name"
-                      [showClear]="true"
-                      placeholder="Sexe"
-                      class="w-full md:w-60" />
-
-                    <p-select
-                      [options]="countryItem"
-                      [checkmark]="true"
-                      optionLabel="name"
-                      [showClear]="true"
-                      placeholder="Selectionnez votre pays"
-                      class="w-full md:w-60" />
-                  </div>
-
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <p-floatlabel class="w-full md:w-full" variant="on">
-                      <p-datepicker [(ngModel)]="date" inputId="birthdate" showIcon iconDisplay="input" />
-                      <label for="birthdate">Date de naissance</label>
-                    </p-floatlabel>
-                  </div>
-
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <p-floatlabel class="w-full md:w-60" variant="on">
-                      <p-select inputId="status" [options]="statusItem" optionLabel="name" class="w-full" />
-                      <label for="status">Selectinnez le status</label>
-                    </p-floatlabel>
-
-                    <p-floatlabel class="w-full md:w-60" variant="on">
-                      <input pInputText id="email" autocomplete="off" />
-                      <label for="email">Adresse de residence </label>
-                    </p-floatlabel>
-                  </div>
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <p-floatlabel class="w-full" variant="on">
-                      <textarea pTextarea id="object" rows="5" cols="30" style="resize: none" class="h-full"></textarea>
-                      <label for="object">Pourquoi souhaitez-vous rejoindre Cinolu ?</label>
-                    </p-floatlabel>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="flex pt-6 justify-end">
-              <p-button label="Suivant" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(2)" />
+            <div class="w-full border-2 border-dashed border-gray-200 rounded bg-surface-50 p-8 font-medium">
+              <form class="flex flex-col gap-y-6 gap-x-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <p-floatlabel class="w-full" variant="on">
+                    <input pInputText id="name" autocomplete="off" />
+                    <label for="name">Nom Complet</label>
+                  </p-floatlabel>
+                  <p-floatlabel class="w-full" variant="on">
+                    <input pInputText id="email" autocomplete="off" />
+                    <label for="email">Adresse email </label>
+                  </p-floatlabel>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <p-floatlabel class="w-full" variant="on">
+                    <input pInputText id="phone" autocomplete="off" />
+                    <label for="phone">Numéro de téléphone </label>
+                  </p-floatlabel>
+                  <p-floatlabel class="w-full" variant="on">
+                    <p-password inputId="password" promptLabel="Entrez votre mot de passe" [feedback]="false" />
+                    <label for="password">Mot de passe</label>
+                  </p-floatlabel>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <p-select
+                    [options]="genderItems"
+                    [checkmark]="true"
+                    optionLabel="name"
+                    [showClear]="true"
+                    placeholder="Sexe"
+                    class="w-full" />
+                  <p-select
+                    [options]="countryItem"
+                    [checkmark]="true"
+                    optionLabel="name"
+                    [showClear]="true"
+                    placeholder="Selectionnez votre pays"
+                    class="w-full" />
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <p-floatlabel class="w-full" variant="on">
+                    <p-datepicker inputId="birthdate" showIcon iconDisplay="input" />
+                    <label for="birthdate">Date de naissance</label>
+                  </p-floatlabel>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <p-floatlabel class="w-full" variant="on">
+                    <p-select inputId="status" [options]="statusItem" optionLabel="name" class="w-full" />
+                    <label for="status">Selectinnez le status</label>
+                  </p-floatlabel>
+                  <p-floatlabel class="w-full md:w-60" variant="on">
+                    <input pInputText id="email" autocomplete="off" />
+                    <label for="email">Adresse de residence </label>
+                  </p-floatlabel>
+                </div>
+                <div class="col-span-1">
+                  <p-floatlabel class="w-full" variant="on">
+                    <textarea pTextarea id="object" rows="10" cols="30" style="resize: none" class="h-full"></textarea>
+                    <label for="object">Pourquoi rejoindre Cinolu ?</label>
+                  </p-floatlabel>
+                </div>
+                <div class="flex justify-end">
+                  <p-button iconPos="right" (onClick)="activateCallback(2)"> Suivant </p-button>
+                </div>
+              </form>
             </div>
           </ng-template>
         </p-step-panel>
-
         <p-step-panel [value]="2">
           <ng-template #content let-activateCallback="activateCallback">
             <div class="flex flex-col h-48">
@@ -143,7 +127,6 @@
             </div>
           </ng-template>
         </p-step-panel>
-
         <p-step-panel [value]="3">
           <ng-template #content let-activateCallback="activateCallback">
             <div class="flex flex-col h-48">

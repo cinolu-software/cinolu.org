@@ -18,6 +18,18 @@
   @apply w-full;
 }
 
+.p-floatlabel {
+  @apply w-full;
+}
+
+.p-floatlabel  input{
+  @apply w-full;
+}
+
+.p-floatlabel textarea {
+  @apply w-full;
+}
+
 .p-multiselect {
   @apply w-full;
 }
