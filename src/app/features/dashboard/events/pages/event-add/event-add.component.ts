@@ -5,7 +5,7 @@ import { CommonModule, Location } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { StepperModule } from 'primeng/stepper';
-import { AddProjectStore } from '../../store/projects/add-project.store';
+import { AddEventStore } from '../../store/events/add-event.store';
 import { TextareaModule } from 'primeng/textarea';
 import { UnpaginatedProgramsStore } from '../../../programs/store/unpaginated-programs.store';
 import { SelectModule } from 'primeng/select';
@@ -14,9 +14,9 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { MultiSelectModule } from 'primeng/multiselect';
 
 @Component({
-  selector: 'app-project-add',
-  templateUrl: './project-add.component.html',
-  providers: [AddProjectStore, UnpaginatedProgramsStore, UnpaginatedCategoriesStore],
+  selector: 'app-event-add',
+  templateUrl: './event-add.component.html',
+  providers: [AddEventStore, UnpaginatedProgramsStore, UnpaginatedCategoriesStore],
   imports: [
     LucideAngularModule,
     SelectModule,
@@ -30,11 +30,11 @@ import { MultiSelectModule } from 'primeng/multiselect';
     ReactiveFormsModule
   ]
 })
-export class AddProjectComponent {
+export class AddEventComponent {
   #fb = inject(FormBuilder);
   #location = inject(Location);
   form: FormGroup;
-  store = inject(AddProjectStore);
+  store = inject(AddEventStore);
   categoriesStore = inject(UnpaginatedCategoriesStore);
   programsStore = inject(UnpaginatedProgramsStore);
   icons = { back: ArrowLeft, next: ChevronsRight, previous: ChevronsLeft, check: Check };
@@ -43,6 +43,7 @@ export class AddProjectComponent {
     this.form = this.#fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
+      place: ['', Validators.required],
       form_link: ['', Validators.required],
       started_at: [null, Validators.required],
       ended_at: [null, Validators.required],
@@ -51,9 +52,9 @@ export class AddProjectComponent {
     });
   }
 
-  onAddProject(): void {
+  onAddEvent(): void {
     if (!this.form.valid) return;
-    this.store.addProject(this.form.value);
+    this.store.addEvent(this.form.value);
   }
 
   onGoBack(): void {

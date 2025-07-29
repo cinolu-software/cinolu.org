@@ -10,11 +10,11 @@ import { ToastrService } from '../../../../../core/services/toast/toastr.service
 
 interface IAddProjectStore {
   isLoading: boolean;
-  projects: IProject | null;
+  project: IProject | null;
 }
 
 export const AddProjectStore = signalStore(
-  withState<IAddProjectStore>({ isLoading: false, projects: null }),
+  withState<IAddProjectStore>({ isLoading: false, project: null }),
   withProps(() => ({
     _http: inject(HttpClient),
     _router: inject(Router),
@@ -28,12 +28,12 @@ export const AddProjectStore = signalStore(
           return _http.post<{ data: IProject }>('projects', project).pipe(
             map(({ data }) => {
               _toast.showSuccess('Le projet a été ajouté avec succès');
-              _router.navigate(['/dashboard/projects']);
-              patchState(store, { isLoading: false, projects: data });
+              _router.navigate(['/dashboard/projects/list']);
+              patchState(store, { isLoading: false, project: data });
             }),
             catchError(() => {
               _toast.showError("Une erreur s'est produite lors de l'ajout du projet");
-              patchState(store, { isLoading: false, projects: null });
+              patchState(store, { isLoading: false, project: null });
               return of(null);
             })
           );

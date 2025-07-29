@@ -18,7 +18,7 @@ import { FilterProjectCategoriesDto } from '../../dto/filter-categories.dto';
 import { ICategory } from '../../../../../shared/models/entities.models';
 
 @Component({
-  selector: 'app-dashboard-project-categories',
+  selector: 'app-project-categories',
   templateUrl: './project-categories.component.html',
   providers: [CategoriesStore, AddCategoryStore, UpdateCategoryStore, DeleteCategoryStore, ConfirmationService],
   imports: [

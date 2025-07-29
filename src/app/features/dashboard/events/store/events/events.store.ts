@@ -3,13 +3,13 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { FilterEventsDto } from '../../dto/filter-events.dto';
+import { FilterEventCategoriesDto } from '../../dto/filter-categories.dto';
+import { IEvent } from '../../../../../shared/models/entities.models';
 import { buildQueryParams } from '../../../../../shared/helpers/build-query-params';
-import { IProgram } from '../../../../../shared/models/entities.models';
 
 interface IEventsStore {
   isLoading: boolean;
-  events: [IProgram[], number];
+  events: [IEvent[], number];
 }
 
 export const EventsStore = signalStore(
@@ -18,12 +18,12 @@ export const EventsStore = signalStore(
     _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
-    loadEvents: rxMethod<FilterEventsDto>(
+    loadEvents: rxMethod<FilterEventCategoriesDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          return _http.get<{ data: [IProgram[], number] }>('events', { params }).pipe(
+          return _http.get<{ data: [IEvent[], number] }>('events', { params }).pipe(
             map(({ data }) => {
               patchState(store, { isLoading: false, events: data });
             }),
@@ -34,6 +34,16 @@ export const EventsStore = signalStore(
           );
         })
       )
-    )
+    ),
+    updateEvent: (event: IEvent): void => {
+      const [events, count] = store.events();
+      const updated = events.map((e) => (e.id === event.id ? event : e));
+      patchState(store, { events: [updated, count] });
+    },
+    deleteEvent: (id: string): void => {
+      const [events, count] = store.events();
+      const filtered = events.filter((event) => event.id !== id);
+      patchState(store, { events: [filtered, count - 1] });
+    }
   }))
 );

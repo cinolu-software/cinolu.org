@@ -110,7 +110,7 @@ export interface IProgram extends IBase {
 export interface IEvent extends IBase {
   name: string;
   slug: string;
-  image: string;
+  cover: string;
   place: string;
   description: string;
   started_at: Date;

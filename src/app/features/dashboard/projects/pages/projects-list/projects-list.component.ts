@@ -17,7 +17,7 @@ import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { PublishProjectStore } from '../../store/projects/publish-project.store';
 
 @Component({
-  selector: 'app-project-add',
+  selector: 'app-projects-list',
   templateUrl: './projects-list.component.html',
   providers: [ProjectsStore, PublishProjectStore, DeleteProjectStore, ConfirmationService],
   imports: [
@@ -34,7 +34,7 @@ import { PublishProjectStore } from '../../store/projects/publish-project.store'
     ApiImgPipe
   ]
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsListComponent implements OnInit {
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   #fb = inject(FormBuilder);

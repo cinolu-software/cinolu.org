@@ -8,11 +8,11 @@ import { ProjectsStore } from './projects.store';
 
 interface IPublishProjectStore {
   isLoading: boolean;
-  projects: IProject | null;
+  project: IProject | null;
 }
 
 export const PublishProjectStore = signalStore(
-  withState<IPublishProjectStore>({ isLoading: false, projects: null }),
+  withState<IPublishProjectStore>({ isLoading: false, project: null }),
   withProps(() => ({
     _http: inject(HttpClient),
     _projectsStore: inject(ProjectsStore)
@@ -25,10 +25,10 @@ export const PublishProjectStore = signalStore(
           return _http.post<{ data: IProject }>(`projects/publish/${id}`, {}).pipe(
             map(({ data }) => {
               _projectsStore.updateProject(data);
-              patchState(store, { isLoading: false, projects: data });
+              patchState(store, { isLoading: false, project: data });
             }),
             catchError(() => {
-              patchState(store, { isLoading: false, projects: null });
+              patchState(store, { isLoading: false, project: null });
               return of(null);
             })
           );

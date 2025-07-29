@@ -3,37 +3,37 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IProject } from '../../../../../shared/models/entities.models';
-import { ProjectDto } from '../../dto/project.dto';
+import { IEvent } from '../../../../../shared/models/entities.models';
+import { EventDto } from '../../dto/event.dto';
 import { Router } from '@angular/router';
 import { ToastrService } from '../../../../../core/services/toast/toastr.service';
 
-interface IUpdateProjectStore {
+interface IUpdateEventStore {
   isLoading: boolean;
-  project: IProject | null;
+  event: IEvent | null;
 }
 
-export const UpdateProjectStore = signalStore(
-  withState<IUpdateProjectStore>({ isLoading: false, project: null }),
+export const UpdateEventStore = signalStore(
+  withState<IUpdateEventStore>({ isLoading: false, event: null }),
   withProps(() => ({
     _http: inject(HttpClient),
     _router: inject(Router),
     _toast: inject(ToastrService)
   })),
   withMethods(({ _http, _router, _toast, ...store }) => ({
-    updateProject: rxMethod<ProjectDto>(
+    updateEvent: rxMethod<EventDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((project) => {
-          return _http.patch<{ data: IProject }>(`projects/${project.id}`, project).pipe(
+        switchMap((event) => {
+          return _http.patch<{ data: IEvent }>(`events/${event.id}`, event).pipe(
             map(({ data }) => {
-              _toast.showSuccess('Le projet a été mis à jour avec succès');
-              _router.navigate(['/dashboard/projects/list']);
-              patchState(store, { isLoading: false, project: data });
+              _toast.showSuccess("L'événement a été mis à jour avec succès");
+              _router.navigate(['/dashboard/events/list']);
+              patchState(store, { isLoading: false, event: data });
             }),
             catchError(() => {
               _toast.showError("Une erreur s'est produite lors de la mise à jour");
-              patchState(store, { isLoading: false, project: null });
+              patchState(store, { isLoading: false, event: null });
               return of(null);
             })
           );

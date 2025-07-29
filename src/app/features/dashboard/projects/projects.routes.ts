@@ -8,17 +8,18 @@ export const projectsRoutes: Routes = [
       {
         path: '',
         title: 'Projects List',
-        loadComponent: () => import('./pages/projects-list/projects-list.component').then((c) => c.ProjectsComponent)
+        loadComponent: () =>
+          import('./pages/projects-list/projects-list.component').then((c) => c.ProjectsListComponent)
       },
       {
         path: 'add',
         title: 'Create Project',
-        loadComponent: () => import('./pages/project-add/project-add.component').then((c) => c.ProjectAddComponent)
+        loadComponent: () => import('./pages/project-add/project-add.component').then((c) => c.AddProjectComponent)
       },
       {
         path: 'edit/:slug',
         title: 'Edit Project',
-        loadComponent: () => import('./pages/project-edit/project-edit.component').then((c) => c.ProjectEditComponent)
+        loadComponent: () => import('./pages/project-edit/project-edit.component').then((c) => c.EditProjectComponent)
       }
     ]
   },

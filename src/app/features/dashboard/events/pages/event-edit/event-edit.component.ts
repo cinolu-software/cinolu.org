@@ -11,17 +11,18 @@ import { SelectModule } from 'primeng/select';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
 import { DatePickerModule } from 'primeng/datepicker';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { ProjectStore } from '../../../../projects/store/project.store';
 import { ActivatedRoute } from '@angular/router';
-import { UpdateProjectStore } from '../../store/projects/update-project.store';
+import { UpdateEventStore } from '../../store/events/update-event.store';
 import { FileUploadComponent } from '../../../../../shared/components/file-upload/file-upload.component';
 import { environment } from '../../../../../../environments/environment';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
+import { EventsStore } from '../../store/events/events.store';
+import { EventStore } from '../../../../events/store/event.store';
 
 @Component({
-  selector: 'app-project-edit',
-  templateUrl: './project-edit.component.html',
-  providers: [ProjectStore, UpdateProjectStore, UnpaginatedProgramsStore, UnpaginatedCategoriesStore],
+  selector: 'app-event-edit',
+  templateUrl: './event-edit.component.html',
+  providers: [EventsStore, EventStore, UpdateEventStore, UnpaginatedProgramsStore, UnpaginatedCategoriesStore],
   imports: [
     LucideAngularModule,
     SelectModule,
@@ -38,24 +39,24 @@ import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
     ApiImgPipe
   ]
 })
-export class EditProjectComponent implements OnInit {
+export class EditEventComponent implements OnInit {
   #fb = inject(FormBuilder);
   #location = inject(Location);
   #route = inject(ActivatedRoute);
   form: FormGroup;
-  store = inject(UpdateProjectStore);
+  store = inject(UpdateEventStore);
   categoriesStore = inject(UnpaginatedCategoriesStore);
   programsStore = inject(UnpaginatedProgramsStore);
-  projectStore = inject(ProjectStore);
-  url = `${environment.apiUrl}projects/cover/`;
+  eventStore = inject(EventStore);
+  url = `${environment.apiUrl}events/cover/`;
   #slug = this.#route.snapshot.params['slug'];
-
   icons = { back: ArrowLeft, next: ChevronsRight, previous: ChevronsLeft, check: Check };
 
   constructor() {
     this.form = this.#fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
+      place: ['', Validators.required],
       description: ['', Validators.required],
       form_link: ['', Validators.required],
       started_at: ['', Validators.required],
@@ -64,29 +65,29 @@ export class EditProjectComponent implements OnInit {
       categories: [[], Validators.required]
     });
     effect(() => {
-      const project = this.projectStore.project();
-      if (!project) return;
+      const event = this.eventStore.event();
+      if (!event) return;
       this.form.patchValue({
-        ...project,
-        started_at: new Date(project.started_at),
-        ended_at: new Date(project.ended_at),
-        program: project.program.id,
-        categories: project.categories?.map((c) => c.id)
+        ...event,
+        started_at: new Date(event.started_at),
+        ended_at: new Date(event.ended_at),
+        program: event.program.id,
+        categories: event.categories?.map((c) => c.id)
       });
     });
   }
 
   ngOnInit(): void {
-    this.projectStore.loadProject(this.#slug);
+    this.eventStore.loadEvent(this.#slug);
   }
 
-  onUpdateProject(): void {
+  onUpdateEvent(): void {
     if (!this.form.valid) return;
-    this.store.updateProject(this.form.value);
+    this.store.updateEvent(this.form.value);
   }
 
   onFileUploadLoaded(): void {
-    this.projectStore.loadProject(this.#slug);
+    this.eventStore.loadEvent(this.#slug);
   }
 
   onGoBack(): void {

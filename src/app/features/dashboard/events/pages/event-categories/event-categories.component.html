@@ -3,7 +3,6 @@
   @let hasQuery = queryParams().q;
   @let categoryCount = store.categories()[1];
   @let categoryList = store.categories()[0];
-
   <div class="relative bg-white rounded-lg">
     <div class="flex flex-col gap-3 mb-10 pt-6">
       <div class="px-6 flex flex-wrap gap-2 md:justify-between md:items-center mb-6 md:mb-0">
@@ -30,11 +29,9 @@
         <input
           class="py-1.5! md:col-span-4"
           pInputText
-          type="text"
           id="q"
-          name="q"
           formControlName="q"
-          autocomplete="none"
+          autocomplete="off"
           placeholder="Rechercher..." />
         <div class="flex items-center gap-1">
           <p-button
