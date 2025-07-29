@@ -6,17 +6,19 @@
     <div class="absolute inset-0 bg-primary-950/85" aria-hidden="true"></div>
   </div>
 
-  <div class="relative z-10 px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-32 max-w-screen-2xl mx-auto pt-10">
+  <div class="relative z-10 px-4 sm:px-6 lg:px-12 xl:px-20 max-w-screen-2xl mx-auto pt-10 space-x-3">
     <h1
-      class="inline-flex text-left gap-2 px-4 py-2 my-2 rounded-full bg-neutral-300/20 backdrop-blur-[1px] border borber-neutral-400/20 hover:bg-neutral-300/30 mb-2 text-primary-50 font-medium font-satoshi text-sm sm:text-base">
+      class="inline-flex items-start gap-2 px-4 py-2 my-2 rounded-full bg-neutral-300/20 backdrop-blur-[1px] border borber-neutral-400/20 hover:bg-neutral-300/30 mb-2 text-primary-50 font-medium font-satoshi text-sm sm:text-base">
       <i-lucide [name]="icons.lightbulb" class="size-5" aria-hidden="true" focusable="false"></i-lucide>
       Innovons ensemble !
     </h1>
 
-    <div class="flex justify-center flex-col items-center text-center">
-      <h2 class="font-satoshi font-black text-white text-3xl text-left sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-        Accélérons les talents,<br />
-        <span class="text-primary-400">connectons les opportunités.</span>
+    <div class="flex justify-center w-full flex-col items-center space-x-3 text-center">
+      <h2
+        [@fadeInOut]
+        class="font-satoshi font-black text-white flex flex-col text-left text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+        {{ currentTitle.first }} <br />
+        <span class="text-primary-400">{{ currentTitle.second }}</span>
       </h2>
 
       <p
@@ -30,7 +32,7 @@
           <a
             [routerLink]="'/join-us'"
             type="submit"
-            class="group relative z-10 flex text-white items-center justify-center gap-2 px-6 py-2 border rounded-full border-primary-400 hover:bg-green-800 duration-300">
+            class="group relative z-10 flex text-white items-center justify-center gap-2 px-6 py-2 border rounded-full border-primary-400 hover:bg-primary-500 duration-300">
             Devenir membre
             <i-lucide [name]="icons.arrowFlesh" class="mt-0.5 group-hover:translate-x-1 transition-all" />
           </a>
@@ -40,7 +42,7 @@
           <button
             [routerLink]="'/donation'"
             type="submit"
-            class="group relative z-10 flex text-white items-center justify-center gap-2 px-6 py-2 border rounded-full border-primary-400 bg-green-700/60 hover:bg-green-800 duration-300">
+            class="group relative z-10 flex text-white items-center justify-center gap-2 px-6 py-2 border rounded-full border-primary-400 bg-primary-500/60 hover:bg-primary-600 duration-300">
             Faire un don
             <i-lucide [name]="icons.donate" class="mt-0.5 group-hover:translate-x-1 transition-all" />
           </button>
