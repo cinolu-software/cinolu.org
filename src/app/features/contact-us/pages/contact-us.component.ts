@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { CONTACT_ITEMS } from '../data/contact.data';
 import { FormsModule, NgForm } from '@angular/forms';
-import { countryCode } from '../../../shared/data/countryItem.data';
+import { countryCode } from '../../../shared/data/country-item.data';
 
 @Component({
   selector: 'app-contact-us',

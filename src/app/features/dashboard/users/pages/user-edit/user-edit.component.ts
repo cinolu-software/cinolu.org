@@ -7,11 +7,12 @@ import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserStore } from '../../store/user.store';
+import { UserStore } from '../../store/users/user.store';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { UnpaginatedRolesStore } from '../../../roles/store/unpaginated-roles.store';
-import { UpdateUserStore } from '../../store/update-user.store';
+import { UpdateUserStore } from '../../store/users/update-user.store';
+import { UnpaginatedRolesStore } from '../../store/roles/unpaginated-roles.store';
+import { DatePickerModule } from 'primeng/datepicker';
 
 @Component({
   selector: 'app-user-edit',
@@ -28,6 +29,7 @@ import { UpdateUserStore } from '../../store/update-user.store';
     ReactiveFormsModule,
     NgOptimizedImage,
     ApiImgPipe,
+    DatePickerModule,
     MultiSelectModule
   ]
 })
@@ -46,18 +48,17 @@ export class UserEditComponent {
       email: ['', [Validators.required]],
       name: ['', Validators.required],
       phone_number: ['', Validators.required],
-      address: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      birth_date: ['', Validators.required],
       roles: [[], Validators.required]
     });
     effect(() => {
       const user = this.store.user();
       if (!user) return;
       this.updateUserForm.patchValue({
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        phone_number: user.phone_number,
-        address: user.address,
+        ...user,
+        birth_date: new Date(user.birth_date || ''),
         roles: user.roles.map((role) => role.id)
       });
     });

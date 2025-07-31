@@ -9,7 +9,7 @@
   </div>
   <div class="flex flex-col">
     @if (categoriesStore.categories().length > 0) {
-      <div class="mb-2 flex flex-wrap gap-4">
+      <div class="mb-2 flex flex-wrap gap-4 md:w-1/4">
         <p-multiselect
           [inputId]="'categoriesFilter'"
           [autocomplete]="'off'"

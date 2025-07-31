@@ -1,10 +1,10 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule, ChevronDown, LayoutGrid, LogOut } from 'lucide-angular';
 import { ILink } from '../../../data/links.data';
-import { IUser } from '../../../../shared/models/entities.models';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
+import { AuthStore } from '../../../../core/auth/auth.store';
 
 @Component({
   selector: 'app-desktop-nav',
@@ -12,15 +12,10 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
   imports: [CommonModule, NgOptimizedImage, LucideAngularModule, RouterModule, ApiImgPipe]
 })
 export class DesktopNavComponent {
-  user = input.required<IUser | null>();
   links = input.required<ILink[]>();
-  signOut = output<void>();
   activeTab = signal<string | null>(null);
-  icons = {
-    chevronDown: ChevronDown,
-    dashboard: LayoutGrid,
-    logOut: LogOut
-  };
+  authStore = inject(AuthStore);
+  icons = { chevronDown: ChevronDown, dashboard: LayoutGrid, logOut: LogOut };
 
   closeNav(): void {
     this.setActiveTab(null);
@@ -30,7 +25,7 @@ export class DesktopNavComponent {
     this.activeTab.set(tab);
   }
 
-  handleSignOut(): void {
-    this.signOut.emit();
+  onSignOut(): void {
+    this.authStore.signOut();
   }
 }

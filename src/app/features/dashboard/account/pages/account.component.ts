@@ -10,6 +10,7 @@ import { environment } from '../../../../../environments/environment';
 import { AuthStore } from '../../../../core/auth/auth.store';
 import { FileUploadComponent } from '../../../../shared/components/file-upload/file-upload.component';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
+import { DatePickerModule } from 'primeng/datepicker';
 
 @Component({
   selector: 'app-account',
@@ -23,6 +24,7 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
     ReactiveFormsModule,
     FileUploadComponent,
     ApiImgPipe,
+    DatePickerModule,
     LucideAngularModule
   ]
 })
@@ -39,7 +41,9 @@ export class AccountComponent implements OnInit {
   constructor() {
     this.infoForm = this.#formBuilder.group({
       email: ['', Validators.email],
-      address: ['', [Validators.required, Validators.minLength(3)]],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      birth_date: ['', Validators.required],
       phone_number: ['', [Validators.minLength(10)]],
       name: ['', Validators.minLength(3)]
     });
@@ -50,11 +54,12 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const user = this.store.user();
+    if (!user) return;
+    console.log(user);
     this.infoForm.patchValue({
-      email: this.store.user()?.email,
-      address: this.store.user()?.address,
-      phone_number: this.store.user()?.phone_number,
-      name: this.store.user()?.name
+      ...user,
+      birth_date: new Date(user.birth_date || '')
     });
   }
 

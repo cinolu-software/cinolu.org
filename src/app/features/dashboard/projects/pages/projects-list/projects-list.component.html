@@ -32,7 +32,7 @@
         </a>
       </div>
       <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
-        <input pInputText class="py-1.5!" id="search" formControlName="q" placeholder="Rechercher..." />
+        <input pInputText class="py-1! md:w-1/3" id="search" formControlName="q" placeholder="Rechercher..." />
         <div class="flex items-center gap-1">
           <p-button
             type="submit"

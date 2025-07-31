@@ -50,8 +50,8 @@ export class ProjectCategoriesComponent implements OnInit {
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, plus: Plus, search: Search };
   queryParams = signal<FilterProjectCategoriesDto>({
-    page: this.#route.snapshot.queryParamMap.get('page'),
-    q: this.#route.snapshot.queryParamMap.get('q')
+    page: this.#route.snapshot.params['page'],
+    q: this.#route.snapshot.params['q']
   });
 
   constructor() {

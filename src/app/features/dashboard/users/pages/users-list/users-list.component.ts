@@ -1,19 +1,19 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LucideAngularModule, RefreshCw, Edit, Trash, Download, Search, Plus } from 'lucide-angular';
-import { UsersStore } from '../../store/users.store';
+import { UsersStore } from '../../store/users/users.store';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { AvatarModule } from 'primeng/avatar';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { DownloadUsersStore } from '../../store/download-csv.store';
+import { DownloadUsersStore } from '../../store/users/download-csv.store';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FilterUsersDto } from '../../dto/filter-user.dto';
+import { FilterUsersDto } from '../../dto/filter-users.dto';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { ConfirmationService } from 'primeng/api';
-import { DeleteUserStore } from '../../store/delete-user.store';
+import { DeleteUserStore } from '../../store/users/delete-user.store';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 
 @Component({
@@ -46,8 +46,8 @@ export class UsersListComponent implements OnInit {
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   icons = { refresh: RefreshCw, edit: Edit, trash: Trash, download: Download, search: Search, plus: Plus };
   queryParams = signal<FilterUsersDto>({
-    page: this.#route.snapshot.queryParamMap.get('page'),
-    q: this.#route.snapshot.queryParamMap.get('q')
+    page: this.#route.snapshot.params['page'],
+    q: this.#route.snapshot.params['q']
   });
 
   constructor() {
@@ -71,7 +71,7 @@ export class UsersListComponent implements OnInit {
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/users'], { queryParams });
+    this.#router.navigate(['/dashboard/users/list'], { queryParams });
   }
 
   updateRouteAndUsers(): void {
