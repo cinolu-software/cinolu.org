@@ -1,47 +1,45 @@
 import { Component, inject } from '@angular/core';
 import { GENDERS, MEMBER_ITEMS } from '../data/member.items';
 import { LucideAngularModule, ArrowRight, ArrowLeft } from 'lucide-angular';
-import { RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { PasswordModule } from 'primeng/password';
 import { SelectModule } from 'primeng/select';
 import { countryCode } from '../../../shared/data/country-item.data';
 import { StepperModule } from 'primeng/stepper';
-import { Button } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
-import { Router } from '@angular/router';
 import { TextareaModule } from 'primeng/textarea';
+import { CommonModule } from '@angular/common';
+import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-join-us',
   imports: [
     LucideAngularModule,
-    RouterLink,
     InputTextModule,
     FormsModule,
     FloatLabelModule,
     PasswordModule,
     SelectModule,
     StepperModule,
-    Button,
     DatePickerModule,
-    TextareaModule
+    TextareaModule,
+    CommonModule,
+    ReactiveFormsModule,
+    Button
   ],
   templateUrl: './join-us.component.html',
   styles: ``
 })
 export class JoinUsComponent {
   memberItems = MEMBER_ITEMS;
-  router = inject(Router);
   icons = { next: ArrowRight, previous: ArrowLeft };
 
   genderItems = GENDERS;
   selectedGender = this.genderItems;
-
   countryItem = countryCode;
-  statusItem = [
+  statutItem = [
     { id: 1, name: 'Étudiant·e' },
     { id: 2, name: 'Entrepreneur·e' },
     { id: 3, name: 'Volontaire' },
@@ -50,5 +48,30 @@ export class JoinUsComponent {
   ];
 
   date: Date | undefined;
-  activePath = this.memberItems[0].path;
+
+  selectedUserId = 0;
+
+  selectUserType(type: number) {
+    this.selectedUserId = type;
+  }
+
+  #fb = inject(FormBuilder);
+  form: FormGroup;
+  constructor() {
+    this.form = this.#fb.group({
+      fullname: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
+      gender: ['', Validators.required],
+      birthdate: ['', Validators.required],
+      statut: ['', Validators.required],
+      country: ['', Validators.required],
+      reason: ['', Validators.required],
+      town: ['', Validators.required]
+    });
+  }
+
+  onSubmit() {
+    console.log(this.form.value);
+  }
 }
