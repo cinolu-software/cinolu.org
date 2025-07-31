@@ -1,13 +1,4 @@
-import {
-  LucideIconData,
-  Info,
-  Activity,
-  UserCheck,
-  BriefcaseBusiness,
-  Briefcase,
-  Calendar1,
-  Columns3Cog
-} from 'lucide-angular';
+import { LucideIconData, Info, Activity, UserCheck, BriefcaseBusiness, Briefcase, Calendar1 } from 'lucide-angular';
 import { RoleEnum } from '../../core/auth/role.enum';
 
 export interface ILink {
@@ -69,7 +60,7 @@ export const DASHBOARD_LINKS: ILink[] = [
   },
   {
     name: 'Mes enteprises',
-    path: '/dashboard/enterprises',
+    path: '/dashboard/ventures/list',
     requiredRole: RoleEnum.User,
     icon: BriefcaseBusiness
   },
@@ -86,7 +77,7 @@ export const DASHBOARD_LINKS: ILink[] = [
     icon: UserCheck,
     children: [
       {
-        name: 'Utilisateurs',
+        name: 'Liste',
         path: '/dashboard/users/list'
       },
       {

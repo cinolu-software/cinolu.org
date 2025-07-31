@@ -10,7 +10,7 @@ export const dashboardRoutes: Routes = [
     loadChildren: () => import('./account/account.routes').then((c) => c.accountRoutes)
   },
   {
-    path: 'enterprises',
+    path: 'ventures',
     canActivate: [roleGuard],
     data: { requiredRole: RoleEnum.User },
     loadChildren: () => import('./ventures/ventures.routes').then((c) => c.venturesRoutes)

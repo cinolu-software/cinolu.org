@@ -46,8 +46,8 @@ export class UsersListComponent implements OnInit {
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   icons = { refresh: RefreshCw, edit: Edit, trash: Trash, download: Download, search: Search, plus: Plus };
   queryParams = signal<FilterUsersDto>({
-    page: this.#route.snapshot.queryParamMap.get('page'),
-    q: this.#route.snapshot.queryParamMap.get('q')
+    page: this.#route.snapshot.params['page'],
+    q: this.#route.snapshot.params['q']
   });
 
   constructor() {
@@ -71,7 +71,7 @@ export class UsersListComponent implements OnInit {
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/users'], { queryParams });
+    this.#router.navigate(['/dashboard/users/list'], { queryParams });
   }
 
   updateRouteAndUsers(): void {

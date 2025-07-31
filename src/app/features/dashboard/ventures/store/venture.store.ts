@@ -4,11 +4,11 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { IEnterprise } from '../../../../shared/models/entities.models';
+import { IVenture } from '../../../../shared/models/entities.models';
 
 interface IVentureStore {
   isLoading: boolean;
-  venture: IEnterprise | null;
+  venture: IVenture | null;
 }
 
 export const VentureStore = signalStore(
@@ -22,7 +22,7 @@ export const VentureStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true, venture: null })),
         switchMap((slug) => {
-          return _http.get<{ data: IEnterprise }>(`ventures/by-slug/${slug}`).pipe(
+          return _http.get<{ data: IVenture }>(`ventures/by-slug/${slug}`).pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false, venture: data });
             }),

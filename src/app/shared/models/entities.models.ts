@@ -11,42 +11,14 @@ export interface IUser extends IBase {
   password?: string;
   biography?: string;
   phone_number?: string;
-  address?: string;
+  city?: string;
+  country?: string;
+  birth_date?: Date;
+  reason: string;
   google_image?: string;
   profile?: string;
-  posts: IPost[];
   roles: IRole[];
-  enterprises: IEnterprise[];
-  positions: IPosition[];
-  expertises: IExpertise[];
-}
-
-export interface IPost extends IBase {
-  title: string;
-  slug: string;
-  views: number;
-  content: string;
-  image: string;
-  commentsCount: number;
-  viewsCount: number;
-  comments: IComment[];
-  categories: ICategory[];
-  author: IUser;
-}
-
-export interface IComment extends IBase {
-  content: string;
-  by: IUser;
-  post: IPost;
-}
-
-export interface IField {
-  type: string;
-  name: string;
-  label: string;
-  placeholder: string;
-  required: boolean;
-  options: string[];
+  ventures: IVenture[];
 }
 
 export interface IProject extends IBase {
@@ -56,7 +28,7 @@ export interface IProject extends IBase {
   description: string;
   started_at: Date;
   ended_at: Date;
-  form?: IField[];
+  form_link?: string;
   report?: JSON;
   is_published: boolean;
   place?: string;
@@ -64,7 +36,7 @@ export interface IProject extends IBase {
   categories: ICategory[];
 }
 
-export interface IEnterprise extends IBase {
+export interface IVenture extends IBase {
   name: string;
   slug: string;
   description: string;
@@ -81,23 +53,6 @@ export interface IEnterprise extends IBase {
   location: string;
   stage: string;
   owner: IUser;
-  products: IProduct[];
-}
-
-export interface IProduct extends IBase {
-  name: string;
-  description: string;
-  slug: string;
-  image: string;
-  price: number;
-  gallery: IProductImage[];
-  enterprise: IEnterprise;
-  categories: ICategory[];
-}
-
-export interface IProductImage extends IBase {
-  image: string;
-  product: IProduct;
 }
 
 export interface IProgram extends IBase {
@@ -128,12 +83,4 @@ export interface ICategory extends IBase {
 export interface IRole extends IBase {
   name: string;
   label: string;
-}
-
-export interface IPosition extends IBase {
-  name: string;
-}
-
-export interface IExpertise extends IBase {
-  name: string;
 }

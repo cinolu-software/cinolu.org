@@ -50,8 +50,8 @@ export class UserRolesComponent implements OnInit {
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, plus: Plus, search: Search };
   queryParams = signal<FilterRolesDto>({
-    page: this.#route.snapshot.queryParamMap.get('page'),
-    q: this.#route.snapshot.queryParamMap.get('q')
+    page: this.#route.snapshot.params['page'],
+    q: this.#route.snapshot.params['q']
   });
 
   constructor() {
@@ -59,11 +59,13 @@ export class UserRolesComponent implements OnInit {
       q: [this.queryParams().q || '', Validators.required]
     });
     this.addRoleForm = this.#fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      label: ['']
     });
     this.updateRoleForm = this.#fb.group({
       id: [''],
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      label: ['']
     });
   }
 
@@ -91,7 +93,7 @@ export class UserRolesComponent implements OnInit {
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/roles'], { queryParams });
+    this.#router.navigate(['/dashboard/users/roles'], { queryParams });
   }
 
   updateRouteAndRoles(): void {
@@ -125,7 +127,6 @@ export class UserRolesComponent implements OnInit {
   onUpdateRole(): void {
     if (this.updateRoleForm.invalid) return;
     this.updateRoleStore.updateRole({
-      id: this.updateRoleForm.value.id,
       payload: this.updateRoleForm.value,
       onSuccess: () => this.onToggleEditModal(null)
     });
@@ -145,7 +146,7 @@ export class UserRolesComponent implements OnInit {
         severity: 'danger'
       },
       accept: () => {
-        this.deleteRoleStore.deleteRole({ id: roleId });
+        this.deleteRoleStore.deleteRole(roleId);
       }
     });
   }

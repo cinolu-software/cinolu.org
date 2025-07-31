@@ -1,4 +1,5 @@
 <div class="hidden lg:flex justify-between text-sm font-semibold">
+  @let user = authStore.user();
   <div class="flex items-center gap-4">
     @for (link of links(); track $index) {
       <a
@@ -9,7 +10,7 @@
         {{ link.name }}
       </a>
     }
-    @if (user(); as user) {
+    @if (user) {
       <div class="flex items-center gap-3">
         <button class="relative menu flex items-center gap-0.5" (click)="setActiveTab('account')">
           <div class="relative h-8 w-8">
@@ -35,7 +36,7 @@
                 </span>
                 Mon compte
               </a>
-              <button class="group flex items-center gap-2.5" (click)="handleSignOut()">
+              <button class="group flex items-center gap-2.5" (click)="onSignOut()">
                 <span class="h-8 w-8 flex items-center justify-center text-white bg-red-600 rounded-full">
                   <i-lucide [name]="icons.logOut" class="size-4 group-hover:animate-spin" />
                 </span>

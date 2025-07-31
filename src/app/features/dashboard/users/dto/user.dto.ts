@@ -3,6 +3,8 @@ export interface UserDto {
   email: string;
   name: string;
   phone_number: string;
-  address: string;
+  city: string;
+  country: string;
+  birth_date: string;
   roles: string[];
 }

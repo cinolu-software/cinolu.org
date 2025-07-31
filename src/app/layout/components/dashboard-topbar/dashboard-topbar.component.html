@@ -5,7 +5,7 @@
       <img ngSrc="/images/logo/logo-g.png" alt="logo" class="w-6 h-6" width="64" height="68" priority />
     </a>
     <div>
-      <app-mobile-nav [user]="authStore.user()" [links]="links()" (signOut)="handleSignOut()" />
+      <app-mobile-nav [user]="authStore.user()" (signOut)="handleSignOut()" />
       <app-desktop-nav [user]="authStore.user()" (signOut)="handleSignOut()" />
     </div>
   </nav>

@@ -3,13 +3,13 @@ import { inject } from '@angular/core';
 import { signalStore, withState, withMethods, patchState, withProps } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, switchMap } from 'rxjs';
-import { IEnterprise } from '../../../../shared/models/entities.models';
+import { IVenture } from '../../../../shared/models/entities.models';
 import { buildQueryParams } from '../../../../shared/helpers/build-query-params';
 import { FilterVenturesDto } from '../dto/filter-venture.dto';
 
 interface IVenturesStore {
   isLoading: boolean;
-  ventures: [IEnterprise[], number];
+  ventures: [IVenture[], number];
 }
 
 export const VenturesStore = signalStore(
@@ -23,7 +23,7 @@ export const VenturesStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          return _http.get<{ data: [IEnterprise[], number] }>('ventures/by-user', { params }).pipe(
+          return _http.get<{ data: [IVenture[], number] }>('ventures/by-user', { params }).pipe(
             tap(({ data }) => patchState(store, { isLoading: false, ventures: data })),
             catchError(() => {
               patchState(store, { isLoading: false, ventures: [[], 0] });

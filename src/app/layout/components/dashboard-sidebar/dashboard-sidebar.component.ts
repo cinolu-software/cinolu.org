@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, ChevronDown, Home } from 'lucide-angular';
@@ -15,6 +15,7 @@ import { HasRoleDirective } from '../../../shared/directives/has-role.directive'
 })
 export class DashboardSidebarComponent {
   #router = inject(Router);
+  style = input<string>();
   icons = { chevronDown: ChevronDown, home: Home };
   links = signal<ILink[]>(DASHBOARD_LINKS);
   currentUrl = signal(this.#router.url);

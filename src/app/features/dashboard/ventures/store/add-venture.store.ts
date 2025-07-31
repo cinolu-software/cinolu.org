@@ -5,7 +5,7 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from '../../../../core/services/toast/toastr.service';
-import { IEnterprise } from '../../../../shared/models/entities.models';
+import { IVenture } from '../../../../shared/models/entities.models';
 import { VentureDto } from '../dto/venture.dto';
 
 interface IAddVentureStore {
@@ -24,7 +24,7 @@ export const AddVentureStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((payload) => {
-          return _http.post<{ data: IEnterprise }>('ventures', payload).pipe(
+          return _http.post<{ data: IVenture }>('ventures', payload).pipe(
             tap(() => {
               patchState(store, { isLoading: false });
               _toast.showSuccess('Entreprise ajoutée');

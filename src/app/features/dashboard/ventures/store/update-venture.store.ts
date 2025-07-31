@@ -5,7 +5,7 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from '../../../../core/services/toast/toastr.service';
-import { IEnterprise } from '../../../../shared/models/entities.models';
+import { IVenture } from '../../../../shared/models/entities.models';
 import { VentureDto } from '../dto/venture.dto';
 
 interface IUpdateVenturetore {
@@ -24,7 +24,7 @@ export const UpdateVenturetore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((params) => {
-          return _http.patch<{ data: IEnterprise }>(`ventures/${params.slug}`, params.payload).pipe(
+          return _http.patch<{ data: IVenture }>(`ventures/${params.slug}`, params.payload).pipe(
             tap(() => {
               patchState(store, { isLoading: false });
               _toast.showSuccess('Entreprise mise à jour');

@@ -22,8 +22,16 @@
         (ngSubmit)="onUpdateInfo()"
         [formGroup]="infoForm">
         <div class="flex flex-col gap-1.5">
-          <label for="address" class="font-medium">Adresse (Ville)</label>
-          <input pInputText id="address" formControlName="address" autocomplete="off" />
+          <label for="country" class="font-medium">Pays</label>
+          <input pInputText id="country" formControlName="country" autocomplete="off" />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label for="city" class="font-medium">Ville</label>
+          <input pInputText id="city" formControlName="city" autocomplete="off" />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label for="birth_date" class="font-medium">Date de naissance </label>
+          <p-datepicker id="birth_date" formControlName="birth_date"></p-datepicker>
         </div>
         <div class="flex flex-col gap-1.5">
           <label for="phone_number" class="font-medium">Numéro de téléphone</label>

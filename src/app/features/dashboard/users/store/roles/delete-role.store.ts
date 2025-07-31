@@ -10,10 +10,6 @@ interface IDeleteRoleStore {
   isLoading: boolean;
 }
 
-interface IDeleteRoleParams {
-  id: string;
-}
-
 export const DeleteRoleStore = signalStore(
   withState<IDeleteRoleStore>({ isLoading: false }),
   withProps(() => ({
@@ -22,10 +18,10 @@ export const DeleteRoleStore = signalStore(
     _rolesStore: inject(RolesStore)
   })),
   withMethods(({ _http, _rolesStore, _toast, ...store }) => ({
-    deleteRole: rxMethod<IDeleteRoleParams>(
+    deleteRole: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(({ id }) => {
+        switchMap((id) => {
           return _http.delete<void>(`roles/${id}`).pipe(
             map(() => {
               patchState(store, { isLoading: false });

@@ -12,7 +12,6 @@ interface IUpdateRoleStore {
 }
 
 interface IUpdateRoleParams {
-  id: string;
   payload: RoleDto;
   onSuccess: () => void;
 }
@@ -27,8 +26,8 @@ export const UpdateRoleStore = signalStore(
     updateRole: rxMethod<IUpdateRoleParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(({ id, payload, onSuccess }) => {
-          return _http.patch<{ data: IRole }>(`roles/${id}`, payload).pipe(
+        switchMap(({ payload, onSuccess }) => {
+          return _http.patch<{ data: IRole }>(`roles/${payload.id}`, payload).pipe(
             map(({ data }) => {
               _rolesStore.updateRole(data);
               patchState(store, { isLoading: false });

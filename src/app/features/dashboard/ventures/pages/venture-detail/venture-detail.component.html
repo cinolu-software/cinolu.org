@@ -105,30 +105,6 @@
               }}</a>
             </td>
           </tr>
-          <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
-            <th scope="row" class="pr-8 py-4 font-medium font-satoshi text-gray-900 whitespace-nowrap">Produits</th>
-            <td class="flex flex-col gap-4 py-4">
-              @for (product of venture.products; track product.id) {
-                <div class="flex flex-col md:flex-row flex-wrap gap-4">
-                  <div class="relative h-14 w-16 rounded bg-gray-200">
-                    <img
-                      [alt]="product?.name"
-                      [ngSrc]="product | apiIMG: 'product'"
-                      class="aspect-video object-cover rounded border-2 border-slate-200/10 mb-2"
-                      fill />
-                  </div>
-                  <div class="flex flex-col gap-0.5">
-                    <h1 class="font-extrabold text-gray-900">{{ product?.name | titlecase }}</h1>
-                    <div class="flex items-center gap-1.5 text-gray-800 font-medium">
-                      Prix :
-                      {{ product?.price | currency: 'USD' }}
-                    </div>
-                  </div>
-                </div>
-                <p class="text-gray-600 font-medium mb-4 border-b border-gray-200 pb-2">{{ product?.description }}</p>
-              }
-            </td>
-          </tr>
         </tbody>
       </table>
     </div>

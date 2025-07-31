@@ -15,7 +15,6 @@ import { EXPLORATION_LINKS } from '../../data/links.data';
 import { DesktopNavComponent } from './desktop-nav/desktop-nav.component';
 import { MobileNavComponent } from './mobile-nav/mobile-nav.component';
 import { RouterLink } from '@angular/router';
-import { AuthStore } from '../../../core/auth/auth.store';
 
 @Component({
   selector: 'app-topbar',
@@ -31,7 +30,6 @@ export class AppTopbarComponent implements OnDestroy {
   desktopNav = viewChild(DesktopNavComponent);
   #destroy$ = new Subject<void>();
   #ngZone = inject(NgZone);
-  authStore = inject(AuthStore);
 
   constructor() {
     afterNextRender(() => {
@@ -39,10 +37,6 @@ export class AppTopbarComponent implements OnDestroy {
         this.setupEventListeners();
       });
     });
-  }
-
-  signOut(): void {
-    this.authStore.signOut();
   }
 
   closeNav(): void {
