@@ -74,16 +74,26 @@ export const DASHBOARD_LINKS: ILink[] = [
     icon: BriefcaseBusiness
   },
   {
-    name: 'Les utilisateurs',
-    path: '/dashboard/users',
-    requiredRole: RoleEnum.Staff,
-    icon: UserCheck
-  },
-  {
     name: 'Les programmes',
     path: '/dashboard/programs',
     requiredRole: RoleEnum.Staff,
     icon: Activity
+  },
+  {
+    name: 'Les utilisateurs',
+    path: '/dashboard/users',
+    requiredRole: RoleEnum.Staff,
+    icon: UserCheck,
+    children: [
+      {
+        name: 'Utilisateurs',
+        path: '/dashboard/users/list'
+      },
+      {
+        name: 'Rôles',
+        path: '/dashboard/users/roles'
+      }
+    ]
   },
   {
     name: 'Les projets',
@@ -116,12 +126,6 @@ export const DASHBOARD_LINKS: ILink[] = [
         path: '/dashboard/events/categories'
       }
     ]
-  },
-  {
-    name: 'Les rôles',
-    path: '/dashboard/roles',
-    requiredRole: RoleEnum.Staff,
-    icon: Columns3Cog
   }
 ];
 

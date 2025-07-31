@@ -8,8 +8,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { UnpaginatedRolesStore } from '../../../roles/store/unpaginated-roles.store';
-import { AddUserStore } from '../../store/add-user.store';
+import { AddUserStore } from '../../store/users/add-user.store';
+import { UnpaginatedRolesStore } from '../../store/roles/unpaginated-roles.store';
 
 @Component({
   selector: 'app-user-add',

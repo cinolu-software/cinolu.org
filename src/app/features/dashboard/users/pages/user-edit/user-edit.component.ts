@@ -7,11 +7,11 @@ import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserStore } from '../../store/user.store';
+import { UserStore } from '../../store/users/user.store';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { UnpaginatedRolesStore } from '../../../roles/store/unpaginated-roles.store';
-import { UpdateUserStore } from '../../store/update-user.store';
+import { UpdateUserStore } from '../../store/users/update-user.store';
+import { UnpaginatedRolesStore } from '../../store/roles/unpaginated-roles.store';
 
 @Component({
   selector: 'app-user-edit',

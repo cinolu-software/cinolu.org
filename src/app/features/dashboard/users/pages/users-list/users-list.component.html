@@ -34,7 +34,7 @@
               <i-lucide [name]="icons.download" class="size-4" />
             }
           </p-button>
-          <p-button [severity]="'secondary'" [size]="'small'" [routerLink]="'/dashboard/users/add'">
+          <p-button [severity]="'secondary'" [size]="'small'" [routerLink]="'/dashboard/users/list/add'">
             <i-lucide [name]="icons.plus" class="size-4" />
             Ajouter un utilisateur
           </p-button>
@@ -114,7 +114,7 @@
                 </td>
                 <td class="px-6 py-2">
                   <div class="flex items-center gap-2">
-                    <a [routerLink]="['/dashboard/users/edit', user.email]">
+                    <a [routerLink]="['/dashboard/users/list/edit', user.email]">
                       <i-lucide [name]="icons.edit" class="size-4" />
                     </a>
                     <button class="text-red-500" (click)="onDeleteUser(user.id, $event)">

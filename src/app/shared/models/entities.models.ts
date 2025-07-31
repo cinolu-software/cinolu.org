@@ -127,6 +127,7 @@ export interface ICategory extends IBase {
 
 export interface IRole extends IBase {
   name: string;
+  label: string;
 }
 
 export interface IPosition extends IBase {
