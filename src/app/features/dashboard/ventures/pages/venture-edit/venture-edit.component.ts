@@ -42,8 +42,8 @@ export class EditVentureComponent {
   form: FormGroup;
   sectors = SECTORS;
   stages = STAGES;
-  logoUrl = `${environment.apiUrl}enterprises/add-logo/`;
-  coverUrl = `${environment.apiUrl}enterprises/add-cover/`;
+  logoUrl = `${environment.apiUrl}ventures/add-logo/`;
+  coverUrl = `${environment.apiUrl}ventures/add-cover/`;
 
   constructor() {
     this.form = this.#fb.group({
@@ -61,11 +61,11 @@ export class EditVentureComponent {
       stage: ['']
     });
     effect(() => {
-      const enterprise = this.store.venture();
-      if (!enterprise) return;
+      const venture = this.store.venture();
+      if (!venture) return;
       this.form.patchValue({
-        ...enterprise,
-        founded_at: new Date(enterprise.founded_at)
+        ...venture,
+        founded_at: new Date(venture.founded_at)
       });
     });
   }

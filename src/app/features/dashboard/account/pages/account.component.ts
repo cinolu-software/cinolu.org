@@ -59,7 +59,7 @@ export class AccountComponent implements OnInit {
     console.log(user);
     this.infoForm.patchValue({
       ...user,
-      birth_date: new Date(user.birth_date || '')
+      birth_date: user.birth_date && new Date(user.birth_date)
     });
   }
 

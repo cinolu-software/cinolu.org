@@ -53,7 +53,7 @@ export class VenturesListComponent implements OnInit {
   updateRoute(): void {
     const { page } = this.queryParams();
     const queryParams = { page };
-    this.#router.navigate(['/dashboard/enterprises'], { queryParams });
+    this.#router.navigate(['/dashboard/ventures/list'], { queryParams });
   }
 
   updateRouteAndEnterprises(): void {
