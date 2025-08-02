@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { STATS } from '../../data/stats.data';
-import { HandCoins, Lightbulb, LucideAngularModule, MoveRight } from 'lucide-angular';
+import { HandCoins, Lightbulb, LucideAngularModule, MoveUpRight } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
+import { REASONS } from '../../data/reasons-join-us.data';
 
 @Component({
   selector: 'app-why-join-us',
@@ -11,9 +12,10 @@ import { ButtonModule } from 'primeng/button';
 })
 export class WhyJoinUsComponent {
   stats = STATS;
+  reason = REASONS;
   icons = {
     lightbulb: Lightbulb,
-    arrowFlesh: MoveRight,
+    moveUp: MoveUpRight,
     donate: HandCoins
   };
 }
