@@ -4,12 +4,12 @@ import { HandCoins, Lightbulb, LucideAngularModule, MoveUpRight, User, UserPlus 
 import { ButtonModule } from 'primeng/button';
 import { REASONS } from '../../data/reasons-join-us.data';
 import { CountUpDirective } from '../../../../shared/directives/count-up.directive';
-import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { RouterLink } from '@angular/router';
+import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 
 @Component({
   selector: 'app-why-join-us',
-  imports: [LucideAngularModule, ButtonModule, CountUpDirective, FadeInOnScrollDirective, RouterLink],
+  imports: [LucideAngularModule, ButtonModule, CountUpDirective, RouterLink, FadeInOnScrollDirective],
   templateUrl: './why-join-us.component.html',
   styles: ``
 })

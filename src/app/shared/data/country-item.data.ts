@@ -1,4 +1,9 @@
-export const countryCode = [
+interface ICountryCode {
+  name: string;
+  code: string;
+}
+
+export const COUNTRY_CODE: ICountryCode[] = [
   { name: 'Congo-Kinshasa', code: '+243' },
   { name: 'Afghanistan', code: '+93' },
   { name: 'Afrique du Sud', code: '+27' },
