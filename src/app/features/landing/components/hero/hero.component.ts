@@ -4,7 +4,7 @@ import { STATS } from '../../data/stats.data';
 import { LucideAngularModule, Lightbulb, MoveRight, HandCoins } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { titlesItems } from '../../data/title.data';
+import { TITLE_ITEMS } from '../../data/title.data';
 
 @Component({
   selector: 'app-hero',
@@ -28,7 +28,7 @@ export class HeroComponent implements OnInit, OnDestroy {
     donate: HandCoins
   };
 
-  rotatingTitles = titlesItems;
+  rotatingTitles = TITLE_ITEMS;
 
   currentTitleIndex = 0;
   currentTitle = this.rotatingTitles[0];
