@@ -1,10 +1,10 @@
-import { Component, Inject, PLATFORM_ID, OnInit, OnDestroy } from '@angular/core';
+import { Component, PLATFORM_ID, OnInit, OnDestroy, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { STATS } from '../../data/stats.data';
-import { LucideAngularModule, Lightbulb, MoveRight, HandCoins } from 'lucide-angular';
+import { Lightbulb, MoveRight, HandCoins, LucideAngularModule } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { titlesItems } from '../../data/title.data';
+import { TITLE_ITEMS } from '../../data/title.data';
 
 @Component({
   selector: 'app-hero',
@@ -21,25 +21,17 @@ import { titlesItems } from '../../data/title.data';
   ]
 })
 export class HeroComponent implements OnInit, OnDestroy {
+  #intervalId: ReturnType<typeof setInterval> | undefined;
+  #platformId = inject(PLATFORM_ID);
   stats = STATS;
-  icons = {
-    lightbulb: Lightbulb,
-    arrowFlesh: MoveRight,
-    donate: HandCoins
-  };
-
-  rotatingTitles = titlesItems;
-
+  icons = { lightbulb: Lightbulb, arrowFlash: MoveRight, donate: HandCoins };
+  rotatingTitles = TITLE_ITEMS;
   currentTitleIndex = 0;
   currentTitle = this.rotatingTitles[0];
 
-  private intervalId: ReturnType<typeof setInterval> | undefined;
-
-  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
-
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.intervalId = setInterval(() => {
+    if (isPlatformBrowser(this.#platformId)) {
+      this.#intervalId = setInterval(() => {
         this.currentTitleIndex = (this.currentTitleIndex + 1) % this.rotatingTitles.length;
         this.currentTitle = this.rotatingTitles[this.currentTitleIndex];
       }, 4000);
@@ -47,8 +39,6 @@ export class HeroComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
+    if (this.#intervalId) clearInterval(this.#intervalId);
   }
 }

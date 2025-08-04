@@ -3,7 +3,7 @@ interface title {
   second: string;
 }
 
-export const titlesItems: title[] = [
+export const TITLE_ITEMS: title[] = [
   {
     first: 'Accélérons les talents,',
     second: 'Connectons les opportunités.'

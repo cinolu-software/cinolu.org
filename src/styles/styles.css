@@ -47,6 +47,14 @@
     @apply rounded-full bg-primary-400;
   }
 
+  textarea {
+    @apply w-full;
+  }
+
+  input {
+    @apply w-full;
+  }
+
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;
