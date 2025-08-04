@@ -55,7 +55,7 @@
       </div>
 
       <div
-        class="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-xl border border-white/30 shadow-md rounded-xl px-6 py-4">
+        class="absolute w-64 z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-xl border border-white/30 shadow-md rounded-xl px-6 py-4">
         <div class="flex items-center gap-4">
           <i-lucide [name]="icons.users" class="text-white size-10 sm:size-12"></i-lucide>
           <div>
@@ -64,7 +64,7 @@
               [end]="5000"
               [duration]="2000"
               suffix=" +"
-              class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight"></p>
+              class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight"></p>
             <p class="text-white text-base uppercase">Membres</p>
           </div>
         </div>
@@ -94,8 +94,8 @@
         <button
           [routerLink]="'/join-us'"
           type="submit"
-          class="group relative z-10 flex items-center justify-center gap-2 px-6 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
-          Devenir membre
+          class="group relative z-10 flex items-center justify-center gap-2 px-6 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-sm">
+          Nous rejoindre
           <i-lucide [name]="icons.userPlus" class="mt-0.5 group-hover:translate-x-1 transition-all duration-300">
           </i-lucide>
         </button>
