@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
@@ -14,12 +14,13 @@ import { StepperModule } from 'primeng/stepper';
 import { TextareaModule } from 'primeng/textarea';
 import { DatePickerModule } from 'primeng/datepicker';
 import { COUNTRY_CODE } from '../../../../shared/data/country-item.data';
-import { GENDERS, MEMBER_ITEMS } from '../../../join-us/data/member.items';
+import { GENDERS } from '../../../join-us/data/member.items';
+import { SignUpRolesStore } from '../../store/sign-up-roles.store';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  providers: [SignUpStore, DatePipe],
+  providers: [SignUpStore, SignUpRolesStore],
   imports: [
     InputTextModule,
     PasswordModule,
@@ -44,7 +45,10 @@ export class AuthSignUpComponent {
   #formBuilder: FormBuilder = inject(FormBuilder);
   form: FormGroup;
   store = inject(SignUpStore);
-  datePipe = inject(DatePipe);
+  rolesStore = inject(SignUpRolesStore);
+  icons = { next: ArrowRight, previous: ArrowLeft };
+  genderItems = GENDERS;
+  countryItems = COUNTRY_CODE;
 
   constructor() {
     this.form = this.#formBuilder.group({
@@ -53,7 +57,7 @@ export class AuthSignUpComponent {
       phone_number: ['', [Validators.required, Validators.pattern(/^\+?[1-9]\d{1,14}$/)]],
       gender: ['', [Validators.required]],
       birth_date: ['', [Validators.required]],
-      profile: ['', [Validators.required]],
+      roles: ['', [Validators.required]],
       country: ['', [Validators.required]],
       city: ['', [Validators.required]],
       address: ['', [Validators.required, Validators.minLength(3)]],
@@ -61,31 +65,14 @@ export class AuthSignUpComponent {
       biography: ['', [Validators.required]]
     });
   }
-  memberItems = MEMBER_ITEMS;
-  icons = { next: ArrowRight, previous: ArrowLeft };
-
-  genderItems = GENDERS;
-  selectedGender = this.genderItems;
-  countryItem = COUNTRY_CODE;
-
-  statutItem = [
-    { id: 1, name: 'Étudiant·e' },
-    { id: 2, name: 'Entrepreneur·e' },
-    { id: 3, name: 'Volontaire' },
-    { id: 4, name: 'Chercheur·se' },
-    { id: 5, name: 'Autre' }
-  ];
 
   onSignUp(): void {
     if (this.form.invalid) return;
-
     const rawForm = this.form.value;
-
     const formattedForm = {
       ...rawForm,
-      birth_date: this.datePipe.transform(rawForm.birth_date, 'dd/MM/yyyy')
+      birth_date: new Date(rawForm.birth_date)
     };
-    console.log(formattedForm);
     this.store.signUp(formattedForm);
   }
 
