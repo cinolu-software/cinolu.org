@@ -11,9 +11,5 @@ export const TITLE_ITEMS: title[] = [
   {
     first: 'Construisons les villes',
     second: 'Intelligentes d’Afrique.'
-  },
-  {
-    first: 'Un espace numérique',
-    second: 'pour bâtir demain.'
   }
 ];

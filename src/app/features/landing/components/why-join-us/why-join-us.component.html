@@ -1,51 +1,105 @@
 <section
-  class="relative bg-grid min-h-screen flex flex-col justify-center items-center gap-10 px-4 sm:px-8 md:px-16 lg:px-32 py-15"
+  class="relative bg-grid px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-10"
   aria-label="Pourquoi rejoindre Cinolu ?"
   role="region">
-  <div class="text-center">
+  <div class="text-center fade-left-init" appAnimationsOnScroll>
     <h3
       class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-3 tracking-tight leading-tight">
       Pourquoi rejoindre <span class="text-primary-400">Cinolu ?</span>
     </h3>
-    <p class="mt-4 text-base max-w-3xl text-gray-600">
+    <p class="mt-4 text-base max-w-3xl text-gray-600 m-auto">
       Cinolu est un Hub d’innovation basé à Lubumbashi en RDC, dédié à l’autonomisation des jeunes, des femmes et des
       innovateurs à travers l’innovation, la technologie, l’entrepreneuriat, le développement durable et la
       collaboration, et ce depuis 2015
     </p>
   </div>
 
-  <div>
-    <h4 class="text-2xl mb-6 text-gray-600 font-extrabold pb-3 text-left">Notre impact en chiffres :</h4>
+  <div class="fade-right-init" appAnimationsOnScroll>
+    <h4 class="text-primary-500 font-medium text-xl md:text-2xl font-satoshi text-left my-10">
+      Notre impact en chiffres :
+    </h4>
     <div
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
       role="list"
       aria-label="Statistiques de notre plateforme">
       @for (s of stats; track $index) {
         <div
-          class="relative gap-2.5 md : 4 justify-center items-start p-6 rounded-lg hover:bg-black-700/20 bg-neutral-300/20 backdrop-blur-[1px] border border-neutral-400/30 w-full"
+          class="relative p-6 pt-10 rounded-lg bg-white border border-gray-200 w-full shadow-sm hover:shadow-md transition"
           role="listitem">
-          <i-lucide
-            [name]="s.icon"
-            class="absolute -left-2 -top-2 h-15 w-15 text-primary-400 text-sm bg-white rounded-full border border-primary-400/20 p-2"
-            aria-hidden="true"
-            focusable="false"></i-lucide>
-          <div class="text-2xl text-center sm:text-3xl lg:text-5xl font-black text-gray-600 mb-1">{{ s.value }}+</div>
-          <div class="text-base text-primary-400">
-            {{ s.label }}
+          <div
+            class="absolute -top-6 -left-6 flex items-center justify-center w-12 h-12 bg-white border border-primary-400 rounded-full shadow">
+            <i-lucide [name]="s.icon" class="text-primary-500 w-6 h-6" aria-hidden="true" focusable="false"></i-lucide>
           </div>
+
+          <p
+            appCountUp
+            [duration]="2000"
+            [end]="s.value"
+            class="text-3xl sm:text-4xl md:text-6xl font-black text-gray-800 text-center"></p>
+
+          <p class="text-center text-primary-600 mt-1 text-sm sm:text-base">
+            {{ s.label }}
+          </p>
         </div>
       }
     </div>
   </div>
-  <div>
-    <p
-      class="text-gray-500 text-base text-center leading-relaxed max-w-3xl mx-auto mt-6 border border-neutral-300 p-6 shadow-md hover:shadow-xl transition-shadow duration-30 rounded-lg">
-      Rejoignez un écosystème dynamique et contribuez à façonner l'avenir de la région avec d’autres change-makers comme
-      vous !
-    </p>
 
-    <div class="flex justify-center mt-6">
-      <p-button label="En savoir plus sur Cinolu" variant="outlined" severity="secondary" />
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center py-20">
+    <div class="relative h-80 sm:h-96 lg:h-[32rem]" appAnimationsOnScroll>
+      <div class="relative w-full h-full overflow-hidden rounded-xl shadow-lg">
+        <img
+          src="/images/joinUs.jpg"
+          alt="Join Us"
+          class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105" />
+      </div>
+
+      <div
+        class="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-xl border border-white/30 shadow-md rounded-xl px-6 py-4">
+        <div class="flex items-center gap-4">
+          <i-lucide [name]="icons.users" class="text-white size-10 sm:size-12"></i-lucide>
+          <div>
+            <p
+              appCountUp
+              [end]="5000"
+              [duration]="2000"
+              suffix=" +"
+              class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight"></p>
+            <p class="text-white text-base uppercase">Membres</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center justify-center gap-2 fade-right-init" appAnimationsOnScroll>
+      <div class="grid grid-cols-1">
+        <p class="text-primary-500 font-light font-satoshi text-xl md:text-2xl text-center mb-7">
+          Rejoignez un écosystème dynamique et contribuez à façonner l’avenir de la région avec d’autres change-makers
+          comme vous.
+        </p>
+
+        @for (item of reason; track $index) {
+          <div
+            class="p-4 flex items-center flex-row-reverse justify-between lg:px-10 bg-white/50 backdrop-blur-[2px] border border-gray-200 rounded-full mt-3 transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
+            <i-lucide stroke="4" [name]="icons.moveUp" class="bg-primary-500 text-2xl text-white p-1 rounded-full">
+            </i-lucide>
+            <h5 class="text-base font-semibold text-gray-900">
+              {{ item }}
+            </h5>
+          </div>
+        }
+      </div>
+
+      <div class="w-full flex justify-center md:justify-start mt-4">
+        <button
+          [routerLink]="'/join-us'"
+          type="submit"
+          class="group relative z-10 flex items-center justify-center gap-2 px-6 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+          Devenir membre
+          <i-lucide [name]="icons.userPlus" class="mt-0.5 group-hover:translate-x-1 transition-all duration-300">
+          </i-lucide>
+        </button>
+      </div>
     </div>
   </div>
 </section>

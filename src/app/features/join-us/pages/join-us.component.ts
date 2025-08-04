@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { PasswordModule } from 'primeng/password';
 import { SelectModule } from 'primeng/select';
-import { countryCode } from '../../../shared/data/country-item.data';
+import { COUNTRY_CODE } from '../../../shared/data/country-item.data';
 import { StepperModule } from 'primeng/stepper';
 import { DatePickerModule } from 'primeng/datepicker';
 import { TextareaModule } from 'primeng/textarea';
@@ -38,7 +38,7 @@ export class JoinUsComponent {
 
   genderItems = GENDERS;
   selectedGender = this.genderItems;
-  countryItem = countryCode;
+  countryItem = COUNTRY_CODE;
   statutItem = [
     { id: 1, name: 'Étudiant·e' },
     { id: 2, name: 'Entrepreneur·e' },

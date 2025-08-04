@@ -24,8 +24,14 @@ export class HeroComponent implements OnInit, OnDestroy {
   #intervalId: ReturnType<typeof setInterval> | undefined;
   #platformId = inject(PLATFORM_ID);
   stats = STATS;
-  icons = { lightbulb: Lightbulb, arrowFlash: MoveRight, donate: HandCoins };
+  icons = {
+    lightbulb: Lightbulb,
+    arrowFlesh: MoveRight,
+    donate: HandCoins
+  };
+
   rotatingTitles = TITLE_ITEMS;
+
   currentTitleIndex = 0;
   currentTitle = this.rotatingTitles[0];
 

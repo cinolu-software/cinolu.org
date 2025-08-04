@@ -7,10 +7,6 @@ interface IMemberItem {
   icon: LucideIconData;
 }
 
-interface IGender {
-  name: string;
-  value: string;
-}
 export const MEMBER_ITEMS: IMemberItem[] = [
   {
     id: 0,
@@ -50,21 +46,4 @@ export const MEMBER_ITEMS: IMemberItem[] = [
   }
 ];
 
-export const GENDERS: IGender[] = [
-  {
-    name: 'Femme',
-    value: 'M'
-  },
-  {
-    name: 'Homme',
-    value: 'H'
-  },
-  {
-    name: 'Autre',
-    value: 'A'
-  },
-  {
-    name: 'Non renseigné',
-    value: 'N'
-  }
-];
+export const GENDERS = ['Femme', 'Homme', 'Autre', 'Non renseigné'];
