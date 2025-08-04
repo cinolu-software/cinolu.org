@@ -40,7 +40,9 @@ export class AddUserComponent {
       email: ['', [Validators.required]],
       name: ['', Validators.required],
       phone_number: ['', Validators.required],
-      address: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      birth_date: ['', Validators.required],
       roles: [[], Validators.required]
     });
   }

@@ -27,7 +27,7 @@ export const AddUserStore = signalStore(
         switchMap((userData) => {
           return _http.post<{ data: IUser }>(`users`, userData).pipe(
             map(({ data }) => {
-              _router.navigate(['/dashboard/users']);
+              _router.navigate(['/dashboard/users/list']);
               _toast.showSuccess('Utilisateur ajouté avec succès');
               patchState(store, { isLoading: false, user: data });
             }),
