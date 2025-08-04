@@ -1,10 +1,12 @@
 <section class="min-h-[105vh] text-gray-600 mt-16">
   <div class="py-10 px-6 relative bg-white rounded-lg">
-    <button class="text-primary-400 hover:underline flex items-center gap-2 mb-6" (click)="onGoBack()">
-      <i-lucide [name]="icons.back" class="size-4" />
-      Revenir en arrière
-    </button>
-    <h5 class="text-xl font-bold text-gray-900 mb-6">Ajouter un utilisateur</h5>
+    <div class="mb-6">
+      <button class="text-primary-400 hover:underline flex items-center gap-2 mb-1" (click)="onGoBack()">
+        <i-lucide [name]="icons.back" class="size-4" />
+        Revenir en arrière
+      </button>
+      <h5 class="text-xl font-bold text-gray-900">Ajouter un utilisateur</h5>
+    </div>
     <form [formGroup]="addUserForm" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6" (ngSubmit)="onAddUser()">
       <div class="flex flex-col gap-1.5">
         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
@@ -19,8 +21,16 @@
         <input pInputText id="phone_number" formControlName="phone_number" />
       </div>
       <div class="flex flex-col gap-1.5">
-        <label for="address" class="block text-sm font-medium text-gray-700">Adresse</label>
-        <input pInputText id="address" formControlName="address" />
+        <label for="city" class="block text-sm font-medium text-gray-700">Ville</label>
+        <input pInputText id="city" formControlName="city" />
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="country" class="block text-sm font-medium text-gray-700">Pays</label>
+        <input pInputText id="country" formControlName="country" />
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="birth_date" class="block text-sm font-medium text-gray-700">Date de naissance</label>
+        <input pInputText id="birth_date" formControlName="birth_date" />
       </div>
       <div class="flex flex-col gap-1.5">
         <label for="role" class="block text-sm font-medium text-gray-700">Rôle</label>
