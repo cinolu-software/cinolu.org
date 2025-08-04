@@ -1,101 +1,126 @@
 <app-auth-card
   title="S'inscrire"
   description="Créez un compte pour accéder à toutes les fonctionnalités de notre plateforme.">
-  <form class="flex flex-col gap-4" (ngSubmit)="onSignUp()" [formGroup]="form">
-    <div class="flex flex-col gap-1.5">
-      <label for="name" class="font-medium">Nom complet</label>
-      <input pInputText id="name" formControlName="name" autocomplete="off" />
-    </div>
-    <div class="flex flex-col gap-1.5">
-      <label for="email" class="font-medium">Adresse e-mail</label>
-      <input pInputText type="email" id="email" formControlName="email" autocomplete="on" />
-    </div>
+  <div class="card flex">
+    <p-stepper [value]="1" class="basis-[50rem]">
+      <p-step-list>
+        <p-step [value]="1">Première Etape</p-step>
+        <p-step [value]="2">Deuxième Etape</p-step>
+        <p-step [value]="3">Troisième Etape</p-step>
+      </p-step-list>
+      <p-step-panels>
+        <p-step-panel [value]="1">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="flex flex-col gap-4">
+              <form [formGroup]="form" class="space-y-3">
+                <div class="flex flex-col gap-1.5">
+                  <label for="name">Nom complet</label>
+                  <input pInputText id="name" formControlName="name" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label for="email">Adresse e-mail</label>
+                  <input pInputText id="email" type="email" formControlName="email" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label for="phone">Téléphone</label>
+                  <input pInputText id="phone" formControlName="phone_number" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label for="gender">Genre</label>
+                  <p-select
+                    inputId="gender"
+                    [options]="genderItems"
+                    formControlName="gender"
+                    [checkmark]="true"
+                    [showClear]="true"
+                    placeholder="Sélectionnez votre genre" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label for="birthdate">Date de naissance</label>
+                  <p-datepicker
+                    inputId="birthdate"
+                    formControlName="birth_date"
+                    showIcon
+                    iconDisplay="input"
+                    dateFormat="dd.mm.yy" />
+                </div>
+              </form>
+            </div>
+            <div class="flex pt-6 justify-end">
+              <p-button label="Suivant" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(2)" />
+            </div>
+          </ng-template>
+        </p-step-panel>
 
-    <div class="flex flex-col gap-1.5">
-      <label for="phone" class="font-medium">Numéro de téléphone</label>
-      <input pInputText id="phone" formControlName="phone_number" autocomplete="on" />
-    </div>
-    <div class="flex flex-col gap-1.5">
-      <label for="gender" class="font-medium">Genre</label>
-      <p-select
-        inputId="gender"
-        [options]="genderItems"
-        formControlName="gender"
-        [checkmark]="true"
-        [showClear]="true"
-        placeholder="Sélectionnez votre genre"
-        class="w-full" />
-    </div>
-
-    <div class="flex flex-col gap-1.5">
-      <label for="birthdate" class="font-medium">Date de naissance</label>
-      <p-datepicker
-        inputId="birthdate"
-        formControlName="birth_date"
-        showIcon
-        iconDisplay="input"
-        dateFormat="dd.mm.yy" />
-    </div>
-    <div class="flex flex-col gap-1.5">
-      <label for="statut" class="font-medium">Statut</label>
-      <p-select
-        inputId="statut"
-        [options]="statutItem"
-        optionValue="name"
-        formControlName="profile"
-        optionLabel="name"
-        class="w-full"
-        placeholder="Sélectionnez un statut" />
-    </div>
-
-    <div class="flex flex-col gap-1.5">
-      <label for="country" class="font-medium">Pays</label>
-      <p-select
-        inputId="country"
-        [options]="countryItem"
-        optionValue="name"
-        formControlName="country"
-        optionLabel="name"
-        [checkmark]="true"
-        [showClear]="true"
-        placeholder="Sélectionnez votre pays"
-        class="w-full" />
-    </div>
-    <div class="flex flex-col gap-1.5">
-      <label for="address" class="font-medium">Adresse de résidence</label>
-      <input pInputText id="address" formControlName="address" autocomplete="on" />
-    </div>
-
-    <div class="flex flex-col gap-1.5">
-      <label for="city" class="font-medium">Ville</label>
-      <input pInputText id="city" formControlName="city" autocomplete="off" />
-    </div>
-    <div class="flex flex-col gap-1.5">
-      <label for="biography" class="font-medium">Biographie</label>
-      <textarea
-        pTextarea
-        id="biography"
-        formControlName="biography"
-        rows="1"
-        cols="30"
-        style="resize: none"
-        class="h-full">
-      </textarea>
-    </div>
-
-    <div class="flex flex-col gap-1.5">
-      <label for="reason" class="font-medium">Pourquoi rejoindre Cinolu ?</label>
-      <textarea pTextarea id="reason" formControlName="reason" rows="5" cols="30" style="resize: none" class="h-full">
-      </textarea>
-    </div>
-
-    <button
-      pButton
-      class="w-full"
-      [loading]="store.isLoading()"
-      [disabled]="store.isLoading() || form.invalid"
-      type="submit">
-      S'inscrire
-    </button>
-  </form>
+        <p-step-panel [value]="2">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="flex flex-col gap-4">
+              <form [formGroup]="form" class="space-y-3">
+                <div class="flex flex-col gap-1.5">
+                  <label for="statut">Statut</label>
+                  <p-select
+                    inputId="statut"
+                    [options]="statutItem"
+                    optionValue="name"
+                    formControlName="profile"
+                    optionLabel="name"
+                    placeholder="Sélectionnez un statut" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label for="country">Pays</label>
+                  <p-select
+                    inputId="country"
+                    [options]="countryItem"
+                    optionValue="name"
+                    formControlName="country"
+                    optionLabel="name"
+                    placeholder="Sélectionnez votre pays" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label for="address">Adresse</label>
+                  <input pInputText id="address" formControlName="address" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label for="city">Ville</label>
+                  <input pInputText id="city" formControlName="city" />
+                </div>
+              </form>
+            </div>
+            <div class="flex pt-6 justify-between">
+              <p-button label="Retour" icon="pi pi-arrow-left" (onClick)="activateCallback(1)" />
+              <p-button label="Suivant" icon="pi pi-arrow-right" (onClick)="activateCallback(3)" />
+            </div>
+          </ng-template>
+        </p-step-panel>
+        <p-step-panel [value]="3">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="flex flex-col gap-4">
+              <form [formGroup]="form" (ngSubmit)="onSignUp()" class="space-y-3">
+                <div class="flex flex-col gap-1.5">
+                  <label for="biography">Biographie</label>
+                  <textarea pTextarea id="biography" formControlName="biography" rows="3" style="resize: none">
+                  </textarea>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label for="reason">Pourquoi rejoindre Cinolu ?</label>
+                  <textarea pTextarea id="reason" formControlName="reason" rows="4" style="resize: none"> </textarea>
+                </div>
+                <button
+                  pButton
+                  type="submit"
+                  class="w-full"
+                  [loading]="store.isLoading()"
+                  [disabled]="store.isLoading() || form.invalid">
+                  S'inscrire
+                </button>
+              </form>
+            </div>
+            <div class="flex pt-6 justify-start">
+              <p-button label="Retour" icon="pi pi-arrow-left" (onClick)="activateCallback(2)" />
+            </div>
+          </ng-template>
+        </p-step-panel>
+      </p-step-panels>
+    </p-stepper>
+  </div>
 </app-auth-card>
