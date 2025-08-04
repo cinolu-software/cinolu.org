@@ -24,7 +24,6 @@ export const UserStore = signalStore(
         switchMap((email) => {
           return _http.get<{ data: IUser }>(`users/${email}`).pipe(
             map(({ data }) => {
-              console.log('User data:', data);
               patchState(store, { isLoading: false, user: data });
             }),
             catchError(() => {

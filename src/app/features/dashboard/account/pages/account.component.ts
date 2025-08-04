@@ -56,7 +56,6 @@ export class AccountComponent implements OnInit {
   ngOnInit(): void {
     const user = this.store.user();
     if (!user) return;
-    console.log(user);
     this.infoForm.patchValue({
       ...user,
       birth_date: user.birth_date && new Date(user.birth_date)
