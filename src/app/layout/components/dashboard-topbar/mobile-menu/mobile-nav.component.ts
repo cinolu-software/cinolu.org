@@ -2,16 +2,15 @@ import { Component, computed, inject, input, output, signal } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Home, Menu, X, ChevronDown } from 'lucide-angular';
-import { DASHBOARD_LINKS, ILink } from '../../../data/links.data';
+import { USER_LINKS, ILink } from '../../../data/links.data';
 import { IUser } from '../../../../shared/models/entities.models';
 import { filter } from 'rxjs';
 import { AuthStore } from '../../../../core/auth/auth.store';
-import { HasRoleDirective } from '../../../../shared/directives/has-role.directive';
 
 @Component({
   selector: 'app-mobile-nav',
   templateUrl: './mobile-nav.component.html',
-  imports: [LucideAngularModule, HasRoleDirective, RouterModule, CommonModule]
+  imports: [LucideAngularModule, RouterModule, CommonModule]
 })
 export class MobileNavComponent {
   user = input.required<IUser | null>();
@@ -20,7 +19,7 @@ export class MobileNavComponent {
   icons = { menu: Menu, close: X, home: Home, chevronDown: ChevronDown };
   #router = inject(Router);
   style = input<string>();
-  links = signal<ILink[]>(DASHBOARD_LINKS);
+  links = signal<ILink[]>(USER_LINKS);
   currentUrl = signal(this.#router.url);
   toggleTab = signal<string | null>(null);
   authStore = inject(AuthStore);

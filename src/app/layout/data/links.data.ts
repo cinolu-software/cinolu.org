@@ -50,19 +50,13 @@ export const MY_CINOLU_LINKS: ILink[] = [
   }
 ];
 
-export const DASHBOARD_LINKS: ILink[] = [
+export const ADMIN_LINKS: ILink[] = [
   {
     name: 'Mes informations',
     path: '/dashboard',
     icon: Info,
     requiredRole: RoleEnum.User,
     exactUrl: true
-  },
-  {
-    name: 'Mes enteprises',
-    path: '/dashboard/ventures/list',
-    requiredRole: RoleEnum.User,
-    icon: BriefcaseBusiness
   },
   {
     name: 'Les programmes',
@@ -117,6 +111,22 @@ export const DASHBOARD_LINKS: ILink[] = [
         path: '/dashboard/events/categories'
       }
     ]
+  }
+];
+
+export const USER_LINKS: ILink[] = [
+  {
+    name: 'Mes informations',
+    path: '/dashboard',
+    icon: Info,
+    requiredRole: RoleEnum.User,
+    exactUrl: true
+  },
+  {
+    name: 'Mes entreprises',
+    path: '/dashboard/ventures/list',
+    requiredRole: RoleEnum.User,
+    icon: BriefcaseBusiness
   }
 ];
 
