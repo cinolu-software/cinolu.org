@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -11,7 +11,16 @@ import { ForgotPasswordStore } from '../../store/forgot-password.store';
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   providers: [ForgotPasswordStore],
-  imports: [FormsModule, ReactiveFormsModule, ButtonModule, InputText, RouterModule, CommonModule, AuthCardComponent]
+  imports: [
+    FormsModule,
+    RouterLink,
+    ReactiveFormsModule,
+    ButtonModule,
+    InputText,
+    RouterModule,
+    CommonModule,
+    AuthCardComponent
+  ]
 })
 export class AuthForgotPasswordComponent {
   #formBuilder = inject(FormBuilder);
