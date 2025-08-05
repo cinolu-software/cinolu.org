@@ -8,14 +8,18 @@ import { environment } from '../../../../../environments/environment';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 import { SignUpStore } from '../../store/sign-up.store';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
-import { SelectModule } from 'primeng/select';
+import { Check, ChevronsLeft, ChevronsRight, LucideAngularModule } from 'lucide-angular';
 import { StepperModule } from 'primeng/stepper';
 import { TextareaModule } from 'primeng/textarea';
 import { DatePickerModule } from 'primeng/datepicker';
 import { COUNTRY_CODE } from '../../../../shared/data/country-item.data';
 import { GENDERS } from '../../../join-us/data/member.items';
 import { SignUpRolesStore } from '../../store/sign-up-roles.store';
+import { MultiSelect } from 'primeng/multiselect';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { SelectChangeEvent, SelectModule } from 'primeng/select';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -26,6 +30,7 @@ import { SignUpRolesStore } from '../../store/sign-up-roles.store';
     PasswordModule,
     ButtonModule,
     FormsModule,
+    RouterLink,
     ReactiveFormsModule,
     AuthCardComponent,
     LucideAngularModule,
@@ -34,10 +39,14 @@ import { SignUpRolesStore } from '../../store/sign-up-roles.store';
     FloatLabelModule,
     PasswordModule,
     SelectModule,
+    MultiSelect,
     StepperModule,
     DatePickerModule,
     TextareaModule,
     CommonModule,
+    LucideAngularModule,
+    InputGroupModule,
+    InputGroupAddonModule,
     ReactiveFormsModule
   ]
 })
@@ -46,21 +55,23 @@ export class AuthSignUpComponent {
   form: FormGroup;
   store = inject(SignUpStore);
   rolesStore = inject(SignUpRolesStore);
-  icons = { next: ArrowRight, previous: ArrowLeft };
   genderItems = GENDERS;
   countryItems = COUNTRY_CODE;
+  selectedCountryCode = '';
+  icons = { next: ChevronsRight, previous: ChevronsLeft, check: Check };
 
   constructor() {
     this.form = this.#formBuilder.group({
-      name: ['', [Validators.minLength(5)]],
+      name: ['', [Validators.required, Validators.minLength(5)]],
       email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      password_confirm: ['', [Validators.required, Validators.minLength(6)]],
       phone_number: ['', [Validators.required, Validators.pattern(/^\+?[1-9]\d{1,14}$/)]],
       gender: ['', [Validators.required]],
       birth_date: ['', [Validators.required]],
       roles: ['', [Validators.required]],
       country: ['', [Validators.required]],
       city: ['', [Validators.required]],
-      address: ['', [Validators.required, Validators.minLength(3)]],
       reason: ['', [Validators.required]],
       biography: ['', [Validators.required]]
     });
@@ -68,12 +79,16 @@ export class AuthSignUpComponent {
 
   onSignUp(): void {
     if (this.form.invalid) return;
-    const rawForm = this.form.value;
-    const formattedForm = {
-      ...rawForm,
-      birth_date: new Date(rawForm.birth_date)
-    };
-    this.store.signUp(formattedForm);
+    this.store.signUp({
+      ...this.form.value,
+      phone_number: this.selectedCountryCode + this.form.value.phone_number,
+      birth_date: new Date(this.form.value.birth_date)
+    });
+  }
+
+  onSelectCountry(event: SelectChangeEvent): void {
+    const value = event.value;
+    this.selectedCountryCode = this.countryItems.find((item) => item.name === value)?.code || '';
   }
 
   signinWithGoogle(): void {

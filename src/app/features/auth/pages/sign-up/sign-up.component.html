@@ -1,141 +1,143 @@
 <app-auth-card
   title="S'inscrire"
   description="Créez un compte pour accéder à toutes les fonctionnalités de notre plateforme.">
-  <div class="flex justify-center px-4 md:pr-16 md:px-0 max-w-md md:w-md w-full">
-    <form [formGroup]="form" class="space-y-3" (ngSubmit)="onSignUp()">
-      <p-stepper [value]="1" class="w-full">
-        <p-step-list>
-          <p-step [value]="1">Etape I</p-step>
-          <p-step [value]="2">Etape II</p-step>
-          <p-step [value]="3">Etape III</p-step>
-        </p-step-list>
-        <p-step-panels>
-          <p-step-panel [value]="1">
-            <ng-template #content let-activateCallback="activateCallback">
-              <div class="flex flex-col gap-4">
-                <div class="flex flex-col gap-1.5">
-                  <label for="name">Nom complet</label>
-                  <input pInputText id="name" formControlName="name" />
-                </div>
-                <div class="flex flex-col gap-1.5">
-                  <label for="email">Adresse e-mail</label>
-                  <input pInputText id="email" type="email" formControlName="email" />
-                </div>
-                <div class="flex flex-col gap-1.5">
-                  <label for="phone">Téléphone</label>
-                  <input pInputText id="phone" formControlName="phone_number" />
-                </div>
-                <div class="flex flex-col gap-1.5">
-                  <label for="gender">Genre</label>
-                  <p-select
-                    inputId="gender"
-                    [options]="genderItems"
-                    formControlName="gender"
-                    [showClear]="true"
-                    placeholder="Sélectionnez votre genre" />
-                </div>
-              </div>
-              <div class="flex pt-6 justify-end">
-                <p-button
-                  label="Suivant"
-                  [outlined]="true"
-                  size="small"
-                  icon="pi pi-arrow-right"
-                  iconPos="right"
-                  (onClick)="activateCallback(2)" />
-              </div>
-            </ng-template>
-          </p-step-panel>
-          <p-step-panel [value]="2">
-            <ng-template #content let-activateCallback="activateCallback">
-              <div class="flex flex-col gap-4">
-                <div class="flex flex-col gap-1.5">
-                  <label for="birthdate">Date de naissance</label>
-                  <p-datepicker
-                    inputId="birthdate"
-                    formControlName="birth_date"
-                    showIcon
-                    iconDisplay="input"
-                    dateFormat="dd.mm.yy" />
-                </div>
-                <div class="flex flex-col gap-1.5">
-                  <label for="statut">Statut</label>
-                  <p-select
-                    [options]="rolesStore.roles()"
-                    inputId="statut"
-                    optionValue="id"
-                    optionLabel="label"
-                    formControlName="roles"
-                    placeholder="Sélectionnez un statut" />
-                </div>
-                <div class="flex flex-col gap-1.5">
-                  <label for="country">Pays</label>
-                  <p-select
-                    [editable]="true"
-                    inputId="country"
-                    [options]="countryItems"
-                    optionValue="name"
-                    formControlName="country"
-                    optionLabel="name"
-                    placeholder="Sélectionnez votre pays" />
-                </div>
-                <div class="flex flex-col gap-1.5">
-                  <label for="address">Adresse</label>
-                  <input pInputText id="address" formControlName="address" />
-                </div>
-              </div>
-              <div class="flex pt-6 justify-between">
-                <p-button
-                  label="Retour"
-                  [outlined]="true"
-                  size="small"
-                  icon="pi pi-arrow-left"
-                  (onClick)="activateCallback(1)" />
-                <p-button
-                  label="Suivant"
-                  [outlined]="true"
-                  size="small"
-                  icon="pi pi-arrow-right"
-                  (onClick)="activateCallback(3)" />
-              </div>
-            </ng-template>
-          </p-step-panel>
-          <p-step-panel [value]="3">
-            <ng-template #content let-activateCallback="activateCallback">
-              <div class="flex flex-col gap-4">
-                <div class="flex flex-col gap-1.5">
-                  <label for="city">Ville</label>
-                  <input pInputText id="city" formControlName="city" />
-                </div>
-                <div class="flex flex-col gap-1.5">
-                  <label for="biography">Biographie</label>
-                  <textarea pTextarea id="biography" formControlName="biography" rows="3" style="resize: none">
-                  </textarea>
-                </div>
-                <div class="flex flex-col gap-1.5">
-                  <label for="reason">Pourquoi rejoindre Cinolu ?</label>
-                  <textarea pTextarea id="reason" formControlName="reason" rows="4" style="resize: none"> </textarea>
-                </div>
-                <div class="flex justify-between items-center gap-4">
-                  <p-button
-                    label="Retour"
-                    [outlined]="true"
-                    size="small"
-                    icon="pi pi-arrow-left"
-                    (onClick)="activateCallback(2)" />
-                  <button
-                    pButton
-                    type="submit"
-                    [loading]="store.isLoading()"
-                    [disabled]="store.isLoading() || form.invalid">
-                    S'inscrire
-                  </button>
-                </div>
-              </div>
-            </ng-template>
-          </p-step-panel>
-        </p-step-panels>
-      </p-stepper>
-    </form>
+  <div class="mb-5">
+    <span class="text-gray-700">Vous avez déjà un compte? </span>
+    <a
+      class="text-md font-medium text-primary-400 underline hover:text-primary-500 duration-300 hover:text-primary-500"
+      [routerLink]="['/sign-in']"
+      >Se connecter</a
+    >
   </div>
+  <form [formGroup]="form" class="flex flex-col" (ngSubmit)="onSignUp()">
+    <p-stepper [value]="1" class="w-full">
+      <p-step-list>
+        <p-step [value]="1" />
+        <p-step [value]="2" />
+        <p-step [value]="3" />
+      </p-step-list>
+      <p-step-panels>
+        <p-step-panel [value]="1">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label for="name">Nom complet</label>
+                <input pInputText id="name" formControlName="name" autocomplete="off" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="email">Adresse e-mail</label>
+                <input pInputText id="email" type="email" formControlName="email" autocomplete="off" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="country">Pays</label>
+                <p-select
+                  (onChange)="onSelectCountry($event)"
+                  [inputId]="'country'"
+                  [options]="countryItems"
+                  [optionLabel]="'name'"
+                  [optionValue]="'name'"
+                  [showClear]="true"
+                  formControlName="country"
+                  autocomplete="off" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="email">Téléphone</label>
+                <p-inputgroup>
+                  <p-inputgroup-addon>{{ selectedCountryCode || '----' }} </p-inputgroup-addon>
+                  <input pInputText id="phone" formControlName="phone_number" autocomplete="off" />
+                </p-inputgroup>
+              </div>
+            </div>
+            <div class="flex pt-6 justify-end">
+              <p-button
+                [outlined]="true"
+                label="Suivant"
+                size="small"
+                iconPos="right"
+                (onClick)="activateCallback(2)" />
+            </div>
+          </ng-template>
+        </p-step-panel>
+        <p-step-panel [value]="2">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label for="birthdate">Date de naissance</label>
+                <p-datepicker
+                  [inputId]="'birthdate'"
+                  formControlName="birth_date"
+                  showIcon
+                  iconDisplay="input"
+                  autocomplete="off" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="roles">Statut</label>
+                <p-multi-select
+                  [options]="rolesStore.roles()"
+                  optionValue="id"
+                  optionLabel="label"
+                  formControlName="roles"
+                  formControlName="roles"
+                  [showClear]="true" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="gender">Genre</label>
+                <p-select
+                  [inputId]="'gender'"
+                  [options]="genderItems"
+                  formControlName="gender"
+                  [showClear]="true"
+                  autocomplete="off" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="city">Ville</label>
+                <input pInputText id="city" formControlName="city" autocomplete="off" />
+              </div>
+            </div>
+            <div class="flex pt-6 justify-between">
+              <p-button label="Retour" [outlined]="true" size="small" (onClick)="activateCallback(1)" />
+              <p-button label="Suivant" [outlined]="true" size="small" (onClick)="activateCallback(3)" />
+            </div>
+          </ng-template>
+        </p-step-panel>
+        <p-step-panel [value]="3">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label for="password">Mot de passe</label>
+                <p-password formControlName="password" [feedback]="false" [toggleMask]="true" [inputId]="'password'" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="password_confirm">Confirmer le mot de passe</label>
+                <p-password
+                  formControlName="password_confirm"
+                  [feedback]="false"
+                  [toggleMask]="true"
+                  [inputId]="'password_confirm'" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="biography">Biographie</label>
+                <textarea pTextarea id="biography" formControlName="biography" rows="4" autocomplete="off"></textarea>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="reason">Pourquoi rejoindre Cinolu ?</label>
+                <textarea pTextarea id="reason" formControlName="reason" rows="4" autocomplete="off"></textarea>
+              </div>
+              <div class="flex justify-between items-center gap-4">
+                <p-button label="Retour" [outlined]="true" size="small" (onClick)="activateCallback(2)" />
+                <button
+                  pButton
+                  type="submit"
+                  [size]="'small'"
+                  [loading]="store.isLoading()"
+                  [disabled]="store.isLoading() || form.invalid">
+                  S'inscrire
+                </button>
+              </div>
+            </div>
+          </ng-template>
+        </p-step-panel>
+      </p-step-panels>
+    </p-stepper>
+  </form>
 </app-auth-card>
