@@ -3,10 +3,11 @@ import { LucideAngularModule } from 'lucide-angular';
 import { CONTACT_ITEMS } from '../data/contact.data';
 import { FormsModule, NgForm } from '@angular/forms';
 import { COUNTRY_CODE } from '../../../shared/data/country-item.data';
+import { FadeInOnScrollDirective } from '../../../shared/directives/animations-on-scroll.directive';
 
 @Component({
   selector: 'app-contact-us',
-  imports: [LucideAngularModule, FormsModule],
+  imports: [LucideAngularModule, FormsModule, FadeInOnScrollDirective],
   standalone: true,
   templateUrl: './contact-us.component.html',
   styles: ``

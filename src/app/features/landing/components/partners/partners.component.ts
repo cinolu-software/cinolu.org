@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { PARTNERS, PARTNERS_CATEGORIES } from '../../data/partners.data';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 
 @Component({
   selector: 'app-partners',
-  imports: [NgOptimizedImage, CommonModule],
+  imports: [NgOptimizedImage, CommonModule, FadeInOnScrollDirective],
   templateUrl: './partners.component.html'
 })
 export class PartnersComponent {
