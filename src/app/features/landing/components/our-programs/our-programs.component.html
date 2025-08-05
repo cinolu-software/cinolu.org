@@ -1,5 +1,36 @@
-<p>our-programs works!</p>
-<p>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam officiis veniam rem nostrum quia repudiandae vitae
-  ducimus, nulla, voluptas vero sint pariatur quas cumque porro accusantium aliquam ut? Minus, voluptatum.
-</p>
+<section class="min-h-fit bg-primary-500 backdrop-blur-[1px] bg-grid items-center content-center" appAnimationsOnScroll>
+  <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 md:py-28">
+    <div class="mb-10">
+      <h3
+        class="text-3xl text-center sm:text-4xl lg:text-5xl text-white font-black font-satoshi mb-3 tracking-tight leading-tight">
+        Nos Programmes
+      </h3>
+      <p class="max-w-3xl text-center text-base text-white m-auto">
+        Chez Cinolu, nous croyons que chaque idée mérite un accompagnement adapté. C’est pourquoi nous avons conçu
+        plusieurs programmes complémentaires pour vous aider à passer de l’idée à l’impact, selon votre profil, vos
+        ambitions et votre stade de développement.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-4">
+      @for (p of programsItems; track $index) {
+        <div
+          class="flex flex-col justify-around bg-white p-4 md:p-6 max-w md:h-68 h-52 hover:shadow-lg transition-all duration-300 border border-gray-100 rounded-lg">
+          <div class="text-center space-y-2">
+            <h5 class="font-extrabold text-lg mb-2 text-gray-900">
+              {{ p.name }}
+            </h5>
+            <hr class="border-gray-200 my-3" />
+            <p class="text-sm text-gray-700">
+              {{ p.description }}
+            </p>
+          </div>
+          <a
+            [routerLink]="['/our-programs/', slugPath(p.path)]"
+            class="border border-primary-500 text-center py-2 mt-3 rounded-full text-primary-500 font-light hover:bg-primary-500 hover:text-white transition-colors duration-200">
+            {{ p.link }}
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</section>
