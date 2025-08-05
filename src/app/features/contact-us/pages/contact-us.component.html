@@ -1,5 +1,6 @@
 <section
-  class="min-h-[83.33vh] bg-grid px-6 sm:px-8 md:px-10 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 mt-10">
+  class="min-h-[83.33vh] bg-grid px-6 sm:px-8 md:px-10 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 mt-10"
+  appAnimationsOnScroll>
   <h3 class="text-center font-black text-gray-700 text-3xl sm:text-4xl lg:text-5xl mb-10">Contactez-Nous</h3>
 
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
@@ -13,7 +14,7 @@
             name="fullname"
             [(ngModel)]="formData.fullname"
             placeholder="Entrez votre nom"
-            class="p-3 bg-[#F6F6F6] border border-transparent focus:outline-none focus:border-primary-500 transition" />
+            class="p-3 bg-gray-200 border border-transparent focus:outline-none focus:border-primary-500 transition" />
         </div>
         <div class="flex flex-col gap-2">
           <label for="email" class="text-sm font-medium text-gray-700">Adresse email</label>
@@ -23,7 +24,7 @@
             [(ngModel)]="formData.email"
             id="email"
             placeholder="exemple@domaine.com"
-            class="p-3 bg-[#F6F6F6] border border-transparent focus:outline-none focus:border-primary-500 transition" />
+            class="p-3 bg-gray-100 border border-transparent focus:outline-none focus:border-primary-500 transition" />
         </div>
       </div>
 
@@ -36,7 +37,7 @@
               id="countryCode"
               name="countryCode"
               [(ngModel)]="formData.countryCode"
-              class="p-3 bg-[#F6F6F6] border border-transparent focus:outline-none focus:border-primary-500 transition text-gray-700 w-full"
+              class="p-3 bg-gray-100 border border-transparent focus:outline-none focus:border-primary-500 transition text-gray-700 w-full"
               aria-label="Code pays">
               <option value="">-- Choisissez votre pays --</option>
               @for (item of countryItems; track $index) {
@@ -54,7 +55,7 @@
             id="phone"
             name="phone"
             placeholder="Entrez votre numéro"
-            class="p-3 bg-[#F6F6F6] border border-transparent focus:outline-none focus:border-primary-500 transition" />
+            class="p-3 bg-gray-100 border border-transparent focus:outline-none focus:border-primary-500 transition" />
         </div>
       </div>
 
@@ -66,7 +67,7 @@
           [(ngModel)]="formData.message"
           rows="5"
           placeholder="Saisissez votre message"
-          class="p-3 bg-[#F6F6F6] border border-transparent focus:outline-none focus:border-primary-500 transition resize-none"></textarea>
+          class="p-3 bg-gray-100 border border-transparent focus:outline-none focus:border-primary-500 transition resize-none"></textarea>
       </div>
 
       <div class="pt-2 flex justify-center sm:justify-start">

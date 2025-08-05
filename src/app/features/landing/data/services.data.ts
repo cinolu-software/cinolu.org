@@ -1,4 +1,4 @@
-import { Lightbulb, Globe, BadgeCheck, LucideIconData } from 'lucide-angular';
+import { Lightbulb, Globe, LucideIconData, BarChart3, Rocket, Handshake } from 'lucide-angular';
 
 interface IService {
   title: string;
@@ -8,21 +8,28 @@ interface IService {
 
 export const SERVICES: IService[] = [
   {
-    title: 'Innovation',
-    description:
-      "Nous impulsons la créativité et le développement de solutions aux problématiques sociétales via l'open innovation.",
+    title: 'Innovative Solutions',
+    description: 'Identifier des solutions innovantes à des défis spécifiques',
     icon: Lightbulb
   },
   {
-    title: 'Ecosystème Building',
-    description:
-      "Nous formulons des projets et des plaidoyers pour des politiques publiques favorisant les acteurs de l'entrepreneuriat innovant.",
-    icon: Globe
+    title: 'Co-Creation de Startups',
+    description: 'Co-créer avec des startups ou talents locaux',
+    icon: Handshake
   },
   {
-    title: 'Capacity Building',
-    description:
-      "Nous mettons à disposition une gamme variée de workshops et d'activités adaptés aux jeunes entrepreneurs et aux mentors.",
-    icon: BadgeCheck
+    title: 'Innovation Challenges',
+    description: 'Lancer des appels à innovation ou défis thématiques',
+    icon: Rocket
+  },
+  {
+    title: 'Project Management',
+    description: 'Piloter des projets de transformation ou d’impact',
+    icon: BarChart3
+  },
+  {
+    title: 'Ecosystem Mapping',
+    description: 'Cartographier ou renforcer un écosystème local',
+    icon: Globe
   }
 ];

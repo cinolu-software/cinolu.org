@@ -7,6 +7,7 @@ import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight } from 'lucide-
 import { RecentProjectsStore } from '../../../projects/store/recent-projects.store';
 import { ProgramCardSkeletonComponent } from '../../../projects/components/project-card-skeleton/project-card-skeleton.component';
 import { ProjectCardComponent } from '../../../projects/components/project-card/project-card.component';
+import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 
 @Component({
   selector: 'app-recent-projects',
@@ -17,7 +18,8 @@ import { ProjectCardComponent } from '../../../projects/components/project-card/
     CarouselModule,
     RouterModule,
     LucideAngularModule,
-    ProgramCardSkeletonComponent
+    ProgramCardSkeletonComponent,
+    FadeInOnScrollDirective
   ],
   templateUrl: './recent-projects.component.html'
 })

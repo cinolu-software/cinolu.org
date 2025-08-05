@@ -7,6 +7,7 @@ import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight } from 'lucide-
 import { EventCardSkeletonComponent } from '../../../events/components/event-card-skeleton/event-card-skeleton.component';
 import { EventCardComponent } from '../../../events/components/event-card/event-card.component';
 import { RecentEventsStore } from '../../../events/store/recent-events.store';
+import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 
 @Component({
   selector: 'app-recent-events',
@@ -17,7 +18,8 @@ import { RecentEventsStore } from '../../../events/store/recent-events.store';
     CarouselModule,
     RouterModule,
     LucideAngularModule,
-    EventCardSkeletonComponent
+    EventCardSkeletonComponent,
+    FadeInOnScrollDirective
   ],
   templateUrl: './recent-events.component.html'
 })

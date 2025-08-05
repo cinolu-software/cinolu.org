@@ -5,6 +5,7 @@ import { RecentEventsComponent } from '../components/recent-events/recent-events
 import { RecentProjectsComponent } from '../components/recent-projects/recent-projects.component';
 import { ServicesComponent } from '../components/services/services.component';
 import { WhyJoinUsComponent } from '../components/why-join-us/why-join-us.component';
+import { OurProgramsComponent } from '../components/our-programs/our-programs.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -15,7 +16,8 @@ import { WhyJoinUsComponent } from '../components/why-join-us/why-join-us.compon
     RecentProjectsComponent,
     RecentEventsComponent,
     PartnersComponent,
-    WhyJoinUsComponent
+    WhyJoinUsComponent,
+    OurProgramsComponent
   ],
   templateUrl: './landing-page.component.html'
 })
