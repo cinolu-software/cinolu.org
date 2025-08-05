@@ -4,78 +4,63 @@
   <h3 class="text-center font-black text-gray-700 text-3xl sm:text-4xl lg:text-5xl mb-10">Contactez-Nous</h3>
 
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-    <form action="" class="space-y-5 w-full" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+    <form action="" class="space-y-5 w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="flex flex-col gap-2">
-          <label for="fullname" class="text-sm font-medium text-gray-700">Votre nom</label>
-          <input
-            type="text"
-            id="fullname"
-            name="fullname"
-            [(ngModel)]="formData.fullname"
-            placeholder="Entrez votre nom"
-            class="p-3 bg-gray-200 border border-transparent focus:outline-none focus:border-primary-500 transition" />
+        <div class="flex flex-col gap-1.5">
+          <label for="name">Nom complet</label>
+          <input pInputText id="name" formControlName="name" autocomplete="off" />
         </div>
-        <div class="flex flex-col gap-2">
-          <label for="email" class="text-sm font-medium text-gray-700">Adresse email</label>
-          <input
-            type="email"
-            name="email"
-            [(ngModel)]="formData.email"
-            id="email"
-            placeholder="exemple@domaine.com"
-            class="p-3 bg-gray-100 border border-transparent focus:outline-none focus:border-primary-500 transition" />
+
+        <div class="flex flex-col gap-1.5">
+          <label for="email">Votre email</label>
+          <input pInputText id="email" formControlName="email" autocomplete="off" />
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="flex flex-col gap-2">
-          <label for="countryCode" class="text-sm font-medium text-gray-700">Pays</label>
-          <div class="flex">
-            <select
-              required
-              id="countryCode"
-              name="countryCode"
-              [(ngModel)]="formData.countryCode"
-              class="p-3 bg-gray-100 border border-transparent focus:outline-none focus:border-primary-500 transition text-gray-700 w-full"
-              aria-label="Code pays">
-              <option value="">-- Choisissez votre pays --</option>
-              @for (item of countryItems; track $index) {
-                <option [value]="item.code" [selected]="item.code === '+243'">({{ item.code }}) {{ item.name }}</option>
-              }
-            </select>
-          </div>
+        <div class="flex flex-col gap-1.5">
+          <label for="country">Pays</label>
+          <p-select
+            (onChange)="onSelectCountry($event)"
+            [inputId]="'country'"
+            [options]="countryItems"
+            [optionLabel]="'name'"
+            [optionValue]="'name'"
+            [showClear]="true"
+            formControlName="country"
+            autocomplete="off" />
         </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="phone" class="text-sm font-medium text-gray-700">Téléphone</label>
-          <input
-            [(ngModel)]="formData.phone"
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="Entrez votre numéro"
-            class="p-3 bg-gray-100 border border-transparent focus:outline-none focus:border-primary-500 transition" />
+        <div class="flex flex-col gap-1.5">
+          <label for="email">Téléphone</label>
+          <p-inputgroup>
+            <p-inputgroup-addon>{{ selectedCountryCode || '----' }} </p-inputgroup-addon>
+            <input pInputText id="phone" formControlName="phone_number" autocomplete="off" />
+          </p-inputgroup>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="flex flex-col gap-1.5">
+          <label for="gender">Genre</label>
+          <p-select
+            [inputId]="'gender'"
+            [options]="genderItems"
+            formControlName="gender"
+            [showClear]="true"
+            autocomplete="off" />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label for="city">Ville</label>
+          <input pInputText id="city" formControlName="city" autocomplete="off" />
         </div>
       </div>
 
       <div class="flex flex-col gap-2">
-        <label for="message" class="text-sm font-medium text-gray-700">Votre message</label>
-        <textarea
-          id="message"
-          name="message"
-          [(ngModel)]="formData.message"
-          rows="5"
-          placeholder="Saisissez votre message"
-          class="p-3 bg-gray-100 border border-transparent focus:outline-none focus:border-primary-500 transition resize-none"></textarea>
+        <label for="message">Saissez votre message</label>
+        <textarea pTextarea id="message" formControlName="message" rows="4" resize="off" autocomplete="off"></textarea>
       </div>
 
       <div class="pt-2 flex justify-center sm:justify-start">
-        <button
-          type="submit"
-          class="w-full sm:w-1/2 bg-primary-500 hover:bg-primary-600 transition text-white font-semibold px-6 py-3">
-          Envoyez
-        </button>
+        <button pButton type="submit">S'inscrire</button>
       </div>
     </form>
 
@@ -95,6 +80,21 @@
             }
           </div>
         }
+
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          @for (item of socialMediaItems; track $index) {
+            <a
+              [href]="item.link"
+              target="_blank"
+              class="group inline-flex items-center justify-center w-10 h-10 rounded-full bg-white hover:bg-white/80 transition duration-300 ease-in-out shadow-md"
+              [attr.aria-label]="item.label">
+              <img
+                [src]="item.icon"
+                [alt]="item.label"
+                class="w-5 h-5 filter group-hover:brightness-125 transition duration-300" />
+            </a>
+          }
+        </div>
       </div>
     </div>
   </div>
@@ -105,7 +105,7 @@
       loading="lazy"
       allowfullscreen
       referrerpolicy="no-referrer-when-downgrade"
-      src="https://www.google.com/maps/place/centre+d'innovation+de+lubumbashi/@-11.6746111,27.4779568,16.5z/data=!4m6!3m5!1s0x19723f8f4deda58d:0xaa54c84125205d12!8m2!3d-11.6744098!4d27.479604!16s%2Fg%2F11gy75k3nv?entry=ttu&g_ep=EgoyMDI1MDcyMy4wIKXMDSoASAFQAw%3D%3D">
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63035.155079005505!2d27.449214218656523!3d-11.665910227221612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19723f8f4deda58d%3A0xaa54c84125205d12!2sCentre%20d&#39;Innovation%20de%20Lubumbashi!5e0!3m2!1sfr!2scd!4v1694512345678!5m2!1sfr!2scd">
     </iframe>
   </div>
 </section>

@@ -5,6 +5,12 @@ interface IContactChildren {
   value: string;
 }
 
+interface ISocialMedia {
+  label: string;
+  link: string;
+  icon: string;
+}
+
 // interface ISocialMedia {
 //   label: string;
 //   link: string;
@@ -14,7 +20,7 @@ interface IContact {
   title: string;
   icon: LucideIconData;
   description: string;
-  children: IContactChildren[];
+  children?: IContactChildren[];
 }
 
 export const CONTACT_ITEMS: IContact[] = [
@@ -65,28 +71,15 @@ export const CONTACT_ITEMS: IContact[] = [
   {
     title: 'Suivez-nous',
     icon: ScanFace,
-    description: 'Restez connectés à notre actualité.',
-    children: [
-      {
-        label: 'Facebook',
-        value: 'https://facebook.com/entreprise'
-      },
-      {
-        label: 'Instagram',
-        value: 'https://www.instagram.com/centredinnovationdelubumbashi/?utm_source=ig_web_button_share_sheet'
-      },
-      {
-        label: 'twitter',
-        value: 'https://x.com/Lubumdigital'
-      },
-      {
-        label: 'tiktok',
-        value: 'https://www.tiktok.com/@cinolu'
-      },
-      {
-        label: 'linkedin',
-        value: 'https://www.linkedin.com/company/cinolu'
-      }
-    ]
+    description: 'Restez connectés à notre actualité.'
   }
+];
+
+export const SOCIAL_LINKS: ISocialMedia[] = [
+  { label: 'Facebook', link: 'https://www.facebook.com/cinolu', icon: 'icons/facebook.svg' },
+  { label: 'Instagram', link: 'https://www.instagram.com/centredinnovationdelubumbashi/', icon: 'icons/instagram.svg' },
+  { label: 'X', link: 'https://x.com/Lubumdigital', icon: 'icons/twitter-x.svg' },
+  { label: 'TikTok', link: 'https://www.tiktok.com/@cinolu', icon: 'icons/tiktok.svg' },
+  { label: 'LinkedIn', link: 'https://www.linkedin.com/company/cinolu', icon: 'icons/linkedin.svg' },
+  { label: 'YouTube', link: 'https://www.youtube.com/@centredinnovationdelubumba3607', icon: 'icons/youtube.svg' }
 ];
