@@ -1,4 +1,4 @@
-<aside class="font-satoshi fixed top-0 w-[20vw] h-screen overflow-y-auto px-8 pt-6 bg-primary-900 text-gray-50">
+<aside class="font-satoshi fixed top-0 w-[22vw] h-screen overflow-y-auto px-10 pt-6 bg-primary-900 text-gray-50">
   <a
     class="mb-12 font-medium text-white inline-flex items-center bg-primary-800 gap-1.5 text-sm border border-primary-400 rounded px-4 py-2 hover:bg-primary-700 transition-colors duration-200"
     [routerLink]="'/'">
@@ -9,12 +9,10 @@
     @for (link of links(); track $index) {
       @if ((link?.children?.length || 0) > 0) {
         <button
-          *appHasRole="link.requiredRole"
           class="flex justify-between items-center px-2 py-1.5 font-medium rounded-md hover:bg-primary-700 hover:text-white"
           (click)="onToggleTab(link.name)"
           [ngClass]="{
-            'bg-primary-700 text-white': isTabOpen(link.name),
-            'text-gray-300': !isTabOpen(link.name)
+            'bg-primary-700 text-white': isTabOpen(link.name)
           }">
           <div class="group inline-flex gap-1.5 items-center">
             <i-lucide [name]="link.icon" class="size-4 text-inherit" />
@@ -32,7 +30,6 @@
           <div class="mx-4 border-l border-gray-500 flex flex-col gap-3">
             @for (child of link.children; track $index) {
               <a
-                *appHasRole="link.requiredRole"
                 class="group flex items-center gap-2 text-gray-300/90 text-sm tracking-wider"
                 [routerLink]="child.path"
                 [routerLinkActive]="'text-white active-link'"
@@ -46,7 +43,6 @@
         }
       } @else {
         <a
-          *appHasRole="link.requiredRole"
           [routerLink]="link.path"
           class="group inline-flex items-center gap-1.5 px-2 py-1.5 font-medium rounded-md hover:bg-primary-700 transition-colors duration-200"
           [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
