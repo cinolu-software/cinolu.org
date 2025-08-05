@@ -13,7 +13,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
 import { DesktopNavComponent } from './desktop-menu/desktop-nav.component';
 import { MobileNavComponent } from './mobile-menu/mobile-nav.component';
-import { DASHBOARD_LINKS } from '../../data/links.data';
+import { USER_LINKS } from '../../data/links.data';
 import { RouterLink } from '@angular/router';
 import { AuthStore } from '../../../core/auth/auth.store';
 
@@ -25,7 +25,7 @@ import { AuthStore } from '../../../core/auth/auth.store';
 export class DashboardTopbarComponent implements OnDestroy {
   #elementRef = inject(ElementRef);
   isFixed = signal(false);
-  links = signal(DASHBOARD_LINKS);
+  links = signal(USER_LINKS);
   fixed = input(false);
   mobileNav = viewChild(MobileNavComponent);
   desktopNav = viewChild(DesktopNavComponent);
