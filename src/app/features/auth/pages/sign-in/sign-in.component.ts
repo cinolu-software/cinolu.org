@@ -41,7 +41,7 @@ export class AuthSignInComponent {
     if (this.form.invalid) return;
     this.store.signIn({
       payload: this.form.value,
-      onSuccess: () => this.form.reset()
+      onSuccess: () => true
     });
   }
 
