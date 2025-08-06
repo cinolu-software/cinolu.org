@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
-
+import { LucideAngularModule, Telescope } from 'lucide-angular';
 
 @Component({
   selector: 'app-vision',
-  imports: [],
+  imports: [LucideAngularModule],
   templateUrl: './vision.component.html'
 })
-export class VisionComponent {}
+export class VisionComponent {
+  icons = {
+    vision: Telescope
+  };
+}
