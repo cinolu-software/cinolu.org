@@ -11,11 +11,6 @@ interface ISocialMedia {
   icon: string;
 }
 
-// interface ISocialMedia {
-//   label: string;
-//   link: string;
-//   icon: LucideIconData;
-// }
 interface IContact {
   title: string;
   icon: LucideIconData;

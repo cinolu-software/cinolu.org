@@ -2,15 +2,18 @@ import { Component } from '@angular/core';
 import { PARTNERS, PARTNERS_CATEGORIES } from '../../data/partners.data';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { Select } from 'primeng/select';
 
 @Component({
   selector: 'app-partners',
-  imports: [NgOptimizedImage, CommonModule, FadeInOnScrollDirective],
+  imports: [NgOptimizedImage, CommonModule, FadeInOnScrollDirective, InputGroupModule, InputGroupAddonModule, Select],
   templateUrl: './partners.component.html'
 })
 export class PartnersComponent {
   partners = PARTNERS;
-  categoryItems = PARTNERS_CATEGORIES;
+  categoryParteners = PARTNERS_CATEGORIES;
 
   statutItem = [
     { id: 1, name: 'Étudiant·e' },

@@ -1,7 +1,6 @@
 import { Route } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { LayoutComponent } from './layout/layout.component';
-import { joinUsRoutes } from './features/join-us/join-us.routes';
 import { donationRoutes } from './features/donation/donation.routes';
 import { contactUsRoutes } from './features/contact-us/contact-us.route';
 
@@ -24,12 +23,7 @@ export const routes: Route[] = [
     data: { layout: 'full-layout' },
     loadChildren: () => import('./features/about-us/about-us.routes').then((m) => m.aboutRoutes)
   },
-  {
-    path: 'join-us',
-    component: LayoutComponent,
-    data: { layout: 'fixed-layout' },
-    loadChildren: () => joinUsRoutes
-  },
+
   {
     path: 'donation',
     component: LayoutComponent,

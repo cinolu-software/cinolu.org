@@ -34,33 +34,25 @@
           <label for="email">Téléphone</label>
           <p-inputgroup>
             <p-inputgroup-addon>{{ selectedCountryCode || '----' }} </p-inputgroup-addon>
-            <input pInputText id="phone" formControlName="phone_number" autocomplete="off" />
+            <input pInputText id="phone" placeholder="979998877" formControlName="phone_number" autocomplete="off" />
           </p-inputgroup>
-        </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="flex flex-col gap-1.5">
-          <label for="gender">Genre</label>
-          <p-select
-            [inputId]="'gender'"
-            [options]="genderItems"
-            formControlName="gender"
-            [showClear]="true"
-            autocomplete="off" />
-        </div>
-        <div class="flex flex-col gap-1.5">
-          <label for="city">Ville</label>
-          <input pInputText id="city" formControlName="city" autocomplete="off" />
         </div>
       </div>
 
       <div class="flex flex-col gap-2">
         <label for="message">Saissez votre message</label>
-        <textarea pTextarea id="message" formControlName="message" rows="4" resize="off" autocomplete="off"></textarea>
+        <textarea
+          pTextarea
+          id="message"
+          placeholder=""
+          formControlName="message"
+          rows="4"
+          resize="off"
+          autocomplete="off"></textarea>
       </div>
 
       <div class="pt-2 flex justify-center sm:justify-start">
-        <button pButton type="submit">S'inscrire</button>
+        <button pButton type="submit">Envoyez</button>
       </div>
     </form>
 

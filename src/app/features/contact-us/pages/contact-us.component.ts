@@ -10,7 +10,7 @@ import { SelectChangeEvent, SelectModule } from 'primeng/select';
 import { InputGroupAddon } from 'primeng/inputgroupaddon';
 import { InputGroup } from 'primeng/inputgroup';
 import { ButtonModule } from 'primeng/button';
-import { GENDERS } from '../../join-us/data/member.items';
+import { GENDERS } from '../../../shared/data/member.items';
 
 @Component({
   selector: 'app-contact-us',
@@ -44,9 +44,7 @@ export class ContactUsComponent {
       name: ['', [Validators.required, Validators.minLength(5)]],
       email: ['', [Validators.email, Validators.required]],
       phone_number: ['', [Validators.required, Validators.pattern(/^\+?[1-9]\d{1,14}$/)]],
-      gender: ['', [Validators.required]],
       country: ['', [Validators.required]],
-      city: ['', [Validators.required]],
       message: ['', [Validators.required]]
     });
   }
