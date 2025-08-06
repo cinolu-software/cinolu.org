@@ -2,7 +2,7 @@ import { Component, computed, effect, inject, input, signal } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, ChevronDown, House } from 'lucide-angular';
-import { USER_LINKS, ILink, ADMIN_LINKS } from '../../data/links.data';
+import { USER_LINKS, ILink, ADMIN_LINKS, COMMON_LINKS } from '../../data/links.data';
 import { filter } from 'rxjs';
 import { AuthStore } from '../../../core/auth/auth.store';
 import { ButtonModule } from 'primeng/button';
@@ -23,8 +23,8 @@ export class DashboardSidebarComponent {
   links = signal<ILink[]>([]);
   dashboardLinks: Record<string, ILink[]> = {
     [RoleEnum.User]: USER_LINKS,
-    [RoleEnum.Admin]: ADMIN_LINKS,
-    [RoleEnum.Coach]: ADMIN_LINKS
+    [RoleEnum.Staff]: ADMIN_LINKS,
+    [RoleEnum.Admin]: ADMIN_LINKS
   };
   activeTab = computed(() => {
     const url = this.currentUrl();
@@ -37,12 +37,7 @@ export class DashboardSidebarComponent {
   constructor() {
     const roles = (this.authStore.user()?.roles as unknown as string[]) || [];
     effect(() => {
-      this.links.set(
-        roles.reduce((acc: ILink[], role: string) => {
-          if (this.dashboardLinks[role]) acc.push(...this.dashboardLinks[role]);
-          return acc;
-        }, [])
-      );
+      this.links.set([...COMMON_LINKS, ...roles.flatMap((role) => this.dashboardLinks[role] || [])]);
     });
     this.#router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
       this.currentUrl.set(event.urlAfterRedirects);

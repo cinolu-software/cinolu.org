@@ -1,5 +1,4 @@
 import { LucideIconData, Info, Activity, UserCheck, BriefcaseBusiness, Briefcase, Calendar1 } from 'lucide-angular';
-import { RoleEnum } from '../../core/auth/role.enum';
 
 export interface ILink {
   name: string;
@@ -9,7 +8,6 @@ export interface ILink {
   icon?: LucideIconData;
   path: string;
   exactUrl?: boolean;
-  requiredRole?: RoleEnum;
   children?: ILink[];
 }
 
@@ -52,22 +50,13 @@ export const MY_CINOLU_LINKS: ILink[] = [
 
 export const ADMIN_LINKS: ILink[] = [
   {
-    name: 'Mes informations',
-    path: '/dashboard',
-    icon: Info,
-    requiredRole: RoleEnum.User,
-    exactUrl: true
-  },
-  {
     name: 'Les programmes',
     path: '/dashboard/programs',
-    requiredRole: RoleEnum.Staff,
     icon: Activity
   },
   {
     name: 'Les utilisateurs',
     path: '/dashboard/users',
-    requiredRole: RoleEnum.Staff,
     icon: UserCheck,
     children: [
       {
@@ -84,7 +73,6 @@ export const ADMIN_LINKS: ILink[] = [
     name: 'Les projets',
     path: '/dashboard/projects',
     icon: Briefcase,
-    requiredRole: RoleEnum.Staff,
     children: [
       {
         name: 'Liste',
@@ -100,7 +88,6 @@ export const ADMIN_LINKS: ILink[] = [
     name: 'Les événements',
     path: '/dashboard/events',
     icon: Calendar1,
-    requiredRole: RoleEnum.Staff,
     children: [
       {
         name: 'Liste ',
@@ -114,18 +101,19 @@ export const ADMIN_LINKS: ILink[] = [
   }
 ];
 
-export const USER_LINKS: ILink[] = [
+export const COMMON_LINKS: ILink[] = [
   {
     name: 'Mes informations',
     path: '/dashboard',
     icon: Info,
-    requiredRole: RoleEnum.User,
     exactUrl: true
-  },
+  }
+];
+
+export const USER_LINKS: ILink[] = [
   {
     name: 'Mes entreprises',
     path: '/dashboard/ventures/list',
-    requiredRole: RoleEnum.User,
     icon: BriefcaseBusiness
   }
 ];
