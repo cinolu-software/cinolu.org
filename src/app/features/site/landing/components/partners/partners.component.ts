@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { PARTNERS, PARTNERS_CATEGORIES } from '../../data/partners.data';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { Select } from 'primeng/select';
+import { FadeInOnScrollDirective } from '../../../../../shared/directives/animations-on-scroll.directive';
 
 @Component({
   selector: 'app-partners',

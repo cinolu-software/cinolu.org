@@ -1,8 +1,8 @@
 import { Route } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { LayoutComponent } from './layout/layout.component';
-import { donationRoutes } from './features/donation/donation.routes';
-import { contactUsRoutes } from './features/contact-us/contact-us.route';
+import { contactUsRoutes } from './features/site/contact-us/contact-us.route';
+import { donationRoutes } from './features/site/donation/donation.routes';
 
 export const routes: Route[] = [
   {

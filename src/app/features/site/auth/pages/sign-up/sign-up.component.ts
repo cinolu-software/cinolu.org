@@ -12,14 +12,14 @@ import { Check, ChevronsLeft, ChevronsRight, LucideAngularModule } from 'lucide-
 import { StepperModule } from 'primeng/stepper';
 import { TextareaModule } from 'primeng/textarea';
 import { DatePickerModule } from 'primeng/datepicker';
-import { COUNTRY_CODE } from '../../../../shared/data/country-item.data';
-import { GENDERS } from '../../../../shared/data/member.items';
 import { SignUpRolesStore } from '../../store/sign-up-roles.store';
 import { MultiSelect } from 'primeng/multiselect';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { SelectChangeEvent, SelectModule } from 'primeng/select';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { RouterLink } from '@angular/router';
+import { COUNTRY_CODE } from '../../../../../shared/data/country-item.data';
+import { GENDERS } from '../../../../../shared/data/member.items';
 
 @Component({
   selector: 'app-sign-up',

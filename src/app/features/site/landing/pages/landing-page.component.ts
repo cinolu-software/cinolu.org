@@ -12,7 +12,6 @@ import { OurProgramsComponent } from '../components/our-programs/our-programs.co
   imports: [
     HeroComponent,
     ServicesComponent,
-    // StatementComponent,
     RecentProjectsComponent,
     RecentEventsComponent,
     PartnersComponent,
