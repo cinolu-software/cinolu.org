@@ -1,28 +1,28 @@
 import { Route } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { LayoutComponent } from './layout/layout.component';
-import { joinUsRoutes } from './features/join-us/join-us.routes';
-import { donationRoutes } from './features/donation/donation.routes';
-import { contactUsRoutes } from './features/contact-us/contact-us.route';
+import { joinUsRoutes } from './features/site/join-us/join-us.routes';
+import { donationRoutes } from './features/site/donation/donation.routes';
+import { contactUsRoutes } from './features/site/contact-us/contact-us.route';
 
 export const routes: Route[] = [
   {
     path: 'programs',
     component: LayoutComponent,
     data: { layout: 'fixed-layout' },
-    loadChildren: () => import('./features/projects/projects.routes').then((m) => m.projectsRoutes)
+    loadChildren: () => import('./features/site/projects/projects.routes').then((m) => m.projectsRoutes)
   },
   {
     path: 'events',
     component: LayoutComponent,
     data: { layout: 'fixed-layout' },
-    loadChildren: () => import('./features/events/events.routes').then((m) => m.eventsRoutes)
+    loadChildren: () => import('./features/site/events/events.routes').then((m) => m.eventsRoutes)
   },
   {
     path: 'about-us',
     component: LayoutComponent,
     data: { layout: 'full-layout' },
-    loadChildren: () => import('./features/about-us/about-us.routes').then((m) => m.aboutRoutes)
+    loadChildren: () => import('./features/site/about-us/about-us.routes').then((m) => m.aboutRoutes)
   },
   {
     path: 'join-us',
@@ -54,18 +54,18 @@ export const routes: Route[] = [
     path: '',
     component: LayoutComponent,
     data: { layout: 'full-layout' },
-    loadChildren: () => import('./features/landing/landing.routes').then((m) => m.landingRoutes)
+    loadChildren: () => import('./features/site/landing/landing.routes').then((m) => m.landingRoutes)
   },
   {
     path: '',
     component: LayoutComponent,
     data: { layout: 'empty-layout' },
-    loadChildren: () => import('./features/auth/auth.routes').then((m) => m.authRoutes)
+    loadChildren: () => import('./features/site/auth/auth.routes').then((m) => m.authRoutes)
   },
   {
     path: '**',
     component: LayoutComponent,
     data: { layout: 'full-layout' },
-    loadChildren: () => import('./features/landing/landing.routes').then((m) => m.landingRoutes)
+    loadChildren: () => import('./features/site/landing/landing.routes').then((m) => m.landingRoutes)
   }
 ];
