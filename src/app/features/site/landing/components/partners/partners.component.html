@@ -5,18 +5,11 @@
         class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-3 tracking-tight leading-tight">
         Écosystème & Partenaires
       </h3>
-
-      <!-- <p class="text-base text-gray-600 max-w-4xl mx-auto leading-relaxed">
-        Le Centre d’Innovation de Lubumbashi est bien plus qu’un espace : c’est un nœud d’un vaste réseau d’acteurs de
-        l’innovation en RDC, en Afrique et à l’international.<br />
-        Institutions, bailleurs, hubs, universités, entreprises, ONG, agences publiques... nous co-construisons des
-        solutions durables avec ceux qui croient à l’impact collectif.
-      </p> -->
     </div>
 
-    <div class="flex flex-wrap justify-center gap-4 py-4">
+    <div class="flex-wrap justify-center gap-4 py-4 hidden md:flex">
       <button
-        *ngFor="let option of categoryItems"
+        *ngFor="let option of categoryParteners"
         (click)="selectUserType(option.id)"
         class="flex flex-nowrap items-center gap-3 px-5 py-2 border rounded-full cursor-pointer transition duration-300"
         [ngClass]="{
@@ -28,6 +21,18 @@
           {{ option.name }}
         </p>
       </button>
+    </div>
+    <div class="flex flex-col gap-1.5 md:hidden">
+      <p-select
+        [inputId]="'userTypeSelect'"
+        [options]="categoryParteners"
+        [optionLabel]="'name'"
+        [optionValue]="'id'"
+        [showClear]="false"
+        (ngModel)="(selectedUserId)"
+        (onChange)="selectUserType($event.value)"
+        placeholder="Sélectionnez une catégorie">
+      </p-select>
     </div>
 
     <div class="min-h-64">
