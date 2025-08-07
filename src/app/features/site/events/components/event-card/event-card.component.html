@@ -29,7 +29,9 @@
       </div>
       <div class="flex items-center text-md leading-5 mb-2">
         <i-lucide [name]="icons.CalendarX" class="size-5" />
-        <div class="ml-1.5">Fini: Le {{ event().started_at }}</div>
+        <div class="ml-1.5">
+          Fini: Le {{ event().ended_at | date : "longDate" }}
+        </div>
       </div>
     </div>
   </div>

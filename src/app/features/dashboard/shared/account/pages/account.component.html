@@ -11,7 +11,9 @@
       class="object-cover h-12 w-12 ring-2 ring-primary-600 bg-gray-200 rounded-full"
     />
     <div class="flex flex-col">
-      <p class="text-gray-500">Inscrit le {{ user.created_at }}</p>
+      <p class="text-gray-500">
+        Inscrit le {{ user.created_at | date : "longDate" }}
+      </p>
       <p class="text-gray-900">{{ user.name }} · {{ user.email }}</p>
     </div>
   </div>

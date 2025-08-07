@@ -24,11 +24,15 @@
     <div class="text-sm font-medium">
       <div class="flex items-center text-md leading-5 mb-2">
         <i-lucide class="size-5" [name]="icons.calendarCheck" />
-        <div class="ml-1.5">Début: Le {{ project().started_at }}</div>
+        <div class="ml-1.5">
+          Début: Le {{ project().started_at | date : "longDate" }}
+        </div>
       </div>
       <div class="t flex items-center text-md leading-5">
         <i-lucide class="size-5" [name]="icons.calendarX" />
-        <div class="ml-1.5">Fin: Le {{ project().ended_at }}</div>
+        <div class="ml-1.5">
+          Fin: Le {{ project().ended_at | date : "longDate" }}
+        </div>
       </div>
     </div>
   </div>

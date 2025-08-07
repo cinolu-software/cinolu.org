@@ -26,6 +26,9 @@ import {
 import { httpInterceptor } from './core/interceptors/http.interceptor';
 import { LoadingInterceptor } from './core/services/loading';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr, 'fr');
 
 export const appConfig: ApplicationConfig = {
   providers: [
