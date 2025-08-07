@@ -3,25 +3,5 @@
   "singleQuote": true,
   "bracketSameLine": true,
   "trailingComma": "none",
-  "endOfLine": "auto",
-  "overrides": [
-    {
-      "files": ["*.html", "*.ts"],
-      "options": {
-        "printWidth": 120
-      }
-    },
-    {
-      "files": "*.html",
-      "options": {
-        "parser": "html"
-      }
-    },
-    {
-      "files": "*.component.html",
-      "options": {
-        "parser": "angular"
-      }
-    }
-  ]
+  "endOfLine": "auto"
 }

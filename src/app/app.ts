@@ -4,7 +4,7 @@ import { LoadingBarComponent } from './shared/components/loading-bar/loading-bar
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  imports: [RouterOutlet, LoadingBarComponent]
+  templateUrl: './app.html',
+  imports: [RouterOutlet, LoadingBarComponent],
 })
-export class AppComponent {}
+export class App {}

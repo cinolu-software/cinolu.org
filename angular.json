@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "cinolu.org": {
+    "app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -19,12 +19,7 @@
               "filepond-plugin-file-validate-size",
               "filepond-plugin-file-validate-type"
             ],
-            "outputPath": "dist/cinolu.org",
-            "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -38,9 +33,8 @@
               "node_modules/filepond/dist/filepond.min.css",
               "node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
             ],
-            "scripts": [],
             "server": "src/main.server.ts",
-            "prerender": true,
+            "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
             }
@@ -50,13 +44,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2MB",
-                  "maximumError": "5MB"
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2MB",
-                  "maximumError": "5MB"
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
                 }
               ],
               "outputHashing": "all"
@@ -79,10 +73,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "cinolu.org:build:production"
+              "buildTarget": "app:build:production"
             },
             "development": {
-              "buildTarget": "cinolu.org:build:development"
+              "buildTarget": "app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -93,10 +87,6 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               {
@@ -104,13 +94,12 @@
                 "input": "public"
               }
             ],
-            "styles": [
+           "styles": [
               "src/styles/styles.css",
               "node_modules/notyf/notyf.min.css",
               "node_modules/filepond/dist/filepond.min.css",
               "node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
-            ],
-            "scripts": []
+            ]
           }
         },
         "lint": {
@@ -126,35 +115,9 @@
     }
   },
   "cli": {
-    "analytics": "87b5bd13-283b-47f3-a6bf-53f60409e909",
+    "analytics": "e986b5aa-5126-4c80-9d3f-6f4dcea7d8c4",
     "schematicCollections": [
       "angular-eslint"
     ]
-  },
-  "schematics": {
-    "@schematics/angular:component": {
-      "type": "component"
-    },
-    "@schematics/angular:directive": {
-      "type": "directive"
-    },
-    "@schematics/angular:service": {
-      "type": "service"
-    },
-    "@schematics/angular:guard": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:interceptor": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:module": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:pipe": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:resolver": {
-      "typeSeparator": "."
-    }
   }
 }

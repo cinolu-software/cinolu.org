@@ -1,9 +1,9 @@
-@import 'tailwindcss';
-@import './overrides/main';
+@import "tailwindcss";
+@import "./overrides/main.css";
 
 @theme {
-  --font-mona: 'Mona Sans', sans-serif;
-  --font-satoshi: 'Satoshi', sans-serif;
+  --font-mona: "Mona Sans", sans-serif;
+  --font-satoshi: "Satoshi", sans-serif;
   --animate-fadeInUp: fadeInUp 300ms ease-in;
 
   --color-primary-50: #f1f8ed;
@@ -56,7 +56,7 @@
   }
 
   button:not(:disabled),
-  [role='button']:not(:disabled) {
+  [role="button"]:not(:disabled) {
     cursor: pointer;
   }
 
@@ -74,7 +74,7 @@
     scrollbar-width: none;
   }
 
-   .dashboard-main-content {
+  .dashboard-main-content {
     @apply bg-white rounded-lg shadow-md px-8 py-10 my-10;
   }
 
@@ -94,27 +94,37 @@
   }
 
   .ring-pulse::before {
-    content: '';
+    content: "";
     position: absolute;
     display: block;
     width: 100%;
     height: 100%;
     border-radius: 9999px;
-    border: 2px solid rgba(34, 197, 94, 0.5); 
+    border: 2px solid rgba(34, 197, 94, 0.5);
     animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     z-index: -1;
   }
 
-    .bg-grid {
-    background-image: 
-      repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.05) 0px, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 80px),
-      repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0px, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 80px);
+  .bg-grid {
+    background-image: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.05) 0px,
+        rgba(255, 255, 255, 0.05) 1px,
+        transparent 1px,
+        transparent 80px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 0px,
+        rgba(0, 0, 0, 0.05) 1px,
+        transparent 1px,
+        transparent 80px
+      );
     background-size: 80px 80px;
     z-index: 10;
   }
 
-
-    .fade-left-init {
+  .fade-left-init {
     @apply opacity-0 -translate-x-12 transition-all duration-700 ease-out;
   }
 
@@ -125,10 +135,7 @@
   .animate-slide-in {
     @apply opacity-100 translate-x-0 transition-all duration-700 ease-out;
   }
-
-
 }
-
 
 @layer components {
   .carousel-nav-btn {
@@ -142,5 +149,4 @@
   .secondary-link {
     @apply border border-white rounded-sm px-4 py-1.5 text-white hover:bg-white hover:text-primary-500 transition-colors duration-300;
   }
-
 }

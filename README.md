@@ -1,69 +1,59 @@
-# Fikiri.co
+# App
 
-Fikiri.co is a powerful and user-friendly mapping solution platform built with **Angular 19**. It provides advanced mapping capabilities, real-time data visualization, and seamless integration with geographic data sources.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.5.
 
-## 🚀 Features
+## Development server
 
-- **Interactive Maps** – Intuitive map navigation with zoom, pan, and layer control.
-- **Responsive UI** – Fully optimized for desktop and mobile devices.
-
-## 🏗️ Technology Stack
-
-- **Frontend**: Angular 19, TypeScript, RxJS
-- **Backend (Optional Integration)**: NestJS
-- **State Management**: NgRx (if applicable)
-- **Styling**: Tailwind CSS / SCSS
-
-## 📦 Installation
-
-### Prerequisites
-
-Ensure you have the following installed:
-
-- Node.js (>=18.x)
-- Angular CLI (>=19.x)
-- Git
-
-### Steps to Install & Run
+To start a local development server, run:
 
 ```bash
-# Clone the repository
-git clone https://github.com/musanzi/v2.fikiri.co.git
-cd fikiri.co
-
-# Install dependencies
-npm install
-
-# Run the development server
-pnpm dev
+ng serve
 ```
 
-## 🛠️ Development & Contribution
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-Want to contribute? Follow these steps:
+## Code scaffolding
 
-1. Fork the repository.
-2. Create a new feature branch: `git checkout -b feature-name`.
-3. Commit your changes: `git commit -m 'feat: Add new feature'`.
-4. Push to your fork: `git push origin feature-name`.
-5. Create a pull request.
-
-## 🚀 Deployment
-
-To build the project for production:
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
 ```bash
-pnpm build
+ng generate component component-name
 ```
 
-This will generate the optimized files in the `dist/` folder, ready for deployment on platforms like **Vercel, Netlify, Firebase Hosting, or an Nginx server**.
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-## 📄 License
+```bash
+ng generate --help
+```
 
-This project is licensed under the [MIT License](LICENSE).
+## Building
 
-## 📩 Contact
+To build the project run:
 
-For inquiries, reach out to **[musanziw.m@gmail.com](mailto:musanziw.m@gmail.com)** or visit [fikiri.co](https://fikiri.co).
+```bash
+ng build
+```
 
-Happy Mapping! 🌍
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+## Running unit tests
+
+To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+
+```bash
+ng test
+```
+
+## Running end-to-end tests
+
+For end-to-end (e2e) testing, run:
+
+```bash
+ng e2e
+```
+
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+
+## Additional Resources
+
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
