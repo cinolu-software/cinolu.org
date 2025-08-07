@@ -1,6 +1,11 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { LucideAngularModule } from 'lucide-angular';
@@ -25,13 +30,12 @@ import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
     FileUploadComponent,
     ApiImgPipe,
     DatePickerModule,
-    LucideAngularModule
-  ]
+    LucideAngularModule,
+  ],
 })
 export class AccountComponent implements OnInit {
   infoForm: FormGroup;
   passwordForm: FormGroup;
-  accUrl = environment.accountUrl;
   url = environment.apiUrl + 'users/image-profile';
   #formBuilder = inject(FormBuilder);
   store = inject(AuthStore);
@@ -45,11 +49,11 @@ export class AccountComponent implements OnInit {
       country: ['', Validators.required],
       birth_date: ['', Validators.required],
       phone_number: ['', [Validators.minLength(10)]],
-      name: ['', Validators.minLength(3)]
+      name: ['', Validators.minLength(3)],
     });
     this.passwordForm = this.#formBuilder.group({
       password: ['', [Validators.minLength(6), Validators.required]],
-      password_confirm: ['', [Validators.minLength(6), Validators.required]]
+      password_confirm: ['', [Validators.minLength(6), Validators.required]],
     });
   }
 
@@ -58,7 +62,7 @@ export class AccountComponent implements OnInit {
     if (!user) return;
     this.infoForm.patchValue({
       ...user,
-      birth_date: user.birth_date && new Date(user.birth_date)
+      birth_date: user.birth_date && new Date(user.birth_date),
     });
   }
 
