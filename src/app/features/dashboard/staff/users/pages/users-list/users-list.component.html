@@ -125,7 +125,7 @@
               {{ user.email }}
             </td>
             <td class="px-6 py-2">
-              {{ user.created_at }}
+              {{ user.created_at | date : "longDate" }}
             </td>
             <td class="px-6 py-2">
               <div class="flex items-center gap-2">
