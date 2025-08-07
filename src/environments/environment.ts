@@ -1,5 +1,4 @@
 export const environment = {
-  apiUrl: 'https://api.cinolu.org/',
-  accountUrl: 'https://app.cinolu.org/',
-  appUrl: 'https://cinolu.org/',
+  apiUrl: 'https://test-api.cinolu.org/',
+  accountUrl: 'https://test.app.cinolu.org/',
 };
