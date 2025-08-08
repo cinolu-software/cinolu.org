@@ -1,5 +1,5 @@
 <section
-  class="relative bg-grid px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-10"
+  class="relative bg-grid px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-0 md:pb-10"
   aria-label="Pourquoi rejoindre Cinolu ?"
   role="region"
 >
@@ -19,7 +19,7 @@
 
   <div class="fade-right-init" appAnimationsOnScroll>
     <h4
-      class="text-primary-500 font-medium text-xl md:text-2xl font-satoshi text-left my-10"
+      class="text-gray-600 font-medium font-satoshi text-xl md:text-2xl text-left mb-7 hyphens-none my-10"
     >
       Notre impact en chiffres :
     </h4>
@@ -30,11 +30,11 @@
     >
       @for (s of stats; track $index) {
         <div
-          class="relative p-6 pt-10 rounded-lg bg-white border border-gray-200 w-full shadow-sm hover:shadow-md transition"
+          class="relative p-6 pt-10 rounded-md bg-white border border-gray-200 w-full shadow-sm hover:shadow-md transition"
           role="listitem"
         >
           <div
-            class="absolute -top-6 -left-6 flex items-center justify-center w-12 h-12 bg-white border border-primary-400 rounded-full shadow"
+            class="absolute -top-6 sm:-left-6 flex items-center justify-center w-12 h-12 bg-white border border-primary-400 rounded-md shadow"
           >
             <i-lucide
               [name]="s.icon"
@@ -48,10 +48,10 @@
             appCountUp
             [duration]="2000"
             [end]="s.value"
-            class="text-3xl sm:text-4xl md:text-6xl font-black text-gray-800 text-center"
+            class="text-4xl sm:text-5xl md:text-6xl font-black text-gray-800 text-center"
           ></p>
 
-          <p class="text-center text-primary-500 mt-1 text-sm sm:text-base">
+          <p class="text-center text-primary-500 mt-1 text-base">
             {{ s.label }}
           </p>
         </div>
@@ -61,7 +61,7 @@
 
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center py-20">
     <div class="relative h-80 sm:h-96 lg:h-[32rem]" appAnimationsOnScroll>
-      <div class="relative w-full h-full overflow-hidden rounded-xl shadow-lg">
+      <div class="relative w-full h-full overflow-hidden rounded-xl shadow-md">
         <img
           src="/images/joinUs.jpg"
           alt="Join Us"
@@ -70,7 +70,7 @@
       </div>
 
       <div
-        class="absolute w-64 z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-xl border border-white/30 shadow-md rounded-xl px-6 py-4"
+        class="absolute w-64 z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-xl border border-white/30 shadow-md rounded-md px-6 py-4"
       >
         <div class="flex items-center gap-4">
           <i-lucide
@@ -97,7 +97,7 @@
     >
       <div class="grid grid-cols-1">
         <p
-          class="text-primary-500 font-light font-satoshi text-xl md:text-2xl text-center mb-7"
+          class="text-gray-600 font-medium font-satoshi text-xl md:text-2xl text-center mb-7 hyphens-none"
         >
           Rejoignez un écosystème dynamique et contribuez à façonner l’avenir de
           la région avec d’autres change-makers comme vous.
@@ -105,15 +105,17 @@
 
         @for (item of reason; track $index) {
           <div
-            class="p-4 flex items-center flex-row-reverse justify-between lg:px-10 bg-white/50 backdrop-blur-[2px] border border-gray-200 rounded-full mt-3 transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg"
+            class="py-4 px-5 flex items-center flex-row-reverse justify-between lg:px-10 bg-white/50 backdrop-blur-[2px] border border-gray-200 rounded-full mt-3 transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg"
           >
             <i-lucide
               stroke="4"
               [name]="icons.moveUp"
-              class="bg-primary-500 text-2xl text-white p-1 rounded-full"
+              class="bg-primary-500 backdrop-blur-[1px] text-2xl text-white p-1 rounded-full"
             >
             </i-lucide>
-            <h5 class="text-base font-semibold text-gray-900">
+            <h5
+              class="text-base font-medium sm:font-semibold text-gray-900 hyphens-none"
+            >
               {{ item }}
             </h5>
           </div>
@@ -124,7 +126,7 @@
         <button
           [routerLink]="'/sign-up'"
           type="submit"
-          class="group relative z-10 flex items-center justify-center gap-2 px-6 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-sm"
+          class="group relative z-10 flex items-center justify-center gap-2 px-6 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-md"
         >
           Rejoignez-Nous
           <i-lucide

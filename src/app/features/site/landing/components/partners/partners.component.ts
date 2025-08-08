@@ -3,8 +3,8 @@ import { PARTNERS, PARTNERS_CATEGORIES } from '../../data/partners.data';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { Select } from 'primeng/select';
 import { FadeInOnScrollDirective } from '../../../../../shared/directives/animations-on-scroll.directive';
+import { UserPlus, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-partners',
@@ -14,13 +14,17 @@ import { FadeInOnScrollDirective } from '../../../../../shared/directives/animat
     FadeInOnScrollDirective,
     InputGroupModule,
     InputGroupAddonModule,
-    Select,
+    LucideAngularModule,
   ],
   templateUrl: './partners.component.html',
 })
 export class PartnersComponent {
   partners = PARTNERS;
   categoryParteners = PARTNERS_CATEGORIES;
+
+  icons = {
+    userPlus: UserPlus,
+  };
 
   statutItem = [
     { id: 1, name: 'Étudiant·e' },

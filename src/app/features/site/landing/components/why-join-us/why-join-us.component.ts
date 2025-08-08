@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { STATS } from '../../data/stats.data';
 import {
+  LucideAngularModule,
   HandCoins,
   Lightbulb,
-  LucideAngularModule,
   MoveUpRight,
   User,
   UserPlus,

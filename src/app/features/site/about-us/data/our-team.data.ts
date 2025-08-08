@@ -45,20 +45,14 @@ export const TEAM_MEMBERS: IMemberItem[] = [
   {
     id: 7,
     name: 'Laura Kabwe',
-    role: 'Coordinatrice Inclusion (F360)',
-    image: 'images/team/mm.webp',
+    role: 'Project Manager  (F360)',
+    image: 'images/team/ll.jpg',
   },
   {
     id: 8,
     name: 'Evelyn Mutombo',
     role: 'Designer & Community Manager',
-    image: 'images/team/mk.webp',
-  },
-  {
-    id: 9,
-    name: 'Wilfried Muzansi',
-    role: 'Développeurs plateforme (OneStop)',
-    image: 'images/team/wm.webp',
+    image: 'images/team/em.jpeg',
   },
   {
     id: 10,
