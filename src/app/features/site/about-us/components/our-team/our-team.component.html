@@ -1,0 +1,32 @@
+<section class="bg-white bg-grid animate-slide-in" id="about" appAnimationsOnScroll>
+  <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-12 sm:py-16 md:pb-20">
+    <h2
+      class="text-2xl sm:text-3xl md:text-4xl text-center lg:text-5xl font-black text-gray-800 font-satoshi mb-8 tracking-tight leading-tight pb-8">
+      Notre <span class="text-primary-500">Équipe</span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <div class="w-full max-h-[32rem] overflow-hidden rounded-xl bg-white shadow-md border border-gray-200 p-4">
+        <img
+          [src]="selectedMember.image"
+          alt="{{ selectedMember.name }}"
+          class="w-full h-80 object-cover object-top rounded-md mb-4" />
+        <h3 class="text-2xl font-bold text-gray-800">{{ selectedMember.name }}</h3>
+        <p class="text-gray-500 text-lg">{{ selectedMember.role }}</p>
+      </div>
+
+      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        @for (item of our_team; track $index) {
+          <div
+            (click)="selectMember(item)"
+            [class.ring]="selectedMember.id === item.id"
+            class="cursor-pointer rounded-md overflow-hidden border border-gray-200 hover:shadow-lg transition-transform duration-300 hover:scale-105 ring-primary-500 ring-2">
+            <div class="w-full aspect-square overflow-hidden">
+              <img [src]="item.image" alt="{{ item.name }}" class="w-full h-full object-cover object-top" />
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
