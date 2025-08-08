@@ -40,28 +40,90 @@
         fill
       />
     </div>
-    <div class="flex flex-col gap-1.5">
-      <div class="mb-1">
-        <h1 class="text-lg font-extrabold text-gray-900">
-          {{ venture?.name | titlecase }}
-        </h1>
-        <p class="text-gray-900 text-sm">
-          Créée le
-          {{ venture.founded_at | date : "longDate" }}
-        </p>
-      </div>
-      <div class="flex items-center gap-1.5 text-gray-800 text-sm">
-        <i-lucide [name]="icons.locate" class="size-3.5 text-green-500" />
-        {{ venture.location }}
-      </div>
-      <div class="flex items-center gap-1.5 text-gray-800 text-sm">
-        <i-lucide [name]="icons.phone" class="size-3 text-green-500" />
-        {{ venture.phone_number }}
-      </div>
-      <div class="flex items-center gap-1.5 text-gray-800 text-sm">
-        <i-lucide [name]="icons.email" class="size-3 text-green-500" />
-        {{ venture.email }}
-      </div>
+    <div class="relative overflow-x-auto">
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+        <tbody>
+          <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
+            <th
+              scope="row"
+              class="pr-8 py-4 font-satoshi font-medium text-gray-900 whitespace-nowrap"
+            >
+              Description
+            </th>
+            <td class="pr-8 text-gray-800 py-4">{{ venture.description }}</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
+            <th
+              scope="row"
+              class="pr-8 py-4 font-satoshi font-medium text-gray-900 whitespace-nowrap"
+            >
+              Problème résolu
+            </th>
+            <td class="pr-8 text-gray-800 py-4">
+              {{ venture.problem_solved }}
+            </td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
+            <th
+              scope="row"
+              class="pr-8 py-4 font-medium font-satoshi text-gray-900 whitespace-nowrap"
+            >
+              Marché cible
+            </th>
+            <td class="pr-8 text-gray-800 py-4">{{ venture.target_market }}</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
+            <th
+              scope="row"
+              class="pr-8 py-4 font-medium font-satoshi text-gray-900 whitespace-nowrap"
+            >
+              Étape
+            </th>
+            <td class="pr-8 text-gray-800 py-4">{{ venture.stage }}</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
+            <th
+              scope="row"
+              class="pr-8 py-4 font-medium font-satoshi text-gray-900 whitespace-nowrap"
+            >
+              Secteur
+            </th>
+            <td class="pr-8 text-gray-800 py-4">{{ venture.sector }}</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
+            <th
+              scope="row"
+              class="pr-8 py-4 font-medium font-satoshi text-gray-900 whitespace-nowrap"
+            >
+              URL LinkedIn
+            </th>
+            <td class="pr-8 text-gray-800 py-4">
+              <a
+                [href]="venture.website"
+                target="_blank"
+                class="text-primary-500 hover:underline"
+                >{{ venture.linkedin_url }}</a
+              >
+            </td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
+            <th
+              scope="row"
+              class="pr-8 py-4 font-medium font-satoshi text-gray-900 whitespace-nowrap"
+            >
+              Site Web
+            </th>
+            <td class="pr-8 text-gray-800 py-4">
+              <a
+                [href]="venture.website"
+                target="_blank"
+                class="text-primary-500 hover:underline"
+                >{{ venture.website }}</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <div
