@@ -91,6 +91,7 @@
       <table class="text-sm text-left rtl:text-right text-gray-500">
         <thead class="font-black text-gray-800 border-y border-gray-200">
           <tr>
+            <th class="px-6 py-3">Logo</th>
             <th class="px-6 py-3">Nom</th>
             <th class="px-6 py-3">Description</th>
             <th class="px-6 py-3">Créé le</th>
@@ -104,6 +105,9 @@
           <tr
             class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap"
           >
+            <td class="px-6 py-2">
+              <p-avatar [image]="program | apiIMG : 'program'" />
+            </td>
             <td class="px-6 py-2 font-medium text-gray-900">
               {{ program.name | titlecase }}
             </td>
@@ -209,6 +213,15 @@
     [modal]="true"
     [style]="{ width: '25rem' }"
   >
+    <div class="mb-4">
+      @if (program()) {
+      <app-file-upload
+        [name]="'logo'"
+        [url]="url + program()?.id"
+        (loaded)="onFileUploadLoaded()"
+      />
+      }
+    </div>
     <form
       class="flex flex-col gap-4"
       [formGroup]="updateProgramForm"

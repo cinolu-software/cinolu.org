@@ -58,6 +58,8 @@ export interface IVenture extends IBase {
 export interface IProgram extends IBase {
   name: string;
   description: string;
+  slug: string;
+  logo: string;
   projects: IProject[];
   events: IEvent[];
 }

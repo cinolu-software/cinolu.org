@@ -1,7 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { CONTACT_ITEMS, SOCIAL_LINKS } from '../data/contact.data';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { COUNTRY_CODE } from '../../../../shared/data/country-item.data';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,9 +17,11 @@ import { InputGroupAddon } from 'primeng/inputgroupaddon';
 import { InputGroup } from 'primeng/inputgroup';
 import { ButtonModule } from 'primeng/button';
 import { GENDERS } from '../../../../shared/data/member.items';
+import { ContactUsStore } from '../store/contact-us.store';
 
 @Component({
   selector: 'app-contact-us',
+  providers: [ContactUsStore],
   imports: [
     LucideAngularModule,
     FormsModule,
@@ -24,16 +32,17 @@ import { GENDERS } from '../../../../shared/data/member.items';
     InputGroupAddon,
     InputGroup,
     SelectModule,
-    ButtonModule
+    ButtonModule,
   ],
   standalone: true,
   templateUrl: './contact-us.component.html',
-  styles: ``
+  styles: ``,
 })
 export class ContactUsComponent {
   countryItems = COUNTRY_CODE;
   contactItems = CONTACT_ITEMS;
   #formBuilder: FormBuilder = inject(FormBuilder);
+  store = inject(ContactUsStore);
   form: FormGroup;
   selectedCountryCode = '';
   genderItems = GENDERS;
@@ -43,18 +52,31 @@ export class ContactUsComponent {
     this.form = this.#formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(5)]],
       email: ['', [Validators.email, Validators.required]],
-      phone_number: ['', [Validators.required, Validators.pattern(/^\+?[1-9]\d{1,14}$/)]],
+      phone_number: [
+        '',
+        [Validators.required, Validators.pattern(/^\+?[1-9]\d{1,14}$/)],
+      ],
       country: ['', [Validators.required]],
-      message: ['', [Validators.required]]
+      message: ['', [Validators.required]],
     });
   }
 
   onSelectCountry(event: SelectChangeEvent): void {
     const value = event.value;
-    this.selectedCountryCode = this.countryItems.find((item) => item.name === value)?.code || '';
+    this.selectedCountryCode =
+      this.countryItems.find((item) => item.name === value)?.code || '';
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    this.store.contactUs({
+      payload: {
+        ...this.form.value,
+        phone_number: this.selectedCountryCode + this.form.value.phone_number,
+      },
+      onSuccess: () => {
+        this.form.reset();
+        this.selectedCountryCode = '';
+      },
+    });
   }
 }

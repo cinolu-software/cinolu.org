@@ -1,12 +1,24 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { LucideAngularModule, RefreshCcw, Edit, Trash, Plus, Search } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  RefreshCcw,
+  SquarePen,
+  Trash,
+  Plus,
+  Search,
+} from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ProgramsStore } from '../store/programs.store';
 import { FilterProgramsDto } from '../dto/filter-programs.dto';
 import { ConfirmPopup } from 'primeng/confirmpopup';
@@ -17,11 +29,21 @@ import { Textarea } from 'primeng/textarea';
 import { UpdateProgramStore } from '../store/update-program.store';
 import { DeleteProgramStore } from '../store/delete-program.store';
 import { IProgram } from '../../../../../shared/models/entities.models';
+import { FileUploadComponent } from '../../../../../shared/components/file-upload/file-upload.component';
+import { environment } from '../../../../../../environments/environment';
+import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
+import { AvatarModule } from 'primeng/avatar';
 
 @Component({
   selector: 'app-programs-list',
   templateUrl: './programs-list.component.html',
-  providers: [ProgramsStore, DeleteProgramStore, UpdateProgramStore, AddProgramStore, ConfirmationService],
+  providers: [
+    ProgramsStore,
+    DeleteProgramStore,
+    UpdateProgramStore,
+    AddProgramStore,
+    ConfirmationService,
+  ],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -32,8 +54,11 @@ import { IProgram } from '../../../../../shared/models/entities.models';
     ReactiveFormsModule,
     ConfirmPopup,
     Dialog,
-    Textarea
-  ]
+    Textarea,
+    FileUploadComponent,
+    ApiImgPipe,
+    AvatarModule,
+  ],
 })
 export class ProgramsListComponent implements OnInit {
   #route = inject(ActivatedRoute);
@@ -47,27 +72,35 @@ export class ProgramsListComponent implements OnInit {
   addProgramStore = inject(AddProgramStore);
   updateProgramStore = inject(UpdateProgramStore);
   deleteProgramStore = inject(DeleteProgramStore);
+  program = signal<IProgram | null>(null);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
-  icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, plus: Plus, search: Search };
+  url = environment.apiUrl + 'programs/logo/';
+  icons = {
+    refresh: RefreshCcw,
+    edit: SquarePen,
+    trash: Trash,
+    plus: Plus,
+    search: Search,
+  };
   showAddModal = signal(false);
   showEditModal = signal(false);
   queryParams = signal<FilterProgramsDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
-    q: this.#route.snapshot.queryParamMap.get('q')
+    q: this.#route.snapshot.queryParamMap.get('q'),
   });
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || '', Validators.required]
+      q: [this.queryParams().q || '', Validators.required],
     });
     this.addProgramForm = this.#fb.group({
       name: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
     });
     this.updateProgramForm = this.#fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
     });
   }
 
@@ -82,6 +115,10 @@ export class ProgramsListComponent implements OnInit {
   onPageChange(currentPage: number): void {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
     this.updateRouteAndPrograms();
+  }
+
+  onFileUploadLoaded(): void {
+    this.loadPrograms();
   }
 
   updateRoute(): void {
@@ -107,16 +144,17 @@ export class ProgramsListComponent implements OnInit {
   }
 
   onToggleAddModal(): void {
-    this.showAddModal.set(!this.showAddModal());
+    this.showAddModal.update((v) => (v ? false : true));
   }
 
   onToggleEditModal(program: IProgram | null): void {
+    this.program.set(program);
     this.updateProgramForm.patchValue({
       id: program?.id || '',
       name: program?.name || '',
-      description: program?.description || ''
+      description: program?.description || '',
     });
-    this.showEditModal.update((v) => !v);
+    this.showEditModal.update((v) => (v ? false : true));
   }
 
   onAddProgram(): void {
@@ -125,7 +163,7 @@ export class ProgramsListComponent implements OnInit {
       onSuccess: () => {
         this.onToggleAddModal();
         this.addProgramForm.reset();
-      }
+      },
     });
   }
 
@@ -135,7 +173,7 @@ export class ProgramsListComponent implements OnInit {
       onSuccess: () => {
         this.onToggleEditModal(null);
         this.updateProgramForm.reset();
-      }
+      },
     });
   }
 
@@ -146,15 +184,15 @@ export class ProgramsListComponent implements OnInit {
       rejectButtonProps: {
         label: 'Annuler',
         severity: 'secondary',
-        outlined: true
+        outlined: true,
       },
       acceptButtonProps: {
         label: 'Confirmer',
-        severity: 'danger'
+        severity: 'danger',
       },
       accept: () => {
         this.deleteProgramStore.deleteProgram({ id: roleId });
-      }
+      },
     });
   }
 }

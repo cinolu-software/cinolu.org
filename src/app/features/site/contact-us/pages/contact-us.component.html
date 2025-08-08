@@ -1,22 +1,34 @@
 <section
   class="min-h-[83.33vh] bg-grid px-6 sm:px-8 md:px-10 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 mt-10"
-  appAnimationsOnScroll>
-  <h3 class="text-center font-black text-gray-700 text-3xl sm:text-4xl lg:text-5xl mb-10">Contactez-Nous</h3>
-
+  appAnimationsOnScroll
+>
+  <h3
+    class="text-center font-black text-gray-700 text-3xl sm:text-4xl lg:text-5xl mb-10"
+  >
+    Contactez-Nous
+  </h3>
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-    <form action="" class="space-y-5 w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form class="space-y-5 w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="flex flex-col gap-1.5">
           <label for="name">Nom complet</label>
-          <input pInputText id="name" formControlName="name" autocomplete="off" />
+          <input
+            pInputText
+            id="name"
+            formControlName="name"
+            autocomplete="off"
+          />
         </div>
-
         <div class="flex flex-col gap-1.5">
           <label for="email">Votre email</label>
-          <input pInputText id="email" formControlName="email" autocomplete="off" />
+          <input
+            pInputText
+            id="email"
+            formControlName="email"
+            autocomplete="off"
+          />
         </div>
       </div>
-
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="flex flex-col gap-1.5">
           <label for="country">Pays</label>
@@ -28,13 +40,22 @@
             [optionValue]="'name'"
             [showClear]="true"
             formControlName="country"
-            autocomplete="off" />
+            autocomplete="off"
+          />
         </div>
         <div class="flex flex-col gap-1.5">
           <label for="email">Téléphone</label>
           <p-inputgroup>
-            <p-inputgroup-addon>{{ selectedCountryCode || '----' }} </p-inputgroup-addon>
-            <input pInputText id="phone" placeholder="979998877" formControlName="phone_number" autocomplete="off" />
+            <p-inputgroup-addon>
+              {{ selectedCountryCode || "----" }}
+            </p-inputgroup-addon>
+            <input
+              pInputText
+              id="phone"
+              placeholder="979998877"
+              formControlName="phone_number"
+              autocomplete="off"
+            />
           </p-inputgroup>
         </div>
       </div>
@@ -48,43 +69,54 @@
           formControlName="message"
           rows="4"
           resize="off"
-          autocomplete="off"></textarea>
+          autocomplete="off"
+        ></textarea>
       </div>
-
       <div class="pt-2 flex justify-center sm:justify-start">
-        <button pButton type="submit">Envoyez</button>
+        <button
+          [size]="'small'"
+          [loading]="store.isLoading()"
+          [disabled]="form.invalid || store.isLoading()"
+          pButton
+          type="submit"
+        >
+          Envoyez votre message
+        </button>
       </div>
     </form>
-
-    <div class="bg-neutral-300/20 backdrop-blur-sm hover:bg-neutral-300/30 p-6 space-y-5">
+    <div
+      class="bg-neutral-300/20 backdrop-blur-sm hover:bg-neutral-300/30 p-6 space-y-5"
+    >
       <h3 class="text-2xl font-extrabold text-gray-800">Restons connectés !</h3>
       <div class="space-y-4">
         @for (item of contactItems; track $index) {
-          <div class="space-y-1">
-            <div class="flex items-center gap-3">
-              <div class="text-white rounded-full p-2 bg-primary-500">
-                <i-lucide [name]="item.icon" class=""></i-lucide>
-              </div>
-              <p class="font-bold text-lg text-gray-700">{{ item.title }}</p>
+        <div class="space-y-1">
+          <div class="flex items-center gap-3">
+            <div class="text-white rounded-full p-2 bg-primary-500">
+              <i-lucide [name]="item.icon" class=""></i-lucide>
             </div>
-            @for (child of item.children; track $index) {
-              <p class="ml-13 text-primary-500 text-base">{{ child.value }}</p>
-            }
+            <p class="font-bold text-lg text-gray-700">{{ item.title }}</p>
           </div>
+          @for (child of item.children; track $index) {
+          <p class="ml-13 text-primary-500 text-base">{{ child.value }}</p>
+          }
+        </div>
         }
 
         <div class="flex flex-wrap items-center justify-center gap-4">
           @for (item of socialMediaItems; track $index) {
-            <a
-              [href]="item.link"
-              target="_blank"
-              class="group inline-flex items-center justify-center w-10 h-10 rounded-full bg-white hover:bg-white/80 transition duration-300 ease-in-out shadow-md"
-              [attr.aria-label]="item.label">
-              <img
-                [src]="item.icon"
-                [alt]="item.label"
-                class="w-5 h-5 filter group-hover:brightness-125 transition duration-300" />
-            </a>
+          <a
+            [href]="item.link"
+            target="_blank"
+            class="group inline-flex items-center justify-center w-10 h-10 rounded-full bg-white hover:bg-white/80 transition duration-300 ease-in-out shadow-md"
+            [attr.aria-label]="item.label"
+          >
+            <img
+              [src]="item.icon"
+              [alt]="item.label"
+              class="w-5 h-5 filter group-hover:brightness-125 transition duration-300"
+            />
+          </a>
           }
         </div>
       </div>
@@ -97,7 +129,8 @@
       loading="lazy"
       allowfullscreen
       referrerpolicy="no-referrer-when-downgrade"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63035.155079005505!2d27.449214218656523!3d-11.665910227221612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19723f8f4deda58d%3A0xaa54c84125205d12!2sCentre%20d&#39;Innovation%20de%20Lubumbashi!5e0!3m2!1sfr!2scd!4v1694512345678!5m2!1sfr!2scd">
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63035.155079005505!2d27.449214218656523!3d-11.665910227221612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19723f8f4deda58d%3A0xaa54c84125205d12!2sCentre%20d&#39;Innovation%20de%20Lubumbashi!5e0!3m2!1sfr!2scd!4v1694512345678!5m2!1sfr!2scd"
+    >
     </iframe>
   </div>
 </section>
