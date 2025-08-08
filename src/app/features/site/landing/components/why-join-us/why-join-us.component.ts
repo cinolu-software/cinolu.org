@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 import { STATS } from '../../data/stats.data';
-import { HandCoins, Lightbulb, LucideAngularModule, MoveUpRight, User, UserPlus } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  HandCoins,
+  Lightbulb,
+  MoveUpRight,
+  User,
+  UserPlus,
+} from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CountUpDirective } from '../../../../../shared/directives/count-up.directive';
 import { RouterLink } from '@angular/router';
@@ -9,9 +16,15 @@ import { REASONS } from '../../data/reasons-join-us.data';
 
 @Component({
   selector: 'app-why-join-us',
-  imports: [LucideAngularModule, ButtonModule, CountUpDirective, RouterLink, FadeInOnScrollDirective],
+  imports: [
+    LucideAngularModule,
+    ButtonModule,
+    CountUpDirective,
+    RouterLink,
+    FadeInOnScrollDirective,
+  ],
   templateUrl: './why-join-us.component.html',
-  styles: ``
+  styles: ``,
 })
 export class WhyJoinUsComponent {
   stats = STATS;
@@ -21,6 +34,6 @@ export class WhyJoinUsComponent {
     moveUp: MoveUpRight,
     donate: HandCoins,
     users: User,
-    userPlus: UserPlus
+    userPlus: UserPlus,
   };
 }
