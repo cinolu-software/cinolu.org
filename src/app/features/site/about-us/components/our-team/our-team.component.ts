@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-our-team',
   imports: [CommonModule],
   templateUrl: './our-team.component.html',
-  styles: ``
+  styles: ``,
 })
 export class OurTeamComponent {
   our_team = TEAM_MEMBERS;

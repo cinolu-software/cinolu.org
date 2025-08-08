@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -11,7 +17,7 @@ interface IDeleteUserStore {
 export const DeleteUserStore = signalStore(
   withState<IDeleteUserStore>({ isLoading: false }),
   withProps(() => ({
-    _http: inject(HttpClient)
+    _http: inject(HttpClient),
   })),
   withMethods(({ _http, ...store }) => ({
     deleteUser: rxMethod<string>(
@@ -25,10 +31,10 @@ export const DeleteUserStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false });
               return of(null);
-            })
+            }),
           );
-        })
-      )
-    )
-  }))
+        }),
+      ),
+    ),
+  })),
 );

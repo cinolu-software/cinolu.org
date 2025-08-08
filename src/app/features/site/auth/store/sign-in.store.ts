@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
@@ -20,13 +26,13 @@ interface ISignInParams {
 
 export const SignInStore = signalStore(
   withState<ISignInStore>({
-    isLoading: false
+    isLoading: false,
   }),
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
     _router: inject(Router),
-    _authStore: inject(AuthStore)
+    _authStore: inject(AuthStore),
   })),
   withMethods(({ _http, _toast, _authStore, _router, ...store }) => ({
     signIn: rxMethod<ISignInParams>(
@@ -45,10 +51,10 @@ export const SignInStore = signalStore(
               patchState(store, { isLoading: false });
               _toast.showError(err.error['message'] || 'Erreur de connexion');
               return of(null);
-            })
+            }),
           );
-        })
-      )
-    )
-  }))
+        }),
+      ),
+    ),
+  })),
 );

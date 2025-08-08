@@ -4,6 +4,9 @@ export const programsRoutes: Routes = [
   {
     path: '',
     title: 'Les programmes',
-    loadComponent: () => import('./pages/programs-list.component').then((c) => c.ProgramsListComponent)
-  }
+    loadComponent: () =>
+      import('./pages/programs-list.component').then(
+        (c) => c.ProgramsListComponent,
+      ),
+  },
 ];

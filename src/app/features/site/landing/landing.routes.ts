@@ -4,6 +4,9 @@ export const landingRoutes: Routes = [
   {
     path: '',
     title: 'Home',
-    loadComponent: () => import('./pages/landing-page.component').then((c) => c.LandingPageComponent)
-  }
+    loadComponent: () =>
+      import('./pages/landing-page.component').then(
+        (c) => c.LandingPageComponent,
+      ),
+  },
 ];

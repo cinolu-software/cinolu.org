@@ -18,9 +18,9 @@ import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
     ApiImgPipe,
     ProjectOverviewComponent,
     ProjectSkeletonComponent,
-    LucideAngularModule
+    LucideAngularModule,
   ],
-  templateUrl: './project-detail.component.html'
+  templateUrl: './project-detail.component.html',
 })
 export class ProjectDetailComponent implements OnInit {
   #location = inject(Location);

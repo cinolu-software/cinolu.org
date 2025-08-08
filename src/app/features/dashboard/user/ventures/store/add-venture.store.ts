@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
@@ -17,7 +23,7 @@ export const AddVentureStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _router: inject(Router)
+    _router: inject(Router),
   })),
   withMethods(({ _http, _toast, _router, ...store }) => ({
     addVenture: rxMethod<VentureDto>(
@@ -34,10 +40,10 @@ export const AddVentureStore = signalStore(
               _toast.showError("Erreur lors de l'ajout");
               patchState(store, { isLoading: false });
               return of(null);
-            })
+            }),
           );
-        })
-      )
-    )
-  }))
+        }),
+      ),
+    ),
+  })),
 );

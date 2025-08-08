@@ -29,20 +29,20 @@ export const ProgramsStore = signalStore(
         exhaustMap(() => {
           return http.get<{ data: IProgram[] }>('programs').pipe(
             tap(({ data }) =>
-              patchState(store, { isLoading: false, programs: data })
+              patchState(store, { isLoading: false, programs: data }),
             ),
             catchError(() => {
               patchState(store, { isLoading: false, programs: [] });
               return of(null);
-            })
+            }),
           );
-        })
-      )
+        }),
+      ),
     ),
   })),
   withHooks({
     onInit: ({ loadPrograms }) => {
       loadPrograms();
     },
-  })
+  }),
 );

@@ -1,13 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject } from '@angular/core';
-import { ArrowLeft, LucideAngularModule, Check, ChevronsLeft, ChevronsRight } from 'lucide-angular';
+import {
+  ArrowLeft,
+  LucideAngularModule,
+  Check,
+  ChevronsLeft,
+  ChevronsRight,
+} from 'lucide-angular';
 import { VentureStore } from '../../store/venture.store';
 import { RouterLink } from '@angular/router';
 import { StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { SECTORS } from '../../data/sectors.data';
 import { STAGES } from '../../data/stage.data';
 import { UpdateVenturetore } from '../../store/update-venture.store';
@@ -30,13 +41,18 @@ import { FileUploadComponent } from '../../../../../../shared/components/file-up
     SelectModule,
     DatePickerModule,
     FileUploadComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  templateUrl: './venture-edit.component.html'
+  templateUrl: './venture-edit.component.html',
 })
 export class EditVentureComponent {
   #fb = inject(FormBuilder);
-  icons = { back: ArrowLeft, next: ChevronsRight, previous: ChevronsLeft, check: Check };
+  icons = {
+    back: ArrowLeft,
+    next: ChevronsRight,
+    previous: ChevronsLeft,
+    check: Check,
+  };
   store = inject(VentureStore);
   updateVentureStore = inject(UpdateVenturetore);
   form: FormGroup;
@@ -58,14 +74,14 @@ export class EditVentureComponent {
       sector: [''],
       founded_at: [''],
       location: [''],
-      stage: ['']
+      stage: [''],
     });
     effect(() => {
       const venture = this.store.venture();
       if (!venture) return;
       this.form.patchValue({
         ...venture,
-        founded_at: new Date(venture.founded_at)
+        founded_at: new Date(venture.founded_at),
       });
     });
   }
@@ -75,7 +91,7 @@ export class EditVentureComponent {
     const venture = this.store.venture();
     this.updateVentureStore.updateVenture({
       slug: venture?.slug || '',
-      payload: this.form.value
+      payload: this.form.value,
     });
   }
 }

@@ -22,13 +22,13 @@ export class FadeInOnScrollDirective {
             if (entry.isIntersecting) {
               this.#renderer.addClass(
                 this.#el.nativeElement,
-                'animate-slide-in'
+                'animate-slide-in',
               );
               observer.unobserve(this.#el.nativeElement);
             }
           });
         },
-        { threshold: 0.1 }
+        { threshold: 0.1 },
       );
       observer.observe(this.#el.nativeElement);
     });

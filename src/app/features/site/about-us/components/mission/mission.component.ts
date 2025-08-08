@@ -5,10 +5,10 @@ import { LucideAngularModule, Rocket } from 'lucide-angular';
   selector: 'app-mission',
   imports: [LucideAngularModule],
   templateUrl: './mission.component.html',
-  styles: ``
+  styles: ``,
 })
 export class MissionComponent {
   icons = {
-    mission: Rocket
+    mission: Rocket,
   };
 }

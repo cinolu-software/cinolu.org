@@ -3,7 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'primeng/carousel';
 import { carouselConfig } from '../../config/carousel.config';
-import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  MoveUpRight,
+  ArrowLeft,
+  ArrowRight,
+} from 'lucide-angular';
 import { RecentProjectsStore } from '../../../projects/store/recent-projects.store';
 import { ProgramCardSkeletonComponent } from '../../../projects/components/project-card-skeleton/project-card-skeleton.component';
 import { ProjectCardComponent } from '../../../projects/components/project-card/project-card.component';
@@ -19,12 +24,16 @@ import { FadeInOnScrollDirective } from '../../../../../shared/directives/animat
     RouterModule,
     LucideAngularModule,
     ProgramCardSkeletonComponent,
-    FadeInOnScrollDirective
+    FadeInOnScrollDirective,
   ],
-  templateUrl: './recent-projects.component.html'
+  templateUrl: './recent-projects.component.html',
 })
 export class RecentProjectsComponent {
   store = inject(RecentProjectsStore);
   carouselConfig = carouselConfig;
-  icons = { moveUpRight: MoveUpRight, moveLeft: ArrowLeft, moveRight: ArrowRight };
+  icons = {
+    moveUpRight: MoveUpRight,
+    moveLeft: ArrowLeft,
+    moveRight: ArrowRight,
+  };
 }

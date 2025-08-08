@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
@@ -17,27 +23,31 @@ export const ResetPasswordStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _router: inject(Router)
+    _router: inject(Router),
   })),
   withMethods(({ _http, _router, _toast, ...store }) => ({
     resetPassword: rxMethod<ResetPasswordDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((payload) => {
-          return _http.post<{ data: IUser }>('auth/reset-password', payload).pipe(
-            tap(() => {
-              patchState(store, { isLoading: false });
-              _toast.showSuccess('Mot de passe réinitialisé avec succès');
-              _router.navigate(['/sign-in']);
-            }),
-            catchError(() => {
-              patchState(store, { isLoading: false });
-              _toast.showError('Erreur lors de la réinitialisation du mot de passe');
-              return of(null);
-            })
-          );
-        })
-      )
-    )
-  }))
+          return _http
+            .post<{ data: IUser }>('auth/reset-password', payload)
+            .pipe(
+              tap(() => {
+                patchState(store, { isLoading: false });
+                _toast.showSuccess('Mot de passe réinitialisé avec succès');
+                _router.navigate(['/sign-in']);
+              }),
+              catchError(() => {
+                patchState(store, { isLoading: false });
+                _toast.showError(
+                  'Erreur lors de la réinitialisation du mot de passe',
+                );
+                return of(null);
+              }),
+            );
+        }),
+      ),
+    ),
+  })),
 );

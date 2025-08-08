@@ -7,12 +7,12 @@ import { ArrowDown, CalendarClock, LucideAngularModule } from 'lucide-angular';
   selector: 'app-history',
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './history.component.html',
-  styles: ``
+  styles: ``,
 })
 export class HistoryComponent {
   historyData = HISTORY_DATA;
   icons = {
     upArrow: ArrowDown,
-    calendar: CalendarClock
+    calendar: CalendarClock,
   };
 }

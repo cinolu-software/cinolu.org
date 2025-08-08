@@ -27,8 +27,8 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
     ApiImgPipe,
     NgxPaginationModule,
     NgOptimizedImage,
-    ConfirmPopupModule
-  ]
+    ConfirmPopupModule,
+  ],
 })
 export class VenturesListComponent implements OnInit {
   icons = { plus: Plus, edit: Edit, trash: Trash, eye: Eye };
@@ -38,7 +38,7 @@ export class VenturesListComponent implements OnInit {
   store = inject(VenturesStore);
   deleteVentureStore = inject(DeleteVentureStore);
   queryParams = signal<FilterVenturesDto>({
-    page: this.#route.snapshot.queryParams?.['page']
+    page: this.#route.snapshot.queryParams?.['page'],
   });
 
   ngOnInit(): void {
@@ -68,15 +68,15 @@ export class VenturesListComponent implements OnInit {
       rejectButtonProps: {
         label: 'Annuler',
         severity: 'secondary',
-        outlined: true
+        outlined: true,
       },
       acceptButtonProps: {
         label: 'Confirmer',
-        severity: 'danger'
+        severity: 'danger',
       },
       accept: () => {
         this.deleteVentureStore.deleteVenture(id);
-      }
+      },
     });
   }
 }

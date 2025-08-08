@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
@@ -13,7 +19,7 @@ interface IDownloadUsersStore {
 export const DownloadUsersStore = signalStore(
   withState<IDownloadUsersStore>({ isLoading: false }),
   withProps(() => ({
-    _http: inject(HttpClient)
+    _http: inject(HttpClient),
   })),
   withMethods(({ _http, ...store }) => ({
     downloadUsers: rxMethod<FilterEventsDto>(
@@ -21,23 +27,25 @@ export const DownloadUsersStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          return _http.get('users/export/csv', { params, responseType: 'blob' }).pipe(
-            tap((blob) => {
-              const url = window.URL.createObjectURL(blob);
-              const a = document.createElement('a');
-              a.href = url;
-              a.download = 'users.csv';
-              a.click();
-              window.URL.revokeObjectURL(url);
-              patchState(store, { isLoading: false });
-            }),
-            catchError(() => {
-              patchState(store, { isLoading: false });
-              return of(null);
-            })
-          );
-        })
-      )
-    )
-  }))
+          return _http
+            .get('users/export/csv', { params, responseType: 'blob' })
+            .pipe(
+              tap((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'users.csv';
+                a.click();
+                window.URL.revokeObjectURL(url);
+                patchState(store, { isLoading: false });
+              }),
+              catchError(() => {
+                patchState(store, { isLoading: false });
+                return of(null);
+              }),
+            );
+        }),
+      ),
+    ),
+  })),
 );

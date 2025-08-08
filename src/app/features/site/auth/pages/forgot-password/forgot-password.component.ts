@@ -1,5 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
@@ -19,8 +25,8 @@ import { ForgotPasswordStore } from '../../store/forgot-password.store';
     InputText,
     RouterModule,
     CommonModule,
-    AuthCardComponent
-  ]
+    AuthCardComponent,
+  ],
 })
 export class AuthForgotPasswordComponent {
   #formBuilder = inject(FormBuilder);
@@ -29,7 +35,7 @@ export class AuthForgotPasswordComponent {
 
   constructor() {
     this.form = this.#formBuilder.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
     });
   }
 

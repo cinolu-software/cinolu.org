@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -18,27 +24,31 @@ export const UpdateEventStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _router: inject(Router),
-    _toast: inject(ToastrService)
+    _toast: inject(ToastrService),
   })),
   withMethods(({ _http, _router, _toast, ...store }) => ({
     updateEvent: rxMethod<EventDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((event) => {
-          return _http.patch<{ data: IEvent }>(`events/${event.id}`, event).pipe(
-            map(({ data }) => {
-              _toast.showSuccess("L'événement a été mis à jour avec succès");
-              _router.navigate(['/dashboard/events/list']);
-              patchState(store, { isLoading: false, event: data });
-            }),
-            catchError(() => {
-              _toast.showError("Une erreur s'est produite lors de la mise à jour");
-              patchState(store, { isLoading: false, event: null });
-              return of(null);
-            })
-          );
-        })
-      )
-    )
-  }))
+          return _http
+            .patch<{ data: IEvent }>(`events/${event.id}`, event)
+            .pipe(
+              map(({ data }) => {
+                _toast.showSuccess("L'événement a été mis à jour avec succès");
+                _router.navigate(['/dashboard/events/list']);
+                patchState(store, { isLoading: false, event: data });
+              }),
+              catchError(() => {
+                _toast.showError(
+                  "Une erreur s'est produite lors de la mise à jour",
+                );
+                patchState(store, { isLoading: false, event: null });
+                return of(null);
+              }),
+            );
+        }),
+      ),
+    ),
+  })),
 );

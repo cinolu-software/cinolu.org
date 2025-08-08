@@ -3,5 +3,5 @@ export enum RoleEnum {
   User = 'user',
   Staff = 'staff',
   Coach = 'coach',
-  Guest = 'guest'
+  Guest = 'guest',
 }

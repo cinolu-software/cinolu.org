@@ -1,9 +1,20 @@
 import { Component, effect, inject, OnInit } from '@angular/core';
-import { ArrowLeft, LucideAngularModule, ChevronsRight, ChevronsLeft, Check } from 'lucide-angular';
+import {
+  ArrowLeft,
+  LucideAngularModule,
+  ChevronsRight,
+  ChevronsLeft,
+  Check,
+} from 'lucide-angular';
 import { Button } from 'primeng/button';
 import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { StepperModule } from 'primeng/stepper';
 import { TextareaModule } from 'primeng/textarea';
 import { UnpaginatedProgramsStore } from '../../../programs/store/unpaginated-programs.store';
@@ -22,7 +33,13 @@ import { EventsStore } from '../../store/events/events.store';
 @Component({
   selector: 'app-event-edit',
   templateUrl: './event-edit.component.html',
-  providers: [EventsStore, EventStore, UpdateEventStore, UnpaginatedProgramsStore, UnpaginatedCategoriesStore],
+  providers: [
+    EventsStore,
+    EventStore,
+    UpdateEventStore,
+    UnpaginatedProgramsStore,
+    UnpaginatedCategoriesStore,
+  ],
   imports: [
     LucideAngularModule,
     SelectModule,
@@ -36,8 +53,8 @@ import { EventsStore } from '../../store/events/events.store';
     ReactiveFormsModule,
     FileUploadComponent,
     NgOptimizedImage,
-    ApiImgPipe
-  ]
+    ApiImgPipe,
+  ],
 })
 export class EditEventComponent implements OnInit {
   #fb = inject(FormBuilder);
@@ -50,7 +67,12 @@ export class EditEventComponent implements OnInit {
   eventStore = inject(EventStore);
   url = `${environment.apiUrl}events/cover/`;
   #slug = this.#route.snapshot.params['slug'];
-  icons = { back: ArrowLeft, next: ChevronsRight, previous: ChevronsLeft, check: Check };
+  icons = {
+    back: ArrowLeft,
+    next: ChevronsRight,
+    previous: ChevronsLeft,
+    check: Check,
+  };
 
   constructor() {
     this.form = this.#fb.group({
@@ -62,7 +84,7 @@ export class EditEventComponent implements OnInit {
       started_at: ['', Validators.required],
       ended_at: ['', Validators.required],
       program: ['', Validators.required],
-      categories: [[], Validators.required]
+      categories: [[], Validators.required],
     });
     effect(() => {
       const event = this.eventStore.event();
@@ -72,7 +94,7 @@ export class EditEventComponent implements OnInit {
         started_at: new Date(event.started_at),
         ended_at: new Date(event.ended_at),
         program: event.program.id,
-        categories: event.categories?.map((c) => c.id)
+        categories: event.categories?.map((c) => c.id),
       });
     });
   }

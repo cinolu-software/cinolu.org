@@ -1,9 +1,20 @@
 import { Component, effect, inject, OnInit } from '@angular/core';
-import { ArrowLeft, LucideAngularModule, ChevronsRight, ChevronsLeft, Check } from 'lucide-angular';
+import {
+  ArrowLeft,
+  LucideAngularModule,
+  ChevronsRight,
+  ChevronsLeft,
+  Check,
+} from 'lucide-angular';
 import { Button } from 'primeng/button';
 import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { StepperModule } from 'primeng/stepper';
 import { TextareaModule } from 'primeng/textarea';
 import { UnpaginatedProgramsStore } from '../../../programs/store/unpaginated-programs.store';
@@ -21,7 +32,12 @@ import { ProjectStore } from '../../../../../site/projects/store/project.store';
 @Component({
   selector: 'app-project-edit',
   templateUrl: './project-edit.component.html',
-  providers: [ProjectStore, UpdateProjectStore, UnpaginatedProgramsStore, UnpaginatedCategoriesStore],
+  providers: [
+    ProjectStore,
+    UpdateProjectStore,
+    UnpaginatedProgramsStore,
+    UnpaginatedCategoriesStore,
+  ],
   imports: [
     LucideAngularModule,
     SelectModule,
@@ -35,8 +51,8 @@ import { ProjectStore } from '../../../../../site/projects/store/project.store';
     ReactiveFormsModule,
     FileUploadComponent,
     NgOptimizedImage,
-    ApiImgPipe
-  ]
+    ApiImgPipe,
+  ],
 })
 export class EditProjectComponent implements OnInit {
   #fb = inject(FormBuilder);
@@ -50,7 +66,12 @@ export class EditProjectComponent implements OnInit {
   url = `${environment.apiUrl}projects/cover/`;
   #slug = this.#route.snapshot.params['slug'];
 
-  icons = { back: ArrowLeft, next: ChevronsRight, previous: ChevronsLeft, check: Check };
+  icons = {
+    back: ArrowLeft,
+    next: ChevronsRight,
+    previous: ChevronsLeft,
+    check: Check,
+  };
 
   constructor() {
     this.form = this.#fb.group({
@@ -61,7 +82,7 @@ export class EditProjectComponent implements OnInit {
       started_at: ['', Validators.required],
       ended_at: ['', Validators.required],
       program: ['', Validators.required],
-      categories: [[], Validators.required]
+      categories: [[], Validators.required],
     });
     effect(() => {
       const project = this.projectStore.project();
@@ -71,7 +92,7 @@ export class EditProjectComponent implements OnInit {
         started_at: new Date(project.started_at),
         ended_at: new Date(project.ended_at),
         program: project.program.id,
-        categories: project.categories?.map((c) => c.id)
+        categories: project.categories?.map((c) => c.id),
       });
     });
   }

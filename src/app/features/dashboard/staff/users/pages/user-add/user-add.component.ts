@@ -6,7 +6,12 @@ import { CommonModule, Location } from '@angular/common';
 import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { AddUserStore } from '../../store/users/add-user.store';
 import { UnpaginatedRolesStore } from '../../store/roles/unpaginated-roles.store';
@@ -24,8 +29,8 @@ import { UnpaginatedRolesStore } from '../../store/roles/unpaginated-roles.store
     AvatarModule,
     NgxPaginationModule,
     ReactiveFormsModule,
-    MultiSelectModule
-  ]
+    MultiSelectModule,
+  ],
 })
 export class AddUserComponent {
   #fb = inject(FormBuilder);
@@ -43,7 +48,7 @@ export class AddUserComponent {
       city: ['', Validators.required],
       country: ['', Validators.required],
       birth_date: ['', Validators.required],
-      roles: [[], Validators.required]
+      roles: [[], Validators.required],
     });
   }
 

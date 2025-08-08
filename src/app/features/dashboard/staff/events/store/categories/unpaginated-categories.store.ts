@@ -1,4 +1,11 @@
-import { patchState, signalStore, withHooks, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withHooks,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, exhaustMap, map, of, pipe, tap } from 'rxjs';
@@ -13,7 +20,7 @@ interface IUnpaginatedCategoriesStore {
 export const UnpaginatedCategoriesStore = signalStore(
   withState<IUnpaginatedCategoriesStore>({ isLoading: false, categories: [] }),
   withProps(() => ({
-    _http: inject(HttpClient)
+    _http: inject(HttpClient),
   })),
   withMethods(({ _http, ...store }) => ({
     loadCategories: rxMethod<void>(
@@ -27,15 +34,15 @@ export const UnpaginatedCategoriesStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, categories: [] });
               return of(null);
-            })
+            }),
           );
-        })
-      )
-    )
+        }),
+      ),
+    ),
   })),
   withHooks({
     onInit({ loadCategories }) {
       loadCategories();
-    }
-  })
+    },
+  }),
 );

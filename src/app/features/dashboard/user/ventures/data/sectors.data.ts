@@ -18,5 +18,5 @@ export const SECTORS = [
   'Télécommunications',
   'Mines / Ressources naturelles',
   'Conseil / Juridique',
-  'Autre'
+  'Autre',
 ];

@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -18,7 +24,7 @@ export const AddEventStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _router: inject(Router),
-    _toast: inject(ToastrService)
+    _toast: inject(ToastrService),
   })),
   withMethods(({ _http, _router, _toast, ...store }) => ({
     addEvent: rxMethod<EventDto>(
@@ -35,10 +41,10 @@ export const AddEventStore = signalStore(
               _toast.showError("Une erreur s'est produite");
               patchState(store, { isLoading: false, events: null });
               return of(null);
-            })
+            }),
           );
-        })
-      )
-    )
-  }))
+        }),
+      ),
+    ),
+  })),
 );

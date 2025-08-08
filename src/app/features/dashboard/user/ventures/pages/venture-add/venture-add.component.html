@@ -1,6 +1,9 @@
 <section class="pt-32 dashboard-main-content flex flex-col gap-4">
   <div class="mb-4">
-    <button class="text-primary-300 hover:underline flex items-center gap-2 mb-1" (click)="onGoBack()">
+    <button
+      class="text-primary-300 hover:underline flex items-center gap-2 mb-1"
+      (click)="onGoBack()"
+    >
       <i-lucide [name]="icons.back" class="size-4" />
       Revenir en arrière
     </button>
@@ -18,27 +21,64 @@
           <ng-template #content let-activateCallback="activateCallback">
             <div class="flex flex-col gap-4">
               <div class="flex flex-col gap-1.5">
-                <label for="name" class="font-medium">Nom de l'entreprise <span class="text-red-500">*</span></label>
-                <input pInputText id="name" formControlName="name" autocomplete="off" />
+                <label for="name" class="font-medium"
+                  >Nom de l'entreprise
+                  <span class="text-red-500">*</span></label
+                >
+                <input
+                  pInputText
+                  id="name"
+                  formControlName="name"
+                  autocomplete="off"
+                />
               </div>
               <div class="flex flex-col gap-1.5">
                 <label for="email" class="font-medium">Adresse e-mail</label>
-                <input pInputText type="email" id="email" formControlName="email" autocomplete="off" />
+                <input
+                  pInputText
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  autocomplete="off"
+                />
               </div>
               <div class="flex flex-col gap-1.5">
-                <label for="phone_number" class="font-medium">Numéro de téléphone</label>
-                <input pInputText id="phone_number" formControlName="phone_number" autocomplete="off" />
+                <label for="phone_number" class="font-medium"
+                  >Numéro de téléphone</label
+                >
+                <input
+                  pInputText
+                  id="phone_number"
+                  formControlName="phone_number"
+                  autocomplete="off"
+                />
               </div>
               <div class="flex flex-col gap-1.5">
                 <label for="website" class="font-medium">Site web</label>
-                <input pInputText id="website" formControlName="website" autocomplete="off" />
+                <input
+                  pInputText
+                  id="website"
+                  formControlName="website"
+                  autocomplete="off"
+                />
               </div>
               <div class="flex flex-col gap-1.5">
-                <label for="linkedin_url" class="font-medium">URL LinkedIn</label>
-                <input pInputText id="linkedin_url" formControlName="linkedin_url" autocomplete="off" />
+                <label for="linkedin_url" class="font-medium"
+                  >URL LinkedIn</label
+                >
+                <input
+                  pInputText
+                  id="linkedin_url"
+                  formControlName="linkedin_url"
+                  autocomplete="off"
+                />
               </div>
               <div class="flex justify-end">
-                <p-button size="small" variant="outlined" (onClick)="activateCallback(2)">
+                <p-button
+                  size="small"
+                  variant="outlined"
+                  (onClick)="activateCallback(2)"
+                >
                   Suivant
                   <i-lucide [name]="icons.next" class="size-4" />
                 </p-button>
@@ -51,15 +91,33 @@
             <div class="flex flex-col gap-4">
               <div class="flex flex-col gap-1.5">
                 <label for="sector" class="font-medium">Secteur</label>
-                <p-select [inputId]="'sector'" [options]="sectors" formControlName="sector" autocomplete="off" />
+                <p-select
+                  [inputId]="'sector'"
+                  [options]="sectors"
+                  formControlName="sector"
+                  autocomplete="off"
+                />
               </div>
               <div class="flex flex-col gap-1.5">
-                <label for="founded_at" class="font-medium">Date de création</label>
-                <p-datepicker [inputId]="'founded_at'" formControlName="founded_at" autocomplete="off" />
+                <label for="founded_at" class="font-medium"
+                  >Date de création</label
+                >
+                <p-datepicker
+                  [inputId]="'founded_at'"
+                  formControlName="founded_at"
+                  autocomplete="off"
+                />
               </div>
               <div class="flex flex-col gap-1.5">
-                <label for="location" class="font-medium">Emplacement(Pays - Ville)</label>
-                <input pInputText id="location" formControlName="location" autocomplete="off" />
+                <label for="location" class="font-medium"
+                  >Emplacement(Pays - Ville)</label
+                >
+                <input
+                  pInputText
+                  id="location"
+                  formControlName="location"
+                  autocomplete="off"
+                />
               </div>
               <div class="flex flex-col gap-1.5">
                 <label for="stage" class="font-medium">Étape</label>
@@ -68,14 +126,24 @@
                   [options]="stages"
                   formControlName="stage"
                   class="w-full"
-                  autocomplete="off" />
+                  autocomplete="off"
+                />
               </div>
               <div class="flex py-6 justify-between">
-                <p-button size="small" variant="outlined" severity="secondary" (onClick)="activateCallback(1)">
+                <p-button
+                  size="small"
+                  variant="outlined"
+                  severity="secondary"
+                  (onClick)="activateCallback(1)"
+                >
                   <i-lucide [name]="icons.previous" class="size-4" />
                   Précedent
                 </p-button>
-                <p-button size="small" variant="outlined" (onClick)="activateCallback(3)">
+                <p-button
+                  size="small"
+                  variant="outlined"
+                  (onClick)="activateCallback(3)"
+                >
                   Suivant
                   <i-lucide [name]="icons.next" class="size-4" />
                 </p-button>
@@ -88,7 +156,8 @@
             <div class="flex flex-col gap-4">
               <div class="flex flex-col gap-1.5">
                 <label for="description" class="font-medium"
-                  >Description de l'entreprise <span class="text-red-500">*</span></label
+                  >Description de l'entreprise
+                  <span class="text-red-500">*</span></label
                 >
                 <textarea
                   [id]="'description'"
@@ -96,7 +165,8 @@
                   formControlName="description"
                   rows="5"
                   cols="30"
-                  autocomplete="off"></textarea>
+                  autocomplete="off"
+                ></textarea>
               </div>
               <div class="flex flex-col gap-1.5">
                 <label for="problem_solved" class="font-medium">
@@ -109,7 +179,8 @@
                   formControlName="problem_solved"
                   rows="5"
                   cols="30"
-                  autocomplete="off"></textarea>
+                  autocomplete="off"
+                ></textarea>
               </div>
               <div class="flex flex-col gap-1.5">
                 <label for="target_market" class="font-medium">
@@ -122,10 +193,16 @@
                   formControlName="target_market"
                   rows="5"
                   cols="30"
-                  autocomplete="off"></textarea>
+                  autocomplete="off"
+                ></textarea>
               </div>
               <div class="flex py-6 justify-between">
-                <p-button size="small" variant="outlined" severity="secondary" (onClick)="activateCallback(2)">
+                <p-button
+                  size="small"
+                  variant="outlined"
+                  severity="secondary"
+                  (onClick)="activateCallback(2)"
+                >
                   <i-lucide [name]="icons.previous" class="size-4" />
                   Précedent
                 </p-button>
@@ -133,7 +210,8 @@
                   [loading]="store.isLoading()"
                   [disabled]="store.isLoading() || form.invalid"
                   size="small"
-                  type="submit">
+                  type="submit"
+                >
                   Finaliser
                   @if (!store.isLoading()) {
                     <i-lucide [name]="icons.check" class="size-4" />

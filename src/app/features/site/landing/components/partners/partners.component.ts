@@ -8,8 +8,15 @@ import { FadeInOnScrollDirective } from '../../../../../shared/directives/animat
 
 @Component({
   selector: 'app-partners',
-  imports: [NgOptimizedImage, CommonModule, FadeInOnScrollDirective, InputGroupModule, InputGroupAddonModule, Select],
-  templateUrl: './partners.component.html'
+  imports: [
+    NgOptimizedImage,
+    CommonModule,
+    FadeInOnScrollDirective,
+    InputGroupModule,
+    InputGroupAddonModule,
+    Select,
+  ],
+  templateUrl: './partners.component.html',
 })
 export class PartnersComponent {
   partners = PARTNERS;
@@ -20,7 +27,7 @@ export class PartnersComponent {
     { id: 2, name: 'Entrepreneur·e' },
     { id: 3, name: 'Volontaire' },
     { id: 4, name: 'Chercheur·se' },
-    { id: 5, name: 'Autre' }
+    { id: 5, name: 'Autre' },
   ];
 
   date: Date | undefined;

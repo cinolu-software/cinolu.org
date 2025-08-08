@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -22,7 +28,7 @@ export const AddProgramStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _programsStore: inject(ProgramsStore),
-    _toast: inject(ToastrService)
+    _toast: inject(ToastrService),
   })),
   withMethods(({ _http, _programsStore, _toast, ...store }) => ({
     addProgram: rxMethod<IAddProgramParams>(
@@ -40,10 +46,10 @@ export const AddProgramStore = signalStore(
               _toast.showError("Échec de l'ajout du rôle");
               patchState(store, { isLoading: false });
               return of(null);
-            })
+            }),
           );
-        })
-      )
-    )
-  }))
+        }),
+      ),
+    ),
+  })),
 );

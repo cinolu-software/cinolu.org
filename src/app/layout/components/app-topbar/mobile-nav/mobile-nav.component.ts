@@ -1,15 +1,27 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { LucideAngularModule, ChevronDown, Menu, X, ArrowLeft } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  ChevronDown,
+  Menu,
+  X,
+  ArrowLeft,
+} from 'lucide-angular';
 import { ILink } from '../../../data/links.data';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { AuthStore } from '../../../../core/auth/auth.store';
 
 @Component({
   selector: 'app-mobile-nav',
-  imports: [RouterModule, NgOptimizedImage, CommonModule, LucideAngularModule, ApiImgPipe],
-  templateUrl: './mobile-nav.component.html'
+  imports: [
+    RouterModule,
+    NgOptimizedImage,
+    CommonModule,
+    LucideAngularModule,
+    ApiImgPipe,
+  ],
+  templateUrl: './mobile-nav.component.html',
 })
 export class MobileNavComponent {
   isOpen = signal<boolean>(false);

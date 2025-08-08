@@ -1,4 +1,10 @@
-import { signalStore, withState, withMethods, patchState, withProps } from '@ngrx/signals';
+import {
+  signalStore,
+  withState,
+  withMethods,
+  patchState,
+  withProps,
+} from '@ngrx/signals';
 import { IUser } from '../../shared/models/entities.models';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, exhaustMap } from 'rxjs';
@@ -17,7 +23,7 @@ export const AuthStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _router: inject(Router),
-    _toast: inject(ToastrService)
+    _toast: inject(ToastrService),
   })),
   withMethods(({ _http, _router, _toast, ...store }) => ({
     getProfile: rxMethod<void>(
@@ -28,10 +34,10 @@ export const AuthStore = signalStore(
             catchError(() => {
               patchState(store, { user: null });
               return of(null);
-            })
-          )
-        )
-      )
+            }),
+          ),
+        ),
+      ),
     ),
     signOut: rxMethod<void>(
       pipe(
@@ -45,11 +51,11 @@ export const AuthStore = signalStore(
             catchError(() => {
               _toast.showError('Erreur lors de la déconnexion');
               return of(null);
-            })
-          )
-        )
-      )
+            }),
+          ),
+        ),
+      ),
     ),
-    setUser: (user: IUser | null) => patchState(store, { user })
-  }))
+    setUser: (user: IUser | null) => patchState(store, { user }),
+  })),
 );

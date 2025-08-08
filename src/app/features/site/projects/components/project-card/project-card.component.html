@@ -4,7 +4,7 @@
 >
   <div class="h-60 w-full relative overflow-hidden bg-gray-100 mb-1.5">
     <img
-      [ngSrc]="project() | apiIMG : 'project'"
+      [ngSrc]="project() | apiIMG: 'project'"
       [alt]="project().name"
       class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30"
       fill
@@ -25,13 +25,13 @@
       <div class="flex items-center text-md leading-5 mb-2">
         <i-lucide class="size-5" [name]="icons.calendarCheck" />
         <div class="ml-1.5">
-          Début: Le {{ project().started_at | date : "longDate" }}
+          Début: Le {{ project().started_at | date: "longDate" }}
         </div>
       </div>
       <div class="t flex items-center text-md leading-5">
         <i-lucide class="size-5" [name]="icons.calendarX" />
         <div class="ml-1.5">
-          Fin: Le {{ project().ended_at | date : "longDate" }}
+          Fin: Le {{ project().ended_at | date: "longDate" }}
         </div>
       </div>
     </div>

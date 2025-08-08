@@ -90,33 +90,33 @@
       <h3 class="text-2xl font-extrabold text-gray-800">Restons connectés !</h3>
       <div class="space-y-4">
         @for (item of contactItems; track $index) {
-        <div class="space-y-1">
-          <div class="flex items-center gap-3">
-            <div class="text-white rounded-full p-2 bg-primary-500">
-              <i-lucide [name]="item.icon" class=""></i-lucide>
+          <div class="space-y-1">
+            <div class="flex items-center gap-3">
+              <div class="text-white rounded-full p-2 bg-primary-500">
+                <i-lucide [name]="item.icon" class=""></i-lucide>
+              </div>
+              <p class="font-bold text-lg text-gray-700">{{ item.title }}</p>
             </div>
-            <p class="font-bold text-lg text-gray-700">{{ item.title }}</p>
+            @for (child of item.children; track $index) {
+              <p class="ml-13 text-primary-500 text-base">{{ child.value }}</p>
+            }
           </div>
-          @for (child of item.children; track $index) {
-          <p class="ml-13 text-primary-500 text-base">{{ child.value }}</p>
-          }
-        </div>
         }
 
         <div class="flex flex-wrap items-center justify-center gap-4">
           @for (item of socialMediaItems; track $index) {
-          <a
-            [href]="item.link"
-            target="_blank"
-            class="group inline-flex items-center justify-center w-10 h-10 rounded-full bg-white hover:bg-white/80 transition duration-300 ease-in-out shadow-md"
-            [attr.aria-label]="item.label"
-          >
-            <img
-              [src]="item.icon"
-              [alt]="item.label"
-              class="w-5 h-5 filter group-hover:brightness-125 transition duration-300"
-            />
-          </a>
+            <a
+              [href]="item.link"
+              target="_blank"
+              class="group inline-flex items-center justify-center w-10 h-10 rounded-full bg-white hover:bg-white/80 transition duration-300 ease-in-out shadow-md"
+              [attr.aria-label]="item.label"
+            >
+              <img
+                [src]="item.icon"
+                [alt]="item.label"
+                class="w-5 h-5 filter group-hover:brightness-125 transition duration-300"
+              />
+            </a>
           }
         </div>
       </div>

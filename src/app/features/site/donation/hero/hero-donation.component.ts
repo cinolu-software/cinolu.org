@@ -6,7 +6,7 @@ import { LucideAngularModule } from 'lucide-angular';
   selector: 'app-hero-donation',
   imports: [LucideAngularModule],
   templateUrl: './hero-donation.component.html',
-  styles: ``
+  styles: ``,
 })
 export class HeroDonationComponent {
   icons = { donation: DollarSign };

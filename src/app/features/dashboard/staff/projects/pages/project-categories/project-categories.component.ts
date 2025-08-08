@@ -1,12 +1,24 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { LucideAngularModule, RefreshCcw, Edit, Plus, Trash, Search } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  RefreshCcw,
+  Edit,
+  Plus,
+  Trash,
+  Search,
+} from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { Dialog } from 'primeng/dialog';
 import { ConfirmPopup } from 'primeng/confirmpopup';
@@ -20,7 +32,13 @@ import { ICategory } from '../../../../../../shared/models/entities.models';
 @Component({
   selector: 'app-project-categories',
   templateUrl: './project-categories.component.html',
-  providers: [CategoriesStore, AddCategoryStore, UpdateCategoryStore, DeleteCategoryStore, ConfirmationService],
+  providers: [
+    CategoriesStore,
+    AddCategoryStore,
+    UpdateCategoryStore,
+    DeleteCategoryStore,
+    ConfirmationService,
+  ],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -30,8 +48,8 @@ import { ICategory } from '../../../../../../shared/models/entities.models';
     NgxPaginationModule,
     ReactiveFormsModule,
     Dialog,
-    ConfirmPopup
-  ]
+    ConfirmPopup,
+  ],
 })
 export class ProjectCategoriesComponent implements OnInit {
   #route = inject(ActivatedRoute);
@@ -48,22 +66,28 @@ export class ProjectCategoriesComponent implements OnInit {
   showAddModal = signal(false);
   showEditModal = signal(false);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
-  icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, plus: Plus, search: Search };
+  icons = {
+    refresh: RefreshCcw,
+    edit: Edit,
+    trash: Trash,
+    plus: Plus,
+    search: Search,
+  };
   queryParams = signal<FilterProjectCategoriesDto>({
     page: this.#route.snapshot.params['page'],
-    q: this.#route.snapshot.params['q']
+    q: this.#route.snapshot.params['q'],
   });
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || '', Validators.required]
+      q: [this.queryParams().q || '', Validators.required],
     });
     this.addCategoryForm = this.#fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
     });
     this.updateCategoryForm = this.#fb.group({
       id: [''],
-      name: ['', Validators.required]
+      name: ['', Validators.required],
     });
   }
 
@@ -83,7 +107,7 @@ export class ProjectCategoriesComponent implements OnInit {
   onToggleEditModal(category: ICategory | null): void {
     this.updateCategoryForm.patchValue({
       id: category?.id || '',
-      name: category?.name || ''
+      name: category?.name || '',
     });
     this.showEditModal.update((v) => !v);
   }
@@ -119,7 +143,7 @@ export class ProjectCategoriesComponent implements OnInit {
     if (this.addCategoryForm.invalid) return;
     this.addCategoryStore.addCategory({
       payload: this.addCategoryForm.value,
-      onSuccess: () => this.onToggleAddModal()
+      onSuccess: () => this.onToggleAddModal(),
     });
   }
 
@@ -128,7 +152,7 @@ export class ProjectCategoriesComponent implements OnInit {
     this.updateCategoryStore.updateCategory({
       id: this.updateCategoryForm.value.id,
       payload: this.updateCategoryForm.value,
-      onSuccess: () => this.onToggleEditModal(null)
+      onSuccess: () => this.onToggleEditModal(null),
     });
   }
 
@@ -139,15 +163,15 @@ export class ProjectCategoriesComponent implements OnInit {
       rejectButtonProps: {
         label: 'Annuler',
         severity: 'secondary',
-        outlined: true
+        outlined: true,
       },
       acceptButtonProps: {
         label: 'Confirmer',
-        severity: 'danger'
+        severity: 'danger',
       },
       accept: () => {
         this.deleteCategoryStore.deleteCategory({ id: categoryId });
-      }
+      },
     });
   }
 }

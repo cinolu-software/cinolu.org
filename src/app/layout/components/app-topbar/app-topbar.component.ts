@@ -7,7 +7,7 @@ import {
   NgZone,
   OnDestroy,
   signal,
-  viewChild
+  viewChild,
 } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
@@ -18,8 +18,14 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
-  imports: [CommonModule, NgOptimizedImage, RouterLink, MobileNavComponent, DesktopNavComponent],
-  templateUrl: './app-topbar.component.html'
+  imports: [
+    CommonModule,
+    NgOptimizedImage,
+    RouterLink,
+    MobileNavComponent,
+    DesktopNavComponent,
+  ],
+  templateUrl: './app-topbar.component.html',
 })
 export class AppTopbarComponent implements OnDestroy {
   #elementRef = inject(ElementRef);
@@ -49,13 +55,15 @@ export class AppTopbarComponent implements OnDestroy {
     const scroll$ = fromEvent(window, 'scroll');
     click$.pipe(takeUntil(this.#destroy$)).subscribe((event: Event) => {
       const isInside = this.#elementRef.nativeElement.contains(event.target);
-      const isMenuOpen = this.mobileNav()?.isOpen() || this.desktopNav()?.activeTab();
+      const isMenuOpen =
+        this.mobileNav()?.isOpen() || this.desktopNav()?.activeTab();
       if (isMenuOpen && !isInside) this.closeNav();
     });
     scroll$.pipe(takeUntil(this.#destroy$)).subscribe(() => {
       const shouldFix = window.scrollY > 20;
       if (this.isFixed() !== shouldFix) this.isFixed.set(shouldFix);
-      if (this.mobileNav()?.isOpen() || this.desktopNav()?.activeTab()) this.closeNav();
+      if (this.mobileNav()?.isOpen() || this.desktopNav()?.activeTab())
+        this.closeNav();
     });
   }
 

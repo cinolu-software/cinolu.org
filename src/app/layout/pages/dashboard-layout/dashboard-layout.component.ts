@@ -6,6 +6,6 @@ import { DashboardTopbarComponent } from '../../components/dashboard-topbar/dash
 @Component({
   selector: 'app-dashboard-layout',
   templateUrl: './dashboard-layout.component.html',
-  imports: [RouterOutlet, DashboardTopbarComponent, DashboardSidebarComponent]
+  imports: [RouterOutlet, DashboardTopbarComponent, DashboardSidebarComponent],
 })
 export class DashboardLayoutComponent {}

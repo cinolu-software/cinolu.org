@@ -6,39 +6,68 @@
         [routerLink]="link.path"
         routerLinkActive="after:bg-primary-500"
         [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
-        class="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 hover:text-primary-500 hover:transition-colors hover:duration-200">
+        class="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 hover:text-primary-500 hover:transition-colors hover:duration-200"
+      >
         {{ link.name }}
       </a>
     }
     @if (user) {
       <div class="flex items-center gap-3">
-        <button class="relative menu flex items-center gap-0.5" (click)="setActiveTab('account')">
+        <button
+          class="relative menu flex items-center gap-0.5"
+          (click)="setActiveTab('account')"
+        >
           <div class="relative h-8 w-8">
             <img
               [ngSrc]="user | apiIMG: 'user'"
               alt="User  Image"
               class="aspect-video object-cover ring-2 ring-primary-600 bg-gray-200 rounded-full"
-              fill />
+              fill
+            />
           </div>
           <i-lucide
             [name]="icons.chevronDown"
             class="transition-transform duration-300 size-4"
             [ngClass]="{
-              'rotate-180': activeTab() === 'account'
-            }" />
+              'rotate-180': activeTab() === 'account',
+            }"
+          />
           <div
             class="absolute top-10 w-[13rem] right-0 animate-Up py-8 px-6 gap-6 z-30 bg-white shadow-lg rounded-lg transition-transform duration-300"
-            [ngClass]="activeTab() === 'account' ? 'block active-nav animate-fadeInUp' : 'hidden'">
-            <div class="grid grid-cols-1 gap-x-8 gap-y-6 font-medium text-gray-900">
-              <a [routerLink]="'/dashboard'" class="group flex items-center gap-2.5">
-                <span class="h-8 w-8 flex items-center justify-center text-white bg-primary-600 rounded-full">
-                  <i-lucide [name]="icons.dashboard" class="size-4 group-hover:animate-spin" />
+            [ngClass]="
+              activeTab() === 'account'
+                ? 'block active-nav animate-fadeInUp'
+                : 'hidden'
+            "
+          >
+            <div
+              class="grid grid-cols-1 gap-x-8 gap-y-6 font-medium text-gray-900"
+            >
+              <a
+                [routerLink]="'/dashboard'"
+                class="group flex items-center gap-2.5"
+              >
+                <span
+                  class="h-8 w-8 flex items-center justify-center text-white bg-primary-600 rounded-full"
+                >
+                  <i-lucide
+                    [name]="icons.dashboard"
+                    class="size-4 group-hover:animate-spin"
+                  />
                 </span>
                 Mon compte
               </a>
-              <button class="group flex items-center gap-2.5" (click)="onSignOut()">
-                <span class="h-8 w-8 flex items-center justify-center text-white bg-red-600 rounded-full">
-                  <i-lucide [name]="icons.logOut" class="size-4 group-hover:animate-spin" />
+              <button
+                class="group flex items-center gap-2.5"
+                (click)="onSignOut()"
+              >
+                <span
+                  class="h-8 w-8 flex items-center justify-center text-white bg-red-600 rounded-full"
+                >
+                  <i-lucide
+                    [name]="icons.logOut"
+                    class="size-4 group-hover:animate-spin"
+                  />
                 </span>
                 Déconnexion
               </button>

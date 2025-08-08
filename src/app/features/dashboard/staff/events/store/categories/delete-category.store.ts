@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -19,7 +25,7 @@ export const DeleteCategoryStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _categoriesStore: inject(CategoriesStore)
+    _categoriesStore: inject(CategoriesStore),
   })),
   withMethods(({ _http, _categoriesStore, _toast, ...store }) => ({
     deleteCategory: rxMethod<IDeleteCategoryParams>(
@@ -36,10 +42,10 @@ export const DeleteCategoryStore = signalStore(
               patchState(store, { isLoading: false });
               _toast.showError('Échec de la suppression de la catégorie');
               return of(null);
-            })
+            }),
           );
-        })
-      )
-    )
-  }))
+        }),
+      ),
+    ),
+  })),
 );

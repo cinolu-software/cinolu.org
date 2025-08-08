@@ -7,9 +7,14 @@ import { FadeInOnScrollDirective } from '../../../../../shared/directives/animat
 
 @Component({
   selector: 'app-our-impact',
-  imports: [CommonModule, LucideAngularModule, CountUpDirective, FadeInOnScrollDirective],
+  imports: [
+    CommonModule,
+    LucideAngularModule,
+    CountUpDirective,
+    FadeInOnScrollDirective,
+  ],
   templateUrl: './our-impact.component.html',
-  styles: ``
+  styles: ``,
 })
 export class OurImpactComponent {
   our_impact = OUR_IMPACT_ITEMS;

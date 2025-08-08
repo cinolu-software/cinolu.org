@@ -39,13 +39,13 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({
         scrollPositionRestoration: 'enabled',
         anchorScrolling: 'enabled',
-      })
+      }),
     ),
     provideApp(),
     provideAnimations(),
     provideHttpClient(
       withFetch(),
-      withInterceptors([httpInterceptor, LoadingInterceptor])
+      withInterceptors([httpInterceptor, LoadingInterceptor]),
     ),
     provideClientHydration(withEventReplay()),
     { provide: LOCALE_ID, useValue: 'fr' },

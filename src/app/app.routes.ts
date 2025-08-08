@@ -9,7 +9,7 @@ export const routes: Route[] = [
     data: { layout: 'fixed-layout' },
     loadChildren: () =>
       import('./features/site/projects/projects.routes').then(
-        (m) => m.projectsRoutes
+        (m) => m.projectsRoutes,
       ),
   },
   {
@@ -18,7 +18,7 @@ export const routes: Route[] = [
     data: { layout: 'fixed-layout' },
     loadChildren: () =>
       import('./features/site/events/events.routes').then(
-        (m) => m.eventsRoutes
+        (m) => m.eventsRoutes,
       ),
   },
   {
@@ -27,7 +27,7 @@ export const routes: Route[] = [
     data: { layout: 'full-layout' },
     loadChildren: () =>
       import('./features/site/about-us/about-us.routes').then(
-        (m) => m.aboutRoutes
+        (m) => m.aboutRoutes,
       ),
   },
   {
@@ -36,7 +36,7 @@ export const routes: Route[] = [
     data: { layout: 'full-layout' },
     loadChildren: () =>
       import('./features/site/donation/donation.routes').then(
-        (m) => m.donationRoutes
+        (m) => m.donationRoutes,
       ),
   },
   {
@@ -45,7 +45,7 @@ export const routes: Route[] = [
     data: { layout: 'fixed-layout' },
     loadChildren: () =>
       import('./features/site/contact-us/contact-us.route').then(
-        (m) => m.contactUsRoutes
+        (m) => m.contactUsRoutes,
       ),
   },
   {
@@ -55,7 +55,7 @@ export const routes: Route[] = [
     canActivate: [authGuard],
     loadChildren: () =>
       import('./features/dashboard/dashboard.routes').then(
-        (m) => m.dashboardRoutes
+        (m) => m.dashboardRoutes,
       ),
   },
   {
@@ -64,7 +64,7 @@ export const routes: Route[] = [
     data: { layout: 'full-layout' },
     loadChildren: () =>
       import('./features/site/landing/landing.routes').then(
-        (m) => m.landingRoutes
+        (m) => m.landingRoutes,
       ),
   },
   {
@@ -80,7 +80,7 @@ export const routes: Route[] = [
     data: { layout: 'full-layout' },
     loadChildren: () =>
       import('./features/site/landing/landing.routes').then(
-        (m) => m.landingRoutes
+        (m) => m.landingRoutes,
       ),
   },
 ];

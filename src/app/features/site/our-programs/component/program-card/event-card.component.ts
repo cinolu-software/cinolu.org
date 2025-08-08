@@ -7,8 +7,14 @@ import { IEvent } from '../../../../../shared/models/entities.models';
 
 @Component({
   selector: 'app-event-card',
-  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe],
-  templateUrl: './event-card.component.html'
+  imports: [
+    LucideAngularModule,
+    CommonModule,
+    NgOptimizedImage,
+    RouterLink,
+    ApiImgPipe,
+  ],
+  templateUrl: './event-card.component.html',
 })
 export class EventCardComponent {
   event = input.required<IEvent>();

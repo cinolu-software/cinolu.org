@@ -1,7 +1,20 @@
-import { Component, computed, inject, input, output, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { LucideAngularModule, Home, Menu, X, ChevronDown } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  Home,
+  Menu,
+  X,
+  ChevronDown,
+} from 'lucide-angular';
 import { USER_LINKS, ILink } from '../../../data/links.data';
 import { IUser } from '../../../../shared/models/entities.models';
 import { filter } from 'rxjs';
@@ -10,7 +23,7 @@ import { AuthStore } from '../../../../core/auth/auth.store';
 @Component({
   selector: 'app-mobile-nav',
   templateUrl: './mobile-nav.component.html',
-  imports: [LucideAngularModule, RouterModule, CommonModule]
+  imports: [LucideAngularModule, RouterModule, CommonModule],
 })
 export class MobileNavComponent {
   user = input.required<IUser | null>();
@@ -26,15 +39,20 @@ export class MobileNavComponent {
   activeTab = computed(() => {
     const url = this.currentUrl();
     return (
-      this.links().find((link) => link.path === url || link.children?.some((child) => url.startsWith(child.path)))
-        ?.name ?? null
+      this.links().find(
+        (link) =>
+          link.path === url ||
+          link.children?.some((child) => url.startsWith(child.path)),
+      )?.name ?? null
     );
   });
 
   constructor() {
-    this.#router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
-      this.currentUrl.set(event.urlAfterRedirects);
-    });
+    this.#router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentUrl.set(event.urlAfterRedirects);
+      });
   }
 
   onToggleTab(name: string): void {

@@ -3,7 +3,7 @@ import {
   inject,
   provideAppInitializer,
   provideEnvironmentInitializer,
-  Provider
+  Provider,
 } from '@angular/core';
 import { APP_CONFIG } from '../services/config/config.constants';
 import { appConfig } from '../../app.config';
@@ -27,9 +27,9 @@ export const provideApp = (): EnvironmentProviders[] => {
         catchError(() => {
           authStore.setUser(null);
           return of(null);
-        })
+        }),
       );
-    })
+    }),
   ];
   return providers;
 };

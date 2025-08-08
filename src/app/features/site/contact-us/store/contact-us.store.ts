@@ -44,10 +44,10 @@ export const ContactUsStore = signalStore(
               patchState(store, { isLoading: false });
               _toast.showError(err.error['message'] || 'Erreur de connexion');
               return of(null);
-            })
+            }),
           );
-        })
-      )
+        }),
+      ),
     ),
-  }))
+  })),
 );

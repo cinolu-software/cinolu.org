@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -15,7 +21,7 @@ interface IRolesStore {
 export const RolesStore = signalStore(
   withState<IRolesStore>({ isLoading: false, roles: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient)
+    _http: inject(HttpClient),
   })),
   withMethods(({ _http, ...store }) => ({
     loadRoles: rxMethod<FilterRolesDto>(
@@ -23,17 +29,19 @@ export const RolesStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          return _http.get<{ data: [IRole[], number] }>('roles/paginated', { params }).pipe(
-            map(({ data }) => {
-              patchState(store, { isLoading: false, roles: data });
-            }),
-            catchError(() => {
-              patchState(store, { isLoading: false, roles: [[], 0] });
-              return of(null);
-            })
-          );
-        })
-      )
+          return _http
+            .get<{ data: [IRole[], number] }>('roles/paginated', { params })
+            .pipe(
+              map(({ data }) => {
+                patchState(store, { isLoading: false, roles: data });
+              }),
+              catchError(() => {
+                patchState(store, { isLoading: false, roles: [[], 0] });
+                return of(null);
+              }),
+            );
+        }),
+      ),
     ),
     addRole: (role: IRole): void => {
       const [roles, count] = store.roles();
@@ -48,6 +56,6 @@ export const RolesStore = signalStore(
       const [roles, count] = store.roles();
       const filtered = roles.filter((role) => role.id !== id);
       patchState(store, { roles: [filtered, count - 1] });
-    }
-  }))
+    },
+  })),
 );

@@ -1,5 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
@@ -22,8 +28,8 @@ import { Password } from 'primeng/password';
     ReactiveFormsModule,
     NgOptimizedImage,
     CommonModule,
-    AuthCardComponent
-  ]
+    AuthCardComponent,
+  ],
 })
 export class AuthSignInComponent {
   #formBuilder: FormBuilder = inject(FormBuilder);
@@ -33,7 +39,7 @@ export class AuthSignInComponent {
   constructor() {
     this.form = this.#formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
@@ -41,7 +47,7 @@ export class AuthSignInComponent {
     if (this.form.invalid) return;
     this.store.signIn({
       payload: this.form.value,
-      onSuccess: () => true
+      onSuccess: () => true,
     });
   }
 

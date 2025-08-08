@@ -16,8 +16,8 @@ import { OurTeamComponent } from '../components/our-team/our-team.component';
     MissionComponent,
     HistoryComponent,
     OurImpactComponent,
-    OurTeamComponent
+    OurTeamComponent,
   ],
-  templateUrl: './about-us.component.html'
+  templateUrl: './about-us.component.html',
 })
 export class AboutUsComponent {}

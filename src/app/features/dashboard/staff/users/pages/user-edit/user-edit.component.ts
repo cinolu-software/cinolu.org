@@ -1,12 +1,25 @@
 import { Component, effect, inject } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { LucideAngularModule, Save, MoveLeft, Locate, TriangleAlert, Phone, Mail } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  Save,
+  MoveLeft,
+  Locate,
+  TriangleAlert,
+  Phone,
+  Mail,
+} from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { UserStore } from '../../store/users/user.store';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { UpdateUserStore } from '../../store/users/update-user.store';
@@ -30,8 +43,8 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
     NgOptimizedImage,
     ApiImgPipe,
     DatePickerModule,
-    MultiSelectModule
-  ]
+    MultiSelectModule,
+  ],
 })
 export class UserEditComponent {
   #fb = inject(FormBuilder);
@@ -40,7 +53,14 @@ export class UserEditComponent {
   store = inject(UserStore);
   updateStore = inject(UpdateUserStore);
   rolesStore = inject(UnpaginatedRolesStore);
-  icons = { save: Save, back: MoveLeft, locate: Locate, alert: TriangleAlert, phone: Phone, email: Mail };
+  icons = {
+    save: Save,
+    back: MoveLeft,
+    locate: Locate,
+    alert: TriangleAlert,
+    phone: Phone,
+    email: Mail,
+  };
 
   constructor() {
     this.updateUserForm = this.#fb.group({
@@ -51,7 +71,7 @@ export class UserEditComponent {
       city: ['', Validators.required],
       country: ['', Validators.required],
       birth_date: ['', Validators.required],
-      roles: [[], Validators.required]
+      roles: [[], Validators.required],
     });
     effect(() => {
       const user = this.store.user();
@@ -59,7 +79,7 @@ export class UserEditComponent {
       this.updateUserForm.patchValue({
         ...user,
         birth_date: new Date(user.birth_date || ''),
-        roles: user.roles.map((role) => role.id)
+        roles: user.roles.map((role) => role.id),
       });
     });
   }

@@ -1,12 +1,26 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { LucideAngularModule, RefreshCcw, Edit, Trash, Search, Plus, Eye, EyeOff } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  RefreshCcw,
+  Edit,
+  Trash,
+  Search,
+  Plus,
+  Eye,
+  EyeOff,
+} from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ProjectsStore } from '../../store/projects/projects.store';
 import { FilterProjectsDto } from '../../dto/filter-projects.dto';
 import { ConfirmationService } from 'primeng/api';
@@ -19,7 +33,12 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 @Component({
   selector: 'app-projects-list',
   templateUrl: './projects-list.component.html',
-  providers: [ProjectsStore, PublishProjectStore, DeleteProjectStore, ConfirmationService],
+  providers: [
+    ProjectsStore,
+    PublishProjectStore,
+    DeleteProjectStore,
+    ConfirmationService,
+  ],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -31,8 +50,8 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
     RouterLink,
     ConfirmPopup,
     AvatarModule,
-    ApiImgPipe
-  ]
+    ApiImgPipe,
+  ],
 })
 export class ProjectsListComponent implements OnInit {
   #route = inject(ActivatedRoute);
@@ -44,15 +63,23 @@ export class ProjectsListComponent implements OnInit {
   deleteProjectStore = inject(DeleteProjectStore);
   publishProjectStore = inject(PublishProjectStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
-  icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, search: Search, plus: Plus, eye: Eye, eyeOff: EyeOff };
+  icons = {
+    refresh: RefreshCcw,
+    edit: Edit,
+    trash: Trash,
+    search: Search,
+    plus: Plus,
+    eye: Eye,
+    eyeOff: EyeOff,
+  };
   queryParams = signal<FilterProjectsDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
-    q: this.#route.snapshot.queryParamMap.get('q')
+    q: this.#route.snapshot.queryParamMap.get('q'),
   });
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || '', Validators.required]
+      q: [this.queryParams().q || '', Validators.required],
     });
   }
 
@@ -102,15 +129,15 @@ export class ProjectsListComponent implements OnInit {
       rejectButtonProps: {
         label: 'Annuler',
         severity: 'secondary',
-        outlined: true
+        outlined: true,
       },
       acceptButtonProps: {
         label: 'Confirmer',
-        severity: 'danger'
+        severity: 'danger',
       },
       accept: () => {
         this.deleteProjectStore.deleteProject(projectId);
-      }
+      },
     });
   }
 }

@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -15,7 +21,7 @@ interface IProgramsStore {
 export const ProgramsStore = signalStore(
   withState<IProgramsStore>({ isLoading: false, programs: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient)
+    _http: inject(HttpClient),
   })),
   withMethods(({ _http, ...store }) => ({
     loadPrograms: rxMethod<FilterProgramsDto>(
@@ -23,17 +29,21 @@ export const ProgramsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          return _http.get<{ data: [IProgram[], number] }>('programs/paginated', { params }).pipe(
-            map(({ data }) => {
-              patchState(store, { isLoading: false, programs: data });
-            }),
-            catchError(() => {
-              patchState(store, { isLoading: false, programs: [[], 0] });
-              return of(null);
-            })
-          );
-        })
-      )
+          return _http
+            .get<{
+              data: [IProgram[], number];
+            }>('programs/paginated', { params })
+            .pipe(
+              map(({ data }) => {
+                patchState(store, { isLoading: false, programs: data });
+              }),
+              catchError(() => {
+                patchState(store, { isLoading: false, programs: [[], 0] });
+                return of(null);
+              }),
+            );
+        }),
+      ),
     ),
     addProgram: (program: IProgram): void => {
       const [programs, count] = store.programs();
@@ -48,6 +58,6 @@ export const ProgramsStore = signalStore(
       const [programs, count] = store.programs();
       const filtered = programs.filter((program) => program.id !== id);
       patchState(store, { programs: [filtered, count - 1] });
-    }
-  }))
+    },
+  })),
 );

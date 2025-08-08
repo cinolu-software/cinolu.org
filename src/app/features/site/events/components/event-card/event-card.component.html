@@ -4,7 +4,7 @@
 >
   <div class="h-60 w-full overflow-hidden relative bg-gray-100">
     <img
-      [ngSrc]="event() | apiIMG : 'event'"
+      [ngSrc]="event() | apiIMG: 'event'"
       [alt]="event().name"
       class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30"
       fill
@@ -30,7 +30,7 @@
       <div class="flex items-center text-md leading-5 mb-2">
         <i-lucide [name]="icons.CalendarX" class="size-5" />
         <div class="ml-1.5">
-          Fini: Le {{ event().ended_at | date : "longDate" }}
+          Fini: Le {{ event().ended_at | date: "longDate" }}
         </div>
       </div>
     </div>

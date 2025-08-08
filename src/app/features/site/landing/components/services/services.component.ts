@@ -6,7 +6,7 @@ import { FadeInOnScrollDirective } from '../../../../../shared/directives/animat
 @Component({
   selector: 'app-our-services',
   imports: [LucideAngularModule, FadeInOnScrollDirective],
-  templateUrl: './services.component.html'
+  templateUrl: './services.component.html',
 })
 export class ServicesComponent {
   services = SERVICES;

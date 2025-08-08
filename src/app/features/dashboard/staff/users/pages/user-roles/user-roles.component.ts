@@ -1,12 +1,24 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { LucideAngularModule, RefreshCcw, Edit, Plus, Trash, Search } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  RefreshCcw,
+  Edit,
+  Plus,
+  Trash,
+  Search,
+} from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { Dialog } from 'primeng/dialog';
 import { ConfirmPopup } from 'primeng/confirmpopup';
@@ -20,7 +32,13 @@ import { IRole } from '../../../../../../shared/models/entities.models';
 @Component({
   selector: 'app-user-roles',
   templateUrl: './user-roles.component.html',
-  providers: [RolesStore, AddRoleStore, UpdateRoleStore, DeleteRoleStore, ConfirmationService],
+  providers: [
+    RolesStore,
+    AddRoleStore,
+    UpdateRoleStore,
+    DeleteRoleStore,
+    ConfirmationService,
+  ],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -30,8 +48,8 @@ import { IRole } from '../../../../../../shared/models/entities.models';
     NgxPaginationModule,
     ReactiveFormsModule,
     Dialog,
-    ConfirmPopup
-  ]
+    ConfirmPopup,
+  ],
 })
 export class UserRolesComponent implements OnInit {
   #route = inject(ActivatedRoute);
@@ -48,24 +66,30 @@ export class UserRolesComponent implements OnInit {
   showAddModal = signal(false);
   showEditModal = signal(false);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
-  icons = { refresh: RefreshCcw, edit: Edit, trash: Trash, plus: Plus, search: Search };
+  icons = {
+    refresh: RefreshCcw,
+    edit: Edit,
+    trash: Trash,
+    plus: Plus,
+    search: Search,
+  };
   queryParams = signal<FilterRolesDto>({
     page: this.#route.snapshot.params['page'],
-    q: this.#route.snapshot.params['q']
+    q: this.#route.snapshot.params['q'],
   });
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || '', Validators.required]
+      q: [this.queryParams().q || '', Validators.required],
     });
     this.addRoleForm = this.#fb.group({
       name: ['', Validators.required],
-      label: ['']
+      label: [''],
     });
     this.updateRoleForm = this.#fb.group({
       id: [''],
       name: ['', Validators.required],
-      label: ['']
+      label: [''],
     });
   }
 
@@ -120,7 +144,7 @@ export class UserRolesComponent implements OnInit {
       onSuccess: () => {
         this.onToggleAddModal();
         this.addRoleForm.reset();
-      }
+      },
     });
   }
 
@@ -128,7 +152,7 @@ export class UserRolesComponent implements OnInit {
     if (this.updateRoleForm.invalid) return;
     this.updateRoleStore.updateRole({
       payload: this.updateRoleForm.value,
-      onSuccess: () => this.onToggleEditModal(null)
+      onSuccess: () => this.onToggleEditModal(null),
     });
   }
 
@@ -139,15 +163,15 @@ export class UserRolesComponent implements OnInit {
       rejectButtonProps: {
         label: 'Annuler',
         severity: 'secondary',
-        outlined: true
+        outlined: true,
       },
       acceptButtonProps: {
         label: 'Confirmer',
-        severity: 'danger'
+        severity: 'danger',
       },
       accept: () => {
         this.deleteRoleStore.deleteRole(roleId);
-      }
+      },
     });
   }
 }

@@ -6,6 +6,6 @@ import { FooterComponent } from '../../components/footer/footer.component';
 @Component({
   selector: 'app-fixed-topbar-layout',
   templateUrl: './fixed-layout.component.html',
-  imports: [RouterOutlet, FooterComponent, AppTopbarComponent]
+  imports: [RouterOutlet, FooterComponent, AppTopbarComponent],
 })
 export class FixedLayoutComponent {}

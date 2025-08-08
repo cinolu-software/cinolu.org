@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
@@ -15,7 +21,7 @@ export const DeleteVentureStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _enterprisesStore: inject(VenturesStore)
+    _enterprisesStore: inject(VenturesStore),
   })),
   withMethods(({ _http, _toast, _enterprisesStore, ...store }) => ({
     deleteVenture: rxMethod<string>(
@@ -32,10 +38,10 @@ export const DeleteVentureStore = signalStore(
               patchState(store, { isLoading: false });
               _toast.showError('Erreur lors de la suppression');
               return of(null);
-            })
+            }),
           );
-        })
-      )
-    )
-  }))
+        }),
+      ),
+    ),
+  })),
 );

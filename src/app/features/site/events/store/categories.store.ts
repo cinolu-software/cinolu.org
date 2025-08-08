@@ -1,4 +1,10 @@
-import { signalStore, withState, withMethods, patchState, withHooks } from '@ngrx/signals';
+import {
+  signalStore,
+  withState,
+  withMethods,
+  patchState,
+  withHooks,
+} from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
@@ -18,19 +24,21 @@ export const EventCategoriesStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
           return http.get<{ data: ICategory[] }>('event-categories').pipe(
-            tap(({ data }) => patchState(store, { isLoading: false, categories: data })),
+            tap(({ data }) =>
+              patchState(store, { isLoading: false, categories: data }),
+            ),
             catchError(() => {
               patchState(store, { isLoading: false, categories: [] });
               return of(null);
-            })
+            }),
           );
-        })
-      )
-    )
+        }),
+      ),
+    ),
   })),
   withHooks({
     onInit: ({ loadCategories }) => {
       loadCategories();
-    }
-  })
+    },
+  }),
 );

@@ -1,5 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
@@ -11,7 +17,15 @@ import { ResetPasswordStore } from '../../store/reset-password.store';
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   providers: [ResetPasswordStore],
-  imports: [FormsModule, RouterLink, ReactiveFormsModule, ButtonModule, PasswordModule, CommonModule, AuthCardComponent]
+  imports: [
+    FormsModule,
+    RouterLink,
+    ReactiveFormsModule,
+    ButtonModule,
+    PasswordModule,
+    CommonModule,
+    AuthCardComponent,
+  ],
 })
 export class AuthResetPasswordComponent {
   #token = inject(ActivatedRoute).snapshot.queryParams['token'];
@@ -22,7 +36,7 @@ export class AuthResetPasswordComponent {
   constructor() {
     this.form = this.#formBuilder.group({
       password: ['', Validators.required],
-      password_confirm: ['', Validators.required]
+      password_confirm: ['', Validators.required],
     });
   }
 

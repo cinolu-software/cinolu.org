@@ -7,8 +7,14 @@ import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-project-card',
-  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe],
-  templateUrl: './project-card.component.html'
+  imports: [
+    LucideAngularModule,
+    CommonModule,
+    NgOptimizedImage,
+    RouterLink,
+    ApiImgPipe,
+  ],
+  templateUrl: './project-card.component.html',
 })
 export class ProjectCardComponent {
   project = input.required<IProject>();

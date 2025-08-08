@@ -1,6 +1,14 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { LucideAngularModule, RefreshCw, Edit, Trash, Download, Search, Plus } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  RefreshCw,
+  Edit,
+  Trash,
+  Download,
+  Search,
+  Plus,
+} from 'lucide-angular';
 import { UsersStore } from '../../store/users/users.store';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -9,7 +17,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DownloadUsersStore } from '../../store/users/download-csv.store';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { FilterUsersDto } from '../../dto/filter-users.dto';
 import { ConfirmationService } from 'primeng/api';
 import { DeleteUserStore } from '../../store/users/delete-user.store';
@@ -19,7 +32,12 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
-  providers: [UsersStore, DownloadUsersStore, DeleteUserStore, ConfirmationService],
+  providers: [
+    UsersStore,
+    DownloadUsersStore,
+    DeleteUserStore,
+    ConfirmationService,
+  ],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -31,8 +49,8 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
     NgxPaginationModule,
     ReactiveFormsModule,
     ConfirmPopup,
-    RouterLink
-  ]
+    RouterLink,
+  ],
 })
 export class UsersListComponent implements OnInit {
   #route = inject(ActivatedRoute);
@@ -44,15 +62,22 @@ export class UsersListComponent implements OnInit {
   deleteStore = inject(DeleteUserStore);
   downloadStore = inject(DownloadUsersStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
-  icons = { refresh: RefreshCw, edit: Edit, trash: Trash, download: Download, search: Search, plus: Plus };
+  icons = {
+    refresh: RefreshCw,
+    edit: Edit,
+    trash: Trash,
+    download: Download,
+    search: Search,
+    plus: Plus,
+  };
   queryParams = signal<FilterUsersDto>({
     page: this.#route.snapshot.params['page'],
-    q: this.#route.snapshot.params['q']
+    q: this.#route.snapshot.params['q'],
   });
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || '', Validators.required]
+      q: [this.queryParams().q || '', Validators.required],
     });
   }
 
@@ -103,15 +128,15 @@ export class UsersListComponent implements OnInit {
       rejectButtonProps: {
         label: 'Annuler',
         severity: 'secondary',
-        outlined: true
+        outlined: true,
       },
       acceptButtonProps: {
         label: 'Confirmer',
-        severity: 'danger'
+        severity: 'danger',
       },
       accept: () => {
         this.deleteStore.deleteUser(userId);
-      }
+      },
     });
   }
 }

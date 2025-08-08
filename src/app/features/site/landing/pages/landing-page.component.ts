@@ -16,8 +16,8 @@ import { OurProgramsComponent } from '../components/our-programs/our-programs.co
     RecentEventsComponent,
     PartnersComponent,
     WhyJoinUsComponent,
-    OurProgramsComponent
+    OurProgramsComponent,
   ],
-  templateUrl: './landing-page.component.html'
+  templateUrl: './landing-page.component.html',
 })
 export class LandingPageComponent {}

@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -15,7 +21,7 @@ interface IEventsStore {
 export const EventsStore = signalStore(
   withState<IEventsStore>({ isLoading: false, events: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient)
+    _http: inject(HttpClient),
   })),
   withMethods(({ _http, ...store }) => ({
     loadEvents: rxMethod<FilterEventCategoriesDto>(
@@ -23,17 +29,19 @@ export const EventsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          return _http.get<{ data: [IEvent[], number] }>('events', { params }).pipe(
-            map(({ data }) => {
-              patchState(store, { isLoading: false, events: data });
-            }),
-            catchError(() => {
-              patchState(store, { isLoading: false, events: [[], 0] });
-              return of(null);
-            })
-          );
-        })
-      )
+          return _http
+            .get<{ data: [IEvent[], number] }>('events', { params })
+            .pipe(
+              map(({ data }) => {
+                patchState(store, { isLoading: false, events: data });
+              }),
+              catchError(() => {
+                patchState(store, { isLoading: false, events: [[], 0] });
+                return of(null);
+              }),
+            );
+        }),
+      ),
     ),
     updateEvent: (event: IEvent): void => {
       const [events, count] = store.events();
@@ -44,6 +52,6 @@ export const EventsStore = signalStore(
       const [events, count] = store.events();
       const filtered = events.filter((event) => event.id !== id);
       patchState(store, { events: [filtered, count - 1] });
-    }
-  }))
+    },
+  })),
 );

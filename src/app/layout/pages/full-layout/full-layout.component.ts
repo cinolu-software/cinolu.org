@@ -6,6 +6,6 @@ import { FooterComponent } from '../../components/footer/footer.component';
 @Component({
   selector: 'app-full-layout',
   templateUrl: './full-layout.component.html',
-  imports: [RouterOutlet, AppTopbarComponent, FooterComponent]
+  imports: [RouterOutlet, AppTopbarComponent, FooterComponent],
 })
 export class FullLayoutComponent {}

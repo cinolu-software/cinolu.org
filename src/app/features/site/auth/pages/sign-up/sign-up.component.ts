@@ -1,5 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
@@ -8,7 +14,12 @@ import { environment } from '../../../../../../environments/environment';
 import { AuthCardComponent } from '../../components/auth-card/auth-card.component';
 import { SignUpStore } from '../../store/sign-up.store';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { Check, ChevronsLeft, ChevronsRight, LucideAngularModule } from 'lucide-angular';
+import {
+  Check,
+  ChevronsLeft,
+  ChevronsRight,
+  LucideAngularModule,
+} from 'lucide-angular';
 import { StepperModule } from 'primeng/stepper';
 import { TextareaModule } from 'primeng/textarea';
 import { DatePickerModule } from 'primeng/datepicker';
@@ -47,8 +58,8 @@ import { GENDERS } from '../../../../../shared/data/member.items';
     LucideAngularModule,
     InputGroupModule,
     InputGroupAddonModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  ],
 })
 export class AuthSignUpComponent {
   #formBuilder: FormBuilder = inject(FormBuilder);
@@ -66,14 +77,17 @@ export class AuthSignUpComponent {
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       password_confirm: ['', [Validators.required, Validators.minLength(6)]],
-      phone_number: ['', [Validators.required, Validators.pattern(/^\+?[1-9]\d{1,14}$/)]],
+      phone_number: [
+        '',
+        [Validators.required, Validators.pattern(/^\+?[1-9]\d{1,14}$/)],
+      ],
       gender: ['', [Validators.required]],
       birth_date: ['', [Validators.required]],
       roles: ['', [Validators.required]],
       country: ['', [Validators.required]],
       city: ['', [Validators.required]],
       reason: ['', [Validators.required]],
-      biography: ['', [Validators.required]]
+      biography: ['', [Validators.required]],
     });
   }
 
@@ -82,13 +96,14 @@ export class AuthSignUpComponent {
     this.store.signUp({
       ...this.form.value,
       phone_number: this.selectedCountryCode + this.form.value.phone_number,
-      birth_date: new Date(this.form.value.birth_date)
+      birth_date: new Date(this.form.value.birth_date),
     });
   }
 
   onSelectCountry(event: SelectChangeEvent): void {
     const value = event.value;
-    this.selectedCountryCode = this.countryItems.find((item) => item.name === value)?.code || '';
+    this.selectedCountryCode =
+      this.countryItems.find((item) => item.name === value)?.code || '';
   }
 
   signinWithGoogle(): void {

@@ -5,7 +5,7 @@ import {
   Globe,
   LucideIconData,
   UserRoundCheck,
-  UsersRound
+  UsersRound,
 } from 'lucide-angular';
 
 interface IOurImpact {
@@ -21,40 +21,40 @@ export const OUR_IMPACT_ITEMS: IOurImpact[] = [
     value: 500,
     title: 'Entrepreneurs accompagnés',
     description: 'Accompagnement des entrepreneurs en devenir',
-    icon: UserRoundCheck
+    icon: UserRoundCheck,
   },
   {
     value: 60,
     artefact: '%',
     title: 'Femmes bénéficiaires',
     description: 'Accompagnement des entrepreneurs en devenir',
-    icon: CircleUserRound
+    icon: CircleUserRound,
   },
   {
     value: 3,
     title: 'Communautés régionales partenaires, Couverture nationale',
     description: 'Accompagnement des entrepreneurs en devenir',
-    icon: Globe
+    icon: Globe,
   },
   {
     value: 150000,
     artefact: 'USD',
     title: 'Financements mobilisés',
     description: 'Accompagnement des entrepreneurs en devenir',
-    icon: CircleDollarSign
+    icon: CircleDollarSign,
   },
   {
     value: 438,
     artefact: '+',
     title: 'Solutions cartographiées via Fikiri',
     description: 'Accompagnement des entrepreneurs en devenir',
-    icon: ChartBar
+    icon: ChartBar,
   },
   {
     value: 50,
     artefact: '+',
     title: 'Mentors, coachs et experts mobilisés',
     description: 'Accompagnement des entrepreneurs en devenir',
-    icon: UsersRound
-  }
+    icon: UsersRound,
+  },
 ];

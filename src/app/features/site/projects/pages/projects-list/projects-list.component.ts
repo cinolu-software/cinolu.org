@@ -22,9 +22,9 @@ import { FilterProjectsDto } from '../../dto/filter-projects.dto';
     NgOptimizedImage,
     ProjectCardComponent,
     FormsModule,
-    ProgramCardSkeletonComponent
+    ProgramCardSkeletonComponent,
   ],
-  templateUrl: './projects-list.component.html'
+  templateUrl: './projects-list.component.html',
 })
 export class ProjectsListComponent implements OnInit {
   #router = inject(Router);
@@ -33,14 +33,17 @@ export class ProjectsListComponent implements OnInit {
   categoriesStore = inject(ProjectCategoriesStore);
   queryParams = signal<FilterProjectsDto>({
     page: this.#route.snapshot.queryParams?.['page'],
-    categories: this.#route.snapshot.queryParams?.['categories']
+    categories: this.#route.snapshot.queryParams?.['categories'],
   });
 
   ngOnInit(): void {
     this.store.loadProjects(this.queryParams());
   }
 
-  onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'categories'): void {
+  onFilterChange(
+    event: MultiSelectChangeEvent,
+    filter: 'page' | 'categories',
+  ): void {
     this.queryParams().page = null;
     this.queryParams()[filter] = event.value;
     this.updateRouteAndprojects();

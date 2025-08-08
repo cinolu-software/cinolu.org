@@ -6,6 +6,6 @@ import { MountDonationComponent } from '../mount-donation/mount-donation.compone
   selector: 'app-donation',
   imports: [HeroDonationComponent, MountDonationComponent],
   templateUrl: './donation.component.html',
-  styles: ``
+  styles: ``,
 })
 export class DonationComponent {}

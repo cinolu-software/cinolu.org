@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -18,7 +24,7 @@ export const AddUserStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _router: inject(Router)
+    _router: inject(Router),
   })),
   withMethods(({ _http, _toast, _router, ...store }) => ({
     addUser: rxMethod<UserDto>(
@@ -35,10 +41,10 @@ export const AddUserStore = signalStore(
               _toast.showError("Erreur lors de l'ajout de l'utilisateur");
               patchState(store, { isLoading: false, user: null });
               return of(null);
-            })
+            }),
           );
-        })
-      )
-    )
-  }))
+        }),
+      ),
+    ),
+  })),
 );

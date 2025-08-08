@@ -1,9 +1,20 @@
 import { Component, inject } from '@angular/core';
-import { ArrowLeft, LucideAngularModule, ChevronsRight, ChevronsLeft, Check } from 'lucide-angular';
+import {
+  ArrowLeft,
+  LucideAngularModule,
+  ChevronsRight,
+  ChevronsLeft,
+  Check,
+} from 'lucide-angular';
 import { Button } from 'primeng/button';
 import { CommonModule, Location } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { StepperModule } from 'primeng/stepper';
 import { AddEventStore } from '../../store/events/add-event.store';
 import { TextareaModule } from 'primeng/textarea';
@@ -16,7 +27,11 @@ import { MultiSelectModule } from 'primeng/multiselect';
 @Component({
   selector: 'app-event-add',
   templateUrl: './event-add.component.html',
-  providers: [AddEventStore, UnpaginatedProgramsStore, UnpaginatedCategoriesStore],
+  providers: [
+    AddEventStore,
+    UnpaginatedProgramsStore,
+    UnpaginatedCategoriesStore,
+  ],
   imports: [
     LucideAngularModule,
     SelectModule,
@@ -27,8 +42,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     Button,
     InputText,
     DatePickerModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  ],
 })
 export class AddEventComponent {
   #fb = inject(FormBuilder);
@@ -37,7 +52,12 @@ export class AddEventComponent {
   store = inject(AddEventStore);
   categoriesStore = inject(UnpaginatedCategoriesStore);
   programsStore = inject(UnpaginatedProgramsStore);
-  icons = { back: ArrowLeft, next: ChevronsRight, previous: ChevronsLeft, check: Check };
+  icons = {
+    back: ArrowLeft,
+    next: ChevronsRight,
+    previous: ChevronsLeft,
+    check: Check,
+  };
 
   constructor() {
     this.form = this.#fb.group({
@@ -48,7 +68,7 @@ export class AddEventComponent {
       started_at: [null, Validators.required],
       ended_at: [null, Validators.required],
       program: ['', Validators.required],
-      categories: [[], Validators.required]
+      categories: [[], Validators.required],
     });
   }
 

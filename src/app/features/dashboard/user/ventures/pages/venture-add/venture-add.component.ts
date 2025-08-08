@@ -1,7 +1,18 @@
 import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ArrowLeft, LucideAngularModule, ChevronsRight, ChevronsLeft, Check } from 'lucide-angular';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import {
+  ArrowLeft,
+  LucideAngularModule,
+  ChevronsRight,
+  ChevronsLeft,
+  Check,
+} from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { Textarea } from 'primeng/textarea';
@@ -23,15 +34,20 @@ import { AddVentureStore } from '../../store/add-venture.store';
     Textarea,
     LucideAngularModule,
     InputTextModule,
-    StepperModule
+    StepperModule,
   ],
-  templateUrl: './venture-add.component.html'
+  templateUrl: './venture-add.component.html',
 })
 export class AddVentureComponent {
   #fb = inject(FormBuilder);
   #location = inject(Location);
   form: FormGroup;
-  icons = { back: ArrowLeft, next: ChevronsRight, previous: ChevronsLeft, check: Check };
+  icons = {
+    back: ArrowLeft,
+    next: ChevronsRight,
+    previous: ChevronsLeft,
+    check: Check,
+  };
   sectors = SECTORS;
   stages = STAGES;
   store = inject(AddVentureStore);
@@ -49,7 +65,7 @@ export class AddVentureComponent {
       sector: [''],
       founded_at: [''],
       location: [''],
-      stage: ['']
+      stage: [''],
     });
   }
 

@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -15,7 +21,7 @@ interface ICategoriesStore {
 export const CategoriesStore = signalStore(
   withState<ICategoriesStore>({ isLoading: false, categories: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient)
+    _http: inject(HttpClient),
   })),
   withMethods(({ _http, ...store }) => ({
     loadCategories: rxMethod<FilterEventCategoriesDto>(
@@ -23,17 +29,21 @@ export const CategoriesStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          return _http.get<{ data: [ICategory[], number] }>('event-categories/paginated', { params }).pipe(
-            map(({ data }) => {
-              patchState(store, { isLoading: false, categories: data });
-            }),
-            catchError(() => {
-              patchState(store, { isLoading: false, categories: [[], 0] });
-              return of(null);
-            })
-          );
-        })
-      )
+          return _http
+            .get<{
+              data: [ICategory[], number];
+            }>('event-categories/paginated', { params })
+            .pipe(
+              map(({ data }) => {
+                patchState(store, { isLoading: false, categories: data });
+              }),
+              catchError(() => {
+                patchState(store, { isLoading: false, categories: [[], 0] });
+                return of(null);
+              }),
+            );
+        }),
+      ),
     ),
     addCategory: (category: ICategory): void => {
       const [categories, count] = store.categories();
@@ -41,13 +51,15 @@ export const CategoriesStore = signalStore(
     },
     updateCategory: (category: ICategory): void => {
       const [categories, count] = store.categories();
-      const updated = categories.map((c) => (c.id === category.id ? category : c));
+      const updated = categories.map((c) =>
+        c.id === category.id ? category : c,
+      );
       patchState(store, { categories: [updated, count] });
     },
     deleteCategory: (id: string): void => {
       const [categories, count] = store.categories();
       const filtered = categories.filter((category) => category.id !== id);
       patchState(store, { categories: [filtered, count - 1] });
-    }
-  }))
+    },
+  })),
 );

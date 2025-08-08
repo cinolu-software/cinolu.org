@@ -4,5 +4,5 @@ export const STAGES = [
   'Pré-revenu',
   'Début de revenus',
   'Croissance / Passage à l’échelle',
-  'Entreprise établie / Mature'
+  'Entreprise établie / Mature',
 ];

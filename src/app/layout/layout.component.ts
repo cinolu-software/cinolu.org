@@ -11,7 +11,12 @@ import { FullLayoutComponent } from './pages/full-layout/full-layout.component';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  imports: [FixedLayoutComponent, EmptyLayoutComponent, FullLayoutComponent, DashboardLayoutComponent]
+  imports: [
+    FixedLayoutComponent,
+    EmptyLayoutComponent,
+    FullLayoutComponent,
+    DashboardLayoutComponent,
+  ],
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   config: AppConfig = {} as AppConfig;
@@ -22,14 +27,16 @@ export class LayoutComponent implements OnInit, OnDestroy {
   #configService = inject(AppConfigService);
 
   ngOnInit(): void {
-    this.#configService.config$.pipe(takeUntil(this.#unsubscribeAll)).subscribe((config) => {
-      this.config = config as AppConfig;
-      this._updateLayout();
-    });
+    this.#configService.config$
+      .pipe(takeUntil(this.#unsubscribeAll))
+      .subscribe((config) => {
+        this.config = config as AppConfig;
+        this._updateLayout();
+      });
     this.#router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
-        takeUntil(this.#unsubscribeAll)
+        takeUntil(this.#unsubscribeAll),
       )
       .subscribe(() => {
         this._updateLayout();
@@ -56,7 +63,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
     }
     const paths = route.pathFromRoot;
     paths.forEach((path) => {
-      if (path.routeConfig && path.routeConfig.data && path.routeConfig.data['layout']) {
+      if (
+        path.routeConfig &&
+        path.routeConfig.data &&
+        path.routeConfig.data['layout']
+      ) {
         this.layout = path.routeConfig.data['layout'];
       }
     });
