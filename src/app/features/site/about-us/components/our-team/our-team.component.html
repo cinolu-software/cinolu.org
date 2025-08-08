@@ -17,14 +17,14 @@
 
       <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         @for (item of our_team; track $index) {
-          <div
+          <button
             (click)="selectMember(item)"
             [class.ring]="selectedMember.id === item.id"
             class="cursor-pointer rounded-md overflow-hidden border border-gray-200 hover:shadow-lg transition-transform duration-300 hover:scale-105 ring-primary-500 ring-2">
             <div class="w-full aspect-square overflow-hidden">
               <img [src]="item.image" alt="{{ item.name }}" class="w-full h-full object-cover object-top" />
             </div>
-          </div>
+          </button>
         }
       </div>
     </div>
