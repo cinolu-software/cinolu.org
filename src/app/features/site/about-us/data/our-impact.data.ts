@@ -38,7 +38,7 @@ export const OUR_IMPACT_ITEMS: IOurImpact[] = [
   },
   {
     value: 150000,
-    artefact: 'USD',
+    artefact: '$',
     title: 'Financements mobilisés',
     description: 'Accompagnement des entrepreneurs en devenir',
     icon: CircleDollarSign,
