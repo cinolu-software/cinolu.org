@@ -101,6 +101,7 @@
               <th class="px-6 py-3">Logo</th>
               <th class="px-6 py-3">Nom</th>
               <th class="px-6 py-3">Description</th>
+              <th class="px-6 py-3">Status</th>
               <th class="px-6 py-3">Créé le</th>
               <th class="px-6 py-3">Actions</th>
             </tr>
@@ -130,11 +131,35 @@
                     {{ program.description }}
                   </span>
                 </td>
+                <td class="px-6 py-2 text-xs capitalize font-medium">
+                  @if (program.is_published) {
+                    <span
+                      class="text-primary-500 bg-primary-400/20 rounded py-1 px-1.5"
+                    >
+                      publié
+                    </span>
+                  } @else {
+                    <span class="text-red-500 bg-red-400/20 rounded py-1 px-2">
+                      dépublié
+                    </span>
+                  }
+                </td>
                 <td class="px-6 py-2">
                   {{ program.created_at | date: "longDate" }}
                 </td>
                 <td class="px-6 py-2">
                   <div class="flex items-center gap-2">
+                    <button
+                      class="text-primary-500"
+                      (click)="onPublishProgram(program.id)"
+                    >
+                      <p-confirmpopup />
+                      @if (!program.is_published) {
+                        <i-lucide [name]="icons.eyeOff" class="size-5" />
+                      } @else {
+                        <i-lucide [name]="icons.eye" class="size-5" />
+                      }
+                    </button>
                     <button
                       class="text-gray-500"
                       (click)="onToggleEditModal(program)"

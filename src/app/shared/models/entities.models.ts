@@ -60,6 +60,7 @@ export interface IProgram extends IBase {
   description: string;
   slug: string;
   logo: string;
+  is_published: boolean;
   projects: IProject[];
   events: IEvent[];
 }

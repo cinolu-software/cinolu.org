@@ -7,6 +7,8 @@ import {
   Trash,
   Plus,
   Search,
+  Eye,
+  EyeOff,
 } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -33,6 +35,7 @@ import { FileUploadComponent } from '../../../../../shared/components/file-uploa
 import { environment } from '../../../../../../environments/environment';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { AvatarModule } from 'primeng/avatar';
+import { PublishProgramStore } from '../store/publish-program.store';
 
 @Component({
   selector: 'app-programs-list',
@@ -43,6 +46,7 @@ import { AvatarModule } from 'primeng/avatar';
     UpdateProgramStore,
     AddProgramStore,
     ConfirmationService,
+    PublishProgramStore,
   ],
   imports: [
     LucideAngularModule,
@@ -72,6 +76,7 @@ export class ProgramsListComponent implements OnInit {
   addProgramStore = inject(AddProgramStore);
   updateProgramStore = inject(UpdateProgramStore);
   deleteProgramStore = inject(DeleteProgramStore);
+  publishProgramStore = inject(PublishProgramStore);
   program = signal<IProgram | null>(null);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   url = environment.apiUrl + 'programs/logo/';
@@ -81,7 +86,10 @@ export class ProgramsListComponent implements OnInit {
     trash: Trash,
     plus: Plus,
     search: Search,
+    eye: Eye,
+    eyeOff: EyeOff,
   };
+
   showAddModal = signal(false);
   showEditModal = signal(false);
   queryParams = signal<FilterProgramsDto>({
@@ -115,6 +123,10 @@ export class ProgramsListComponent implements OnInit {
   onPageChange(currentPage: number): void {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
     this.updateRouteAndPrograms();
+  }
+
+  onPublishProgram(id: string): void {
+    this.publishProgramStore.publishProgram(id);
   }
 
   onFileUploadLoaded(): void {
