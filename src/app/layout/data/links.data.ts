@@ -8,6 +8,7 @@ import {
   Calendar1,
   Phone,
   House,
+  BookOpen,
 } from 'lucide-angular';
 
 export interface ILink {
@@ -68,6 +69,21 @@ export const ADMIN_LINKS: ILink[] = [
     name: 'Les programmes',
     path: '/dashboard/programs',
     icon: Activity,
+  },
+  {
+    name: 'Le blog',
+    path: '/dashboard/blog',
+    icon: BookOpen,
+    children: [
+      {
+        name: 'Articles',
+        path: '/dashboard/blog/articles',
+      },
+      {
+        name: 'Tags',
+        path: '/dashboard/blog/tags',
+      },
+    ],
   },
   {
     name: 'Les utilisateurs',
