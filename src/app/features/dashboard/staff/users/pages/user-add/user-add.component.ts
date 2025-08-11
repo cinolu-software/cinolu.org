@@ -15,6 +15,7 @@ import {
 import { MultiSelectModule } from 'primeng/multiselect';
 import { AddUserStore } from '../../store/users/add-user.store';
 import { UnpaginatedRolesStore } from '../../store/roles/unpaginated-roles.store';
+import { DatePicker } from 'primeng/datepicker';
 
 @Component({
   selector: 'app-user-add',
@@ -29,6 +30,7 @@ import { UnpaginatedRolesStore } from '../../store/roles/unpaginated-roles.store
     AvatarModule,
     NgxPaginationModule,
     ReactiveFormsModule,
+    DatePicker,
     MultiSelectModule,
   ],
 })
