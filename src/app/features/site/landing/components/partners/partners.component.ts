@@ -5,6 +5,7 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { FadeInOnScrollDirective } from '../../../../../shared/directives/animations-on-scroll.directive';
 import { UserPlus, LucideAngularModule } from 'lucide-angular';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-partners',
@@ -15,6 +16,7 @@ import { UserPlus, LucideAngularModule } from 'lucide-angular';
     InputGroupModule,
     InputGroupAddonModule,
     LucideAngularModule,
+    RouterLink
   ],
   templateUrl: './partners.component.html',
 })

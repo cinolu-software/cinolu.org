@@ -54,10 +54,16 @@ export const TEAM_MEMBERS: IMemberItem[] = [
     role: 'Designer & Community Manager',
     image: 'images/team/em.jpeg',
   },
+    {
+    id: 9,
+    name: 'Wilfried Musanzi',
+    role: 'Developpeur',
+    image: 'images/team/wm.webp',
+  },
   {
     id: 10,
     name: 'Ackeem Mbuebua',
-    role: 'Développeurs plateforme (OneStop)',
+    role: 'Développeurs',
     image: 'images/team/mk.webp',
   },
 ];

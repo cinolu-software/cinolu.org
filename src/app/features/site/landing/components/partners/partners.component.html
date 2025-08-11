@@ -1,6 +1,6 @@
 <section class="bg-grid fade-right-init" appAnimationsOnScroll>
   <div
-    class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-10"
+    class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-15 md:pb-10"
   >
     <div class="mb-16 text-center px-4">
       <h3
@@ -234,13 +234,27 @@
   </div>
 
   <div
-    class="h-96 bg-primary-600 flex items-center content-center justify-center bg-grid"
+    class="h-96 bg-primary-600 flex flex-col items-center justify-center bg-grid"
   >
     <p
       class="max-w-3xl text-center text-3xl sm:text-4xl lg:text-5xl font-black text-white font-satoshi mb-3 tracking-tight leading-tight"
     >
-      "Ce réseau est notre moteur de croissance collective, et une porte
-      d’entrée vers des projets plus grands."
+      Ce réseau est notre moteur de croissance collective, et une porte
+      d’entrée vers des projets plus grands.
     </p>
+
+        <button
+          [routerLink]="'/sign-up'"
+          type="submit"
+          class="group relative flex items-center justify-center gap-2 px-6 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-md mt-4 md:mt-7"
+        >
+          Devenir Partenaire
+          <i-lucide
+            [name]="icons.userPlus"
+            class="mt-0.5 group-hover:translate-x-1 transition-all duration-300"
+          >
+          </i-lucide>
+        </button>
   </div>
+    
 </section>

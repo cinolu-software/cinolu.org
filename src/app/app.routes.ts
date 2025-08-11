@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { LayoutComponent } from './layout/layout.component';
 
+
 export const routes: Route[] = [
   {
     path: 'programs',
@@ -56,6 +57,15 @@ export const routes: Route[] = [
     loadChildren: () =>
       import('./features/dashboard/dashboard.routes').then(
         (m) => m.dashboardRoutes,
+      ),
+  },
+    {
+    path: 'blog-ressources',
+    component: LayoutComponent,
+    data: { layout: 'full-layout' },
+    loadChildren: () =>
+      import('./features/site/blog/blogs.routes').then(
+        (m) => m.blogsRoutes,
       ),
   },
   {

@@ -41,6 +41,10 @@ export const EXPLORATION_LINKS: ILink[] = [
     name: 'Contact',
     path: '/contact-us',
   },
+  {
+    name: 'Blog',
+    path: '/blog-ressources',
+  },
 ];
 
 export const MY_CINOLU_LINKS: ILink[] = [
