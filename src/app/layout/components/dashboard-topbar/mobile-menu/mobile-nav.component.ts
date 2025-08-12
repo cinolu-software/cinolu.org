@@ -1,6 +1,7 @@
 import {
   Component,
   computed,
+  effect,
   inject,
   input,
   output,
@@ -15,10 +16,16 @@ import {
   X,
   ChevronDown,
 } from 'lucide-angular';
-import { USER_LINKS, ILink } from '../../../data/links.data';
+import {
+  USER_LINKS,
+  ILink,
+  ADMIN_LINKS,
+  COMMON_LINKS,
+} from '../../../data/links.data';
 import { IUser } from '../../../../shared/models/entities.models';
 import { filter } from 'rxjs';
 import { AuthStore } from '../../../../core/auth/auth.store';
+import { RoleEnum } from '../../../../core/auth/role.enum';
 
 @Component({
   selector: 'app-mobile-nav',
@@ -32,10 +39,15 @@ export class MobileNavComponent {
   icons = { menu: Menu, close: X, home: Home, chevronDown: ChevronDown };
   #router = inject(Router);
   style = input<string>();
-  links = signal<ILink[]>(USER_LINKS);
   currentUrl = signal(this.#router.url);
   toggleTab = signal<string | null>(null);
   authStore = inject(AuthStore);
+  links = signal<ILink[]>([]);
+  dashboardLinks: Record<string, ILink[]> = {
+    [RoleEnum.User]: USER_LINKS,
+    [RoleEnum.Staff]: ADMIN_LINKS,
+    [RoleEnum.Admin]: ADMIN_LINKS,
+  };
   activeTab = computed(() => {
     const url = this.currentUrl();
     return (
@@ -48,6 +60,13 @@ export class MobileNavComponent {
   });
 
   constructor() {
+    const roles = (this.authStore.user()?.roles as unknown as string[]) || [];
+    effect(() => {
+      this.links.set([
+        ...COMMON_LINKS,
+        ...roles.flatMap((role) => this.dashboardLinks[role] || []),
+      ]);
+    });
     this.#router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {

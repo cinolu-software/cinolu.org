@@ -6,6 +6,9 @@ import {
   BriefcaseBusiness,
   Briefcase,
   Calendar1,
+  Phone,
+  House,
+  BookOpen,
 } from 'lucide-angular';
 
 export interface ILink {
@@ -21,23 +24,28 @@ export interface ILink {
 
 export const EXPLORATION_LINKS: ILink[] = [
   {
+    icon: House,
     name: 'Accueil',
     path: '/',
     exactUrl: true,
   },
   {
+    icon: Activity,
     name: 'Programmes',
     path: '/programs',
   },
   {
+    icon: Calendar1,
     name: 'Evénements',
     path: '/events',
   },
   {
+    icon: Info,
     name: 'A propos',
     path: '/about-us',
   },
   {
+    icon: Phone,
     name: 'Contact',
     path: '/contact-us',
   },
@@ -65,6 +73,21 @@ export const ADMIN_LINKS: ILink[] = [
     name: 'Les programmes',
     path: '/dashboard/programs',
     icon: Activity,
+  },
+  {
+    name: 'Le blog',
+    path: '/dashboard/blog',
+    icon: BookOpen,
+    children: [
+      {
+        name: 'Articles',
+        path: '/dashboard/blog/articles',
+      },
+      {
+        name: 'Tags',
+        path: '/dashboard/blog/tags',
+      },
+    ],
   },
   {
     name: 'Les utilisateurs',
