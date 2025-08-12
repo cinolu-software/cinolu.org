@@ -87,3 +87,16 @@ export interface IRole extends IBase {
   name: string;
   label: string;
 }
+
+export interface ITag extends IBase {
+  name: string;
+}
+
+export interface IArticle extends IBase {
+  title: string;
+  slug: string;
+  image: string;
+  content: string;
+  authorId: number;
+  tag: string[];
+}
