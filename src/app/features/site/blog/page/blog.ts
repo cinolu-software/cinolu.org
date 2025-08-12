@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
-import { Info, LucideAngularModule, UserPlus } from 'lucide-angular';
+import {
+  Calendar1,
+  Info,
+  LucideAngularModule,
+  MessageCircleMore,
+  Tag,
+  ThumbsUp,
+  UserPlus,
+} from 'lucide-angular';
 import { HeroBlog } from '../components/hero-blog/hero-blog';
 import { RouterLink } from '@angular/router';
 import { BLOGS } from '../data/blogs.data';
@@ -17,6 +25,10 @@ export class Blog {
   icons = {
     info: Info,
     userPlus: UserPlus,
+    tag: Tag,
+    comment: MessageCircleMore,
+    like: ThumbsUp,
+    calendar: Calendar1,
   };
 
   latestPost = this.postBlogs.reduce((latest, post) =>

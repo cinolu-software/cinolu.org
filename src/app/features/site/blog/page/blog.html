@@ -79,9 +79,8 @@
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         @for (item of postBlogs; track $index) {
-          <a
-            href="{{ item.path }}"
-            class="bg-gray-50 shadow-md hover:shadow-lg rounded-lg cursor-pointer overflow-hidden flex flex-col"
+          <div
+            class="bg-gray-50 shadow-md hover:shadow-lg rounded-lg overflow-hidden flex flex-col"
           >
             <div class="relative h-48 overflow-hidden rounded-t-lg">
               <img
@@ -96,25 +95,35 @@
                 {{ item.title }}
               </h5>
             </div>
-            <div class="p-4 flex flex-col flex-grow">
+            <div class="p-4 flex flex-col flex-grow text-gray-600">
               <p class="text-gray-600 text-sm flex-grow line-clamp-4">
                 {{ item.description }}
               </p>
+              <span
+                class="truncate max-w-[10ch] bg-primary-500/20 text-primary-500 py-1 px-2 text-base"
+                >{{ item.tags }}</span
+              >
+
               <div
                 class="flex justify-between items-center py-2 border-t border-gray-100 mt-4"
               >
-                <button
-                  type="button"
-                  class="px-4 py-1 bg-primary-500 text-white rounded hover:bg-primary-600 transition"
+                <div class="flex gap-2">
+                  <p class="hover:text-blue-600 hover:cursor-pointer">
+                    <i-lucide [name]="icons.like" class="size-5"></i-lucide>
+                  </p>
+                  <p class="hover:text-primary-500 hover:cursor-pointer">
+                    <i-lucide [name]="icons.comment" class="size-5"></i-lucide>
+                  </p>
+                </div>
+                <p
+                  class="text-gray-600 flex items-center gap-1 text-xs whitespace-nowrap"
                 >
-                  Voir Plus
-                </button>
-                <p class="text-gray-600 text-xs whitespace-nowrap">
-                  {{ item.date }}
+                  <i-lucide [name]="icons.calendar" class="size-5"></i-lucide>
+                  {{ item.readingTime }}
                 </p>
               </div>
             </div>
-          </a>
+          </div>
         }
       </div>
     </section>

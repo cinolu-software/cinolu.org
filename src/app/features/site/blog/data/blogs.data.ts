@@ -24,8 +24,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-08-01',
     author: 'Ackeem Mbuebua',
     category: 'Programmes',
-    tags: ['entrepreneuriat', 'formation', 'innovation'],
-    image: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2',
+    tags: ['Entrepreneuriat', 'Formation', 'Innovation'],
+    image:
+      'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=600&auto=format&fit=crop&q=60',
     path: '/blog/lancement-programme-2025',
     slug: 'lancement-programme-2025',
     content:
@@ -41,8 +42,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-07-30',
     author: 'Sarah Kabila',
     category: 'Événements',
-    tags: ['bootcamp', 'formation', 'jeunes'],
-    image: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2',
+    tags: ['Bootcamp', 'Formation', 'Jeunes'],
+    image:
+      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&auto=format&fit=crop&q=60',
     path: '/blog/bootcamp-juillet-2025',
     slug: 'bootcamp-juillet-2025',
     content:
@@ -59,8 +61,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-07-25',
     author: 'Ackeem Mbuebua',
     category: 'Portraits',
-    tags: ['success story', 'écologie', 'innovation'],
-    image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216',
+    tags: ['Success Story', 'Ecologie', 'Innovation'],
+    image:
+      'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&auto=format&fit=crop&q=60',
     path: '/blog/portrait-marie-ecoclean',
     slug: 'portrait-marie-ecoclean',
     content:
@@ -77,8 +80,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-07-20',
     author: 'Sarah Kabila',
     category: 'Conseils',
-    tags: ['pitch', 'investisseurs', 'startup'],
-    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d',
+    tags: ['Pitch', 'Investisseurs', 'Startup'],
+    image:
+      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&auto=format&fit=crop&q=60',
     path: '/blog/5-conseils-pour-reussir-son-pitch',
     slug: '5-conseils-pour-reussir-son-pitch',
     content:
@@ -94,8 +98,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-07-15',
     author: 'Ackeem Mbuebua',
     category: 'Actualités',
-    tags: ['subventions', 'finance', 'innovation'],
-    image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216',
+    tags: ['Subventions', 'Finance', 'Innovation'],
+    image:
+      'https://images.unsplash.com/photo-1534126511673-b6899657816a?w=600&auto=format&fit=crop&q=60',
     path: '/blog/nouvelles-subventions-2025',
     slug: 'nouvelles-subventions-2025',
     content:
@@ -111,8 +116,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-07-10',
     author: 'Sarah Kabila',
     category: 'Analyse',
-    tags: ['tendances', 'business', '2025'],
-    image: 'https://images.unsplash.com/photo-1534126511673-b6899657816a',
+    tags: ['Tendances', 'Business', '2025'],
+    image:
+      'https://images.unsplash.com/photo-1522204605094-1c6a26b4856e?w=600&auto=format&fit=crop&q=60',
     path: '/blog/tendances-entrepreneuriales-2025',
     slug: 'tendances-entrepreneuriales-2025',
     content:
@@ -128,8 +134,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-07-05',
     author: 'Ackeem Mbuebua',
     category: 'Conseils',
-    tags: ['business plan', 'startup', 'financement'],
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f',
+    tags: ['Business plan', 'Startup', 'Financement'],
+    image:
+      'https://images.unsplash.com/photo-1520975698519-59c54b6b9c9f?w=600&auto=format&fit=crop&q=60',
     path: '/blog/comment-creer-un-business-plan-solide',
     slug: 'comment-creer-un-business-plan-solide',
     content:
@@ -145,8 +152,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-07-01',
     author: 'Sarah Kabila',
     category: 'Portraits',
-    tags: ['mentorat', 'expertise', 'accompagnement'],
-    image: 'https://images.unsplash.com/photo-1521790361557-2a3d6d3f9c88',
+    tags: ['Mentorat', 'Expertise', 'Accompagnement'],
+    image:
+      'https://images.unsplash.com/photo-1531058020387-3be344556be6?w=600&auto=format&fit=crop&q=60',
     path: '/blog/rencontre-avec-nos-mentors',
     slug: 'rencontre-avec-nos-mentors',
     content:
@@ -162,8 +170,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-06-28',
     author: 'Ackeem Mbuebua',
     category: 'Finance',
-    tags: ['levée de fonds', 'investisseurs', 'startup'],
-    image: 'https://images.unsplash.com/photo-1556742400-b5b7c5121f1d',
+    tags: ['Levée de fonds', 'Investisseurs', 'Startup'],
+    image:
+      'https://images.unsplash.com/photo-1556742400-b5b7c5121f1d?w=600&auto=format&fit=crop&q=60',
     path: '/blog/comment-lever-des-fonds-efficacement',
     slug: 'comment-lever-des-fonds-efficacement',
     content:
@@ -180,8 +189,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-06-25',
     author: 'Sarah Kabila',
     category: 'Conseils',
-    tags: ['réseautage', 'relations', 'opportunités'],
-    image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d',
+    tags: ['Réseautage', 'Relations', 'Opportunités'],
+    image:
+      'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&auto=format&fit=crop&q=60',
     path: '/blog/l-importance-du-reseautage',
     slug: 'l-importance-du-reseautage',
     content:
@@ -198,8 +208,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-06-20',
     author: 'Ackeem Mbuebua',
     category: 'Branding',
-    tags: ['marque', 'identité', 'marketing'],
-    image: 'https://images.unsplash.com/photo-1522204605094-1c6a26b4856e',
+    tags: ['Marque', 'Identité', 'Marketing'],
+    image:
+      'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&auto=format&fit=crop&q=60',
     path: '/blog/creer-une-marque-forte',
     slug: 'creer-une-marque-forte',
     content:
@@ -215,8 +226,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-06-15',
     author: 'Sarah Kabila',
     category: 'Impact',
-    tags: ['impact social', 'innovation', 'communauté'],
-    image: 'https://images.unsplash.com/photo-1520975698519-59c54b6b9c9f',
+    tags: ['Impact social', 'Innovation', 'Communauté'],
+    image:
+      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&auto=format&fit=crop&q=60',
     path: '/blog/l-impact-social-des-startups',
     slug: 'l-impact-social-des-startups',
     content:
@@ -232,8 +244,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-06-10',
     author: 'Ackeem Mbuebua',
     category: 'Événements',
-    tags: ['organisation', 'événement', 'réseautage'],
-    image: 'https://images.unsplash.com/photo-1531058020387-3be344556be6',
+    tags: ['Organisation', 'Evénement', 'Réseautage'],
+    image:
+      'https://images.unsplash.com/photo-1531058020387-3be344556be6?w=600&auto=format&fit=crop&q=60',
     path: '/blog/organiser-un-evenement-entrepreneurial-reussi',
     slug: 'organiser-un-evenement-entrepreneurial-reussi',
     content:
@@ -249,8 +262,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-06-05',
     author: 'Sarah Kabila',
     category: 'Portraits',
-    tags: ['femmes', 'leadership', 'inspiration'],
-    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d',
+    tags: ['Femmes', 'Leadership', 'Inspiration'],
+    image:
+      'https://images.unsplash.com/photo-1521790361557-2a3d6d3f9c88?w=600&auto=format&fit=crop&q=60',
     path: '/blog/les-femmes-dans-l-entrepreneuriat',
     slug: 'les-femmes-dans-l-entrepreneuriat',
     content:
@@ -266,8 +280,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-06-01',
     author: 'Ackeem Mbuebua',
     category: 'Conseils',
-    tags: ['startup', 'erreurs', 'conseils'],
-    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0',
+    tags: ['Startup', 'Erreurs', 'Conseils'],
+    image:
+      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&auto=format&fit=crop&q=60',
     path: '/blog/les-erreurs-a-eviter-en-lancant-sa-startup',
     slug: 'les-erreurs-a-eviter-en-lancant-sa-startup',
     content:
@@ -283,8 +298,9 @@ export const BLOGS: IBlog[] = [
     date: '2025-05-28',
     author: 'Sarah Kabila',
     category: 'Réseautage',
-    tags: ['international', 'réseau', 'opportunités'],
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f',
+    tags: ['International', 'Réseau', 'Opportunités'],
+    image:
+      'https://images.unsplash.com/photo-1531058020387-3be344556be6?w=600&auto=format&fit=crop&q=60',
     path: '/blog/construire-un-reseau-international',
     slug: 'construire-un-reseau-international',
     content:
@@ -294,3 +310,4 @@ export const BLOGS: IBlog[] = [
     updatedAt: '2025-05-29',
   },
 ];
+
