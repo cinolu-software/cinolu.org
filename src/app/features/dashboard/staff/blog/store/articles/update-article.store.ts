@@ -27,7 +27,7 @@ export const UpdateEventStore = signalStore(
     _toast: inject(ToastrService),
   })),
   withMethods(({ _http, _router, _toast, ...store }) => ({
-    updateEvent: rxMethod<ArticleDto>(
+    updateArticle: rxMethod<ArticleDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((article) => {
