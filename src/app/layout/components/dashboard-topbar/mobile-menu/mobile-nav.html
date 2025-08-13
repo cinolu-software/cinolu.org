@@ -33,7 +33,7 @@
             <div class="mx-4 border-l border-gray-300 flex flex-col gap-2.5">
               @for (child of link.children; track $index) {
                 <a
-                  class="group flex items-center gap-2 text-gray-800/90 text-sm tracking-wider"
+                  class="group flex items-center gap-2 text-gray-800/90  tracking-wider"
                   [routerLink]="child.path"
                   [routerLinkActive]="'text-gray-800 active-link'"
                   [routerLinkActiveOptions]="{ exact: child.exactUrl || false }"

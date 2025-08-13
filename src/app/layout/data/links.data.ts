@@ -81,7 +81,7 @@ export const ADMIN_LINKS: ILink[] = [
     icon: BookOpen,
     children: [
       {
-        name: 'Articles',
+        name: 'Les articles',
         path: '/dashboard/blog/articles',
       },
       {

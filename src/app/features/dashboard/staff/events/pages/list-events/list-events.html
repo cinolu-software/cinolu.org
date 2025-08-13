@@ -5,12 +5,10 @@
   @let eventList = store.events()[0];
   <div class="relative bg-white rounded-lg">
     <div class="flex flex-col gap-3 mb-10 pt-6">
-      <div
-        class="px-6 flex flex-wrap gap-2 md:justify-between md:items-center mb-6 md:mb-0"
-      >
+      <div class="px-6 flex flex-wrap gap-2 md:justify-between md:items-center mb-6 md:mb-0">
         <h5 class="text-lg font-bold">
           Liste des événements
-          <span class="text-gray-500 text-sm">
+          <span class="text-gray-500 ">
             @if (isLoading) {
               <p-progress-spinner
                 strokeWidth="5"
@@ -23,53 +21,33 @@
             }
           </span>
         </h5>
-        <a
-          pButton
-          [outlined]="true"
-          [size]="'small'"
-          [routerLink]="['/dashboard/events/list/add']"
-          class="flex items-center gap-2"
-        >
-          <i-lucide [name]="icons.plus" class="size-4" />
+        <a pButton [outlined]="true" [size]="'small'" [routerLink]="['/dashboard/events/list/add']"
+           class="flex items-center gap-2">
+          <i-lucide [name]="icons.plus" class="size-4"/>
           Ajouter un événement
         </a>
       </div>
-      <form
-        [formGroup]="searchForm"
-        (ngSubmit)="onSearch()"
-        class="px-6 flex flex-col gap-1 md:flex-row md:gap-4"
-      >
+      <form [formGroup]="searchForm" (ngSubmit)="onSearch()"
+            class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
         <input
           pInputText
           class="py-1! md:w-1/3"
           id="search"
           formControlName="q"
-          placeholder="Rechercher..."
-        />
+          placeholder="Rechercher..."/>
         <div class="flex items-center gap-1">
-          <p-button
-            type="submit"
-            [size]="'small'"
-            [loading]="isLoading"
-            [disabled]="
-              searchForm.invalid || isLoading || (eventCount === 0 && !hasQuery)
-            "
-          >
+          <p-button type="submit" [size]="'small'" [loading]="isLoading"
+                    [disabled]="searchForm.invalid || isLoading || (eventCount === 0 && !hasQuery)">
             Rechercher
             @if (!isLoading) {
-              <i-lucide [name]="icons.search" class="size-4" />
+              <i-lucide [name]="icons.search" class="size-4"/>
             }
           </p-button>
-          <p-button
-            [size]="'small'"
-            [outlined]="true"
-            [loading]="isLoading"
-            [disabled]="isLoading || !hasQuery"
-            (click)="onResetSearch()"
-          >
+          <p-button [size]="'small'" [outlined]="true" [loading]="isLoading" [disabled]="isLoading || !hasQuery"
+                    (click)="onResetSearch()">
             Réinitialiser
             @if (!isLoading) {
-              <i-lucide [name]="icons.refresh" class="size-4" />
+              <i-lucide [name]="icons.refresh" class="size-4"/>
             }
           </p-button>
         </div>
@@ -95,33 +73,29 @@
     }
     @if (eventCount > 0 && !isLoading) {
       <div class="relative flex flex-col overflow-x-auto">
-        <table class="text-sm text-left rtl:text-right text-gray-500">
+        <table class=" text-left rtl:text-right text-gray-500">
           <thead class="font-black text-gray-800 border-y border-gray-200">
-            <tr>
-              <th class="px-6 py-3">Image</th>
-              <th class="px-6 py-3">Nom</th>
-              <th class="px-6 py-3">Début</th>
-              <th class="px-6 py-3">Fin</th>
-              <th class="px-6 py-3">Status</th>
-              <th class="px-6 py-3">Actions</th>
-            </tr>
+          <tr>
+            <th class="px-6 py-3">Image</th>
+            <th class="px-6 py-3">Nom</th>
+            <th class="px-6 py-3">Début</th>
+            <th class="px-6 py-3">Fin</th>
+            <th class="px-6 py-3">Status</th>
+            <th class="px-6 py-3">Actions</th>
+          </tr>
           </thead>
           <tbody>
-            @for (
-              event of eventList
-                | paginate
-                  : {
-                      itemsPerPage: 40,
-                      currentPage: queryParams().page || 1,
-                      totalItems: eventCount,
-                    };
-              track event.id
-            ) {
-              <tr
-                class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap"
-              >
+            @for (event of eventList
+              | paginate
+              : {
+                itemsPerPage: 40,
+                currentPage: queryParams().page || 1,
+                totalItems: eventCount,
+              };
+              track event.id) {
+              <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
                 <td class="px-6 py-2">
-                  <p-avatar [image]="event | apiIMG: 'event'" />
+                  <p-avatar [image]="event | apiIMG: 'event'"/>
                 </td>
                 <td class="px-6 py-2 font-medium text-gray-900">
                   {{ event.name | titlecase }}
@@ -136,11 +110,11 @@
                   @if (event.is_published) {
                     <span
                       class="text-primary-500 bg-primary-400/20 rounded py-1 px-1.5"
-                      >publié</span
+                    >publié</span
                     >
                   } @else {
                     <span class="text-red-500 bg-red-400/20 rounded py-1 px-2"
-                      >dépublié</span
+                    >dépublié</span
                     >
                   }
                 </td>
@@ -150,24 +124,24 @@
                       class="text-primary-500"
                       (click)="onPublishProject(event.id)"
                     >
-                      <p-confirmpopup />
+                      <p-confirmpopup/>
                       @if (!event.is_published) {
-                        <i-lucide [name]="icons.eyeOff" class="size-5" />
+                        <i-lucide [name]="icons.eyeOff" class="size-5"/>
                       } @else {
-                        <i-lucide [name]="icons.eye" class="size-5" />
+                        <i-lucide [name]="icons.eye" class="size-5"/>
                       }
                     </button>
                     <a
                       [routerLink]="['/dashboard/events/list/edit', event.slug]"
                     >
-                      <i-lucide [name]="icons.edit" class="size-4" />
+                      <i-lucide [name]="icons.edit" class="size-4"/>
                     </a>
                     <button
                       class="text-red-500"
                       (click)="onDeleteProject(event.id, $event)"
                     >
-                      <p-confirmpopup />
-                      <i-lucide [name]="icons.trash" class="size-4" />
+                      <p-confirmpopup/>
+                      <i-lucide [name]="icons.trash" class="size-4"/>
                     </button>
                   </div>
                 </td>
