@@ -19,7 +19,7 @@ interface IAddArticleStore {
   articles: IArticle | null;
 }
 
-export const AddEArticleStore = signalStore(
+export const AddArticleStore = signalStore(
   withState<IAddArticleStore>({ isLoading: false, articles: null }),
   withProps(() => ({
     _http: inject(HttpClient),
