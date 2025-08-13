@@ -5,6 +5,27 @@ interface IBase {
   deleted_at: Date;
 }
 
+export interface ITag extends IBase {
+  name: string;
+}
+
+export interface IComment extends IBase {
+  content: string;
+  author: IUser;
+  article: IArticle;
+}
+
+export interface IArticle extends IBase {
+  title: string;
+  slug: string;
+  image: string;
+  content: string;
+  published_at: Date;
+  tags: ITag[];
+  comments: IComment[];
+  author: IUser;
+}
+
 export interface IUser extends IBase {
   email: string;
   name: string;

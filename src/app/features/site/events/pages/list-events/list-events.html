@@ -39,17 +39,13 @@
       <div
         class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10"
       >
-        @for (
-          event of store.events()[0]
-            | paginate
-              : {
-                  itemsPerPage: 9,
-                  currentPage: queryParams().page || 1,
-                  totalItems: store.events()[1],
-                };
-          track event.id
-        ) {
-          <app-event-card [event]="event" />
+        @for (event of store.events()[0] | paginate : {
+          itemsPerPage: 9,
+          currentPage: queryParams().page || 1,
+          totalItems: store.events()[1],
+        };
+          track event.id) {
+          <app-event-card [event]="event"/>
         }
       </div>
       @if (store.events()[1] > 9) {
@@ -79,7 +75,7 @@
         class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10"
       >
         @for (event of skeletonArray; track $index) {
-          <app-event-card-skeleton />
+          <app-event-card-skeleton/>
         }
       </div>
     }

@@ -5,7 +5,7 @@ export const blogsRoutes: Routes = [
         path: '',
         title: 'Blog',
         loadComponent: () =>
-      import('./page/blog').then(
+      import('./pages/blog').then(
         (c) => c.Blog,
       )
     },
