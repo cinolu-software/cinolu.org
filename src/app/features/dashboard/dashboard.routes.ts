@@ -31,4 +31,9 @@ export const dashboardRoutes: Routes = [
     loadChildren: () =>
       import('./staff/events/events.routes').then((c) => c.eventsRoutes),
   },
+  {
+    path: 'blog',
+    loadChildren: () =>
+      import('./staff/blog/blog.routes').then((c) => c.blogRoutes),
+  },
 ];

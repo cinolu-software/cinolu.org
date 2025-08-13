@@ -25,9 +25,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FilterArticleTagsDto } from '../../dto/filter-tags.dto';
 import { CommonModule } from '@angular/common';
 import { ITag } from '../../../../../../shared/models/entities.models';
+import { UpdateTagStore } from '../../store/tags/update-tag.store';
+import { DeleteTagStore } from '../../store/tags/delete-tag.store';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-article-tags',
+  providers: [
+    ConfirmationService,
+    TagsStore,
+    AddTagStore,
+    UpdateTagStore,
+    DeleteTagStore,
+  ],
   imports: [
     LucideAngularModule,
     ReactiveFormsModule,
@@ -40,18 +50,22 @@ import { ITag } from '../../../../../../shared/models/entities.models';
     CommonModule,
   ],
   templateUrl: './article-tags.html',
-  providers: [TagsStore, AddTagStore],
   styles: ``,
 })
 export class ArticleTags implements OnInit {
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   #fb = inject(FormBuilder);
-  seachForm: FormGroup;
+  #confirmationService = inject(ConfirmationService);
+
+  searchForm: FormGroup;
   addTagForm: FormGroup;
   updateTagForm: FormGroup;
   store = inject(TagsStore);
   addTagStore = inject(AddTagStore);
+  deleteTagStore = inject(DeleteTagStore);
+  updateTagStore = inject(UpdateTagStore);
+
   showAddModal = signal(false);
   showEditModal = signal(false);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
@@ -70,7 +84,7 @@ export class ArticleTags implements OnInit {
   });
 
   constructor() {
-    this.seachForm = this.#fb.group({
+    this.searchForm = this.#fb.group({
       q: [this.queryParams().q || '', Validators.required],
     });
     this.addTagForm = this.#fb.group({
@@ -105,28 +119,29 @@ export class ArticleTags implements OnInit {
 
   onPageChange(currentPage: number): void {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
+    this.updateRouteAndTags();
   }
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/article-tags'], { queryParams });
+    this.#router.navigate(['/dashboard/tags'], { queryParams });
   }
 
-  updateRouteAddTags(): void {
+  updateRouteAndTags(): void {
     this.updateRoute();
     this.loadTags();
   }
 
   onResetSearch(): void {
-    this.seachForm.reset();
+    this.searchForm.reset();
     this.queryParams.set({ page: null, q: null });
-    this.updateRouteAddTags();
+    this.updateRouteAndTags();
   }
 
   onSearch(): void {
-    const searchValue = this.seachForm.value.q;
+    const searchValue = this.searchForm.value.q;
     this.queryParams.set({ page: null, q: searchValue });
-    this.updateRouteAddTags();
+    this.updateRouteAndTags();
   }
 
   onAddTag(): void {
@@ -137,5 +152,31 @@ export class ArticleTags implements OnInit {
     });
   }
 
+  onUpdateTag(): void {
+    if (this.updateTagForm.invalid) return;
+    this.updateTagStore.updateTag({
+      id: this.updateTagForm.value.id,
+      payload: this.updateTagForm.value,
+      onSuccess: () => this.onToggleEditModal(null),
+    });
+  }
 
+  onDeleteTag(tagId: string, tag: Event): void {
+    this.#confirmationService.confirm({
+      target: tag.currentTarget as EventTarget,
+      message: 'Etes-vous sûr ?',
+      rejectButtonProps: {
+        label: 'Annuler',
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Confirmer',
+        severity: 'danger',
+      },
+      accept: () => {
+        this.deleteTagStore.deleteTag({ id: tagId });
+      },
+    });
+  }
 }

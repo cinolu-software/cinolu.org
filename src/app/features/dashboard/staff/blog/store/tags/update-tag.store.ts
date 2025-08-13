@@ -10,41 +10,40 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TagsStore } from './tag.store';
-import { ArticleTagDto } from '../../dto/article-tag.dto';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 import { ITag } from '../../../../../../shared/models/entities.models';
 
-interface IAddTagStore {
+interface IUpdateTagStore {
   isLoading: boolean;
 }
 
-interface IAddTagParams {
-  payload: ArticleTagDto;
+interface IUpdateTagParams {
+  id: string;
+  payload: ITag;
   onSuccess: () => void;
 }
 
-export const AddTagStore = signalStore(
-  withState<IAddTagStore>({ isLoading: false }),
+export const UpdateTagStore = signalStore(
+  withState<IUpdateTagStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _tagsStore: inject(TagsStore),
     _toast: inject(ToastrService),
+    _tagsStore: inject(TagsStore),
   })),
   withMethods(({ _http, _tagsStore, _toast, ...store }) => ({
-    addTag: rxMethod<IAddTagParams>(
+    updateTag: rxMethod<IUpdateTagParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(({ payload, onSuccess }) => {
-          return _http.post<{ data: ITag }>('tags', payload).pipe(
+        switchMap(({ id, payload, onSuccess }) => {
+          return _http.patch<{ data: ITag }>(`tags/${id}`, payload).pipe(
             map(({ data }) => {
-              _tagsStore.addTag(data);
-              _toast.showSuccess('Tag ajoutée avec succès');
+              _toast.showSuccess('Tag mise à jour');
+              _tagsStore.updateTag(data);
               patchState(store, { isLoading: false });
               onSuccess();
             }),
-            catchError((e) => {
-              _toast.showError("Échec de l'ajout du tag");
-              console.log(e);
+            catchError(() => {
+              _toast.showError('Échec de la mise à jour');
               patchState(store, { isLoading: false });
               return of(null);
             }),

@@ -16,10 +16,11 @@ import { ITag } from '../../../../../../shared/models/entities.models';
 interface ITagsStore {
   isLoading: boolean;
   tags: [ITag[], number];
+  lastQuery: FilterArticleTagsDto | null;
 }
 
 export const TagsStore = signalStore(
-  withState<ITagsStore>({ isLoading: false, tags: [[], 0] }),
+  withState<ITagsStore>({ isLoading: false, tags: [[], 0], lastQuery: null }),
   withProps(() => ({
     _http: inject(HttpClient),
   })),
@@ -28,11 +29,10 @@ export const TagsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
+          patchState(store, { lastQuery: queryParams });
           const params = buildQueryParams(queryParams);
           return _http
-            .get<{
-              data: [ITag[], number];
-            }>('tags', { params })
+            .get<{ data: [ITag[], number] }>('tags/filtered', { params })
             .pipe(
               map(({ data }) => {
                 patchState(store, { isLoading: false, tags: data });
@@ -45,18 +45,21 @@ export const TagsStore = signalStore(
         }),
       ),
     ),
+
     addTag: (tag: ITag): void => {
       const [tags, count] = store.tags();
       patchState(store, { tags: [[tag, ...tags], count + 1] });
     },
+
     updateTag: (tag: ITag): void => {
       const [tags, count] = store.tags();
-      const updated = tags.map((c) => (c.id === tag.id ? tag : c));
+      const updated = tags.map((t) => (t.id === tag.id ? tag : t));
       patchState(store, { tags: [updated, count] });
     },
+
     deleteTag: (id: string): void => {
-      const [tag, count] = store.tags();
-      const filtered = tag.filter((tag) => tag.id !== id);
+      const [tags, count] = store.tags();
+      const filtered = tags.filter((tag) => tag.id !== id);
       patchState(store, { tags: [filtered, count - 1] });
     },
   })),

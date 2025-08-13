@@ -10,42 +10,37 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TagsStore } from './tag.store';
-import { ArticleTagDto } from '../../dto/article-tag.dto';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { ITag } from '../../../../../../shared/models/entities.models';
 
-interface IAddTagStore {
+interface IDeleteTagStore {
   isLoading: boolean;
 }
 
-interface IAddTagParams {
-  payload: ArticleTagDto;
-  onSuccess: () => void;
+interface IDeleteTagParams {
+  id: string;
 }
 
-export const AddTagStore = signalStore(
-  withState<IAddTagStore>({ isLoading: false }),
+export const DeleteTagStore = signalStore(
+  withState<IDeleteTagStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _tagsStore: inject(TagsStore),
     _toast: inject(ToastrService),
+    _tagsStore: inject(TagsStore),
   })),
   withMethods(({ _http, _tagsStore, _toast, ...store }) => ({
-    addTag: rxMethod<IAddTagParams>(
+    deleteTag: rxMethod<IDeleteTagParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(({ payload, onSuccess }) => {
-          return _http.post<{ data: ITag }>('tags', payload).pipe(
-            map(({ data }) => {
-              _tagsStore.addTag(data);
-              _toast.showSuccess('Tag ajoutée avec succès');
+        switchMap(({ id }) => {
+          return _http.delete<void>(`tags/${id}`).pipe(
+            map(() => {
               patchState(store, { isLoading: false });
-              onSuccess();
+              _tagsStore.deleteTag(id);
+              _toast.showSuccess('Tag supprimée avec succès');
             }),
-            catchError((e) => {
-              _toast.showError("Échec de l'ajout du tag");
-              console.log(e);
+            catchError(() => {
               patchState(store, { isLoading: false });
+              _toast.showError('Échec de la suppression du tag');
               return of(null);
             }),
           );
