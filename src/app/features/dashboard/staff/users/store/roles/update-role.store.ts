@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { RolesStore } from './roles.store';
 import { RoleDto } from '../../dto/role.dto';
 import { IRole } from '../../../../../../shared/models/entities.models';
+import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 
 interface IUpdateRoleStore {
   isLoading: boolean;
@@ -27,8 +28,9 @@ export const UpdateRoleStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _rolesStore: inject(RolesStore),
+    _toast: inject(ToastrService),
   })),
-  withMethods(({ _http, _rolesStore, ...store }) => ({
+  withMethods(({ _http, _rolesStore, _toast, ...store }) => ({
     updateRole: rxMethod<IUpdateRoleParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
@@ -38,10 +40,12 @@ export const UpdateRoleStore = signalStore(
             .pipe(
               map(({ data }) => {
                 _rolesStore.updateRole(data);
+                _toast.showSuccess('Rôle mis à jour avec succès');
                 patchState(store, { isLoading: false });
                 onSuccess();
               }),
               catchError(() => {
+                _toast.showError('Erreur lors de la mise à jour du rôle');
                 patchState(store, { isLoading: false });
                 return of(null);
               }),
