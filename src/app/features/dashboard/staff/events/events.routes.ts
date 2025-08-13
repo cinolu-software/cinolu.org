@@ -8,15 +8,15 @@ export const eventsRoutes: Routes = [
         path: '',
         title: 'Liste des événements',
         loadComponent: () =>
-          import('./pages/events-list/events-list.component').then(
-            (c) => c.EventsListComponent,
+          import('./pages/list-events/list-events').then(
+            (c) => c.ListEvents,
           ),
       },
       {
         path: 'add',
         title: 'Créer un événement',
         loadComponent: () =>
-          import('./pages/event-add/event-add.component').then(
+          import('./pages/add-event/add-event').then(
             (c) => c.AddEventComponent,
           ),
       },
@@ -24,7 +24,7 @@ export const eventsRoutes: Routes = [
         path: 'edit/:slug',
         title: 'Modifier un événement',
         loadComponent: () =>
-          import('./pages/event-edit/event-edit.component').then(
+          import('./pages/edit-event/edit-event').then(
             (c) => c.EditEventComponent,
           ),
       },
@@ -34,8 +34,8 @@ export const eventsRoutes: Routes = [
     path: 'categories',
     title: "Catégories d'événements",
     loadComponent: () =>
-      import('./pages/event-categories/event-categories.component').then(
-        (c) => c.EventCategoriesComponent,
+      import('./pages/event-categories/event-categories').then(
+        (c) => c.EventCategories,
       ),
   },
 ];

@@ -9,23 +9,23 @@ export const usersRoutes: Routes = [
         path: '',
         title: 'Liste des utilisateurs',
         loadComponent: () =>
-          import('./pages/users-list/users-list.component').then(
-            (c) => c.UsersListComponent,
+          import('./pages/list-users/list-users').then(
+            (c) => c.ListUsers,
           ),
       },
       {
         path: 'edit/:email',
         title: "Modifier l'utilisateur",
         loadComponent: () =>
-          import('./pages/user-edit/user-edit.component').then(
-            (c) => c.UserEditComponent,
+          import('./pages/edit-user/edit-user').then(
+            (c) => c.EditUser,
           ),
       },
       {
         path: 'add',
         title: 'Ajouter un utilisateur',
         loadComponent: () =>
-          import('./pages/user-add/user-add.component').then(
+          import('./pages/add-user/add-user').then(
             (c) => c.AddUserComponent,
           ),
       },
@@ -35,8 +35,8 @@ export const usersRoutes: Routes = [
     path: 'roles',
     title: 'Roles',
     loadComponent: () =>
-      import('./pages/user-roles/user-roles.component').then(
-        (c) => c.UserRolesComponent,
+      import('./pages/user-roles/user-roles').then(
+        (c) => c.UserRoles,
       ),
   },
 ];

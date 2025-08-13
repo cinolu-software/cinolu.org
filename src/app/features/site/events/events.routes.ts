@@ -5,16 +5,16 @@ export const eventsRoutes: Routes = [
     path: '',
     title: 'Events',
     loadComponent: () =>
-      import('./pages/events-list/events-list.component').then(
-        (c) => c.EventsListComponent,
+      import('./pages/list-events/list-events').then(
+        (c) => c.ListEvents,
       ),
   },
   {
     path: ':slug',
     title: 'Events - Details',
     loadComponent: () =>
-      import('./pages/event-detail/event-detail.component').then(
-        (c) => c.EventDetailComponent,
+      import('./pages/detail-event/detail-event').then(
+        (c) => c.DetailEvent,
       ),
   },
 ];

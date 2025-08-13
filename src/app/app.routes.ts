@@ -1,12 +1,12 @@
 import { Route } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
-import { LayoutComponent } from './layout/layout.component';
+import { Layout } from './layout/layout';
 
 
 export const routes: Route[] = [
   {
     path: 'programs',
-    component: LayoutComponent,
+    component: Layout,
     data: { layout: 'fixed-layout' },
     loadChildren: () =>
       import('./features/site/projects/projects.routes').then(
@@ -15,7 +15,7 @@ export const routes: Route[] = [
   },
   {
     path: 'events',
-    component: LayoutComponent,
+    component: Layout,
     data: { layout: 'fixed-layout' },
     loadChildren: () =>
       import('./features/site/events/events.routes').then(
@@ -24,7 +24,7 @@ export const routes: Route[] = [
   },
   {
     path: 'about-us',
-    component: LayoutComponent,
+    component: Layout,
     data: { layout: 'full-layout' },
     loadChildren: () =>
       import('./features/site/about-us/about-us.routes').then(
@@ -33,7 +33,7 @@ export const routes: Route[] = [
   },
   {
     path: 'donation',
-    component: LayoutComponent,
+    component: Layout,
     data: { layout: 'full-layout' },
     loadChildren: () =>
       import('./features/site/donation/donation.routes').then(
@@ -42,7 +42,7 @@ export const routes: Route[] = [
   },
   {
     path: 'contact-us',
-    component: LayoutComponent,
+    component: Layout,
     data: { layout: 'fixed-layout' },
     loadChildren: () =>
       import('./features/site/contact-us/contact-us.route').then(
@@ -51,7 +51,7 @@ export const routes: Route[] = [
   },
   {
     path: 'dashboard',
-    component: LayoutComponent,
+    component: Layout,
     data: { layout: 'dashboard-layout' },
     canActivate: [authGuard],
     loadChildren: () =>
@@ -61,7 +61,7 @@ export const routes: Route[] = [
   },
     {
     path: 'blog-ressources',
-    component: LayoutComponent,
+    component: Layout,
     data: { layout: 'full-layout' },
     loadChildren: () =>
       import('./features/site/blog/blogs.routes').then(
@@ -70,7 +70,7 @@ export const routes: Route[] = [
   },
   {
     path: '',
-    component: LayoutComponent,
+    component: Layout,
     data: { layout: 'full-layout' },
     loadChildren: () =>
       import('./features/site/landing/landing.routes').then(
@@ -79,14 +79,14 @@ export const routes: Route[] = [
   },
   {
     path: '',
-    component: LayoutComponent,
+    component: Layout,
     data: { layout: 'empty-layout' },
     loadChildren: () =>
       import('./features/site/auth/auth.routes').then((m) => m.authRoutes),
   },
   {
     path: '**',
-    component: LayoutComponent,
+    component: Layout,
     data: { layout: 'full-layout' },
     loadChildren: () =>
       import('./features/site/landing/landing.routes').then(

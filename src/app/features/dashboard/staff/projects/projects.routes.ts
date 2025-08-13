@@ -9,15 +9,15 @@ export const projectsRoutes: Routes = [
         path: '',
         title: 'Liste des projets',
         loadComponent: () =>
-          import('./pages/projects-list/projects-list.component').then(
-            (c) => c.ProjectsListComponent,
+          import('./pages/list-projects/list-projects').then(
+            (c) => c.ListProjects,
           ),
       },
       {
         path: 'add',
         title: 'Créer un projet',
         loadComponent: () =>
-          import('./pages/project-add/project-add.component').then(
+          import('./pages/add-project/add-project').then(
             (c) => c.AddProjectComponent,
           ),
       },
@@ -25,7 +25,7 @@ export const projectsRoutes: Routes = [
         path: 'edit/:slug',
         title: 'Modifier un projet',
         loadComponent: () =>
-          import('./pages/project-edit/project-edit.component').then(
+          import('./pages/edit-project/edit-project').then(
             (c) => c.EditProjectComponent,
           ),
       },
@@ -35,8 +35,8 @@ export const projectsRoutes: Routes = [
     path: 'categories',
     title: 'Catégories de projets',
     loadComponent: () =>
-      import('./pages/project-categories/project-categories.component').then(
-        (c) => c.ProjectCategoriesComponent,
+      import('./pages/project-categories/project-categories').then(
+        (c) => c.ProjectCategories,
       ),
   },
 ];
