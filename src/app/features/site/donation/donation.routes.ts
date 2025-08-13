@@ -5,6 +5,6 @@ export const donationRoutes: Routes = [
     path: '',
     title: 'Rejoindre Cinolu',
     loadComponent: () =>
-      import('./pages/donation.component').then((c) => c.DonationComponent),
+      import('./pages/donation').then((c) => c.Donation),
   },
 ];

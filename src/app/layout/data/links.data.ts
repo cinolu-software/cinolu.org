@@ -50,6 +50,7 @@ export const EXPLORATION_LINKS: ILink[] = [
     path: '/contact-us',
   },
   {
+    icon: BookOpen,
     name: 'Blog',
     path: '/blog-ressources',
   },

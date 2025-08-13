@@ -8,7 +8,7 @@ export const blogRoutes: Routes = [
   //         path: '',
   //         title: 'Liste des articles',
   //         loadComponent: () =>
-  //           import('./pages/article-list/').then((c) => c.EventsListComponent),
+  //           import('./pages/article-list/').then((c) => c.ListEvents),
   //       },
   //       {
   //         path: 'add',

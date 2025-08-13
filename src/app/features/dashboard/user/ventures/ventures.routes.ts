@@ -9,23 +9,21 @@ export const venturesRoutes: Routes = [
         path: '',
         title: 'Liste',
         loadComponent: () =>
-          import('./pages/ventures-list/ventures-list.component').then(
-            (c) => c.VenturesListComponent,
+          import('./pages/list-ventures/list-ventures').then(
+            (c) => c.ListVentures,
           ),
       },
       {
         path: 'add',
         title: 'Ajouter',
         loadComponent: () =>
-          import('./pages/venture-add/venture-add.component').then(
-            (c) => c.AddVentureComponent,
-          ),
+          import('./pages/add-venture/add-venture').then((c) => c.AddVenture),
       },
       {
         path: 'update/:slug',
         title: 'Modifier',
         loadComponent: () =>
-          import('./pages/venture-edit/venture-edit.component').then(
+          import('./pages/edit-venture/edit-venture').then(
             (c) => c.EditVentureComponent,
           ),
       },
@@ -33,8 +31,8 @@ export const venturesRoutes: Routes = [
         path: 'view/:slug',
         title: 'Voir',
         loadComponent: () =>
-          import('./pages/venture-detail/venture-detail.component').then(
-            (c) => c.VentureDetailComponent,
+          import('./pages/detail-venture/detail-venture').then(
+            (c) => c.DetailVenture,
           ),
       },
     ],

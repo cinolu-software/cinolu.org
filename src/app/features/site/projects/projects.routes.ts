@@ -5,16 +5,16 @@ export const projectsRoutes: Routes = [
     path: ':slug',
     title: 'Program - Details',
     loadComponent: () =>
-      import('./pages/project-detail/project-detail.component').then(
-        (c) => c.ProjectDetailComponent,
+      import('./pages/detail-project/detail-project').then(
+        (c) => c.DetailProject,
       ),
   },
   {
     path: '',
     title: 'Programs',
     loadComponent: () =>
-      import('./pages/projects-list/projects-list.component').then(
-        (c) => c.ProjectsListComponent,
+      import('./pages/list-projects/list-projects').then(
+        (c) => c.ListProjects,
       ),
   },
 ];
