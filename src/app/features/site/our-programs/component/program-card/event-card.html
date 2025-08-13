@@ -18,11 +18,11 @@
       {{ event().name | titlecase }}
     </h4>
     <div
-      class="mt-0.5 text-sm line-clamp-2"
+      class="mt-0.5  line-clamp-2"
       [innerHTML]="event().description"
     ></div>
     <div class="my-3 h-1 w-14 border-t border-gray-200"></div>
-    <div class="font-medium text-sm">
+    <div class="font-medium ">
       <div class="flex items-center text-md leading-5 mb-2">
         <i-lucide [name]="icons.MapPin" class="size-5" />
         <div class="ml-1.5">{{ event().place | titlecase }}</div>

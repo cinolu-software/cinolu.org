@@ -41,20 +41,20 @@
             <h1 class="text-lg font-extrabold text-gray-900">
               {{ user.name | titlecase }}
             </h1>
-            <p class="text-gray-900 text-sm">
+            <p class="text-gray-900 ">
               Rejoint le
               {{ user.created_at | date: "longDate" }}
             </p>
           </div>
-          <div class="flex items-center gap-1.5 text-gray-800 text-sm">
+          <div class="flex items-center gap-1.5 text-gray-800 ">
             <i-lucide [name]="icons.locate" class="size-3.5 text-green-500" />
             {{ user.country }}, {{ user.city }}
           </div>
-          <div class="flex items-center gap-1.5 text-gray-800 text-sm">
+          <div class="flex items-center gap-1.5 text-gray-800 ">
             <i-lucide [name]="icons.phone" class="size-3 text-green-500" />
             {{ user.phone_number }}
           </div>
-          <div class="flex items-center gap-1.5 text-gray-800 text-sm">
+          <div class="flex items-center gap-1.5 text-gray-800 ">
             <i-lucide [name]="icons.email" class="size-3 text-green-500" />
             {{ user.email }}
           </div>
@@ -68,13 +68,13 @@
         (ngSubmit)="onUpdateUser()"
       >
         <div class="flex flex-col gap-1.5">
-          <label for="email" class="block text-sm font-medium text-gray-700"
+          <label for="email" class="block  font-medium text-gray-700"
             >Email</label
           >
           <input pInputText id="email" formControlName="email" />
         </div>
         <div class="flex flex-col gap-1.5">
-          <label for="name" class="block text-sm font-medium text-gray-700"
+          <label for="name" class="block  font-medium text-gray-700"
             >Nom</label
           >
           <input pInputText formControlName="name" />
@@ -82,19 +82,19 @@
         <div class="flex flex-col gap-1.5">
           <label
             for="phone_number"
-            class="block text-sm font-medium text-gray-700"
+            class="block  font-medium text-gray-700"
             >Numéro de téléphone</label
           >
           <input pInputText id="phone_number" formControlName="phone_number" />
         </div>
         <div class="flex flex-col gap-1.5">
-          <label for="country" class="block text-sm font-medium text-gray-700"
+          <label for="country" class="block  font-medium text-gray-700"
             >Pays</label
           >
           <input pInputText id="country" formControlName="country" />
         </div>
         <div class="flex flex-col gap-1.5">
-          <label for="city" class="block text-sm font-medium text-gray-700"
+          <label for="city" class="block  font-medium text-gray-700"
             >Ville</label
           >
           <input pInputText id="city" formControlName="city" />
@@ -102,7 +102,7 @@
         <div class="flex flex-col gap-1.5">
           <label
             for="birth_date"
-            class="block text-sm font-medium text-gray-700"
+            class="block  font-medium text-gray-700"
             >Date de naissance</label
           >
           <p-datepicker
@@ -111,7 +111,7 @@
           ></p-datepicker>
         </div>
         <div class="flex flex-col gap-1.5">
-          <label for="role" class="block text-sm font-medium text-gray-700"
+          <label for="role" class="block  font-medium text-gray-700"
             >Rôle</label
           >
           <p-multiselect

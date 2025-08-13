@@ -10,7 +10,7 @@
       >
         <h5 class="text-lg font-bold">
           Liste des tags
-          <span class="text-gray-500 text-sm">
+          <span class="text-gray-500 ">
             @if (isLoading) {
               <p-progress-spinner
                 strokeWidth="5"
@@ -94,7 +94,7 @@
     }
     @if (tagsCount > 0 && !isLoading) {
       <div class="relative flex flex-col overflow-x-auto">
-        <table class="text-sm text-left rtl:text-right text-gray-500">
+        <table class=" text-left rtl:text-right text-gray-500">
           <thead class="font-black text-gray-800 border-y border-gray-200">
             <tr>
               <th class="px-6 py-3">Nom</th>
