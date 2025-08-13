@@ -26,11 +26,10 @@
           />
           <div
             class="absolute top-10 w-[13rem] right-0 animate-Up py-8 px-6 gap-6 z-30 bg-white shadow-lg rounded-lg transition-transform duration-300"
-            [ngClass]="
-              activeTab() === 'account'
-                ? 'block active-nav animate-fadeInUp'
-                : 'hidden'
-            ">
+            [ngClass]="{
+             'block active-nav animate-fadeInUp' : activeTab() === 'account',
+              'hidden' : activeTab() !== 'account'
+            }">
             <div class="grid grid-cols-1 gap-x-8 gap-y-6 font-medium text-gray-900 text-base">
               <a [routerLink]="'/dashboard'"
                  class="group flex items-center gap-2.5">
