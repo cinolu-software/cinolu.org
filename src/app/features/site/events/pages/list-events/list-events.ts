@@ -39,35 +39,34 @@ export class ListEvents implements OnInit {
     this.store.loadEvents(this.queryParams());
   }
 
-  onFilterChange(
+  async onFilterChange(
     event: MultiSelectChangeEvent,
     filter: 'page' | 'categories',
-  ): void {
+  ): Promise<void> {
     this.queryParams().page = null;
     this.queryParams()[filter] = event.value;
-    this.updateRouteAndEvents();
+    await this.updateRouteAndEvents();
   }
 
-  onClear(): void {
+  async onClear(): Promise<void> {
     this.queryParams().page = null;
     this.queryParams().categories = null;
-    this.updateRouteAndEvents();
+    await this.updateRouteAndEvents();
   }
 
-
-  onPageChange(currentPage: number): void {
+  async onPageChange(currentPage: number): Promise<void> {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
-    this.updateRouteAndEvents();
+    await this.updateRouteAndEvents();
   }
 
-  updateRoute(): void {
+  async updateRoute(): Promise<void> {
     const { page, categories } = this.queryParams();
     const queryParams = { page, categories };
-    this.#router.navigate(['/events'], { queryParams });
+    await this.#router.navigate(['/events'], { queryParams });
   }
 
-  updateRouteAndEvents(): void {
-    this.updateRoute();
+  async updateRouteAndEvents(): Promise<void> {
+    await this.updateRoute();
     this.store.loadEvents(this.queryParams());
   }
 }

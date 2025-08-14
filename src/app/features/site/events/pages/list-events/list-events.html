@@ -19,7 +19,7 @@
   <div class="flex flex-col">
     @if (categoriesStore.categories().length > 0) {
       <div class="mb-2 flex flex-wrap gap-4 md:w-1/4">
-        <p-multiselect
+        <p-multiSelect
           [inputId]="'categoriesFilter'"
           [autocomplete]="'off'"
           [showHeader]="false"
@@ -31,32 +31,22 @@
           [showClear]="true"
           placeholder="Choisir une catégorie"
           class="w-full md:w-64"
-        >
-        </p-multiselect>
+        />
       </div>
     }
     @if (store.events()[1] > 0 && !store.isLoading()) {
-      <div
-        class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10"
-      >
+      <div class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10">
         @for (event of store.events()[0] | paginate : {
-          itemsPerPage: 9,
-          currentPage: queryParams().page || 1,
-          totalItems: store.events()[1],
-        };
-          track event.id) {
+          itemsPerPage: 9, currentPage: queryParams().page || 1, totalItems: store.events()[1],
+        }; track event.id) {
           <app-event-card [event]="event"/>
         }
       </div>
       @if (store.events()[1] > 9) {
         <div class="flex justify-center mb-8">
-          <pagination-controls
-            nextLabel=""
-            previousLabel=""
-            [maxSize]="5"
-            (pageChange)="onPageChange($event)"
-            class="pg"
-          />
+          <pagination-controls nextLabel="" previousLabel="" [maxSize]="5"
+                               (pageChange)="onPageChange($event)"
+                               class="pg"/>
         </div>
       }
     }
@@ -65,16 +55,12 @@
     }
     @if (categoriesStore.isLoading()) {
       <div class="pb-2 pt-10">
-        <div
-          class="w-full md:w-64 bg-gray-200 rounded-md h-10 animate-pulse"
-        ></div>
+        <div class="w-full md:w-64 bg-gray-200 rounded-md h-10 animate-pulse"></div>
       </div>
     }
     @if (store.isLoading()) {
-      <div
-        class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10"
-      >
-        @for (event of skeletonArray; track $index) {
+      <div class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10">
+        @for (i of skeletonArray; track $index) {
           <app-event-card-skeleton/>
         }
       </div>

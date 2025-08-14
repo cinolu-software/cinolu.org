@@ -30,7 +30,9 @@ export const ArticlesStore = signalStore(
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
           return _http
-            .get<{ data: [IArticle[], number] }>('articles/find-published', { params })
+            .get<{
+              data: [IArticle[], number];
+            }>('articles/find-published', { params })
             .pipe(
               tap(({ data }) =>
                 patchState(store, { isLoading: false, articles: data }),

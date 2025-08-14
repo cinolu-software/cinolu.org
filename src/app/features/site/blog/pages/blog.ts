@@ -1,24 +1,25 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { LucideAngularModule, UserPlus } from 'lucide-angular';
 import { HeroBlog } from '../components/hero-blog/hero-blog';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ArticlesStore } from '../store/articles.store';
 import { ArticleCard } from '../components/article-card/article-card';
 import { FilterArticlesDto } from '../dto/filter-articles.dto';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { MultiSelectChangeEvent } from 'primeng/multiselect';
+import { ArticleCardSkeleton } from '../components/article-card-skeleton/article-card-skeleton';
+import { TagsStore } from '../store/tags.store';
+import { MultiSelectChangeEvent, MultiSelectModule } from 'primeng/multiselect';
 
 @Component({
   selector: 'app-blog',
-  providers: [ArticlesStore],
+  providers: [ArticlesStore, TagsStore],
   imports: [
-    LucideAngularModule,
     HeroBlog,
-    RouterLink,
     CommonModule,
     ArticleCard,
     NgxPaginationModule,
+    ArticleCardSkeleton,
+    MultiSelectModule,
   ],
   templateUrl: './blog.html',
 })
@@ -26,9 +27,8 @@ export class Blog implements OnInit {
   store = inject(ArticlesStore);
   #route = inject(ActivatedRoute);
   #router = inject(Router);
-  icons = {
-    userPlus: UserPlus,
-  };
+  tagsStore = inject(TagsStore);
+  arrSkeleton = Array.from({ length: 12 }).fill(0);
   queryParams = signal<FilterArticlesDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
     tags: this.#route.snapshot.queryParamMap.get('tags'),
@@ -38,31 +38,34 @@ export class Blog implements OnInit {
     this.store.loadArticles(this.queryParams());
   }
 
-  onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'tags'): void {
+  async onFilterChange(
+    event: MultiSelectChangeEvent,
+    filter: 'page' | 'tags',
+  ): Promise<void> {
     this.queryParams().page = null;
     this.queryParams()[filter] = event.value;
-    this.updateRouteAndEvents();
+    await this.updateRouteAndArticles();
   }
 
-  onClear(): void {
+  async onClear(): Promise<void> {
     this.queryParams().page = null;
     this.queryParams().tags = null;
-    this.updateRouteAndEvents();
+    await this.updateRouteAndArticles();
   }
 
-  onPageChange(currentPage: number): void {
+  async onPageChange(currentPage: number): Promise<void> {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
-    this.updateRouteAndEvents();
+    await this.updateRouteAndArticles();
   }
 
-  updateRoute(): void {
+  async updateRoute(): Promise<void> {
     const { page, tags } = this.queryParams();
     const queryParams = { page, tags };
-    this.#router.navigate(['/events'], { queryParams });
+    await this.#router.navigate(['/blog-ressources'], { queryParams });
   }
 
-  updateRouteAndEvents(): void {
-    this.updateRoute();
+  async updateRouteAndArticles(): Promise<void> {
+    await this.updateRoute();
     this.store.loadArticles(this.queryParams());
   }
 }
