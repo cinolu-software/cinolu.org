@@ -9,7 +9,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ArticlesStore } from './article.store';
+import { ArticlesStore } from './articles.store';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 import { IArticle } from '../../../../../../shared/models/entities.models';
 

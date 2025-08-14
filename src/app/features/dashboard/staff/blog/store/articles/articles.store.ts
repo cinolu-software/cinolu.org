@@ -9,22 +9,22 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { FilterArticleTagsDto } from '../../dto/filter-tags.dto';
+import { FilterArticlesTagsDto } from '../../dto/filter-tags.dto';
 import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
 import { IArticle } from '../../../../../../shared/models/entities.models';
 
-interface IArticleStore {
+interface IArticlesStore {
   isLoading: boolean;
   articles: [IArticle[], number];
 }
 
 export const ArticlesStore = signalStore(
-  withState<IArticleStore>({ isLoading: false, articles: [[], 0] }),
+  withState<IArticlesStore>({ isLoading: false, articles: [[], 0] }),
   withProps(() => ({
     _http: inject(HttpClient),
   })),
   withMethods(({ _http, ...store }) => ({
-    loadArticles: rxMethod<FilterArticleTagsDto>(
+    loadArticles: rxMethod<FilterArticlesTagsDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {

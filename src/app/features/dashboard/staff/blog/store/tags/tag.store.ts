@@ -9,14 +9,14 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { FilterArticleTagsDto } from '../../dto/filter-tags.dto';
+import { FilterArticlesTagsDto } from '../../dto/filter-tags.dto';
 import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
 import { ITag } from '../../../../../../shared/models/entities.models';
 
 interface ITagsStore {
   isLoading: boolean;
   tags: [ITag[], number];
-  lastQuery: FilterArticleTagsDto | null;
+  lastQuery: FilterArticlesTagsDto | null;
 }
 
 export const TagsStore = signalStore(
@@ -25,7 +25,7 @@ export const TagsStore = signalStore(
     _http: inject(HttpClient),
   })),
   withMethods(({ _http, ...store }) => ({
-    loadTags: rxMethod<FilterArticleTagsDto>(
+    loadTags: rxMethod<FilterArticlesTagsDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {

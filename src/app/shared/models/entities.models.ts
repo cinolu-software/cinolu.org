@@ -114,8 +114,4 @@ export interface ITag extends IBase {
   name: string;
 }
 
-export interface IArticle extends IBase {
-  title: string;
-  tags: [];
-  content: string;
-}
+

@@ -8,7 +8,6 @@ import {
 } from '@angular/forms';
 import {
   ArrowLeft,
-  Check,
   ChevronsLeft,
   ChevronsRight,
   LucideAngularModule,
@@ -18,7 +17,6 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { InputText } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectModule } from 'primeng/select';
-import { StepperModule } from 'primeng/stepper';
 import { TextareaModule } from 'primeng/textarea';
 import { AddArticleStore } from '../../store/articles/add-article.store';
 import { UnpaginatedTagStore } from '../../store/tags/unpaginated-tag.store';
@@ -31,17 +29,15 @@ import { UnpaginatedTagStore } from '../../store/tags/unpaginated-tag.store';
     SelectModule,
     MultiSelectModule,
     TextareaModule,
-    StepperModule,
     CommonModule,
     Button,
     InputText,
     DatePickerModule,
     ReactiveFormsModule,
   ],
-  templateUrl: './article-add.html',
-  styles: ``,
+  templateUrl: './add-article.html',
 })
-export class ArticleAdd {
+export class AddArticle {
   #fb = inject(FormBuilder);
   #location = inject(Location);
   form: FormGroup;
@@ -51,13 +47,13 @@ export class ArticleAdd {
     back: ArrowLeft,
     next: ChevronsRight,
     previous: ChevronsLeft,
-    check: Check,
   };
 
   constructor() {
     this.form = this.#fb.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
+      summary: ['', Validators.required],
       tags: [[], Validators.required],
     });
   }

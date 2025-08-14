@@ -22,7 +22,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { TagsStore } from '../../store/tags/tag.store';
 import { AddTagStore } from '../../store/tags/add-tag.store';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FilterArticleTagsDto } from '../../dto/filter-tags.dto';
+import { FilterArticlesTagsDto } from '../../dto/filter-tags.dto';
 import { CommonModule } from '@angular/common';
 import { ITag } from '../../../../../../shared/models/entities.models';
 import { UpdateTagStore } from '../../store/tags/update-tag.store';
@@ -50,7 +50,6 @@ import { ConfirmationService } from 'primeng/api';
     CommonModule,
   ],
   templateUrl: './article-tags.html',
-  styles: ``,
 })
 export class ArticleTags implements OnInit {
   #route = inject(ActivatedRoute);
@@ -78,7 +77,7 @@ export class ArticleTags implements OnInit {
     search: Search,
   };
 
-  queryParams = signal<FilterArticleTagsDto>({
+  queryParams = signal<FilterArticlesTagsDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
     q: this.#route.snapshot.queryParamMap.get('q'),
   });

@@ -34,11 +34,10 @@ export const AddArticleStore = signalStore(
           return _http.post<{ data: IArticle }>('articles', article).pipe(
             map(({ data }) => {
               _toast.showSuccess("L'article a été ajouté avec succès");
-              _router.navigate(['/dashboard/articles/list']);
+              _router.navigate(['/dashboard/blog/articles']);
               patchState(store, { isLoading: false, articles: data });
             }),
             catchError(() => {
-              console.log(article);
               _toast.showError("Une erreur s'est produite lors de l'ajout");
               patchState(store, { isLoading: false, articles: null });
               return of(null);

@@ -8,15 +8,15 @@ export const blogRoutes: Routes = [
         path: '',
         title: 'Liste des articles',
         loadComponent: () =>
-          import('./pages/article-list/article-list').then(
-            (c) => c.ArticleList,
+          import('./pages/list-articles/list-articles').then(
+            (c) => c.ListArticles,
           ),
       },
       {
         path: 'add',
         title: 'Inserer un article',
         loadComponent: () =>
-          import('./pages/article-add/article-add').then((c) => c.ArticleAdd),
+          import('./pages/add-article/add-article').then((c) => c.AddArticle),
       },
       //       {
       //         path: 'edit/:slug',

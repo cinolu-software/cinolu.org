@@ -27,7 +27,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { DeleteArticleStore } from '../../store/articles/delete-article.store';
-import { ArticlesStore } from '../../store/articles/article.store';
+import { ArticlesStore } from '../../store/articles/articles.store';
 import { AddArticleStore } from '../../store/articles/add-article.store';
 
 @Component({
@@ -52,9 +52,9 @@ import { AddArticleStore } from '../../store/articles/add-article.store';
     AvatarModule,
     ApiImgPipe,
   ],
-  templateUrl: './article-list.html',
+  templateUrl: './list-articles.html',
 })
-export class ArticleList implements OnInit {
+export class ListArticles implements OnInit {
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   #fb = inject(FormBuilder);
@@ -97,26 +97,26 @@ export class ArticleList implements OnInit {
     this.updateRouteAndArticles();
   }
 
-  updateRoute(): void {
+  async updateRoute(): Promise<void> {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/articles/list'], { queryParams });
+    await this.#router.navigate(['/dashboard/blog/articles'], { queryParams });
   }
 
-  updateRouteAndArticles(): void {
-    this.updateRoute();
+  async updateRouteAndArticles(): Promise<void> {
+    await this.updateRoute();
     this.loadArticles();
   }
 
-  onResetSearch(): void {
+  async onResetSearch(): Promise<void> {
     this.searchForm.reset();
     this.queryParams.set({ page: null, q: null });
-    this.updateRouteAndArticles();
+    await this.updateRouteAndArticles();
   }
 
-  onSearch(): void {
+  async onSearch(): Promise<void> {
     const searchValue = this.searchForm.value.q;
     this.queryParams.set({ page: null, q: searchValue });
-    this.updateRouteAndArticles();
+    await this.updateRouteAndArticles();
   }
 
   onDeleteArticle(articleId: string, article: Event): void {
