@@ -94,9 +94,6 @@ export interface ITag extends IBase {
 
 export interface IArticle extends IBase {
   title: string;
-  slug: string;
-  image: string;
+  tags: [];
   content: string;
-  authorId: number;
-  tag: string[];
 }

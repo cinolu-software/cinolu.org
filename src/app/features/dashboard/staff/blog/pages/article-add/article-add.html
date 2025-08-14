@@ -1,1 +1,75 @@
-<p>article-add works!</p>
+<section class="pt-32 dashboard-main-content flex flex-col gap-4">
+  <div class="mb-4">
+    <button
+      class="text-primary-400 hover:underline flex items-center gap-2"
+      (click)="onGoBack()"
+    >
+      <i-lucide [name]="icons.back" class="size-4" />
+      Revenir en arrière
+    </button>
+    <h5 class="text-2xl font-bold">Ajouter un article</h5>
+  </div>
+
+  <form class="w-full md:w-2/3" [formGroup]="form" (ngSubmit)="onAddArticle()">
+    <p-stepper [value]="1" class="w-full">
+      <p-step-list class="w-full overflow-x-scroll scrollbar-hide">
+        <p-step [value]="1" />
+      </p-step-list>
+      <p-step-panels>
+        <p-step-panel [value]="1">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label for="title" class="font-medium"
+                  >Titre de l'article<span class="text-red-500">*</span></label
+                >
+                <input pInputText id="title" formControlName="title" />
+              </div>
+
+              <div class="flex flex-col gap-1.5">
+                <p class="font-medium">Tags de l'article</p>
+                <p-multiselect
+                  [inputId]="'id'"
+                  [autocomplete]="'off'"
+                  [showHeader]="false"
+                  [options]="tagsStore.tags()"
+                  [optionValue]="'name'"
+                  [optionLabel]="'name'"
+                  [showClear]="true"
+                  formControlName="tags"
+                >
+                </p-multiselect>
+              </div>
+
+              <div class="flex flex-col gap-1.5">
+                <p class="font-medium">
+                  Contenu<span class="text-red-500">*</span>
+                </p>
+                <textarea
+                  pTextarea
+                  formControlName="content"
+                  rows="8"
+                  cols="30"
+                ></textarea>
+              </div>
+
+              <div class="flex py-6 justify-between">
+                <p-button
+                  [loading]="store.isLoading()"
+                  [disabled]="store.isLoading() || form.invalid"
+                  size="small"
+                  type="submit"
+                >
+                  Finaliser
+                  @if (!store.isLoading()) {
+                    <i-lucide [name]="icons.check" class="size-4" />
+                  }
+                </p-button>
+              </div>
+            </div>
+          </ng-template>
+        </p-step-panel>
+      </p-step-panels>
+    </p-stepper>
+  </form>
+</section>

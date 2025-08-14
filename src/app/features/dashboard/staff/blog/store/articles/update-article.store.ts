@@ -32,7 +32,7 @@ export const UpdateEventStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((article) => {
           return _http
-            .patch<{ data: IArticle }>(`articles/${article.id}`, article)
+            .patch<{ data: IArticle }>(`articles/${article}`, article)
             .pipe(
               map(({ data }) => {
                 _toast.showSuccess("L'article a été mis à jour avec succès");

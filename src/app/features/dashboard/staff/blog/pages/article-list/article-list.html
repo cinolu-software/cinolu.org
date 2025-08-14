@@ -27,7 +27,7 @@
           pButton
           [outlined]="true"
           [size]="'small'"
-          [routerLink]="['/dashboard/articles/list/add']"
+          [routerLink]="['/dashboard/blog/articles/add']"
           class="flex items-center gap-2"
         >
           <i-lucide [name]="icons.plus" class="size-4" />
@@ -132,11 +132,9 @@
                 <td class="px-6 py-2 font-medium text-gray-900">
                   {{ article.content | titlecase }}
                 </td>
+
                 <td class="px-6 py-2">
-                  {{ article.authorId | date: "shortDate" }}
-                </td>
-                <td class="px-6 py-2">
-                  {{ article.tag }}
+                  {{ article.tags }}
                 </td>
               </tr>
             }

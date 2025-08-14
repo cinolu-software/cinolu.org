@@ -12,14 +12,12 @@ export const blogRoutes: Routes = [
             (c) => c.ArticleList,
           ),
       },
-      //       {
-      //         path: 'add',
-      //         title: 'Créer un événement',
-      //         loadComponent: () =>
-      //           import('./pages/event-add/event-add.component').then(
-      //             (c) => c.AddEventComponent,
-      //           ),
-      //       },
+      {
+        path: 'add',
+        title: 'Inserer un article',
+        loadComponent: () =>
+          import('./pages/article-add/article-add').then((c) => c.ArticleAdd),
+      },
       //       {
       //         path: 'edit/:slug',
       //         title: 'Modifier un événement',

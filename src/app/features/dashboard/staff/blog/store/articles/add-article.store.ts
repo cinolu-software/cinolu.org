@@ -30,14 +30,15 @@ export const AddArticleStore = signalStore(
     addArticle: rxMethod<ArticleDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((artcle) => {
-          return _http.post<{ data: IArticle }>('articles', artcle).pipe(
+        switchMap((article) => {
+          return _http.post<{ data: IArticle }>('articles', article).pipe(
             map(({ data }) => {
               _toast.showSuccess("L'article a été ajouté avec succès");
               _router.navigate(['/dashboard/articles/list']);
               patchState(store, { isLoading: false, articles: data });
             }),
             catchError(() => {
+              console.log(article);
               _toast.showError("Une erreur s'est produite lors de l'ajout");
               patchState(store, { isLoading: false, articles: null });
               return of(null);
