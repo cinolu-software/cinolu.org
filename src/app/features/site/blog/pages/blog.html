@@ -1,9 +1,9 @@
-<app-hero-blog />
+<app-hero-blog/>
 <section id="about" class="py-12 sm:py-16 md:py-20">
   <div
     class="px-4 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
   >
-    <h2
+    <!-- <h2
       class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-6 tracking-tight leading-tight lg:my-7"
     >
       Nos <span class="text-primary-500">Blogs</span>
@@ -72,61 +72,31 @@
           </div>
         }
       </section>
-    </div>
-
-    <section class="mt-12">
+    </div> -->
+    @if (store.articles() && !store.isLoading()) {
       <h3 class="text-2xl font-bold text-center mb-8">Tous les articles</h3>
-
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        @for (item of postBlogs; track $index) {
-          <div
-            class="bg-gray-50 shadow-md hover:shadow-lg rounded-lg overflow-hidden flex flex-col"
-          >
-            <div class="relative h-48 overflow-hidden rounded-t-lg">
-              <img
-                src="{{ item.image }}"
-                alt="Image de l'article {{ item.title }}"
-                class="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
-                loading="lazy"
-              />
-              <h5
-                class="absolute inset-0 flex justify-center items-center bg-gray-900/50 hover:bg-primary-900/80 text-white font-satoshi font-bold uppercase text-center px-4  sm:text-base"
-              >
-                {{ item.title }}
-              </h5>
-            </div>
-            <div class="p-4 flex flex-col flex-grow text-gray-600">
-              <p class="text-gray-600  flex-grow line-clamp-4">
-                {{ item.description }}
-              </p>
-              <span
-                class="truncate max-w-[10ch] bg-primary-500/20 text-primary-500 py-1 px-2 text-base"
-                >{{ item.tags }}</span
-              >
-
-              <div
-                class="flex justify-between items-center py-2 border-t border-gray-100 mt-4"
-              >
-                <div class="flex gap-2">
-                  <p class="hover:text-blue-600 hover:cursor-pointer">
-                    <i-lucide [name]="icons.like" class="size-5"></i-lucide>
-                  </p>
-                  <p class="hover:text-primary-500 hover:cursor-pointer">
-                    <i-lucide [name]="icons.comment" class="size-5"></i-lucide>
-                  </p>
-                </div>
-                <p
-                  class="text-gray-600 flex items-center gap-1 text-xs whitespace-nowrap"
-                >
-                  <i-lucide [name]="icons.calendar" class="size-5"></i-lucide>
-                  {{ item.readingTime }}
-                </p>
-              </div>
-            </div>
-          </div>
+        @for (article of store.articles()[0] | paginate : {
+          itemsPerPage: 10,
+          currentPage: queryParams().page || 1,
+          totalItems: store.articles()[1],
+        };
+          track article.id) {
+          <app-article-card [article]="article"/>
         }
       </div>
-    </section>
+      @if (store.articles()[1] > 12) {
+        <div class="flex justify-center my-10">
+          <pagination-controls
+            nextLabel=""
+            previousLabel=""
+            [maxSize]="5"
+            (pageChange)="onPageChange($event)"
+            class="pg"
+          />
+        </div>
+      }
+    }
   </div>
 </section>
 
@@ -138,7 +108,7 @@
   >
     Innovons ensemble.
   </p>
-  <p class=" sm:text-base md:text-lg max-w-screen-lg text-gray-600">
+  <p class="sm:text-base md:text-lg max-w-screen-lg text-gray-600">
     La plateforme numérique Cinolu OneStop a été conçue pour centraliser les
     parcours d’accompagnement, automatiser les processus (adhésion, candidature,
     mentorat) et valoriser l’impact collectif.

@@ -27,8 +27,8 @@ export class ApiImgPipe implements PipeTransform {
       product: value['image']
         ? `${apiUrl}uploads/products/images/${value['image']}`
         : '/images/no-image.jpg',
-      post: value['image']
-        ? `${apiUrl}uploads/posts/${value['image']}`
+      article: value['image']
+        ? `${apiUrl}uploads/articles/${value['image']}`
         : '/images/no-image.jpg',
       event: value['cover']
         ? `${apiUrl}uploads/events/${value['cover']}`
