@@ -19,6 +19,7 @@ export interface IArticle extends IBase {
   title: string;
   slug: string;
   image: string;
+  summary: string;
   content: string;
   published_at: Date;
   tags: ITag[];

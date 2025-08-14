@@ -1,129 +1,39 @@
 <app-hero-blog/>
-<section id="about" class="py-12 sm:py-16 md:py-20">
-  <div
-    class="px-4 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
-  >
-    <!-- <h2
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-6 tracking-tight leading-tight lg:my-7"
-    >
-      Nos <span class="text-primary-500">Blogs</span>
-    </h2>
-
-    <div class="flex flex-col lg:flex-row gap-6">
-      <a
-        href="{{ latestPost.path }}"
-        class="w-full lg:w-2/3 p-4 rounded-lg max-h-[32rem] cursor-pointer flex flex-col border-1 shadow-md hover:shadow-lg transition-all duration-300 bg-white"
-      >
-        <div class="flex-shrink-0 overflow-hidden rounded-md">
-          <img
-            src="{{ latestPost.image }}"
-            alt="Image de l'article {{ latestPost.title }}"
-            width="600"
-            height="400"
-            class="object-cover w-full h-64 sm:h-80 md:h-96 rounded-md"
-            loading="lazy"
-          />
-        </div>
-
-        <div class="mt-4 flex justify-between items-center">
-          <h3 class="text-xl font-bold text-gray-800">
-            {{ latestPost.title }}
-          </h3>
-          <button
-            type="button"
-            class="px-6 py-2 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition"
-          >
-            Voir Plus
-          </button>
-        </div>
-      </a>
-
-      <section class="w-full lg:w-1/3 p-4 bg-gray-50 rounded-lg shadow-inner">
-        <h3 class="font-bold text-2xl text-gray-800 mb-4">
-          Articles populaires
-        </h3>
-        @for (item of latestFivePosts; track $index) {
-          <div class="flex flex-col gap-4 overflow-y-auto max-h-[32rem]">
-            <article
-              class="flex gap-3 cursor-pointer hover:bg-gray-100 p-2 rounded-md transition"
-            >
-              <div
-                class="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md"
-              >
-                <img
-                  src="{{ item.image }}"
-                  alt="Image de l'article {{ item.title }}"
-                  class="object-cover h-full w-full"
-                  loading="lazy"
-                />
-              </div>
-              <div class="flex flex-col justify-between">
-                <h4 class="text-md font-bold text-gray-800 mb-1 line-clamp-2">
-                  {{ item.title }}
-                </h4>
-                <p class="text-gray-600  line-clamp-3">
-                  {{ item.description }}
-                </p>
-                <p class="text-gray-500 text-xs mt-1">
-                  {{ item.date }}
-                </p>
-              </div>
-            </article>
-          </div>
-        }
-      </section>
-    </div> -->
+<div class="pt-14 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
+  @if (tagsStore.tags().length > 0) {
+    <div class="mb-10 flex flex-wrap gap-4 md:w-1/4">
+      <p-multiSelect
+        [inputId]="'tagsFilter'"
+        [autocomplete]="'off'"
+        [showHeader]="false"
+        (onChange)="onFilterChange($event, 'tags')"
+        (onClear)="onClear()"
+        [options]="tagsStore.tags()"
+        [optionValue]="'id'"
+        [optionLabel]="'name'"
+        [showClear]="true"
+        placeholder="Choisir un tag"
+        class="w-full md:w-64"
+      />
+    </div>
+  }
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    @if (store.isLoading()) {
+      @for (a of arrSkeleton; track $index) {
+        <app-article-card-skeleton/>
+      }
+    }
     @if (store.articles() && !store.isLoading()) {
-      <h3 class="text-2xl font-bold text-center mb-8">Tous les articles</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        @for (article of store.articles()[0] | paginate : {
-          itemsPerPage: 10,
-          currentPage: queryParams().page || 1,
-          totalItems: store.articles()[1],
-        };
-          track article.id) {
-          <app-article-card [article]="article"/>
-        }
-      </div>
-      @if (store.articles()[1] > 12) {
-        <div class="flex justify-center my-10">
-          <pagination-controls
-            nextLabel=""
-            previousLabel=""
-            [maxSize]="5"
-            (pageChange)="onPageChange($event)"
-            class="pg"
-          />
-        </div>
+      @for (article of store.articles()[0] | paginate : {
+        itemsPerPage: 12, currentPage: queryParams().page || 1, totalItems: store.articles()[1],
+      }; track article.id) {
+        <app-article-card [article]="article"/>
       }
     }
   </div>
-</section>
-
-<div
-  class="bg-[#EEEEEE] bg-grid py-12 px-4 sm:px-8 md:px-16 flex flex-col items-center justify-center text-center"
->
-  <p
-    class="max-w-3xl text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary-500 font-satoshi mb-4 tracking-tight leading-tight"
-  >
-    Innovons ensemble.
-  </p>
-  <p class="sm:text-base md:text-lg max-w-screen-lg text-gray-600">
-    La plateforme numérique Cinolu OneStop a été conçue pour centraliser les
-    parcours d’accompagnement, automatiser les processus (adhésion, candidature,
-    mentorat) et valoriser l’impact collectif.
-  </p>
-  <div class="w-full flex justify-center mt-8">
-    <button
-      [routerLink]="'/join-us'"
-      type="submit"
-      class="group relative z-10 flex items-center justify-center gap-2 px-6 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-sm"
-    >
-      Nous rejoindre
-      <i-lucide
-        [name]="icons.userPlus"
-        class="mt-0.5 group-hover:translate-x-1 transition-all duration-300"
-      ></i-lucide>
-    </button>
-  </div>
+  @if ((store.articles()[1] > 12 && !store.isLoading())) {
+    <div class="flex justify-center my-10">
+      <pagination-controls nextLabel="" previousLabel="" [maxSize]="5" (pageChange)="onPageChange($event)" class="pg"/>
+    </div>
+  }
 </div>
