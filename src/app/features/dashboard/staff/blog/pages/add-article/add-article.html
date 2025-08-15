@@ -54,7 +54,14 @@
           rows="8"
           cols="30"
         ></textarea> -->
-        <quill-editor formControlName="content"></quill-editor>
+
+        <label for="content">Contenu</label>
+        <div class="quill-wrapper p-inputtext p-component">
+          <quill-editor
+            formControlName="content"
+            [style]="{ height: '100px' }"
+          ></quill-editor>
+        </div>
       </div>
 
       <div class="flex py-6 justify-between">

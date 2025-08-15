@@ -1,5 +1,6 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import 'quill/dist/quill.snow.css';
 import {
   FormBuilder,
   FormGroup,
@@ -35,7 +36,7 @@ import { QuillModule } from 'ngx-quill';
     InputText,
     DatePickerModule,
     ReactiveFormsModule,
-    QuillModule 
+    QuillModule,
   ],
   templateUrl: './add-article.html',
 })
