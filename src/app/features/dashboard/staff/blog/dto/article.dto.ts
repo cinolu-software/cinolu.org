@@ -4,4 +4,5 @@ export interface ArticleDto {
   content: string;
   summary: string;
   tags: string[];
+  author: string;
 }

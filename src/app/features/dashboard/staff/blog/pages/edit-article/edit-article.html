@@ -1,5 +1,5 @@
 <section class="pt-32 dashboard-main-content flex flex-col gap-4">
-  @let event = eventStore.event();
+  @let article = articleStore.article();
   <div class="mb-4">
     <button
       class="text-primary-400 hover:underline flex items-center gap-2"
@@ -8,9 +8,13 @@
       <i-lucide [name]="icons.back" class="size-4" />
       Revenir en arrière
     </button>
-    <h5 class="text-2xl font-bold">Modifier l'événement</h5>
+    <h5 class="text-2xl font-bold">Modifier l'article</h5>
   </div>
-  <form class="w-full md:w-2/3" [formGroup]="form" (ngSubmit)="onUpdateEvent()">
+  <form
+    class="w-full md:w-2/3"
+    [formGroup]="form"
+    (ngSubmit)="onUpdateArticle()"
+  >
     <p-stepper [value]="1" class="w-full">
       <p-step-list class="w-full overflow-x-scroll scrollbar-hide">
         <p-step [value]="1" />
@@ -24,59 +28,49 @@
               <div
                 class="relative h-52 md:h-80 mb-6 w-full pb-8 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-gray-200 rounded"
               >
-
-                @if (event?.cover) {
+                @if (article?.image) {
                   <img
-                    [ngSrc]="event | apiIMG: 'event'"
-                    [alt]="event?.name + ' cover image'"
+                    [ngSrc]="article | apiIMG: 'article'"
+                    [alt]="article?.title + ' cover image'"
                     class="aspect-video object-cover h-full opacity-90 rounded border-2 border-slate-200/10"
                     fill
                     priority
                   />
                 }
               </div>
-              @if (eventStore.isLoading()) {
+              @if (articleStore.isLoading()) {
                 <div
                   class="h-20 bg-gray-200 animate-pulse rounded-md w-full mb-4"
                 ></div>
               } @else {
                 <app-file-upload
                   [name]="'cover'"
-                  [url]="url + event?.id"
+                  [url]="url + article?.id"
                   (loaded)="onFileUploadLoaded()"
                 />
               }
             </div>
             <div class="flex flex-col gap-4">
               <div class="flex flex-col gap-1.5">
-                <label for="name" class="font-medium"
-                  >Nom de l'événement<span class="text-red-500">*</span></label
+                <label for="title" class="font-medium"
+                  >Titre de l'article<span class="text-red-500">*</span></label
                 >
-                <input pInputText id="name" formControlName="name" />
+                <input pInputText id="title" formControlName="title" />
               </div>
               <div class="flex flex-col gap-1.5">
-                <label for="form_link" class="font-medium"
-                  >Lien du formulaire<span class="text-red-500">*</span></label
-                >
-                <input pInputText id="form_link" formControlName="form_link" />
+                <p class="font-medium">Tags de l'article</p>
+                <p-multiSelect
+                  [inputId]="'id'"
+                  [autocomplete]="'off'"
+                  [showHeader]="false"
+                  [options]="tagsStore.tags()"
+                  [optionValue]="'id'"
+                  [optionLabel]="'name'"
+                  [showClear]="true"
+                  formControlName="tags"
+                />
               </div>
-              <div class="flex flex-col gap-1.5">
-                <label for="place" class="font-medium"
-                  >Lieu<span class="text-red-500">*</span></label
-                >
-                <input pInputText id="place" formControlName="place" />
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <p class="font-medium">
-                  Description<span class="text-red-500">*</span>
-                </p>
-                <textarea
-                  pTextarea
-                  formControlName="description"
-                  rows="8"
-                  cols="30"
-                ></textarea>
-              </div>
+
               <div class="flex justify-end">
                 <p-button
                   size="small"
@@ -94,38 +88,30 @@
           <ng-template #content let-activateCallback="activateCallback">
             <div class="flex flex-col gap-4">
               <div class="flex flex-col gap-1.5">
-                <p class="font-medium">Programme</p>
-                <p-select
-                  inputId="program"
-                  [optionValue]="'id'"
-                  [optionLabel]="'name'"
-                  [options]="programsStore.programs()"
-                  formControlName="program"
-                  class="w-full"
-                />
+                <label for="summary" class="font-medium">
+                  Résumé<span class="text-red-500">*</span>
+                </label>
+                <textarea
+                  id="summary"
+                  pTextarea
+                  formControlName="summary"
+                  rows="8"
+                  cols="30"
+                ></textarea>
               </div>
+
               <div class="flex flex-col gap-1.5">
-                <p class="font-medium">Catégories</p>
-                <p-multiselect
-                  [inputId]="'categories'"
-                  [autocomplete]="'off'"
-                  [showHeader]="false"
-                  [options]="categoriesStore.categories()"
-                  [optionValue]="'id'"
-                  [optionLabel]="'name'"
-                  [showClear]="true"
-                  formControlName="categories"
-                >
-                </p-multiselect>
+                <p class="font-medium">
+                  Contenu<span class="text-red-500">*</span>
+                </p>
+                <textarea
+                  pTextarea
+                  formControlName="content"
+                  rows="8"
+                  cols="30"
+                ></textarea>
               </div>
-              <div class="flex flex-col gap-1.5">
-                <p class="font-medium">Date de début</p>
-                <p-datepicker formControlName="started_at" />
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <p class="font-medium">Date de fin</p>
-                <p-datepicker formControlName="ended_at" />
-              </div>
+
               <div class="flex py-6 justify-between">
                 <p-button
                   size="small"
@@ -142,7 +128,7 @@
                   size="small"
                   type="submit"
                 >
-                  Finaliser
+                  Mettre à jour
                   @if (!store.isLoading()) {
                     <i-lucide [name]="icons.check" class="size-4" />
                   }

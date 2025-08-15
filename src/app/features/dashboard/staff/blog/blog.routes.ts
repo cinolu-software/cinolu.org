@@ -18,14 +18,14 @@ export const blogRoutes: Routes = [
         loadComponent: () =>
           import('./pages/add-article/add-article').then((c) => c.AddArticle),
       },
-      //       {
-      //         path: 'edit/:slug',
-      //         title: 'Modifier un événement',
-      //         loadComponent: () =>
-      //           import('./pages/event-edit/event-edit.component').then(
-      //             (c) => c.EditEventComponent,
-      //           ),
-      //       },
+      {
+        path: 'edit/:slug',
+        title: 'Modifier un article',
+        loadComponent: () =>
+          import('./pages/edit-article/edit-article').then(
+            (c) => c.EditArticle,
+          ),
+      },
     ],
   },
   {

@@ -19,7 +19,7 @@ interface IUpdateArticleStore {
   article: IArticle | null;
 }
 
-export const UpdateEventStore = signalStore(
+export const UpdateArticleStore = signalStore(
   withState<IUpdateArticleStore>({ isLoading: false, article: null }),
   withProps(() => ({
     _http: inject(HttpClient),
@@ -32,11 +32,11 @@ export const UpdateEventStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((article) => {
           return _http
-            .patch<{ data: IArticle }>(`articles/${article}`, article)
+            .patch<{ data: IArticle }>(`articles/${article.id}`, article)
             .pipe(
               map(({ data }) => {
                 _toast.showSuccess("L'article a été mis à jour avec succès");
-                _router.navigate(['/dashboard/articles/list']);
+                _router.navigate(['/dashboard/blog/articles']);
                 patchState(store, { isLoading: false, article: data });
               }),
               catchError(() => {

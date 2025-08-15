@@ -29,11 +29,11 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { DeleteArticleStore } from '../../store/articles/delete-article.store';
 import { ArticlesStore } from '../../store/articles/articles.store';
 import { AddArticleStore } from '../../store/articles/add-article.store';
+import { ConfirmPopup } from 'primeng/confirmpopup';
 
 @Component({
   selector: 'app-article-list',
   providers: [
-    ConfirmationService,
     ConfirmationService,
     ArticlesStore,
     AddArticleStore,
@@ -51,6 +51,7 @@ import { AddArticleStore } from '../../store/articles/add-article.store';
     // ConfirmPopup,
     AvatarModule,
     ApiImgPipe,
+    ConfirmPopup,
   ],
   templateUrl: './list-articles.html',
 })

@@ -113,5 +113,3 @@ export interface IRole extends IBase {
 export interface ITag extends IBase {
   name: string;
 }
-
-
