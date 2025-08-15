@@ -4,7 +4,7 @@
       class="text-primary-400 hover:underline flex items-center gap-2"
       (click)="onGoBack()"
     >
-      <i-lucide [name]="icons.back" class="size-4"/>
+      <i-lucide [name]="icons.back" class="size-4" />
       Revenir en arrière
     </button>
     <h5 class="text-2xl font-bold">Ajouter un article</h5>
@@ -14,9 +14,9 @@
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-1.5">
         <label for="title" class="font-medium"
-        >Titre de l'article<span class="text-red-500">*</span></label
+          >Titre de l'article<span class="text-red-500">*</span></label
         >
-        <input pInputText id="title" formControlName="title"/>
+        <input pInputText id="title" formControlName="title" />
       </div>
 
       <div class="flex flex-col gap-1.5">
@@ -45,7 +45,7 @@
         ></textarea>
       </div>
       <div class="flex flex-col gap-1.5">
-        <p class="font-medium">
+        <!-- <p class="font-medium">
           Contenu<span class="text-red-500">*</span>
         </p>
         <textarea
@@ -53,7 +53,8 @@
           formControlName="content"
           rows="8"
           cols="30"
-        ></textarea>
+        ></textarea> -->
+        <quill-editor formControlName="content"></quill-editor>
       </div>
 
       <div class="flex py-6 justify-between">

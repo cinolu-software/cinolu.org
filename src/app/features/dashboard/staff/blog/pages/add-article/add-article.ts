@@ -20,6 +20,7 @@ import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { AddArticleStore } from '../../store/articles/add-article.store';
 import { UnpaginatedTagStore } from '../../store/tags/unpaginated-tag.store';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-article-add',
@@ -34,6 +35,7 @@ import { UnpaginatedTagStore } from '../../store/tags/unpaginated-tag.store';
     InputText,
     DatePickerModule,
     ReactiveFormsModule,
+    QuillModule 
   ],
   templateUrl: './add-article.html',
 })
