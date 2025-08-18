@@ -1,5 +1,7 @@
-<app-hero-blog/>
-<div class="pt-14 px-8 mb-10 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
+<app-hero-blog />
+<div
+  class="pt-14 px-8 mb-10 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
+>
   @if (tagsStore.tags().length > 0) {
     <div class="mb-10 flex flex-wrap gap-4 md:w-1/4">
       <p-multiSelect
@@ -20,20 +22,33 @@
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
     @if (store.isLoading()) {
       @for (a of arrSkeleton; track $index) {
-        <app-article-card-skeleton/>
+        <app-article-card-skeleton />
       }
     }
     @if (store.articles() && !store.isLoading()) {
-      @for (article of store.articles()[0] | paginate : {
-        itemsPerPage: 12, currentPage: queryParams().page || 1, totalItems: store.articles()[1],
-      }; track article.id) {
-        <app-article-card [article]="article"/>
+      @for (
+        article of store.articles()[0]
+          | paginate
+            : {
+                itemsPerPage: 12,
+                currentPage: queryParams().page || 1,
+                totalItems: store.articles()[1],
+              };
+        track article.id
+      ) {
+        <app-article-card [article]="article" />
       }
     }
   </div>
-  @if ((store.articles()[1] > 12 && !store.isLoading())) {
+  @if (store.articles()[1] > 12 && !store.isLoading()) {
     <div class="flex justify-center mt-10">
-      <pagination-controls nextLabel="" previousLabel="" [maxSize]="5" (pageChange)="onPageChange($event)" class="pg"/>
+      <pagination-controls
+        nextLabel=""
+        previousLabel=""
+        [maxSize]="5"
+        (pageChange)="onPageChange($event)"
+        class="pg"
+      />
     </div>
   }
 </div>
