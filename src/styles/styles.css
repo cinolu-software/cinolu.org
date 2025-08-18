@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./overrides/main.css";
+@import "quill/dist/quill.snow.css";
 
 @theme {
   --font-mona: "Mona Sans", sans-serif;
@@ -106,7 +107,8 @@
   }
 
   .bg-grid {
-    background-image: repeating-linear-gradient(
+    background-image:
+      repeating-linear-gradient(
         0deg,
         rgba(0, 0, 0, 0.05) 0px,
         rgba(255, 255, 255, 0.05) 1px,

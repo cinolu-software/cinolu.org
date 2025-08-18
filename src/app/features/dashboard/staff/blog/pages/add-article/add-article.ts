@@ -1,6 +1,5 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import 'quill/dist/quill.snow.css';
 import {
   FormBuilder,
   FormGroup,
