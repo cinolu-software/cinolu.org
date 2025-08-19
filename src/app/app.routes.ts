@@ -2,7 +2,6 @@ import { Route } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { Layout } from './layout/layout';
 
-
 export const routes: Route[] = [
   {
     path: 'programs',
@@ -59,14 +58,12 @@ export const routes: Route[] = [
         (m) => m.dashboardRoutes,
       ),
   },
-    {
+  {
     path: 'blog-ressources',
     component: Layout,
     data: { layout: 'full-layout' },
     loadChildren: () =>
-      import('./features/site/blog/blogs.routes').then(
-        (m) => m.blogsRoutes,
-      ),
+      import('./features/site/blog/blogs.routes').then((m) => m.blogsRoutes),
   },
   {
     path: '',
