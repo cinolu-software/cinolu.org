@@ -9,42 +9,34 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ProgramsStore } from './programs.store';
-import { ProgramDto } from '../dto/program.dto';
+import { SubprogramsStore } from './subprograms.store';
 import { ToastrService } from '../../../../../core/services/toast/toastr.service';
-import { IProgram } from '../../../../../shared/models/entities.models';
 
-interface IAddProgramStore {
+interface IDeleteSubprogramStore {
   isLoading: boolean;
 }
 
-interface IAddProgramParams {
-  payload: ProgramDto;
-  onSuccess: () => void;
-}
-
-export const AddProgramStore = signalStore(
-  withState<IAddProgramStore>({ isLoading: false }),
+export const DeleteSubprogramsStore = signalStore(
+  withState<IDeleteSubprogramStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _programsStore: inject(ProgramsStore),
     _toast: inject(ToastrService),
+    _programsStore: inject(SubprogramsStore),
   })),
   withMethods(({ _http, _programsStore, _toast, ...store }) => ({
-    addProgram: rxMethod<IAddProgramParams>(
+    deleteProgram: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(({ payload, onSuccess }) => {
-          return _http.post<{ data: IProgram }>('programs', payload).pipe(
-            map(({ data }) => {
-              _programsStore.addProgram(data);
-              _toast.showSuccess('Programme ajouté');
+        switchMap((id) => {
+          return _http.delete<void>(`subprograms/${id}`).pipe(
+            map(() => {
               patchState(store, { isLoading: false });
-              onSuccess();
+              _programsStore.deleteProgram(id);
+              _toast.showSuccess('Programme supprimé');
             }),
             catchError(() => {
-              _toast.showError("Échec de l'ajout du rôle");
               patchState(store, { isLoading: false });
+              _toast.showError('Échec de la suppression');
               return of(null);
             }),
           );

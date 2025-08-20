@@ -83,6 +83,15 @@ export interface IProgram extends IBase {
   slug: string;
   logo: string;
   is_published: boolean;
+  subprograms: ISubprogram[];
+}
+
+export interface ISubprogram extends IBase {
+  name: string;
+  description: string;
+  slug: string;
+  logo: string;
+  is_published: boolean;
   projects: IProject[];
   events: IEvent[];
 }

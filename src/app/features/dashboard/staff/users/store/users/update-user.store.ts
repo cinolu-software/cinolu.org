@@ -35,7 +35,7 @@ export const UpdateUserStore = signalStore(
             .patch<{ data: IUser }>(`users/${userData.id}`, userData)
             .pipe(
               map(({ data }) => {
-                _router.navigate(['/dashboard/users/list']);
+                _router.navigate(['/dashboard/users']);
                 _toast.showSuccess('Utilisateur mis à jour avec succès');
                 patchState(store, { isLoading: false, user: data });
               }),

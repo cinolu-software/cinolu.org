@@ -2,12 +2,11 @@ import { Routes } from '@angular/router';
 
 export const venturesRoutes: Routes = [
   {
-    path: 'list',
-    title: 'Mes entreprises',
+    path: '',
     children: [
       {
         path: '',
-        title: 'Liste',
+        title: 'Mes entreprises',
         loadComponent: () =>
           import('./pages/list-ventures/list-ventures').then(
             (c) => c.ListVentures,

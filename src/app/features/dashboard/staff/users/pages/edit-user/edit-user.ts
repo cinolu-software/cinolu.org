@@ -20,7 +20,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { UserStore } from '../../store/users/user.store';
+import { UsersStore } from '../../store/users/user.store';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { UpdateUserStore } from '../../store/users/update-user.store';
 import { UnpaginatedRolesStore } from '../../store/roles/unpaginated-roles.store';
@@ -30,7 +30,7 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 @Component({
   selector: 'app-user-edit',
   templateUrl: './edit-user.html',
-  providers: [UserStore, UpdateUserStore, UnpaginatedRolesStore],
+  providers: [UsersStore, UpdateUserStore, UnpaginatedRolesStore],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -50,7 +50,7 @@ export class EditUser {
   #fb = inject(FormBuilder);
   #location = inject(Location);
   updateUserForm: FormGroup;
-  store = inject(UserStore);
+  store = inject(UsersStore);
   updateStore = inject(UpdateUserStore);
   rolesStore = inject(UnpaginatedRolesStore);
   icons = {

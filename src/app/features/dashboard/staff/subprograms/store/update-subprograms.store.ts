@@ -9,38 +9,38 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ProgramsStore } from './programs.store';
-import { ProgramDto } from '../dto/program.dto';
+import { SubprogramsStore } from './subprograms.store';
+import { SubprogramDto } from '../dto/subprograms.dto';
 import { ToastrService } from '../../../../../core/services/toast/toastr.service';
 import { IProgram } from '../../../../../shared/models/entities.models';
 
-interface IUpdateProgramStore {
+interface IUpdateSubprogramStore {
   isLoading: boolean;
 }
 
-interface IUpdateProgramParams {
-  payload: ProgramDto;
+interface IUpdateSubprogramParams {
+  payload: SubprogramDto;
   onSuccess: () => void;
 }
 
-export const UpdateProgramStore = signalStore(
-  withState<IUpdateProgramStore>({ isLoading: false }),
+export const UpdateSubprogramsStore = signalStore(
+  withState<IUpdateSubprogramStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _programsStore: inject(ProgramsStore),
+    _programsStore: inject(SubprogramsStore),
     _toast: inject(ToastrService),
   })),
   withMethods(({ _http, _programsStore, _toast, ...store }) => ({
-    updateProgram: rxMethod<IUpdateProgramParams>(
+    updateProgram: rxMethod<IUpdateSubprogramParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ payload, onSuccess }) => {
           return _http
-            .patch<{ data: IProgram }>(`programs/${payload.id}`, payload)
+            .patch<{ data: IProgram }>(`subprograms/${payload.id}`, payload)
             .pipe(
               map(({ data }) => {
                 _programsStore.updateProgram(data);
-                _toast.showSuccess('Programme mis à jour');
+                _toast.showSuccess('Sous programme mis à jour');
                 patchState(store, { isLoading: false });
                 onSuccess();
               }),

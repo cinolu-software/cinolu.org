@@ -2,8 +2,7 @@ import { Routes } from '@angular/router';
 
 export const usersRoutes: Routes = [
   {
-    path: 'list',
-    title: 'Les utilisateurs',
+    path: '',
     children: [
       {
         path: '',

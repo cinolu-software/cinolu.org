@@ -5,8 +5,6 @@ export const programsRoutes: Routes = [
     path: '',
     title: 'Les programmes',
     loadComponent: () =>
-      import('./pages/list-programs').then(
-        (c) => c.ListPrograms,
-      ),
+      import('./pages/list-programs').then((c) => c.ListPrograms),
   },
 ];
