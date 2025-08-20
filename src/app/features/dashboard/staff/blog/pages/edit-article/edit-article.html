@@ -5,7 +5,7 @@
       class="text-primary-400 hover:underline flex items-center gap-2"
       (click)="onGoBack()"
     >
-      <i-lucide [name]="icons.back" class="size-4"/>
+      <i-lucide [name]="icons.back" class="size-4" />
       Revenir en arrière
     </button>
     <h5 class="text-2xl font-bold">Modifier l'article</h5>
@@ -17,8 +17,8 @@
   >
     <p-stepper [value]="1" class="w-full">
       <p-step-list class="w-full overflow-x-scroll scrollbar-hide">
-        <p-step [value]="1"/>
-        <p-step [value]="2"/>
+        <p-step [value]="1" />
+        <p-step [value]="2" />
       </p-step-list>
       <p-step-panels>
         <p-step-panel [value]="1">
@@ -53,9 +53,9 @@
             <div class="flex flex-col gap-4">
               <div class="flex flex-col gap-1.5">
                 <label for="title" class="font-medium"
-                >Titre de l'article<span class="text-red-500">*</span></label
+                  >Titre de l'article<span class="text-red-500">*</span></label
                 >
-                <input pInputText id="title" formControlName="title"/>
+                <input pInputText id="title" formControlName="title" />
               </div>
               <div class="flex flex-col gap-1.5">
                 <p class="font-medium">Tags de l'article</p>
@@ -70,6 +70,18 @@
                   formControlName="tags"
                 />
               </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="font-medium" for="published_at"
+                  >Date de publication</label
+                >
+                <p-datepicker
+                  showIcon="true"
+                  name="published_at"
+                  id="published_at"
+                  formControlName="published_at"
+                  dateFormat="dd.mm.yy"
+                />
+              </div>
 
               <div class="flex justify-end">
                 <p-button
@@ -78,7 +90,7 @@
                   (onClick)="activateCallback(2)"
                 >
                   Suivant
-                  <i-lucide [name]="icons.next" class="size-4"/>
+                  <i-lucide [name]="icons.next" class="size-4" />
                 </p-button>
               </div>
             </div>
@@ -117,7 +129,7 @@
                   severity="secondary"
                   (onClick)="activateCallback(1)"
                 >
-                  <i-lucide [name]="icons.previous" class="size-4"/>
+                  <i-lucide [name]="icons.previous" class="size-4" />
                   Précedent
                 </p-button>
                 <p-button
@@ -128,7 +140,7 @@
                 >
                   Mettre à jour
                   @if (!store.isLoading()) {
-                    <i-lucide [name]="icons.check" class="size-4"/>
+                    <i-lucide [name]="icons.check" class="size-4" />
                   }
                 </p-button>
               </div>

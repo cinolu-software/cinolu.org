@@ -79,6 +79,7 @@ export class EditArticle implements OnInit {
     this.form = this.#fb.group({
       id: ['', Validators.required],
       title: ['', Validators.required],
+      published_at: ['', Validators.required],
       content: ['', Validators.required],
       summary: ['', Validators.required],
       tags: [[], Validators.required],
