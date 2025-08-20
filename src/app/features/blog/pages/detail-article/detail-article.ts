@@ -16,19 +16,20 @@ import { ArticleStore } from '../../../dashboard/staff/blog/store/articles/artic
 import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ArticleCardSkeleton } from '../../components/article-card-skeleton/article-card-skeleton';
-import { HeroBlog } from "../../components/hero-blog/hero-blog";
+import { HeroBlog } from '../../components/hero-blog/hero-blog';
+import { ArticlesStore } from '../../../dashboard/staff/blog/store/articles/articles.store';
 
 @Component({
   selector: 'app-detail-article',
-  providers: [ArticleStore],
+  providers: [ArticleStore, ArticlesStore],
   imports: [
     LucideAngularModule,
     CommonModule,
     ApiImgPipe,
     ArticleCardSkeleton,
     NgOptimizedImage,
-    HeroBlog
-],
+    HeroBlog,
+  ],
   templateUrl: './detail-article.html',
   styles: ``,
 })
@@ -47,10 +48,12 @@ export class DetailArticle implements OnInit {
   };
   #route = inject(ActivatedRoute);
   store = inject(ArticleStore);
+  storeArticle = inject(ArticlesStore);
 
   ngOnInit(): void {
     const slug = this.#route.snapshot.params['slug'];
     this.store.loadArticle(slug);
+    console.log(this.storeArticle.articles());
   }
 
   onGoBack(): void {
