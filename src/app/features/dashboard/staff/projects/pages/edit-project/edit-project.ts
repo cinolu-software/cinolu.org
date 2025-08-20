@@ -27,7 +27,7 @@ import { UpdateProjectStore } from '../../store/projects/update-project.store';
 import { environment } from '../../../../../../../environments/environment';
 import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
-import { ProjectStore } from '../../../../../site/projects/store/project.store';
+import { ProjectStore } from '../../../../../projects/store/project.store';
 
 @Component({
   selector: 'app-project-edit',

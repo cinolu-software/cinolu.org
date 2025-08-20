@@ -27,7 +27,7 @@ import { UpdateEventStore } from '../../store/events/update-event.store';
 import { environment } from '../../../../../../../environments/environment';
 import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
-import { EventStore } from '../../../../../site/events/store/event.store';
+import { EventStore } from '../../../../../events/store/event.store';
 import { EventsStore } from '../../store/events/events.store';
 
 @Component({

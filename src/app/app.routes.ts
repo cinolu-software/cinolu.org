@@ -8,7 +8,7 @@ export const routes: Route[] = [
     component: Layout,
     data: { layout: 'fixed-layout' },
     loadChildren: () =>
-      import('./features/site/projects/projects.routes').then(
+      import('./features/projects/projects.routes').then(
         (m) => m.projectsRoutes,
       ),
   },
@@ -17,7 +17,7 @@ export const routes: Route[] = [
     component: Layout,
     data: { layout: 'fixed-layout' },
     loadChildren: () =>
-      import('./features/site/events/events.routes').then(
+      import('./features/events/events.routes').then(
         (m) => m.eventsRoutes,
       ),
   },
@@ -26,7 +26,7 @@ export const routes: Route[] = [
     component: Layout,
     data: { layout: 'full-layout' },
     loadChildren: () =>
-      import('./features/site/about-us/about-us.routes').then(
+      import('./features/about-us/about-us.routes').then(
         (m) => m.aboutRoutes,
       ),
   },
@@ -35,7 +35,7 @@ export const routes: Route[] = [
     component: Layout,
     data: { layout: 'full-layout' },
     loadChildren: () =>
-      import('./features/site/donation/donation.routes').then(
+      import('./features/donation/donation.routes').then(
         (m) => m.donationRoutes,
       ),
   },
@@ -44,7 +44,7 @@ export const routes: Route[] = [
     component: Layout,
     data: { layout: 'fixed-layout' },
     loadChildren: () =>
-      import('./features/site/contact-us/contact-us.route').then(
+      import('./features/contact-us/contact-us.route').then(
         (m) => m.contactUsRoutes,
       ),
   },
@@ -63,14 +63,14 @@ export const routes: Route[] = [
     component: Layout,
     data: { layout: 'full-layout' },
     loadChildren: () =>
-      import('./features/site/blog/blogs.routes').then((m) => m.blogsRoutes),
+      import('./features/blog/blogs.routes').then((m) => m.blogsRoutes),
   },
   {
     path: '',
     component: Layout,
     data: { layout: 'full-layout' },
     loadChildren: () =>
-      import('./features/site/landing/landing.routes').then(
+      import('./features/landing/landing.routes').then(
         (m) => m.landingRoutes,
       ),
   },
@@ -79,14 +79,14 @@ export const routes: Route[] = [
     component: Layout,
     data: { layout: 'empty-layout' },
     loadChildren: () =>
-      import('./features/site/auth/auth.routes').then((m) => m.authRoutes),
+      import('./features/auth/auth.routes').then((m) => m.authRoutes),
   },
   {
     path: '**',
     component: Layout,
     data: { layout: 'full-layout' },
     loadChildren: () =>
-      import('./features/site/landing/landing.routes').then(
+      import('./features/landing/landing.routes').then(
         (m) => m.landingRoutes,
       ),
   },

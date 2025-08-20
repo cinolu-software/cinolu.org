@@ -116,25 +116,25 @@ export class ArticleTags implements OnInit {
     this.showEditModal.update((v) => !v);
   }
 
-  onPageChange(currentPage: number): void {
+  async onPageChange(currentPage: number): Promise<void> {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
-    this.updateRouteAndTags();
+    await this.updateRouteAndTags();
   }
 
-  updateRoute(): void {
+  async updateRoute(): Promise<void> {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/tags'], { queryParams });
+    await this.#router.navigate(['/dashboard/blog/tags'], { queryParams });
   }
 
-  updateRouteAndTags(): void {
-    this.updateRoute();
+  async updateRouteAndTags(): Promise<void> {
+    await this.updateRoute();
     this.loadTags();
   }
 
-  onResetSearch(): void {
+  async onResetSearch(): Promise<void> {
     this.searchForm.reset();
     this.queryParams.set({ page: null, q: null });
-    this.updateRouteAndTags();
+    await this.updateRouteAndTags();
   }
 
   onSearch(): void {

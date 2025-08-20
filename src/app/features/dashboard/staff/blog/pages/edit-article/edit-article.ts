@@ -28,7 +28,8 @@ import { ActivatedRoute } from '@angular/router';
 import { UnpaginatedTagStore } from '../../store/tags/unpaginated-tag.store';
 import { environment } from '../../../../../../../environments/environment';
 import { ArticleStore } from '../../store/articles/article.store';
-import { ArticlesStore } from '../../../../../site/blog/store/articles.store';
+import { ArticlesStore } from '../../../../../blog/store/articles.store';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-edit-article',
@@ -53,6 +54,7 @@ import { ArticlesStore } from '../../../../../site/blog/store/articles.store';
     FileUpload,
     NgOptimizedImage,
     ApiImgPipe,
+    QuillModule
   ],
   templateUrl: './edit-article.html',
 })
