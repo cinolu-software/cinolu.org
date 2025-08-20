@@ -30,6 +30,7 @@ import { DeleteArticleStore } from '../../store/articles/delete-article.store';
 import { ArticlesStore } from '../../store/articles/articles.store';
 import { AddArticleStore } from '../../store/articles/add-article.store';
 import { ConfirmPopup } from 'primeng/confirmpopup';
+import { IArticle } from '../../../../../../shared/models/entities.models';
 
 @Component({
   selector: 'app-article-list',
@@ -137,5 +138,11 @@ export class ListArticles implements OnInit {
         this.deleteArticleStore.deleteArticle(articleId);
       },
     });
+  }
+
+  isPublished(article: IArticle): boolean {
+    return (
+      !!article.published_at && new Date(article.published_at) <= new Date()
+    );
   }
 }

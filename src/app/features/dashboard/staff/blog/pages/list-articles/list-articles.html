@@ -103,6 +103,7 @@
               <th class="px-6 py-3">Image</th>
               <th class="px-6 py-3">Titre</th>
               <th class="px-6 py-3">Résumé</th>
+              <th class="px-6 py-3">Status</th>
               <th class="px-6 py-3">Actions</th>
             </tr>
           </thead>
@@ -134,12 +135,22 @@
                   {{ article.summary | titlecase }}
                 </td>
 
+                <td class="px-6 py-2 text-xs capitalize font-medium">
+                  @if (isPublished(article)) {
+                    <span
+                      class="text-primary-500 bg-primary-400/20 rounded py-1 px-1.5"
+                    >
+                      publié
+                    </span>
+                  } @else {
+                    <span class="text-red-500 bg-red-400/20 rounded py-1 px-2">
+                      non publié
+                    </span>
+                  }
+                </td>
+
                 <td class="px-6 py-2">
                   <div class="flex items-center gap-2">
-                    <button class="text-primary-500">
-                      <p-confirmpopup />
-                      <i-lucide [name]="icons.eye" class="size-5" />
-                    </button>
                     <a
                       [routerLink]="[
                         '/dashboard/blog/articles/edit',
