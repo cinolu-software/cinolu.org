@@ -17,11 +17,11 @@ import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ArticleCardSkeleton } from '../../components/article-card-skeleton/article-card-skeleton';
 import { HeroBlog } from '../../components/hero-blog/hero-blog';
-import { ArticlesStore } from '../../../dashboard/staff/blog/store/articles/articles.store';
+import { RecentArticlesStore } from '../../store/articles.last-five.store';
 
 @Component({
   selector: 'app-detail-article',
-  providers: [ArticleStore, ArticlesStore],
+  providers: [ArticleStore, RecentArticlesStore],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -48,7 +48,7 @@ export class DetailArticle implements OnInit {
   };
   #route = inject(ActivatedRoute);
   store = inject(ArticleStore);
-  storeArticle = inject(ArticlesStore);
+  storeArticle = inject(RecentArticlesStore);
 
   ngOnInit(): void {
     const slug = this.#route.snapshot.params['slug'];
