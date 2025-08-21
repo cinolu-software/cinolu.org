@@ -77,15 +77,28 @@ export interface IVenture extends IBase {
   owner: IUser;
 }
 
+
+export interface SubProgram extends IBase {
+  name: string;
+  slug: string;
+  logo: string | null;
+  description: string;
+  is_published: boolean;
+}
+
 export interface IProgram extends IBase {
   name: string;
-  description: string;
   slug: string;
-  logo: string;
+  logo: string | null;
+  description: string;
   is_published: boolean;
-  projects: IProject[];
-  events: IEvent[];
+  subprograms: SubProgram[];
 }
+
+export interface ProgramResponse {
+  data: IProgram;
+}
+
 
 export interface IEvent extends IBase {
   name: string;

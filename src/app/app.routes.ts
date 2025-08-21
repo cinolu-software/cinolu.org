@@ -13,22 +13,27 @@ export const routes: Route[] = [
       ),
   },
   {
+    path: 'our-programs',
+    component: Layout,
+    data: { layout: 'fixed-layout' },
+    loadChildren: () =>
+      import('./features/our-programs/programs.routes').then(
+        (m) => m.programsRoutes,
+      ),
+  },
+  {
     path: 'events',
     component: Layout,
     data: { layout: 'fixed-layout' },
     loadChildren: () =>
-      import('./features/events/events.routes').then(
-        (m) => m.eventsRoutes,
-      ),
+      import('./features/events/events.routes').then((m) => m.eventsRoutes),
   },
   {
     path: 'about-us',
     component: Layout,
     data: { layout: 'full-layout' },
     loadChildren: () =>
-      import('./features/about-us/about-us.routes').then(
-        (m) => m.aboutRoutes,
-      ),
+      import('./features/about-us/about-us.routes').then((m) => m.aboutRoutes),
   },
   {
     path: 'donation',
@@ -70,9 +75,7 @@ export const routes: Route[] = [
     component: Layout,
     data: { layout: 'full-layout' },
     loadChildren: () =>
-      import('./features/landing/landing.routes').then(
-        (m) => m.landingRoutes,
-      ),
+      import('./features/landing/landing.routes').then((m) => m.landingRoutes),
   },
   {
     path: '',
@@ -86,8 +89,6 @@ export const routes: Route[] = [
     component: Layout,
     data: { layout: 'full-layout' },
     loadChildren: () =>
-      import('./features/landing/landing.routes').then(
-        (m) => m.landingRoutes,
-      ),
+      import('./features/landing/landing.routes').then((m) => m.landingRoutes),
   },
 ];
