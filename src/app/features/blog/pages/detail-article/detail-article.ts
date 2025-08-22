@@ -13,7 +13,7 @@ import {
   UserPlus,
 } from 'lucide-angular';
 import { ArticleStore } from '../../../dashboard/staff/blog/store/articles/article.store';
-import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ArticleCardSkeleton } from '../../components/article-card-skeleton/article-card-skeleton';
 import { HeroBlog } from '../../components/hero-blog/hero-blog';
@@ -35,7 +35,6 @@ import { RecentArticlesStore } from '../../store/recent-articles.store';
   styles: ``,
 })
 export class DetailArticle implements OnInit {
-  #location = inject(Location);
   icons = {
     moveLeft: ArrowLeft,
     fileText: FileText,
@@ -58,9 +57,5 @@ export class DetailArticle implements OnInit {
         this.store.loadArticle(slug);
       }
     });
-  }
-
-  onGoBack(): void {
-    this.#location.back();
   }
 }

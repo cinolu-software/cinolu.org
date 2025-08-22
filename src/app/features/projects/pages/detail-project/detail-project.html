@@ -6,13 +6,6 @@
       <h2 class="font-black font-satoshi mb-1 text-2xl md:text-4xl">
         {{ project.name | titlecase }}
       </h2>
-      <button
-        class="underline flex items-center gap-1 pb-4 text-primary-700"
-        (click)="onGoBack()"
-      >
-        <i-lucide [name]="icons.moveLeft" class="size-4" />
-        Retour
-      </button>
     </div>
     <div class="relative h-60 w-full md:h-96 bg-gray-50">
       <img
