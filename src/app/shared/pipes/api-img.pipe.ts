@@ -12,6 +12,9 @@ export class ApiImgPipe implements PipeTransform {
       program: value['logo']
         ? `${apiUrl}uploads/programs/${value['logo']}`
         : '/images/no-image.jpg',
+      subprogram: value['logo']
+        ? `${apiUrl}uploads/subprograms/${value['logo']}`
+        : '/images/no-image.jpg',
       user: value['profile']
         ? `${apiUrl}uploads/profiles/${value['profile']}`
         : (value['google_image'] ?? '/images/avatar-default.webp'),

@@ -1,4 +1,4 @@
-<section class="min-h-[105vh] text-gray-600 mt-16">
+<section class="min-h-[105vh] text-gray-600">
   @let isLoading = store.isLoading();
   @let hasQuery = queryParams().q;
   @let projectCount = store.projects()[1];
@@ -9,16 +9,8 @@
       <div class="px-6 flex flex-wrap gap-2 md:justify-between md:items-center mb-6 md:mb-0">
         <h5 class="text-lg font-bold">
           Liste des projects
-          <span class="text-gray-500 ">
-            @if (isLoading) {
-              <p-progress-spinner strokeWidth="5" animationDuration=".5s" fill="transparent"
-                                  [style]="{ width: '0.8rem', height: '0.8rem' }"/>
-            } @else {
-              ({{ projectCount }})
-            }
-          </span>
         </h5>
-        <a pButton [outlined]="true" [size]="'small'" [routerLink]="['/dashboard/projects/list/add']"
+        <a pButton [outlined]="true" [size]="'small'" [routerLink]="['/dashboard/projects/add']"
            class="flex items-center gap-2">
           <i-lucide [name]="icons.plus" class="size-4"/>
           Ajouter un projet
@@ -79,23 +71,24 @@
               track project.id) {
               <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
                 <td class="px-6 py-2">
-                  <p-avatar [image]="project | apiIMG: 'project'"/>
+                  @if (project) {
+                    <p-avatar [image]="project | apiIMG: 'project'"/>
+                  }
                 </td>
                 <td class="px-6 py-2 font-medium text-gray-900">
                   {{ project.name | titlecase }}
                 </td>
                 <td class="px-6 py-2">
-                  {{ project.started_at | date: "shortDate" }}
+                  {{ project.started_at | date: "longDate" }}
                 </td>
                 <td class="px-6 py-2">
-                  {{ project.ended_at | date: "shortDate" }}
+                  {{ project.ended_at | date: "longDate" }}
                 </td>
                 <td class="px-6 py-2 text-xs capitalize font-medium">
                   @if (project.is_published) {
-                    <span
-                      class="text-primary-500 bg-primary-400/20 rounded py-1 px-1.5"
-                    >publié</span
-                    >
+                    <span class="text-primary-500 bg-primary-400/20 rounded py-1 px-1.5">
+                      publié
+                    </span>
                   } @else {
                     <span class="text-red-500 bg-red-400/20 rounded py-1 px-2">dépublié</span>
                   }

@@ -34,7 +34,7 @@ export const AddProjectStore = signalStore(
           return _http.post<{ data: IProject }>('projects', project).pipe(
             map(({ data }) => {
               _toast.showSuccess('Le projet a été ajouté avec succès');
-              _router.navigate(['/dashboard/projects/list']);
+              _router.navigate(['/dashboard/projects']);
               patchState(store, { isLoading: false, project: data });
             }),
             catchError(() => {

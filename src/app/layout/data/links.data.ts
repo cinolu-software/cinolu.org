@@ -31,7 +31,7 @@ export const EXPLORATION_LINKS: ILink[] = [
   {
     icon: Activity,
     name: 'Programmes',
-    path: '/list-programs',
+    path: '/programs',
   },
   {
     icon: Calendar1,

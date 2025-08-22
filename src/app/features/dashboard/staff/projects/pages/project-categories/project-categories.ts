@@ -1,9 +1,8 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {
   LucideAngularModule,
   RefreshCcw,
-  Edit,
+  SquarePen,
   Plus,
   Trash,
   Search,
@@ -44,7 +43,6 @@ import { ICategory } from '../../../../../../shared/models/entities.models';
     CommonModule,
     ButtonModule,
     InputTextModule,
-    ProgressSpinnerModule,
     NgxPaginationModule,
     ReactiveFormsModule,
     Dialog,
@@ -68,7 +66,7 @@ export class ProjectCategories implements OnInit {
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   icons = {
     refresh: RefreshCcw,
-    edit: Edit,
+    edit: SquarePen,
     trash: Trash,
     plus: Plus,
     search: Search,
@@ -93,6 +91,10 @@ export class ProjectCategories implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
+  }
+
+  get count(): number {
+    return this.store.categories()[1];
   }
 
   loadCategories(): void {

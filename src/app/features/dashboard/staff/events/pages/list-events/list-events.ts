@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {
   LucideAngularModule,
   RefreshCcw,
@@ -44,7 +43,6 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
     CommonModule,
     ButtonModule,
     InputTextModule,
-    ProgressSpinnerModule,
     NgxPaginationModule,
     ReactiveFormsModule,
     RouterLink,
@@ -87,6 +85,10 @@ export class ListEvents implements OnInit {
     this.loadEvents();
   }
 
+  get count(): number {
+    return this.store.events()[1];
+  }
+
   loadEvents(): void {
     this.store.loadEvents(this.queryParams());
   }
@@ -96,13 +98,13 @@ export class ListEvents implements OnInit {
     this.updateRouteAndEvents();
   }
 
-  updateRoute(): void {
+  async updateRoute(): Promise<void> {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/events/list'], { queryParams });
+    await this.#router.navigate(['/dashboard/events'], { queryParams });
   }
 
   updateRouteAndEvents(): void {
-    this.updateRoute();
+    this.updateRoute().then();
     this.loadEvents();
   }
 
