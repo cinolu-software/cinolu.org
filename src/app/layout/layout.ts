@@ -7,16 +7,12 @@ import { DashboardLayout } from './pages/dashboard-layout/dashboard-layout';
 import { EmptyLayout } from './pages/empty-layout/empty-layout';
 import { FixedLayout } from './pages/fixed-layout/fixed-layout';
 import { FullLayout } from './pages/full-layout/full-layout';
+import { Loader } from './components/loader/loader';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.html',
-  imports: [
-    FixedLayout,
-    EmptyLayout,
-    FullLayout,
-    DashboardLayout,
-  ],
+  imports: [FixedLayout, EmptyLayout, FullLayout, DashboardLayout, Loader],
 })
 export class Layout implements OnInit, OnDestroy {
   config: AppConfig = {} as AppConfig;

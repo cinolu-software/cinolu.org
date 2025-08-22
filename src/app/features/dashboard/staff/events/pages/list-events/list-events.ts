@@ -98,13 +98,13 @@ export class ListEvents implements OnInit {
     this.updateRouteAndEvents();
   }
 
-  updateRoute(): void {
+  async updateRoute(): Promise<void> {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/events/list'], { queryParams });
+    await this.#router.navigate(['/dashboard/events'], { queryParams });
   }
 
   updateRouteAndEvents(): void {
-    this.updateRoute();
+    this.updateRoute().then();
     this.loadEvents();
   }
 
