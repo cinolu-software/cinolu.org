@@ -54,7 +54,7 @@ export class AddArticle {
   constructor() {
     this.form = this.#fb.group({
       title: ['', Validators.required],
-      published_at: [new Date('now'), Validators.required],
+      published_at: [new Date(), Validators.required],
       content: ['', Validators.required],
       summary: ['', Validators.required],
       tags: [[], Validators.required],
