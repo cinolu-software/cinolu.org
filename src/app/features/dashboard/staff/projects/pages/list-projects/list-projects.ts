@@ -86,38 +86,38 @@ export class ListProjects implements OnInit {
   }
 
   get count(): number {
-    return this.store.projects()[1]
+    return this.store.projects()[1];
   }
 
   loadProjects(): void {
     this.store.loadProjects(this.queryParams());
   }
 
-  onPageChange(currentPage: number): void {
+  async onPageChange(currentPage: number): Promise<void> {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
-    this.updateRouteAndProjects();
+    await this.updateRouteAndProjects();
   }
 
-  updateRoute(): void {
+  async updateRoute(): Promise<void> {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/projects/list'], { queryParams });
+    await this.#router.navigate(['/dashboard/projects'], { queryParams });
   }
 
-  updateRouteAndProjects(): void {
-    this.updateRoute();
+  async updateRouteAndProjects(): Promise<void> {
+    await this.updateRoute();
     this.loadProjects();
   }
 
-  onResetSearch(): void {
+  async onResetSearch(): Promise<void> {
     this.searchForm.reset();
     this.queryParams.set({ page: null, q: null });
-    this.updateRouteAndProjects();
+    await this.updateRouteAndProjects();
   }
 
-  onSearch(): void {
+  async onSearch(): Promise<void> {
     const searchValue = this.searchForm.value.q;
     this.queryParams.set({ page: null, q: searchValue });
-    this.updateRouteAndProjects();
+    await this.updateRouteAndProjects();
   }
 
   onPublishProject(projectId: string): void {

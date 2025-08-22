@@ -36,7 +36,7 @@ export const UpdateProjectStore = signalStore(
             .pipe(
               map(({ data }) => {
                 _toast.showSuccess('Le projet a été mis à jour avec succès');
-                _router.navigate(['/dashboard/projects/list']);
+                _router.navigate(['/dashboard/projects']);
                 patchState(store, { isLoading: false, project: data });
               }),
               catchError(() => {

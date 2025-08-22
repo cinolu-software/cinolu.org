@@ -34,7 +34,7 @@ export const AddEventStore = signalStore(
           return _http.post<{ data: IEvent }>('events', event).pipe(
             map(({ data }) => {
               _toast.showSuccess("L'événement a été ajouté avec succès");
-              _router.navigate(['/dashboard/events/list']);
+              _router.navigate(['/dashboard/events']);
               patchState(store, { isLoading: false, events: data });
             }),
             catchError(() => {

@@ -36,7 +36,7 @@ export const UpdateEventStore = signalStore(
             .pipe(
               map(({ data }) => {
                 _toast.showSuccess("L'événement a été mis à jour avec succès");
-                _router.navigate(['/dashboard/events/list']);
+                _router.navigate(['/dashboard/events']);
                 patchState(store, { isLoading: false, event: data });
               }),
               catchError(() => {
