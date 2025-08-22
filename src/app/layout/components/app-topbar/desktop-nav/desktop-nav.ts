@@ -10,6 +10,7 @@ import {
 import { ILink } from '../../../data/links.data';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { AuthStore } from '../../../../core/auth/auth.store';
+import { ButtonDirective } from 'primeng/button';
 
 @Component({
   selector: 'app-desktop-nav',
@@ -20,6 +21,7 @@ import { AuthStore } from '../../../../core/auth/auth.store';
     LucideAngularModule,
     RouterModule,
     ApiImgPipe,
+    ButtonDirective,
   ],
 })
 export class DesktopNav {
