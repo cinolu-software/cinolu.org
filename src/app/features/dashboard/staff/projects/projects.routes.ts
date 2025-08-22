@@ -2,8 +2,7 @@ import { Routes } from '@angular/router';
 
 export const projectsRoutes: Routes = [
   {
-    path: 'list',
-    title: '',
+    path: '',
     children: [
       {
         path: '',
@@ -30,13 +29,5 @@ export const projectsRoutes: Routes = [
           ),
       },
     ],
-  },
-  {
-    path: 'categories',
-    title: 'Catégories de projets',
-    loadComponent: () =>
-      import('./pages/project-categories/project-categories').then(
-        (c) => c.ProjectCategories,
-      ),
   },
 ];

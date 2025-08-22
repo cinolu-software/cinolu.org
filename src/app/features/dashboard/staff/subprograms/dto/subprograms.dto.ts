@@ -1,4 +1,4 @@
-export interface ProgramDto {
+export interface SubprogramDto {
   id: string;
   name: string;
   description: string;

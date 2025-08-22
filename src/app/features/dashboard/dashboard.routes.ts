@@ -22,6 +22,13 @@ export const dashboardRoutes: Routes = [
       import('./staff/programs/programs.routes').then((c) => c.programsRoutes),
   },
   {
+    path: 'subprograms',
+    loadChildren: () =>
+      import('./staff/subprograms/subprograms.routes').then(
+        (c) => c.subprogramsRoutes,
+      ),
+  },
+  {
     path: 'projects',
     loadChildren: () =>
       import('./staff/projects/projects.routes').then((c) => c.projectsRoutes),

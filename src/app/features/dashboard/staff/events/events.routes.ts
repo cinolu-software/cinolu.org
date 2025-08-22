@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const eventsRoutes: Routes = [
   {
-    path: 'list',
+    path: '',
     children: [
       {
         path: '',
@@ -29,13 +29,5 @@ export const eventsRoutes: Routes = [
           ),
       },
     ],
-  },
-  {
-    path: 'categories',
-    title: "Catégories d'événements",
-    loadComponent: () =>
-      import('./pages/event-categories/event-categories').then(
-        (c) => c.EventCategories,
-      ),
   },
 ];

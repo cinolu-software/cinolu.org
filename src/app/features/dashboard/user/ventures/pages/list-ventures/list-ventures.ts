@@ -45,19 +45,19 @@ export class ListVentures implements OnInit {
     this.store.loadVentures(this.queryParams());
   }
 
-  onPageChange(currentPage: number): void {
+  async onPageChange(currentPage: number): Promise<void> {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
-    this.updateRouteAndEnterprises();
+    await this.updateRouteAndEnterprises();
   }
 
-  updateRoute(): void {
+  async updateRoute(): Promise<void> {
     const { page } = this.queryParams();
     const queryParams = { page };
-    this.#router.navigate(['/dashboard/ventures/list'], { queryParams });
+    await this.#router.navigate(['/dashboard/ventures'], { queryParams });
   }
 
-  updateRouteAndEnterprises(): void {
-    this.updateRoute();
+  async updateRouteAndEnterprises(): Promise<void> {
+    await this.updateRoute();
     this.store.loadVentures(this.queryParams());
   }
 

@@ -4,7 +4,6 @@ import {
   Activity,
   UserCheck,
   BriefcaseBusiness,
-  Briefcase,
   Calendar1,
   Phone,
   House,
@@ -71,9 +70,27 @@ export const MY_CINOLU_LINKS: ILink[] = [
 
 export const ADMIN_LINKS: ILink[] = [
   {
-    name: 'Les programmes',
+    name: 'Les portefeuilles',
     path: '/dashboard/programs',
     icon: Activity,
+    children: [
+      {
+        name: 'Programmes',
+        path: '/dashboard/programs',
+      },
+      {
+        name: 'Sous-programmes',
+        path: '/dashboard/subprograms',
+      },
+      {
+        name: 'Projets',
+        path: '/dashboard/projects',
+      },
+      {
+        name: 'Evénements',
+        path: '/dashboard/events',
+      },
+    ],
   },
   {
     name: 'Le blog',
@@ -81,7 +98,7 @@ export const ADMIN_LINKS: ILink[] = [
     icon: BookOpen,
     children: [
       {
-        name: 'Les articles',
+        name: 'Articles',
         path: '/dashboard/blog/articles',
       },
       {
@@ -97,41 +114,11 @@ export const ADMIN_LINKS: ILink[] = [
     children: [
       {
         name: 'Liste',
-        path: '/dashboard/users/list',
+        path: '/dashboard/users',
       },
       {
         name: 'Rôles',
         path: '/dashboard/users/roles',
-      },
-    ],
-  },
-  {
-    name: 'Les projets',
-    path: '/dashboard/projects',
-    icon: Briefcase,
-    children: [
-      {
-        name: 'Liste',
-        path: '/dashboard/projects/list',
-      },
-      {
-        name: 'Catégories',
-        path: '/dashboard/projects/categories',
-      },
-    ],
-  },
-  {
-    name: 'Les événements',
-    path: '/dashboard/events',
-    icon: Calendar1,
-    children: [
-      {
-        name: 'Liste ',
-        path: '/dashboard/events/list',
-      },
-      {
-        name: 'Catégories',
-        path: '/dashboard/events/categories',
       },
     ],
   },

@@ -34,7 +34,7 @@ export const AddVentureStore = signalStore(
             tap(() => {
               patchState(store, { isLoading: false });
               _toast.showSuccess('Entreprise ajoutée');
-              _router.navigate(['/dashboard/ventures/list']);
+              _router.navigate(['/dashboard/ventures']);
             }),
             catchError(() => {
               _toast.showError("Erreur lors de l'ajout");

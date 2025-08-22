@@ -18,7 +18,7 @@ interface IUserStore {
   user: IUser | null;
 }
 
-export const UserStore = signalStore(
+export const UsersStore = signalStore(
   withState<IUserStore>({ isLoading: false, user: null }),
   withProps(() => ({
     _http: inject(HttpClient),

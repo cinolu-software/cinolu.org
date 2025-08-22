@@ -18,19 +18,23 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Client,
   },
   {
-    path: 'dashboard/ventures/list/update/:slug',
+    path: 'our-programs/:slug',
     renderMode: RenderMode.Client,
   },
   {
-    path: 'dashboard/users/list/edit/:email',
+    path: 'dashboard/ventures/update/:slug',
     renderMode: RenderMode.Client,
   },
   {
-    path: 'dashboard/projects/list/edit/:slug',
+    path: 'dashboard/users/edit/:email',
     renderMode: RenderMode.Client,
   },
   {
-    path: 'dashboard/events/list/edit/:slug',
+    path: 'dashboard/projects/edit/:slug',
+    renderMode: RenderMode.Client,
+  },
+  {
+    path: 'dashboard/events/edit/:slug',
     renderMode: RenderMode.Client,
   },
   {
@@ -38,7 +42,7 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Client,
   },
   {
-    path: 'dashboard/ventures/list/view/:slug',
+    path: 'dashboard/ventures/view/:slug',
     renderMode: RenderMode.Client,
   },
   {
