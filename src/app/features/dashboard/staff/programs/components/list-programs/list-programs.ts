@@ -9,6 +9,8 @@ import {
   Search,
   Eye,
   EyeOff,
+  Layers,
+  GitBranch,
 } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -21,24 +23,24 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ProgramsStore } from '../store/programs.store';
-import { FilterProgramsDto } from '../dto/filter-programs.dto';
+import { ProgramsStore } from '../../store/list-programs/programs.store';
+import { FilterProgramsDto } from '../../dto/list-programs/filter-programs.dto';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 import { Dialog } from 'primeng/dialog';
-import { AddProgramStore } from '../store/add-program.store';
+import { AddProgramStore } from '../../store/list-programs/add-program.store';
 import { Textarea } from 'primeng/textarea';
-import { UpdateProgramStore } from '../store/update-program.store';
-import { DeleteProgramStore } from '../store/delete-program.store';
-import { IProgram } from '../../../../../shared/models/entities.models';
-import { FileUpload } from '../../../../../shared/components/file-upload/file-upload';
-import { environment } from '../../../../../../environments/environment';
-import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
+import { UpdateProgramStore } from '../../store/list-programs/update-program.store';
+import { DeleteProgramStore } from '../../store/list-programs/delete-program.store';
+import { IProgram } from '../../../../../../shared/models/entities.models';
+import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
+import { environment } from '../../../../../../../environments/environment';
+import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { AvatarModule } from 'primeng/avatar';
-import { PublishProgramStore } from '../store/publish-program.store';
+import { PublishProgramStore } from '../../store/list-programs/publish-program.store';
 
 @Component({
-  selector: 'app-programs-list',
+  selector: 'app-list-programs',
   templateUrl: './list-programs.html',
   providers: [
     ProgramsStore,
@@ -88,8 +90,9 @@ export class ListPrograms implements OnInit {
     search: Search,
     eye: Eye,
     eyeOff: EyeOff,
+    program: Layers,
+    subprograms: GitBranch,
   };
-
   showAddModal = signal(false);
   showEditModal = signal(false);
   queryParams = signal<FilterProgramsDto>({
@@ -116,13 +119,17 @@ export class ListPrograms implements OnInit {
     this.loadPrograms();
   }
 
+  get count(): number {
+    return this.store.programs()[1];
+  }
+
   loadPrograms(): void {
     this.store.loadPrograms(this.queryParams());
   }
 
-  onPageChange(currentPage: number): void {
+  async onPageChange(currentPage: number): Promise<void> {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
-    this.updateRouteAndPrograms();
+    await this.updateRouteAndPrograms();
   }
 
   onPublishProgram(id: string): void {
@@ -133,30 +140,30 @@ export class ListPrograms implements OnInit {
     this.loadPrograms();
   }
 
-  updateRoute(): void {
+  async updateRoute(): Promise<void> {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/programs'], { queryParams });
+    await this.#router.navigate(['/dashboard/programs'], { queryParams });
   }
 
-  updateRouteAndPrograms(): void {
-    this.updateRoute();
+  async updateRouteAndPrograms(): Promise<void> {
+    await this.updateRoute();
     this.loadPrograms();
   }
 
-  onResetSearch(): void {
+  async onResetSearch(): Promise<void> {
     this.searchForm.reset();
     this.queryParams.set({ page: null, q: null });
-    this.updateRouteAndPrograms();
+    await this.updateRouteAndPrograms();
   }
 
-  onSearch(): void {
+  async onSearch(): Promise<void> {
     const searchValue = this.searchForm.value.q;
     this.queryParams.set({ page: null, q: searchValue });
-    this.updateRouteAndPrograms();
+    await this.updateRouteAndPrograms();
   }
 
   onToggleAddModal(): void {
-    this.showAddModal.update((v) => (v ? false : true));
+    this.showAddModal.update((v) => !v);
   }
 
   onToggleEditModal(program: IProgram | null): void {
@@ -166,7 +173,7 @@ export class ListPrograms implements OnInit {
       name: program?.name || '',
       description: program?.description || '',
     });
-    this.showEditModal.update((v) => (v ? false : true));
+    this.showEditModal.update((v) => !v);
   }
 
   onAddProgram(): void {

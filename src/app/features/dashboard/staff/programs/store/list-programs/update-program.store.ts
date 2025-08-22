@@ -10,9 +10,9 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ProgramsStore } from './programs.store';
-import { ProgramDto } from '../dto/program.dto';
-import { ToastrService } from '../../../../../core/services/toast/toastr.service';
-import { IProgram } from '../../../../../shared/models/entities.models';
+import { ProgramDto } from '../../dto/list-programs/program.dto';
+import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
+import { IProgram } from '../../../../../../shared/models/entities.models';
 
 interface IUpdateProgramStore {
   isLoading: boolean;

@@ -17,7 +17,6 @@ import {
 } from '@angular/forms';
 import { StepperModule } from 'primeng/stepper';
 import { TextareaModule } from 'primeng/textarea';
-import { UnpaginatedProgramsStore } from '../../../programs/store/unpaginated-programs.store';
 import { SelectModule } from 'primeng/select';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
 import { DatePickerModule } from 'primeng/datepicker';
@@ -28,6 +27,7 @@ import { environment } from '../../../../../../../environments/environment';
 import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { ProjectStore } from '../../../../../projects/store/project.store';
+import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 
 @Component({
   selector: 'app-project-edit',
@@ -35,7 +35,7 @@ import { ProjectStore } from '../../../../../projects/store/project.store';
   providers: [
     ProjectStore,
     UpdateProjectStore,
-    UnpaginatedProgramsStore,
+    UnpaginatedSubprogramsStore,
     UnpaginatedCategoriesStore,
   ],
   imports: [
@@ -61,7 +61,7 @@ export class EditProjectComponent implements OnInit {
   form: FormGroup;
   store = inject(UpdateProjectStore);
   categoriesStore = inject(UnpaginatedCategoriesStore);
-  programsStore = inject(UnpaginatedProgramsStore);
+  programsStore = inject(UnpaginatedSubprogramsStore);
   projectStore = inject(ProjectStore);
   url = `${environment.apiUrl}projects/cover/`;
   #slug = this.#route.snapshot.params['slug'];

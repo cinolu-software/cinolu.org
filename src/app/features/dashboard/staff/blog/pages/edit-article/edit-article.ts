@@ -54,7 +54,7 @@ import { QuillModule } from 'ngx-quill';
     FileUpload,
     NgOptimizedImage,
     ApiImgPipe,
-    QuillModule
+    QuillModule,
   ],
   templateUrl: './edit-article.html',
 })
@@ -89,7 +89,7 @@ export class EditArticle implements OnInit {
       if (!article) return;
       this.form.patchValue({
         ...article,
-        updated_at: new Date(),
+        published_at: new Date(article.published_at),
         tags: article.tags?.map((c) => c.id),
       });
     });

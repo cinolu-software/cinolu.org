@@ -10,14 +10,14 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, exhaustMap, map, of, pipe, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IProject } from '../../../../../shared/models/entities.models';
+import { IProject } from '../../../../../../shared/models/entities.models';
 
 interface IUnpaginatedProgramsStore {
   isLoading: boolean;
   programs: IProject[];
 }
 
-export const UnpaginatedSubprogramsStore = signalStore(
+export const UnpaginatedProgramsStore = signalStore(
   withState<IUnpaginatedProgramsStore>({ isLoading: false, programs: [] }),
   withProps(() => ({
     _http: inject(HttpClient),
@@ -27,7 +27,7 @@ export const UnpaginatedSubprogramsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
-          return _http.get<{ data: IProject[] }>('subprograms').pipe(
+          return _http.get<{ data: IProject[] }>('programs').pipe(
             map(({ data }) => {
               patchState(store, { isLoading: false, programs: data });
             }),

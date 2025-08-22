@@ -92,6 +92,7 @@ export interface ISubprogram extends IBase {
   slug: string;
   logo: string;
   is_published: boolean;
+  program: IProgram;
   projects: IProject[];
   events: IEvent[];
 }

@@ -10,9 +10,9 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { SubprogramsStore } from './subprograms.store';
-import { SubprogramDto } from '../dto/subprograms.dto';
-import { ToastrService } from '../../../../../core/services/toast/toastr.service';
-import { IProgram } from '../../../../../shared/models/entities.models';
+import { SubprogramDto } from '../../dto/subprograms/subprograms.dto';
+import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
+import { ISubprogram } from '../../../../../../shared/models/entities.models';
 
 interface IUpdateSubprogramStore {
   isLoading: boolean;
@@ -27,19 +27,19 @@ export const UpdateSubprogramsStore = signalStore(
   withState<IUpdateSubprogramStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _programsStore: inject(SubprogramsStore),
+    _subprogramsStore: inject(SubprogramsStore),
     _toast: inject(ToastrService),
   })),
-  withMethods(({ _http, _programsStore, _toast, ...store }) => ({
+  withMethods(({ _http, _subprogramsStore, _toast, ...store }) => ({
     updateProgram: rxMethod<IUpdateSubprogramParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ payload, onSuccess }) => {
           return _http
-            .patch<{ data: IProgram }>(`subprograms/${payload.id}`, payload)
+            .patch<{ data: ISubprogram }>(`subprograms/${payload.id}`, payload)
             .pipe(
               map(({ data }) => {
-                _programsStore.updateProgram(data);
+                _subprogramsStore.updateProgram(data);
                 _toast.showSuccess('Sous programme mis à jour');
                 patchState(store, { isLoading: false });
                 onSuccess();

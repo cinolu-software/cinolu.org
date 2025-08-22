@@ -31,7 +31,7 @@ export const EXPLORATION_LINKS: ILink[] = [
   {
     icon: Activity,
     name: 'Programmes',
-    path: '/programs',
+    path: '/list-programs',
   },
   {
     icon: Calendar1,
@@ -71,16 +71,12 @@ export const MY_CINOLU_LINKS: ILink[] = [
 export const ADMIN_LINKS: ILink[] = [
   {
     name: 'Les portefeuilles',
-    path: '/dashboard/programs',
+    path: '/dashboard/list-programs',
     icon: Activity,
     children: [
       {
         name: 'Programmes',
         path: '/dashboard/programs',
-      },
-      {
-        name: 'Sous-programmes',
-        path: '/dashboard/subprograms',
       },
       {
         name: 'Projets',
@@ -118,7 +114,7 @@ export const ADMIN_LINKS: ILink[] = [
       },
       {
         name: 'Rôles',
-        path: '/dashboard/users/roles',
+        path: '/dashboard/roles',
       },
     ],
   },
@@ -136,7 +132,7 @@ export const COMMON_LINKS: ILink[] = [
 export const USER_LINKS: ILink[] = [
   {
     name: 'Mes entreprises',
-    path: '/dashboard/ventures/list',
+    path: '/dashboard/ventures',
     icon: BriefcaseBusiness,
   },
 ];
