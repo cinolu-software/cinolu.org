@@ -17,7 +17,6 @@ import {
 } from '@angular/forms';
 import { StepperModule } from 'primeng/stepper';
 import { TextareaModule } from 'primeng/textarea';
-import { UnpaginatedProgramsStore } from '../../../programs/store/unpaginated-programs.store';
 import { SelectModule } from 'primeng/select';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
 import { DatePickerModule } from 'primeng/datepicker';
@@ -29,6 +28,7 @@ import { FileUpload } from '../../../../../../shared/components/file-upload/file
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { EventStore } from '../../../../../events/store/event.store';
 import { EventsStore } from '../../store/events/events.store';
+import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 
 @Component({
   selector: 'app-event-edit',
@@ -37,7 +37,7 @@ import { EventsStore } from '../../store/events/events.store';
     EventsStore,
     EventStore,
     UpdateEventStore,
-    UnpaginatedProgramsStore,
+    UnpaginatedSubprogramsStore,
     UnpaginatedCategoriesStore,
   ],
   imports: [
@@ -63,7 +63,7 @@ export class EditEventComponent implements OnInit {
   form: FormGroup;
   store = inject(UpdateEventStore);
   categoriesStore = inject(UnpaginatedCategoriesStore);
-  programsStore = inject(UnpaginatedProgramsStore);
+  programsStore = inject(UnpaginatedSubprogramsStore);
   eventStore = inject(EventStore);
   url = `${environment.apiUrl}events/cover/`;
   #slug = this.#route.snapshot.params['slug'];

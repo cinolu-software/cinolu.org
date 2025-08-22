@@ -9,19 +9,19 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IProgram } from '../../../../../shared/models/entities.models';
-import { SubprogramsStore } from './subprograms.store';
+import { IProgram } from '../../../../../../shared/models/entities.models';
+import { ProgramsStore } from './programs.store';
 
-interface IPublishSubprogramStore {
+interface IPublishProgramStore {
   isLoading: boolean;
   program: IProgram | null;
 }
 
-export const PublishSubprogramsStore = signalStore(
-  withState<IPublishSubprogramStore>({ isLoading: false, program: null }),
+export const PublishProgramStore = signalStore(
+  withState<IPublishProgramStore>({ isLoading: false, program: null }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _programsStore: inject(SubprogramsStore),
+    _programsStore: inject(ProgramsStore),
   })),
   withMethods(({ _http, _programsStore, ...store }) => ({
     publishProgram: rxMethod<string>(
@@ -29,7 +29,7 @@ export const PublishSubprogramsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((id) => {
           return _http
-            .post<{ data: IProgram }>(`subprograms/publish/${id}`, {})
+            .post<{ data: IProgram }>(`programs/publish/${id}`, {})
             .pipe(
               map(({ data }) => {
                 _programsStore.updateProgram(data);

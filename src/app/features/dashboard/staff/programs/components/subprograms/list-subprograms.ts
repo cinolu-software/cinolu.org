@@ -21,26 +21,29 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { SubprogramsStore } from '../store/subprograms.store';
-import { FilterSubprogramsDto } from '../dto/filter-subprograms.dto';
+import { SubprogramsStore } from '../../store/subprograms/subprograms.store';
+import { FilterSubprogramsDto } from '../../dto/subprograms/filter-subprograms.dto';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 import { Dialog } from 'primeng/dialog';
-import { AddSubprogramsStore } from '../store/add-subprograms.store';
+import { AddSubprogramsStore } from '../../store/subprograms/add-subprograms.store';
 import { Textarea } from 'primeng/textarea';
-import { UpdateSubprogramsStore } from '../store/update-subprograms.store';
-import { DeleteSubprogramsStore } from '../store/delete-subprograms.store';
-import { IProgram } from '../../../../../shared/models/entities.models';
-import { FileUpload } from '../../../../../shared/components/file-upload/file-upload';
-import { environment } from '../../../../../../environments/environment';
-import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
+import { UpdateSubprogramsStore } from '../../store/subprograms/update-subprograms.store';
+import { DeleteSubprogramsStore } from '../../store/subprograms/delete-subprograms.store';
+import { ISubprogram } from '../../../../../../shared/models/entities.models';
+import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
+import { environment } from '../../../../../../../environments/environment';
+import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { AvatarModule } from 'primeng/avatar';
-import { PublishSubprogramsStore } from '../store/publish-subprograms.store';
+import { PublishSubprogramsStore } from '../../store/subprograms/publish-subprograms.store';
+import { UnpaginatedProgramsStore } from '../../store/list-programs/unpaginated-programs.store';
+import { SelectModule } from 'primeng/select';
 
 @Component({
-  selector: 'app-programs-list',
+  selector: 'app-list-subprograms',
   templateUrl: './list-subprograms.html',
   providers: [
+    UnpaginatedProgramsStore,
     SubprogramsStore,
     DeleteSubprogramsStore,
     UpdateSubprogramsStore,
@@ -62,6 +65,7 @@ import { PublishSubprogramsStore } from '../store/publish-subprograms.store';
     FileUpload,
     ApiImgPipe,
     AvatarModule,
+    SelectModule,
   ],
 })
 export class ListSubprograms implements OnInit {
@@ -70,16 +74,17 @@ export class ListSubprograms implements OnInit {
   #fb = inject(FormBuilder);
   #confirmationService = inject(ConfirmationService);
   searchForm: FormGroup;
-  addProgramForm: FormGroup;
-  updateProgramForm: FormGroup;
+  addSubprogramForm: FormGroup;
+  updateSubprogramForm: FormGroup;
   store = inject(SubprogramsStore);
-  addProgramStore = inject(AddSubprogramsStore);
-  updateProgramStore = inject(UpdateSubprogramsStore);
-  deleteProgramStore = inject(DeleteSubprogramsStore);
-  publishProgramStore = inject(PublishSubprogramsStore);
-  program = signal<IProgram | null>(null);
+  programsStore = inject(UnpaginatedProgramsStore);
+  addSubprogramStore = inject(AddSubprogramsStore);
+  updateSubrogramStore = inject(UpdateSubprogramsStore);
+  deleteSubrogramStore = inject(DeleteSubprogramsStore);
+  publishSubrogramStore = inject(PublishSubprogramsStore);
+  subprogram = signal<ISubprogram | null>(null);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
-  url = environment.apiUrl + 'programs/logo/';
+  url = environment.apiUrl + 'subprograms/logo/';
   icons = {
     refresh: RefreshCcw,
     edit: SquarePen,
@@ -89,7 +94,6 @@ export class ListSubprograms implements OnInit {
     eye: Eye,
     eyeOff: EyeOff,
   };
-
   showAddModal = signal(false);
   showEditModal = signal(false);
   queryParams = signal<FilterSubprogramsDto>({
@@ -101,90 +105,97 @@ export class ListSubprograms implements OnInit {
     this.searchForm = this.#fb.group({
       q: [this.queryParams().q || '', Validators.required],
     });
-    this.addProgramForm = this.#fb.group({
+    this.addSubprogramForm = this.#fb.group({
       name: ['', Validators.required],
+      programId: ['', Validators.required],
       description: ['', Validators.required],
     });
-    this.updateProgramForm = this.#fb.group({
+    this.updateSubprogramForm = this.#fb.group({
       id: ['', Validators.required],
+      programId: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
-    this.loadPrograms();
+    this.loadSubprograms();
   }
 
-  loadPrograms(): void {
+  get count(): number {
+    return this.store.subprograms()[1];
+  }
+
+  loadSubprograms(): void {
     this.store.loadPrograms(this.queryParams());
   }
 
-  onPageChange(currentPage: number): void {
+  async onPageChange(currentPage: number): Promise<void> {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
-    this.updateRouteAndPrograms();
+    await this.updateRouteAndSubrograms();
   }
 
   onPublishProgram(id: string): void {
-    this.publishProgramStore.publishProgram(id);
+    this.publishSubrogramStore.publishProgram(id);
   }
 
   onFileUploadLoaded(): void {
-    this.loadPrograms();
+    this.loadSubprograms();
   }
 
   async updateRoute(): Promise<void> {
     const queryParams = this.queryParams();
-    await this.#router.navigate(['/dashboard/subprograms'], { queryParams });
+    await this.#router.navigate(['/dashboard/programs'], { queryParams });
   }
 
-  async updateRouteAndPrograms(): Promise<void> {
+  async updateRouteAndSubrograms(): Promise<void> {
     await this.updateRoute();
-    this.loadPrograms();
+    this.loadSubprograms();
   }
 
   async onResetSearch(): Promise<void> {
     this.searchForm.reset();
     this.queryParams.set({ page: null, q: null });
-    await this.updateRouteAndPrograms();
+    await this.updateRouteAndSubrograms();
   }
 
   async onSearch(): Promise<void> {
     const searchValue = this.searchForm.value.q;
     this.queryParams.set({ page: null, q: searchValue });
-    await this.updateRouteAndPrograms();
+    await this.updateRouteAndSubrograms();
   }
 
   onToggleAddModal(): void {
     this.showAddModal.update((v) => !v);
   }
 
-  onToggleEditModal(program: IProgram | null): void {
-    this.program.set(program);
-    this.updateProgramForm.patchValue({
-      id: program?.id || '',
-      name: program?.name || '',
-      description: program?.description || '',
+  onToggleEditModal(subprogram: ISubprogram | null): void {
+    this.subprogram.set(subprogram);
+    this.updateSubprogramForm.patchValue({
+      id: subprogram?.id || '',
+      programId: subprogram?.program?.id || '',
+      name: subprogram?.name || '',
+      description: subprogram?.description || '',
     });
     this.showEditModal.update((v) => !v);
   }
 
   onAddProgram(): void {
-    this.addProgramStore.addProgram({
-      payload: this.addProgramForm.value,
+    this.addSubprogramStore.addProgram({
+      payload: this.addSubprogramForm.value,
       onSuccess: () => {
         this.onToggleAddModal();
-        this.addProgramForm.reset();
+        this.addSubprogramForm.reset();
       },
     });
   }
 
   onUpdateProgram(): void {
-    this.updateProgramStore.updateProgram({
-      payload: this.updateProgramForm.value,
+    this.updateSubrogramStore.updateProgram({
+      payload: this.updateSubprogramForm.value,
       onSuccess: () => {
         this.onToggleEditModal(null);
-        this.updateProgramForm.reset();
+        this.updateSubprogramForm.reset();
       },
     });
   }
@@ -203,7 +214,7 @@ export class ListSubprograms implements OnInit {
         severity: 'danger',
       },
       accept: () => {
-        this.deleteProgramStore.deleteProgram(roleId);
+        this.deleteSubrogramStore.deleteProgram(roleId);
       },
     });
   }

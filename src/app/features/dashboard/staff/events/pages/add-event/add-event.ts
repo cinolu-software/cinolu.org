@@ -18,18 +18,18 @@ import {
 import { StepperModule } from 'primeng/stepper';
 import { AddEventStore } from '../../store/events/add-event.store';
 import { TextareaModule } from 'primeng/textarea';
-import { UnpaginatedProgramsStore } from '../../../programs/store/unpaginated-programs.store';
 import { SelectModule } from 'primeng/select';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
 import { DatePickerModule } from 'primeng/datepicker';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 
 @Component({
   selector: 'app-event-add',
   templateUrl: './add-event.html',
   providers: [
     AddEventStore,
-    UnpaginatedProgramsStore,
+    UnpaginatedSubprogramsStore,
     UnpaginatedCategoriesStore,
   ],
   imports: [
@@ -51,7 +51,7 @@ export class AddEventComponent {
   form: FormGroup;
   store = inject(AddEventStore);
   categoriesStore = inject(UnpaginatedCategoriesStore);
-  programsStore = inject(UnpaginatedProgramsStore);
+  programsStore = inject(UnpaginatedSubprogramsStore);
   icons = {
     back: ArrowLeft,
     next: ChevronsRight,

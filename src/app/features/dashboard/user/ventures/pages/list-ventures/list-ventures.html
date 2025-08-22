@@ -3,7 +3,7 @@
     <div class="flex w-full flex-wrap gap-4 justify-between items-center mb-6">
       <h1 class="text-2xl font-bold">Mes entreprises</h1>
       <p-button
-        [routerLink]="'/dashboard/ventures/list/add'"
+        [routerLink]="'/dashboard/ventures/add'"
         [size]="'small'"
         variant="outlined"
       >
@@ -37,14 +37,14 @@
               <div class="flex items-center gap-1.5">
                 <a
                   class="ml-4 inline-block text-gray-500 hover:text-gray-700"
-                  [routerLink]="['/dashboard/ventures/list/view', venture.slug]"
+                  [routerLink]="['/dashboard/ventures/view', venture.slug]"
                 >
                   <i-lucide [name]="icons.eye" class="size-5 text-inherit" />
                 </a>
                 <a
                   class="text-gray-500 hover:text-gray-700"
                   [routerLink]="[
-                    '/dashboard/ventures/list/update',
+                    '/dashboard/ventures/update',
                     venture.slug,
                   ]"
                 >

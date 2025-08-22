@@ -12,7 +12,7 @@ export const dashboardRoutes: Routes = [
       import('./user/ventures/ventures.routes').then((c) => c.venturesRoutes),
   },
   {
-    path: 'users',
+    path: '',
     loadChildren: () =>
       import('./staff/users/users.routes').then((c) => c.usersRoutes),
   },
@@ -20,13 +20,6 @@ export const dashboardRoutes: Routes = [
     path: 'programs',
     loadChildren: () =>
       import('./staff/programs/programs.routes').then((c) => c.programsRoutes),
-  },
-  {
-    path: 'subprograms',
-    loadChildren: () =>
-      import('./staff/subprograms/subprograms.routes').then(
-        (c) => c.subprogramsRoutes,
-      ),
   },
   {
     path: 'projects',

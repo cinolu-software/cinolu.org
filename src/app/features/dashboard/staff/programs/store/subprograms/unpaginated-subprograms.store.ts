@@ -10,29 +10,29 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, exhaustMap, map, of, pipe, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IProject } from '../../../../../shared/models/entities.models';
+import { ISubprogram } from '../../../../../../shared/models/entities.models';
 
 interface IUnpaginatedProgramsStore {
   isLoading: boolean;
-  programs: IProject[];
+  subprograms: ISubprogram[];
 }
 
-export const UnpaginatedProgramsStore = signalStore(
-  withState<IUnpaginatedProgramsStore>({ isLoading: false, programs: [] }),
+export const UnpaginatedSubprogramsStore = signalStore(
+  withState<IUnpaginatedProgramsStore>({ isLoading: false, subprograms: [] }),
   withProps(() => ({
     _http: inject(HttpClient),
   })),
   withMethods(({ _http, ...store }) => ({
-    loadPrograms: rxMethod<void>(
+    loadSubprograms: rxMethod<void>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
-          return _http.get<{ data: IProject[] }>('programs').pipe(
+          return _http.get<{ data: ISubprogram[] }>('subprograms').pipe(
             map(({ data }) => {
-              patchState(store, { isLoading: false, programs: data });
+              patchState(store, { isLoading: false, subprograms: data });
             }),
             catchError(() => {
-              patchState(store, { isLoading: false, programs: [] });
+              patchState(store, { isLoading: false, subprograms: [] });
               return of(null);
             }),
           );
@@ -41,8 +41,8 @@ export const UnpaginatedProgramsStore = signalStore(
     ),
   })),
   withHooks({
-    onInit({ loadPrograms }) {
-      loadPrograms();
+    onInit({ loadSubprograms }) {
+      loadSubprograms();
     },
   }),
 );

@@ -1,0 +1,41 @@
+<section class="min-h-[105vh] text-gray-600 mt-10">
+  <div
+    class="inline-flex items-center gap-4 rounded-full mb-8 bg-gray-200">
+    <button
+      class="relative font-medium text-gray-700 flex items-center gap-1 px-4 py-2 rounded-full hover:text-primary-500 transition-colors duration-200"
+      (click)="setActiveTab('programs')" [ngClass]="{
+        'bg-white text-primary-500' : activeTab() === 'programs',
+      }">
+      <i-lucide [name]="icons.program" class="size-3.5"/>
+      Programmes
+      @if (activeTab() === 'programs') {
+        <span
+          class="absolute -top-4 -right-4 text-sm h-8 w-8 flex flex-col items-center justify-center font-bold text-white bg-primary-500 rounded-full p-1">
+          {{ programsCount }}
+        </span>
+      }
+    </button>
+    <button
+      class="relative font-medium text-gray-700 flex items-center gap-1 px-4 py-2 rounded-full hover:text-primary-500 transition-colors duration-200"
+      (click)="setActiveTab('subprograms')" [ngClass]="{
+          'bg-white text-primary-500' : activeTab() === 'subprograms',
+       }">
+      <i-lucide [name]="icons.subprograms" class="size-3.5"/>
+      Sous-programmes
+      @if (activeTab() === 'subprograms') {
+        <span
+          class="absolute -top-4 -right-4 text-sm h-8 w-8 flex flex-col items-center justify-center font-bold text-white bg-primary-500 rounded-full p-1">
+          {{ subprogramsCount }}
+        </span>
+      }
+    </button>
+  </div>
+
+  @if (activeTab() === 'programs') {
+    <app-list-programs/>
+  }
+  @if (activeTab() === 'subprograms') {
+    <app-list-subprograms/>
+  }
+</section>
+

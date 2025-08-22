@@ -18,18 +18,18 @@ import {
 import { StepperModule } from 'primeng/stepper';
 import { AddProjectStore } from '../../store/projects/add-project.store';
 import { TextareaModule } from 'primeng/textarea';
-import { UnpaginatedProgramsStore } from '../../../programs/store/unpaginated-programs.store';
 import { SelectModule } from 'primeng/select';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
 import { DatePickerModule } from 'primeng/datepicker';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 
 @Component({
   selector: 'app-project-add',
   templateUrl: './add-project.html',
   providers: [
     AddProjectStore,
-    UnpaginatedProgramsStore,
+    UnpaginatedSubprogramsStore,
     UnpaginatedCategoriesStore,
   ],
   imports: [
@@ -51,7 +51,7 @@ export class AddProjectComponent {
   form: FormGroup;
   store = inject(AddProjectStore);
   categoriesStore = inject(UnpaginatedCategoriesStore);
-  programsStore = inject(UnpaginatedProgramsStore);
+  programsStore = inject(UnpaginatedSubprogramsStore);
   icons = {
     back: ArrowLeft,
     next: ChevronsRight,
