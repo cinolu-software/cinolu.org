@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   ArrowLeft,
   Calendar1,
@@ -17,7 +17,7 @@ import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ArticleCardSkeleton } from '../../components/article-card-skeleton/article-card-skeleton';
 import { HeroBlog } from '../../components/hero-blog/hero-blog';
-import { RecentArticlesStore } from '../../store/articles.last-five.store';
+import { RecentArticlesStore } from '../../store/recent-articles.store';
 
 @Component({
   selector: 'app-detail-article',
@@ -29,6 +29,7 @@ import { RecentArticlesStore } from '../../store/articles.last-five.store';
     ArticleCardSkeleton,
     NgOptimizedImage,
     HeroBlog,
+    RouterLink,
   ],
   templateUrl: './detail-article.html',
   styles: ``,
@@ -51,9 +52,12 @@ export class DetailArticle implements OnInit {
   storeArticle = inject(RecentArticlesStore);
 
   ngOnInit(): void {
-    const slug = this.#route.snapshot.params['slug'];
-    this.store.loadArticle(slug);
-    console.log(this.storeArticle.articles());
+    this.#route.paramMap.subscribe((params) => {
+      const slug = params.get('slug');
+      if (slug) {
+        this.store.loadArticle(slug);
+      }
+    });
   }
 
   onGoBack(): void {

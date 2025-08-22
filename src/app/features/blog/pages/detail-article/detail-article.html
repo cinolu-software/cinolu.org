@@ -1,89 +1,9 @@
-<!-- <section
-  class="pt-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
->
-  @if (store.article(); as article) {
-    <div
-      class="bg-white rounded-lg border border-gray-200 shadow-sm flex flex-col overflow-hidden hover:shadow-md transition"
-    >
-      <div class="relative h-48 md:h-56 2xl:h-48 overflow-hidden">
-        <img
-          [ngSrc]="article() | apiIMG: 'article'"
-          alt="Image de l'article {{ article().title }}"
-          class="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
-          loading="lazy"
-          fill
-        />
-      </div>
-
-      <div class="p-4 flex flex-col gap-4">
-        <div class="space-y-2">
-          <h3 class="text-gray-900 font-semibold text-base line-clamp-1">
-            {{ article().title }}
-          </h3>
-          <p class="text-gray-500 text-sm line-clamp-3 hyphens-none">
-            {{ article().content }}
-          </p>
-        </div>
-
-        <div class="flex items-center justify-between">
-          <div class="flex gap-2">
-            @for (tag of article().tags; track tag.id; let i = $index) {
-              @if (i < 2) {
-                <span
-                  class="flex items-center bg-primary-500/40 text-xs font-medium text-primary-600 rounded-full py-1 px-2"
-                >
-                  <span class="max-w-[8ch] truncate">
-                    {{ tag.name }}
-                  </span>
-                </span>
-              }
-            }
-          </div>
-          <a
-            [routerLink]="article().slug"
-            class="flex items-center gap-1 text-xs font-medium border border-primary-500 px-3 py-1.5 rounded-full text-primary-500 hover:bg-primary-500 hover:text-white transition-colors duration-200"
-          >
-            Voir plus
-            <i-lucide [name]="icons.moveUp" class="w-4 h-4"></i-lucide>
-          </a>
-        </div>
-
-        <div
-          class="flex justify-between items-center text-gray-400 text-xs border-t border-gray-200 pt-3"
-        >
-          <button
-            type="button"
-            class="flex items-center gap-1 hover:text-primary-500 transition"
-          >
-            <i-lucide [name]="icons.comment" class="w-4 h-4"></i-lucide>
-          </button>
-
-          <span class="flex items-center gap-1">
-            <i-lucide [name]="icons.calendar" class="w-4 h-4"></i-lucide>
-            {{ article().created_at | date: "dd/MM/yyyy" }}
-          </span>
-        </div>
-      </div>
-    </div>
-  }
-  @if (store.isLoading()) {
-    <app-article-card-skeleton />
-  }
-  @if (!store.isLoading() && !store.article()) {
-    <div class="min-h-[75vh] w-full flex flex-col justify-center items-center">
-      <h2 class="text-3xl font-semibold">
-        Aucun événement avec cet identifiant !
-      </h2>
-    </div>
-  }
-</section> -->
 <app-hero-blog />
 
 <section
-  class="flex pt-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
+  class="flex flex-col lg:flex-row pt-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto gap-8"
 >
-  <div class="w-2/3">
-    <p>{{ storeArticle }}</p>
+  <div class="lg:w-2/3 w-full">
     @if (store.article(); as article) {
       <div class="pt-4 pb-8">
         <button
@@ -94,42 +14,46 @@
           Retour
         </button>
       </div>
-      <div class="relative mb-10 h-60 w-full md:h-96 bg-gray-50">
+
+      <div
+        class="relative mb-10 h-60 w-full md:h-96 bg-gray-50 overflow-hidden"
+      >
         <img
           [ngSrc]="article | apiIMG: 'article'"
-          [alt]="'Photo de couverture'"
-          class="aspect-video object-cover"
+          alt="Photo de couverture"
+          class="object-cover w-full h-full"
           fill
           priority
         />
       </div>
 
-      <h2 class="font-black font-satoshi mb-1 text-2xl md:text-4xl">
-        {{ article.title | titlecase }}
-      </h2>
       <div class="my-10">
-        <div class="flex items-center gap-1 mb-2 text-primary-800">
-          <i-lucide [name]="icons.fileText" class="size-5" />
-          <h2 class="font-semibold text-lg">Détail</h2>
-        </div>
-        <div class="mb-6" [innerHTML]="article.content"></div>
+        <h2 class="font-black font-satoshi mb-4 text-2xl md:text-4xl">
+          {{ article.title | titlecase }}
+        </h2>
 
-        <div class="flex items-center gap-1 mb-2 text-primary-800">
+        <div
+          class="mb-8 prose max-w-none hyphens-none"
+          [innerHTML]="article.content"
+        ></div>
+
+        <div class="flex items-center gap-2 mb-3 text-primary-800">
           <i-lucide [name]="icons.fileText" class="size-5" />
-          <h2 class="font-semibold text-lg">Résumé</h2>
+          <h3 class="font-semibold text-lg">Résumé</h3>
         </div>
-        <div class="mb-6" [innerHTML]="article.summary"></div>
-        <div class="mb-4">
-          <p class="mb-1.5">
-            Date de publication :
-            <strong>{{ article.published_at | date: "longDate" }}</strong>
-          </p>
-        </div>
+        <div class="mb-8 prose max-w-none" [innerHTML]="article.summary"></div>
+
+        <p class="mb-4">
+          Date de publication :
+          <strong>{{ article.published_at | date: "longDate" }}</strong>
+        </p>
       </div>
     }
+
     @if (store.isLoading()) {
       <app-article-card-skeleton />
     }
+
     @if (!store.isLoading() && !store.article()) {
       <div
         class="min-h-[75vh] w-full flex flex-col justify-center items-center"
@@ -139,8 +63,39 @@
     }
   </div>
 
-  <div class="w-1/3">
+  <div class="lg:w-1/3 w-full">
+    <h3 class="font-black font-satoshi mb-4 text-2xl">Derniers articles</h3>
 
-    
+    <div class="flex flex-col gap-6">
+      @for (article of storeArticle.articles(); track $index) {
+        <a [routerLink]="['/blog-ressources', article.slug]">
+          <div
+            class="flex gap-3 items-start w-full bg-gray-50 rounded-sm overflow-hidden hover:shadow-md transition cursor-pointer"
+          >
+            <div class="relative h-28 w-28 flex-shrink-0 bg-gray-200">
+              <img
+                [ngSrc]="article | apiIMG: 'article'"
+                alt="Miniature article"
+                class="object-cover w-full h-full"
+                fill
+                priority
+              />
+            </div>
+
+            <div class="flex flex-col justify-between p-3 w-full">
+              <h4
+                class="font-bold font-satoshi text-sm md:text-base line-clamp-2"
+              >
+                {{ article.title | titlecase }}
+              </h4>
+              <div
+                class="text-sm text-gray-600 line-clamp-2 hyphens-none"
+                [innerHTML]="article.summary || article.content"
+              ></div>
+            </div>
+          </div>
+        </a>
+      }
+    </div>
   </div>
 </section>
