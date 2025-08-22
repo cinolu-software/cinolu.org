@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   ArrowLeft,
   Calendar1,
@@ -7,6 +7,7 @@ import {
   FolderOpenDot,
   LucideAngularModule,
   MessageCircleMore,
+  MoveRight,
   MoveUpRight,
   NotepadText,
   Tag,
@@ -19,7 +20,7 @@ import { ProgramStore } from '../../../landing/store/program.store';
 @Component({
   selector: 'app-detail-programs',
   providers: [ProgramStore],
-  imports: [LucideAngularModule, CommonModule],
+  imports: [LucideAngularModule, CommonModule, RouterLink],
   templateUrl: './detail-programs.html',
   styles: ``,
 })
@@ -36,7 +37,8 @@ export class DetailPrograms implements OnInit {
     calendar: Calendar1,
     moveUp: MoveUpRight,
     thumbsUp: ThumbsUp,
-    program:FolderOpenDot
+    program:FolderOpenDot,
+    arrow : MoveRight
   };
   #route = inject(ActivatedRoute);
   store = inject(ProgramStore);

@@ -95,10 +95,6 @@ export interface IProgram extends IBase {
   subprograms: SubProgram[];
 }
 
-export interface ProgramResponse {
-  data: IProgram;
-}
-
 
 export interface IEvent extends IBase {
   name: string;
