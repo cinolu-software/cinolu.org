@@ -1,0 +1,41 @@
+<section class="min-h-[105vh] text-gray-600 mt-10">
+  <div
+    class="inline-flex items-center gap-4 rounded-full mb-8 bg-gray-200">
+    <button
+      class="relative font-medium text-gray-700 flex items-center gap-1 px-4 py-2 rounded-full hover:text-primary-500 transition-colors duration-200"
+      (click)="setActiveTab('projects')" [ngClass]="{
+        'bg-white text-primary-500' : activeTab() === 'projects',
+      }">
+      <i-lucide [name]="icons.projects" class="size-3.5"/>
+      Projets
+      @if (activeTab() === 'projects') {
+        <span
+          class="absolute -top-4 -right-4 text-sm h-8 w-8 flex flex-col items-center justify-center font-bold text-white bg-primary-500 rounded-full p-1">
+          {{ projectsCount }}
+        </span>
+      }
+    </button>
+    <button
+      class="relative font-medium text-gray-700 flex items-center gap-1 px-4 py-2 rounded-full hover:text-primary-500 transition-colors duration-200"
+      (click)="setActiveTab('categories')" [ngClass]="{
+          'bg-white text-primary-500' : activeTab() === 'categories',
+       }">
+      <i-lucide [name]="icons.categories" class="size-3.5"/>
+      Catégories
+      @if (activeTab() === 'categories') {
+        <span
+          class="absolute -top-4 -right-4 text-sm h-8 w-8 flex flex-col items-center justify-center font-bold text-white bg-primary-500 rounded-full p-1">
+          {{ categoriesCount }}
+        </span>
+      }
+    </button>
+  </div>
+
+  @if (activeTab() === 'projects') {
+    <app-projects-list/>
+  }
+  @if (activeTab() === 'categories') {
+    <app-project-categories/>
+  }
+</section>
+

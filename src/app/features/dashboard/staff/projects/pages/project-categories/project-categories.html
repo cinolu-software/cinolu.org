@@ -1,4 +1,4 @@
-<section class="min-h-[105vh] text-gray-600 mt-16">
+<section class="min-h-[105vh] text-gray-600">
   @let isLoading = store.isLoading();
   @let hasQuery = queryParams().q;
   @let categoryCount = store.categories()[1];
@@ -6,71 +6,30 @@
 
   <div class="relative bg-white rounded-lg">
     <div class="flex flex-col gap-3 mb-10 pt-6">
-      <div
-        class="px-6 flex flex-wrap gap-2 md:justify-between md:items-center mb-6 md:mb-0"
-      >
+      <div class="px-6 flex flex-wrap gap-2 md:justify-between md:items-center mb-6 md:mb-0">
         <h5 class="text-lg font-bold">
           Liste des catégories
-          <span class="text-gray-500 ">
-            @if (isLoading) {
-              <p-progress-spinner
-                strokeWidth="5"
-                animationDuration=".5s"
-                fill="transparent"
-                [style]="{ width: '0.8rem', height: '0.8rem' }"
-              />
-            } @else {
-              ({{ categoryCount }})
-            }
-          </span>
         </h5>
-        <p-button
-          [outlined]="true"
-          [size]="'small'"
-          (click)="onToggleAddModal()"
-        >
-          <i-lucide [name]="icons.plus" class="size-4" />
+        <p-button [outlined]="true" [size]="'small'" (click)="onToggleAddModal()">
+          <i-lucide [name]="icons.plus" class="size-4"/>
           Ajouter une catégorie
         </p-button>
       </div>
-      <form
-        [formGroup]="searchForm"
-        (ngSubmit)="onSearch()"
-        class="px-6 flex flex-col gap-1 md:flex-row md:gap-4"
-      >
-        <input
-          class="py-1! md:w-1/3"
-          pInputText
-          id="q"
-          formControlName="q"
-          placeholder="Rechercher..."
-        />
+      <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
+        <input class="py-1! md:w-1/3" pInputText id="q" formControlName="q" placeholder="Rechercher..."/>
         <div class="flex items-center gap-1">
-          <p-button
-            type="submit"
-            [size]="'small'"
-            [loading]="isLoading"
-            [disabled]="
-              searchForm.invalid ||
-              isLoading ||
-              (categoryCount === 0 && !hasQuery)
-            "
-          >
+          <p-button type="submit" [size]="'small'" [loading]="isLoading"
+                    [disabled]="searchForm.invalid || isLoading || (categoryCount === 0 && !hasQuery)">
             Rechercher
             @if (!isLoading) {
-              <i-lucide [name]="icons.search" class="size-4" />
+              <i-lucide [name]="icons.search" class="size-4"/>
             }
           </p-button>
-          <p-button
-            [size]="'small'"
-            [outlined]="true"
-            [loading]="isLoading"
-            [disabled]="isLoading || !hasQuery"
-            (click)="onResetSearch()"
-          >
+          <p-button [size]="'small'" [outlined]="true"
+                    [loading]="isLoading" [disabled]="isLoading || !hasQuery" (click)="onResetSearch()">
             Réinitialiser
             @if (!isLoading) {
-              <i-lucide [name]="icons.refresh" class="size-4" />
+              <i-lucide [name]="icons.refresh" class="size-4"/>
             }
           </p-button>
         </div>
@@ -78,11 +37,7 @@
     </div>
     @if (categoryCount === 0 && !isLoading) {
       <h4 class="font-medium text-gray-700 text-lg px-6 pb-8">
-        {{
-          hasQuery
-            ? "Aucune catégorie trouvée avec ce filtre"
-            : "Aucune catégorie trouvée"
-        }}
+        {{ hasQuery ? "Aucune catégorie trouvée avec ce filtre" : "Aucune catégorie trouvée" }}
       </h4>
     }
     @if (isLoading) {
@@ -98,42 +53,29 @@
       <div class="relative flex flex-col overflow-x-auto">
         <table class=" text-left rtl:text-right text-gray-500">
           <thead class="font-black text-gray-800 border-y border-gray-200">
-            <tr>
-              <th class="px-6 py-3">Nom</th>
-              <th class="px-6 py-3">Actions</th>
-            </tr>
+          <tr>
+            <th class="px-6 py-3">Nom</th>
+            <th class="px-6 py-3">Actions</th>
+          </tr>
           </thead>
           <tbody>
-            @for (
-              category of categoryList
-                | paginate
-                  : {
-                      itemsPerPage: 40,
-                      currentPage: queryParams().page || 1,
-                      totalItems: categoryCount,
-                    };
-              track category.id
-            ) {
-              <tr
-                class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap"
-              >
+            @for (category of categoryList | paginate : {
+              itemsPerPage: 40,
+              currentPage: queryParams().page || 1,
+              totalItems: categoryCount,
+            }; track category.id) {
+              <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
                 <td class="px-6 py-2 font-medium text-gray-900">
                   {{ category.name | titlecase }}
                 </td>
                 <td class="px-6 py-2">
                   <div class="flex items-center gap-2">
-                    <button
-                      class="text-gray-500"
-                      (click)="onToggleEditModal(category)"
-                    >
-                      <i-lucide [name]="icons.edit" class="size-4" />
+                    <button class="text-gray-500" (click)="onToggleEditModal(category)">
+                      <i-lucide [name]="icons.edit" class="size-4"/>
                     </button>
-                    <button
-                      class="text-red-700"
-                      (click)="onDeleteCategory(category.id, $event)"
-                    >
-                      <p-confirmpopup />
-                      <i-lucide [name]="icons.trash" class="size-4" />
+                    <button class="text-red-700" (click)="onDeleteCategory(category.id, $event)">
+                      <p-confirmpopup/>
+                      <i-lucide [name]="icons.trash" class="size-4"/>
                     </button>
                   </div>
                 </td>
@@ -145,109 +87,51 @@
     }
     @if (categoryCount > 40) {
       <div class="flex justify-center items-center gap-3 py-8">
-        <pagination-controls
-          nextLabel=""
-          previousLabel=""
-          [autoHide]="true"
-          [maxSize]="5"
-          (pageChange)="onPageChange($event)"
-          class="pg"
-        >
-        </pagination-controls>
+        <pagination-controls nextLabel="" previousLabel="" [autoHide]="true" [maxSize]="5"
+                             (pageChange)="onPageChange($event)" class="pg"/>
+
       </div>
     }
   </div>
 
-  <p-dialog
-    [(visible)]="showAddModal"
-    [closable]="false"
-    [modal]="true"
-    [style]="{ width: '25rem' }"
-  >
-    <form
-      class="flex flex-col gap-4"
-      [formGroup]="addCategoryForm"
-      (ngSubmit)="onAddCategory()"
-    >
+  <p-dialog [(visible)]="showAddModal" [closable]="false" [modal]="true" [style]="{ width: '25rem' }">
+    <form class="flex flex-col gap-4" [formGroup]="addCategoryForm" (ngSubmit)="onAddCategory()">
       <div class="flex flex-col gap-1.5">
-        <label for="name" class="font-medium"
-          >Nom de la catégorie<span class="text-red-500">*</span></label
-        >
-        <input
-          pInputText
-          type="text"
-          id="name"
-          name="name"
-          formControlName="name"
-        />
+        <label for="name" class="font-medium">
+          Nom de la catégorie<span class="text-red-500">*</span>
+        </label>
+        <input pInputText type="text" id="name" name="name" formControlName="name"/>
       </div>
       <div class="flex justify-end gap-4 flex-wrap">
-        <p-button
-          size="small"
-          variant="outlined"
-          severity="danger"
-          class="font-satoshi"
-          (onClick)="onToggleAddModal()"
-        >
+        <p-button size="small" variant="outlined" severity="danger" class="font-satoshi" (onClick)="onToggleAddModal()">
           Annuler
         </p-button>
-        <p-button
-          size="small"
-          severity="primary"
-          class="font-satoshi"
-          [disabled]="!addCategoryForm.valid || addCategoryStore.isLoading()"
-          [loading]="addCategoryStore.isLoading()"
-          (onClick)="onAddCategory()"
-        >
+        <p-button size="small" severity="primary" class="font-satoshi"
+                  [disabled]="!addCategoryForm.valid || addCategoryStore.isLoading()"
+                  [loading]="addCategoryStore.isLoading()"
+                  (onClick)="onAddCategory()">
           Ajouter la catégorie
         </p-button>
       </div>
     </form>
   </p-dialog>
 
-  <p-dialog
-    [(visible)]="showEditModal"
-    [closable]="false"
-    [modal]="true"
-    [style]="{ width: '25rem' }"
-  >
-    <form
-      class="flex flex-col gap-4"
-      [formGroup]="updateCategoryForm"
-      (ngSubmit)="onUpdateCategory()"
-    >
+  <p-dialog [(visible)]="showEditModal" [closable]="false" [modal]="true" [style]="{ width: '25rem' }">
+    <form class="flex flex-col gap-4" [formGroup]="updateCategoryForm" (ngSubmit)="onUpdateCategory()">
       <div class="flex flex-col gap-1.5">
-        <label for="name" class="font-medium"
-          >Nom du catégorie<span class="text-red-500">*</span></label
-        >
-        <input
-          pInputText
-          type="text"
-          id="name"
-          name="name"
-          formControlName="name"
-        />
+        <label for="name" class="font-medium">
+          Nom du catégorie<span class="text-red-500">*</span>
+        </label>
+        <input pInputText type="text" id="name" name="name" formControlName="name"/>
       </div>
       <div class="flex justify-end gap-4 flex-wrap">
-        <p-button
-          size="small"
-          variant="outlined"
-          severity="danger"
-          class="font-satoshi"
-          (onClick)="onToggleEditModal(null)"
-        >
+        <p-button size="small" variant="outlined" severity="danger" class="font-satoshi"
+                  (onClick)="onToggleEditModal(null)">
           Annuler
         </p-button>
-        <p-button
-          size="small"
-          severity="primary"
-          class="font-satoshi"
-          [disabled]="
-            !updateCategoryForm.valid || updateCategoryStore.isLoading()
-          "
-          [loading]="updateCategoryStore.isLoading()"
-          (onClick)="onUpdateCategory()"
-        >
+        <p-button size="small" severity="primary" class="font-satoshi"
+                  [disabled]=" !updateCategoryForm.valid || updateCategoryStore.isLoading() "
+                  [loading]="updateCategoryStore.isLoading()" (onClick)="onUpdateCategory()">
           Modifier la catégorie
         </p-button>
       </div>

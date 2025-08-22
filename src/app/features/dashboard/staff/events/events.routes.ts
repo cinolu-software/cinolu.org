@@ -7,10 +7,7 @@ export const eventsRoutes: Routes = [
       {
         path: '',
         title: 'Liste des événements',
-        loadComponent: () =>
-          import('./pages/list-events/list-events').then(
-            (c) => c.ListEvents,
-          ),
+        loadComponent: () => import('./pages/events').then((c) => c.Events),
       },
       {
         path: 'add',

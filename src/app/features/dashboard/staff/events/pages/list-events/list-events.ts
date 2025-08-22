@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {
   LucideAngularModule,
   RefreshCcw,
@@ -44,7 +43,6 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
     CommonModule,
     ButtonModule,
     InputTextModule,
-    ProgressSpinnerModule,
     NgxPaginationModule,
     ReactiveFormsModule,
     RouterLink,
@@ -85,6 +83,10 @@ export class ListEvents implements OnInit {
 
   ngOnInit(): void {
     this.loadEvents();
+  }
+
+  get count(): number {
+    return this.store.events()[1];
   }
 
   loadEvents(): void {

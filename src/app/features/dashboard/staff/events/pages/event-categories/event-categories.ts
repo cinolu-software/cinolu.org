@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {
   LucideAngularModule,
   RefreshCcw,
@@ -44,7 +43,6 @@ import { ICategory } from '../../../../../../shared/models/entities.models';
     CommonModule,
     ButtonModule,
     InputTextModule,
-    ProgressSpinnerModule,
     NgxPaginationModule,
     ReactiveFormsModule,
     Dialog,
@@ -93,6 +91,10 @@ export class EventCategories implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
+  }
+
+  get count(): number {
+    return this.store.categories()[1];
   }
 
   loadCategories(): void {

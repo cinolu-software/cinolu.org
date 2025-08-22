@@ -7,10 +7,7 @@ export const projectsRoutes: Routes = [
       {
         path: '',
         title: 'Liste des projets',
-        loadComponent: () =>
-          import('./pages/list-projects/list-projects').then(
-            (c) => c.ListProjects,
-          ),
+        loadComponent: () => import('./pages/projects').then((c) => c.Projects),
       },
       {
         path: 'add',
