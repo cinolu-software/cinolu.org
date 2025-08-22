@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage, Location } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, effect, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -7,7 +7,6 @@ import {
   Validators,
 } from '@angular/forms';
 import {
-  ArrowLeft,
   Check,
   ChevronsLeft,
   ChevronsRight,
@@ -60,7 +59,6 @@ import { QuillModule } from 'ngx-quill';
 })
 export class EditArticle implements OnInit {
   #fb = inject(FormBuilder);
-  #location = inject(Location);
   #route = inject(ActivatedRoute);
   form: FormGroup;
   store = inject(UpdateArticleStore);
@@ -69,7 +67,6 @@ export class EditArticle implements OnInit {
   url = `${environment.apiUrl}articles/cover/`;
   #slug = this.#route.snapshot.params['slug'];
   icons = {
-    back: ArrowLeft,
     next: ChevronsRight,
     previous: ChevronsLeft,
     check: Check,
@@ -106,9 +103,5 @@ export class EditArticle implements OnInit {
 
   onFileUploadLoaded(): void {
     this.articleStore.loadArticle(this.#slug);
-  }
-
-  onGoBack(): void {
-    this.#location.back();
   }
 }
