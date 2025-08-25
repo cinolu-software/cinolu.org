@@ -2,11 +2,13 @@
   <div
     class="px-8 lg:px-16 2xl:px-28 max-w-screen-2xl mx-auto py-10 font-satoshi text-gray-800"
   >
-    <h3 class="font-black sm:text-3xl text-center lg:text-5xl lg:py-4">
+    <h3
+      class="text-3xl text-center sm:text-4xl lg:text-5xl font-black font-satoshi mb-3 tracking-tight leading-tight"
+    >
       Pourquoi faire un don à <span class="text-primary-400"> Cinolu ?</span>
     </h3>
     <div class="px-3 md:px-10 lg:space-y-4">
-      <p class="text-xl md:text-xl font-black leading-snug text-primary-800">
+      <p class="text-xl md:text-xl font-black leading-snug text-primary-600">
         Chaque jour, le Centre d’Innovation de Lubumbashi (Cinolu) accompagne
         des jeunes, des femmes et des innovateurs dans la création de projets à
         impact. Grâce à votre soutien, nous pouvons :
@@ -15,27 +17,27 @@
       <div class="grid grid-cols-1">
         @for (item of OptionItems; track $index) {
           <div
-            class="p-5 flex items-center flex-row-reverse justify-between bg-white/50 backdrop-blur-[2px] lg:px-15 border border-gray-200 rounded-full gap-2 transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg mt-7"
+            class="p-5 flex items-center justify-between bg-white/50 backdrop-blur-[2px] lg:px-15 border border-gray-200 lg:rounded-full md:rounded-2xl sm:rounded-xl rounded-sm transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg mt-7 gap-3"
           >
-            <i-lucide
-              [name]="item.icon"
-              class="text-primary-500 size-7"
-            ></i-lucide>
             <h5 class="text-lg font-semibold text-gray-900">
               {{ item.title }}
             </h5>
+            <i-lucide
+              [name]="item.icon"
+              class="text-primary-500 size-7 hidden sm:block"
+            ></i-lucide>
           </div>
         }
       </div>
 
       <div
-        class="bg-primary-500/50 backdrop-blur-[2px] p-5 flex items-center flex-row-reverse justify-between lg:px-15 border border-gray-200 rounded-2xl hover:shadow-sm transition duration-300 mt-4"
+        class="bg-primary-500 backdrop-blur-[2px] p-5 flex items-center flex-row-reverse justify-between lg:px-15 border border-gray-200 rounded-2xl hover:shadow-sm transition duration-300 mt-4"
       >
         <i-lucide
           [name]="icons.circleChevronRight"
           class="text-white size-7"
         ></i-lucide>
-        <h5 class="text-2xl font-semibold text-white">
+        <h5 class="text-2xl font-black text-white uppercase">
           Un petit geste peut générer un grand impact
         </h5>
       </div>
@@ -43,9 +45,7 @@
 
     <div>
       <div class="text-center max-w-[700px] mx-auto flex flex-col items-center">
-        <h2
-          class="text-2xl sm:text-3xl font-black leading-snug text-primary-800"
-        >
+        <h2 class="text-2xl sm:text-3xl font-black leading-snug text-gray-800">
           Choisissez un montant pour soutenir nos actions
         </h2>
 
@@ -54,13 +54,13 @@
           d’entrepreneuriat en RDC.
         </p>
       </div>
-      <div
+      <!-- <div
         class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-10 px-4 sm:px-0"
       >
         @for (item of mountItems; track $index) {
           <div
             [ngClass]="'hover:bg-' + item.color"
-            class="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between"
+            class="bg-white border border-gray-200 lg:rounded-xl rounded-sm shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between"
           >
             <div>
               <img
@@ -70,7 +70,7 @@
               />
               <div class="px-4 sm:px-5 pb-4">
                 <h5
-                  class="text-lg font-semibold text-primary-900 mt-2 mb-1 text-center sm:text-left"
+                  class="text-lg font-semibold text-gray-800 mt-2 mb-1 text-center sm:text-left"
                 >
                   {{ item.title }}
                 </h5>
@@ -92,26 +92,54 @@
                 </p>
               </div>
             </div>
-            <div class="px-4 pb-4">
-              <button
-                class="w-full max-w-[170px] mx-auto flex items-center justify-between bg-primary-500 text-white px-4 py-2 rounded-full group hover:bg-primary-600 transition"
-              >
-                <span class=" font-medium uppercase"
-                  >Je fais un don</span
-                >
-                <span
-                  class="flex items-center justify-center w-6 h-6 bg-white/10 rounded-full group-hover:bg-white/20 transition"
-                >
-                  <i-lucide
-                    [name]="icons.arrowUpRight"
-                    class="text-white size-5"
-                  ></i-lucide>
-                </span>
-              </button>
-            </div>
+            <button
+              class="w-full hover:text-base my-3 mx-auto max-w-[170px] font-light text-base justify-between bg-primary-500 text-center text-white px-4 py-2 rounded-full hover:bg-primary-600 transition"
+            >
+              Je fais un don
+            </button>
           </div>
         }
-      </div>
+      </div> -->
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5">
+      @for (p of mountItems; track $index) {
+        <div
+          class="flex flex-col justify-around hover:z-50 bg-white p-6 max-w hover:shadow-lg transition-all duration-300"
+        >
+          <div class="text-center mb-4 md:mb-0">
+            <div
+              class="h-12 w-12 border border-primary-500 rounded-full overflow-hidden mx-auto mb-3"
+            >
+              <img
+                class="rounded-t-xl h-full w-full object-contain p-4 transform scale-200"
+                [src]="p.icon"
+                [alt]="p.title"
+              />
+            </div>
+
+            <hr class="border-gray-200 mb-1.5" />
+            <p class="text-gray-700 hyphens-none line-clamp-3">
+              {{ p.description }}
+            </p>
+          </div>
+
+          @if (p.mount !== undefined) {
+            <a
+              class="border border-primary-500 cursor-pointer mt-6 text-center py-1.5 px-5 rounded-full text-primary-500 font-black 2xl:text-base hover:bg-primary-500 hover:text-white transition-colors duration-200 max-sm:max-w-fit max-sm:m-auto"
+            >
+              {{ p.mount | currency: "USD" : "symbol" }}
+            </a>
+          } @else {
+            <form>
+              <input
+                type="number"
+                placeholder="Taper montant"
+                class="border border-primary-500 w-full text-gray-600 font-light px-3 py-2 text-base rounded-md"
+              />
+            </form>
+          }
+        </div>
+      }
     </div>
   </div>
 </section>
