@@ -1,4 +1,4 @@
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
@@ -7,7 +7,6 @@ import {
   Validators,
 } from '@angular/forms';
 import {
-  ArrowLeft,
   ChevronsLeft,
   ChevronsRight,
   LucideAngularModule,
@@ -41,12 +40,10 @@ import { QuillModule } from 'ngx-quill';
 })
 export class AddArticle {
   #fb = inject(FormBuilder);
-  #location = inject(Location);
   form: FormGroup;
   store = inject(AddArticleStore);
   tagsStore = inject(UnpaginatedTagStore);
   icons = {
-    back: ArrowLeft,
     next: ChevronsRight,
     previous: ChevronsLeft,
   };
@@ -54,7 +51,7 @@ export class AddArticle {
   constructor() {
     this.form = this.#fb.group({
       title: ['', Validators.required],
-      published_at: [new Date('now'), Validators.required],
+      published_at: [new Date(), Validators.required],
       content: ['', Validators.required],
       summary: ['', Validators.required],
       tags: [[], Validators.required],
@@ -65,9 +62,5 @@ export class AddArticle {
     if (!this.form.valid) return;
     console.log(this.form.value);
     this.store.addArticle(this.form.value);
-  }
-
-  onGoBack(): void {
-    this.#location.back();
   }
 }
