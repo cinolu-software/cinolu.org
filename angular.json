@@ -9,13 +9,13 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
-      
       "architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
             "allowedCommonJsDependencies": [
               "filepond",
+              "quill-delta",
               "filepond-plugin-image-preview",
               "filepond-plugin-file-validate-size",
               "filepond-plugin-file-validate-type"
