@@ -27,9 +27,9 @@ export const EventStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((slug) => {
           return _http.get<{ data: IEvent }>(`events/slug/${slug}`).pipe(
-            tap(({ data }) =>
-              patchState(store, { isLoading: false, event: data }),
-            ),
+            tap(({ data }) => {
+              patchState(store, { isLoading: false, event: data });
+            }),
             catchError(() => {
               patchState(store, { isLoading: false });
               return of(null);

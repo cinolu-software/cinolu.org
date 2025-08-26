@@ -7,15 +7,15 @@
     <a
       class="text-md font-medium text-primary-400 underline not-[]:duration-300 hover:text-primary-500"
       [routerLink]="['/sign-in']"
-      >Se connecter</a
+    >Se connecter</a
     >
   </div>
   <form [formGroup]="form" class="flex flex-col" (ngSubmit)="onSignUp()">
     <p-stepper [value]="1" class="w-full">
       <p-step-list>
-        <p-step [value]="1" />
-        <p-step [value]="2" />
-        <p-step [value]="3" />
+        <p-step [value]="1"/>
+        <p-step [value]="2"/>
+        <p-step [value]="3"/>
       </p-step-list>
       <p-step-panels>
         <p-step-panel [value]="1">
@@ -57,7 +57,7 @@
                 <label for="email">Téléphone</label>
                 <p-inputgroup>
                   <p-inputgroup-addon
-                    >{{ selectedCountryCode || "----" }}
+                  >{{ selectedCountryCode || "----" }}
                   </p-inputgroup-addon>
                   <input
                     pInputText
@@ -84,13 +84,8 @@
             <div class="flex flex-col gap-4">
               <div class="flex flex-col gap-1.5">
                 <label for="birthdate">Date de naissance</label>
-                <p-datepicker
-                  [inputId]="'birthdate'"
-                  formControlName="birth_date"
-                  showIcon
-                  iconDisplay="input"
-                  autocomplete="off"
-                />
+                <p-datePicker [inputId]="'birthdate'" formControlName="birth_date"
+                              showIcon iconDisplay="input" autocomplete="off"/>
               </div>
               <div class="flex flex-col gap-1.5">
                 <label for="roles">Statut</label>
@@ -99,19 +94,12 @@
                   optionValue="id"
                   optionLabel="label"
                   formControlName="roles"
-                  formControlName="roles"
                   [showClear]="true"
                 />
               </div>
               <div class="flex flex-col gap-1.5">
                 <label for="gender">Genre</label>
-                <p-select
-                  [inputId]="'gender'"
-                  [options]="genderItems"
-                  formControlName="gender"
-                  [showClear]="true"
-                  autocomplete="off"
-                />
+                <p-select [inputId]="'gender'" [options]="genderItems" formControlName="gender" [showClear]="true"/>
               </div>
               <div class="flex flex-col gap-1.5">
                 <label for="city">Ville</label>

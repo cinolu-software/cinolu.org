@@ -26,6 +26,8 @@ import { UpdateUserStore } from '../../store/users/update-user.store';
 import { UnpaginatedRolesStore } from '../../store/roles/unpaginated-roles.store';
 import { DatePickerModule } from 'primeng/datepicker';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
+import { Select } from 'primeng/select';
+import { GENDERS } from '../../../../../../shared/data/member.items';
 
 @Component({
   selector: 'app-user-edit',
@@ -44,11 +46,13 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
     ApiImgPipe,
     DatePickerModule,
     MultiSelectModule,
+    Select,
   ],
 })
 export class EditUser {
   #fb = inject(FormBuilder);
   #location = inject(Location);
+  genders = GENDERS;
   updateUserForm: FormGroup;
   store = inject(UsersStore);
   updateStore = inject(UpdateUserStore);
@@ -67,6 +71,7 @@ export class EditUser {
       id: ['', Validators.required],
       email: ['', [Validators.required]],
       name: ['', Validators.required],
+      gender: ['', Validators.required],
       phone_number: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
