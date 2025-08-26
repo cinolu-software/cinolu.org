@@ -1,76 +1,39 @@
-<section
-  class="pt-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto fade-left-init"
-  id="projects"
-  appAnimationsOnScroll
->
+<section class="pt-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto fade-left-init" id="projects"
+         appAnimationsOnScroll>
   <div class="flex justify-between items-center mb-6">
     <div>
       <h3 class="font-black font-satoshi mb-2 text-2xl">
         Les événements récents
       </h3>
-      <a
-        routerLink="/events"
-        class="inline-flex group items-center gap-0.5 text-primary-500 hover:underline"
-      >
+      <a routerLink="/events" class="inline-flex group items-center gap-0.5 text-primary-500 hover:underline">
         Liste des événements
-        <i-lucide
-          [name]="icons.moveUpRight"
-          class="h-4 w-4 duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
-        />
+        <i-lucide [name]="icons.moveUpRight"
+                  class="h-4 w-4 duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"/>
       </a>
     </div>
     <div class="flex items-center gap-4 place-self-end">
-      <button
-        (click)="carousel.navBackward($event)"
-        class="carousel-nav-btn"
-        type="button"
-        aria-label="Previous slide"
-      >
-        <i-lucide
-          [name]="icons.moveLeft"
-          class="size-3.5"
-          aria-hidden="true"
-          focusable="false"
-        ></i-lucide>
+      <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
+        <i-lucide [name]="icons.moveLeft" class="size-3.5"/>
       </button>
-      <button
-        (click)="carousel.navForward($event)"
-        class="carousel-nav-btn"
-        type="button"
-        aria-label="Next slide"
-      >
-        <i-lucide
-          [name]="icons.moveRight"
-          class="size-3.5"
-          aria-hidden="true"
-          focusable="false"
-        ></i-lucide>
+      <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button">
+        <i-lucide [name]="icons.moveRight" class="size-3.5"/>
       </button>
     </div>
   </div>
   @if (store.isLoading()) {
-    <div
-      class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10"
-    >
+    <div class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10">
       @for (project of [1, 3, 3]; track $index) {
-        <app-event-card-skeleton />
+        <app-event-card-skeleton/>
       }
     </div>
   }
   <div class="flex flex-col gap-5">
-    <p-carousel
-      #carousel
-      [value]="store.events()"
-      [numVisible]="3"
-      [numScroll]="1"
-      [showIndicators]="false"
-      [showNavigators]="false"
-      [circular]="true"
-      [responsiveOptions]="carouselOptions"
-    >
+    <p-carousel #carousel [value]="store.events()" [numVisible]="3" [numScroll]="1" [showIndicators]="false"
+                [showNavigators]="false" [circular]="true"
+                [responsiveOptions]="carouselOptions">
       <ng-template let-event #item>
         <div class="mr-3.5">
-          <app-event-card [event]="event" />
+          <app-event-card [event]="event"/>
         </div>
       </ng-template>
     </p-carousel>
