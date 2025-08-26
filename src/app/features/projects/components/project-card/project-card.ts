@@ -19,8 +19,4 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 export class ProjectCard {
   project = input.required<IProject>();
   icons = { calendarCheck: CalendarCheck, calendarX: CalendarX };
-
-  isFinished(project: IProject): boolean {
-    return new Date(project.ended_at) <= new Date();
-  }
 }
