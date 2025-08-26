@@ -3,9 +3,12 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   ArrowLeft,
   Calendar1,
+  CalendarCheck,
+  CalendarMinus,
   FileText,
   FolderOpenDot,
   LucideAngularModule,
+  MapPin,
   MessageCircleMore,
   MoveRight,
   MoveUpRight,
@@ -14,13 +17,21 @@ import {
   ThumbsUp,
   UserPlus,
 } from 'lucide-angular';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { SubprogramsStore } from '../../../landing/store/subprogram.store';
+import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-list-sub-programs',
   providers: [SubprogramsStore],
-  imports: [LucideAngularModule, CommonModule, RouterLink],
+  imports: [
+    LucideAngularModule,
+    CommonModule,
+    RouterLink,
+    ApiImgPipe,
+    CommonModule,
+    NgOptimizedImage,
+  ],
   templateUrl: './list-sub-programs.html',
   styles: ``,
 })
@@ -38,7 +49,10 @@ export class ListSubPrograms implements OnInit {
     thumbsUp: ThumbsUp,
     program: FolderOpenDot,
     arrow: MoveRight,
-  };
+    place:MapPin,
+    startedAt :CalendarCheck,
+    endedAt :CalendarMinus,
+    };
 
   #route = inject(ActivatedRoute);
   store = inject(SubprogramsStore);
