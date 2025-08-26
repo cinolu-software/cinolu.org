@@ -9,12 +9,12 @@ export const programsRoutes: Routes = [
         (c) => c.DetailPrograms,
       ),
   },
-  // {
-  //   path: ':slug',
-  //   title: 'Events - Details',
-  //   loadComponent: () =>
-  //     import('./pages/detail-event/detail-event').then(
-  //       (c) => c.DetailEvent,
-  //     ),
-  // },
+  {
+    path: ':slug/:slug',
+    title: 'Events - Details',
+    loadComponent: () =>
+      import('./pages/list-sub-programs/list-sub-programs').then(
+        (c) => c.ListSubPrograms,
+      ),
+  },
 ];

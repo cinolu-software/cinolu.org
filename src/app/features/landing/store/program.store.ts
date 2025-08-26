@@ -28,7 +28,6 @@ export const ProgramStore = signalStore(
         switchMap((slug) => {
           return _http.get<{ data: IProgram }>(`programs/slug/${slug}`).pipe(
             tap(({ data }) => {
-              console.log('API response:', data);
               patchState(store, { isLoading: false, program: data });
             }),
             catchError(() => {
