@@ -30,8 +30,8 @@ export const AddUserStore = signalStore(
     addUser: rxMethod<UserDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((userData) => {
-          return _http.post<{ data: IUser }>(`users`, userData).pipe(
+        switchMap((dto) => {
+          return _http.post<{ data: IUser }>('users', dto).pipe(
             map(({ data }) => {
               _router.navigate(['/dashboard/users']);
               _toast.showSuccess('Utilisateur ajouté avec succès');
