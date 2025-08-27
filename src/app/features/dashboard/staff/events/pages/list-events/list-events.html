@@ -104,12 +104,12 @@
                         <i-lucide [name]="icons.starOff" class="size-4"/>
                       }
                     </button>
-                    <button class="text-primary-500" (click)="onPublishProject(event.id)">
+                    <button (click)="onPublishProject(event.id)">
                       <p-confirmpopup/>
                       @if (!event.is_published) {
                         <i-lucide [name]="icons.eyeOff" class="size-5"/>
                       } @else {
-                        <i-lucide [name]="icons.eye" class="size-5"/>
+                        <i-lucide [name]="icons.eye" class="size-5 text-primary-500"/>
                       }
                     </button>
                     <a [routerLink]="['/dashboard/events/edit', event.slug]">

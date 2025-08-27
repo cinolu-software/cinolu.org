@@ -102,11 +102,11 @@
                       <i-lucide [name]="icons.starOff" class="size-4"/>
                     }
                   </button>
-                  <button class="text-primary-500" (click)="onPublishProgram(program.id)">
+                  <button (click)="onPublishProgram(program.id)">
                     @if (!program.is_published) {
                       <i-lucide [name]="icons.eyeOff" class="size-5"/>
                     } @else {
-                      <i-lucide [name]="icons.eye" class="size-5"/>
+                      <i-lucide [name]="icons.eye" class="size-5 text-primary-500"/>
                     }
                   </button>
                   <button class="text-gray-500" (click)="onToggleEditModal(program)">
