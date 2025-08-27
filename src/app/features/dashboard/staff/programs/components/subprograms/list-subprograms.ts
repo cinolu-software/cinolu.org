@@ -9,6 +9,8 @@ import {
   Search,
   Eye,
   EyeOff,
+  Star,
+  StarOff,
 } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -38,6 +40,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { PublishSubprogramsStore } from '../../store/subprograms/publish-subprograms.store';
 import { UnpaginatedProgramsStore } from '../../store/list-programs/unpaginated-programs.store';
 import { SelectModule } from 'primeng/select';
+import { HighlightSubprogramStore } from '../../store/subprograms/highlight-subprogram.store';
 
 @Component({
   selector: 'app-list-subprograms',
@@ -50,6 +53,7 @@ import { SelectModule } from 'primeng/select';
     AddSubprogramsStore,
     ConfirmationService,
     PublishSubprogramsStore,
+    HighlightSubprogramStore,
   ],
   imports: [
     LucideAngularModule,
@@ -82,6 +86,7 @@ export class ListSubprograms implements OnInit {
   updateSubrogramStore = inject(UpdateSubprogramsStore);
   deleteSubrogramStore = inject(DeleteSubprogramsStore);
   publishSubrogramStore = inject(PublishSubprogramsStore);
+  highlightStore = inject(HighlightSubprogramStore);
   subprogram = signal<ISubprogram | null>(null);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   url = environment.apiUrl + 'subprograms/logo/';
@@ -93,6 +98,8 @@ export class ListSubprograms implements OnInit {
     search: Search,
     eye: Eye,
     eyeOff: EyeOff,
+    star: Star,
+    starOff: StarOff,
   };
   showAddModal = signal(false);
   showEditModal = signal(false);
@@ -124,6 +131,10 @@ export class ListSubprograms implements OnInit {
 
   get count(): number {
     return this.store.subprograms()[1];
+  }
+
+  highlightSubprogram(id: string): void {
+    this.highlightStore.highlight(id);
   }
 
   loadSubprograms(): void {

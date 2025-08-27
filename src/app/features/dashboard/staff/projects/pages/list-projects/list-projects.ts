@@ -8,6 +8,8 @@ import {
   Plus,
   Eye,
   EyeOff,
+  Star,
+  StarOff,
 } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -28,6 +30,7 @@ import { ConfirmPopup } from 'primeng/confirmpopup';
 import { AvatarModule } from 'primeng/avatar';
 import { PublishProjectStore } from '../../store/projects/publish-project.store';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
+import { HighlightProjectStore } from '../../store/projects/highlight-project.store';
 
 @Component({
   selector: 'app-projects-list',
@@ -36,6 +39,7 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
     ProjectsStore,
     PublishProjectStore,
     DeleteProjectStore,
+    HighlightProjectStore,
     ConfirmationService,
   ],
   imports: [
@@ -60,6 +64,7 @@ export class ListProjects implements OnInit {
   store = inject(ProjectsStore);
   deleteProjectStore = inject(DeleteProjectStore);
   publishProjectStore = inject(PublishProjectStore);
+  highlightStore = inject(HighlightProjectStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   icons = {
     refresh: RefreshCcw,
@@ -69,6 +74,8 @@ export class ListProjects implements OnInit {
     plus: Plus,
     eye: Eye,
     eyeOff: EyeOff,
+    star: Star,
+    starOff: StarOff,
   };
   queryParams = signal<FilterProjectsDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
@@ -96,6 +103,10 @@ export class ListProjects implements OnInit {
   async onPageChange(currentPage: number): Promise<void> {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
     await this.updateRouteAndProjects();
+  }
+
+  highlightProject(projectId: string): void {
+    this.highlightStore.highlight(projectId);
   }
 
   async updateRoute(): Promise<void> {
