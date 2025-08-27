@@ -56,57 +56,12 @@
           d’entrepreneuriat en RDC.
         </p>
       </div>
-      <!-- <div
-        class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-10 px-4 sm:px-0"
-      >
-        @for (item of mountItems; track $index) {
-          <div
-            [ngClass]="'hover:bg-' + item.color"
-            class="bg-white border border-gray-200 lg:rounded-xl rounded-sm shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between"
-          >
-            <div>
-              <img
-                class="rounded-t-xl w-full h-28 sm:h-32 md:h-36 object-contain p-4"
-                [src]="item.icon"
-                [alt]="item.title"
-              />
-              <div class="px-4 sm:px-5 pb-4">
-                <h5
-                  class="text-lg font-semibold text-gray-800 mt-2 mb-1 text-center sm:text-left"
-                >
-                  {{ item.title }}
-                </h5>
 
-                <p
-                  class="text-xl sm:text-2xl lg:text-3xl font-black text-primary-600 text-center sm:text-left"
-                >
-                  @if (item.mount !== undefined) {
-                    {{ item.mount | currency: "USD" : "symbol" }}
-                  } @else {
-                    <form>
-                      <input
-                        type="number"
-                        placeholder="Taper montant"
-                        class="border border-primary-500 w-full text-gray-600 font-light px-3 py-2 text-base rounded-md"
-                      />
-                    </form>
-                  }
-                </p>
-              </div>
-            </div>
-            <button
-              class="w-full hover:text-base my-3 mx-auto max-w-[170px] font-light text-base justify-between bg-primary-500 text-center text-white px-4 py-2 rounded-full hover:bg-primary-600 transition"
-            >
-              Je fais un don
-            </button>
-          </div>
-        }
-      </div> -->
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 py-8">
       @for (p of mountItems; track $index) {
         <div
-          class="flex flex-col justify-around hover:z-50 bg-white p-6 max-w hover:shadow-lg transition-all duration-300"
+          class="flex flex-col justify-around hover:z-10 bg-white p-6 max-w hover:shadow-lg transition-all duration-300"
         >
           <div class="text-center mb-4 md:mb-0">
             <div
