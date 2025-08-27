@@ -1,8 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, input } from '@angular/core';
+import { IProject } from '../../../../../shared/models/entities.models';
 import {
-  ArrowLeft,
   Calendar1,
+  ArrowLeft,
   CalendarCheck,
   CalendarMinus,
   FileText,
@@ -18,24 +18,15 @@ import {
   UserPlus,
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { SubprogramsStore } from '../../../landing/store/subprogram.store';
-import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-import { IProject } from '../../../../shared/models/entities.models';
+import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 
 @Component({
-  selector: 'app-list-sub-programs',
-  providers: [SubprogramsStore],
-  imports: [
-    LucideAngularModule,
-    CommonModule,
-    ApiImgPipe,
-    CommonModule,
-    NgOptimizedImage,
-  ],
-  templateUrl: './list-sub-programs.html',
+  selector: 'app-subprogram-card',
+  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, ApiImgPipe],
+  templateUrl: './subprogram-card.html',
   styles: ``,
 })
-export class ListSubPrograms implements OnInit {
+export class SubprogramCard {
   icons = {
     moveLeft: ArrowLeft,
     fileText: FileText,
@@ -54,13 +45,7 @@ export class ListSubPrograms implements OnInit {
     endedAt: CalendarMinus,
   };
 
-  #route = inject(ActivatedRoute);
-  store = inject(SubprogramsStore);
-
-  ngOnInit(): void {
-    const slug = this.#route.snapshot.params['slug'];
-    this.store.loadSubprogram(slug);
-  }
+  project = input.required<IProject>();
 
   getStatut(project: IProject): string {
     const now = new Date();
