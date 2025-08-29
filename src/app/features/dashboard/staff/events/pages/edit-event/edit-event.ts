@@ -80,7 +80,7 @@ export class EditEventComponent implements OnInit {
       name: ['', Validators.required],
       place: ['', Validators.required],
       description: ['', Validators.required],
-      form_link: ['', Validators.required],
+      form_link: [''],
       started_at: ['', Validators.required],
       ended_at: ['', Validators.required],
       program: ['', Validators.required],
