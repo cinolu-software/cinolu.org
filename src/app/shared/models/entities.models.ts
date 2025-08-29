@@ -21,7 +21,8 @@ export interface IArticle extends IBase {
   image: string;
   summary: string;
   content: string;
-  published_at: Date;
+  published_at: Date
+  is_highlighted: boolean
   tags: ITag[];
   comments: IComment[];
   author: IUser;
@@ -54,7 +55,8 @@ export interface IProject extends IBase {
   report?: JSON;
   is_published: boolean;
   place?: string;
-  program: IProgram;
+  is_highlighted?: boolean;
+  program: ISubprogram;
   categories: ICategory[];
 }
 
@@ -83,6 +85,7 @@ export interface IProgram extends IBase {
   slug: string;
   logo: string;
   is_published: boolean;
+  is_highlighted: boolean;
   subprograms: ISubprogram[];
 }
 
@@ -92,6 +95,7 @@ export interface ISubprogram extends IBase {
   slug: string;
   logo: string;
   is_published: boolean;
+  is_highlighted: boolean;
   program: IProgram;
   projects: IProject[];
   events: IEvent[];
@@ -105,6 +109,7 @@ export interface IEvent extends IBase {
   description: string;
   started_at: Date;
   is_published: boolean;
+  is_highlighted: boolean;
   link: string;
   ended_at: Date;
   program: IProgram;

@@ -108,8 +108,7 @@
         </p-button>
         <p-button size="small" severity="primary" class="font-satoshi"
                   [disabled]="!addCategoryForm.valid || addCategoryStore.isLoading()"
-                  [loading]="addCategoryStore.isLoading()"
-                  (onClick)="onAddCategory()">
+                  [loading]="addCategoryStore.isLoading()" (onClick)="onAddCategory()">
           Ajouter la catégorie
         </p-button>
       </div>

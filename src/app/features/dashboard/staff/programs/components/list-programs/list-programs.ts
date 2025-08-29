@@ -11,6 +11,8 @@ import {
   EyeOff,
   Layers,
   GitBranch,
+  Star,
+  StarOff,
 } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -38,6 +40,7 @@ import { environment } from '../../../../../../../environments/environment';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { AvatarModule } from 'primeng/avatar';
 import { PublishProgramStore } from '../../store/list-programs/publish-program.store';
+import { HighlightProgramStore } from '../../store/list-programs/highlight-program.store';
 
 @Component({
   selector: 'app-list-programs',
@@ -49,6 +52,7 @@ import { PublishProgramStore } from '../../store/list-programs/publish-program.s
     AddProgramStore,
     ConfirmationService,
     PublishProgramStore,
+    HighlightProgramStore,
   ],
   imports: [
     LucideAngularModule,
@@ -79,6 +83,7 @@ export class ListPrograms implements OnInit {
   updateProgramStore = inject(UpdateProgramStore);
   deleteProgramStore = inject(DeleteProgramStore);
   publishProgramStore = inject(PublishProgramStore);
+  highlightStore = inject(HighlightProgramStore);
   program = signal<IProgram | null>(null);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   url = environment.apiUrl + 'programs/logo/';
@@ -92,6 +97,8 @@ export class ListPrograms implements OnInit {
     eyeOff: EyeOff,
     program: Layers,
     subprograms: GitBranch,
+    star: Star,
+    starOff: StarOff,
   };
   showAddModal = signal(false);
   showEditModal = signal(false);
@@ -143,6 +150,10 @@ export class ListPrograms implements OnInit {
   async updateRoute(): Promise<void> {
     const queryParams = this.queryParams();
     await this.#router.navigate(['/dashboard/programs'], { queryParams });
+  }
+
+  highlightProgram(id: string): void {
+    this.highlightStore.highlight(id);
   }
 
   async updateRouteAndPrograms(): Promise<void> {

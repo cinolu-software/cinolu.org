@@ -16,29 +16,30 @@ import {
   RefreshCcw,
   Search,
   SquarePen,
+  Star,
+  StarOff,
   Trash,
 } from 'lucide-angular';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ConfirmationService } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
-// import { ConfirmPopup } from 'primeng/confirmpopup';
 import { InputTextModule } from 'primeng/inputtext';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { DeleteArticleStore } from '../../store/articles/delete-article.store';
 import { ArticlesStore } from '../../store/articles/articles.store';
-import { AddArticleStore } from '../../store/articles/add-article.store';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { IArticle } from '../../../../../../shared/models/entities.models';
+import { HighlightArticleStore } from '../../store/articles/highlight-article.store';
 
 @Component({
   selector: 'app-article-list',
   providers: [
     ConfirmationService,
     ArticlesStore,
-    AddArticleStore,
     DeleteArticleStore,
+    HighlightArticleStore,
   ],
   imports: [
     LucideAngularModule,
@@ -49,7 +50,6 @@ import { IArticle } from '../../../../../../shared/models/entities.models';
     NgxPaginationModule,
     ReactiveFormsModule,
     RouterLink,
-    // ConfirmPopup,
     AvatarModule,
     ApiImgPipe,
     ConfirmPopup,
@@ -64,7 +64,7 @@ export class ListArticles implements OnInit {
   searchForm: FormGroup;
   store = inject(ArticlesStore);
   deleteArticleStore = inject(DeleteArticleStore);
-  addArticleStore = inject(AddArticleStore);
+  highlightStore = inject(HighlightArticleStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   icons = {
     refresh: RefreshCcw,
@@ -74,6 +74,8 @@ export class ListArticles implements OnInit {
     plus: Plus,
     eye: Eye,
     eyeOff: EyeOff,
+    star: Star,
+    starOff: StarOff
   };
   queryParams = signal<FilterArticleDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
@@ -96,12 +98,16 @@ export class ListArticles implements OnInit {
 
   onPageChange(currentPage: number): void {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
-    this.updateRouteAndArticles();
+    this.updateRouteAndArticles().then();
   }
 
   async updateRoute(): Promise<void> {
     const queryParams = this.queryParams();
     await this.#router.navigate(['/dashboard/blog/articles'], { queryParams });
+  }
+
+  highlightArticle(articleId: string): void {
+    this.highlightStore.highlight(articleId);
   }
 
   async updateRouteAndArticles(): Promise<void> {

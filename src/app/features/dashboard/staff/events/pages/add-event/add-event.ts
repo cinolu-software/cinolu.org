@@ -64,7 +64,7 @@ export class AddEventComponent {
       name: ['', Validators.required],
       description: ['', Validators.required],
       place: ['', Validators.required],
-      form_link: ['', Validators.required],
+      form_link: [''],
       started_at: [null, Validators.required],
       ended_at: [null, Validators.required],
       program: ['', Validators.required],

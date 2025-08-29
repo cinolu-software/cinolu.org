@@ -78,7 +78,7 @@ export class EditProjectComponent implements OnInit {
       id: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
-      form_link: ['', Validators.required],
+      form_link: [''],
       started_at: ['', Validators.required],
       ended_at: ['', Validators.required],
       program: ['', Validators.required],

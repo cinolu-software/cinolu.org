@@ -8,6 +8,8 @@ import {
   Plus,
   Eye,
   EyeOff,
+  Star,
+  StarOff,
 } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -28,6 +30,7 @@ import { ConfirmPopup } from 'primeng/confirmpopup';
 import { AvatarModule } from 'primeng/avatar';
 import { PublishEventStore } from '../../store/events/publish-event.store';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
+import { HighlightEventStore } from '../../store/events/highlight-event.store';
 
 @Component({
   selector: 'app-events-list',
@@ -37,6 +40,7 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
     PublishEventStore,
     DeleteEventStore,
     ConfirmationService,
+    HighlightEventStore
   ],
   imports: [
     LucideAngularModule,
@@ -60,6 +64,7 @@ export class ListEvents implements OnInit {
   store = inject(EventsStore);
   deleteEventStore = inject(DeleteEventStore);
   publishEventStore = inject(PublishEventStore);
+  highlightStore = inject(HighlightEventStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   icons = {
     refresh: RefreshCcw,
@@ -69,6 +74,8 @@ export class ListEvents implements OnInit {
     plus: Plus,
     eye: Eye,
     eyeOff: EyeOff,
+    star: Star,
+    starOff: StarOff
   };
   queryParams = signal<FilterEventsDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
@@ -101,6 +108,10 @@ export class ListEvents implements OnInit {
   async updateRoute(): Promise<void> {
     const queryParams = this.queryParams();
     await this.#router.navigate(['/dashboard/events'], { queryParams });
+  }
+
+  highlightEvent(eventId: string): void {
+    this.highlightStore.highlight(eventId);
   }
 
   updateRouteAndEvents(): void {
