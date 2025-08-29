@@ -63,7 +63,7 @@ export class AddProjectComponent {
     this.form = this.#fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      form_link: ['', Validators.required],
+      form_link: ['' ],
       started_at: [null, Validators.required],
       ended_at: [null, Validators.required],
       program: ['', Validators.required],
