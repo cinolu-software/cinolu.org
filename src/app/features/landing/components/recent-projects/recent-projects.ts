@@ -36,4 +36,5 @@ export class RecentProjects {
     moveLeft: ArrowLeft,
     moveRight: ArrowRight,
   };
+  protected readonly carouselOptions = carouselConfig;
 }
