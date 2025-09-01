@@ -71,8 +71,8 @@ export class ListUsers implements OnInit {
     plus: Plus,
   };
   queryParams = signal<FilterUsersDto>({
-    page: this.#route.snapshot.params['page'],
-    q: this.#route.snapshot.params['q'],
+    page: this.#route.snapshot.queryParamMap.get('page'),
+    q: this.#route.snapshot.queryParamMap.get('q'),
   });
 
   constructor() {
@@ -96,7 +96,7 @@ export class ListUsers implements OnInit {
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/users/list'], { queryParams });
+    this.#router.navigate(['/dashboard/users'], { queryParams }).then();
   }
 
   updateRouteAndUsers(): void {
