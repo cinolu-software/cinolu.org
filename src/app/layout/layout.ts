@@ -39,11 +39,6 @@ export class Layout implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
-    this.#unsubscribeAll.next(null);
-    this.#unsubscribeAll.complete();
-  }
-
   private _updateLayout(): void {
     let route = this.#activatedRoute;
     while (route.firstChild) {
@@ -53,9 +48,7 @@ export class Layout implements OnInit, OnDestroy {
     const layoutFromQueryParam = route.snapshot.queryParamMap.get('layout');
     if (layoutFromQueryParam) {
       this.layout = layoutFromQueryParam;
-      if (this.config) {
-        this.config.layout = layoutFromQueryParam;
-      }
+      if (this.config) this.config.layout = layoutFromQueryParam;
     }
     const paths = route.pathFromRoot;
     paths.forEach((path) => {
@@ -67,5 +60,10 @@ export class Layout implements OnInit, OnDestroy {
         this.layout = path.routeConfig.data['layout'];
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.#unsubscribeAll.next(null);
+    this.#unsubscribeAll.complete();
   }
 }
