@@ -6,6 +6,7 @@ import { RecentProjects } from '../components/recent-projects/recent-projects';
 import { Services } from '../components/services/services';
 import { WhyJoinUs } from '../components/why-join-us/why-join-us';
 import { OurPrograms } from '../components/our-programs/our-programs';
+import { Highlight } from "../components/highlight/highlight";
 
 @Component({
   selector: 'app-landing-page',
@@ -17,7 +18,8 @@ import { OurPrograms } from '../components/our-programs/our-programs';
     Partners,
     WhyJoinUs,
     OurPrograms,
-  ],
+    Highlight
+],
   templateUrl: './landing-page.html',
 })
 export class LandingPage {}

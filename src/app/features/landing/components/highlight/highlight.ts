@@ -1,18 +1,32 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LucideAngularModule, MoveUpRight, UserPlus, Users } from 'lucide-angular';
+import { OnInit } from '@angular/core';
+import {
+  LucideAngularModule,
+  MoveUpRight,
+  UserPlus,
+  Users,
+} from 'lucide-angular';
 import { CountUpDirective } from '../../../../shared/directives/count-up.directive';
+import { HighlightsStore } from '../../../highlight/store/highlights.store';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-highlight',
-  imports: [LucideAngularModule, NgOptimizedImage, RouterLink, CountUpDirective],
+  providers: [HighlightsStore],
+  imports: [LucideAngularModule, RouterLink, CountUpDirective, CommonModule],
   templateUrl: './highlight.html',
 })
-export class Highlight {
+export class Highlight implements OnInit {
+  store = inject(HighlightsStore);
+
   icons = {
     moveUp: MoveUpRight,
     userPlus: UserPlus,
     users: Users,
   };
+
+  ngOnInit(): void {
+    this.store.highlight();
+  }
 }
