@@ -10,11 +10,18 @@ import {
 import { CountUpDirective } from '../../../../shared/directives/count-up.directive';
 import { HighlightsStore } from '../../../highlight/store/highlights.store';
 import { CommonModule } from '@angular/common';
+import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 
 @Component({
   selector: 'app-highlight',
   providers: [HighlightsStore],
-  imports: [LucideAngularModule, RouterLink, CountUpDirective, CommonModule],
+  imports: [
+    LucideAngularModule,
+    RouterLink,
+    CountUpDirective,
+    CommonModule,
+    FadeInOnScrollDirective,
+  ],
   templateUrl: './highlight.html',
 })
 export class Highlight implements OnInit {

@@ -11,7 +11,6 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { FilterHighlightsDto } from '../dto/filter-highlights.dto';
 import { IHighlight } from '../../../shared/models/entities.models';
-import { buildQueryParams } from '../../../shared/helpers/build-query-params';
 interface IHighlightsStore {
   isLoading: boolean;
   highlight: IHighlight | null;
@@ -26,15 +25,14 @@ export const HighlightsStore = signalStore(
     loadHighlights: rxMethod<FilterHighlightsDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((queryParams) => {
-          const params = buildQueryParams(queryParams);
-          return _http.get<{ data: IHighlight }>('highlights', { params }).pipe(
+        switchMap(() => {
+          return _http.get<{ data: IHighlight }>('highlights').pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false, highlight: data });
               console.log(data);
             }),
             catchError((e) => {
-              console.error(e);
+              console.log(e);
               patchState(store, { isLoading: false, highlight: null });
               return of(null);
             }),

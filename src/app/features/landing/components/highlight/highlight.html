@@ -22,34 +22,78 @@
     <div
       class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center py-0 sm:py-10"
     >
-      <div class="relative h-80 sm:h-96 lg:h-[32rem]" appAnimationsOnScroll>
-        <div
-          class="relative w-full h-full overflow-hidden rounded-md shadow-md"
-        >
-          <img
-            src="/images/joinUs.jpg"
-            alt="Join Us"
-            class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
-          />
-        </div>
+      <div class="" appAnimationsOnScroll>
+        <div>
+          <div class="relative h-80 lg:h-[20rem]">
+            <div
+              class="relative w-full h-full overflow-hidden rounded-md shadow-md"
+            >
+              <img
+                src="/images/joinUs.jpg"
+                alt="Join Us"
+                class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+              />
+            </div>
 
-        <div
-          class="absolute w-64 z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-xl border border-white/30 shadow-md rounded-md px-6 py-4"
-        >
-          <div class="flex items-center gap-4">
-            <i-lucide
-              [name]="icons.users"
-              class="text-white size-10 sm:size-12"
-            ></i-lucide>
-            <div>
-              <p
-                appCountUp
-                [end]="5000"
-                [duration]="2000"
-                suffix=" +"
-                class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight"
-              ></p>
-              <p class="text-white text-base uppercase">Membres</p>
+            <div
+              class="absolute w-64 z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-xl border border-white/30 shadow-md rounded-md px-6 py-4"
+            >
+              <div class="flex items-center gap-4">
+                <i-lucide
+                  [name]="icons.users"
+                  class="text-white size-10 sm:size-12"
+                ></i-lucide>
+                <div>
+                  <p
+                    appCountUp
+                    [end]="5000"
+                    [duration]="2000"
+                    suffix=" +"
+                    class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight"
+                  ></p>
+                  <p class="text-white text-base uppercase">Membres</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 relative mt-6 h-48 lg:h-64 gap-4">
+            <div class="h-full overflow-hidden rounded-md">
+              <img
+                src="/images/joinUs.jpg"
+                alt="Join Us"
+                class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+              />
+            </div>
+
+            <div
+              class="h-full overflow-hidden rounded-md bg-white hyphens-none"
+            >
+              <div class="relative w-full h-32 overflow-hidden">
+                <img
+                  src="/images/joinUs.jpg"
+                  alt="Join Us"
+                  fill
+                  class="w-full h-32 object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+                />
+              </div>
+
+              <div class="p-2 md:p-4">
+                <p class="text-base mb-2 text-gray-600 line-clamp-3">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Ratione voluptatem quia nostrum nihil quibusdam distinctio
+                  consequuntur quae laborum pariatur nesciunt est molestiae
+                  porro ex expedita earum incidunt, libero fugiat consectetur.
+                </p>
+              </div>
+            </div>
+
+            <div class="h-full overflow-hidden rounded-md">
+              <img
+                src="/images/projects.jpg"
+                alt="Join Us"
+                class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+              />
             </div>
           </div>
         </div>
@@ -71,7 +115,7 @@
             <i-lucide
               stroke="4"
               [name]="icons.moveUp"
-              class="bg-primary-500 backdrop-blur-[1px] text-2xl text-white p-1 rounded-full"
+              class="bg-white backdrop-blur-[1px] text-2xl text-white p-1 rounded-full"
             >
             </i-lucide>
           </div>
