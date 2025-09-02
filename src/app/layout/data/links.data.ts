@@ -7,6 +7,7 @@ import {
   Calendar1,
   Phone,
   House,
+  LayoutGrid,
   BookOpen,
 } from 'lucide-angular';
 
@@ -122,8 +123,14 @@ export const ADMIN_LINKS: ILink[] = [
 
 export const COMMON_LINKS: ILink[] = [
   {
-    name: 'Mes informations',
+    name: 'Dashboard',
     path: '/dashboard',
+    icon: LayoutGrid,
+    exactUrl: true,
+  },
+  {
+    name: 'Mes informations',
+    path: '/dashboard/account',
     icon: Info,
     exactUrl: true,
   },

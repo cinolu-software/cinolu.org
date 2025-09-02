@@ -3,6 +3,12 @@ import { Routes } from '@angular/router';
 export const dashboardRoutes: Routes = [
   {
     path: '',
+    title: 'Dashboard',
+    loadComponent: () =>
+      import('./shared/dashboard/pages/dashboard').then((c) => c.Dashboard),
+  },
+  {
+    path: 'account',
     loadChildren: () =>
       import('./shared/account/account.routes').then((c) => c.accountRoutes),
   },
