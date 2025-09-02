@@ -10,26 +10,24 @@ import {
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, exhaustMap } from 'rxjs';
-import { AdminStatsDto } from '../dto/stats.dto';
-import { AuthStore } from '../../../../../core/auth/auth.store';
+import { IUserStats } from '../types/stats.type';
 
 interface IStatsStore {
   isLoading: boolean;
-  stats: AdminStatsDto | null;
+  stats: IUserStats | null;
 }
 
-export const DashboardStore = signalStore(
+export const UserStatsStore = signalStore(
   withState<IStatsStore>({ isLoading: false, stats: null }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _authStore: inject(AuthStore),
   })),
   withMethods(({ _http, ...store }) => ({
-    getAdminStats: rxMethod<void>(
+    getUserStats: rxMethod<void>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
-          return _http.get<{ data: AdminStatsDto }>('stats/admin').pipe(
+          return _http.get<{ data: IUserStats }>('stats/user').pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false, stats: data });
             }),
@@ -43,10 +41,8 @@ export const DashboardStore = signalStore(
     ),
   })),
   withHooks({
-    onInit({ getAdminStats, _authStore }) {
-      const roles = _authStore.user()?.roles as unknown as string[];
-      const isStaff = roles.includes('admin') || roles.includes('staff');
-      if (isStaff) getAdminStats();
+    onInit({ getUserStats }) {
+      getUserStats();
     },
   }),
 );

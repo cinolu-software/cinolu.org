@@ -1,49 +1,41 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject,  } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import {
-  Book,
-  BookOpen,
-  Calendar,
-  FileText,
-  Layers,
-  LucideAngularModule,
-  Newspaper,
-  User,
-  Users,
-} from 'lucide-angular';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { DashboardStore } from '../store/dashboard.store';
+import { AdminStatsStore } from '../store/admin-stats.store';
+import { AuthStore } from '../../../../../core/auth/auth.store';
+import { AdminStats } from '../components/admin-stats/admin-stats';
+import { UserStats } from '../components/user-stats/user-stats';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.html',
-  providers: [DashboardStore],
+  providers: [AdminStatsStore],
   imports: [
     ButtonModule,
     InputTextModule,
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    LucideAngularModule,
     NgxPaginationModule,
     ConfirmPopupModule,
+    AdminStats,
+    UserStats,
   ],
 })
 export class Dashboard {
-  store = inject(DashboardStore);
-  icons = {
-    user: User,
-    users: Users,
-    bookOpen: BookOpen,
-    book: Book,
-    file: FileText,
-    layers: Layers,
-    calendar: Calendar,
-    newsPaper: Newspaper,
-  };
+  authStore = inject(AuthStore);
+  isAdmin = signal<boolean>(false);
+
+  constructor() {
+    effect(() => {
+      const roles = this.authStore.user()?.roles as unknown as string[];
+      const isAdmin = roles.includes('admin') || roles.includes('staff');
+      this.isAdmin.set(isAdmin);
+    });
+  }
 }
