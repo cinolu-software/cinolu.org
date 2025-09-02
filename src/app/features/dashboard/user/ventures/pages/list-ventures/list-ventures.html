@@ -2,60 +2,37 @@
   <div class="dashboard-main-content">
     <div class="flex w-full flex-wrap gap-4 justify-between items-center mb-6">
       <h1 class="text-2xl font-bold">Mes entreprises</h1>
-      <p-button
-        [routerLink]="'/dashboard/ventures/add'"
-        [size]="'small'"
-        variant="outlined"
-      >
-        <i-lucide [name]="icons.plus" class="size-4" />
+      <p-button [routerLink]="'/dashboard/ventures/add'" [size]="'small'" variant="outlined">
+        <i-lucide [name]="icons.plus" class="size-4"/>
         Ajouter une entreprise
       </p-button>
     </div>
     @if (store.ventures()[0] && !store.isLoading()) {
-      @for (
-        venture of store.ventures()[0]
-          | paginate
-            : {
-                itemsPerPage: 10,
-                currentPage: queryParams().page ?? 1,
-                totalItems: store.ventures()[1],
-              };
-        track venture.id
-      ) {
+      @for (venture of store.ventures()[0] | paginate : {
+        itemsPerPage: 10,
+        currentPage: queryParams().page ?? 1,
+        totalItems: store.ventures()[1],
+      }; track venture.id) {
         <div class="flex flex-col md:flex-row gap-4 mb-6">
           <div class="relative h-28 w-40 rounded bg-gray-200">
-            <img
-              [ngSrc]="venture | apiIMG: 'venture'"
-              [alt]="venture.name"
-              class="aspect-video object-cover rounded border-2 border-slate-200/10"
-              fill
-            />
+            <img [ngSrc]="venture | apiIMG: 'venture'" [alt]="venture.name"
+                 class="aspect-video object-cover rounded border-2 border-slate-200/10" fill/>
           </div>
           <div class="flex flex-col gap-1.5 w-full md:w-3/4">
             <div class="flex items-center">
               <h3 class="font-bold font-satoshi text-lg">{{ venture.name }}</h3>
               <div class="flex items-center gap-1.5">
-                <a
-                  class="ml-4 inline-block text-gray-500 hover:text-gray-700"
-                  [routerLink]="['/dashboard/ventures/view', venture.slug]"
-                >
-                  <i-lucide [name]="icons.eye" class="size-5 text-inherit" />
+                <a class="ml-4 inline-block text-gray-500 hover:text-gray-700"
+                   [routerLink]="['/dashboard/ventures/view', venture.slug]">
+                  <i-lucide [name]="icons.eye" class="size-5 text-inherit"/>
                 </a>
-                <a
-                  class="text-gray-500 hover:text-gray-700"
-                  [routerLink]="[
-                    '/dashboard/ventures/update',
-                    venture.slug,
-                  ]"
-                >
-                  <i-lucide [name]="icons.edit" class="size-4 text-inheri" />
+                <a class="text-gray-500 hover:text-gray-700"
+                   [routerLink]="['/dashboard/ventures/update',venture.slug,]">
+                  <i-lucide [name]="icons.edit" class="size-4 text-inheri"/>
                 </a>
                 <button (click)="onDeleteVenture(venture.id, $event)">
-                  <p-confirmpopup />
-                  <i-lucide
-                    [name]="icons.trash"
-                    class="size-4 text-red-500 hover:text-red-700"
-                  />
+                  <p-confirmpopup/>
+                  <i-lucide [name]="icons.trash" class="size-4 text-red-500 hover:text-red-700"/>
                 </button>
               </div>
             </div>
@@ -67,13 +44,8 @@
       }
       @if (store.ventures()[1] > 10) {
         <div class="flex justify-center pb-8">
-          <pagination-controls
-            nextLabel=""
-            previousLabel=""
-            [maxSize]="5"
-            (pageChange)="onPageChange($event)"
-            class="pg"
-          />
+          <pagination-controls nextLabel="" previousLabel="" [maxSize]="5"
+                               (pageChange)="onPageChange($event)" class="pg"/>
         </div>
       }
     }
@@ -85,18 +57,10 @@
         <div class="flex flex-col md:flex-row gap-4 mb-6">
           <div class="h-28 w-52 rounded bg-gray-200 animate-pulse mb-4"></div>
           <div class="md:col-span-2">
-            <div
-              class="animate-pulse h-4 w-full mb-4 md:w-56 rounded-md bg-gray-200"
-            ></div>
-            <div
-              class="animate-pulse h-2 w-full mb-1 rounded-md bg-gray-200"
-            ></div>
-            <div
-              class="animate-pulse h-2 w-full mb-1 rounded-md bg-gray-200"
-            ></div>
-            <div
-              class="animate-pulse h-2 w-full md:w-48 rounded-md bg-gray-200"
-            ></div>
+            <div class="animate-pulse h-4 w-full mb-4 md:w-56 rounded-md bg-gray-200"></div>
+            <div class="animate-pulse h-2 w-full mb-1 rounded-md bg-gray-200"></div>
+            <div class="animate-pulse h-2 w-full mb-1 rounded-md bg-gray-200"></div>
+            <div class="animate-pulse h-2 w-full md:w-48 rounded-md bg-gray-200"></div>
           </div>
         </div>
       }

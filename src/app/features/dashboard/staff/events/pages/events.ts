@@ -15,7 +15,7 @@ export class Events {
   eventsList = viewChild<ListEvents>(ListEvents);
   eventCategories = viewChild<EventCategories>(EventCategories);
 
-  get projectsCount(): number {
+  get eventsCount(): number {
     return this.eventsList()?.count || 0;
   }
 

@@ -1,4 +1,4 @@
-import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
   ArrowLeft,
@@ -24,7 +24,6 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
   templateUrl: './detail-venture.html',
 })
 export class DetailVenture {
-  #location = inject(Location);
   icons = {
     back: ArrowLeft,
     locate: MapPin,
@@ -32,8 +31,4 @@ export class DetailVenture {
     email: MailCheck,
   };
   store = inject(VentureStore);
-
-  onGoBack(): void {
-    this.#location.back();
-  }
 }

@@ -8,6 +8,11 @@ export const dashboardRoutes: Routes = [
       import('./shared/dashboard/pages/dashboard').then((c) => c.Dashboard),
   },
   {
+    path: 'community',
+    loadChildren: () =>
+      import('./user/outreach/outreach.routes').then((c) => c.outreachRoutes),
+  },
+  {
     path: 'account',
     loadChildren: () =>
       import('./shared/account/account.routes').then((c) => c.accountRoutes),

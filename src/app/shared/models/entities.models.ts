@@ -33,6 +33,7 @@ export interface IUser extends IBase {
   name: string;
   password?: string;
   biography?: string;
+  gender?: string;
   phone_number?: string;
   city?: string;
   country?: string;

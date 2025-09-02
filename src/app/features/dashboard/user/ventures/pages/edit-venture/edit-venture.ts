@@ -8,7 +8,6 @@ import {
   ChevronsRight,
 } from 'lucide-angular';
 import { VentureStore } from '../../store/venture.store';
-import { RouterLink } from '@angular/router';
 import { StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
@@ -32,7 +31,6 @@ import { FileUpload } from '../../../../../../shared/components/file-upload/file
   providers: [VentureStore, UpdateVenturetore],
   imports: [
     LucideAngularModule,
-    RouterLink,
     CommonModule,
     StepperModule,
     ButtonModule,

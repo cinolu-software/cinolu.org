@@ -9,6 +9,7 @@ import {
   House,
   LayoutGrid,
   BookOpen,
+  Group,
 } from 'lucide-angular';
 
 export interface ILink {
@@ -142,6 +143,17 @@ export const USER_LINKS: ILink[] = [
     path: '/dashboard/ventures',
     icon: BriefcaseBusiness,
   },
+  {
+    name: 'Communauté',
+    path: '/dashboard/community',
+    icon: Group,
+    children: [
+      {
+        name: 'Vulgarisation',
+        path: '/dashboard/community/outreach',
+      }
+    ]
+  }
 ];
 
 export const SOCIAL_LINKS: ILink[] = [
