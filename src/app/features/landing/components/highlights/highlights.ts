@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { OnInit } from '@angular/core';
 import {
   LucideAngularModule,
   MoveUpRight,
@@ -8,12 +7,12 @@ import {
   Users,
 } from 'lucide-angular';
 import { CountUpDirective } from '../../../../shared/directives/count-up.directive';
-import { HighlightsStore } from '../../../highlight/store/highlights.store';
+import { HighlightsStore } from '../../../highlights/store/highlights.store';
 import { CommonModule } from '@angular/common';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 
 @Component({
-  selector: 'app-highlight',
+  selector: 'app-highlights',
   providers: [HighlightsStore],
   imports: [
     LucideAngularModule,
@@ -22,9 +21,9 @@ import { FadeInOnScrollDirective } from '../../../../shared/directives/animation
     CommonModule,
     FadeInOnScrollDirective,
   ],
-  templateUrl: './highlight.html',
+  templateUrl: './highlights.html',
 })
-export class Highlight implements OnInit {
+export class Highlights {
   store = inject(HighlightsStore);
 
   icons = {
@@ -32,8 +31,4 @@ export class Highlight implements OnInit {
     userPlus: UserPlus,
     users: Users,
   };
-
-  ngOnInit(): void {
-    this.store.highlight();
-  }
 }

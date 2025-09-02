@@ -4,36 +4,35 @@ import {
   withMethods,
   patchState,
   withProps,
+  withHooks,
 } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { catchError, of, pipe, switchMap, tap } from 'rxjs';
+import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { FilterHighlightsDto } from '../dto/filter-highlights.dto';
 import { IHighlight } from '../../../shared/models/entities.models';
+
 interface IHighlightsStore {
   isLoading: boolean;
-  highlight: IHighlight | null;
+  highlights: IHighlight | null;
 }
 
 export const HighlightsStore = signalStore(
-  withState<IHighlightsStore>({ isLoading: false, highlight: null }),
+  withState<IHighlightsStore>({ isLoading: false, highlights: null }),
   withProps(() => ({
     _http: inject(HttpClient),
   })),
   withMethods(({ _http, ...store }) => ({
-    loadHighlights: rxMethod<FilterHighlightsDto>(
+    loadHighlights: rxMethod<void>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(() => {
+        exhaustMap(() => {
           return _http.get<{ data: IHighlight }>('highlights').pipe(
             tap(({ data }) => {
-              patchState(store, { isLoading: false, highlight: data });
-              console.log(data);
+              patchState(store, { isLoading: false, highlights: data });
             }),
-            catchError((e) => {
-              console.log(e);
-              patchState(store, { isLoading: false, highlight: null });
+            catchError(() => {
+              patchState(store, { isLoading: false, highlights: null });
               return of(null);
             }),
           );
@@ -41,4 +40,9 @@ export const HighlightsStore = signalStore(
       ),
     ),
   })),
+  withHooks({
+    onInit({ loadHighlights }) {
+      loadHighlights();
+    },
+  }),
 );
