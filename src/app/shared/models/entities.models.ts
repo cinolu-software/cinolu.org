@@ -21,8 +21,8 @@ export interface IArticle extends IBase {
   image: string;
   summary: string;
   content: string;
-  published_at: Date
-  is_highlighted: boolean
+  published_at: Date;
+  is_highlighted: boolean;
   tags: ITag[];
   comments: IComment[];
   author: IUser;
@@ -128,4 +128,26 @@ export interface IRole extends IBase {
 
 export interface ITag extends IBase {
   name: string;
+}
+
+export interface IHighlight {
+  data: {
+    programs: IProgram[];
+    subprograms: ISubprogram[];
+    events: IEvent[];
+    projects: IProject[];
+    articles: IArticle[];
+  };
+}
+
+export interface IHighlightCard {
+  id: string;
+  type: 'program' | 'subprogram' | 'event' | 'project' | 'article';
+  title: string;
+  description: string;
+  image?: string | null;
+  slug: string;
+  link: string;
+  dateStart?: string;
+  dateEnd?: string;
 }
