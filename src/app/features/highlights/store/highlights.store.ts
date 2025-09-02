@@ -39,6 +39,27 @@ export const HighlightsStore = signalStore(
         }),
       ),
     ),
+    getFirstHighlight(
+      highlights: Record<string, IHighlight[]>,
+    ): IHighlight | null {
+      if (!highlights) return null;
+
+      const keys = [
+        'programs',
+        'subprograms',
+        'events',
+        'projects',
+        'articles',
+      ];
+
+      for (const key of keys) {
+        if (Array.isArray(highlights[key]) && highlights[key].length > 0) {
+          return highlights[key][0];
+        }
+      }
+
+      return null;
+    },
   })),
   withHooks({
     onInit({ loadHighlights }) {

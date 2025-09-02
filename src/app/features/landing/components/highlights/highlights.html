@@ -5,120 +5,54 @@
   <div
     class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 md:py-28"
   >
-    <div class="mb-10">
+    <div class="mb-10 text-center">
       <h3
-        class="text-3xl text-center sm:text-4xl lg:text-5xl font-black font-satoshi mb-3 tracking-tight leading-tight"
+        class="text-3xl sm:text-4xl lg:text-5xl font-black font-satoshi mb-3 tracking-tight leading-tight"
       >
         Nos Temps forts
       </h3>
-
-      {{ store.highlights() | json }}
-      <p class="max-w-3xl text-center text-base text-white m-auto hyphens-none">
+      <p class="max-w-3xl text-base text-white m-auto hyphens-none">
         Un aperçu des projets, événements et initiatives qui ont marqué ou
         marquent notre parcours.
       </p>
     </div>
 
-    <div
-      class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center py-0 sm:py-10"
-    >
-      <div class="" appAnimationsOnScroll>
-        <div>
-          <div class="relative h-80 lg:h-[20rem]">
-            <div
-              class="relative w-full h-full overflow-hidden rounded-md shadow-md"
-            >
-              <img
-                src="/images/joinUs.jpg"
-                alt="Join Us"
-                class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
-              />
-            </div>
+    @if (store.highlights(); as highlights) {
+      @for (program of highlights.events; track $index) {
+        <p>{{ program.name }}</p>
+      }
+      {{ highlights | json }}
+    }
 
-            <div
-              class="absolute w-64 z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-xl border border-white/30 shadow-md rounded-md px-6 py-4"
-            >
-              <div class="flex items-center gap-4">
-                <i-lucide
-                  [name]="icons.users"
-                  class="text-white size-10 sm:size-12"
-                ></i-lucide>
-                <div>
-                  <p
-                    appCountUp
-                    [end]="5000"
-                    [duration]="2000"
-                    suffix=" +"
-                    class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight"
-                  ></p>
-                  <p class="text-white text-base uppercase">Membres</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-3 relative mt-6 h-48 lg:h-64 gap-4">
-            <div class="h-full overflow-hidden rounded-md">
-              <img
-                src="/images/joinUs.jpg"
-                alt="Join Us"
-                class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
-              />
-            </div>
-
-            <div
-              class="h-full overflow-hidden rounded-md bg-white hyphens-none"
-            >
-              <div class="relative w-full h-32 overflow-hidden">
-                <img
-                  src="/images/joinUs.jpg"
-                  alt="Join Us"
-                  fill
-                  class="w-full h-32 object-cover transition-transform duration-500 ease-in-out hover:scale-105"
-                />
-              </div>
-
-              <div class="p-2 md:p-4">
-                <p class="text-base mb-2 text-gray-600 line-clamp-3">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ratione voluptatem quia nostrum nihil quibusdam distinctio
-                  consequuntur quae laborum pariatur nesciunt est molestiae
-                  porro ex expedita earum incidunt, libero fugiat consectetur.
-                </p>
-              </div>
-            </div>
-
-            <div class="h-full overflow-hidden rounded-md">
-              <img
-                src="/images/projects.jpg"
-                alt="Join Us"
-                class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="flex flex-col items-center justify-center gap-2 fade-right-init"
-        appAnimationsOnScroll
-      >
-        <div class="grid grid-cols-1">
-          <p class="max-w-3xl text-center text-base text-white m-auto">
-            Un aperçu des projets, événements et initiatives qui ont marqué ou
-            marquent notre parcours.
-          </p>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 py-0 sm:py-10">
+      <div class="relative" appAnimationsOnScroll>
+        <div
+          class="relative h-80 lg:h-[20rem] rounded-md shadow-md overflow-hidden"
+        >
+          <img
+            src="/images/joinUs.jpg"
+            alt="Programme principal"
+            class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+          />
 
           <div
-            class="py-4 px-5 flex items-center flex-row-reverse justify-between lg:px-10 bg-white/50 backdrop-blur-[2px] border border-gray-200 rounded-full mt-3 transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg"
+            class="absolute m-auto z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-xl border border-white/30 shadow-md rounded-md px-6 py-4"
           >
-            <i-lucide
-              stroke="4"
-              [name]="icons.moveUp"
-              class="bg-white backdrop-blur-[1px] text-2xl text-white p-1 rounded-full"
+            <h2
+              class="text-2xl sm:text-3xl font-satoshi lg:text-4xl font-bold text-white mb-3 tracking-tight leading-snug"
             >
-            </i-lucide>
+              A la une de nos programmes
+            </h2>
           </div>
+        </div>
+
+        <div class="mt-6 text-center">
+          <p class="max-w-3xl text-base text-white m-auto">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores
+            suscipit assumenda aliquam doloremque voluptates, nisi ipsam sunt?
+            Voluptatum, repudiandae aut voluptatibus, libero, quasi quod
+            reprehenderit blanditiis nulla dolores numquam natus.
+          </p>
         </div>
 
         <div class="w-full flex justify-center md:justify-start mt-4">
@@ -127,13 +61,100 @@
             type="submit"
             class="group relative z-10 flex items-center justify-center gap-2 px-6 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-md"
           >
-            Rejoignez-Nous
+            Découvrir Plus
             <i-lucide
-              [name]="icons.userPlus"
+              [name]="icons.users"
               class="mt-0.5 group-hover:translate-x-1 transition-all duration-300"
-            >
-            </i-lucide>
+            ></i-lucide>
           </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-3 gap-4 relative mt-6 h-48 lg:h-64">
+        <div
+          class="h-full overflow-hidden rounded-md bg-white hyphens-none flex flex-col"
+        >
+          <div class="relative w-full h-28 overflow-hidden">
+            <img
+              src="/images/joinUs.jpg"
+              alt="Programme secondaire 1"
+              class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+            />
+          </div>
+          <div class="flex-1 flex flex-col justify-between p-3 md:p-4">
+            <p class="text-sm text-gray-600 line-clamp-3">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
+              voluptatem quia nostrum nihil quibusdam distinctio consequuntur.
+            </p>
+            <button
+              type="submit"
+              class="group relative text-sm flex items-center justify-center gap-2 px-5 py-1 mt-3 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-md"
+            >
+              Découvrir
+              <i-lucide
+                [name]="icons.moveUp"
+                class="mt-0.5 group-hover:translate-x-1 transition-all duration-300 size-5"
+              ></i-lucide>
+            </button>
+          </div>
+        </div>
+
+        <!-- Carte 2 -->
+        <div
+          class="h-full overflow-hidden rounded-md bg-white hyphens-none flex flex-col"
+        >
+          <div class="relative w-full h-28 overflow-hidden">
+            <img
+              src="/images/joinUs.jpg"
+              alt="Programme secondaire 2"
+              class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+            />
+          </div>
+          <div class="flex-1 flex flex-col justify-between p-3 md:p-4">
+            <p class="text-sm text-gray-600 line-clamp-3">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
+              voluptatem quia nostrum nihil quibusdam distinctio consequuntur.
+            </p>
+            <button
+              type="submit"
+              class="group relative text-sm flex items-center justify-center gap-2 px-5 py-1 mt-3 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-md"
+            >
+              Découvrir
+              <i-lucide
+                [name]="icons.moveUp"
+                class="mt-0.5 group-hover:translate-x-1 transition-all duration-300 size-5"
+              ></i-lucide>
+            </button>
+          </div>
+        </div>
+
+        <!-- Carte 3 -->
+        <div
+          class="h-full overflow-hidden rounded-md bg-white hyphens-none flex flex-col"
+        >
+          <div class="relative w-full h-28 overflow-hidden">
+            <img
+              src="/images/projects.jpg"
+              alt="Programme secondaire 3"
+              class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+            />
+          </div>
+          <div class="flex-1 flex flex-col justify-between p-3 md:p-4">
+            <p class="text-sm text-gray-600 line-clamp-3">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
+              voluptatem quia nostrum nihil quibusdam distinctio consequuntur.
+            </p>
+            <button
+              type="submit"
+              class="group relative text-sm flex items-center justify-center gap-2 px-5 py-1 mt-3 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-md"
+            >
+              Découvrir
+              <i-lucide
+                [name]="icons.moveUp"
+                class="mt-0.5 group-hover:translate-x-1 transition-all duration-300 size-5"
+              ></i-lucide>
+            </button>
+          </div>
         </div>
       </div>
     </div>
