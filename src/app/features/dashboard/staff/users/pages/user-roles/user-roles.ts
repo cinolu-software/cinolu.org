@@ -84,12 +84,10 @@ export class UserRoles implements OnInit {
     });
     this.addRoleForm = this.#fb.group({
       name: ['', Validators.required],
-      label: [''],
     });
     this.updateRoleForm = this.#fb.group({
       id: [''],
       name: ['', Validators.required],
-      label: [''],
     });
   }
 
@@ -117,7 +115,7 @@ export class UserRoles implements OnInit {
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/users/roles'], { queryParams });
+    this.#router.navigate(['/dashboard/users/roles'], { queryParams }).then();
   }
 
   updateRouteAndRoles(): void {
