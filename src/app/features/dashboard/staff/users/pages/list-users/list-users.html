@@ -84,15 +84,13 @@
             @for (user of userList  | paginate : {
               itemsPerPage: 40, currentPage: queryParams().page || 1,
               totalItems: userCount,
-            };
-              track user.id) {
+            }; track user.id) {
               <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
                 <td class="px-6 py-2">
                   <p-avatar [image]="user | apiIMG: 'user'"/>
                 </td>
                 <td class="px-6 py-2 font-medium">
                   {{ user.name | titlecase }}
-
                 </td>
                 <td class="px-6 py-2">
                   {{ user.email }}
