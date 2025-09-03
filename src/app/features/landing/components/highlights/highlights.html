@@ -1,5 +1,5 @@
 <section
-  class="min-h-fit bg-primary-500 md:max-h-full text-white backdrop-blur-[1px] bg-grid items-center content-center"
+  class="min-h-fit bg-primary-500 md:h-[500px] text-white backdrop-blur-[1px] bg-grid items-center content-center"
   appAnimationsOnScroll
 >
   <div
@@ -17,11 +17,9 @@
       </p>
     </div>
 
-    <div
-      class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch min-h-[400px]"
-    >
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
       <div
-        class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 rounded-lg bg-white hyphens-none p-6 lg:p-8"
+        class="lg:col-span-2 md:h-[400px] grid grid-cols-1 md:grid-cols-2 gap-6 rounded-lg bg-white hyphens-none p-6 lg:p-8"
       >
         <div class="w-full">
           @for (item of keys; track $index) {
@@ -82,7 +80,7 @@
 
           <button
             type="submit"
-            class="group relative text-sm flex items-center justify-center gap-2 px-5 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-md"
+            class="group relative mt-3 text-sm flex items-center justify-center gap-2 px-5 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-md"
           >
             Découvrir
             <i-lucide
@@ -93,9 +91,9 @@
         </div>
       </div>
 
-      <div class="relative lg:col-span-1" appAnimationsOnScroll>
+      <div class="md:h-[400px] relative lg:col-span-1" appAnimationsOnScroll>
         <div
-          class="relative rounded-lg shadow-md overflow-hidden h-full min-h-[500px]"
+          class="relative rounded-lg shadow-md overflow-hidden h-full min-h-[400px]"
         >
           <img
             src="/images/joinUs.jpg"
