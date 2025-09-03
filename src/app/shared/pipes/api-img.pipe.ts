@@ -22,10 +22,10 @@ export class ApiImgPipe implements PipeTransform {
         ? `${apiUrl}uploads/projects/${value['cover']}`
         : '/images/no-image.jpg',
       venture: value['logo']
-        ? `${apiUrl}uploads/ventures/logos/${value['logo']}`
+        ? `${apiUrl}uploads/enterprises/logos/${value['logo']}`
         : '/images/no-image.jpg',
       ventureCover: value['cover']
-        ? `${apiUrl}uploads/ventures/covers/${value['cover']}`
+        ? `${apiUrl}uploads/enterprises/covers/${value['cover']}`
         : '/images/no-image.jpg',
       product: value['image']
         ? `${apiUrl}uploads/products/images/${value['image']}`

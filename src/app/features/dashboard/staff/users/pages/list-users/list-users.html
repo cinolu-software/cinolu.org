@@ -75,6 +75,7 @@
             <th class="px-6 py-3">Image</th>
             <th class="px-6 py-3">Nom</th>
             <th class="px-6 py-3">Email</th>
+            <th class="px-6 py-3">Refs</th>
             <th class="px-6 py-3">Rejoint le</th>
             <th class="px-6 py-3">Actions</th>
           </tr>
@@ -97,7 +98,10 @@
                   {{ user.email }}
                 </td>
                 <td class="px-6 py-2">
-                  {{ user.created_at | date: "longDate" }}
+                  {{ user.referralsCount }}
+                </td>
+                <td class="px-6 py-2">
+                  {{ user.created_at | date: "shortDate" }}
                 </td>
                 <td class="px-6 py-2">
                   <div class="flex items-center gap-2">

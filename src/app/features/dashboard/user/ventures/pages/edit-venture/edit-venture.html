@@ -39,7 +39,11 @@
                 <p class="font-medium mb-1.5">
                   Ajouter une photo de couverture
                 </p>
-                <app-file-upload [name]="'cover'" [url]="coverUrl + venture?.id"/>
+                @if (store.isLoading()) {
+                  <div class="h-20 bg-gray-200 animate-pulse rounded-md w-full mb-4"></div>
+                } @else {
+                  <app-file-upload [name]="'cover'" [url]="coverUrl + venture?.id"/>
+                }
               </div>
               <div class="flex py-6 justify-end">
                 <p-button size="small" variant="outlined" (onClick)="activateCallback(2)">
