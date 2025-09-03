@@ -131,13 +131,11 @@ export interface ITag extends IBase {
 }
 
 export interface IHighlight {
-  data: {
-    programs?: IProgram[];
-    subprograms?: ISubprogram[];
-    events?: IEvent[];
-    projects?: IProject[];
-    articles?: IArticle[];
-  };
+  programs?: IProgram[];
+  subprograms?: ISubprogram[];
+  events?: IEvent[];
+  projects?: IProject[];
+  articles?: IArticle[];
 }
 
 export interface IHighlightCard {

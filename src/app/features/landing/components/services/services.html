@@ -17,15 +17,17 @@
     >
       @for (s of services; track $index) {
         <div
-          class="flex gap-5 bg-white p-2 md:p-5 shadow-md hover:shadow-lg rounded-lg duration-300 transition-all"
+          class="flex gap-5 bg-white p-2 md:p-5 shadow-md hover:shadow-lg rounded-md duration-300 transition-all"
         >
           <p
             class="text-primary-500 text-center flex flex-col items-center justify-center mb-3 rounded-full"
           >
             <i-lucide [name]="s.icon" class="md:size-12 size-10" />
           </p>
-          <div>
-            <h5 class="font-extrabold py-3 text-lg mb-1.5 text-gray-900">
+          <div class="mb-2">
+            <h5
+              class="font-extrabold py-2 md:py-3 text-lg mb-1.5 text-gray-900"
+            >
               {{ s.title }}
             </h5>
             <p>{{ s.description }}</p>
