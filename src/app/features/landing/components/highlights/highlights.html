@@ -1,5 +1,5 @@
 <section
-  class="min-h-fit bg-primary-500 md:h-[500px] text-white backdrop-blur-[1px] bg-grid items-center content-center"
+  class="min-h-fit bg-primary-500 md:h-[500px] text-white backdrop-blur-[1px] bg-grid flex items-center"
   appAnimationsOnScroll
 >
   <div
@@ -19,27 +19,27 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
       <div
-        class="lg:col-span-2 md:h-[400px] grid grid-cols-1 md:grid-cols-2 gap-6 rounded-lg bg-white hyphens-none p-6 lg:p-8"
+        class="lg:col-span-2 md:h-[400px] grid grid-cols-1 md:grid-cols-2 gap-6 rounded-lg bg-white p-6 lg:p-8"
       >
         <div class="w-full">
-          @for (item of keys; track $index) {
+          @for (key of keys; track key.id) {
             <button
-              (click)="selectKey(item)"
+              (click)="selectKey(key)"
               class="w-full py-2 px-5 flex items-center flex-row-reverse justify-between lg:px-6 border rounded-full mt-4 transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg"
               [ngClass]="
-                selectedKey.id === item.id
+                selectedKey.id === key.id
                   ? 'bg-primary-500 text-white border-primary-500 ring-2 ring-primary-500 ring-offset-2'
                   : 'bg-white/60 text-gray-900 border-gray-200'
               "
-              [attr.aria-pressed]="selectedKey.id === item.id"
+              [attr.aria-pressed]="selectedKey.id === key.id"
               type="button"
             >
               <i-lucide
                 stroke="4"
                 [name]="icons.moveUp"
-                class="backdrop-blur-[1px] text-lg p-1 rounded-full transition-colors duration-300"
+                class="text-lg p-1 rounded-full transition-colors duration-300"
                 [ngClass]="
-                  selectedKey.id === item.id
+                  selectedKey.id === key.id
                     ? 'bg-white text-primary-600'
                     : 'bg-primary-500 text-white'
                 "
@@ -48,59 +48,63 @@
               <span
                 class="text-base font-medium sm:font-semibold hyphens-none transition-colors duration-300"
                 [ngClass]="
-                  selectedKey.id === item.id ? 'text-white' : 'text-gray-900'
+                  selectedKey.id === key.id ? 'text-white' : 'text-gray-900'
                 "
               >
-                {{ item.name }}
+                {{ key.name }}
               </span>
             </button>
           }
         </div>
 
-        <div class="flex flex-col justify-between">
-          <div class="text-center md:text-left space-y-4">
-            <p
-              class="bg-primary-500/30 font-black py-1 w-28 px-6 text-primary-500 line-clamp-1 rounded-md"
-            >
-              Tous les tags
-            </p>
-            <h3
-              class="font-black font-satoshi text-gray-500 mb-2 text-2xl line-clamp-2"
-            >
-              Rejoignez un écosystème dynamique et contribuez à façonner
-              l’avenir de la région avec d’autres change-makers comme vous.
-            </h3>
-            <p class="text-base text-gray-500 max-w-3xl">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Asperiores suscipit assumenda aliquam doloremque voluptates, nisi
-              ipsam sunt? Voluptatum, repudiandae aut voluptatibus, libero,
-              quasi quod reprehenderit blanditiis nulla dolores numquam natus.
-            </p>
-          </div>
+        @if (selectedData.length > 0) {
+          <div class="flex flex-col justify-between">
+            <div class="text-center md:text-left space-y-4">
+              <p
+                class="bg-primary-500/20 text-base font-satoshi py-1 w-32 px-4 text-primary-500 line-clamp-1 rounded-md max-w-[11ch]"
+              >
+                {{ selectedKey.name }}
+              </p>
+              <h3
+                class="font-black font-satoshi text-gray-700 mb-2 text-2xl line-clamp-2"
+              >
+                {{ getItemTitle(selectedData[0]) }}
+              </h3>
+              <p
+                class="text-base text-gray-700 max-w-3xl line-clamp-6 hyphens-none"
+              >
+                {{ getItemDescription(selectedData[0]) }}
+              </p>
+            </div>
 
-          <button
-            type="submit"
-            class="group relative mt-3 text-sm flex items-center justify-center gap-2 px-5 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-md"
-          >
-            Découvrir
-            <i-lucide
-              [name]="icons.moveUp"
-              class="mt-0.5 group-hover:translate-x-1 transition-all duration-300 size-5"
-            ></i-lucide>
-          </button>
-        </div>
+            <button
+              [routerLink]="whatIsPath() + '/' + selectedData[0].slug"
+              type="submit"
+              class="group relative mt-3 text-sm flex items-center justify-center gap-2 px-5 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-md"
+            >
+              Découvrir
+              <i-lucide
+                [name]="icons.moveUp"
+                class="mt-0.5 group-hover:translate-x-1 transition-all duration-300 size-5"
+              ></i-lucide>
+            </button>
+          </div>
+        }
       </div>
 
-      <div class="md:h-[400px] relative lg:col-span-1" appAnimationsOnScroll>
-        <div
-          class="relative rounded-lg shadow-md overflow-hidden h-full min-h-[400px]"
-        >
-          <img
-            src="/images/joinUs.jpg"
-            alt="Programme principal"
-            class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
-          />
-        </div>
+      <div class="md:h-[400px] relative lg:col-span-1">
+        @if (selectedData.length > 0) {
+          <div
+            class="relative rounded-lg shadow-md overflow-hidden h-full min-h-[400px]"
+          >
+            <img
+              [ngSrc]="selectedData[0] | apiIMG: whatIsDisplayed()"
+              fill
+              [alt]="getItemTitle(selectedData[0])"
+              class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+            />
+          </div>
+        }
       </div>
     </div>
   </div>
