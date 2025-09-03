@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
@@ -40,7 +39,6 @@ import { AddVentureStore } from '../../store/add-venture.store';
 })
 export class AddVenture {
   #fb = inject(FormBuilder);
-  #location = inject(Location);
   form: FormGroup;
   icons = {
     back: ArrowLeft,
@@ -67,10 +65,6 @@ export class AddVenture {
       location: [''],
       stage: [''],
     });
-  }
-
-  onGoBack(): void {
-    this.#location.back();
   }
 
   onAddVenture(): void {

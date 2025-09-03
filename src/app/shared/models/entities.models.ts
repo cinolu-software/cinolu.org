@@ -34,10 +34,14 @@ export interface IUser extends IBase {
   password?: string;
   biography?: string;
   gender?: string;
+  referralsCount?: number;
   phone_number?: string;
   city?: string;
   country?: string;
   birth_date?: Date;
+  referral_code?: string;
+  referrals?: IUser[];
+  referred_by?: IUser;
   reason: string;
   google_image?: string;
   profile?: string;

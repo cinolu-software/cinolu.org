@@ -75,6 +75,7 @@
             <th class="px-6 py-3">Image</th>
             <th class="px-6 py-3">Nom</th>
             <th class="px-6 py-3">Email</th>
+            <th class="px-6 py-3">Refs</th>
             <th class="px-6 py-3">Rejoint le</th>
             <th class="px-6 py-3">Actions</th>
           </tr>
@@ -83,21 +84,22 @@
             @for (user of userList  | paginate : {
               itemsPerPage: 40, currentPage: queryParams().page || 1,
               totalItems: userCount,
-            };
-              track user.id) {
+            }; track user.id) {
               <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
                 <td class="px-6 py-2">
                   <p-avatar [image]="user | apiIMG: 'user'"/>
                 </td>
                 <td class="px-6 py-2 font-medium">
                   {{ user.name | titlecase }}
-
                 </td>
                 <td class="px-6 py-2">
                   {{ user.email }}
                 </td>
                 <td class="px-6 py-2">
-                  {{ user.created_at | date: "longDate" }}
+                  {{ user.referralsCount }}
+                </td>
+                <td class="px-6 py-2">
+                  {{ user.created_at | date: "shortDate" }}
                 </td>
                 <td class="px-6 py-2">
                   <div class="flex items-center gap-2">
