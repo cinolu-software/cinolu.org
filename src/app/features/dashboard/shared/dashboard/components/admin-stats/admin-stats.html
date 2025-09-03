@@ -1,60 +1,111 @@
 @let stats = store.stats();
-<div class="flex flex-wrap  gap-6">
-  <div class="flex flex-col p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-    <div class="flex items-center flex-wrap gap-2">
-      <div class="flex items-center justify-center w-10 h-10 rounded-xl text-white shadow bg-green-500">
-        <i-lucide [img]="icons.users" class="w-6 h-6"/>
-      </div>
-      <span class="text-3xl font-bold text-gray-900">{{ stats?.totalUsers }}</span>
+<div class="flex flex-wrap gap-6">
+  <div
+    class="flex gap-5 p-6 justify-center items-center bg-white rounded-md shadow-md hover:shadow-xl transition-all duration-500 w-xsm transform hover:-translate-y-2 hover:scale-[1.02] cursor-pointer group"
+  >
+    <div
+      class="flex items-center justify-center p-4 bg-primary-500/10 rounded-md transition-colors duration-300 group-hover:bg-primary-500/20"
+    >
+      <i-lucide
+        [img]="icons.users"
+        class="text-primary-500 h-10 w-10 stroke-1 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110"
+      />
     </div>
-    <div class="mt-4 flex flex-col">
-      <span class="text-gray-600 text-xl font-medium">Nb. Utilisateurs</span>
-    </div>
-  </div>
-  <div class="flex flex-col p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-    <div class="flex items-center flex-wrap gap-2">
-      <div class="flex items-center justify-center w-10 h-10 rounded-xl text-white shadow bg-green-500">
-        <i-lucide [img]="icons.book" class="w-8 h-8"/>
-      </div>
-      <span class="text-3xl font-bold text-gray-900">{{ stats?.totalPrograms }}</span>
-    </div>
-    <div class="mt-4 flex flex-col">
-      <span class="text-gray-600 text-xl font-medium">Nb. Programmes</span>
-    </div>
-  </div>
-  <div class="flex flex-col p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-    <div class="flex items-center flex-wrap gap-2">
-      <div class="flex items-center justify-center w-10 h-10 rounded-xl text-white shadow bg-green-500">
-        <i-lucide [img]="icons.file" class="w-8 h-8"/>
-      </div>
-      <span class="text-3xl font-bold text-gray-900">{{ stats?.totalProjects }}</span>
-    </div>
-    <div class="mt-4 flex flex-col">
-      <span class="text-gray-600 text-xl font-medium">Nb. Projects</span>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-gray-600 text-base">Utilisateurs</span>
+      <span
+        class="text-4xl font-satoshi font-black text-primary-500 transition-colors duration-300 group-hover:text-primary-600"
+      >
+        {{ stats?.totalUsers }}
+      </span>
     </div>
   </div>
-  <div class="flex flex-col p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300">
-    <div class="flex items-center flex-wrap gap-2">
-      <div class="flex items-center justify-center w-10 h-10 rounded-xl text-white shadow bg-green-500">
-        <i-lucide [img]="icons.calendar" class="w-8 h-8"/>
-      </div>
-      <span class="text-3xl font-bold text-gray-900">{{ stats?.totalEvents }}</span>
+
+  <div
+    class="flex gap-5 p-6 justify-center items-center bg-white rounded-md shadow-md hover:shadow-xl transition-all duration-500 w-xsm transform hover:-translate-y-2 hover:scale-[1.02] cursor-pointer group"
+  >
+    <div
+      class="flex items-center justify-center p-4 bg-primary-500/10 rounded-md transition-colors duration-300 group-hover:bg-primary-500/20"
+    >
+      <i-lucide
+        [img]="icons.book"
+        class="text-primary-500 h-10 w-10 stroke-1 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110"
+      />
     </div>
-    <div class="mt-4 flex flex-col">
-        <span class="text-gray-600 text-xl font-medium">
-          Nb. Evénements
-        </span>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-gray-600 text-base">Programmes</span>
+      <span
+        class="text-4xl font-satoshi font-black text-primary-500 transition-colors duration-300 group-hover:text-primary-600"
+      >
+        {{ stats?.totalPrograms }}
+      </span>
     </div>
   </div>
-  <div class="flex flex-col p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-    <div class="flex items-center flex-wrap gap-2">
-      <div class="flex items-center justify-center w-10 h-10 rounded-xl text-white shadow bg-green-500">
-        <i-lucide [img]="icons.newsPaper" class="w-8 h-8"/>
-      </div>
-      <span class="text-3xl font-bold text-gray-900">{{ stats?.totalArticles }}</span>
+
+  <div
+    class="flex gap-5 p-6 justify-center items-center bg-white rounded-md shadow-md hover:shadow-xl transition-all duration-500 w-xsm transform hover:-translate-y-2 hover:scale-[1.02] cursor-pointer group"
+  >
+    <div
+      class="flex items-center justify-center p-4 bg-primary-500/10 rounded-md transition-colors duration-300 group-hover:bg-primary-500/20"
+    >
+      <i-lucide
+        [img]="icons.calendar"
+        class="text-primary-500 h-10 w-10 stroke-1 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110"
+      />
     </div>
-    <div class="mt-4 flex flex-col">
-      <span class="text-gray-600 text-xl font-medium">Nb. Articles</span>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-gray-600 text-base">Projects</span>
+      <span
+        class="text-4xl font-satoshi font-black text-primary-500 transition-colors duration-300 group-hover:text-primary-600"
+      >
+        {{ stats?.totalProjects }}
+      </span>
+    </div>
+  </div>
+
+  <div
+    class="flex gap-5 p-6 justify-center items-center bg-white rounded-md shadow-md hover:shadow-xl transition-all duration-500 w-xsm transform hover:-translate-y-2 hover:scale-[1.02] cursor-pointer group"
+  >
+    <div
+      class="flex items-center justify-center p-4 bg-primary-500/10 rounded-md transition-colors duration-300 group-hover:bg-primary-500/20"
+    >
+      <i-lucide
+        [img]="icons.calendar"
+        class="text-primary-500 h-10 w-10 stroke-1 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110"
+      />
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-gray-600 text-base">Evénements</span>
+      <span
+        class="text-4xl font-satoshi font-black text-primary-500 transition-colors duration-300 group-hover:text-primary-600"
+      >
+        {{ stats?.totalEvents }}
+      </span>
+    </div>
+  </div>
+  <div
+    class="flex gap-5 p-6 justify-center items-center bg-white rounded-md shadow-md hover:shadow-xl transition-all duration-500 w-xsm transform hover:-translate-y-2 hover:scale-[1.02] cursor-pointer group"
+  >
+    <div
+      class="flex items-center justify-center p-4 bg-primary-500/10 rounded-md transition-colors duration-300 group-hover:bg-primary-500/20"
+    >
+      <i-lucide
+        [img]="icons.newsPaper"
+        class="text-primary-500 h-10 w-10 stroke-1 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110"
+      />
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-gray-600 text-base">Les Articles</span>
+      <span
+        class="text-4xl font-satoshi font-black text-primary-500 transition-colors duration-300 group-hover:text-primary-600"
+      >
+        {{ stats?.totalArticles }}
+      </span>
     </div>
   </div>
 </div>
