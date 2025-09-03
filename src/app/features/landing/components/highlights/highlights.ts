@@ -69,7 +69,7 @@ export class Highlights {
       case 'programs':
         return 'our-programs';
       case 'subprograms':
-        return 'our-programs';
+        return 'our-programs/' + this.selectedKey.key + '/';
       case 'events':
         return 'events';
       case 'projects':
