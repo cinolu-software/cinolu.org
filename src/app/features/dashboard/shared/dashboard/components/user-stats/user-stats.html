@@ -11,4 +11,15 @@
       <span class="text-gray-600 text-xl font-medium">Nb. d'entreprises</span>
     </div>
   </div>
+  <div class="flex flex-col p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div class="flex items-center flex-wrap gap-2">
+      <div class="flex items-center justify-center w-10 h-10 rounded-xl text-white shadow bg-green-500">
+        <i-lucide [img]="icons.mic" class="w-6 h-6"/>
+      </div>
+      <span class="text-3xl font-bold text-gray-900">{{ stats?.referralsCount }}</span>
+    </div>
+    <div class="mt-4 flex flex-col">
+      <span class="text-gray-600 text-xl font-medium">Nb. des partages</span>
+    </div>
+  </div>
 </div>

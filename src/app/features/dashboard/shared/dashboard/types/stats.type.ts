@@ -9,4 +9,5 @@ export interface IAdminStats {
 
 export interface IUserStats {
   totalVentures: number;
+  referralsCount: number;
 }
