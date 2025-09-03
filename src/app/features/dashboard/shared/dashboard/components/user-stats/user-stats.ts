@@ -6,6 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import {
   BriefcaseBusiness,
   LucideAngularModule,
+  Mic
 } from 'lucide-angular';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -31,5 +32,6 @@ export class UserStats {
   store = inject(UserStatsStore);
   icons = {
     ventures: BriefcaseBusiness,
+    mic: Mic
   };
 }
