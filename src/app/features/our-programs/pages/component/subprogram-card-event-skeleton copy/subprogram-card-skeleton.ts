@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-subprogram-card-skeleton',
   imports: [],
   templateUrl: './subprogram-card-skeleton.html',
-  styles: ``
+  styles: ``,
 })
-export class SubprogramCardSkeleton {
-
-}
+export class SubprogramCardEventSkeleton {}
