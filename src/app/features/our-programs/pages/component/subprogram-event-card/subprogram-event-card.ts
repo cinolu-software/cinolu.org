@@ -2,7 +2,6 @@ import { Component, input } from '@angular/core';
 import { IEvent } from '../../../../../shared/models/entities.models';
 import {
   Calendar1,
-  ArrowLeft,
   CalendarCheck,
   CalendarMinus,
   FileText,
@@ -15,7 +14,6 @@ import {
   NotepadText,
   Tag,
   ThumbsUp,
-  UserPlus,
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
@@ -23,15 +21,12 @@ import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 @Component({
   selector: 'app-subprogram-event-card',
   imports: [LucideAngularModule, CommonModule, NgOptimizedImage, ApiImgPipe],
-  templateUrl: './subprogram-card.html',
-  styles: ``,
+  templateUrl: './subprogram-event-card.html',
 })
 export class SubprogramEventCard {
   icons = {
-    moveLeft: ArrowLeft,
     fileText: FileText,
     notepadText: NotepadText,
-    userPlus: UserPlus,
     tag: Tag,
     comment: MessageCircleMore,
     like: ThumbsUp,

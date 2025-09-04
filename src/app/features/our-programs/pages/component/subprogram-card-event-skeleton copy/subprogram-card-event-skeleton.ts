@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-subprogram-card-skeleton',
+  selector: 'app-subprogram-event-card-skeleton',
   imports: [],
-  templateUrl: './subprogram-card-skeleton.html',
+  templateUrl: './subprogram-card-event-skeleton.html',
   styles: ``,
 })
 export class SubprogramCardEventSkeleton {}

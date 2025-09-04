@@ -2,17 +2,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   ArrowLeft,
-  Calendar1,
-  CalendarCheck,
-  CalendarMinus,
-  FileText,
   FolderOpenDot,
   LucideAngularModule,
-  MapPin,
-  MessageCircleMore,
   MoveRight,
-  NotepadText,
-  Tag,
   ThumbsUp,
   UserPlus,
   MoveUpRight,
@@ -24,7 +16,8 @@ import { SubprogramsStore } from '../../../landing/store/subprogram.store';
 import { IProject } from '../../../../shared/models/entities.models';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { CarouselModule } from 'primeng/carousel';
-import { SubprogramCardEventSkeleton } from '../component/subprogram-card-event-skeleton copy/subprogram-card-skeleton';
+import { SubprogramCardSkeleton } from '../component/subprogram-card-skeleton/subprogram-card-skeleton';
+import { SubprogramEventCard } from '../component/subprogram-event-card/subprogram-event-card';
 
 @Component({
   selector: 'app-list-sub-programs',
@@ -34,8 +27,9 @@ import { SubprogramCardEventSkeleton } from '../component/subprogram-card-event-
     CommonModule,
     CommonModule,
     CarouselModule,
-    SubprogramCardEventSkeleton,
     SubprogramCard,
+    SubprogramCardSkeleton,
+    SubprogramEventCard,
   ],
   templateUrl: './list-sub-programs.html',
   styles: ``,
@@ -43,20 +37,11 @@ import { SubprogramCardEventSkeleton } from '../component/subprogram-card-event-
 export class ListSubPrograms implements OnInit {
   icons = {
     moveLeft: ArrowLeft,
-    fileText: FileText,
-    notepadText: NotepadText,
     userPlus: UserPlus,
-    tag: Tag,
-    comment: MessageCircleMore,
-    like: ThumbsUp,
-    calendar: Calendar1,
     moveUp: MoveUpRight,
     thumbsUp: ThumbsUp,
     program: FolderOpenDot,
     arrow: MoveRight,
-    place: MapPin,
-    startedAt: CalendarCheck,
-    endedAt: CalendarMinus,
     moveRight: ArrowRight,
   };
 
