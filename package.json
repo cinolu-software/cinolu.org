@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",
-    "build": "ng build",
+    "build": "ng build --aot",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.html\"",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
