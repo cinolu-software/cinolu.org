@@ -29,6 +29,7 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { EventStore } from '../../../../../events/store/event.store';
 import { EventsStore } from '../../store/events/events.store';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
+import { QuillEditorComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-event-edit',
@@ -54,6 +55,7 @@ import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms
     FileUpload,
     NgOptimizedImage,
     ApiImgPipe,
+    QuillEditorComponent,
   ],
 })
 export class EditEventComponent implements OnInit {

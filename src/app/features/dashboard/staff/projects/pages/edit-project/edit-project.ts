@@ -28,6 +28,7 @@ import { FileUpload } from '../../../../../../shared/components/file-upload/file
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { ProjectStore } from '../../../../../projects/store/project.store';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
+import { QuillEditorComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-project-edit',
@@ -52,6 +53,7 @@ import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms
     FileUpload,
     NgOptimizedImage,
     ApiImgPipe,
+    QuillEditorComponent,
   ],
 })
 export class EditProjectComponent implements OnInit {

@@ -23,6 +23,7 @@ import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-c
 import { DatePickerModule } from 'primeng/datepicker';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
+import { QuillEditorComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-project-add',
@@ -43,6 +44,7 @@ import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms
     InputText,
     DatePickerModule,
     ReactiveFormsModule,
+    QuillEditorComponent,
   ],
 })
 export class AddProjectComponent {
@@ -63,7 +65,7 @@ export class AddProjectComponent {
     this.form = this.#fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      form_link: ['' ],
+      form_link: [''],
       started_at: [null, Validators.required],
       ended_at: [null, Validators.required],
       program: ['', Validators.required],

@@ -28,12 +28,11 @@
                 </label>
                 <input pInputText id="form_link" formControlName="form_link"/>
               </div>
-              <div class="flex flex-col gap-1.5">
+              <div class="flex flex-col gap-1.5 mb-10">
                 <p class="font-medium">
                   Description<span class="text-red-500">*</span>
                 </p>
-                <textarea pTextarea formControlName="description" rows="8" cols="30">
-                </textarea>
+                <quill-editor formControlName="description" class="rounded-md!" [style]="{ height: '200px' }"/>
               </div>
               <div class="flex py-6 pb-80 justify-end">
                 <p-button size="small" variant="outlined" (onClick)="activateCallback(2)">

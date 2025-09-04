@@ -28,6 +28,7 @@ import { LoadingInterceptor } from './core/services/loading';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { provideQuillConfig } from 'ngx-quill';
 registerLocaleData(localeFr, 'fr');
 
 export const appConfig: ApplicationConfig = {
@@ -50,6 +51,18 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: TitleStrategy, useClass: PageTitleStrategy },
+    provideQuillConfig({
+      modules: {
+        syntax: true,
+        toolbar: [
+          ['bold', 'italic'],
+          ['blockquote'],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+          ['link']
+        ]
+      }
+    }),
     providePrimeNG({
       theme: {
         preset: primeNGPreset,
