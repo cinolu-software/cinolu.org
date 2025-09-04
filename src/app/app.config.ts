@@ -53,7 +53,7 @@ export const appConfig: ApplicationConfig = {
     { provide: TitleStrategy, useClass: PageTitleStrategy },
     provideQuillConfig({
       modules: {
-        syntax: true,
+        syntax: false,
         toolbar: [
           ['bold', 'italic'],
           ['blockquote'],

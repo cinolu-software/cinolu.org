@@ -84,6 +84,7 @@ export class EditArticle implements OnInit {
     effect(() => {
       const article = this.articleStore.article();
       if (!article) return;
+      console.log(article.content);
       this.form.patchValue({
         ...article,
         published_at: new Date(article.published_at),
