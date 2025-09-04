@@ -11,16 +11,20 @@ import {
   MapPin,
   MessageCircleMore,
   MoveRight,
-  MoveUpRight,
   NotepadText,
   Tag,
   ThumbsUp,
   UserPlus,
+  MoveUpRight,
+  ArrowRight,
 } from 'lucide-angular';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { SubprogramCard } from '../component/subprogram-card/subprogram-card';
+import { CommonModule } from '@angular/common';
 import { SubprogramsStore } from '../../../landing/store/subprogram.store';
-import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { IProject } from '../../../../shared/models/entities.models';
+import { carouselConfig } from '../../../landing/config/carousel.config';
+import { CarouselModule } from 'primeng/carousel';
+import { SubprogramCardEventSkeleton } from '../component/subprogram-card-event-skeleton copy/subprogram-card-skeleton';
 
 @Component({
   selector: 'app-list-sub-programs',
@@ -28,9 +32,10 @@ import { IProject } from '../../../../shared/models/entities.models';
   imports: [
     LucideAngularModule,
     CommonModule,
-    ApiImgPipe,
     CommonModule,
-    NgOptimizedImage,
+    CarouselModule,
+    SubprogramCardEventSkeleton,
+    SubprogramCard,
   ],
   templateUrl: './list-sub-programs.html',
   styles: ``,
@@ -52,10 +57,12 @@ export class ListSubPrograms implements OnInit {
     place: MapPin,
     startedAt: CalendarCheck,
     endedAt: CalendarMinus,
+    moveRight: ArrowRight,
   };
 
   #route = inject(ActivatedRoute);
   store = inject(SubprogramsStore);
+  carouselOptions = carouselConfig;
 
   ngOnInit(): void {
     const slug = this.#route.snapshot.params['slug'];

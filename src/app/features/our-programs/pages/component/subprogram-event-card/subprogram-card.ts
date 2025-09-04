@@ -21,12 +21,12 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 
 @Component({
-  selector: 'app-subprogram-card',
+  selector: 'app-subprogram-event-card',
   imports: [LucideAngularModule, CommonModule, NgOptimizedImage, ApiImgPipe],
   templateUrl: './subprogram-card.html',
   styles: ``,
 })
-export class SubprogramCard {
+export class SubprogramEventCard {
   icons = {
     moveLeft: ArrowLeft,
     fileText: FileText,
