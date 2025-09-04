@@ -79,7 +79,7 @@ export class EditEventComponent implements OnInit {
     this.form = this.#fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
-      place: ['', Validators.required],
+      place: [''],
       description: ['', Validators.required],
       form_link: [''],
       started_at: ['', Validators.required],
