@@ -5,7 +5,6 @@
   <p>Mon lien de vulgarisation</p>
   <h4 class="text-primary-300 underline mb-4">{{ referralLink() }}</h4>
   <h5 class="text-xl">Personnes invitées : <strong>{{ referralsCount }}</strong></h5>
-
   <div class="flex items-center gap-3 mt-6">
     <p-button size="small" severity="primary" (onClick)="copyReferralLink()">
       {{ isLinkCopied() ? 'Lien copié !' : 'Copier le lien' }}
@@ -15,9 +14,7 @@
       Générer un nouveau lien
     </p-button>
   </div>
-  @if (referralsCount) {
-    <div class="mt-10">
-      <app-badge-card [referralsCount]="referralsCount"/>
-    </div>
-  }
+  <div class="mt-12">
+    <app-badge-card [referralsCount]="referralsCount"/>
+  </div>
 </section>

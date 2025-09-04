@@ -1,0 +1,7 @@
+.p-select-list {
+  @apply z-[999!] relative;
+}
+
+.p-datepicker-panel {
+  @apply z-[999!] relative w-full border-collapse;
+}

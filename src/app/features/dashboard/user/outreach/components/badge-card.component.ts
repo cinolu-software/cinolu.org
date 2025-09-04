@@ -10,5 +10,5 @@ import { CommonModule } from '@angular/common';
 })
 export class BadgeCardComponent {
   badges = BADGES;
-  referralsCount = input.required<number>();
+  referralsCount = input<number | undefined>();
 }
