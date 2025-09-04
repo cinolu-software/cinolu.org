@@ -39,9 +39,12 @@
                 <input pInputText id="city" formControlName="city"/>
               </div>
             </div>
-            <div class="flex pt-6 justify-end">
-              <p-button [outlined]="true" label="Suivant" size="small" iconPos="right"
-                        (onClick)="activateCallback(2)"/>
+            <div class="flex py-6 pb-20 justify-end">
+              <p-button size="small" variant="outlined" severity="secondary"
+                        (onClick)="activateCallback(2)">
+                Suivant
+                <i-lucide [name]="icons.next" class="size-4"/>
+              </p-button>
             </div>
           </ng-template>
         </p-step-panel>
@@ -57,9 +60,17 @@
                 <textarea pTextarea id="reason" formControlName="reason" rows="4"></textarea>
               </div>
             </div>
-            <div class="flex pt-6 justify-between">
-              <p-button label="Retour" [outlined]="true" size="small" (onClick)="activateCallback(1)"/>
-              <p-button label="Suivant" [outlined]="true" size="small" (onClick)="activateCallback(3)"/>
+            <div class="flex py-6 pb-20 justify-between">
+              <p-button size="small" variant="outlined" severity="secondary"
+                        (onClick)="activateCallback(1)">
+                <i-lucide [name]="icons.previous" class="size-4"/>
+                Précedent
+              </p-button>
+              <p-button size="small" variant="outlined" severity="secondary"
+                        (onClick)="activateCallback(3)">
+                Suivant
+                <i-lucide [name]="icons.next" class="size-4"/>
+              </p-button>
             </div>
           </ng-template>
         </p-step-panel>
@@ -88,12 +99,19 @@
                 <p-password formControlName="password_confirm" [feedback]="false" [toggleMask]="true"
                             [inputId]="'password_confirm'"/>
               </div>
-              <div class="flex justify-between items-center gap-4">
-                <p-button label="Retour" [outlined]="true" size="small" (onClick)="activateCallback(2)"/>
-                <button pButton type="submit" [size]="'small'"
-                        [loading]="store.isLoading()" [disabled]="store.isLoading() || form.invalid">
+              <div class="flex justify-between py-6 pb-20">
+                <p-button size="small" variant="outlined" severity="secondary"
+                          (onClick)="activateCallback(2)">
+                  <i-lucide [name]="icons.previous" class="size-4"/>
+                  Précedent
+                </p-button>
+                <p-button [loading]="store.isLoading()" [disabled]="store.isLoading() || form.invalid"
+                          size="small" type="submit">
                   S'inscrire
-                </button>
+                  @if (!store.isLoading()) {
+                    <i-lucide [name]="icons.check" class="size-4"/>
+                  }
+                </p-button>
               </div>
             </div>
           </ng-template>

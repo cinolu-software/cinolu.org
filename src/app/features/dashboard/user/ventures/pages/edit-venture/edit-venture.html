@@ -45,7 +45,7 @@
                   <app-file-upload [name]="'cover'" [url]="coverUrl + venture?.id"/>
                 }
               </div>
-              <div class="flex py-6 justify-end">
+              <div class="flex py-6 pb-40 justify-end">
                 <p-button size="small" variant="outlined" (onClick)="activateCallback(2)">
                   Suivant
                   <i-lucide [name]="icons.next" class="size-4"/>
@@ -81,7 +81,7 @@
                 <p class="font-medium">Étape</p>
                 <p-select inputId="stage" [options]="stages" formControlName="stage"/>
               </div>
-              <div class="flex py-6 justify-between">
+              <div class="flex py-6 pb-40 justify-between">
                 <p-button size="small" variant="outlined" severity="secondary" (onClick)="activateCallback(1)">
                   <i-lucide [name]="icons.previous" class="size-4"/>
                   Précedent
@@ -109,7 +109,7 @@
                 <p class="font-medium">Marché cible<span class="text-red-500">*</span></p>
                 <textarea pTextarea formControlName="target_market" rows="5" cols="30"></textarea>
               </div>
-              <div class="flex justify-between">
+              <div class="flex py-6 pb-40 justify-between">
                 <p-button size="small" variant="outlined" severity="secondary" (onClick)="activateCallback(2)">
                   <i-lucide [name]="icons.previous" class="size-4"/>
                   Précedent

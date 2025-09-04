@@ -1,20 +1,9 @@
 <section class="pt-32 dashboard-main-content flex flex-col gap-4">
   @let project = projectStore.project();
   <div class="mb-4">
-    <button
-      class="text-primary-400 hover:underline flex items-center gap-2"
-      (click)="onGoBack()"
-    >
-      <i-lucide [name]="icons.back" class="size-4"/>
-      Revenir en arrière
-    </button>
     <h5 class="text-2xl font-bold">Modifier le projet</h5>
   </div>
-  <form
-    class="w-full md:w-2/3"
-    [formGroup]="form"
-    (ngSubmit)="onUpdateProject()"
-  >
+  <form class="w-full md:w-2/3" [formGroup]="form" (ngSubmit)="onUpdateProject()">
     <p-stepper [value]="1" class="w-full">
       <p-step-list class="w-full overflow-x-scroll scrollbar-hide">
         <p-step [value]="1"/>
@@ -26,22 +15,14 @@
             <div class="w-full">
               <p class="font-medium mb-2">Photo de couverture</p>
               <div
-                class="relative h-52 md:h-80 mb-6 w-full pb-8 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-gray-200 rounded"
-              >
+                class="relative h-52 md:h-80 mb-6 w-full pb-8 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-gray-200 rounded">
                 @if (project?.cover) {
-                  <img
-                    [ngSrc]="project | apiIMG: 'project'"
-                    [alt]="project?.name + ' cover image'"
-                    class="aspect-video object-cover h-full opacity-90 rounded border-2 border-slate-200/10"
-                    fill
-                    priority
-                  />
+                  <img priority fill [ngSrc]="project | apiIMG: 'project'" [alt]="project?.name + ' cover image'"
+                       class="aspect-video object-cover h-full opacity-90 rounded border-2 border-slate-200/10"/>
                 }
               </div>
               @if (projectStore.isLoading()) {
-                <div
-                  class="h-20 bg-gray-200 animate-pulse rounded-md w-full mb-4"
-                ></div>
+                <div class="h-20 bg-gray-200 animate-pulse rounded-md w-full mb-4"></div>
               } @else {
                 <app-file-upload [name]="'cover'" [url]="url + project?.id" (loaded)="onFileUploadLoaded()"/>
               }
@@ -66,7 +47,7 @@
                 <textarea pTextarea formControlName="description" rows="8" cols="30">
                 </textarea>
               </div>
-              <div class="flex justify-end">
+              <div class="flex py-6 pb-80 justify-end">
                 <p-button size="small" variant="outlined" (onClick)="activateCallback(2)">
                   Suivant
                   <i-lucide [name]="icons.next" class="size-4"/>
@@ -80,20 +61,13 @@
             <div class="flex flex-col gap-4">
               <div class="flex flex-col gap-1.5">
                 <p class="font-medium">Programme</p>
-                <p-select
-                  inputId="program"
-                  [optionValue]="'id'"
-                  [optionLabel]="'name'"
-                  [options]="programsStore.subprograms()"
-                  formControlName="program"
-                  class="w-full"
-                />
+                <p-select inputId="program" [optionValue]="'id'" [optionLabel]="'name'"
+                          [options]="programsStore.subprograms()" formControlName="program" class="w-full"/>
               </div>
               <div class="flex flex-col gap-1.5">
                 <p class="font-medium">Catégories</p>
                 <p-multiSelect [inputId]="'categories'" [autocomplete]="'off'" [showHeader]="false"
-                               [options]="categoriesStore.categories()"
-                               [optionValue]="'id'" [optionLabel]="'name'"
+                               [options]="categoriesStore.categories()" [optionValue]="'id'" [optionLabel]="'name'"
                                [showClear]="true" formControlName="categories"/>
               </div>
               <div class="flex flex-col gap-1.5">
@@ -104,7 +78,7 @@
                 <p class="font-medium">Date de fin</p>
                 <p-datePicker formControlName="ended_at"/>
               </div>
-              <div class="flex py-6 justify-between">
+              <div class="flex py-6 pb-96 justify-between">
                 <p-button size="small" variant="outlined"
                           severity="secondary" (onClick)="activateCallback(1)">
                   <i-lucide [name]="icons.previous" class="size-4"/>

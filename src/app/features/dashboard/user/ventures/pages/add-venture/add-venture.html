@@ -33,7 +33,7 @@
                 <label for="linkedin_url" class="font-medium">URL LinkedIn</label>
                 <input pInputText id="linkedin_url" formControlName="linkedin_url"/>
               </div>
-              <div class="flex justify-end">
+              <div class="flex justify-end py-6 pb-40">
                 <p-button size="small" variant="outlined" (onClick)="activateCallback(2)">
                   Suivant
                   <i-lucide [name]="icons.next" class="size-4"/>
@@ -61,7 +61,7 @@
                 <label for="stage" class="font-medium">Étape</label>
                 <p-select [inputId]="'stage'" [options]="stages" formControlName="stage" class="w-full"/>
               </div>
-              <div class="flex py-6 justify-between">
+              <div class="flex py-6 pb-40 justify-between">
                 <p-button size="small" variant="outlined" severity="secondary" (onClick)="activateCallback(1)">
                   <i-lucide [name]="icons.previous" class="size-4"/>
                   Précedent
@@ -98,7 +98,7 @@
                 <textarea [id]="'target_market'" pTextarea formControlName="target_market" rows="5"
                           cols="30"></textarea>
               </div>
-              <div class="flex py-6 justify-between">
+              <div class="flex py-6 pb-40 justify-between">
                 <p-button size="small" variant="outlined" severity="secondary" (onClick)="activateCallback(2)">
                   <i-lucide [name]="icons.previous" class="size-4"/>
                   Précedent

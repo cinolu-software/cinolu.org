@@ -1,10 +1,6 @@
 <section class="pt-32 dashboard-main-content flex flex-col gap-4">
   @let event = eventStore.event();
   <div class="mb-4">
-    <button class="text-primary-400 hover:underline flex items-center gap-2" (click)="onGoBack()">
-      <i-lucide [name]="icons.back" class="size-4"/>
-      Revenir en arrière
-    </button>
     <h5 class="text-2xl font-bold">Modifier l'événement</h5>
   </div>
   <form class="w-full md:w-2/3" [formGroup]="form" (ngSubmit)="onUpdateEvent()">
@@ -56,10 +52,9 @@
                 <p class="font-medium">
                   Description<span class="text-red-500">*</span>
                 </p>
-                <textarea pTextarea formControlName="description" rows="8" cols="30">
-                </textarea>
+                <textarea pTextarea formControlName="description" rows="8" cols="30"></textarea>
               </div>
-              <div class="flex justify-end">
+              <div class="flex py-6 pb-80 justify-end">
                 <p-button size="small" variant="outlined" (onClick)="activateCallback(2)">
                   Suivant
                   <i-lucide [name]="icons.next" class="size-4"/>
@@ -92,7 +87,7 @@
                 <p class="font-medium">Date de fin</p>
                 <p-datePicker formControlName="ended_at"/>
               </div>
-              <div class="flex py-6 justify-between">
+              <div class="flex py-6 pb-96 justify-between">
                 <p-button size="small" variant="outlined"
                           severity="secondary" (onClick)="activateCallback(1)">
                   <i-lucide [name]="icons.previous" class="size-4"/>

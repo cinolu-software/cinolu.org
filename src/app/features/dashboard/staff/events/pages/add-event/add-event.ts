@@ -7,7 +7,7 @@ import {
   Check,
 } from 'lucide-angular';
 import { Button } from 'primeng/button';
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule,  } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
 import {
   FormBuilder,
@@ -47,7 +47,6 @@ import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms
 })
 export class AddEventComponent {
   #fb = inject(FormBuilder);
-  #location = inject(Location);
   form: FormGroup;
   store = inject(AddEventStore);
   categoriesStore = inject(UnpaginatedCategoriesStore);
@@ -75,9 +74,5 @@ export class AddEventComponent {
   onAddEvent(): void {
     if (!this.form.valid) return;
     this.store.addEvent(this.form.value);
-  }
-
-  onGoBack(): void {
-    this.#location.back();
   }
 }

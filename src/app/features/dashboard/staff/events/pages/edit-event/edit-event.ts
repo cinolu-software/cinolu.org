@@ -7,7 +7,7 @@ import {
   Check,
 } from 'lucide-angular';
 import { Button } from 'primeng/button';
-import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
 import {
   FormBuilder,
@@ -58,7 +58,6 @@ import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms
 })
 export class EditEventComponent implements OnInit {
   #fb = inject(FormBuilder);
-  #location = inject(Location);
   #route = inject(ActivatedRoute);
   form: FormGroup;
   store = inject(UpdateEventStore);
@@ -110,9 +109,5 @@ export class EditEventComponent implements OnInit {
 
   onFileUploadLoaded(): void {
     this.eventStore.loadEvent(this.#slug);
-  }
-
-  onGoBack(): void {
-    this.#location.back();
   }
 }
