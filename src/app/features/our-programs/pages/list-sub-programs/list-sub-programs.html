@@ -72,6 +72,8 @@
             [showNavigators]="false"
             [circular]="true"
             [responsiveOptions]="carouselOptions"
+            [autoplayInterval]="5000"
+            [orientation]="'vertical'"
           >
             <ng-template let-project #item>
               <div class="mr-3.5">
@@ -127,6 +129,7 @@
             [showNavigators]="false"
             [circular]="true"
             [responsiveOptions]="carouselOptions"
+            [autoplayInterval]="5000"
           >
             <ng-template let-event #item>
               <div class="mr-3.5">
