@@ -89,6 +89,12 @@
               ></i-lucide>
             </button>
           </div>
+        } @else {
+          <p
+            class="text-2xl flex items-center justify-center lg:text-3xl font-black font-satoshi mb-3 tracking-tight leading-tight text-gray-700 hyphens-none text-center lg:text-left"
+          >
+            Pas encore d'actualité ou de fait marquant pour cette catégorie.
+          </p>
         }
       </div>
 
@@ -101,6 +107,17 @@
               [ngSrc]="selectedData[0] | apiIMG: whatIsDisplayed()"
               fill
               [alt]="getItemTitle(selectedData[0])"
+              class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+            />
+          </div>
+        } @else {
+          <div
+            class="relative rounded-lg shadow-md overflow-hidden h-full min-h-[400px]"
+          >
+            <img
+              src="/images/mise-avant-default.jpg"
+              fill
+              alt="images par defaut"
               class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
             />
           </div>
