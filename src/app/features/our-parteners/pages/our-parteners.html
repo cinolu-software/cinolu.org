@@ -1,6 +1,6 @@
+<app-parteners-hero />
 <section
   class="min-h-fit backdrop-blur-[1px] bg-grid items-center content-center"
-  appAnimationsOnScroll
 >
   <div
     class="px-8 min-h-dvh xl:min-h-[800px] lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 md:py-28"
@@ -8,16 +8,22 @@
     <h3
       class="text-3xl text-center sm:text-4xl lg:text-5xl font-black font-satoshi mb-12 tracking-tight leading-tight"
     >
-      Tous nos partenaires
+      Tous nos <span class="text-primary-400">partenaires ?</span>
     </h3>
 
     <div class="py-12">
       <div class="mx-auto">
         <div
-          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-8"
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4 lg:gap-8"
         >
           @for (item of parteners; track $index) {
             <div
+              pAnimateOnScroll
+              [enterClass]="
+                $index % 2 === 0
+                  ? 'animate-enter fade-in-10 zoom-in-50 animate-duration-2000'
+                  : 'animate-enter fade-in-10 zoom-in-50 animate-duration-2000'
+              "
               class="flex flex-col items-center justify-center bg-white p-6 transition duration-300 group h-32 border border-gray-100"
             >
               <div class="w-32 h-16 relative">
@@ -31,7 +37,7 @@
               </div>
 
               <p
-                class="mt-4 text-sm font-medium text-gray-600 group-hover:text-primary-600 md:truncate"
+                class="mt-4 text-sm font-medium text-gray-600 group-hover:text-primary-600 lg:truncate"
               >
                 {{ item.name }}
               </p>
