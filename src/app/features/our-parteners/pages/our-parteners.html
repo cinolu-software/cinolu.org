@@ -1,0 +1,44 @@
+<section
+  class="min-h-fit backdrop-blur-[1px] bg-grid items-center content-center"
+  appAnimationsOnScroll
+>
+  <div
+    class="px-8 min-h-dvh xl:min-h-[800px] lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 md:py-28"
+  >
+    <h3
+      class="text-3xl text-center sm:text-4xl lg:text-5xl font-black font-satoshi mb-12 tracking-tight leading-tight"
+    >
+      Tous nos partenaires
+    </h3>
+
+    <div class="py-12">
+      <div class="mx-auto">
+        <div
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-8"
+        >
+          @for (item of parteners; track $index) {
+            <div
+              class="flex flex-col items-center justify-center bg-white p-6 transition duration-300 group h-32 border border-gray-100"
+            >
+              <div class="w-32 h-16 relative">
+                <img
+                  *ngIf="item.image"
+                  fill
+                  [ngSrc]="item.image"
+                  [alt]="'logo de ' + item.name"
+                  class="object-contain absolute inset-0 m-auto max-w-full max-h-full transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+
+              <p
+                class="mt-4 text-sm font-medium text-gray-600 group-hover:text-primary-600 md:truncate"
+              >
+                {{ item.name }}
+              </p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

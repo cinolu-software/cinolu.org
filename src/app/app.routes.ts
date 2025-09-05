@@ -13,6 +13,15 @@ export const routes: Route[] = [
       ),
   },
   {
+    path: 'partners',
+    component: Layout,
+    data: { layout: 'fixed-layout' },
+    loadChildren: () =>
+      import('./features/our-parteners/parteners.route').then(
+        (m) => m.OurParteners,
+      ),
+  },
+  {
     path: 'our-programs',
     component: Layout,
     data: { layout: 'fixed-layout' },
