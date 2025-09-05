@@ -9,225 +9,63 @@
         Écosystème & Partenaires
       </h3>
     </div>
-    <div
-      class="flex w-full gap-4 py-4 overflow-x-auto scrollbar-hide md:flex-wrap md:justify-center"
-    >
-      <button
-        *ngFor="let option of categoryParteners"
-        (click)="selectUserType(option.id)"
-        class="flex flex-nowrap items-center gap-3 px-5 py-2 border rounded-full cursor-pointer transition duration-300 flex-shrink-0"
-        [ngClass]="{
-          'bg-primary-500 text-white border-primary-500':
-            selectedUserId === option.id,
-          'text-gray-600 border-gray-300 hover:bg-primary-500 hover:text-white hover:border-primary-500':
-            selectedUserId !== option.id,
-        }"
+
+    <div class="card">
+      <p-carousel
+        [value]="partners"
+        [numVisible]="5"
+        [circular]="true"
+        autoplayInterval="2000"
+        showIndicators="false"
+        showNavigators="true"
+        [responsiveOptions]="responsiveOptions"
       >
-        <p class="font-semibold text-base">
-          {{ option.name }}
-        </p>
-      </button>
-    </div>
-    <div class="min-h-64">
-      <ng-container [ngSwitch]="selectedUserId">
-        <form *ngSwitchCase="0">
+        <ng-template let-partners #item>
           <div
-            class="mt-10 grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7"
+            class="border border-gray-900/10 dark:border-surface-700 rounded m-2 p-4 bg-white/20 backdrop-blur-[2px]"
           >
-            @for (p of partners; track $index) {
-              <div
-                class="relative group h-24 sm:h-28 md:h-32 w-full shadow-sm hover:shadow-lg rounded-lg flex items-center justify-center transform transition-transform duration-300 ease-in-out hover:scale-110"
-              >
+            <div class="mb-4">
+              <div class="relative mx-auto space-y-2">
                 <div
-                  class="relative group h-24 sm:h-28 md:h-32 w-full shadow-sm hover:shadow-lg rounded-lg flex items-center justify-center transform transition-transform duration-300 ease-in-out hover:scale-110"
+                  class="w-full h-20 m-2 flex items-center justify-center rounded-md"
                 >
-                  <div
-                    class="w-full h-full flex items-center justify-center rounded-md p-2 sm:p-3 md:p-4 bg-white hover:border-4 border-primary-400 transition-all duration-300"
-                  >
-                    <img
-                      [ngSrc]="p.image"
-                      alt="Logo partenaire"
-                      width="100"
-                      height="100"
-                      class="max-h-full max-w-full object-contain"
-                    />
-                  </div>
-
-                  <span
-                    class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 text-xs text-white bg-opacity-80 px-2 py-1 bg-primary-500 rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 whitespace-nowrap"
-                  >
-                    {{ p.name }}
-                  </span>
+                  <img
+                    [ngSrc]="partners.image"
+                    alt="Logo partenaire"
+                    width="100"
+                    height="100"
+                    class="max-h-full object-contain w-full rounded-border"
+                  />
                 </div>
+
+                <p-tag
+                  [value]="partners.category"
+                  class="dark:!bg-surface-900"
+                  [ngStyle]="{ 'left.px': 5, 'top.px': 5 }"
+                />
               </div>
-            }
+            </div>
+            <div class="mb-4 font-medium hyphens-none line-clamp-1">
+              {{ partners.name }}
+            </div>
           </div>
-        </form>
+        </ng-template>
+      </p-carousel>
 
-        <form *ngSwitchCase="1">
-          <div
-            class="mt-10 grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7"
-          >
-            @for (p of partners; track $index) {
-              @if (p.category === "Institutions & bailleurs") {
-                <div
-                  class="relative group h-24 sm:h-28 md:h-32 w-full shadow-sm hover:shadow-lg rounded-lg flex items-center justify-center transform transition-transform duration-300 ease-in-out hover:scale-110"
-                >
-                  <div
-                    class="w-full h-full flex items-center justify-center rounded-md p-2 sm:p-3 md:p-4 bg-white hover:border-4 border-primary-400 transition-all duration-300"
-                  >
-                    <img
-                      [ngSrc]="p.image"
-                      alt="Logo partenaire"
-                      width="100"
-                      height="100"
-                      class="max-h-full max-w-full object-contain"
-                    />
-                  </div>
-
-                  <span
-                    class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 text-xs text-white bg-opacity-80 px-2 py-1 bg-primary-500 rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 whitespace-nowrap"
-                  >
-                    {{ p.name }}
-                  </span>
-                </div>
-              }
-            }
-          </div>
-        </form>
-
-        <form *ngSwitchCase="2">
-          <div
-            class="mt-10 grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7"
-          >
-            @for (p of partners; track $index) {
-              @if (p.category === "Entreprises & banques") {
-                <div
-                  class="relative group h-24 sm:h-28 md:h-32 w-full shadow-sm hover:shadow-lg rounded-lg flex items-center justify-center transform transition-transform duration-300 ease-in-out hover:scale-110"
-                >
-                  <div
-                    class="w-full h-full flex items-center justify-center rounded-md p-2 sm:p-3 md:p-4 bg-white hover:border-4 border-primary-400 transition-all duration-300"
-                  >
-                    <img
-                      [ngSrc]="p.image"
-                      alt="Logo partenaire"
-                      width="100"
-                      height="100"
-                      class="max-h-full max-w-full object-contain"
-                    />
-                  </div>
-
-                  <span
-                    class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 text-xs text-white bg-opacity-80 px-2 py-1 bg-primary-500 rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 whitespace-nowrap"
-                  >
-                    {{ p.name }}
-                  </span>
-                </div>
-              }
-            }
-          </div>
-        </form>
-
-        <form *ngSwitchCase="3">
-          <div
-            class="mt-10 grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7"
-          >
-            @for (p of partners; track $index) {
-              @if (p.category === "Universités & écoles") {
-                <div
-                  class="relative group h-24 sm:h-28 md:h-32 w-full shadow-sm hover:shadow-lg rounded-lg flex items-center justify-center transform transition-transform duration-300 ease-in-out hover:scale-110"
-                >
-                  <div
-                    class="w-full h-full flex items-center justify-center rounded-md p-2 sm:p-3 md:p-4 bg-white hover:border-4 border-primary-400 transition-all duration-300"
-                  >
-                    <img
-                      [ngSrc]="p.image"
-                      alt="Logo partenaire"
-                      width="100"
-                      height="100"
-                      class="max-h-full max-w-full object-contain"
-                    />
-                  </div>
-
-                  <span
-                    class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 text-xs text-white bg-opacity-80 px-2 py-1 bg-primary-500 rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 whitespace-nowrap"
-                  >
-                    {{ p.name }}
-                  </span>
-                </div>
-              }
-            }
-          </div>
-        </form>
-
-        <form *ngSwitchCase="4">
-          <div
-            class="mt-10 grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7"
-          >
-            @for (p of partners; track $index) {
-              @if (p.category === "Hubs & réseaux africains") {
-                <div
-                  class="relative group h-24 sm:h-28 md:h-32 w-full shadow-sm hover:shadow-lg rounded-lg flex items-center justify-center transform transition-transform duration-300 ease-in-out hover:scale-110"
-                >
-                  <div
-                    class="w-full h-full flex items-center justify-center rounded-md p-2 sm:p-3 md:p-4 bg-white hover:border-4 border-primary-400 transition-all duration-300"
-                  >
-                    <img
-                      [ngSrc]="p.image"
-                      alt="Logo partenaire"
-                      width="100"
-                      height="100"
-                      class="max-h-full max-w-full object-contain"
-                    />
-                  </div>
-
-                  <span
-                    class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 text-xs text-white bg-opacity-80 px-2 py-1 bg-primary-500 rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 whitespace-nowrap"
-                  >
-                    {{ p.name }}
-                  </span>
-                </div>
-              }
-            }
-          </div>
-        </form>
-
-        <form *ngSwitchCase="5">
-          <div
-            class="mt-10 grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7"
-          >
-            @for (p of partners; track $index) {
-              @if (p.category === "Associations & communautés") {
-                <div
-                  class="relative group h-24 sm:h-28 md:h-32 w-full shadow-sm hover:shadow-lg rounded-lg flex items-center justify-center transform transition-transform duration-300 ease-in-out hover:scale-110"
-                >
-                  <div
-                    class="w-full h-full flex items-center justify-center rounded-md p-2 sm:p-3 md:p-4 bg-white hover:border-4 border-primary-400 transition-all duration-300"
-                  >
-                    <img
-                      [ngSrc]="p.image"
-                      alt="Logo partenaire"
-                      width="100"
-                      height="100"
-                      class="max-h-full max-w-full object-contain"
-                    />
-                  </div>
-
-                  <span
-                    class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 text-xs text-white bg-opacity-80 px-2 py-1 bg-primary-500 rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 whitespace-nowrap"
-                  >
-                    {{ p.name }}
-                  </span>
-                </div>
-              }
-            }
-          </div>
-        </form>
-      </ng-container>
+      <a
+        routerLink="/events"
+        class="group flex items-center justify-center gap-3 max-w-2xs mt-6 text-center py-2 px-6 rounded-full border-2 border-primary-500 text-primary-500 font-semibold text-base shadow-md hover:bg-primary-500 hover:text-white hover:shadow-lg transition-all duration-300 max-sm:max-w-fit max-sm:m-auto"
+      >
+        Tous nos partenaires
+        <i-lucide
+          [name]="icons.moveUp"
+          class="h-5 w-5 transform transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+        />
+      </a>
     </div>
 
     <h4
-      class="text-xl font-black pt-10 sm:text-2xl text-center md:text-3xl lg:text-4xl text-primary-500 font-satoshi mb-6"
+      class="text-gray-600 text-2xl sm:text-3xl font-satoshi lg:text-4xl font-bold tracking-tight leading-snug my-10"
     >
       Ensemble, on va plus loin !
     </h4>
@@ -239,22 +77,21 @@
     <p
       class="max-w-3xl text-center text-3xl sm:text-4xl lg:text-5xl font-black text-white font-satoshi mb-3 tracking-tight leading-tight"
     >
-      Ce réseau est notre moteur de croissance collective, et une porte
-      d’entrée vers des projets plus grands.
+      Ce réseau est notre moteur de croissance collective, et une porte d’entrée
+      vers des projets plus grands.
     </p>
 
-        <button
-          [routerLink]="'/sign-up'"
-          type="submit"
-          class="group relative flex items-center justify-center gap-2 px-6 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-md mt-4 md:mt-7"
-        >
-          Devenir Partenaire
-          <i-lucide
-            [name]="icons.userPlus"
-            class="mt-0.5 group-hover:translate-x-1 transition-all duration-300"
-          >
-          </i-lucide>
-        </button>
+    <button
+      [routerLink]="'/sign-up'"
+      type="submit"
+      class="group relative flex items-center justify-center gap-2 px-6 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-md mt-4 md:mt-7"
+    >
+      Devenir Partenaire
+      <i-lucide
+        [name]="icons.userPlus"
+        class="mt-0.5 group-hover:translate-x-1 transition-all duration-300"
+      >
+      </i-lucide>
+    </button>
   </div>
-    
 </section>

@@ -4,8 +4,18 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
-import { UserPlus, LucideAngularModule } from 'lucide-angular';
+import {
+  UserPlus,
+  LucideAngularModule,
+  Heart,
+  ShoppingCart,
+  MoveUpRight,
+} from 'lucide-angular';
 import { RouterLink } from '@angular/router';
+import {} from '@angular/core';
+import { Carousel } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
+import { Tag } from 'primeng/tag';
 
 @Component({
   selector: 'app-partners',
@@ -16,31 +26,54 @@ import { RouterLink } from '@angular/router';
     InputGroupModule,
     InputGroupAddonModule,
     LucideAngularModule,
-    RouterLink
+    RouterLink,
+    Carousel,
+    ButtonModule,
+    Tag,
   ],
   templateUrl: './partners.html',
 })
 export class Partners {
+  responsiveOptions: {
+    breakpoint: string;
+    numVisible: number;
+    numScroll: number;
+  }[] = [
+    {
+      breakpoint: '1400px',
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '1199px',
+      numVisible: 3,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '767px',
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '575px',
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
+
   partners = PARTNERS;
   categoryParteners = PARTNERS_CATEGORIES;
 
   icons = {
     userPlus: UserPlus,
+    piHeart: Heart,
+    shoppingCart: ShoppingCart,
+    moveUp: MoveUpRight,
   };
-
-  statutItem = [
-    { id: 1, name: 'Étudiant·e' },
-    { id: 2, name: 'Entrepreneur·e' },
-    { id: 3, name: 'Volontaire' },
-    { id: 4, name: 'Chercheur·se' },
-    { id: 5, name: 'Autre' },
-  ];
-
-  date: Date | undefined;
 
   selectedUserId = 0;
 
-  selectUserType(type: number) {
+  selectPartenerType(type: number) {
     this.selectedUserId = type;
   }
 }
