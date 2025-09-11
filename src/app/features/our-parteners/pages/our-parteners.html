@@ -14,25 +14,24 @@
     <div class="py-12">
       <div class="mx-auto">
         <div
-          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4 lg:gap-8"
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3 lg:gap-6"
         >
           @for (item of parteners; track $index) {
             <div
               pAnimateOnScroll
               [enterClass]="
                 $index % 2 === 0
-                  ? 'animate-enter fade-in-10 zoom-in-50 animate-duration-2000'
-                  : 'animate-enter fade-in-10 zoom-in-50 animate-duration-2000'
+                  ? 'animate-enter fade-in-10 zoom-in-50 animate-duration-1000'
+                  : 'animate-enter fade-in-10 zoom-in-50 animate-duration-1000'
               "
-              class="flex flex-col items-center justify-center bg-white p-6 transition duration-300 group h-32 border border-gray-100"
+              class="flex flex-col items-center justify-center bg-white p-6 transition duration-300 group h-36 border border-gray-100"
             >
-              <div class="w-32 h-16 relative">
-                <img
-                  *ngIf="item.image"
-                  fill
-                  [ngSrc]="item.image"
+              <div class="w-28 h-12 flex items-center justify-center">
+                <p-image
+                  [src]="item.image"
                   [alt]="'logo de ' + item.name"
-                  class="object-contain absolute inset-0 m-auto max-w-full max-h-full transition-transform duration-300 group-hover:scale-105"
+                  [preview]="true"
+                  imageClass="object-contain max-w-full max-h-12"
                 />
               </div>
 

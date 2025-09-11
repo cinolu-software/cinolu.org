@@ -126,6 +126,22 @@
     background-size: 80px 80px;
     z-index: 10;
   }
+  :host ::ng-deep .p-image-preview {
+    background: rgba(255, 255, 255, 0.95);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden;
+    padding: 2rem;
+  }
+
+  :host ::ng-deep .p-image-preview img {
+    max-width: 250px; /* ou 80vw si tu veux qu’il s’adapte à l’écran */
+    max-height: 250px; /* ou 80vh pour l’écran */
+    object-fit: contain;
+    margin: auto;
+    display: block;
+  }
 
   .fade-left-init {
     @apply opacity-0 -translate-x-12 transition-all duration-700 ease-out;
