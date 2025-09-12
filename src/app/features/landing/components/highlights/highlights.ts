@@ -12,22 +12,13 @@ import {
   IArticle,
 } from '../../../../shared/models/entities.models';
 import { interval, Subscription } from 'rxjs';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
-import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-highlights',
   standalone: true,
-  imports: [
-    CommonModule,
-    LucideAngularModule,
-    FadeInOnScrollDirective,
-    NgOptimizedImage,
-    ApiImgPipe,
-    HighlightCard,
-  ],
+  imports: [LucideAngularModule, FadeInOnScrollDirective, HighlightCard],
   providers: [HighlightsStore],
   templateUrl: `./highlights.html`,
 })
@@ -50,7 +41,7 @@ export class Highlights implements OnInit, OnDestroy {
   ngOnInit() {
     this.updateSelectedData();
 
-    this.carouselSub = interval(5000).subscribe(() => {
+    this.carouselSub = interval(10000).subscribe(() => {
       const currentIndex = this.keys.findIndex(
         (k) => k.id === this.selectedKey.id,
       );

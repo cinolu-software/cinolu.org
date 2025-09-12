@@ -136,11 +136,39 @@
   }
 
   :host ::ng-deep .p-image-preview img {
-    max-width: 250px; /* ou 80vw si tu veux qu’il s’adapte à l’écran */
-    max-height: 250px; /* ou 80vh pour l’écran */
+    max-width: 250px;
+    max-height: 250px;
     object-fit: contain;
     margin: auto;
     display: block;
+  }
+
+  :host {
+    @keyframes slidedown-icon {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(20px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .slidedown-icon {
+      animation: slidedown-icon;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+    }
+
+    .box {
+      background-image: radial-gradient(var(--primary-300), var(--primary-600));
+      border-radius: 50% !important;
+      color: var(--primary-color-text);
+    }
   }
 
   .fade-left-init {

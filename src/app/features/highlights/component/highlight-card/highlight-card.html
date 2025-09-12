@@ -1,7 +1,12 @@
-<div class="max-w-7xl mx-auto p-6 lg:p-8">
+<div
+  pAnimateOnScroll
+  enterClass="animate-enter fade-in-10 slide-in-from-l-8 animate-duration-3000"
+  leaveClass="animate-leave fade-out-0"
+  class="max-w-7xl mx-auto lg:p-8"
+>
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <div
-      class="lg:col-span-2 bg-white rounded-xl shadow-lg p-6 lg:p-8 flex flex-col md:flex-row gap-6"
+      class="lg:col-span-2 bg-white rounded-md shadow-lg p-4 lg:p-8 flex flex-col md:flex-row gap-6"
     >
       <div class="w-full md:w-1/2">
         @for (key of keys; track key.id) {
@@ -75,7 +80,7 @@
     </div>
 
     <div
-      class="md:h-[400px] relative lg:col-span-1 rounded-xl overflow-hidden shadow-md"
+      class="md:h-[400px] relative lg:col-span-1 rounded-md overflow-hidden shadow-md"
     >
       @if (data.length > 0) {
         <img
