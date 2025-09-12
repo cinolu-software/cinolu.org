@@ -64,7 +64,7 @@ export class AddEventComponent {
     this.form = this.#fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      place: ['', Validators.required],
+      place: [''],
       form_link: [''],
       started_at: [null, Validators.required],
       ended_at: [null, Validators.required],
