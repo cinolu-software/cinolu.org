@@ -19,10 +19,7 @@
             <i-lucide [name]="link.icon" class="size-4 text-inherit"/>
             {{ link.name }}
           </div>
-          <i-lucide
-            [name]="icons.chevronDown"
-            class="size-3.5 transition-transform duration-300 -rotate-45"
-            [ngClass]="{
+          <i-lucide [name]="icons.chevronDown" class="size-3.5 transition-transform duration-300 -rotate-45" [ngClass]="{
               'rotate-45 text-white': isTabOpen(link.name),
               'text-gray-400': !isTabOpen(link.name),
             }"
@@ -31,11 +28,9 @@
         @if (isTabOpen(link.name)) {
           <div class="ml-10 border-l border-gray-500 flex flex-col gap-3">
             @for (child of link.children; track $index) {
-              <a
-                class="group flex items-center gap-3 text-gray-300/90 tracking-wider"
-                [routerLink]="child.path"
-                [routerLinkActive]="'text-white active-link'"
-                [routerLinkActiveOptions]="{ exact: child.exactUrl || false }">
+              <a class="group flex items-center gap-3 text-gray-300/90 tracking-wider"
+                 [routerLink]="child.path" [routerLinkActive]="'text-white active-link'"
+                 [routerLinkActiveOptions]="{ exact: child.exactUrl || false }">
                 <div
                   class="relative group-[.active-link]:bg-gray-50 group-[.active-link]:after:bg-gray-50 group-hover:bg-gray-100 group-hover:after:bg-gray-100 transition-colors duration-300 h-[1px] mr-1 w-6 bg-gray-500 after:absolute after:-top-0.5 after:-right-1 after:w-1.5 after:bg-gray-500/90 after:h-1.5 after:rounded-full after:z-40">
                 </div>
