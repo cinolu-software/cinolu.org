@@ -44,7 +44,9 @@ export class DashboardSidebar {
       this.links().find(
         (link) =>
           link.path === url ||
-          link.children?.some((child) => url.startsWith(child.path)),
+          link.children?.some(
+            (child) => child.path && url.startsWith(child.path),
+          ),
       )?.name ?? null
     );
   });
