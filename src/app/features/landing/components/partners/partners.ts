@@ -40,8 +40,8 @@ export class Partners {
     numScroll: number;
   }[] = [
     {
-      breakpoint: '1400px',
-      numVisible: 2,
+      breakpoint: '1280px',
+      numVisible: 4,
       numScroll: 1,
     },
     {
