@@ -1,13 +1,24 @@
 <div class="fixed top-1/2 -right-2 z-[1000] hidden sm:block">
   <button
-    class="group relative px-3 py-2 rounded-l-2xl bg-primary-600 text-white flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-300 ease-in-out hover:bg-primary-500 active:scale-95 animate-slide-in sm:px-3 sm:py-1 sm:text-sm md:px-4 md:py-2 md:text-base lg:px-5 lg:py-3 lg:text-base"
+    class="group relative flex items-center gap-2 rounded-l-2xl px-4 py-2 bg-primary-100 text-primary-500 font-medium shadow-md overflow-hidden transition-all duration-300 ease-out hover:bg-primary-500 hover:text-white hover:shadow-lg active:scale-95"
     (click)="onGoBack()"
   >
     <span
-      class="transform transition-transform duration-300 group-hover:-translate-x-1"
+      class="transform group-hover:text-white z-100 transition-transform duration-300 group-hover:-translate-x-1 group-hover:scale-110"
     >
-      <i-lucide [name]="icons.back" class="size-5" />
+      <i-lucide
+        [name]="icons.back"
+        class="size-5 "
+      />
     </span>
-    <span class="font-base">Retour</span>
+
+    <span
+      class="relative z-10 transition-colors duration-300 group-hover:text-white"
+      >Retour</span
+    >
+
+    <span
+      class="absolute inset-0 bg-primary-500 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-out z-0"
+    ></span>
   </button>
 </div>
