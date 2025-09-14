@@ -16,7 +16,6 @@ import {
   Sparkles,
   GraduationCap,
   Youtube,
-  Layers,
   Image,
 } from 'lucide-angular';
 
@@ -162,38 +161,24 @@ export const EXPLORATION_LINK: ILink[] = [
         name: 'Stages & Communautés',
         children: [
           {
-            name: 'Cisco Networking Academy',
-            path: '/programs/fellowships/cisco',
+            name: 'Fellowships',
+            path: '/programs/fellowships',
             icon: GraduationCap,
+            children: [
+              {
+                name: 'Cisco Networking Academy',
+                path: '/programs/fellowships/cisco',
+              },
+            ],
           },
         ],
       },
     ],
   },
   {
-    icon: Layers,
-    name: 'Services',
-    path: '/services',
-    children: [
-      { name: 'Formations', path: '/services/formations' },
-      {
-        name: 'Gestion de projets d’innovation & développement d’écosystème',
-        path: '/services/innovation-projects',
-      },
-      {
-        name: 'Conseils en structuration & gestion d’entreprises',
-        path: '/services/consulting',
-      },
-      {
-        name: 'Études & facilitation des marchés',
-        path: '/services/market-studies',
-      },
-    ],
-  },
-  {
     icon: Calendar1,
-    name: 'Actualités',
-    path: '/news',
+    name: 'Évènements',
+    path: '/events',
   },
   {
     icon: Info,
@@ -203,7 +188,7 @@ export const EXPLORATION_LINK: ILink[] = [
       { name: 'OneStop Platform', path: '/mycinolu/onestop' },
       { name: 'À propos', path: '/about-us' },
       { name: 'Jobs & Opportunités', path: '/jobs-opportunities' },
-      { name: 'Blog', path: '/blog', icon: BookOpen },
+      { name: 'Blog', path: '/blog-ressources', icon: BookOpen },
       { name: 'Youtube', path: 'https://youtube.com/...', icon: Youtube },
       { name: 'Galerie', path: '/gallery', icon: Image },
     ],
