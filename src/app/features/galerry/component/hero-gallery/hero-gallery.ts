@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
+import { NgOptimizedImage } from "@angular/common";
 
 @Component({
   selector: 'app-hero-gallery',
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './hero-gallery.html',
-  styles: ``
 })
 export class HeroGallery {
 

@@ -1,1 +1,25 @@
-<p>hero-gallery works!</p>
+<div class="py-12 sm:py-16 md:py-20" id="gallery">
+  <div
+    class="px-4 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
+  >
+    <h2
+      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-3 tracking-tight leading-tight lg:my-7"
+    >
+      Notre <span class="text-primary-500">Galerie</span>
+    </h2>
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    >
+      <div
+        class="overflow-hidden rounded-lg shadow-md"
+      >
+        <img
+          fill
+          [ngSrc]="'images/gallery/8.jpg'"
+          alt="Gallery Image"
+          class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+        />
+      </div>
+    </div>
+  </div>
+</div>
