@@ -7,7 +7,7 @@
     >
       Qui <span class="text-primary-500">sommes-nous ?</span>
     </h2>
-    <div class=" md:text-base">
+    <div class="md:text-base">
       <p
         class="font-normal text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed sm:leading-8 md:leading-10 text-black text-justify hyphens-none"
       >
@@ -34,22 +34,25 @@
   >
     Innovons ensemble.
   </p>
-  <p class=" sm:text-base md:text-lg max-w-screen-lg text-gray-600">
+  <p class="sm:text-base md:text-lg max-w-screen-lg text-gray-600">
     La plateforme numérique Cinolu OneStop a été conçue pour centraliser les
     parcours d’accompagnement, automatiser les processus (adhésion, candidature,
     mentorat) et valoriser l’impact collectif.
   </p>
   <div class="w-full flex justify-center mt-8">
-    <button
-      [routerLink]="'/join-us'"
-      type="submit"
-      class="group relative z-10 flex items-center justify-center gap-2 px-6 py-2 border border-primary-400 bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg rounded-sm"
+    <a
+      routerLink="/sign-up"
+      class="relative inline-flex gap-2 items-center justify-center px-6 md:px-8 py-2 rounded-full border-1 border-primary-500 font-semibold text-primary-500 overflow-hidden group transition duration-300 ease-out hover:text-white"
     >
-      Nous rejoindre
+      <span
+        class="absolute inset-0 bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-in-out"
+      ></span>
+      <span class="relative">Rejoignez-Nous</span>
       <i-lucide
         [name]="icons.userPlus"
-        class="mt-0.5 group-hover:translate-x-1 transition-all duration-300"
-      ></i-lucide>
-    </button>
+        class="group-hover:translate-x-1 transition-all duration-300"
+      >
+      </i-lucide>
+    </a>
   </div>
 </div>
