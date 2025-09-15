@@ -2,12 +2,13 @@ import { Routes } from '@angular/router';
 
 export const projectsRoutes: Routes = [
   {
-    path: '',
+    path: 'projects',
+    title: 'Les projets',
     children: [
       {
         path: '',
         title: 'Liste des projets',
-        loadComponent: () => import('./pages/projects').then((c) => c.Projects),
+        loadComponent: () => import('./pages/list-projects/list-projects').then((c) => c.ListProjects),
       },
       {
         path: 'add',
@@ -27,4 +28,9 @@ export const projectsRoutes: Routes = [
       },
     ],
   },
+  {
+    path: 'project-categories',
+    title: 'Les catégories de projets',
+    loadComponent: () => import('./pages/project-categories/project-categories').then(m => m.ProjectCategories)
+  }
 ];

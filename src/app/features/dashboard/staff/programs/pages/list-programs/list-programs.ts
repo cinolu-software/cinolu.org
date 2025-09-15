@@ -41,6 +41,8 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { AvatarModule } from 'primeng/avatar';
 import { PublishProgramStore } from '../../store/list-programs/publish-program.store';
 import { HighlightProgramStore } from '../../store/list-programs/highlight-program.store';
+import { MultiSelect } from 'primeng/multiselect';
+import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
 
 @Component({
   selector: 'app-list-programs',
@@ -51,6 +53,7 @@ import { HighlightProgramStore } from '../../store/list-programs/highlight-progr
     UpdateProgramStore,
     AddProgramStore,
     ConfirmationService,
+    UnpaginatedCategoriesStore,
     PublishProgramStore,
     HighlightProgramStore,
   ],
@@ -68,6 +71,7 @@ import { HighlightProgramStore } from '../../store/list-programs/highlight-progr
     FileUpload,
     ApiImgPipe,
     AvatarModule,
+    MultiSelect,
   ],
 })
 export class ListPrograms implements OnInit {
@@ -84,6 +88,7 @@ export class ListPrograms implements OnInit {
   deleteProgramStore = inject(DeleteProgramStore);
   publishProgramStore = inject(PublishProgramStore);
   highlightStore = inject(HighlightProgramStore);
+  categoriesStore = inject(UnpaginatedCategoriesStore)
   program = signal<IProgram | null>(null);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   url = environment.apiUrl + 'programs/logo/';
@@ -114,11 +119,13 @@ export class ListPrograms implements OnInit {
     this.addProgramForm = this.#fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
+      categories: [[], Validators.required],
     });
     this.updateProgramForm = this.#fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
+      categories: [[], Validators.required],
     });
   }
 
@@ -183,6 +190,7 @@ export class ListPrograms implements OnInit {
       id: program?.id || '',
       name: program?.name || '',
       description: program?.description || '',
+      categories: program?.categories?.map((role) => role.id),
     });
     this.showEditModal.update((v) => !v);
   }

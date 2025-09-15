@@ -10,7 +10,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { UserDto } from '../../dto/user.dto';
+import { UserDto } from '../../dto/users/user.dto';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 import { IUser } from '../../../../../../shared/models/entities.models';
 

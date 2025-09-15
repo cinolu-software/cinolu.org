@@ -12,14 +12,14 @@ import { HttpClient } from '@angular/common/http';
 import { CategoriesStore } from './categories.store';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 import { ICategory } from '../../../../../../shared/models/entities.models';
-import { EventCategoryDto } from '../../dto/events/event-category.dto';
+import { ProgramCategoryDto } from '../../dto/categories/program-category.dto';
 
 interface IAddCategoryStore {
   isLoading: boolean;
 }
 
 interface IAddCategoryParams {
-  payload: EventCategoryDto;
+  payload: ProgramCategoryDto;
   onSuccess: () => void;
 }
 
@@ -36,7 +36,7 @@ export const AddCategoryStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ payload, onSuccess }) => {
           return _http
-            .post<{ data: ICategory }>('event-categories', payload)
+            .post<{ data: ICategory }>('program-categories', payload)
             .pipe(
               map(({ data }) => {
                 _categoriesStore.addCategory(data);

@@ -2,12 +2,13 @@ import { Routes } from '@angular/router';
 
 export const eventsRoutes: Routes = [
   {
-    path: '',
+    path: 'events',
     children: [
       {
         path: '',
         title: 'Liste des événements',
-        loadComponent: () => import('./pages/events').then((c) => c.Events),
+        loadComponent: () =>
+          import('./pages/list-events/list-events').then((c) => c.ListEvents),
       },
       {
         path: 'add',
@@ -26,5 +27,13 @@ export const eventsRoutes: Routes = [
           ),
       },
     ],
+  },
+  {
+    path: 'event-categories',
+    title: "Catégories d'événements",
+    loadComponent: () =>
+      import('./pages/event-categories/event-categories').then(
+        (c) => c.EventCategories,
+      ),
   },
 ];

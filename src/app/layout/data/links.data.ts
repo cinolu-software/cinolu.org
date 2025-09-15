@@ -233,7 +233,7 @@ export const ADMIN_LINKS: ILink[] = [
         path: '/dashboard/projects',
       },
       {
-        name: 'Catégories',
+        name: 'Les catégories',
         path: '/dashboard/project-categories',
       },
     ],
@@ -248,7 +248,7 @@ export const ADMIN_LINKS: ILink[] = [
         path: '/dashboard/events',
       },
       {
-        name: 'Catégories',
+        name: 'Les catégories',
         path: '/dashboard/event-categories',
       },
     ],
@@ -259,11 +259,11 @@ export const ADMIN_LINKS: ILink[] = [
     icon: BookOpen,
     children: [
       {
-        name: 'Articles',
+        name: 'Tous les articles',
         path: '/dashboard/blog/articles',
       },
       {
-        name: 'Tags',
+        name: 'Les tags',
         path: '/dashboard/blog/tags',
       },
     ],

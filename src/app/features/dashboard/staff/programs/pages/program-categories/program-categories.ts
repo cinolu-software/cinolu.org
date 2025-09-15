@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {
   LucideAngularModule,
   RefreshCcw,
@@ -22,21 +21,21 @@ import {
 import { ConfirmationService } from 'primeng/api';
 import { Dialog } from 'primeng/dialog';
 import { ConfirmPopup } from 'primeng/confirmpopup';
-import { FilterRolesDto } from '../../dto/roles/filter-roles.dto';
-import { AddRoleStore } from '../../store/roles/add-role.store';
-import { DeleteRoleStore } from '../../store/roles/delete-role.store';
-import { RolesStore } from '../../store/roles/roles.store';
-import { UpdateRoleStore } from '../../store/roles/update-role.store';
-import { IRole } from '../../../../../../shared/models/entities.models';
+import { CategoriesStore } from '../../store/categories/categories.store';
+import { AddCategoryStore } from '../../store/categories/add-category.store';
+import { DeleteCategoryStore } from '../../store/categories/delete-category.store';
+import { UpdateCategoryStore } from '../../store/categories/update-category.store';
+import { ICategory } from '../../../../../../shared/models/entities.models';
+import { FilterProgramCategoriesDto } from '../../dto/categories/filter-categories.dto';
 
 @Component({
-  selector: 'app-user-roles',
-  templateUrl: './user-roles.html',
+  selector: 'app-project-categories',
+  templateUrl: './program-categories.html',
   providers: [
-    RolesStore,
-    AddRoleStore,
-    UpdateRoleStore,
-    DeleteRoleStore,
+    CategoriesStore,
+    AddCategoryStore,
+    UpdateCategoryStore,
+    DeleteCategoryStore,
     ConfirmationService,
   ],
   imports: [
@@ -44,25 +43,24 @@ import { IRole } from '../../../../../../shared/models/entities.models';
     CommonModule,
     ButtonModule,
     InputTextModule,
-    ProgressSpinnerModule,
     NgxPaginationModule,
     ReactiveFormsModule,
     Dialog,
     ConfirmPopup,
   ],
 })
-export class UserRoles implements OnInit {
+export class ProgramCategories implements OnInit {
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   #fb = inject(FormBuilder);
   #confirmationService = inject(ConfirmationService);
   searchForm: FormGroup;
-  addRoleForm: FormGroup;
-  updateRoleForm: FormGroup;
-  store = inject(RolesStore);
-  addRoleStore = inject(AddRoleStore);
-  deleteRoleStore = inject(DeleteRoleStore);
-  updateRoleStore = inject(UpdateRoleStore);
+  addCategoryForm: FormGroup;
+  updateCategoryForm: FormGroup;
+  store = inject(CategoriesStore);
+  addCategoryStore = inject(AddCategoryStore);
+  deleteCategoryStore = inject(DeleteCategoryStore);
+  updateCategoryStore = inject(UpdateCategoryStore);
   showAddModal = signal(false);
   showEditModal = signal(false);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
@@ -73,7 +71,7 @@ export class UserRoles implements OnInit {
     plus: Plus,
     search: Search,
   };
-  queryParams = signal<FilterRolesDto>({
+  queryParams = signal<FilterProgramCategoriesDto>({
     page: this.#route.snapshot.params['page'],
     q: this.#route.snapshot.params['q'],
   });
@@ -82,79 +80,85 @@ export class UserRoles implements OnInit {
     this.searchForm = this.#fb.group({
       q: [this.queryParams().q || '', Validators.required],
     });
-    this.addRoleForm = this.#fb.group({
+    this.addCategoryForm = this.#fb.group({
       name: ['', Validators.required],
     });
-    this.updateRoleForm = this.#fb.group({
+    this.updateCategoryForm = this.#fb.group({
       id: [''],
       name: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
-    this.loadRoles();
+    this.loadCategories();
   }
 
-  loadRoles(): void {
-    this.store.loadRoles(this.queryParams());
+  get count(): number {
+    return this.store.categories()[1];
+  }
+
+  loadCategories(): void {
+    this.store.loadCategories(this.queryParams());
   }
 
   onToggleAddModal(): void {
     this.showAddModal.set(!this.showAddModal());
+    if (this.showAddModal()) this.addCategoryForm.reset();
   }
 
-  onToggleEditModal(role: IRole | null): void {
-    this.updateRoleForm.patchValue({ ...role });
+  onToggleEditModal(category: ICategory | null): void {
+    this.updateCategoryForm.patchValue({
+      id: category?.id || '',
+      name: category?.name || '',
+    });
     this.showEditModal.update((v) => !v);
   }
 
   onPageChange(currentPage: number): void {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
-    this.updateRouteAndRoles();
+    this.updateRouteAndCategories();
   }
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/users/roles'], { queryParams }).then();
+    this.#router.navigate(['/dashboard/project-categories'], { queryParams }).then();
   }
 
-  updateRouteAndRoles(): void {
+  updateRouteAndCategories(): void {
     this.updateRoute();
-    this.loadRoles();
+    this.loadCategories();
   }
 
   onResetSearch(): void {
     this.searchForm.reset();
     this.queryParams.set({ page: null, q: null });
-    this.updateRouteAndRoles();
+    this.updateRouteAndCategories();
   }
 
   onSearch(): void {
     const searchValue = this.searchForm.value.q;
     this.queryParams.set({ page: null, q: searchValue });
-    this.updateRouteAndRoles();
+    this.updateRouteAndCategories();
   }
 
-  onAddRole(): void {
-    if (this.addRoleForm.invalid) return;
-    this.addRoleStore.addRole({
-      payload: this.addRoleForm.value,
-      onSuccess: () => {
-        this.onToggleAddModal();
-        this.addRoleForm.reset();
-      },
+  onAddCategory(): void {
+    if (this.addCategoryForm.invalid) return;
+    this.addCategoryStore.addCategory({
+      payload: this.addCategoryForm.value,
+      onSuccess: () => this.onToggleAddModal(),
     });
   }
 
-  onUpdateRole(): void {
-    if (this.updateRoleForm.invalid) return;
-    this.updateRoleStore.updateRole({
-      payload: this.updateRoleForm.value,
+  onUpdateCategory(): void {
+    if (this.updateCategoryForm.invalid) return;
+    this.updateCategoryStore.updateCategory({
+      id: this.updateCategoryForm.value.id,
+      payload: this.updateCategoryForm.value,
       onSuccess: () => this.onToggleEditModal(null),
     });
   }
 
-  onDeleteRole(roleId: string, event: Event): void {
+  onDeleteCategory(categoryId: string, event: Event): void {
     this.#confirmationService.confirm({
       target: event.currentTarget as EventTarget,
       message: 'Etes-vous sûr ?',
@@ -168,7 +172,7 @@ export class UserRoles implements OnInit {
         severity: 'danger',
       },
       accept: () => {
-        this.deleteRoleStore.deleteRole(roleId);
+        this.deleteCategoryStore.deleteCategory(categoryId);
       },
     });
   }
