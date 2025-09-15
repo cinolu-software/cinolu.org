@@ -29,19 +29,30 @@
 
                 <div class="relative group/sub px-4 py-2">
                   @if (sublink.path && !sublink.children?.length) {
-                    <a
-                      [routerLink]="sublink.path"
-                      routerLinkActive="bg-primary-100 text-primary-600"
-                      [routerLinkActiveOptions]="{
-                        exact: sublink.exactUrl || false,
-                      }"
-                      class="block px-4 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-colors duration-200"
-                      role="menuitem"
-                    >
-                      {{ sublink.name }}
-                    </a>
+                    @if (sublink.external===false) {
+                      <a
+                        [routerLink]="sublink.path"
+                        routerLinkActive="bg-primary-100 text-primary-600"
+                        [routerLinkActiveOptions]="{
+                          exact: sublink.exactUrl || false,
+                        }"
+                        class="block px-4 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-colors duration-200"
+                        role="menuitem"
+                      >
+                        {{ sublink.name }}
+                      </a>
+                    } @else {
+                      <a
+                        href="{{ sublink.path }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="block px-4 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-colors duration-200"
+                        role="menuitem"
+                      >
+                        {{ sublink.name }}
+                      </a>
+                    }
                   } @else {
-                    <!-- Ligne combinée : parent -> premier enfant -->
                     <div
                       class="flex items-center justify-between px-4 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-colors duration-200"
                     >
