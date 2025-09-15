@@ -121,7 +121,7 @@ export class EventCategories implements OnInit {
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/project-categories'], { queryParams }).then();
+    this.#router.navigate(['/dashboard/event-categories'], { queryParams }).then();
   }
 
   updateRouteAndCategories(): void {

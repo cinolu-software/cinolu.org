@@ -121,7 +121,7 @@ export class ProgramCategories implements OnInit {
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/project-categories'], { queryParams }).then();
+    this.#router.navigate(['/dashboard/program-categories'], { queryParams }).then();
   }
 
   updateRouteAndCategories(): void {
