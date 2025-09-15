@@ -25,6 +25,7 @@ import { SelectModule } from 'primeng/select';
 import { DatePickerModule } from 'primeng/datepicker';
 import { environment } from '../../../../../../../environments/environment';
 import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
+import { QuillEditorComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-edit-venture',
@@ -40,6 +41,7 @@ import { FileUpload } from '../../../../../../shared/components/file-upload/file
     DatePickerModule,
     FileUpload,
     ReactiveFormsModule,
+    QuillEditorComponent,
   ],
   templateUrl: './edit-venture.html',
 })
