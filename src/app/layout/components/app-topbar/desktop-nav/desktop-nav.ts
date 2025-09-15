@@ -3,14 +3,13 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
   LucideAngularModule,
-  ChevronDown,
+  ChevronRight,
   LayoutGrid,
   LogOut,
 } from 'lucide-angular';
 import { ILink } from '../../../data/links.data';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { AuthStore } from '../../../../core/auth/auth.store';
-import { ButtonDirective } from 'primeng/button';
 
 @Component({
   selector: 'app-desktop-nav',
@@ -21,14 +20,13 @@ import { ButtonDirective } from 'primeng/button';
     LucideAngularModule,
     RouterModule,
     ApiImgPipe,
-    ButtonDirective,
   ],
 })
 export class DesktopNav {
   links = input.required<ILink[]>();
   activeTab = signal<string | null>(null);
   authStore = inject(AuthStore);
-  icons = { chevronDown: ChevronDown, dashboard: LayoutGrid, logOut: LogOut };
+  icons = { chevronRight: ChevronRight, dashboard: LayoutGrid, logOut: LogOut };
 
   closeNav(): void {
     this.setActiveTab(null);

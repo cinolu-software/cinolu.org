@@ -11,26 +11,20 @@ import {
 } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
-import { EXPLORATION_LINKS } from '../../data/links.data';
+import { EXPLORATION_LINK } from '../../data/links.data';
 import { DesktopNav } from './desktop-nav/desktop-nav';
 import { MobileNav } from './mobile-nav/mobile-nav';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
-  imports: [
-    CommonModule,
-    NgOptimizedImage,
-    RouterLink,
-    MobileNav,
-    DesktopNav,
-  ],
+  imports: [CommonModule, NgOptimizedImage, RouterLink, MobileNav, DesktopNav],
   templateUrl: './app-topbar.html',
 })
 export class AppTopbar implements OnDestroy {
   #elementRef = inject(ElementRef);
   isFixed = signal(false);
-  links = signal(EXPLORATION_LINKS);
+  links = signal(EXPLORATION_LINK);
   fixed = input(false);
   mobileNav = viewChild(MobileNav);
   desktopNav = viewChild(DesktopNav);

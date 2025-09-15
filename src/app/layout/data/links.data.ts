@@ -10,6 +10,13 @@ import {
   LayoutGrid,
   BookOpen,
   Group,
+  Users,
+  Briefcase,
+  FlaskConical,
+  Sparkles,
+  GraduationCap,
+  Youtube,
+  Image,
 } from 'lucide-angular';
 
 export interface ILink {
@@ -18,7 +25,7 @@ export interface ILink {
   description?: string;
   fragment?: string;
   icon?: LucideIconData;
-  path: string;
+  path?: string;
   exactUrl?: boolean;
   children?: ILink[];
 }
@@ -67,6 +74,130 @@ export const MY_CINOLU_LINKS: ILink[] = [
     name: 'Vision',
     path: '/about-us',
     fragment: 'vision',
+  },
+];
+
+export const EXPLORATION_LINK: ILink[] = [
+  {
+    icon: House,
+    name: 'Accueil',
+    path: '/',
+    exactUrl: true,
+  },
+  {
+    icon: Activity,
+    name: 'Programmes',
+    path: '/programs',
+    children: [
+      {
+        name: 'Genre & Inclusion',
+        children: [
+          {
+            name: 'F360 Hub',
+            path: '/programs/genre-inclusion/f360',
+            icon: Users,
+            children: [
+              {
+                name: 'Binti Bora',
+                path: '/programs/genre-inclusion/f360/binti-bora',
+              },
+              {
+                name: 'Binti Safari',
+                path: '/programs/genre-inclusion/f360/binti-safari',
+              },
+              {
+                name: 'F360 Capacity Building',
+                path: '/programs/genre-inclusion/f360/capacity-building',
+              },
+              {
+                name: 'F360 Incubates',
+                path: '/programs/genre-inclusion/f360/incubates',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: 'Entreprenariat & Employabilité',
+        children: [
+          {
+            name: 'Ushindi Hub',
+            path: '/programs/entrepreneurship/ushindi',
+            icon: Briefcase,
+            children: [
+              {
+                name: 'UCampus Sprint',
+                path: '/programs/entrepreneurship/ushindi/ucampus-sprint',
+              },
+              {
+                name: 'L’Impact',
+                path: '/programs/entrepreneurship/ushindi/limpact',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: 'Recherche & Innovation',
+        children: [
+          {
+            name: 'Uvumbuzi Hub',
+            path: '/programs/research/uvumbuzi',
+            icon: FlaskConical,
+          },
+        ],
+      },
+      {
+        name: 'Jeunesse & Créativité',
+        children: [
+          {
+            name: 'Ushahidi Hub',
+            path: '/programs/youth/ushahidi',
+            icon: Sparkles,
+          },
+        ],
+      },
+      {
+        name: 'Stages & Communautés',
+        children: [
+          {
+            name: 'Fellowships',
+            path: '/programs/fellowships',
+            icon: GraduationCap,
+            children: [
+              {
+                name: 'Cisco Networking Academy',
+                path: '/programs/fellowships/cisco',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    icon: Calendar1,
+    name: 'Évènements',
+    path: '/events',
+  },
+  {
+    icon: Info,
+    name: 'My Cinolu',
+    path: '/mycinolu',
+    children: [
+      { name: 'OneStop Platform', path: '/mycinolu/onestop' },
+      { name: 'À propos', path: '/about-us' },
+      { name: 'Jobs & Opportunités', path: '/jobs-opportunities' },
+      { name: 'Contacts', path: '/contact-us', icon: Image },
+      { name: 'Blog', path: '/blog-ressources', icon: BookOpen },
+      {
+        name: 'Youtube',
+        path: 'https://youtube.com/@centredinnovationdelubumba3607?si=b8auRTD8fB60qJwI',
+        external:true,
+        icon: Youtube,
+      },
+      { name: 'Galerie', path: '/gallery', icon: Image },
+    ],
   },
 ];
 
@@ -151,9 +282,9 @@ export const USER_LINKS: ILink[] = [
       {
         name: 'Vulgarisation',
         path: '/dashboard/community/outreach',
-      }
-    ]
-  }
+      },
+    ],
+  },
 ];
 
 export const SOCIAL_LINKS: ILink[] = [
