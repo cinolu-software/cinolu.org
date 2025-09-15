@@ -21,6 +21,7 @@ import { StepperModule } from 'primeng/stepper';
 import { SECTORS } from '../../data/sectors.data';
 import { STAGES } from '../../data/stage.data';
 import { AddVentureStore } from '../../store/add-venture.store';
+import { QuillEditorComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-venture-add',
@@ -34,6 +35,7 @@ import { AddVentureStore } from '../../store/add-venture.store';
     LucideAngularModule,
     InputTextModule,
     StepperModule,
+    QuillEditorComponent,
   ],
   templateUrl: './add-venture.html',
 })
