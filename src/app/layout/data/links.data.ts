@@ -17,6 +17,8 @@ import {
   GraduationCap,
   Youtube,
   Image,
+  Layers,
+  Folders,
 } from 'lucide-angular';
 
 export interface ILink {
@@ -193,7 +195,7 @@ export const EXPLORATION_LINK: ILink[] = [
       {
         name: 'Youtube',
         path: 'https://youtube.com/@centredinnovationdelubumba3607?si=b8auRTD8fB60qJwI',
-        external:true,
+        external: true,
         icon: Youtube,
       },
       { name: 'Galerie', path: '/gallery', icon: Image },
@@ -203,21 +205,51 @@ export const EXPLORATION_LINK: ILink[] = [
 
 export const ADMIN_LINKS: ILink[] = [
   {
-    name: 'Les portefeuilles',
+    name: 'Les programmes',
     path: '/dashboard/list-programs',
-    icon: Activity,
+    icon: Layers,
     children: [
       {
-        name: 'Programmes',
+        name: 'Tous les programmes',
         path: '/dashboard/programs',
       },
       {
-        name: 'Projets',
+        name: 'Catégories',
+        path: '/dashboard/program-categories',
+      },
+      {
+        name: 'Sous programmes',
+        path: '/dashboard/subprograms',
+      },
+    ],
+  },
+  {
+    name: 'Les projets',
+    path: '/dashboard/list-programs',
+    icon: Folders,
+    children: [
+      {
+        name: 'Tous les projets',
         path: '/dashboard/projects',
       },
       {
-        name: 'Evénements',
+        name: 'Catégories',
+        path: '/dashboard/project-categories',
+      },
+    ],
+  },
+  {
+    name: 'Les événements',
+    path: '/dashboard/list-programs',
+    icon: Calendar1,
+    children: [
+      {
+        name: 'Tous les événements',
         path: '/dashboard/events',
+      },
+      {
+        name: 'Catégories',
+        path: '/dashboard/event-categories',
       },
     ],
   },
