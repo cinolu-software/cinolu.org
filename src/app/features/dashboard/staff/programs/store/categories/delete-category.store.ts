@@ -9,42 +9,34 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { RolesStore } from './roles.store';
-import { RoleDto } from '../../dto/roles/role.dto';
+import { CategoriesStore } from './categories.store';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { IRole } from '../../../../../../shared/models/entities.models';
 
-interface IAddRoleStore {
+interface IDeleteCategoryStore {
   isLoading: boolean;
 }
 
-interface IAddRoleParams {
-  payload: RoleDto;
-  onSuccess: () => void;
-}
-
-export const AddRoleStore = signalStore(
-  withState<IAddRoleStore>({ isLoading: false }),
+export const DeleteCategoryStore = signalStore(
+  withState<IDeleteCategoryStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _rolesStore: inject(RolesStore),
     _toast: inject(ToastrService),
+    _categoriesStore: inject(CategoriesStore),
   })),
-  withMethods(({ _http, _rolesStore, _toast, ...store }) => ({
-    addRole: rxMethod<IAddRoleParams>(
+  withMethods(({ _http, _categoriesStore, _toast, ...store }) => ({
+    deleteCategory: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(({ payload, onSuccess }) => {
-          return _http.post<{ data: IRole }>('roles', payload).pipe(
-            map(({ data }) => {
-              _rolesStore.addRole(data);
-              _toast.showSuccess('Rôle ajouté avec succès');
+        switchMap((id) => {
+          return _http.delete<void>(`program-categories/${id}`).pipe(
+            map(() => {
               patchState(store, { isLoading: false });
-              onSuccess();
+              _categoriesStore.deleteCategory(id);
+              _toast.showSuccess('Catégorie supprimée avec succès');
             }),
             catchError(() => {
-              _toast.showError("Échec de l'ajout du rôle");
               patchState(store, { isLoading: false });
+              _toast.showError('Échec de la suppression de la catégorie');
               return of(null);
             }),
           );

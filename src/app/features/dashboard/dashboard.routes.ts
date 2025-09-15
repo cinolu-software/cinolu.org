@@ -28,17 +28,17 @@ export const dashboardRoutes: Routes = [
       import('./staff/users/users.routes').then((c) => c.usersRoutes),
   },
   {
-    path: 'programs',
+    path: '',
     loadChildren: () =>
       import('./staff/programs/programs.routes').then((c) => c.programsRoutes),
   },
   {
-    path: 'projects',
+    path: '',
     loadChildren: () =>
       import('./staff/projects/projects.routes').then((c) => c.projectsRoutes),
   },
   {
-    path: 'events',
+    path: '',
     loadChildren: () =>
       import('./staff/events/events.routes').then((c) => c.eventsRoutes),
   },

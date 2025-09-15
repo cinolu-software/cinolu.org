@@ -27,7 +27,7 @@ export const ProgramsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
-          return http.get<{ data: IProgram[] }>('programs/find-recent').pipe(
+          return http.get<{ data: IProgram[] }>('programs/find-published').pipe(
             tap(({ data }) =>
               patchState(store, { isLoading: false, programs: data }),
             ),

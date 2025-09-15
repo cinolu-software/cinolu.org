@@ -23,7 +23,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { FilterUsersDto } from '../../dto/filter-users.dto';
+import { FilterUsersDto } from '../../dto/users/filter-users.dto';
 import { ConfirmationService } from 'primeng/api';
 import { DeleteUserStore } from '../../store/users/delete-user.store';
 import { ConfirmPopup } from 'primeng/confirmpopup';

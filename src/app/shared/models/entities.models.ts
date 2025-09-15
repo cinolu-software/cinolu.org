@@ -92,6 +92,7 @@ export interface IProgram extends IBase {
   is_published: boolean;
   is_highlighted: boolean;
   subprograms: ISubprogram[];
+  categories: ICategory[];
 }
 
 export interface ISubprogram extends IBase {

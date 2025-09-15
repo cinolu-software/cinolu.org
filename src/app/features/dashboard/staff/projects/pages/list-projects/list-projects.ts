@@ -23,7 +23,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { ProjectsStore } from '../../store/projects/projects.store';
-import { FilterProjectsDto } from '../../dto/filter-projects.dto';
 import { ConfirmationService } from 'primeng/api';
 import { DeleteProjectStore } from '../../store/projects/delete-project.store';
 import { ConfirmPopup } from 'primeng/confirmpopup';
@@ -31,6 +30,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { PublishProjectStore } from '../../store/projects/publish-project.store';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { HighlightProjectStore } from '../../store/projects/highlight-project.store';
+import { FilterProjectsDto } from '../../dto/projects/filter-projects.dto';
 
 @Component({
   selector: 'app-projects-list',

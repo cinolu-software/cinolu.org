@@ -26,11 +26,11 @@ import { AddCategoryStore } from '../../store/categories/add-category.store';
 import { DeleteCategoryStore } from '../../store/categories/delete-category.store';
 import { UpdateCategoryStore } from '../../store/categories/update-category.store';
 import { ICategory } from '../../../../../../shared/models/entities.models';
-import { FilterEventCategoriesDto } from '../../dto/categories/filter-categories.dto';
+import { FilterProgramCategoriesDto } from '../../dto/categories/filter-categories.dto';
 
 @Component({
-  selector: 'app-event-categories',
-  templateUrl: './event-categories.html',
+  selector: 'app-project-categories',
+  templateUrl: './program-categories.html',
   providers: [
     CategoriesStore,
     AddCategoryStore,
@@ -49,7 +49,7 @@ import { FilterEventCategoriesDto } from '../../dto/categories/filter-categories
     ConfirmPopup,
   ],
 })
-export class EventCategories implements OnInit {
+export class ProgramCategories implements OnInit {
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   #fb = inject(FormBuilder);
@@ -71,9 +71,9 @@ export class EventCategories implements OnInit {
     plus: Plus,
     search: Search,
   };
-  queryParams = signal<FilterEventCategoriesDto>({
-    page: this.#route.snapshot.queryParamMap.get('page'),
-    q: this.#route.snapshot.queryParamMap.get('q'),
+  queryParams = signal<FilterProgramCategoriesDto>({
+    page: this.#route.snapshot.params['page'],
+    q: this.#route.snapshot.params['q'],
   });
 
   constructor() {
@@ -121,7 +121,7 @@ export class EventCategories implements OnInit {
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/event-categories'], { queryParams }).then();
+    this.#router.navigate(['/dashboard/program-categories'], { queryParams }).then();
   }
 
   updateRouteAndCategories(): void {
@@ -172,7 +172,7 @@ export class EventCategories implements OnInit {
         severity: 'danger',
       },
       accept: () => {
-        this.deleteCategoryStore.deleteCategory({ id: categoryId });
+        this.deleteCategoryStore.deleteCategory(categoryId);
       },
     });
   }

@@ -7,7 +7,7 @@ import {
   Check,
 } from 'lucide-angular';
 import { Button } from 'primeng/button';
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule,  } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
 import {
   FormBuilder,
@@ -49,7 +49,6 @@ import { QuillEditorComponent } from 'ngx-quill';
 })
 export class AddProjectComponent {
   #fb = inject(FormBuilder);
-  #location = inject(Location);
   form: FormGroup;
   store = inject(AddProjectStore);
   categoriesStore = inject(UnpaginatedCategoriesStore);
@@ -76,9 +75,5 @@ export class AddProjectComponent {
   onAddProject(): void {
     if (!this.form.valid) return;
     this.store.addProject(this.form.value);
-  }
-
-  onGoBack(): void {
-    this.#location.back();
   }
 }

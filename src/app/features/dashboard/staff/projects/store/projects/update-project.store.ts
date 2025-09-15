@@ -9,10 +9,10 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ProjectDto } from '../../dto/project.dto';
 import { Router } from '@angular/router';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 import { IProject } from '../../../../../../shared/models/entities.models';
+import { ProjectDto } from '../../dto/projects/project.dto';
 
 interface IUpdateProjectStore {
   isLoading: boolean;

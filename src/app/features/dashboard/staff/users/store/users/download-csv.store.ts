@@ -9,8 +9,8 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { FilterEventsDto } from '../../../events/dto/filter-events.dto';
 import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
+import { FilterEventsDto } from '../../../events/dto/categories/filter-events.dto';
 
 interface IDownloadUsersStore {
   isLoading: boolean;

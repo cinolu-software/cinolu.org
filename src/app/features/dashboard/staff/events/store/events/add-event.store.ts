@@ -9,10 +9,10 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { EventDto } from '../../dto/event.dto';
 import { Router } from '@angular/router';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 import { IEvent } from '../../../../../../shared/models/entities.models';
+import { EventDto } from '../../dto/events/event.dto';
 
 interface IAddEventStore {
   isLoading: boolean;

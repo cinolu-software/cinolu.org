@@ -10,42 +10,42 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CategoriesStore } from './categories.store';
-import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 import { ICategory } from '../../../../../../shared/models/entities.models';
-import { EventCategoryDto } from '../../dto/events/event-category.dto';
+import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 
-interface IAddCategoryStore {
+interface IUpdateCategoryStore {
   isLoading: boolean;
 }
 
-interface IAddCategoryParams {
-  payload: EventCategoryDto;
+interface IUpdateCategoryParams {
+  id: string;
+  payload: ICategory;
   onSuccess: () => void;
 }
 
-export const AddCategoryStore = signalStore(
-  withState<IAddCategoryStore>({ isLoading: false }),
+export const UpdateCategoryStore = signalStore(
+  withState<IUpdateCategoryStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _categoriesStore: inject(CategoriesStore),
     _toast: inject(ToastrService),
+    _categoriesStore: inject(CategoriesStore),
   })),
   withMethods(({ _http, _categoriesStore, _toast, ...store }) => ({
-    addCategory: rxMethod<IAddCategoryParams>(
+    updateCategory: rxMethod<IUpdateCategoryParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(({ payload, onSuccess }) => {
+        switchMap(({ id, payload, onSuccess }) => {
           return _http
-            .post<{ data: ICategory }>('event-categories', payload)
+            .patch<{ data: ICategory }>(`program-categories/${id}`, payload)
             .pipe(
               map(({ data }) => {
-                _categoriesStore.addCategory(data);
-                _toast.showSuccess('Catégorie ajoutée avec succès');
+                _toast.showSuccess('Catégorie mise à jour');
+                _categoriesStore.updateCategory(data);
                 patchState(store, { isLoading: false });
                 onSuccess();
               }),
               catchError(() => {
-                _toast.showError("Échec de l'ajout de la catégorie");
+                _toast.showError('Échec de la mise à jour');
                 patchState(store, { isLoading: false });
                 return of(null);
               }),

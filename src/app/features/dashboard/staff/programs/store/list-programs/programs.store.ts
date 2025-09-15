@@ -7,7 +7,7 @@ import {
 } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
+import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterProgramsDto } from '../../dto/list-programs/filter-programs.dto';
 import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
@@ -34,7 +34,7 @@ export const ProgramsStore = signalStore(
               data: [IProgram[], number];
             }>('programs/paginated', { params })
             .pipe(
-              map(({ data }) => {
+              tap(({ data }) => {
                 patchState(store, { isLoading: false, programs: data });
               }),
               catchError(() => {

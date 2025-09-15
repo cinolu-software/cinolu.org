@@ -10,7 +10,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RolesStore } from './roles.store';
-import { RoleDto } from '../../dto/role.dto';
+import { RoleDto } from '../../dto/roles/role.dto';
 import { IRole } from '../../../../../../shared/models/entities.models';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 

@@ -11,7 +11,7 @@ import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
 import { ICategory } from '../../../../../../shared/models/entities.models';
-import { FilterProjectCategoriesDto } from '../../dto/categories/filter-categories.dto';
+import { FilterProgramCategoriesDto } from '../../dto/categories/filter-categories.dto';
 
 interface ICategoriesStore {
   isLoading: boolean;
@@ -24,7 +24,7 @@ export const CategoriesStore = signalStore(
     _http: inject(HttpClient),
   })),
   withMethods(({ _http, ...store }) => ({
-    loadCategories: rxMethod<FilterProjectCategoriesDto>(
+    loadCategories: rxMethod<FilterProgramCategoriesDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
@@ -32,7 +32,7 @@ export const CategoriesStore = signalStore(
           return _http
             .get<{
               data: [ICategory[], number];
-            }>('project-categories/paginated', { params })
+            }>('program-categories/paginated', { params })
             .pipe(
               map(({ data }) => {
                 patchState(store, { isLoading: false, categories: data });

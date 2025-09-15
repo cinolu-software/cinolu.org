@@ -10,9 +10,9 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CategoriesStore } from './categories.store';
-import { ProjectCategoryDto } from '../../dto/event-category.dto';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 import { ICategory } from '../../../../../../shared/models/entities.models';
+import { ProjectCategoryDto } from '../../dto/categories/event-category.dto';
 
 interface IAddCategoryStore {
   isLoading: boolean;
