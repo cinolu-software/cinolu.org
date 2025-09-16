@@ -3,10 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GALLERY_IMAGES } from '../../data/gallery.data';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LucideAngularModule, StepBack, StepForward, X } from 'lucide-angular';
-interface GalleryImage {
-  src: string;
-  alt: string;
-}
+import { IGalleryImage } from '../../data/gallery.data';
 
 @Component({
   selector: 'app-gallery-card',
@@ -22,7 +19,7 @@ export class GalleryCard {
 
   currentIndex = signal(0);
   lightboxOpen = signal(false);
-  current = signal<GalleryImage | null>(null);
+  current = signal<IGalleryImage | null>(null);
 
   filtered = () => this.photos.slice(0, this.page() * this.perPage);
 
@@ -32,7 +29,7 @@ export class GalleryCard {
     this.page.update((p) => p + 1);
   }
 
-  openLightbox(p: GalleryImage) {
+  openLightbox(p: IGalleryImage) {
     this.currentIndex.set(this.photos.findIndex((x) => x.src === p.src));
     this.current.set(p);
     this.lightboxOpen.set(true);
