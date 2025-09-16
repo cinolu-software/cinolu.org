@@ -1,88 +1,97 @@
-<section class="max-w-7xl mx-auto p-6">
-  <h2 class="text-2xl font-extrabold tracking-tight mb-6">Galerie</h2>
-
-  <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
-    @for (p of filtered(); track p.src) {
-      <article
-        class="break-inside-avoid rounded-xl overflow-hidden relative group shadow-lg bg-white"
-      >
-        <img
-          tabindex="0"
-          (click)="openLightbox(p)"
-          (keydown)="($event.key === 'Enter' || $event.key === ' ') && openLightbox(p)"
-          [src]="p.src"
-          [alt]="p.alt"
-          loading="lazy"
-          class="w-full h-auto object-cover cursor-pointer transition-transform duration-500 group-hover:scale-105"
-        />
-
-        <div
-          class="absolute bottom-3 left-3 right-3 p-3 rounded-md bg-gradient-to-t from-black/60 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity"
-        >
-          <h3 class="font-semibold">{{ p.alt }}</h3>
-        </div>
-      </article>
-    }
-  </div>
-
-  <!-- Pagination -->
-  <div class="mt-6 flex justify-center">
-    @if (canLoadMore()) {
-      <button
-        (click)="loadMore()"
-        class="px-6 py-2 rounded-full border border-gray-200 bg-white shadow-md hover:shadow-lg"
-      >
-        Charger plus
-      </button>
-    }
-  </div>
-
-  <!-- Lightbox -->
-  @if (lightboxOpen()) {
+<section class="sm:py-16 md:py-20 mx-auto">
+  <div
+    class="px-4 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
+  >
     <div
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
-      tabindex="0"
-      (click)="closeLightbox()"
-      (keydown)="($event.key === 'Enter' || $event.key === ' ') && closeLightbox()"
+      class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4"
     >
+      @for (p of filtered(); track p.src) {
+        <article
+          class="break-inside-avoid rounded-md overflow-hidden relative group shadow-lg bg-white"
+        >
+          <img
+            tabindex="0"
+            (click)="openLightbox(p)"
+            (keydown)="
+              ($event.key === 'Enter' || $event.key === ' ') && openLightbox(p)
+            "
+            [src]="p.src"
+            [alt]="p.alt"
+            loading="lazy"
+            class="w-full h-auto object-cover cursor-pointer transition-transform duration-500 group-hover:scale-105"
+          />
+
+          <div
+            class="absolute bottom-3 left-3 right-3 p-3 rounded-md bg-gradient-to-t from-black/60 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <h3 class="font-semibold">{{ p.alt }}</h3>
+          </div>
+        </article>
+      }
+    </div>
+
+    <div class="mt-6 flex justify-center">
+      @if (canLoadMore()) {
+        <button
+          (click)="loadMore()"
+          class="px-6 py-2 rounded-full border border-gray-200 bg-white shadow-md hover:shadow-lg"
+        >
+          Charger plus
+        </button>
+      }
+    </div>
+
+    @if (lightboxOpen()) {
       <div
-        class="max-w-4xl w-full max-h-[90vh] overflow-hidden rounded-2xl bg-white"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
         tabindex="0"
-        (click)="$event.stopPropagation()"
-        (keydown)="($event.key === 'Enter' || $event.key === ' ') && $event.stopPropagation()"
+        (click)="closeLightbox()"
+        (keydown)="
+          ($event.key === 'Enter' || $event.key === ' ') && closeLightbox()
+        "
       >
-        <div class="flex justify-between items-center p-3 border-b">
-          <h3 class="font-semibold">{{ current()?.alt }}</h3>
-          <div class="flex items-center gap-2">
-            <button
-              (click)="prev($event)"
-              class="p-2 rounded hover:bg-gray-100"
-            >
-              ◀
-            </button>
-            <button
-              (click)="next($event)"
-              class="p-2 rounded hover:bg-gray-100"
-            >
-              ▶
-            </button>
-            <button
-              (click)="closeLightbox()"
-              class="p-2 rounded hover:bg-gray-100"
-            >
-              ✕
-            </button>
+        <div
+          class="max-w-4xl w-full max-h-[90vh] overflow-hidden rounded-md bg-white"
+          tabindex="0"
+          (click)="$event.stopPropagation()"
+          (keydown)="
+            ($event.key === 'Enter' || $event.key === ' ') &&
+              $event.stopPropagation()
+          "
+        >
+          <div class="flex justify-between items-center p-3 border-b">
+            <h3 class="font-semibold">{{ current()?.alt }}</h3>
+            <div class="flex items-center gap-2">
+              <button
+                (click)="prev($event)"
+                class="p-2 rounded hover:bg-gray-100"
+              >
+                ◀
+              </button>
+              <button
+                (click)="next($event)"
+                class="p-2 rounded hover:bg-gray-100"
+              >
+                ▶
+              </button>
+              <button
+                (click)="closeLightbox()"
+                class="p-2 rounded hover:bg-gray-100"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+
+          <div class="p-4 flex items-center justify-center bg-black">
+            <img
+              [src]="current()?.src"
+              [alt]="current()?.alt"
+              class="max-h-[75vh] object-contain"
+            />
           </div>
         </div>
-
-        <div class="p-4 flex items-center justify-center bg-black">
-          <img
-            [src]="current()?.src"
-            [alt]="current()?.alt"
-            class="max-h-[75vh] object-contain"
-          />
-        </div>
       </div>
-    </div>
-  }
+    }
+  </div>
 </section>

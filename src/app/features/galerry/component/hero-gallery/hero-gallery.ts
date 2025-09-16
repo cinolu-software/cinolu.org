@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { NgOptimizedImage } from "@angular/common";
+import { Info, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-hero-gallery',
-  imports: [NgOptimizedImage],
+  imports: [LucideAngularModule],
   templateUrl: './hero-gallery.html',
 })
 export class HeroGallery {
-
+  icons = {
+    info: Info,
+  };
 }
-
-

@@ -1,25 +1,39 @@
-<div class="py-12 sm:py-16 md:py-20" id="gallery">
+
+<section
+  class="relative min-h-[50vh] pt-40 pb-20 flex"
+  aria-label="Section gallery"
+  role="region"
+  id="gallery"
+>
   <div
-    class="px-4 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
+    class="absolute inset-0 bg-[url('/images/gallery/8.jpg')] bg-cover bg-center bg-no-repeat"
+    aria-hidden="true"
   >
-    <h2
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-3 tracking-tight leading-tight lg:my-7"
-    >
-      Notre <span class="text-primary-500">Galerie</span>
-    </h2>
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-    >
-      <div
-        class="overflow-hidden rounded-lg shadow-md"
-      >
-        <img
-          fill
-          [ngSrc]="'images/gallery/8.jpg'"
-          alt="Gallery Image"
-          class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
-        />
-      </div>
-    </div>
+    <div class="absolute inset-0 bg-primary-950/85" aria-hidden="true"></div>
   </div>
-</div>
+  <div
+    class="px-8 relative z-10 sm:px-6 lg:px-12 xl:px-20 2xl:px-32 max-w-screen-2xl mx-auto"
+  >
+    <h1
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/20 backdrop-blur-sm mb-4 text-primary-50 font-medium font-satoshi"
+    >
+      <i-lucide
+        [name]="icons.info"
+        class="size-5"
+        aria-hidden="true"
+        focusable="false"
+      ></i-lucide>
+      Gallery
+    </h1>
+    <h2
+      class="font-satoshi font-black text-white flex flex-wrap items-center gap-2 text-left text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-10"
+    >
+      Des souvenirs <span class="text-primary-400">à partager.</span>
+    </h2>
+
+    <p class="text-lg sm:text-xl text-primary-100 mb-12">
+      Découvrez les histoires derrière chaque photo et revivez avec nous les
+      temps forts de notre parcours collectif.
+    </p>
+  </div>
+</section>
