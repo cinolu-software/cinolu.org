@@ -54,6 +54,13 @@ export const routes: Route[] = [
       ),
   },
   {
+    path: 'gallery',
+    component: Layout,
+    data: { layout: 'full-layout' },
+    loadChildren: () =>
+      import('./features/galerry/gallery.routes').then((m) => m.galleryRoutes),
+  },
+  {
     path: 'contact-us',
     component: Layout,
     data: { layout: 'fixed-layout' },

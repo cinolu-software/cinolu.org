@@ -9,3 +9,5 @@ import { NgOptimizedImage } from "@angular/common";
 export class HeroGallery {
 
 }
+
+
