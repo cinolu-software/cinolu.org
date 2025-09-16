@@ -2,6 +2,7 @@ import { Component, HostListener, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GALLERY_IMAGES } from '../../data/gallery.data';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LucideAngularModule, StepBack, StepForward, X } from 'lucide-angular';
 interface GalleryImage {
   src: string;
   alt: string;
@@ -9,11 +10,12 @@ interface GalleryImage {
 
 @Component({
   selector: 'app-gallery-card',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, LucideAngularModule],
   templateUrl: './gallery-card.html',
   styles: ``,
 })
 export class GalleryCard {
+  icons = { prev: StepForward, back: StepBack, close: X };
   photos = GALLERY_IMAGES;
   page = signal(1);
   perPage = 9;
