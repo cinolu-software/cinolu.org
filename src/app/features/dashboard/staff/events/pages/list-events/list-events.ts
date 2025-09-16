@@ -31,6 +31,7 @@ import { PublishEventStore } from '../../store/events/publish-event.store';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { HighlightEventStore } from '../../store/events/highlight-event.store';
 import { FilterEventsDto } from '../../dto/categories/filter-events.dto';
+import { ProgressSpinner } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-events-list',
@@ -40,7 +41,7 @@ import { FilterEventsDto } from '../../dto/categories/filter-events.dto';
     PublishEventStore,
     DeleteEventStore,
     ConfirmationService,
-    HighlightEventStore
+    HighlightEventStore,
   ],
   imports: [
     LucideAngularModule,
@@ -53,6 +54,7 @@ import { FilterEventsDto } from '../../dto/categories/filter-events.dto';
     ConfirmPopup,
     AvatarModule,
     ApiImgPipe,
+    ProgressSpinner,
   ],
 })
 export class ListEvents implements OnInit {
@@ -75,7 +77,7 @@ export class ListEvents implements OnInit {
     eye: Eye,
     eyeOff: EyeOff,
     star: Star,
-    starOff: StarOff
+    starOff: StarOff,
   };
   queryParams = signal<FilterEventsDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),

@@ -1,196 +1,104 @@
 <div class="hidden lg:flex justify-between w-full text-sm font-bold">
   @let user = authStore.user();
   <div class="flex items-center gap-6">
+    <button
+      class="group flex items-center relative hover:text-primary-500 hover:transition-colors hover:duration-200">
+      Programmes
+      <i-lucide class="size-3.5 transition-transform duration-300 group-hover:rotate-45"
+                [name]="icons.chevronRight"/>
+      @if (programsStore.programs()) {
+        <div
+          class="absolute left-0 top-6 w-60 bg-white shadow-xl rounded-md z-30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-top">
+          <div class="flex flex-col divide-y divide-gray-200 py-2">
+            @for (p of programsStore.programs(); track $index) {
+              <div class="relative group/sub px-4 py-2 text-left">
+                <a routerLinkActive="bg-primary-100 text-primary-600"
+                   [routerLink]="['/our-programs', p.slug]" [routerLinkActiveOptions]="{ exact: true, }"
+                   class="block px-4 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-colors duration-200">
+                  {{ p.name }}
+                  <span class="block text-xs font-normal text-gray-500">
+                    {{ p?.category?.name }}
+                  </span>
+                </a>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </button>
     @for (link of links(); track $index) {
       <div class="relative group">
-        <a
-          [routerLink]="link.path"
-          routerLinkActive="after:bg-primary-500"
-          [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
-          class="group flex items-center relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 hover:text-primary-500 hover:transition-colors hover:duration-200"
-        >
-          <span>{{ link.name }}</span>
-          @if (link.children?.length) {
-            <i-lucide
-              [name]="icons.chevronRight"
-              class="size-4 ml-1 transition-transform duration-300 group-hover:rotate-45"
-            ></i-lucide>
-          }
-        </a>
-
         @if (link.children?.length) {
-          <div
-            class="absolute left-0 top-full mt-4 w-96 bg-white shadow-xl rounded-md z-30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-top"
-            role="menu"
-          >
-            <div class="flex flex-col divide-y divide-gray-200 py-2">
-              @for (sublink of link.children; track $index) {
-                @let firstChild = sublink.children?.[0];
-
-                <div class="relative group/sub px-4 py-2">
-                  @if (sublink.path && !sublink.children?.length) {
-                    @if (sublink.external === true) {
-                      <a
-                        href="{{ sublink.path }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        routerLinkActive="bg-primary-100 text-primary-600"
-                        [routerLinkActiveOptions]="{
-                          exact: sublink.exactUrl || false,
-                        }"
-                        class="block px-4 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-colors duration-200"
-                        role="menuitem"
-                      >
+          <button
+            class="group flex items-center relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 hover:text-primary-500 hover:transition-colors hover:duration-200">
+            {{ link.name }}
+            <i-lucide class="size-3.5 transition-transform duration-300 group-hover:rotate-45"
+                      [name]="icons.chevronRight"/>
+            @if (link.children?.length) {
+              <div
+                class="absolute left-0 top-6 w-56 bg-white shadow-xl rounded-md z-30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-top">
+                <div class="flex text-left flex-col divide-y divide-gray-200 py-2">
+                  @for (sublink of link.children; track $index) {
+                    <div class="relative group/sub px-4 py-2">
+                      <a routerLinkActive="bg-primary-100 text-primary-600"
+                         [routerLink]="sublink.path" [routerLinkActiveOptions]="{ exact: sublink.exactUrl || false }"
+                         class="block px-4 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-colors duration-200">
                         {{ sublink.name }}
                       </a>
-                    } @else {
-                      <a
-                        [routerLink]="sublink.path"
-                        routerLinkActive="bg-primary-100 text-primary-600"
-                        [routerLinkActiveOptions]="{
-                          exact: sublink.exactUrl || false,
-                        }"
-                        class="block px-4 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-colors duration-200"
-                        role="menuitem"
-                      >
-                        {{ sublink.name }}
-                      </a>
-                    }
-                  } @else {
-                    <div
-                      class="flex items-center justify-between px-4 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-colors duration-200"
-                    >
-                      <div class="flex gap-1 items-center">
-                        <span>{{ sublink.name }}</span>
-
-                        @if (firstChild) {
-                          <span>-></span>
-                          <a
-                            [routerLink]="firstChild.path"
-                            routerLinkActive="bg-primary-100 text-primary-600"
-                            [routerLinkActiveOptions]="{
-                              exact: firstChild.exactUrl || false,
-                            }"
-                            class="text-gray-700 font-medium hover:text-primary-600"
-                          >
-                            {{ firstChild.name }}
-                          </a>
-                        }
-                      </div>
-
-                      @if (firstChild?.children?.length) {
-                        <i-lucide
-                          [name]="icons.chevronRight"
-                          class="size-4 transition-transform duration-300 group-hover/sub:rotate-90"
-                        ></i-lucide>
-                      }
                     </div>
-
-                    @if (firstChild?.children?.length) {
-                      <div
-                        class="absolute left-full top-0 ml-2 w-64 bg-white shadow-lg rounded-lg z-40 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-300 origin-left"
-                        role="menu"
-                      >
-                        <div
-                          class="flex flex-col divide-y divide-gray-200 py-2"
-                        >
-                          @for (
-                            option of firstChild?.children ?? [];
-                            track $index
-                          ) {
-                            <a
-                              [routerLink]="option.path"
-                              routerLinkActive="bg-primary-100 text-primary-600"
-                              [routerLinkActiveOptions]="{
-                                exact: option.exactUrl || false,
-                              }"
-                              class="block px-6 py-3 text-gray-700 font-normal hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-colors duration-200"
-                              role="menuitem"
-                            >
-                              {{ option.name }}
-                            </a>
-                          }
-                        </div>
-                      </div>
-                    }
                   }
                 </div>
-              }
-            </div>
-          </div>
+              </div>
+            }
+          </button>
+        } @else {
+          <a
+            class="group flex items-center relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 hover:text-primary-500 hover:transition-colors hover:duration-200"
+            [routerLink]="link.path" routerLinkActive="after:bg-primary-500"
+            [routerLinkActiveOptions]="{ exact: link.exactUrl || false }">
+            {{ link.name }}
+          </a>
         }
+
       </div>
     }
-
     @if (user) {
-      <div class="flex items-center gap-3">
-        <button
-          class="relative menu flex items-center gap-0.5"
-          (click)="setActiveTab('account')"
-        >
-          <div class="relative h-8 w-8">
-            <img
-              [ngSrc]="user | apiIMG: 'user'"
-              alt="User  Image"
-              class="aspect-video object-cover ring-2 ring-primary-600 bg-gray-200 rounded-full"
-              fill
-            />
+      <div class="flex gap-3">
+        <button class="group relative flex items-center gap-1">
+          <div class="flex items-center gap-1">
+            <div class="relative h-8 w-8">
+              <img [ngSrc]="user | apiIMG: 'user'" alt="User Image"
+                   class="aspect-video object-cover ring-2 ring-primary-600 bg-gray-200 rounded-full" fill/>
+            </div>
+            <i-lucide [name]="icons.chevronRight"
+                      class="transition-transform duration-300 size-4 group-hover:rotate-45"/>
           </div>
-          <i-lucide
-            [name]="icons.chevronRight"
-            class="transition-transform duration-300 size-4"
-            [ngClass]="{ 'rotate-180': activeTab() === 'account' }"
-          />
           <div
-            class="absolute top-10 w-[13rem] right-0 animate-Up py-8 px-6 gap-6 z-30 bg-white shadow-lg rounded-md transition-transform duration-300"
-            [ngClass]="{
-              'block active-nav animate-fadeInUp': activeTab() === 'account',
-              hidden: activeTab() !== 'account',
-            }"
-          >
-            <div
-              class="grid grid-cols-1 gap-x-8 gap-y-6 font-medium text-gray-900 text-base"
-            >
-              <a
-                [routerLink]="'/dashboard'"
-                class="group flex items-center gap-2.5"
-              >
-                <span
-                  class="h-8 w-8 flex items-center justify-center text-white bg-primary-600 rounded-full"
-                >
-                  <i-lucide
-                    [name]="icons.dashboard"
-                    class="size-4 group-hover:animate-spin"
-                  />
-                </span>
-                Mon compte
-              </a>
-              <button
-                class="group flex items-center gap-2.5"
-                (click)="onSignOut()"
-              >
-                <span
-                  class="h-8 w-8 flex items-center justify-center text-white bg-red-600 rounded-full"
-                >
-                  <i-lucide
-                    [name]="icons.logOut"
-                    class="size-4 group-hover:animate-spin"
-                  />
-                </span>
-                Déconnexion
-              </button>
+            class="invisible absolute right-0 top-full mt-2 w-52 rounded-md bg-white shadow-xl opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100">
+            <div class="text-left flex flex-col divide-y divide-gray-200 py-2">
+              <div class="flex flex-col px-4 py-2">
+                <a [routerLink]="'/dashboard'"
+                   class="block rounded-lg px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600">
+                  Mon compte
+                </a>
+              </div>
+              <div class="flex flex-col px-4 py-2">
+                <button
+                  class="flex rounded-lg px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600"
+                  (click)="onSignOut()">
+                  Se déconnecter
+                </button>
+              </div>
             </div>
           </div>
         </button>
       </div>
     } @else {
-      <a
-        routerLink="/sign-in"
-        class="relative inline-flex items-center justify-center px-6 py-2 rounded-full border-1 border-primary-500 font-semibold text-primary-500 overflow-hidden group transition duration-300 ease-out hover:text-white"
-      >
-        <span
-          class="absolute inset-0 bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out"
-        ></span>
+      <a routerLink="/sign-in"
+         class="relative inline-flex items-center justify-center px-6 py-2 rounded-full border-1 border-primary-500 font-semibold text-primary-500 overflow-hidden group transition duration-300 ease-out hover:text-white">
+            <span
+              class="absolute inset-0 bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out">
+            </span>
         <span class="relative">Se connecter</span>
       </a>
     }

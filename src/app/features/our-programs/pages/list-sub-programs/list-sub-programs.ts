@@ -10,14 +10,14 @@ import {
   MoveUpRight,
   ArrowRight,
 } from 'lucide-angular';
-import { SubprogramCard } from '../component/subprogram-card/subprogram-card';
+import { SubprogramCard } from '../../component/subprogram-card/subprogram-card';
 import { CommonModule } from '@angular/common';
 import { SubprogramsStore } from '../../../landing/store/subprogram.store';
 import { IProject } from '../../../../shared/models/entities.models';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { CarouselModule } from 'primeng/carousel';
-import { SubprogramCardSkeleton } from '../component/subprogram-card-skeleton/subprogram-card-skeleton';
-import { SubprogramEventCard } from '../component/subprogram-event-card/subprogram-event-card';
+import { SubprogramCardSkeleton } from '../../component/subprogram-card-skeleton/subprogram-card-skeleton';
+import { SubprogramEventCard } from '../../component/subprogram-event-card/subprogram-event-card';
 
 @Component({
   selector: 'app-list-sub-programs',

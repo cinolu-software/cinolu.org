@@ -16,11 +16,17 @@ import {
 } from 'lucide-angular';
 import { CommonModule } from '@angular/common';
 import { ProgramStore } from '../../../landing/store/program.store';
+import { SubprogramCardSkeleton } from '../../component/subprogram-card-skeleton/subprogram-card-skeleton';
 
 @Component({
   selector: 'app-detail-programs',
   providers: [ProgramStore],
-  imports: [LucideAngularModule, CommonModule, RouterLink],
+  imports: [
+    LucideAngularModule,
+    CommonModule,
+    RouterLink,
+    SubprogramCardSkeleton,
+  ],
   templateUrl: './detail-programs.html',
   styles: ``,
 })

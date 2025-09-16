@@ -27,6 +27,7 @@ import { DeleteCategoryStore } from '../../store/categories/delete-category.stor
 import { UpdateCategoryStore } from '../../store/categories/update-category.store';
 import { ICategory } from '../../../../../../shared/models/entities.models';
 import { FilterProjectCategoriesDto } from '../../dto/categories/filter-categories.dto';
+import { ProgressSpinner } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-project-categories',
@@ -47,6 +48,7 @@ import { FilterProjectCategoriesDto } from '../../dto/categories/filter-categori
     ReactiveFormsModule,
     Dialog,
     ConfirmPopup,
+    ProgressSpinner,
   ],
 })
 export class ProjectCategories implements OnInit {

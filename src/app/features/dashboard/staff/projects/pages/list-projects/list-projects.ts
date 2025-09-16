@@ -31,6 +31,7 @@ import { PublishProjectStore } from '../../store/projects/publish-project.store'
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { HighlightProjectStore } from '../../store/projects/highlight-project.store';
 import { FilterProjectsDto } from '../../dto/projects/filter-projects.dto';
+import { ProgressSpinner } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-projects-list',
@@ -53,6 +54,7 @@ import { FilterProjectsDto } from '../../dto/projects/filter-projects.dto';
     ConfirmPopup,
     AvatarModule,
     ApiImgPipe,
+    ProgressSpinner,
   ],
 })
 export class ListProjects implements OnInit {

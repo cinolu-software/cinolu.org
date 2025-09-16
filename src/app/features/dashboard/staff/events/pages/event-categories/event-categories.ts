@@ -27,6 +27,7 @@ import { DeleteCategoryStore } from '../../store/categories/delete-category.stor
 import { UpdateCategoryStore } from '../../store/categories/update-category.store';
 import { ICategory } from '../../../../../../shared/models/entities.models';
 import { FilterEventCategoriesDto } from '../../dto/categories/filter-categories.dto';
+import { ProgressSpinner } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-event-categories',
@@ -47,6 +48,7 @@ import { FilterEventCategoriesDto } from '../../dto/categories/filter-categories
     ReactiveFormsModule,
     Dialog,
     ConfirmPopup,
+    ProgressSpinner,
   ],
 })
 export class EventCategories implements OnInit {
@@ -121,7 +123,9 @@ export class EventCategories implements OnInit {
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/event-categories'], { queryParams }).then();
+    this.#router
+      .navigate(['/dashboard/event-categories'], { queryParams })
+      .then();
   }
 
   updateRouteAndCategories(): void {

@@ -27,6 +27,7 @@ import { DeleteCategoryStore } from '../../store/categories/delete-category.stor
 import { UpdateCategoryStore } from '../../store/categories/update-category.store';
 import { ICategory } from '../../../../../../shared/models/entities.models';
 import { FilterProgramCategoriesDto } from '../../dto/categories/filter-categories.dto';
+import { ProgressSpinner } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-project-categories',
@@ -47,6 +48,7 @@ import { FilterProgramCategoriesDto } from '../../dto/categories/filter-categori
     ReactiveFormsModule,
     Dialog,
     ConfirmPopup,
+    ProgressSpinner,
   ],
 })
 export class ProgramCategories implements OnInit {
@@ -121,7 +123,9 @@ export class ProgramCategories implements OnInit {
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/program-categories'], { queryParams }).then();
+    this.#router
+      .navigate(['/dashboard/program-categories'], { queryParams })
+      .then();
   }
 
   updateRouteAndCategories(): void {

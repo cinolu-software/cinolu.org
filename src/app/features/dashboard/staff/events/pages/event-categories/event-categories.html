@@ -8,6 +8,14 @@
       <div class="px-6 flex flex-wrap gap-2 md:justify-between md:items-center mb-6 md:mb-0">
         <h5 class="text-lg font-bold">
           Liste des catégories
+          <span class="text-gray-500">
+            @if (isLoading) {
+              <p-progress-spinner strokeWidth="5" animationDuration=".5s" fill="transparent"
+                                  [style]="{ width: '0.8rem', height: '0.8rem' }"/>
+            } @else {
+              ({{ categoryCount | json }})
+            }
+          </span>
         </h5>
         <p-button [outlined]="true" [size]="'small'" (click)="onToggleAddModal()">
           <i-lucide [name]="icons.plus" class="size-4"/>

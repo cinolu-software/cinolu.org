@@ -26,7 +26,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ProgramsStore } from '../../store/list-programs/programs.store';
-import { FilterProgramsDto } from '../../dto/list-programs/filter-programs.dto';
+import { FilterProgramsDto } from '../../dto/programs/filter-programs.dto';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 import { Dialog } from 'primeng/dialog';
@@ -41,8 +41,8 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { AvatarModule } from 'primeng/avatar';
 import { PublishProgramStore } from '../../store/list-programs/publish-program.store';
 import { HighlightProgramStore } from '../../store/list-programs/highlight-program.store';
-import { MultiSelect } from 'primeng/multiselect';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
+import { Select } from 'primeng/select';
 
 @Component({
   selector: 'app-list-programs',
@@ -71,7 +71,7 @@ import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-c
     FileUpload,
     ApiImgPipe,
     AvatarModule,
-    MultiSelect,
+    Select,
   ],
 })
 export class ListPrograms implements OnInit {
@@ -88,7 +88,7 @@ export class ListPrograms implements OnInit {
   deleteProgramStore = inject(DeleteProgramStore);
   publishProgramStore = inject(PublishProgramStore);
   highlightStore = inject(HighlightProgramStore);
-  categoriesStore = inject(UnpaginatedCategoriesStore)
+  categoriesStore = inject(UnpaginatedCategoriesStore);
   program = signal<IProgram | null>(null);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   url = environment.apiUrl + 'programs/logo/';
@@ -119,22 +119,18 @@ export class ListPrograms implements OnInit {
     this.addProgramForm = this.#fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      categories: [[], Validators.required],
+      category: ['', Validators.required],
     });
     this.updateProgramForm = this.#fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
-      categories: [[], Validators.required],
+      category: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
     this.loadPrograms();
-  }
-
-  get count(): number {
-    return this.store.programs()[1];
   }
 
   loadPrograms(): void {
@@ -190,7 +186,7 @@ export class ListPrograms implements OnInit {
       id: program?.id || '',
       name: program?.name || '',
       description: program?.description || '',
-      categories: program?.categories?.map((role) => role.id),
+      category: program?.category?.id,
     });
     this.showEditModal.update((v) => !v);
   }

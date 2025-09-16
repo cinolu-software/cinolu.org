@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
@@ -10,10 +10,12 @@ import {
 import { ILink } from '../../../data/links.data';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { AuthStore } from '../../../../core/auth/auth.store';
+import { ProgramsStore } from '../../../../features/landing/store/programs.store';
 
 @Component({
   selector: 'app-desktop-nav',
   templateUrl: './desktop-nav.html',
+  providers: [ProgramsStore],
   imports: [
     CommonModule,
     NgOptimizedImage,
@@ -24,17 +26,9 @@ import { AuthStore } from '../../../../core/auth/auth.store';
 })
 export class DesktopNav {
   links = input.required<ILink[]>();
-  activeTab = signal<string | null>(null);
   authStore = inject(AuthStore);
+  programsStore = inject(ProgramsStore);
   icons = { chevronRight: ChevronRight, dashboard: LayoutGrid, logOut: LogOut };
-
-  closeNav(): void {
-    this.setActiveTab(null);
-  }
-
-  setActiveTab(tab: string | null): void {
-    this.activeTab.set(tab);
-  }
 
   onSignOut(): void {
     this.authStore.signOut();

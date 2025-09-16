@@ -1,21 +1,11 @@
 import {
   LucideIconData,
   Info,
-  Activity,
   UserCheck,
-  BriefcaseBusiness,
   Calendar1,
-  Phone,
-  House,
   LayoutGrid,
   BookOpen,
   Group,
-  Users,
-  Briefcase,
-  FlaskConical,
-  Sparkles,
-  GraduationCap,
-  Youtube,
   Image,
   Layers,
   Folders,
@@ -32,40 +22,6 @@ export interface ILink {
   children?: ILink[];
 }
 
-export const EXPLORATION_LINKS: ILink[] = [
-  {
-    icon: House,
-    name: 'Accueil',
-    path: '/',
-    exactUrl: true,
-  },
-  {
-    icon: Activity,
-    name: 'Programmes',
-    path: '/programs',
-  },
-  {
-    icon: Calendar1,
-    name: 'Evénements',
-    path: '/events',
-  },
-  {
-    icon: Info,
-    name: 'A propos',
-    path: '/about-us',
-  },
-  {
-    icon: Phone,
-    name: 'Contact',
-    path: '/contact-us',
-  },
-  {
-    icon: BookOpen,
-    name: 'Blog',
-    path: '/blog-ressources',
-  },
-];
-
 export const MY_CINOLU_LINKS: ILink[] = [
   {
     name: 'A propos',
@@ -79,127 +35,24 @@ export const MY_CINOLU_LINKS: ILink[] = [
   },
 ];
 
-export const EXPLORATION_LINK: ILink[] = [
+export const EXPLORATION_LINKS: ILink[] = [
   {
-    icon: House,
-    name: 'Accueil',
-    path: '/',
-    exactUrl: true,
-  },
-  {
-    icon: Activity,
-    name: 'Programmes',
-    path: '/programs',
+    icon: Info,
+    name: 'My Cinolu',
+    path: '/mycinolu',
     children: [
-      {
-        name: 'Genre & Inclusion',
-        children: [
-          {
-            name: 'F360 Hub',
-            path: '/programs/genre-inclusion/f360',
-            icon: Users,
-            children: [
-              {
-                name: 'Binti Bora',
-                path: '/programs/genre-inclusion/f360/binti-bora',
-              },
-              {
-                name: 'Binti Safari',
-                path: '/programs/genre-inclusion/f360/binti-safari',
-              },
-              {
-                name: 'F360 Capacity Building',
-                path: '/programs/genre-inclusion/f360/capacity-building',
-              },
-              {
-                name: 'F360 Incubates',
-                path: '/programs/genre-inclusion/f360/incubates',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        name: 'Entreprenariat & Employabilité',
-        children: [
-          {
-            name: 'Ushindi Hub',
-            path: '/programs/entrepreneurship/ushindi',
-            icon: Briefcase,
-            children: [
-              {
-                name: 'UCampus Sprint',
-                path: '/programs/entrepreneurship/ushindi/ucampus-sprint',
-              },
-              {
-                name: 'L’Impact',
-                path: '/programs/entrepreneurship/ushindi/limpact',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        name: 'Recherche & Innovation',
-        children: [
-          {
-            name: 'Uvumbuzi Hub',
-            path: '/programs/research/uvumbuzi',
-            icon: FlaskConical,
-          },
-        ],
-      },
-      {
-        name: 'Jeunesse & Créativité',
-        children: [
-          {
-            name: 'Ushahidi Hub',
-            path: '/programs/youth/ushahidi',
-            icon: Sparkles,
-          },
-        ],
-      },
-      {
-        name: 'Stages & Communautés',
-        children: [
-          {
-            name: 'Fellowships',
-            path: '/programs/fellowships',
-            icon: GraduationCap,
-            children: [
-              {
-                name: 'Cisco Networking Academy',
-                path: '/programs/fellowships/cisco',
-              },
-            ],
-          },
-        ],
-      },
+      { name: 'OneStop Platform', path: '/', exactUrl: true },
+      { name: 'À propos', path: '/about-us' },
+      { name: 'Jobs & Opportunités', path: '/jobs-opportunities' },
+      { name: 'Contacts', path: '/contact-us', icon: Image },
+      { name: 'Blog', path: '/blog-ressources', icon: BookOpen },
+      { name: 'Galerie', path: '/gallery', icon: Image },
     ],
   },
   {
     icon: Calendar1,
     name: 'Évènements',
     path: '/events',
-  },
-  {
-    icon: Info,
-    name: 'My Cinolu',
-    path: '/mycinolu',
-    children: [
-      { name: 'OneStop Platform', path: '/mycinolu/onestop' },
-      { name: 'À propos', path: '/about-us' },
-      { name: 'Jobs & Opportunités', path: '/jobs-opportunities' },
-      { name: 'Contacts', path: '/contact-us', icon: Image },
-      { name: 'Blog', path: '/blog-ressources', icon: BookOpen },
-      {
-        name: 'Youtube',
-        path: 'https://youtube.com/@centredinnovationdelubumba3607?si=b8auRTD8fB60qJwI',
-        external: true,
-        icon: Youtube,
-      },
-      { name: 'Galerie', path: '/gallery', icon: Image },
-    ],
   },
 ];
 
@@ -302,15 +155,14 @@ export const COMMON_LINKS: ILink[] = [
 
 export const USER_LINKS: ILink[] = [
   {
-    name: 'Mes entreprises',
-    path: '/dashboard/ventures',
-    icon: BriefcaseBusiness,
-  },
-  {
-    name: 'Communauté',
+    name: 'My Cinolu',
     path: '/dashboard/community',
     icon: Group,
     children: [
+      {
+        name: 'Mes entreprises',
+        path: '/dashboard/ventures',
+      },
       {
         name: 'Vulgarisation',
         path: '/dashboard/community/outreach',

@@ -3,30 +3,19 @@
   [ngClass]="{
     'bg-white shadow-sm text-gray-800': isFixed() || fixed(),
     'text-white': !isFixed() && !fixed(),
-  }"
->
+  }">
   <nav
-    class="flex justify-between items-center w-full px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
-  >
+    class="flex justify-between items-center w-full px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
     <div class="flex gap-3 items-center">
       <a routerLink="/" aria-label="logo" class="inline-block">
-        <img
-          [ngSrc]="
-            isFixed() || fixed()
-              ? 'images/logo/logo-g.png'
-              : 'images/logo/logo-w.png'
-          "
-          alt="logo"
-          class="w-8 h-9 cursor-pointer aspect-video object-cover"
-          width="64"
-          height="68"
-          priority
-        />
+        <img priority [ngSrc]="isFixed() || fixed()? 'images/logo/logo-g.png': 'images/logo/logo-w.png' "
+             width="64" height="68" alt="logo"
+             class="w-8 h-9 cursor-pointer aspect-video object-cover"/>
       </a>
     </div>
     <div>
-      <app-mobile-nav [links]="links()" />
-      <app-desktop-nav [links]="links()" />
+      <app-mobile-nav [links]="links()"/>
+      <app-desktop-nav [links]="links()"/>
     </div>
   </nav>
 </header>

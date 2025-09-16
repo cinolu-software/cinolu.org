@@ -9,7 +9,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { FilterProgramsDto } from '../../dto/list-programs/filter-programs.dto';
+import { FilterProgramsDto } from '../../dto/programs/filter-programs.dto';
 import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
 import { IProgram } from '../../../../../../shared/models/entities.models';
 

@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { IProject } from '../../../../../shared/models/entities.models';
+import { IProject } from '../../../../shared/models/entities.models';
 import {
   Calendar1,
   ArrowLeft,
@@ -18,7 +18,7 @@ import {
   UserPlus,
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-subprogram-card',
