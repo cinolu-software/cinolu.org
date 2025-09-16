@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Info, LucideAngularModule } from 'lucide-angular';
+import { Image, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-hero-gallery',
@@ -8,6 +8,6 @@ import { Info, LucideAngularModule } from 'lucide-angular';
 })
 export class HeroGallery {
   icons = {
-    info: Info,
+    info: Image,
   };
 }
