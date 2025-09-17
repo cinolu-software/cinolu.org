@@ -1,13 +1,19 @@
-<app-hero-blog />
+<app-hero-card
+  background="/images/about.jpg"
+  [badgeIcon]="icons.info"
+  badgeText="Actualités"
+  title="  Nos
+"
+  highlight="Articles"
+  description="Le blog de Cinolu, un espace d’idées, de récits et de ressources au service des innovateurs d’Afrique."
+/>
 
 <section
-  class="flex flex-col lg:flex-row pt-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto gap-8"
+  class="min-h-[85vh] flex flex-col lg:flex-row lg:py-20 px-8 md:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto gap-8"
 >
   <div class="lg:w-2/3 w-full">
     @if (store.article(); as article) {
-      <div class="pt-4 pb-8">
-    
-      </div>
+      <div class="pt-4 pb-8"></div>
 
       <div
         class="relative mb-10 h-60 w-full md:h-96 bg-gray-50 overflow-hidden"
@@ -22,12 +28,12 @@
       </div>
 
       <div class="my-10">
-        <h2 class="font-black font-satoshi mb-4 text-2xl md:text-4xl">
+        <h2 class="font-black font-satoshi mb-4 text-2xl md:text-3xl">
           {{ article.title | titlecase }}
         </h2>
 
         <div
-          class="mb-8 prose max-w-none hyphens-none"
+          class="mb-8 text-base font-normal text-gray-700 text-justify hyphens-none"
           [innerHTML]="article.content"
         ></div>
 
@@ -35,7 +41,7 @@
           <i-lucide [name]="icons.fileText" class="size-5" />
           <h3 class="font-semibold text-lg">Résumé</h3>
         </div>
-        <div class="mb-8 prose max-w-none" [innerHTML]="article.summary"></div>
+        <div class="mb-8 max-w-none" [innerHTML]="article.summary"></div>
 
         <p class="mb-4">
           Date de publication :
@@ -52,7 +58,11 @@
       <div
         class="min-h-[75vh] w-full flex flex-col justify-center items-center"
       >
-        <h2 class="text-3xl font-semibold">Mauvais chemin !</h2>
+        <h2 class="text-3xl font-semibold mb-3">Aucun article trouvé</h2>
+
+        <div class="w-full">
+          <app-article-card-skeleton />
+        </div>
       </div>
     }
   </div>

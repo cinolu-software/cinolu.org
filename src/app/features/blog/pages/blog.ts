@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { HeroBlog } from '../components/hero-blog/hero-blog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ArticlesStore } from '../store/articles.store';
@@ -9,17 +8,19 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ArticleCardSkeleton } from '../components/article-card-skeleton/article-card-skeleton';
 import { TagsStore } from '../store/tags.store';
 import { MultiSelectChangeEvent, MultiSelectModule } from 'primeng/multiselect';
+import { HeroCard } from '../../../layout/components/hero-card/hero-card';
+import { Edit2Icon, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-blog',
-  providers: [ArticlesStore, TagsStore],
+  providers: [ArticlesStore, TagsStore, LucideAngularModule],
   imports: [
-    HeroBlog,
     CommonModule,
     ArticleCard,
     NgxPaginationModule,
     ArticleCardSkeleton,
     MultiSelectModule,
+    HeroCard,
   ],
   templateUrl: './blog.html',
 })
@@ -68,4 +69,8 @@ export class Blog implements OnInit {
     await this.updateRoute();
     this.store.loadArticles(this.queryParams());
   }
+
+  icons = {
+    edit: Edit2Icon,
+  };
 }
