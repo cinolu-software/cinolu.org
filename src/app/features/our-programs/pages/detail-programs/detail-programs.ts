@@ -49,7 +49,11 @@ export class DetailPrograms implements OnInit {
   store = inject(ProgramStore);
 
   ngOnInit(): void {
-    const slug = this.#route.snapshot.params['slug'];
-    this.store.loadProgram(slug);
+    this.#route.paramMap.subscribe((params) => {
+      const slug = params.get('slug');
+      if (slug) {
+        this.store.loadProgram(slug);
+      }
+    });
   }
 }
