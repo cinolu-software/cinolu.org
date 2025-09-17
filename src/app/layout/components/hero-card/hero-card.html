@@ -1,39 +1,59 @@
 <section
-  class="relative min-h-[50vh] pt-40 pb-20 flex"
+  class="relative min-h-[50vh] pt-32 sm:pt-40 pb-12 sm:pb-20 flex flex-col items-center justify-center content-center"
   aria-label="Hero card section"
   role="region"
 >
-  <div
-    class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-    [ngStyle]="{ 'background-image': 'url(' + background + ')' }"
-    aria-hidden="true"
-  >
-    <div class="absolute inset-0 bg-primary-950/85" aria-hidden="true"></div>
-  </div>
+  <div>
+    <img
+      [src]="background"
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="lazy"
+      aria-hidden="true"
+    />
+    <div
+      class="absolute inset-0"
+      [ngClass]="overlayColor"
+      aria-hidden="true"
+    ></div>
 
-  <div
-    class="px-8 relative z-10 sm:px-6 lg:px-12 xl:px-20 2xl:px-32 max-w-screen-2xl mx-auto"
-  >
-    <h1
-      class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/20 backdrop-blur-sm mb-4 text-primary-50 font-medium font-satoshi"
+    <div
+      class="px-8 relative z-10 sm:px-6 lg:px-12 xl:px-20 2xl:px-32 max-w-screen-2xl mx-auto flex flex-col"
+      [ngClass]="{
+        'justify-start': align === 'top',
+        'justify-center': align === 'center',
+        'justify-end': align === 'bottom',
+      }"
     >
-      <i-lucide
-        [name]="badgeIcon"
-        class="size-5"
-        aria-hidden="true"
-      ></i-lucide>
-      {{ badgeText }}
-    </h1>
+      @if (badgeText) {
+        <p
+          class="inline-flex items-start max-w-36 gap-2 px-4 py-2 my-2 rounded-full bg-neutral-300/20 backdrop-blur-[1px] border borber-neutral-400/20 hover:bg-neutral-300/30 mb-2 text-primary-50 font-medium sm:text-base font-satoshi"
+        >
+          <i-lucide
+            [name]="badgeIcon"
+            class="size-5"
+            aria-hidden="true"
+          ></i-lucide>
+          {{ badgeText }}
+        </p>
+      }
 
-    <h2
-      class="font-satoshi font-black text-white flex flex-wrap items-center gap-2 text-left text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-10"
-    >
-      {{ title }}
-      <span class="text-primary-400">{{ highlight }}</span>
-    </h2>
+      <h1
+        class="font-satoshi font-black text-white flex flex-wrap items-center gap-2 text-left text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-6"
+      >
+        {{ title }}
+        @if (highlight) {
+          <span class="text-primary-400">{{ highlight }}</span>
+        }
+      </h1>
 
-    <p class="text-base md:text-lg text-primary-100 mb-12 font-satoshi">
-      {{ description }}
-    </p>
+      @if (description) {
+        <p
+          class="text-base md:text-lg text-white max-w-2xl font-satoshi hyphens-none"
+        >
+          {{ description }}
+        </p>
+      }
+    </div>
   </div>
 </section>

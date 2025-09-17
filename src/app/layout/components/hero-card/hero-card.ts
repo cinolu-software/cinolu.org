@@ -8,10 +8,12 @@ import { LucideIconData, LucideAngularModule } from 'lucide-angular';
   templateUrl: './hero-card.html',
 })
 export class HeroCard {
-  @Input() background!: string;
+  @Input({ required: true }) background!: string;
   @Input() badgeIcon!: LucideIconData;
   @Input() badgeText = 'Section';
-  @Input() title!: string;
+  @Input({ required: true }) title!: string;
   @Input() highlight!: string;
   @Input() description!: string;
+  @Input() overlayColor = 'bg-primary-950/85';
+  @Input() align: 'top' | 'center' | 'bottom' = 'top';
 }

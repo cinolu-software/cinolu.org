@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { GALLERY_IMAGES } from '../data/gallery.data';
-import { HeroGallery } from "../component/hero-gallery/hero-gallery";
-import { GalleryCard } from "../component/gallery-card/gallery-card";
+import { GalleryCard } from '../component/gallery-card/gallery-card';
+import { HeroCard } from '../../../layout/components/hero-card/hero-card';
+import { Image } from 'lucide-angular';
 
 @Component({
   selector: 'app-gallery',
-  imports: [HeroGallery, GalleryCard],
+  imports: [GalleryCard, HeroCard],
   templateUrl: './gallery.html',
-  styles: ``,
 })
 export class Gallery {
   galleryImages = GALLERY_IMAGES;
+  icons = {
+    image: Image,
+  };
 }
