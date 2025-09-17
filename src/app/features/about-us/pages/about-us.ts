@@ -6,6 +6,8 @@ import { Mission } from '../components/mission/mission';
 import { History } from '../components/history/history';
 import { OurImpact } from '../components/our-impact/our-impact';
 import { OurTeam } from '../components/our-team/our-team';
+import { LucideAngularModule, Info } from 'lucide-angular';
+import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 
 @Component({
   selector: 'app-about-us',
@@ -17,7 +19,13 @@ import { OurTeam } from '../components/our-team/our-team';
     History,
     OurImpact,
     OurTeam,
+    LucideAngularModule,
+    HeroCard,
   ],
   templateUrl: './about-us.html',
 })
-export class AboutUs {}
+export class AboutUs {
+  icons = {
+    info: Info,
+  };
+}
