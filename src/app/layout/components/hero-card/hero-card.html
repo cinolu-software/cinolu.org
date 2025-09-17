@@ -18,20 +18,15 @@
     ></div>
 
     <div
-      class="px-8 relative z-10 sm:px-6 lg:px-12 xl:px-20 2xl:px-32 max-w-screen-2xl mx-auto flex flex-col"
-      [ngClass]="{
-        'justify-start': align === 'top',
-        'justify-center': align === 'center',
-        'justify-end': align === 'bottom',
-      }"
+      class="px-8 relative z-10 sm:px-6 lg:px-12 xl:px-20 2xl:px-32 max-w-screen-2xl mx-auto flex flex-col items-center justify-center text-center"
     >
       @if (badgeText) {
         <p
-          class="inline-flex items-start max-w-36 gap-2 px-4 py-2 my-2 rounded-full bg-neutral-300/20 backdrop-blur-[1px] border borber-neutral-400/20 hover:bg-neutral-300/30 mb-2 text-primary-50 font-medium sm:text-base font-satoshi"
+          class="inline-flex max-w-36 gap-2 px-4 py-1.5 my-2 rounded-full bg-neutral-300/20 backdrop-blur-[1px] border borber-neutral-400/20 hover:bg-neutral-300/30 mb-2 text-primary-50 font-medium sm:text-base font-satoshi items-center"
         >
           <i-lucide
             [name]="badgeIcon"
-            class="size-5"
+            class="size-4"
             aria-hidden="true"
           ></i-lucide>
           {{ badgeText }}
@@ -49,7 +44,7 @@
 
       @if (description) {
         <p
-          class="text-base md:text-lg text-white max-w-2xl font-satoshi hyphens-none"
+          class="text-base md:text-md text-white max-w-2xl font-satoshi hyphens-none"
         >
           {{ description }}
         </p>
