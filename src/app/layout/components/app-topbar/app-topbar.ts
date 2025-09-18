@@ -15,22 +15,10 @@ import { EXPLORATION_LINKS } from '../../data/links.data';
 import { DesktopNav } from './desktop-nav/desktop-nav';
 import { MobileNav } from './mobile-nav/mobile-nav';
 import { RouterLink } from '@angular/router';
-import { AuthStore } from '../../../core/auth/auth.store';
-import { ChevronDown, LucideAngularModule } from 'lucide-angular';
-import { ApiImgPipe } from '../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-topbar',
-  imports: [
-    CommonModule,
-    NgOptimizedImage,
-    RouterLink,
-    MobileNav,
-    DesktopNav,
-    LucideAngularModule,
-    ApiImgPipe,
-    NgOptimizedImage,
-  ],
+  imports: [CommonModule, NgOptimizedImage, RouterLink, MobileNav, DesktopNav],
   templateUrl: './app-topbar.html',
 })
 export class AppTopbar implements OnDestroy {
@@ -41,9 +29,6 @@ export class AppTopbar implements OnDestroy {
   mobileNav = viewChild(MobileNav);
   #destroy$ = new Subject<void>();
   #ngZone = inject(NgZone);
-  authStore = inject(AuthStore);
-
-  icons = { chevronRight: ChevronDown };
 
   constructor() {
     afterNextRender(() => {
@@ -75,9 +60,5 @@ export class AppTopbar implements OnDestroy {
   ngOnDestroy(): void {
     this.#destroy$.next();
     this.#destroy$.complete();
-  }
-
-  onSignOut(): void {
-    this.authStore.signOut();
   }
 }
