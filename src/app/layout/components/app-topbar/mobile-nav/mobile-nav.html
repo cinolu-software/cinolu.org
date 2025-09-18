@@ -4,7 +4,7 @@
     <i-lucide [name]="isOpen() ? icons.close : icons.menu" class="size-6" />
   </button>
   <div
-    class="fixed top-16 left-0 right-0 bottom-0 -translate-x-[100vw] bg-white transition-transform duration-300"
+    class="fixed top-16 left-0 right-0 bottom-0 -translate-x-[100vw] bg-white transition-transform duration-300 border-t border-gray-300"
     [ngClass]="isOpen() ? 'translate-x-0 active-nav' : ''"
   >
     <div
@@ -15,7 +15,7 @@
           <div class="w-full">
             @if (link.children?.length) {
               <button
-                class="flex justify-between items-center w-full px-4 py-2 text-base font-medium text-gray-800 border-b border-gray-200"
+                class="flex justify-between items-center w-full px-4 py-2 text-lg font-medium text-gray-800 border-b border-gray-200"
                 (click)="toggleLink(i)"
               >
                 {{ link.name }}
@@ -39,7 +39,7 @@
                     [routerLinkActiveOptions]="{
                       exact: sublink.exactUrl || false,
                     }"
-                    class="flex gap-2 items-center px-6 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 transition-colors duration-200"
+                    class="flex gap-2 items-center text-lg px-6 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 transition-colors duration-200"
                   >
                     <i-lucide
                       [name]="icons.plus"
@@ -54,7 +54,7 @@
                 [routerLink]="link.path"
                 routerLinkActive="text-primary-600"
                 [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
-                class="flex gap-2 w-full px-4 py-2 text-base font-medium text-gray-800 border-b border-gray-200 hover:text-primary-500"
+                class="flex gap-2 text-lg w-full px-4 py-2 font-medium text-gray-800 border-b border-gray-200 hover:text-primary-500"
               >
                 {{ link.name }}
               </a>
@@ -64,7 +64,7 @@
 
         <div class="w-full">
           <button
-            class="flex justify-between items-center w-full px-4 py-2 text-base font-medium text-gray-800 border-b border-gray-200"
+            class="flex justify-between items-center w-full px-4 py-2 text-lg font-medium text-gray-800 border-b border-gray-200"
             (click)="togglePrograms()"
           >
             Programmes
@@ -85,7 +85,7 @@
           >
             @for (p of programsStore.programs(); track $index) {
               <a
-                routerLinkActive="bg-primary-100 text-primary-600"
+                routerLinkActive="bg-primary-100 text-primary-500"
                 [routerLink]="['/our-programs/' + p.slug]"
                 [routerLinkActiveOptions]="{ exact: true }"
                 class="block px-6 py-3 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 transition-colors duration-200"
@@ -103,7 +103,7 @@
       <div>
         @if (authStore.user()) {
           <div class="">
-            <button class="group relative flex items-center gap-1">
+            <button class="group relative flex items-center w-full gap-1">
               <div
                 class="flex items-center gap-3 border-1 border-primary-500 rounded-md w-full px-4 py-2 hover:bg-gray-100 transition-colors duration-200"
               >
@@ -119,7 +119,7 @@
                 <span>{{ user?.name }}</span>
               </div>
               <div
-                class="invisible absolute bottom-10 right-0 w-full mt-2 rounded-md bg-white opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100"
+                class="invisible absolute bottom-16 border border-gray-200 bg-white right-0 w-full mt-2 opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100"
               >
                 <div
                   class="text-left flex flex-col divide-y divide-gray-200 py-2"
@@ -127,14 +127,14 @@
                   <div class="flex flex-col px-4 py-2">
                     <a
                       [routerLink]="'/dashboard'"
-                      class="block rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600"
+                      class="block text-lg rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600"
                     >
                       Mon compte
                     </a>
                   </div>
                   <div class="flex flex-col px-4 py-2">
                     <button
-                      class="flex rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600"
+                      class="flex rounded-md text-lg px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600"
                       (click)="onSignOut()"
                     >
                       Se déconnecter
