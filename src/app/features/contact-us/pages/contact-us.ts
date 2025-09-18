@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { LucideAngularModule } from 'lucide-angular';
+import { Headset, LucideAngularModule } from 'lucide-angular';
 import { CONTACT_ITEMS, SOCIAL_LINKS } from '../data/contact.data';
 import {
   FormBuilder,
@@ -18,6 +18,7 @@ import { InputGroup } from 'primeng/inputgroup';
 import { ButtonModule } from 'primeng/button';
 import { GENDERS } from '../../../shared/data/member.items';
 import { ContactUsStore } from '../store/contact-us.store';
+import { HeroCard } from "../../../layout/components/hero-card/hero-card";
 
 @Component({
   selector: 'app-contact-us',
@@ -33,11 +34,15 @@ import { ContactUsStore } from '../store/contact-us.store';
     InputGroup,
     SelectModule,
     ButtonModule,
+    HeroCard,
   ],
   standalone: true,
   templateUrl: './contact-us.html',
 })
 export class ContactUs {
+  icons = {
+    phone: Headset,
+  };
   countryItems = COUNTRY_CODE;
   contactItems = CONTACT_ITEMS;
   #formBuilder: FormBuilder = inject(FormBuilder);
