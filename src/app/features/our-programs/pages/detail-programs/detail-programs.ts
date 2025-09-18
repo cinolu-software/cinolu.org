@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   ArrowLeft,
@@ -17,6 +17,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { ProgramStore } from '../../../landing/store/program.store';
 import { SubprogramCardSkeleton } from '../../component/subprogram-card-skeleton/subprogram-card-skeleton';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-detail-programs',
@@ -28,9 +29,8 @@ import { SubprogramCardSkeleton } from '../../component/subprogram-card-skeleton
     SubprogramCardSkeleton,
   ],
   templateUrl: './detail-programs.html',
-  styles: ``,
 })
-export class DetailPrograms implements OnInit {
+export class DetailPrograms implements OnInit, OnDestroy {
   icons = {
     moveLeft: ArrowLeft,
     fileText: FileText,
@@ -47,13 +47,17 @@ export class DetailPrograms implements OnInit {
   };
   #route = inject(ActivatedRoute);
   store = inject(ProgramStore);
+  destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.#route.paramMap.subscribe((params) => {
+    this.#route.paramMap.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       const slug = params.get('slug');
-      if (slug) {
-        this.store.loadProgram(slug);
-      }
+      if (slug) this.store.loadProgram(slug);
     });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
