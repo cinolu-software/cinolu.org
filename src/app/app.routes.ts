@@ -63,7 +63,7 @@ export const routes: Route[] = [
   {
     path: 'contact-us',
     component: Layout,
-    data: { layout: 'fixed-layout' },
+    data: { layout: 'full-layout' },
     loadChildren: () =>
       import('./features/contact-us/contact-us.route').then(
         (m) => m.contactUsRoutes,

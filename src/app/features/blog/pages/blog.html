@@ -1,62 +1,65 @@
-<app-hero-blog />
-  <h3
-    class="text-3xl text-center sm:text-4xl lg:text-5xl text-gray-800 font-black font-satoshi mt-7 lg:mt-16 tracking-tight leading-tight"
-  >
-    Nos Articles
-  </h3>
+<app-hero-card
+  background="/images/about.jpg"
+  [badgeIcon]="icons.edit"
+  badgeText="Actualités"
+  title="  Nos
+"
+  highlight="Articles"
+  description="Le blog de Cinolu, un espace d’idées, de récits et de ressources au service des innovateurs d’Afrique."
+/>
 
-  <div
-    class="pt-14 px-8 mb-10 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
-  >
-    @if (tagsStore.tags().length > 0) {
-      <div class="mb-10 flex flex-wrap gap-4 md:w-1/4">
-        <p-multiSelect
-          [inputId]="'tagsFilter'"
-          [autocomplete]="'off'"
-          [showHeader]="false"
-          (onChange)="onFilterChange($event, 'tags')"
-          (onClear)="onClear()"
-          [options]="tagsStore.tags()"
-          [optionValue]="'id'"
-          [optionLabel]="'name'"
-          [showClear]="true"
-          placeholder="Choisir un tag"
-          class="w-full md:w-64"
-        />
-      </div>
-    }
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8"
-    >
-      @if (store.isLoading()) {
-        @for (a of arrSkeleton; track $index) {
-          <app-article-card-skeleton />
-        }
-      }
-      @if (store.articles() && !store.isLoading()) {
-        @for (
-          article of store.articles()[0]
-            | paginate
-              : {
-                  itemsPerPage: 12,
-                  currentPage: queryParams().page || 1,
-                  totalItems: store.articles()[1],
-                };
-          track article.id
-        ) {
-          <app-article-card [article]="article" />
-        }
-      }
+<div
+  class="pt-14 px-8 mb-10 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
+>
+  @if (tagsStore.tags().length > 0) {
+    <div class="mb-10 flex flex-wrap gap-4 md:w-1/4">
+      <p-multiSelect
+        [inputId]="'tagsFilter'"
+        [autocomplete]="'off'"
+        [showHeader]="false"
+        (onChange)="onFilterChange($event, 'tags')"
+        (onClear)="onClear()"
+        [options]="tagsStore.tags()"
+        [optionValue]="'id'"
+        [optionLabel]="'name'"
+        [showClear]="true"
+        placeholder="Choisir un tag"
+        class="w-full md:w-64"
+      />
     </div>
-    @if (store.articles()[1] > 12 && !store.isLoading()) {
-      <div class="flex justify-center mt-10">
-        <pagination-controls
-          nextLabel=""
-          previousLabel=""
-          [maxSize]="5"
-          (pageChange)="onPageChange($event)"
-          class="pg"
-        />
-      </div>
+  }
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8"
+  >
+    @if (store.isLoading()) {
+      @for (a of arrSkeleton; track $index) {
+        <app-article-card-skeleton />
+      }
+    }
+    @if (store.articles() && !store.isLoading()) {
+      @for (
+        article of store.articles()[0]
+          | paginate
+            : {
+                itemsPerPage: 12,
+                currentPage: queryParams().page || 1,
+                totalItems: store.articles()[1],
+              };
+        track article.id
+      ) {
+        <app-article-card [article]="article" />
+      }
     }
   </div>
+  @if (store.articles()[1] > 12 && !store.isLoading()) {
+    <div class="flex justify-center mt-10">
+      <pagination-controls
+        nextLabel=""
+        previousLabel=""
+        [maxSize]="5"
+        (pageChange)="onPageChange($event)"
+        class="pg"
+      />
+    </div>
+  }
+</div>

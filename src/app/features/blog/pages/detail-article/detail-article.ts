@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   ArrowLeft,
   Calendar1,
+  Edit2Icon,
   FileText,
   LucideAngularModule,
   MessageCircleMore,
@@ -16,8 +17,8 @@ import { ArticleStore } from '../../../dashboard/staff/blog/store/articles/artic
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ArticleCardSkeleton } from '../../components/article-card-skeleton/article-card-skeleton';
-import { HeroBlog } from '../../components/hero-blog/hero-blog';
 import { RecentArticlesStore } from '../../store/recent-articles.store';
+import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
 
 @Component({
   selector: 'app-detail-article',
@@ -28,8 +29,8 @@ import { RecentArticlesStore } from '../../store/recent-articles.store';
     ApiImgPipe,
     ArticleCardSkeleton,
     NgOptimizedImage,
-    HeroBlog,
     RouterLink,
+    HeroCard,
   ],
   templateUrl: './detail-article.html',
   styles: ``,
@@ -45,6 +46,7 @@ export class DetailArticle implements OnInit {
     like: ThumbsUp,
     calendar: Calendar1,
     moveUp: MoveUpRight,
+    info: Edit2Icon,
   };
   #route = inject(ActivatedRoute);
   store = inject(ArticleStore);
