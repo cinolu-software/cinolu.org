@@ -20,6 +20,7 @@ export interface ILink {
   path?: string;
   exactUrl?: boolean;
   children?: ILink[];
+  open?: boolean;
 }
 
 export const MY_CINOLU_LINKS: ILink[] = [

@@ -1,5 +1,7 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { ProgramsStore } from '../../../../features/landing/store/programs.store';
+
 import { RouterModule } from '@angular/router';
 import {
   LucideAngularModule,
@@ -7,6 +9,8 @@ import {
   Menu,
   X,
   ArrowLeft,
+  ChevronRight,
+  Minus,
 } from 'lucide-angular';
 import { ILink } from '../../../data/links.data';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
@@ -21,23 +25,44 @@ import { AuthStore } from '../../../../core/auth/auth.store';
     LucideAngularModule,
     ApiImgPipe,
   ],
+  providers: [ProgramsStore],
   templateUrl: './mobile-nav.html',
 })
 export class MobileNav {
   isOpen = signal<boolean>(false);
   links = input.required<ILink[]>();
+  programsStore = inject(ProgramsStore);
+
   authStore = inject(AuthStore);
-  icons = { menu: Menu, close: X, arrowDown: ChevronDown, moveLeft: ArrowLeft };
+  icons = {
+    menu: Menu,
+    close: X,
+    arrowDown: ChevronDown,
+    moveLeft: ArrowLeft,
+    chevronRight: ChevronRight,
+    plus: Minus,
+  };
+
+  programsOpen = signal<boolean>(false);
 
   toggleNav(): void {
     this.isOpen.update((isOpen) => !isOpen);
+  }
+
+  closeNav(): void {
+    this.isOpen.set(false);
   }
 
   onSignOut(): void {
     this.authStore.signOut();
   }
 
-  closeNav(): void {
-    this.isOpen.set(false);
+  toggleLink(index: number): void {
+    this.links().forEach((l, i) => {
+      l.open = i === index ? !l.open : false;
+    });
+  }
+  togglePrograms(): void {
+    this.programsOpen.update((v) => !v);
   }
 }

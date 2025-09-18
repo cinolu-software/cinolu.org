@@ -4,54 +4,173 @@
     <i-lucide [name]="isOpen() ? icons.close : icons.menu" class="size-6" />
   </button>
   <div
-    class="fixed top-16 left-0 right-8 bottom-0 -translate-x-[100vw] bg-white transition-transform duration-300"
+    class="fixed top-16 left-0 right-0 bottom-0 -translate-x-[100vw] bg-white transition-transform duration-300"
     [ngClass]="isOpen() ? 'translate-x-0 active-nav' : ''"
   >
     <div
-      class="inline-flex flex-col justify-between py-10 px-8 h-full text-gray-900"
+      class="inline-flex flex-col justify-between py-10 px-8 h-full text-gray-900 w-full"
     >
-      <div class="inline-flex flex-col gap-2 font-medium menu">
-        @for (link of links(); track $index) {
-          <a
-            [routerLink]="link.path"
-            class="group inline-flex items-center gap-2 px-4 py-2 font-medium rounded-md hover:bg-gray-200 transition-colors duration-200"
-            [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
-            [routerLinkActive]="'bg-gray-200 text-gray-800'"
-            (click)="toggleNav()"
+      <div class="flex flex-col items-start gap-4 w-full">
+        @for (link of links(); track $index; let i = $index) {
+          <div class="w-full">
+            @if (link.children?.length) {
+              <button
+                class="flex justify-between items-center w-full px-4 py-2 text-base font-medium text-gray-800 border-b border-gray-200"
+                (click)="toggleLink(i)"
+              >
+                {{ link.name }}
+                <i-lucide
+                  class="size-5 transition-transform duration-300"
+                  [ngClass]="{ 'rotate-90': link.open }"
+                  [name]="icons.chevronRight"
+                />
+              </button>
+
+              <div
+                class="flex flex-col bg-gray-50 transition-all duration-300 overflow-hidden"
+                [style.maxHeight]="
+                  link.open ? (link.children?.length ?? 0) * 48 + 'px' : '0px'
+                "
+              >
+                @for (sublink of link.children; track $index) {
+                  <a
+                    routerLinkActive="bg-primary-100 text-primary-600"
+                    [routerLink]="sublink.path"
+                    [routerLinkActiveOptions]="{
+                      exact: sublink.exactUrl || false,
+                    }"
+                    class="flex gap-2 items-center px-6 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 transition-colors duration-200"
+                  >
+                    <i-lucide
+                      [name]="icons.plus"
+                      class="size-3 text-inherit stroke-1"
+                    />
+                    {{ sublink.name }}
+                  </a>
+                }
+              </div>
+            } @else {
+              <a
+                [routerLink]="link.path"
+                routerLinkActive="text-primary-600"
+                [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
+                class="flex gap-2 w-full px-4 py-2 text-base font-medium text-gray-800 border-b border-gray-200 hover:text-primary-500"
+              >
+                {{ link.name }}
+              </a>
+            }
+          </div>
+        }
+
+        <div class="w-full">
+          <button
+            class="flex justify-between items-center w-full px-4 py-2 text-base font-medium text-gray-800 border-b border-gray-200"
+            (click)="togglePrograms()"
           >
-            <i-lucide [name]="link.icon" class="size-4 text-inherit" />
-            {{ link.name }}
-          </a>
+            Programmes
+            <i-lucide
+              class="size-5 transition-transform duration-300"
+              [ngClass]="{ 'rotate-90': programsOpen() }"
+              [name]="icons.chevronRight"
+            />
+          </button>
+
+          <div
+            class="flex flex-col bg-gray-50 transition-all duration-300 overflow-hidden"
+            [style.maxHeight]="
+              programsOpen()
+                ? programsStore.programs().length * 64 + 'px'
+                : '0px'
+            "
+          >
+            @for (p of programsStore.programs(); track $index) {
+              <a
+                routerLinkActive="bg-primary-100 text-primary-600"
+                [routerLink]="['/our-programs/' + p.slug]"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="block px-6 py-3 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 transition-colors duration-200"
+              >
+                {{ p.name }}
+                <!-- <span class="block text-sm font-normal text-gray-500">
+                  {{ p?.category?.name }}
+                </span> -->
+              </a>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div>
+        @if (authStore.user()) {
+          <div class="">
+            <button class="group relative flex items-center gap-1">
+              <div
+                class="flex items-center gap-3 border-1 border-primary-500 rounded-md w-full px-4 py-2 hover:bg-gray-100 transition-colors duration-200"
+              >
+                <div class="relative h-8 w-8">
+                  <img
+                    [ngSrc]="user | apiIMG: 'user'"
+                    alt="User Image"
+                    class="aspect-video object-cover ring-2 ring-primary-600 bg-gray-200 rounded-full"
+                    fill
+                  />
+                </div>
+
+                <span>{{ user?.name }}</span>
+              </div>
+              <div
+                class="invisible absolute bottom-10 right-0 w-full mt-2 rounded-md bg-white opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100"
+              >
+                <div
+                  class="text-left flex flex-col divide-y divide-gray-200 py-2"
+                >
+                  <div class="flex flex-col px-4 py-2">
+                    <a
+                      [routerLink]="'/dashboard'"
+                      class="block rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600"
+                    >
+                      Mon compte
+                    </a>
+                  </div>
+                  <div class="flex flex-col px-4 py-2">
+                    <button
+                      class="flex rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600"
+                      (click)="onSignOut()"
+                    >
+                      Se déconnecter
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+        } @else {
+          <div class="w-full space-y-4">
+            <a
+              routerLink="/sign-in"
+              class="relative inline-flex w-full items-center justify-center px-6 py-3 rounded-full border-1 border-primary-500 font-semibold text-primary-500 overflow-hidden group transition duration-300 ease-out hover:text-white"
+            >
+              <span
+                class="absolute inset-0 bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out"
+              >
+              </span>
+              <span class="relative">Connexion</span>
+            </a>
+
+            <a
+              routerLink="/sign-up"
+              class="relative inline-flex w-full items-center justify-center px-6 py-3 rounded-full border-primary-500 border-2 font-semibold text-white overflow-hidden group transition duration-300 ease-out"
+            >
+              <span
+                class="absolute inset-0 bg-primary-500 scale-x-100 group-hover:scale-x-0 transition-transform origin-right duration-300 ease-out"
+              ></span>
+              <span class="relative group-hover:text-primary-500"
+                >Inscription</span
+              >
+            </a>
+          </div>
         }
       </div>
-      @if (user) {
-        <div class="flex flex-col gap-8 text-gray-900">
-          <a [routerLink]="'/dashboard'" class="flex items-center gap-2.5">
-            <img
-              [ngSrc]="user | apiIMG: 'user'"
-              alt="Profile picture"
-              width="32"
-              height="32"
-              class="rounded-full aspect-video object-cover w-8 h-8 ring-2 ring-primary-800 ring-offset-1"
-            />
-            <p class="font-semibold">{{ user?.name }}</p>
-          </a>
-          <button
-            class="flex items-center text-white justify-center text-center px-6 py-2 bg-red-800 rounded-sm hover:bg-red-900 disabled:bg-red-800/30 transition-colors duration-300 gap-1.5 font-medium"
-            (click)="onSignOut()"
-          >
-            Se déconnecter
-          </button>
-        </div>
-      }
-      @if (!user) {
-        <a
-          routerLink="/sign-in"
-          class="flex items-center justify-center text-white px-6 py-2 bg-primary-600 rounded-sm hover:bg-primary-700 transition-colors duration-300 gap-1.5 font-medium"
-        >
-          Se connecter
-        </a>
-      }
     </div>
   </div>
 </div>
