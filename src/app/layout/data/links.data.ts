@@ -37,6 +37,11 @@ export const MY_CINOLU_LINKS: ILink[] = [
 
 export const EXPLORATION_LINKS: ILink[] = [
   {
+    icon: Calendar1,
+    name: 'Accueil',
+    path: '/',
+  },
+  {
     icon: Info,
     name: 'My Cinolu',
     path: '/mycinolu',

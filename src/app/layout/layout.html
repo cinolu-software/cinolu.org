@@ -1,31 +1,31 @@
 @if (layout === "empty-layout") {
   @defer (on immediate) {
-    <app-empty-layout/>
+    <app-empty-layout />
   } @placeholder {
-    <app-loader/>
+    <app-loader />
   }
 }
 
 @if (layout === "full-layout") {
   @defer (on immediate) {
-    <app-full-layout/>
+    <app-full-layout />
   } @placeholder {
-    <app-loader/>
+    <app-loader />
   }
 }
 
 @if (layout === "fixed-layout") {
   @defer (on immediate) {
-    <app-fixed-topbar-layout/>
+    <app-fixed-topbar-layout />
   } @placeholder {
-    <app-loader/>
+    <app-loader />
   }
 }
 
 @if (layout === "dashboard-layout") {
   @defer (on idle) {
-    <app-dashboard-layout/>
+    <app-dashboard-layout />
   } @placeholder {
-    <app-loader/>
+    <app-loader />
   }
 }
