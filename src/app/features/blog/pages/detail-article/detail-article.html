@@ -15,7 +15,7 @@
       <div class="pt-4 pb-8"></div>
 
       <div
-        class="relative mb-10 h-60 w-full md:h-96 bg-gray-50 overflow-hidden"
+        class="relative mb-10 h-60 w-full md:h-96 bg-gray-100 overflow-hidden"
       >
         <img
           [ngSrc]="article | apiIMG: 'article'"
@@ -73,9 +73,9 @@
       @for (article of storeArticle.articles(); track $index) {
         <a [routerLink]="['/blog-ressources', article.slug]">
           <div
-            class="flex gap-3 items-start w-full bg-gray-50 rounded-sm overflow-hidden hover:shadow-md transition cursor-pointer"
+            class="flex gap-3 items-start w-full bg-gray-100 rounded-sm overflow-hidden hover:shadow-md transition cursor-pointer"
           >
-            <div class="relative h-28 w-28 flex-shrink-0 bg-gray-200">
+            <div class="relative h-28 w-28 flex-shrink-0 bg-gray-100">
               <img
                 [ngSrc]="article | apiIMG: 'article'"
                 alt="Miniature article"

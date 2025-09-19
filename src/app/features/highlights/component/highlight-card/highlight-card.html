@@ -1,7 +1,7 @@
 <div class="max-w-7xl mx-auto">
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
     <div
-      class="lg:col-span-2 bg-white rounded-md shadow-lg p-4 lg:p-8 flex flex-col md:flex-row gap-6"
+      class="lg:col-span-2 p-4 lg:p-8 flex-col md:flex-row gap-6 hover:shadow-lg duration-300 transition-all relative flex bg-white shadow-sm border border-slate-200 rounded-md"
     >
       <div class="w-full md:w-1/2">
         @for (key of keys; track key.id) {
@@ -67,7 +67,9 @@
             ></i-lucide>
           </button>
         } @else {
-          <p class="text-center text-2xl lg:text-3xl font-black text-gray-700">
+          <p
+            class="text-center flex items-center h-full text-xl lg:text-2xl font-black text-gray-700"
+          >
             Pas encore d'actualité ou de fait marquant pour cette catégorie.
           </p>
         }
@@ -75,7 +77,7 @@
     </div>
 
     <div
-      class="md:h-[400px] relative lg:col-span-1 rounded-md overflow-hidden shadow-md"
+      class="md:h-[400px] relative lg:col-span-1 overflow-hidden hover:shadow-lg duration-300 transition-all flex bg-white shadow-sm border border-slate-200 rounded-md"
     >
       @if (data.length > 0) {
         <img

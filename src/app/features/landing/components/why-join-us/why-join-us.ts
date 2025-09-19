@@ -10,7 +10,6 @@ import {
 } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CountUpDirective } from '../../../../shared/directives/count-up.directive';
-import { RouterLink } from '@angular/router';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { REASONS } from '../../data/reasons-join-us.data';
 
@@ -20,7 +19,6 @@ import { REASONS } from '../../data/reasons-join-us.data';
     LucideAngularModule,
     ButtonModule,
     CountUpDirective,
-    RouterLink,
     FadeInOnScrollDirective,
   ],
   templateUrl: './why-join-us.html',
