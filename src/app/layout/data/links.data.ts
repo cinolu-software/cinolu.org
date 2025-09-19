@@ -73,7 +73,7 @@ export const ADMIN_LINKS: ILink[] = [
         path: '/dashboard/programs',
       },
       {
-        name: 'Catégories',
+        name: 'Les catégories',
         path: '/dashboard/program-categories',
       },
       {
