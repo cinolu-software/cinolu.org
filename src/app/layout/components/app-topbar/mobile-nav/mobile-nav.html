@@ -4,8 +4,8 @@
     <i-lucide [name]="isOpen() ? icons.close : icons.menu" class="size-6" />
   </button>
   <div
-    class="fixed top-16 left-0 right-0 bottom-0 -translate-x-[100vw] bg-white transition-transform duration-300 border-t border-gray-300"
-    [ngClass]="isOpen() ? 'translate-x-0 active-nav' : ''"
+    class="fixed top-16 left-0 bottom-0 w-full bg-white transition-transform duration-300 border-t border-gray-300"
+    [ngClass]="isOpen() ? 'translate-x-0' : 'translate-x-full'"
   >
     <div
       class="inline-flex flex-col justify-between py-10 px-8 h-full text-gray-900 w-full"
