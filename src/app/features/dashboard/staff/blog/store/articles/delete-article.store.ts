@@ -35,11 +35,10 @@ export const DeleteArticleStore = signalStore(
               _toast.showSuccess("L'article a été supprimé avec succès");
               patchState(store, { isLoading: false });
             }),
-            catchError((e) => {
+            catchError(() => {
               _toast.showError(
                 "Une erreur s'est produite lors de la suppression",
               );
-              console.log(e);
               patchState(store, { isLoading: false });
               return of(null);
             }),

@@ -1,48 +1,49 @@
-<app-parteners-hero />
+<app-hero-card
+  background="/images/about.jpg"
+  [badgeIcon]="icons.handshake"
+  badgeText="Partenaires"
+  title="Ils nous font
+"
+  highlight="confiance"
+  description="Découvrez notre histoire, notre mission et rencontrez notre équipe dévouée. Nous sommes passionnés par ce que nous faisons et nous nous engageons à fournir le meilleur service possible."
+/>
+
 <section
   class="min-h-fit backdrop-blur-[1px] bg-grid items-center content-center"
 >
   <div
     class="px-8 min-h-dvh xl:min-h-[800px] lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 md:py-28"
   >
-    <h3
-      class="text-3xl text-center sm:text-4xl lg:text-5xl font-black font-satoshi mb-12 tracking-tight leading-tight"
-    >
-      Tous nos <span class="text-primary-400">partenaires ?</span>
-    </h3>
-
-    <div class="py-12">
-      <div class="mx-auto">
-        <div
-          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3 lg:gap-6"
-        >
-          @for (item of parteners; track $index) {
-            <div
-              pAnimateOnScroll
-              [enterClass]="
-                $index % 2 === 0
-                  ? 'animate-enter fade-in-10 zoom-in-50 animate-duration-1000'
-                  : 'animate-enter fade-in-10 zoom-in-50 animate-duration-1000'
-              "
-              class="flex flex-col items-center justify-center bg-white p-6 transition duration-300 group h-36 border border-gray-100"
-            >
-              <div class="w-28 h-12 flex items-center justify-center">
-                <p-image
-                  [src]="item.image"
-                  [alt]="'logo de ' + item.name"
-                  [preview]="true"
-                  imageClass="object-contain max-w-full max-h-12"
-                />
-              </div>
-
-              <p
-                class="mt-4 text-sm font-medium text-gray-600 group-hover:text-primary-600 lg:truncate"
-              >
-                {{ item.name }}
-              </p>
+    <div class="mx-auto">
+      <div
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3 lg:gap-6"
+      >
+        @for (item of parteners; track $index) {
+          <div
+            pAnimateOnScroll
+            [enterClass]="
+              $index % 2 === 0
+                ? 'animate-enter fade-in-10 zoom-in-50 animate-duration-1000'
+                : 'animate-enter fade-in-10 zoom-in-50 animate-duration-1000'
+            "
+            class="flex flex-col items-center justify-center bg-white p-6 transition duration-300 group h-36 border border-gray-100"
+          >
+            <div class="w-28 h-12 flex items-center justify-center">
+              <p-image
+                [src]="item.image"
+                [alt]="'logo de ' + item.name"
+                [preview]="true"
+                imageClass="object-contain max-w-full max-h-12"
+              />
             </div>
-          }
-        </div>
+
+            <p
+              class="mt-4 text-sm font-medium text-gray-600 group-hover:text-primary-600 lg:truncate"
+            >
+              {{ item.name }}
+            </p>
+          </div>
+        }
       </div>
     </div>
   </div>

@@ -4,13 +4,25 @@ import { CommonModule } from '@angular/common';
 import { PartenersHero } from '../component/hero/partenes-hero';
 import { AnimateOnScrollModule } from 'primeng/animateonscroll';
 import { Image } from 'primeng/image';
+import { HeroCard } from "../../../layout/components/hero-card/hero-card";
+import { Handshake, LucideAngularModule } from 'lucide-angular';
+
 
 @Component({
   selector: 'app-our-parteners',
-  imports: [CommonModule, PartenersHero, AnimateOnScrollModule, Image],
+  imports: [
+    CommonModule,
+    PartenersHero,
+    AnimateOnScrollModule,
+    Image,
+    HeroCard,
+    LucideAngularModule,
+  ],
   templateUrl: './our-parteners.html',
-  styles: ``,
 })
 export class OurParteners {
   parteners = PARTNERS;
+  icons = {
+    handshake: Handshake,
+  };
 }
