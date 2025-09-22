@@ -13,13 +13,6 @@ import { ButtonModule } from 'primeng/button';
 import { AuthCard } from '../../components/auth-card/auth-card';
 import { SignUpStore } from '../../store/sign-up.store';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import {
-  Check,
-  ChevronsLeft,
-  ChevronsRight,
-  LucideAngularModule,
-} from 'lucide-angular';
-import { StepperModule } from 'primeng/stepper';
 import { TextareaModule } from 'primeng/textarea';
 import { DatePickerModule } from 'primeng/datepicker';
 import { InputGroupModule } from 'primeng/inputgroup';
@@ -41,17 +34,14 @@ import { GENDERS } from '../../../../shared/data/member.items';
     RouterLink,
     ReactiveFormsModule,
     AuthCard,
-    LucideAngularModule,
     InputTextModule,
     FormsModule,
     FloatLabelModule,
     PasswordModule,
     SelectModule,
-    StepperModule,
     DatePickerModule,
     TextareaModule,
     CommonModule,
-    LucideAngularModule,
     InputGroupModule,
     InputGroupAddonModule,
     ReactiveFormsModule,
@@ -66,7 +56,6 @@ export class SignUp {
   countryItems = COUNTRY_CODE;
   selectedCountryCode = '';
   ref = this.#route.snapshot.queryParams['ref'] || null;
-  icons = { next: ChevronsRight, previous: ChevronsLeft, check: Check };
 
   constructor() {
     this.form = this.#formBuilder.group({
@@ -78,9 +67,6 @@ export class SignUp {
       gender: ['', [Validators.required]],
       birth_date: ['', [Validators.required]],
       country: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      reason: ['', [Validators.required]],
-      biography: ['', [Validators.required]],
     });
   }
 

@@ -1,6 +1,6 @@
 <app-auth-card title="S'inscrire"
                description="Créez un compte pour accéder à toutes les fonctionnalités de notre plateforme.">
-  <div class="mb-5">
+  <div class="mb-5 text-sm">
     <span class="text-gray-700">Vous avez déjà un compte? </span>
     <a class="text-md font-medium text-primary-400 underline not-[]:duration-300 hover:text-primary-500"
        [routerLink]="['/sign-in']">
@@ -8,115 +8,50 @@
     </a>
   </div>
   <form [formGroup]="form" class="flex flex-col" (ngSubmit)="onSignUp()">
-    <p-stepper [value]="1" class="w-full">
-      <p-step-list>
-        @for (step of [1, 2, 3]; track step) {
-          <p-step [value]="step"/>
-        }
-      </p-step-list>
-      <p-step-panels>
-        <p-step-panel [value]="1">
-          <ng-template #content let-activateCallback="activateCallback">
-            <div class="flex flex-col gap-4">
-              <div class="flex flex-col gap-1.5">
-                <label for="name">Nom complet</label>
-                <input pInputText id="name" formControlName="name"/>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <label for="email">Adresse e-mail</label>
-                <input pInputText id="email" type="email" formControlName="email"/>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <label for="birthdate">Date de naissance</label>
-                <p-datePicker [inputId]="'birthdate'" formControlName="birth_date" showIcon iconDisplay="input"/>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <label for="gender">Genre</label>
-                <p-select [inputId]="'gender'" [options]="genderItems" formControlName="gender"/>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <label for="city">Ville</label>
-                <input pInputText id="city" formControlName="city"/>
-              </div>
-            </div>
-            <div class="flex py-6 pb-20 justify-end">
-              <p-button size="small" variant="outlined" severity="secondary"
-                        (onClick)="activateCallback(2)">
-                Suivant
-                <i-lucide [name]="icons.next" class="size-4"/>
-              </p-button>
-            </div>
-          </ng-template>
-        </p-step-panel>
-        <p-step-panel [value]="2">
-          <ng-template #content let-activateCallback="activateCallback">
-            <div class="flex flex-col gap-4">
-              <div class="flex flex-col gap-1.5">
-                <label for="biography">Biographie</label>
-                <textarea pTextarea id="biography" formControlName="biography" rows="4"></textarea>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <label for="reason">Pourquoi rejoindre Cinolu ?</label>
-                <textarea pTextarea id="reason" formControlName="reason" rows="4"></textarea>
-              </div>
-            </div>
-            <div class="flex py-6 pb-20 justify-between">
-              <p-button size="small" variant="outlined" severity="secondary"
-                        (onClick)="activateCallback(1)">
-                <i-lucide [name]="icons.previous" class="size-4"/>
-                Précedent
-              </p-button>
-              <p-button size="small" variant="outlined" severity="secondary"
-                        (onClick)="activateCallback(3)">
-                Suivant
-                <i-lucide [name]="icons.next" class="size-4"/>
-              </p-button>
-            </div>
-          </ng-template>
-        </p-step-panel>
-        <p-step-panel [value]="3">
-          <ng-template #content let-activateCallback="activateCallback">
-            <div class="flex flex-col gap-4">
-              <div class="flex flex-col gap-1.5 z-[999]">
-                <label for="country">Pays</label>
-                <p-select (onChange)="onSelectCountry($event)" class="z-[9999]" [inputId]="'country'"
-                          [options]="countryItems"
-                          [optionLabel]="'name'" [optionValue]="'name'" formControlName="country"/>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <label for="email">Téléphone</label>
-                <p-inputgroup>
-                  <p-inputgroup-addon>{{ selectedCountryCode || "----" }}</p-inputgroup-addon>
-                  <input pInputText id="phone" formControlName="phone_number"/>
-                </p-inputgroup>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <label for="password">Mot de passe</label>
-                <p-password formControlName="password" [feedback]="false" [toggleMask]="true" [inputId]="'password'"/>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <label for="password_confirm">Confirmer le mot de passe</label>
-                <p-password formControlName="password_confirm" [feedback]="false" [toggleMask]="true"
-                            [inputId]="'password_confirm'"/>
-              </div>
-              <div class="flex justify-between py-6 pb-20">
-                <p-button size="small" variant="outlined" severity="secondary"
-                          (onClick)="activateCallback(2)">
-                  <i-lucide [name]="icons.previous" class="size-4"/>
-                  Précedent
-                </p-button>
-                <p-button [loading]="store.isLoading()" [disabled]="store.isLoading() || form.invalid"
-                          size="small" type="submit">
-                  S'inscrire
-                  @if (!store.isLoading()) {
-                    <i-lucide [name]="icons.check" class="size-4"/>
-                  }
-                </p-button>
-              </div>
-            </div>
-          </ng-template>
-        </p-step-panel>
-      </p-step-panels>
-    </p-stepper>
+    <div class="flex flex-col gap-3">
+      <div class="flex flex-col gap-1.5">
+        <label for="name">Nom complet</label>
+        <input pInputText id="name" formControlName="name"/>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="email">Adresse e-mail</label>
+        <input pInputText id="email" type="email" formControlName="email"/>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="birthdate">Date de naissance</label>
+        <p-datePicker [inputId]="'birthdate'" formControlName="birth_date" showIcon iconDisplay="input"/>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="gender">Genre</label>
+        <p-select [inputId]="'gender'" [options]="genderItems" formControlName="gender"/>
+      </div>
+      <div class="flex flex-col gap-1.5 z-[999]">
+        <label for="country">Pays</label>
+        <p-select (onChange)="onSelectCountry($event)" class="z-[9999]" [inputId]="'country'"
+                  [options]="countryItems" [optionLabel]="'name'" [optionValue]="'name'" formControlName="country"/>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="email">Téléphone</label>
+        <p-inputgroup>
+          <p-inputgroup-addon>{{ selectedCountryCode || "----" }}</p-inputgroup-addon>
+          <input pInputText id="phone" formControlName="phone_number"/>
+        </p-inputgroup>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col gap-1.5">
+          <label for="password">Mot de passe</label>
+          <p-password formControlName="password" [feedback]="false" [toggleMask]="true"
+                      [inputId]="'password'"/>
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label for="password_confirm">Confirmer le mot de passe</label>
+          <p-password formControlName="password_confirm" [feedback]="false" [toggleMask]="true"
+                      [inputId]="'password_confirm'"/>
+        </div>
+      </div>
+      <p-button class="mt-4" [loading]="store.isLoading()" [disabled]="store.isLoading() || form.invalid" type="submit">
+        S'inscrire
+      </p-button>
+    </div>
   </form>
 </app-auth-card>
