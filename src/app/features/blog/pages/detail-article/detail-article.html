@@ -7,16 +7,12 @@
   description="Le blog de Cinolu, un espace d’idées, de récits et de ressources au service des innovateurs d’Afrique."
 />
 
-<section
-  class="min-h-[85vh] flex flex-col lg:flex-row lg:py-20 px-8 md:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto gap-8"
+<!-- <section
+  class="min-h-[85vh] flex flex-col lg:flex-row lg:py-32 px-8 md:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto gap-8"
 >
   <div class="lg:w-2/3 w-full">
     @if (store.article(); as article) {
-      <div class="pt-4 pb-8"></div>
-
-      <div
-        class="relative mb-10 h-60 w-full md:h-96 bg-gray-100 overflow-hidden"
-      >
+      <div class="relative h-60 w-full md:h-96 bg-gray-100 overflow-hidden">
         <img
           [ngSrc]="article | apiIMG: 'article'"
           alt="Photo de couverture"
@@ -26,7 +22,7 @@
         />
       </div>
 
-      <div class="my-10">
+      <div class="my-10 p-4">
         <h2 class="font-black font-satoshi mb-4 text-2xl md:text-3xl">
           {{ article.title | titlecase }}
         </h2>
@@ -46,6 +42,15 @@
           Date de publication :
           <strong>{{ article.published_at | date: "longDate" }}</strong>
         </p>
+
+        <textarea
+          name="comment"
+          placeholder="Saississez le commentaire"
+          id="comment"
+          cols="30"
+          rows="10"
+          class="w-full resize-none border border-gray-200 rounded-md p-4 focus:outline-none focus:ring-2 focus:ring-primary-500"
+        ></textarea>
       </div>
     }
 
@@ -67,7 +72,9 @@
   </div>
 
   <div class="lg:w-1/3 w-full">
-    <h3 class="font-black font-satoshi mb-4 text-2xl">Derniers articles</h3>
+    <h3 class="font-black font-satoshi mb-4 text-2xl lg:text-3xl">
+      Derniers articles
+    </h3>
 
     <div class="flex flex-col gap-6">
       @for (article of storeArticle.articles(); track $index) {
@@ -94,6 +101,114 @@
               <div
                 class="text-sm text-gray-600 line-clamp-2 hyphens-none"
                 [innerHTML]="article.summary || article.content"
+              ></div>
+            </div>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section> -->
+
+<section
+  class="min-h-[85vh] flex flex-col lg:flex-row lg:py-32 px-8 md:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto gap-8"
+>
+  <div class="lg:w-2/3 w-full">
+    @if (store.article(); as article) {
+      <div class="relative h-60 w-full md:h-96 bg-gray-100 overflow-hidden">
+        <img
+          [ngSrc]="article | apiIMG: 'article'"
+          alt="Photo de couverture de l’article {{ article.title }}"
+          class="object-cover w-full h-full"
+          fill
+          priority
+        />
+      </div>
+
+      <div class="my-10 p-4">
+        <!-- Titre principal de l’article -->
+        <h1 class="font-black font-satoshi mb-4 text-2xl md:text-3xl">
+          {{ article.title | titlecase }}
+        </h1>
+
+        <!-- Contenu -->
+        <div
+          class="mb-8 text-base font-normal text-gray-700 text-justify hyphens-auto"
+          [innerHTML]="article.content"
+        ></div>
+
+        <!-- Résumé -->
+        <div class="flex items-center gap-2 mb-3 text-primary-800">
+          <i-lucide [name]="icons.fileText" class="size-5" />
+          <h2 class="font-semibold text-lg">Résumé</h2>
+        </div>
+        <div class="mb-8 max-w-none" [innerHTML]="article.summary"></div>
+
+        <!-- Date de publication -->
+        <p class="mb-4 text-sm text-gray-600">
+          Publié le :
+          <strong>{{ article.published_at | date: "longDate" }}</strong>
+        </p>
+
+        <!-- Zone de commentaire -->
+        <textarea
+          name="comment"
+          placeholder="Saisissez un commentaire"
+          id="comment"
+          rows="6"
+          class="w-full resize-none border border-gray-200 rounded-md p-4 focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
+        ></textarea>
+      </div>
+    }
+
+    @if (store.isLoading()) {
+      <app-article-card-skeleton />
+    }
+
+    @if (!store.isLoading() && !store.article()) {
+      <div
+        class="min-h-[75vh] w-full flex flex-col justify-center items-center"
+      >
+        <h2 class="text-3xl font-semibold mb-3">Aucun article trouvé</h2>
+
+        <div class="w-full">
+          <app-article-card-skeleton />
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="lg:w-1/3 w-full">
+    <h2 class="font-black font-satoshi mb-4 text-2xl lg:text-3xl">
+      Derniers articles
+    </h2>
+
+    <div class="flex flex-col gap-6">
+      @for (article of storeArticle.articles(); track $index) {
+        <a [routerLink]="['/blog-ressources', article.slug]">
+          <div
+            class="flex gap-3 items-start w-full bg-gray-100 rounded-sm overflow-hidden hover:shadow-md transition cursor-pointer"
+          >
+            <div class="relative h-28 w-28 flex-shrink-0 bg-gray-100">
+              <img
+                [ngSrc]="article | apiIMG: 'article'"
+                alt="Miniature de l’article {{ article.title }}"
+                class="object-cover w-full h-full"
+                fill
+              />
+            </div>
+
+            <div class="flex flex-col justify-between p-3 w-full">
+              <h3
+                class="font-bold font-satoshi text-sm md:text-base line-clamp-2"
+              >
+                {{ article.title | titlecase }}
+              </h3>
+              <div
+                class="text-sm text-gray-600 line-clamp-2 hyphens-auto"
+                [innerHTML]="
+                  article.summary || (article.content | slice: 0 : 150)
+                "
               ></div>
             </div>
           </div>
