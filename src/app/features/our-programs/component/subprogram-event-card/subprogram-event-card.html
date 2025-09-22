@@ -48,17 +48,19 @@
       <div class="font-medium capitalize">
         @switch (getStatut(event())) {
           @case ("En cours") {
-            <span class="text-green-600 bg-green-100 rounded-md py-1 px-2">
+            <span
+              class="text-primary-500 bg-primary-500/10 rounded-md py-1 px-2"
+            >
               En cours
             </span>
           }
           @case ("À venir") {
-            <span class="text-blue-600 bg-blue-100 rounded-md py-1 px-2">
+            <span class="text-blue-500 bg-blue-500/10 rounded-md py-1 px-2">
               À venir
             </span>
           }
           @default {
-            <span class="text-red-600 bg-red-100 rounded-md py-1 px-2">
+            <span class="text-red-500 bg-red-500/10 rounded-md py-1 px-2">
               {{ getStatut(event()) }}
             </span>
           }
@@ -71,7 +73,7 @@
           @if (event().place) {
             <span><strong>Lieu :</strong> {{ event().place }}</span>
           } @else {
-            <span class="text-green-600 bg-green-100 rounded-md py-1 px-2"
+            <span class="text-priùary-500 bg-green-500/10 rounded-md py-1 px-2"
               >En ligne</span
             >
           }
