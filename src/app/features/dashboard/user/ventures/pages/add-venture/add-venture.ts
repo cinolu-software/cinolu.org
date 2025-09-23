@@ -5,13 +5,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {
-  ArrowLeft,
-  LucideAngularModule,
-  ChevronsRight,
-  ChevronsLeft,
-  Check,
-} from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { Textarea } from 'primeng/textarea';
@@ -32,7 +25,6 @@ import { QuillEditorComponent } from 'ngx-quill';
     ButtonModule,
     DatePickerModule,
     Textarea,
-    LucideAngularModule,
     InputTextModule,
     StepperModule,
     QuillEditorComponent,
@@ -42,12 +34,6 @@ import { QuillEditorComponent } from 'ngx-quill';
 export class AddVenture {
   #fb = inject(FormBuilder);
   form: FormGroup;
-  icons = {
-    back: ArrowLeft,
-    next: ChevronsRight,
-    previous: ChevronsLeft,
-    check: Check,
-  };
   sectors = SECTORS;
   stages = STAGES;
   store = inject(AddVentureStore);

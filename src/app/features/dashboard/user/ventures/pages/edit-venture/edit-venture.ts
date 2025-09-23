@@ -1,12 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject } from '@angular/core';
-import {
-  ArrowLeft,
-  LucideAngularModule,
-  Check,
-  ChevronsLeft,
-  ChevronsRight,
-} from 'lucide-angular';
 import { VentureStore } from '../../store/venture.store';
 import { StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
@@ -31,7 +24,6 @@ import { QuillEditorComponent } from 'ngx-quill';
   selector: 'app-edit-venture',
   providers: [VentureStore, UpdateVenturetore],
   imports: [
-    LucideAngularModule,
     CommonModule,
     StepperModule,
     ButtonModule,
@@ -47,12 +39,6 @@ import { QuillEditorComponent } from 'ngx-quill';
 })
 export class EditVentureComponent {
   #fb = inject(FormBuilder);
-  icons = {
-    back: ArrowLeft,
-    next: ChevronsRight,
-    previous: ChevronsLeft,
-    check: Check,
-  };
   store = inject(VentureStore);
   updateVentureStore = inject(UpdateVenturetore);
   form: FormGroup;
@@ -62,6 +48,14 @@ export class EditVentureComponent {
   coverUrl = `${environment.apiUrl}ventures/add-cover/`;
 
   constructor() {
+    effect(() => {
+      const venture = this.store.venture();
+      if (!venture) return;
+      this.form.patchValue({
+        ...venture,
+        founded_at: new Date(venture.founded_at),
+      });
+    });
     this.form = this.#fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -75,14 +69,6 @@ export class EditVentureComponent {
       founded_at: [''],
       location: [''],
       stage: [''],
-    });
-    effect(() => {
-      const venture = this.store.venture();
-      if (!venture) return;
-      this.form.patchValue({
-        ...venture,
-        founded_at: new Date(venture.founded_at),
-      });
     });
   }
 
