@@ -57,6 +57,7 @@
         class="flex items-center gap-1 hover:text-primary-500 transition"
       >
         <i-lucide [name]="icons.comment" class="w-4 h-4"></i-lucide>
+        <span>{{ commentCount(article().comments) }}</span>
       </button>
 
       <span class="flex items-center gap-1">

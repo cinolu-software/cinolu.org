@@ -13,7 +13,7 @@ import { IComment } from '../../../../../../shared/models/entities.models';
 
 interface ICommentsStore {
   isLoading: boolean;
-  comment: IComment | null;
+  comment: IComment  | null;
 }
 
 export const CommentStore = signalStore(
@@ -26,10 +26,11 @@ export const CommentStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((id) => {
-          return _http.get<{ data: IComment }>(`comments/${id}`).pipe(
-            tap(({ data }) =>
-              patchState(store, { isLoading: false, comment: data }),
-            ),
+          return _http.get<{ data: IComment }>(`comments/article/${id}`).pipe(
+            tap(({ data }) => {
+              patchState(store, { isLoading: false, comment: data });
+              console.log(data);
+            }),
             catchError(() => {
               patchState(store, { isLoading: false });
               return of(null);

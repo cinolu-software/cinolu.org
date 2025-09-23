@@ -15,12 +15,6 @@ export interface IComment extends IBase {
   article: IArticle;
 }
 
-export interface IComment extends IBase {
-  content: string;
-  author: IUser;
-  article: IArticle;
-}
-
 export interface IArticle extends IBase {
   title: string;
   slug: string;

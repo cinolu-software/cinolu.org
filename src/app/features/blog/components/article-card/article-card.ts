@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import {
   Calendar1,
   Info,
@@ -13,7 +13,7 @@ import { IArticle } from '../../../../shared/models/entities.models';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { RouterLink } from '@angular/router';
-
+import { CommentsStore } from '../../../dashboard/staff/blog/store/comments/comments.store';
 @Component({
   selector: 'app-article-card',
   imports: [
@@ -23,10 +23,12 @@ import { RouterLink } from '@angular/router';
     RouterLink,
     CommonModule,
   ],
+  providers: [CommentsStore],
   templateUrl: './article-card.html',
 })
 export class ArticleCard {
   article = input.required<IArticle>();
+  commentStore = inject(CommentsStore);
   icons = {
     info: Info,
     userPlus: UserPlus,
@@ -37,4 +39,9 @@ export class ArticleCard {
     moveUp: MoveUpRight,
   };
   protected readonly ApiImgPipe = ApiImgPipe;
+
+  get commentCount() {
+    return (comments: unknown) =>
+      Array.isArray(comments) ? comments.length : 0;
+  }
 }

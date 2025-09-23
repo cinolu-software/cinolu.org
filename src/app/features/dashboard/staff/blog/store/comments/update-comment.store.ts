@@ -32,10 +32,12 @@ export const UpdateArticleStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((comment) => {
           return _http
-            .patch<{ data: IComment }>(`comment/${comment.articleId}`, comment)
+            .patch<{ data: IComment }>(`comments/${comment.articleId}`, comment)
             .pipe(
               map(({ data }) => {
-                _toast.showSuccess("Le commentaire a été mis à jour avec succès");
+                _toast.showSuccess(
+                  'Le commentaire a été mis à jour avec succès',
+                );
                 patchState(store, { isLoading: false, comment: data });
               }),
               catchError(() => {
