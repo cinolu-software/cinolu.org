@@ -4,8 +4,6 @@ export interface SignUpDto {
   phone_number: string;
   referral_code?: string;
   birth_date: Date;
-  reason: string;
-  city: string;
   country: string;
   gender: string;
   password: string;
