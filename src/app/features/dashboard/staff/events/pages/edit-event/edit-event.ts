@@ -1,11 +1,4 @@
 import { Component, effect, inject, OnInit } from '@angular/core';
-import {
-  ArrowLeft,
-  LucideAngularModule,
-  ChevronsRight,
-  ChevronsLeft,
-  Check,
-} from 'lucide-angular';
 import { Button } from 'primeng/button';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
@@ -15,7 +8,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { StepperModule } from 'primeng/stepper';
 import { TextareaModule } from 'primeng/textarea';
 import { SelectModule } from 'primeng/select';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
@@ -42,11 +34,9 @@ import { QuillEditorComponent } from 'ngx-quill';
     UnpaginatedCategoriesStore,
   ],
   imports: [
-    LucideAngularModule,
     SelectModule,
     MultiSelectModule,
     TextareaModule,
-    StepperModule,
     CommonModule,
     Button,
     InputText,
@@ -68,12 +58,6 @@ export class EditEventComponent implements OnInit {
   eventStore = inject(EventStore);
   url = `${environment.apiUrl}events/cover/`;
   #slug = this.#route.snapshot.params['slug'];
-  icons = {
-    back: ArrowLeft,
-    next: ChevronsRight,
-    previous: ChevronsLeft,
-    check: Check,
-  };
 
   constructor() {
     this.form = this.#fb.group({

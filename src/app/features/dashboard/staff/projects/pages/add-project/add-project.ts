@@ -1,11 +1,4 @@
 import { Component, inject } from '@angular/core';
-import {
-  ArrowLeft,
-  LucideAngularModule,
-  ChevronsRight,
-  ChevronsLeft,
-  Check,
-} from 'lucide-angular';
 import { Button } from 'primeng/button';
 import { CommonModule,  } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
@@ -33,7 +26,6 @@ import { QuillEditorComponent } from 'ngx-quill';
     UnpaginatedCategoriesStore,
   ],
   imports: [
-    LucideAngularModule,
     SelectModule,
     MultiSelectModule,
     TextareaModule,
@@ -51,12 +43,6 @@ export class AddProjectComponent {
   store = inject(AddProjectStore);
   categoriesStore = inject(UnpaginatedCategoriesStore);
   programsStore = inject(UnpaginatedSubprogramsStore);
-  icons = {
-    back: ArrowLeft,
-    next: ChevronsRight,
-    previous: ChevronsLeft,
-    check: Check,
-  };
 
   constructor() {
     this.form = this.#fb.group({

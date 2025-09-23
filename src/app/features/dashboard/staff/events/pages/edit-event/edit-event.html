@@ -3,107 +3,73 @@
   <div class="mb-4">
     <h5 class="text-2xl font-bold">Modifier l'événement</h5>
   </div>
-  <form class="w-full md:w-2/3" [formGroup]="form" (ngSubmit)="onUpdateEvent()">
-    <p-stepper [value]="1" class="w-full">
-      <p-step-list class="w-full overflow-x-scroll scrollbar-hide">
-        <p-step [value]="1"/>
-        <p-step [value]="2"/>
-      </p-step-list>
-      <p-step-panels>
-        <p-step-panel [value]="1">
-          <ng-template #content let-activateCallback="activateCallback">
-            <div class="w-full">
-              <p class="font-medium mb-2">Photo de couverture</p>
-              <div
-                class="relative h-52 md:h-80 mb-6 w-full pb-8 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-gray-200 rounded">
-                @if (event?.cover) {
-                  <img [ngSrc]="event | apiIMG: 'event'" [alt]="event?.name + ' cover image'"
-                       class="aspect-video object-cover h-full opacity-90 rounded border-2 border-slate-200/10"
-                       fill priority/>
-                }
-              </div>
-              @if (eventStore.isLoading()) {
-                <div class="h-20 bg-gray-200 animate-pulse rounded-md w-full mb-4">
-                </div>
-              } @else {
-                <app-file-upload [name]="'cover'" [url]="url + event?.id" (loaded)="onFileUploadLoaded()"/>
-              }
-            </div>
-            <div class="flex flex-col gap-4">
-              <div class="flex flex-col gap-1.5">
-                <label for="name" class="font-medium">
-                  Nom de l'événement<span class="text-red-500">*</span>
-                </label>
-                <input pInputText id="name" formControlName="name"/>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <label for="form_link" class="font-medium">
-                  Lien du formulaire
-                </label>
-                <input pInputText id="form_link" formControlName="form_link"/>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <label for="place" class="font-medium">
-                  Lieu
-                </label>
-                <input pInputText id="place" formControlName="place"/>
-              </div>
-              <div class="flex flex-col gap-1.5 mb-10">
-                <p class="font-medium">
-                  Description<span class="text-red-500">*</span>
-                </p>
-                  <quill-editor formControlName="description" [style]="{ height: '200px' }"/>
-              </div>
-              <div class="flex py-6 pb-80 justify-end">
-                <p-button size="small" variant="outlined" (onClick)="activateCallback(2)">
-                  Suivant
-                  <i-lucide [name]="icons.next" class="size-4"/>
-                </p-button>
-              </div>
-            </div>
-          </ng-template>
-        </p-step-panel>
-        <p-step-panel [value]="2">
-          <ng-template #content let-activateCallback="activateCallback">
-            <div class="flex flex-col gap-4">
-              <div class="flex flex-col gap-1.5">
-                <p class="font-medium">Programme</p>
-                <p-select inputId="program" [optionValue]="'id'" [optionLabel]="'name'"
-                          [options]="programsStore.subprograms()"
-                          formControlName="program" class="w-full"/>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <p class="font-medium">Catégories</p>
-                <p-multiSelect [inputId]="'categories'" [autocomplete]="'off'"
-                               [showHeader]="false" [options]="categoriesStore.categories()"
-                               [optionValue]="'id'" [optionLabel]="'name'"
-                               [showClear]="true" formControlName="categories"/>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <p class="font-medium">Date de début</p>
-                <p-datePicker formControlName="started_at"/>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <p class="font-medium">Date de fin</p>
-                <p-datePicker formControlName="ended_at"/>
-              </div>
-              <div class="flex py-6 pb-96 justify-between">
-                <p-button size="small" variant="outlined" severity="secondary" (onClick)="activateCallback(1)">
-                  <i-lucide [name]="icons.previous" class="size-4"/>
-                  Précedent
-                </p-button>
-                <p-button [loading]="store.isLoading()"
-                          [disabled]="store.isLoading() || form.invalid" size="small" type="submit">
-                  Finaliser
-                  @if (!store.isLoading()) {
-                    <i-lucide [name]="icons.check" class="size-4"/>
-                  }
-                </p-button>
-              </div>
-            </div>
-          </ng-template>
-        </p-step-panel>
-      </p-step-panels>
-    </p-stepper>
+  <form class="w-full grid grid-cols-1 md:grid-cols-5 gap-5" [formGroup]="form" (ngSubmit)="onUpdateEvent()">
+    <div class="w-full col-span-2">
+      <p class="font-medium mb-2">Photo de couverture</p>
+      <div
+        class="relative h-52 mb-6 w-full pb-8 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-gray-200 rounded">
+        @if (event?.cover) {
+          <img [ngSrc]="event | apiIMG: 'event'" [alt]="event?.name + ' cover image'"
+               class="aspect-video object-cover h-full opacity-90 rounded border-2 border-slate-200/10"
+               fill priority/>
+        }
+      </div>
+      @if (eventStore.isLoading()) {
+        <div class="h-20 bg-gray-200 animate-pulse rounded-md w-full mb-4">
+        </div>
+      } @else {
+        <app-file-upload [name]="'cover'" [url]="url + event?.id" (loaded)="onFileUploadLoaded()"/>
+      }
+    </div>
+    <div class="flex flex-col gap-5 col-span-3">
+      <div class="flex flex-col gap-1.5">
+        <label for="name" class="font-medium">
+          Nom de l'événement<span class="text-red-500">*</span>
+        </label>
+        <input pInputText id="name" formControlName="name"/>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="form_link" class="font-medium">
+          Lien du formulaire
+        </label>
+        <input pInputText id="form_link" formControlName="form_link"/>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="place" class="font-medium">
+          Lieu
+        </label>
+        <input pInputText id="place" formControlName="place"/>
+      </div>
+      <div class="flex flex-col gap-1.5 mb-10">
+        <p class="font-medium">
+          Description<span class="text-red-500">*</span>
+        </p>
+        <quill-editor formControlName="description" [style]="{ height: '200px' }"/>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <p class="font-medium">Programme</p>
+        <p-select inputId="program" [optionValue]="'id'" [optionLabel]="'name'"
+                  [options]="programsStore.subprograms()" formControlName="program" class="w-full"/>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <p class="font-medium">Catégories</p>
+        <p-multiSelect [inputId]="'categories'" [autocomplete]="'off'" [optionValue]="'id'" [optionLabel]="'name'"
+                       [options]="categoriesStore.categories()" formControlName="categories"/>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <p class="font-medium">Date de début</p>
+        <p-datePicker showIcon iconDisplay="input" formControlName="started_at"/>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <p class="font-medium">Date de fin</p>
+        <p-datePicker showIcon iconDisplay="input" formControlName="ended_at"/>
+      </div>
+      <div class="flex py-3 justify-between">
+        <p-button [loading]="store.isLoading()"
+                  [disabled]="store.isLoading() || form.invalid" size="small" type="submit">
+          Modifier l'événement
+        </p-button>
+      </div>
+    </div>
   </form>
 </section>

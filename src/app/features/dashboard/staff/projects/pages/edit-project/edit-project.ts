@@ -1,11 +1,4 @@
 import { Component, effect, inject, OnInit } from '@angular/core';
-import {
-  ArrowLeft,
-  LucideAngularModule,
-  ChevronsRight,
-  ChevronsLeft,
-  Check,
-} from 'lucide-angular';
 import { Button } from 'primeng/button';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
@@ -39,7 +32,6 @@ import { QuillEditorComponent } from 'ngx-quill';
     UnpaginatedCategoriesStore,
   ],
   imports: [
-    LucideAngularModule,
     SelectModule,
     MultiSelectModule,
     TextareaModule,
@@ -64,12 +56,6 @@ export class EditProjectComponent implements OnInit {
   projectStore = inject(ProjectStore);
   url = `${environment.apiUrl}projects/cover/`;
   #slug = this.#route.snapshot.params['slug'];
-  icons = {
-    back: ArrowLeft,
-    next: ChevronsRight,
-    previous: ChevronsLeft,
-    check: Check,
-  };
 
   constructor() {
     this.form = this.#fb.group({
