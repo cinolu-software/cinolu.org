@@ -49,9 +49,10 @@
                       [inputId]="'password_confirm'"/>
         </div>
       </div>
-      <p-button class="mt-4" [loading]="store.isLoading()" [disabled]="store.isLoading() || form.invalid" type="submit">
+      <button pButton class="w-full mt-6" [loading]="store.isLoading()" [disabled]="store.isLoading() || form.invalid"
+              type="submit">
         S'inscrire
-      </p-button>
+      </button>
     </div>
   </form>
 </app-auth-card>
