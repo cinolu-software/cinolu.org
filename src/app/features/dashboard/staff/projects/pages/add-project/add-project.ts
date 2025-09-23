@@ -15,7 +15,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { StepperModule } from 'primeng/stepper';
 import { AddProjectStore } from '../../store/projects/add-project.store';
 import { TextareaModule } from 'primeng/textarea';
 import { SelectModule } from 'primeng/select';
@@ -38,7 +37,6 @@ import { QuillEditorComponent } from 'ngx-quill';
     SelectModule,
     MultiSelectModule,
     TextareaModule,
-    StepperModule,
     CommonModule,
     Button,
     InputText,

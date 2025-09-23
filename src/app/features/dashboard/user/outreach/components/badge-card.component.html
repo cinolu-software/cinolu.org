@@ -1,6 +1,6 @@
 <div class="flex items-center gap-5 flex-wrap py-2">
   @for (badge of badges; track badge.name) {
-    <div class="flex flex-col items-center py-6 px-16 border border-gray-300 rounded-lg shadow-md transition-all"
+    <div class="flex flex-col items-center py-3 px-12 border border-gray-300 rounded-lg shadow-md transition-all"
          [class.opacity-100]="(referralsCount() ?? 0) >= badge.threshold"
          [class.opacity-40]="(referralsCount() ?? 0) < badge.threshold">
       <i-lucide [name]="badge.icon" class="w-10 h-10 mb-2"

@@ -15,7 +15,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { StepperModule } from 'primeng/stepper';
 import { TextareaModule } from 'primeng/textarea';
 import { SelectModule } from 'primeng/select';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
@@ -44,7 +43,6 @@ import { QuillEditorComponent } from 'ngx-quill';
     SelectModule,
     MultiSelectModule,
     TextareaModule,
-    StepperModule,
     CommonModule,
     Button,
     InputText,
@@ -66,7 +64,6 @@ export class EditProjectComponent implements OnInit {
   projectStore = inject(ProjectStore);
   url = `${environment.apiUrl}projects/cover/`;
   #slug = this.#route.snapshot.params['slug'];
-
   icons = {
     back: ArrowLeft,
     next: ChevronsRight,
