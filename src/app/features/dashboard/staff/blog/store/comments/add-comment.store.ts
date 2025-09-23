@@ -18,7 +18,7 @@ interface IAddCommentStore {
   comments: IComment | null;
 }
 
-export const AddArticleStore = signalStore(
+export const AddCommentStore = signalStore(
   withState<IAddCommentStore>({ isLoading: false, comments: null }),
   withProps(() => ({
     _http: inject(HttpClient),
@@ -31,12 +31,12 @@ export const AddArticleStore = signalStore(
         switchMap((comment) => {
           return _http.post<{ data: IComment }>('comments', comment).pipe(
             map(({ data }) => {
-              _toast.showSuccess("Le commentaire a été ajouté avec succès");
+              _toast.showSuccess('Le commentaire a été ajouté avec succès');
+              console.log(data); // console
               patchState(store, { isLoading: false, comments: data });
             }),
             catchError(() => {
               _toast.showError("Une erreur s'est produite lors de l'ajout");
-              patchState(store, { isLoading: false, comments: null });
               return of(null);
             }),
           );

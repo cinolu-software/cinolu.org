@@ -6,9 +6,9 @@
   highlight="Articles"
   description="Le blog de Cinolu, un espace d’idées, de récits et de ressources au service des innovateurs d’Afrique."
 />
-
+@let commentsAll = storeComment.comments();
 <section
-  class="min-h-[85vh] flex flex-col lg:flex-row lg:py-32 px-8 md:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto gap-8"
+  class="min-h-[85vh] py-10 flex flex-col lg:flex-row lg:py-32 px-8 md:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto gap-8"
 >
   <div class="lg:w-2/3 w-full">
     @if (store.article(); as article) {
@@ -16,13 +16,13 @@
         <img
           [ngSrc]="article | apiIMG: 'article'"
           alt="Photo de couverture de l’article {{ article.title }}"
-          class="object-cover w-full h-full"
+          class="object-cover w-[100%] h-[100%]"
           fill
           priority
         />
       </div>
 
-      <div class="my-10 p-4">
+      <div class="my-10 md:p-4">
         <h1 class="font-black font-satoshi mb-4 text-2xl md:text-3xl">
           {{ article.title | titlecase }}
         </h1>
@@ -32,24 +32,102 @@
           [innerHTML]="article.content"
         ></div>
 
-        <div class="flex items-center gap-2 mb-3 text-primary-800">
-          <i-lucide [name]="icons.fileText" class="size-5" />
-          <h2 class="font-semibold text-lg">Résumé</h2>
+        <div class="flex items-center gap-3 my-6">
+          <div class="flex-1 border-t border-gray-300"></div>
+          <span class="px-3 text-gray-700 font-semibold">Résumé</span>
+          <div class="flex-1 border-t border-gray-300"></div>
         </div>
+
         <div class="mb-8 max-w-none" [innerHTML]="article.summary"></div>
 
-        <p class="mb-4 text-sm text-gray-600">
-          Publié le :
-          <strong>{{ article.published_at | date: "longDate" }}</strong>
-        </p>
+        <div class="flex flex-col lg:flex-row gap-2 justify-between">
+          <p class="mb-4 text-sm text-gray-600">
+            Publié le :
+            <strong>{{ article.published_at | date: "longDate" }}</strong>
+          </p>
 
-        <textarea
-          name="comment"
-          placeholder="Saisissez un commentaire"
-          id="comment"
-          rows="6"
-          class="w-full resize-none border border-gray-200 rounded-md p-4 focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
-        ></textarea>
+          <p class="mb-4 text-sm text-gray-600">
+            Commentaires :
+            <strong>{{ commentCount }}</strong>
+          </p>
+        </div>
+
+        <form action="" [formGroup]="form" (ngSubmit)="onAddComment()">
+          <div class="flex gap-2 flex-col mb-2">
+            <label for="content">Saisissez un commentaire</label>
+            <input
+              type="text"
+              id="content"
+              name="content"
+              formControlName="content"
+              placeholder="Mon commentaire"
+              class="w-full resize-none border border-gray-200 rounded-md p-4 focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
+            />
+          </div>
+
+          <input type="hidden" formControlName="articleId" />
+
+          <div class="flex justify-between">
+            <p-button
+              [loading]="storeAddComment.isLoading()"
+              [disabled]="storeAddComment.isLoading() || form.invalid"
+              size="small"
+              type="submit"
+            >
+              Ajouter un commentaire
+            </p-button>
+          </div>
+        </form>
+
+        <div class="flex items-center gap-3 my-6">
+          <div class="flex-1 border-t border-gray-300"></div>
+          <span class="px-3 text-gray-700 font-semibold">Commentaires</span>
+          <div class="flex-1 border-t border-gray-300"></div>
+        </div>
+
+        <div class="flex flex-col gap-4 mt-8">
+          @for (comment of commentsAll; track $index) {
+            <div
+              class="bg-white border border-gray-200 rounded-md transition p-4 md:p-5 flex flex-col gap-3 md:flex-row md:items-start md:gap-4"
+            >
+              <div class="flex-shrink-0">
+                <div
+                  class="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-gradient-to-l from-pink-400 to-primary-500 overflow-hidden bg-gray-200 flex items-center justify-center text-white font-semibold"
+                >
+                  @if (comment.author.profile) {
+                    <img
+                      [src]="comment.author.profile"
+                      alt="Avatar de {{ comment.author.name }}"
+                      class="object-cover w-full h-full"
+                      loading="lazy"
+                    />
+                  } @else {
+                    {{ comment.author.name.charAt(0).toUpperCase() }}
+                  }
+                </div>
+              </div>
+
+              <div class="flex-1 flex flex-col gap-2">
+                <div
+                  class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1"
+                >
+                  <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                    <span class="font-medium text-gray-800">{{
+                      comment.author.name
+                    }}</span>
+                  </div>
+                  <div class="text-xs text-gray-400">
+                    {{ comment.created_at | date: "fullDate" }}
+                  </div>
+                </div>
+
+                <p class="text-gray-700 leading-relaxed break-words">
+                  {{ comment.content }}
+                </p>
+              </div>
+            </div>
+          }
+        </div>
       </div>
     }
 
@@ -79,13 +157,13 @@
       @for (article of storeArticle.articles(); track $index) {
         <a [routerLink]="['/blog-ressources', article.slug]">
           <div
-            class="flex gap-3 items-start w-full bg-gray-100 rounded-sm overflow-hidden hover:shadow-md transition cursor-pointer"
+            class="flex gap-3 items-start w-full bg-gray-100 rounded-md overflow-hidden hover:shadow-md transition cursor-pointer"
           >
             <div class="relative h-28 w-28 flex-shrink-0 bg-gray-100">
               <img
                 [ngSrc]="article | apiIMG: 'article'"
                 alt="Miniature de l’article {{ article.title }}"
-                class="object-cover w-full h-full"
+                class="object-cover w-[100%] h-[100%]"
                 fill
               />
             </div>
