@@ -13,7 +13,7 @@ import { IArticle } from '../../../../shared/models/entities.models';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { RouterLink } from '@angular/router';
-import { CommentsStore } from '../../../dashboard/staff/blog/store/comments/comments.store';
+import { CommentsStore } from '../../store/comments/comments.store';
 @Component({
   selector: 'app-article-card',
   imports: [

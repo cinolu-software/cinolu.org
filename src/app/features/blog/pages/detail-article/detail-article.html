@@ -6,7 +6,7 @@
   highlight="Articles"
   description="Le blog de Cinolu, un espace d’idées, de récits et de ressources au service des innovateurs d’Afrique."
 />
-@let commentsAll = storeComment.comments();
+@let comments = commentsStore.comments();
 @let user = profile.user();
 
 <section
@@ -88,7 +88,7 @@
         </div>
 
         <div class="flex flex-col gap-4 mt-8">
-          @for (comment of commentsAll; track $index) {
+          @for (comment of comments[0]; track $index) {
             <div
               class="bg-white border border-gray-200 rounded-md transition p-4 md:p-5 flex flex-col gap-3 md:flex-row md:items-start md:gap-4"
             >
@@ -245,8 +245,6 @@
         size="small"
         severity="primary"
         class="font-satoshi"
-        [disabled]="!updateCommentForm.valid || updateCommentStore.isLoading()"
-        [loading]="updateCommentStore.isLoading()"
         (onClick)="onUpdateComment()"
       >
         Mettre à jour

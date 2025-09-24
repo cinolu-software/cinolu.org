@@ -9,9 +9,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { FilterArticlesCommentsDto } from '../../dto/filter-tags.dto';
-import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
-import { IComment } from '../../../../../../shared/models/entities.models';
+import { IComment } from '../../../../shared/models/entities.models';
 
 interface ICommentsStore {
   isLoading: boolean;
@@ -24,13 +22,12 @@ export const CommentsStore = signalStore(
     _http: inject(HttpClient),
   })),
   withMethods(({ _http, ...store }) => ({
-    loadComments: rxMethod<FilterArticlesCommentsDto>(
+    loadComments: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((queryParams) => {
-          const params = buildQueryParams(queryParams);
+        switchMap((id) => {
           return _http
-            .get<{ data: [IComment[], number] }>('comments', { params })
+            .get<{ data: [IComment[], number] }>(`comments/article/${id}`)
             .pipe(
               map(({ data }) => {
                 patchState(store, { isLoading: false, comments: data });
@@ -43,13 +40,15 @@ export const CommentsStore = signalStore(
         }),
       ),
     ),
-
+    addComment: (comment: IComment): void => {
+      const [comments, count] = store.comments();
+      patchState(store, { comments: [[comment, ...comments], count + 1] });
+    },
     updateComment: (comment: IComment): void => {
       const [comments, count] = store.comments();
       const updated = comments.map((c) => (c.id === comment.id ? comment : c));
       patchState(store, { comments: [updated, count] });
     },
-
     deleteComment: (id: string): void => {
       const [comments, count] = store.comments();
       const filtered = comments.filter((comment) => comment.id !== id);

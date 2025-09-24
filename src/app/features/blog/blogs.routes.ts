@@ -4,7 +4,7 @@ export const blogsRoutes: Routes = [
   {
     path: '',
     title: 'Blog',
-    loadComponent: () => import('./pages/blog').then((c) => c.Blog),
+    loadComponent: () => import('./pages/list-articles/list-articles').then((c) => c.ListArticles),
   },
   {
     path: ':slug',

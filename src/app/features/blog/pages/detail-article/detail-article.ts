@@ -19,7 +19,7 @@ import { ArticleStore } from '../../../dashboard/staff/blog/store/articles/artic
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ArticleCardSkeleton } from '../../components/article-card-skeleton/article-card-skeleton';
-import { RecentArticlesStore } from '../../store/recent-articles.store';
+import { RecentArticlesStore } from '../../store/articles/recent-articles.store';
 import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
 import {
   FormBuilder,
@@ -28,24 +28,25 @@ import {
   Validators,
 } from '@angular/forms';
 import { TextareaModule } from 'primeng/textarea';
-import { AddCommentStore } from '../../../dashboard/staff/blog/store/comments/add-comment.store';
+import { AddCommentStore } from '../../store/comments/add-comment.store';
 import { Button } from 'primeng/button';
-import { CommentStore } from '../../../dashboard/staff/blog/store/comments/comment.store';
 import { AuthStore } from '../../../../core/auth/auth.store';
-import { UpdateCommentStore } from '../../../dashboard/staff/blog/store/comments/update-comment.store';
+import { UpdateCommentStore } from '../../store/comments/update-comment.store';
 import { IComment } from '../../../../shared/models/entities.models';
 import { Dialog } from 'primeng/dialog';
 import { ConfirmPopup } from 'primeng/confirmpopup';
-import { DeleteCommentStore } from '../../../dashboard/staff/blog/store/comments/delete-comment';
+import { DeleteCommentStore } from '../../store/comments/delete-comment';
 import { ConfirmationService } from 'primeng/api';
+import { CommentsStore } from '../../store/comments/comments.store';
+
 @Component({
   selector: 'app-detail-article',
   providers: [
+    CommentsStore,
     ArticleStore,
     UpdateCommentStore,
     RecentArticlesStore,
     AddCommentStore,
-    CommentStore,
     DeleteCommentStore,
     ConfirmationService,
   ],
@@ -70,12 +71,14 @@ export class DetailArticle implements OnInit {
   form: FormGroup;
   storeAddComment = inject(AddCommentStore);
   #confirmationService = inject(ConfirmationService);
-  storeComment = inject(CommentStore);
   profile = inject(AuthStore);
   updateCommentStore = inject(UpdateCommentStore);
   deleteCommentStore = inject(DeleteCommentStore);
+  commentsStore = inject(CommentsStore);
+  store = inject(ArticleStore);
+  storeArticle = inject(RecentArticlesStore);
+  #route = inject(ActivatedRoute);
   updateCommentForm: FormGroup;
-
   icons = {
     moveLeft: ArrowLeft,
     fileText: FileText,
@@ -90,9 +93,6 @@ export class DetailArticle implements OnInit {
     edit: Pencil,
     delete: Trash,
   };
-  #route = inject(ActivatedRoute);
-  store = inject(ArticleStore);
-  storeArticle = inject(RecentArticlesStore);
   comment = signal<IComment | null>(null);
   showEditModal = signal(false);
 
@@ -106,15 +106,14 @@ export class DetailArticle implements OnInit {
       id: ['', Validators.required],
       content: ['', Validators.required],
     });
+    effect(() => {
+      const article = this.store.article();
+      if (article) {
+        this.form.patchValue({ articleId: article.id });
+        this.commentsStore.loadComments(article.id);
+      }
+    });
   }
-
-  articleEffect = effect(() => {
-    const article = this.store.article();
-    if (article) {
-      this.form.patchValue({ articleId: article.id });
-      this.storeComment.loadComments(article.id);
-    }
-  });
 
   ngOnInit(): void {
     this.#route.paramMap.subscribe((params) => {
@@ -132,7 +131,7 @@ export class DetailArticle implements OnInit {
     if (!this.form.valid) return;
     this.storeAddComment.addComment(this.form.value);
     this.form.reset();
-    this.storeComment.loadComments(article.id);
+    this.commentsStore.loadComments(article.id);
   }
 
   get commentCount(): number {
@@ -140,9 +139,9 @@ export class DetailArticle implements OnInit {
     return Array.isArray(comments) ? comments.length : 0;
   }
 
-  get commentsAllWithName() {
-    return this.storeComment.comments()?.filter((c) => !!c.author?.name) ?? [];
-  }
+  // get commentsAllWithName() {
+  //   return this.commentsStore.comments()?.filter((c) => !!c.author?.name) ?? [];
+  // }
 
   onToggleEditModal(comment: IComment | null): void {
     this.comment.set(comment);

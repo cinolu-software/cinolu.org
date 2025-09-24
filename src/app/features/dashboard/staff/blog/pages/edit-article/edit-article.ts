@@ -27,7 +27,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UnpaginatedTagStore } from '../../store/tags/unpaginated-tag.store';
 import { environment } from '../../../../../../../environments/environment';
 import { ArticleStore } from '../../store/articles/article.store';
-import { ArticlesStore } from '../../../../../blog/store/articles.store';
+import { ArticlesStore } from '../../../../../blog/store/articles/articles.store';
 import { QuillModule } from 'ngx-quill';
 
 @Component({

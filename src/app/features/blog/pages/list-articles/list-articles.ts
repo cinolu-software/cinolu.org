@@ -1,15 +1,15 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ArticlesStore } from '../store/articles.store';
-import { ArticleCard } from '../components/article-card/article-card';
-import { FilterArticlesDto } from '../dto/filter-articles.dto';
+import { ArticlesStore } from '../../store/articles/articles.store';
+import { ArticleCard } from '../../components/article-card/article-card';
+import { FilterArticlesDto } from '../../dto/filter-articles.dto';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ArticleCardSkeleton } from '../components/article-card-skeleton/article-card-skeleton';
-import { TagsStore } from '../store/tags.store';
+import { ArticleCardSkeleton } from '../../components/article-card-skeleton/article-card-skeleton';
+import { TagsStore } from '../../store/articles/tags.store';
 import { MultiSelectChangeEvent, MultiSelectModule } from 'primeng/multiselect';
-import { HeroCard } from '../../../layout/components/hero-card/hero-card';
-import { Edit2Icon, LucideAngularModule } from 'lucide-angular';
+import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
+import { Pen, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-blog',
@@ -22,9 +22,9 @@ import { Edit2Icon, LucideAngularModule } from 'lucide-angular';
     MultiSelectModule,
     HeroCard,
   ],
-  templateUrl: './blog.html',
+  templateUrl: './list-articles.html',
 })
-export class Blog implements OnInit {
+export class ListArticles implements OnInit {
   store = inject(ArticlesStore);
   #route = inject(ActivatedRoute);
   #router = inject(Router);
@@ -34,6 +34,7 @@ export class Blog implements OnInit {
     page: this.#route.snapshot.queryParamMap.get('page'),
     tags: this.#route.snapshot.queryParamMap.get('tags'),
   });
+  icons = { edit: Pen };
 
   ngOnInit(): void {
     this.store.loadArticles(this.queryParams());
@@ -69,8 +70,4 @@ export class Blog implements OnInit {
     await this.updateRoute();
     this.store.loadArticles(this.queryParams());
   }
-
-  icons = {
-    edit: Edit2Icon,
-  };
 }

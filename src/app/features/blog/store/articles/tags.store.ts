@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { ITag } from '../../../shared/models/entities.models';
+import { ITag } from '../../../../shared/models/entities.models';
 
 interface ITagsStore {
   isLoading: boolean;
