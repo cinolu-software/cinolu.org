@@ -1,5 +1,6 @@
 import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ConfirmDialog } from 'primeng/confirmdialog';
 import {
   ArrowLeft,
   BadgeInfo,
@@ -34,7 +35,6 @@ import { AuthStore } from '../../../../core/auth/auth.store';
 import { UpdateCommentStore } from '../../store/comments/update-comment.store';
 import { IComment } from '../../../../shared/models/entities.models';
 import { Dialog } from 'primeng/dialog';
-import { ConfirmPopup } from 'primeng/confirmpopup';
 import { DeleteCommentStore } from '../../store/comments/delete-comment';
 import { ConfirmationService } from 'primeng/api';
 import { CommentsStore } from '../../store/comments/comments.store';
@@ -62,7 +62,7 @@ import { CommentsStore } from '../../store/comments/comments.store';
     TextareaModule,
     Button,
     Dialog,
-    ConfirmPopup,
+    ConfirmDialog,
   ],
   templateUrl: './detail-article.html',
 })
@@ -151,7 +151,7 @@ export class DetailArticle implements OnInit {
     this.updateCommentStore.updateComment({
       payload: this.updateCommentForm.value,
       onSuccess: () => {
-        console.log('clickeddddd!!!')
+        console.log('clickeddddd!!!');
         this.showEditModal.set(false);
       },
     });
@@ -159,7 +159,7 @@ export class DetailArticle implements OnInit {
 
   onDeleteComment(commentId: string, event: Event): void {
     this.#confirmationService.confirm({
-      target: event.target as HTMLElement,
+      target: event.currentTarget as EventTarget,
       message: 'Êtes-vous sûr ?',
       acceptLabel: 'Confirmer',
       rejectLabel: 'Annuler',
