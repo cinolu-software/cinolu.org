@@ -26,13 +26,14 @@ export const AddCommentStore = signalStore(
     _commentsStore: inject(CommentsStore),
     _toast: inject(ToastrService),
   })),
-  withMethods(({ _http, _toast, ...store }) => ({
+  withMethods(({ _http, _commentsStore, _toast, ...store }) => ({
     addComment: rxMethod<CommentDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((comment) => {
           return _http.post<{ data: IComment }>('comments', comment).pipe(
             map(({ data }) => {
+              _commentsStore.addComment(data);
               _toast.showSuccess('Le commentaire a été ajouté avec succès');
               patchState(store, { isLoading: false, comments: data });
             }),

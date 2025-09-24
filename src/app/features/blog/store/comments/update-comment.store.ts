@@ -44,11 +44,11 @@ export const UpdateCommentStore = signalStore(
             .pipe(
               map(({ data }) => {
                 _commentsStore.updateComment(data);
+                onSuccess();
                 _toast.showSuccess(
                   'Le commentaire a été mis à jour avec succès',
                 );
                 patchState(store, { isLoading: false });
-                onSuccess();
               }),
               catchError(() => {
                 _toast.showError('Échec de la mise à jour');

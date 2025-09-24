@@ -50,7 +50,7 @@
 
           <p class="mb-4 text-sm text-gray-600">
             Commentaires :
-            <strong>{{ commentCount }}</strong>
+            <strong>{{ comments[1] }}</strong>
           </p>
         </div>
 
@@ -67,7 +67,7 @@
             />
           </div>
 
-          <input type="hidden" formControlName="articleId" />
+          <input type="hidden" formControlName="articleId"/>
 
           <div class="flex justify-between">
             <p-button
@@ -94,17 +94,15 @@
             >
               <div class="flex-shrink-0">
                 <div
-                  class="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-gradient-to-l from-pink-400 to-primary-500 overflow-hidden bg-gray-200 flex items-center justify-center text-white font-semibold"
+                  class="relative h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-gradient-to-l from-pink-400 to-primary-500 overflow-hidden bg-gray-200 flex items-center justify-center text-white font-semibold"
                 >
-                  @if (comment.author.profile) {
+                  @if (comment.author; as a) {
                     <img
-                      [src]="comment.author.profile"
-                      alt="Avatar de {{ comment.author.name }}"
+                      [ngSrc]="a | apiIMG: 'user'"
+                      alt="Avatar de {{ a.name }}"
                       class="object-cover w-full h-full"
                       loading="lazy"
-                    />
-                  } @else {
-                    {{ comment.author.name.charAt(0).toUpperCase() }}
+                      fill/>
                   }
                 </div>
               </div>
@@ -114,9 +112,8 @@
                   class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1"
                 >
                   <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-                    <span class="font-medium text-gray-800">{{
-                      comment.author.name
-                    }}</span>
+                    <span class="font-medium text-gray-800">
+                      {{ comment?.author?.name }}</span>
                   </div>
                   <div class="text-xs text-gray-400">
                     {{ comment.created_at | date: "fullDate" }}
@@ -133,13 +130,11 @@
                       class="text-gray-500"
                       (click)="onToggleEditModal(comment)"
                     >
-                      <i-lucide [name]="icons.edit" class="size-4" />
+                      <i-lucide [name]="icons.edit" class="size-4"/>
                     </button>
-                    <button
-                      class="text-red-700"
-                      (click)="onDeleteComment(comment.id, $event)"
-                    >
-                      <i-lucide [name]="icons.delete" class="size-4" />
+                    <button class="text-red-700" (click)="onDeleteComment(comment.id, $event)">
+                      <p-confirmpopup/>
+                      <i-lucide [name]="icons.delete" class="size-4"/>
                     </button>
                   </div>
                 }
@@ -151,7 +146,7 @@
     }
 
     @if (store.isLoading()) {
-      <app-article-card-skeleton />
+      <app-article-card-skeleton/>
     }
 
     @if (!store.isLoading() && !store.article()) {
@@ -161,7 +156,7 @@
         <h2 class="text-3xl font-semibold mb-3">Aucun article trouvé</h2>
 
         <div class="w-full">
-          <app-article-card-skeleton />
+          <app-article-card-skeleton/>
         </div>
       </div>
     }
@@ -207,7 +202,6 @@
   </div>
 </section>
 
-<p-confirmpopup></p-confirmpopup>
 
 <p-dialog
   [(visible)]="showEditModal"
@@ -222,7 +216,7 @@
   >
     <div class="flex flex-col gap-1.5">
       <label for="content" class="font-medium"
-        >Contenu<span class="text-red-500">*</span></label
+      >Contenu<span class="text-red-500">*</span></label
       >
       <textarea
         pTextarea
@@ -237,7 +231,7 @@
         variant="outlined"
         severity="danger"
         class="font-satoshi"
-        (onClick)="onToggleEditModal(null)"
+        (onClick)="closeModal()"
       >
         Annuler
       </p-button>

@@ -134,30 +134,25 @@ export class DetailArticle implements OnInit {
     this.commentsStore.loadComments(article.id);
   }
 
-  get commentCount(): number {
-    const comments = this.store.article()?.comments;
-    return Array.isArray(comments) ? comments.length : 0;
-  }
-
-  // get commentsAllWithName() {
-  //   return this.commentsStore.comments()?.filter((c) => !!c.author?.name) ?? [];
-  // }
-
   onToggleEditModal(comment: IComment | null): void {
     this.comment.set(comment);
     this.updateCommentForm.patchValue({
       id: comment?.id || '',
       content: comment?.content || '',
     });
-    this.showEditModal.update((v) => !v);
+    this.showEditModal.set(true);
+  }
+
+  closeModal(): void {
+    this.showEditModal.set(false);
   }
 
   onUpdateComment(): void {
     this.updateCommentStore.updateComment({
       payload: this.updateCommentForm.value,
       onSuccess: () => {
-        this.onToggleEditModal(null);
-        this.updateCommentForm.reset();
+        console.log('clickeddddd!!!')
+        this.showEditModal.set(false);
       },
     });
   }
