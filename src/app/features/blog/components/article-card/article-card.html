@@ -1,7 +1,7 @@
 <div
-  class="bg-white rounded-lg border border-gray-200 shadow-sm flex flex-col overflow-hidden hover:shadow-md transition"
+  class="bg-white rounded-md border border-gray-200 shadow-sm flex flex-col overflow-hidden hover:shadow-md transition"
 >
-  <div class="relative h-48 md:h-56 2xl:h-48 overflow-hidden">
+  <div class="relative h-48 md:h-56 2xl:h-60 overflow-hidden">
     <img
       [ngSrc]="article() | apiIMG: 'article'"
       alt="Image de l'article {{ article().title }}"
@@ -11,12 +11,16 @@
     />
   </div>
 
-  <div class="p-4 flex flex-col gap-4">
-    <div class="space-y-2">
-      <h3 class="text-gray-900 font-semibold text-base line-clamp-1">
+  <div class="p-5 flex flex-col gap-5">
+    <div class="space-y-3">
+      <h3
+        class="text-gray-900 font-bold text-lg lg:text-xl leading-snug line-clamp-1"
+      >
         {{ article().title }}
       </h3>
-      <p class="text-gray-500 text-sm line-clamp-3 hyphens-none">
+      <p
+        class="text-gray-600 text-sm leading-relaxed line-clamp-3 sm:line-clamp-2 lg:line-clamp-3"
+      >
         {{ article().content }}
       </p>
     </div>
@@ -26,9 +30,9 @@
         @for (tag of article().tags; track tag.id; let i = $index) {
           @if (i < 2) {
             <span
-              class="flex items-center bg-primary-500/40 text-xs font-medium text-primary-600 rounded-full py-1 px-2"
+              class="flex items-center bg-primary-50 text-xs font-medium text-primary-600 rounded-full py-1 px-2 border border-primary-100"
             >
-              <span class="max-w-[8ch] truncate">
+              <span class="max-w-[12ch] truncate">
                 {{ tag.name }}
               </span>
             </span>
@@ -37,7 +41,7 @@
       </div>
       <a
         [routerLink]="article().slug"
-        class="flex items-center gap-1 text-xs font-medium border border-primary-500 px-3 py-1.5 rounded-full text-primary-500 hover:bg-primary-500 hover:text-white transition-colors duration-200"
+        class="flex items-center gap-1 text-xs font-semibold border border-primary-500 px-3 py-1.5 rounded-full text-primary-600 hover:bg-primary-500 hover:text-white transition-colors duration-200"
       >
         Voir plus
         <i-lucide [name]="icons.moveUp" class="w-4 h-4"></i-lucide>
@@ -49,14 +53,16 @@
     >
       <button
         type="button"
+        aria-label="Voir les commentaires"
         class="flex items-center gap-1 hover:text-primary-500 transition"
       >
         <i-lucide [name]="icons.comment" class="w-4 h-4"></i-lucide>
+        <span>{{ commentCount(article().comments) }}</span>
       </button>
 
       <span class="flex items-center gap-1">
         <i-lucide [name]="icons.calendar" class="w-4 h-4"></i-lucide>
-        {{ article().created_at | date: "dd/MM/yyyy" }}
+        {{ article().created_at | date: "longDate" }}
       </span>
     </div>
   </div>

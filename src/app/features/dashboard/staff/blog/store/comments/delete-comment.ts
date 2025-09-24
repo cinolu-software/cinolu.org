@@ -7,39 +7,42 @@ import {
 } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, of, pipe, switchMap, tap } from 'rxjs';
+import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ArticlesStore } from './articles.store';
+import { CommentsStore } from './comments.store';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { IArticle } from '../../../../../../shared/models/entities.models';
 
-interface IDeleteArticleStore {
+interface IDeleteCommentStore {
   isLoading: boolean;
 }
 
-export const DeleteArticleStore = signalStore(
-  withState<IDeleteArticleStore>({ isLoading: false }),
+interface IDeleteCommentParams {
+  id: string;
+}
+
+export const DeleteCommentStore = signalStore(
+  withState<IDeleteCommentStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _articlesStore: inject(ArticlesStore),
+    _commentsStore: inject(CommentsStore),
   })),
-  withMethods(({ _http, _articlesStore, _toast, ...store }) => ({
-    deleteArticle: rxMethod<string>(
+  withMethods(({ _http, _commentsStore, _toast, ...store }) => ({
+    deleteComment: rxMethod<IDeleteCommentParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((id) => {
-          return _http.delete<{ data: IArticle }>(`articles/${id}`).pipe(
-            tap(() => {
-              _articlesStore.deleteAricle(id);
-              _toast.showSuccess("L'article a été supprimé avec succès");
+        switchMap(({ id }) => {
+          return _http.delete<void>(`comments/${id}`).pipe(
+            map(() => {
               patchState(store, { isLoading: false });
+              _commentsStore.deleteComment(id);
+              _toast.showSuccess('Commentaire a été supprimé avec succès');
             }),
             catchError(() => {
+              patchState(store, { isLoading: false });
               _toast.showError(
                 "Une erreur s'est produite lors de la suppression",
               );
-              patchState(store, { isLoading: false });
               return of(null);
             }),
           );

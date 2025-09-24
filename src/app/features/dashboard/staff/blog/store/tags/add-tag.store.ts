@@ -42,9 +42,8 @@ export const AddTagStore = signalStore(
               patchState(store, { isLoading: false });
               onSuccess();
             }),
-            catchError((e) => {
+            catchError(() => {
               _toast.showError("Échec de l'ajout du tag");
-              console.log(e);
               patchState(store, { isLoading: false });
               return of(null);
             }),

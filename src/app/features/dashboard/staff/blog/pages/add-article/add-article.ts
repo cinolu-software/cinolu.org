@@ -60,7 +60,6 @@ export class AddArticle {
 
   onAddArticle(): void {
     if (!this.form.valid) return;
-    console.log(this.form.value);
     this.store.addArticle(this.form.value);
   }
 }

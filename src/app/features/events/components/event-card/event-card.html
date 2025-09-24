@@ -1,8 +1,8 @@
 <a
   [routerLink]="['/events', event().slug]"
-  class="bg-card mb-4 group flex flex-col overflow-hidden rounded-md shadow"
+  class="bg-card mb-4 group flex flex-col overflow-hidden rounded-md shadow bg-white"
 >
-  <div class="h-60 w-full overflow-hidden relative bg-gray-100">
+  <div class="h-60 w-full overflow-hidden relative">
     <img
       class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30"
       [ngSrc]="event() | apiIMG: 'event'"

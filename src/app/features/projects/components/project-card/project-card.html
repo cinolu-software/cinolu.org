@@ -1,48 +1,48 @@
 <div
-  class="bg-card group flex flex-col mb-4 overflow-hidden rounded-md shadow hover:shadow-lg transition"
+  class="relative flex flex-col w-full my-6 bg-white shadow-sm hover:shadow-lg rounded-md overflow-hidden transition-all duration-300"
 >
-  <div class="h-60 w-full relative overflow-hidden bg-gray-100 mb-1.5">
+  <div class="group relative overflow-hidden h-56">
     <img
       fill
       [ngSrc]="project() | apiIMG: 'project'"
       [alt]="project().name"
-      class="w-full h-full object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30"
+      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
     />
-  </div>
-
-  <div class="flex flex-col py-5 px-4 mb-1.5">
-    <h4
-      class="mb-2 text-xl group-hover:text-primary-900 font-bold transition-colors duration-200 line-clamp-1"
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent"
+    ></div>
+    <h6
+      class="absolute bottom-4 left-4 text-white text-2xl font-bold drop-shadow-lg line-clamp-1"
     >
       {{ project().name | titlecase }}
-    </h4>
+    </h6>
+  </div>
 
-    <div class="mt-0.5 line-clamp-2" [innerHTML]="project().description"></div>
+  <div class="p-5 space-y-4">
+    <p class="text-slate-700 text-base line-clamp-3">
+      <span [innerHTML]="project().description"></span>
+    </p>
 
-    <div class="my-3 h-1 w-14 border-t border-gray-200"></div>
-
-    <div class="font-medium mb-4">
-      <div class="flex items-center text-md leading-5 mb-2">
-        <i-lucide class="size-5" [name]="icons.calendarCheck" />
-        <div class="ml-1.5">
-          Début : {{ project().started_at | date: "longDate" }}
-        </div>
+    <div class="flex flex-col gap-2 text-base text-slate-600">
+      <div class="flex items-center gap-2">
+        <i-lucide
+          class="size-5 text-primary-500"
+          [name]="icons.calendarCheck"
+        />
+        <span>Début : {{ project().started_at | date: "longDate" }}</span>
       </div>
-      <div class="flex items-center text-md leading-5">
-        <i-lucide class="size-5" [name]="icons.calendarX" />
-        <div class="ml-1.5">
-          Fin : {{ project().ended_at | date: "longDate" }}
-        </div>
+      <div class="flex items-center gap-2">
+        <i-lucide class="size-5 text-red-500" [name]="icons.calendarX" />
+        <span>Fin : {{ project().ended_at | date: "longDate" }}</span>
       </div>
     </div>
 
     <a
       [routerLink]="['/programs', project().slug]"
-      type="button"
-      aria-label="En savoir plus"
-      class="inline-flex items-center mt-4 justify-center gap-2 rounded-full bg-primary-500 text-white font-semibold shadow-sm transition hover:bg-primary-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-xs sm:text-sm md:text-base px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 max-w-[200px] sm:max-w-[250px] md:max-w-[300px]"
+      class="inline-flex items-center justify-center gap-2 w-full rounded-md bg-primary-500 py-2.5 px-6 text-white text-base font-medium shadow-lg hover:bg-primary-600 transition"
     >
       En savoir plus
+      <i-lucide class="size-4" [name]="icons.moveRight" />
     </a>
   </div>
 </div>

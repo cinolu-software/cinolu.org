@@ -25,7 +25,6 @@ export const RecentArticlesStore = signalStore(
         exhaustMap(() => {
           return http.get<{ data: IArticle[] }>('articles/find-recent').pipe(
             tap(({ data }) => {
-              console.log(data);
               patchState(store, { isLoading: false, articles: data });
             }),
             catchError(() => {

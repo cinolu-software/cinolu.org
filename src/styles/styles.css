@@ -78,6 +78,11 @@
     scrollbar-width: none;
   }
 
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
   .dashboard-main-content {
     @apply bg-white rounded-lg shadow-md px-8 py-10 ;
   }
