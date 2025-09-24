@@ -9,42 +9,50 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { CommentDto } from '../../dto/comment.dto';
-import { Router } from '@angular/router';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 import { IComment } from '../../../../../../shared/models/entities.models';
+import { CommentsStore } from './comments.store';
 
 interface IUpdateCommentStore {
   isLoading: boolean;
-  comment: IComment | null;
 }
 
-export const UpdateArticleStore = signalStore(
-  withState<IUpdateCommentStore>({ isLoading: false, comment: null }),
+interface CommentDto {
+  id: string;
+  content: string;
+}
+
+interface IUpdateCommentParams {
+  payload: CommentDto;
+  onSuccess: () => void;
+}
+
+export const UpdateCommentStore = signalStore(
+  withState<IUpdateCommentStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _router: inject(Router),
+    _commentsStore: inject(CommentsStore),
     _toast: inject(ToastrService),
   })),
-  withMethods(({ _http, _toast, ...store }) => ({
-    updateArticle: rxMethod<CommentDto>(
+  withMethods(({ _http, _commentsStore, _toast, ...store }) => ({
+    updateComment: rxMethod<IUpdateCommentParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((comment) => {
+        switchMap(({ payload, onSuccess }) => {
           return _http
-            .patch<{ data: IComment }>(`comments/${comment.articleId}`, comment)
+            .patch<{ data: IComment }>(`comments/${payload.id}`, payload)
             .pipe(
               map(({ data }) => {
+                _commentsStore.updateComment(data);
                 _toast.showSuccess(
                   'Le commentaire a été mis à jour avec succès',
                 );
-                patchState(store, { isLoading: false, comment: data });
+                patchState(store, { isLoading: false });
+                onSuccess();
               }),
               catchError(() => {
-                _toast.showError(
-                  "Une erreur s'est produite lors de la mise à jour",
-                );
-                patchState(store, { isLoading: false, comment: null });
+                _toast.showError('Échec de la mise à jour');
+                patchState(store, { isLoading: false });
                 return of(null);
               }),
             );

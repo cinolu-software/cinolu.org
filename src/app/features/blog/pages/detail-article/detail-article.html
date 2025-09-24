@@ -7,6 +7,8 @@
   description="Le blog de Cinolu, un espace d’idées, de récits et de ressources au service des innovateurs d’Afrique."
 />
 @let commentsAll = storeComment.comments();
+@let user = profile.user();
+
 <section
   class="min-h-[85vh] py-10 flex flex-col lg:flex-row lg:py-32 px-8 md:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto gap-8"
 >
@@ -124,6 +126,23 @@
                 <p class="text-gray-700 leading-relaxed break-words">
                   {{ comment.content }}
                 </p>
+
+                @if (comment.author.id === user?.id) {
+                  <div class="flex items-center gap-2">
+                    <button
+                      class="text-gray-500"
+                      (click)="onToggleEditModal(comment)"
+                    >
+                      <i-lucide [name]="icons.edit" class="size-4" />
+                    </button>
+                    <button
+                      class="text-red-700"
+                      (click)="onDeleteComment(comment.id, $event)"
+                    >
+                      <i-lucide [name]="icons.delete" class="size-4" />
+                    </button>
+                  </div>
+                }
               </div>
             </div>
           }
@@ -187,3 +206,51 @@
     </div>
   </div>
 </section>
+
+<p-confirmpopup></p-confirmpopup>
+
+<p-dialog
+  [(visible)]="showEditModal"
+  [closable]="false"
+  [modal]="true"
+  [style]="{ width: '25rem' }"
+>
+  <form
+    [formGroup]="updateCommentForm"
+    class="flex flex-col gap-4"
+    (ngSubmit)="onUpdateComment()"
+  >
+    <div class="flex flex-col gap-1.5">
+      <label for="content" class="font-medium"
+        >Contenu<span class="text-red-500">*</span></label
+      >
+      <textarea
+        pTextarea
+        id="content"
+        formControlName="content"
+        rows="5"
+      ></textarea>
+    </div>
+    <div class="flex justify-end gap-4 flex-wrap">
+      <p-button
+        size="small"
+        variant="outlined"
+        severity="danger"
+        class="font-satoshi"
+        (onClick)="onToggleEditModal(null)"
+      >
+        Annuler
+      </p-button>
+      <p-button
+        size="small"
+        severity="primary"
+        class="font-satoshi"
+        [disabled]="!updateCommentForm.valid || updateCommentStore.isLoading()"
+        [loading]="updateCommentStore.isLoading()"
+        (onClick)="onUpdateComment()"
+      >
+        Mettre à jour
+      </p-button>
+    </div>
+  </form>
+</p-dialog>
