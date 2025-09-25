@@ -1,4 +1,11 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  effect,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import {
@@ -38,6 +45,7 @@ import { Dialog } from 'primeng/dialog';
 import { DeleteCommentStore } from '../../store/comments/delete-comment';
 import { ConfirmationService } from 'primeng/api';
 import { CommentsStore } from '../../store/comments/comments.store';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-detail-article',
@@ -66,7 +74,7 @@ import { CommentsStore } from '../../store/comments/comments.store';
   ],
   templateUrl: './detail-article.html',
 })
-export class DetailArticle implements OnInit {
+export class DetailArticle implements OnInit, OnDestroy {
   #fb = inject(FormBuilder);
   form: FormGroup;
   storeAddComment = inject(AddCommentStore);
@@ -99,6 +107,12 @@ export class DetailArticle implements OnInit {
   #slug = this.#route.snapshot.params['slug'];
   comment = signal<IComment | null>(null);
   showEditModal = signal(false);
+  destroy$ = new Subject<void>();
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   constructor() {
     this.form = this.#fb.group({
@@ -127,7 +141,10 @@ export class DetailArticle implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.loadArticle(this.#slug);
+    this.#route.paramMap.pipe(takeUntil(this.destroy$)).subscribe((params) => {
+      const slug = params.get('slug');
+      if (slug) this.store.loadArticle(slug);
+    });
   }
 
   onAddComment(): void {
