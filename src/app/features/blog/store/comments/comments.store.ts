@@ -10,10 +10,17 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IComment } from '../../../../shared/models/entities.models';
+import { buildQueryParams } from '../../../../shared/helpers/build-query-params';
+import { FilterCommentsDto } from '../../dto/filter-comments.dto';
 
 interface ICommentsStore {
   isLoading: boolean;
   comments: [IComment[], number];
+}
+
+interface ICommmentsParams {
+  slug: string;
+  dto: FilterCommentsDto;
 }
 
 export const CommentsStore = signalStore(
@@ -22,15 +29,27 @@ export const CommentsStore = signalStore(
     _http: inject(HttpClient),
   })),
   withMethods(({ _http, ...store }) => ({
-    loadComments: rxMethod<string>(
+    loadComments: rxMethod<ICommmentsParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((id) => {
+        switchMap((p) => {
+          const params = buildQueryParams(p.dto);
           return _http
-            .get<{ data: [IComment[], number] }>(`comments/article/${id}`)
+            .get<{
+              data: [IComment[], number];
+            }>(`comments/article/${p.slug}`, { params })
             .pipe(
               map(({ data }) => {
-                patchState(store, { isLoading: false, comments: data });
+                const [currentComments] = store.comments();
+                const comments = data[0];
+                const count = data[1];
+                console.log('loaded comments', data);
+                patchState(store, {
+                  comments: [
+                    [...comments, ...currentComments],
+                    count + comments.length,
+                  ],
+                });
               }),
               catchError(() => {
                 patchState(store, { isLoading: false, comments: [[], 0] });
@@ -43,6 +62,12 @@ export const CommentsStore = signalStore(
     addComment: (comment: IComment): void => {
       const [comments, count] = store.comments();
       patchState(store, { comments: [[comment, ...comments], count + 1] });
+    },
+    addComments: (comments: IComment[]): void => {
+      const [currentComments, count] = store.comments();
+      patchState(store, {
+        comments: [[...comments, ...currentComments], count + comments.length],
+      });
     },
     updateComment: (comment: IComment): void => {
       const [comments, count] = store.comments();

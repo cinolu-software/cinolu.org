@@ -6,7 +6,8 @@
   highlight="Articles"
   description="Le blog de Cinolu, un espace d’idées, de récits et de ressources au service des innovateurs d’Afrique."
 />
-@let comments = commentsStore.comments();
+@let comments = commentsStore.comments()[0];
+@let count = commentsStore.comments()[1];
 @let user = profile.user();
 
 <section
@@ -50,7 +51,7 @@
 
           <p class="mb-4 text-sm text-gray-600">
             Commentaires :
-            <strong>{{ comments[1] }}</strong>
+            <strong>{{ count }}</strong>
           </p>
         </div>
 
@@ -88,7 +89,7 @@
         </div>
 
         <div class="flex flex-col gap-4 mt-8">
-          @for (comment of comments[0]; track $index) {
+          @for (comment of comments; track $index) {
             <div
               class="bg-white border border-gray-200 rounded-md transition p-4 md:p-5 flex flex-col gap-3 md:flex-row md:items-start md:gap-4"
             >
@@ -140,6 +141,11 @@
                 }
               </div>
             </div>
+          }
+          @if (comments.length < count) {
+            <p-button size="small" outlined severity="primary" (click)="loadMore()">
+              Load more
+            </p-button>
           }
         </div>
       </div>
@@ -198,6 +204,9 @@
           </div>
         </a>
       }
+
+
+
     </div>
   </div>
 </section>

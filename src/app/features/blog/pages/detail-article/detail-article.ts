@@ -93,6 +93,10 @@ export class DetailArticle implements OnInit {
     edit: Pencil,
     delete: Trash,
   };
+  queryParams = signal({
+    page: this.#route.snapshot.params['page'] || '1',
+  });
+  #slug = this.#route.snapshot.params['slug'];
   comment = signal<IComment | null>(null);
   showEditModal = signal(false);
 
@@ -107,31 +111,31 @@ export class DetailArticle implements OnInit {
       content: ['', Validators.required],
     });
     effect(() => {
-      const article = this.store.article();
-      if (article) {
-        this.form.patchValue({ articleId: article.id });
-        this.commentsStore.loadComments(article.id);
-      }
+      this.commentsStore.loadComments({
+        slug: this.#slug,
+        dto: this.queryParams(),
+      });
     });
   }
 
+  loadMore(): void {
+    console.log('clicked!!!');
+    this.queryParams.update((params) => ({
+      ...params,
+      page: +params.page + 1,
+    }));
+  }
+
   ngOnInit(): void {
-    this.#route.paramMap.subscribe((params) => {
-      const slug = params.get('slug');
-      if (slug) {
-        this.store.loadArticle(slug);
-      }
-    });
+    this.store.loadArticle(this.#slug);
   }
 
   onAddComment(): void {
     const article = this.store.article();
-    if (!article) return;
+    if (!article || !this.form.valid) return;
     this.form.patchValue({ articleId: article.id });
-    if (!this.form.valid) return;
     this.storeAddComment.addComment(this.form.value);
     this.form.reset();
-    this.commentsStore.loadComments(article.id);
   }
 
   onToggleEditModal(comment: IComment | null): void {
@@ -151,7 +155,7 @@ export class DetailArticle implements OnInit {
     this.updateCommentStore.updateComment({
       payload: this.updateCommentForm.value,
       onSuccess: () => {
-        console.log('clickeddddd!!!')
+        console.log('clickeddddd!!!');
         this.showEditModal.set(false);
       },
     });
