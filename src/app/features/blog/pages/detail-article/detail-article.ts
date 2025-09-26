@@ -1,5 +1,6 @@
 import {
   Component,
+  computed,
   effect,
   inject,
   OnDestroy,
@@ -196,4 +197,23 @@ export class DetailArticle implements OnInit, OnDestroy {
       },
     });
   }
+  isLoggedIn = computed(() => !!this.profile.user());
+  showLoginMessage = signal(false);
+
+  handleInputClick() {
+    if (!this.isLoggedIn()) {
+      this.showLoginMessage.set(true);
+
+      setTimeout(() => {
+        this.showLoginMessage.set(false);
+      }, 8000);
+    }
+  }
+
+  isButtonDisabled = computed(
+    () =>
+      this.storeAddComment.isLoading() ||
+      this.form.invalid ||
+      !this.isLoggedIn(),
+  );
 }
