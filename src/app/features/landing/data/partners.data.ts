@@ -36,6 +36,11 @@ export const PARTNERS: IPartner[] = [
     category: 'Institution',
   },
   {
+    name: 'Akili RDC',
+    image: '/images/partners/0.png',
+    category: 'Hub',
+  },
+  {
     name: 'Eazy-Life',
     image: '/images/partners/6.png',
     category: 'Institution',
