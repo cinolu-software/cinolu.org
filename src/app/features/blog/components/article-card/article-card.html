@@ -39,12 +39,17 @@
           }
         }
       </div>
-      <a
-        [routerLink]="article().slug"
-        class="flex items-center gap-1 text-xs font-semibold border border-primary-500 px-3 py-1.5 rounded-full text-primary-600 hover:bg-primary-500 hover:text-white transition-colors duration-200"
-      >
-        Voir plus
-        <i-lucide [name]="icons.moveUp" class="w-4 h-4"></i-lucide>
+
+      <a [routerLink]="article().slug" class="w-fit">
+        <p-button size="small" rounded="full" outlined severity="primary">
+          <span class="group flex items-center gap-2 px-2">
+            Voir plus
+            <i-lucide
+              class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
+              [name]="icons.moveUp"
+            />
+          </span>
+        </p-button>
       </a>
     </div>
 
