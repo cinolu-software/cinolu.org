@@ -55,25 +55,38 @@
           </p>
         </div>
 
-        <form action="" [formGroup]="form" (ngSubmit)="onAddComment()">
+        <form
+          class="flex flex-col gap-3"
+          [formGroup]="form"
+          (ngSubmit)="onAddComment()"
+        >
           <div class="flex gap-2 flex-col mb-2">
             <label for="content">Saisissez un commentaire</label>
+
             <input
+              [disabled]="!isLoggedIn()"
               type="text"
               id="content"
               name="content"
               formControlName="content"
-              placeholder="Mon commentaire"
-              class="w-full resize-none border border-gray-200 rounded-md p-4 focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
+              placeholder="Commentaire......."
+              class="w-full resize-none border border-gray-200 rounded-md p-4 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:cursor-not-allowed disabled:bg-gray-100"
+              (click)="handleInputClick()"
             />
           </div>
+
+          @if (showLoginMessage()) {
+            <div class="text-red-500 bg-red-500/10 text-sm my-2 p-2 rounded-md">
+              Vous devez vous connecter pour écrire un commentaire.
+            </div>
+          }
 
           <input type="hidden" formControlName="articleId" />
 
           <div class="flex justify-between">
             <p-button
               [loading]="storeAddComment.isLoading()"
-              [disabled]="storeAddComment.isLoading() || form.invalid"
+              [disabled]="isButtonDisabled()"
               size="small"
               type="submit"
             >
@@ -150,7 +163,12 @@
             </div>
           }
           @if (comments.length < count) {
-            <p-button size="small" outlined severity="primary" (click)="loadMore()">
+            <p-button
+              size="small"
+              outlined
+              severity="primary"
+              (click)="loadMore()"
+            >
               Load more
             </p-button>
           }
@@ -211,9 +229,6 @@
           </div>
         </a>
       }
-
-
-
     </div>
   </div>
 </section>
