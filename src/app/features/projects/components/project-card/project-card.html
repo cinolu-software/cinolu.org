@@ -9,7 +9,7 @@
       class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
     />
     <div
-      class="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent"
+      class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"
     ></div>
     <h6
       class="absolute bottom-4 left-4 text-white text-2xl font-bold drop-shadow-lg line-clamp-1"
@@ -37,12 +37,16 @@
       </div>
     </div>
 
-    <a
-      [routerLink]="['/programs', project().slug]"
-      class="inline-flex items-center justify-center gap-2 w-full rounded-md bg-primary-500 py-2.5 px-6 text-white text-base font-medium shadow-lg hover:bg-primary-600 transition"
-    >
-      En savoir plus
-      <i-lucide class="size-4" [name]="icons.moveRight" />
+    <a [routerLink]="['/programs', project().slug]">
+      <p-button class="" size="small" outlined severity="primary">
+        <p class="flex items-center gap-2 group px-4">
+          Voir le programme
+          <i-lucide
+            class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
+            [name]="icons.moveRight"
+          />
+        </p>
+      </p-button>
     </a>
   </div>
 </div>

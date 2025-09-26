@@ -1,14 +1,14 @@
 <section
-  class="py-10 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto fade-left-init"
+  class="py-10 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto fade-left-init"
   id="projects"
   appAnimationsOnScroll
 >
-  <div class="flex flex-wrap justify-between items-center mb-6">
+  <div class="flex flex-wrap justify-between items-center">
     <div class="mb-10">
       <h3
         class="text-3xl text-center sm:text-4xl lg:text-5xl font-black font-satoshi tracking-tight leading-tight"
       >
-        Les projets récents
+        Les programmes récents
       </h3>
     </div>
 
@@ -38,7 +38,7 @@
       }
     </div>
   }
-  <div class="flex flex-col gap-5">
+  <div class="space-y-4">
     <p-carousel
       #carousel
       [value]="store.projects()"
@@ -56,15 +56,19 @@
         </div>
       </ng-template>
     </p-carousel>
-    <a
-      routerLink="/programs"
-      class="group flex items-center justify-center gap-3 max-w-2xs mt-6 text-center py-2 px-6 rounded-full border-2 border-primary-500 text-primary-500 font-semibold text-base shadow-md hover:bg-primary-500 hover:text-white hover:shadow-lg transition-all duration-300 max-sm:max-w-fit max-sm:m-auto"
-    >
-      Liste des projets
-      <i-lucide
-        [name]="icons.moveUpRight"
-        class="h-5 w-5 transform transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
-      />
-    </a>
+
+    <div class="w-full flex justify-center items-center">
+      <a routerLink="/programs" class="w-fit">
+        <p-button psize="large" rounded="full" outlined severity="primary">
+          <span class="group flex items-center gap-2 px-8">
+            Tous les programmes
+            <i-lucide
+              class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
+              [name]="icons.moveUpRight"
+            />
+          </span>
+        </p-button>
+      </a>
+    </div>
   </div>
 </section>

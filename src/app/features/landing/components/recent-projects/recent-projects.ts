@@ -13,6 +13,7 @@ import { RecentProjectsStore } from '../../../projects/store/recent-projects.sto
 import { ProgramCardSkeletonComponent } from '../../../projects/components/project-card-skeleton/project-card-skeleton';
 import { ProjectCard } from '../../../projects/components/project-card/project-card';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
+import { Button } from "primeng/button";
 
 @Component({
   selector: 'app-recent-projects',
@@ -25,7 +26,8 @@ import { FadeInOnScrollDirective } from '../../../../shared/directives/animation
     LucideAngularModule,
     ProgramCardSkeletonComponent,
     FadeInOnScrollDirective,
-  ],
+    Button
+],
   templateUrl: './recent-projects.html',
 })
 export class RecentProjects {
