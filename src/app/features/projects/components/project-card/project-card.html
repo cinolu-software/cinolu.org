@@ -23,30 +23,35 @@
       <span [innerHTML]="project().description"></span>
     </p>
 
-    <div class="flex flex-col gap-2 text-base text-slate-600">
+    <div
+      class="flex justify-between gap-2 text-base text-slate-600 items-center"
+    >
       <div class="flex items-center gap-2">
         <i-lucide
           class="size-5 text-primary-500"
           [name]="icons.calendarCheck"
         />
-        <span>Début : {{ project().started_at | date: "longDate" }}</span>
+        <span> {{ project().started_at | date: "shortDate" }}</span>
       </div>
       <div class="flex items-center gap-2">
         <i-lucide class="size-5 text-red-500" [name]="icons.calendarX" />
-        <span>Fin : {{ project().ended_at | date: "longDate" }}</span>
+        <span>{{ project().ended_at | date: "shortDate" }}</span>
       </div>
     </div>
 
-    <a [routerLink]="['/programs', project().slug]">
-      <p-button class="" size="small" outlined severity="primary">
-        <p class="flex items-center gap-2 group px-4">
-          Voir le programme
-          <i-lucide
-            class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
-            [name]="icons.moveRight"
-          />
-        </p>
-      </p-button>
-    </a>
+    <p-button
+      [routerLink]="['/programs', project().slug]"
+      size="small"
+      outlined
+      severity="primary"
+    >
+      <p class="flex items-center gap-2 group px-4">
+        Explorer ce programme
+        <i-lucide
+          class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
+          [name]="icons.moveRight"
+        />
+      </p>
+    </p-button>
   </div>
 </div>

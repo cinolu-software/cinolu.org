@@ -13,6 +13,7 @@ import { EventCardSkeleton } from '../../../events/components/event-card-skeleto
 import { EventCard } from '../../../events/components/event-card/event-card';
 import { RecentEventsStore } from '../../../events/store/recent-events.store';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
+import { Button } from "primeng/button";
 
 @Component({
   selector: 'app-recent-events',
@@ -25,7 +26,8 @@ import { FadeInOnScrollDirective } from '../../../../shared/directives/animation
     LucideAngularModule,
     EventCardSkeleton,
     FadeInOnScrollDirective,
-  ],
+    Button
+],
   templateUrl: './recent-events.html',
 })
 export class RecentEvents {
