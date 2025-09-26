@@ -9,7 +9,7 @@
 />
 
 <div
-  class="pt-14 px-8 min-h-[100vh] mb-10 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
+  class="px-8 min-h-[100vh] lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-10 lg:py-20"
 >
   @if (tagsStore.tags().length > 0) {
     <div class="mb-10 flex flex-wrap gap-4 md:w-1/4">
@@ -42,7 +42,7 @@
         article of store.articles()[0]
           | paginate
             : {
-                itemsPerPage: 12,
+                itemsPerPage: 6,
                 currentPage: queryParams().page || 1,
                 totalItems: store.articles()[1],
               };
@@ -59,7 +59,7 @@
       Pas d'articles disponibles
     </p>
   }
-  @if (store.articles()[1] > 12 && !store.isLoading()) {
+  @if (store.articles()[1] > 6 && !store.isLoading()) {
     <div class="flex justify-center mt-10">
       <pagination-controls
         nextLabel=""
