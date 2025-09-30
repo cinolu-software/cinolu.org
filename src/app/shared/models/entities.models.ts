@@ -9,6 +9,16 @@ export interface ITag extends IBase {
   name: string;
 }
 
+export interface IJob extends IBase {
+  title: string;
+  description: string;
+  cover?: string;
+  link: string;
+  date: string;
+  location: string;
+  tags: string[];
+}
+
 export interface IComment extends IBase {
   content: string;
   author: IUser;

@@ -31,6 +31,15 @@ export const routes: Route[] = [
       ),
   },
   {
+    path: 'jobs-opportunities',
+    component: Layout,
+    data: { layout: 'full-layout' },
+    loadChildren: () =>
+      import('./features/jobs-opportunities/jobs.routes').then(
+        (m) => m.jobsRoutes,
+      ),
+  },
+  {
     path: 'events',
     component: Layout,
     data: { layout: 'fixed-layout' },
