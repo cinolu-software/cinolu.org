@@ -32,5 +32,5 @@ export class HeroCard {
   @Input({ required: true }) title!: string;
   @Input() highlight!: string;
   @Input() description!: string;
-  @Input() overlayColor = 'bg-primary-950/85';
+  @Input() overlayColor = 'bg-black/85';
 }

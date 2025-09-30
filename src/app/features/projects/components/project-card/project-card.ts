@@ -9,6 +9,7 @@ import {
 } from 'lucide-angular';
 import { IProject } from '../../../../shared/models/entities.models';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
+import { Button } from "primeng/button";
 
 @Component({
   selector: 'app-project-card',
@@ -18,7 +19,8 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
     NgOptimizedImage,
     RouterLink,
     ApiImgPipe,
-  ],
+    Button
+],
   templateUrl: './project-card.html',
 })
 export class ProjectCard {

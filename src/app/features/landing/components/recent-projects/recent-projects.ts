@@ -13,6 +13,7 @@ import { RecentProjectsStore } from '../../../projects/store/recent-projects.sto
 import { ProgramCardSkeletonComponent } from '../../../projects/components/project-card-skeleton/project-card-skeleton';
 import { ProjectCard } from '../../../projects/components/project-card/project-card';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
+import { Button } from "primeng/button";
 
 @Component({
   selector: 'app-recent-projects',
@@ -25,6 +26,7 @@ import { FadeInOnScrollDirective } from '../../../../shared/directives/animation
     LucideAngularModule,
     ProgramCardSkeletonComponent,
     FadeInOnScrollDirective,
+    Button,
   ],
   templateUrl: './recent-projects.html',
 })
@@ -36,31 +38,4 @@ export class RecentProjects {
     moveLeft: ArrowLeft,
     moveRight: ArrowRight,
   };
-
-  responsiveOptions: {
-    breakpoint: string;
-    numVisible: number;
-    numScroll: number;
-  }[] = [
-    {
-      breakpoint: '1280px',
-      numVisible: 4,
-      numScroll: 1,
-    },
-    {
-      breakpoint: '1199px',
-      numVisible: 3,
-      numScroll: 1,
-    },
-    {
-      breakpoint: '767px',
-      numVisible: 2,
-      numScroll: 1,
-    },
-    {
-      breakpoint: '575px',
-      numVisible: 1,
-      numScroll: 1,
-    },
-  ];
 }

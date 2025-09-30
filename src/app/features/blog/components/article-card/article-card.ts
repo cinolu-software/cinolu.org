@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, Input, input } from '@angular/core';
 import {
   Calendar1,
   Info,
@@ -14,6 +14,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { RouterLink } from '@angular/router';
 import { CommentsStore } from '../../store/comments/comments.store';
+import { Button } from 'primeng/button';
 @Component({
   selector: 'app-article-card',
   imports: [
@@ -22,11 +23,13 @@ import { CommentsStore } from '../../store/comments/comments.store';
     ApiImgPipe,
     RouterLink,
     CommonModule,
+    Button,
   ],
   providers: [CommentsStore],
   templateUrl: './article-card.html',
 })
 export class ArticleCard {
+  @Input() count = '';
   article = input.required<IArticle>();
   commentStore = inject(CommentsStore);
   icons = {
