@@ -13,16 +13,25 @@ import {
   MoveRight,
   MoveUpRight,
   NotepadText,
-  Tag,
+  Tags,
   ThumbsUp,
   UserPlus,
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
+import { Button } from 'primeng/button';
+import { Tag } from "primeng/tag";
 
 @Component({
   selector: 'app-subprogram-card',
-  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, ApiImgPipe],
+  imports: [
+    LucideAngularModule,
+    CommonModule,
+    NgOptimizedImage,
+    ApiImgPipe,
+    Button,
+    Tag
+],
   templateUrl: './subprogram-card.html',
   styles: ``,
 })
@@ -32,7 +41,7 @@ export class SubprogramCard {
     fileText: FileText,
     notepadText: NotepadText,
     userPlus: UserPlus,
-    tag: Tag,
+    tag: Tags,
     comment: MessageCircleMore,
     like: ThumbsUp,
     calendar: Calendar1,
