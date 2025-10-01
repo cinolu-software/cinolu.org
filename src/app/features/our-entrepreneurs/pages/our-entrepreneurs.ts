@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { LucideAngularModule, Users } from 'lucide-angular';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { ENTREPRENEURS_DATA } from '../data/entrepreneurs.data';
-import { ComponyCard } from "../components/compony-card/compony-card";
+import { ComponyCard } from '../components/company-card/company-card';
 
 @Component({
   selector: 'app-our-entrepreneurs',

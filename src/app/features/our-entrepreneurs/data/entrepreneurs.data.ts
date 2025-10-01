@@ -46,7 +46,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
       {
         website: 'https://afritech.cd',
       },
-      { linkedin: 'https://linkedin.com/in/sarahkabeya' }
+      { linkedin: 'https://linkedin.com/in/sarahkabeya' },
     ],
     products: [
       {

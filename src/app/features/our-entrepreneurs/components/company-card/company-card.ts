@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-compony-card',
   imports: [NgOptimizedImage, Button, LucideAngularModule, RouterLink],
-  templateUrl: './compony-card.html',
+  templateUrl: './company-card.html',
   styles: ``,
 })
 export class ComponyCard {
