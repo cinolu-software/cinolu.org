@@ -48,12 +48,12 @@ export const EXPLORATION_LINKS: ILink[] = [
     name: 'My Cinolu',
     path: '/mycinolu',
     children: [
-      { name: 'OneStop Platform', path: '/', exactUrl: true },
-      { name: 'À propos', path: '/about-us' },
+      { name: 'Nos entrepreneurs', path: '/entrepreneurs', exactUrl: true },
       { name: 'Jobs & Opportunités', path: '/jobs-opportunities' },
-      { name: 'Contacts', path: '/contact-us', icon: Image },
       { name: 'Blog', path: '/blog-ressources', icon: BookOpen },
       { name: 'Galerie', path: '/gallery', icon: Image },
+      { name: 'À propos', path: '/about-us' },
+      { name: 'Contacts', path: '/contact-us', icon: Image },
     ],
   },
   {
