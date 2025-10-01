@@ -63,6 +63,15 @@ export const routes: Route[] = [
       ),
   },
   {
+    path: 'entrepreneurs',
+    component: Layout,
+    data: { layout: 'full-layout' },
+    loadChildren: () =>
+      import('./features/our-entrepreneurs/entrepreneurs.routes').then(
+        (m) => m.entrepreneursRoutes,
+      ),
+  },
+  {
     path: 'gallery',
     component: Layout,
     data: { layout: 'full-layout' },
