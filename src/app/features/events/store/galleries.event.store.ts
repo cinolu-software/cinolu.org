@@ -28,11 +28,9 @@ export const GalleryEventStore = signalStore(
         switchMap((slug) => {
           return _http.get<{ data: IImage }>(`galleries/event/${slug}`).pipe(
             tap(({ data }) => {
-              console.log(data);
               patchState(store, { isLoading: false, gallery: data });
             }),
-            catchError((e) => {
-              console.log(e);
+            catchError(() => {
               patchState(store, { isLoading: false });
               return of(null);
             }),
