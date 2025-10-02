@@ -40,7 +40,7 @@ export class AddVenture {
       ventureId: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
-      price: [0, [Validators.required, Validators.min(0)]],
+      price: ['', [Validators.required, Validators.min(0)]],
     });
   }
 
