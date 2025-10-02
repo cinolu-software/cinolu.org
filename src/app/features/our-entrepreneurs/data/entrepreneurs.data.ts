@@ -59,6 +59,36 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         price: 'Abonnement mensuel',
         link: 'https://afritech.cd/e-learning',
       },
+      {
+        id: 101,
+        name: 'Plateforme e-learning AfriTech',
+        image: 'https://picsum.photos/seed/afritech1/400/250',
+        logo: 'https://picsum.photos/seed/afritechlogo/100/100',
+        description:
+          'Une solution d’apprentissage en ligne adaptée aux écoles africaines.',
+        price: 'Abonnement mensuel',
+        link: 'https://afritech.cd/e-learning',
+      },
+      {
+        id: 101,
+        name: 'Plateforme e-learning AfriTech',
+        image: 'https://picsum.photos/seed/afritech1/400/250',
+        logo: 'https://picsum.photos/seed/afritechlogo/100/100',
+        description:
+          'Une solution d’apprentissage en ligne adaptée aux écoles africaines.',
+        price: 'Abonnement mensuel',
+        link: 'https://afritech.cd/e-learning',
+      },
+      {
+        id: 101,
+        name: 'Plateforme e-learning AfriTech',
+        image: 'https://picsum.photos/seed/afritech1/400/250',
+        logo: 'https://picsum.photos/seed/afritechlogo/100/100',
+        description:
+          'Une solution d’apprentissage en ligne adaptée aux écoles africaines.',
+        price: 'Abonnement mensuel',
+        link: 'https://afritech.cd/e-learning',
+      },
     ],
   },
   {
