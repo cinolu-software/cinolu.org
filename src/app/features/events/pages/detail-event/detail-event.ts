@@ -17,10 +17,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { Button } from 'primeng/button';
 import { IEvent } from '../../../../shared/models/entities.models';
+import { GalleryEventStore } from '../../store/galleries.event.store';
 
 @Component({
   selector: 'app-event',
-  providers: [EventStore],
+  providers: [EventStore, GalleryEventStore],
   imports: [
     CommonModule,
     EventSkeleton,
@@ -45,10 +46,12 @@ export class DetailEvent implements OnInit {
   };
   #route = inject(ActivatedRoute);
   store = inject(EventStore);
+  galleryStore = inject(GalleryEventStore);
 
   ngOnInit(): void {
     const slug = this.#route.snapshot.params['slug'];
     this.store.loadEvent(slug);
+    this.galleryStore.loadGallery(slug);
   }
 
   onGoBack(): void {
