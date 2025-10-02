@@ -31,6 +31,15 @@ export const routes: Route[] = [
       ),
   },
   {
+    path: 'jobs-opportunities',
+    component: Layout,
+    data: { layout: 'full-layout' },
+    loadChildren: () =>
+      import('./features/jobs-opportunities/jobs.routes').then(
+        (m) => m.jobsRoutes,
+      ),
+  },
+  {
     path: 'events',
     component: Layout,
     data: { layout: 'fixed-layout' },
@@ -51,6 +60,24 @@ export const routes: Route[] = [
     loadChildren: () =>
       import('./features/donation/donation.routes').then(
         (m) => m.donationRoutes,
+      ),
+  },
+  {
+    path: 'entrepreneurs',
+    component: Layout,
+    data: { layout: 'full-layout' },
+    loadChildren: () =>
+      import('./features/our-entrepreneurs/entrepreneurs.routes').then(
+        (m) => m.entrepreneursRoutes,
+      ),
+  },
+  {
+    path: 'entrepreneurs/:id',
+    component: Layout,
+    data: { layout: 'fixed-layout' },
+    loadChildren: () =>
+      import('./features/our-entrepreneurs/entrepreneurs.routes').then(
+        (m) => m.entrepreneursRoutes,
       ),
   },
   {

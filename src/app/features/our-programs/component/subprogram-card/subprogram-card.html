@@ -15,17 +15,19 @@
 
   <div class="sm:w-3/5 w-full flex flex-col p-4 sm:p-6 gap-4 justify-between">
     <h3
-      class="font-semibold text-xl sm:text-2xl text-gray-800 flex items-center gap-2"
+      class="font-semibold text-xl sm:text-2xl text-gray-800 flex items-center gap-2 hyphens-none"
     >
       <i-lucide [name]="icons.tag" class="size-4" />
       {{ project().name }}
     </h3>
 
-    <p class="text-gray-600 text-sm sm:text-base">
+    <p class="text-gray-600 text-sm sm:text-base hyphens-none text-justify">
       {{ project().description }}
     </p>
 
-    <div class="flex justify-between gap-4 text-sm sm:text-base">
+    <div
+      class="flex justify-between max-sm:flex-col gap-4 text-sm sm:text-base"
+    >
       <div class="flex items-center gap-2 text-gray-700">
         <i-lucide [name]="icons.calendar" class="size-4 sm:size-5" />
         <span>
@@ -45,24 +47,16 @@
     <div
       class="flex flex-wrap gap-3 items-center justify-between text-sm sm:text-base"
     >
-      <div class="font-medium capitalize">
+      <div class="font-medium">
         @switch (getStatut(project())) {
           @case ("En cours") {
-            <span
-              class="text-primary-500 bg-primary-500/10 rounded-md py-1 px-2"
-            >
-              En cours
-            </span>
+            <p-tag severity="Primary" value="En cours" />
           }
           @case ("À venir") {
-            <span class="text-blue-500 bg-blue-500/10 rounded-md py-1 px-2">
-              À venir
-            </span>
+            <p-tag severity="info" value="À venir" />
           }
           @default {
-            <span class="text-red-500 bg-red-500/10 rounded-md py-1 px-2">
-              {{ getStatut(project()) }}
-            </span>
+            <p-tag severity="warn" value="{{ getStatut(project()) }}" />
           }
         }
       </div>
@@ -82,15 +76,36 @@
       </div>
     </div>
 
-    <button
-      type="button"
-      class="group max-w-64 text-sm sm:text-base font-medium relative z-10 flex items-center text-primary-500 border border-primary-500 rounded-full justify-center gap-2 py-2 px-6 hover:-translate-y-1 hover:shadow-lg hover:bg-primary-500 hover:text-white transition duration-300"
-    >
-      Postuler
-      <i-lucide
-        [name]="icons.arrow"
-        class="group-hover:translate-x-1 transition-all duration-300"
-      />
-    </button>
+    @if (
+      getStatut(project()) === "En cours" ||
+      (getStatut(project()) === "À venir" && project().form_link)
+    ) {
+      <a
+        [href]="project().form_link"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="w-fit"
+      >
+        <p-button size="small" severity="primary" outlined>
+          <p class="flex items-center gap-2 group px-4">
+            Postuler
+            <i-lucide
+              class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
+              [name]="icons.arrow"
+            />
+          </p>
+        </p-button>
+      </a>
+    } @else {
+      <p-button size="small" severity="danger" disabled outlined>
+        <p class="flex items-center gap-2 group px-4">
+          Postuler
+          <i-lucide
+            class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
+            [name]="icons.arrow"
+          />
+        </p>
+      </p-button>
+    }
   </div>
 </div>

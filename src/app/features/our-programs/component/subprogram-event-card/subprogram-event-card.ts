@@ -1,6 +1,7 @@
 import { Component, input } from '@angular/core';
 import { IEvent } from '../../../../shared/models/entities.models';
 import {
+  BookmarkCheck,
   Calendar1,
   CalendarCheck,
   CalendarMinus,
@@ -12,22 +13,30 @@ import {
   MoveRight,
   MoveUpRight,
   NotepadText,
-  Tag,
   ThumbsUp,
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
+import { Tag } from 'primeng/tag';
+import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-subprogram-event-card',
-  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, ApiImgPipe],
+  imports: [
+    LucideAngularModule,
+    CommonModule,
+    NgOptimizedImage,
+    ApiImgPipe,
+    Tag,
+    Button,
+  ],
   templateUrl: './subprogram-event-card.html',
 })
 export class SubprogramEventCard {
   icons = {
     fileText: FileText,
     notepadText: NotepadText,
-    tag: Tag,
+    tag: BookmarkCheck,
     comment: MessageCircleMore,
     like: ThumbsUp,
     calendar: Calendar1,

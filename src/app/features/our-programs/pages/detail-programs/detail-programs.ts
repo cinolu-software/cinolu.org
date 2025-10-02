@@ -14,10 +14,12 @@ import {
   ThumbsUp,
   UserPlus,
 } from 'lucide-angular';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ProgramStore } from '../../../landing/store/program.store';
 import { SubprogramCardSkeleton } from '../../component/subprogram-card-skeleton/subprogram-card-skeleton';
 import { Subject, takeUntil } from 'rxjs';
+import { Button } from 'primeng/button';
+import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-detail-programs',
@@ -27,6 +29,9 @@ import { Subject, takeUntil } from 'rxjs';
     CommonModule,
     RouterLink,
     SubprogramCardSkeleton,
+    Button,
+    ApiImgPipe,
+    NgOptimizedImage,
   ],
   templateUrl: './detail-programs.html',
 })
