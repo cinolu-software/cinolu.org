@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { VentureStore } from '../../store/ventures/venture.store';
 import { StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
