@@ -30,9 +30,9 @@
           {{ article.title | titlecase }}
         </h1>
 
-        <div class="text-gray-700 break-words hyphens-none">
+        <div class="text-gray-700 wrap-break-word hyphens-none">
           <article
-            class="relative hyphens-none"
+            class="relative whitespace-normal break-words hyphens-none flex flex-col gap-1"
             [innerHTML]="article.content"
           ></article>
         </div>
