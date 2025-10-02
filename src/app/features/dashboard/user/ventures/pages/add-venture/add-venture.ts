@@ -13,7 +13,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { StepperModule } from 'primeng/stepper';
 import { SECTORS } from '../../data/sectors.data';
 import { STAGES } from '../../data/stage.data';
-import { AddVentureStore } from '../../store/add-venture.store';
+import { AddVentureStore } from '../../store/ventures/add-venture.store';
 import { QuillEditorComponent } from 'ngx-quill';
 
 @Component({

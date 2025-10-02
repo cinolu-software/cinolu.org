@@ -11,7 +11,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { IVenture } from '../../../../../shared/models/entities.models';
+import { IVenture } from '../../../../../../shared/models/entities.models';
 
 interface IVentureStore {
   isLoading: boolean;

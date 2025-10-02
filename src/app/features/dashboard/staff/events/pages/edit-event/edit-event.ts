@@ -104,8 +104,7 @@ export class EditEventComponent implements OnInit {
     this.store.updateEvent(this.form.value);
   }
 
-  onDeleteImage(imageId: string | undefined): void {
-    if (!imageId) return;
+  onDeleteImage(imageId: string): void {
     this.deleteGalleryStore.deleteImage(imageId);
   }
 

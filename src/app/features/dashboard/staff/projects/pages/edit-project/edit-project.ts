@@ -96,8 +96,7 @@ export class EditProjectComponent implements OnInit {
     this.galleryStore.loadGallery(this.#slug);
   }
 
-  onDeleteImage(imageId: string | undefined): void {
-    if (!imageId) return;
+  onDeleteImage(imageId: string): void {
     this.deleteImageStore.deleteImage(imageId);
   }
 

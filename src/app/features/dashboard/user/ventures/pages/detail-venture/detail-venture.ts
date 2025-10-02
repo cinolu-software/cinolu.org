@@ -8,7 +8,7 @@ import {
   PhoneCall,
 } from 'lucide-angular';
 import { SelectModule } from 'primeng/select';
-import { VentureStore } from '../../store/venture.store';
+import { VentureStore } from '../../store/ventures/venture.store';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 
 @Component({
