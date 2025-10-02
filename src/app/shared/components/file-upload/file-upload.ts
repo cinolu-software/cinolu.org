@@ -13,20 +13,23 @@ registerPlugin(imagePreview, validateType, validateSize);
 export class FileUpload implements OnInit {
   name = input.required<string>();
   url = input.required<string>();
+  multiple = input<boolean>(false);
   loaded = output<void>();
   pondOptions: unknown;
 
   ngOnInit(): void {
     this.pondOptions = {
       name: this.name(),
-      labelIdle: 'Ajouter une image',
+      labelIdle:
+        'Drag & Drop your files or <span class="filepond--label-action">Browse</span>',
       acceptedFileTypes: 'image/jpeg, image/png, image/webp',
       maxFileSize: '1MB',
-      allowImagePreview: true,
+      allowImagePreview: !this.multiple(),
       allowFileSizeValidation: true,
       credits: false,
-      instantUpload: false,
+      instantUpload: this.multiple(),
       allowRemove: true,
+      allowMultiple: this.multiple(),
       server: {
         process: {
           url: this.url(),

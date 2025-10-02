@@ -22,6 +22,9 @@ import { EventStore } from '../../../../../events/store/event.store';
 import { EventsStore } from '../../store/events/events.store';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 import { QuillEditorComponent } from 'ngx-quill';
+import { LucideAngularModule, Trash2 } from 'lucide-angular';
+import { GalleryStore } from '../../store/galleries/galeries.store';
+import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 
 @Component({
   selector: 'app-event-edit',
@@ -29,6 +32,8 @@ import { QuillEditorComponent } from 'ngx-quill';
   providers: [
     EventsStore,
     EventStore,
+    GalleryStore,
+    DeleteGalleryStore,
     UpdateEventStore,
     UnpaginatedSubprogramsStore,
     UnpaginatedCategoriesStore,
@@ -46,6 +51,7 @@ import { QuillEditorComponent } from 'ngx-quill';
     NgOptimizedImage,
     ApiImgPipe,
     QuillEditorComponent,
+    LucideAngularModule,
   ],
 })
 export class EditEventComponent implements OnInit {
@@ -58,6 +64,10 @@ export class EditEventComponent implements OnInit {
   eventStore = inject(EventStore);
   url = `${environment.apiUrl}events/cover/`;
   #slug = this.#route.snapshot.params['slug'];
+  icons = { trash: Trash2 };
+  galleryUrl = `${environment.apiUrl}galleries/event/`;
+  deleteGalleryStore = inject(DeleteGalleryStore);
+  galleryStore = inject(GalleryStore);
 
   constructor() {
     this.form = this.#fb.group({
@@ -86,6 +96,7 @@ export class EditEventComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventStore.loadEvent(this.#slug);
+    this.galleryStore.loadGallery(this.#slug);
   }
 
   onUpdateEvent(): void {
@@ -93,7 +104,12 @@ export class EditEventComponent implements OnInit {
     this.store.updateEvent(this.form.value);
   }
 
+  onDeleteImage(imageId: string | undefined): void {
+    if (!imageId) return;
+    this.deleteGalleryStore.deleteImage(imageId);
+  }
+
   onFileUploadLoaded(): void {
-    this.eventStore.loadEvent(this.#slug);
+    this.galleryStore.loadGallery(this.#slug);
   }
 }

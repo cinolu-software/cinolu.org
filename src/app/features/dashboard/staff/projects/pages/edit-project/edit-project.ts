@@ -21,17 +21,23 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { ProjectStore } from '../../../../../projects/store/project.store';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 import { QuillEditorComponent } from 'ngx-quill';
+import { LucideAngularModule, Trash2 } from 'lucide-angular';
+import { GalleryStore } from '../../store/galleries/galeries.store';
+import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 
 @Component({
   selector: 'app-project-edit',
   templateUrl: './edit-project.html',
   providers: [
+    GalleryStore,
+    DeleteGalleryStore,
     ProjectStore,
     UpdateProjectStore,
     UnpaginatedSubprogramsStore,
     UnpaginatedCategoriesStore,
   ],
   imports: [
+    LucideAngularModule,
     SelectModule,
     MultiSelectModule,
     TextareaModule,
@@ -55,7 +61,11 @@ export class EditProjectComponent implements OnInit {
   programsStore = inject(UnpaginatedSubprogramsStore);
   projectStore = inject(ProjectStore);
   url = `${environment.apiUrl}projects/cover/`;
+  galleryUrl = `${environment.apiUrl}galleries/project/`;
   #slug = this.#route.snapshot.params['slug'];
+  icons = { trash: Trash2 };
+  galleryStore = inject(GalleryStore);
+  deleteImageStore = inject(DeleteGalleryStore);
 
   constructor() {
     this.form = this.#fb.group({
@@ -83,6 +93,12 @@ export class EditProjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectStore.loadProject(this.#slug);
+    this.galleryStore.loadGallery(this.#slug);
+  }
+
+  onDeleteImage(imageId: string | undefined): void {
+    if (!imageId) return;
+    this.deleteImageStore.deleteImage(imageId);
   }
 
   onUpdateProject(): void {
@@ -91,6 +107,6 @@ export class EditProjectComponent implements OnInit {
   }
 
   onFileUploadLoaded(): void {
-    this.projectStore.loadProject(this.#slug);
+    this.galleryStore.loadGallery(this.#slug);
   }
 }
