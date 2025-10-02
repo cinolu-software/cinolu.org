@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { VentureStore } from '../../store/ventures/venture.store';
 import { StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
@@ -22,7 +22,8 @@ import { QuillEditorComponent } from 'ngx-quill';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
-import { LucideAngularModule, Trash2 } from 'lucide-angular';
+import { LucideAngularModule, Trash } from 'lucide-angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-venture',
@@ -49,9 +50,10 @@ import { LucideAngularModule, Trash2 } from 'lucide-angular';
   ],
   templateUrl: './edit-venture.html',
 })
-export class EditVentureComponent {
+export class EditVentureComponent implements OnInit {
   #fb = inject(FormBuilder);
   store = inject(VentureStore);
+
   updateVentureStore = inject(UpdateVenturetore);
   form: FormGroup;
   sectors = SECTORS;
@@ -61,7 +63,9 @@ export class EditVentureComponent {
   galleryUrl = `${environment.apiUrl}galleries/venture/`;
   galleryStore = inject(GalleryStore);
   deleteGalleryStore = inject(DeleteGalleryStore);
-  icons = { trash: Trash2 };
+  #route = inject(ActivatedRoute);
+  icons = { trash: Trash };
+  #slug = this.#route.snapshot.params['slug'];
 
   constructor() {
     effect(() => {
@@ -88,6 +92,11 @@ export class EditVentureComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.store.loadVenture(this.#slug);
+    this.galleryStore.loadGallery(this.#slug);
+  }
+
   onUpdateVenture(): void {
     if (!this.form.valid) return;
     const venture = this.store.venture();
@@ -102,8 +111,6 @@ export class EditVentureComponent {
   }
 
   onFileUploadLoaded(): void {
-    const venture = this.store.venture();
-    if (!venture) return;
-    this.store.loadVenture(venture.slug);
+    this.galleryStore.loadGallery(this.#slug);
   }
 }

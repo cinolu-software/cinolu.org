@@ -34,7 +34,8 @@ export const DeleteGalleryStore = signalStore(
               _galleryStore.deleteImage(id);
               _toast.showSuccess('Image supprimée avec succès');
             }),
-            catchError(() => {
+            catchError((e) => {
+              console.error(e);
               patchState(store, { isLoading: false });
               _toast.showError("Échec de la suppression de l'image");
               return of(null);

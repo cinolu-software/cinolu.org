@@ -30,6 +30,7 @@ export const GalleryStore = signalStore(
             .get<{ data: IImage[] }>(`galleries/venture/${slug}`)
             .pipe(
               map(({ data }) => {
+                console.log(data);
                 patchState(store, { isLoading: false, gallery: data });
               }),
               catchError(() => {
