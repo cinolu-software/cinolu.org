@@ -20,8 +20,6 @@ export class FileUpload implements OnInit {
   ngOnInit(): void {
     this.pondOptions = {
       name: this.name(),
-      labelIdle:
-        'Drag & Drop your files or <span class="filepond--label-action">Browse</span>',
       acceptedFileTypes: 'image/jpeg, image/png, image/webp',
       maxFileSize: '1MB',
       allowImagePreview: !this.multiple(),
