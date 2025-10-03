@@ -38,5 +38,14 @@ export const ProjectStore = signalStore(
         }),
       ),
     ),
+    deleteImage: (imageId: string): void => {
+      const images = store.project()?.gallery || [];
+      const updatedImages = images.filter((img) => img.id !== imageId);
+      const updatedProject = {
+        ...store.project(),
+        gallery: updatedImages,
+      } as IProject;
+      patchState(store, { project: updatedProject });
+    },
   })),
 );

@@ -1,4 +1,4 @@
-import { Component, inject, input,  } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { IVenture } from '../../../../../../shared/models/entities.models';
 import { NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
@@ -13,7 +13,7 @@ import {
 } from 'lucide-angular';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopup } from 'primeng/confirmpopup';
-import { DeleteVentureStore } from '../../store/delete-venture.store';
+import { DeleteVentureStore } from '../../store/ventures/delete-venture.store';
 
 @Component({
   selector: 'app-venture-card',

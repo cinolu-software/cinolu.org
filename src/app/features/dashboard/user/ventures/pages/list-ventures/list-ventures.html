@@ -1,19 +1,30 @@
-<section class="min-h-[110vh] w-full px-6">
+<section class="dashboard-main-content w-full px-6">
   <div class="flex w-full flex-wrap gap-4 justify-between items-center mb-10">
     <h1 class="text-2xl font-bold">Mes entreprises</h1>
-    <p-button [routerLink]="'/dashboard/ventures/add'" [size]="'small'" variant="outlined">
-      <i-lucide [name]="icons.plus" class="size-4"/>
+    <p-button
+      [routerLink]="'/dashboard/ventures/add'"
+      [size]="'small'"
+      variant="outlined"
+    >
+      <i-lucide [name]="icons.plus" class="size-4" />
       Ajouter une entreprise
     </p-button>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6"
+  >
     @if (store.ventures()[0] && !store.isLoading()) {
-      @for (venture of store.ventures()[0] | paginate : {
-        itemsPerPage: 10,
-        currentPage: queryParams().page || 1,
-        totalItems: store.ventures()[1],
-      }; track venture.id) {
-        <app-venture-card [venture]="venture"/>
+      @for (
+        venture of store.ventures()[0]
+          | paginate
+            : {
+                itemsPerPage: 10,
+                currentPage: queryParams().page || 1,
+                totalItems: store.ventures()[1],
+              };
+        track venture.id
+      ) {
+        <app-venture-card [venture]="venture" />
       }
     }
     @if (store.ventures()[1] <= 0 && !store.isLoading()) {
@@ -27,8 +38,13 @@
   </div>
   @if (store.ventures()[1] > 10) {
     <div class="flex items-center justify-center py-8">
-      <pagination-controls nextLabel="" previousLabel="" [maxSize]="5"
-                           (pageChange)="onPageChange($event)" class="pg"/>
+      <pagination-controls
+        nextLabel=""
+        previousLabel=""
+        [maxSize]="5"
+        (pageChange)="onPageChange($event)"
+        class="pg"
+      />
     </div>
   }
 </section>

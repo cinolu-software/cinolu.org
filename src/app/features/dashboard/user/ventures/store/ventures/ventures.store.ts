@@ -9,9 +9,9 @@ import {
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, switchMap } from 'rxjs';
-import { FilterVenturesDto } from '../dto/filter-venture.dto';
-import { buildQueryParams } from '../../../../../shared/helpers/build-query-params';
-import { IVenture } from '../../../../../shared/models/entities.models';
+import { FilterVenturesDto } from '../../dto/filter-venture.dto';
+import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
+import { IVenture } from '../../../../../../shared/models/entities.models';
 
 interface IVenturesStore {
   isLoading: boolean;

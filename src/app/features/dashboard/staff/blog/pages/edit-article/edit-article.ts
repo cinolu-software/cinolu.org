@@ -6,16 +6,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {
-  Check,
-  ChevronsLeft,
-  ChevronsRight,
-  LucideAngularModule,
-} from 'lucide-angular';
 import { DatePickerModule } from 'primeng/datepicker';
 import { InputText } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { StepperModule } from 'primeng/stepper';
 import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { TextareaModule } from 'primeng/textarea';
@@ -40,11 +33,9 @@ import { QuillModule } from 'ngx-quill';
     UnpaginatedTagStore,
   ],
   imports: [
-    LucideAngularModule,
     SelectModule,
     MultiSelectModule,
     TextareaModule,
-    StepperModule,
     CommonModule,
     Button,
     InputText,
@@ -66,11 +57,6 @@ export class EditArticle implements OnInit {
   articleStore = inject(ArticleStore);
   url = `${environment.apiUrl}articles/cover/`;
   #slug = this.#route.snapshot.params['slug'];
-  icons = {
-    next: ChevronsRight,
-    previous: ChevronsLeft,
-    check: Check,
-  };
 
   constructor() {
     this.form = this.#fb.group({

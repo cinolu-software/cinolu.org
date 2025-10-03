@@ -1,24 +1,74 @@
 <section class="pt-32 dashboard-main-content flex flex-col gap-4">
   @let event = eventStore.event();
-  <div class="mb-4">
-    <h5 class="text-2xl font-bold">Modifier l'événement</h5>
+  <div class="flex flex-col gap-4 mb-10">
+    <p class="font-medium">Galerie</p>
+    <div class="w-full md:w-1/3">
+      @if (eventStore.isLoading()) {
+        <div
+          class="h-20 bg-gray-200 animate-pulse rounded-md w-full mb-4"
+        ></div>
+      } @else {
+        <app-file-upload
+          [multiple]="true"
+          [name]="'image'"
+          [url]="galleryUrl + event?.id"
+          (loaded)="onFileUploadLoaded()"
+        />
+      }
+    </div>
+    <div class="flex flex-wrap gap-3">
+      @for (image of galleryStore.gallery(); track image.id) {
+        <div
+          class="relative w-36 h-28 bg-gray-200 aspect-square rounded overflow-hidden border-2 border-slate-200/10 group"
+        >
+          <img
+            class="object-cover h-full"
+            priority
+            fill
+            [ngSrc]="image | apiIMG: 'eventGallery'"
+            [alt]="event?.name + ' gallery image'"
+          />
+          <button
+            type="button"
+            (click)="onDeleteImage(image.id)"
+            class="absolute top-2 right-2 p-1.5 z-90 bg-red-500/80 hover:bg-red-600 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition"
+          >
+            <i-lucide [name]="icons.trash" class="w-4 h-4 text-white" />
+          </button>
+        </div>
+      }
+    </div>
   </div>
-  <form class="w-full grid grid-cols-1 md:grid-cols-5 gap-5" [formGroup]="form" (ngSubmit)="onUpdateEvent()">
-    <div class="w-full col-span-2">
+  <form
+    class="grid grid-cols-1 md:grid-cols-5 gap-5"
+    [formGroup]="form"
+    (ngSubmit)="onUpdateEvent()"
+  >
+    <div class="col-span-2">
       <p class="font-medium mb-2">Photo de couverture</p>
       <div
-        class="relative h-52 mb-6 w-full pb-8 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-gray-200 rounded">
+        class="relative h-52 mb-6 w-full pb-8 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-gray-200 rounded"
+      >
         @if (event?.cover) {
-          <img [ngSrc]="event | apiIMG: 'event'" [alt]="event?.name + ' cover image'"
-               class="aspect-video object-cover h-full opacity-90 rounded border-2 border-slate-200/10"
-               fill priority/>
+          <img
+            [ngSrc]="event | apiIMG: 'event'"
+            [alt]="event?.name + ' cover image'"
+            class="aspect-video object-cover h-full opacity-90 rounded border-2 border-slate-200/10"
+            fill
+            priority
+          />
         }
       </div>
       @if (eventStore.isLoading()) {
-        <div class="h-20 bg-gray-200 animate-pulse rounded-md w-full mb-4">
-        </div>
+        <div
+          class="h-20 bg-gray-200 animate-pulse rounded-md w-full mb-4"
+        ></div>
       } @else {
-        <app-file-upload [name]="'cover'" [url]="url + event?.id" (loaded)="onFileUploadLoaded()"/>
+        <app-file-upload
+          [name]="'cover'"
+          [url]="url + event?.id"
+          (loaded)="onCoverUploadLoaded()"
+        />
       }
     </div>
     <div class="flex flex-col gap-5 col-span-3">
@@ -26,47 +76,66 @@
         <label for="name" class="font-medium">
           Nom de l'événement<span class="text-red-500">*</span>
         </label>
-        <input pInputText id="name" formControlName="name"/>
+        <input pInputText id="name" formControlName="name" />
       </div>
       <div class="flex flex-col gap-1.5">
-        <label for="form_link" class="font-medium">
-          Lien du formulaire
-        </label>
-        <input pInputText id="form_link" formControlName="form_link"/>
+        <label for="form_link" class="font-medium"> Lien du formulaire </label>
+        <input pInputText id="form_link" formControlName="form_link" />
       </div>
       <div class="flex flex-col gap-1.5">
-        <label for="place" class="font-medium">
-          Lieu
-        </label>
-        <input pInputText id="place" formControlName="place"/>
+        <label for="place" class="font-medium"> Lieu </label>
+        <input pInputText id="place" formControlName="place" />
       </div>
       <div class="flex flex-col gap-1.5 mb-10">
         <p class="font-medium">
           Description<span class="text-red-500">*</span>
         </p>
-        <quill-editor formControlName="description" [style]="{ height: '200px' }"/>
+        <quill-editor
+          formControlName="description"
+          [style]="{ height: '200px' }"
+        />
       </div>
       <div class="flex flex-col gap-1.5">
         <p class="font-medium">Programme</p>
-        <p-select inputId="program" [optionValue]="'id'" [optionLabel]="'name'"
-                  [options]="programsStore.subprograms()" formControlName="program" class="w-full"/>
+        <p-select
+          inputId="program"
+          [optionValue]="'id'"
+          [optionLabel]="'name'"
+          [options]="programsStore.subprograms()"
+          formControlName="program"
+          class="w-full"
+        />
       </div>
       <div class="flex flex-col gap-1.5">
         <p class="font-medium">Catégories</p>
-        <p-multiSelect [inputId]="'categories'" [autocomplete]="'off'" [optionValue]="'id'" [optionLabel]="'name'"
-                       [options]="categoriesStore.categories()" formControlName="categories"/>
+        <p-multiSelect
+          [inputId]="'categories'"
+          [autocomplete]="'off'"
+          [optionValue]="'id'"
+          [optionLabel]="'name'"
+          [options]="categoriesStore.categories()"
+          formControlName="categories"
+        />
       </div>
       <div class="flex flex-col gap-1.5">
         <p class="font-medium">Date de début</p>
-        <p-datePicker showIcon iconDisplay="input" formControlName="started_at"/>
+        <p-datePicker
+          showIcon
+          iconDisplay="input"
+          formControlName="started_at"
+        />
       </div>
       <div class="flex flex-col gap-1.5">
         <p class="font-medium">Date de fin</p>
-        <p-datePicker showIcon iconDisplay="input" formControlName="ended_at"/>
+        <p-datePicker showIcon iconDisplay="input" formControlName="ended_at" />
       </div>
       <div class="flex py-3 justify-between">
-        <p-button [loading]="store.isLoading()"
-                  [disabled]="store.isLoading() || form.invalid" size="small" type="submit">
+        <p-button
+          [loading]="store.isLoading()"
+          [disabled]="store.isLoading() || form.invalid"
+          size="small"
+          type="submit"
+        >
           Modifier l'événement
         </p-button>
       </div>

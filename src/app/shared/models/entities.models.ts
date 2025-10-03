@@ -9,10 +9,24 @@ export interface ITag extends IBase {
   name: string;
 }
 
+export interface IJob extends IBase {
+  title: string;
+  description: string;
+  cover?: string;
+  link: string;
+  date: string;
+  location: string;
+  tags: string[];
+}
+
 export interface IComment extends IBase {
   content: string;
   author: IUser;
   article: IArticle;
+}
+
+export interface IImage extends IBase {
+  image: string;
 }
 
 export interface IArticle extends IBase {
@@ -63,6 +77,7 @@ export interface IProject extends IBase {
   is_highlighted?: boolean;
   program: ISubprogram;
   categories: ICategory[];
+  gallery: IImage[];
 }
 
 export interface IVenture extends IBase {
@@ -82,6 +97,8 @@ export interface IVenture extends IBase {
   location: string;
   stage: string;
   owner: IUser;
+  gallery: IImage[];
+  products: IProduct[];
 }
 
 export interface IProgram extends IBase {
@@ -120,6 +137,15 @@ export interface IEvent extends IBase {
   ended_at: Date;
   program: IProgram;
   categories: ICategory[];
+  gallery: IImage[];
+}
+
+export interface IProduct extends IBase {
+  name: string;
+  slug: string;
+  description: string;
+  price: number;
+  venture: IVenture;
 }
 
 export interface ICategory extends IBase {
@@ -141,16 +167,4 @@ export interface IHighlight {
   events?: IEvent[];
   projects?: IProject[];
   articles?: IArticle[];
-}
-
-export interface IHighlightCard {
-  id: string;
-  type: 'program' | 'subprogram' | 'event' | 'project' | 'article';
-  title: string;
-  description: string;
-  image?: string | null;
-  slug: string;
-  link: string;
-  dateStart?: string;
-  dateEnd?: string;
 }

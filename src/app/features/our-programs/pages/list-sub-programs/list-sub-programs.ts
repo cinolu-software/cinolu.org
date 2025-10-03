@@ -14,7 +14,6 @@ import { SubprogramCard } from '../../component/subprogram-card/subprogram-card'
 import { CommonModule } from '@angular/common';
 import { SubprogramsStore } from '../../../landing/store/subprogram.store';
 import { IProject } from '../../../../shared/models/entities.models';
-import { carouselConfig } from '../../../landing/config/carousel.config';
 import { CarouselModule } from 'primeng/carousel';
 import { SubprogramCardSkeleton } from '../../component/subprogram-card-skeleton/subprogram-card-skeleton';
 import { SubprogramEventCard } from '../../component/subprogram-event-card/subprogram-event-card';
@@ -47,7 +46,28 @@ export class ListSubPrograms implements OnInit {
 
   #route = inject(ActivatedRoute);
   store = inject(SubprogramsStore);
-  carouselOptions = carouselConfig;
+  carouselOptions = [
+    {
+      breakpoint: '1280px',
+      numVisible: 1,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '1199px',
+      numVisible: 3,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '991px',
+      numVisible: 1,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '575px',
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
 
   ngOnInit(): void {
     const slug = this.#route.snapshot.params['slug'];

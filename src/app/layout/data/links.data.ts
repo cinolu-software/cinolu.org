@@ -48,12 +48,12 @@ export const EXPLORATION_LINKS: ILink[] = [
     name: 'My Cinolu',
     path: '/mycinolu',
     children: [
-      { name: 'OneStop Platform', path: '/', exactUrl: true },
-      { name: 'À propos', path: '/about-us' },
+      { name: 'Nos entrepreneurs', path: '/entrepreneurs', exactUrl: true },
       { name: 'Jobs & Opportunités', path: '/jobs-opportunities' },
-      { name: 'Contacts', path: '/contact-us', icon: Image },
       { name: 'Blog', path: '/blog-ressources', icon: BookOpen },
       { name: 'Galerie', path: '/gallery', icon: Image },
+      { name: 'À propos', path: '/about-us' },
+      { name: 'Contacts', path: '/contact-us', icon: Image },
     ],
   },
   {
@@ -134,11 +134,11 @@ export const ADMIN_LINKS: ILink[] = [
     icon: UserCheck,
     children: [
       {
-        name: 'Liste',
+        name: 'Les utilisateurs',
         path: '/dashboard/users',
       },
       {
-        name: 'Rôles',
+        name: 'Les rôles',
         path: '/dashboard/roles',
       },
     ],
@@ -162,17 +162,28 @@ export const COMMON_LINKS: ILink[] = [
 
 export const USER_LINKS: ILink[] = [
   {
-    name: 'My Cinolu',
+    name: 'One Stop',
     path: '/dashboard/community',
     icon: Group,
     children: [
       {
-        name: 'Mes entreprises',
+        name: 'Vulgarisation',
+        path: '/dashboard/community/outreach',
+      },
+    ],
+  },
+  {
+    name: 'Mes entreprises',
+    path: '/dashboard/ventures',
+    icon: Folders,
+    children: [
+      {
+        name: 'Liste entreprises',
         path: '/dashboard/ventures',
       },
       {
-        name: 'Vulgarisation',
-        path: '/dashboard/community/outreach',
+        name: 'Liste produits',
+        path: '/dashboard/products',
       },
     ],
   },

@@ -30,10 +30,12 @@
           {{ article.title | titlecase }}
         </h1>
 
-        <div
-          class="mb-8 text-base font-normal text-gray-700 text-justify hyphens-auto"
-          [innerHTML]="article.content"
-        ></div>
+        <div class="text-gray-700 wrap-break-word hyphens-none">
+          <article
+            class="relative whitespace-normal break-words hyphens-none flex flex-col gap-1"
+            [innerHTML]="article.content"
+          ></article>
+        </div>
 
         <div class="flex items-center gap-3 my-6">
           <div class="flex-1 border-t border-gray-300"></div>
@@ -41,7 +43,10 @@
           <div class="flex-1 border-t border-gray-300"></div>
         </div>
 
-        <div class="mb-8 max-w-none" [innerHTML]="article.summary"></div>
+        <div
+          class="mb-8 max-w-none wrap-break-word hyphens-none text-justify"
+          [innerHTML]="article.summary"
+        ></div>
 
         <div class="flex flex-col lg:flex-row gap-2 justify-between">
           <p class="mb-4 text-sm text-gray-600">

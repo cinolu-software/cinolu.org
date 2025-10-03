@@ -23,6 +23,11 @@ export const dashboardRoutes: Routes = [
       import('./user/ventures/ventures.routes').then((c) => c.venturesRoutes),
   },
   {
+    path: 'products',
+    loadChildren: () =>
+      import('./user/products/products.routes').then((c) => c.productsRoutes),
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./staff/users/users.routes').then((c) => c.usersRoutes),

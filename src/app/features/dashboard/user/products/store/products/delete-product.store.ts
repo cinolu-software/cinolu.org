@@ -9,34 +9,37 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { VenturesStore } from './ventures.store';
-import { ToastrService } from '../../../../../core/services/toast/toastr.service';
+import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
+import { IProduct } from '../../../../../../shared/models/entities.models';
+import { ProductsStore } from './products.store';
 
-interface IDeleteVentureStore {
+interface IDeleteProductStore {
   isLoading: boolean;
 }
 
-export const DeleteVentureStore = signalStore(
-  withState<IDeleteVentureStore>({ isLoading: false }),
+export const DeleteProductStore = signalStore(
+  withState<IDeleteProductStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _enterprisesStore: inject(VenturesStore),
+    _productsStore: inject(ProductsStore),
   })),
-  withMethods(({ _http, _toast, _enterprisesStore, ...store }) => ({
-    deleteVenture: rxMethod<string>(
+  withMethods(({ _http, _toast, _productsStore, ...store }) => ({
+    deleteProduct: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((id) => {
-          return _http.delete(`ventures/${id}`).pipe(
+          return _http.delete<{ data: IProduct }>(`products/${id}`).pipe(
             tap(() => {
+              _productsStore.deleteProduct(id);
+              _toast.showSuccess('Le produit a été supprimé');
               patchState(store, { isLoading: false });
-              _enterprisesStore.deleteVenture(id);
-              _toast.showSuccess('Entreprise supprimée');
             }),
             catchError(() => {
+              _toast.showError(
+                "Une erreur s'est produite lors de la suppression",
+              );
               patchState(store, { isLoading: false });
-              _toast.showError('Erreur lors de la suppression');
               return of(null);
             }),
           );

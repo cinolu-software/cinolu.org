@@ -1,7 +1,6 @@
 import {
   patchState,
   signalStore,
-  withHooks,
   withMethods,
   withProps,
   withState,
@@ -10,8 +9,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { IVenture } from '../../../../../shared/models/entities.models';
+import { IVenture } from '../../../../../../shared/models/entities.models';
 
 interface IVentureStore {
   isLoading: boolean;
@@ -22,7 +20,6 @@ export const VentureStore = signalStore(
   withState<IVentureStore>({ isLoading: false, venture: null }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _route: inject(ActivatedRoute),
   })),
   withMethods(({ _http, ...store }) => ({
     loadVenture: rxMethod<string>(
@@ -42,10 +39,4 @@ export const VentureStore = signalStore(
       ),
     ),
   })),
-  withHooks({
-    onInit: ({ loadVenture: loadEnterprise, _route }) => {
-      const slug = _route.snapshot.params['slug'];
-      loadEnterprise(slug);
-    },
-  }),
 );
