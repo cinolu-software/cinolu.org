@@ -145,6 +145,7 @@ export interface IProduct extends IBase {
   slug: string;
   description: string;
   price: number;
+  venture: IVenture;
 }
 
 export interface ICategory extends IBase {

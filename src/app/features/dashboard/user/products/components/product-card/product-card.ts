@@ -11,16 +11,25 @@ import {
 } from 'lucide-angular';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopup } from 'primeng/confirmpopup';
+import { CurrencyPipe } from '@angular/common';
+import { DeleteProductStore } from '../../store/products/delete-product.store';
 
 @Component({
   selector: 'app-product-card',
-  providers: [ConfirmationService],
-  imports: [ButtonModule, RouterModule, LucideAngularModule, ConfirmPopup],
+  providers: [ConfirmationService, DeleteProductStore],
+  imports: [
+    ButtonModule,
+    RouterModule,
+    LucideAngularModule,
+    ConfirmPopup,
+    CurrencyPipe,
+  ],
   templateUrl: './product-card.html',
 })
 export class ProductCard {
   product = input.required<IProduct>();
   #confirmationService = inject(ConfirmationService);
+  store = inject(DeleteProductStore);
   icons = { plus: Plus, edit: SquarePen, trash: Trash, eye: Eye };
 
   onDeleteProduct(id: string, event: Event): void {
@@ -37,7 +46,7 @@ export class ProductCard {
         severity: 'danger',
       },
       accept: () => {
-        // this.deleteVentureStore.deleteVenture(id);
+        this.store.deleteProduct(id);
       },
     });
   }

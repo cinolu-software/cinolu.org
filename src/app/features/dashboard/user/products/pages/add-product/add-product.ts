@@ -15,7 +15,7 @@ import { AddProductStore } from '../../store/products/add-product.store';
 import { unpaginatedVenturesStore } from '../../../ventures/store/ventures/venture-unpaginated.store';
 
 @Component({
-  selector: 'app-venture-add',
+  selector: 'app-product-add',
   providers: [AddProductStore, unpaginatedVenturesStore],
   imports: [
     ReactiveFormsModule,
@@ -27,9 +27,9 @@ import { unpaginatedVenturesStore } from '../../../ventures/store/ventures/ventu
     StepperModule,
     SelectModule,
   ],
-  templateUrl: './add-venture.html',
+  templateUrl: './add-product.html',
 })
-export class AddVenture {
+export class AddProduct {
   #fb = inject(FormBuilder);
   form: FormGroup;
   venturesStore = inject(unpaginatedVenturesStore);

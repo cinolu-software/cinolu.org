@@ -162,21 +162,28 @@ export const COMMON_LINKS: ILink[] = [
 
 export const USER_LINKS: ILink[] = [
   {
-    name: 'My Cinolu',
+    name: 'One Stop',
     path: '/dashboard/community',
     icon: Group,
     children: [
       {
-        name: 'Mes entreprises',
+        name: 'Vulgarisation',
+        path: '/dashboard/community/outreach',
+      },
+    ],
+  },
+  {
+    name: 'Mes entreprises',
+    path: '/dashboard/ventures',
+    icon: Folders,
+    children: [
+      {
+        name: 'Liste entreprises',
         path: '/dashboard/ventures',
       },
       {
-        name: 'Mes produits',
+        name: 'Liste produits',
         path: '/dashboard/products',
-      },
-      {
-        name: 'Vulgarisation',
-        path: '/dashboard/community/outreach',
       },
     ],
   },
