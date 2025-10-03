@@ -13,11 +13,11 @@ import { IImage } from '../../../shared/models/entities.models';
 
 interface IGalleryStore {
   isLoading: boolean;
-  gallery: IImage | null;
+  gallery: IImage[];
 }
 
 export const GalleryEventStore = signalStore(
-  withState<IGalleryStore>({ isLoading: false, gallery: null }),
+  withState<IGalleryStore>({ isLoading: false, gallery: [] }),
   withProps(() => ({
     _http: inject(HttpClient),
   })),
@@ -26,11 +26,13 @@ export const GalleryEventStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((slug) => {
-          return _http.get<{ data: IImage }>(`galleries/event/${slug}`).pipe(
+          return _http.get<{ data: IImage[] }>(`galleries/event/${slug}`).pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false, gallery: data });
+              console.log(data);
             }),
-            catchError(() => {
+            catchError((e) => {
+              console.log(e);
               patchState(store, { isLoading: false });
               return of(null);
             }),

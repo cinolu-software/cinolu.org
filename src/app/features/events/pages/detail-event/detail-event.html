@@ -1,28 +1,59 @@
 <section
-  class="px-6 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-grid pt-30 pb-10"
+  class="px-6 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-grid pt-[7.5rem] pb-16"
 >
   @if (store.event(); as event) {
-    <div class="space-y-6 md:space-y-12">
+    <div class="space-y-12">
       <div class="text-center">
         <h2
-          class="font-black font-satoshi mb-1 text-2xl md:text-4xl text-center"
+          class="font-black font-satoshi text-3xl md:text-4xl text-gray-900 leading-tight"
         >
           {{ event.name | titlecase }}
         </h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div
-          class="relative h-64 md:h-[28rem] bg-gray-100 rounded-md overflow-hidden shadow-sm"
-        >
-          <img
-            [ngSrc]="event | apiIMG: 'event'"
-            [alt]="'Photo de couverture'"
-            class="aspect-video object-cover"
-            fill
-            priority
-          />
-        </div>
+        @if (images().length > 0) {
+          <p-galleria
+            [value]="images()"
+            [responsiveOptions]="responsiveOptions"
+            [numVisible]="1"
+            [circular]="images().length > 1"
+            [showItemNavigators]="true"
+            [showThumbnails]="false"
+            autoPlay="true"
+            class="mx-auto w-full rounded-md shadow-sm overflow-hidden h-80 md:h-[32rem]"
+          >
+            <ng-template pTemplate="item" let-img>
+              <div class="w-full overflow-hidden h-80 md:h-[32rem]">
+                <img
+                  [ngSrc]="img | apiIMG: 'eventGallery'"
+                  [alt]="img.image"
+                  class="object-cover w-full h-full block transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+            </ng-template>
+
+            <ng-template pTemplate="thumbnail" let-img>
+              <img
+                [ngSrc]="img | apiIMG: 'eventGallery'"
+                [alt]="img.image"
+                class="object-cover w-full h-24 block rounded-md shadow-sm"
+              />
+            </ng-template>
+          </p-galleria>
+        } @else {
+          <div
+            class="relative w-full rounded-md shadow-sm overflow-hidden h-80 md:h-[32rem]"
+          >
+            <img
+              [ngSrc]="event | apiIMG: 'event'"
+              [alt]="'Photo de couverture'"
+              class="object-cover object-center w-full h-full block"
+              fill
+              priority
+            />
+          </div>
+        }
 
         <div class="flex flex-col gap-8">
           <div
@@ -37,7 +68,7 @@
               <h3 class="font-semibold text-xl text-gray-800">Description</h3>
             </div>
             <p
-              class="text-gray-600 leading-relaxed text-justify text-base hyphens-none"
+              class="text-gray-600 leading-relaxed text-justify text-base"
               [innerHTML]="event.description"
             ></p>
           </div>
@@ -56,21 +87,29 @@
               </div>
               <h3 class="font-semibold text-xl text-primary-700">Dates</h3>
             </div>
-            <p class="text-gray-700 text-base mb-2">
-              📅 <span class="font-medium">Début :</span>
+            <p class="text-gray-700 text-base mb-2 flex gap-2 items-center">
+              <i-lucide
+                [name]="icons.calendarDays"
+                class="size-5 stroke-[1.5]"
+              />
+              <span class="font-medium">Début :</span>
               {{ event.started_at | date: "longDate" }}
             </p>
-            <p class="text-gray-700 text-base">
-              🏁 <span class="font-medium">Fin :</span>
+            <p class="text-gray-700 text-base flex gap-2 items-center">
+              <i-lucide
+                [name]="icons.calendarX"
+                class="size-5 stroke-[1.5] text-red-600"
+              />
+              <span class="font-medium">Fin :</span>
               {{ event.ended_at | date: "longDate" }}
             </p>
           </div>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full mt-10">
         <div
-          class="rounded-md bg-green-50 shadow-sm border border-green-100 p-8 hover:shadow-lg transition"
+          class="rounded-md bg-green-50 shadow-sm border border-green-100 p-8 hover:shadow-lg transition w-full"
         >
           <div class="flex items-center gap-3 mb-6">
             <div
@@ -92,7 +131,7 @@
         </div>
 
         <div
-          class="rounded-md bg-white shadow-sm border border-gray-100 p-8 hover:shadow-lg transition"
+          class="rounded-md bg-white shadow-sm border border-gray-100 p-8 hover:shadow-lg transition w-full"
         >
           <div class="flex items-center gap-3 mb-4">
             <div
@@ -109,31 +148,39 @@
         </div>
       </div>
 
-      <div class="flex justify-center gap-6">
+      <div
+        class="flex flex-col md:flex-row justify-center items-center gap-6 mt-10 w-full m-auto bg-gray-50 rounded-md p-6 md:p-8"
+      >
         @if (
           getStatut(event) === "En cours" ||
           (getStatut(event) === "À venir" && event.link)
         ) {
-          <p-button size="small" severity="primary" outlined>
-            <p class="flex items-center gap-2 group px-4">
-              Postuler Maintenant
-              <i-lucide
-                class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
-                [name]="icons.arrow"
-              />
-            </p>
+          <p-button
+            size="large"
+            severity="primary"
+            class="flex items-center gap-3 px-6 lg:px-8 py-3 group rounded-lg transition-all duration-300"
+          >
+            Postuler Maintenant
+            <i-lucide
+              class="size-5 group-hover:translate-x-1 transition-transform duration-300"
+              [name]="icons.arrow"
+            />
           </p-button>
         } @else {
-          <p-button size="small" severity="danger" disabled outlined>
-            <p class="flex items-center gap-2 group px-4">
-              <i-lucide class="size-4" [name]="icons.fileLock" />
+          <div class="flex flex-col items-center gap-4">
+            <h3 class="text-xl font-semibold text-gray-700">
+              Événement terminé
+            </h3>
+            <p-button
+              size="large"
+              severity="danger"
+              disabled
+              class="flex items-center gap-3 px-6 py-3 rounded-lg opacity-70 cursor-not-allowed"
+            >
+              <i-lucide class="size-5" [name]="icons.fileLock" />
               Postuler Maintenant
-              <i-lucide
-                class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
-                [name]="icons.arrow"
-              />
-            </p>
-          </p-button>
+            </p-button>
+          </div>
         }
       </div>
     </div>
@@ -145,7 +192,7 @@
 
   @if (!store.isLoading() && !store.event()) {
     <div class="min-h-[75vh] w-full flex flex-col justify-center items-center">
-      <h2 class="text-3xl font-semibold">
+      <h2 class="text-3xl font-semibold text-gray-700">
         Aucun événement avec cet identifiant !
       </h2>
     </div>
