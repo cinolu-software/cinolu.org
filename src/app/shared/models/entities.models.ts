@@ -142,8 +142,10 @@ export interface IEvent extends IBase {
 
 export interface IProduct extends IBase {
   name: string;
+  slug: string;
   description: string;
   price: number;
+  venture: IVenture;
 }
 
 export interface ICategory extends IBase {

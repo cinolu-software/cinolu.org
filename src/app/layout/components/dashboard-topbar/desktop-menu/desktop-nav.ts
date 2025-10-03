@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule, LogOut, ChevronDown } from 'lucide-angular';
@@ -19,19 +19,9 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 export class DesktopNav {
   user = input.required<IUser | null>();
   signOut = output<void>();
-  activeTab = signal<string>('');
   icons = { chevronDown: ChevronDown, logOut: LogOut };
-
-  closeNav(): void {
-    this.setActiveTab('');
-  }
-
-  setActiveTab(tab: string): void {
-    this.activeTab.set(tab);
-  }
 
   handleSignOut(): void {
     this.signOut.emit();
-    this.setActiveTab('');
   }
 }

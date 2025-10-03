@@ -27,10 +27,9 @@ export const GalleryStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((slug) => {
           return _http
-            .get<{ data: IImage[] }>(`galleries/venture/${slug}`)
+            .get<{ data: IImage[] }>(`galleries/product/${slug}`)
             .pipe(
               map(({ data }) => {
-                console.log(data);
                 patchState(store, { isLoading: false, gallery: data });
               }),
               catchError(() => {

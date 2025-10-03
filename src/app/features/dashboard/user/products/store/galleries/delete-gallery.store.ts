@@ -28,16 +28,16 @@ export const DeleteGalleryStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((id) => {
-          return _http.delete<void>(`galleries/venture/${id}`).pipe(
+          return _http.delete<void>(`galleries/product/${id}`).pipe(
             map(() => {
               patchState(store, { isLoading: false });
               _galleryStore.deleteImage(id);
-              _toast.showSuccess('Image supprimée avec succès');
+              _toast.showSuccess('Image supprimée');
             }),
             catchError((e) => {
               console.error(e);
               patchState(store, { isLoading: false });
-              _toast.showError("Échec de la suppression de l'image");
+              _toast.showError('Échec de la suppression');
               return of(null);
             }),
           );

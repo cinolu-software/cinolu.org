@@ -1,0 +1,38 @@
+<div
+  class="max-w-sm rounded border border-gray-200 overflow-hidden shadow-lg bg-white transition-transform duration-300 hover:scale-105"
+>
+  <div class="px-5 py-4">
+    <div class="font-bold text-lg mb-4 text-gray-900 line-clamp-1">
+      {{ product().name }}
+    </div>
+    <p class="text-gray-700 line-clamp-3">
+      {{ product().description }}
+    </p>
+    <h5 class="text-gray-900 font-bold text-xl mt-2 mb-2">
+      {{ product().price | currency: "USD" : "symbol" : "1.2-2" }}
+    </h5>
+  </div>
+  <div class="flex items-center flex-wrap gap-2 px-5 pb-6">
+    <a
+      pButton
+      size="small"
+      severity="secondary"
+      outlined
+      class="text-gray-500 hover:text-gray-700"
+      [routerLink]="['/dashboard/products/update', product().slug]"
+    >
+      <i-lucide [name]="icons.edit" class="size-4 text-inheri" />
+      Modifier
+    </a>
+    <button
+      pButton
+      size="small"
+      severity="danger"
+      (click)="onDeleteProduct(product().id, $event)"
+    >
+      <p-confirmpopup />
+      <i-lucide [name]="icons.trash" class="size-4" />
+      Supprimer
+    </button>
+  </div>
+</div>

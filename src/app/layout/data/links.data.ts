@@ -134,11 +134,11 @@ export const ADMIN_LINKS: ILink[] = [
     icon: UserCheck,
     children: [
       {
-        name: 'Liste',
+        name: 'Les utilisateurs',
         path: '/dashboard/users',
       },
       {
-        name: 'Rôles',
+        name: 'Les rôles',
         path: '/dashboard/roles',
       },
     ],
@@ -162,17 +162,28 @@ export const COMMON_LINKS: ILink[] = [
 
 export const USER_LINKS: ILink[] = [
   {
-    name: 'My Cinolu',
+    name: 'One Stop',
     path: '/dashboard/community',
     icon: Group,
     children: [
       {
-        name: 'Mes entreprises',
+        name: 'Vulgarisation',
+        path: '/dashboard/community/outreach',
+      },
+    ],
+  },
+  {
+    name: 'Mes entreprises',
+    path: '/dashboard/ventures',
+    icon: Folders,
+    children: [
+      {
+        name: 'Liste entreprises',
         path: '/dashboard/ventures',
       },
       {
-        name: 'Vulgarisation',
-        path: '/dashboard/community/outreach',
+        name: 'Liste produits',
+        path: '/dashboard/products',
       },
     ],
   },
