@@ -108,6 +108,10 @@ export class EditEventComponent implements OnInit {
     this.deleteGalleryStore.deleteImage(imageId);
   }
 
+  onCoverUploadLoaded(): void {
+    this.eventStore.loadEvent(this.#slug);
+  }
+
   onFileUploadLoaded(): void {
     this.galleryStore.loadGallery(this.#slug);
   }
