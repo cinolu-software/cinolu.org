@@ -12,48 +12,56 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-        @if (images().length > 0) {
-          <p-galleria
-            [value]="images()"
-            [responsiveOptions]="responsiveOptions"
-            [numVisible]="1"
-            [circular]="images().length > 1"
-            [showItemNavigators]="true"
-            [showThumbnails]="false"
-            autoPlay="true"
-            class="mx-auto w-full rounded-md shadow-sm overflow-hidden h-80 md:h-[32rem]"
-          >
-            <ng-template pTemplate="item" let-img>
-              <div class="w-full overflow-hidden h-80 md:h-[32rem]">
-                <img
-                  [ngSrc]="img | apiIMG: 'eventGallery'"
-                  [alt]="img.image"
-                  class="object-cover w-full h-full block transition-transform duration-300 hover:scale-105"
-                />
-              </div>
-            </ng-template>
+        <div>
+          @if (images().length > 0) {
+            <p-galleria
+              [value]="images()"
+              [responsiveOptions]="responsiveOptions"
+              [numVisible]="1"
+              [circular]="images().length > 1"
+              [showItemNavigators]="true"
+              [showThumbnails]="false"
+              autoPlay="true"
+              class="mx-auto w-full rounded-md shadow-sm overflow-hidden h-80 md:h-[32rem]"
+            >
+              <ng-template pTemplate="item" let-img>
+                <div class="relative w-full overflow-hidden h-80 md:h-[32rem]">
+                  <img
+                    fill
+                    [ngSrc]="img | apiIMG: 'eventGallery'"
+                    [alt]="img.image"
+                    class="relative object-cover w-full h-full block transition-transform duration-300 hover:scale-105"
+                    priority
+                  />
+                </div>
+              </ng-template>
 
-            <ng-template pTemplate="thumbnail" let-img>
+              <ng-template pTemplate="thumbnail" let-img>
+                <div class="relative w-full">
+                  <img
+                    fill
+                    [ngSrc]="img | apiIMG: 'eventGallery'"
+                    [alt]="img.image"
+                    class="relative object-cover w-full h-24 block rounded-md shadow-sm"
+                    priority
+                  />
+                </div>
+              </ng-template>
+            </p-galleria>
+          } @else {
+            <div
+              class="relative w-full rounded-md shadow-sm overflow-hidden h-80 md:h-[32rem]"
+            >
               <img
-                [ngSrc]="img | apiIMG: 'eventGallery'"
-                [alt]="img.image"
-                class="object-cover w-full h-24 block rounded-md shadow-sm"
+                [ngSrc]="event | apiIMG: 'event'"
+                [alt]="'Photo de couverture'"
+                class="relative object-cover object-center w-full h-full block"
+                fill
+                priority
               />
-            </ng-template>
-          </p-galleria>
-        } @else {
-          <div
-            class="relative w-full rounded-md shadow-sm overflow-hidden h-80 md:h-[32rem]"
-          >
-            <img
-              [ngSrc]="event | apiIMG: 'event'"
-              [alt]="'Photo de couverture'"
-              class="object-cover object-center w-full h-full block"
-              fill
-              priority
-            />
-          </div>
-        }
+            </div>
+          }
+        </div>
 
         <div class="flex flex-col gap-8">
           <div
