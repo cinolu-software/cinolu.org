@@ -72,7 +72,6 @@ export class DetailEvent implements OnInit {
     effect(() => {
       const gallery = this.galleryStore.gallery();
       this.images.set(gallery ?? []);
-      console.log('Images galleria:', this.images());
     });
   }
 
