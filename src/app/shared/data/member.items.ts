@@ -56,4 +56,4 @@ export const MEMBER_ITEMS: IMemberItem[] = [
   },
 ];
 
-export const GENDERS = ['Femme', 'Homme', 'Non renseigné'];
+export const GENDERS = ['Femme', 'Homme'];
