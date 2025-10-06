@@ -83,7 +83,7 @@ export class EditUser {
       if (!user) return;
       this.updateUserForm.patchValue({
         ...user,
-        birth_date: new Date(user.birth_date || ''),
+        birth_date: user.birth_date ? new Date(user.birth_date) : '',
         roles: user.roles.map((role) => role.id),
       });
     });

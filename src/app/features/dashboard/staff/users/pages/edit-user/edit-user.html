@@ -1,4 +1,4 @@
-<section class="min-h-[105vh] text-gray-600 mt-16">
+<section class="min-h-[105vh] text-gray-600">
   <div class="py-10 px-6 relative bg-white rounded-lg">
     @if (store.isLoading()) {
       <div class="flex flex-col md:flex-row flex-wrap gap-4">
@@ -39,18 +39,24 @@
               {{ user.created_at | date: "longDate" }}
             </p>
           </div>
-          <div class="flex items-center gap-1.5 text-gray-800">
-            <i-lucide [name]="icons.locate" class="size-3.5 text-green-500" />
-            {{ user.country }}, {{ user.city }}
-          </div>
-          <div class="flex items-center gap-1.5 text-gray-800">
-            <i-lucide [name]="icons.phone" class="size-3 text-green-500" />
-            {{ user.phone_number }}
-          </div>
-          <div class="flex items-center gap-1.5 text-gray-800">
-            <i-lucide [name]="icons.email" class="size-3 text-green-500" />
-            {{ user.email }}
-          </div>
+          @if (user.city || user.country) {
+            <div class="flex items-center gap-1.5 text-gray-800">
+              <i-lucide [name]="icons.locate" class="size-3.5 text-green-500" />
+              {{ user.country }}, {{ user.city }}
+            </div>
+          }
+          @if (user.phone_number) {
+            <div class="flex items-center gap-1.5 text-gray-800">
+              <i-lucide [name]="icons.phone" class="size-3 text-green-500" />
+              {{ user.phone_number }}
+            </div>
+          }
+          @if (user.email) {
+            <div class="flex items-center gap-1.5 text-gray-800">
+              <i-lucide [name]="icons.email" class="size-3 text-green-500" />
+              {{ user.email }}
+            </div>
+          }
         </div>
       </div>
     }
