@@ -43,7 +43,6 @@ export const CommentsStore = signalStore(
                 const [currentComments] = store.comments();
                 const comments = data[0];
                 const count = data[1];
-                console.log('loaded comments', data);
                 patchState(store, {
                   comments: [
                     [...comments, ...currentComments],

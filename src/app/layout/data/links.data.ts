@@ -48,7 +48,7 @@ export const EXPLORATION_LINKS: ILink[] = [
     name: 'My Cinolu',
     path: '/mycinolu',
     children: [
-      // { name: 'Nos entrepreneurs', path: '/entrepreneurs', exactUrl: true },
+      { name: 'Nos entrepreneurs', path: '/entrepreneurs', exactUrl: true },
       { name: 'Jobs & Opportunités', path: '/jobs-opportunities' },
       { name: 'Blog', path: '/blog-ressources', icon: BookOpen },
       { name: 'Galerie', path: '/gallery', icon: Image },
