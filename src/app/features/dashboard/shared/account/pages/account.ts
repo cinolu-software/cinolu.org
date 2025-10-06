@@ -16,6 +16,8 @@ import { environment } from '../../../../../../environments/environment';
 import { AuthStore } from '../../../../../core/auth/auth.store';
 import { FileUpload } from '../../../../../shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
+import { SelectModule } from 'primeng/select';
+import { GENDERS } from '../../../../../shared/data/member.items';
 
 @Component({
   selector: 'app-account',
@@ -31,6 +33,7 @@ import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
     ApiImgPipe,
     DatePickerModule,
     LucideAngularModule,
+    SelectModule,
   ],
 })
 export class Account implements OnInit {
@@ -41,12 +44,14 @@ export class Account implements OnInit {
   store = inject(AuthStore);
   infoStore = inject(UpdateInfoStore);
   passwordStore = inject(UpdatePasswordStore);
+  genders = GENDERS;
 
   constructor() {
     this.infoForm = this.#formBuilder.group({
       email: ['', Validators.email],
       city: ['', Validators.required],
       country: ['', Validators.required],
+      gender: [null, Validators.required],
       birth_date: ['', Validators.required],
       phone_number: ['', [Validators.minLength(10)]],
       name: ['', Validators.minLength(3)],
