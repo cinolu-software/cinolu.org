@@ -32,7 +32,7 @@
 
         <div class="text-gray-700 wrap-break-word hyphens-none">
           <article
-            class="relative whitespace-normal break-words hyphens-none flex flex-col gap-1"
+            class="text-gray-600 leading-relaxed text-base whitespace-pre-line first:hyphens-none break-words hyphens-none text-justify"
             [innerHTML]="article.content"
           ></article>
         </div>
@@ -43,10 +43,10 @@
           <div class="flex-1 border-t border-gray-300"></div>
         </div>
 
-        <div
-          class="mb-8 max-w-none wrap-break-word hyphens-none text-justify"
+        <article
+          class="text-gray-600 leading-relaxed text-base whitespace-pre-line break-words hyphens-none text-justify"
           [innerHTML]="article.summary"
-        ></div>
+        ></article>
 
         <div class="flex flex-col lg:flex-row gap-2 justify-between">
           <p class="mb-4 text-sm text-gray-600">
