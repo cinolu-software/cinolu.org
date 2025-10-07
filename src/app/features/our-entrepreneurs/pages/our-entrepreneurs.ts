@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { LucideAngularModule, Users } from 'lucide-angular';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { ENTREPRENEURS_DATA } from '../data/entrepreneurs.data';
-import { ComponyCard } from '../components/company-card/company-card';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { HighUserCard } from '../components/high-user-card/high-user-card';
 
 @Component({
   selector: 'app-our-entrepreneurs',
-  imports: [LucideAngularModule, HeroCard, ComponyCard, PaginatorModule],
+  imports: [LucideAngularModule, HeroCard, PaginatorModule, HighUserCard],
   templateUrl: './our-entrepreneurs.html',
 })
 export class OurEntrepreneurs {

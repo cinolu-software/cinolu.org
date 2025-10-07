@@ -31,6 +31,7 @@ export interface IEntrepreneur {
   category: string;
   socials: ISocials[];
   products: IProduct[];
+  score: number;
 }
 
 export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
@@ -43,9 +44,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
     location: 'Kinshasa, RDC',
     category: 'Technologie',
     socials: [
-      {
-        website: 'https://afritech.cd',
-      },
+      { website: 'https://afritech.cd' },
       { linkedin: 'https://linkedin.com/in/sarahkabeya' },
     ],
     products: [
@@ -59,37 +58,8 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         price: 'Abonnement mensuel',
         link: 'https://afritech.cd/e-learning',
       },
-      {
-        id: 101,
-        name: 'Plateforme e-learning AfriTech',
-        image: 'https://picsum.photos/seed/afritech1/400/250',
-        logo: 'https://picsum.photos/seed/afritechlogo/100/100',
-        description:
-          'Une solution d’apprentissage en ligne adaptée aux écoles africaines.',
-        price: 'Abonnement mensuel',
-        link: 'https://afritech.cd/e-learning',
-      },
-      {
-        id: 101,
-        name: 'Plateforme e-learning AfriTech',
-        image: 'https://picsum.photos/seed/afritech1/400/250',
-        logo: 'https://picsum.photos/seed/afritechlogo/100/100',
-        description:
-          'Une solution d’apprentissage en ligne adaptée aux écoles africaines.',
-        price: 'Abonnement mensuel',
-        link: 'https://afritech.cd/e-learning',
-      },
-      {
-        id: 101,
-        name: 'Plateforme e-learning AfriTech',
-        image: 'https://picsum.photos/seed/afritech1/400/250',
-        logo: 'https://picsum.photos/seed/afritechlogo/100/100',
-        description:
-          'Une solution d’apprentissage en ligne adaptée aux écoles africaines.',
-        price: 'Abonnement mensuel',
-        link: 'https://afritech.cd/e-learning',
-      },
     ],
+    score: Math.floor(Math.random() * 10) + 1,
   },
   {
     id: 2,
@@ -100,12 +70,8 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
     location: 'Lubumbashi, RDC',
     category: 'Mode',
     socials: [
-      {
-        website: 'https://congowear.cd',
-      },
-      {
-        linkedin: 'https://linkedin.com/in/patrickmwamba',
-      },
+      { website: 'https://congowear.cd' },
+      { linkedin: 'https://linkedin.com/in/patrickmwamba' },
     ],
     products: [
       {
@@ -119,6 +85,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         link: 'https://congowear.cd/elegance',
       },
     ],
+    score: Math.floor(Math.random() * 10) + 1,
   },
   {
     id: 3,
@@ -128,11 +95,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
     bio: 'Promotrice de produits alimentaires biologiques locaux.',
     location: 'Goma, RDC',
     category: 'Agroalimentaire',
-    socials: [
-      {
-        facebook: 'https://facebook.com/bioRDC',
-      },
-    ],
+    socials: [{ facebook: 'https://facebook.com/bioRDC' }],
     products: [
       {
         id: 103,
@@ -144,6 +107,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         link: 'https://biordc.cd/miel',
       },
     ],
+    score: Math.floor(Math.random() * 10) + 1,
   },
   {
     id: 4,
@@ -153,11 +117,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
     bio: 'Ingénieur engagé dans l’énergie solaire pour les foyers congolais.',
     location: 'Mbuji-Mayi, RDC',
     category: 'Énergie',
-    socials: [
-      {
-        website: 'https://rdcsolar.cd',
-      },
-    ],
+    socials: [{ website: 'https://rdcsolar.cd' }],
     products: [
       {
         id: 104,
@@ -169,6 +129,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         link: 'https://rdcsolar.cd/kit',
       },
     ],
+    score: Math.floor(Math.random() * 10) + 1,
   },
   {
     id: 5,
@@ -178,11 +139,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
     bio: 'Passionnée de beauté, elle développe des cosmétiques naturels.',
     location: 'Bukavu, RDC',
     category: 'Cosmétiques',
-    socials: [
-      {
-        instagram: 'https://instagram.com/congocosmetics',
-      },
-    ],
+    socials: [{ instagram: 'https://instagram.com/congocosmetics' }],
     products: [
       {
         id: 105,
@@ -194,6 +151,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         link: 'https://congocosmetics.cd/karite',
       },
     ],
+    score: Math.floor(Math.random() * 10) + 1,
   },
   {
     id: 6,
@@ -203,11 +161,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
     bio: 'Expert en développement logiciel et solutions digitales.',
     location: 'Kinshasa, RDC',
     category: 'Technologie',
-    socials: [
-      {
-        linkedin: 'https://linkedin.com/in/jeanpaulkasongo',
-      },
-    ],
+    socials: [{ linkedin: 'https://linkedin.com/in/jeanpaulkasongo' }],
     products: [
       {
         id: 106,
@@ -219,6 +173,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         link: 'https://congotech.cd/services',
       },
     ],
+    score: Math.floor(Math.random() * 10) + 1,
   },
   {
     id: 7,
@@ -228,11 +183,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
     bio: 'Artiste plasticienne et promotrice de l’art congolais.',
     location: 'Lubumbashi, RDC',
     category: 'Art & Culture',
-    socials: [
-      {
-        instagram: 'https://instagram.com/mbayoarts',
-      },
-    ],
+    socials: [{ instagram: 'https://instagram.com/mbayoarts' }],
     products: [
       {
         id: 107,
@@ -245,6 +196,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         link: 'https://mbayoarts.cd/gallery',
       },
     ],
+    score: Math.floor(Math.random() * 10) + 1,
   },
   {
     id: 8,
@@ -254,11 +206,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
     bio: 'Entrepreneur agricole, il valorise les produits locaux.',
     location: 'Matadi, RDC',
     category: 'Agroalimentaire',
-    socials: [
-      {
-        facebook: 'https://facebook.com/agrocongo',
-      },
-    ],
+    socials: [{ facebook: 'https://facebook.com/agrocongo' }],
     products: [
       {
         id: 108,
@@ -270,6 +218,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         link: 'https://agrocongo.cd/cafe',
       },
     ],
+    score: Math.floor(Math.random() * 10) + 1,
   },
   {
     id: 9,
@@ -279,11 +228,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
     bio: 'Designer spécialisée dans le mobilier moderne congolais.',
     location: 'Kinshasa, RDC',
     category: 'Design',
-    socials: [
-      {
-        website: 'https://kindesign.cd',
-      },
-    ],
+    socials: [{ website: 'https://kindesign.cd' }],
     products: [
       {
         id: 109,
@@ -295,6 +240,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         link: 'https://kindesign.cd/chaise',
       },
     ],
+    score: Math.floor(Math.random() * 10) + 1,
   },
   {
     id: 10,
@@ -304,11 +250,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
     bio: 'Innovateur dans les solutions de mobilité urbaine.',
     location: 'Kinshasa, RDC',
     category: 'Transport',
-    socials: [
-      {
-        linkedin: 'https://linkedin.com/in/micheltshibanda',
-      },
-    ],
+    socials: [{ linkedin: 'https://linkedin.com/in/micheltshibanda' }],
     products: [
       {
         id: 110,
@@ -320,5 +262,6 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         link: 'https://congotransport.cd/taxi',
       },
     ],
+    score: Math.floor(Math.random() * 10) + 1,
   },
 ];
