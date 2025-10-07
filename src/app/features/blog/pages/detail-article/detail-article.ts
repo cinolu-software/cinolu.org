@@ -34,6 +34,7 @@ import { DeleteCommentStore } from '../../store/comments/delete-comment';
 import { ConfirmationService } from 'primeng/api';
 import { CommentsStore } from '../../store/comments/comments.store';
 import { Subject, takeUntil } from 'rxjs';
+import { QuillViewComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-detail-article',
@@ -59,6 +60,7 @@ import { Subject, takeUntil } from 'rxjs';
     Button,
     Dialog,
     ConfirmDialog,
+    QuillViewComponent,
   ],
   templateUrl: './detail-article.html',
 })

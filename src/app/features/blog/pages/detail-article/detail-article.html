@@ -20,11 +20,7 @@
     </div>
     <div class="my-10 md:p-4">
       <h1 class="font-black font-satoshi mb-4 text-2xl md:text-3xl">{{ article.title | titlecase }}</h1>
-      <div class="text-gray-700 wrap-break-word hyphens-none">
-        <article
-          class="relative whitespace-normal break-words hyphens-none flex flex-col gap-1"
-          [innerHTML]="article.content"></article>
-      </div>
+      <quill-view [content]="article.content" class="hyphens-none text-base" />
       <div class="flex items-center gap-3 my-6">
         <div class="flex-1 border-t border-gray-300"></div>
         <span class="px-3 text-gray-700 font-semibold">Résumé</span>
