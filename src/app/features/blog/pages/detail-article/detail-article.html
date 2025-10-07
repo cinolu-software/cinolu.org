@@ -67,37 +67,34 @@
         >
           <div class="flex gap-2 flex-col mb-2">
             <label for="content">Saisissez un commentaire</label>
-
-            <input
-              [disabled]="!isLoggedIn()"
-              type="text"
+            <textarea
               id="content"
-              name="content"
+              pTextarea
+              pSize="small"
+              fluid
               formControlName="content"
-              placeholder="Commentaire......."
-              class="w-full resize-none border border-gray-200 rounded-md p-4 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:cursor-not-allowed disabled:bg-gray-100"
-              (click)="handleInputClick()"
-            />
+            ></textarea>
           </div>
-
-          @if (showLoginMessage()) {
+          @if (!isLoggedIn()) {
             <div class="text-red-500 bg-red-500/10 text-sm my-2 p-2 rounded-md">
               Vous devez vous connecter pour écrire un commentaire.
             </div>
           }
-
           <input type="hidden" formControlName="articleId" />
-
-          <div class="flex justify-between">
-            <p-button
-              [loading]="storeAddComment.isLoading()"
-              [disabled]="isButtonDisabled()"
-              size="small"
-              type="submit"
-            >
-              Ajouter un commentaire
-            </p-button>
-          </div>
+          @if (isLoggedIn()) {
+            <div class="flex justify-between">
+              <p-button
+                [loading]="storeAddComment.isLoading()"
+                [disabled]="
+                  !isLoggedIn() || form.invalid || storeAddComment.isLoading()
+                "
+                size="small"
+                type="submit"
+              >
+                Ajouter un commentaire
+              </p-button>
+            </div>
+          }
         </form>
 
         <div class="flex items-center gap-3 my-6">

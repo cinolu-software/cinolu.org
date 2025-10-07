@@ -1,6 +1,5 @@
 import {
   Component,
-  computed,
   effect,
   inject,
   OnDestroy,
@@ -109,6 +108,7 @@ export class DetailArticle implements OnInit, OnDestroy {
   comment = signal<IComment | null>(null);
   showEditModal = signal(false);
   destroy$ = new Subject<void>();
+  isLoggedIn = signal<boolean>(false);
 
   ngOnDestroy() {
     this.destroy$.next();
@@ -126,6 +126,8 @@ export class DetailArticle implements OnInit, OnDestroy {
       content: ['', Validators.required],
     });
     effect(() => {
+      this.isLoggedIn.set(!!this.profile.user());
+      if (!this.isLoggedIn()) this.form.get('content')?.disable();
       this.commentsStore.loadComments({
         slug: this.#slug,
         dto: this.queryParams(),
@@ -197,23 +199,4 @@ export class DetailArticle implements OnInit, OnDestroy {
       },
     });
   }
-  isLoggedIn = computed(() => !!this.profile.user());
-  showLoginMessage = signal(false);
-
-  handleInputClick() {
-    if (!this.isLoggedIn()) {
-      this.showLoginMessage.set(true);
-
-      setTimeout(() => {
-        this.showLoginMessage.set(false);
-      }, 8000);
-    }
-  }
-
-  isButtonDisabled = computed(
-    () =>
-      this.storeAddComment.isLoading() ||
-      this.form.invalid ||
-      !this.isLoggedIn(),
-  );
 }
