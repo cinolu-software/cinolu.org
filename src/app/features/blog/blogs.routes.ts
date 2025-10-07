@@ -9,9 +9,6 @@ export const blogsRoutes: Routes = [
   {
     path: ':slug',
     title: 'Article - Details',
-    loadComponent: () =>
-      import('./pages/detail-article/detail-article').then(
-        (c) => c.DetailArticle,
-      ),
+    loadComponent: () => import('./pages/detail-article/detail-article').then((c) => c.DetailArticle),
   },
 ];

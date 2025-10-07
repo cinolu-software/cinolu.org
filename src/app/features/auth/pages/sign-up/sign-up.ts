@@ -1,11 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
@@ -82,7 +76,6 @@ export class SignUp {
 
   onSelectCountry(event: SelectChangeEvent): void {
     const value = event.value;
-    this.selectedCountryCode =
-      this.countryItems.find((item) => item.name === value)?.code || '';
+    this.selectedCountryCode = this.countryItems.find((item) => item.name === value)?.code || '';
   }
 }

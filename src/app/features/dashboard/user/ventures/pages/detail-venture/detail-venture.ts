@@ -1,12 +1,6 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import {
-  ArrowLeft,
-  LucideAngularModule,
-  MapPin,
-  MailCheck,
-  PhoneCall,
-} from 'lucide-angular';
+import { ArrowLeft, LucideAngularModule, MapPin, MailCheck, PhoneCall } from 'lucide-angular';
 import { SelectModule } from 'primeng/select';
 import { VentureStore } from '../../store/ventures/venture.store';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
@@ -15,13 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-venture-detail',
   providers: [VentureStore],
-  imports: [
-    SelectModule,
-    LucideAngularModule,
-    NgOptimizedImage,
-    CommonModule,
-    ApiImgPipe,
-  ],
+  imports: [SelectModule, LucideAngularModule, NgOptimizedImage, CommonModule, ApiImgPipe],
   templateUrl: './detail-venture.html',
 })
 export class DetailVenture implements OnInit {

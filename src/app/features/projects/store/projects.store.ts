@@ -1,10 +1,4 @@
-import {
-  signalStore,
-  withState,
-  withMethods,
-  patchState,
-  withProps,
-} from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withProps } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
@@ -34,9 +28,7 @@ export const ProjectsStore = signalStore(
               data: [IProject[], number];
             }>('projects/find-published', { params })
             .pipe(
-              tap(({ data }) =>
-                patchState(store, { isLoading: false, projects: data }),
-              ),
+              tap(({ data }) => patchState(store, { isLoading: false, projects: data })),
               catchError(() => {
                 patchState(store, { isLoading: false, projects: [[], 0] });
                 return of(null);

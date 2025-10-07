@@ -1,19 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import {
-  LucideAngularModule,
-  Pencil,
-  Plus,
-  RefreshCcw,
-  Search,
-  Trash,
-} from 'lucide-angular';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { LucideAngularModule, Pencil, Plus, RefreshCcw, Search, Trash } from 'lucide-angular';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Dialog } from 'primeng/dialog';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { InputText } from 'primeng/inputtext';
@@ -31,13 +19,7 @@ import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-article-tags',
-  providers: [
-    ConfirmationService,
-    TagsStore,
-    AddTagStore,
-    UpdateTagStore,
-    DeleteTagStore,
-  ],
+  providers: [ConfirmationService, TagsStore, AddTagStore, UpdateTagStore, DeleteTagStore],
   imports: [
     LucideAngularModule,
     ReactiveFormsModule,

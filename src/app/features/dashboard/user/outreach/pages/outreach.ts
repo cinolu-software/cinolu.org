@@ -35,9 +35,7 @@ export class Outreach {
 
   constructor() {
     effect(() => {
-      this.referralLink.set(
-        `${environment.appUrl}sign-up?ref=${this.authStore.user()?.referral_code}`,
-      );
+      this.referralLink.set(`${environment.appUrl}sign-up?ref=${this.authStore.user()?.referral_code}`);
       if (this.isLinkCopied()) {
         setTimeout(() => {
           this.isLinkCopied.set(false);

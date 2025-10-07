@@ -1,25 +1,12 @@
 import { Component, effect, inject } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import {
-  LucideAngularModule,
-  Save,
-  MoveLeft,
-  Locate,
-  TriangleAlert,
-  Phone,
-  Mail,
-} from 'lucide-angular';
+import { LucideAngularModule, Save, MoveLeft, Locate, TriangleAlert, Phone, Mail } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersStore } from '../../store/users/user.store';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { UpdateUserStore } from '../../store/users/update-user.store';

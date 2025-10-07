@@ -1,10 +1,4 @@
-import {
-  signalStore,
-  withState,
-  withMethods,
-  patchState,
-  withProps,
-} from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withProps } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
@@ -34,9 +28,7 @@ export const EventsStore = signalStore(
               data: [IEvent[], number];
             }>('events/find-published', { params })
             .pipe(
-              tap(({ data }) =>
-                patchState(store, { isLoading: false, events: data }),
-              ),
+              tap(({ data }) => patchState(store, { isLoading: false, events: data })),
               catchError(() => {
                 patchState(store, { isLoading: false, events: [[], 0] });
                 return of(null);

@@ -1,50 +1,24 @@
 <section class="dashboard-main-content w-full px-6">
   <div class="flex w-full flex-wrap gap-4 justify-between items-center mb-10">
     <h1 class="text-2xl font-bold">Mes produits</h1>
-    <p-button
-      [routerLink]="'/dashboard/products/add'"
-      [size]="'small'"
-      variant="outlined"
-    >
+    <p-button [routerLink]="'/dashboard/products/add'" [size]="'small'" variant="outlined">
       <i-lucide [name]="icons.plus" class="size-4" />
       Ajouter un produit
     </p-button>
   </div>
-  <div
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4"
-  >
-    @if (store.products()[0] && !store.isLoading()) {
-      @for (
-        product of store.products()[0]
-          | paginate
-            : {
-                itemsPerPage: 10,
-                currentPage: queryParams().page || 1,
-                totalItems: store.products()[1],
-              };
-        track product.id
-      ) {
-        <app-product-card [product]="product" />
-      }
-    }
-    @if (store.products()[1] <= 0 && !store.isLoading()) {
-      <p class="text-gray-600 text-lg">Aucun produit trouvé.</p>
-    }
-    @if (store.isLoading()) {
-      @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track $index) {
-        <app-product-card-skeleton />
-      }
-    }
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+    @if (store.products()[0] && !store.isLoading()) { @for ( product of store.products()[0] | paginate : { itemsPerPage:
+    10, currentPage: queryParams().page || 1, totalItems: store.products()[1], }; track product.id ) {
+    <app-product-card [product]="product" />
+    } } @if (store.products()[1] <= 0 && !store.isLoading()) {
+    <p class="text-gray-600 text-lg">Aucun produit trouvé.</p>
+    } @if (store.isLoading()) { @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track $index) {
+    <app-product-card-skeleton />
+    } }
   </div>
   @if (store.products()[1] > 10) {
-    <div class="flex items-center justify-center py-8">
-      <pagination-controls
-        nextLabel=""
-        previousLabel=""
-        [maxSize]="5"
-        (pageChange)="onPageChange($event)"
-        class="pg"
-      />
-    </div>
+  <div class="flex items-center justify-center py-8">
+    <pagination-controls nextLabel="" previousLabel="" [maxSize]="5" (pageChange)="onPageChange($event)" class="pg" />
+  </div>
   }
 </section>

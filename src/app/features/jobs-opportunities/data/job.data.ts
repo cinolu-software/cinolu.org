@@ -1,10 +1,9 @@
-import { IJob } from "../../../shared/models/entities.models";
+import { IJob } from '../../../shared/models/entities.models';
 
-  // id: string;
-  // created_at: Date;
-  // updated_at: Date;
-  // deleted_at: Date;
-
+// id: string;
+// created_at: Date;
+// updated_at: Date;
+// deleted_at: Date;
 
 export const JOBS_DATA: IJob[] = [
   {
@@ -54,6 +53,5 @@ export const JOBS_DATA: IJob[] = [
     date: '2023-01-01',
     location: 'Lubumbashi',
     tags: ['Program Manager', 'Program Manager', 'Program Manager'],
-  }
-
+  },
 ];

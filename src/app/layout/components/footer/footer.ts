@@ -1,16 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
-import {
-  EXPLORATION_LINKS,
-  MY_CINOLU_LINKS,
-  SOCIAL_LINKS,
-} from '../../data/links.data';
-import {
-  LucideAngularModule,
-  ArrowUpRight,
-  ChevronRight,
-} from 'lucide-angular';
+import { EXPLORATION_LINKS, MY_CINOLU_LINKS, SOCIAL_LINKS } from '../../data/links.data';
+import { LucideAngularModule, ArrowUpRight, ChevronRight } from 'lucide-angular';
 
 @Component({
   selector: 'app-footer',

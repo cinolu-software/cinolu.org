@@ -2,13 +2,7 @@ import { Component, inject, input } from '@angular/core';
 import { IProduct } from '../../../../../../shared/models/entities.models';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
-import {
-  SquarePen,
-  Eye,
-  LucideAngularModule,
-  Plus,
-  Trash,
-} from 'lucide-angular';
+import { SquarePen, Eye, LucideAngularModule, Plus, Trash } from 'lucide-angular';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { CurrencyPipe } from '@angular/common';
@@ -17,13 +11,7 @@ import { DeleteProductStore } from '../../store/products/delete-product.store';
 @Component({
   selector: 'app-product-card',
   providers: [ConfirmationService, DeleteProductStore],
-  imports: [
-    ButtonModule,
-    RouterModule,
-    LucideAngularModule,
-    ConfirmPopup,
-    CurrencyPipe,
-  ],
+  imports: [ButtonModule, RouterModule, LucideAngularModule, ConfirmPopup, CurrencyPipe],
   templateUrl: './product-card.html',
 })
 export class ProductCard {

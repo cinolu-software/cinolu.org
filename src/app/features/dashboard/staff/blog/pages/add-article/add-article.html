@@ -2,9 +2,7 @@
   <form class="w-full md:w-2/3" [formGroup]="form" (ngSubmit)="onAddArticle()">
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-1.5">
-        <label for="title" class="font-medium">
-          Titre de l'article<span class="text-red-500">*</span>
-        </label>
+        <label for="title" class="font-medium"> Titre de l'article<span class="text-red-500">*</span> </label>
         <input pInputText id="title" formControlName="title" />
       </div>
       <div class="flex flex-col gap-1.5">
@@ -16,46 +14,26 @@
           [options]="tagsStore.tags()"
           [optionValue]="'id'"
           [optionLabel]="'name'"
-          formControlName="tags"
-        />
+          formControlName="tags" />
       </div>
       <div class="flex flex-col gap-1.5">
-        <label class="font-medium" for="published_at">
-          Date de publication
-        </label>
-        <p-datePicker
-          name="published_at"
-          id="published_at"
-          formControlName="published_at"
-        />
+        <label class="font-medium" for="published_at"> Date de publication </label>
+        <p-datePicker name="published_at" id="published_at" formControlName="published_at" />
       </div>
       <div class="flex flex-col gap-1.5">
-        <label for="summary" class="font-medium">
-          Résumé<span class="text-red-500">*</span>
-        </label>
-        <textarea
-          id="summary"
-          pTextarea
-          formControlName="summary"
-          rows="5"
-          cols="30"
-        ></textarea>
+        <label for="summary" class="font-medium"> Résumé<span class="text-red-500">*</span> </label>
+        <textarea id="summary" pTextarea formControlName="summary" rows="5" cols="30"></textarea>
       </div>
       <div class="flex flex-col gap-1.5 mb-10">
         <label for="content">Contenu</label>
-        <quill-editor
-          formControlName="content"
-          class="rounded-md!"
-          [style]="{ height: '150px' }"
-        />
+        <quill-editor formControlName="content" class="rounded-md!" [style]="{ height: '150px' }" />
       </div>
       <div class="flex py-6 justify-between">
         <p-button
           [loading]="store.isLoading()"
           [disabled]="store.isLoading() || form.invalid"
           size="small"
-          type="submit"
-        >
+          type="submit">
           Ajouter l'article
         </p-button>
       </div>

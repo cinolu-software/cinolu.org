@@ -1,10 +1,4 @@
-import {
-  patchState,
-  signalStore,
-  withMethods,
-  withProps,
-  withState,
-} from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
@@ -27,9 +21,7 @@ export const ArticleStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((slug) => {
           return _http.get<{ data: IArticle }>(`articles/slug/${slug}`).pipe(
-            tap(({ data }) =>
-              patchState(store, { isLoading: false, article: data }),
-            ),
+            tap(({ data }) => patchState(store, { isLoading: false, article: data })),
             catchError(() => {
               patchState(store, { isLoading: false });
               return of(null);

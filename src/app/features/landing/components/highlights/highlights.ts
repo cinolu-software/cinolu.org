@@ -1,16 +1,7 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { HighlightsStore } from '../../../highlights/store/highlights.store';
-import {
-  HighlightKey,
-  HighlightCard,
-} from '../../../highlights/component/highlight-card/highlight-card';
-import {
-  IProgram,
-  ISubprogram,
-  IEvent,
-  IProject,
-  IArticle,
-} from '../../../../shared/models/entities.models';
+import { HighlightKey, HighlightCard } from '../../../highlights/component/highlight-card/highlight-card';
+import { IProgram, ISubprogram, IEvent, IProject, IArticle } from '../../../../shared/models/entities.models';
 import { interval, Subscription } from 'rxjs';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { LucideAngularModule } from 'lucide-angular';
@@ -42,9 +33,7 @@ export class Highlights implements OnInit, OnDestroy {
     this.updateSelectedData();
 
     this.carouselSub = interval(10000).subscribe(() => {
-      const currentIndex = this.keys.findIndex(
-        (k) => k.id === this.selectedKey.id,
-      );
+      const currentIndex = this.keys.findIndex((k) => k.id === this.selectedKey.id);
       const nextIndex = (currentIndex + 1) % this.keys.length;
       this.selectedKey = this.keys[nextIndex];
       this.updateSelectedData();

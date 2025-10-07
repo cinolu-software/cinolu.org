@@ -1,14 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import {
-  LucideAngularModule,
-  RefreshCw,
-  SquarePen,
-  Trash,
-  Download,
-  Search,
-  Plus,
-} from 'lucide-angular';
+import { LucideAngularModule, RefreshCw, SquarePen, Trash, Download, Search, Plus } from 'lucide-angular';
 import { UsersStore } from '../../store/users/users.store';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -17,12 +9,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DownloadUsersStore } from '../../store/users/download-csv.store';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FilterUsersDto } from '../../dto/users/filter-users.dto';
 import { ConfirmationService } from 'primeng/api';
 import { DeleteUserStore } from '../../store/users/delete-user.store';
@@ -32,12 +19,7 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 @Component({
   selector: 'app-users-list',
   templateUrl: './list-users.html',
-  providers: [
-    UsersStore,
-    DownloadUsersStore,
-    DeleteUserStore,
-    ConfirmationService,
-  ],
+  providers: [UsersStore, DownloadUsersStore, DeleteUserStore, ConfirmationService],
   imports: [
     LucideAngularModule,
     CommonModule,

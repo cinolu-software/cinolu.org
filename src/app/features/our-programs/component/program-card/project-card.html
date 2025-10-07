@@ -1,20 +1,14 @@
-<a
-  [routerLink]="['/projects']"
-  class="bg-card mb-4 group flex flex-col overflow-hidden rounded- shadow"
->
+<a [routerLink]="['/projects']" class="bg-card mb-4 group flex flex-col overflow-hidden rounded- shadow">
   <div class="h-60 flex w-full overflow-hidden relative bg-gray-100">
     <img
       [ngSrc]="program() | apiIMG: 'cover'"
       [alt]="program().name"
       class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30"
-      fill
-    />
+      fill />
   </div>
 
   <div class="flex flex-col p-6">
-    <h4
-      class="mt-4 mb-2 text-lg group-hover:text-primary-900 transition-colors duration-200 font-bold line-clamp-1"
-    >
+    <h4 class="mt-4 mb-2 text-lg group-hover:text-primary-900 transition-colors duration-200 font-bold line-clamp-1">
       {{ program().name | titlecase }}
     </h4>
     <div class="mt-0.5 line-clamp-2" [innerHTML]="program().description"></div>
@@ -26,9 +20,7 @@
       </div>
       <div class="flex items-center text-md leading-5 mb-2">
         <i-lucide [name]="icons.CalendarX" class="size-5" />
-        <div class="ml-1.5">
-          Fini: Le {{ program().started_at | date: "longDate" }}
-        </div>
+        <div class="ml-1.5">Fini: Le {{ program().started_at | date: 'longDate' }}</div>
       </div>
     </div>
   </div>

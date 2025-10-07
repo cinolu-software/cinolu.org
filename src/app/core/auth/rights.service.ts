@@ -18,13 +18,7 @@ export class RightsService {
   #hierarchies: Ihierarchy[] = [];
 
   constructor() {
-    this.buildRoles([
-      RoleEnum.Guest,
-      RoleEnum.User,
-      RoleEnum.Coach,
-      RoleEnum.Staff,
-      RoleEnum.Admin,
-    ]);
+    this.buildRoles([RoleEnum.Guest, RoleEnum.User, RoleEnum.Coach, RoleEnum.Staff, RoleEnum.Admin]);
   }
 
   private buildRoles(roles: RoleEnum[]): void {
@@ -41,9 +35,7 @@ export class RightsService {
 
   isAuthorized({ currentRoles, requiredRole }: IAuthorizedParams): boolean {
     const requiredPriority = this.getPriority(requiredRole);
-    const currentPriorities = currentRoles?.map((role) =>
-      this.getPriority(role),
-    ) ?? [1];
+    const currentPriorities = currentRoles?.map((role) => this.getPriority(role)) ?? [1];
     const currentHighPriority = Math.max(...currentPriorities);
     return currentHighPriority >= requiredPriority;
   }

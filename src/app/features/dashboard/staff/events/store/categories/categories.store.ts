@@ -1,10 +1,4 @@
-import {
-  patchState,
-  signalStore,
-  withMethods,
-  withProps,
-  withState,
-} from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -51,9 +45,7 @@ export const CategoriesStore = signalStore(
     },
     updateCategory: (category: ICategory): void => {
       const [categories, count] = store.categories();
-      const updated = categories.map((c) =>
-        c.id === category.id ? category : c,
-      );
+      const updated = categories.map((c) => (c.id === category.id ? category : c));
       patchState(store, { categories: [updated, count] });
     },
     deleteCategory: (id: string): void => {

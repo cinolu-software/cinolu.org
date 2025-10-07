@@ -3,10 +3,7 @@ import { inject } from '@angular/core';
 import { Observable, finalize, take } from 'rxjs';
 import { LoadingService } from './loading.service';
 
-export const LoadingInterceptor = (
-  req: HttpRequest<unknown>,
-  next: HttpHandlerFn,
-): Observable<HttpEvent<unknown>> => {
+export const LoadingInterceptor = (req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
   const loadingService = inject(LoadingService);
   let handleRequestsAutomatically = false;
 

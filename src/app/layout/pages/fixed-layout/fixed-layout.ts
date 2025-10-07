@@ -4,7 +4,6 @@ import { AppTopbar } from '../../components/app-topbar/app-topbar';
 import { Footer } from '../../components/footer/footer';
 import { BackButton } from '../../../shared/components/back-button/back-button';
 
-
 @Component({
   selector: 'app-fixed-topbar-layout',
   templateUrl: './fixed-layout.html',

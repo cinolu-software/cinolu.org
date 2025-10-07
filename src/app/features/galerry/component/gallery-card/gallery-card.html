@@ -1,127 +1,81 @@
 <section class="sm:py-16 md:py-20 mx-auto bg-grid">
-  <div
-    class="px-4 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
-  >
+  <div class="px-4 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
     <p class="mt-4 text-base max-w-3xl text-gray-600 m-auto mb-9 text-center">
-      Parcourez notre collection et plongez dans l’énergie de nos événements
-      passés.
+      Parcourez notre collection et plongez dans l’énergie de nos événements passés.
     </p>
 
-    <div
-      class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4"
-    >
+    <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
       @for (p of filtered(); track p.src) {
-        <article
-          class="break-inside-avoid rounded-md overflow-hidden relative border border-primary-600/20 group bg-white"
-        >
-          <img
-            tabindex="0"
-            (click)="openLightbox(p)"
-            (keydown)="
-              ($event.key === 'Enter' || $event.key === ' ') && openLightbox(p)
-            "
-            [src]="p.src"
-            [alt]="p.alt"
-            loading="lazy"
-            class="w-full h-auto object-cover cursor-pointer transition-transform duration-500 group-hover:scale-105"
-          />
+      <article
+        class="break-inside-avoid rounded-md overflow-hidden relative border border-primary-600/20 group bg-white">
+        <img
+          tabindex="0"
+          (click)="openLightbox(p)"
+          (keydown)="($event.key === 'Enter' || $event.key === ' ') && openLightbox(p)"
+          [src]="p.src"
+          [alt]="p.alt"
+          loading="lazy"
+          class="w-full h-auto object-cover cursor-pointer transition-transform duration-500 group-hover:scale-105" />
 
-          <div
-            class="absolute bottom-3 left-3 right-3 p-3 rounded-md bg-gradient-to-b from-black/70 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity"
-          >
-            <h3 class="font-semibold">{{ p.alt }}</h3>
-          </div>
-        </article>
+        <div
+          class="absolute bottom-3 left-3 right-3 p-3 rounded-md bg-gradient-to-b from-black/70 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity">
+          <h3 class="font-semibold">{{ p.alt }}</h3>
+        </div>
+      </article>
       }
     </div>
 
     <div class="mt-6 flex justify-center">
       @if (canLoadMore()) {
-        <button
-          (click)="loadMore()"
-          class="relative inline-flex items-center justify-center px-8 py-2 rounded-full border-1 border-primary-500 font-semibold text-primary-500 overflow-hidden group transition duration-300 ease-out hover:text-white"
-        >
-          <span
-            class="absolute inset-0 bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out"
-          ></span>
-          <span class="relative">Afficher plus</span>
-        </button>
+      <button
+        (click)="loadMore()"
+        class="relative inline-flex items-center justify-center px-8 py-2 rounded-full border-1 border-primary-500 font-semibold text-primary-500 overflow-hidden group transition duration-300 ease-out hover:text-white">
+        <span
+          class="absolute inset-0 bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out"></span>
+        <span class="relative">Afficher plus</span>
+      </button>
       }
     </div>
 
     @if (lightboxOpen()) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+      tabindex="0"
+      (click)="closeLightbox()"
+      (keydown)="($event.key === 'Enter' || $event.key === ' ') && closeLightbox()">
       <div
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+        class="max-w-4xl w-full max-h-[90vh] overflow-hidden rounded-md bg-white"
         tabindex="0"
-        (click)="closeLightbox()"
-        (keydown)="
-          ($event.key === 'Enter' || $event.key === ' ') && closeLightbox()
-        "
-      >
-        <div
-          class="max-w-4xl w-full max-h-[90vh] overflow-hidden rounded-md bg-white"
-          tabindex="0"
-          (click)="$event.stopPropagation()"
-          (keydown)="
-            ($event.key === 'Enter' || $event.key === ' ') &&
-              $event.stopPropagation()
-          "
-        >
-          <div class="flex justify-between items-center p-3 md:px-6 border-b">
-            <div class="flex items-center gap-2">
-              <i-lucide
-                [name]="icons.description"
-                class="group-hover:translate-x-1 transition-all duration-300 stroke-1"
-              >
-              </i-lucide>
-              <h3 class="font-satoshi text-base">
-                {{ current()?.alt }}
-              </h3>
-            </div>
-
-            <div class="flex items-center gap-2">
-              <button
-                (click)="prev($event)"
-                class="p-2 rounded hover:bg-gray-100 text-primary-900"
-              >
-                <i-lucide
-                  [name]="icons.back"
-                  class="group-hover:translate-x-1 transition-all duration-300 stroke-1"
-                >
-                </i-lucide>
-              </button>
-              <button
-                (click)="next($event)"
-                class="p-2 rounded hover:bg-gray-100 text-primary-900"
-              >
-                <i-lucide
-                  [name]="icons.prev"
-                  class="group-hover:translate-x-1 transition-all duration-300 stroke-1"
-                >
-                </i-lucide>
-              </button>
-              <button
-                (click)="closeLightbox()"
-                class="p-2 rounded hover:bg-gray-100"
-              >
-                <i-lucide
-                  [name]="icons.close"
-                  class="group-hover:translate-x-1 transition-all duration-300 stroke-1"
-                >
-                </i-lucide>
-              </button>
-            </div>
+        (click)="$event.stopPropagation()"
+        (keydown)="($event.key === 'Enter' || $event.key === ' ') && $event.stopPropagation()">
+        <div class="flex justify-between items-center p-3 md:px-6 border-b">
+          <div class="flex items-center gap-2">
+            <i-lucide [name]="icons.description" class="group-hover:translate-x-1 transition-all duration-300 stroke-1">
+            </i-lucide>
+            <h3 class="font-satoshi text-base">{{ current()?.alt }}</h3>
           </div>
 
-          <div class="p-4 flex items-center justify-center bg-black">
-            <img
-              [src]="current()?.src"
-              [alt]="current()?.alt"
-              class="max-h-[75vh] object-contain"
-            />
+          <div class="flex items-center gap-2">
+            <button (click)="prev($event)" class="p-2 rounded hover:bg-gray-100 text-primary-900">
+              <i-lucide [name]="icons.back" class="group-hover:translate-x-1 transition-all duration-300 stroke-1">
+              </i-lucide>
+            </button>
+            <button (click)="next($event)" class="p-2 rounded hover:bg-gray-100 text-primary-900">
+              <i-lucide [name]="icons.prev" class="group-hover:translate-x-1 transition-all duration-300 stroke-1">
+              </i-lucide>
+            </button>
+            <button (click)="closeLightbox()" class="p-2 rounded hover:bg-gray-100">
+              <i-lucide [name]="icons.close" class="group-hover:translate-x-1 transition-all duration-300 stroke-1">
+              </i-lucide>
+            </button>
           </div>
         </div>
+
+        <div class="p-4 flex items-center justify-center bg-black">
+          <img [src]="current()?.src" [alt]="current()?.alt" class="max-h-[75vh] object-contain" />
+        </div>
       </div>
+    </div>
     }
   </div>
 </section>

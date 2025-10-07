@@ -17,12 +17,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SubprogramsStore } from '../../store/subprograms/subprograms.store';
 import { FilterSubprogramsDto } from '../../dto/subprograms/filter-subprograms.dto';
 import { ConfirmPopup } from 'primeng/confirmpopup';

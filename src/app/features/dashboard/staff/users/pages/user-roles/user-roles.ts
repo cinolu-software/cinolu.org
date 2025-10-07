@@ -1,24 +1,12 @@
-import  { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import {
-  LucideAngularModule,
-  RefreshCcw,
-  SquarePen,
-  Plus,
-  Trash,
-  Search,
-} from 'lucide-angular';
+import { LucideAngularModule, RefreshCcw, SquarePen, Plus, Trash, Search } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { Dialog } from 'primeng/dialog';
 import { ConfirmPopup } from 'primeng/confirmpopup';
@@ -32,13 +20,7 @@ import { IRole } from '../../../../../../shared/models/entities.models';
 @Component({
   selector: 'app-user-roles',
   templateUrl: './user-roles.html',
-  providers: [
-    RolesStore,
-    AddRoleStore,
-    UpdateRoleStore,
-    DeleteRoleStore,
-    ConfirmationService,
-  ],
+  providers: [RolesStore, AddRoleStore, UpdateRoleStore, DeleteRoleStore, ConfirmationService],
   imports: [
     LucideAngularModule,
     CommonModule,

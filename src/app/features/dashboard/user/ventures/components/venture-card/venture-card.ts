@@ -4,13 +4,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
-import {
-  SquarePen,
-  Eye,
-  LucideAngularModule,
-  Plus,
-  Trash,
-} from 'lucide-angular';
+import { SquarePen, Eye, LucideAngularModule, Plus, Trash } from 'lucide-angular';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { DeleteVentureStore } from '../../store/ventures/delete-venture.store';
@@ -18,14 +12,7 @@ import { DeleteVentureStore } from '../../store/ventures/delete-venture.store';
 @Component({
   selector: 'app-venture-card',
   providers: [ConfirmationService, DeleteVentureStore],
-  imports: [
-    NgOptimizedImage,
-    ApiImgPipe,
-    ButtonModule,
-    RouterModule,
-    LucideAngularModule,
-    ConfirmPopup,
-  ],
+  imports: [NgOptimizedImage, ApiImgPipe, ButtonModule, RouterModule, LucideAngularModule, ConfirmPopup],
   templateUrl: './venture-card.html',
 })
 export class VentureCard {

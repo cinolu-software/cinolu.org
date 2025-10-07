@@ -1,10 +1,4 @@
-import {
-  patchState,
-  signalStore,
-  withMethods,
-  withProps,
-  withState,
-} from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -31,22 +25,18 @@ export const UpdateArticleStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((article) => {
-          return _http
-            .patch<{ data: IArticle }>(`articles/${article.id}`, article)
-            .pipe(
-              map(({ data }) => {
-                _toast.showSuccess("L'article a été mis à jour avec succès");
-                _router.navigate(['/dashboard/blog/articles']);
-                patchState(store, { isLoading: false, article: data });
-              }),
-              catchError(() => {
-                _toast.showError(
-                  "Une erreur s'est produite lors de la mise à jour",
-                );
-                patchState(store, { isLoading: false, article: null });
-                return of(null);
-              }),
-            );
+          return _http.patch<{ data: IArticle }>(`articles/${article.id}`, article).pipe(
+            map(({ data }) => {
+              _toast.showSuccess("L'article a été mis à jour avec succès");
+              _router.navigate(['/dashboard/blog/articles']);
+              patchState(store, { isLoading: false, article: data });
+            }),
+            catchError(() => {
+              _toast.showError("Une erreur s'est produite lors de la mise à jour");
+              patchState(store, { isLoading: false, article: null });
+              return of(null);
+            }),
+          );
         }),
       ),
     ),

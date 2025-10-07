@@ -16,12 +16,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EventsStore } from '../../store/events/events.store';
 import { ConfirmationService } from 'primeng/api';
 import { DeleteEventStore } from '../../store/events/delete-event.store';
@@ -36,13 +31,7 @@ import { ProgressSpinner } from 'primeng/progressspinner';
 @Component({
   selector: 'app-events-list',
   templateUrl: './list-events.html',
-  providers: [
-    EventsStore,
-    PublishEventStore,
-    DeleteEventStore,
-    ConfirmationService,
-    HighlightEventStore,
-  ],
+  providers: [EventsStore, PublishEventStore, DeleteEventStore, ConfirmationService, HighlightEventStore],
   imports: [
     LucideAngularModule,
     CommonModule,

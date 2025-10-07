@@ -1,11 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
@@ -17,15 +11,7 @@ import { ResetPasswordStore } from '../../store/reset-password.store';
   selector: 'app-reset-password',
   templateUrl: './reset-password.html',
   providers: [ResetPasswordStore],
-  imports: [
-    FormsModule,
-    RouterLink,
-    ReactiveFormsModule,
-    ButtonModule,
-    PasswordModule,
-    CommonModule,
-    AuthCard,
-  ],
+  imports: [FormsModule, RouterLink, ReactiveFormsModule, ButtonModule, PasswordModule, CommonModule, AuthCard],
 })
 export class ResetPassword {
   #token = inject(ActivatedRoute).snapshot.queryParams['token'];

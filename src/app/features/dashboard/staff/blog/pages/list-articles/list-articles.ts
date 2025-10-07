@@ -1,11 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FilterArticleDto } from '../../dto/filter-article.dto';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
@@ -35,12 +30,7 @@ import { HighlightArticleStore } from '../../store/articles/highlight-article.st
 
 @Component({
   selector: 'app-article-list',
-  providers: [
-    ConfirmationService,
-    ArticlesStore,
-    DeleteArticleStore,
-    HighlightArticleStore,
-  ],
+  providers: [ConfirmationService, ArticlesStore, DeleteArticleStore, HighlightArticleStore],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -75,7 +65,7 @@ export class ListArticles implements OnInit {
     eye: Eye,
     eyeOff: EyeOff,
     star: Star,
-    starOff: StarOff
+    starOff: StarOff,
   };
   queryParams = signal<FilterArticleDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
@@ -147,8 +137,6 @@ export class ListArticles implements OnInit {
   }
 
   isPublished(article: IArticle): boolean {
-    return (
-      !!article.published_at && new Date(article.published_at) <= new Date()
-    );
+    return !!article.published_at && new Date(article.published_at) <= new Date();
   }
 }

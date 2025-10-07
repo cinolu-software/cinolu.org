@@ -1,10 +1,4 @@
-import {
-  UserCog,
-  Lightbulb,
-  Handshake,
-  Network,
-  LucideIconData,
-} from 'lucide-angular';
+import { UserCog, Lightbulb, Handshake, Network, LucideIconData } from 'lucide-angular';
 
 interface IStat {
   value: number;

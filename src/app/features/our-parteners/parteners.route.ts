@@ -4,7 +4,6 @@ export const OurParteners: Routes = [
   {
     path: '',
     title: 'Our-Parteners',
-    loadComponent: () =>
-      import('./pages/our-parteners').then((c) => c.OurParteners),
+    loadComponent: () => import('./pages/our-parteners').then((c) => c.OurParteners),
   },
 ];

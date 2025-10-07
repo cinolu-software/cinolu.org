@@ -1,10 +1,6 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  LucideAngularModule,
-  FileText,
-  NotepadTextDashed,
-} from 'lucide-angular';
+import { LucideAngularModule, FileText, NotepadTextDashed } from 'lucide-angular';
 import { IProject } from '../../../../../shared/models/entities.models';
 
 @Component({

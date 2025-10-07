@@ -1,12 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
-import {
-  signalStore,
-  withState,
-  withMethods,
-  patchState,
-  withProps,
-} from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withProps } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, switchMap } from 'rxjs';
 import { FilterVenturesDto } from '../../dto/filter-venture.dto';
@@ -29,17 +23,13 @@ export const VenturesStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          return _http
-            .get<{ data: [IVenture[], number] }>('ventures/by-user', { params })
-            .pipe(
-              tap(({ data }) =>
-                patchState(store, { isLoading: false, ventures: data }),
-              ),
-              catchError(() => {
-                patchState(store, { isLoading: false, ventures: [[], 0] });
-                return of([]);
-              }),
-            );
+          return _http.get<{ data: [IVenture[], number] }>('ventures/by-user', { params }).pipe(
+            tap(({ data }) => patchState(store, { isLoading: false, ventures: data })),
+            catchError(() => {
+              patchState(store, { isLoading: false, ventures: [[], 0] });
+              return of([]);
+            }),
+          );
         }),
       ),
     ),

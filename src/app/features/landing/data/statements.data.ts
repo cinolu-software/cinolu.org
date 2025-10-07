@@ -16,12 +16,10 @@ export const STATEMENTS: IStatement[] = [
   },
   {
     title: 'Un guichet unique pour votre parcours',
-    description:
-      'De l’idéation à la croissance, accédez à une offre complète sur une seule plateforme.',
+    description: 'De l’idéation à la croissance, accédez à une offre complète sur une seule plateforme.',
   },
   {
     title: 'Formations et accompagnement sur mesure',
-    description:
-      'Nous proposons des parcours longs de formation et d’incubation adaptés à vos besoins.',
+    description: 'Nous proposons des parcours longs de formation et d’incubation adaptés à vos besoins.',
   },
 ];

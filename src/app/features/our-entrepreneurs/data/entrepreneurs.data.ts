@@ -54,8 +54,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         name: 'Plateforme e-learning AfriTech',
         image: 'https://picsum.photos/seed/afritech1/400/250',
         logo: 'https://picsum.photos/seed/afritechlogo/100/100',
-        description:
-          'Une solution d’apprentissage en ligne adaptée aux écoles africaines.',
+        description: 'Une solution d’apprentissage en ligne adaptée aux écoles africaines.',
         price: 'Abonnement mensuel',
         link: 'https://afritech.cd/e-learning',
       },
@@ -64,8 +63,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         name: 'Plateforme e-learning AfriTech',
         image: 'https://picsum.photos/seed/afritech1/400/250',
         logo: 'https://picsum.photos/seed/afritechlogo/100/100',
-        description:
-          'Une solution d’apprentissage en ligne adaptée aux écoles africaines.',
+        description: 'Une solution d’apprentissage en ligne adaptée aux écoles africaines.',
         price: 'Abonnement mensuel',
         link: 'https://afritech.cd/e-learning',
       },
@@ -74,8 +72,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         name: 'Plateforme e-learning AfriTech',
         image: 'https://picsum.photos/seed/afritech1/400/250',
         logo: 'https://picsum.photos/seed/afritechlogo/100/100',
-        description:
-          'Une solution d’apprentissage en ligne adaptée aux écoles africaines.',
+        description: 'Une solution d’apprentissage en ligne adaptée aux écoles africaines.',
         price: 'Abonnement mensuel',
         link: 'https://afritech.cd/e-learning',
       },
@@ -84,8 +81,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         name: 'Plateforme e-learning AfriTech',
         image: 'https://picsum.photos/seed/afritech1/400/250',
         logo: 'https://picsum.photos/seed/afritechlogo/100/100',
-        description:
-          'Une solution d’apprentissage en ligne adaptée aux écoles africaines.',
+        description: 'Une solution d’apprentissage en ligne adaptée aux écoles africaines.',
         price: 'Abonnement mensuel',
         link: 'https://afritech.cd/e-learning',
       },
@@ -113,8 +109,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         name: 'Collection Congo Elegance',
         image: 'https://picsum.photos/seed/congowear1/400/250',
         logo: 'https://picsum.photos/seed/congowearlogo/100/100',
-        description:
-          'Ligne de vêtements alliant élégance moderne et tissus traditionnels.',
+        description: 'Ligne de vêtements alliant élégance moderne et tissus traditionnels.',
         price: 'À partir de 50$',
         link: 'https://congowear.cd/elegance',
       },
@@ -239,8 +234,7 @@ export const ENTREPRENEURS_DATA: IEntrepreneur[] = [
         name: 'Tableaux contemporains',
         image: 'https://picsum.photos/seed/mbayoart/400/250',
         logo: 'https://picsum.photos/seed/mbayoartlogo/100/100',
-        description:
-          'Œuvres inspirées des traditions congolaises et modernité.',
+        description: 'Œuvres inspirées des traditions congolaises et modernité.',
         price: 'Sur demande',
         link: 'https://mbayoarts.cd/gallery',
       },

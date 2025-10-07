@@ -1,13 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
-import {
-  signalStore,
-  withState,
-  withMethods,
-  patchState,
-  withProps,
-  withHooks,
-} from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withProps, withHooks } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, exhaustMap } from 'rxjs';
 import { IAdminStats } from '../types/stats.type';

@@ -1,27 +1,8 @@
-import {
-  Component,
-  computed,
-  effect,
-  inject,
-  input,
-  output,
-  signal,
-} from '@angular/core';
+import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import {
-  LucideAngularModule,
-  Home,
-  Menu,
-  X,
-  ChevronDown,
-} from 'lucide-angular';
-import {
-  USER_LINKS,
-  ILink,
-  ADMIN_LINKS,
-  COMMON_LINKS,
-} from '../../../data/links.data';
+import { LucideAngularModule, Home, Menu, X, ChevronDown } from 'lucide-angular';
+import { USER_LINKS, ILink, ADMIN_LINKS, COMMON_LINKS } from '../../../data/links.data';
 import { IUser } from '../../../../shared/models/entities.models';
 import { filter } from 'rxjs';
 import { AuthStore } from '../../../../core/auth/auth.store';
@@ -52,9 +33,7 @@ export class MobileNav {
     const url = this.currentUrl();
     return (
       this.links().find(
-        (link) =>
-          link.path === url ||
-          link.children?.some((child) => child.path && url.startsWith(child.path)),
+        (link) => link.path === url || link.children?.some((child) => child.path && url.startsWith(child.path)),
       )?.name ?? null
     );
   });
@@ -62,16 +41,11 @@ export class MobileNav {
   constructor() {
     const roles = (this.authStore.user()?.roles as unknown as string[]) || [];
     effect(() => {
-      this.links.set([
-        ...COMMON_LINKS,
-        ...roles.flatMap((role) => this.dashboardLinks[role] || []),
-      ]);
+      this.links.set([...COMMON_LINKS, ...roles.flatMap((role) => this.dashboardLinks[role] || [])]);
     });
-    this.#router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        this.currentUrl.set(event.urlAfterRedirects);
-      });
+    this.#router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+      this.currentUrl.set(event.urlAfterRedirects);
+    });
   }
 
   onToggleTab(name: string): void {

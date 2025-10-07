@@ -7,12 +7,7 @@ import { FadeInOnScrollDirective } from '../../../../shared/directives/animation
 
 @Component({
   selector: 'app-our-impact',
-  imports: [
-    CommonModule,
-    LucideAngularModule,
-    CountUpDirective,
-    FadeInOnScrollDirective,
-  ],
+  imports: [CommonModule, LucideAngularModule, CountUpDirective, FadeInOnScrollDirective],
   templateUrl: './our-impact.html',
   styles: ``,
 })

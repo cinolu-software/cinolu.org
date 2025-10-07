@@ -1,10 +1,4 @@
-import {
-  patchState,
-  signalStore,
-  withMethods,
-  withProps,
-  withState,
-} from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -29,26 +23,20 @@ export const HighlightArticleStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((id) => {
-          return _http
-            .patch<{ data: IArticle }>(`articles/highlight/${id}`, {})
-            .pipe(
-              map(({ data }) => {
-                _articlesStore.updateArticle(data);
-                _toast.showSuccess(
-                  data.is_highlighted
-                    ? "L'article a été mis en avant"
-                    : "L'article n'est plus mis en avant",
-                );
-                patchState(store, { isLoading: false });
-              }),
-              catchError(() => {
-                _toast.showError(
-                  "Erreur lors de la mise en avant de l'article",
-                );
-                patchState(store, { isLoading: false });
-                return of(null);
-              }),
-            );
+          return _http.patch<{ data: IArticle }>(`articles/highlight/${id}`, {}).pipe(
+            map(({ data }) => {
+              _articlesStore.updateArticle(data);
+              _toast.showSuccess(
+                data.is_highlighted ? "L'article a été mis en avant" : "L'article n'est plus mis en avant",
+              );
+              patchState(store, { isLoading: false });
+            }),
+            catchError(() => {
+              _toast.showError("Erreur lors de la mise en avant de l'article");
+              patchState(store, { isLoading: false });
+              return of(null);
+            }),
+          );
         }),
       ),
     ),

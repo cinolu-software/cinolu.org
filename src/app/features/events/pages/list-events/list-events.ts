@@ -39,10 +39,7 @@ export class ListEvents implements OnInit {
     this.store.loadEvents(this.queryParams());
   }
 
-  async onFilterChange(
-    event: MultiSelectChangeEvent,
-    filter: 'page' | 'categories',
-  ): Promise<void> {
+  async onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'categories'): Promise<void> {
     this.queryParams().page = null;
     this.queryParams()[filter] = event.value;
     await this.updateRouteAndEvents();

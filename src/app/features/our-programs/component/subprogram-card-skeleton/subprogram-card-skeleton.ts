@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './subprogram-card-skeleton.html',
 })
-export class SubprogramCardSkeleton {
-
-}
+export class SubprogramCardSkeleton {}

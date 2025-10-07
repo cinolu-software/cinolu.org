@@ -4,27 +4,20 @@
   badgeText="Nos Entrepreneurs"
   title="Découvrez"
   highlight="nos talents."
-  description="Une communauté d’entrepreneurs visionnaires qui innovent, créent de la valeur et inspirent l’avenir de l’Afrique."
-/>
+  description="Une communauté d’entrepreneurs visionnaires qui innovent, créent de la valeur et inspirent l’avenir de l’Afrique." />
 
 <section class="sm:py-16 min-h-[75vh] md:py-20 mx-auto bg-grid py-10">
-  <div
-    class="px-4 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
-  >
+  <div class="px-4 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
     <p class="mt-2 text-base max-w-3xl text-gray-600 m-auto mb-12 text-center">
-      Parcourez notre collection et découvrez les histoires inspirantes et les
-      projets innovants de nos talents.
+      Parcourez notre collection et découvrez les histoires inspirantes et les projets innovants de nos talents.
     </p>
 
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6"
-    >
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
       @for (item of pagedEntrepreneurs; track $index) {
-        <div
-          class="transform transition-transform duration-300 hover:scale-105 hover:shadow-lg rounded-lg overflow-hidden"
-        >
-          <app-compony-card [company]="item" />
-        </div>
+      <div
+        class="transform transition-transform duration-300 hover:scale-105 hover:shadow-lg rounded-lg overflow-hidden">
+        <app-compony-card [company]="item" />
+      </div>
       }
     </div>
 
@@ -33,8 +26,7 @@
       [first]="first"
       [rows]="rows"
       [totalRecords]="entrepreneurs.length"
-      [rowsPerPageOptions]="[4, 8, 12]"
-    >
+      [rowsPerPageOptions]="[4, 8, 12]">
     </p-paginator>
   </div>
 </section>

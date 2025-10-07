@@ -1,11 +1,4 @@
-import {
-  patchState,
-  signalStore,
-  withHooks,
-  withMethods,
-  withProps,
-  withState,
-} from '@ngrx/signals';
+import { patchState, signalStore, withHooks, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, exhaustMap, map, of, pipe, tap } from 'rxjs';

@@ -16,12 +16,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProjectsStore } from '../../store/projects/projects.store';
 import { ConfirmationService } from 'primeng/api';
 import { DeleteProjectStore } from '../../store/projects/delete-project.store';
@@ -36,13 +31,7 @@ import { ProgressSpinner } from 'primeng/progressspinner';
 @Component({
   selector: 'app-projects-list',
   templateUrl: './list-projects.html',
-  providers: [
-    ProjectsStore,
-    PublishProjectStore,
-    DeleteProjectStore,
-    HighlightProjectStore,
-    ConfirmationService,
-  ],
+  providers: [ProjectsStore, PublishProjectStore, DeleteProjectStore, HighlightProjectStore, ConfirmationService],
   imports: [
     LucideAngularModule,
     CommonModule,

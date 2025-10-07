@@ -17,14 +17,7 @@ import { CommentsStore } from '../../store/comments/comments.store';
 import { Button } from 'primeng/button';
 @Component({
   selector: 'app-article-card',
-  imports: [
-    LucideAngularModule,
-    NgOptimizedImage,
-    ApiImgPipe,
-    RouterLink,
-    CommonModule,
-    Button,
-  ],
+  imports: [LucideAngularModule, NgOptimizedImage, ApiImgPipe, RouterLink, CommonModule, Button],
   providers: [CommentsStore],
   templateUrl: './article-card.html',
 })
@@ -44,7 +37,6 @@ export class ArticleCard {
   protected readonly ApiImgPipe = ApiImgPipe;
 
   get commentCount() {
-    return (comments: unknown) =>
-      Array.isArray(comments) ? comments.length : 0;
+    return (comments: unknown) => (Array.isArray(comments) ? comments.length : 0);
   }
 }

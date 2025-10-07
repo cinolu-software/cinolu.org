@@ -3,11 +3,7 @@
     <div class="mb-6">
       <h5 class="text-xl font-bold text-gray-900">Ajouter un utilisateur</h5>
     </div>
-    <form
-      [formGroup]="addUserForm"
-      class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6"
-      (ngSubmit)="onAddUser()"
-    >
+    <form [formGroup]="addUserForm" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6" (ngSubmit)="onAddUser()">
       <div class="flex flex-col gap-1.5">
         <label for="email" class="block font-medium text-gray-700">Email</label>
         <input pInputText id="email" formControlName="email" />
@@ -18,16 +14,10 @@
       </div>
       <div class="flex flex-col gap-1.5">
         <label for="gender">Genre</label>
-        <p-select
-          [inputId]="'gender'"
-          [options]="genders"
-          formControlName="gender"
-        />
+        <p-select [inputId]="'gender'" [options]="genders" formControlName="gender" />
       </div>
       <div class="flex flex-col gap-1.5">
-        <label for="phone_number" class="block font-medium text-gray-700"
-          >Numéro de téléphone</label
-        >
+        <label for="phone_number" class="block font-medium text-gray-700">Numéro de téléphone</label>
         <input pInputText id="phone_number" formControlName="phone_number" />
       </div>
       <div class="flex flex-col gap-1.5">
@@ -35,15 +25,11 @@
         <input pInputText id="city" formControlName="city" />
       </div>
       <div class="flex flex-col gap-1.5">
-        <label for="country" class="block font-medium text-gray-700"
-          >Pays</label
-        >
+        <label for="country" class="block font-medium text-gray-700">Pays</label>
         <input pInputText id="country" formControlName="country" />
       </div>
       <div class="flex flex-col gap-1.5">
-        <label for="birth_date" class="block font-medium text-gray-700"
-          >Date de naissance</label
-        >
+        <label for="birth_date" class="block font-medium text-gray-700">Date de naissance</label>
         <p-datePicker id="birth_date" formControlName="birth_date" />
       </div>
       <div class="flex flex-col gap-1.5">
@@ -54,16 +40,14 @@
           [optionValue]="'id'"
           [optionLabel]="'name'"
           display="chip"
-          formControlName="roles"
-        />
+          formControlName="roles" />
       </div>
       <div class="flex flex-col gap-1.5 mt-4 col-span-2 w-full md:w-1/3">
         <p-button
           type="submit"
           [loading]="store.isLoading()"
           [label]="'Enregistrer l\'utilisateur'"
-          [disabled]="addUserForm.invalid || store.isLoading()"
-        />
+          [disabled]="addUserForm.invalid || store.isLoading()" />
       </div>
     </form>
   </div>

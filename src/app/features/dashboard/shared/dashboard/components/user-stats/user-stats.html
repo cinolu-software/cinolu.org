@@ -1,44 +1,36 @@
 @let stats = store.stats();
 <div class="flex flex-wrap gap-6">
   <div
-    class="flex gap-5 p-6 justify-center items-center bg-white rounded-md shadow-md hover:shadow-xl transition-all duration-500 w-xsm transform hover:-translate-y-2 hover:scale-[1.02] cursor-pointer group"
-  >
+    class="flex gap-5 p-6 justify-center items-center bg-white rounded-md shadow-md hover:shadow-xl transition-all duration-500 w-xsm transform hover:-translate-y-2 hover:scale-[1.02] cursor-pointer group">
     <div
-      class="flex items-center justify-center p-4 bg-primary-500/10 rounded-md transition-colors duration-300 group-hover:bg-primary-500/20"
-    >
+      class="flex items-center justify-center p-4 bg-primary-500/10 rounded-md transition-colors duration-300 group-hover:bg-primary-500/20">
       <i-lucide
         [img]="icons.ventures"
-        class="text-primary-500 h-10 w-10 stroke-1 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110"
-      />
+        class="text-primary-500 h-10 w-10 stroke-1 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110" />
     </div>
 
     <div class="flex flex-col gap-1">
       <span class="text-gray-600 text-base">Entreprises</span>
       <span
-        class="text-4xl font-satoshi font-black text-primary-500 transition-colors duration-300 group-hover:text-primary-600"
-      >
+        class="text-4xl font-satoshi font-black text-primary-500 transition-colors duration-300 group-hover:text-primary-600">
         {{ stats?.totalVentures }}
       </span>
     </div>
   </div>
 
   <div
-    class="flex gap-5 p-6 justify-center items-center bg-white rounded-md shadow-md hover:shadow-xl transition-all duration-500 w-xsm transform hover:-translate-y-2 hover:scale-[1.02] cursor-pointer group"
-  >
+    class="flex gap-5 p-6 justify-center items-center bg-white rounded-md shadow-md hover:shadow-xl transition-all duration-500 w-xsm transform hover:-translate-y-2 hover:scale-[1.02] cursor-pointer group">
     <div
-      class="flex items-center justify-center p-4 bg-primary-500/10 rounded-md transition-colors duration-300 group-hover:bg-primary-500/20"
-    >
+      class="flex items-center justify-center p-4 bg-primary-500/10 rounded-md transition-colors duration-300 group-hover:bg-primary-500/20">
       <i-lucide
         [img]="icons.mic"
-        class="text-primary-500 h-10 w-10 stroke-1 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110"
-      />
+        class="text-primary-500 h-10 w-10 stroke-1 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110" />
     </div>
 
     <div class="flex flex-col gap-1">
       <span class="text-gray-600 text-base">Partages</span>
       <span
-        class="text-4xl font-satoshi font-black text-primary-500 transition-colors duration-300 group-hover:text-primary-600"
-      >
+        class="text-4xl font-satoshi font-black text-primary-500 transition-colors duration-300 group-hover:text-primary-600">
         {{ stats?.referralsCount }}
       </span>
     </div>

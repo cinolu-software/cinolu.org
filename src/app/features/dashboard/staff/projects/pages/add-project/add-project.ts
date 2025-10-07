@@ -1,13 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Button } from 'primeng/button';
-import { CommonModule,  } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AddProjectStore } from '../../store/projects/add-project.store';
 import { TextareaModule } from 'primeng/textarea';
 import { SelectModule } from 'primeng/select';
@@ -20,11 +15,7 @@ import { QuillEditorComponent } from 'ngx-quill';
 @Component({
   selector: 'app-project-add',
   templateUrl: './add-project.html',
-  providers: [
-    AddProjectStore,
-    UnpaginatedSubprogramsStore,
-    UnpaginatedCategoriesStore,
-  ],
+  providers: [AddProjectStore, UnpaginatedSubprogramsStore, UnpaginatedCategoriesStore],
   imports: [
     SelectModule,
     MultiSelectModule,

@@ -1,10 +1,4 @@
-import {
-  signalStore,
-  withState,
-  withMethods,
-  patchState,
-  withProps,
-} from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withProps } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
@@ -26,17 +20,15 @@ export const GalleryProjectStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((slug) => {
-          return _http
-            .get<{ data: IImage[] }>(`galleries/project/${slug}`)
-            .pipe(
-              tap(({ data }) => {
-                patchState(store, { isLoading: false, gallery: data });
-              }),
-              catchError(() => {
-                patchState(store, { isLoading: false });
-                return of(null);
-              }),
-            );
+          return _http.get<{ data: IImage[] }>(`galleries/project/${slug}`).pipe(
+            tap(({ data }) => {
+              patchState(store, { isLoading: false, gallery: data });
+            }),
+            catchError(() => {
+              patchState(store, { isLoading: false });
+              return of(null);
+            }),
+          );
         }),
       ),
     ),

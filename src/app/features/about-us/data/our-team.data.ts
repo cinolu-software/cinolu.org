@@ -54,7 +54,7 @@ export const TEAM_MEMBERS: IMemberItem[] = [
     role: 'Designer & Community Manager',
     image: 'images/team/em.jpeg',
   },
-    {
+  {
     id: 9,
     name: 'Wilfried Musanzi',
     role: 'Developpeur',

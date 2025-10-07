@@ -2,13 +2,7 @@ import { Component, HostListener, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GALLERY_IMAGES } from '../../data/gallery.data';
 import { ReactiveFormsModule } from '@angular/forms';
-import {
-  LucideAngularModule,
-  ReceiptText,
-  StepBack,
-  StepForward,
-  X,
-} from 'lucide-angular';
+import { LucideAngularModule, ReceiptText, StepBack, StepForward, X } from 'lucide-angular';
 import { IGalleryImage } from '../../data/gallery.data';
 
 @Component({

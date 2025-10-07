@@ -1,20 +1,8 @@
-import {
-  Component,
-  computed,
-  effect,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, ChevronDown, House } from 'lucide-angular';
-import {
-  USER_LINKS,
-  ILink,
-  ADMIN_LINKS,
-  COMMON_LINKS,
-} from '../../data/links.data';
+import { USER_LINKS, ILink, ADMIN_LINKS, COMMON_LINKS } from '../../data/links.data';
 import { filter } from 'rxjs';
 import { AuthStore } from '../../../core/auth/auth.store';
 import { ButtonModule } from 'primeng/button';
@@ -42,11 +30,7 @@ export class DashboardSidebar {
     const url = this.currentUrl();
     return (
       this.links().find(
-        (link) =>
-          link.path === url ||
-          link.children?.some(
-            (child) => child.path && url.startsWith(child.path),
-          ),
+        (link) => link.path === url || link.children?.some((child) => child.path && url.startsWith(child.path)),
       )?.name ?? null
     );
   });
@@ -54,16 +38,11 @@ export class DashboardSidebar {
   constructor() {
     const roles = (this.authStore.user()?.roles as unknown as string[]) || [];
     effect(() => {
-      this.links.set([
-        ...COMMON_LINKS,
-        ...roles.flatMap((role) => this.dashboardLinks[role] || []),
-      ]);
+      this.links.set([...COMMON_LINKS, ...roles.flatMap((role) => this.dashboardLinks[role] || [])]);
     });
-    this.#router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        this.currentUrl.set(event.urlAfterRedirects);
-      });
+    this.#router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+      this.currentUrl.set(event.urlAfterRedirects);
+    });
   }
 
   onToggleTab(name: string): void {

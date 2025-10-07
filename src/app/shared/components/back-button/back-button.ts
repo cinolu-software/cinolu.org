@@ -6,17 +6,16 @@ import { ArrowLeft, LucideAngularModule } from 'lucide-angular';
   selector: 'app-back-button',
   imports: [LucideAngularModule],
   templateUrl: './back-button.html',
-  styles: ``
+  styles: ``,
 })
 export class BackButton {
-  icons={
-    back : ArrowLeft
-  }
+  icons = {
+    back: ArrowLeft,
+  };
 
   #location = inject(Location);
 
   onGoBack(): void {
     this.#location.back();
   }
-
 }

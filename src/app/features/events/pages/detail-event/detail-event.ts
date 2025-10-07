@@ -26,15 +26,7 @@ import { GalleryEventStore } from '../../store/galleries.event.store';
   selector: 'app-event',
   standalone: true,
   providers: [EventStore, GalleryEventStore],
-  imports: [
-    CommonModule,
-    EventSkeleton,
-    LucideAngularModule,
-    NgOptimizedImage,
-    ApiImgPipe,
-    Button,
-    GalleriaModule,
-  ],
+  imports: [CommonModule, EventSkeleton, LucideAngularModule, NgOptimizedImage, ApiImgPipe, Button, GalleriaModule],
   templateUrl: './detail-event.html',
 })
 export class DetailEvent implements OnInit {

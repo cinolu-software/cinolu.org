@@ -16,13 +16,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-article-card',
-  imports: [
-    LucideAngularModule,
-    NgOptimizedImage,
-    ApiImgPipe,
-    RouterLink,
-    CommonModule,
-  ],
+  imports: [LucideAngularModule, NgOptimizedImage, ApiImgPipe, RouterLink, CommonModule],
   templateUrl: './article-card.html',
 })
 export class ArticleCardDetail {

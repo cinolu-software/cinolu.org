@@ -6,12 +6,7 @@ import { CommonModule } from '@angular/common';
 import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { AddUserStore } from '../../store/users/add-user.store';
 import { UnpaginatedRolesStore } from '../../store/roles/unpaginated-roles.store';

@@ -3,11 +3,7 @@ import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import {
-  BriefcaseBusiness,
-  LucideAngularModule,
-  Mic
-} from 'lucide-angular';
+import { BriefcaseBusiness, LucideAngularModule, Mic } from 'lucide-angular';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
@@ -32,6 +28,6 @@ export class UserStats {
   store = inject(UserStatsStore);
   icons = {
     ventures: BriefcaseBusiness,
-    mic: Mic
+    mic: Mic,
   };
 }

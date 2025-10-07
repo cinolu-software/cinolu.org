@@ -1,10 +1,4 @@
-import {
-  patchState,
-  signalStore,
-  withMethods,
-  withProps,
-  withState,
-} from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -29,17 +23,15 @@ export const ProjectsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          return _http
-            .get<{ data: [IProject[], number] }>('projects', { params })
-            .pipe(
-              map(({ data }) => {
-                patchState(store, { isLoading: false, projects: data });
-              }),
-              catchError(() => {
-                patchState(store, { isLoading: false, projects: [[], 0] });
-                return of(null);
-              }),
-            );
+          return _http.get<{ data: [IProject[], number] }>('projects', { params }).pipe(
+            map(({ data }) => {
+              patchState(store, { isLoading: false, projects: data });
+            }),
+            catchError(() => {
+              patchState(store, { isLoading: false, projects: [[], 0] });
+              return of(null);
+            }),
+          );
         }),
       ),
     ),

@@ -1,13 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  OnInit,
-  Renderer2,
-  PLATFORM_ID,
-  OnDestroy,
-  input,
-  inject,
-} from '@angular/core';
+import { Directive, ElementRef, OnInit, Renderer2, PLATFORM_ID, OnDestroy, input, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
@@ -53,11 +44,7 @@ export class CountUpDirective implements OnInit, OnDestroy {
     const step = () => {
       current += increment;
       if (current < this.end()) {
-        this.#renderer.setProperty(
-          this.#el.nativeElement,
-          'innerText',
-          Math.floor(current).toLocaleString(),
-        );
+        this.#renderer.setProperty(this.#el.nativeElement, 'innerText', Math.floor(current).toLocaleString());
         requestAnimationFrame(step);
       } else {
         this.#renderer.setProperty(

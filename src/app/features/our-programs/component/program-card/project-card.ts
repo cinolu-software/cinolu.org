@@ -7,13 +7,7 @@ import { IProject } from '../../../../shared/models/entities.models';
 
 @Component({
   selector: 'app-project-card',
-  imports: [
-    LucideAngularModule,
-    CommonModule,
-    NgOptimizedImage,
-    RouterLink,
-    ApiImgPipe,
-  ],
+  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe],
   templateUrl: './project-card.html',
 })
 export class EventCard {

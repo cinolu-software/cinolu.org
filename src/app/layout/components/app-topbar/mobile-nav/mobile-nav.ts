@@ -3,28 +3,14 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ProgramsStore } from '../../../../features/landing/store/programs.store';
 
 import { RouterModule } from '@angular/router';
-import {
-  LucideAngularModule,
-  ChevronDown,
-  Menu,
-  X,
-  ArrowLeft,
-  ChevronRight,
-  Minus,
-} from 'lucide-angular';
+import { LucideAngularModule, ChevronDown, Menu, X, ArrowLeft, ChevronRight, Minus } from 'lucide-angular';
 import { ILink } from '../../../data/links.data';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { AuthStore } from '../../../../core/auth/auth.store';
 
 @Component({
   selector: 'app-mobile-nav',
-  imports: [
-    RouterModule,
-    NgOptimizedImage,
-    CommonModule,
-    LucideAngularModule,
-    ApiImgPipe,
-  ],
+  imports: [RouterModule, NgOptimizedImage, CommonModule, LucideAngularModule, ApiImgPipe],
   providers: [ProgramsStore],
   templateUrl: './mobile-nav.html',
 })

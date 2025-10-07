@@ -14,14 +14,7 @@ import { Pen, LucideAngularModule } from 'lucide-angular';
 @Component({
   selector: 'app-blog',
   providers: [ArticlesStore, TagsStore, LucideAngularModule],
-  imports: [
-    CommonModule,
-    ArticleCard,
-    NgxPaginationModule,
-    ArticleCardSkeleton,
-    MultiSelectModule,
-    HeroCard,
-  ],
+  imports: [CommonModule, ArticleCard, NgxPaginationModule, ArticleCardSkeleton, MultiSelectModule, HeroCard],
   templateUrl: './list-articles.html',
 })
 export class ListArticles implements OnInit {
@@ -40,10 +33,7 @@ export class ListArticles implements OnInit {
     this.store.loadArticles(this.queryParams());
   }
 
-  async onFilterChange(
-    event: MultiSelectChangeEvent,
-    filter: 'page' | 'tags',
-  ): Promise<void> {
+  async onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'tags'): Promise<void> {
     this.queryParams().page = null;
     this.queryParams()[filter] = event.value;
     await this.updateRouteAndArticles();

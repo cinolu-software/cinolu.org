@@ -1,12 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  inject,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ProgressBar } from 'primeng/progressbar';
 
@@ -32,27 +24,21 @@ export class LoadingBar implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.#loadingService.mode$
-      .pipe(takeUntil(this.#unsubscribeAll))
-      .subscribe((value) => {
-        this.mode = value;
-        this.#cdr.detectChanges();
-      });
+    this.#loadingService.mode$.pipe(takeUntil(this.#unsubscribeAll)).subscribe((value) => {
+      this.mode = value;
+      this.#cdr.detectChanges();
+    });
 
-    this.#loadingService.progress$
-      .pipe(takeUntil(this.#unsubscribeAll))
-      .subscribe((value) => {
-        if (!value) return;
-        this.progress = value;
-        this.#cdr.detectChanges();
-      });
+    this.#loadingService.progress$.pipe(takeUntil(this.#unsubscribeAll)).subscribe((value) => {
+      if (!value) return;
+      this.progress = value;
+      this.#cdr.detectChanges();
+    });
 
-    this.#loadingService.show$
-      .pipe(takeUntil(this.#unsubscribeAll))
-      .subscribe((value) => {
-        this.show = value;
-        this.#cdr.detectChanges();
-      });
+    this.#loadingService.show$.pipe(takeUntil(this.#unsubscribeAll)).subscribe((value) => {
+      this.show = value;
+      this.#cdr.detectChanges();
+    });
   }
 
   ngOnDestroy(): void {

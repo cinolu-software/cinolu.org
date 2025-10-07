@@ -1,11 +1,4 @@
-import {
-  signalStore,
-  withState,
-  withMethods,
-  patchState,
-  withProps,
-  withHooks,
-} from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withProps, withHooks } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
@@ -39,18 +32,10 @@ export const HighlightsStore = signalStore(
         }),
       ),
     ),
-    getFirstHighlight(
-      highlights: Record<string, IHighlight[]>,
-    ): IHighlight | null {
+    getFirstHighlight(highlights: Record<string, IHighlight[]>): IHighlight | null {
       if (!highlights) return null;
 
-      const keys = [
-        'programs',
-        'subprograms',
-        'events',
-        'projects',
-        'articles',
-      ];
+      const keys = ['programs', 'subprograms', 'events', 'projects', 'articles'];
 
       for (const key of keys) {
         if (Array.isArray(highlights[key]) && highlights[key].length > 0) {

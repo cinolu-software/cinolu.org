@@ -1,10 +1,4 @@
-import {
-  afterNextRender,
-  Directive,
-  ElementRef,
-  inject,
-  Renderer2,
-} from '@angular/core';
+import { afterNextRender, Directive, ElementRef, inject, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appAnimationsOnScroll]',
@@ -20,10 +14,7 @@ export class FadeInOnScrollDirective {
         (entries, observer) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              this.#renderer.addClass(
-                this.#el.nativeElement,
-                'animate-slide-in',
-              );
+              this.#renderer.addClass(this.#el.nativeElement, 'animate-slide-in');
               observer.unobserve(this.#el.nativeElement);
             }
           });

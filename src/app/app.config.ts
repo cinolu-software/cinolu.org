@@ -4,25 +4,14 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import {
-  provideRouter,
-  TitleStrategy,
-  withInMemoryScrolling,
-} from '@angular/router';
+import { provideRouter, TitleStrategy, withInMemoryScrolling } from '@angular/router';
 import { routes } from './app.routes';
-import {
-  provideClientHydration,
-  withEventReplay,
-} from '@angular/platform-browser';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { providePrimeNG } from 'primeng/config';
 import { PageTitleStrategy } from './core/strategies/page-title.strategy';
 import { primeNGPreset } from './shared/config/primeng.config';
 import { provideApp } from './core/providers/app.provider';
-import {
-  provideHttpClient,
-  withFetch,
-  withInterceptors,
-} from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { httpInterceptor } from './core/interceptors/http.interceptor';
 import { LoadingInterceptor } from './core/services/loading';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -44,10 +33,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideApp(),
     provideAnimations(),
-    provideHttpClient(
-      withFetch(),
-      withInterceptors([httpInterceptor, LoadingInterceptor]),
-    ),
+    provideHttpClient(withFetch(), withInterceptors([httpInterceptor, LoadingInterceptor])),
     provideClientHydration(withEventReplay()),
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: TitleStrategy, useClass: PageTitleStrategy },
@@ -57,11 +43,11 @@ export const appConfig: ApplicationConfig = {
         toolbar: [
           ['bold', 'italic'],
           ['blockquote'],
-          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-          ['link']
-        ]
-      }
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ header: [1, 2, 3, 4, 5, 6, false] }],
+          ['link'],
+        ],
+      },
     }),
     providePrimeNG({
       theme: {

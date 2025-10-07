@@ -5,12 +5,7 @@ import { StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SECTORS } from '../../data/sectors.data';
 import { STAGES } from '../../data/stage.data';
 import { UpdateVenturetore } from '../../store/ventures/update-venture.store';
@@ -27,12 +22,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-venture',
-  providers: [
-    VentureStore,
-    UpdateVenturetore,
-    GalleryStore,
-    DeleteGalleryStore,
-  ],
+  providers: [VentureStore, UpdateVenturetore, GalleryStore, DeleteGalleryStore],
   imports: [
     CommonModule,
     StepperModule,

@@ -1,207 +1,144 @@
-<section
-  class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto overflow-x-hidden py-20"
->
+<section class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto overflow-x-hidden py-20">
   @if (store.project(); as project) {
-    <div class="space-y-12">
-      <div class="text-center">
-        <h2
-          class="font-black font-satoshi text-3xl md:text-4xl text-gray-900 leading-tight"
-        >
-          {{ project.name | titlecase }}
-        </h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div>
-          @if (images().length > 0) {
-            <p-galleria
-              [value]="images()"
-              [responsiveOptions]="responsiveOptions"
-              [numVisible]="1"
-              [circular]="images().length > 1"
-              [showItemNavigators]="true"
-              [showThumbnails]="false"
-              autoPlay="true"
-              class="mx-auto w-full rounded-xl shadow-md overflow-hidden h-80 md:h-[32rem]"
-            >
-              <ng-template pTemplate="item" let-img>
-                <div class="relative w-full h-80 md:h-[32rem]">
-                  <img
-                    fill
-                    [ngSrc]="img | apiIMG: 'eventGallery'"
-                    [alt]="img.image"
-                    class="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
-                    priority
-                  />
-                </div>
-              </ng-template>
-            </p-galleria>
-          } @else {
-            <div
-              class="relative w-full rounded-xl shadow-md overflow-hidden h-80 md:h-[32rem]"
-            >
-              <img
-                [ngSrc]="project | apiIMG: 'event'"
-                [alt]="'Photo de couverture'"
-                class="object-cover object-center w-full h-full"
-                fill
-                priority
-              />
-            </div>
-          }
-        </div>
-
-        <div class="flex flex-col gap-8">
-          <div
-            class="rounded-xl bg-gradient-to-br from-white to-gray-50 shadow border border-gray-100 p-8 hover:shadow-lg transition"
-          >
-            <div class="flex items-center gap-3 mb-4">
-              <div
-                class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-100 text-primary-600"
-              >
-                <i-lucide [name]="icons.fileText" class="size-5 stroke-[1.5]" />
-              </div>
-              <h3 class="font-semibold text-xl text-gray-800">Description</h3>
-            </div>
-            <p
-              class="text-gray-600 leading-relaxed text-justify text-base"
-              [innerHTML]="project.description"
-            ></p>
-          </div>
-
-          <div
-            class="rounded-xl bg-primary-50 shadow border border-primary-200 p-8 hover:shadow-lg transition"
-          >
-            <div class="flex items-center gap-3 mb-6">
-              <div
-                class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-500 text-white"
-              >
-                <i-lucide
-                  [name]="icons.calendarDays"
-                  class="size-5 stroke-[1.5]"
-                />
-              </div>
-              <h3 class="font-semibold text-xl text-primary-600">Dates</h3>
-            </div>
-
-            <div class="relative pl-6 border-l-2 border-primary-200 space-y-4">
-              <div class="relative">
-                <span
-                  class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-primary-500"
-                ></span>
-                <p class="font-medium text-gray-700">
-                  Début : {{ project.started_at | date: "short" }}
-                </p>
-              </div>
-              <div class="relative">
-                <span
-                  class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-red-500"
-                ></span>
-                <p class="font-medium text-gray-700">
-                  Fin : {{ project.ended_at | date: "short" }}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full mt-10">
-        <div
-          class="rounded-xl bg-gradient-to-r from-green-50 to-white shadow border border-green-100 p-8 hover:shadow-md transition"
-        >
-          <div class="flex items-center gap-3 mb-6">
-            <div
-              class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-500 text-white"
-            >
-              <i-lucide [name]="icons.tag" class="size-5 stroke-[1.5]" />
-            </div>
-            <h3 class="font-semibold text-xl text-primary-600">Catégories</h3>
-          </div>
-          <div class="flex flex-wrap gap-3">
-            @for (item of project.categories; track $index) {
-              <span
-                class="px-4 py-1.5 text-sm font-semibold rounded-full bg-blue-100 text-primary-600 hover:scale-105 transition"
-              >
-                {{ item.name }}
-              </span>
-            }
-          </div>
-        </div>
-
-        <div
-          class="rounded-xl bg-white shadow-md border border-gray-200 overflow-hidden"
-        >
-          <div class="p-8">
-            <div class="flex items-center gap-3 mb-4">
-              <div
-                class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-100 text-primary-500"
-              >
-                <i-lucide [name]="icons.mapPin" class="size-5 stroke-[1.5]" />
-              </div>
-              <h3 class="font-semibold text-xl text-gray-800">Adresse</h3>
-            </div>
-            <p
-              class="text-gray-600 leading-relaxed text-justify text-base mb-4"
-              [innerHTML]="project.place"
-            ></p>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="flex flex-col md:flex-row justify-center items-center gap-6 mt-10 w-full m-auto bg-gray-50 rounded-xl p-6 md:p-8"
-      >
-        @if (
-          getStatut(project) === "En cours" ||
-          (getStatut(project) === "À venir" && project.form_link)
-        ) {
-          <p-button
-            size="large"
-            severity="primary"
-            class="flex items-center gap-3 px-6 lg:px-8 py-3 group rounded-md hover:scale-105 transition-all duration-300"
-          >
-            Postuler Maintenant
-            <i-lucide
-              class="size-5 group-hover:translate-x-1 transition-transform duration-300"
-              [name]="icons.arrow"
-            />
-          </p-button>
-        } @else {
-          <div class="flex flex-col items-center gap-4">
-            <h3 class="text-xl font-semibold text-gray-700">
-              Événement terminé
-            </h3>
-            <p-button
-              size="large"
-              severity="danger"
-              disabled
-              class="flex items-center gap-3 px-6 py-3 rounded-md opacity-70 cursor-not-allowed"
-            >
-              <i-lucide class="size-5" [name]="icons.fileLock" />
-              Postuler Maintenant
-            </p-button>
-            <a
-              href="/projet"
-              class="text-sm font-medium text-primary-600 hover:underline"
-              >Voir les prochains événements</a
-            >
-          </div>
-        }
-      </div>
-    </div>
-  }
-
-  @if (store.isLoading()) {
-    <app-project-skeleton />
-  }
-  @if (!store.isLoading() && !store.project()) {
-    <div
-      class="min-h-[75vh] w-full flex flex-col justify-center items-center px-5"
-    >
-      <h2 class="text-3xl font-semibold">
-        Aucun programme avec cet identifiant !
+  <div class="space-y-12">
+    <div class="text-center">
+      <h2 class="font-black font-satoshi text-3xl md:text-4xl text-gray-900 leading-tight">
+        {{ project.name | titlecase }}
       </h2>
     </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div>
+        @if (images().length > 0) {
+        <p-galleria
+          [value]="images()"
+          [responsiveOptions]="responsiveOptions"
+          [numVisible]="1"
+          [circular]="images().length > 1"
+          [showItemNavigators]="true"
+          [showThumbnails]="false"
+          autoPlay="true"
+          class="mx-auto w-full rounded-xl shadow-md overflow-hidden h-80 md:h-[32rem]">
+          <ng-template pTemplate="item" let-img>
+            <div class="relative w-full h-80 md:h-[32rem]">
+              <img
+                fill
+                [ngSrc]="img | apiIMG: 'eventGallery'"
+                [alt]="img.image"
+                class="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
+                priority />
+            </div>
+          </ng-template>
+        </p-galleria>
+        } @else {
+        <div class="relative w-full rounded-xl shadow-md overflow-hidden h-80 md:h-[32rem]">
+          <img
+            [ngSrc]="project | apiIMG: 'event'"
+            [alt]="'Photo de couverture'"
+            class="object-cover object-center w-full h-full"
+            fill
+            priority />
+        </div>
+        }
+      </div>
+
+      <div class="flex flex-col gap-8">
+        <div
+          class="rounded-xl bg-gradient-to-br from-white to-gray-50 shadow border border-gray-100 p-8 hover:shadow-lg transition">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-100 text-primary-600">
+              <i-lucide [name]="icons.fileText" class="size-5 stroke-[1.5]" />
+            </div>
+            <h3 class="font-semibold text-xl text-gray-800">Description</h3>
+          </div>
+          <p class="text-gray-600 leading-relaxed text-justify text-base" [innerHTML]="project.description"></p>
+        </div>
+
+        <div class="rounded-xl bg-primary-50 shadow border border-primary-200 p-8 hover:shadow-lg transition">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-500 text-white">
+              <i-lucide [name]="icons.calendarDays" class="size-5 stroke-[1.5]" />
+            </div>
+            <h3 class="font-semibold text-xl text-primary-600">Dates</h3>
+          </div>
+
+          <div class="relative pl-6 border-l-2 border-primary-200 space-y-4">
+            <div class="relative">
+              <span class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-primary-500"></span>
+              <p class="font-medium text-gray-700">Début : {{ project.started_at | date: 'short' }}</p>
+            </div>
+            <div class="relative">
+              <span class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-red-500"></span>
+              <p class="font-medium text-gray-700">Fin : {{ project.ended_at | date: 'short' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full mt-10">
+      <div
+        class="rounded-xl bg-gradient-to-r from-green-50 to-white shadow border border-green-100 p-8 hover:shadow-md transition">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-500 text-white">
+            <i-lucide [name]="icons.tag" class="size-5 stroke-[1.5]" />
+          </div>
+          <h3 class="font-semibold text-xl text-primary-600">Catégories</h3>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          @for (item of project.categories; track $index) {
+          <span
+            class="px-4 py-1.5 text-sm font-semibold rounded-full bg-blue-100 text-primary-600 hover:scale-105 transition">
+            {{ item.name }}
+          </span>
+          }
+        </div>
+      </div>
+
+      <div class="rounded-xl bg-white shadow-md border border-gray-200 overflow-hidden">
+        <div class="p-8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-100 text-primary-500">
+              <i-lucide [name]="icons.mapPin" class="size-5 stroke-[1.5]" />
+            </div>
+            <h3 class="font-semibold text-xl text-gray-800">Adresse</h3>
+          </div>
+          <p class="text-gray-600 leading-relaxed text-justify text-base mb-4" [innerHTML]="project.place"></p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="flex flex-col md:flex-row justify-center items-center gap-6 mt-10 w-full m-auto bg-gray-50 rounded-xl p-6 md:p-8">
+      @if (getStatut(project) === 'En cours' || (getStatut(project) === 'À venir' && project.form_link)) {
+      <p-button
+        size="large"
+        severity="primary"
+        class="flex items-center gap-3 px-6 lg:px-8 py-3 group rounded-md hover:scale-105 transition-all duration-300">
+        Postuler Maintenant
+        <i-lucide class="size-5 group-hover:translate-x-1 transition-transform duration-300" [name]="icons.arrow" />
+      </p-button>
+      } @else {
+      <div class="flex flex-col items-center gap-4">
+        <h3 class="text-xl font-semibold text-gray-700">Événement terminé</h3>
+        <p-button
+          size="large"
+          severity="danger"
+          disabled
+          class="flex items-center gap-3 px-6 py-3 rounded-md opacity-70 cursor-not-allowed">
+          <i-lucide class="size-5" [name]="icons.fileLock" />
+          Postuler Maintenant
+        </p-button>
+        <a href="/projet" class="text-sm font-medium text-primary-600 hover:underline">Voir les prochains événements</a>
+      </div>
+      }
+    </div>
+  </div>
+  } @if (store.isLoading()) {
+  <app-project-skeleton />
+  } @if (!store.isLoading() && !store.project()) {
+  <div class="min-h-[75vh] w-full flex flex-col justify-center items-center px-5">
+    <h2 class="text-3xl font-semibold">Aucun programme avec cet identifiant !</h2>
+  </div>
   }
 </section>

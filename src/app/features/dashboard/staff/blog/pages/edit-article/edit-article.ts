@@ -1,11 +1,6 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, effect, inject, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePickerModule } from 'primeng/datepicker';
 import { InputText } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -25,13 +20,7 @@ import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-edit-article',
-  providers: [
-    ArticleStore,
-    UnpaginatedArticlesStore,
-    UpdateArticleStore,
-    ArticlesStore,
-    UnpaginatedTagStore,
-  ],
+  providers: [ArticleStore, UnpaginatedArticlesStore, UpdateArticleStore, ArticlesStore, UnpaginatedTagStore],
   imports: [
     SelectModule,
     MultiSelectModule,

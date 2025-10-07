@@ -1,10 +1,4 @@
-import {
-  patchState,
-  signalStore,
-  withMethods,
-  withProps,
-  withState,
-} from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -29,26 +23,20 @@ export const HighlightSubprogramStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((id) => {
-          return _http
-            .patch<{ data: ISubprogram }>(`subprograms/highlight/${id}`, {})
-            .pipe(
-              map(({ data }) => {
-                _subprogramsStore.updateProgram(data);
-                _toast.showSuccess(
-                  data.is_highlighted
-                    ? 'Programme mis en avant'
-                    : 'Programme retiré de la mise en avant',
-                );
-                patchState(store, { isLoading: false });
-              }),
-              catchError(() => {
-                _toast.showError(
-                  'Erreur lors de la mise en avant du programme',
-                );
-                patchState(store, { isLoading: false });
-                return of(null);
-              }),
-            );
+          return _http.patch<{ data: ISubprogram }>(`subprograms/highlight/${id}`, {}).pipe(
+            map(({ data }) => {
+              _subprogramsStore.updateProgram(data);
+              _toast.showSuccess(
+                data.is_highlighted ? 'Programme mis en avant' : 'Programme retiré de la mise en avant',
+              );
+              patchState(store, { isLoading: false });
+            }),
+            catchError(() => {
+              _toast.showError('Erreur lors de la mise en avant du programme');
+              patchState(store, { isLoading: false });
+              return of(null);
+            }),
+          );
         }),
       ),
     ),

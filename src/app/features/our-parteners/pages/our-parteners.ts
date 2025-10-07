@@ -3,19 +3,12 @@ import { PARTNERS } from '../../landing/data/partners.data';
 import { CommonModule } from '@angular/common';
 import { AnimateOnScrollModule } from 'primeng/animateonscroll';
 import { Image } from 'primeng/image';
-import { HeroCard } from "../../../layout/components/hero-card/hero-card";
+import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { Handshake, LucideAngularModule } from 'lucide-angular';
-
 
 @Component({
   selector: 'app-our-parteners',
-  imports: [
-    CommonModule,
-    AnimateOnScrollModule,
-    Image,
-    HeroCard,
-    LucideAngularModule,
-  ],
+  imports: [CommonModule, AnimateOnScrollModule, Image, HeroCard, LucideAngularModule],
   templateUrl: './our-parteners.html',
 })
 export class OurParteners {

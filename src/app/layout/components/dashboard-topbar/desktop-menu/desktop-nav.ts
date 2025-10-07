@@ -8,13 +8,7 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 @Component({
   selector: 'app-desktop-nav',
   templateUrl: './desktop-nav.html',
-  imports: [
-    CommonModule,
-    RouterModule,
-    ApiImgPipe,
-    LucideAngularModule,
-    NgOptimizedImage,
-  ],
+  imports: [CommonModule, RouterModule, ApiImgPipe, LucideAngularModule, NgOptimizedImage],
 })
 export class DesktopNav {
   user = input.required<IUser | null>();

@@ -4,12 +4,7 @@ import { AnimateOnScrollModule } from 'primeng/animateonscroll';
 import { CommonModule } from '@angular/common';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import {
-  LucideAngularModule,
-  MoveUpRight,
-  UserPlus,
-  Users,
-} from 'lucide-angular';
+import { LucideAngularModule, MoveUpRight, UserPlus, Users } from 'lucide-angular';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import {
   IHighlight,
@@ -28,14 +23,7 @@ export interface HighlightKey {
 
 @Component({
   selector: 'app-highlight-card',
-  imports: [
-    CommonModule,
-    NgOptimizedImage,
-    RouterLink,
-    LucideAngularModule,
-    ApiImgPipe,
-    AnimateOnScrollModule,
-  ],
+  imports: [CommonModule, NgOptimizedImage, RouterLink, LucideAngularModule, ApiImgPipe, AnimateOnScrollModule],
   styles: [
     `
       :host {
@@ -60,10 +48,7 @@ export interface HighlightKey {
         }
 
         .box {
-          background-image: radial-gradient(
-            var(--primary-300),
-            var(--primary-600)
-          );
+          background-image: radial-gradient(var(--primary-300), var(--primary-600));
           border-radius: 50% !important;
           color: var(--primary-color-text);
         }
@@ -85,15 +70,11 @@ export class HighlightCard {
     this.keySelected.emit(key);
   }
 
-  getItemTitle(
-    item: IProgram | ISubprogram | IEvent | IProject | IArticle,
-  ): string {
+  getItemTitle(item: IProgram | ISubprogram | IEvent | IProject | IArticle): string {
     return 'name' in item ? item.name : (item.title ?? 'Titre inconnu');
   }
 
-  getItemDescription(
-    item: IProgram | ISubprogram | IEvent | IProject | IArticle,
-  ): string {
+  getItemDescription(item: IProgram | ISubprogram | IEvent | IProject | IArticle): string {
     return 'description' in item ? item.description : (item.summary ?? '');
   }
 

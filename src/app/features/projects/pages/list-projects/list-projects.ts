@@ -40,10 +40,7 @@ export class ListProjects implements OnInit {
     this.store.loadProjects(this.queryParams());
   }
 
-  onFilterChange(
-    event: MultiSelectChangeEvent,
-    filter: 'page' | 'categories',
-  ): void {
+  onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'categories'): void {
     this.queryParams().page = null;
     this.queryParams()[filter] = event.value;
     this.updateRouteAndprojects();

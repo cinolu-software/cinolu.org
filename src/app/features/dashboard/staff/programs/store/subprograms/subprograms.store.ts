@@ -1,10 +1,4 @@
-import {
-  patchState,
-  signalStore,
-  withMethods,
-  withProps,
-  withState,
-} from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
@@ -53,9 +47,7 @@ export const SubprogramsStore = signalStore(
     },
     updateProgram: (subprogram: ISubprogram): void => {
       const [subprograms, count] = store.subprograms();
-      const updated = subprograms.map((sp) =>
-        sp.id === subprogram.id ? subprogram : sp,
-      );
+      const updated = subprograms.map((sp) => (sp.id === subprogram.id ? subprogram : sp));
       patchState(store, { subprograms: [updated, count] });
     },
     deleteProgram: (id: string): void => {

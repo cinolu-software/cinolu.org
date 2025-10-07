@@ -1,13 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Button } from 'primeng/button';
-import { CommonModule,  } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AddEventStore } from '../../store/events/add-event.store';
 import { TextareaModule } from 'primeng/textarea';
 import { SelectModule } from 'primeng/select';
@@ -20,11 +15,7 @@ import { QuillEditorComponent } from 'ngx-quill';
 @Component({
   selector: 'app-event-add',
   templateUrl: './add-event.html',
-  providers: [
-    AddEventStore,
-    UnpaginatedSubprogramsStore,
-    UnpaginatedCategoriesStore,
-  ],
+  providers: [AddEventStore, UnpaginatedSubprogramsStore, UnpaginatedCategoriesStore],
   imports: [
     SelectModule,
     MultiSelectModule,
@@ -43,7 +34,6 @@ export class AddEventComponent {
   store = inject(AddEventStore);
   categoriesStore = inject(UnpaginatedCategoriesStore);
   programsStore = inject(UnpaginatedSubprogramsStore);
-
 
   constructor() {
     this.form = this.#fb.group({

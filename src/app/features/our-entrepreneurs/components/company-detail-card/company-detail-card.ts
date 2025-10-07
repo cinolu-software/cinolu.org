@@ -1,8 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import {
-  ENTREPRENEURS_DATA,
-  IEntrepreneur,
-} from '../../data/entrepreneurs.data';
+import { ENTREPRENEURS_DATA, IEntrepreneur } from '../../data/entrepreneurs.data';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { HeroCard } from '../../../../layout/components/hero-card/hero-card';

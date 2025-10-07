@@ -1,11 +1,4 @@
-import {
-  Component,
-  effect,
-  inject,
-  OnDestroy,
-  OnInit,
-  signal,
-} from '@angular/core';
+import { Component, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import {
@@ -29,12 +22,7 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ArticleCardSkeleton } from '../../components/article-card-skeleton/article-card-skeleton';
 import { RecentArticlesStore } from '../../store/articles/recent-articles.store';
 import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaModule } from 'primeng/textarea';
 import { AddCommentStore } from '../../store/comments/add-comment.store';
 import { Button } from 'primeng/button';
@@ -136,7 +124,6 @@ export class DetailArticle implements OnInit, OnDestroy {
   }
 
   loadMore(): void {
-    console.log('clicked!!!');
     this.queryParams.update((params) => ({
       ...params,
       page: +params.page + 1,

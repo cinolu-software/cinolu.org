@@ -8,8 +8,7 @@ interface IPrograms {
 export const PROGRAMS_ITEMS: IPrograms[] = [
   {
     name: 'F360 – Femmes 360',
-    description:
-      'Pour l’autonomisation des femmes dans l’innovation et l’entrepreneuriat',
+    description: 'Pour l’autonomisation des femmes dans l’innovation et l’entrepreneuriat',
     link: 'Découvrir F360',
     path: 'F360',
   },
@@ -21,8 +20,7 @@ export const PROGRAMS_ITEMS: IPrograms[] = [
   },
   {
     name: 'Uvumbuzi',
-    description:
-      'Pour transformer la recherche scientifique en solution concrète',
+    description: 'Pour transformer la recherche scientifique en solution concrète',
     link: 'Découvrir Uvumbuzi',
     path: 'Decouvrir Uvumbuzi',
   },
@@ -34,8 +32,7 @@ export const PROGRAMS_ITEMS: IPrograms[] = [
   },
   {
     name: 'Ushaidi',
-    description:
-      'Pour favoriser l’inclusion numérique et l’expression citoyenne',
+    description: 'Pour favoriser l’inclusion numérique et l’expression citoyenne',
     link: 'Découvrir Ushaidi',
     path: 'Decouvrir Ushaidi',
   },

@@ -1,10 +1,4 @@
-import {
-  signalStore,
-  withState,
-  withMethods,
-  patchState,
-  withHooks,
-} from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withHooks } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
@@ -27,9 +21,7 @@ export const RecentProjectsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
           return http.get<{ data: IProject[] }>('projects/find-recent').pipe(
-            tap(({ data }) =>
-              patchState(store, { isLoading: false, projects: data }),
-            ),
+            tap(({ data }) => patchState(store, { isLoading: false, projects: data })),
             catchError(() => {
               patchState(store, { isLoading: false, projects: [] });
               return of(null);

@@ -1,16 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import {
-  ChevronsLeft,
-  ChevronsRight,
-  LucideAngularModule,
-} from 'lucide-angular';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChevronsLeft, ChevronsRight, LucideAngularModule } from 'lucide-angular';
 import { Button } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
 import { InputText } from 'primeng/inputtext';

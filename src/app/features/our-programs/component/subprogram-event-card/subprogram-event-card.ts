@@ -22,14 +22,7 @@ import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-subprogram-event-card',
-  imports: [
-    LucideAngularModule,
-    CommonModule,
-    NgOptimizedImage,
-    ApiImgPipe,
-    Tag,
-    Button,
-  ],
+  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, ApiImgPipe, Tag, Button],
   templateUrl: './subprogram-event-card.html',
 })
 export class SubprogramEventCard {

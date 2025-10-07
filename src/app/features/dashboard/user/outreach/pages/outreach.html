@@ -1,7 +1,6 @@
 <section class="min-h-[110vh] w-full">
-  @let user = authStore.user();
-  @let isLoading = generateReferralCodeStore.isLoading();
-  @let referralsCount = user?.referralsCount;
+  @let user = authStore.user(); @let isLoading = generateReferralCodeStore.isLoading(); @let referralsCount =
+  user?.referralsCount;
   <p>Mon lien de vulgarisation</p>
   <h4 class="text-primary-300 underline mb-4">{{ referralLink() }}</h4>
   <h5 class="text-xl">Personnes invitées : <strong>{{ referralsCount }}</strong></h5>
@@ -9,12 +8,16 @@
     <p-button size="small" severity="primary" (onClick)="copyReferralLink()">
       {{ isLinkCopied() ? 'Lien copié !' : 'Copier le lien' }}
     </p-button>
-    <p-button size="small" severity="primary" (onClick)="generateNewReferralLink()"
-              [disabled]="isLoading" [loading]="isLoading">
+    <p-button
+      size="small"
+      severity="primary"
+      (onClick)="generateNewReferralLink()"
+      [disabled]="isLoading"
+      [loading]="isLoading">
       Générer un nouveau lien
     </p-button>
   </div>
   <div class="mt-12">
-    <app-badge-card [referralsCount]="referralsCount"/>
+    <app-badge-card [referralsCount]="referralsCount" />
   </div>
 </section>

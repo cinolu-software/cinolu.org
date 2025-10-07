@@ -1,11 +1,4 @@
-import {
-  signalStore,
-  withState,
-  withMethods,
-  patchState,
-  withProps,
-  withHooks,
-} from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withProps, withHooks } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
@@ -28,9 +21,7 @@ export const ProgramsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
           return http.get<{ data: IProgram[] }>('programs').pipe(
-            tap(({ data }) =>
-              patchState(store, { isLoading: false, programs: data }),
-            ),
+            tap(({ data }) => patchState(store, { isLoading: false, programs: data })),
             catchError(() => {
               patchState(store, { isLoading: false, programs: [] });
               return of(null);

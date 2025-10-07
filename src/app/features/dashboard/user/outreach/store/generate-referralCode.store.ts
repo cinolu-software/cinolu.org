@@ -1,10 +1,4 @@
-import {
-  patchState,
-  signalStore,
-  withMethods,
-  withProps,
-  withState,
-} from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../../../core/services/toast/toastr.service';
@@ -29,20 +23,18 @@ export const GenerateReferralCodeStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
-          return _http
-            .post<{ data: IUser }>('users/generate/referralCode', {})
-            .pipe(
-              tap(({ data }) => {
-                patchState(store, { isLoading: false });
-                _authStore.setUser(data);
-                _toast.showSuccess('Lien généré avec succès');
-              }),
-              catchError(() => {
-                _toast.showError('Erreur lors de la génération du lien');
-                patchState(store, { isLoading: false });
-                return of(null);
-              }),
-            );
+          return _http.post<{ data: IUser }>('users/generate/referralCode', {}).pipe(
+            tap(({ data }) => {
+              patchState(store, { isLoading: false });
+              _authStore.setUser(data);
+              _toast.showSuccess('Lien généré avec succès');
+            }),
+            catchError(() => {
+              _toast.showError('Erreur lors de la génération du lien');
+              patchState(store, { isLoading: false });
+              return of(null);
+            }),
+          );
         }),
       ),
     ),

@@ -1,11 +1,4 @@
-import {
-  LucideIconData,
-  MailCheck,
-  Phone,
-  MapPin,
-  Clock,
-  ScanFace,
-} from 'lucide-angular';
+import { LucideIconData, MailCheck, Phone, MapPin, Clock, ScanFace } from 'lucide-angular';
 
 interface IContactChildren {
   label?: string;
@@ -40,8 +33,7 @@ export const CONTACT_ITEMS: IContact[] = [
   {
     title: 'Appelez-nous',
     icon: Phone,
-    description:
-      'Notre équipe est disponible pour vos appels du lundi au samedi.',
+    description: 'Notre équipe est disponible pour vos appels du lundi au samedi.',
     children: [
       {
         label: 'Téléphone',

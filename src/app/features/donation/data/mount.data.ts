@@ -17,8 +17,7 @@ export const DONATION_ITEMS: IDonationItem[] = [
   {
     mount: 25,
     title: 'Soutenir une session de coaching',
-    description:
-      'Aidez-nous à offrir des sessions de coaching aux entrepreneurs.',
+    description: 'Aidez-nous à offrir des sessions de coaching aux entrepreneurs.',
     icon: 'images/illustrations/1.svg',
     color: '#f59e0b',
   },
@@ -32,24 +31,21 @@ export const DONATION_ITEMS: IDonationItem[] = [
   {
     mount: 100,
     title: 'Offrir un accompagnement à un·e entrepreneur·e',
-    description:
-      'Aidez un entrepreneur à bénéficier d’un accompagnement personnalisé.',
+    description: 'Aidez un entrepreneur à bénéficier d’un accompagnement personnalisé.',
     icon: 'images/illustrations/3.svg',
     color: '#3b82f6',
   },
   {
     mount: 300,
     title: 'Parrainer une mini-cohorte de 3 bénéficiaires',
-    description:
-      'Soutenez une petite cohorte d’entrepreneurs dans leur parcours.',
+    description: 'Soutenez une petite cohorte d’entrepreneurs dans leur parcours.',
     icon: 'images/illustrations/4.svg',
     color: '#8b5cf6',
   },
   {
     mount: undefined,
     title: 'Montant libre',
-    description:
-      'Faites un don selon vos possibilités pour soutenir nos actions.',
+    description: 'Faites un don selon vos possibilités pour soutenir nos actions.',
     icon: 'images/illustrations/5.svg',
     color: '#f43f5e',
   },
@@ -57,23 +53,19 @@ export const DONATION_ITEMS: IDonationItem[] = [
 
 export const OPTION_ITEMS: Iadventage[] = [
   {
-    title:
-      'Offrir des bourses d’accès à nos programmes (bootcamps, incubation, accélération)',
+    title: 'Offrir des bourses d’accès à nos programmes (bootcamps, incubation, accélération)',
     icon: CircleChevronRight,
   },
   {
-    title:
-      'Organiser des hackathons, des pitch days et des ateliers dans les écoles et universités',
+    title: 'Organiser des hackathons, des pitch days et des ateliers dans les écoles et universités',
     icon: CircleChevronRight,
   },
   {
-    title:
-      'Fournir des ressources éducatives, du mentorat et un accompagnement personnalisé',
+    title: 'Fournir des ressources éducatives, du mentorat et un accompagnement personnalisé',
     icon: CircleChevronRight,
   },
   {
-    title:
-      'Déployer notre plateforme numérique OneStop pour mieux connecter nos membres',
+    title: 'Déployer notre plateforme numérique OneStop pour mieux connecter nos membres',
     icon: CircleChevronRight,
   },
 ];

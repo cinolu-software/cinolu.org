@@ -11,17 +11,9 @@ import { LucideIconData, LucideAngularModule } from 'lucide-angular';
     trigger('fadeInOut', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(10px)' }),
-        animate(
-          '1000ms ease-in-out',
-          style({ opacity: 1, transform: 'translateY(0)' }),
-        ),
+        animate('1000ms ease-in-out', style({ opacity: 1, transform: 'translateY(0)' })),
       ]),
-      transition(':leave', [
-        animate(
-          '1000ms ease-in-out',
-          style({ opacity: 0, transform: 'translateY(-10px)' }),
-        ),
-      ]),
+      transition(':leave', [animate('1000ms ease-in-out', style({ opacity: 0, transform: 'translateY(-10px)' }))]),
     ]),
   ],
 })

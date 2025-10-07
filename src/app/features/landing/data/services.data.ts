@@ -1,11 +1,4 @@
-import {
-  Lightbulb,
-  Globe,
-  LucideIconData,
-  BarChart3,
-  Rocket,
-  Handshake,
-} from 'lucide-angular';
+import { Lightbulb, Globe, LucideIconData, BarChart3, Rocket, Handshake } from 'lucide-angular';
 
 interface IService {
   title: string;

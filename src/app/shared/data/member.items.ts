@@ -1,11 +1,4 @@
-import {
-  DollarSign,
-  GraduationCap,
-  Heart,
-  LucideIconData,
-  UserCheck,
-  UserCog,
-} from 'lucide-angular';
+import { DollarSign, GraduationCap, Heart, LucideIconData, UserCheck, UserCog } from 'lucide-angular';
 
 interface IMemberItem {
   id: number;
@@ -24,22 +17,19 @@ export const MEMBER_ITEMS: IMemberItem[] = [
   {
     id: 1,
     title: 'Je suis Entrepreneur',
-    description:
-      'Rejoignez un réseau dynamique d’entrepreneurs et d’innovateurs.',
+    description: 'Rejoignez un réseau dynamique d’entrepreneurs et d’innovateurs.',
     icon: UserCog,
   },
   {
     id: 2,
     title: 'Je suis Étudiant',
-    description:
-      'Participez à des programmes de formation et d’accompagnement.',
+    description: 'Participez à des programmes de formation et d’accompagnement.',
     icon: GraduationCap,
   },
   {
     id: 3,
     title: 'Je suis Mentor / Coach',
-    description:
-      'Contribuez à l’accompagnement des entrepreneurs et étudiants.',
+    description: 'Contribuez à l’accompagnement des entrepreneurs et étudiants.',
     icon: UserCheck,
   },
   {

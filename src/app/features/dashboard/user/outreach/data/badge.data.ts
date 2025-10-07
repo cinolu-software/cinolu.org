@@ -1,11 +1,4 @@
-import {
-  Award,
-  Crown,
-  Gem,
-  LucideIconData,
-  Medal,
-  Trophy,
-} from 'lucide-angular';
+import { Award, Crown, Gem, LucideIconData, Medal, Trophy } from 'lucide-angular';
 
 export interface Badge {
   name: string;

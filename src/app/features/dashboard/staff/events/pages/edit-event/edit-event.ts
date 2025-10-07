@@ -2,12 +2,7 @@ import { Component, effect, inject, OnInit } from '@angular/core';
 import { Button } from 'primeng/button';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaModule } from 'primeng/textarea';
 import { SelectModule } from 'primeng/select';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
