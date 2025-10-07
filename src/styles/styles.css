@@ -1,12 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap");
-@import url("https://api.fontshare.com/v2/css?f[]=satoshi@400,401,500,501,700,701,900,901,1,2&display=swap");
-@import "tailwindcss";
-@import "./overrides/main.css";
-@import "quill/dist/quill.snow.css";
+@import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,401,500,501,700,701,900,901,1,2&display=swap');
+@import 'tailwindcss';
+@import './overrides/main.css';
+@import 'quill/dist/quill.snow.css';
 
 @theme {
-  --font-mona: "Mona Sans", sans-serif;
-  --font-satoshi: "Satoshi", sans-serif;
+  --font-mona: 'Mona Sans', sans-serif;
+  --font-satoshi: 'Satoshi', sans-serif;
   --animate-fadeInUp: fadeInUp 300ms ease-in;
 
   --color-primary-50: #f1f8ed;
@@ -82,7 +82,7 @@
   }
 
   button:not(:disabled),
-  [role="button"]:not(:disabled) {
+  [role='button']:not(:disabled) {
     cursor: pointer;
   }
 
@@ -106,7 +106,7 @@
   }
 
   .dashboard-main-content {
-    @apply bg-white rounded-lg shadow-md px-8 py-10 ;
+    @apply bg-white rounded-lg shadow-md px-8 py-10;
   }
 
   @keyframes pulse-ring {
@@ -125,7 +125,7 @@
   }
 
   .ring-pulse::before {
-    content: "";
+    content: '';
     position: absolute;
     display: block;
     width: 100%;

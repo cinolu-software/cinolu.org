@@ -12,7 +12,7 @@ import { AuthStore } from '../../../../../core/auth/auth.store';
 import { FileUpload } from '../../../../../shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { SelectModule } from 'primeng/select';
-import { GENDERS } from '../../../../../shared/data/member.items';
+import { GENDERS } from '../../../../../shared/data/genders.data';
 
 @Component({
   selector: 'app-account',
@@ -46,7 +46,8 @@ export class Account implements OnInit {
       email: ['', Validators.email],
       city: ['', Validators.required],
       country: ['', Validators.required],
-      gender: [null, Validators.required],
+      // use empty string default to match genders option values (e.g. 'female'|'male')
+      gender: ['', Validators.required],
       birth_date: ['', Validators.required],
       phone_number: ['', [Validators.minLength(10)]],
       name: ['', Validators.minLength(3)],

@@ -12,6 +12,7 @@
         <div class="animate-pulse rounded-md bg-gray-200 h-3 w-52"></div>
         <div class="animate-pulse rounded-md bg-gray-200 h-3 w-52"></div>
       </div>
+      <div class="animate-pulse mt-10 rounded-lg h-96 w-full bg-gray-200"></div>
     </div>
     } @if (store.user(); as user) {
     <div class="flex flex-col md:flex-row flex-wrap gap-4 mb-6">
@@ -46,7 +47,6 @@
         }
       </div>
     </div>
-    } @if (store.isLoading() || store.user()) {
     <form
       [formGroup]="updateUserForm"
       (ngSubmit)="onUpdateUser()"

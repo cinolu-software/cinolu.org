@@ -13,8 +13,8 @@ import { UpdateUserStore } from '../../store/users/update-user.store';
 import { UnpaginatedRolesStore } from '../../store/roles/unpaginated-roles.store';
 import { DatePickerModule } from 'primeng/datepicker';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
-import { Select } from 'primeng/select';
-import { GENDERS } from '../../../../../../shared/data/member.items';
+import { SelectModule } from 'primeng/select';
+import { GENDERS } from '../../../../../../shared/data/genders.data';
 
 @Component({
   selector: 'app-user-edit',
@@ -33,7 +33,7 @@ import { GENDERS } from '../../../../../../shared/data/member.items';
     ApiImgPipe,
     DatePickerModule,
     MultiSelectModule,
-    Select,
+    SelectModule,
   ],
 })
 export class EditUser {
@@ -44,14 +44,7 @@ export class EditUser {
   store = inject(UsersStore);
   updateStore = inject(UpdateUserStore);
   rolesStore = inject(UnpaginatedRolesStore);
-  icons = {
-    save: Save,
-    back: MoveLeft,
-    locate: Locate,
-    alert: TriangleAlert,
-    phone: Phone,
-    email: Mail,
-  };
+  icons = { save: Save, back: MoveLeft, locate: Locate, alert: TriangleAlert, phone: Phone, email: Mail };
 
   constructor() {
     this.updateUserForm = this.#fb.group({
@@ -59,7 +52,7 @@ export class EditUser {
       email: ['', [Validators.required]],
       name: ['', Validators.required],
       phone_number: ['', Validators.required],
-      gender: [null, Validators.required],
+      gender: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
       birth_date: ['', Validators.required],

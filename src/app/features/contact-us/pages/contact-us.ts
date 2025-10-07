@@ -10,7 +10,7 @@ import { SelectChangeEvent, SelectModule } from 'primeng/select';
 import { InputGroupAddon } from 'primeng/inputgroupaddon';
 import { InputGroup } from 'primeng/inputgroup';
 import { ButtonModule } from 'primeng/button';
-import { GENDERS } from '../../../shared/data/member.items';
+import { GENDERS } from '../../../shared/data/genders.data';
 import { ContactUsStore } from '../store/contact-us.store';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 

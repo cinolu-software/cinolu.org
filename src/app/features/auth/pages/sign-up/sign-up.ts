@@ -14,7 +14,7 @@ import { SelectChangeEvent, SelectModule } from 'primeng/select';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { COUNTRY_CODE } from '../../../../shared/data/country-item.data';
-import { GENDERS } from '../../../../shared/data/member.items';
+import { GENDERS } from '../../../../shared/data/genders.data';
 
 @Component({
   selector: 'app-sign-up',
