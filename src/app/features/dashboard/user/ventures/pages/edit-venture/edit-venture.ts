@@ -13,7 +13,6 @@ import { SelectModule } from 'primeng/select';
 import { DatePickerModule } from 'primeng/datepicker';
 import { environment } from '../../../../../../../environments/environment';
 import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
-import { QuillEditorComponent } from 'ngx-quill';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
@@ -33,7 +32,6 @@ import { ActivatedRoute } from '@angular/router';
     DatePickerModule,
     FileUpload,
     ReactiveFormsModule,
-    QuillEditorComponent,
     ApiImgPipe,
     NgOptimizedImage,
     LucideAngularModule,
