@@ -1,7 +1,7 @@
 <section class="min-h-[105vh] text-gray-600">
   @let isLoading = store.isLoading(); @let hasQuery = queryParams().q; @let eventCount = store.events()[1]; @let
   eventList = store.events()[0];
-  <div class="relative bg-white rounded-lg">
+  <div class="relative bg-white rounded-lg pb-10">
     <div class="flex flex-col gap-3 mb-10 pt-6">
       <div class="px-6 flex flex-wrap gap-2 md:justify-between md:items-center mb-6 md:mb-0">
         <h5 class="text-lg font-bold">
@@ -56,7 +56,7 @@
       {{ hasQuery ? 'Aucun événement trouvé avec ce filtre' : 'Aucun événement trouvé' }}
     </h4>
     } @if (isLoading) {
-    <div class="grid grid-cols-5 overflow-x-auto">
+    <div class="grid grid-cols-5 mx-6 my-6 border border-gray-200 rounded-lg">
       @for (i of skeletonArray; track $index) {
       <div class="border-y border-gray-200 py-3 px-6">
         <div class="h-4 rounded-md bg-gray-200 animate-pulse mb-2"></div>
@@ -64,9 +64,9 @@
       }
     </div>
     } @if (eventCount > 0 && !isLoading) {
-    <div class="relative flex flex-col overflow-x-auto">
+    <div class="relative flex flex-col overflow-x-auto mx-6 my-6 border border-gray-200 rounded-lg">
       <table class="text-left rtl:text-right text-gray-500">
-        <thead class="font-black text-gray-800 border-y border-gray-200">
+        <thead class="font-black text-gray-800 bg-gray-100">
           <tr>
             <th class="px-6 py-3">Image</th>
             <th class="px-6 py-3">Nom</th>
@@ -79,14 +79,14 @@
         <tbody>
           @for ( event of eventList | paginate : { itemsPerPage: 40, currentPage: queryParams().page || 1, totalItems:
           eventCount, }; track event.id ) {
-          <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
+          <tr class="border-b border-gray-200 last:border-none">
             <td class="px-6 py-2">
               <p-avatar [image]="event | apiIMG: 'event'" />
             </td>
-            <td class="px-6 py-2 font-medium text-gray-900">{{ event.name | titlecase }}</td>
-            <td class="px-6 py-2">{{ event.started_at | date: 'longDate' }}</td>
-            <td class="px-6 py-2">{{ event.ended_at | date: 'longDate' }}</td>
-            <td class="px-6 py-2 text-xs capitalize font-medium">
+            <td class="px-6 py-2 font-medium text-gray-900 w-80 hyphens-auto">{{ event.name | titlecase }}</td>
+            <td class="px-6 py-2">{{ event.started_at | date: 'shortDate' }}</td>
+            <td class="px-6 py-2">{{ event.ended_at | date: 'shortDate' }}</td>
+            <td class="px-6 py-2 text-xs capitalize font-medium w-32">
               @if (event.is_published) {
               <span class="text-primary-500 bg-primary-400/20 rounded py-1 px-1.5">publié</span>
               } @else {
@@ -95,27 +95,28 @@
             </td>
             <td class="px-6 py-2">
               <div class="flex items-center gap-2">
-                <button class="text-gray-500" (click)="highlightEvent(event.id)">
+                <button pButton outlined severity="success" (click)="highlightEvent(event.id)">
                   @if (event.is_highlighted) {
-                  <i-lucide [name]="icons.star" class="size-4 text-yellow-500" />
+                  <i-lucide [name]="icons.star" class="size-4" />
                   } @else {
                   <i-lucide [name]="icons.starOff" class="size-4" />
                   }
                 </button>
-                <button (click)="onPublishProject(event.id)">
-                  <p-confirmpopup />
+                <button pButton outlined (click)="onPublishProject(event.id)">
                   @if (!event.is_published) {
-                  <i-lucide [name]="icons.eyeOff" class="size-5" />
+                  <i-lucide [name]="icons.eyeOff" class="size-4" />
                   } @else {
-                  <i-lucide [name]="icons.eye" class="size-5 text-primary-500" />
+                  <i-lucide [name]="icons.eye" class="size-4" />
                   }
                 </button>
-                <a [routerLink]="['/dashboard/events/edit', event.slug]">
+                <a pButton outlined severity="info" [routerLink]="['/dashboard/events/edit', event.slug]">
                   <i-lucide [name]="icons.edit" class="size-4" />
                 </a>
-                <button class="text-red-500" (click)="onDeleteProject(event.id, $event)">
-                  <p-confirmpopup />
-                  <i-lucide [name]="icons.trash" class="size-4" />
+                <button pButton outlined severity="danger" (click)="onDeleteProject(event.id, $event)">
+                  <div class="relative">
+                    <p-confirmpopup />
+                    <i-lucide [name]="icons.trash" class="size-4" />
+                  </div>
                 </button>
               </div>
             </td>
