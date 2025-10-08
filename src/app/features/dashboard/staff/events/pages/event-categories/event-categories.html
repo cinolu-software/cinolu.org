@@ -13,7 +13,7 @@
               animationDuration=".5s"
               fill="transparent"
               [style]="{ width: '0.8rem', height: '0.8rem' }" />
-            } @else { ({{ categoryCount | json }}) }
+            } @else { [{{ categoryCount | json }}] }
           </span>
         </h5>
         <p-button [outlined]="true" [size]="'small'" (click)="onToggleAddModal()">
@@ -21,35 +21,8 @@
           Ajouter une catégorie
         </p-button>
       </div>
-      <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
-        <input
-          class="py-1! md:w-1/3"
-          pInputText
-          id="q"
-          formControlName="q"
-          autocomplete="off"
-          placeholder="Rechercher..." />
-        <div class="flex items-center gap-1">
-          <p-button
-            type="submit"
-            [size]="'small'"
-            [loading]="isLoading"
-            [disabled]="searchForm.invalid || isLoading || (categoryCount === 0 && !hasQuery)">
-            Rechercher @if (!isLoading) {
-            <i-lucide [name]="icons.search" class="size-4" />
-            }
-          </p-button>
-          <p-button
-            [size]="'small'"
-            [outlined]="true"
-            [loading]="isLoading"
-            [disabled]="isLoading || !hasQuery"
-            (click)="onResetSearch()">
-            Réinitialiser @if (!isLoading) {
-            <i-lucide [name]="icons.refresh" class="size-4" />
-            }
-          </p-button>
-        </div>
+      <form [formGroup]="searchForm" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
+        <input class="md:w-1/3" pInputText id="q" formControlName="q" placeholder="Rechercher..." />
       </form>
     </div>
     @if (categoryCount === 0 && !isLoading) {

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LucideAngularModule, RefreshCcw, SquarePen, Plus, Trash, Search } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
@@ -16,6 +16,8 @@ import { DeleteRoleStore } from '../../store/roles/delete-role.store';
 import { RolesStore } from '../../store/roles/roles.store';
 import { UpdateRoleStore } from '../../store/roles/update-role.store';
 import { IRole } from '../../../../../../shared/models/entities.models';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-user-roles',
@@ -47,6 +49,7 @@ export class UserRoles implements OnInit {
   updateRoleStore = inject(UpdateRoleStore);
   showAddModal = signal(false);
   showEditModal = signal(false);
+  #destroyRef = inject(DestroyRef);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   icons = {
     refresh: RefreshCcw,
@@ -62,7 +65,7 @@ export class UserRoles implements OnInit {
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || '', Validators.required],
+      q: [this.queryParams().q || ''],
     });
     this.addRoleForm = this.#fb.group({
       name: ['', Validators.required],
@@ -75,6 +78,14 @@ export class UserRoles implements OnInit {
 
   ngOnInit(): void {
     this.loadRoles();
+    const searchInput = this.searchForm.get('q');
+    searchInput?.valueChanges
+      .pipe(debounceTime(1000), distinctUntilChanged(), takeUntilDestroyed(this.#destroyRef))
+      .subscribe((searchValue: string) => {
+        this.queryParams().q = searchValue ? searchValue.trim() : null;
+        this.queryParams().page = null;
+        this.updateRouteAndRoles();
+      });
   }
 
   loadRoles(): void {
@@ -97,24 +108,12 @@ export class UserRoles implements OnInit {
 
   updateRoute(): void {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/users/roles'], { queryParams }).then();
+    this.#router.navigate(['/dashboard/roles'], { queryParams }).then();
   }
 
   updateRouteAndRoles(): void {
     this.updateRoute();
     this.loadRoles();
-  }
-
-  onResetSearch(): void {
-    this.searchForm.reset();
-    this.queryParams.set({ page: null, q: null });
-    this.updateRouteAndRoles();
-  }
-
-  onSearch(): void {
-    const searchValue = this.searchForm.value.q;
-    this.queryParams.set({ page: null, q: searchValue });
-    this.updateRouteAndRoles();
   }
 
   onAddRole(): void {

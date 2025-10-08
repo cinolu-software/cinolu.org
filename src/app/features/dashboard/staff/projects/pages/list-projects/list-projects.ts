@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import {
   LucideAngularModule,
   RefreshCcw,
@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ProjectsStore } from '../../store/projects/projects.store';
 import { ConfirmationService } from 'primeng/api';
 import { DeleteProjectStore } from '../../store/projects/delete-project.store';
@@ -27,6 +27,8 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { HighlightProjectStore } from '../../store/projects/highlight-project.store';
 import { FilterProjectsDto } from '../../dto/projects/filter-projects.dto';
 import { ProgressSpinner } from 'primeng/progressspinner';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-projects-list',
@@ -57,6 +59,7 @@ export class ListProjects implements OnInit {
   publishProjectStore = inject(PublishProjectStore);
   highlightStore = inject(HighlightProjectStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
+  #destroyRef = inject(DestroyRef);
   icons = {
     refresh: RefreshCcw,
     edit: SquarePen,
@@ -75,16 +78,20 @@ export class ListProjects implements OnInit {
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || '', Validators.required],
+      q: [this.queryParams().q || ''],
     });
   }
 
   ngOnInit(): void {
     this.loadProjects();
-  }
-
-  get count(): number {
-    return this.store.projects()[1];
+    const searchInput = this.searchForm.get('q');
+    searchInput?.valueChanges
+      .pipe(debounceTime(1000), distinctUntilChanged(), takeUntilDestroyed(this.#destroyRef))
+      .subscribe((searchValue: string) => {
+        this.queryParams().q = searchValue ? searchValue.trim() : null;
+        this.queryParams().page = null;
+        this.updateRouteAndProjects();
+      });
   }
 
   loadProjects(): void {
@@ -108,18 +115,6 @@ export class ListProjects implements OnInit {
   async updateRouteAndProjects(): Promise<void> {
     await this.updateRoute();
     this.loadProjects();
-  }
-
-  async onResetSearch(): Promise<void> {
-    this.searchForm.reset();
-    this.queryParams.set({ page: null, q: null });
-    await this.updateRouteAndProjects();
-  }
-
-  async onSearch(): Promise<void> {
-    const searchValue = this.searchForm.value.q;
-    this.queryParams.set({ page: null, q: searchValue });
-    await this.updateRouteAndProjects();
   }
 
   onPublishProject(projectId: string): void {

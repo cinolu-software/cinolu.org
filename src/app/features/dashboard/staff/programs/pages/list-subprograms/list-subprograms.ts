@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {
   LucideAngularModule,
@@ -36,6 +36,8 @@ import { PublishSubprogramsStore } from '../../store/subprograms/publish-subprog
 import { UnpaginatedProgramsStore } from '../../store/list-programs/unpaginated-programs.store';
 import { SelectModule } from 'primeng/select';
 import { HighlightSubprogramStore } from '../../store/subprograms/highlight-subprogram.store';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-list-subprograms',
@@ -85,6 +87,7 @@ export class ListSubprograms implements OnInit {
   subprogram = signal<ISubprogram | null>(null);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   url = environment.apiUrl + 'subprograms/logo/';
+  #destroyRef = inject(DestroyRef);
   icons = {
     refresh: RefreshCcw,
     edit: SquarePen,
@@ -105,7 +108,7 @@ export class ListSubprograms implements OnInit {
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || '', Validators.required],
+      q: [this.queryParams().q || ''],
     });
     this.addSubprogramForm = this.#fb.group({
       name: ['', Validators.required],
@@ -122,6 +125,14 @@ export class ListSubprograms implements OnInit {
 
   ngOnInit(): void {
     this.loadSubprograms();
+    const searchInput = this.searchForm.get('q');
+    searchInput?.valueChanges
+      .pipe(debounceTime(1000), distinctUntilChanged(), takeUntilDestroyed(this.#destroyRef))
+      .subscribe((searchValue: string) => {
+        this.queryParams().q = searchValue ? searchValue.trim() : null;
+        this.queryParams().page = null;
+        this.updateRouteAndSubrograms();
+      });
   }
 
   get count(): number {
@@ -157,18 +168,6 @@ export class ListSubprograms implements OnInit {
   async updateRouteAndSubrograms(): Promise<void> {
     await this.updateRoute();
     this.loadSubprograms();
-  }
-
-  async onResetSearch(): Promise<void> {
-    this.searchForm.reset();
-    this.queryParams.set({ page: null, q: null });
-    await this.updateRouteAndSubrograms();
-  }
-
-  async onSearch(): Promise<void> {
-    const searchValue = this.searchForm.value.q;
-    this.queryParams.set({ page: null, q: searchValue });
-    await this.updateRouteAndSubrograms();
   }
 
   onToggleAddModal(): void {

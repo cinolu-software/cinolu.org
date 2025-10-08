@@ -13,7 +13,7 @@
               animationDuration=".5s"
               fill="transparent"
               [style]="{ width: '0.8rem', height: '0.8rem' }" />
-            } @else { ({{ tagsCount }}) }
+            } @else { [{{ tagsCount }}] }
           </span>
         </h5>
         <p-button [outlined]="true" [size]="'small'" (click)="onToggleAddModal()">
@@ -21,29 +21,8 @@
           Ajouter une tag
         </p-button>
       </div>
-      <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
-        <input pInputText class="py-1! md:w-1/3" id="q" formControlName="q" placeholder="Rechercher..." />
-        <div class="flex items-center gap-1">
-          <p-button
-            type="submit"
-            [size]="'small'"
-            [loading]="isLoading"
-            [disabled]="searchForm.invalid || isLoading || (tagsCount === 0 && !hasQuery)">
-            Rechercher @if (!isLoading) {
-            <i-lucide [name]="icons.search" class="size-4" />
-            }
-          </p-button>
-          <p-button
-            outlined
-            [size]="'small'"
-            [loading]="isLoading"
-            [disabled]="isLoading || !hasQuery"
-            (click)="onResetSearch()">
-            Réinitialiser @if (!isLoading) {
-            <i-lucide [name]="icons.refresh" class="size-4" />
-            }
-          </p-button>
-        </div>
+      <form [formGroup]="searchForm" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
+        <input pInputText class="md:w-1/3" id="q" formControlName="q" placeholder="Rechercher..." />
       </form>
     </div>
     @if (tagsCount === 0 && !isLoading) {

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {
   LucideAngularModule,
@@ -38,6 +38,8 @@ import { PublishProgramStore } from '../../store/list-programs/publish-program.s
 import { HighlightProgramStore } from '../../store/list-programs/highlight-program.store';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
 import { Select } from 'primeng/select';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-list-programs',
@@ -87,6 +89,7 @@ export class ListPrograms implements OnInit {
   program = signal<IProgram | null>(null);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   url = environment.apiUrl + 'programs/logo/';
+  #destroyRef = inject(DestroyRef);
   icons = {
     refresh: RefreshCcw,
     edit: SquarePen,
@@ -109,7 +112,7 @@ export class ListPrograms implements OnInit {
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || '', Validators.required],
+      q: [this.queryParams().q || ''],
     });
     this.addProgramForm = this.#fb.group({
       name: ['', Validators.required],
@@ -126,6 +129,14 @@ export class ListPrograms implements OnInit {
 
   ngOnInit(): void {
     this.loadPrograms();
+    const searchInput = this.searchForm.get('q');
+    searchInput?.valueChanges
+      .pipe(debounceTime(1000), distinctUntilChanged(), takeUntilDestroyed(this.#destroyRef))
+      .subscribe((searchValue: string) => {
+        this.queryParams().q = searchValue ? searchValue.trim() : null;
+        this.queryParams().page = null;
+        this.updateRouteAndPrograms();
+      });
   }
 
   loadPrograms(): void {
@@ -157,18 +168,6 @@ export class ListPrograms implements OnInit {
   async updateRouteAndPrograms(): Promise<void> {
     await this.updateRoute();
     this.loadPrograms();
-  }
-
-  async onResetSearch(): Promise<void> {
-    this.searchForm.reset();
-    this.queryParams.set({ page: null, q: null });
-    await this.updateRouteAndPrograms();
-  }
-
-  async onSearch(): Promise<void> {
-    const searchValue = this.searchForm.value.q;
-    this.queryParams.set({ page: null, q: searchValue });
-    await this.updateRouteAndPrograms();
   }
 
   onToggleAddModal(): void {

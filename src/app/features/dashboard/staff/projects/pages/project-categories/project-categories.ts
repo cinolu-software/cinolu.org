@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { LucideAngularModule, RefreshCcw, SquarePen, Plus, Trash, Search } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -16,6 +16,8 @@ import { UpdateCategoryStore } from '../../store/categories/update-category.stor
 import { ICategory } from '../../../../../../shared/models/entities.models';
 import { FilterProjectCategoriesDto } from '../../dto/categories/filter-categories.dto';
 import { ProgressSpinner } from 'primeng/progressspinner';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-project-categories',
@@ -48,6 +50,7 @@ export class ProjectCategories implements OnInit {
   showAddModal = signal(false);
   showEditModal = signal(false);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
+  #destroyRef = inject(DestroyRef);
   icons = {
     refresh: RefreshCcw,
     edit: SquarePen,
@@ -62,7 +65,7 @@ export class ProjectCategories implements OnInit {
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || '', Validators.required],
+      q: [this.queryParams().q || ''],
     });
     this.addCategoryForm = this.#fb.group({
       name: ['', Validators.required],
@@ -75,6 +78,14 @@ export class ProjectCategories implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
+    const searchInput = this.searchForm.get('q');
+    searchInput?.valueChanges
+      .pipe(debounceTime(1000), distinctUntilChanged(), takeUntilDestroyed(this.#destroyRef))
+      .subscribe((searchValue: string) => {
+        this.queryParams().q = searchValue ? searchValue.trim() : null;
+        this.queryParams().page = null;
+        this.updateRouteAndCategories();
+      });
   }
 
   get count(): number {
@@ -111,18 +122,6 @@ export class ProjectCategories implements OnInit {
   updateRouteAndCategories(): void {
     this.updateRoute();
     this.loadCategories();
-  }
-
-  onResetSearch(): void {
-    this.searchForm.reset();
-    this.queryParams.set({ page: null, q: null });
-    this.updateRouteAndCategories();
-  }
-
-  onSearch(): void {
-    const searchValue = this.searchForm.value.q;
-    this.queryParams.set({ page: null, q: searchValue });
-    this.updateRouteAndCategories();
   }
 
   onAddCategory(): void {

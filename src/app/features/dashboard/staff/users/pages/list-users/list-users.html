@@ -13,7 +13,7 @@
               animationDuration=".5s"
               fill="transparent"
               [style]="{ width: '0.8rem', height: '0.8rem' }" />
-            } @else { ({{ userCount }}) }
+            } @else { [{{ userCount }}] }
           </span>
         </h5>
         <div class="flex flex-col md:flex-row md:items-center gap-2">
@@ -33,29 +33,8 @@
           </p-button>
         </div>
       </div>
-      <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
-        <input pInputText class="py-1! md:w-1/3" formControlName="q" placeholder="Rechercher..." />
-        <div class="flex items-center gap-1">
-          <p-button
-            type="submit"
-            [size]="'small'"
-            [loading]="isLoading"
-            [disabled]="searchForm.invalid || isLoading || (userCount === 0 && !hasQuery)">
-            Rechercher @if (!isLoading) {
-            <i-lucide [name]="icons.search" class="size-4" />
-            }
-          </p-button>
-          <p-button
-            [size]="'small'"
-            [outlined]="true"
-            [loading]="isLoading"
-            [disabled]="isLoading || !hasQuery"
-            (click)="onResetSearch()">
-            Réinitialiser @if (!isLoading) {
-            <i-lucide [name]="icons.refresh" class="size-4" />
-            }
-          </p-button>
-        </div>
+      <form [formGroup]="searchForm" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
+        <input pInputText class="md:w-1/2" formControlName="q" placeholder="Rechercher..." />
       </form>
     </div>
     @if (userCount === 0 && !isLoading) {

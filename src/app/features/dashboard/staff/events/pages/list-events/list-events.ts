@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import {
   LucideAngularModule,
   RefreshCcw,
@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { EventsStore } from '../../store/events/events.store';
 import { ConfirmationService } from 'primeng/api';
 import { DeleteEventStore } from '../../store/events/delete-event.store';
@@ -27,6 +27,8 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { HighlightEventStore } from '../../store/events/highlight-event.store';
 import { FilterEventsDto } from '../../dto/categories/filter-events.dto';
 import { ProgressSpinner } from 'primeng/progressspinner';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-events-list',
@@ -57,6 +59,7 @@ export class ListEvents implements OnInit {
   publishEventStore = inject(PublishEventStore);
   highlightStore = inject(HighlightEventStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
+  #destroyRef = inject(DestroyRef);
   icons = {
     refresh: RefreshCcw,
     edit: SquarePen,
@@ -75,16 +78,20 @@ export class ListEvents implements OnInit {
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || '', Validators.required],
+      q: [this.queryParams().q || ''],
     });
   }
 
   ngOnInit(): void {
     this.loadEvents();
-  }
-
-  get count(): number {
-    return this.store.events()[1];
+    const searchInput = this.searchForm.get('q');
+    searchInput?.valueChanges
+      .pipe(debounceTime(1000), distinctUntilChanged(), takeUntilDestroyed(this.#destroyRef))
+      .subscribe((searchValue: string) => {
+        this.queryParams().q = searchValue ? searchValue.trim() : null;
+        this.queryParams().page = null;
+        this.updateRouteAndEvents();
+      });
   }
 
   loadEvents(): void {
@@ -108,18 +115,6 @@ export class ListEvents implements OnInit {
   updateRouteAndEvents(): void {
     this.updateRoute().then();
     this.loadEvents();
-  }
-
-  onResetSearch(): void {
-    this.searchForm.reset();
-    this.queryParams.set({ page: null, q: null });
-    this.updateRouteAndEvents();
-  }
-
-  onSearch(): void {
-    const searchValue = this.searchForm.value.q;
-    this.queryParams.set({ page: null, q: searchValue });
-    this.updateRouteAndEvents();
   }
 
   onPublishProject(projectId: string): void {
