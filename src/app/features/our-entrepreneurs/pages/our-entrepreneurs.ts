@@ -2,13 +2,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { LucideAngularModule, Users } from 'lucide-angular';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
-import { HighUserCard } from '../components/high-user-card/high-user-card';
 import { EntrepreneursStore } from '../store/ventures/entrepreneurs.store';
+import { EntrepreneurUserCard } from "../components/entrepreneur-user-card/entrepreneur-user-card";
 
 @Component({
   selector: 'app-our-entrepreneurs',
   providers: [EntrepreneursStore],
-  imports: [LucideAngularModule, HeroCard, PaginatorModule, HighUserCard],
+  imports: [LucideAngularModule, HeroCard, PaginatorModule, EntrepreneurUserCard],
   templateUrl: './our-entrepreneurs.html',
 })
 export class OurEntrepreneurs implements OnInit {
