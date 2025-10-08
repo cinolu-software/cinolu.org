@@ -1,63 +1,60 @@
 <div
-  class="w-80 bg-white rounded-xl shadow-xl overflow-hidden p-4 transition duration-300 hover:shadow-2xl mx-auto"
+  class="w-full bg-white rounded-md shadow-xl overflow-hidden p-3 transition duration-300 hover:shadow-2xl"
 >
-  <!-- Image principale -->
-  <div class="relative h-32 rounded-lg overflow-hidden">
+  <div class="relative h-28 rounded-2xl overflow-hidden">
     <img
       [src]="entrepreneur.products[0].image"
-      alt=""
+      alt="Image du produit"
       class="w-full h-full object-cover"
     />
 
-    <!-- Photo de profil -->
+    <div class="absolute inset-0 bg-black/30"></div>
+
     <img
       [src]="entrepreneur.photo"
       [alt]="entrepreneur.name"
-      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full object-cover border-2 border-white shadow-md"
+      class="absolute bottom-3 left-3 w-14 h-14 rounded-full object-cover border-2 border-white shadow-md"
     />
 
-    <!-- Score -->
     <div
-      class="absolute top-3 right-3 flex items-center bg-white/70 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs font-semibold text-gray-800"
+      class="absolute top-3 right-3 flex items-center bg-white/70 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-gray-800"
     >
       <span class="mr-1 text-yellow-500">
         <i-lucide size="16" [name]="icons.award"></i-lucide>
       </span>
-      {{ entrepreneur.score }}
+      {{ entrepreneur.score | percent: "1.0-0" }}
     </div>
 
-    <!-- Vérifié -->
-    <span class="absolute bottom-3 right-3 text-white drop-shadow-md">
+    <span class="absolute bottom-3 right-3 text-white drop-shadow-lg">
       <i-lucide size="20" [name]="icons.verified"></i-lucide>
     </span>
   </div>
 
-  <!-- Corps -->
-  <div class="pt-8 text-center">
-    <h2 class="text-lg font-bold text-gray-900 mb-1">
+  <div class="p-3 pt-4 text-center">
+    <h2 class="text-xl font-bold text-gray-900 truncate">
       {{ entrepreneur.name }}
     </h2>
-    <p class="text-sm text-gray-500 mb-5 px-3 line-clamp-2">
+
+    <p class="text-base text-gray-500 mb-4 line-clamp-2">
       {{ entrepreneur.bio }}
     </p>
 
-    <!-- Points -->
-    <div class="flex justify-center items-center text-sm mb-5">
+    <div class="flex justify-center items-center text-base mb-6">
       <div class="flex flex-col items-center">
         <div class="flex items-center text-yellow-500">
-          <i-lucide size="18" [name]="icons.verified"></i-lucide>
-          <span class="ml-1 font-semibold">{{
-            entrepreneur.score | percent: "1.1-1"
-          }}</span>
+          <i-lucide size="20" [name]="icons.award"></i-lucide>
+
+          <span class="ml-1 text-xl font-bold">
+            {{ entrepreneur.score | percent: "1.1-1" }}
+          </span>
         </div>
-        <span class="text-xs text-gray-400 mt-1">Points</span>
+        <span class="text-xs text-gray-400 mt-1">Score</span>
       </div>
     </div>
 
-    <!-- Bouton -->
     <button
       [routerLink]="['/entrepreneurs', entrepreneur.id]"
-      class="w-full py-2.5 text-sm font-semibold text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300"
+      class="w-full py-3 text-sm font-semibold text-white bg-primary-500 rounded-md hover:bg-primary-600 transition duration-150 shadow-md hover:shadow-lg"
     >
       Voir le profil
     </button>
