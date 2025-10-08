@@ -34,13 +34,7 @@ export const CommentsStore = signalStore(
             }>(`comments/article/${p.slug}`, { params })
             .pipe(
               map(({ data }) => {
-                const [currentComments] = store.comments();
-                const comments = data[0];
-                const count = data[1];
-                console.log('loaded comments', data);
-                patchState(store, {
-                  comments: [[...comments, ...currentComments], count + comments.length],
-                });
+                patchState(store, { isLoading: false, comments: data });
               }),
               catchError(() => {
                 patchState(store, { isLoading: false, comments: [[], 0] });
@@ -57,7 +51,7 @@ export const CommentsStore = signalStore(
     addComments: (comments: IComment[]): void => {
       const [currentComments, count] = store.comments();
       patchState(store, {
-        comments: [[...comments, ...currentComments], count + comments.length],
+        comments: [[...currentComments, ...comments], count + comments.length],
       });
     },
     updateComment: (comment: IComment): void => {
