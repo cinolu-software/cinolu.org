@@ -2,7 +2,7 @@
   @let isLoading = store.isLoading(); @let hasQuery = queryParams().q; @let roleCount = store.roles()[1]; @let roleList
   = store.roles()[0];
 
-  <div class="relative bg-white rounded-lg">
+  <div class="relative bg-white rounded-lg pb-10">
     <div class="flex flex-col gap-3 mb-10 pt-6">
       <div class="px-6 flex flex-wrap gap-2 md:justify-between md:items-center mb-6 md:mb-0">
         <h5 class="text-lg font-bold">
@@ -52,7 +52,7 @@
       {{ hasQuery ? 'Aucun rôle trouvé avec ce filtre' : 'Aucun utilisateur trouvé' }}
     </h4>
     } @if (isLoading) {
-    <div class="grid grid-cols-3 overflow-x-auto">
+    <div class="grid grid-cols-3 mx-6 my-6 border border-gray-200 rounded-lg">
       @for (i of skeletonArray; track $index) {
       <div class="border-y border-gray-200 py-3 px-6">
         <div class="h-4 rounded-md bg-gray-200 animate-pulse mb-2"></div>
@@ -60,29 +60,29 @@
       }
     </div>
     } @if (roleCount > 0 && !isLoading) {
-    <div class="relative flex flex-col overflow-x-auto">
+    <div class="relative flex flex-col overflow-x-auto mx-6 my-6 border border-gray-200 rounded-lg">
       <table class="text-left rtl:text-right text-gray-500">
-        <thead class="font-black text-gray-800 border-y border-gray-200">
+        <thead class="font-black text-gray-800 bg-gray-100">
           <tr>
             <th class="px-6 py-3">Nom</th>
-            <th class="px-6 py-3">Date de création</th>
             <th class="px-6 py-3">Actions</th>
           </tr>
         </thead>
         <tbody>
           @for ( role of roleList | paginate : { itemsPerPage: 40, currentPage: queryParams().page || 1, totalItems:
           roleCount, }; track role.id ) {
-          <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
+          <tr class="border-b border-gray-200 last:border-none">
             <td class="px-6 py-2 font-medium">{{ role.name | titlecase }}</td>
-            <td class="px-6 py-2">{{ role.created_at | date: 'longDate' }}</td>
             <td class="px-6 py-2">
               <div class="flex items-center gap-2">
-                <button class="text-gray-500" (click)="onToggleEditModal(role)">
+                <button pButton outlined severity="info" class="text-gray-500" (click)="onToggleEditModal(role)">
                   <i-lucide [name]="icons.edit" class="size-4" />
                 </button>
-                <button class="text-red-700" (click)="onDeleteRole(role.id, $event)">
-                  <p-confirmpopup />
-                  <i-lucide [name]="icons.trash" class="size-4" />
+                <button pButton outlined severity="danger" (click)="onDeleteRole(role.id, $event)">
+                  <div class="relative">
+                    <p-confirmpopup />
+                    <i-lucide [name]="icons.trash" class="size-4" />
+                  </div>
                 </button>
               </div>
             </td>

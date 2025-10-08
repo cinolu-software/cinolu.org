@@ -1,7 +1,7 @@
 <section class="min-h-[105vh] text-gray-600">
   @let isLoading = store.isLoading(); @let hasQuery = queryParams().q; @let articleCount = store.articles()[1]; @let
   articleList = store.articles()[0];
-  <div class="relative bg-white rounded-lg">
+  <div class="relative bg-white rounded-lg pb-10">
     <div class="flex flex-col gap-3 mb-10 pt-6">
       <div class="px-6 flex flex-wrap gap-2 md:justify-between md:items-center mb-6 md:mb-0">
         <h5 class="text-lg font-bold">
@@ -18,7 +18,7 @@
         </h5>
         <a
           pButton
-          [outlined]="true"
+          outlined
           [size]="'small'"
           [routerLink]="['/dashboard/blog/articles/add']"
           class="flex items-center gap-2">
@@ -40,7 +40,7 @@
           </p-button>
           <p-button
             [size]="'small'"
-            [outlined]="true"
+            outlined
             [loading]="isLoading"
             [disabled]="isLoading || !hasQuery"
             (click)="onResetSearch()">
@@ -56,7 +56,7 @@
       {{ hasQuery ? 'Aucun article trouvé avec ce filtre' : 'Aucun événement trouvé' }}
     </h4>
     } @if (isLoading) {
-    <div class="grid grid-cols-5 overflow-x-auto">
+    <div class="grid grid-cols-5 mx-6 my-6 border border-gray-200 rounded-lg">
       @for (i of skeletonArray; track $index) {
       <div class="border-y border-gray-200 py-3 px-6">
         <div class="h-4 rounded-md bg-gray-200 animate-pulse mb-2"></div>
@@ -64,13 +64,12 @@
       }
     </div>
     } @if (articleCount > 0 && !isLoading) {
-    <div class="relative flex flex-col overflow-x-auto">
+    <div class="relative flex flex-col overflow-x-auto mx-6 my-6 border border-gray-200 rounded-lg">
       <table class="text-left rtl:text-right text-gray-500">
-        <thead class="font-black text-gray-800 border-y border-gray-200">
+        <thead class="font-black text-gray-800 bg-gray-100">
           <tr>
             <th class="px-6 py-3">Image</th>
             <th class="px-6 py-3">Titre</th>
-            <th class="px-6 py-3">Résumé</th>
             <th class="px-6 py-3">Status</th>
             <th class="px-6 py-3">Actions</th>
           </tr>
@@ -78,13 +77,12 @@
         <tbody>
           @for ( article of articleList | paginate : { itemsPerPage: 40, currentPage: queryParams().page || 1,
           totalItems: articleCount, }; track article.id ) {
-          <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
+          <tr class="border-b border-gray-200 last:border-none">
             <td class="px-6 py-2">
               <p-avatar [image]="article | apiIMG: 'article'" />
             </td>
-            <td class="px-6 py-2 font-medium truncate max-w-xs">{{ article.title | titlecase }}</td>
-            <td class="px-6 py-2 font-medium truncate max-w-xs">{{ article.summary | titlecase }}</td>
-            <td class="px-6 py-2 text-xs capitalize font-medium">
+            <td class="px-6 py-2 font-medium w-80 hyphens-auto">{{ article.title | titlecase }}</td>
+            <td class="px-6 py-2 text-xs capitalize font-medium w-32">
               @if (isPublished(article)) {
               <span class="text-primary-500 bg-primary-400/20 rounded py-1 px-1.5"> publié </span>
               } @else {
@@ -93,17 +91,17 @@
             </td>
             <td class="px-6 py-2">
               <div class="flex items-center gap-2">
-                <button class="text-gray-500" (click)="highlightArticle(article.id)">
+                <button pButton outlined severity="success" (click)="highlightArticle(article.id)">
                   @if (article.is_highlighted) {
-                  <i-lucide [name]="icons.star" class="size-4 text-yellow-500" />
+                  <i-lucide [name]="icons.star" class="size-4 ]" />
                   } @else {
                   <i-lucide [name]="icons.starOff" class="size-4" />
                   }
                 </button>
-                <a [routerLink]="['/dashboard/blog/articles/edit', article.slug]">
+                <a pButton outlined severity="info" [routerLink]="['/dashboard/blog/articles/edit', article.slug]">
                   <i-lucide [name]="icons.edit" class="size-4" />
                 </a>
-                <button class="text-red-500" (click)="onDeleteArticle(article.id, $event)">
+                <button pButton outlined severity="danger" (click)="onDeleteArticle(article.id, $event)">
                   <p-confirmpopup />
                   <i-lucide [name]="icons.trash" class="size-4" />
                 </button>

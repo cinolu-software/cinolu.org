@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { LucideAngularModule, Pencil, Plus, RefreshCcw, Search, Trash } from 'lucide-angular';
+import { LucideAngularModule, Plus, RefreshCcw, Search, SquarePen, Trash } from 'lucide-angular';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Dialog } from 'primeng/dialog';
 import { ConfirmPopup } from 'primeng/confirmpopup';
@@ -46,14 +46,12 @@ export class ArticleTags implements OnInit {
   addTagStore = inject(AddTagStore);
   deleteTagStore = inject(DeleteTagStore);
   updateTagStore = inject(UpdateTagStore);
-
   showAddModal = signal(false);
   showEditModal = signal(false);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
-
   icons = {
     refresh: RefreshCcw,
-    edit: Pencil,
+    edit: SquarePen,
     trash: Trash,
     plus: Plus,
     search: Search,
