@@ -8,7 +8,6 @@
       <i-lucide [name]="icons.lightbulb" class="size-5" />
       Innovons ensemble !
     </h1>
-
     <div class="flex justify-center w-full flex-col items-center space-y-3 text-center">
       <h2
         [@fadeInOut]
@@ -16,7 +15,6 @@
         <span> Accélérons les talents </span>
         <span class="text-primary-400">Connectons les opportunités</span>
       </h2>
-
       <h2
         [@fadeInOut]
         class="font-satoshi sm:hidden md:mt-4 font-black gap-2 text-white text-left text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl hyphens-none">
@@ -38,13 +36,13 @@
           </a>
         </div>
         <div class="relative w-full md:w-56 inline-flex max-md:justify-center mt-6">
-          <button
-            [routerLink]="'/donation'"
-            type="submit"
+          <a
+            href="https://www.every.org/centre-dinnovation-lubumbashi-asbl?utm_campaign=donate-link#/donate"
+            target="_blank"
             class="group relative w-full md:w-56 z-10 flex text-white items-center justify-center gap-2 px-6 py-2 border rounded-full border-primary-400 bg-primary-500/60 hover:bg-primary-600 duration-300">
             Faire un don
             <i-lucide [name]="icons.donate" class="mt-0.5 group-hover:translate-x-1 transition-all" />
-          </button>
+          </a>
         </div>
       </div>
     </div>
