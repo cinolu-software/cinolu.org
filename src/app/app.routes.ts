@@ -40,21 +40,6 @@ export const routes: Route[] = [
     loadChildren: () => import('./features/about-us/about-us.routes').then((m) => m.aboutRoutes),
   },
   {
-    path: 'donation',
-    component: Layout,
-    data: { layout: 'full-layout' },
-    loadChildren: () => import('./features/donation/donation.routes').then((m) => m.donationRoutes),
-  },
-  // {
-  //   path: 'entrepreneurs',
-  //   component: Layout,
-  //   data: { layout: 'full-layout' },
-  //   loadChildren: () =>
-  //     import('./features/our-entrepreneurs/entrepreneurs.routes').then(
-  //       (m) => m.entrepreneursRoutes,
-  //     ),
-  // },
-  {
     path: 'entrepreneurs/:id',
     component: Layout,
     data: { layout: 'fixed-layout' },
