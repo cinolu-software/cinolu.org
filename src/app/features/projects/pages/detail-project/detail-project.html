@@ -1,17 +1,17 @@
 <section
-  class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto overflow-x-hidden py-20"
+  class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-20 lg:py-32 overflow-x-hidden"
 >
   @if (store.project(); as project) {
     <div class="space-y-12">
       <div class="text-center">
         <h2
-          class="font-black font-satoshi text-3xl md:text-4xl text-gray-900 leading-tight"
+          class="font-extrabold font-satoshi text-3xl md:text-4xl text-gray-900 tracking-tight"
         >
           {{ project.name | titlecase }}
         </h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
         <div>
           @if (images().length > 0) {
             <p-galleria
@@ -22,7 +22,7 @@
               [showItemNavigators]="true"
               [showThumbnails]="false"
               autoPlay="true"
-              class="mx-auto w-full rounded-xl shadow-md overflow-hidden h-80 md:h-[32rem]"
+              class="mx-auto w-full rounded-md shadow-lg overflow-hidden h-80 md:h-[32rem]"
             >
               <ng-template pTemplate="item" let-img>
                 <div class="relative w-full h-80 md:h-[32rem]">
@@ -30,7 +30,7 @@
                     fill
                     [ngSrc]="img | apiIMG: 'eventGallery'"
                     [alt]="img.image"
-                    class="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
+                    class="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
                     priority
                   />
                 </div>
@@ -38,7 +38,7 @@
             </p-galleria>
           } @else {
             <div
-              class="relative w-full rounded-xl shadow-md overflow-hidden h-80 md:h-[32rem]"
+              class="relative w-full h-80 md:h-[32rem] rounded-md overflow-hidden shadow-lg border border-gray-100"
             >
               <img
                 [ngSrc]="project | apiIMG: 'project'"
@@ -53,97 +53,82 @@
 
         <div class="flex flex-col gap-8">
           <div
-            class="rounded-xl bg-gradient-to-br from-white to-gray-50 shadow border border-gray-100 p-8 hover:shadow-lg transition"
+            class="rounded-md bg-white shadow-md border border-primary-100 p-6 hover:shadow-lg transition-all duration-300"
           >
-            <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center gap-4 mb-5">
               <div
-                class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-100 text-primary-600"
-              >
-                <i-lucide [name]="icons.fileText" class="size-5 stroke-[1.5]" />
-              </div>
-              <h3 class="font-semibold text-xl text-gray-800">Description</h3>
-            </div>
-
-            <article
-              class="text-gray-600 leading-relaxed text-base whitespace-pre-line break-words hyphens-none text-justify"
-              [innerHTML]="project.description"
-            ></article>
-          </div>
-
-          <div
-            class="rounded-xl bg-primary-50 shadow border border-primary-200 p-8 hover:shadow-lg transition"
-          >
-            <div class="flex items-center gap-3 mb-6">
-              <div
-                class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-500 text-white"
+                class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-400 text-white shadow-sm"
               >
                 <i-lucide
                   [name]="icons.calendarDays"
                   class="size-5 stroke-[1.5]"
                 />
               </div>
-              <h3 class="font-semibold text-xl text-primary-600">Dates</h3>
+              <h3 class="font-semibold text-2xl text-gray-800 tracking-tight">
+                Dates
+              </h3>
             </div>
-
-            <div class="relative pl-8 border-l-2 border-primary-200 space-y-4">
+            <div class="relative pl-8 border-l-2 border-primary-100 space-y-4">
               <div class="relative">
                 <span
-                  class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-primary-500"
+                  class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-primary-500 ring-4 ring-primary-100"
                 ></span>
                 <p class="font-medium text-gray-700">
-                  Début : {{ project.started_at | date: "fullDate" }}
+                  <span class="font-semibold text-gray-900">Début :</span>
+                  {{ project.started_at | date: "fullDate" }}
                 </p>
               </div>
               <div class="relative">
                 <span
-                  class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-red-500"
+                  class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-red-500 ring-4 ring-red-100"
                 ></span>
                 <p class="font-medium text-gray-700">
-                  Fin : {{ project.ended_at | date: "fullDate" }}
+                  <span class="font-semibold text-gray-900">Fin :</span>
+                  {{ project.ended_at | date: "fullDate" }}
                 </p>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full mt-10">
-        <div
-          class="rounded-xl bg-gradient-to-r from-green-50 to-white shadow border border-green-100 p-8 hover:shadow-md transition"
-        >
-          <div class="flex items-center gap-3 mb-6">
-            <div
-              class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-500 text-white"
-            >
-              <i-lucide [name]="icons.tag" class="size-5 stroke-[1.5]" />
-            </div>
-            <h3 class="font-semibold text-xl text-primary-600">Catégories</h3>
-          </div>
-          <div class="flex flex-wrap gap-3">
-            @for (item of project.categories; track $index) {
-              <span
-                class="px-4 py-1.5 text-sm font-semibold rounded-full bg-blue-100 text-primary-600 hover:scale-105 transition"
-              >
-                {{ item.name }}
-              </span>
-            }
-          </div>
-        </div>
-
-        <div
-          class="rounded-xl bg-white shadow-md border border-gray-200 overflow-hidden"
-        >
-          <div class="p-8">
-            <div class="flex items-center gap-3 mb-4">
+          <div
+            class="rounded-md bg-gradient-to-br from-green-50 via-white to-white shadow-md border border-green-100 p-6 hover:shadow-lg transition-all duration-300"
+          >
+            <div class="flex items-center gap-4 mb-5">
               <div
-                class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-100 text-primary-500"
+                class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-400 text-white shadow-sm"
+              >
+                <i-lucide [name]="icons.tag" class="size-5 stroke-[1.5]" />
+              </div>
+              <h3 class="font-semibold text-2xl text-gray-800 tracking-tight">
+                Catégories
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-3">
+              @for (item of project.categories; track $index) {
+                <span
+                  class="px-4 py-1.5 text-sm font-medium rounded-full bg-emerald-100 text-emerald-700 hover:bg-emerald-200 hover:scale-105 transition-all duration-300"
+                >
+                  {{ item.name }}
+                </span>
+              }
+            </div>
+          </div>
+
+          <div
+            class="rounded-md bg-white shadow-md border border-gray-100 p-6 hover:shadow-lg transition-all duration-300"
+          >
+            <div class="flex items-center gap-4 mb-5">
+              <div
+                class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-primary-400 to-primary-500 text-white shadow-sm"
               >
                 <i-lucide [name]="icons.mapPin" class="size-5 stroke-[1.5]" />
               </div>
-              <h3 class="font-semibold text-xl text-gray-800">Adresse</h3>
+              <h3 class="font-semibold text-2xl text-gray-800 tracking-tight">
+                Adresse
+              </h3>
             </div>
             <p
-              class="text-gray-600 leading-relaxed text-justify text-base mb-4"
+              class="text-gray-600 leading-relaxed text-base text-justify border-l-4 border-primary-100 pl-4"
               [innerHTML]="project.place"
             ></p>
           </div>
@@ -151,44 +136,59 @@
       </div>
 
       <div
-        class="flex flex-col md:flex-row justify-center items-center gap-6 mt-10 w-full m-auto bg-gray-50 rounded-xl p-6 md:p-8"
+        class="rounded-md bg-gradient-to-br from-white to-gray-50 shadow border border-gray-100 p-8 hover:shadow-lg transition-all duration-300"
       >
-        @if (
-          getStatut(project) === "En cours" ||
-          (getStatut(project) === "À venir" && project.form_link)
-        ) {
-          <p-button
-            size="large"
-            severity="primary"
-            class="flex items-center gap-3 px-6 lg:px-8 py-3 group rounded-md hover:scale-105 transition-all duration-300"
+        <div class="flex items-center gap-4 mb-5">
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-primary-100 text-primary-600 shadow-sm"
           >
-            Postuler Maintenant
-            <i-lucide
-              class="size-5 group-hover:translate-x-1 transition-transform duration-300"
-              [name]="icons.arrow"
-            />
-          </p-button>
-        } @else {
-          <div class="flex flex-col items-center gap-4">
-            <h3 class="text-xl font-semibold text-gray-700">
-              Événement terminé
-            </h3>
+            <i-lucide [name]="icons.fileText" class="size-5 stroke-[1.5]" />
+          </div>
+          <h3 class="font-semibold text-2xl text-gray-800 tracking-tight">
+            Description
+          </h3>
+        </div>
+
+        <article
+          class="text-gray-600 leading-relaxed text-base whitespace-pre-line break-words text-justify"
+          [innerHTML]="project.description"
+        ></article>
+
+        <div
+          class="flex flex-col md:flex-row justify-center items-center gap-6 mt-10 w-full m-auto bg-gray-50 rounded-md p-6 md:p-8"
+        >
+          @if (
+            getStatut(project) === "En cours" ||
+            (getStatut(project) === "À venir" && project.form_link)
+          ) {
             <p-button
               size="large"
-              severity="danger"
-              disabled
-              class="flex items-center gap-3 px-6 py-3 rounded-md opacity-70 cursor-not-allowed"
+              severity="primary"
+              class="flex items-center gap-3 px-6 lg:px-8 py-3 group rounded-md hover:scale-105 transition-all duration-300"
             >
-              <i-lucide class="size-5" [name]="icons.fileLock" />
               Postuler Maintenant
+              <i-lucide
+                class="size-5 group-hover:translate-x-1 transition-transform duration-300"
+                [name]="icons.arrow"
+              />
             </p-button>
-            <a
-              href="/projet"
-              class="text-sm font-medium text-primary-600 hover:underline"
-              >Voir les prochains événements</a
-            >
-          </div>
-        }
+          } @else {
+            <div class="flex flex-col items-center gap-4">
+              <h3 class="text-xl font-semibold text-gray-700">
+                Événement terminé
+              </h3>
+              <p-button
+                size="large"
+                severity="danger"
+                disabled
+                class="flex items-center gap-3 px-6 py-3 rounded-md opacity-70 cursor-not-allowed"
+              >
+                <i-lucide class="size-5" [name]="icons.fileLock" />
+                Postuler Maintenant
+              </p-button>
+            </div>
+          }
+        </div>
       </div>
     </div>
   }
