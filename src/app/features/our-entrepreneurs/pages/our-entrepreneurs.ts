@@ -1,24 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { LucideAngularModule, Users } from 'lucide-angular';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
-import { ENTREPRENEURS_DATA } from '../data/entrepreneurs.data';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { HighUserCard } from '../components/high-user-card/high-user-card';
+import { EntrepreneursStore } from '../store/ventures/entrepreneurs.store';
 
 @Component({
   selector: 'app-our-entrepreneurs',
+  providers: [EntrepreneursStore],
   imports: [LucideAngularModule, HeroCard, PaginatorModule, HighUserCard],
   templateUrl: './our-entrepreneurs.html',
 })
-export class OurEntrepreneurs {
+export class OurEntrepreneurs implements OnInit {
   icons = { users: Users };
-  entrepreneurs = ENTREPRENEURS_DATA;
+  entrepreneurs = inject(EntrepreneursStore);
 
   first = 0;
   rows = 4;
 
+  ngOnInit() {
+    this.entrepreneurs.loadEntrepreneurs();
+  }
+
   get pagedEntrepreneurs() {
-    return this.entrepreneurs.slice(this.first, this.first + this.rows);
+    const data = this.entrepreneurs.entrepreneurs();
+    return data.slice(this.first, this.first + this.rows);
   }
 
   onPageChange(event: PaginatorState) {

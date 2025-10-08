@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IEntrepreneur } from '../../data/entrepreneurs.data';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   Award,
   FileBadge,
@@ -13,14 +12,22 @@ import {
   Verified,
 } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
+import { IUser } from '../../../../shared/models/entities.models';
+import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-high-user-card',
-  imports: [CommonModule, LucideAngularModule, RouterLink],
+  imports: [
+    CommonModule,
+    LucideAngularModule,
+    RouterLink,
+    ApiImgPipe,
+    NgOptimizedImage,
+  ],
   templateUrl: './high-user-card.html',
 })
 export class HighUserCard {
-  @Input() entrepreneur!: IEntrepreneur;
+  @Input() entrepreneur!: IUser;
 
   icons = {
     MoveRight: MoveRight,

@@ -23,7 +23,7 @@
       (onPageChange)="onPageChange($event)"
       [first]="first"
       [rows]="rows"
-      [totalRecords]="entrepreneurs.length"
+      [totalRecords]="this.entrepreneurs.entrepreneurs().length"
       [rowsPerPageOptions]="[4, 8, 12]"
     >
     </p-paginator>

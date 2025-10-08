@@ -1,28 +1,33 @@
 <div
-  class="w-full bg-white rounded-md shadow-xl overflow-hidden p-3 transition duration-300 hover:shadow-2xl"
+  class="w-full bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-2xl"
 >
-  <div class="relative h-28 rounded-2xl overflow-hidden">
+  <div class="relative h-32 rounded-lg overflow-hidden group">
     <img
-      [src]="entrepreneur.products[0].image"
-      alt="Image du produit"
-      class="w-full h-full object-cover"
+      *ngIf="entrepreneur.ventures?.length"
+      [ngSrc]="entrepreneur.ventures[0] | apiIMG: 'ventureCover'"
+      [alt]="entrepreneur.ventures[0].name || 'Image de couverture'"
+      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      priority
+      fill
     />
 
-    <div class="absolute inset-0 bg-black/30"></div>
+    <div class="absolute inset-0 bg-black/50"></div>
 
     <img
-      [src]="entrepreneur.photo"
+      [ngSrc]="entrepreneur | apiIMG: 'user'"
       [alt]="entrepreneur.name"
-      class="absolute bottom-3 left-3 w-14 h-14 rounded-full object-cover border-2 border-white shadow-md"
+      class="absolute bottom-3 left-3 w-10 h-10 rounded-full object-cover border-2 border-white shadow-md"
+      loading="lazy"
+      fill
     />
 
     <div
-      class="absolute top-3 right-3 flex items-center bg-white/70 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-gray-800"
+      class="absolute top-3 left-3 flex items-center bg-white/70 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-gray-800"
     >
       <span class="mr-1 text-yellow-500">
         <i-lucide size="16" [name]="icons.award"></i-lucide>
       </span>
-      {{ entrepreneur.score | percent: "1.0-0" }}
+      <span>Top</span>
     </div>
 
     <span class="absolute bottom-3 right-3 text-white drop-shadow-lg">
@@ -30,31 +35,18 @@
     </span>
   </div>
 
-  <div class="p-3 pt-4 text-center">
-    <h2 class="text-xl font-bold text-gray-900 truncate">
+  <div class="p-4 text-center">
+    <h2 class="text-lg font-bold text-gray-900 truncate">
       {{ entrepreneur.name }}
     </h2>
 
-    <p class="text-base text-gray-500 mb-4 line-clamp-2">
-      {{ entrepreneur.bio }}
+    <p class="text-sm text-gray-500 mb-4 line-clamp-2 min-h-[40px]">
+      {{ entrepreneur.biography || "Aucune biographie disponible." }}
     </p>
-
-    <div class="flex justify-center items-center text-base mb-6">
-      <div class="flex flex-col items-center">
-        <div class="flex items-center text-yellow-500">
-          <i-lucide size="20" [name]="icons.award"></i-lucide>
-
-          <span class="ml-1 text-xl font-bold">
-            {{ entrepreneur.score | percent: "1.1-1" }}
-          </span>
-        </div>
-        <span class="text-xs text-gray-400 mt-1">Score</span>
-      </div>
-    </div>
 
     <button
       [routerLink]="['/entrepreneurs', entrepreneur.id]"
-      class="w-full py-3 text-sm font-semibold text-white bg-primary-500 rounded-md hover:bg-primary-600 transition duration-150 shadow-md hover:shadow-lg"
+      class="w-full py-3 text-sm font-semibold text-white bg-primary-500 rounded-lg hover:bg-primary-600 transition duration-200 shadow-md hover:shadow-lg"
     >
       Voir le profil
     </button>
