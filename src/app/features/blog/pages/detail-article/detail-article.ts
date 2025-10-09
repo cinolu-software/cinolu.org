@@ -34,7 +34,6 @@ import { ConfirmationService } from 'primeng/api';
 import { CommentsStore } from '../../store/comments/comments.store';
 import { Subject, takeUntil } from 'rxjs';
 import { QuillViewComponent } from 'ngx-quill';
-import { Tag } from 'primeng/tag';
 
 @Component({
   selector: 'app-detail-article',
@@ -60,7 +59,6 @@ import { Tag } from 'primeng/tag';
     Dialog,
     ConfirmDialog,
     QuillViewComponent,
-    Tag,
   ],
   templateUrl: './detail-article.html',
 })
