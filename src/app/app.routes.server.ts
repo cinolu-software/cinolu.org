@@ -54,6 +54,10 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Client,
   },
   {
+    path: 'entrepreneurs/:email',
+    renderMode: RenderMode.Client,
+  },
+  {
     path: 'dashboard/products/update/:slug',
     renderMode: RenderMode.Client,
   },

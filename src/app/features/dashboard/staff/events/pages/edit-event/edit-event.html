@@ -4,7 +4,7 @@
     <p class="font-medium">Galerie</p>
     <div class="w-full md:w-1/3">
       @if (eventStore.isLoading()) {
-      <div class="h-20 bg-gray-200 animate-pulse rounded-md w-full mb-4"></div>
+      <div class="h-20 bg-gray-200 animate-pulse rounded-lg w-full mb-4"></div>
       } @else {
       <app-file-upload
         [multiple]="true"
@@ -48,7 +48,7 @@
         }
       </div>
       @if (eventStore.isLoading()) {
-      <div class="h-20 bg-gray-200 animate-pulse rounded-md w-full mb-4"></div>
+      <div class="h-20 bg-gray-200 animate-pulse rounded-lg w-full mb-4"></div>
       } @else {
       <app-file-upload [name]="'cover'" [url]="url + event?.id" (loaded)="onCoverUploadLoaded()" />
       }

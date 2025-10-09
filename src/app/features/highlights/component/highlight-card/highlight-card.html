@@ -1,7 +1,7 @@
 <div class="max-w-7xl mx-auto">
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
     <div
-      class="lg:col-span-2 p-4 lg:p-8 flex-col md:flex-row gap-6 hover:shadow-lg duration-300 transition-all relative flex bg-white shadow-sm border border-slate-200 rounded-md">
+      class="lg:col-span-2 p-4 lg:p-8 flex-col md:flex-row gap-6 hover:shadow-lg duration-300 transition-all relative flex bg-white shadow-sm border border-slate-200 rounded-lg">
       <div class="w-full md:w-1/2">
         @for (key of keys; track key.id) {
         <button
@@ -28,7 +28,7 @@
       <div class="flex-1 flex flex-col justify-between">
         @if (data.length > 0) {
         <div class="space-y-4">
-          <p class="bg-primary-500/20 text-primary-500 text-base font-satoshi py-1 px-4 rounded-md w-32 line-clamp-1">
+          <p class="bg-primary-500/20 text-primary-500 text-base font-satoshi py-1 px-4 rounded-lg w-32 line-clamp-1">
             {{ selectedKey.name }}
           </p>
           <h3 class="text-gray-700 font-black text-2xl line-clamp-2">{{ getItemTitle(data[0]) }}</h3>
@@ -37,7 +37,7 @@
 
         <button
           [routerLink]="whatIsPath() + '/' + data[0].slug"
-          class="mt-3 px-5 py-2 border border-primary-400 bg-primary-500 text-white rounded-md flex items-center justify-center gap-2 transition-all duration-300 hover:bg-primary-600 hover:-translate-y-1 hover:shadow-lg"
+          class="mt-3 px-5 py-2 border border-primary-400 bg-primary-500 text-white rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:bg-primary-600 hover:-translate-y-1 hover:shadow-lg"
           type="button">
           Découvrir
           <i-lucide
@@ -53,7 +53,7 @@
     </div>
 
     <div
-      class="md:h-[400px] relative lg:col-span-1 overflow-hidden hover:shadow-lg duration-300 transition-all flex bg-white shadow-sm border border-slate-200 rounded-md">
+      class="md:h-[400px] relative lg:col-span-1 overflow-hidden hover:shadow-lg duration-300 transition-all flex bg-white shadow-sm border border-slate-200 rounded-lg">
       @if (data.length > 0) {
       <img
         [ngSrc]="data[0] | apiIMG: whatIsDisplayed()"

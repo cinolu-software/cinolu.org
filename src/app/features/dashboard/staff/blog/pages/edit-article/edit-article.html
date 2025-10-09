@@ -15,7 +15,7 @@
         }
       </div>
       @if (articleStore.isLoading()) {
-      <div class="h-20 bg-gray-200 animate-pulse rounded-md w-full mb-4"></div>
+      <div class="h-20 bg-gray-200 animate-pulse rounded-lg w-full mb-4"></div>
       } @else {
       <app-file-upload [name]="'article'" [url]="url + article?.id" (loaded)="onFileUploadLoaded()" />
       }

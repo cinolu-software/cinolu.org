@@ -45,7 +45,7 @@
           <textarea id="content" pTextarea pSize="small" fluid formControlName="content"></textarea>
         </div>
         @if (!isLoggedIn()) {
-        <div class="text-red-500 bg-red-500/10 text-sm my-2 p-2 rounded-md">
+        <div class="text-red-500 bg-red-500/10 text-sm my-2 p-2 rounded-lg">
           Vous devez vous connecter pour écrire un commentaire.
         </div>
         }
@@ -71,7 +71,7 @@
       <div class="flex flex-col gap-4 mt-8">
         @for (comment of comments; track $index) {
         <div
-          class="bg-white border border-gray-200 rounded-md transition p-4 md:p-5 flex flex-col gap-3 md:flex-row md:items-start md:gap-4">
+          class="bg-white border border-gray-200 rounded-lg transition p-4 md:p-5 flex flex-col gap-3 md:flex-row md:items-start md:gap-4">
           <div class="flex-shrink-0">
             <div
               class="relative h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-gradient-to-l from-pink-400 to-primary-500 overflow-hidden bg-gray-200 flex items-center justify-center text-white font-semibold">
@@ -131,7 +131,7 @@
       @for (article of storeArticle.articles(); track $index) {
       <a [routerLink]="['/blog-ressources', article.slug]">
         <div
-          class="flex gap-3 items-start w-full bg-gray-100 rounded-md overflow-hidden hover:shadow-md transition cursor-pointer">
+          class="flex gap-3 items-start w-full bg-gray-100 rounded-lg overflow-hidden hover:shadow-md transition cursor-pointer">
           <div class="relative h-28 w-28 flex-shrink-0 bg-gray-100">
             <img
               [ngSrc]="article | apiIMG: 'article'"

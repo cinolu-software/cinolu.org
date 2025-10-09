@@ -8,7 +8,7 @@
     <div class="flex flex-col gap-2">
       @for (link of links(); track $index) { @if ((link?.children?.length || 0) > 0) {
       <button
-        class="flex justify-between items-center px-2 py-1.5 font-medium rounded-md hover:bg-gray-200"
+        class="flex justify-between items-center px-2 py-1.5 font-medium rounded-lg hover:bg-gray-200"
         (click)="onToggleTab(link.name)"
         [ngClass]="{
               'bg-gray-200 text-gray-800': isTabOpen(link.name),
@@ -43,7 +43,7 @@
       } } @else {
       <a
         [routerLink]="link.path"
-        class="group inline-flex items-center gap-1.5 px-2 py-1.5 font-medium rounded-md hover:bg-gray-200 transition-colors duration-200"
+        class="group inline-flex items-center gap-1.5 px-2 py-1.5 font-medium rounded-lg hover:bg-gray-200 transition-colors duration-200"
         [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
         [routerLinkActive]="'bg-gray-200 text-gray-800'"
         (click)="onToggleTab(link.name)"

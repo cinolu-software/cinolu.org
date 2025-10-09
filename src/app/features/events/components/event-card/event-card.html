@@ -1,4 +1,4 @@
-<div class="bg-card mb-4 group flex flex-col overflow-hidden rounded-md shadow bg-white">
+<div class="bg-card mb-4 group flex flex-col overflow-hidden rounded-lg shadow bg-white">
   <div class="h-60 w-full overflow-hidden relative">
     <img
       class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30"
@@ -10,10 +10,7 @@
     <h4 class="mt-4 mb-2 text-xl group-hover:text-primary-900 transition-colors duration-200 font-bold line-clamp-1">
       {{ event().name | titlecase }}
     </h4>
-    <article
-      class="mt-0.5 line-clamp-2 break-words hyphens-none break-all"
-      [innerHTML]="event().description"
-    ></article>
+    <article class="mt-0.5 line-clamp-2 break-words hyphens-none break-all" [innerHTML]="event().description"></article>
     <div class="my-3 h-1 w-14 border-t border-gray-200"></div>
 
     <div class="flex flex-wrap justify-between items-end gap-3">

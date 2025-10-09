@@ -18,7 +18,7 @@
           [showItemNavigators]="true"
           [showThumbnails]="false"
           autoPlay="true"
-          class="mx-auto w-full rounded-xl shadow-md overflow-hidden h-80 md:h-[32rem]">
+          class="mx-auto w-full rounded-lg shadow-md overflow-hidden h-80 md:h-[32rem]">
           <ng-template pTemplate="item" let-img>
             <div class="relative w-full h-80 md:h-[32rem]">
               <img
@@ -31,7 +31,7 @@
           </ng-template>
         </p-galleria>
         } @else {
-        <div class="relative w-full rounded-xl shadow-md overflow-hidden h-80 md:h-[32rem]">
+        <div class="relative w-full rounded-lg shadow-md overflow-hidden h-80 md:h-[32rem]">
           <img
             [ngSrc]="project | apiIMG: 'event'"
             [alt]="'Photo de couverture'"
@@ -44,7 +44,7 @@
 
       <div class="flex flex-col gap-8">
         <div
-          class="rounded-xl bg-gradient-to-br from-white to-gray-50 shadow border border-gray-100 p-8 hover:shadow-lg transition">
+          class="rounded-lg bg-gradient-to-br from-white to-gray-50 shadow border border-gray-100 p-8 hover:shadow-lg transition">
           <div class="flex items-center gap-3 mb-4">
             <div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-100 text-primary-600">
               <i-lucide [name]="icons.fileText" class="size-5 stroke-[1.5]" />
@@ -54,7 +54,7 @@
           <p class="text-gray-600 leading-relaxed text-justify text-base" [innerHTML]="project.description"></p>
         </div>
 
-        <div class="rounded-xl bg-primary-50 shadow border border-primary-200 p-8 hover:shadow-lg transition">
+        <div class="rounded-lg bg-primary-50 shadow border border-primary-200 p-8 hover:shadow-lg transition">
           <div class="flex items-center gap-3 mb-6">
             <div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-500 text-white">
               <i-lucide [name]="icons.calendarDays" class="size-5 stroke-[1.5]" />
@@ -78,7 +78,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full mt-10">
       <div
-        class="rounded-xl bg-gradient-to-r from-green-50 to-white shadow border border-green-100 p-8 hover:shadow-md transition">
+        class="rounded-lg bg-gradient-to-r from-green-50 to-white shadow border border-green-100 p-8 hover:shadow-md transition">
         <div class="flex items-center gap-3 mb-6">
           <div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-500 text-white">
             <i-lucide [name]="icons.tag" class="size-5 stroke-[1.5]" />
@@ -95,7 +95,7 @@
         </div>
       </div>
 
-      <div class="rounded-xl bg-white shadow-md border border-gray-200 overflow-hidden">
+      <div class="rounded-lg bg-white shadow-md border border-gray-200 overflow-hidden">
         <div class="p-8">
           <div class="flex items-center gap-3 mb-4">
             <div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-100 text-primary-500">
@@ -109,12 +109,12 @@
     </div>
 
     <div
-      class="flex flex-col md:flex-row justify-center items-center gap-6 mt-10 w-full m-auto bg-gray-50 rounded-xl p-6 md:p-8">
+      class="flex flex-col md:flex-row justify-center items-center gap-6 mt-10 w-full m-auto bg-gray-50 rounded-lg p-6 md:p-8">
       @if (getStatut(project) === 'En cours' || (getStatut(project) === 'À venir' && project.form_link)) {
       <p-button
         size="large"
         severity="primary"
-        class="flex items-center gap-3 px-6 lg:px-8 py-3 group rounded-md hover:scale-105 transition-all duration-300">
+        class="flex items-center gap-3 px-6 lg:px-8 py-3 group rounded-lg hover:scale-105 transition-all duration-300">
         Postuler Maintenant
         <i-lucide class="size-5 group-hover:translate-x-1 transition-transform duration-300" [name]="icons.arrow" />
       </p-button>
@@ -125,7 +125,7 @@
           size="large"
           severity="danger"
           disabled
-          class="flex items-center gap-3 px-6 py-3 rounded-md opacity-70 cursor-not-allowed">
+          class="flex items-center gap-3 px-6 py-3 rounded-lg opacity-70 cursor-not-allowed">
           <i-lucide class="size-5" [name]="icons.fileLock" />
           Postuler Maintenant
         </p-button>

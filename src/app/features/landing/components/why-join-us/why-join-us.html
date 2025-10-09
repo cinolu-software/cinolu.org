@@ -20,13 +20,12 @@
       aria-label="Statistiques de Cinolu">
       @for (s of stats; track $index) {
       <div
-        class="relative p-6 pt-10 w-full hover:shadow-md transition duration-300 flex flex-col bg-white shadow-sm border border-slate-200 rounded-md"
+        class="relative p-6 pt-10 w-full hover:shadow-md transition duration-300 flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg"
         role="listitem">
         <div
-          class="absolute -top-6 flex items-center justify-center w-12 h-12 bg-white border border-primary-400 rounded-md shadow">
+          class="absolute -top-6 flex items-center justify-center w-12 h-12 bg-white border border-primary-400 rounded-lg shadow">
           <i-lucide [name]="s.icon" class="text-primary-500 w-6 h-6" aria-hidden="true" focusable="false"></i-lucide>
         </div>
-
         <p
           appCountUp
           [duration]="2000"

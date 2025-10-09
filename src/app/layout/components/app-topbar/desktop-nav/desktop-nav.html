@@ -11,7 +11,7 @@
           [name]="icons.chevronRight" />
         @if (link.children?.length) {
         <div
-          class="absolute left-0 top-10 w-80 bg-white shadow-xl rounded-md z-30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-top">
+          class="absolute left-0 top-10 w-80 bg-white shadow-xl rounded-lg z-30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-top">
           <div class="flex text-left flex-col divide-y divide-gray-200 py-2">
             @for (sublink of link.children; track $index) {
             <div class="relative group/sub px-4 py-2">
@@ -49,7 +49,7 @@
         [name]="icons.chevronRight" />
       @if (programsStore.programs()) {
       <div
-        class="absolute left-0 top-10 w-80 bg-white shadow-xl rounded-md z-30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-top">
+        class="absolute left-0 top-10 w-80 bg-white shadow-xl rounded-lg z-30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-top">
         <div class="flex flex-col divide-y divide-gray-200 py-2">
           @for (p of programsStore.programs(); track $index) {
           <div class="relative group/sub px-4 py-2 text-left">
@@ -85,7 +85,7 @@
             class="transition-transform size-5 group-hover:mt-0 ml-0.5 duration-300 group-hover:rotate-90" />
         </div>
         <div
-          class="invisible absolute right-0 top-full mt-2 w-56 rounded-md bg-white shadow-xl opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100">
+          class="invisible absolute right-0 top-full mt-2 w-56 rounded-lg bg-white shadow-xl opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100">
           <div class="text-left flex flex-col divide-y divide-gray-200 py-2">
             <div class="flex flex-col px-4 py-2">
               <a

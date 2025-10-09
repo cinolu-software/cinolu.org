@@ -1,5 +1,5 @@
 <div
-  class="transition overflow-hidden flex flex-col gap-6 sm:flex-row h-full md:min-h-96 bg-white/20 shadow-sm border backdrop-blur-[2px] border-slate-200 rounded-md">
+  class="transition overflow-hidden flex flex-col gap-6 sm:flex-row h-full md:min-h-96 bg-white/20 shadow-sm border backdrop-blur-[2px] border-slate-200 rounded-lg">
   <div class="sm:w-2/5 w-full aspect-video sm:aspect-auto">
     <div class="relative w-full h-full overflow-hidden">
       <img
@@ -53,7 +53,7 @@
           @if (project().place) {
           <span><strong>Lieu :</strong> {{ project().place }}</span>
           } @else {
-          <span class="text-primary-500 bg-primary-500/10 rounded-md py-1 px-2">En ligne</span>
+          <span class="text-primary-500 bg-primary-500/10 rounded-lg py-1 px-2">En ligne</span>
           }
         </div>
       </div>

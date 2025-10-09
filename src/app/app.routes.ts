@@ -39,15 +39,12 @@ export const routes: Route[] = [
     data: { layout: 'full-layout' },
     loadChildren: () => import('./features/about-us/about-us.routes').then((m) => m.aboutRoutes),
   },
-  // {
-  //   path: 'entrepreneurs',
-  //   component: Layout,
-  //   data: { layout: 'full-layout' },
-  //   loadChildren: () =>
-  //     import('./features/our-entrepreneurs/entrepreneurs.routes').then(
-  //       (m) => m.entrepreneursRoutes,
-  //     ),
-  // },
+  {
+    path: 'entrepreneurs',
+    component: Layout,
+    data: { layout: 'full-layout' },
+    loadChildren: () => import('./features/our-entrepreneurs/entrepreneurs.routes').then((m) => m.entrepreneursRoutes),
+  },
   {
     path: 'entrepreneurs/:id',
     component: Layout,
