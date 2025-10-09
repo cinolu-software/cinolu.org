@@ -11,7 +11,7 @@ import {
   MoveUpRight,
   NotepadText,
   Pencil,
-  Tag,
+  Tags,
   ThumbsUp,
   Trash,
   UserPlus,
@@ -21,7 +21,6 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ArticleCardSkeleton } from '../../components/article-card-skeleton/article-card-skeleton';
 import { RecentArticlesStore } from '../../store/articles/recent-articles.store';
-import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaModule } from 'primeng/textarea';
 import { AddCommentStore } from '../../store/comments/add-comment.store';
@@ -35,6 +34,7 @@ import { ConfirmationService } from 'primeng/api';
 import { CommentsStore } from '../../store/comments/comments.store';
 import { Subject, takeUntil } from 'rxjs';
 import { QuillViewComponent } from 'ngx-quill';
+import { Tag } from 'primeng/tag';
 
 @Component({
   selector: 'app-detail-article',
@@ -54,13 +54,13 @@ import { QuillViewComponent } from 'ngx-quill';
     ArticleCardSkeleton,
     NgOptimizedImage,
     RouterLink,
-    HeroCard,
     ReactiveFormsModule,
     TextareaModule,
     Button,
     Dialog,
     ConfirmDialog,
     QuillViewComponent,
+    Tag,
   ],
   templateUrl: './detail-article.html',
 })
@@ -82,7 +82,7 @@ export class DetailArticle implements OnInit, OnDestroy {
     fileText: FileText,
     notepadText: NotepadText,
     userPlus: UserPlus,
-    tag: Tag,
+    tag: Tags,
     comment: MessageCircleMore,
     like: ThumbsUp,
     calendar: Calendar1,

@@ -73,7 +73,7 @@ export const routes: Route[] = [
   {
     path: 'blog-ressources',
     component: Layout,
-    data: { layout: 'full-layout' },
+    data: { layout: 'fixed-layout' },
     loadChildren: () => import('./features/blog/blogs.routes').then((m) => m.blogsRoutes),
   },
   {
