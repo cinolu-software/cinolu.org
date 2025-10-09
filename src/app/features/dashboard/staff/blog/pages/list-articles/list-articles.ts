@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, signal, OnInit, DestroyRef } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FilterArticleDto } from '../../dto/filter-article.dto';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
@@ -27,6 +27,8 @@ import { ArticlesStore } from '../../store/articles/articles.store';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { IArticle } from '../../../../../../shared/models/entities.models';
 import { HighlightArticleStore } from '../../store/articles/highlight-article.store';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-article-list',
@@ -55,6 +57,7 @@ export class ListArticles implements OnInit {
   store = inject(ArticlesStore);
   deleteArticleStore = inject(DeleteArticleStore);
   highlightStore = inject(HighlightArticleStore);
+  #destroyRef = inject(DestroyRef);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   icons = {
     refresh: RefreshCcw,
@@ -74,12 +77,20 @@ export class ListArticles implements OnInit {
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || '', Validators.required],
+      q: [this.queryParams().q || ''],
     });
   }
 
   ngOnInit(): void {
     this.loadArticles();
+    const searchInput = this.searchForm.get('q');
+    searchInput?.valueChanges
+      .pipe(debounceTime(1000), distinctUntilChanged(), takeUntilDestroyed(this.#destroyRef))
+      .subscribe((searchValue: string) => {
+        this.queryParams().q = searchValue ? searchValue.trim() : null;
+        this.queryParams().page = null;
+        this.updateRouteAndArticles();
+      });
   }
 
   loadArticles(): void {
@@ -103,18 +114,6 @@ export class ListArticles implements OnInit {
   async updateRouteAndArticles(): Promise<void> {
     await this.updateRoute();
     this.loadArticles();
-  }
-
-  async onResetSearch(): Promise<void> {
-    this.searchForm.reset();
-    this.queryParams.set({ page: null, q: null });
-    await this.updateRouteAndArticles();
-  }
-
-  async onSearch(): Promise<void> {
-    const searchValue = this.searchForm.value.q;
-    this.queryParams.set({ page: null, q: searchValue });
-    await this.updateRouteAndArticles();
   }
 
   onDeleteArticle(articleId: string, article: Event): void {

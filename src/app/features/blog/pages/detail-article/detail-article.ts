@@ -176,12 +176,16 @@ export class DetailArticle implements OnInit, OnDestroy {
       message: 'Êtes-vous sûr ?',
       acceptLabel: 'Confirmer',
       rejectLabel: 'Annuler',
+      closable: false,
       acceptButtonProps: {
         severity: 'danger',
+        outlined: true,
+        size: 'small',
       },
       rejectButtonProps: {
         severity: 'secondary',
         outlined: true,
+        size: 'small',
       },
       accept: () => {
         this.deleteCommentStore.deleteComment({ id: commentId });

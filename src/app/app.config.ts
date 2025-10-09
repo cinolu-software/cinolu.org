@@ -39,13 +39,15 @@ export const appConfig: ApplicationConfig = {
     { provide: TitleStrategy, useClass: PageTitleStrategy },
     provideQuillConfig({
       modules: {
-        syntax: false,
         toolbar: [
-          ['bold', 'italic'],
+          ['bold', 'italic', 'underline'],
           ['blockquote'],
           [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ indent: '-1' }, { indent: '+1' }],
           [{ header: [1, 2, 3, 4, 5, 6, false] }],
-          ['link'],
+          [{ color: [] }, { background: [] }],
+          [{ align: [] }],
+          ['link', 'image', 'video'],
         ],
       },
     }),

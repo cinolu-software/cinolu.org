@@ -1,7 +1,6 @@
 @let isLoading = store.isLoading(); @let hasQuery = queryParams().q; @let subprogramList = store.subprograms()[0]; @let
 subprogramCount = store.subprograms()[1];
-
-<div class="relative bg-white rounded-lg">
+<div class="relative bg-white rounded-lg pb-12">
   <div class="flex flex-col gap-3 mb-10 pt-6">
     <div class="px-6 flex flex-col md:flex-row gap-2 md:justify-between md:items-center mb-6 md:mb-0">
       <h5 class="text-lg font-bold">
@@ -21,29 +20,8 @@ subprogramCount = store.subprograms()[1];
         Ajouter un programme
       </p-button>
     </div>
-    <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
-      <input class="py-1! md:w-1/3" pInputText id="q" formControlName="q" placeholder="Rechercher..." />
-      <div class="flex items-center gap-1">
-        <p-button
-          type="submit"
-          [size]="'small'"
-          [loading]="isLoading"
-          [disabled]="searchForm.invalid || isLoading || (subprogramCount === 0 && !hasQuery)">
-          Rechercher @if (!isLoading) {
-          <i-lucide [name]="icons.search" class="size-4" />
-          }
-        </p-button>
-        <p-button
-          [size]="'small'"
-          [outlined]="true"
-          [loading]="isLoading"
-          [disabled]="isLoading || !hasQuery"
-          (click)="onResetSearch()">
-          Réinitialiser @if (!isLoading) {
-          <i-lucide [name]="icons.refresh" class="size-4" />
-          }
-        </p-button>
-      </div>
+    <form [formGroup]="searchForm" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
+      <input class="md:w-1/3" pInputText id="q" formControlName="q" placeholder="Rechercher..." />
     </form>
   </div>
   @if (subprogramCount === 0 && !isLoading) {
@@ -51,7 +29,7 @@ subprogramCount = store.subprograms()[1];
     {{ hasQuery ? 'Aucun programme trouvé avec ce filtre' : 'Aucun programme trouvé' }}
   </h4>
   } @if (isLoading) {
-  <div class="grid grid-cols-5 overflow-x-auto">
+  <div class="grid grid-cols-5 overflow-x-auto mx-6 my-6 border border-gray-200 rounded-lg">
     @for (i of skeletonArray; track $index) {
     <div class="border-y border-gray-200 py-3 px-6">
       <div class="h-4 rounded-md bg-gray-200 animate-pulse mb-2"></div>
@@ -59,13 +37,12 @@ subprogramCount = store.subprograms()[1];
     }
   </div>
   } @if (subprogramCount > 0 && !isLoading) {
-  <div class="relative flex flex-col overflow-x-auto">
+  <div class="relative flex flex-col overflow-x-auto mx-6 my-6 border border-gray-200 rounded-lg">
     <table class="text-left rtl:text-right text-gray-500">
-      <thead class="font-black text-gray-800 border-y border-gray-200">
+      <thead class="font-black text-gray-800 bg-gray-100">
         <tr>
           <th class="px-6 py-3">Logo</th>
           <th class="px-6 py-3">Nom</th>
-          <th class="px-6 py-3">Description</th>
           <th class="px-6 py-3">Status</th>
           <th class="px-6 py-3">Créé le</th>
           <th class="px-6 py-3">Actions</th>
@@ -74,15 +51,12 @@ subprogramCount = store.subprograms()[1];
       <tbody>
         @for ( program of subprogramList | paginate : { itemsPerPage: 40, currentPage: queryParams().page || 1,
         totalItems: subprogramCount, }; track program.id ) {
-        <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
+        <tr class="border-b border-gray-200 last:border-none">
           <td class="px-6 py-2">
-            <p-avatar [image]="program | apiIMG: 'subprogram'" />
+            <p-avatar [image]="program | apiIMG: 'subprogram'" class="object-contain!" />
           </td>
-          <td class="px-6 py-2 font-medium text-gray-900">{{ program.name | titlecase }}</td>
-          <td class="px-6 py-2 whitespace-normal">
-            <span class="text-gray-500 line-clamp-3"> {{ program.description }} </span>
-          </td>
-          <td class="px-6 py-2 text-xs capitalize font-medium">
+          <td class="px-6 py-2 font-medium text-gray-900 w-80 hyphens-auto">{{ program.name | titlecase }}</td>
+          <td class="px-6 py-2 text-xs capitalize font-medium w-32">
             @if (program.is_published) {
             <span class="text-primary-500 bg-primary-400/20 rounded py-1 px-1.5"> publié </span>
             } @else {
@@ -92,27 +66,28 @@ subprogramCount = store.subprograms()[1];
           <td class="px-6 py-2">{{ program.created_at | date: 'longDate' }}</td>
           <td class="px-6 py-2">
             <div class="flex items-center gap-2">
-              <button class="text-gray-500" (click)="highlightSubprogram(program.id)">
+              <button pButton outlined severity="success" (click)="highlightSubprogram(program.id)">
                 @if (program.is_highlighted) {
-                <i-lucide [name]="icons.star" class="size-4 text-yellow-500" />
+                <i-lucide [name]="icons.star" class="size-4" />
                 } @else {
                 <i-lucide [name]="icons.starOff" class="size-4" />
                 }
               </button>
-              <button (click)="onPublishProgram(program.id)">
-                <p-confirmpopup />
+              <button pButton outlined severity="primary" (click)="onPublishProgram(program.id)">
                 @if (!program.is_published) {
-                <i-lucide [name]="icons.eyeOff" class="size-5" />
+                <i-lucide [name]="icons.eyeOff" class="size-4" />
                 } @else {
-                <i-lucide [name]="icons.eye" class="size-5 text-primary-500" />
+                <i-lucide [name]="icons.eye" class="size-4" />
                 }
               </button>
-              <button class="text-gray-500" (click)="onToggleEditModal(program)">
+              <button pButton outlined severity="info" (click)="onToggleEditModal(program)">
                 <i-lucide [name]="icons.edit" class="size-4" />
               </button>
-              <button class="text-red-700" (click)="onDeleteRole(program.id, $event)">
-                <p-confirmpopup />
-                <i-lucide [name]="icons.trash" class="size-4" />
+              <button pButton outlined severity="danger" (click)="onDeleteRole(program.id, $event)">
+                <div class="relative">
+                  <p-confirmpopup />
+                  <i-lucide [name]="icons.trash" class="size-4" />
+                </div>
               </button>
             </div>
           </td>
@@ -154,7 +129,7 @@ subprogramCount = store.subprograms()[1];
       <textarea pTextarea id="description" formControlName="description" rows="5" cols="30"> </textarea>
     </div>
     <div class="flex justify-end gap-4 flex-wrap">
-      <p-button size="small" variant="outlined" severity="danger" class="font-satoshi" (onClick)="onToggleAddModal()">
+      <p-button size="small" outlined severity="danger" class="font-satoshi" (onClick)="onToggleAddModal()">
         Annuler
       </p-button>
       <p-button

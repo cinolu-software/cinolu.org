@@ -1,7 +1,7 @@
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
+import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IComment } from '../../../../shared/models/entities.models';
 import { buildQueryParams } from '../../../../shared/helpers/build-query-params';
@@ -33,13 +33,8 @@ export const CommentsStore = signalStore(
               data: [IComment[], number];
             }>(`comments/article/${p.slug}`, { params })
             .pipe(
-              map(({ data }) => {
-                const [currentComments] = store.comments();
-                const comments = data[0];
-                const count = data[1];
-                patchState(store, {
-                  comments: [[...comments, ...currentComments], count + comments.length],
-                });
+              tap(({ data }) => {
+                patchState(store, { isLoading: false, comments: data });
               }),
               catchError(() => {
                 patchState(store, { isLoading: false, comments: [[], 0] });
@@ -56,7 +51,7 @@ export const CommentsStore = signalStore(
     addComments: (comments: IComment[]): void => {
       const [currentComments, count] = store.comments();
       patchState(store, {
-        comments: [[...comments, ...currentComments], count + comments.length],
+        comments: [[...currentComments, ...comments], count + comments.length],
       });
     },
     updateComment: (comment: IComment): void => {

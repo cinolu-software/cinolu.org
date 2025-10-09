@@ -1,7 +1,7 @@
 <section class="min-h-[105vh] text-gray-600">
   @let isLoading = store.isLoading(); @let hasQuery = queryParams().q; @let userCount = store.users()[1]; @let userList
   = store.users()[0]; @let isDownloading = downloadStore.isLoading();
-  <div class="relative bg-white rounded-lg">
+  <div class="relative bg-white rounded-lg pb-10">
     <div class="flex flex-col gap-3 mb-10 pt-6">
       <div class="px-6 flex flex-col gap-2 md:flex-row md:justify-between md:items-center mb-6 md:mb-0">
         <h5 class="text-lg font-bold">
@@ -13,7 +13,7 @@
               animationDuration=".5s"
               fill="transparent"
               [style]="{ width: '0.8rem', height: '0.8rem' }" />
-            } @else { ({{ userCount }}) }
+            } @else { [{{ userCount }}] }
           </span>
         </h5>
         <div class="flex flex-col md:flex-row md:items-center gap-2">
@@ -33,29 +33,8 @@
           </p-button>
         </div>
       </div>
-      <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
-        <input pInputText class="py-1! md:w-1/3" formControlName="q" placeholder="Rechercher..." />
-        <div class="flex items-center gap-1">
-          <p-button
-            type="submit"
-            [size]="'small'"
-            [loading]="isLoading"
-            [disabled]="searchForm.invalid || isLoading || (userCount === 0 && !hasQuery)">
-            Rechercher @if (!isLoading) {
-            <i-lucide [name]="icons.search" class="size-4" />
-            }
-          </p-button>
-          <p-button
-            [size]="'small'"
-            [outlined]="true"
-            [loading]="isLoading"
-            [disabled]="isLoading || !hasQuery"
-            (click)="onResetSearch()">
-            Réinitialiser @if (!isLoading) {
-            <i-lucide [name]="icons.refresh" class="size-4" />
-            }
-          </p-button>
-        </div>
+      <form [formGroup]="searchForm" class="px-6 flex flex-col gap-1 md:flex-row md:gap-4">
+        <input pInputText class="md:w-1/2" formControlName="q" placeholder="Rechercher..." />
       </form>
     </div>
     @if (userCount === 0 && !isLoading) {
@@ -63,7 +42,7 @@
       {{ hasQuery ? 'Aucun utilisateur trouvé avec ce filtre' : 'Aucun utilisateur trouvé' }}
     </h4>
     } @if (isLoading) {
-    <div class="grid grid-cols-5 overflow-x-auto">
+    <div class="grid grid-cols-5 mx-6 my-6 border border-gray-200 rounded-lg">
       @for (i of skeletonArray; track $index) {
       <div class="border-y border-gray-200 py-3 px-6">
         <div class="h-4 rounded-md bg-gray-200 animate-pulse mb-2"></div>
@@ -71,14 +50,13 @@
       }
     </div>
     } @if (userCount > 0 && !isLoading) {
-    <div class="relative flex flex-col overflow-x-auto">
+    <div class="relative flex flex-col overflow-x-auto mx-6 my-6 border border-gray-200 rounded-lg">
       <table class="text-left rtl:text-right text-gray-500">
-        <thead class="font-black text-gray-800 border-y border-gray-200">
+        <thead class="font-black text-gray-800 bg-gray-100">
           <tr>
             <th class="px-6 py-3">Image</th>
             <th class="px-6 py-3">Nom</th>
             <th class="px-6 py-3">Email</th>
-            <th class="px-6 py-3">Refs</th>
             <th class="px-6 py-3">Rejoint le</th>
             <th class="px-6 py-3">Actions</th>
           </tr>
@@ -86,22 +64,23 @@
         <tbody>
           @for ( user of userList | paginate : { itemsPerPage: 40, currentPage: queryParams().page || 1, totalItems:
           userCount, }; track user.id ) {
-          <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50 whitespace-nowrap">
+          <tr class="border-b border-gray-200 last:border-none">
             <td class="px-6 py-2">
               <p-avatar [image]="user | apiIMG: 'user'" />
             </td>
-            <td class="px-6 py-2 font-medium">{{ user.name | titlecase }}</td>
+            <td class="px-6 py-2 font-medium w-60">{{ user.name | titlecase }}</td>
             <td class="px-6 py-2">{{ user.email }}</td>
-            <td class="px-6 py-2">{{ user.referralsCount }}</td>
             <td class="px-6 py-2">{{ user.created_at | date: 'shortDate' }}</td>
             <td class="px-6 py-2">
               <div class="flex items-center gap-2">
-                <a [routerLink]="['/dashboard/users/edit', user.email]">
+                <a pButton outlined severity="info" [routerLink]="['/dashboard/users/edit', user.email]">
                   <i-lucide [name]="icons.edit" class="size-4" />
                 </a>
-                <button class="text-red-500" (click)="onDeleteUser(user.id, $event)">
-                  <p-confirmpopup />
-                  <i-lucide [name]="icons.trash" class="size-4" />
+                <button pButton outlined severity="danger" (click)="onDeleteUser(user.id, $event)">
+                  <div class="relative">
+                    <p-confirmpopup />
+                    <i-lucide [name]="icons.trash" class="size-4" />
+                  </div>
                 </button>
               </div>
             </td>

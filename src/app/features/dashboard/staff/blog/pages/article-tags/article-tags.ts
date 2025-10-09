@@ -1,6 +1,6 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { LucideAngularModule, Pencil, Plus, RefreshCcw, Search, Trash } from 'lucide-angular';
+import { LucideAngularModule, Plus, RefreshCcw, Search, SquarePen, Trash } from 'lucide-angular';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Dialog } from 'primeng/dialog';
 import { ConfirmPopup } from 'primeng/confirmpopup';
@@ -16,6 +16,8 @@ import { ITag } from '../../../../../../shared/models/entities.models';
 import { UpdateTagStore } from '../../store/tags/update-tag.store';
 import { DeleteTagStore } from '../../store/tags/delete-tag.store';
 import { ConfirmationService } from 'primeng/api';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-article-tags',
@@ -46,19 +48,17 @@ export class ArticleTags implements OnInit {
   addTagStore = inject(AddTagStore);
   deleteTagStore = inject(DeleteTagStore);
   updateTagStore = inject(UpdateTagStore);
-
   showAddModal = signal(false);
   showEditModal = signal(false);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
-
+  #destroyRef = inject(DestroyRef);
   icons = {
     refresh: RefreshCcw,
-    edit: Pencil,
+    edit: SquarePen,
     trash: Trash,
     plus: Plus,
     search: Search,
   };
-
   queryParams = signal<FilterArticlesTagsDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
     q: this.#route.snapshot.queryParamMap.get('q'),
@@ -66,7 +66,7 @@ export class ArticleTags implements OnInit {
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || '', Validators.required],
+      q: [this.queryParams().q || ''],
     });
     this.addTagForm = this.#fb.group({
       name: ['', Validators.required],
@@ -79,6 +79,14 @@ export class ArticleTags implements OnInit {
 
   ngOnInit(): void {
     this.store.loadTags(this.queryParams());
+    const searchInput = this.searchForm.get('q');
+    searchInput?.valueChanges
+      .pipe(debounceTime(1000), distinctUntilChanged(), takeUntilDestroyed(this.#destroyRef))
+      .subscribe((searchValue: string) => {
+        this.queryParams().q = searchValue ? searchValue.trim() : null;
+        this.queryParams().page = null;
+        this.updateRouteAndTags();
+      });
   }
 
   loadTags() {
@@ -111,18 +119,6 @@ export class ArticleTags implements OnInit {
   async updateRouteAndTags(): Promise<void> {
     await this.updateRoute();
     this.loadTags();
-  }
-
-  async onResetSearch(): Promise<void> {
-    this.searchForm.reset();
-    this.queryParams.set({ page: null, q: null });
-    await this.updateRouteAndTags();
-  }
-
-  onSearch(): void {
-    const searchValue = this.searchForm.value.q;
-    this.queryParams.set({ page: null, q: searchValue });
-    this.updateRouteAndTags();
   }
 
   onAddTag(): void {

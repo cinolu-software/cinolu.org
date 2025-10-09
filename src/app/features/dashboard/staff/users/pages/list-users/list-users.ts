@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LucideAngularModule, RefreshCw, SquarePen, Trash, Download, Search, Plus } from 'lucide-angular';
 import { UsersStore } from '../../store/users/users.store';
@@ -9,12 +9,14 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DownloadUsersStore } from '../../store/users/download-csv.store';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FilterUsersDto } from '../../dto/users/filter-users.dto';
 import { ConfirmationService } from 'primeng/api';
 import { DeleteUserStore } from '../../store/users/delete-user.store';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-users-list',
@@ -44,6 +46,7 @@ export class ListUsers implements OnInit {
   deleteStore = inject(DeleteUserStore);
   downloadStore = inject(DownloadUsersStore);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
+  #destroyRef = inject(DestroyRef);
   icons = {
     refresh: RefreshCw,
     edit: SquarePen,
@@ -59,12 +62,20 @@ export class ListUsers implements OnInit {
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || '', Validators.required],
+      q: [this.queryParams().q || ''],
     });
   }
 
   ngOnInit(): void {
     this.loadUsers();
+    const searchInput = this.searchForm.get('q');
+    searchInput?.valueChanges
+      .pipe(debounceTime(1000), distinctUntilChanged(), takeUntilDestroyed(this.#destroyRef))
+      .subscribe((searchValue: string) => {
+        this.queryParams().q = searchValue ? searchValue.trim() : null;
+        this.queryParams().page = null;
+        this.updateRouteAndUsers();
+      });
   }
 
   loadUsers(): void {
@@ -88,19 +99,6 @@ export class ListUsers implements OnInit {
 
   onDownloadUsers(): void {
     this.downloadStore.downloadUsers(this.queryParams());
-  }
-
-  onResetSearch(): void {
-    this.searchForm.reset();
-    this.queryParams().q = null;
-    this.updateRouteAndUsers();
-  }
-
-  onSearch(): void {
-    const searchValue = this.searchForm.value.q;
-    this.queryParams().q = searchValue ? searchValue : null;
-    this.queryParams().page = null;
-    this.updateRouteAndUsers();
   }
 
   onDeleteUser(userId: string, event: Event): void {
