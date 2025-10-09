@@ -10,7 +10,7 @@
         [multiple]="true"
         [name]="'image'"
         [url]="galleryUrl + project?.id"
-        (loaded)="onFileUploadLoaded()" />
+        (loaded)="onGalleryUploaded()" />
       }
     </div>
     <div class="flex flex-wrap gap-3">
@@ -51,7 +51,7 @@
       @if (projectStore.isLoading()) {
       <div class="h-20 bg-gray-200 animate-pulse rounded-lg w-full mb-4"></div>
       } @else {
-      <app-file-upload [name]="'cover'" [url]="url + project?.id" (loaded)="onCoverUploadLoaded()" />
+      <app-file-upload [name]="'cover'" [url]="url + project?.id" (loaded)="onCoverUploaded()" />
       }
     </div>
     <div class="flex flex-col gap-4 col-span-3">

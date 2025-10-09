@@ -10,14 +10,13 @@
     <h4 class="mt-4 mb-2 text-xl group-hover:text-primary-900 transition-colors duration-200 font-bold line-clamp-1">
       {{ event().name | titlecase }}
     </h4>
-    <article class="mt-0.5 line-clamp-2 break-words hyphens-none break-all" [innerHTML]="event().description"></article>
+    <article class="mt-0.5 line-clamp-2 break-all" [innerHTML]="event().description"></article>
     <div class="my-3 h-1 w-14 border-t border-gray-200"></div>
-
     <div class="flex flex-wrap justify-between items-end gap-3">
       <div class="font-medium flex flex-col gap-2">
         <div class="flex items-center text-md leading-5 gap-1.5">
           <i-lucide [name]="icons.MapPin" class="size-5" />
-          <div>{{ event().place | titlecase }}</div>
+          <div>{{ event().place | titlecase | slice: 0: 15 }} @if (event().place.length > 15) { ... }</div>
         </div>
         <div class="flex items-center text-md leading-5 gap-1.5">
           <i-lucide [name]="icons.CalendarX" class="size-5" />

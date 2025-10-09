@@ -17,10 +17,21 @@ import { environment } from '../../../../../../../environments/environment';
 import { ArticleStore } from '../../store/articles/article.store';
 import { ArticlesStore } from '../../../../../blog/store/articles/articles.store';
 import { QuillModule } from 'ngx-quill';
+import { GalleryStore } from '../../store/galleries/galeries.store';
+import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
+import { LucideAngularModule, Trash2 } from 'lucide-angular';
 
 @Component({
   selector: 'app-edit-article',
-  providers: [ArticleStore, UnpaginatedArticlesStore, UpdateArticleStore, ArticlesStore, UnpaginatedTagStore],
+  providers: [
+    ArticleStore,
+    GalleryStore,
+    DeleteGalleryStore,
+    UnpaginatedArticlesStore,
+    UpdateArticleStore,
+    ArticlesStore,
+    UnpaginatedTagStore,
+  ],
   imports: [
     SelectModule,
     MultiSelectModule,
@@ -32,6 +43,7 @@ import { QuillModule } from 'ngx-quill';
     ReactiveFormsModule,
     FileUpload,
     NgOptimizedImage,
+    LucideAngularModule,
     ApiImgPipe,
     QuillModule,
   ],
@@ -46,6 +58,10 @@ export class EditArticle implements OnInit {
   articleStore = inject(ArticleStore);
   url = `${environment.apiUrl}articles/cover/`;
   #slug = this.#route.snapshot.params['slug'];
+  icons = { trash: Trash2 };
+  galleryStore = inject(GalleryStore);
+  deleteGalleryStore = inject(DeleteGalleryStore);
+  galleryUrl = `${environment.apiUrl}galleries/article/`;
 
   constructor() {
     this.form = this.#fb.group({
@@ -69,6 +85,7 @@ export class EditArticle implements OnInit {
 
   ngOnInit(): void {
     this.articleStore.loadArticle(this.#slug);
+    this.galleryStore.loadGallery(this.#slug);
   }
 
   onUpdateArticle(): void {
@@ -76,7 +93,15 @@ export class EditArticle implements OnInit {
     this.store.updateArticle(this.form.value);
   }
 
-  onFileUploadLoaded(): void {
+  onGalleryUploaded(): void {
+    this.galleryStore.loadGallery(this.#slug);
+  }
+
+  onCoverUploaded(): void {
     this.articleStore.loadArticle(this.#slug);
+  }
+
+  onDeleteImage(imgId: string): void {
+    this.deleteGalleryStore.deleteImage(imgId);
   }
 }

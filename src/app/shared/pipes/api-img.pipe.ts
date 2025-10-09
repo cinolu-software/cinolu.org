@@ -12,6 +12,7 @@ export class ApiImgPipe implements PipeTransform {
       program: value['logo'] ? `${apiUrl}uploads/programs/${value['logo']}` : '/images/no-image.jpg',
       eventGallery: `${apiUrl}uploads/galleries/events/${value['image']}`,
       projectGallery: `${apiUrl}uploads/galleries/projects/${value['image']}`,
+      articleGallery: `${apiUrl}uploads/galleries/articles/${value['image']}`,
       productGallery: `${apiUrl}uploads/galleries/products/${value['image']}`,
       ventureGallery: `${apiUrl}uploads/galleries/ventures/${value['image']}`,
       subprogram: value['logo'] ? `${apiUrl}uploads/subprograms/${value['logo']}` : '/images/no-image.jpg',
