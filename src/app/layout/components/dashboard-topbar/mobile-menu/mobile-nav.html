@@ -1,9 +1,4 @@
-<div
-  class="lg:hidden flex items-center justify-between"
-  [ngClass]="{
-    'hidden': !isOpen(),
-    'flex': isOpen()
-  }">
+<div class="lg:hidden flex items-center justify-between">
   <button (click)="toggleNav()">
     <i-lucide [name]="isOpen() ? icons.close : icons.menu" class="size-6" />
   </button>
