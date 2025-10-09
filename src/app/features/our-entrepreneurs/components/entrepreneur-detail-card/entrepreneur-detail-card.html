@@ -10,7 +10,7 @@
 <div class="sm:py-16 md:py-20 px-6 sm:px-8 lg:px-16 xl:px-24 py-10 2xl:px-32 max-w-screen-2xl mx-auto">
   <div class="grid md:grid-cols-3 gap-10">
     <div
-      class="md:col-span-1 bg-white shadow-md rounded-lg p-8 flex flex-col items-center text-center border border-gray-100">
+      class="md:col-span-1 bg-white shadow-md rounded-lg p-8 flex flex-col items-center text-center border border-gray-100 h-fit">
       <div class="relative w-40 h-40 rounded-full overflow-hidden shadow-md border-4 border-white mb-4">
         <img
           [ngSrc]="entrepreneur() | apiIMG: 'user'"
@@ -21,7 +21,7 @@
           proiority />
       </div>
 
-      <h2 class="text-2xl font-extrabold text-primary-700">{{ entrepreneur()?.name }}</h2>
+      <h2 class="text-2xl font-extrabold text-primary-500">{{ entrepreneur()?.name }}</h2>
       <p class="text-sm text-gray-600 mb-1">{{ entrepreneur()?.ventures?.[0]?.sector || "Secteur non défini" }}</p>
       <p class="text-xs text-gray-500">
         {{ entrepreneur()?.city || "Ville inconnue" }} - {{ entrepreneur()?.country || "Pays inconnu" }}
@@ -36,14 +36,14 @@
         <a
           [href]="entrepreneur()?.ventures?.[0]?.linkedin_url"
           target="_blank"
-          class="transition border border-primary-500 rounded-full p-1.5 h-9 w-9 flex items-center justify-center hover:bg-primary-500 hover:text-white">
+          class="border border-primary-500 rounded-full p-1.5 h-9 w-9 flex items-center justify-center hover:bg-primary-500/10 hover:text-white transition-all duration-300">
           <img src="icons/linkedin.svg" alt="LinkedIn" class="h-4 w-4" />
         </a>
         } @if (entrepreneur()?.ventures?.[0]?.website) {
         <a
           [href]="entrepreneur()?.ventures?.[0]?.website"
           target="_blank"
-          class="transition border border-primary-500 rounded-full p-1.5 h-9 w-9 flex items-center justify-center hover:bg-primary-500 hover:text-white">
+          class="border border-primary-500 rounded-full p-1.5 h-9 w-9 flex items-center justify-center hover:bg-primary-500/10 hover:text-white transition-all duration-300">
           <img src="icons/internet.svg" alt="Site web" class="h-4 w-4" />
         </a>
         }
@@ -81,17 +81,18 @@
           <div class="p-6 pt-12">
             <h4 class="text-lg font-bold text-gray-700 mb-2">{{ venture.name }}</h4>
             <p class="text-sm text-gray-600 mb-3">{{ venture.description }}</p>
+            @if (venture.stage) {
+            <p class="text-xs text-gray-500 mb-4"><strong>Phase :</strong> {{ venture.stage }}</p>
+            }
 
-            <p class="text-xs text-gray-500 mb-4" *ngIf="venture.stage"><strong>Phase :</strong> {{ venture.stage }}</p>
-
-            <a
-              [routerLink]="['/ventures', venture.slug]"
-              class="inline-flex items-center gap-2 px-4 py-2 bg-primary-500 text-white text-sm rounded-lg hover:bg-primary-600 transition">
-              Découvrir
-              <i-lucide
-                [name]="icons.moveRight"
-                class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"></i-lucide>
-            </a>
+            <p-button [routerLink]="['/ventures', venture.slug]" size="small" outlined severity="primary">
+              <p class="flex items-center gap-2 group px-4">
+                Découvrir
+                <i-lucide
+                  class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
+                  [name]="icons.moveRight" />
+              </p>
+            </p-button>
           </div>
         </div>
         }
