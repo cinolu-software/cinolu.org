@@ -13,15 +13,7 @@ import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
   selector: 'app-entrepreneur-detail-card',
   standalone: true,
   providers: [EntrepreneursStore],
-  imports: [
-    CommonModule,
-    RouterModule,
-    LucideAngularModule,
-    ButtonModule,
-    ApiImgPipe,
-    HeroCard,
-    NgOptimizedImage,
-  ],
+  imports: [CommonModule, RouterModule, LucideAngularModule, ButtonModule, ApiImgPipe, HeroCard, NgOptimizedImage],
   templateUrl: './entrepreneur-detail-card.html',
 })
 export class EntrepreneurDetailCard {
@@ -38,9 +30,7 @@ export class EntrepreneurDetailCard {
 
   constructor() {
     const emailParam = this.route.snapshot.paramMap.get('email');
-    const email = emailParam
-      ? decodeURIComponent(emailParam).toLowerCase()
-      : '';
+    const email = emailParam ? decodeURIComponent(emailParam).toLowerCase() : '';
     this.ventures.loadEntrepreneurs();
     effect(() => {
       const list = this.ventures.entrepreneurs();
