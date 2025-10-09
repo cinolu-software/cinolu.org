@@ -10,7 +10,7 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
 
 @Component({
-  selector: 'app-company-detail-card',
+  selector: 'app-entrepreneur-detail-card',
   standalone: true,
   providers: [EntrepreneursStore],
   imports: [
@@ -22,9 +22,9 @@ import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
     HeroCard,
     NgOptimizedImage,
   ],
-  templateUrl: './company-detail-card.html',
+  templateUrl: './entrepreneur-detail-card.html',
 })
-export class CompanyDetailCard {
+export class EntrepreneurDetailCard {
   private route = inject(ActivatedRoute);
   private ventures = inject(EntrepreneursStore);
 
@@ -41,28 +41,11 @@ export class CompanyDetailCard {
     const email = emailParam
       ? decodeURIComponent(emailParam).toLowerCase()
       : '';
-
-    console.log('📩 Email reçu dans l’URL :', email);
-
-    // On charge les entrepreneurs
     this.ventures.loadEntrepreneurs();
-
-    // On écoute les changements du store
     effect(() => {
       const list = this.ventures.entrepreneurs();
 
       if (!list || list.length === 0) {
-        console.log('⏳ En attente du chargement des entrepreneurs...');
-        return;
-      }
-
-      console.log(
-        '📊 Entrepreneurs chargés :',
-        list.map((e) => e.email),
-      );
-
-      if (!email) {
-        console.warn('⚠️ Aucun email trouvé dans l’URL.');
         return;
       }
 
@@ -70,9 +53,6 @@ export class CompanyDetailCard {
 
       if (found) {
         this.entrepreneur.set(found);
-        console.log('✅ Entrepreneur trouvé :', found);
-      } else {
-        console.warn('❌ Aucun entrepreneur trouvé pour :', email);
       }
     });
   }

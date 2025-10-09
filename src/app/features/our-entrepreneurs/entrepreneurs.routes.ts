@@ -9,8 +9,8 @@ export const entrepreneursRoutes = [
     path: ':email',
     title: 'Entrepreneur - Details',
     loadComponent: () =>
-      import('./components/company-detail-card/company-detail-card').then(
-        (c) => c.CompanyDetailCard,
-      ),
+      import(
+        './components/entrepreneur-detail-card/entrepreneur-detail-card'
+      ).then((c) => c.EntrepreneurDetailCard),
   },
 ];
