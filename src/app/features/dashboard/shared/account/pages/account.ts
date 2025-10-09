@@ -13,6 +13,7 @@ import { FileUpload } from '../../../../../shared/components/file-upload/file-up
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { SelectModule } from 'primeng/select';
 import { GENDERS } from '../../../../../shared/data/genders.data';
+import { Textarea } from 'primeng/textarea';
 
 @Component({
   selector: 'app-account',
@@ -29,6 +30,7 @@ import { GENDERS } from '../../../../../shared/data/genders.data';
     DatePickerModule,
     LucideAngularModule,
     SelectModule,
+    Textarea,
   ],
 })
 export class Account implements OnInit {
@@ -46,7 +48,7 @@ export class Account implements OnInit {
       email: ['', Validators.email],
       city: ['', Validators.required],
       country: ['', Validators.required],
-      // use empty string default to match genders option values (e.g. 'female'|'male')
+      biography: [''],
       gender: ['', Validators.required],
       birth_date: ['', Validators.required],
       phone_number: ['', [Validators.minLength(10)]],

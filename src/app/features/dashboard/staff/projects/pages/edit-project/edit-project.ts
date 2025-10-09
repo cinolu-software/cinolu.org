@@ -100,11 +100,11 @@ export class EditProjectComponent implements OnInit {
     this.store.updateProject(this.form.value);
   }
 
-  onCoverUploadLoaded(): void {
+  onCoverUploaded(): void {
     this.projectStore.loadProject(this.#slug);
   }
 
-  onFileUploadLoaded(): void {
+  onGalleryUploaded(): void {
     this.galleryStore.loadGallery(this.#slug);
   }
 }
