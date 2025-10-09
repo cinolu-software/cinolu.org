@@ -39,7 +39,7 @@
       </div>
       <quill-view [content]="article.content" class="hyphens-none text-base" />
 
-      <form class="flex flex-col gap-3" [formGroup]="form" (ngSubmit)="onAddComment()">
+      <form class="flex flex-col gap-3 mt-6" [formGroup]="form" (ngSubmit)="onAddComment()">
         <div class="flex gap-2 flex-col mb-2">
           <label for="content">Saisissez un commentaire</label>
           <textarea id="content" pTextarea pSize="small" fluid formControlName="content"></textarea>
