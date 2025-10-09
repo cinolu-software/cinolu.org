@@ -6,6 +6,8 @@ import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, MoveUpRight, UserPlus, Users } from 'lucide-angular';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
+import { Button } from 'primeng/button';
+
 import {
   IHighlight,
   IProgram,
@@ -23,7 +25,7 @@ export interface HighlightKey {
 
 @Component({
   selector: 'app-highlight-card',
-  imports: [CommonModule, NgOptimizedImage, RouterLink, LucideAngularModule, ApiImgPipe, AnimateOnScrollModule],
+  imports: [CommonModule, NgOptimizedImage, RouterLink, LucideAngularModule, ApiImgPipe, AnimateOnScrollModule, Button],
   styles: [
     `
       :host {
@@ -81,7 +83,7 @@ export class HighlightCard {
   whatIsDisplayed(): string {
     switch (this.selectedKey?.key) {
       case 'programs':
-        return 'program';
+        return 'default';
       case 'subprograms':
         return 'subprogram';
       case 'events':

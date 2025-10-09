@@ -28,22 +28,20 @@
       <div class="flex-1 flex flex-col justify-between">
         @if (data.length > 0) {
         <div class="space-y-4">
-          <p class="bg-primary-500/20 text-primary-500 text-base font-satoshi py-1 px-4 rounded-lg w-32 line-clamp-1">
-            {{ selectedKey.name }}
-          </p>
           <h3 class="text-gray-700 font-black text-2xl line-clamp-2">{{ getItemTitle(data[0]) }}</h3>
-          <p class="text-gray-700 text-base line-clamp-6">{{ getItemDescription(data[0]) }}</p>
+          <p
+            class="text-gray-700 justify-center text-base line-clamp-6 hyphens-none break-words break-all"
+            [innerHTML]="getItemDescription(data[0])"></p>
         </div>
 
-        <button
-          [routerLink]="whatIsPath() + '/' + data[0].slug"
-          class="mt-3 px-5 py-2 border border-primary-400 bg-primary-500 text-white rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:bg-primary-600 hover:-translate-y-1 hover:shadow-lg"
-          type="button">
-          Découvrir
-          <i-lucide
-            [name]="icons.moveUp"
-            class="size-5 group-hover:translate-x-1 transition-all duration-300"></i-lucide>
-        </button>
+        <p-button [routerLink]="whatIsPath() + '/' + data[0].slug" size="small" outlined severity="primary">
+          <p class="flex items-center gap-2 group px-4">
+            Découvrir
+            <i-lucide
+              class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
+              [name]="icons.moveUp" />
+          </p>
+        </p-button>
         } @else {
         <p class="text-center flex items-center h-full text-xl lg:text-2xl font-black text-gray-700">
           Pas encore d'actualité ou de fait marquant pour cette catégorie.
