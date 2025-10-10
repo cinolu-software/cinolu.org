@@ -5,11 +5,10 @@ import { LucideAngularModule, CalendarCheck, CalendarX, MoveRight } from 'lucide
 import { IProject } from '../../../../shared/models/entities.models';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { Button } from 'primeng/button';
-import { QuillViewComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-project-card',
-  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe, Button, QuillViewComponent],
+  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe, Button],
   templateUrl: './project-card.html',
 })
 export class ProjectCard {
