@@ -10,7 +10,9 @@
     <h4 class="mt-4 mb-2 text-xl group-hover:text-primary-900 transition-colors duration-200 font-bold line-clamp-1">
       {{ event().name | titlecase }}
     </h4>
-    <quill-view class="hyphens-none" [content]="event().description" />
+    <p class="text-slate-700 text-base">
+      <span class="line-clamp-2 break-all" [innerHTML]="event().description"></span>
+    </p>
     <div class="my-3 h-1 w-14 border-t border-gray-200"></div>
     <div class="flex flex-wrap justify-between items-end gap-3">
       <div class="font-medium flex flex-col gap-2">
