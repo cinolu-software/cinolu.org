@@ -58,7 +58,7 @@
   }
 
   .ql-editor {
-    @apply !text-base;
+    @apply !text-base !leading-normal !font-mona;
   }
 
   .filepond--drip-blob {

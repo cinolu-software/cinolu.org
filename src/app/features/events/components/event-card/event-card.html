@@ -10,7 +10,7 @@
     <h4 class="mt-4 mb-2 text-xl group-hover:text-primary-900 transition-colors duration-200 font-bold line-clamp-1">
       {{ event().name | titlecase }}
     </h4>
-    <article class="mt-0.5 line-clamp-2 break-all" [innerHTML]="event().description"></article>
+    <quill-view class="hyphens-none" [content]="event().description" />
     <div class="my-3 h-1 w-14 border-t border-gray-200"></div>
     <div class="flex flex-wrap justify-between items-end gap-3">
       <div class="font-medium flex flex-col gap-2">
@@ -23,7 +23,6 @@
           <div>Fin : Le {{ event().ended_at | date: 'dd/MM/yyyy' }}</div>
         </div>
       </div>
-
       <p-button class="" size="small" outlined severity="primary" [routerLink]="['/events', event().slug]">
         <p class="flex items-center gap-2 group px-2">
           Voir Plus

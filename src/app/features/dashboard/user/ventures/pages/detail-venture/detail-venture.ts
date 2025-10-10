@@ -5,11 +5,12 @@ import { SelectModule } from 'primeng/select';
 import { VentureStore } from '../../store/ventures/venture.store';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { ActivatedRoute } from '@angular/router';
+import { QuillViewComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-venture-detail',
   providers: [VentureStore],
-  imports: [SelectModule, LucideAngularModule, NgOptimizedImage, CommonModule, ApiImgPipe],
+  imports: [SelectModule, LucideAngularModule, NgOptimizedImage, CommonModule, ApiImgPipe, QuillViewComponent],
   templateUrl: './detail-venture.html',
 })
 export class DetailVenture implements OnInit {

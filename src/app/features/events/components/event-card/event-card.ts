@@ -5,10 +5,11 @@ import { LucideAngularModule, MapPin, CalendarX, MoveRight } from 'lucide-angula
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { IEvent } from '../../../../shared/models/entities.models';
 import { Button } from 'primeng/button';
+import { QuillViewComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-event-card',
-  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe, Button],
+  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe, Button, QuillViewComponent],
   templateUrl: './event-card.html',
 })
 export class EventCard {
