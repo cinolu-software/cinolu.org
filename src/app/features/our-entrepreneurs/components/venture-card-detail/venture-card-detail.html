@@ -1,5 +1,5 @@
 @if (venture()) {
-<section class="max-w-screen-xl mx-auto px-6 sm:px-8 lg:px-16 py-12">
+<section class="max-w-screen-xl mx-auto px-6 sm:px-8 lg:px-16 py-12 md:py-16 lg:py-28">
   <div class="relative w-full h-72 rounded-lg overflow-hidden mb-12">
     <img [ngSrc]="venture() | apiIMG:'ventureCover'" alt="cover" fill class="object-cover" priority />
     @if (venture()?.logo) {
@@ -10,44 +10,72 @@
     }
   </div>
 
-  <div class="text-center mb-10">
+  <div class="text-center w-full mb-10">
     <h1 class="text-3xl font-extrabold text-primary-600 mb-2">{{ venture()?.name }}</h1>
     <p class="text-sm text-gray-500">{{ venture()?.sector }} • {{ venture()?.location }}</p>
-    <p class="text-xs text-primary-500 mt-1">{{ venture()?.stage }}</p>
+
+    <div class="text-center flex flex-col items-center justify-center gap-3">
+      <h2 class="text-lg font-semibold text-gray-800 mt-4">Stade de développement</h2>
+      <p class="text-xs text-primary-500 py-2 px-4 bg-primary-500/10 border-primary-500/20 border w-fit rounded-full">
+        {{ venture()?.stage }}
+      </p>
+    </div>
   </div>
 
-  <div class="space-y-8 bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-    @if (venture()?.description) {
+  <div class="grid grid-cols-1 md:grid-cols-2">
     <div>
-      <h2 class="text-xl font-semibold text-gray-800 mb-3">Description</h2>
-      <p class="text-gray-700 leading-relaxed">{{ venture()?.description }}</p>
+      <h1 class="text-xl font-semibold text-gray-800 mb-3">Informations</h1>
     </div>
-    } @if (venture()?.problem_solved) {
-    <div>
-      <h2 class="text-xl font-semibold text-gray-800 mb-3">Problème résolu</h2>
-      <p class="text-gray-700 leading-relaxed">{{ venture()?.problem_solved }}</p>
-    </div>
-    } @if (venture()?.target_market) {
-    <div>
-      <h2 class="text-xl font-semibold text-gray-800 mb-3">Marché cible</h2>
-      <p class="text-gray-700 leading-relaxed">{{ venture()?.target_market }}</p>
-    </div>
-    }
-
-    <div class="flex flex-wrap items-center gap-4 pt-6 border-t">
-      @if (venture()?.website) {
-      <a [href]="venture()?.website" target="_blank" class="text-primary-500 hover:underline text-sm">🌐 Site Web</a>
-      } @if (venture()?.linkedin_url) {
-      <a [href]="venture()?.linkedin_url" target="_blank" class="text-primary-500 hover:underline text-sm"
-        >🔗 LinkedIn</a
-      >
-      } @if (venture()?.email) {
-      <a href="mailto:{{ venture()?.email }}" class="text-primary-500 hover:underline text-sm">
-        ✉️ {{ venture()?.email }}
-      </a>
-      } @if (venture()?.phone_number) {
-      <span class="text-gray-600 text-sm">📞 {{ venture()?.phone_number }}</span>
+    <div
+      class="space-y-8 bg-white p-8 rounded-lg hover:shadow-xl/10 border border-gray-100 transform transition-all duration-300">
+      @if (venture()?.description) {
+      <div>
+        <h2 class="text-xl font-semibold text-gray-800 mb-3">Description</h2>
+        <p class="text-gray-700 leading-relaxed">{{ venture()?.description }}</p>
+      </div>
+      } @if (venture()?.problem_solved) {
+      <div>
+        <h2 class="text-xl font-semibold text-gray-800 mb-3">Problème résolu</h2>
+        <p class="text-gray-700 leading-relaxed">{{ venture()?.problem_solved }}</p>
+      </div>
+      } @if (venture()?.target_market) {
+      <div>
+        <h2 class="text-xl font-semibold text-gray-800 mb-3">Marché cible</h2>
+        <p class="text-gray-700 leading-relaxed">{{ venture()?.target_market }}</p>
+      </div>
       }
+
+      <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-gray-200">
+        @if (venture()?.website) {
+        <a
+          [href]="venture()?.website"
+          target="_blank"
+          class="text-primary-500 hover:underline text-sm flex items-center gap-1">
+          <i-lucide [name]="icons.globe" size="18" class="inline-block" />
+          Site Web</a
+        >
+        } @if (venture()?.linkedin_url) {
+        <a
+          [href]="venture()?.linkedin_url"
+          target="_blank"
+          class="text-primary-500 hover:underline text-sm flex items-center gap-1">
+          <i-lucide [name]="icons.linkedin" size="18" />
+          LinkedIn</a
+        >
+        } @if (venture()?.email) {
+        <a
+          href="mailto:{{ venture()?.email }}"
+          class="text-primary-500 hover:underline text-sm flex items-center gap-1">
+          <i-lucide [name]="icons.email" size="18" />
+          {{ venture()?.email }}
+        </a>
+        } @if (venture()?.phone_number) {
+        <span class="text-gray-600 text-sm flex items-center gap-1">
+          <i-lucide [name]="icons.phone" size="18" />
+          {{ venture()?.phone_number }}</span
+        >
+        }
+      </div>
     </div>
   </div>
 </section>

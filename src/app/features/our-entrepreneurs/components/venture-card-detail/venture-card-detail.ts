@@ -1,5 +1,5 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { Building2, LucideAngularModule, MoveRight } from 'lucide-angular';
+import { Building2, Globe, Linkedin, LucideAngularModule, Mail, MoveRight, Phone } from 'lucide-angular';
 import { IVenture } from '../../../../shared/models/entities.models';
 import { ActivatedRoute } from '@angular/router';
 import { EntrepreneursStore } from '../../store/ventures/entrepreneurs.store';
@@ -21,6 +21,10 @@ export class VentureCardDetail {
   icons = {
     moveRight: MoveRight,
     building: Building2,
+    phone: Phone,
+    linkedin: Linkedin,
+    email: Mail,
+    globe: Globe,
   };
 
   constructor() {
