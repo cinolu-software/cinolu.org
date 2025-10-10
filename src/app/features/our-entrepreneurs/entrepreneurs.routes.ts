@@ -11,7 +11,7 @@ export const entrepreneursRoutes = [
       import('./components/entrepreneur-detail-card/entrepreneur-detail-card').then((c) => c.EntrepreneurDetailCard),
   },
   {
-    path: '/ventures/:slug',
+    path: 'venture/:slug',
     title: 'Venture - Details',
     loadComponent: () =>
       import('./components/venture-card-detail/venture-card-detail').then((c) => c.VentureCardDetail),
