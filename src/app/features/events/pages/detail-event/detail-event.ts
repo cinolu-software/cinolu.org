@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, effect, inject, model, OnInit } from '@angular/core';
 import { EventSkeleton } from '../../components/event-detail-skeleton/event-skeleton';
 import { GalleriaModule } from 'primeng/galleria';
@@ -22,12 +22,13 @@ import { Button } from 'primeng/button';
 import { IEvent, IImage } from '../../../../shared/models/entities.models';
 import { GalleryEventStore } from '../../store/galleries.event.store';
 import { carouselConfig } from '../../../landing/config/carousel.config';
+import { QuillViewComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-event',
   standalone: true,
   providers: [EventStore, GalleryEventStore],
-  imports: [CommonModule, EventSkeleton, LucideAngularModule, NgOptimizedImage, ApiImgPipe, Button, GalleriaModule],
+  imports: [CommonModule, EventSkeleton, LucideAngularModule, ApiImgPipe, Button, GalleriaModule, QuillViewComponent],
   templateUrl: './detail-event.html',
 })
 export class DetailEvent implements OnInit {
@@ -44,6 +45,7 @@ export class DetailEvent implements OnInit {
     fileLock: FileLock2,
     calendarSync: CalendarSync,
     calendarX: CalendarX,
+    calendarCheck: CalendarDays,
   };
 
   #route = inject(ActivatedRoute);
