@@ -21,6 +21,7 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { Button } from 'primeng/button';
 import { IEvent, IImage } from '../../../../shared/models/entities.models';
 import { GalleryEventStore } from '../../store/galleries.event.store';
+import { carouselConfig } from '../../../landing/config/carousel.config';
 
 @Component({
   selector: 'app-event',
@@ -49,16 +50,7 @@ export class DetailEvent implements OnInit {
   store = inject(EventStore);
   galleryStore = inject(GalleryEventStore);
 
-  responsiveOptions = [
-    {
-      breakpoint: '1300px',
-      numVisible: 4,
-    },
-    {
-      breakpoint: '575px',
-      numVisible: 1,
-    },
-  ];
+  responsiveOptions = carouselConfig;
 
   constructor() {
     effect(() => {
