@@ -1,48 +1,46 @@
-<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
-  <div class="flex flex-col gap-3 p-4">
-    @for (key of keys; track key.id) {
+<div class="flex gap-6">
+  <div class="flex flex-col gap-4 w-1/4">
     <button
-      (click)="selectKey($index)"
-      class="w-full py-3 px-6 text-left rounded-full border transition-all duration-500 ease-out"
-      [ngClass]="
-        selectedIndex() === $index
-          ? 'bg-primary-500 text-white border-primary-500 shadow-lg scale-105'
-          : 'bg-white text-gray-800 border-gray-200 hover:shadow-md hover:-translate-y-1'
-      ">
-      <span class="font-medium text-base">{{ key.name }}</span>
+      *ngFor="let key of keys"
+      (click)="selectKey(key)"
+      [ngClass]="selectedKey.id === key.id ? 'bg-primary-500 text-white' : 'bg-white text-gray-900 border'"
+      class="px-4 py-2 rounded-full border hover:shadow-lg transition-all duration-300">
+      {{ key.name }}
     </button>
-    }
   </div>
 
-  <div class="lg:col-span-2 relative perspective-1000">
-    <div
-      class="card-3d transition-transform duration-700 ease-in-out"
-      [style.transform]="'rotateY(' + selectedIndex() * 180 + 'deg)'">
-      @if (selectedItem) {
-      <div class="card-face front">
-        <div class="flex flex-col md:flex-row gap-6 items-center p-6 md:p-10 w-full">
-          <div class="relative w-full md:w-1/2 overflow-hidden rounded-lg shadow-md">
+  <div class="w-3/4 relative h-96 perspective">
+    <div class="relative w-full h-full">
+      <ng-container *ngFor="let item of data; let i = index; trackBy: trackByFn">
+        <div
+          *ngIf="isVisible(i)"
+          class="card absolute"
+          [class.active]="i === activeIndex"
+          [class.prev]="i === (activeIndex - 1 + data.length) % data.length"
+          [class.next]="i === (activeIndex + 1) % data.length">
+          <div class="h-48 w-full relative rounded-lg overflow-hidden mb-4">
             <img
-              [src]="selectedItem | apiIMG: whatIsDisplayed()"
-              [alt]="getItemTitle(selectedItem)"
-              class="w-full h-64 md:h-80 object-cover transform transition-transform duration-700 group-hover:scale-105" />
+              [ngSrc]="data[0] | apiIMG: whatIsDisplayed()"
+              fill
+              [alt]="getItemTitle(data[0])"
+              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
           </div>
 
-          <div class="flex-1 flex flex-col justify-center space-y-4 text-center md:text-left">
-            <h3 class="text-2xl font-bold text-gray-900">{{ getItemTitle(selectedItem) }}</h3>
-            <p class="text-gray-700 line-clamp-5" [innerHTML]="getItemDescription(selectedItem)"></p>
+          <h3 class="font-bold text-xl mb-2 text-gray-800">{{ getItemTitle(item) }}</h3>
+          <div class="prose prose-gray max-w-none mt-2 text-gray-600 !line-clamp-3 !hyphens-none break-words break-all">
+            <quill-view [content]="getItemDescription(item)" class="quill-prose"></quill-view>
+          </div>
 
-            <button
-              pButton
-              type="button"
-              class="mt-2 px-6 py-2 rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 flex items-center gap-2 mx-auto md:mx-0">
+          <p-button [routerLink]="whatIsPath() + '/' + data[0].slug" size="small" outlined severity="primary">
+            <p class="flex items-center gap-2 group px-4">
               Découvrir
-              <i-lucide [name]="icons.moveUp" class="size-5"></i-lucide>
-            </button>
-          </div>
+              <i-lucide
+                class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
+                [name]="icons.moveUp" />
+            </p>
+          </p-button>
         </div>
-      </div>
-      }
+      </ng-container>
     </div>
   </div>
 </div>

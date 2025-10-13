@@ -13,11 +13,17 @@
     </div>
 
     <div>
-      <app-highlight-card
+      <!-- <app-highlight-card
         [keys]="keys"
         [selectedKey]="selectedKey"
         [data]="selectedData"
-        (keySelected)="selectKey($event)"></app-highlight-card>
+        (keySelected)="selectKey($event)"></app-highlight-card> -->
+
+      <app-highlight-card2
+        [keys]="keys"
+        [selectedKey]="selectedKey"
+        [data]="selectedData"
+        (keySelected)="selectKey($event)" />
     </div>
   </div>
 </section>

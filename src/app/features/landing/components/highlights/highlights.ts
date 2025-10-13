@@ -5,11 +5,12 @@ import { IProgram, ISubprogram, IEvent, IProject, IArticle } from '../../../../s
 import { interval, Subscription } from 'rxjs';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { LucideAngularModule } from 'lucide-angular';
+import { HighlightCard2 } from '../../../highlights/component/highlight-card2/highlight-card2';
 
 @Component({
   selector: 'app-highlights',
   standalone: true,
-  imports: [LucideAngularModule, FadeInOnScrollDirective, HighlightCard],
+  imports: [LucideAngularModule, FadeInOnScrollDirective, HighlightCard, HighlightCard2],
   providers: [HighlightsStore],
   templateUrl: `./highlights.html`,
 })
