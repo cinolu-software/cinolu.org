@@ -22,12 +22,6 @@ export const routes: Route[] = [
     loadChildren: () => import('./features/our-programs/programs.routes').then((m) => m.programsRoutes),
   },
   {
-    path: 'jobs-opportunities',
-    component: Layout,
-    data: { layout: 'full-layout' },
-    loadChildren: () => import('./features/jobs-opportunities/jobs.routes').then((m) => m.jobsRoutes),
-  },
-  {
     path: 'events',
     component: Layout,
     data: { layout: 'fixed-layout' },

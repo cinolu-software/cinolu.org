@@ -4,42 +4,42 @@ export const dashboardRoutes: Routes = [
   {
     path: '',
     title: 'Dashboard',
-    loadComponent: () => import('./shared/dashboard/pages/dashboard').then((c) => c.Dashboard),
+    loadComponent: () => import('./pages/dashboard/pages/dashboard').then((c) => c.Dashboard),
   },
   {
     path: 'community',
-    loadChildren: () => import('./user/outreach/outreach.routes').then((c) => c.outreachRoutes),
+    loadChildren: () => import('./pages/outreach/outreach.routes').then((c) => c.outreachRoutes),
   },
   {
     path: 'account',
-    loadChildren: () => import('./shared/account/account.routes').then((c) => c.accountRoutes),
+    loadChildren: () => import('./pages/account/account.routes').then((c) => c.accountRoutes),
   },
   {
     path: 'ventures',
-    loadChildren: () => import('./user/ventures/ventures.routes').then((c) => c.venturesRoutes),
+    loadChildren: () => import('./pages/ventures/ventures.routes').then((c) => c.venturesRoutes),
   },
   {
     path: 'products',
-    loadChildren: () => import('./user/products/products.routes').then((c) => c.productsRoutes),
+    loadChildren: () => import('./pages/products/products.routes').then((c) => c.productsRoutes),
   },
   {
     path: '',
-    loadChildren: () => import('./staff/users/users.routes').then((c) => c.usersRoutes),
+    loadChildren: () => import('./pages/users/users.routes').then((c) => c.usersRoutes),
   },
   {
     path: '',
-    loadChildren: () => import('./staff/programs/programs.routes').then((c) => c.programsRoutes),
+    loadChildren: () => import('./pages/programs/programs.routes').then((c) => c.programsRoutes),
   },
   {
     path: '',
-    loadChildren: () => import('./staff/projects/projects.routes').then((c) => c.projectsRoutes),
+    loadChildren: () => import('./pages/projects/projects.routes').then((c) => c.projectsRoutes),
   },
   {
     path: '',
-    loadChildren: () => import('./staff/events/events.routes').then((c) => c.eventsRoutes),
+    loadChildren: () => import('./pages/events/events.routes').then((c) => c.eventsRoutes),
   },
   {
     path: 'blog',
-    loadChildren: () => import('./staff/blog/blog.routes').then((c) => c.blogRoutes),
+    loadChildren: () => import('./pages/blog/blog.routes').then((c) => c.blogRoutes),
   },
 ];
