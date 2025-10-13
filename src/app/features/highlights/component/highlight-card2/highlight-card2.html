@@ -1,0 +1,48 @@
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <div class="flex flex-col gap-3 p-4">
+    @for (key of keys; track key.id) {
+    <button
+      (click)="selectKey($index)"
+      class="w-full py-3 px-6 text-left rounded-full border transition-all duration-500 ease-out"
+      [ngClass]="
+        selectedIndex() === $index
+          ? 'bg-primary-500 text-white border-primary-500 shadow-lg scale-105'
+          : 'bg-white text-gray-800 border-gray-200 hover:shadow-md hover:-translate-y-1'
+      ">
+      <span class="font-medium text-base">{{ key.name }}</span>
+    </button>
+    }
+  </div>
+
+  <div class="lg:col-span-2 relative perspective-1000">
+    <div
+      class="card-3d transition-transform duration-700 ease-in-out"
+      [style.transform]="'rotateY(' + selectedIndex() * 180 + 'deg)'">
+      @if (selectedItem) {
+      <div class="card-face front">
+        <div class="flex flex-col md:flex-row gap-6 items-center p-6 md:p-10 w-full">
+          <div class="relative w-full md:w-1/2 overflow-hidden rounded-lg shadow-md">
+            <img
+              [src]="selectedItem | apiIMG: whatIsDisplayed()"
+              [alt]="getItemTitle(selectedItem)"
+              class="w-full h-64 md:h-80 object-cover transform transition-transform duration-700 group-hover:scale-105" />
+          </div>
+
+          <div class="flex-1 flex flex-col justify-center space-y-4 text-center md:text-left">
+            <h3 class="text-2xl font-bold text-gray-900">{{ getItemTitle(selectedItem) }}</h3>
+            <p class="text-gray-700 line-clamp-5" [innerHTML]="getItemDescription(selectedItem)"></p>
+
+            <button
+              pButton
+              type="button"
+              class="mt-2 px-6 py-2 rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-all duration-300 flex items-center gap-2 mx-auto md:mx-0">
+              Découvrir
+              <i-lucide [name]="icons.moveUp" class="size-5"></i-lucide>
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>
