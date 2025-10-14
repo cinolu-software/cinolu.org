@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import { IndicatorDto } from '../pages/projects/dto/projects/indicator.dto';
+import { IndicatorDto } from '../dto/indicator.dto';
 
 @Component({
   selector: 'app-indicators',

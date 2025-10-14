@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 import { IIndicator } from '../../../../../../shared/models/entities.models';
 import { IndicatorDto } from '../../../../dto/indicator.dto';
-import { ProjectStore } from '../../../../../projects/store/project.store';
+import { EventStore } from '../../../../../events/store/event.store';
 
 interface IAddIndicatorStore {
   isLoading: boolean;
@@ -16,17 +16,17 @@ export const AddIndicatorStore = signalStore(
   withState<IAddIndicatorStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _projectStore: inject(ProjectStore),
+    _eventStore: inject(EventStore),
     _toast: inject(ToastrService),
   })),
-  withMethods(({ _http, _toast, _projectStore, ...store }) => ({
+  withMethods(({ _http, _toast, _eventStore, ...store }) => ({
     addIndicator: rxMethod<{ id: string; indicators: IndicatorDto[] }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ id, indicators }) => {
-          return _http.post<{ data: IIndicator[] }>(`projects/indicators/${id}`, indicators).pipe(
+          return _http.post<{ data: IIndicator[] }>(`events/indicators/${id}`, indicators).pipe(
             tap(({ data }) => {
-              _projectStore.addIndicators(data);
+              _eventStore.addIndicators(data);
               _toast.showSuccess('Les indicateurs ont été ajoutés');
               patchState(store, { isLoading: false });
             }),

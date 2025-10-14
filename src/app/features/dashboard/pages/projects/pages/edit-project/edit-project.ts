@@ -22,7 +22,7 @@ import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { IndicatorsComponent } from '../../../../components/indicators';
 import { Tabs } from '../../../../../../shared/components/tabs/tabs';
 import { AddIndicatorStore } from '../../store/projects/add-indicators.store';
-import { IndicatorDto } from '../../dto/projects/indicator.dto';
+import { IndicatorDto } from '../../../../dto/indicator.dto';
 
 @Component({
   selector: 'app-project-edit',
@@ -127,8 +127,6 @@ export class EditProjectComponent implements OnInit {
   }
 
   onSaveIndicators(id: string, indicators: IndicatorDto[]): void {
-    console.log(indicators);
-    return;
     this.addIndicatorsStore.addIndicator({ id, indicators });
   }
 }

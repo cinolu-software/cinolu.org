@@ -106,6 +106,9 @@
     </div>
   </form>
   } @if (activeTab() === 'indicators' && event) {
-  <app-indicators [isLoading]="false" [indicators]="event.indicators" (saveIndicators)="onSaveIndicators($event)" />
+  <app-indicators
+    [isLoading]="addIndicatorsStore.isLoading() "
+    [indicators]="event.indicators"
+    (saveIndicators)="onSaveIndicators(event.id, $event)" />
   }
 </section>

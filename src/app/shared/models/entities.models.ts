@@ -9,7 +9,7 @@ export interface ITag extends IBase {
   name: string;
 }
 
-export interface IIndicator {
+export interface IIndicator extends IBase {
   name: string;
   value: number;
 }
