@@ -1,30 +1,29 @@
 <app-hero-card
-  background="/images/about.jpg"
+  background="/images/parteners-default.jpg"
   [badgeIcon]="icons.handshake"
   badgeText="Partenaires"
   title="Ils nous font
 "
   highlight="confiance"
-  description="Découvrez notre histoire, notre mission et rencontrez notre équipe dévouée. Nous sommes passionnés par ce que nous faisons et nous nous engageons à fournir le meilleur service possible." />
+  description="Ensemble avec nos partenaires, nous soutenons les entrepreneurs dans leur parcours, favorisons les synergies et transformons les idées en succès durables." />
 
 <section class="min-h-fit backdrop-blur-[1px] bg-grid items-center content-center">
   <div class="px-8 min-h-dvh xl:min-h-[800px] lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 md:py-28">
     <div class="mx-auto">
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3 lg:gap-6">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-6">
         @for (item of parteners; track $index) {
         <div
-          pAnimateOnScroll
-          [enterClass]="$index % 2 === 0 ? 'animate-enter fade-in-10 zoom-in-50 animate-duration-1000' : 'animate-enter fade-in-10 zoom-in-50 animate-duration-1000'"
-          class="flex flex-col items-center justify-center bg-white p-6 transition duration-300 group h-36 border border-gray-100">
-          <div class="w-28 h-12 flex items-center justify-center">
+          class="flex flex-col items-center justify-center bg-white p-6 transition duration-300 group h-48 border border-gray-100 rounded-lg hover:shadow-lg hover:-translate-y-1">
+          <div class="h-16 flex items-center justify-center">
             <p-image
               [src]="item.image"
               [alt]="'logo de ' + item.name"
-              [preview]="true"
               imageClass="object-contain max-w-full max-h-12" />
           </div>
 
-          <p class="mt-4 text-sm font-medium text-gray-600 group-hover:text-primary-600 lg:truncate">{{ item.name }}</p>
+          <p class="mt-4 text-sm font-medium text-gray-600 lg:text-lg group-hover:text-primary-600 lg:truncate">
+            {{ item.name }}
+          </p>
         </div>
         }
       </div>
