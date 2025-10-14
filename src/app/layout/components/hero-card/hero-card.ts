@@ -22,7 +22,7 @@ export class HeroCard {
   @Input() badgeIcon!: LucideIconData;
   @Input() badgeText = 'Section';
   @Input({ required: true }) title!: string;
-  @Input() highlight!: string;
+  @Input() highlight?: string;
   @Input() description!: string;
   @Input() overlayColor = 'bg-black/60';
 }

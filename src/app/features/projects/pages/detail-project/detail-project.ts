@@ -23,19 +23,22 @@ import { IImage, IProject } from '../../../../shared/models/entities.models';
 import { GalleryProjectStore } from '../../store/galleries.projet.store';
 import { GalleriaModule } from 'primeng/galleria';
 import { Button } from 'primeng/button';
+import { QuillViewComponent } from 'ngx-quill';
+import { carouselConfig } from '../../../landing/config/carousel.config';
 
 @Component({
   selector: 'app-project-detail',
   providers: [ProjectStore, GalleryProjectStore],
   imports: [
     CommonModule,
-    NgOptimizedImage,
     FormsModule,
     ApiImgPipe,
     ProjectSkeleton,
     LucideAngularModule,
+    NgOptimizedImage,
     GalleriaModule,
     Button,
+    QuillViewComponent,
   ],
   templateUrl: './detail-project.html',
 })
@@ -57,6 +60,7 @@ export class DetailProject implements OnInit {
     calendarSync: CalendarSync,
     calendarX: CalendarX,
     map: MapPinHouse,
+    calendarCheck: CalendarX,
   };
 
   constructor() {
@@ -66,17 +70,7 @@ export class DetailProject implements OnInit {
     });
   }
 
-  responsiveOptions = [
-    {
-      breakpoint: '1300px',
-      numVisible: 4,
-    },
-    {
-      breakpoint: '575px',
-      numVisible: 1,
-    },
-  ];
-
+  responsiveOptions = carouselConfig;
   ngOnInit(): void {
     const slug = this.#route.snapshot.params['slug'];
     this.store.loadProject(slug);

@@ -12,12 +12,18 @@
       </p>
     </div>
 
-    <div>
+    <div class="w-full">
       <app-highlight-card
         [keys]="keys"
         [selectedKey]="selectedKey"
         [data]="selectedData"
         (keySelected)="selectKey($event)"></app-highlight-card>
+
+      <!-- <app-highlight-card2
+        [keys]="keys"
+        [selectedKey]="selectedKey"
+        [data]="selectedData"
+        (keySelected)="selectKey($event)" /> -->
     </div>
   </div>
 </section>

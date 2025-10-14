@@ -4,10 +4,11 @@ import { GALLERY_IMAGES } from '../../data/gallery.data';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LucideAngularModule, ReceiptText, StepBack, StepForward, X } from 'lucide-angular';
 import { IGalleryImage } from '../../data/gallery.data';
+import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-gallery-card',
-  imports: [CommonModule, ReactiveFormsModule, LucideAngularModule],
+  imports: [CommonModule, ReactiveFormsModule, LucideAngularModule, Button],
   templateUrl: './gallery-card.html',
   styles: ``,
 })
@@ -21,6 +22,7 @@ export class GalleryCard {
   photos = GALLERY_IMAGES;
   page = signal(1);
   perPage = 9;
+  options = [];
 
   currentIndex = signal(0);
   lightboxOpen = signal(false);
@@ -63,11 +65,23 @@ export class GalleryCard {
     this.current.set(this.photos[newIdx]);
   }
 
+  listCategories() {
+    const uniques = Array.from(new Set(this.photos.map((photo) => photo.category).filter((c): c is string => !!c)));
+    return uniques;
+  }
+
   @HostListener('window:keydown', ['$event'])
   handleKey(event: KeyboardEvent) {
     if (!this.lightboxOpen()) return;
     if (event.key === 'ArrowRight') this.next();
     if (event.key === 'ArrowLeft') this.prev();
     if (event.key === 'Escape') this.closeLightbox();
+  }
+
+  filterByCategory(item: string): void {
+    this.photos = this.photos.filter((photo) => photo.category === item);
+    this.page.set(1);
+    this.closeLightbox();
+    console.log(this.photos);
   }
 }

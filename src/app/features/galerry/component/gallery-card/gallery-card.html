@@ -1,9 +1,10 @@
-<section class="sm:py-16 md:py-20 mx-auto bg-grid">
+<section class="py-16 md:py-20 mx-auto bg-grid">
   <div class="px-4 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
-    <p class="mt-4 text-base max-w-3xl text-gray-600 m-auto mb-9 text-center">
-      Parcourez notre collection et plongez dans l’énergie de nos événements passés.
-    </p>
-
+    <div class="mb-4 flex flex-wrap gap-2 justify-center items-center">
+      @for (item of listCategories(); track $index) {
+      <p-button outlined (click)="filterByCategory(item)">{{item}}</p-button>
+      }
+    </div>
     <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
       @for (p of filtered(); track p.src) {
       <article
@@ -16,7 +17,6 @@
           [alt]="p.alt"
           loading="lazy"
           class="w-full h-auto object-cover cursor-pointer transition-transform duration-500 group-hover:scale-105" />
-
         <div
           class="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-gradient-to-b from-black/70 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity">
           <h3 class="font-semibold">{{ p.alt }}</h3>
@@ -44,7 +44,7 @@
       (click)="closeLightbox()"
       (keydown)="($event.key === 'Enter' || $event.key === ' ') && closeLightbox()">
       <div
-        class="max-w-4xl w-full max-h-[90vh] overflow-hidden rounded-lg bg-white"
+        class="max-w-3xl w-full max-h-[90vh] overflow-hidden rounded-lg bg-white"
         tabindex="0"
         (click)="$event.stopPropagation()"
         (keydown)="($event.key === 'Enter' || $event.key === ' ') && $event.stopPropagation()">
