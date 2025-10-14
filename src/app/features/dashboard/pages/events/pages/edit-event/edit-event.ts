@@ -65,7 +65,7 @@ export class EditEventComponent implements OnInit {
   url = `${environment.apiUrl}events/cover/`;
   #slug = this.#route.snapshot.params['slug'];
   icons = { trash: Trash2 };
-  galleryUrl = `${environment.apiUrl}galleries/event/`;
+  galleryUrl = `${environment.apiUrl}events/gallery/`;
   deleteGalleryStore = inject(DeleteGalleryStore);
   galleryStore = inject(GalleryStore);
   tabs = [

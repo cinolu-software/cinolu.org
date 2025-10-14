@@ -35,7 +35,7 @@
         <ng-template pTemplate="item" let-img>
           <div class="relative w-full overflow-hidden h-72 md:h-[32rem]">
             <img
-              [src]="img | apiIMG: 'ventureGallery'"
+              [src]="img | apiIMG: 'gallery'"
               [alt]="img.image"
               class="relative object-cover w-full h-full block transition-transform duration-300 hover:scale-105"
               priority />
@@ -43,7 +43,7 @@
         </ng-template>
 
         <ng-template pTemplate="thumbnail" let-img>
-          <img [src]="img | apiIMG: 'ventureGallery'" [alt]="img.image" class="relative object-cover h-20 w-20" />
+          <img [src]="img | apiIMG: 'gallery'" [alt]="img.image" class="relative object-cover h-20 w-20" />
         </ng-template>
       </p-galleria>
       } @else {
