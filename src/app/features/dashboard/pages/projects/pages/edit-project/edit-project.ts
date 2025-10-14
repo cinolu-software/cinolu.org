@@ -63,7 +63,7 @@ export class EditProjectComponent implements OnInit {
   programsStore = inject(UnpaginatedSubprogramsStore);
   projectStore = inject(ProjectStore);
   url = `${environment.apiUrl}projects/cover/`;
-  galleryUrl = `${environment.apiUrl}galleries/project/`;
+  galleryUrl = `${environment.apiUrl}projects/gallery/`;
   #slug = this.#route.snapshot.params['slug'];
   icons = { trash: Trash2 };
   galleryStore = inject(GalleryStore);
@@ -109,8 +109,8 @@ export class EditProjectComponent implements OnInit {
     this.activeTab.set(tab);
   }
 
-  onDeleteImage(imageId: string): void {
-    this.deleteImageStore.deleteImage(imageId);
+  onDeleteImage(id: string): void {
+    this.deleteImageStore.deleteImage(id);
   }
 
   onUpdateProject(): void {

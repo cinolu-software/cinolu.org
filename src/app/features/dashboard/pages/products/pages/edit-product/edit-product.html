@@ -1,7 +1,8 @@
 <section class="pt-32 dashboard-main-content flex flex-col gap-4">
   @let product = productStore.product();
-  <div class="flex flex-col gap-4 mb-10">
-    <p class="font-medium">Galerie</p>
+  <app-tabs [tabs]="tabs" [activeTab]="activeTab()" (tabChange)="onTabChange($event)" />
+  @if (activeTab() === 'gallery') {
+  <div class="flex flex-col gap-4">
     <div class="w-full md:w-1/3">
       @if (productStore.isLoading()) {
       <div class="h-20 bg-gray-200 animate-pulse rounded-lg w-full mb-4"></div>
@@ -21,7 +22,7 @@
           class="object-cover h-full"
           priority
           fill
-          [ngSrc]="image | apiIMG: 'productGallery'"
+          [ngSrc]="image | apiIMG: 'gallery'"
           [alt]="product?.name + ' gallery image'" />
         <button
           type="button"
@@ -33,6 +34,7 @@
       }
     </div>
   </div>
+  } @if (activeTab() === 'edit') {
   <form class="w-full" [formGroup]="form" (ngSubmit)="onEditProduct()">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="flex flex-col gap-2">
@@ -72,4 +74,5 @@
       </div>
     </div>
   </form>
+  }
 </section>

@@ -20,7 +20,8 @@
           <ng-template pTemplate="item" let-img>
             <div class="relative w-full overflow-hidden h-72 md:h-[27rem]">
               <img
-                [src]="img | apiIMG: 'projectGallery'"
+                fill
+                [ngSrc]="img | apiIMG: 'gallery'"
                 [alt]="img.image"
                 class="relative object-cover w-full h-full block transition-transform duration-300 hover:scale-105"
                 priority />

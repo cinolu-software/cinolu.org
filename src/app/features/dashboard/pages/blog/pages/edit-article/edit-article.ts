@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePickerModule } from 'primeng/datepicker';
 import { InputText } from 'primeng/inputtext';
@@ -19,7 +19,8 @@ import { ArticlesStore } from '../../../../../blog/store/articles/articles.store
 import { QuillModule } from 'ngx-quill';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
-import { LucideAngularModule, Trash2 } from 'lucide-angular';
+import { Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
+import { Tabs } from '../../../../../../shared/components/tabs/tabs';
 
 @Component({
   selector: 'app-edit-article',
@@ -46,6 +47,7 @@ import { LucideAngularModule, Trash2 } from 'lucide-angular';
     LucideAngularModule,
     ApiImgPipe,
     QuillModule,
+    Tabs,
   ],
   templateUrl: './edit-article.html',
 })
@@ -61,7 +63,12 @@ export class EditArticle implements OnInit {
   icons = { trash: Trash2 };
   galleryStore = inject(GalleryStore);
   deleteGalleryStore = inject(DeleteGalleryStore);
-  galleryUrl = `${environment.apiUrl}galleries/article/`;
+  galleryUrl = `${environment.apiUrl}articles/gallery/`;
+  tabs = [
+    { label: "Modifier l'article", name: 'edit', icon: SquarePen },
+    { label: 'Gérer la galerie', name: 'gallery', icon: Images },
+  ];
+  activeTab = signal('edit');
 
   constructor() {
     this.form = this.#fb.group({
@@ -86,6 +93,10 @@ export class EditArticle implements OnInit {
   ngOnInit(): void {
     this.articleStore.loadArticle(this.#slug);
     this.galleryStore.loadGallery(this.#slug);
+  }
+
+  onTabChange(tab: string): void {
+    this.activeTab.set(tab);
   }
 
   onUpdateArticle(): void {
