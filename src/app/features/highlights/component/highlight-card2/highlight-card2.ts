@@ -5,7 +5,6 @@ import { LucideAngularModule, MoveUpRight } from 'lucide-angular';
 import { Button } from 'primeng/button';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { interval, Subscription } from 'rxjs';
-
 import {
   IHighlight,
   IProgram,
@@ -22,6 +21,8 @@ export interface HighlightKey {
   key: keyof IHighlight;
 }
 
+type HighlightItem = IProgram | ISubprogram | IEvent | IProject | IArticle;
+
 @Component({
   selector: 'app-highlight-card2',
   standalone: true,
@@ -36,52 +37,23 @@ export interface HighlightKey {
           color: #4b5563;
           overflow: hidden;
           display: -webkit-box;
-          -webkit-line-clamp: 3 !important;
+          -webkit-line-clamp: 4 !important;
           -webkit-box-orient: vertical;
           text-overflow: ellipsis;
-          hyphens: none;
           word-break: break-word;
           margin-top: 0.5rem;
         }
 
-        .perspective {
-          perspective: 1000px;
-        }
-
         .card {
-          width: 100%;
-          height: 100%;
-          border-radius: 1rem;
-          background: white;
-          padding: 1.5rem;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-          top: 0;
-          left: 0;
-          transition: all 0.5s ease;
-          transform-style: preserve-3d;
-          backface-visibility: hidden;
-          position: absolute;
-          z-index: 1;
-          opacity: 0.6;
-          transform: scale(0.9) translateY(20px);
+          @apply absolute rounded-xl bg-white shadow-lg overflow-hidden transition-all duration-700 ease-in-out flex flex-col;
         }
 
-        .card.active {
-          z-index: 3;
-          opacity: 1;
-          transform: scale(1) translateY(0);
+        .card img {
+          @apply w-full h-1/2 object-cover;
         }
 
-        .card.prev {
-          z-index: 2;
-          opacity: 0.6;
-          transform: scale(0.85) translateY(-20px) rotateY(-10deg);
-        }
-
-        .card.next {
-          z-index: 2;
-          opacity: 0.6;
-          transform: scale(0.85) translateY(20px) rotateY(10deg);
+        .card-content {
+          @apply p-4 flex flex-col justify-between flex-1;
         }
       }
     `,
@@ -90,11 +62,11 @@ export interface HighlightKey {
 export class HighlightCard2 implements OnInit, OnDestroy {
   @Input() keys: HighlightKey[] = [];
   @Input() selectedKey!: HighlightKey;
-  @Input() data: (IProgram | ISubprogram | IEvent | IProject | IArticle)[] = [];
+  @Input() data: HighlightItem[] = [];
   @Output() keySelected = new EventEmitter<HighlightKey>();
 
   activeIndex = 0;
-  carouselSub!: Subscription;
+  carouselSub?: Subscription;
   icons = { moveUp: MoveUpRight };
 
   ngOnInit() {
@@ -105,32 +77,42 @@ export class HighlightCard2 implements OnInit, OnDestroy {
     this.carouselSub?.unsubscribe();
   }
 
-  selectKey(key: HighlightKey) {
+  startAutoRotation(): void {
+    this.carouselSub = interval(6000).subscribe(() => {
+      if (this.data.length > 1) this.nextItem();
+    });
+  }
+
+  prevItem(): void {
+    this.activeIndex = (this.activeIndex - 1 + this.data.length) % this.data.length;
+  }
+
+  nextItem(): void {
+    this.activeIndex = (this.activeIndex + 1) % this.data.length;
+  }
+
+  selectKey(key: HighlightKey): void {
     this.selectedKey = key;
     this.activeIndex = 0;
     this.keySelected.emit(key);
   }
 
-  startAutoRotation() {
-    this.carouselSub = interval(5000).subscribe(() => {
-      if (this.data.length > 1) {
-        this.activeIndex = (this.activeIndex + 1) % this.data.length;
-      }
-    });
+  getItemTitle(item: HighlightItem): string {
+    if ('name' in item) return item.name;
+    if ('title' in item) return item.title ?? 'Titre inconnu';
+    return 'Titre inconnu';
   }
 
-  getItemTitle(item: IProgram | ISubprogram | IEvent | IProject | IArticle): string {
-    return 'name' in item ? item.name : (item.title ?? 'Titre inconnu');
-  }
-
-  getItemDescription(item: IProgram | ISubprogram | IEvent | IProject | IArticle): string {
-    return 'description' in item ? item.description : (item.summary ?? '');
+  getItemDescription(item: HighlightItem): string {
+    if ('description' in item) return item.description ?? '';
+    if ('summary' in item) return item.summary ?? '';
+    return '';
   }
 
   whatIsDisplayed(): string {
     switch (this.selectedKey?.key) {
       case 'programs':
-        return 'default';
+        return 'program';
       case 'subprograms':
         return 'subprogram';
       case 'events':
@@ -144,13 +126,8 @@ export class HighlightCard2 implements OnInit, OnDestroy {
     }
   }
 
-  isVisible(index: number): boolean {
-    const total = this.data.length;
-    return [(this.activeIndex - 1 + total) % total, this.activeIndex, (this.activeIndex + 1) % total].includes(index);
-  }
-
-  trackByFn(index: number, item: { id?: string }): string {
-    return item.id ?? index.toString();
+  trackByFn(index: number, item: HighlightItem): string {
+    return (item as { id?: string }).id ?? index.toString();
   }
 
   whatIsPath(): string {
@@ -158,7 +135,7 @@ export class HighlightCard2 implements OnInit, OnDestroy {
       case 'programs':
         return 'our-programs';
       case 'subprograms':
-        return 'our-programs/' + this.selectedKey.key + '/';
+        return `our-programs/${this.selectedKey.key}`;
       case 'events':
         return 'events';
       case 'projects':
@@ -168,5 +145,15 @@ export class HighlightCard2 implements OnInit, OnDestroy {
       default:
         return '';
     }
+  }
+
+  prevCategory(): HighlightKey | null {
+    const index = this.keys.findIndex((k) => k.id === this.selectedKey.id);
+    return index > 0 ? this.keys[index - 1] : null;
+  }
+
+  nextCategory(): HighlightKey | null {
+    const index = this.keys.findIndex((k) => k.id === this.selectedKey.id);
+    return index < this.keys.length - 1 ? this.keys[index + 1] : null;
   }
 }

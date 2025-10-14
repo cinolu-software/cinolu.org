@@ -17,7 +17,8 @@
       {{ project().name }}
     </h3>
 
-    <p class="text-gray-600 text-sm sm:text-base hyphens-none text-justify">{{ project().description }}</p>
+    <!-- <p class="text-gray-600 text-sm sm:text-base hyphens-none text-justify">{{ project().description }}</p> -->
+    <quill-view [content]="project().description" class="quill-prose overflow-y-auto" />
 
     <div class="flex justify-between max-sm:flex-col gap-4 text-sm sm:text-base">
       <div class="flex items-center gap-2 text-gray-700">

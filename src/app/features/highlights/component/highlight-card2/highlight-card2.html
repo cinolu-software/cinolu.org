@@ -1,46 +1,84 @@
-<div class="flex gap-6">
-  <div class="flex flex-col gap-4 w-1/4">
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-10 w-full py-10">
+  <div class="col-span-1 flex flex-col gap-3 w-full">
     <button
       *ngFor="let key of keys"
       (click)="selectKey(key)"
-      [ngClass]="selectedKey.id === key.id ? 'bg-primary-500 text-white' : 'bg-white text-gray-900 border'"
-      class="px-4 py-2 rounded-full border hover:shadow-lg transition-all duration-300">
-      {{ key.name }}
+      type="button"
+      class="w-full py-2.5 px-5 flex items-center justify-between flex-row-reverse border rounded-full gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+      [ngClass]="
+        selectedKey.id === key.id
+          ? 'bg-primary-500 text-white border-primary-500 ring-2 ring-primary-500 ring-offset-2'
+          : 'bg-white/70 text-gray-900 border-gray-200 hover:bg-gray-50'
+      "
+      [attr.aria-pressed]="selectedKey.id === key.id"
+      tabindex="0">
+      <i-lucide
+        stroke="4"
+        [name]="icons.moveUp"
+        class="text-lg p-1 rounded-full transition-colors duration-300"
+        [ngClass]="
+          selectedKey.id === key.id
+            ? 'bg-white text-primary-600'
+            : 'bg-primary-500 text-white'
+        "></i-lucide>
+
+      <span class="text-base font-medium sm:font-semibold transition-colors duration-300 truncate text-left">
+        {{ key.name }}
+      </span>
     </button>
   </div>
 
-  <div class="w-3/4 relative h-96 perspective">
-    <div class="relative w-full h-full">
-      <ng-container *ngFor="let item of data; let i = index; trackBy: trackByFn">
-        <div
-          *ngIf="isVisible(i)"
-          class="card absolute"
-          [class.active]="i === activeIndex"
-          [class.prev]="i === (activeIndex - 1 + data.length) % data.length"
-          [class.next]="i === (activeIndex + 1) % data.length">
-          <div class="h-48 w-full relative rounded-lg overflow-hidden mb-4">
-            <img
-              [ngSrc]="data[0] | apiIMG: whatIsDisplayed()"
-              fill
-              [alt]="getItemTitle(data[0])"
-              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-          </div>
+  <div class="col-span-1 lg:col-span-3 relative h-[28rem] overflow-hidden flex items-center justify-center gap-4">
+    <div
+      *ngIf="prevCategory()"
+      class="w-48 md:w-56 h-[25rem] bg-gray-100 rounded-xl flex items-center justify-center text-gray-500 cursor-pointer"
+      (click)="selectKey(prevCategory()!)"
+      tabindex="0"
+      (keydown.enter)="selectKey(prevCategory()!)"
+      (keydown.space)="selectKey(prevCategory()!)">
+      {{ prevCategory()?.name }}
+    </div>
 
-          <h3 class="font-bold text-xl mb-2 text-gray-800">{{ getItemTitle(item) }}</h3>
-          <div class="prose prose-gray max-w-none mt-2 text-gray-600 !line-clamp-3 !hyphens-none break-words break-all">
-            <quill-view [content]="getItemDescription(item)" class="quill-prose"></quill-view>
-          </div>
-
-          <p-button [routerLink]="whatIsPath() + '/' + data[0].slug" size="small" outlined severity="primary">
-            <p class="flex items-center gap-2 group px-4">
-              Découvrir
-              <i-lucide
-                class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
-                [name]="icons.moveUp" />
-            </p>
-          </p-button>
+    <ng-container *ngFor="let item of data; let i = index; trackBy: trackByFn">
+      <div *ngIf="i === activeIndex" class="card w-72 md:w-80 h-[25rem]">
+        <div class="card-image h-40 md:h-48 w-full relative overflow-hidden rounded-t-lg">
+          <img
+            [ngSrc]="item | apiIMG: whatIsDisplayed()"
+            fill
+            [alt]="getItemTitle(item)"
+            class="object-cover w-full h-full transition-transform duration-500 hover:scale-105" />
         </div>
-      </ng-container>
+
+        <div class="card-content">
+          <div>
+            <h3 class="font-semibold text-xl mb-2 text-gray-800">{{ getItemTitle(item) }}</h3>
+            <div class="text-gray-600 line-clamp-4 leading-relaxed">
+              <quill-view [content]="getItemDescription(item)" class="quill-prose"></quill-view>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <p-button [routerLink]="whatIsPath() + '/' + item.slug" size="small" outlined severity="primary">
+              <p class="flex items-center gap-2 group px-3">
+                Découvrir
+                <i-lucide
+                  class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
+                  [name]="icons.moveUp" />
+              </p>
+            </p-button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <div
+      *ngIf="nextCategory()"
+      class="w-48 md:w-56 h-[25rem] bg-gray-100 rounded-xl flex items-center justify-center text-gray-500 cursor-pointer"
+      (click)="selectKey(nextCategory()!)"
+      tabindex="0"
+      (keydown.enter)="selectKey(nextCategory()!)"
+      (keydown.space)="selectKey(nextCategory()!)">
+      {{ nextCategory()?.name }}
     </div>
   </div>
 </div>

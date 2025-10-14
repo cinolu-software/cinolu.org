@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { HighlightsStore } from '../../../highlights/store/highlights.store';
-import { HighlightKey, HighlightCard } from '../../../highlights/component/highlight-card/highlight-card';
+import { HighlightKey } from '../../../highlights/component/highlight-card/highlight-card';
 import { IProgram, ISubprogram, IEvent, IProject, IArticle } from '../../../../shared/models/entities.models';
 import { interval, Subscription } from 'rxjs';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
@@ -10,7 +10,7 @@ import { HighlightCard2 } from '../../../highlights/component/highlight-card2/hi
 @Component({
   selector: 'app-highlights',
   standalone: true,
-  imports: [LucideAngularModule, FadeInOnScrollDirective, HighlightCard, HighlightCard2],
+  imports: [LucideAngularModule, FadeInOnScrollDirective, HighlightCard2],
   providers: [HighlightsStore],
   templateUrl: `./highlights.html`,
 })
