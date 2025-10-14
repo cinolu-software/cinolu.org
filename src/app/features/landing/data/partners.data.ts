@@ -27,7 +27,7 @@ export const PARTNERS: IPartner[] = [
   },
   {
     name: 'Giz',
-    image: '/images/partners/4.jpg',
+    image: '/images/partners/6.jpg',
     category: 'Institutions & bailleurs',
   },
   {
@@ -42,7 +42,7 @@ export const PARTNERS: IPartner[] = [
   },
   {
     name: 'Eazy-Life',
-    image: '/images/partners/6.png',
+    image: '/images/partners/61.jpg',
     category: 'Institution',
   },
   {
