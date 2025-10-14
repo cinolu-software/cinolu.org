@@ -21,7 +21,8 @@ import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { IndicatorsComponent } from '../../../../components/indicators';
 import { Tabs } from '../../../../../../shared/components/tabs/tabs';
-import { IIndicator } from '../../../../../../shared/models/entities.models';
+import { AddIndicatorStore } from '../../store/projects/add-indicators.store';
+import { IndicatorDto } from '../../dto/projects/indicator.dto';
 
 @Component({
   selector: 'app-project-edit',
@@ -30,6 +31,7 @@ import { IIndicator } from '../../../../../../shared/models/entities.models';
     GalleryStore,
     DeleteGalleryStore,
     ProjectStore,
+    AddIndicatorStore,
     UpdateProjectStore,
     UnpaginatedSubprogramsStore,
     UnpaginatedCategoriesStore,
@@ -66,6 +68,7 @@ export class EditProjectComponent implements OnInit {
   icons = { trash: Trash2 };
   galleryStore = inject(GalleryStore);
   deleteImageStore = inject(DeleteGalleryStore);
+  addIndicatorsStore = inject(AddIndicatorStore);
   tabs = [
     { label: 'Modifier le projet', name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
@@ -123,7 +126,9 @@ export class EditProjectComponent implements OnInit {
     this.galleryStore.loadGallery(this.#slug);
   }
 
-  onSaveIndicators(indicators: IIndicator[] | undefined): void {
-    console.log('Indicators to save:', indicators);
+  onSaveIndicators(id: string, indicators: IndicatorDto[]): void {
+    console.log(indicators);
+    return;
+    this.addIndicatorsStore.addIndicator({ id, indicators });
   }
 }

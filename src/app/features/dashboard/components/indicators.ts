@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import { IIndicator } from '../../../shared/models/entities.models';
+import { IndicatorDto } from '../pages/projects/dto/projects/indicator.dto';
 
 @Component({
   selector: 'app-indicators',
@@ -12,9 +12,10 @@ import { IIndicator } from '../../../shared/models/entities.models';
   templateUrl: './indicators.html',
 })
 export class IndicatorsComponent {
-  indicators = input<IIndicator[]>();
-  indicatorsTab = signal<IIndicator[] | undefined>([]);
-  saveIndicators = output<IIndicator[] | undefined>();
+  indicators = input.required<IndicatorDto[]>();
+  isLoading = input.required<boolean>();
+  indicatorsTab = signal<IndicatorDto[]>([]);
+  saveIndicators = output<IndicatorDto[]>();
   icons = { trash: Trash2, plus: Plus };
 
   constructor() {
@@ -25,17 +26,11 @@ export class IndicatorsComponent {
   }
 
   addIndicator(): void {
-    this.indicatorsTab.update((indicators) => {
-      if (!indicators) return;
-      return [...indicators, { name: '', value: 0 }];
-    });
+    this.indicatorsTab.update((indicators) => [...indicators, { name: '', value: 0 }]);
   }
 
   removeIndicator(index: number): void {
-    this.indicatorsTab.update((indicators) => {
-      if (!indicators) return;
-      return indicators.filter((_, i) => i !== index);
-    });
+    this.indicatorsTab.update((indicators) => indicators.filter((_, i) => i !== index));
   }
 
   onSaveIndicators(): void {

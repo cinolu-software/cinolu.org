@@ -10,11 +10,7 @@ export class ApiImgPipe implements PipeTransform {
     const value = v as Record<string, string>;
     const images: Record<string, string> = {
       program: value['logo'] ? `${apiUrl}uploads/programs/${value['logo']}` : '/images/no-image.jpg',
-      eventGallery: `${apiUrl}uploads/galleries/events/${value['image']}`,
-      projectGallery: `${apiUrl}uploads/galleries/projects/${value['image']}`,
-      articleGallery: `${apiUrl}uploads/galleries/articles/${value['image']}`,
-      productGallery: `${apiUrl}uploads/galleries/products/${value['image']}`,
-      ventureGallery: `${apiUrl}uploads/galleries/ventures/${value['image']}`,
+      gallery: `${apiUrl}uploads/galleries/${value['image']}`,
       subprogram: value['logo'] ? `${apiUrl}uploads/subprograms/${value['logo']}` : '/images/no-image.jpg',
       user: value['profile']
         ? `${apiUrl}uploads/profiles/${value['profile']}`
