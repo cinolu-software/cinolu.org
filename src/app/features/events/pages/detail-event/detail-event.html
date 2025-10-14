@@ -18,7 +18,7 @@
           [numVisible]="5"
           [containerStyle]="{ 'max-width': '640px' }">
           <ng-template pTemplate="item" let-img>
-            <div class="relative w-full overflow-hidden h-72 md:h-[32rem]">
+            <div class="relative w-full overflow-hidden h-72 md:h-[27rem]">
               <img
                 [src]="img | apiIMG: 'eventGallery'"
                 [alt]="img.image"
@@ -32,7 +32,7 @@
           </ng-template>
         </p-galleria>
         } @else {
-        <div class="relative w-full overflow-hidden h-72 md:h-[32rem]">
+        <div class="relative w-full overflow-hidden h-72 md:h-[34rem]">
           <img
             [src]="event | apiIMG: 'event'"
             [alt]="event.name"
@@ -100,7 +100,7 @@
             </div>
             <h3 class="font-semibold text-xl text-gray-800">Adresse</h3>
           </div>
-          <quill-view class="hyphens-none" [content]="event.description" />
+          <quill-view class="hyphens-none" [content]="event.place" />
         </div>
       </div>
     </div>
