@@ -1,9 +1,8 @@
 <app-hero-card
-  [background]="entrepreneur()?.ventures?.[0]?.cover || 'default-cover.jpg'"
+  [background]="'images/entrepeneur-default.jpg'"
   [badgeIcon]="icons.users"
   badgeText="Profil Entrepreneur"
   [title]="entrepreneur()?.name || 'Nom non disponible'"
-  [highlight]="'Entrepreneur'"
   [description]="entrepreneur()?.ventures?.[0]?.description || ''" />
 
 @if (entrepreneur()) {
