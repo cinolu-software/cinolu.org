@@ -11,7 +11,7 @@
     <h4 class="mt-4 mb-2 text-lg group-hover:text-primary-900 transition-colors duration-200 font-bold line-clamp-1">
       {{ program().name | titlecase }}
     </h4>
-    <div class="mt-0.5 line-clamp-2" [innerHTML]="program().description"></div>
+    <quill-view class="hyphens-none" [content]="program().description" />
     <div class="my-3 h-1 w-14 border-t border-gray-200"></div>
     <div class="font-medium">
       <div class="flex items-center text-md leading-5 mb-2">

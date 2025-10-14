@@ -19,10 +19,11 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { Tag } from 'primeng/tag';
 import { Button } from 'primeng/button';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-subprogram-event-card',
-  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, ApiImgPipe, Tag, Button],
+  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, ApiImgPipe, Tag, Button, QuillModule],
   templateUrl: './subprogram-event-card.html',
 })
 export class SubprogramEventCard {

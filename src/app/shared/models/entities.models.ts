@@ -9,14 +9,9 @@ export interface ITag extends IBase {
   name: string;
 }
 
-export interface IJob extends IBase {
-  title: string;
-  description: string;
-  cover?: string;
-  link: string;
-  date: string;
-  location: string;
-  tags: string[];
+export interface IIndicator {
+  name: string;
+  value: number;
 }
 
 export interface IComment extends IBase {
@@ -78,6 +73,7 @@ export interface IProject extends IBase {
   program: ISubprogram;
   categories: ICategory[];
   gallery: IImage[];
+  indicators: IIndicator[];
 }
 
 export interface IVenture extends IBase {
@@ -138,6 +134,7 @@ export interface IEvent extends IBase {
   program: IProgram;
   categories: ICategory[];
   gallery: IImage[];
+  indicators: IIndicator[];
 }
 
 export interface IProduct extends IBase {

@@ -16,7 +16,7 @@ import {
   Trash,
   UserPlus,
 } from 'lucide-angular';
-import { ArticleStore } from '../../../dashboard/staff/blog/store/articles/article.store';
+import { ArticleStore } from '../../../dashboard/pages/blog/store/articles/article.store';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ArticleCardSkeleton } from '../../components/article-card-skeleton/article-card-skeleton';

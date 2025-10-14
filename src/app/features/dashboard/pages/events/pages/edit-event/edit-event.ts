@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { Button } from 'primeng/button';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
@@ -9,30 +9,34 @@ import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-c
 import { DatePickerModule } from 'primeng/datepicker';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ActivatedRoute } from '@angular/router';
-import { UpdateProjectStore } from '../../store/projects/update-project.store';
+import { UpdateEventStore } from '../../store/events/update-event.store';
 import { environment } from '../../../../../../../environments/environment';
 import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
-import { ProjectStore } from '../../../../../projects/store/project.store';
+import { EventStore } from '../../../../../events/store/event.store';
+import { EventsStore } from '../../store/events/events.store';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 import { QuillEditorComponent } from 'ngx-quill';
-import { LucideAngularModule, Trash2 } from 'lucide-angular';
+import { ChartColumn, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
+import { Tabs } from '../../../../../../shared/components/tabs/tabs';
+import { IndicatorsComponent } from '../../../../components/indicators';
+import { IIndicator } from '../../../../../../shared/models/entities.models';
 
 @Component({
-  selector: 'app-project-edit',
-  templateUrl: './edit-project.html',
+  selector: 'app-event-edit',
+  templateUrl: './edit-event.html',
   providers: [
+    EventsStore,
+    EventStore,
     GalleryStore,
     DeleteGalleryStore,
-    ProjectStore,
-    UpdateProjectStore,
+    UpdateEventStore,
     UnpaginatedSubprogramsStore,
     UnpaginatedCategoriesStore,
   ],
   imports: [
-    LucideAngularModule,
     SelectModule,
     MultiSelectModule,
     TextareaModule,
@@ -45,27 +49,37 @@ import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
     NgOptimizedImage,
     ApiImgPipe,
     QuillEditorComponent,
+    LucideAngularModule,
+    Tabs,
+    IndicatorsComponent,
   ],
 })
-export class EditProjectComponent implements OnInit {
+export class EditEventComponent implements OnInit {
   #fb = inject(FormBuilder);
   #route = inject(ActivatedRoute);
   form: FormGroup;
-  store = inject(UpdateProjectStore);
+  store = inject(UpdateEventStore);
   categoriesStore = inject(UnpaginatedCategoriesStore);
   programsStore = inject(UnpaginatedSubprogramsStore);
-  projectStore = inject(ProjectStore);
-  url = `${environment.apiUrl}projects/cover/`;
-  galleryUrl = `${environment.apiUrl}galleries/project/`;
+  eventStore = inject(EventStore);
+  url = `${environment.apiUrl}events/cover/`;
   #slug = this.#route.snapshot.params['slug'];
   icons = { trash: Trash2 };
+  galleryUrl = `${environment.apiUrl}galleries/event/`;
+  deleteGalleryStore = inject(DeleteGalleryStore);
   galleryStore = inject(GalleryStore);
-  deleteImageStore = inject(DeleteGalleryStore);
+  tabs = [
+    { label: "Modifier l'événement", name: 'edit', icon: SquarePen },
+    { label: 'Gérer la galerie', name: 'gallery', icon: Images },
+    { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
+  ];
+  activeTab = signal('edit');
 
   constructor() {
     this.form = this.#fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
+      place: [''],
       description: ['', Validators.required],
       form_link: [''],
       started_at: ['', Validators.required],
@@ -74,37 +88,45 @@ export class EditProjectComponent implements OnInit {
       categories: [[], Validators.required],
     });
     effect(() => {
-      const project = this.projectStore.project();
-      if (!project) return;
+      const event = this.eventStore.event();
+      if (!event) return;
       this.form.patchValue({
-        ...project,
-        started_at: new Date(project.started_at),
-        ended_at: new Date(project.ended_at),
-        program: project.program.id,
-        categories: project.categories?.map((c) => c.id),
+        ...event,
+        started_at: new Date(event.started_at),
+        ended_at: new Date(event.ended_at),
+        program: event.program.id,
+        categories: event.categories?.map((c) => c.id),
       });
     });
   }
 
   ngOnInit(): void {
-    this.projectStore.loadProject(this.#slug);
+    this.eventStore.loadEvent(this.#slug);
     this.galleryStore.loadGallery(this.#slug);
   }
 
-  onDeleteImage(imageId: string): void {
-    this.deleteImageStore.deleteImage(imageId);
+  onTabChange(tab: string): void {
+    this.activeTab.set(tab);
   }
 
-  onUpdateProject(): void {
+  onUpdateEvent(): void {
     if (!this.form.valid) return;
-    this.store.updateProject(this.form.value);
+    this.store.updateEvent(this.form.value);
+  }
+
+  onDeleteImage(imageId: string): void {
+    this.deleteGalleryStore.deleteImage(imageId);
   }
 
   onCoverUploaded(): void {
-    this.projectStore.loadProject(this.#slug);
+    this.eventStore.loadEvent(this.#slug);
   }
 
   onGalleryUploaded(): void {
     this.galleryStore.loadGallery(this.#slug);
+  }
+
+  onSaveIndicators(indicators: IIndicator[] | undefined): void {
+    console.log('Indicators to save:', indicators);
   }
 }

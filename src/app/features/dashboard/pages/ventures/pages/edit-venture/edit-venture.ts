@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { VentureStore } from '../../store/ventures/venture.store';
 import { StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
@@ -11,13 +11,14 @@ import { STAGES } from '../../data/stage.data';
 import { UpdateVenturetore } from '../../store/ventures/update-venture.store';
 import { SelectModule } from 'primeng/select';
 import { DatePickerModule } from 'primeng/datepicker';
-import { environment } from '../../../../../../../environments/environment';
-import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
-import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
-import { LucideAngularModule, Trash } from 'lucide-angular';
+import { Images, LucideAngularModule, SquarePen, Trash } from 'lucide-angular';
 import { ActivatedRoute } from '@angular/router';
+import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
+import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
+import { Tabs } from '../../../../../../shared/components/tabs/tabs';
+import { environment } from '../../../../../../../environments/environment';
 
 @Component({
   selector: 'app-edit-venture',
@@ -35,6 +36,7 @@ import { ActivatedRoute } from '@angular/router';
     ApiImgPipe,
     NgOptimizedImage,
     LucideAngularModule,
+    Tabs,
   ],
   templateUrl: './edit-venture.html',
 })
@@ -54,6 +56,11 @@ export class EditVentureComponent implements OnInit {
   #route = inject(ActivatedRoute);
   icons = { trash: Trash };
   #slug = this.#route.snapshot.params['slug'];
+  tabs = [
+    { label: 'Modifier la startup', name: 'edit', icon: SquarePen },
+    { label: 'Gérer la galerie', name: 'gallery', icon: Images },
+  ];
+  activeTab = signal('edit');
 
   constructor() {
     effect(() => {
@@ -83,6 +90,10 @@ export class EditVentureComponent implements OnInit {
   ngOnInit(): void {
     this.store.loadVenture(this.#slug);
     this.galleryStore.loadGallery(this.#slug);
+  }
+
+  onTabChange(tab: string): void {
+    this.activeTab.set(tab);
   }
 
   onUpdateVenture(): void {

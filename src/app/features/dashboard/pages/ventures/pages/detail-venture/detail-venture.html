@@ -52,7 +52,7 @@
       <tbody>
         <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
           <th class="pr-8 py-4 font-satoshi font-medium text-gray-900 whitespace-nowrap">Description</th>
-          <td class="pr-8 text-gray-800 py-4" [innerHTML]="venture.description"></td>
+          <quill-view class="hyphens-none" [content]="venture.description" />
         </tr>
         <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
           <th class="pr-8 py-4 font-satoshi font-medium text-gray-900 whitespace-nowrap">Problème résolu</th>
