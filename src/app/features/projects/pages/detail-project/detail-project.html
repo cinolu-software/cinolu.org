@@ -18,9 +18,9 @@
           [numVisible]="5"
           [containerStyle]="{ 'max-width': '640px' }">
           <ng-template pTemplate="item" let-img>
-            <div class="relative w-full overflow-hidden h-72 md:h-[32rem]">
+            <div class="relative w-full overflow-hidden h-72 md:h-[27rem]">
               <img
-                [src]="img | apiIMG: 'eventGallery'"
+                [src]="img | apiIMG: 'projectGallery'"
                 [alt]="img.image"
                 class="relative object-cover w-full h-full block transition-transform duration-300 hover:scale-105"
                 priority />
@@ -32,7 +32,7 @@
           </ng-template>
         </p-galleria>
         } @else {
-        <div class="relative w-full overflow-hidden h-72 md:h-[32rem]">
+        <div class="relative w-full overflow-hidden h-72 md:h-[34rem] border border-gray-100">
           <img
             [src]="project | apiIMG: 'project'"
             [alt]="project.name"
@@ -106,7 +106,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col justify-center items-center gap-6 mt-10 w-full m-auto bg-gray-50 rounded-lg p-6 md:p-8">
+    <div class="flex flex-col justify-center items-center gap-6 mt-10 w-full m-auto bg-gray-100 rounded-lg p-6 md:p-8">
       <div class="w-full p-6">
         <div class="flex items-center gap-3 mb-6">
           <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-primary-100 text-primary-600">

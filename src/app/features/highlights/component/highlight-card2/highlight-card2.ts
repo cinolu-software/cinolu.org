@@ -37,11 +37,14 @@ type HighlightItem = IProgram | ISubprogram | IEvent | IProject | IArticle;
           color: #4b5563;
           overflow: hidden;
           display: -webkit-box;
-          -webkit-line-clamp: 4 !important;
+          -webkit-line-clamp: 1 !important;
           -webkit-box-orient: vertical;
           text-overflow: ellipsis;
           word-break: break-word;
           margin-top: 0.5rem;
+          hyphens: none !important;
+          line-height: 1.5rem;
+          text-align: justify !important;
         }
 
         .card {
