@@ -2,11 +2,11 @@ import { Component, effect, inject, model, OnInit, signal } from '@angular/core'
 import { Building2, Globe, Linkedin, LucideAngularModule, Mail, MoveRight, Phone } from 'lucide-angular';
 import { IImage, IVenture } from '../../../../shared/models/entities.models';
 import { ActivatedRoute } from '@angular/router';
-import { EntrepreneursStore } from '../../store/ventures/entrepreneurs.store';
+import { EntrepreneursStore } from '../../store/entrepreneurs.store';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { carouselConfig } from '../../../landing/config/carousel.config';
-import { GalleryVenturesStore } from '../../store/ventures/galleries.ventures.store';
+import { GalleryVenturesStore } from '../../store/galleries.ventures.store';
 import { GalleriaModule } from 'primeng/galleria';
 
 @Component({
