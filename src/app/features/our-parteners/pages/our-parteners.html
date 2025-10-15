@@ -10,8 +10,14 @@
 <section class="min-h-fit backdrop-blur-[1px] bg-grid items-center content-center">
   <div class="px-8 min-h-dvh xl:min-h-[800px] lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 md:py-28">
     <div class="mx-auto">
+      <div class="flex flex-wrap gap-2 justify-center items-center pb-16">
+        <p-button outlined (click)="resetFilter()">Tout</p-button>
+        @for (item of listCategories(); track $index) {
+        <p-button outlined (click)="filterByCategory(item)">{{ item }}</p-button>
+        }
+      </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-6">
-        @for (item of parteners; track $index) {
+        @for (item of filtered(); track $index) {
         <div
           class="flex flex-col items-center justify-center bg-white p-6 transition duration-300 group h-48 border border-gray-100 rounded-lg hover:shadow-lg hover:-translate-y-1">
           <div class="h-16 flex items-center justify-center">
@@ -25,6 +31,18 @@
             {{ item.name }}
           </p>
         </div>
+        }
+      </div>
+
+      <div class="mt-6 flex justify-center">
+        @if (canLoadMore()) {
+        <button
+          (click)="loadMore()"
+          class="relative inline-flex items-center justify-center px-8 py-2 rounded-full border-1 border-primary-500 font-semibold text-primary-500 overflow-hidden group transition duration-300 ease-out hover:text-white">
+          <span
+            class="absolute inset-0 bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out"></span>
+          <span class="relative">Afficher plus</span>
+        </button>
         }
       </div>
     </div>
