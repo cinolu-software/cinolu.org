@@ -1,16 +1,18 @@
 @if (venture()) {
 <section class="max-w-screen-xl mx-auto px-6 sm:px-8 lg:px-16 py-12 md:py-16 lg:py-28">
-  <div class="relative w-full h-72 rounded-lg overflow-hidden mb-12">
-    <img [ngSrc]="venture() | apiIMG:'ventureCover'" alt="cover" fill class="object-cover" priority />
+  <div class="relative">
+    <div class="relative w-full h-72 rounded-lg overflow-hidden mb-12">
+      <img [ngSrc]="venture() | apiIMG:'ventureCover'" alt="cover" fill class="object-cover" priority />
+    </div>
     @if (venture()?.logo) {
     <div
-      class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-28 h-28 rounded-full border-4 border-white shadow-lg bg-white overflow-hidden">
+      class="absolute bottom-0 z-10 left-1/2 -translate-x-1/2 translate-y-1/2 w-28 h-28 rounded-full border-4 border-gray-200 bg-white overflow-hidden">
       <img fill [ngSrc]="venture() | apiIMG:'venture'" alt="logo" class="object-cover" />
     </div>
     }
   </div>
 
-  <div class="text-center w-full mb-10">
+  <div class="text-center w-full py-10">
     <h1 class="text-3xl font-extrabold text-primary-600 mb-2">{{ venture()?.name }}</h1>
     <p class="text-sm text-gray-500">{{ venture()?.sector }} • {{ venture()?.location }}</p>
 
