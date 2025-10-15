@@ -9,9 +9,9 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
       <div>
-        @if (images().length > 0) {
+        @if (project.gallery && project.gallery.length > 0) {
         <p-galleria
-          [value]="images()"
+          [value]="project.gallery"
           [autoPlay]="true"
           [circular]="true"
           [responsiveOptions]="responsiveOptions"
@@ -29,7 +29,7 @@
           </ng-template>
 
           <ng-template pTemplate="thumbnail" let-img>
-            <img [src]="img | apiIMG: 'projectGallery'" [alt]="img.image" class="relative object-cover h-20 w-20" />
+            <img [src]="img | apiIMG: 'gallery'" [alt]="img.image" class="relative object-cover h-20 w-20" />
           </ng-template>
         </p-galleria>
         } @else {
