@@ -1,5 +1,5 @@
-import { Component, input, OnInit, output } from '@angular/core';
-import { FilePondModule, registerPlugin } from 'ngx-filepond';
+import { Component, input, OnInit, output, viewChild } from '@angular/core';
+import { FilePondComponent, FilePondModule, registerPlugin } from 'ngx-filepond';
 import validateType from 'filepond-plugin-file-validate-type';
 import validateSize from 'filepond-plugin-file-validate-size';
 import imagePreview from 'filepond-plugin-image-preview';
@@ -11,6 +11,7 @@ registerPlugin(imagePreview, validateType, validateSize);
   templateUrl: './file-upload.html',
 })
 export class FileUpload implements OnInit {
+  pond = viewChild<FilePondComponent>('pond');
   name = input.required<string>();
   url = input.required<string>();
   multiple = input<boolean>(false);
@@ -42,6 +43,9 @@ export class FileUpload implements OnInit {
   }
 
   handleLoaded(): void {
+    setTimeout(() => {
+      this.pond()?.['pond']?.removeFiles();
+    }, 3000);
     this.loaded.emit();
   }
 }
