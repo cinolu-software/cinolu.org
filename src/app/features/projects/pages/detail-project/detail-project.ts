@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, effect, inject, model, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProjectSkeleton } from '../../components/project-skeleton/project-skeleton';
@@ -35,6 +35,7 @@ import { carouselConfig } from '../../../landing/config/carousel.config';
     ApiImgPipe,
     ProjectSkeleton,
     LucideAngularModule,
+    NgOptimizedImage,
     GalleriaModule,
     Button,
     QuillViewComponent,

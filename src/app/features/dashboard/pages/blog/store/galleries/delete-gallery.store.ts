@@ -22,7 +22,7 @@ export const DeleteGalleryStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((id) => {
-          return _http.delete<void>(`galleries/article/${id}`).pipe(
+          return _http.delete<void>(`articles/gallery/remove/${id}`).pipe(
             map(() => {
               patchState(store, { isLoading: false });
               _galleryStore.deleteImage(id);

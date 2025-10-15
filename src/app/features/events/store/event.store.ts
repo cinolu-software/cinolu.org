@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { IEvent } from '../../../shared/models/entities.models';
+import { IEvent, IIndicator } from '../../../shared/models/entities.models';
 
 interface IEventStore {
   isLoading: boolean;
@@ -32,5 +32,9 @@ export const EventStore = signalStore(
         }),
       ),
     ),
+    addIndicators(indicators: IIndicator[]): void {
+      const updatedEvent = { ...store.event(), indicators } as IEvent;
+      patchState(store, { event: updatedEvent });
+    },
   })),
 );

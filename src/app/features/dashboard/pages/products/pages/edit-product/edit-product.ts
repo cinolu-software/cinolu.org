@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -15,8 +15,9 @@ import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { environment } from '../../../../../../../environments/environment';
 import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
-import { LucideAngularModule, Trash } from 'lucide-angular';
+import { Images, LucideAngularModule, SquarePen, Trash } from 'lucide-angular';
 import { NgOptimizedImage } from '@angular/common';
+import { Tabs } from '../../../../../../shared/components/tabs/tabs';
 
 @Component({
   selector: 'app-product-add',
@@ -34,6 +35,7 @@ import { NgOptimizedImage } from '@angular/common';
     ApiImgPipe,
     LucideAngularModule,
     NgOptimizedImage,
+    Tabs,
   ],
   templateUrl: './edit-product.html',
 })
@@ -47,8 +49,13 @@ export class EditProductComponent implements OnInit {
   #slug = this.#route.snapshot.params['slug'];
   galleryStore = inject(GalleryStore);
   deleteGalleryStore = inject(DeleteGalleryStore);
-  galleryUrl = `${environment.apiUrl}galleries/product/`;
+  galleryUrl = `${environment.apiUrl}products/gallery/`;
   icons = { trash: Trash };
+  tabs = [
+    { label: 'Modifier le produit', name: 'edit', icon: SquarePen },
+    { label: 'Gérer la galerie', name: 'gallery', icon: Images },
+  ];
+  activeTab = signal('edit');
 
   constructor() {
     this.venturesStore.loadVentures();
@@ -75,6 +82,10 @@ export class EditProductComponent implements OnInit {
   ngOnInit(): void {
     this.productStore.loadProduct(this.#slug);
     this.galleryStore.loadGallery(this.#slug);
+  }
+
+  onTabChange(tab: string): void {
+    this.activeTab.set(tab);
   }
 
   onEditProduct(): void {

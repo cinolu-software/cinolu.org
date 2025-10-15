@@ -50,7 +50,7 @@ export class EditVentureComponent implements OnInit {
   stages = STAGES;
   logoUrl = `${environment.apiUrl}ventures/add-logo/`;
   coverUrl = `${environment.apiUrl}ventures/add-cover/`;
-  galleryUrl = `${environment.apiUrl}galleries/venture/`;
+  galleryUrl = `${environment.apiUrl}ventures/gallery/`;
   galleryStore = inject(GalleryStore);
   deleteGalleryStore = inject(DeleteGalleryStore);
   #route = inject(ActivatedRoute);

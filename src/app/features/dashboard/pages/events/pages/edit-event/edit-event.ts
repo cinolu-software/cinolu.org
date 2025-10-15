@@ -22,12 +22,14 @@ import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { Tabs } from '../../../../../../shared/components/tabs/tabs';
 import { IndicatorsComponent } from '../../../../components/indicators';
-import { IIndicator } from '../../../../../../shared/models/entities.models';
+import { IndicatorDto } from '../../../../dto/indicator.dto';
+import { AddIndicatorStore } from '../../store/events/add-indicators.store';
 
 @Component({
   selector: 'app-event-edit',
   templateUrl: './edit-event.html',
   providers: [
+    AddIndicatorStore,
     EventsStore,
     EventStore,
     GalleryStore,
@@ -65,9 +67,10 @@ export class EditEventComponent implements OnInit {
   url = `${environment.apiUrl}events/cover/`;
   #slug = this.#route.snapshot.params['slug'];
   icons = { trash: Trash2 };
-  galleryUrl = `${environment.apiUrl}galleries/event/`;
+  galleryUrl = `${environment.apiUrl}events/gallery/`;
   deleteGalleryStore = inject(DeleteGalleryStore);
   galleryStore = inject(GalleryStore);
+  addIndicatorsStore = inject(AddIndicatorStore);
   tabs = [
     { label: "Modifier l'événement", name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
@@ -126,7 +129,7 @@ export class EditEventComponent implements OnInit {
     this.galleryStore.loadGallery(this.#slug);
   }
 
-  onSaveIndicators(indicators: IIndicator[] | undefined): void {
-    console.log('Indicators to save:', indicators);
+  onSaveIndicators(id: string, indicators: IndicatorDto[]): void {
+    this.addIndicatorsStore.addIndicator({ id, indicators });
   }
 }

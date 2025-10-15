@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { IProject } from '../../../shared/models/entities.models';
+import { IIndicator, IProject } from '../../../shared/models/entities.models';
 
 interface IProjectStore {
   isLoading: boolean;
@@ -30,6 +30,10 @@ export const ProjectStore = signalStore(
         }),
       ),
     ),
+    addIndicators(indicators: IIndicator[]): void {
+      const updatedProject = { ...store.project(), indicators } as IProject;
+      patchState(store, { project: updatedProject });
+    },
     deleteImage: (imageId: string): void => {
       const images = store.project()?.gallery || [];
       const updatedImages = images.filter((img) => img.id !== imageId);

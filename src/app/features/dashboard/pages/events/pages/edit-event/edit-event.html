@@ -17,7 +17,7 @@
         class="object-cover h-full"
         priority
         fill
-        [ngSrc]="image | apiIMG: 'eventGallery'"
+        [ngSrc]="image | apiIMG: 'gallery'"
         [alt]="event?.name + ' gallery image'" />
       <button
         type="button"
@@ -105,7 +105,10 @@
       </div>
     </div>
   </form>
-  } @if (activeTab() === 'indicators') {
-  <app-indicators [indicators]="event?.indicators" (saveIndicators)="onSaveIndicators($event)" />
+  } @if (activeTab() === 'indicators' && event) {
+  <app-indicators
+    [isLoading]="addIndicatorsStore.isLoading() "
+    [indicators]="event.indicators"
+    (saveIndicators)="onSaveIndicators(event.id, $event)" />
   }
 </section>

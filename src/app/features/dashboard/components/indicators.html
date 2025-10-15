@@ -7,7 +7,7 @@
         <div class="flex items-center gap-2">
           <input pInputText type="number" [(ngModel)]="ind.value" />
           <p-button
-            [disabled]="indicatorsTab()?.length === 1"
+            [disabled]="indicatorsTab().length === 1"
             outlined
             severity="danger"
             (click)="removeIndicator($index)">
@@ -24,5 +24,7 @@
       Ajouter un indicateur
     </button>
   </div>
-  <button pButton size="small" (click)="onSaveIndicators()">Enregistrer les indicateurs</button>
+  <button pButton size="small" [disabled]="isLoading()" [loading]="isLoading()" (click)="onSaveIndicators()">
+    Enregistrer les indicateurs
+  </button>
 </div>
