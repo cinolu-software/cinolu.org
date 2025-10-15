@@ -5,24 +5,23 @@
     class="flex text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-primary-500 font-satoshi tracking-tight leading-tight mb-12">
     Historique
   </h2>
-  <div
-    *ngFor="let item of historyData"
-    class="group relative cursor-pointer mb-6 text-left border border-gray-200 p-5 sm:p-6 rounded-lg bg-white transition-all duration-300 ease-in-out transform hover:scale-[1.02] z-0 hover:z-10 shadow-sm hover:shadow-md">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <h3
-        class="flex items-center gap-3 sm:gap-4 font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-800 group-hover:text-primary-500">
-        <i-lucide [name]="icons.calendar" class="text-primary-500 size-10 sm:size-12 md:size-14 shrink-0" />
-        <span class="leading-tight"> {{ item.title }} </span>
-      </h3>
 
-      <i-lucide
-        [name]="icons.upArrow"
-        class="text-gray-800 hidden sm:block group-hover:text-primary-400 transform transition-transform duration-300 ease-in-out group-hover:rotate-90 size-6 sm:size-8" />
-    </div>
-
-    <p
-      class="text-gray-600 mt-4 sm:opacity-0 overflow-hidden transition-all duration-300 ease-in-out group-hover:opacity-100 font-normal text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed sm:leading-8 md:leading-10 hyphens-none">
-      {{ item.description }}
-    </p>
+  <div class="card">
+    <p-timeline [value]="historyData" align="alternate" class="customized-timeline">
+      <ng-template #marker let-event>
+        <span
+          class="flex w-8 h-8 items-center justify-center text-white rounded-full z-10 shadow-sm"
+          [style]="{ 'background-color': event.color }">
+          <i-lucide [name]="event.icon" size="14"></i-lucide>
+        </span>
+      </ng-template>
+      <ng-template #content let-event>
+        <p-card [header]="event.status" [subheader]="event.title">
+          <p>{{ event.description }}</p>
+          <p-button [label]="event.title" [text]="true" />
+          <p-button [label]="event.date" [text]="true" />
+        </p-card>
+      </ng-template>
+    </p-timeline>
   </div>
 </section>
