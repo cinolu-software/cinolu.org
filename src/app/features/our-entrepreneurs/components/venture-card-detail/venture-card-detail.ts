@@ -1,16 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Building2, Globe, Linkedin, LucideAngularModule, Mail, MoveRight, Phone } from 'lucide-angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { GalleriaModule } from 'primeng/galleria';
 import { VentureDetailsStore } from '../../store/venture.store';
+import { Button } from "primeng/button";
 
 @Component({
   selector: 'app-venture-card-detail',
   providers: [VentureDetailsStore],
-  imports: [LucideAngularModule, CommonModule, ApiImgPipe, NgOptimizedImage, GalleriaModule],
+  imports: [LucideAngularModule, CommonModule, ApiImgPipe, NgOptimizedImage, GalleriaModule, Button, RouterLink],
   templateUrl: './venture-card-detail.html',
 })
 export class VentureCardDetail implements OnInit {
