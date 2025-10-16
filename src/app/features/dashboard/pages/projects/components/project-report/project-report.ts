@@ -59,7 +59,6 @@ export class ProjectReport implements OnDestroy {
         body: this.project().indicators.map((i) => [i.name, i.value]),
       });
     }
-    doc.setFontSize(10);
     const blob = doc.output('blob');
     const url = URL.createObjectURL(blob);
     this.pdfUrl.set(this.sanitizer.bypassSecurityTrustResourceUrl(url));
