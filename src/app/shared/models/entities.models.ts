@@ -143,6 +143,7 @@ export interface IProduct extends IBase {
   description: string;
   price: number;
   venture: IVenture;
+  gallery: IImage[];
 }
 
 export interface ICategory extends IBase {
