@@ -4,7 +4,11 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import { IndicatorDto } from '../dto/indicator.dto';
+
+export interface IndicatorDto {
+  name: string;
+  value: number;
+}
 
 @Component({
   selector: 'app-indicators',
@@ -34,6 +38,7 @@ export class IndicatorsComponent {
   }
 
   onSaveIndicators(): void {
+    this.indicatorsTab.update((indicators) => indicators.filter((indicator) => indicator.name.trim() !== ''));
     this.saveIndicators.emit(this.indicatorsTab());
   }
 }

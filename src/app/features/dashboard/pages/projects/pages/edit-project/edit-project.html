@@ -110,9 +110,8 @@
     </div>
   </form>
   } @if (activeTab() === 'indicators' && project) {
-  <app-indicators
-    [isLoading]="addIndicatorsStore.isLoading()"
-    [indicators]="project.indicators"
-    (saveIndicators)="onSaveIndicators(project.id, $event)" />
+  <app-project-indicators [project]="project" />
+  } @if (activeTab() === 'report' && project) {
+  <app-project-report [project]="project" />
   }
 </section>

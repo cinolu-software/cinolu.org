@@ -17,19 +17,17 @@ import { EventStore } from '../../../../../events/store/event.store';
 import { EventsStore } from '../../store/events/events.store';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 import { QuillEditorComponent } from 'ngx-quill';
-import { ChartColumn, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
+import { ChartColumn, FileText, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { Tabs } from '../../../../../../shared/components/tabs/tabs';
-import { IndicatorsComponent } from '../../../../components/indicators';
-import { IndicatorDto } from '../../../../dto/indicator.dto';
-import { AddIndicatorStore } from '../../store/events/add-indicators.store';
+import { EventIndicators } from '../../components/event-indicators/event-indicators';
+import { EventReport } from '../../components/event-report/event-report';
 
 @Component({
   selector: 'app-event-edit',
   templateUrl: './edit-event.html',
   providers: [
-    AddIndicatorStore,
     EventsStore,
     EventStore,
     GalleryStore,
@@ -53,7 +51,8 @@ import { AddIndicatorStore } from '../../store/events/add-indicators.store';
     QuillEditorComponent,
     LucideAngularModule,
     Tabs,
-    IndicatorsComponent,
+    EventIndicators,
+    EventReport,
   ],
 })
 export class EditEventComponent implements OnInit {
@@ -70,11 +69,11 @@ export class EditEventComponent implements OnInit {
   galleryUrl = `${environment.apiUrl}events/gallery/`;
   deleteGalleryStore = inject(DeleteGalleryStore);
   galleryStore = inject(GalleryStore);
-  addIndicatorsStore = inject(AddIndicatorStore);
   tabs = [
     { label: "Modifier l'événement", name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
     { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
+    { label: 'Rapport', name: 'report', icon: FileText },
   ];
   activeTab = signal('edit');
 
@@ -127,9 +126,5 @@ export class EditEventComponent implements OnInit {
 
   onGalleryUploaded(): void {
     this.galleryStore.loadGallery(this.#slug);
-  }
-
-  onSaveIndicators(id: string, indicators: IndicatorDto[]): void {
-    this.addIndicatorsStore.addIndicator({ id, indicators });
   }
 }

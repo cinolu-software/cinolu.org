@@ -5,8 +5,8 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 import { IIndicator } from '../../../../../../shared/models/entities.models';
-import { IndicatorDto } from '../../../../dto/indicator.dto';
 import { ProjectStore } from '../../../../../projects/store/project.store';
+import { IndicatorDto } from '../../../../components/indicators/indicators';
 
 interface IAddIndicatorStore {
   isLoading: boolean;

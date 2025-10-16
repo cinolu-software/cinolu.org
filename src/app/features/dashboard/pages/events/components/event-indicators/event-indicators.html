@@ -1,0 +1,4 @@
+<app-indicators
+  [isLoading]="addIndicatorsStore.isLoading() "
+  [indicators]="event().indicators"
+  (saveIndicators)="onSaveIndicators(event().id, $event)" />

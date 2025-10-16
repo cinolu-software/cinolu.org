@@ -16,13 +16,12 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { ProjectStore } from '../../../../../projects/store/project.store';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 import { QuillEditorComponent } from 'ngx-quill';
-import { ChartColumn, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
+import { ChartColumn, FileText, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
-import { IndicatorsComponent } from '../../../../components/indicators';
 import { Tabs } from '../../../../../../shared/components/tabs/tabs';
-import { AddIndicatorStore } from '../../store/projects/add-indicators.store';
-import { IndicatorDto } from '../../../../dto/indicator.dto';
+import { ProjectIndicators } from '../../components/project-indicators/project-indicators';
+import { ProjectReport } from '../../components/project-report/project-report';
 
 @Component({
   selector: 'app-project-edit',
@@ -31,7 +30,6 @@ import { IndicatorDto } from '../../../../dto/indicator.dto';
     GalleryStore,
     DeleteGalleryStore,
     ProjectStore,
-    AddIndicatorStore,
     UpdateProjectStore,
     UnpaginatedSubprogramsStore,
     UnpaginatedCategoriesStore,
@@ -51,7 +49,8 @@ import { IndicatorDto } from '../../../../dto/indicator.dto';
     ApiImgPipe,
     QuillEditorComponent,
     Tabs,
-    IndicatorsComponent,
+    ProjectIndicators,
+    ProjectReport,
   ],
 })
 export class EditProjectComponent implements OnInit {
@@ -68,11 +67,11 @@ export class EditProjectComponent implements OnInit {
   icons = { trash: Trash2 };
   galleryStore = inject(GalleryStore);
   deleteImageStore = inject(DeleteGalleryStore);
-  addIndicatorsStore = inject(AddIndicatorStore);
   tabs = [
     { label: 'Modifier le projet', name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
     { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
+    { label: 'Rapport', name: 'report', icon: FileText },
   ];
   activeTab = signal('edit');
 
@@ -124,9 +123,5 @@ export class EditProjectComponent implements OnInit {
 
   onGalleryUploaded(): void {
     this.galleryStore.loadGallery(this.#slug);
-  }
-
-  onSaveIndicators(id: string, indicators: IndicatorDto[]): void {
-    this.addIndicatorsStore.addIndicator({ id, indicators });
   }
 }
