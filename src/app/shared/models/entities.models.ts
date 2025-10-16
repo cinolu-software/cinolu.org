@@ -35,6 +35,7 @@ export interface IArticle extends IBase {
   tags: ITag[];
   comments: IComment[];
   author: IUser;
+  gallery?: IImage[];
 }
 
 export interface IUser extends IBase {
