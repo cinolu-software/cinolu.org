@@ -3,7 +3,8 @@
     <div class="flex flex-col items-center justify-center max-sm:py-20">
       @if (store.product(); as product) {
 
-      <div class="relative bg-gray-50 rounded-2xl shadow-md overflow-hidden max-w-3xl w-full">
+      <div class="relative bg-gray-50 rounded-lg shadow-md overflow-hidden max-w-3xl w-full">
+        @if (product.gallery.length >0 ) {
         <p-galleria
           [value]="product.gallery"
           [autoPlay]="true"
@@ -21,11 +22,15 @@
                 [alt]="img.image"
                 class="object-cover w-full h-full transition-transform duration-500 hover:scale-105" />
             </div>
-          </ng-template>
-        </p-galleria>
+          </ng-template> </p-galleria
+        >}@else {
+        <div class="relative w-full overflow-hidden h-72 md:h-[28rem]">
+          <img src="images/no-image.jpg" alt="" class="object-cover w-full h-full" />
+        </div>
+        }
 
         <div
-          class="absolute bg-white/95 border border-primary-500 shadow-md flex flex-col justify-center p-4 rounded-xl top-6 right-6">
+          class="absolute bg-white/95 border border-primary-500 shadow-md flex flex-col justify-center p-4 rounded-lg top-6 right-6">
           <p class="text-primary-600 text-lg md:text-2xl font-black">{{ product.price }} $</p>
         </div>
       </div>
