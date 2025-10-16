@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { IImage } from '../../../../shared/models/entities.models';
+import { IImage } from '../../../shared/models/entities.models';
 
 interface IGalleryStore {
   isLoading: boolean;
@@ -19,9 +19,11 @@ export const GalleryVenturesStore = signalStore(
     loadGallery: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((id) => {
-          return _http.get<{ data: IImage[] }>(`galleries/venture/${id}`).pipe(
+        switchMap((slug) => {
+          return _http.get<{ data: IImage[] }>(`ventures/gallery/${slug}`).pipe(
             tap(({ data }) => {
+              console.log('Data : ', data);
+
               patchState(store, { isLoading: false, gallery: data });
             }),
             catchError(() => {

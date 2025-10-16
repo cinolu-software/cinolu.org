@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, exhaustMap } from 'rxjs';
-import { IUser } from '../../../../shared/models/entities.models';
+import { IUser } from '../../../shared/models/entities.models';
 
 interface IEntrepreneursStore {
   isLoading: boolean;
@@ -18,9 +18,7 @@ export const EntrepreneursStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
           return http.get<{ data: IUser[] }>('users/entrepreneurs').pipe(
-            tap(({ data }) =>
-              patchState(store, { isLoading: false, entrepreneurs: data }),
-            ),
+            tap(({ data }) => patchState(store, { isLoading: false, entrepreneurs: data })),
             catchError(() => {
               patchState(store, { isLoading: false, entrepreneurs: [] });
               return of(null);

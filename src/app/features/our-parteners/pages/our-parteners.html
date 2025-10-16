@@ -10,8 +10,14 @@
 <section class="min-h-fit backdrop-blur-[1px] bg-grid items-center content-center">
   <div class="px-8 min-h-dvh xl:min-h-[800px] lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 md:py-28">
     <div class="mx-auto">
+      <div class="flex flex-wrap gap-2 justify-center items-center pb-16">
+        <p-button outlined (click)="resetFilter()">Tout</p-button>
+        @for (item of listCategories(); track $index) {
+        <p-button outlined (click)="filterByCategory(item)">{{ item }}</p-button>
+        }
+      </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-6">
-        @for (item of parteners; track $index) {
+        @for (item of filtered(); track $index) {
         <div
           class="flex flex-col items-center justify-center bg-white p-6 transition duration-300 group h-48 border border-gray-100 rounded-lg hover:shadow-lg hover:-translate-y-1">
           <div class="h-16 flex items-center justify-center">
@@ -25,6 +31,12 @@
             {{ item.name }}
           </p>
         </div>
+        }
+      </div>
+
+      <div class="mt-6 lg:mt-14 flex justify-center">
+        @if (canLoadMore()) {
+        <p-button outlined (click)="loadMore()">Plus de partenaires</p-button>
         }
       </div>
     </div>

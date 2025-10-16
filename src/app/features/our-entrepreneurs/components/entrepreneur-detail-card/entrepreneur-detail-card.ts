@@ -4,7 +4,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { LucideAngularModule, MoveRight, Users } from 'lucide-angular';
 import { SOCIAL_LINKS } from '../../../contact-us/data/contact.data';
 import { IUser } from '../../../../shared/models/entities.models';
-import { EntrepreneursStore } from '../../store/ventures/entrepreneurs.store';
+import { EntrepreneursStore } from '../../store/entrepreneurs.store';
 import { ButtonModule } from 'primeng/button';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { HeroCard } from '../../../../layout/components/hero-card/hero-card';

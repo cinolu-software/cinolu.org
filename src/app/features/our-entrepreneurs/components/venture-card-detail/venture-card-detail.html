@@ -1,32 +1,35 @@
-@if (venture()) {
+@let venture = store.venture(); @let produit = venture?.products; @if (venture) {
 <section class="max-w-screen-xl mx-auto px-6 sm:px-8 lg:px-16 py-12 md:py-16 lg:py-28">
-  <div class="relative w-full h-72 rounded-lg overflow-hidden mb-12">
-    <img [ngSrc]="venture() | apiIMG:'ventureCover'" alt="cover" fill class="object-cover" priority />
-    @if (venture()?.logo) {
+  <div class="relative">
+    <div class="relative w-full h-72 rounded-lg overflow-hidden mb-12">
+      <img [ngSrc]="venture | apiIMG:'ventureCover'" fill alt="cover" class="object-cover w-full h-full" priority />
+    </div>
+
+    @if (venture?.logo) {
     <div
-      class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-28 h-28 rounded-full border-4 border-white shadow-lg bg-white overflow-hidden">
-      <img fill [ngSrc]="venture() | apiIMG:'venture'" alt="logo" class="object-cover" />
+      class="absolute bottom-0 z-10 left-1/2 -translate-x-1/2 translate-y-1/2 w-28 h-28 rounded-full border-4 border-gray-200 bg-white overflow-hidden">
+      <img [ngSrc]="venture | apiIMG:'venture'" fill alt="logo" class="object-cover w-full h-full" />
     </div>
     }
   </div>
 
-  <div class="text-center w-full mb-10">
-    <h1 class="text-3xl font-extrabold text-primary-600 mb-2">{{ venture()?.name }}</h1>
-    <p class="text-sm text-gray-500">{{ venture()?.sector }} • {{ venture()?.location }}</p>
+  <div class="text-center w-full py-10">
+    <h1 class="text-3xl font-extrabold text-primary-600 mb-2">{{ venture?.name }}</h1>
+    <p class="text-sm text-gray-500">{{ venture?.sector }} • {{ venture?.location }}</p>
 
     <div class="text-center flex flex-col items-center justify-center gap-3">
       <h2 class="text-lg font-semibold text-gray-800 mt-4">Stade de développement</h2>
       <p class="text-xs text-primary-500 py-2 px-4 bg-primary-500/10 border-primary-500/20 border w-fit rounded-full">
-        {{ venture()?.stage }}
+        {{ venture?.stage }}
       </p>
     </div>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2">
     <div>
-      @if (images().length > 0) {
+      @if (venture?.gallery && venture?.gallery?.length) {
       <p-galleria
-        [value]="images()"
+        [value]="venture?.gallery"
         [autoPlay]="true"
         [circular]="true"
         [responsiveOptions]="responsiveOptions"
@@ -37,20 +40,22 @@
             <img
               [src]="img | apiIMG: 'gallery'"
               [alt]="img.image"
+              fill
               class="relative object-cover w-full h-full block transition-transform duration-300 hover:scale-105"
               priority />
           </div>
         </ng-template>
 
         <ng-template pTemplate="thumbnail" let-img>
-          <img [src]="img | apiIMG: 'gallery'" [alt]="img.image" class="relative object-cover h-20 w-20" />
+          <img [src]="img | apiIMG: 'gallery'" [alt]="img.image" fill class="relative object-cover h-20 w-20" />
         </ng-template>
       </p-galleria>
       } @else {
       <div class="relative w-full overflow-hidden h-72 md:h-[32rem]">
         <img
-          [src]="venture() | apiIMG: 'ventureCover'"
-          [alt]="venture()?.name"
+          [src]="venture | apiIMG: 'ventureCover'"
+          [alt]="venture?.name"
+          fill
           class="relative object-cover w-full h-full block transition-transform duration-300 hover:scale-105"
           priority />
       </div>
@@ -58,54 +63,81 @@
     </div>
     <div
       class="space-y-8 bg-white p-8 rounded-lg hover:shadow-xl/10 border border-gray-100 transform transition-all duration-300">
-      @if (venture()?.description) {
+      @if (venture?.description) {
       <div>
         <h2 class="text-xl font-semibold text-gray-800 mb-3">Description</h2>
-        <p class="text-gray-700 leading-relaxed">{{ venture()?.description }}</p>
+        <p class="text-gray-700 leading-relaxed">{{ venture?.description }}</p>
       </div>
-      } @if (venture()?.problem_solved) {
+      } @if (venture?.problem_solved) {
       <div>
         <h2 class="text-xl font-semibold text-gray-800 mb-3">Problème résolu</h2>
-        <p class="text-gray-700 leading-relaxed">{{ venture()?.problem_solved }}</p>
+        <p class="text-gray-700 leading-relaxed">{{ venture?.problem_solved }}</p>
       </div>
-      } @if (venture()?.target_market) {
+      } @if (venture?.target_market) {
       <div>
         <h2 class="text-xl font-semibold text-gray-800 mb-3">Marché cible</h2>
-        <p class="text-gray-700 leading-relaxed">{{ venture()?.target_market }}</p>
+        <p class="text-gray-700 leading-relaxed">{{ venture?.target_market }}</p>
       </div>
       }
 
       <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-gray-200">
-        @if (venture()?.website) {
+        @if (venture?.website) {
         <a
-          [href]="venture()?.website"
+          [href]="venture?.website"
           target="_blank"
           class="text-primary-500 hover:underline text-sm flex items-center gap-1">
           <i-lucide [name]="icons.globe" size="18" class="inline-block" />
           Site Web</a
         >
-        } @if (venture()?.linkedin_url) {
+        } @if (venture?.linkedin_url) {
         <a
-          [href]="venture()?.linkedin_url"
+          [href]="venture?.linkedin_url"
           target="_blank"
           class="text-primary-500 hover:underline text-sm flex items-center gap-1">
           <i-lucide [name]="icons.linkedin" size="18" />
           LinkedIn</a
         >
-        } @if (venture()?.email) {
-        <a
-          href="mailto:{{ venture()?.email }}"
-          class="text-primary-500 hover:underline text-sm flex items-center gap-1">
+        } @if (venture?.email) {
+        <a href="mailto:{{ venture?.email }}" class="text-primary-500 hover:underline text-sm flex items-center gap-1">
           <i-lucide [name]="icons.email" size="18" />
-          {{ venture()?.email }}
+          {{ venture?.email }}
         </a>
-        } @if (venture()?.phone_number) {
+        } @if (venture?.phone_number) {
         <span class="text-gray-600 text-sm flex items-center gap-1">
           <i-lucide [name]="icons.phone" size="18" />
-          {{ venture()?.phone_number }}</span
+          {{ venture?.phone_number }}</span
         >
         }
       </div>
+    </div>
+
+    <div>
+      @if (produit?.length) {
+      <h2 class="text-2xl font-extrabold text-gray-600 mb-6 mt-16">Produits</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+        @for (products of produit; track $index) {
+        <div class="text-center">
+          <p-galleria
+            [value]="products.gallery"
+            [showThumbnails]="false"
+            [circular]="true"
+            [autoPlay]="true"
+            [containerStyle]="{ 'max-width': '640px' }">
+            <ng-template pTemplate="item" let-img>
+              <img [src]="img | apiIMG:'gallery'" [alt]="products.name" class="object-cover w-full h-full" />
+            </ng-template>
+          </p-galleria>
+
+          <h3 class="text-lg font-semibold text-gray-800">{{ products.name }}</h3>
+          <p class="text-sm text-gray-500">{{ products.price }} USD</p>
+        </div>
+        }
+      </div>
+      } @else {
+      <div>
+        <p class="text-2xl text-gray-600">Aucun produit trouvé</p>
+      </div>
+      }
     </div>
   </div>
 </section>

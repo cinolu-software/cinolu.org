@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, effect, inject, model, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProjectSkeleton } from '../../components/project-skeleton/project-skeleton';
 import {
@@ -19,8 +19,7 @@ import {
 import { ProjectStore } from '../../store/project.store';
 import { ActivatedRoute } from '@angular/router';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-import { IImage, IProject } from '../../../../shared/models/entities.models';
-import { GalleryProjectStore } from '../../store/galleries.projet.store';
+import { IProject } from '../../../../shared/models/entities.models';
 import { GalleriaModule } from 'primeng/galleria';
 import { Button } from 'primeng/button';
 import { QuillViewComponent } from 'ngx-quill';
@@ -28,7 +27,7 @@ import { carouselConfig } from '../../../landing/config/carousel.config';
 
 @Component({
   selector: 'app-project-detail',
-  providers: [ProjectStore, GalleryProjectStore],
+  providers: [ProjectStore],
   imports: [
     CommonModule,
     FormsModule,
@@ -43,10 +42,8 @@ import { carouselConfig } from '../../../landing/config/carousel.config';
   templateUrl: './detail-project.html',
 })
 export class DetailProject implements OnInit {
-  images = model<IImage[]>([]);
   #route = inject(ActivatedRoute);
   store = inject(ProjectStore);
-  galleryProjectStore = inject(GalleryProjectStore);
 
   icons = {
     moveLeft: ArrowLeft,
@@ -63,18 +60,10 @@ export class DetailProject implements OnInit {
     calendarCheck: CalendarX,
   };
 
-  constructor() {
-    effect(() => {
-      const gallery = this.galleryProjectStore.gallery();
-      this.images.set(gallery ?? []);
-    });
-  }
-
   responsiveOptions = carouselConfig;
   ngOnInit(): void {
     const slug = this.#route.snapshot.params['slug'];
     this.store.loadProject(slug);
-    this.galleryProjectStore.loadGallery(slug);
   }
 
   getStatut(project: IProject): string {
