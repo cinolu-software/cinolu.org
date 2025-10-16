@@ -132,11 +132,3 @@ If you'd like a contributor guide, tests, or CI configuration added, open an iss
 ## License
 
 Add your license here (e.g., MIT). If the repository has an organizational license file in the root, the client inherits that license.
-
----
-
-If you'd like, I can also:
-
-- add a short developer Quick Start section with exact pnpm/ng commands for SSR build steps,
-- draft a CONTRIBUTING.md and CODE_OF_CONDUCT.md,
-- or scaffold GitHub Actions CI for builds and tests.
