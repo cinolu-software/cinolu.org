@@ -4,11 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { GalleriaModule } from 'primeng/galleria';
+import { ProductDetailSkeleton } from "../product-detail-skeleton/product-detail-skeleton";
 
 @Component({
   selector: 'app-product-detail',
   providers: [ProductDetailsStore],
-  imports: [ApiImgPipe, GalleriaModule],
+  imports: [ApiImgPipe, GalleriaModule, ProductDetailSkeleton],
   templateUrl: './product-detail.html',
 })
 export class ProductDetail implements OnInit {
