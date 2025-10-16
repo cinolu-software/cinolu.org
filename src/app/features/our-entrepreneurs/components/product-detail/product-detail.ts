@@ -3,13 +3,12 @@ import { ProductDetailsStore } from '../../store/product.store';
 import { ActivatedRoute } from '@angular/router';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-import { NgOptimizedImage } from '@angular/common';
 import { GalleriaModule } from 'primeng/galleria';
 
 @Component({
   selector: 'app-product-detail',
   providers: [ProductDetailsStore],
-  imports: [ApiImgPipe, NgOptimizedImage, GalleriaModule],
+  imports: [ApiImgPipe, GalleriaModule],
   templateUrl: './product-detail.html',
 })
 export class ProductDetail implements OnInit {
