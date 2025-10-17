@@ -13,7 +13,7 @@ import { AuthStore } from '../../../../../../core/auth/auth.store';
 @Component({
   selector: 'app-user-stats',
   templateUrl: './user-stats.html',
-  providers: [UserStatsStore, AuthStore],
+  providers: [UserStatsStore],
   imports: [
     ButtonModule,
     InputTextModule,
