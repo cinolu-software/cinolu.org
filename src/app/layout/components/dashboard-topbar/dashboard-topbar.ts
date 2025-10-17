@@ -16,10 +16,11 @@ import { MobileNav } from './mobile-menu/mobile-nav';
 import { USER_LINKS } from '../../data/links.data';
 import { RouterLink } from '@angular/router';
 import { AuthStore } from '../../../core/auth/auth.store';
+import { Calendar, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-dashboard-topbar',
-  imports: [CommonModule, RouterLink, NgOptimizedImage, DesktopNav, MobileNav],
+  imports: [CommonModule, RouterLink, NgOptimizedImage, DesktopNav, MobileNav, LucideAngularModule],
   templateUrl: './dashboard-topbar.html',
 })
 export class DashboardTopbar implements OnDestroy {
@@ -33,6 +34,8 @@ export class DashboardTopbar implements OnDestroy {
   #ngZone = inject(NgZone);
   authStore = inject(AuthStore);
 
+  icons = { calendar: Calendar };
+
   constructor() {
     afterNextRender(() => {
       this.#ngZone.runOutsideAngular(() => {
@@ -40,6 +43,8 @@ export class DashboardTopbar implements OnDestroy {
       });
     });
   }
+
+  date = new Date();
 
   handleSignOut(): void {
     this.authStore.signOut();
