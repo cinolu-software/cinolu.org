@@ -8,11 +8,12 @@ import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { UserStatsStore } from '../../store/user-stats.store';
+import { AuthStore } from '../../../../../../core/auth/auth.store';
 
 @Component({
   selector: 'app-user-stats',
   templateUrl: './user-stats.html',
-  providers: [UserStatsStore],
+  providers: [UserStatsStore, AuthStore],
   imports: [
     ButtonModule,
     InputTextModule,
@@ -26,6 +27,8 @@ import { UserStatsStore } from '../../store/user-stats.store';
 })
 export class UserStats {
   store = inject(UserStatsStore);
+  authStore = inject(AuthStore);
+
   icons = {
     ventures: BriefcaseBusiness,
     mic: Mic,

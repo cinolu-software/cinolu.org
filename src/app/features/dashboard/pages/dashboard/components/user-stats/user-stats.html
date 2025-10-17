@@ -1,6 +1,18 @@
 @let stats = store.stats();
 
 <div class="flex flex-wrap gap-6">
+  <div class="flex items-center w-full gap-3 h-32 justify-between mt-2 bg-primary-500/10 p-4 rounded-lg shadow-md">
+    <p class="text-gray-700 text-lg font-medium">
+      Bonjour, {{ authStore.user() | json}}
+
+      <span
+        ><i-lucide [name]="icons.mic" class="h-4 w-4 stroke-2" />
+
+        <span> Bienvenue back, </span><span class="font-semibold">{{ authStore.user()?.name }}</span>
+      </span>
+    </p>
+  </div>
+
   <div
     class="flex flex-col gap-1 max-w-sm w-60 p-6 items-center bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.03] cursor-pointer group">
     <div class="flex items-center justify-between w-full gap-4">
