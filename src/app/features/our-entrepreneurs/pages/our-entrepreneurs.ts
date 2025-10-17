@@ -4,11 +4,12 @@ import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { EntrepreneursStore } from '../store/entrepreneurs.store';
 import { EntrepreneurUserCard } from '../components/entrepreneur-user-card/entrepreneur-user-card';
+import { EntrepreneurCardSkeleton } from '../components/entrepreneur-card-skeleton/entrepreneur-card-skeleton';
 
 @Component({
   selector: 'app-our-entrepreneurs',
   providers: [EntrepreneursStore],
-  imports: [LucideAngularModule, HeroCard, PaginatorModule, EntrepreneurUserCard],
+  imports: [LucideAngularModule, HeroCard, PaginatorModule, EntrepreneurUserCard, EntrepreneurCardSkeleton],
   templateUrl: './our-entrepreneurs.html',
 })
 export class OurEntrepreneurs implements OnInit {
