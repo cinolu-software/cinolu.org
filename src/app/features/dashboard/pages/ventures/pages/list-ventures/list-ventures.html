@@ -1,9 +1,10 @@
-<section class="dashboard-main-content w-full px-6">
-  <div class="flex w-full flex-wrap gap-4 justify-between items-center mb-10">
-    <h1 class="text-2xl font-bold">Mes entreprises</h1>
+<section class="content w-full px-6">
+  <div
+    class="flex w-full flex-wrap gap-4 justify-between items-center mb-10 bg-white rounded-lg h-32 px-8 hover:shadow-lg transition-all duration-300">
+    <h1 class="text-2xl font-bold font-satoshi">Mes entreprises</h1>
     <p-button [routerLink]="'/dashboard/ventures/add'" [size]="'small'" variant="outlined">
       <i-lucide [name]="icons.plus" class="size-4" />
-      Ajouter une entreprise
+      Nouvelle entreprise
     </p-button>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
