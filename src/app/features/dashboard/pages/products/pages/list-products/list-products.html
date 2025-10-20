@@ -1,10 +1,12 @@
 <section class="w-full">
   <div
     class="flex w-full flex-wrap gap-4 justify-between items-center mb-10 bg-white rounded-lg h-32 px-8 hover:shadow-lg transition-all duration-300">
-    <h1 class="text-2xl font-bold font-satoshi flex items-center gap-2">
-      <i-lucide [name]="icons.shopping" class="size-10 md:size-10" />
+    <div class="text-2xl font-bold font-satoshi flex items-center gap-2">
+      <span class="border border-primary-500/50 p-1 rounded-lg text-primary-600">
+        <i-lucide [name]="icons.shopping" class="size-5 md:size-8" />
+      </span>
       Mes produits
-    </h1>
+    </div>
     <p-button [routerLink]="'/dashboard/products/add'" [size]="'small'" variant="outlined">
       <i-lucide [name]="icons.plus" class="size-4" />
       <span class="hidden sm:block"> Nouveau produit </span>
