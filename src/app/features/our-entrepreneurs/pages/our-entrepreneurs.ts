@@ -17,10 +17,28 @@ export class OurEntrepreneurs implements OnInit {
   entrepreneurs = inject(EntrepreneursStore);
 
   first = 0;
-  rows = 4;
+  rows = 8;
+  rowsOptions: number[] = [];
+  lengthTotal = 0;
 
   ngOnInit() {
     this.entrepreneurs.loadEntrepreneurs();
+
+    setTimeout(() => {
+      const total = this.entrepreneurs.entrepreneurs().length;
+      this.lengthTotal = total;
+      this.rowsOptions = this.generateRowsOptions(total);
+    }, 500);
+  }
+
+  private generateRowsOptions(total: number): number[] {
+    const options: number[] = [];
+    const step = 8;
+    for (let i = step; i <= total; i += step) {
+      options.push(i);
+    }
+    if (!options.includes(total)) options.push(total);
+    return options;
   }
 
   get pagedEntrepreneurs() {
@@ -30,6 +48,6 @@ export class OurEntrepreneurs implements OnInit {
 
   onPageChange(event: PaginatorState) {
     this.first = event.first ?? 0;
-    this.rows = event.rows ?? 4;
+    this.rows = event.rows ?? 8;
   }
 }
