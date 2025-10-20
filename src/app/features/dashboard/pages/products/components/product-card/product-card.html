@@ -1,23 +1,31 @@
 <div
-  class="max-w-sm rounded-lg border border-gray-200 overflow-hidden space-y-4 shadow-lg bg-white transition-transform duration-300 h-52 p-5 hover:scale-105">
-  <div class="">
-    <div class="font-bold text-lg text-gray-900 line-clamp-1">{{ product().name }}</div>
-    <p class="text-gray-700 line-clamp-2">{{ product().description }}</p>
-    <h5 class="text-gray-900 font-bold text-xl">{{ product().price | currency: 'USD' : 'symbol' : '1.2-2' }}</h5>
+  class="max-w-sm h-52 p-5 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 space-y-4">
+  <div>
+    <h3 class="font-semibold text-lg text-gray-900 truncate">{{ product().name }}</h3>
+    <p class="text-sm text-gray-600 line-clamp-2 my-2">{{ product().description }}</p>
+    <p class="text-xl font-bold text-gray-900">{{ product().price | currency: 'USD' : 'symbol' : '1.2-2' }}</p>
   </div>
-  <div class="flex items-center flex-wrap gap-2">
+
+  <div class="flex items-center gap-2">
     <a
       pButton
       size="small"
       severity="secondary"
       outlined
-      class="text-gray-500 hover:text-gray-700"
+      class="text-gray-500 hover:text-gray-700 transition-colors duration-200"
       [routerLink]="['/dashboard/products/update', product().slug]">
-      <i-lucide [name]="icons.edit" class="size-4 text-inheri" />
+      <i-lucide [name]="icons.edit" class="size-4" />
     </a>
-    <button pButton size="small" severity="danger" (click)="onDeleteProduct(product().id, $event)">
+
+    <button
+      pButton
+      size="small"
+      severity="danger"
+      (click)="onDeleteProduct(product().id, $event)"
+      class="transition-transform duration-200 hover:scale-110">
       <i-lucide [name]="icons.trash" class="size-4" />
     </button>
+
     <p-confirmpopup />
   </div>
 </div>
