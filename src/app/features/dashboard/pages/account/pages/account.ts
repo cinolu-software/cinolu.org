@@ -11,7 +11,7 @@ import { environment } from '../../../../../../environments/environment';
 import { AuthStore } from '../../../../../core/auth/auth.store';
 import { FileUpload } from '../../../../../shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
-import { SelectModule } from 'primeng/select';
+import { Select, SelectModule } from 'primeng/select';
 import { GENDERS } from '../../../../../shared/data/genders.data';
 import { Textarea } from 'primeng/textarea';
 
@@ -31,6 +31,7 @@ import { Textarea } from 'primeng/textarea';
     LucideAngularModule,
     SelectModule,
     Textarea,
+    Select,
   ],
 })
 export class Account implements OnInit {

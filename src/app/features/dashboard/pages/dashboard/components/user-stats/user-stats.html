@@ -1,18 +1,28 @@
 @let stats = store.stats(); @let user = authStore.user();
-<div class="flex flex-wrap gap-6">
+<div class="flex flex-wrap gap-6 px-4">
   @if (user) {
-  <div class="flex items-center w-full gap-3 h-32 justify-between mt-2 bg-primary-500/10 p-4 rounded-lg shadow-md">
-    <p class="text-gray-700 text-lg font-medium">
-      Bonjour, {{ user.name }}
-      <span>
-        <i-lucide [name]="icons.mic" class="h-4 w-4 stroke-2" />
-        <span> Bienvenue back, </span><span class="font-semibold">{{ user?.name }}</span>
-      </span>
-    </p>
-  </div>
-  }
   <div
-    class="flex flex-col gap-1 max-w-sm w-60 p-6 items-center bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.03] cursor-pointer group">
+    class="flex flex-col md:flex-row items-center justify-between w-full gap-4 mt-2 bg-primary-500 p-6 rounded-lg shadow-md text-white">
+    <div class="flex items-center gap-4">
+      <i-lucide [name]="icons.hand" class="size-16 md:size-20 stroke-1 rotate-1 opacity-90" />
+      <div>
+        <p class="text-xl font-semibold">Bonjour, {{ user.name }}</p>
+        <p class="text-sm md:text-base text-white/90">Heureux de vous revoir 👋</p>
+      </div>
+    </div>
+
+    <span class="text-sm md:text-base text-white/90 font-medium text-center md:text-right">
+      Bienvenue sur la plateforme <strong>Cinolu OneStop</strong>
+    </span>
+  </div>
+
+  }
+
+  <div class="w-full mt-4 mb-2 text-lg font-semibold">
+    <p class="text-gray-500 font-satoshi">Statistiques personnelles</p>
+  </div>
+  <div
+    class="flex flex-col gap-1 max-sm:w-full max-w-sm w-60 p-6 items-center bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.03] cursor-pointer group">
     <div class="flex items-center justify-between w-full gap-4">
       <span class="text-gray-600 text-base font-medium">Entreprises</span>
 
@@ -48,7 +58,7 @@
   </div>
 
   <div
-    class="flex flex-col gap-1 max-w-sm w-60 p-6 items-center bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.03] cursor-pointer group">
+    class="flex flex-col gap-1 max-sm:w-full max-w-sm w-60 p-6 items-center bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.03] cursor-pointer group">
     <div class="flex items-center justify-between w-full gap-4">
       <span class="text-gray-600 text-base font-medium">Partages</span>
 
