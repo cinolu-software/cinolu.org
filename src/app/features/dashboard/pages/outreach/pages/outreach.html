@@ -1,9 +1,48 @@
-<section class="w-full">
+<section class="w-full px-4">
   @let user = authStore.user(); @let isLoading = generateReferralCodeStore.isLoading(); @let referralsCount =
   user?.referralsCount;
-  <p>Mon lien de vulgarisation</p>
-  <h4 class="text-primary-300 underline mb-4">{{ referralLink() }}</h4>
-  <h5 class="text-xl">Personnes invitées : <strong>{{ referralsCount }}</strong></h5>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div
+      class="flex flex-col md:flex-row items-start md:items-center justify-between bg-white rounded-lg px-8 py-6 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
+      <div class="flex items-center gap-4">
+        <div class="flex items-center justify-center w-14 h-14 rounded-lg bg-primary-50 text-primary-600">
+          <i-lucide [name]="icons.link" class="w-7 h-7" />
+        </div>
+        <div>
+          <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-1">Votre lien de parrainage</h3>
+          <p class="text-sm text-gray-500 mb-3">Partagez ce lien pour gagner des récompenses</p>
+          <h4 class="text-primary-600 underline font-medium hover:text-primary-700 cursor-pointer transition-colors">
+            {{ referralLink() }}
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="flex flex-col md:flex-row items-start md:items-center justify-between bg-white rounded-lg px-8 py-6 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-gray-100"
+      [ngClass]="{
+    'text-primary-500': (referralsCount ?? 0) > 0,
+    'text-red-400': (referralsCount ?? 0) <= 0
+  }">
+      <div class="flex items-center gap-4">
+        <div
+          class="flex items-center justify-center w-14 h-14 rounded-lg"
+          [ngClass]="{
+    'bg-primary-500/10': (referralsCount ?? 0) > 0,
+    'bg-red-400/10': (referralsCount ?? 0) <= 0
+  }">
+          <i-lucide [name]="icons.user" class="w-7 h-7" />
+        </div>
+        <div>
+          <h3 class="text-lg md:text-xl font-bold mb-1">Vos statistiques de parrainage</h3>
+          <p class="text-sm text-gray-500 mb-3">Total des personnes parrainées</p>
+          <h5 class="text-3xl font-extrabold">{{ referralsCount }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="flex items-center gap-3 mt-6">
     <p-button size="small" severity="primary" (onClick)="copyReferralLink()">
       {{ isLinkCopied() ? 'Lien copié !' : 'Copier le lien' }}
