@@ -3,7 +3,7 @@
   <div class="sm:w-2/5 w-full aspect-video sm:aspect-auto">
     <div class="relative w-full h-full overflow-hidden">
       <img
-        [ngSrc]="event() | apiIMG: 'project'"
+        [ngSrc]="event() | apiIMG: 'event'"
         alt="Image de l'activité {{ event().name }}"
         class="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
         loading="lazy"
@@ -17,8 +17,7 @@
       {{ event().name }}
     </h3>
 
-    <p class="text-gray-600 text-sm sm:text-base hyphens-none text-justify">{{ event().description }}</p>
-    <quill-view class="hyphens-none" [content]="event().description" />
+    <quill-view class="text-gray-600 text-sm sm:text-base hyphens-none text-justify" [content]="event().description" />
 
     <div class="flex justify-between max-sm:flex-col gap-4 text-sm sm:text-base">
       <div class="flex items-center gap-2 text-gray-700">
