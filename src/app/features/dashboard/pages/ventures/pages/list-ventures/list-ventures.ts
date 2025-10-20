@@ -3,7 +3,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { LucideAngularModule, Plus } from 'lucide-angular';
+import { Building2, LucideAngularModule, Plus } from 'lucide-angular';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { VenturesStore } from '../../store/ventures/ventures.store';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -31,7 +31,7 @@ import { VentureCardSkeleton } from '../../components/venture-card-skeleton/vent
   ],
 })
 export class ListVentures implements OnInit {
-  icons = { plus: Plus };
+  icons = { plus: Plus, company: Building2 };
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   store = inject(VenturesStore);

@@ -1,7 +1,12 @@
 <section class="content w-full px-4">
   <div
-    class="flex w-full flex-wrap gap-4 justify-between items-center mb-10 bg-white rounded-lg h-32 px-8 hover:shadow-lg transition-all duration-300">
-    <h1 class="text-2xl font-bold font-satoshi">Mes entreprises</h1>
+    class="flex w-full flex-wrap gap-2 md:gap-4 justify-between items-center mb-10 bg-white rounded-lg h-28 md:h-32 px-8 hover:shadow-lg transition-all duration-300">
+    <div class="text-xl md:text-2xl font-bold font-satoshi flex items-center gap-2">
+      <span class="border border-primary-500/50 p-1 rounded-lg text-primary-600 hidden md:block">
+        <i-lucide [name]="icons.company" class="size-5 md:size-8" />
+      </span>
+      Mes entreprises
+    </div>
     <p-button [routerLink]="'/dashboard/ventures/add'" [size]="'small'" variant="outlined">
       <i-lucide [name]="icons.plus" class="size-4" />
       <span class="hidden sm:block"> Nouvelle entreprise </span>
