@@ -42,4 +42,8 @@ export const dashboardRoutes: Routes = [
     path: 'blog',
     loadChildren: () => import('./pages/blog/blog.routes').then((c) => c.blogRoutes),
   },
+  {
+    path: 'entrepreneurs',
+    loadChildren: () => import('./pages/our-entrepreneurs/entrepreneurs.routes').then((c) => c.entrepreneursRoutes),
+  },
 ];

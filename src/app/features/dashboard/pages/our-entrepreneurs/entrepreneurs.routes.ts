@@ -1,24 +1,19 @@
-export const entrepreneursRoutes = [
+import { Routes } from '@angular/router';
+
+export const entrepreneursRoutes: Routes = [
   {
     path: '',
-    title: 'Entrepreneurs',
-    loadComponent: () => import('./pages/our-entrepreneurs').then((c) => c.OurEntrepreneurs),
-  },
-  {
-    path: ':email',
-    title: 'Entrepreneur - Details',
-    loadComponent: () =>
-      import('./components/entrepreneur-detail-card/entrepreneur-detail-card').then((c) => c.EntrepreneurDetailCard),
-  },
-  {
-    path: 'venture/:slug',
-    title: 'Venture - Details',
-    loadComponent: () =>
-      import('./components/venture-card-detail/venture-card-detail').then((c) => c.VentureCardDetail),
-  },
-  {
-    path: 'venture/:slug/:slug',
-    title: 'Product - Details',
-    loadComponent: () => import('./components/product-detail/product-detail').then((c) => c.ProductDetail),
+    children: [
+      {
+        path: '',
+        title: 'Liste des entrepreneurs',
+        loadComponent: () => import('./pages/list-entrepreneurs/list-entrepreneurs').then((c) => c.ListEntrepreneurs),
+      },
+      {
+        path: 'edit/:email',
+        title: "Modifier l'entrepreneur",
+        loadComponent: () => import('./pages/edit-entrepreneur/edit-entrepreneur').then((c) => c.EditEntrepreneur),
+      },
+    ],
   },
 ];
