@@ -58,7 +58,7 @@
   }
 
   .ql-editor {
-    @apply !text-base !leading-normal !font-mona;
+    @apply !text-base !leading-normal !font-mona !text-justify;
   }
 
   .filepond--drip-blob {
@@ -158,50 +158,6 @@
       );
     background-size: 80px 80px;
     z-index: 10;
-  }
-  :host ::ng-deep .p-image-preview {
-    background: rgba(255, 255, 255, 0.95);
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    overflow: hidden;
-    padding: 2rem;
-  }
-
-  :host ::ng-deep .p-image-preview img {
-    max-width: 250px;
-    max-height: 250px;
-    object-fit: contain;
-    margin: auto;
-    display: block;
-  }
-
-  :host {
-    @keyframes slidedown-icon {
-      0% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(20px);
-      }
-
-      100% {
-        transform: translateY(0);
-      }
-    }
-
-    .slidedown-icon {
-      animation: slidedown-icon;
-      animation-duration: 3s;
-      animation-iteration-count: infinite;
-    }
-
-    .box {
-      background-image: radial-gradient(var(--primary-300), var(--primary-600));
-      border-radius: 50% !important;
-      color: var(--primary-color-text);
-    }
   }
 
   .fade-left-init {
