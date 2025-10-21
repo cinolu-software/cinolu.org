@@ -28,39 +28,6 @@ type HighlightItem = IProgram | ISubprogram | IEvent | IProject | IArticle;
   standalone: true,
   imports: [CommonModule, NgOptimizedImage, RouterLink, LucideAngularModule, Button, ApiImgPipe, QuillViewComponent],
   templateUrl: './highlight-card2.html',
-  styles: [
-    `
-      :host {
-        .quill-prose .ql-editor {
-          font-family: inherit;
-          font-size: 1rem;
-          color: #4b5563;
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-line-clamp: 1 !important;
-          -webkit-box-orient: vertical;
-          text-overflow: ellipsis;
-          word-break: break-word;
-          margin-top: 0.5rem;
-          hyphens: none !important;
-          line-height: 1.5rem;
-          text-align: justify !important;
-        }
-
-        .card {
-          @apply absolute rounded-xl bg-white shadow-lg overflow-hidden transition-all duration-700 ease-in-out flex flex-col;
-        }
-
-        .card img {
-          @apply w-full h-1/2 object-cover;
-        }
-
-        .card-content {
-          @apply p-4 flex flex-col justify-between flex-1;
-        }
-      }
-    `,
-  ],
 })
 export class HighlightCard2 implements OnInit, OnDestroy {
   @Input() keys: HighlightKey[] = [];
