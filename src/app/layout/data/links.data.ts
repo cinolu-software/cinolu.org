@@ -157,6 +157,10 @@ export const ADMIN_LINKS: ILink[] = [
         name: 'Ajouter un entrepreneur',
         path: '/dashboard/entrepreneurs/add',
       },
+      {
+        name: 'Liste des entreprises',
+        path: '/dashboard/entrepreneurs/ventures',
+      },
     ],
   },
 ];

@@ -7,20 +7,23 @@ import { IVenture } from '../../../../../shared/models/entities.models';
 
 interface IVenturesStore {
   isLoading: boolean;
-  ventures: IVenture[];
+  ventures: [IVenture[], number];
 }
 
 export const VenturesStore = signalStore(
-  withState<IVenturesStore>({ isLoading: false, ventures: [] }),
+  withState<IVenturesStore>({ isLoading: false, ventures: [[], 0] }),
   withMethods((store, http = inject(HttpClient)) => ({
     loadVentures: rxMethod<void>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
-          return http.get<{ data: IVenture[] }>('ventures').pipe(
-            tap(({ data }) => patchState(store, { isLoading: false, ventures: data })),
+          return http.get<{ data: [IVenture[], number] }>('ventures').pipe(
+            tap(({ data }) => {
+              const [ventures, total] = data;
+              patchState(store, { isLoading: false, ventures: [ventures, total] });
+            }),
             catchError(() => {
-              patchState(store, { isLoading: false, ventures: [] });
+              patchState(store, { isLoading: false, ventures: [[], 0] });
               return of(null);
             }),
           );

@@ -14,6 +14,11 @@ export const entrepreneursRoutes: Routes = [
         title: "Modifier l'entrepreneur",
         loadComponent: () => import('./pages/edit-entrepreneur/edit-entrepreneur').then((c) => c.EditEntrepreneur),
       },
+      {
+        path: 'ventures',
+        title: 'Liste des entreprises',
+        loadComponent: () => import('./pages/list-ventures/list-ventures').then((c) => c.ListVentures),
+      },
     ],
   },
 ];
