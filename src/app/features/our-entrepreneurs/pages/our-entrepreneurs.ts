@@ -18,27 +18,9 @@ export class OurEntrepreneurs implements OnInit {
 
   first = 0;
   rows = 8;
-  rowsOptions: number[] = [];
-  lengthTotal = 0;
 
   ngOnInit() {
     this.entrepreneurs.loadEntrepreneurs();
-
-    setTimeout(() => {
-      const total = this.entrepreneurs.entrepreneurs().length;
-      this.lengthTotal = total;
-      this.rowsOptions = this.generateRowsOptions(total);
-    }, 500);
-  }
-
-  private generateRowsOptions(total: number): number[] {
-    const options: number[] = [];
-    const step = 8;
-    for (let i = step; i <= total; i += step) {
-      options.push(i);
-    }
-    if (!options.includes(total)) options.push(total);
-    return options;
   }
 
   get pagedEntrepreneurs() {
