@@ -17,6 +17,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FilterEntrepreneursDto } from '../../dto/ventures/filter-ventures.dto';
 import { DeleteVentureStore } from '../../store/delete-venture.store';
 import { VenturesStore } from '../../store/ventures.store';
+import { SECTORS } from '../../../ventures/data/sectors.data';
+import { Select } from "primeng/select";
 
 @Component({
   selector: 'app-list-ventures',
@@ -34,7 +36,8 @@ import { VenturesStore } from '../../store/ventures.store';
     ConfirmPopup,
     RouterLink,
     ApiImgPipe,
-  ],
+    Select
+],
   templateUrl: './list-ventures.html',
 })
 export class ListVentures implements OnInit {
@@ -43,6 +46,8 @@ export class ListVentures implements OnInit {
   #fb = inject(FormBuilder);
   #confirmationService = inject(ConfirmationService);
   #destroyRef = inject(DestroyRef);
+
+  sectors = SECTORS;
 
   store = inject(VenturesStore);
   deleteStore = inject(DeleteVentureStore);
@@ -91,11 +96,6 @@ export class ListVentures implements OnInit {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
     this.updateRouteAndVentures();
   }
-
-  // async updateRoute(): void {
-  //   const queryParams = this.queryParams();
-  //   this.#router.navigate(['/dashboard/entrepreneurs/ventures'], { queryParams }).then();
-  // }
 
   async updateRoute(): Promise<void> {
     const queryParams = this.queryParams();

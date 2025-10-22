@@ -17,16 +17,17 @@
         </span>
       </h5>
 
-      <p-button [outlined]="true" severity="secondary" size="small" [routerLink]="'/dashboard/entrepreneurs/add'">
+      <!-- <p-button [outlined]="true" severity="secondary" size="small" [routerLink]="'/dashboard/entrepreneurs/add'">
         <i-lucide [name]="icons.plus" class="size-4" />
         Ajouter une entreprise
-      </p-button>
+      </p-button> -->
     </div>
 
-    <form [formGroup]="searchForm" class="px-6 my-4 md:w-1/2">
+    <form [formGroup]="searchForm" class="flex flex-wrap px-6 my-4 justify-between md:w-1/2">
       <span class="relative block">
         <input pInputText class="w-full pl-9 py-2" formControlName="q" placeholder="Rechercher une entreprise..." />
       </span>
+      <p-select [options]="sectors" formControlName="q" placeholder="Secteur à sélectionner" class="w-full md:w-56" />
     </form>
 
     @if (ventureCount === 0 && !isLoading) {
@@ -81,7 +82,7 @@
                   [routerLink]="['/dashboard/entrepreneurs/ventures/edit', venture.slug]">
                   <i-lucide [name]="icons.edit" class="size-4" />
                 </a>
-                <button pButton outlined severity="danger" (click)="onDeleteVenture(venture.id, $event)">
+                <button type="submit" pButton outlined severity="danger" (click)="onDeleteVenture(venture.id, $event)">
                   <div class="relative">
                     <p-confirmpopup />
                     <i-lucide [name]="icons.trash" class="size-4" />
