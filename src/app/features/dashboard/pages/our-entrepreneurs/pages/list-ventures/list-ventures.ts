@@ -18,7 +18,7 @@ import { FilterEntrepreneursDto } from '../../dto/ventures/filter-ventures.dto';
 import { DeleteVentureStore } from '../../store/delete-venture.store';
 import { VenturesStore } from '../../store/ventures.store';
 import { SECTORS } from '../../../ventures/data/sectors.data';
-import { Select } from "primeng/select";
+import { Select } from 'primeng/select';
 
 @Component({
   selector: 'app-list-ventures',
@@ -36,8 +36,8 @@ import { Select } from "primeng/select";
     ConfirmPopup,
     RouterLink,
     ApiImgPipe,
-    Select
-],
+    Select,
+  ],
   templateUrl: './list-ventures.html',
 })
 export class ListVentures implements OnInit {
