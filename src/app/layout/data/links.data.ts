@@ -152,14 +152,12 @@ export const ADMIN_LINKS: ILink[] = [
       {
         name: 'Liste des entrepreneurs',
         path: '/dashboard/entrepreneurs',
-      },
-      {
-        name: 'Ajouter un entrepreneur',
-        path: '/dashboard/entrepreneurs/add',
+        exactUrl: true,
       },
       {
         name: 'Liste des entreprises',
         path: '/dashboard/entrepreneurs/ventures',
+        exactUrl: true,
       },
     ],
   },
