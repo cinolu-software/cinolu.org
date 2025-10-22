@@ -74,7 +74,11 @@
             </td>
             <td class="px-5 py-2 text-sm">
               <div class="flex justify-center items-center gap-2">
-                <a pButton outlined severity="info" [routerLink]="['/dashboard/ventures/edit', venture.id]">
+                <a
+                  pButton
+                  outlined
+                  severity="info"
+                  [routerLink]="['/dashboard/entrepreneurs/ventures/edit', venture.slug]">
                   <i-lucide [name]="icons.edit" class="size-4" />
                 </a>
                 <button pButton outlined severity="danger" (click)="onDeleteVenture(venture.id, $event)">
