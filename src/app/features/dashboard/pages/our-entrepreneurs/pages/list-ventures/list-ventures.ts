@@ -2,7 +2,17 @@ import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Download, LucideAngularModule, Plus, RefreshCw, SquarePen, Trash } from 'lucide-angular';
+import {
+  ChevronDown,
+  ChevronRight,
+  Download,
+  LucideAngularModule,
+  Plus,
+  RefreshCw,
+  SquareCheck,
+  SquarePen,
+  Trash,
+} from 'lucide-angular';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
@@ -46,22 +56,21 @@ export class ListVentures implements OnInit {
   #fb = inject(FormBuilder);
   #confirmationService = inject(ConfirmationService);
   #destroyRef = inject(DestroyRef);
-
   sectors = SECTORS;
-
   store = inject(VenturesStore);
   deleteStore = inject(DeleteVentureStore);
-
   searchForm: FormGroup;
 
   skeletonArray = Array.from({ length: 40 }, (_, i) => i + 1);
-
   icons = {
     refresh: RefreshCw,
     edit: SquarePen,
     trash: Trash,
     download: Download,
     plus: Plus,
+    squaredCheck: SquareCheck,
+    chevronDown: ChevronDown,
+    chevronRight: ChevronRight,
   };
 
   queryParams = signal<FilterEntrepreneursDto>({
@@ -134,5 +143,11 @@ export class ListVentures implements OnInit {
     if (s.includes('médias') || s.includes('media')) return 'linear-gradient(to right, #8b5cf6, #7c3aed)';
     if (s.includes('tech')) return 'linear-gradient(to right, #0ea5e9, #0284c7)';
     return 'linear-gradient(to right, #9ca3af, #6b7280)';
+  }
+
+  expandedMenu = signal<string | null>(null);
+
+  toggleExpand(id: string) {
+    this.expandedMenu.update((current) => (current === id ? null : id));
   }
 }
