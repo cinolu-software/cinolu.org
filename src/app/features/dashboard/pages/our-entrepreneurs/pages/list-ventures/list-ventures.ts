@@ -14,7 +14,7 @@ import { ConfirmationService } from 'primeng/api';
 import { DownloadUsersStore } from '../../../users/store/users/download-csv.store';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FilterEntrepreneursDto } from '../../dto/users/filter-users.dto';
+import { FilterEntrepreneursDto } from '../../dto/ventures/filter-ventures.dto';
 import { DeleteVentureStore } from '../../store/delete-venture.store';
 import { VenturesStore } from '../../store/ventures.store';
 
@@ -84,7 +84,7 @@ export class ListVentures implements OnInit {
   }
 
   loadVentures(): void {
-    this.store.loadVentures();
+    this.store.loadVentures(this.queryParams());
   }
 
   onPageChange(currentPage: number): void {
@@ -92,9 +92,14 @@ export class ListVentures implements OnInit {
     this.updateRouteAndVentures();
   }
 
-  updateRoute(): void {
+  // async updateRoute(): void {
+  //   const queryParams = this.queryParams();
+  //   this.#router.navigate(['/dashboard/entrepreneurs/ventures'], { queryParams }).then();
+  // }
+
+  async updateRoute(): Promise<void> {
     const queryParams = this.queryParams();
-    this.#router.navigate(['/dashboard/entrepreneurs/ventures'], { queryParams }).then();
+    await this.#router.navigate(['/dashboard/entrepreneurs/ventures'], { queryParams });
   }
 
   onDeleteVenture(ventureId: string, event: Event): void {
@@ -116,9 +121,8 @@ export class ListVentures implements OnInit {
     });
   }
 
-  async updateRouteAndVentures(): Promise<void> {
-    await this.updateRoute();
-    this.updateRoute();
+  updateRouteAndVentures(): void {
+    this.updateRoute().then();
     this.loadVentures();
   }
 

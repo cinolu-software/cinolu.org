@@ -1,9 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { pipe, tap, catchError, of, exhaustMap } from 'rxjs';
+import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { IVenture } from '../../../../../shared/models/entities.models';
+import { buildQueryParams } from '../../../../../shared/helpers/build-query-params';
+import { FilterVenturesDto } from '../dto/ventures/filter-ventures.dto';
 
 interface IVenturesStore {
   isLoading: boolean;
@@ -12,13 +14,17 @@ interface IVenturesStore {
 
 export const VenturesStore = signalStore(
   withState<IVenturesStore>({ isLoading: false, ventures: [[], 0] }),
-  withMethods((store, http = inject(HttpClient)) => ({
-    loadVentures: rxMethod<void>(
+  withProps(() => ({
+    _http: inject(HttpClient),
+  })),
+  withMethods(({ _http, ...store }) => ({
+    loadVentures: rxMethod<FilterVenturesDto>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        exhaustMap(() => {
-          return http.get<{ data: [IVenture[], number] }>('ventures').pipe(
-            tap(({ data }) => {
+        switchMap((queryParams) => {
+          const params = buildQueryParams(queryParams);
+          return _http.get<{ data: [IVenture[], number] }>('ventures', { params }).pipe(
+            map(({ data }) => {
               const [ventures, total] = data;
               patchState(store, { isLoading: false, ventures: [ventures, total] });
             }),

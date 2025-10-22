@@ -14,9 +14,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EntrepreneursStore } from '../../store/entrepreneurs.store';
 import { DownloadUsersStore } from '../../../users/store/users/download-csv.store';
 import { DeleteUserStore } from '../../../users/store/users/delete-user.store';
-import { FilterEntrepreneursDto } from '../../dto/users/filter-users.dto';
+import { FilterEntrepreneursDto } from '../../dto/ventures/filter-ventures.dto';
 import { ConfirmPopup } from 'primeng/confirmpopup';
-import { ApiImgPipe } from "../../../../../../shared/pipes/api-img.pipe";
+import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-users-list',
@@ -33,8 +33,8 @@ import { ApiImgPipe } from "../../../../../../shared/pipes/api-img.pipe";
     ReactiveFormsModule,
     ConfirmPopup,
     RouterLink,
-    ApiImgPipe
-],
+    ApiImgPipe,
+  ],
 })
 export class ListEntrepreneurs implements OnInit {
   #route = inject(ActivatedRoute);
