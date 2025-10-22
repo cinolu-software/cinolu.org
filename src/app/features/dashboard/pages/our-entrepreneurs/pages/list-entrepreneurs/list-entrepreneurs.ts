@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { LucideAngularModule, RefreshCw, SquarePen, Trash, Download, Search, Plus } from 'lucide-angular';
+import { LucideAngularModule, RefreshCw, SquarePen, Trash, Download, Search, Plus, UserLock } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { AvatarModule } from 'primeng/avatar';
@@ -53,6 +53,7 @@ export class ListEntrepreneurs implements OnInit {
     download: Download,
     search: Search,
     plus: Plus,
+    lock: UserLock,
   };
   queryParams = signal<FilterEntrepreneursDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),

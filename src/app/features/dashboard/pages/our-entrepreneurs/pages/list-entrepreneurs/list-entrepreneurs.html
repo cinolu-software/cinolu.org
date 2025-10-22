@@ -69,6 +69,12 @@
             <td class="px-6 py-2 text-sm">@let companies = entrepreneur.ventures; {{ companies.length }}</td>
             <td class="px-6 py-2 text-sm">
               <div class="flex items-center gap-2">
+                <button type="submit" pButton outlined severity="warn">
+                  <div class="relative">
+                    <p-confirmpopup />
+                    <i-lucide [name]="icons.lock" class="size-4" />
+                  </div>
+                </button>
                 <a pButton outlined severity="info" [routerLink]="['/dashboard/users/edit', entrepreneur.email]">
                   <i-lucide [name]="icons.edit" class="size-4" />
                 </a>
