@@ -2,7 +2,7 @@ import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { Button } from 'primeng/button';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaModule } from 'primeng/textarea';
 import { SelectModule } from 'primeng/select';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
@@ -16,7 +16,7 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { ProjectStore } from '../../../../../projects/store/project.store';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 import { QuillEditorComponent } from 'ngx-quill';
-import { FileText, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
+import { ChartColumn, FileText, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { Tabs } from '../../../../../../shared/components/tabs/tabs';
@@ -48,6 +48,7 @@ import { ProjectReport } from '../../components/project-report/project-report';
     ApiImgPipe,
     QuillEditorComponent,
     Tabs,
+    FormsModule,
     ProjectReport,
   ],
 })
@@ -65,9 +66,14 @@ export class EditProjectComponent implements OnInit {
   icons = { trash: Trash2 };
   galleryStore = inject(GalleryStore);
   deleteImageStore = inject(DeleteGalleryStore);
+  targetedValues: Record<string, number> = {};
+  achievedValues: Record<string, number> = {};
+  // isTargetMetricValue: Record<string, boolean> = {};
+  // isAchievedMetricValue: Record<string, boolean> = {};
   tabs = [
     { label: 'Modifier le projet', name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
+    { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
     { label: 'Rapport', name: 'report', icon: FileText },
   ];
   activeTab = signal('edit');
@@ -86,6 +92,14 @@ export class EditProjectComponent implements OnInit {
     effect(() => {
       const project = this.projectStore.project();
       if (!project) return;
+      const indicators = project.program.program.indicators;
+      indicators.map((ind) => {
+        const metric = project.metrics.find((m) => m?.indicator?.id === ind?.id);
+        this.targetedValues[ind.id] = metric?.target ?? 0;
+        this.achievedValues[ind.id] = metric?.achieved ?? 0;
+        // this.isTargetMetricValue[ind.id] = metric?.target ? true : false;
+        // this.isAchievedMetricValue[ind.id] = metric?.achieved ? true : false;
+      });
       this.form.patchValue({
         ...project,
         started_at: new Date(project.started_at),
@@ -120,5 +134,25 @@ export class EditProjectComponent implements OnInit {
 
   onGalleryUploaded(): void {
     this.galleryStore.loadGallery(this.#slug);
+  }
+
+  onSaveTargetedValues() {
+    const project = this.projectStore.project();
+    if (!project) return;
+    const result = project.program.program.indicators.map((ind) => ({
+      id: ind.id,
+      value: this.targetedValues[ind.id] ?? 0,
+    }));
+    console.log(result);
+  }
+
+  onSaveAchievedValues() {
+    const project = this.projectStore.project();
+    if (!project) return;
+    const result = project.program.program.indicators.map((ind) => ({
+      id: ind.id,
+      value: this.achievedValues[ind.id] ?? 0,
+    }));
+    console.log(result);
   }
 }

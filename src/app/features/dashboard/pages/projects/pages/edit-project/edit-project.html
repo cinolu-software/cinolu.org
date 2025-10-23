@@ -109,6 +109,33 @@
       </div>
     </div>
   </form>
+  } @if (activeTab() === 'indicators') {
+  <div class="grid grid-cols-2 gap-10">
+    <div class="flex flex-col gap-3">
+      <h2 class="text-lg text-gray-800 font-semibold">Indicateurs Attendus</h2>
+      <div class="flex flex-col gap-3">
+        @for (ind of project?.program?.program?.indicators; track $index) {
+        <div class="flex items-center gap-2 w-full">
+          <input pInputText [value]="ind.name" [disabled]="true" />
+          <input class="w-2/4" pInputText type="number" [(ngModel)]="targetedValues[ind.id]" />
+        </div>
+        }
+        <p-button pButton size="small" class="self-end" (click)="onSaveTargetedValues()">Enregistrer</p-button>
+      </div>
+    </div>
+    <div class="flex flex-col gap-3">
+      <h2 class="text-lg text-gray-800 font-semibold">Indicateurs Obtenus</h2>
+      <div class="flex flex-col gap-3">
+        @for (ind of project?.program?.program?.indicators; track $index) {
+        <div class="flex items-center gap-2 w-full">
+          <input pInputText [value]="ind.name" [disabled]="true" />
+          <input class="w-2/4" pInputText type="number" [(ngModel)]="achievedValues[ind.id]" />
+        </div>
+        }
+        <p-button pButton size="small" class="self-end" (click)="onSaveAchievedValues()">Enregistrer</p-button>
+      </div>
+    </div>
+  </div>
   } @if (activeTab() === 'report' && project) {
   <app-project-report [project]="project" />
   }
