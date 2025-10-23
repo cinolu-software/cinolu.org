@@ -2,6 +2,7 @@ import { Flag, Users, Briefcase, Globe, Settings } from 'lucide-angular';
 
 export const HISTORY_TIMELINE = [
   {
+    id: 1,
     status: 'Lancement',
     date: '2015',
     icon: Flag,
@@ -10,6 +11,7 @@ export const HISTORY_TIMELINE = [
     description: 'Lancement du Cinolu, 1er hub d’innovation à Lubumbashi',
   },
   {
+    id: 2,
     status: 'Programmes',
     date: '2017–2020',
     icon: Users,
@@ -17,6 +19,7 @@ export const HISTORY_TIMELINE = [
     description: 'Mise en œuvre de programmes genre & jeunesse (F360, civic tech…)',
   },
   {
+    id: 3,
     status: 'Incubateur',
     date: '2021',
     icon: Briefcase,
@@ -24,6 +27,7 @@ export const HISTORY_TIMELINE = [
     description: 'Déploiement de l’incubateur Ushindi et de cohortes entrepreneuriales',
   },
   {
+    id: 4,
     status: 'Expansion',
     date: '2023–2024',
     icon: Globe,
@@ -31,6 +35,7 @@ export const HISTORY_TIMELINE = [
     description: 'Déploiement régional (SOPA+, Afrilabs, Fikiri…) et création du Cinolu OneStop',
   },
   {
+    id: 5,
     status: 'Structuration',
     date: '2025',
     icon: Settings,
