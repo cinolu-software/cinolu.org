@@ -11,7 +11,6 @@ export interface ITag extends IBase {
 
 export interface IIndicator extends IBase {
   name: string;
-  value: number;
 }
 
 export interface IComment extends IBase {
@@ -74,7 +73,7 @@ export interface IProject extends IBase {
   program: ISubprogram;
   categories: ICategory[];
   gallery: IImage[];
-  indicators: IIndicator[];
+  metrics: IMetric[];
 }
 
 export interface IVenture extends IBase {
@@ -107,6 +106,7 @@ export interface IProgram extends IBase {
   is_highlighted: boolean;
   subprograms: ISubprogram[];
   category: ICategory;
+  indicators: IIndicator[];
 }
 
 export interface ISubprogram extends IBase {
@@ -135,7 +135,16 @@ export interface IEvent extends IBase {
   program: IProgram;
   categories: ICategory[];
   gallery: IImage[];
-  indicators: IIndicator[];
+  metrics: IMetric[];
+}
+
+export interface IMetric extends IBase {
+  indicator: IIndicator;
+  target: number;
+  achieved: number;
+  is_public: boolean;
+  project: IProject;
+  event: IEvent;
 }
 
 export interface IProduct extends IBase {

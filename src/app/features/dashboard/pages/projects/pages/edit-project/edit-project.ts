@@ -16,11 +16,10 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { ProjectStore } from '../../../../../projects/store/project.store';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 import { QuillEditorComponent } from 'ngx-quill';
-import { ChartColumn, FileText, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
+import { FileText, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { Tabs } from '../../../../../../shared/components/tabs/tabs';
-import { ProjectIndicators } from '../../components/project-indicators/project-indicators';
 import { ProjectReport } from '../../components/project-report/project-report';
 
 @Component({
@@ -49,7 +48,6 @@ import { ProjectReport } from '../../components/project-report/project-report';
     ApiImgPipe,
     QuillEditorComponent,
     Tabs,
-    ProjectIndicators,
     ProjectReport,
   ],
 })
@@ -70,7 +68,6 @@ export class EditProjectComponent implements OnInit {
   tabs = [
     { label: 'Modifier le projet', name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
-    { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
     { label: 'Rapport', name: 'report', icon: FileText },
   ];
   activeTab = signal('edit');

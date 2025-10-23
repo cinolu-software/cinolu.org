@@ -1,6 +1,6 @@
 import { Component, OnDestroy, signal, inject, input, effect } from '@angular/core';
 import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
+// import autoTable from 'jspdf-autotable';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { IProject } from '../../../../../../shared/models/entities.models';
 
@@ -52,13 +52,13 @@ export class ProjectReport implements OnDestroy {
     doc.text(descLines, marginX, y);
     y += descLines.length * 7;
     doc.setFontSize(12);
-    if (this.project().indicators?.length) {
-      autoTable(doc, {
-        startY: y + 10,
-        head: [['Indicateur', 'Valeur']],
-        body: this.project().indicators.map((i) => [i.name, i.value]),
-      });
-    }
+    // if (this.project().indicators?.length) {
+    //   autoTable(doc, {
+    //     startY: y + 10,
+    //     head: [['Indicateur', 'Valeur']],
+    //     body: this.project().indicators.map((i) => [i.name]),
+    //   });
+    // }
     doc.setFontSize(10);
     const blob = doc.output('blob');
     const url = URL.createObjectURL(blob);

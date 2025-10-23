@@ -17,11 +17,10 @@ import { EventStore } from '../../../../../events/store/event.store';
 import { EventsStore } from '../../store/events/events.store';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 import { QuillEditorComponent } from 'ngx-quill';
-import { ChartColumn, FileText, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
+import { FileText, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { Tabs } from '../../../../../../shared/components/tabs/tabs';
-import { EventIndicators } from '../../components/event-indicators/event-indicators';
 import { EventReport } from '../../components/event-report/event-report';
 
 @Component({
@@ -51,7 +50,6 @@ import { EventReport } from '../../components/event-report/event-report';
     QuillEditorComponent,
     LucideAngularModule,
     Tabs,
-    EventIndicators,
     EventReport,
   ],
 })
@@ -72,7 +70,6 @@ export class EditEventComponent implements OnInit {
   tabs = [
     { label: "Modifier l'événement", name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
-    { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
     { label: 'Rapport', name: 'report', icon: FileText },
   ];
   activeTab = signal('edit');
