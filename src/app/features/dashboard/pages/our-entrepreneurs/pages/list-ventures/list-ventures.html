@@ -58,14 +58,12 @@
 
           <tr
             class="border-b border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer"
-            [class.bg-gray-100]="expandedMenu() === venture.id"
+            [ngClass]="expandedMenu() === venture.id ? 'bg-gray-100 border border-primary-500/60' : ''"
             (click)="toggleExpand(venture.id)">
-            <td
-              class="px-5 py-2 text-sm flex gap-2 content-center items-center"
-              [class.text-primary-500]="expandedMenu() === venture.id">
+            <td class="px-5 py-2 text-sm" [class.text-primary-500]="expandedMenu() === venture.id">
               <i-lucide
                 [name]="expandedMenu() === venture.id ? icons.chevronDown : icons.chevronRight"
-                class="size-4 transition-transform duration-200" />
+                class="size-4 md:size-6 transition-transform duration-200" />
             </td>
             <td class="px-6 py-2">
               <p-avatar [image]="venture | apiIMG: 'venture'" shape="circle" size="large" />
