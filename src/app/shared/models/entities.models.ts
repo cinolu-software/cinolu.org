@@ -132,7 +132,7 @@ export interface IEvent extends IBase {
   is_highlighted: boolean;
   link: string;
   ended_at: Date;
-  program: IProgram;
+  program: ISubprogram;
   categories: ICategory[];
   gallery: IImage[];
   metrics: IMetric[];

@@ -2,7 +2,7 @@ import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { Button } from 'primeng/button';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaModule } from 'primeng/textarea';
 import { SelectModule } from 'primeng/select';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
@@ -17,11 +17,13 @@ import { EventStore } from '../../../../../events/store/event.store';
 import { EventsStore } from '../../store/events/events.store';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 import { QuillEditorComponent } from 'ngx-quill';
-import { FileText, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
+import { ChartColumn, FileText, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { Tabs } from '../../../../../../shared/components/tabs/tabs';
 import { EventReport } from '../../components/event-report/event-report';
+import { AddMetricStore } from '../../store/events/add-metric.store';
+import { ICategory, IEvent, IIndicator, IMetric } from '../../../../../../shared/models/entities.models';
 
 @Component({
   selector: 'app-event-edit',
@@ -34,12 +36,14 @@ import { EventReport } from '../../components/event-report/event-report';
     UpdateEventStore,
     UnpaginatedSubprogramsStore,
     UnpaginatedCategoriesStore,
+    AddMetricStore,
   ],
   imports: [
     SelectModule,
     MultiSelectModule,
     TextareaModule,
     CommonModule,
+    FormsModule,
     Button,
     InputText,
     DatePickerModule,
@@ -67,15 +71,43 @@ export class EditEventComponent implements OnInit {
   galleryUrl = `${environment.apiUrl}events/gallery/`;
   deleteGalleryStore = inject(DeleteGalleryStore);
   galleryStore = inject(GalleryStore);
+  addMetricsStore = inject(AddMetricStore);
+  targeted: Record<string, number | null> = {};
+  achieved: Record<string, number | null> = {};
   tabs = [
     { label: "Modifier l'événement", name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
+    { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
     { label: 'Rapport', name: 'report', icon: FileText },
   ];
   activeTab = signal('edit');
 
+  get totalTargeted(): number | null {
+    return Object.values(this.targeted).reduce((sum, val) => (sum || 0) + (val ?? 0), 0);
+  }
+
+  get totalAchieved(): number | null {
+    return Object.values(this.achieved).reduce((sum, val) => (sum || 0) + (val ?? 0), 0);
+  }
+
+  get achievementPercentage(): number {
+    const total = this.totalTargeted;
+    if (!total || !this.totalAchieved) return 0;
+    return Math.round((this.totalAchieved / total) * 100);
+  }
+
   constructor() {
-    this.form = this.#fb.group({
+    this.form = this.#initForm();
+    this.#watchEventChanges();
+  }
+
+  ngOnInit(): void {
+    this.eventStore.loadEvent(this.#slug);
+    this.galleryStore.loadGallery(this.#slug);
+  }
+
+  #initForm(): FormGroup {
+    return this.#fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
       place: [''],
@@ -86,22 +118,34 @@ export class EditEventComponent implements OnInit {
       program: ['', Validators.required],
       categories: [[], Validators.required],
     });
-    effect(() => {
-      const event = this.eventStore.event();
-      if (!event) return;
-      this.form.patchValue({
-        ...event,
-        started_at: new Date(event.started_at),
-        ended_at: new Date(event.ended_at),
-        program: event.program.id,
-        categories: event.categories?.map((c) => c.id),
-      });
+  }
+
+  #patchForm(event: IEvent): void {
+    this.form.patchValue({
+      ...event,
+      started_at: new Date(event.started_at),
+      ended_at: new Date(event.ended_at),
+      program: event.program.id,
+      categories: event.categories?.map((c: ICategory) => c.id),
     });
   }
 
-  ngOnInit(): void {
-    this.eventStore.loadEvent(this.#slug);
-    this.galleryStore.loadGallery(this.#slug);
+  #watchEventChanges(): void {
+    effect(() => {
+      const event = this.eventStore.event();
+      if (!event) return;
+      this.#patchForm(event);
+      this.#initMetrics(event);
+    });
+  }
+
+  #initMetrics(event: IEvent): void {
+    const indicators = event.program?.program?.indicators ?? [];
+    indicators.forEach((indicator: IIndicator) => {
+      const metric = event.metrics.find((m: IMetric) => m?.indicator?.id === indicator?.id);
+      this.targeted[indicator.id] = metric?.target ?? null;
+      this.achieved[indicator.id] = metric?.achieved ?? null;
+    });
   }
 
   onTabChange(tab: string): void {
@@ -123,5 +167,16 @@ export class EditEventComponent implements OnInit {
 
   onGalleryUploaded(): void {
     this.galleryStore.loadGallery(this.#slug);
+  }
+
+  onSaveMetrics(): void {
+    const event = this.eventStore.event();
+    if (!event) return;
+    const metrics = event.program.program.indicators.map((ind: IIndicator) => ({
+      indicatorId: ind.id,
+      target: this.targeted[ind.id] ?? 0,
+      achieved: this.achieved[ind.id] ?? 0,
+    }));
+    this.addMetricsStore.addMetrics({ id: event.id, metrics });
   }
 }

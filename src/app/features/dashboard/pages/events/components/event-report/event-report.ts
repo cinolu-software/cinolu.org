@@ -1,6 +1,6 @@
 import { Component, OnDestroy, signal, inject, input, effect } from '@angular/core';
 import jsPDF from 'jspdf';
-// import autoTable from 'jspdf-autotable';
+import autoTable from 'jspdf-autotable';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { IEvent } from '../../../../../../shared/models/entities.models';
 
@@ -49,15 +49,15 @@ export class EventReport implements OnDestroy {
     descDiv.innerHTML = (this.event().description || '').replace(/style="[^"]*"/g, '');
     const descLines = doc.splitTextToSize(descDiv.textContent || '', 180);
     doc.text(descLines, marginX, y);
-    y += descLines.length * 7;
+    y += descLines.length * 5;
     doc.setFontSize(12);
-    // if (this.event().indicators?.length) {
-    //   autoTable(doc, {
-    //     startY: y + 10,
-    //     head: [['Indicateur', 'Valeur']],
-    //     body: this.event().indicators.map((i) => [i.name]),
-    //   });
-    // }
+    if (this.event().metrics?.length) {
+      autoTable(doc, {
+        startY: y + 10,
+        head: [['Indicateur', 'Attendu', 'Obtenu']],
+        body: this.event().metrics.map((i) => [i.indicator.name, i.target, i.achieved]),
+      });
+    }
     doc.setFontSize(10);
     doc.text(`Généré le ${new Date().toLocaleString()}`, marginX, 180);
     const blob = doc.output('blob');

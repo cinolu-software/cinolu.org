@@ -150,12 +150,12 @@ export const ADMIN_LINKS: ILink[] = [
     icon: UserCheck,
     children: [
       {
-        name: 'Liste des entrepreneurs',
+        name: 'Les entrepreneurs',
         path: '/dashboard/entrepreneurs',
         exactUrl: true,
       },
       {
-        name: 'Liste des entreprises',
+        name: 'Les entreprises',
         path: '/dashboard/entrepreneurs/ventures',
         exactUrl: true,
       },
