@@ -11,7 +11,7 @@
 
   @if (isLoading()) {
   <div class="flex justify-center py-20">
-    <p>Chargement des highlights...</p>
+    <app-highlight-card-skeleton />
   </div>
   } @else { @if (highlights().length > 0) {
   <app-highlight-card [data]="highlights() " />
