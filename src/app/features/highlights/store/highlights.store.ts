@@ -1,17 +1,31 @@
 import { signalStore, withState, withMethods, patchState, withProps, withHooks } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
-import { inject } from '@angular/core';
+import { inject, Signal } from '@angular/core';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { IHighlight } from '../../../shared/models/entities.models';
+import { IProgram, ISubprogram, IEvent, IProject, IArticle, IHighlight } from '../../../shared/models/entities.models';
+
+export type HighlightSource = 'programs' | 'subprograms' | 'events' | 'projects' | 'articles';
+
+export type HighlightItem =
+  | (IProgram & { sourceKey: 'programs' })
+  | (ISubprogram & { sourceKey: 'subprograms' })
+  | (IEvent & { sourceKey: 'events' })
+  | (IProject & { sourceKey: 'projects' })
+  | (IArticle & { sourceKey: 'articles' });
 
 interface IHighlightsStore {
   isLoading: boolean;
-  highlights: IHighlight | null;
+  highlights: HighlightItem[];
+  _rawHighlights?: IHighlight | null;
 }
 
 export const HighlightsStore = signalStore(
-  withState<IHighlightsStore>({ isLoading: false, highlights: null }),
+  withState<IHighlightsStore>({
+    isLoading: false,
+    highlights: [],
+    _rawHighlights: null,
+  }),
   withProps(() => ({
     _http: inject(HttpClient),
   })),
@@ -19,31 +33,61 @@ export const HighlightsStore = signalStore(
     loadHighlights: rxMethod<void>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        exhaustMap(() => {
-          return _http.get<{ data: IHighlight }>('highlights').pipe(
+        exhaustMap(() =>
+          _http.get<{ data: IHighlight }>('highlights').pipe(
             tap(({ data }) => {
-              patchState(store, { isLoading: false, highlights: data });
+              const highlights: HighlightItem[] = [
+                ...(data.programs?.map(
+                  (item) => ({ ...item, sourceKey: 'programs' }) as IProgram & { sourceKey: 'programs' },
+                ) || []),
+                ...(data.subprograms?.map(
+                  (item) => ({ ...item, sourceKey: 'subprograms' }) as ISubprogram & { sourceKey: 'subprograms' },
+                ) || []),
+                ...(data.events?.map(
+                  (item) => ({ ...item, sourceKey: 'events' }) as IEvent & { sourceKey: 'events' },
+                ) || []),
+                ...(data.projects?.map(
+                  (item) => ({ ...item, sourceKey: 'projects' }) as IProject & { sourceKey: 'projects' },
+                ) || []),
+                ...(data.articles?.map(
+                  (item) => ({ ...item, sourceKey: 'articles' }) as IArticle & { sourceKey: 'articles' },
+                ) || []),
+              ];
+
+              patchState(store, {
+                isLoading: false,
+                highlights,
+                _rawHighlights: data,
+              });
             }),
-            catchError(() => {
-              patchState(store, { isLoading: false, highlights: null });
+            catchError((err) => {
+              console.error('Failed to load highlights', err);
+              patchState(store, { isLoading: false, highlights: [], _rawHighlights: null });
               return of(null);
             }),
-          );
-        }),
+          ),
+        ),
       ),
     ),
-    getFirstHighlight(highlights: Record<string, IHighlight[]>): IHighlight | null {
+
+    getFirstHighlight(
+      highlightsSignal: Signal<IHighlight | null | undefined>,
+      categoryKeys: HighlightSource[] = ['programs', 'subprograms', 'events', 'projects', 'articles'],
+    ): HighlightItem | null {
+      const highlights = highlightsSignal();
       if (!highlights) return null;
 
-      const keys = ['programs', 'subprograms', 'events', 'projects', 'articles'];
-
-      for (const key of keys) {
-        if (Array.isArray(highlights[key]) && highlights[key].length > 0) {
-          return highlights[key][0];
+      for (const key of categoryKeys) {
+        const items = highlights[key];
+        if (items && items.length > 0) {
+          return { ...items[0], sourceKey: key } as HighlightItem;
         }
       }
-
       return null;
+    },
+
+    getAllHighlights(): HighlightItem[] {
+      return store.highlights();
     },
   })),
   withHooks({
