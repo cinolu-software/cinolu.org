@@ -1,27 +1,28 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
-import { Button } from 'primeng/button';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { InputText } from 'primeng/inputtext';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TextareaModule } from 'primeng/textarea';
-import { SelectModule } from 'primeng/select';
-import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
-import { DatePickerModule } from 'primeng/datepicker';
-import { MultiSelectModule } from 'primeng/multiselect';
+import { OnInit, inject, signal, effect, Component } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { UpdateProjectStore } from '../../store/projects/update-project.store';
+import { LucideAngularModule, Trash2, SquarePen, Images, ChartColumn, FileText } from 'lucide-angular';
+import { QuillEditorComponent } from 'ngx-quill';
+import { Button } from 'primeng/button';
+import { DatePickerModule } from 'primeng/datepicker';
+import { InputText } from 'primeng/inputtext';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { SelectModule } from 'primeng/select';
+import { TextareaModule } from 'primeng/textarea';
 import { environment } from '../../../../../../../environments/environment';
 import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
+import { Tabs } from '../../../../../../shared/components/tabs/tabs';
+import { IProject, IIndicator, IMetric, ICategory } from '../../../../../../shared/models/entities.models';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { ProjectStore } from '../../../../../projects/store/project.store';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
-import { QuillEditorComponent } from 'ngx-quill';
-import { ChartColumn, FileText, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
-import { GalleryStore } from '../../store/galleries/galeries.store';
-import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
-import { Tabs } from '../../../../../../shared/components/tabs/tabs';
-import { ProjectIndicators } from '../../components/project-indicators/project-indicators';
 import { ProjectReport } from '../../components/project-report/project-report';
+import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
+import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
+import { GalleryStore } from '../../store/galleries/galeries.store';
+import { AddMetricStore } from '../../store/projects/add-metric.store';
+import { UpdateProjectStore } from '../../store/projects/update-project.store';
 
 @Component({
   selector: 'app-project-edit',
@@ -33,50 +34,78 @@ import { ProjectReport } from '../../components/project-report/project-report';
     UpdateProjectStore,
     UnpaginatedSubprogramsStore,
     UnpaginatedCategoriesStore,
+    AddMetricStore,
   ],
   imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     LucideAngularModule,
     SelectModule,
     MultiSelectModule,
     TextareaModule,
-    CommonModule,
     Button,
     InputText,
     DatePickerModule,
-    ReactiveFormsModule,
     FileUpload,
     NgOptimizedImage,
     ApiImgPipe,
     QuillEditorComponent,
     Tabs,
-    ProjectIndicators,
     ProjectReport,
   ],
 })
 export class EditProjectComponent implements OnInit {
   #fb = inject(FormBuilder);
   #route = inject(ActivatedRoute);
-  form: FormGroup;
-  store = inject(UpdateProjectStore);
-  categoriesStore = inject(UnpaginatedCategoriesStore);
-  programsStore = inject(UnpaginatedSubprogramsStore);
   projectStore = inject(ProjectStore);
-  url = `${environment.apiUrl}projects/cover/`;
-  galleryUrl = `${environment.apiUrl}projects/gallery/`;
-  #slug = this.#route.snapshot.params['slug'];
-  icons = { trash: Trash2 };
   galleryStore = inject(GalleryStore);
   deleteImageStore = inject(DeleteGalleryStore);
+  updateProjectStore = inject(UpdateProjectStore);
+  categoriesStore = inject(UnpaginatedCategoriesStore);
+  programsStore = inject(UnpaginatedSubprogramsStore);
+  addMetricsStore = inject(AddMetricStore);
+  form: FormGroup;
+  #slug = this.#route.snapshot.params['slug'];
+  url = `${environment.apiUrl}projects/cover/`;
+  galleryUrl = `${environment.apiUrl}projects/gallery/`;
+  targeted: Record<string, number | null> = {};
+  achieved: Record<string, number | null> = {};
+  activeTab = signal('edit');
+  icons = { trash: Trash2 };
   tabs = [
     { label: 'Modifier le projet', name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
     { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
     { label: 'Rapport', name: 'report', icon: FileText },
   ];
-  activeTab = signal('edit');
 
   constructor() {
-    this.form = this.#fb.group({
+    this.form = this.#initForm();
+    this.#watchProjectChanges();
+  }
+
+  get totalTargeted(): number | null {
+    return Object.values(this.targeted).reduce((sum, val) => (sum || 0) + (val ?? 0), 0);
+  }
+
+  get totalAchieved(): number | null {
+    return Object.values(this.achieved).reduce((sum, val) => (sum || 0) + (val ?? 0), 0);
+  }
+
+  get achievementPercentage(): number {
+    const total = this.totalTargeted;
+    if (!total || !this.totalAchieved) return 0;
+    return Math.round((this.totalAchieved / total) * 100);
+  }
+
+  ngOnInit(): void {
+    this.projectStore.loadProject(this.#slug);
+    this.galleryStore.loadGallery(this.#slug);
+  }
+
+  #initForm(): FormGroup {
+    return this.#fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -86,35 +115,50 @@ export class EditProjectComponent implements OnInit {
       program: ['', Validators.required],
       categories: [[], Validators.required],
     });
+  }
+
+  #watchProjectChanges(): void {
     effect(() => {
       const project = this.projectStore.project();
       if (!project) return;
-      this.form.patchValue({
-        ...project,
-        started_at: new Date(project.started_at),
-        ended_at: new Date(project.ended_at),
-        program: project.program.id,
-        categories: project.categories?.map((c) => c.id),
-      });
+      this.#initMetrics(project);
+      this.#patchForm(project);
     });
   }
 
-  ngOnInit(): void {
-    this.projectStore.loadProject(this.#slug);
-    this.galleryStore.loadGallery(this.#slug);
+  #initMetrics(project: IProject): void {
+    const indicators = project.program?.program?.indicators ?? [];
+    indicators.forEach((indicator: IIndicator) => {
+      const metric = project.metrics.find((m: IMetric) => m?.indicator?.id === indicator?.id);
+      this.targeted[indicator.id] = metric?.target ?? null;
+      this.achieved[indicator.id] = metric?.achieved ?? null;
+    });
   }
 
-  onTabChange(tab: string): void {
-    this.activeTab.set(tab);
+  onSaveMetrics(): void {
+    const project = this.projectStore.project();
+    if (!project) return;
+    const metrics = project.program.program.indicators.map((ind: IIndicator) => ({
+      indicatorId: ind.id,
+      target: this.targeted[ind.id] ?? 0,
+      achieved: this.achieved[ind.id] ?? 0,
+    }));
+    this.addMetricsStore.addMetrics({ id: project.id, metrics });
   }
 
-  onDeleteImage(id: string): void {
-    this.deleteImageStore.deleteImage(id);
+  #patchForm(project: IProject): void {
+    this.form.patchValue({
+      ...project,
+      started_at: new Date(project.started_at),
+      ended_at: new Date(project.ended_at),
+      program: project.program.id,
+      categories: project.categories?.map((c: ICategory) => c.id),
+    });
   }
 
   onUpdateProject(): void {
-    if (!this.form.valid) return;
-    this.store.updateProject(this.form.value);
+    if (this.form.invalid) return;
+    this.updateProjectStore.updateProject(this.form.value);
   }
 
   onCoverUploaded(): void {
@@ -123,5 +167,13 @@ export class EditProjectComponent implements OnInit {
 
   onGalleryUploaded(): void {
     this.galleryStore.loadGallery(this.#slug);
+  }
+
+  onDeleteImage(id: string): void {
+    this.deleteImageStore.deleteImage(id);
+  }
+
+  onTabChange(tab: string): void {
+    this.activeTab.set(tab);
   }
 }

@@ -5,7 +5,7 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterProgramsDto } from '../../dto/programs/filter-programs.dto';
 import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
-import { IProgram } from '../../../../../../shared/models/entities.models';
+import { IIndicator, IProgram } from '../../../../../../shared/models/entities.models';
 
 interface IProgramsStore {
   isLoading: boolean;
@@ -39,6 +39,14 @@ export const ProgramsStore = signalStore(
         }),
       ),
     ),
+    addIndicators(programId: string, indicators: IIndicator[]): void {
+      const [programs, count] = store.programs();
+      const updated = programs.map((p) => {
+        if (p.id === programId) return { ...p, indicators };
+        return p;
+      });
+      patchState(store, { programs: [updated, count] });
+    },
     addProgram: (program: IProgram): void => {
       const [programs, count] = store.programs();
       patchState(store, { programs: [[program, ...programs], count + 1] });

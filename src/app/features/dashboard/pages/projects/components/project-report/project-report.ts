@@ -50,13 +50,13 @@ export class ProjectReport implements OnDestroy {
     descDiv.innerHTML = (this.project().description || '').replace(/style="[^"]*"/g, '');
     const descLines = doc.splitTextToSize(descDiv.textContent || '', 180);
     doc.text(descLines, marginX, y);
-    y += descLines.length * 7;
+    y += descLines.length * 5;
     doc.setFontSize(12);
-    if (this.project().indicators?.length) {
+    if (this.project().metrics?.length) {
       autoTable(doc, {
         startY: y + 10,
-        head: [['Indicateur', 'Valeur']],
-        body: this.project().indicators.map((i) => [i.name, i.value]),
+        head: [['Indicateur', 'Attendu', 'Obtenu']],
+        body: this.project().metrics.map((i) => [i.indicator.name, i.target, i.achieved]),
       });
     }
     doc.setFontSize(10);
