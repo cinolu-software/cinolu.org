@@ -1,89 +1,131 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AnimateOnScrollModule } from 'primeng/animateonscroll';
-
-import { CommonModule } from '@angular/common';
-import { NgOptimizedImage } from '@angular/common';
+import { Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, inject } from '@angular/core';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { LucideAngularModule, MoveUpRight, UserPlus, Users } from 'lucide-angular';
+import { LucideAngularModule, ChevronLeft, ChevronRight, MoveUpRight } from 'lucide-angular';
+import { ButtonModule } from 'primeng/button';
+import { interval, Subscription } from 'rxjs';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-import { Button } from 'primeng/button';
 
-import {
-  IHighlight,
-  IProgram,
-  ISubprogram,
-  IEvent,
-  IProject,
-  IArticle,
-} from '../../../../shared/models/entities.models';
+import { IArticle, HighlightItem } from '../../../../shared/models/entities.models';
 
-export interface HighlightKey {
-  id: number;
-  name: string;
-  key: keyof IHighlight;
-}
+export type HighlightSource = 'programs' | 'subprograms' | 'events' | 'projects' | 'articles';
 
 @Component({
   selector: 'app-highlight-card',
-  imports: [CommonModule, NgOptimizedImage, RouterLink, LucideAngularModule, ApiImgPipe, AnimateOnScrollModule, Button],
-  styles: [
-    `
-      :host {
-        @keyframes slidedown-icon {
-          0% {
-            transform: translateY(0);
-          }
-
-          50% {
-            transform: translateY(20px);
-          }
-
-          100% {
-            transform: translateY(0);
-          }
-        }
-
-        .slidedown-icon {
-          animation: slidedown-icon;
-          animation-duration: 3s;
-          animation-iteration-count: infinite;
-        }
-
-        .box {
-          background-image: radial-gradient(var(--primary-300), var(--primary-600));
-          border-radius: 50% !important;
-          color: var(--primary-color-text);
-        }
-      }
-    `,
-  ],
-
+  standalone: true,
+  imports: [CommonModule, NgOptimizedImage, RouterLink, LucideAngularModule, ButtonModule, ApiImgPipe],
   templateUrl: './highlight-card.html',
 })
-export class HighlightCard {
-  @Input() keys: HighlightKey[] = [];
-  @Input() selectedKey!: HighlightKey;
-  @Input() data: (IProgram | ISubprogram | IEvent | IProject | IArticle)[] = [];
-  @Output() keySelected = new EventEmitter<HighlightKey>();
+export class HighlightCard implements OnInit, OnChanges, OnDestroy {
+  private sanitizer = inject(DomSanitizer);
 
-  icons = { moveUp: MoveUpRight, userPlus: UserPlus, users: Users };
+  @Input() data: HighlightItem[] = [];
 
-  selectKey(key: HighlightKey) {
-    this.keySelected.emit(key);
+  activeIndex = 1;
+  carouselSub?: Subscription;
+
+  icons = {
+    prev: ChevronLeft,
+    next: ChevronRight,
+    moveUp: MoveUpRight,
+  };
+
+  ngOnInit(): void {
+    if (this.data.length > 1) {
+      this.startAutoRotation();
+    }
   }
 
-  getItemTitle(item: IProgram | ISubprogram | IEvent | IProject | IArticle): string {
-    return 'name' in item ? item.name : (item.title ?? 'Titre inconnu');
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data']) {
+      console.log('Données reçues dans HighlightCard3 :', this.data);
+      this.activeIndex = 1;
+      this.carouselSub?.unsubscribe();
+
+      if (this.data.length > 1) {
+        this.startAutoRotation();
+      }
+    }
   }
 
-  getItemDescription(item: IProgram | ISubprogram | IEvent | IProject | IArticle): string {
-    return 'description' in item ? item.description : (item.summary ?? '');
+  ngOnDestroy(): void {
+    this.carouselSub?.unsubscribe();
   }
 
-  whatIsDisplayed(): string {
-    switch (this.selectedKey?.key) {
+  private startAutoRotation(): void {
+    this.carouselSub = interval(7000).subscribe(() => this.nextItem());
+  }
+
+  prevItem(): void {
+    if (this.data.length > 0) {
+      this.activeIndex = (this.activeIndex - 1 + this.data.length) % this.data.length;
+    }
+  }
+
+  nextItem(): void {
+    if (this.data.length > 0) {
+      this.activeIndex = (this.activeIndex + 1) % this.data.length;
+    }
+  }
+
+  get prevItemData(): HighlightItem | null {
+    return this.data.length ? this.data[(this.activeIndex - 1 + this.data.length) % this.data.length] : null;
+  }
+
+  get currentItem(): HighlightItem | null {
+    return this.data.length ? this.data[this.activeIndex] : null;
+  }
+
+  get nextItemData(): HighlightItem | null {
+    return this.data.length ? this.data[(this.activeIndex + 1) % this.data.length] : null;
+  }
+
+  getItemTitle(item: HighlightItem): string {
+    return 'name' in item ? item.name : ((item as IArticle).title ?? '');
+  }
+
+  getItemDescription(item: HighlightItem): SafeHtml {
+    const desc = 'description' in item ? item.description : ((item as IArticle).summary ?? '');
+    return this.sanitizer.bypassSecurityTrustHtml(desc);
+  }
+
+  getSourceLabel(sourceKey: HighlightSource): string {
+    switch (sourceKey) {
       case 'programs':
-        return 'default';
+        return 'Programme';
+      case 'subprograms':
+        return 'Sous-programme';
+      case 'events':
+        return 'Événement';
+      case 'projects':
+        return 'Projet';
+      case 'articles':
+        return 'Article';
+    }
+  }
+
+  getPath(sourceKey: HighlightSource, slug?: string): string {
+    switch (sourceKey) {
+      case 'programs':
+        return `/our-programs/${slug ?? ''}`;
+      case 'subprograms':
+        return `/our-programs/subprograms/${slug ?? ''}`;
+      case 'events':
+        return `/events/${slug ?? ''}`;
+      case 'projects':
+        return `/programs/${slug ?? ''}`;
+      case 'articles':
+        return `/blog-ressources/${slug ?? ''}`;
+      default:
+        return '/';
+    }
+  }
+
+  whatIsDisplayed(element: HighlightItem): string {
+    switch (element.sourceKey) {
+      case 'programs':
+        return 'program';
       case 'subprograms':
         return 'subprogram';
       case 'events':
@@ -95,26 +137,5 @@ export class HighlightCard {
       default:
         return 'cover';
     }
-  }
-
-  whatIsPath(): string {
-    switch (this.selectedKey?.key) {
-      case 'programs':
-        return 'our-programs';
-      case 'subprograms':
-        return 'our-programs/' + this.selectedKey.key + '/';
-      case 'events':
-        return 'events';
-      case 'projects':
-        return 'programs';
-      case 'articles':
-        return 'blog-ressources';
-      default:
-        return '';
-    }
-  }
-
-  trackByFn(index: number, item: { id?: string }): string {
-    return item.id ?? index.toString();
   }
 }

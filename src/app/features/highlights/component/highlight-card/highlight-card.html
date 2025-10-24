@@ -1,70 +1,88 @@
-<div class="max-w-7xl mx-auto">
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-6 w-full items-center overflow-hidden">
+  <div class="flex justify-center">
+    <button
+      (click)="prevItem()"
+      class="p-2 rounded-full border border-gray-300 hover:shadow-md transition-all duration-300 text-primary-500">
+      <i-lucide [name]="icons.prev"></i-lucide>
+    </button>
+  </div>
+
+  <div class="relative flex items-center justify-center lg:col-span-3 overflow-hidden">
     <div
-      class="lg:col-span-2 p-4 lg:p-8 flex-col md:flex-row gap-6 hover:shadow-lg duration-300 transition-all relative flex bg-white shadow-sm border border-slate-200 rounded-lg">
-      <div class="w-full md:w-1/2">
-        @for (key of keys; track key.id) {
-        <button
-          (click)="selectKey(key)"
-          class="w-full py-2 px-5 flex items-center justify-between flex-row-reverse border rounded-full mt-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-          [ngClass]="selectedKey.id === key.id ? 'bg-primary-500 text-white border-primary-500 ring-2 ring-primary-500 ring-offset-2' : 'bg-white/60 text-gray-900 border-gray-200'"
-          [attr.aria-pressed]="selectedKey.id === key.id"
-          type="button">
-          <i-lucide
-            stroke="4"
-            [name]="icons.moveUp"
-            class="text-lg p-1 rounded-full transition-colors duration-300"
-            [ngClass]="selectedKey.id === key.id ? 'bg-white text-primary-600' : 'bg-primary-500 text-white'"></i-lucide>
-
-          <span
-            class="text-base font-medium sm:font-semibold transition-colors duration-300"
-            [ngClass]="selectedKey.id === key.id ? 'text-white' : 'text-gray-900'">
-            {{ key.name }}
-          </span>
-        </button>
-        }
+      *ngIf="prevItemData"
+      class="hidden lg:flex w-64 h-[26rem] bg-white border rounded-lg overflow-hidden shadow-sm opacity-60 scale-90 transition-all duration-500">
+      <div class="absolute top-3 left-3 bg-primary-500 text-white text-xs px-3 py-1 rounded-full">
+        {{ getSourceLabel(prevItemData.sourceKey) }}
       </div>
+      <img
+        [ngSrc]="prevItemData | apiIMG: whatIsDisplayed(prevItemData)"
+        fill
+        class="object-cover h-40 w-full"
+        [alt]="getItemTitle(prevItemData)" />
+      <div class="p-3 flex flex-col justify-between flex-1">
+        <h4 class="font-semibold text-gray-800 line-clamp-2">{{ getItemTitle(prevItemData) }}</h4>
+        <p [innerHTML]="getItemDescription(prevItemData)" class="text-gray-600 text-sm line-clamp-3"></p>
+      </div>
+    </div>
 
-      <div class="flex-1 flex flex-col justify-between">
-        @if (data.length > 0) {
-        <div class="space-y-4">
-          <h3 class="text-gray-700 font-black text-2xl line-clamp-2">{{ getItemTitle(data[0]) }}</h3>
-          <p
-            class="text-gray-700 justify-center text-base line-clamp-6 hyphens-none break-words break-all"
-            [innerHTML]="getItemDescription(data[0])"></p>
+    <div
+      *ngIf="currentItem"
+      class="relative h-[28rem] w-[90%] lg:w-[70%] bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden transition-all duration-700">
+      <div class="absolute top-4 left-4 bg-primary-500 text-white text-xs px-3 py-1 rounded-full">
+        {{ getSourceLabel(currentItem.sourceKey) }}
+      </div>
+      <div class="relative h-52 w-full overflow-hidden">
+        <img
+          [ngSrc]="currentItem | apiIMG: whatIsDisplayed(currentItem)"
+          fill
+          [alt]="getItemTitle(currentItem)"
+          class="object-cover w-full h-full" />
+      </div>
+      <div class="p-5 flex flex-col justify-between h-[calc(100%-13rem)]">
+        <div>
+          <h3 class="font-semibold text-xl text-gray-800">{{ getItemTitle(currentItem) }}</h3>
+          <div [innerHTML]="getItemDescription(currentItem)" class="text-gray-600 line-clamp-3"></div>
         </div>
-
-        <p-button [routerLink]="whatIsPath() + '/' + data[0].slug" size="small" outlined severity="primary">
-          <p class="flex items-center gap-2 group px-4">
-            Découvrir
-            <i-lucide
-              class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
-              [name]="icons.moveUp" />
-          </p>
-        </p-button>
-        } @else {
-        <p class="text-center flex items-center h-full text-xl lg:text-2xl font-black text-gray-700">
-          Pas encore d'actualité ou de fait marquant pour cette catégorie.
-        </p>
-        }
+        <div class="mt-4">
+          <p-button
+            [routerLink]="getPath(currentItem.sourceKey, currentItem.slug)"
+            size="small"
+            outlined
+            severity="primary">
+            <p class="flex items-center gap-2 group px-4">
+              Découvrir
+              <i-lucide
+                [name]="icons.moveUp"
+                class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"></i-lucide>
+            </p>
+          </p-button>
+        </div>
       </div>
     </div>
 
     <div
-      class="md:h-[400px] relative lg:col-span-1 overflow-hidden hover:shadow-lg duration-300 transition-all flex bg-white shadow-sm border border-slate-200 rounded-lg">
-      @if (data.length > 0) {
+      *ngIf="nextItemData"
+      class="hidden lg:flex w-64 h-[26rem] bg-white border rounded-lg overflow-hidden shadow-sm opacity-60 scale-90 transition-all duration-500">
+      <div class="absolute top-3 left-3 bg-primary-500 text-white text-xs px-3 py-1 rounded-full">
+        {{ getSourceLabel(nextItemData.sourceKey) }}
+      </div>
       <img
-        [ngSrc]="data[0] | apiIMG: whatIsDisplayed()"
+        [ngSrc]="nextItemData | apiIMG: whatIsDisplayed(nextItemData)"
         fill
-        [alt]="getItemTitle(data[0])"
-        class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-      } @else {
-      <img
-        src="/images/mise-avant-default.jpg"
-        fill
-        alt="image par défaut"
-        class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-      }
+        class="object-cover h-40 w-full"
+        [alt]="getItemTitle(nextItemData)" />
+      <div class="p-3 flex flex-col justify-between flex-1">
+        <h4 class="font-semibold text-gray-800 line-clamp-2">{{ getItemTitle(nextItemData) }}</h4>
+        <p [innerHTML]="getItemDescription(nextItemData)" class="text-gray-600 text-sm line-clamp-3"></p>
+      </div>
     </div>
+  </div>
+
+  <div class="flex justify-center">
+    <button
+      (click)="nextItem()"
+      class="p-2 rounded-full border border-gray-300 hover:shadow-md transition-all duration-300 text-primary-500">
+      <i-lucide [name]="icons.next"></i-lucide>
+    </button>
   </div>
 </div>

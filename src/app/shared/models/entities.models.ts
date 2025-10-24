@@ -167,3 +167,10 @@ export interface IHighlight {
   projects?: IProject[];
   articles?: IArticle[];
 }
+
+export type HighlightItem =
+  | (IProgram & { sourceKey: 'programs' })
+  | (ISubprogram & { sourceKey: 'subprograms' })
+  | (IEvent & { sourceKey: 'events' })
+  | (IProject & { sourceKey: 'projects' })
+  | (IArticle & { sourceKey: 'articles' });
