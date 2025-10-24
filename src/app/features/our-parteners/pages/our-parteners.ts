@@ -26,6 +26,7 @@ export class OurParteners {
 
   page = signal(1);
   perPage = 12;
+  isActiveCategory = signal<string | null>(null);
 
   current = signal<IPartner | null>(null);
 
@@ -47,10 +48,16 @@ export class OurParteners {
   filterByCategory(item: string): void {
     this.Parteners = this.allParteners.filter((photo) => photo.category === item);
     this.page.set(1);
+    this.isActiveCategory.set(item);
   }
 
   resetFilter(): void {
     this.Parteners = [...this.allParteners];
     this.page.set(1);
+    this.isActiveCategory.set(null);
+  }
+
+  isActiveButton(category: string): boolean {
+    return this.isActiveCategory() === category;
   }
 }

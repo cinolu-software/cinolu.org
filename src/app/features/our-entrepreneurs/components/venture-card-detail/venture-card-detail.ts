@@ -7,11 +7,12 @@ import { carouselConfig } from '../../../landing/config/carousel.config';
 import { GalleriaModule } from 'primeng/galleria';
 import { VentureDetailsStore } from '../../store/venture.store';
 import { Button } from "primeng/button";
+import { VentureCardSkeleton } from "../venture-card-skeleton/venture-card-skeleton";
 
 @Component({
   selector: 'app-venture-card-detail',
   providers: [VentureDetailsStore],
-  imports: [LucideAngularModule, CommonModule, ApiImgPipe, NgOptimizedImage, GalleriaModule, Button, RouterLink],
+  imports: [LucideAngularModule, CommonModule, ApiImgPipe, NgOptimizedImage, GalleriaModule, Button, RouterLink, VentureCardSkeleton],
   templateUrl: './venture-card-detail.html',
 })
 export class VentureCardDetail implements OnInit {

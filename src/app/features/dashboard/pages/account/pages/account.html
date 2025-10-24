@@ -17,59 +17,77 @@
       <p class="font-medium mb-2">Photo de profil</p>
       <app-file-upload [name]="'profile'" [url]="url" (loaded)="handleLoaded()" />
     </div>
-    <form
-      class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6 mb-16"
-      (ngSubmit)="onUpdateInfo()"
-      [formGroup]="infoForm">
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6" (ngSubmit)="onUpdateInfo()" [formGroup]="infoForm">
       <div class="flex flex-col gap-1.5">
-        <label for="name" class="font-medium">Nom complet</label>
-        <input pInputText id="name" formControlName="name" />
+        <label for="name" class="font-medium text-gray-700">Nom complet</label>
+        <input pInputText id="name" formControlName="name" class="w-full" placeholder="Entrez votre nom complet" />
       </div>
+
       <div class="flex flex-col gap-1.5">
-        <label for="email" class="font-medium">Adresse e-mail</label>
-        <input pInputText type="email" id="email" formControlName="email" />
+        <label for="email" class="font-medium text-gray-700">Adresse e-mail</label>
+        <input
+          pInputText
+          type="email"
+          id="email"
+          formControlName="email"
+          class="w-full"
+          placeholder="exemple@mail.com" />
       </div>
-      <div class="flex flex-col gap-4">
-        <div class="flex flex-col gap-1.5">
-          <label for="phone_number" class="font-medium">Numéro de téléphone</label>
-          <input pInputText id="phone_number" formControlName="phone_number" />
+
+      <div class="flex flex-col md:flex-row gap-4 md:col-span-2">
+        <div class="flex-1 flex flex-col gap-1.5">
+          <label for="phone_number" class="font-medium text-gray-700">Numéro de téléphone</label>
+          <input pInputText id="phone_number" formControlName="phone_number" class="w-full" placeholder="+243..." />
         </div>
-        <div class="flex flex-col gap-1.5">
-          <label for="gender">Genre</label>
+
+        <div class="flex-1 flex flex-col gap-1.5">
+          <label for="gender" class="font-medium text-gray-700">Genre</label>
           <p-select
             [inputId]="'gender'"
             [options]="genders"
             [optionLabel]="'label'"
             [optionValue]="'value'"
-            formControlName="gender" />
+            formControlName="gender"
+            class="w-full"></p-select>
         </div>
       </div>
-      <div class="flex flex-col gap-1.5">
-        <label for="biography" class="font-medium">Biographie</label>
-        <textarea pTextarea id="biography" formControlName="biography" rows="5"></textarea>
+
+      <div class="flex flex-col gap-1.5 md:col-span-2">
+        <label for="biography" class="font-medium text-gray-700">Biographie</label>
+        <textarea
+          pTextarea
+          id="biography"
+          formControlName="biography"
+          rows="5"
+          placeholder="Parlez un peu de vous..."
+          class="w-full resize-none"></textarea>
       </div>
 
       <div class="flex flex-col gap-1.5">
-        <label for="country" class="font-medium">Pays</label>
-        <input pInputText id="country" formControlName="country" />
+        <label for="country" class="font-medium text-gray-700">Pays</label>
+        <input pInputText id="country" formControlName="country" class="w-full" placeholder="Ex: RDC" />
       </div>
+
       <div class="flex flex-col gap-1.5">
-        <label for="city" class="font-medium">Ville</label>
-        <input pInputText id="city" formControlName="city" />
+        <label for="city" class="font-medium text-gray-700">Ville</label>
+        <input pInputText id="city" formControlName="city" class="w-full" placeholder="Lubumbashi" />
       </div>
-      <div class="flex flex-col gap-1.5">
-        <label for="birth_date" class="font-medium">Date de naissance </label>
-        <p-datepicker [inputId]="'birth_date'" formControlName="birth_date"></p-datepicker>
+
+      <div class="flex flex-col gap-1.5 md:col-span-2 md:w-1/2">
+        <label for="birth_date" class="font-medium text-gray-700">Date de naissance</label>
+        <p-datepicker [inputId]="'birth_date'" formControlName="birth_date" class="w-full"></p-datepicker>
       </div>
+
       <p-button
         size="small"
         [loading]="infoStore.isLoading()"
         [disabled]="infoStore.isLoading() || infoForm.invalid"
-        class="w-full col-span-2 md:w-3/4"
+        class="w-full sm:w-auto md:w-1/3"
         type="submit">
         Mettre à jour mon profil
       </p-button>
     </form>
+
     <form
       class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6"
       (ngSubmit)="onUpdatePassword()"

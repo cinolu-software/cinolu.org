@@ -11,9 +11,9 @@
   <div class="px-8 min-h-dvh xl:min-h-[800px] lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 md:py-28">
     <div class="mx-auto">
       <div class="flex flex-wrap gap-2 justify-center items-center pb-16">
-        <p-button outlined (click)="resetFilter()">Tout</p-button>
+        <p-button [outlined]="!!isActiveCategory()" (click)="resetFilter()">Tout</p-button>
         @for (item of listCategories(); track $index) {
-        <p-button outlined (click)="filterByCategory(item)">{{ item }}</p-button>
+        <p-button [outlined]="!isActiveButton(item)" (click)="filterByCategory(item)">{{ item }}</p-button>
         }
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-6">

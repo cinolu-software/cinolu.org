@@ -22,6 +22,7 @@ export class GalleryCard {
   allPhotos: IGalleryImage[] = GALLERY_IMAGES;
 
   photos: IGalleryImage[] = [...this.allPhotos];
+  activeCategory = signal<string | null>(null);
 
   page = signal(1);
   perPage = 9;
@@ -76,11 +77,17 @@ export class GalleryCard {
     this.photos = this.allPhotos.filter((photo) => photo.category === item);
     this.page.set(1);
     this.closeLightbox();
+    this.activeCategory.set(item);
   }
 
   resetFilter(): void {
     this.photos = [...this.allPhotos];
     this.page.set(1);
+    this.activeCategory.set(null);
+  }
+
+  isActiveButton(category: string): boolean {
+    return this.activeCategory() === category;
   }
 
   @HostListener('window:keydown', ['$event'])

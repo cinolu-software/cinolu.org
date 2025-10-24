@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, effect, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {
   LucideAngularModule,
@@ -13,13 +13,14 @@ import {
   GitBranch,
   Star,
   StarOff,
+  ChartColumn,
 } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProgramsStore } from '../../store/list-programs/programs.store';
 import { FilterProgramsDto } from '../../dto/programs/filter-programs.dto';
 import { ConfirmPopup } from 'primeng/confirmpopup';
@@ -40,6 +41,8 @@ import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-c
 import { Select } from 'primeng/select';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { Tabs } from '../../../../../../shared/components/tabs/tabs';
+import { AddIndicatorStore } from '../../store/list-programs/add-indicators.store';
 
 @Component({
   selector: 'app-list-programs',
@@ -53,6 +56,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
     UnpaginatedCategoriesStore,
     PublishProgramStore,
     HighlightProgramStore,
+    AddIndicatorStore,
   ],
   imports: [
     LucideAngularModule,
@@ -69,6 +73,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
     ApiImgPipe,
     AvatarModule,
     Select,
+    Tabs,
+    FormsModule,
   ],
 })
 export class ListPrograms implements OnInit {
@@ -86,10 +92,12 @@ export class ListPrograms implements OnInit {
   publishProgramStore = inject(PublishProgramStore);
   highlightStore = inject(HighlightProgramStore);
   categoriesStore = inject(UnpaginatedCategoriesStore);
-  program = signal<IProgram | null>(null);
+  addIndicatorStore = inject(AddIndicatorStore);
+  program = signal<IProgram>({} as IProgram);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
   url = environment.apiUrl + 'programs/logo/';
   #destroyRef = inject(DestroyRef);
+  indicatorsTab = signal<string[]>(['']);
   icons = {
     refresh: RefreshCcw,
     edit: SquarePen,
@@ -109,8 +117,19 @@ export class ListPrograms implements OnInit {
     page: this.#route.snapshot.queryParamMap.get('page'),
     q: this.#route.snapshot.queryParamMap.get('q'),
   });
+  tabs = [
+    { label: 'Modifier le programme', name: 'edit', icon: SquarePen },
+    { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
+  ];
+  activeTab = signal('edit');
 
   constructor() {
+    effect(() => {
+      const indNames = this.program()?.indicators?.length
+        ? this.program().indicators?.map((ind) => ind.name)
+        : Array.from({ length: 3 }, () => '');
+      this.indicatorsTab.set(indNames);
+    });
     this.searchForm = this.#fb.group({
       q: [this.queryParams().q || ''],
     });
@@ -139,8 +158,20 @@ export class ListPrograms implements OnInit {
       });
   }
 
+  onTabChange(tab: string): void {
+    this.activeTab.set(tab);
+  }
+
   loadPrograms(): void {
     this.store.loadPrograms(this.queryParams());
+  }
+
+  addIndicator(): void {
+    this.indicatorsTab.update((indicators) => [...indicators, '']);
+  }
+
+  removeIndicator(index: number): void {
+    this.indicatorsTab.update((indicators) => indicators.filter((_, i) => i !== index));
   }
 
   async onPageChange(currentPage: number): Promise<void> {
@@ -170,11 +201,7 @@ export class ListPrograms implements OnInit {
     this.loadPrograms();
   }
 
-  onToggleAddModal(): void {
-    this.showAddModal.update((v) => !v);
-  }
-
-  onToggleEditModal(program: IProgram | null): void {
+  onToggleEditModal(program: IProgram): void {
     this.program.set(program);
     this.updateProgramForm.patchValue({
       id: program?.id || '',
@@ -189,7 +216,7 @@ export class ListPrograms implements OnInit {
     this.addProgramStore.addProgram({
       payload: this.addProgramForm.value,
       onSuccess: () => {
-        this.onToggleAddModal();
+        this.showAddModal.set(false);
         this.addProgramForm.reset();
       },
     });
@@ -199,7 +226,7 @@ export class ListPrograms implements OnInit {
     this.updateProgramStore.updateProgram({
       payload: this.updateProgramForm.value,
       onSuccess: () => {
-        this.onToggleEditModal(null);
+        this.showEditModal.set(false);
         this.updateProgramForm.reset();
       },
     });
@@ -222,5 +249,11 @@ export class ListPrograms implements OnInit {
         this.deleteProgramStore.deleteProgram({ id: roleId });
       },
     });
+  }
+
+  onSaveIndicators(): void {
+    const id = this.program().id;
+    const indicators = this.indicatorsTab().filter((ind) => ind.trim() !== '');
+    this.addIndicatorStore.addIndicator({ id, indicators });
   }
 }

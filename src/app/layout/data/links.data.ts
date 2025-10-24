@@ -128,6 +128,7 @@ export const ADMIN_LINKS: ILink[] = [
       },
     ],
   },
+
   {
     name: 'Les utilisateurs',
     path: '/dashboard/users',
@@ -140,6 +141,23 @@ export const ADMIN_LINKS: ILink[] = [
       {
         name: 'Les rôles',
         path: '/dashboard/roles',
+      },
+    ],
+  },
+  {
+    name: 'Les entrepreneurs',
+    path: '/dashboard/entrepreneurs',
+    icon: UserCheck,
+    children: [
+      {
+        name: 'Les entrepreneurs',
+        path: '/dashboard/entrepreneurs',
+        exactUrl: true,
+      },
+      {
+        name: 'Les entreprises',
+        path: '/dashboard/entrepreneurs/ventures',
+        exactUrl: true,
       },
     ],
   },

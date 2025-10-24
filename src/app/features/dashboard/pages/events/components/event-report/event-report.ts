@@ -50,13 +50,13 @@ export class EventReport implements OnDestroy {
     descDiv.innerHTML = (this.event().description || '').replace(/style="[^"]*"/g, '');
     const descLines = doc.splitTextToSize(descDiv.textContent || '', 180);
     doc.text(descLines, marginX, y);
-    y += descLines.length * 7;
+    y += descLines.length * 5;
     doc.setFontSize(12);
-    if (this.event().indicators?.length) {
+    if (this.event().metrics?.length) {
       autoTable(doc, {
         startY: y + 10,
-        head: [['Indicateur', 'Valeur']],
-        body: this.event().indicators.map((i) => [i.name, i.value]),
+        head: [['Indicateur', 'Attendu', 'Obtenu']],
+        body: this.event().metrics.map((i) => [i.indicator.name, i.target, i.achieved]),
       });
     }
     const blob = doc.output('blob');

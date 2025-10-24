@@ -3,7 +3,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { LucideAngularModule, Plus } from 'lucide-angular';
+import { LucideAngularModule, Plus, ShoppingBasket } from 'lucide-angular';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProductsStore } from '../../store/products/products.store';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -31,7 +31,7 @@ import { ProductCardSkeleton } from '../../components/product-card-skeleton/prod
   ],
 })
 export class ListVentures implements OnInit {
-  icons = { plus: Plus };
+  icons = { plus: Plus, shopping: ShoppingBasket };
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   store = inject(ProductsStore);

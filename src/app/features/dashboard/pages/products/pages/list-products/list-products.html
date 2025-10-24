@@ -1,23 +1,37 @@
-<section class="dashboard-main-content w-full px-6">
-  <div class="flex w-full flex-wrap gap-4 justify-between items-center mb-10">
-    <h1 class="text-2xl font-bold">Mes produits</h1>
-    <p-button [routerLink]="'/dashboard/products/add'" [size]="'small'" variant="outlined">
+<section class="w-full px-4">
+  <div
+    class="flex flex-wrap items-center justify-between w-full mb-10 bg-white rounded-lg h-auto md:h-32 px-6 md:px-8 py-4 shadow-sm hover:shadow-md transition-all duration-300">
+    <div class="flex items-center gap-3 text-2xl font-bold font-satoshi text-gray-900">
+      <span
+        class="hidden md:flex items-center justify-center border border-primary-500/50 p-2 rounded-md text-primary-600 bg-primary-50">
+        <i-lucide [name]="icons.shopping" class="size-5 md:size-6" />
+      </span>
+      <span>Mes produits</span>
+    </div>
+
+    <p-button
+      [routerLink]="'/dashboard/products/add'"
+      [size]="'small'"
+      variant="outlined"
+      class="flex items-center gap-2 border-primary-500 text-primary-600 hover:bg-primary-50 transition-colors duration-200">
       <i-lucide [name]="icons.plus" class="size-4" />
-      Ajouter un produit
+      <span class="hidden sm:block font-medium">Nouveau produit</span>
     </p-button>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
     @if (store.products()[0] && !store.isLoading()) { @for ( product of store.products()[0] | paginate : { itemsPerPage:
-    10, currentPage: queryParams().page || 1, totalItems: store.products()[1], }; track product.id ) {
+    10, currentPage: queryParams().page || 1, totalItems: store.products()[1] }; track product.id ) {
     <app-product-card [product]="product" />
     } } @if (store.products()[1] <= 0 && !store.isLoading()) {
-    <p class="text-gray-600 text-lg">Aucun produit trouvé.</p>
-    } @if (store.isLoading()) { @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track $index) {
+    <p class="col-span-full text-center text-gray-500 text-lg py-10">Aucun produit trouvé.</p>
+    } @if (store.isLoading()) { @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track $index) {
     <app-product-card-skeleton />
     } }
   </div>
+
   @if (store.products()[1] > 10) {
-  <div class="flex items-center justify-center py-8">
+  <div class="flex items-center justify-center py-10">
     <pagination-controls nextLabel="" previousLabel="" [maxSize]="5" (pageChange)="onPageChange($event)" class="pg" />
   </div>
   }

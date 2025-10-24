@@ -34,6 +34,8 @@ import { ConfirmationService } from 'primeng/api';
 import { CommentsStore } from '../../store/comments/comments.store';
 import { Subject, takeUntil } from 'rxjs';
 import { QuillViewComponent } from 'ngx-quill';
+import { GalleriaModule } from 'primeng/galleria';
+import { carouselConfig } from '../../../landing/config/carousel.config';
 
 @Component({
   selector: 'app-detail-article',
@@ -59,6 +61,7 @@ import { QuillViewComponent } from 'ngx-quill';
     Dialog,
     ConfirmDialog,
     QuillViewComponent,
+    GalleriaModule,
   ],
   templateUrl: './detail-article.html',
 })
@@ -74,6 +77,7 @@ export class DetailArticle implements OnInit, OnDestroy {
   store = inject(ArticleStore);
   storeArticle = inject(RecentArticlesStore);
   #route = inject(ActivatedRoute);
+  responsiveOptions = carouselConfig;
   updateCommentForm: FormGroup;
   icons = {
     moveLeft: ArrowLeft,
@@ -162,7 +166,6 @@ export class DetailArticle implements OnInit, OnDestroy {
     this.updateCommentStore.updateComment({
       payload: this.updateCommentForm.value,
       onSuccess: () => {
-        console.log('clickeddddd!!!');
         this.showEditModal.set(false);
       },
     });

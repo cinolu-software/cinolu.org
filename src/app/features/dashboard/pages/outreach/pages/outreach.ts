@@ -3,7 +3,7 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { LucideAngularModule } from 'lucide-angular';
+import { Link, LucideAngularModule, UsersRound } from 'lucide-angular';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AuthStore } from '../../../../../core/auth/auth.store';
@@ -32,6 +32,10 @@ export class Outreach {
   generateReferralCodeStore = inject(GenerateReferralCodeStore);
   referralLink = signal('');
   isLinkCopied = signal(false);
+  icons = {
+    link: Link,
+    user: UsersRound,
+  };
 
   constructor() {
     effect(() => {

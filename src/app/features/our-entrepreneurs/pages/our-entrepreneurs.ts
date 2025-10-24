@@ -4,11 +4,12 @@ import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { EntrepreneursStore } from '../store/entrepreneurs.store';
 import { EntrepreneurUserCard } from '../components/entrepreneur-user-card/entrepreneur-user-card';
+import { EntrepreneurCardSkeleton } from '../components/entrepreneur-card-skeleton/entrepreneur-card-skeleton';
 
 @Component({
   selector: 'app-our-entrepreneurs',
   providers: [EntrepreneursStore],
-  imports: [LucideAngularModule, HeroCard, PaginatorModule, EntrepreneurUserCard],
+  imports: [LucideAngularModule, HeroCard, PaginatorModule, EntrepreneurUserCard, EntrepreneurCardSkeleton],
   templateUrl: './our-entrepreneurs.html',
 })
 export class OurEntrepreneurs implements OnInit {
@@ -16,7 +17,7 @@ export class OurEntrepreneurs implements OnInit {
   entrepreneurs = inject(EntrepreneursStore);
 
   first = 0;
-  rows = 4;
+  rows = 8;
 
   ngOnInit() {
     this.entrepreneurs.loadEntrepreneurs();
@@ -29,6 +30,6 @@ export class OurEntrepreneurs implements OnInit {
 
   onPageChange(event: PaginatorState) {
     this.first = event.first ?? 0;
-    this.rows = event.rows ?? 4;
+    this.rows = event.rows ?? 8;
   }
 }
