@@ -6,6 +6,8 @@ import {
   ChevronDown,
   ChevronRight,
   Download,
+  Eye,
+  EyeOff,
   LucideAngularModule,
   Plus,
   RefreshCw,
@@ -71,6 +73,8 @@ export class ListVentures implements OnInit {
     squaredCheck: SquareCheck,
     chevronDown: ChevronDown,
     chevronRight: ChevronRight,
+    eyeOff: EyeOff,
+    eyeOpen: Eye,
   };
 
   queryParams = signal<FilterEntrepreneursDto>({
