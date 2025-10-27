@@ -21,7 +21,7 @@
           [alt]="getItemTitle(prevItemData)"
           loading="lazy" />
       </div>
-      <div class="p-3 flex flex-col justify-between gap-1 flex-1 font-satoshi">
+      <div class="p-3 flex flex-col justify-between gap-1 flex-1">
         <h4 class="font-semibold text-gray-800 line-clamp-1">{{ getItemTitle(prevItemData) }}</h4>
         <p [innerHTML]="getItemDescription(prevItemData)" class="text-gray-600 text-sm line-clamp-2"></p>
       </div>
@@ -31,7 +31,7 @@
           size="small"
           outlined
           severity="primary">
-          <p class="flex items-center gap-2 group px-4 font-satoshi">
+          <p class="flex items-center gap-2 group px-4">
             Découvrir
             <i-lucide
               [name]="icons.moveUp"
@@ -66,7 +66,7 @@
             size="small"
             outlined
             severity="primary">
-            <p class="flex items-center gap-2 group px-4 font-satoshi">
+            <p class="flex items-center gap-2 group px-4">
               Découvrir
               <i-lucide
                 [name]="icons.moveUp"
@@ -91,7 +91,7 @@
           [alt]="getItemTitle(nextItemData)"
           loading="lazy" />
       </div>
-      <div class="p-3 flex flex-col justify-between gap-1 flex-1 font-satoshi">
+      <div class="p-3 flex flex-col justify-between gap-1 flex-1">
         <h4 class="font-semibold text-gray-800 line-clamp-1">{{ getItemTitle(nextItemData) }}</h4>
         <p [innerHTML]="getItemDescription(nextItemData)" class="text-gray-600 text-base line-clamp-2"></p>
       </div>
@@ -101,7 +101,7 @@
           size="small"
           outlined
           severity="primary">
-          <p class="flex items-center gap-2 group px-4 font-satoshi">
+          <p class="flex items-center gap-2 group px-4">
             Découvrir
             <i-lucide
               [name]="icons.moveUp"
@@ -114,7 +114,7 @@
   </div>
 
   <div class="flex justify-center">
-    <button (click)="nextItem()"  class="carousel-nav-btn">
+    <button (click)="nextItem()" class="carousel-nav-btn">
       <i-lucide [name]="icons.next"></i-lucide>
     </button>
   </div>
