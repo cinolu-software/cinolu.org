@@ -1,14 +1,19 @@
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
+import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 import { IIndicator } from '../../../../../../shared/models/entities.models';
-import { ProgramsStore } from './programs.store';
 
 interface IAddIndicatorStore {
   isLoading: boolean;
+}
+
+export interface IndicatorDto {
+  name: string;
+  target: number | null;
+  year: number | null;
 }
 
 export const AddIndicatorStore = signalStore(
@@ -16,19 +21,16 @@ export const AddIndicatorStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _programsStore: inject(ProgramsStore),
   })),
-  withMethods(({ _http, _toast, _programsStore, ...store }) => ({
-    addIndicator: rxMethod<{ id: string; indicators: string[] }>(
+  withMethods(({ _http, _toast, ...store }) => ({
+    addIndicator: rxMethod<{ id: string; indicators: IndicatorDto[] }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ id, indicators }) => {
           return _http.post<{ data: IIndicator[] }>(`programs/indicators/${id}`, indicators).pipe(
-            map(({ data }) => {
-              console.log(data);
+            tap(() => {
               _toast.showSuccess('Les indicateurs ont été ajoutés');
               patchState(store, { isLoading: false });
-              _programsStore.addIndicators(id, data);
             }),
             catchError(() => {
               _toast.showError("Une erreur s'est produite");

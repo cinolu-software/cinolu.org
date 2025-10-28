@@ -15,7 +15,7 @@ interface IProjectsStore {
 export const ProjectsStore = signalStore(
   withState<IProjectsStore>({ isLoading: false, projects: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadProjects: rxMethod<FilterProjectCategoriesDto>(
@@ -30,10 +30,10 @@ export const ProjectsStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, projects: [[], 0] });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
+        })
+      )
     ),
     updateProject: (project: IProject): void => {
       const [projects, count] = store.projects();
@@ -44,6 +44,6 @@ export const ProjectsStore = signalStore(
       const [projects, count] = store.projects();
       const filtered = projects.filter((project) => project.id !== id);
       patchState(store, { projects: [filtered, count - 1] });
-    },
-  })),
+    }
+  }))
 );

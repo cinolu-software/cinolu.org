@@ -31,9 +31,10 @@ export class EventReport implements OnDestroy {
     doc.text('Centre d’innovation de Lubumbashi (CINOLU)', marginX + 35, 16);
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(12);
-    doc.text('Rapport d’événement', marginX + 35, 23);
+    doc.text('Rapport du projet', marginX + 35, 23);
     doc.setFontSize(10);
     doc.text(`Généré le ${new Date().toLocaleString()}`, marginX + 35, 30);
+    y = 60;
 
     doc.setFontSize(18);
     doc.text(this.event().name, marginX, y);
@@ -58,8 +59,6 @@ export class EventReport implements OnDestroy {
         body: this.event().metrics.map((i) => [i.indicator.name, i.target, i.achieved]),
       });
     }
-    doc.setFontSize(10);
-    doc.text(`Généré le ${new Date().toLocaleString()}`, marginX, 180);
     const blob = doc.output('blob');
     const url = URL.createObjectURL(blob);
     this.pdfUrl.set(this.sanitizer.bypassSecurityTrustResourceUrl(url));

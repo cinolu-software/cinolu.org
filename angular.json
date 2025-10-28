@@ -14,6 +14,13 @@
           "builder": "@angular/build:application",
           "options": {
             "allowedCommonJsDependencies": [
+              "jspdf",
+              "jspdf-autotable",
+              "canvg",
+              "core-js",
+              "@babel/runtime",
+              "raf",
+              "rgbcolor",
               "filepond",
               "quill-delta",
               "filepond-plugin-image-preview",
@@ -97,7 +104,7 @@
                 "input": "public"
               }
             ],
-           "styles": [
+            "styles": [
               "src/styles/styles.css",
               "node_modules/notyf/notyf.min.css",
               "node_modules/filepond/dist/filepond.min.css",
@@ -108,10 +115,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
@@ -119,8 +123,6 @@
   },
   "cli": {
     "analytics": "e986b5aa-5126-4c80-9d3f-6f4dcea7d8c4",
-    "schematicCollections": [
-      "angular-eslint"
-    ]
+    "schematicCollections": ["angular-eslint"]
   }
 }

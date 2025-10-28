@@ -11,6 +11,8 @@ export interface ITag extends IBase {
 
 export interface IIndicator extends IBase {
   name: string;
+  target: number | null;
+  year: number | null;
 }
 
 export interface IComment extends IBase {
@@ -108,6 +110,7 @@ export interface IProgram extends IBase {
   subprograms: ISubprogram[];
   category: ICategory;
   indicators: IIndicator[];
+  indicators_grouped?: Record<string, IIndicator[]>;
 }
 
 export interface ISubprogram extends IBase {
