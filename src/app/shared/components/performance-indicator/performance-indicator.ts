@@ -7,7 +7,6 @@ import { PerformanceStatusPipe } from '../../pipes/performance-status.pipe';
  */
 @Component({
   selector: 'app-performance-indicator',
-  standalone: true,
   imports: [CommonModule, PerformanceStatusPipe],
   templateUrl: './performance-indicator.html',
   changeDetection: ChangeDetectionStrategy.OnPush

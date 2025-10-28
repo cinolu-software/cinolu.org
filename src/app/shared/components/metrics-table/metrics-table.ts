@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InputText } from 'primeng/inputtext';
@@ -11,16 +11,15 @@ import { MetricsMap } from '../../helpers/metrics.helper';
  */
 @Component({
   selector: 'app-metrics-table',
-  standalone: true,
   imports: [CommonModule, FormsModule, InputText, Button],
   templateUrl: './metrics-table.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MetricsTableComponent {
-  @Input({ required: true }) indicators!: IIndicator[];
-  @Input({ required: true }) metricsMap!: MetricsMap;
-  @Input() isLoading = false;
-  @Output() save = new EventEmitter<void>();
+  indicators = input.required<IIndicator[]>();
+  metricsMap = input.required<MetricsMap>();
+  isLoading = input.required<boolean>();
+  save = output<void>();
 
   onSave(): void {
     this.save.emit();
