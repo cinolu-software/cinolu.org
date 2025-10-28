@@ -1,0 +1,83 @@
+<div class="p-6 bg-white rounded-lg">
+  @let program = programStore.program();
+  <app-tabs [tabs]="tabs" [activeTab]="activeTab()" (tabChange)="onTabChange($event)" />
+  @if (activeTab() === 'edit') {
+  <div class="bg-white max-w-3xl rounded-lg mt-6">
+    <div class="w-1/2">
+      @if (programStore.isLoading()) {
+      <div class="h-20 bg-gray-200 animate-pulse rounded-lg w-full mb-4"></div>
+      } @else {
+      <app-file-upload [name]="'logo'" [url]="url + program?.id" />
+      }
+    </div>
+    <form class="flex flex-col gap-4" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col gap-1.5">
+          <label for="categories" class="block font-medium text-gray-700">Catégories</label>
+          <p-select
+            [inputId]="'categories'"
+            [options]="categoriesStore.categories()"
+            [optionValue]="'id'"
+            [optionLabel]="'name'"
+            formControlName="category"></p-select>
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label for="name" class="font-medium">Nom du programme<span class="text-red-500">*</span></label>
+          <input pInputText id="name" formControlName="name" />
+        </div>
+        <div class="flex flex-col gap-1.5 col-span-2">
+          <label for="description" class="font-medium">Description<span class="text-red-500">*</span></label>
+          <textarea pTextarea id="description" formControlName="description" rows="8" cols="30"></textarea>
+        </div>
+      </div>
+      <p-button
+        size="small"
+        severity="primary"
+        class="font-satoshi"
+        [disabled]="updateForm.invalid || updateProgramStore.isLoading()"
+        [loading]="updateProgramStore.isLoading()"
+        (onClick)="onSubmit()">
+        Mettre à jour
+      </p-button>
+    </form>
+  </div>
+  } @if (activeTab() === 'indicators') {
+  <div class="bg-white max-w-3xl rounded-lg mt-6 p-4">
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-3">
+        <label for="indicator-year" class="font-medium">Année</label>
+        <p-datepicker pSize="small" id="indicator-year" view="year" dateFormat="yy" [(ngModel)]="year" />
+      </div>
+    </div>
+    @for (ind of indicatorsTab(); track $index) {
+    <div class="flex items-end gap-4 mb-3">
+      <div class="flex flex-col gap-2 w-2/3">
+        <input pInputText [(ngModel)]="ind.name" />
+      </div>
+      <div class="flex flex-col gap-2">
+        <input pInputText type="number" [(ngModel)]="ind.target" />
+      </div>
+      <p-button
+        outlined
+        type="button"
+        severity="danger"
+        [disabled]="(indicatorsTab().length <= 1) "
+        (click)="removeIndicator($index)">
+        Supprimer
+      </p-button>
+    </div>
+    }
+    <div class="flex justify-between items-center gap-2 mt-4">
+      <p-button size="small" outlined type="button" (click)="addIndicator()"> Ajouter un indicateur </p-button>
+      <p-button
+        size="small"
+        severity="primary"
+        [disabled]="addIndicatorStore.isLoading()"
+        [loading]="addIndicatorStore.isLoading()"
+        (onClick)="onSaveIndicators()">
+        Enregistrer les indicateurs
+      </p-button>
+    </div>
+  </div>
+  }
+</div>

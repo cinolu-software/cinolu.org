@@ -1,63 +1,28 @@
-import { Component, DestroyRef, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import {
-  LucideAngularModule,
-  RefreshCcw,
-  SquarePen,
-  Trash,
-  Plus,
-  Search,
-  Eye,
-  EyeOff,
-  Layers,
-  GitBranch,
-  Star,
-  StarOff,
-  ChartColumn,
-} from 'lucide-angular';
+import { LucideAngularModule, SquarePen, Trash, Plus, Search, Eye, EyeOff, Star, StarOff } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ProgramsStore } from '../../store/list-programs/programs.store';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ProgramsStore } from '../../store/programs/programs.store';
 import { FilterProgramsDto } from '../../dto/programs/filter-programs.dto';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
-import { Dialog } from 'primeng/dialog';
-import { AddProgramStore } from '../../store/list-programs/add-program.store';
-import { Textarea } from 'primeng/textarea';
-import { UpdateProgramStore } from '../../store/list-programs/update-program.store';
-import { DeleteProgramStore } from '../../store/list-programs/delete-program.store';
-import { IProgram } from '../../../../../../shared/models/entities.models';
-import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
-import { environment } from '../../../../../../../environments/environment';
+import { DeleteProgramStore } from '../../store/programs/delete-program.store';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { AvatarModule } from 'primeng/avatar';
-import { PublishProgramStore } from '../../store/list-programs/publish-program.store';
-import { HighlightProgramStore } from '../../store/list-programs/highlight-program.store';
-import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
-import { Select } from 'primeng/select';
+import { PublishProgramStore } from '../../store/programs/publish-program.store';
+import { HighlightProgramStore } from '../../store/programs/highlight-program.store';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Tabs } from '../../../../../../shared/components/tabs/tabs';
-import { AddIndicatorStore } from '../../store/list-programs/add-indicators.store';
 
 @Component({
   selector: 'app-list-programs',
   templateUrl: './list-programs.html',
-  providers: [
-    ProgramsStore,
-    DeleteProgramStore,
-    UpdateProgramStore,
-    AddProgramStore,
-    ConfirmationService,
-    UnpaginatedCategoriesStore,
-    PublishProgramStore,
-    HighlightProgramStore,
-    AddIndicatorStore,
-  ],
+  providers: [ProgramsStore, DeleteProgramStore, ConfirmationService, PublishProgramStore, HighlightProgramStore],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -67,15 +32,10 @@ import { AddIndicatorStore } from '../../store/list-programs/add-indicators.stor
     NgxPaginationModule,
     ReactiveFormsModule,
     ConfirmPopup,
-    Dialog,
-    Textarea,
-    FileUpload,
     ApiImgPipe,
     AvatarModule,
-    Select,
-    Tabs,
-    FormsModule,
-  ],
+    RouterLink
+  ]
 })
 export class ListPrograms implements OnInit {
   #route = inject(ActivatedRoute);
@@ -83,66 +43,30 @@ export class ListPrograms implements OnInit {
   #fb = inject(FormBuilder);
   #confirmationService = inject(ConfirmationService);
   searchForm: FormGroup;
-  addProgramForm: FormGroup;
-  updateProgramForm: FormGroup;
   store = inject(ProgramsStore);
-  addProgramStore = inject(AddProgramStore);
-  updateProgramStore = inject(UpdateProgramStore);
   deleteProgramStore = inject(DeleteProgramStore);
   publishProgramStore = inject(PublishProgramStore);
   highlightStore = inject(HighlightProgramStore);
-  categoriesStore = inject(UnpaginatedCategoriesStore);
-  addIndicatorStore = inject(AddIndicatorStore);
-  program = signal<IProgram>({} as IProgram);
   skeletonArray = Array.from({ length: 100 }, (_, i) => i + 1);
-  url = environment.apiUrl + 'programs/logo/';
   #destroyRef = inject(DestroyRef);
-  indicatorsTab = signal<string[]>(['']);
   icons = {
-    refresh: RefreshCcw,
     edit: SquarePen,
     trash: Trash,
     plus: Plus,
     search: Search,
     eye: Eye,
     eyeOff: EyeOff,
-    program: Layers,
-    subprograms: GitBranch,
     star: Star,
-    starOff: StarOff,
+    starOff: StarOff
   };
-  showAddModal = signal(false);
-  showEditModal = signal(false);
   queryParams = signal<FilterProgramsDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
-    q: this.#route.snapshot.queryParamMap.get('q'),
+    q: this.#route.snapshot.queryParamMap.get('q')
   });
-  tabs = [
-    { label: 'Modifier le programme', name: 'edit', icon: SquarePen },
-    { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
-  ];
-  activeTab = signal('edit');
 
   constructor() {
-    effect(() => {
-      const indNames = this.program()?.indicators?.length
-        ? this.program().indicators?.map((ind) => ind.name)
-        : Array.from({ length: 3 }, () => '');
-      this.indicatorsTab.set(indNames);
-    });
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || ''],
-    });
-    this.addProgramForm = this.#fb.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      category: ['', Validators.required],
-    });
-    this.updateProgramForm = this.#fb.group({
-      id: ['', Validators.required],
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      category: ['', Validators.required],
+      q: [this.queryParams().q || '']
     });
   }
 
@@ -158,25 +82,13 @@ export class ListPrograms implements OnInit {
       });
   }
 
-  onTabChange(tab: string): void {
-    this.activeTab.set(tab);
-  }
-
   loadPrograms(): void {
     this.store.loadPrograms(this.queryParams());
   }
 
-  addIndicator(): void {
-    this.indicatorsTab.update((indicators) => [...indicators, '']);
-  }
-
-  removeIndicator(index: number): void {
-    this.indicatorsTab.update((indicators) => indicators.filter((_, i) => i !== index));
-  }
-
-  async onPageChange(currentPage: number): Promise<void> {
+  onPageChange(currentPage: number): void {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
-    await this.updateRouteAndPrograms();
+    this.updateRouteAndPrograms();
   }
 
   onPublishProgram(id: string): void {
@@ -187,73 +99,36 @@ export class ListPrograms implements OnInit {
     this.loadPrograms();
   }
 
-  async updateRoute(): Promise<void> {
+  updateRoute(): void {
     const queryParams = this.queryParams();
-    await this.#router.navigate(['/dashboard/programs'], { queryParams });
+    this.#router.navigate(['/dashboard/programs'], { queryParams });
   }
 
   highlightProgram(id: string): void {
     this.highlightStore.highlight(id);
   }
 
-  async updateRouteAndPrograms(): Promise<void> {
-    await this.updateRoute();
+  updateRouteAndPrograms(): void {
+    this.updateRoute();
     this.loadPrograms();
-  }
-
-  onToggleEditModal(program: IProgram): void {
-    this.program.set(program);
-    this.updateProgramForm.patchValue({
-      id: program?.id || '',
-      name: program?.name || '',
-      description: program?.description || '',
-      category: program?.category?.id,
-    });
-    this.showEditModal.update((v) => !v);
-  }
-
-  onAddProgram(): void {
-    this.addProgramStore.addProgram({
-      payload: this.addProgramForm.value,
-      onSuccess: () => {
-        this.showAddModal.set(false);
-        this.addProgramForm.reset();
-      },
-    });
-  }
-
-  onUpdateProgram(): void {
-    this.updateProgramStore.updateProgram({
-      payload: this.updateProgramForm.value,
-      onSuccess: () => {
-        this.showEditModal.set(false);
-        this.updateProgramForm.reset();
-      },
-    });
   }
 
   onDeleteRole(roleId: string, event: Event): void {
     this.#confirmationService.confirm({
       target: event.currentTarget as EventTarget,
       message: 'Etes-vous sûr ?',
+      acceptLabel: 'Confirmer',
+      rejectLabel: 'Annuler',
       rejectButtonProps: {
-        label: 'Annuler',
         severity: 'secondary',
-        outlined: true,
+        outlined: true
       },
       acceptButtonProps: {
-        label: 'Confirmer',
-        severity: 'danger',
+        severity: 'danger'
       },
       accept: () => {
         this.deleteProgramStore.deleteProgram({ id: roleId });
-      },
+      }
     });
-  }
-
-  onSaveIndicators(): void {
-    const id = this.program().id;
-    const indicators = this.indicatorsTab().filter((ind) => ind.trim() !== '');
-    this.addIndicatorStore.addIndicator({ id, indicators });
   }
 }

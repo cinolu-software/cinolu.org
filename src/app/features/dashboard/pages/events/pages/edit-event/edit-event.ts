@@ -13,7 +13,6 @@ import { UpdateEventStore } from '../../store/events/update-event.store';
 import { environment } from '../../../../../../../environments/environment';
 import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
-import { EventStore } from '../../../../../events/store/event.store';
 import { EventsStore } from '../../store/events/events.store';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 import { QuillEditorComponent } from 'ngx-quill';
@@ -24,11 +23,14 @@ import { Tabs } from '../../../../../../shared/components/tabs/tabs';
 import { EventReport } from '../../components/event-report/event-report';
 import { AddMetricStore } from '../../store/events/add-metric.store';
 import { ICategory, IEvent, IIndicator, IMetric } from '../../../../../../shared/models/entities.models';
+import { EventStore } from '../../store/events/event.store';
+import { IndicatorsStore } from '../../../programs/store/programs/indicators.store';
 
 @Component({
   selector: 'app-event-edit',
   templateUrl: './edit-event.html',
   providers: [
+    IndicatorsStore,
     EventsStore,
     EventStore,
     GalleryStore,
@@ -36,7 +38,7 @@ import { ICategory, IEvent, IIndicator, IMetric } from '../../../../../../shared
     UpdateEventStore,
     UnpaginatedSubprogramsStore,
     UnpaginatedCategoriesStore,
-    AddMetricStore,
+    AddMetricStore
   ],
   imports: [
     SelectModule,
@@ -54,8 +56,8 @@ import { ICategory, IEvent, IIndicator, IMetric } from '../../../../../../shared
     QuillEditorComponent,
     LucideAngularModule,
     Tabs,
-    EventReport,
-  ],
+    EventReport
+  ]
 })
 export class EditEventComponent implements OnInit {
   #fb = inject(FormBuilder);
@@ -65,6 +67,7 @@ export class EditEventComponent implements OnInit {
   categoriesStore = inject(UnpaginatedCategoriesStore);
   programsStore = inject(UnpaginatedSubprogramsStore);
   eventStore = inject(EventStore);
+  indicatorsStore = inject(IndicatorsStore);
   url = `${environment.apiUrl}events/cover/`;
   #slug = this.#route.snapshot.params['slug'];
   icons = { trash: Trash2 };
@@ -78,7 +81,7 @@ export class EditEventComponent implements OnInit {
     { label: "Modifier l'événement", name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
     { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
-    { label: 'Rapport', name: 'report', icon: FileText },
+    { label: 'Rapport', name: 'report', icon: FileText }
   ];
   activeTab = signal('edit');
 
@@ -116,7 +119,7 @@ export class EditEventComponent implements OnInit {
       started_at: ['', Validators.required],
       ended_at: ['', Validators.required],
       program: ['', Validators.required],
-      categories: [[], Validators.required],
+      categories: [[], Validators.required]
     });
   }
 
@@ -126,7 +129,7 @@ export class EditEventComponent implements OnInit {
       started_at: new Date(event.started_at),
       ended_at: new Date(event.ended_at),
       program: event.program.id,
-      categories: event.categories?.map((c: ICategory) => c.id),
+      categories: event.categories?.map((c: ICategory) => c.id)
     });
   }
 
@@ -140,7 +143,7 @@ export class EditEventComponent implements OnInit {
   }
 
   #initMetrics(event: IEvent): void {
-    const indicators = event.program?.program?.indicators ?? [];
+    const indicators = this.indicatorsStore.indicators();
     indicators.forEach((indicator: IIndicator) => {
       const metric = event.metrics.find((m: IMetric) => m?.indicator?.id === indicator?.id);
       this.targeted[indicator.id] = metric?.target ?? null;
@@ -172,10 +175,11 @@ export class EditEventComponent implements OnInit {
   onSaveMetrics(): void {
     const event = this.eventStore.event();
     if (!event) return;
-    const metrics = event.program.program.indicators.map((ind: IIndicator) => ({
+    const indicators = this.indicatorsStore.indicators();
+    const metrics = indicators.map((ind: IIndicator) => ({
       indicatorId: ind.id,
       target: this.targeted[ind.id] ?? 0,
-      achieved: this.achieved[ind.id] ?? 0,
+      achieved: this.achieved[ind.id] ?? 0
     }));
     this.addMetricsStore.addMetrics({ id: event.id, metrics });
   }

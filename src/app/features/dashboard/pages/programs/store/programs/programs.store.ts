@@ -5,7 +5,7 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterProgramsDto } from '../../dto/programs/filter-programs.dto';
 import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
-import { IIndicator, IProgram } from '../../../../../../shared/models/entities.models';
+import { IProgram } from '../../../../../../shared/models/entities.models';
 
 interface IProgramsStore {
   isLoading: boolean;
@@ -23,34 +23,18 @@ export const ProgramsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          return _http
-            .get<{
-              data: [IProgram[], number];
-            }>('programs/paginated', { params })
-            .pipe(
-              tap(({ data }) => {
-                patchState(store, { isLoading: false, programs: data });
-              }),
-              catchError(() => {
-                patchState(store, { isLoading: false, programs: [[], 0] });
-                return of(null);
-              }),
-            );
+          return _http.get<{ data: [IProgram[], number] }>('programs/paginated', { params }).pipe(
+            tap(({ data }) => {
+              patchState(store, { isLoading: false, programs: data });
+            }),
+            catchError(() => {
+              patchState(store, { isLoading: false, programs: [[], 0] });
+              return of(null);
+            }),
+          );
         }),
       ),
     ),
-    addIndicators(programId: string, indicators: IIndicator[]): void {
-      const [programs, count] = store.programs();
-      const updated = programs.map((p) => {
-        if (p.id === programId) return { ...p, indicators };
-        return p;
-      });
-      patchState(store, { programs: [updated, count] });
-    },
-    addProgram: (program: IProgram): void => {
-      const [programs, count] = store.programs();
-      patchState(store, { programs: [[program, ...programs], count + 1] });
-    },
     updateProgram: (program: IProgram): void => {
       const [programs, count] = store.programs();
       const updated = programs.map((p) => (p.id === program.id ? program : p));

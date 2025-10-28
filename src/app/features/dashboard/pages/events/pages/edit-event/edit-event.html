@@ -140,7 +140,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (ind of event?.program?.program?.indicators; track $index) {
+        @for (ind of indicatorsStore.indicators(); track $index) {
         <tr>
           <td class="pt-4 pr-2">
             <input pInputText [id]="ind.name" [value]="ind.name" [disabled]="true" class="w-full" />

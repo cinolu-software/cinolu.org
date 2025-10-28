@@ -15,7 +15,7 @@ export const DeleteGalleryStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _galleryStore: inject(GalleryStore),
+    _galleryStore: inject(GalleryStore)
   })),
   withMethods(({ _http, _galleryStore, _toast, ...store }) => ({
     deleteImage: rxMethod<string>(
@@ -32,10 +32,10 @@ export const DeleteGalleryStore = signalStore(
               patchState(store, { isLoading: false });
               _toast.showError("Échec de la suppression de l'image");
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

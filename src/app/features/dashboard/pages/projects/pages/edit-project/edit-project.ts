@@ -15,7 +15,6 @@ import { FileUpload } from '../../../../../../shared/components/file-upload/file
 import { Tabs } from '../../../../../../shared/components/tabs/tabs';
 import { IProject, IIndicator, IMetric, ICategory } from '../../../../../../shared/models/entities.models';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
-import { ProjectStore } from '../../../../../projects/store/project.store';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 import { ProjectReport } from '../../components/project-report/project-report';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
@@ -23,18 +22,21 @@ import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { AddMetricStore } from '../../store/projects/add-metric.store';
 import { UpdateProjectStore } from '../../store/projects/update-project.store';
+import { IndicatorsStore } from '../../../programs/store/programs/indicators.store';
+import { ProjectStore } from '../../store/projects/project.store';
 
 @Component({
   selector: 'app-project-edit',
   templateUrl: './edit-project.html',
   providers: [
+    IndicatorsStore,
     GalleryStore,
     DeleteGalleryStore,
     ProjectStore,
     UpdateProjectStore,
     UnpaginatedSubprogramsStore,
     UnpaginatedCategoriesStore,
-    AddMetricStore,
+    AddMetricStore
   ],
   imports: [
     CommonModule,
@@ -52,8 +54,8 @@ import { UpdateProjectStore } from '../../store/projects/update-project.store';
     ApiImgPipe,
     QuillEditorComponent,
     Tabs,
-    ProjectReport,
-  ],
+    ProjectReport
+  ]
 })
 export class EditProjectComponent implements OnInit {
   #fb = inject(FormBuilder);
@@ -65,6 +67,7 @@ export class EditProjectComponent implements OnInit {
   categoriesStore = inject(UnpaginatedCategoriesStore);
   programsStore = inject(UnpaginatedSubprogramsStore);
   addMetricsStore = inject(AddMetricStore);
+  indicatorsStore = inject(IndicatorsStore);
   form: FormGroup;
   #slug = this.#route.snapshot.params['slug'];
   url = `${environment.apiUrl}projects/cover/`;
@@ -77,7 +80,7 @@ export class EditProjectComponent implements OnInit {
     { label: 'Modifier le projet', name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
     { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
-    { label: 'Rapport', name: 'report', icon: FileText },
+    { label: 'Rapport', name: 'report', icon: FileText }
   ];
 
   constructor() {
@@ -113,7 +116,7 @@ export class EditProjectComponent implements OnInit {
       started_at: ['', Validators.required],
       ended_at: ['', Validators.required],
       program: ['', Validators.required],
-      categories: [[], Validators.required],
+      categories: [[], Validators.required]
     });
   }
 
@@ -127,9 +130,9 @@ export class EditProjectComponent implements OnInit {
   }
 
   #initMetrics(project: IProject): void {
-    const indicators = project.program?.program?.indicators ?? [];
+    const indicators = this.indicatorsStore.indicators();
     indicators.forEach((indicator: IIndicator) => {
-      const metric = project.metrics.find((m: IMetric) => m?.indicator?.id === indicator?.id);
+      const metric = project.metrics.find((m: IMetric) => m?.indicator?.id === indicator.id);
       this.targeted[indicator.id] = metric?.target ?? null;
       this.achieved[indicator.id] = metric?.achieved ?? null;
     });
@@ -138,10 +141,11 @@ export class EditProjectComponent implements OnInit {
   onSaveMetrics(): void {
     const project = this.projectStore.project();
     if (!project) return;
-    const metrics = project.program.program.indicators.map((ind: IIndicator) => ({
+    const indicators = this.indicatorsStore.indicators();
+    const metrics = indicators.map((ind: IIndicator) => ({
       indicatorId: ind.id,
       target: this.targeted[ind.id] ?? 0,
-      achieved: this.achieved[ind.id] ?? 0,
+      achieved: this.achieved[ind.id] ?? 0
     }));
     this.addMetricsStore.addMetrics({ id: project.id, metrics });
   }
@@ -152,7 +156,7 @@ export class EditProjectComponent implements OnInit {
       started_at: new Date(project.started_at),
       ended_at: new Date(project.ended_at),
       program: project.program.id,
-      categories: project.categories?.map((c: ICategory) => c.id),
+      categories: project.categories?.map((c: ICategory) => c.id)
     });
   }
 

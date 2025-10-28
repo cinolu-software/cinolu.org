@@ -13,7 +13,7 @@ interface IGalleryStore {
 export const GalleryProductStore = signalStore(
   withState<IGalleryStore>({ isLoading: false, gallery: [] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadGallery: rxMethod<string>(
@@ -22,16 +22,15 @@ export const GalleryProductStore = signalStore(
         switchMap((slug) => {
           return _http.get<{ data: IImage[] }>(`products/gallery/${slug}`).pipe(
             tap(({ data }) => {
-              console.log(data);
               patchState(store, { isLoading: false, gallery: data });
             }),
             catchError(() => {
               patchState(store, { isLoading: false });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

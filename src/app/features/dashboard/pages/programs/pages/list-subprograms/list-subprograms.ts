@@ -10,7 +10,7 @@ import {
   Eye,
   EyeOff,
   Star,
-  StarOff,
+  StarOff
 } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -33,7 +33,7 @@ import { environment } from '../../../../../../../environments/environment';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { AvatarModule } from 'primeng/avatar';
 import { PublishSubprogramsStore } from '../../store/subprograms/publish-subprograms.store';
-import { UnpaginatedProgramsStore } from '../../store/list-programs/unpaginated-programs.store';
+import { UnpaginatedProgramsStore } from '../../store/programs/unpaginated-programs.store';
 import { SelectModule } from 'primeng/select';
 import { HighlightSubprogramStore } from '../../store/subprograms/highlight-subprogram.store';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -50,7 +50,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
     AddSubprogramsStore,
     ConfirmationService,
     PublishSubprogramsStore,
-    HighlightSubprogramStore,
+    HighlightSubprogramStore
   ],
   imports: [
     LucideAngularModule,
@@ -66,8 +66,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
     FileUpload,
     ApiImgPipe,
     AvatarModule,
-    SelectModule,
-  ],
+    SelectModule
+  ]
 })
 export class ListSubprograms implements OnInit {
   #route = inject(ActivatedRoute);
@@ -97,29 +97,29 @@ export class ListSubprograms implements OnInit {
     eye: Eye,
     eyeOff: EyeOff,
     star: Star,
-    starOff: StarOff,
+    starOff: StarOff
   };
   showAddModal = signal(false);
   showEditModal = signal(false);
   queryParams = signal<FilterSubprogramsDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
-    q: this.#route.snapshot.queryParamMap.get('q'),
+    q: this.#route.snapshot.queryParamMap.get('q')
   });
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || ''],
+      q: [this.queryParams().q || '']
     });
     this.addSubprogramForm = this.#fb.group({
       name: ['', Validators.required],
       programId: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['', Validators.required]
     });
     this.updateSubprogramForm = this.#fb.group({
       id: ['', Validators.required],
       programId: ['', Validators.required],
       name: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['', Validators.required]
     });
   }
 
@@ -180,7 +180,7 @@ export class ListSubprograms implements OnInit {
       id: subprogram?.id || '',
       programId: subprogram?.program?.id || '',
       name: subprogram?.name || '',
-      description: subprogram?.description || '',
+      description: subprogram?.description || ''
     });
     this.showEditModal.update((v) => !v);
   }
@@ -191,7 +191,7 @@ export class ListSubprograms implements OnInit {
       onSuccess: () => {
         this.onToggleAddModal();
         this.addSubprogramForm.reset();
-      },
+      }
     });
   }
 
@@ -201,7 +201,7 @@ export class ListSubprograms implements OnInit {
       onSuccess: () => {
         this.onToggleEditModal(null);
         this.updateSubprogramForm.reset();
-      },
+      }
     });
   }
 
@@ -212,15 +212,15 @@ export class ListSubprograms implements OnInit {
       rejectButtonProps: {
         label: 'Annuler',
         severity: 'secondary',
-        outlined: true,
+        outlined: true
       },
       acceptButtonProps: {
         label: 'Confirmer',
-        severity: 'danger',
+        severity: 'danger'
       },
       accept: () => {
         this.deleteSubrogramStore.deleteProgram(roleId);
-      },
+      }
     });
   }
 }
