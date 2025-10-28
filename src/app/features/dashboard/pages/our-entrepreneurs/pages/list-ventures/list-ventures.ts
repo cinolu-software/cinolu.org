@@ -162,7 +162,8 @@ export class ListVentures implements OnInit {
     return venture.is_published;
   }
 
-  onPublishVenture(ventureSlug: string): void {
+  onPublishVenture(ventureSlug: string, event: Event): void {
     this.pulishStore.publishVenture(ventureSlug);
+    event.stopPropagation();
   }
 }

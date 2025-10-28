@@ -42,13 +42,13 @@
       <table class="text-left text-gray-600 w-full">
         <thead class="bg-gray-100 text-gray-700 py-5 font-semibold uppercase text-sm">
           <tr class="py-2">
-            <th class="px-5 py-4">#</th>
-            <th class="px-5 py-4">Image</th>
-            <th class="px-5 py-4">Nom</th>
-            <th class="px-5 py-4">Création</th>
-            <th class="px-5 py-4">Secteur</th>
-            <th class="px-5 py-4">Statut</th>
-            <th class="px-5 py-4 text-center">Actions</th>
+            <th class="px-6 py-4">#</th>
+            <th class="px-6 py-4">Image</th>
+            <th class="px-6 py-4">Nom</th>
+            <th class="px-6 py-4">Création</th>
+            <th class="px-6 py-4">Secteur</th>
+            <th class="px-6 py-4">Statut</th>
+            <th class="px-6 py-4 text-center">Actions</th>
           </tr>
         </thead>
 
@@ -60,7 +60,7 @@
             class="border-b border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer"
             [ngClass]="expandedMenu() === venture.id ? 'bg-gray-50' : ''"
             (click)="toggleExpand(venture.id)">
-            <td class="px-5 py-2 text-sm" [class.text-primary-500]="expandedMenu() === venture.id">
+            <td class="px-6 py-2 text-sm" [class.text-primary-500]="expandedMenu() === venture.id">
               <i-lucide
                 [name]="expandedMenu() === venture.id ? icons.chevronDown : icons.chevronRight"
                 class="size-4 md:size-6 transition-transform duration-200" />
@@ -68,27 +68,27 @@
             <td class="px-6 py-2">
               <p-avatar [image]="venture | apiIMG: 'venture'" shape="circle" size="large" />
             </td>
-            <td class="px-5 py-2 font-semibold text-sm">{{ venture.name | titlecase }}</td>
+            <td class="px-6 py-2 font-semibold text-sm">{{ venture.name | titlecase }}</td>
 
-            <td class="px-5 py-2 text-sm">{{ venture.founded_at | date: 'shortDate' }}</td>
-            <td class="px-5 py-2 text-sm">
+            <td class="px-6 py-2 text-sm">{{ venture.founded_at | date: 'shortDate' }}</td>
+            <td class="px-6 py-2 text-sm">
               <span
-                class="px-5 py-1.5 text-xs font-semibold rounded-lg text-white truncate inline-block max-w-[15ch]"
+                class="px-6 py-1.5 text-xs font-semibold rounded-lg text-white truncate inline-block max-w-[15ch]"
                 [style.background]="sectorColor(venture.sector)">
                 {{ venture.sector }}
               </span>
             </td>
 
-            <td class="px-5 py-2 text-sm">
+            <td class="py-2 w-28 text-sm text-center">
               @if (venture.is_published) {
               <span class="text-primary-500 bg-primary-400/20 rounded py-1 px-1.5">publié</span>
               } @else {
               <span class="text-red-500 bg-red-400/20 rounded py-1 px-2">dépublié</span>
               }
             </td>
-            <td class="px-5 py-2 text-sm">
+            <td class="px-6 py-2 text-sm">
               <div class="flex justify-center items-center gap-2">
-                <button type="submit" pButton outlined (click)="onPublishVenture(venture.slug)">
+                <button type="submit" pButton outlined (click)="onPublishVenture(venture.slug, $event)">
                   @if (!venture.is_published) {
                   <i-lucide [name]="icons.eyeOff" class="size-4" />
                   } @else {
@@ -138,7 +138,7 @@
                   }
 
                   <span
-                    class="px-5 py-1.5 text-xs font-semibold rounded-lg text-white truncate inline-block w-fit"
+                    class="px-6 py-1.5 text-xs font-semibold rounded-lg text-white truncate inline-block w-fit"
                     [style.background]="sectorColor(venture.sector)">
                     {{ venture.sector }}
                   </span>
