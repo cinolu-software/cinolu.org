@@ -1,0 +1,97 @@
+<aside class="min-h-full">
+  @if (store.user(); as user) {
+  <div class="px-4 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="bg-white p-6 rounded-lg shadow-sm text-center md:text-left flex flex-col items-center h-fit">
+      <div class="relative flex items-center justify-center flex-col">
+        <div class="relative h-28 w-28 rounded-full overflow-hidden bg-gray-100">
+          <img
+            [ngSrc]="user | apiIMG: 'user'"
+            alt="User profile Image"
+            fill
+            property
+            class="rounded-full h-full w-full object-cover ring-2 ring-primary-600 bg-gray-100" />
+        </div>
+
+        <button
+          class="absolute bottom-1 right-1 bg-primary-600 hover:bg-primary-700 text-white p-1.5 rounded-full transition overflow-hidden">
+          <lucide-icon [name]="icons.camera" class="w-4 h-4"></lucide-icon>
+          <app-file-upload
+            [name]="'profile'"
+            [url]="url"
+            (loaded)="handleLoaded()"
+            class="absolute inset-0 opacity-0 cursor-pointer" />
+        </button>
+      </div>
+
+      <div class="mt-4 text-center">
+        <h2 class="text-xl font-semibold text-gray-900">{{ user.name }}</h2>
+        <p class="text-sm text-gray-500">{{ user.city || 'Ville non renseignée' }}, {{ user.country || '' }}</p>
+        <p class="mt-1 text-gray-700 text-sm">{{ user.email }}</p>
+        <p class="text-gray-700 text-sm">{{ user.phone_number }}</p>
+      </div>
+
+      <div class="flex flex-col items-center md:items-start gap-2 mt-4">
+        <div class="flex items-center gap-2 text-sm text-gray-700">
+          <lucide-icon [name]="icons.calendar" class="w-4 h-4 text-primary-600"></lucide-icon>
+          <span>Inscrit le {{ user.created_at | date: 'longDate' }}</span>
+        </div>
+        <a
+          routerLink="/dashboard/mon-profil/modifier"
+          class="inline-flex items-center gap-1 bg-primary-600 hover:bg-primary-700 text-white text-sm px-4 py-2 rounded-md mt-2 transition">
+          <lucide-icon [name]="icons.edit" class="w-4 h-4"></lucide-icon>
+          Modifier le profil
+        </a>
+      </div>
+    </div>
+
+    <div class="md:col-span-2 flex flex-col gap-6">
+      <section class="bg-white rounded-lg p-6 shadow-sm">
+        <h3 class="font-semibold text-gray-800 mb-4 flex items-center gap-2 text-lg">
+          <span
+            class="inline-flex items-center justify-center w-10 h-10 border border-gray-200 rounded-full p-2 bg-gray-50 hover:bg-primary-50 transition-colors">
+            <i-lucide [name]="icons.user" class="w-5 h-5 text-primary-600"></i-lucide>
+          </span>
+
+          Informations personnelles
+        </h3>
+        <p class="text-gray-700"><span class="font-medium text-gray-800">Nom complet :</span> {{ user.name }}</p>
+        <p class="text-gray-700">
+          <span class="font-medium text-gray-800">Genre :</span> {{ isGender(user) || 'Non spécifié' }}
+        </p>
+        <p class="text-gray-700">
+          <span class="font-medium text-gray-800">Date de naissance :</span> {{ user.birth_date | date: 'longDate' }}
+        </p>
+      </section>
+
+      <section class="bg-white rounded-lg p-6 shadow-sm">
+        <h3 class="font-semibold text-gray-800 mb-4 flex items-center gap-2 text-lg">
+          <span
+            class="inline-flex items-center justify-center w-10 h-10 border border-gray-200 rounded-full p-2 bg-gray-50 hover:bg-primary-50 transition-colors">
+            <i-lucide [name]="icons.phone" class="w-5 h-5 text-primary-600"></i-lucide>
+          </span>
+          Contact
+        </h3>
+        <p class="text-gray-700"><span class="font-medium text-gray-800">Téléphone :</span> {{ user.phone_number }}</p>
+        <p class="text-gray-700"><span class="font-medium text-gray-800">E-mail :</span> {{ user.email }}</p>
+        <p class="text-gray-700">
+          <span class="font-medium text-gray-800">Pays :</span> {{ user.country || 'Non renseigné' }}
+        </p>
+        <p class="text-gray-700">
+          <span class="font-medium text-gray-800">Ville :</span> {{ user.city || 'Non renseigné' }}
+        </p>
+      </section>
+
+      <section class="bg-white rounded-lg p-6 shadow-sm">
+        <h3 class="font-semibold text-gray-800 mb-4 flex items-center gap-2 text-lg">
+          <span
+            class="inline-flex items-center justify-center w-10 h-10 border border-gray-200 rounded-full p-2 bg-gray-50 hover:bg-primary-50 transition-colors">
+            <i-lucide [name]="icons.fileText" class="w-5 h-5 text-primary-600"></i-lucide>
+          </span>
+          Biographie
+        </h3>
+        <p class="text-gray-700 leading-relaxed">{{ user.biography || 'Aucune biographie disponible.' }}</p>
+      </section>
+    </div>
+  </div>
+  }
+</aside>
