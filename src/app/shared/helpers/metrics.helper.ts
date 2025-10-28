@@ -23,6 +23,27 @@ export interface MetricDto {
 }
 
 /**
+ * Performance status levels
+ */
+export type PerformanceStatus = 'low' | 'medium' | 'high';
+
+/**
+ * Performance thresholds configuration
+ */
+export interface PerformanceThresholds {
+  medium: number; // percentage threshold for medium performance (default: 50)
+  high: number; // percentage threshold for high performance (default: 80)
+}
+
+/**
+ * Default performance thresholds
+ */
+const DEFAULT_THRESHOLDS: PerformanceThresholds = {
+  medium: 50,
+  high: 80
+};
+
+/**
  * Initializes metrics map from indicators and existing metrics
  * @param indicators - Array of indicators
  * @param existingMetrics - Array of existing metrics to populate values
@@ -77,10 +98,59 @@ export function calculateAchievementPercentage(totalTargeted: number, totalAchie
 /**
  * Gets performance status based on achievement percentage
  * @param percentage - Achievement percentage
+ * @param thresholds - Optional custom thresholds
  * @returns Performance status ('low', 'medium', 'high')
  */
-export function getPerformanceStatus(percentage: number): 'low' | 'medium' | 'high' {
-  if (percentage < 50) return 'low';
-  if (percentage < 80) return 'medium';
+export function getPerformanceStatus(
+  percentage: number,
+  thresholds: PerformanceThresholds = DEFAULT_THRESHOLDS
+): PerformanceStatus {
+  if (percentage < thresholds.medium) return 'low';
+  if (percentage < thresholds.high) return 'medium';
   return 'high';
+}
+
+/**
+ * Gets CSS color class for performance status
+ * @param status - Performance status
+ * @returns Tailwind CSS color class
+ */
+export function getPerformanceColor(status: PerformanceStatus): string {
+  const colorMap: Record<PerformanceStatus, string> = {
+    low: 'bg-red-500',
+    medium: 'bg-yellow-500',
+    high: 'bg-green-500'
+  };
+  return colorMap[status];
+}
+
+/**
+ * Validates metrics values
+ * @param metricsMap - Metrics map to validate
+ * @returns True if all metrics have valid values
+ */
+export function validateMetrics(metricsMap: MetricsMap): boolean {
+  return Object.values(metricsMap).every(
+    (metric) => metric.target !== null && metric.achieved !== null && metric.target >= 0 && metric.achieved >= 0
+  );
+}
+
+/**
+ * Gets metrics summary statistics
+ * @param metricsMap - Metrics map
+ * @returns Summary object with totals and percentage
+ */
+export function getMetricsSummary(metricsMap: MetricsMap) {
+  const totalTargeted = calculateMetricsTotal(metricsMap, 'target');
+  const totalAchieved = calculateMetricsTotal(metricsMap, 'achieved');
+  const percentage = calculateAchievementPercentage(totalTargeted, totalAchieved);
+  const status = getPerformanceStatus(percentage);
+
+  return {
+    totalTargeted,
+    totalAchieved,
+    percentage,
+    status,
+    color: getPerformanceColor(status)
+  };
 }

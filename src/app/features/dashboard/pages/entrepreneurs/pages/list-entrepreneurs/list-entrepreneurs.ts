@@ -16,7 +16,7 @@ import { DownloadUsersStore } from '../../../users/store/users/download-csv.stor
 import { DeleteUserStore } from '../../../users/store/users/delete-user.store';
 import { FilterEntrepreneursDto } from '../../dto/ventures/filter-ventures.dto';
 import { ConfirmPopup } from 'primeng/confirmpopup';
-import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
+import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-users-list',
@@ -33,8 +33,8 @@ import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
     ReactiveFormsModule,
     ConfirmPopup,
     RouterLink,
-    ApiImgPipe,
-  ],
+    ApiImgPipe
+  ]
 })
 export class ListEntrepreneurs implements OnInit {
   #route = inject(ActivatedRoute);
@@ -53,16 +53,16 @@ export class ListEntrepreneurs implements OnInit {
     download: Download,
     search: Search,
     plus: Plus,
-    lock: UserLock,
+    lock: UserLock
   };
   queryParams = signal<FilterEntrepreneursDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
-    q: this.#route.snapshot.queryParamMap.get('q'),
+    q: this.#route.snapshot.queryParamMap.get('q')
   });
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || ''],
+      q: [this.queryParams().q || '']
     });
   }
 
@@ -104,15 +104,15 @@ export class ListEntrepreneurs implements OnInit {
       rejectButtonProps: {
         label: 'Annuler',
         severity: 'secondary',
-        outlined: true,
+        outlined: true
       },
       acceptButtonProps: {
         label: 'Confirmer',
-        severity: 'danger',
+        severity: 'danger'
       },
       accept: () => {
         this.deleteStore.deleteUser(userId);
-      },
+      }
     });
   }
 }

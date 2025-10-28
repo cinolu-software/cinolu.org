@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PerformanceStatusPipe } from '../../pipes/performance-status.pipe';
 
@@ -13,8 +13,8 @@ import { PerformanceStatusPipe } from '../../pipes/performance-status.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PerformanceIndicatorComponent {
-  @Input({ required: true }) totalTargeted!: number;
-  @Input({ required: true }) totalAchieved!: number;
-  @Input({ required: true }) percentage!: number;
-  @Input() label = 'Performance';
+  totalTargeted = input.required<number>();
+  totalAchieved = input.required<number>();
+  percentage = input.required<number>();
+  label = input('Performance');
 }

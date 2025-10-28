@@ -11,7 +11,7 @@ interface IDeleteVentureStore {
 export const DeleteVentureStore = signalStore(
   withState<IDeleteVentureStore>({ isLoading: false }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     deleteVenture: rxMethod<string>(
@@ -25,10 +25,10 @@ export const DeleteVentureStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

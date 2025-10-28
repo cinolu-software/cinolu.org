@@ -5,36 +5,34 @@ import { InputText } from 'primeng/inputtext';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaModule } from 'primeng/textarea';
 import { SelectModule } from 'primeng/select';
-import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
 import { DatePickerModule } from 'primeng/datepicker';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ActivatedRoute } from '@angular/router';
-import { UpdateEventStore } from '../../store/events/update-event.store';
-import { environment } from '../../../../../../../environments/environment';
-import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
-import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
-import { EventsStore } from '../../store/events/events.store';
-import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 import { QuillEditorComponent } from 'ngx-quill';
 import { ChartColumn, FileText, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
-import { GalleryStore } from '../../store/galleries/galeries.store';
-import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
-import { Tabs } from '../../../../../../shared/components/tabs/tabs';
-import { EventReport } from '../../components/event-report/event-report';
-import { AddMetricStore } from '../../store/events/add-metric.store';
-import { IEvent } from '../../../../../../shared/models/entities.models';
-import { EventStore } from '../../store/events/event.store';
-import { IndicatorsStore } from '../../../programs/store/programs/indicators.store';
-import { PerformanceIndicatorComponent } from '../../../../../../shared/components/performance-indicator/performance-indicator';
-import { MetricsTableComponent } from '../../../../../../shared/components/metrics-table/metrics-table';
+import { environment } from '@environments/environment';
+import { FileUpload, Tabs, PerformanceIndicatorComponent, MetricsTableComponent } from '@shared/components';
+import { IEvent } from '@shared/models';
+import { ApiImgPipe } from '@shared/pipes';
 import {
   MetricsMap,
   initializeMetricsMap,
   metricsMapToDto,
   calculateMetricsTotal,
-  calculateAchievementPercentage
-} from '../../../../../../shared/helpers/metrics.helper';
-import { parseDate, extractCategoryIds } from '../../../../../../shared/helpers/form.helper';
+  calculateAchievementPercentage,
+  parseDate,
+  extractCategoryIds
+} from '@shared/helpers';
+import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
+import { UpdateEventStore } from '../../store/events/update-event.store';
+import { EventsStore } from '../../store/events/events.store';
+import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
+import { GalleryStore } from '../../store/galleries/galeries.store';
+import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
+import { EventReport } from '../../components/event-report/event-report';
+import { AddMetricStore } from '../../store/events/add-metric.store';
+import { EventStore } from '../../store/events/event.store';
+import { IndicatorsStore } from '../../../programs/store/programs/indicators.store';
 
 @Component({
   selector: 'app-event-edit',

@@ -10,11 +10,19 @@ import { InputText } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
-import { environment } from '../../../../../../../environments/environment';
-import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
-import { Tabs } from '../../../../../../shared/components/tabs/tabs';
-import { IProject } from '../../../../../../shared/models/entities.models';
-import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
+import { environment } from '@environments/environment';
+import { FileUpload, Tabs, PerformanceIndicatorComponent, MetricsTableComponent } from '@shared/components';
+import { IProject } from '@shared/models';
+import { ApiImgPipe } from '@shared/pipes';
+import {
+  MetricsMap,
+  initializeMetricsMap,
+  metricsMapToDto,
+  calculateMetricsTotal,
+  calculateAchievementPercentage,
+  parseDate,
+  extractCategoryIds
+} from '@shared/helpers';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 import { ProjectReport } from '../../components/project-report/project-report';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
@@ -24,16 +32,6 @@ import { AddMetricStore } from '../../store/projects/add-metric.store';
 import { UpdateProjectStore } from '../../store/projects/update-project.store';
 import { IndicatorsStore } from '../../../programs/store/programs/indicators.store';
 import { ProjectStore } from '../../store/projects/project.store';
-import { PerformanceIndicatorComponent } from '../../../../../../shared/components/performance-indicator/performance-indicator';
-import { MetricsTableComponent } from '../../../../../../shared/components/metrics-table/metrics-table';
-import {
-  MetricsMap,
-  initializeMetricsMap,
-  metricsMapToDto,
-  calculateMetricsTotal,
-  calculateAchievementPercentage
-} from '../../../../../../shared/helpers/metrics.helper';
-import { parseDate, extractCategoryIds } from '../../../../../../shared/helpers/form.helper';
 
 @Component({
   selector: 'app-project-edit',
