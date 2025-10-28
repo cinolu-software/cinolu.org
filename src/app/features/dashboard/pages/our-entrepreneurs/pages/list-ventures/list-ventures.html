@@ -42,13 +42,13 @@
       <table class="text-left text-gray-600 w-full">
         <thead class="bg-gray-100 text-gray-700 py-5 font-semibold uppercase text-sm">
           <tr class="py-2">
-            <th class="px-5 py-4">#</th>
-            <th class="px-5 py-4">Image</th>
-            <th class="px-5 py-4">Nom</th>
-            <th class="px-5 py-4">Email</th>
-            <th class="px-5 py-4">Création</th>
-            <th class="px-5 py-4">Secteur</th>
-            <th class="px-5 py-4 text-center">Actions</th>
+            <th class="px-6 py-4">#</th>
+            <th class="px-6 py-4">Image</th>
+            <th class="px-6 py-4">Nom</th>
+            <th class="px-6 py-4">Création</th>
+            <th class="px-6 py-4">Secteur</th>
+            <th class="px-6 py-4">Statut</th>
+            <th class="px-6 py-4 text-center">Actions</th>
           </tr>
         </thead>
 
@@ -58,9 +58,9 @@
 
           <tr
             class="border-b border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer"
-            [ngClass]="expandedMenu() === venture.id ? 'bg-gray-100 border border-primary-500/60' : ''"
+            [ngClass]="expandedMenu() === venture.id ? 'bg-gray-50' : ''"
             (click)="toggleExpand(venture.id)">
-            <td class="px-5 py-2 text-sm" [class.text-primary-500]="expandedMenu() === venture.id">
+            <td class="px-6 py-2 text-sm" [class.text-primary-500]="expandedMenu() === venture.id">
               <i-lucide
                 [name]="expandedMenu() === venture.id ? icons.chevronDown : icons.chevronRight"
                 class="size-4 md:size-6 transition-transform duration-200" />
@@ -68,18 +68,33 @@
             <td class="px-6 py-2">
               <p-avatar [image]="venture | apiIMG: 'venture'" shape="circle" size="large" />
             </td>
-            <td class="px-5 py-2 font-semibold text-sm">{{ venture.name | titlecase }}</td>
-            <td class="px-5 py-2 text-sm">{{ venture.email }}</td>
-            <td class="px-5 py-2 text-sm">{{ venture.founded_at | date: 'shortDate' }}</td>
-            <td class="px-5 py-2 text-sm">
+            <td class="px-6 py-2 font-semibold text-sm">{{ venture.name | titlecase }}</td>
+
+            <td class="px-6 py-2 text-sm">{{ venture.founded_at | date: 'shortDate' }}</td>
+            <td class="px-6 py-2 text-sm">
               <span
-                class="px-5 py-1.5 text-xs font-semibold rounded-lg text-white truncate inline-block max-w-[15ch]"
+                class="px-6 py-1.5 text-xs font-semibold rounded-lg text-white truncate inline-block max-w-[15ch]"
                 [style.background]="sectorColor(venture.sector)">
                 {{ venture.sector }}
               </span>
             </td>
-            <td class="px-5 py-2 text-sm">
+
+            <td class="py-2 w-28 text-sm text-center">
+              @if (venture.is_published) {
+              <span class="text-primary-500 bg-primary-400/20 rounded py-1 px-1.5">publié</span>
+              } @else {
+              <span class="text-red-500 bg-red-400/20 rounded py-1 px-2">dépublié</span>
+              }
+            </td>
+            <td class="px-6 py-2 text-sm">
               <div class="flex justify-center items-center gap-2">
+                <button type="submit" pButton outlined (click)="onPublishVenture(venture.slug, $event)">
+                  @if (!venture.is_published) {
+                  <i-lucide [name]="icons.eyeOff" class="size-4" />
+                  } @else {
+                  <i-lucide [name]="icons.eyeOpen" class="size-4" />
+                  }
+                </button>
                 <a
                   pButton
                   outlined
@@ -99,7 +114,7 @@
           </tr>
 
           @if (expandedMenu() === venture.id) {
-          <tr class="bg-gray-50 border-b border-gray-200 animate-fadeIn">
+          <tr class="bg-gray-50 animate-fadeIn">
             <td colspan="7" class="px-6 py-4 text-sm text-gray-700">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex flex-col gap-2">
@@ -111,13 +126,19 @@
                     <p class="font-semibold text-gray-800">Localisation :</p>
                     <p>{{ venture.location || 'Non spécifiée' }}</p>
                   </div>
+                  @if (venture.owner) {
+                  <div class="flex gap-2">
+                    <p class="font-semibold text-gray-800">Email :</p>
+                    <p>{{ venture.owner.email }}</p>
+                  </div>
                   <div class="flex gap-2">
                     <p class="font-semibold text-gray-800">Responsable :</p>
-                    <p>{{ venture.email }}</p>
+                    <p>{{ venture.owner.name }}</p>
                   </div>
+                  }
 
                   <span
-                    class="px-5 py-1.5 text-xs font-semibold rounded-lg text-white truncate inline-block w-fit"
+                    class="px-6 py-1.5 text-xs font-semibold rounded-lg text-white truncate inline-block w-fit"
                     [style.background]="sectorColor(venture.sector)">
                     {{ venture.sector }}
                   </span>

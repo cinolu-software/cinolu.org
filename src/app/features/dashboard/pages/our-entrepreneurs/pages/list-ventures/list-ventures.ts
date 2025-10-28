@@ -6,6 +6,8 @@ import {
   ChevronDown,
   ChevronRight,
   Download,
+  Eye,
+  EyeOff,
   LucideAngularModule,
   Plus,
   RefreshCw,
@@ -29,11 +31,13 @@ import { DeleteVentureStore } from '../../store/delete-venture.store';
 import { VenturesStore } from '../../store/ventures.store';
 import { SECTORS } from '../../../ventures/data/sectors.data';
 import { Select } from 'primeng/select';
+import { IVenture } from '../../../../../../shared/models/entities.models';
+import { PublishVentureStore } from '../../store/publish-venture.store';
 
 @Component({
   selector: 'app-list-ventures',
   standalone: true,
-  providers: [DownloadUsersStore, ConfirmationService, DeleteVentureStore, VenturesStore],
+  providers: [DownloadUsersStore, ConfirmationService, DeleteVentureStore, VenturesStore, PublishVentureStore],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -56,6 +60,7 @@ export class ListVentures implements OnInit {
   #fb = inject(FormBuilder);
   #confirmationService = inject(ConfirmationService);
   #destroyRef = inject(DestroyRef);
+  pulishStore = inject(PublishVentureStore);
   sectors = SECTORS;
   store = inject(VenturesStore);
   deleteStore = inject(DeleteVentureStore);
@@ -71,6 +76,8 @@ export class ListVentures implements OnInit {
     squaredCheck: SquareCheck,
     chevronDown: ChevronDown,
     chevronRight: ChevronRight,
+    eyeOff: EyeOff,
+    eyeOpen: Eye,
   };
 
   queryParams = signal<FilterEntrepreneursDto>({
@@ -149,5 +156,14 @@ export class ListVentures implements OnInit {
 
   toggleExpand(id: string) {
     this.expandedMenu.update((current) => (current === id ? null : id));
+  }
+
+  isPublished(venture: IVenture): boolean {
+    return venture.is_published;
+  }
+
+  onPublishVenture(ventureSlug: string, event: Event): void {
+    this.pulishStore.publishVenture(ventureSlug);
+    event.stopPropagation();
   }
 }

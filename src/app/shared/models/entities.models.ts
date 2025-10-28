@@ -91,6 +91,7 @@ export interface IVenture extends IBase {
   website: string;
   linkedin_url: string;
   sector: string;
+  is_published: boolean;
   founded_at: Date;
   location: string;
   stage: string;

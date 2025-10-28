@@ -36,5 +36,15 @@ export const VenturesStore = signalStore(
         }),
       ),
     ),
+    updateVenture: (venture: IVenture): void => {
+      const [ventures, count] = store.ventures();
+      const updated = ventures.map((v) => (v.slug === venture.slug ? venture : v));
+      patchState(store, { ventures: [updated, count] });
+    },
+    deleteVenture: (id: string): void => {
+      const [ventures, count] = store.ventures();
+      const filtered = ventures.filter((venture) => venture.id !== id);
+      patchState(store, { ventures: [filtered, count - 1] });
+    },
   })),
 );

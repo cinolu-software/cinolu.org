@@ -39,7 +39,6 @@ export class HighlightCard implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
-      console.log('Données reçues dans HighlightCard3 :', this.data);
       this.activeIndex = 1;
       this.carouselSub?.unsubscribe();
 
@@ -54,7 +53,7 @@ export class HighlightCard implements OnInit, OnChanges, OnDestroy {
   }
 
   private startAutoRotation(): void {
-    this.carouselSub = interval(7000).subscribe(() => this.nextItem());
+    this.carouselSub = interval(5000).subscribe(() => this.nextItem());
   }
 
   prevItem(): void {
