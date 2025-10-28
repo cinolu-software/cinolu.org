@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { OnInit, inject, signal, effect, Component } from '@angular/core';
+import { OnInit, inject, signal, effect, Component, computed } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LucideAngularModule, Trash2, SquarePen, Images, ChartColumn, FileText } from 'lucide-angular';
@@ -13,7 +13,7 @@ import { TextareaModule } from 'primeng/textarea';
 import { environment } from '../../../../../../../environments/environment';
 import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
 import { Tabs } from '../../../../../../shared/components/tabs/tabs';
-import { IProject, IIndicator, IMetric, ICategory } from '../../../../../../shared/models/entities.models';
+import { IProject } from '../../../../../../shared/models/entities.models';
 import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
 import { ProjectReport } from '../../components/project-report/project-report';
@@ -24,6 +24,16 @@ import { AddMetricStore } from '../../store/projects/add-metric.store';
 import { UpdateProjectStore } from '../../store/projects/update-project.store';
 import { IndicatorsStore } from '../../../programs/store/programs/indicators.store';
 import { ProjectStore } from '../../store/projects/project.store';
+import { PerformanceIndicatorComponent } from '../../../../../../shared/components/performance-indicator/performance-indicator';
+import { MetricsTableComponent } from '../../../../../../shared/components/metrics-table/metrics-table';
+import {
+  MetricsMap,
+  initializeMetricsMap,
+  metricsMapToDto,
+  calculateMetricsTotal,
+  calculateAchievementPercentage
+} from '../../../../../../shared/helpers/metrics.helper';
+import { parseDate, extractCategoryIds } from '../../../../../../shared/helpers/form.helper';
 
 @Component({
   selector: 'app-project-edit',
@@ -54,52 +64,52 @@ import { ProjectStore } from '../../store/projects/project.store';
     ApiImgPipe,
     QuillEditorComponent,
     Tabs,
-    ProjectReport
+    ProjectReport,
+    PerformanceIndicatorComponent,
+    MetricsTableComponent
   ]
 })
 export class EditProjectComponent implements OnInit {
-  #fb = inject(FormBuilder);
-  #route = inject(ActivatedRoute);
-  projectStore = inject(ProjectStore);
-  galleryStore = inject(GalleryStore);
-  deleteImageStore = inject(DeleteGalleryStore);
-  updateProjectStore = inject(UpdateProjectStore);
-  categoriesStore = inject(UnpaginatedCategoriesStore);
-  programsStore = inject(UnpaginatedSubprogramsStore);
-  addMetricsStore = inject(AddMetricStore);
-  indicatorsStore = inject(IndicatorsStore);
-  form: FormGroup;
-  #slug = this.#route.snapshot.params['slug'];
-  url = `${environment.apiUrl}projects/cover/`;
-  galleryUrl = `${environment.apiUrl}projects/gallery/`;
-  targeted: Record<string, number | null> = {};
-  achieved: Record<string, number | null> = {};
+  readonly #fb = inject(FormBuilder);
+  readonly #route = inject(ActivatedRoute);
+  readonly #slug = this.#route.snapshot.params['slug'];
+
+  // Stores
+  readonly projectStore = inject(ProjectStore);
+  readonly galleryStore = inject(GalleryStore);
+  readonly deleteImageStore = inject(DeleteGalleryStore);
+  readonly updateProjectStore = inject(UpdateProjectStore);
+  readonly categoriesStore = inject(UnpaginatedCategoriesStore);
+  readonly programsStore = inject(UnpaginatedSubprogramsStore);
+  readonly addMetricsStore = inject(AddMetricStore);
+  readonly indicatorsStore = inject(IndicatorsStore);
+
+  // Form and state
+  form!: FormGroup;
+  metricsMap: MetricsMap = {};
   activeTab = signal('edit');
-  icons = { trash: Trash2 };
-  tabs = [
+
+  // Constants
+  readonly url = `${environment.apiUrl}projects/cover/`;
+  readonly galleryUrl = `${environment.apiUrl}projects/gallery/`;
+  readonly icons = { trash: Trash2 };
+  readonly tabs = [
     { label: 'Modifier le projet', name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
     { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
     { label: 'Rapport', name: 'report', icon: FileText }
   ];
 
+  // Computed metrics
+  readonly totalTargeted = computed(() => calculateMetricsTotal(this.metricsMap, 'target'));
+  readonly totalAchieved = computed(() => calculateMetricsTotal(this.metricsMap, 'achieved'));
+  readonly achievementPercentage = computed(() =>
+    calculateAchievementPercentage(this.totalTargeted(), this.totalAchieved())
+  );
+
   constructor() {
     this.form = this.#initForm();
     this.#watchProjectChanges();
-  }
-
-  get totalTargeted(): number | null {
-    return Object.values(this.targeted).reduce((sum, val) => (sum || 0) + (val ?? 0), 0);
-  }
-
-  get totalAchieved(): number | null {
-    return Object.values(this.achieved).reduce((sum, val) => (sum || 0) + (val ?? 0), 0);
-  }
-
-  get achievementPercentage(): number {
-    const total = this.totalTargeted;
-    if (!total || !this.totalAchieved) return 0;
-    return Math.round((this.totalAchieved / total) * 100);
   }
 
   ngOnInit(): void {
@@ -121,42 +131,37 @@ export class EditProjectComponent implements OnInit {
   }
 
   #watchProjectChanges(): void {
-    effect(() => {
-      const project = this.projectStore.project();
-      if (!project) return;
-      this.#initMetrics(project);
-      this.#patchForm(project);
-    });
+    effect(
+      () => {
+        const project = this.projectStore.project();
+        if (!project) return;
+        this.#initMetrics(project);
+        this.#patchForm(project);
+      },
+      { allowSignalWrites: true }
+    );
   }
 
   #initMetrics(project: IProject): void {
     const indicators = this.indicatorsStore.indicators();
-    indicators.forEach((indicator: IIndicator) => {
-      const metric = project.metrics.find((m: IMetric) => m?.indicator?.id === indicator.id);
-      this.targeted[indicator.id] = metric?.target ?? null;
-      this.achieved[indicator.id] = metric?.achieved ?? null;
-    });
+    this.metricsMap = initializeMetricsMap(indicators, project.metrics);
   }
 
   onSaveMetrics(): void {
     const project = this.projectStore.project();
     if (!project) return;
     const indicators = this.indicatorsStore.indicators();
-    const metrics = indicators.map((ind: IIndicator) => ({
-      indicatorId: ind.id,
-      target: this.targeted[ind.id] ?? 0,
-      achieved: this.achieved[ind.id] ?? 0
-    }));
+    const metrics = metricsMapToDto(this.metricsMap, indicators);
     this.addMetricsStore.addMetrics({ id: project.id, metrics });
   }
 
   #patchForm(project: IProject): void {
     this.form.patchValue({
       ...project,
-      started_at: new Date(project.started_at),
-      ended_at: new Date(project.ended_at),
+      started_at: parseDate(project.started_at),
+      ended_at: parseDate(project.ended_at),
       program: project.program.id,
-      categories: project.categories?.map((c: ICategory) => c.id)
+      categories: extractCategoryIds(project.categories)
     });
   }
 

@@ -1,0 +1,18 @@
+<div class="p-4 bg-gray-50 rounded-lg w-full">
+  <p class="font-medium">{{ label }} :</p>
+  <div class="flex justify-between items-center mt-2">
+    <div>
+      <span>Total Attendus: <strong>{{ totalTargeted }}</strong></span>
+      <span class="ml-4">Total Obtenus: <strong>{{ totalAchieved }}</strong></span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span>{{ percentage }}%</span>
+      <div class="w-40 h-4 bg-gray-200 rounded-full overflow-hidden">
+        <div
+          class="h-full transition-all duration-300"
+          [style.width.%]="percentage"
+          [ngClass]="percentage | performanceStatus"></div>
+      </div>
+    </div>
+  </div>
+</div>

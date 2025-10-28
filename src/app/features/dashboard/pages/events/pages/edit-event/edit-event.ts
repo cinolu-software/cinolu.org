@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnInit, signal, computed } from '@angular/core';
 import { Button } from 'primeng/button';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
@@ -22,9 +22,19 @@ import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { Tabs } from '../../../../../../shared/components/tabs/tabs';
 import { EventReport } from '../../components/event-report/event-report';
 import { AddMetricStore } from '../../store/events/add-metric.store';
-import { ICategory, IEvent, IIndicator, IMetric } from '../../../../../../shared/models/entities.models';
+import { IEvent } from '../../../../../../shared/models/entities.models';
 import { EventStore } from '../../store/events/event.store';
 import { IndicatorsStore } from '../../../programs/store/programs/indicators.store';
+import { PerformanceIndicatorComponent } from '../../../../../../shared/components/performance-indicator/performance-indicator';
+import { MetricsTableComponent } from '../../../../../../shared/components/metrics-table/metrics-table';
+import {
+  MetricsMap,
+  initializeMetricsMap,
+  metricsMapToDto,
+  calculateMetricsTotal,
+  calculateAchievementPercentage
+} from '../../../../../../shared/helpers/metrics.helper';
+import { parseDate, extractCategoryIds } from '../../../../../../shared/helpers/form.helper';
 
 @Component({
   selector: 'app-event-edit',
@@ -56,48 +66,48 @@ import { IndicatorsStore } from '../../../programs/store/programs/indicators.sto
     QuillEditorComponent,
     LucideAngularModule,
     Tabs,
-    EventReport
+    EventReport,
+    PerformanceIndicatorComponent,
+    MetricsTableComponent
   ]
 })
 export class EditEventComponent implements OnInit {
-  #fb = inject(FormBuilder);
-  #route = inject(ActivatedRoute);
-  form: FormGroup;
-  store = inject(UpdateEventStore);
-  categoriesStore = inject(UnpaginatedCategoriesStore);
-  programsStore = inject(UnpaginatedSubprogramsStore);
-  eventStore = inject(EventStore);
-  indicatorsStore = inject(IndicatorsStore);
-  url = `${environment.apiUrl}events/cover/`;
-  #slug = this.#route.snapshot.params['slug'];
-  icons = { trash: Trash2 };
-  galleryUrl = `${environment.apiUrl}events/gallery/`;
-  deleteGalleryStore = inject(DeleteGalleryStore);
-  galleryStore = inject(GalleryStore);
-  addMetricsStore = inject(AddMetricStore);
-  targeted: Record<string, number | null> = {};
-  achieved: Record<string, number | null> = {};
-  tabs = [
+  readonly #fb = inject(FormBuilder);
+  readonly #route = inject(ActivatedRoute);
+  readonly #slug = this.#route.snapshot.params['slug'];
+
+  // Stores
+  readonly store = inject(UpdateEventStore);
+  readonly categoriesStore = inject(UnpaginatedCategoriesStore);
+  readonly programsStore = inject(UnpaginatedSubprogramsStore);
+  readonly eventStore = inject(EventStore);
+  readonly indicatorsStore = inject(IndicatorsStore);
+  readonly deleteGalleryStore = inject(DeleteGalleryStore);
+  readonly galleryStore = inject(GalleryStore);
+  readonly addMetricsStore = inject(AddMetricStore);
+
+  // Form and state
+  form!: FormGroup;
+  metricsMap: MetricsMap = {};
+  activeTab = signal('edit');
+
+  // Constants
+  readonly url = `${environment.apiUrl}events/cover/`;
+  readonly galleryUrl = `${environment.apiUrl}events/gallery/`;
+  readonly icons = { trash: Trash2 };
+  readonly tabs = [
     { label: "Modifier l'événement", name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
     { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
     { label: 'Rapport', name: 'report', icon: FileText }
   ];
-  activeTab = signal('edit');
 
-  get totalTargeted(): number | null {
-    return Object.values(this.targeted).reduce((sum, val) => (sum || 0) + (val ?? 0), 0);
-  }
-
-  get totalAchieved(): number | null {
-    return Object.values(this.achieved).reduce((sum, val) => (sum || 0) + (val ?? 0), 0);
-  }
-
-  get achievementPercentage(): number {
-    const total = this.totalTargeted;
-    if (!total || !this.totalAchieved) return 0;
-    return Math.round((this.totalAchieved / total) * 100);
-  }
+  // Computed metrics
+  readonly totalTargeted = computed(() => calculateMetricsTotal(this.metricsMap, 'target'));
+  readonly totalAchieved = computed(() => calculateMetricsTotal(this.metricsMap, 'achieved'));
+  readonly achievementPercentage = computed(() =>
+    calculateAchievementPercentage(this.totalTargeted(), this.totalAchieved())
+  );
 
   constructor() {
     this.form = this.#initForm();
@@ -126,29 +136,28 @@ export class EditEventComponent implements OnInit {
   #patchForm(event: IEvent): void {
     this.form.patchValue({
       ...event,
-      started_at: new Date(event.started_at),
-      ended_at: new Date(event.ended_at),
+      started_at: parseDate(event.started_at),
+      ended_at: parseDate(event.ended_at),
       program: event.program.id,
-      categories: event.categories?.map((c: ICategory) => c.id)
+      categories: extractCategoryIds(event.categories)
     });
   }
 
   #watchEventChanges(): void {
-    effect(() => {
-      const event = this.eventStore.event();
-      if (!event) return;
-      this.#patchForm(event);
-      this.#initMetrics(event);
-    });
+    effect(
+      () => {
+        const event = this.eventStore.event();
+        if (!event) return;
+        this.#patchForm(event);
+        this.#initMetrics(event);
+      },
+      { allowSignalWrites: true }
+    );
   }
 
   #initMetrics(event: IEvent): void {
     const indicators = this.indicatorsStore.indicators();
-    indicators.forEach((indicator: IIndicator) => {
-      const metric = event.metrics.find((m: IMetric) => m?.indicator?.id === indicator?.id);
-      this.targeted[indicator.id] = metric?.target ?? null;
-      this.achieved[indicator.id] = metric?.achieved ?? null;
-    });
+    this.metricsMap = initializeMetricsMap(indicators, event.metrics);
   }
 
   onTabChange(tab: string): void {
@@ -176,11 +185,7 @@ export class EditEventComponent implements OnInit {
     const event = this.eventStore.event();
     if (!event) return;
     const indicators = this.indicatorsStore.indicators();
-    const metrics = indicators.map((ind: IIndicator) => ({
-      indicatorId: ind.id,
-      target: this.targeted[ind.id] ?? 0,
-      achieved: this.achieved[ind.id] ?? 0
-    }));
+    const metrics = metricsMapToDto(this.metricsMap, indicators);
     this.addMetricsStore.addMetrics({ id: event.id, metrics });
   }
 }
