@@ -2,7 +2,7 @@ import { Component, computed, effect, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { LucideAngularModule, MoveRight, Users } from 'lucide-angular';
+import { LucideAngularModule, MoveRight, Users, MapPin, Briefcase, TrendingUp, User, Package } from 'lucide-angular';
 import { SOCIAL_LINKS } from '../../../contact-us/data/contact.data';
 import { IUser, IVenture } from '../../../../shared/models/entities.models';
 import { ButtonModule } from 'primeng/button';
@@ -26,7 +26,12 @@ export class EntrepreneurDetailCard {
 
   readonly icons = {
     users: Users,
-    moveRight: MoveRight
+    moveRight: MoveRight,
+    mapPin: MapPin,
+    briefcase: Briefcase,
+    trendingUp: TrendingUp,
+    user: User,
+    package: Package
   };
 
   private readonly slugParam = toSignal(
