@@ -1,26 +1,26 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, effect, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { LucideAngularModule, MoveRight, Users } from 'lucide-angular';
 import { SOCIAL_LINKS } from '../../../contact-us/data/contact.data';
 import { IUser, IVenture } from '../../../../shared/models/entities.models';
-import { EntrepreneursStore } from '../../store/entrepreneurs.store';
 import { ButtonModule } from 'primeng/button';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
 import { map } from 'rxjs';
+import { VentureStore } from '@features/entrepreneurs/store/venture.store';
 
 @Component({
   selector: 'app-entrepreneur-detail-card',
   standalone: true,
-  providers: [EntrepreneursStore],
+  providers: [VentureStore],
   imports: [CommonModule, RouterModule, LucideAngularModule, ButtonModule, ApiImgPipe, HeroCard, NgOptimizedImage],
   templateUrl: './entrepreneur-detail-card.html'
 })
 export class EntrepreneurDetailCard {
   private route = inject(ActivatedRoute);
-  readonly ventures = inject(EntrepreneursStore);
+  readonly ventureStore = inject(VentureStore);
 
   readonly socialLinks = SOCIAL_LINKS;
 
@@ -29,31 +29,33 @@ export class EntrepreneurDetailCard {
     moveRight: MoveRight
   };
 
-  private readonly emailParam = toSignal(
-    this.route.paramMap.pipe(map((params) => decodeURIComponent(params.get('email') || '').toLowerCase())),
+  private readonly slugParam = toSignal(
+    this.route.paramMap.pipe(
+      map((params) => {
+        const slug = params.get('slug') || '';
+        return decodeURIComponent(slug).toLowerCase();
+      })
+    ),
     { initialValue: '' }
   );
 
   readonly entrepreneur = computed<IUser | null>(() => {
-    const email = this.emailParam();
-    const list = this.ventures.entrepreneurs();
-
-    if (!email || !list || list.length === 0) {
-      return null;
-    }
-
-    return list.find((e) => e.email.toLowerCase() === email) || null;
+    const venture = this.ventureStore.venture();
+    return venture?.owner || null;
   });
 
-  readonly publishedVentures = computed<IVenture[]>(() => {
-    const entrepreneur = this.entrepreneur();
-    if (!entrepreneur?.ventures) return [];
-    return entrepreneur.ventures.filter((venture) => venture.is_published);
+  readonly venture = computed<IVenture | null>(() => {
+    return this.ventureStore.venture();
   });
 
-  readonly hasPublishedVentures = computed<boolean>(() => this.publishedVentures().length > 0);
+  readonly hasVenture = computed<boolean>(() => this.venture() !== null);
 
   constructor() {
-    this.ventures.loadEntrepreneurs();
+    effect(() => {
+      const slug = this.slugParam();
+      if (slug) {
+        this.ventureStore.loadVenture(slug);
+      }
+    });
   }
 }
