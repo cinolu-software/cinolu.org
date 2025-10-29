@@ -8,7 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
 import { Textarea } from 'primeng/textarea';
 import { UpdateProgramStore } from '../../store/programs/update-program.store';
-import { AddIndicatorStore, IndicatorDto } from '../../store/programs/add-indicators.store';
+import { AddIndicatorStore } from '../../store/programs/add-indicators.store';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
 import { Tabs } from '../../../../../../shared/components/tabs/tabs';
 import { ChartColumn, SquarePen } from 'lucide-angular';
@@ -16,6 +16,12 @@ import { environment } from '../../../../../../../environments/environment';
 import { DatePicker } from 'primeng/datepicker';
 import { IProgram } from '../../../../../../shared/models/entities.models';
 import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
+
+interface IndicatorFormData {
+  indicatorId: string;
+  name: string;
+  target: number | null;
+}
 
 @Component({
   selector: 'app-update-program-page',
@@ -44,7 +50,7 @@ export class UpdateProgram {
   url = environment.apiUrl + 'programs/logo/';
   activeTab = signal('edit');
   addIndicatorStore = inject(AddIndicatorStore);
-  indicatorsTab = signal<IndicatorDto[]>([]);
+  indicatorsTab = signal<IndicatorFormData[]>([]);
   year = signal<Date>(new Date());
   currentYear = new Date().getFullYear();
   tabs = [
@@ -72,9 +78,18 @@ export class UpdateProgram {
   }
 
   #initIndicatorsTab(program: IProgram): void {
-    this.indicatorsTab.set(
-      program.indicators_grouped?.[this.selectedYear()!] || [{ name: '', target: null, year: this.selectedYear() }]
-    );
+    const yearIndicators = program.indicators_grouped?.[this.selectedYear()];
+    if (yearIndicators && yearIndicators.length > 0) {
+      this.indicatorsTab.set(
+        yearIndicators.map((indicator) => ({
+          indicatorId: indicator.id,
+          name: indicator.name,
+          target: indicator.target
+        }))
+      );
+    } else {
+      this.indicatorsTab.set([{ indicatorId: '', name: '', target: null }]);
+    }
   }
 
   #patchForm(program: IProgram): void {
@@ -87,7 +102,7 @@ export class UpdateProgram {
   }
 
   addIndicator(): void {
-    this.indicatorsTab.update((indicators) => [...indicators, { name: '', target: null, year: this.selectedYear() }]);
+    this.indicatorsTab.update((indicators) => [...indicators, { indicatorId: '', name: '', target: null }]);
   }
 
   removeIndicator(index: number): void {
@@ -97,10 +112,12 @@ export class UpdateProgram {
   onSaveIndicators(): void {
     const program = this.programStore.program();
     if (!program) return;
-    const indicators = this.indicatorsTab()
-      .filter((ind) => ind.name.trim() !== '')
-      .map((ind) => ({ ...ind, year: this.selectedYear() }));
-    if (!indicators.length) return;
+    const validIndicators = this.indicatorsTab().filter((ind) => ind.name.trim() !== '' && ind.target !== null);
+    if (!validIndicators.length) return;
+    const metrics: Record<string, number>[] = validIndicators.map((indicator) => ({
+      [indicator.indicatorId || indicator.name]: indicator.target!
+    }));
+    const indicators = { year: this.selectedYear(), metrics };
     this.addIndicatorStore.addIndicator({ id: program.id, indicators });
   }
 

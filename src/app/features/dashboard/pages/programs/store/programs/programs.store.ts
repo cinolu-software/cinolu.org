@@ -15,7 +15,7 @@ interface IProgramsStore {
 export const ProgramsStore = signalStore(
   withState<IProgramsStore>({ isLoading: false, programs: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadPrograms: rxMethod<FilterProgramsDto>(
@@ -30,10 +30,10 @@ export const ProgramsStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, programs: [[], 0] });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
+        })
+      )
     ),
     updateProgram: (program: IProgram): void => {
       const [programs, count] = store.programs();
@@ -44,6 +44,6 @@ export const ProgramsStore = signalStore(
       const [programs, count] = store.programs();
       const filtered = programs.filter((program) => program.id !== id);
       patchState(store, { programs: [filtered, count - 1] });
-    },
-  })),
+    }
+  }))
 );

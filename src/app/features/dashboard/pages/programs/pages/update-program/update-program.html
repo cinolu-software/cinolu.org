@@ -52,10 +52,10 @@
     @for (ind of indicatorsTab(); track $index) {
     <div class="flex items-end gap-4 mb-3">
       <div class="flex flex-col gap-2 w-2/3">
-        <input pInputText [(ngModel)]="ind.name" />
+        <input pInputText placeholder="Indicateur" [(ngModel)]="ind.name" />
       </div>
       <div class="flex flex-col gap-2">
-        <input pInputText type="number" [(ngModel)]="ind.target" />
+        <input pInputText placeholder="KPI" type="number" [(ngModel)]="ind.target" />
       </div>
       <p-button
         outlined

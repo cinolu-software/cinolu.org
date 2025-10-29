@@ -11,19 +11,18 @@ interface IAddIndicatorStore {
 }
 
 export interface IndicatorDto {
-  name: string;
-  target: number | null;
-  year: number | null;
+  year: number;
+  metrics: Record<string, number>[];
 }
 
 export const AddIndicatorStore = signalStore(
   withState<IAddIndicatorStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _toast: inject(ToastrService),
+    _toast: inject(ToastrService)
   })),
   withMethods(({ _http, _toast, ...store }) => ({
-    addIndicator: rxMethod<{ id: string; indicators: IndicatorDto[] }>(
+    addIndicator: rxMethod<{ id: string; indicators: IndicatorDto }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ id, indicators }) => {
@@ -36,10 +35,10 @@ export const AddIndicatorStore = signalStore(
               _toast.showError("Une erreur s'est produite");
               patchState(store, { isLoading: false });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );
