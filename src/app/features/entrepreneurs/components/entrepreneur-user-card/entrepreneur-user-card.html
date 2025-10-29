@@ -1,9 +1,11 @@
+@let entrepreneur = entrepreneurs().owner; @let venture = entrepreneurs();
+
 <div class="w-full bg-white rounded-lg shadow-lg transition duration-300 hover:shadow-2xl relative">
   <div class="relative h-40 rounded-t-xl overflow-hidden group">
     <img
-      *ngIf="entrepreneur.ventures?.length"
-      [ngSrc]="entrepreneur.ventures[0] | apiIMG: 'ventureCover'"
-      [alt]="entrepreneur.ventures[0].name || 'Image de couverture'"
+      *ngIf="venture.cover"
+      [ngSrc]="venture | apiIMG: 'ventureCover'"
+      [alt]="venture.name || 'Image de couverture'"
       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
       priority
       fill />
@@ -42,7 +44,7 @@
       {{ entrepreneur.biography || "Aucune biographie disponible." }}
     </p>
 
-    <p-button [routerLink]="['/entrepreneurs', entrepreneur.email]" size="small" outlined severity="primary">
+    <p-button [routerLink]="['/entrepreneurs', venture.slug]" size="small" outlined severity="primary">
       <p class="flex items-center gap-2 group px-4">
         Voir le profil
         <i-lucide

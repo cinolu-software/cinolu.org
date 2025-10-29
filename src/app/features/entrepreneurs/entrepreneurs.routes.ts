@@ -5,7 +5,7 @@ export const entrepreneursRoutes = [
     loadComponent: () => import('./pages/our-entrepreneurs').then((c) => c.OurEntrepreneurs),
   },
   {
-    path: ':email',
+    path: ':slug',
     title: 'Entrepreneur - Details',
     loadComponent: () =>
       import('./components/entrepreneur-detail-card/entrepreneur-detail-card').then((c) => c.EntrepreneurDetailCard),
