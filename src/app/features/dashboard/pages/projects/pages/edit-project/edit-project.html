@@ -110,20 +110,13 @@
     </div>
   </form>
   } @if (activeTab() === 'indicators') {
-  <div class="w-full md:w-2/3">
-    <app-performance-indicator
-      [totalTargeted]="totalTargeted()"
-      [totalAchieved]="totalAchieved()"
-      [percentage]="achievementPercentage()"
-      label="Performance du projet" />
-  </div>
-  <div class="w-full md:w-2/3">
-    <app-metrics-table
-      [indicators]="indicatorsStore.indicators()"
-      [metricsMap]="metricsMap"
-      [isLoading]="addMetricsStore.isLoading()"
-      (save)="onSaveMetrics()" />
-  </div>
+  <app-metrics-table
+    [indicators]="indicatorsStore.indicators()"
+    [metricsMap]="metricsMap"
+    [existingMetrics]="project?.metrics ?? []"
+    [isLoading]="addMetricsStore.isLoading()"
+    (saveKPIs)="onSaveMetrics()"
+    (saveReports)="onSaveMetrics()" />
   } @if (activeTab() === 'report' && project) {
   <app-project-report [project]="project" />
   }

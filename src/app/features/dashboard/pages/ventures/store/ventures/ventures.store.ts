@@ -23,7 +23,7 @@ export const VenturesStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          return _http.get<{ data: [IVenture[], number] }>('ventures/by-user', { params }).pipe(
+          return _http.get<{ data: [IVenture[], number] }>('ventures/by-user/paginated', { params }).pipe(
             tap(({ data }) => patchState(store, { isLoading: false, ventures: data })),
             catchError(() => {
               patchState(store, { isLoading: false, ventures: [[], 0] });

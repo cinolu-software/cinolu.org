@@ -1,7 +1,244 @@
-<section class="min-h-[110vh] w-full md:px-8">
+<section class="min-h-[110vh] -mt-10 w-full pb-12">
   @if (isAdmin()) {
-  <app-admin-stats />
+  <div
+    class="flex items-center justify-between gap-4 mt-10 mb-8 bg-white rounded-xl px-6 py-4 shadow-sm border border-gray-200">
+    <label for="indicator-year" class="font-semibold text-gray-800">Sélectionner l'année :</label>
+    <p-datepicker
+      pSize="small"
+      id="indicator-year"
+      view="year"
+      dateFormat="yy"
+      [(ngModel)]="year"
+      class="border-primary-500" />
+  </div>
+  @if (reportStore.isLoading()) {
+  <div class="flex items-center justify-center py-32">
+    <div class="flex flex-col items-center gap-4">
+      <div class="relative">
+        <div class="w-16 h-16 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
+      </div>
+      <p class="text-lg font-medium text-gray-700">Chargement des rapports...</p>
+      <p class="text-sm text-gray-500">Veuillez patienter</p>
+    </div>
+  </div>
+  } @else if (reportStore.report().length === 0) {
+  <div
+    class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl border-2 border-dashed border-gray-300 p-16 text-center">
+    <div class="bg-white rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center shadow-sm">
+      <i class="pi pi-inbox text-5xl text-gray-400"></i>
+    </div>
+    <h3 class="text-2xl font-bold text-gray-800 mb-3">Aucun rapport disponible</h3>
+    <p class="text-gray-600 text-lg">
+      Aucune donnée de performance pour l'année <span class="font-semibold text-primary-600">{{ selectedYear() }}</span>
+    </p>
+    <p class="text-sm text-gray-500 mt-2">
+      Sélectionnez une autre année ou attendez que les données soient disponibles
+    </p>
+  </div>
   } @else {
+  <div
+    class="bg-gradient-to-br from-primary-500 via-emerald-500 to-teal-500 rounded-2xl shadow-xl p-8 mb-10 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+    <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"></div>
+    <div class="relative z-10">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="text-3xl font-bold text-white flex items-center gap-3 mb-2">
+            <span>Performance Globale {{ selectedYear() }}</span>
+          </h2>
+          <p class="text-white/90 text-sm">Vue d'ensemble des programmes et indicateurs</p>
+        </div>
+        <span
+          class="text-sm font-semibold text-white bg-white/20 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-lg border border-white/30">
+          {{ reportStore.report().length }} Programme{{ reportStore.report().length > 1 ? 's' : '' }}
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div
+          class="bg-primary-600/50 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary-500/80">
+          <div class="flex items-center justify-between mb-3">
+            <div class="bg-primary-700 rounded-full text-xs font-medium px-3 py-1">
+              <span class="text-xs font-semibold text-primary-50 tracking-wide">Actifs</span>
+            </div>
+          </div>
+          <p class="text-sm text-gray-50 font-medium mb-1">Programmes</p>
+          <p class="text-4xl font-black text-gray-50">{{ reportStore.report().length }}</p>
+        </div>
+        <div
+          class="bg-primary-600/50 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary-500/80">
+          <div class="flex items-center justify-between mb-3">
+            <div class="bg-primary-700 rounded-full text-xs font-medium px-3 py-1">
+              <span class="text-xs font-semibold text-primary-50 tracking-wide">Total</span>
+            </div>
+          </div>
+          <p class="text-sm text-gray-50 font-medium mb-1">Indicateurs</p>
+          <p class="text-4xl font-black text-gray-50">{{ totalIndicators() }}</p>
+        </div>
+
+        <div
+          class="bg-primary-100/50 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary-100/10">
+          <div class="flex items-center justify-between mb-3">
+            <div
+              class="rounded-full p-3 shadow-md"
+              [class.bg-gradient-to-br]="true"
+              [class.from-red-500]="averagePerformance() < 50"
+              [class.to-red-600]="averagePerformance() < 50"
+              [class.from-yellow-500]="averagePerformance() >= 50 && averagePerformance() < 80"
+              [class.to-yellow-600]="averagePerformance() >= 50 && averagePerformance() < 80"
+              [class.from-green-500]="averagePerformance() >= 80"
+              [class.to-green-600]="averagePerformance() >= 80">
+              <i
+                class="text-white text-2xl"
+                [class.pi-exclamation-triangle]="averagePerformance() < 50"
+                [class.pi-chart-line]="averagePerformance() >= 50 && averagePerformance() < 80"
+                [class.pi-check-circle]="averagePerformance() >= 80"></i>
+            </div>
+            <div
+              class="rounded-full px-3 py-1"
+              [class.bg-red-50]="averagePerformance() < 50"
+              [class.bg-yellow-50]="averagePerformance() >= 50 && averagePerformance() < 80"
+              [class.bg-green-50]="averagePerformance() >= 80">
+              <span
+                class="text-xs font-semibold uppercase tracking-wide"
+                [class.text-red-700]="averagePerformance() < 50"
+                [class.text-yellow-700]="averagePerformance() >= 50 && averagePerformance() < 80"
+                [class.text-green-700]="averagePerformance() >= 80">
+                {{ averagePerformance() < 50 ? 'Faible' : (averagePerformance() < 80 ? 'Moyen' : 'Excellent') }}
+              </span>
+            </div>
+          </div>
+          <p class="text-sm text-gray-600 font-medium mb-1">Performance</p>
+          <p
+            class="text-4xl font-black"
+            [class.text-red-600]="averagePerformance() < 50"
+            [class.text-yellow-600]="averagePerformance() >= 50 && averagePerformance() < 80"
+            [class.text-green-600]="averagePerformance() >= 80">
+            {{ averagePerformance() }}%
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @for (program of reportStore.report(); track program.name; let idx = $index) {
+    <div
+      class="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group hover:-translate-y-1">
+      <div class="relative">
+        <div
+          class="h-1.5 w-full"
+          [class.bg-gradient-to-r]="true"
+          [class.from-red-400]="program.performance < 50"
+          [class.to-red-600]="program.performance < 50"
+          [class.from-yellow-400]="program.performance >= 50 && program.performance < 80"
+          [class.to-yellow-600]="program.performance >= 50 && program.performance < 80"
+          [class.from-green-400]="program.performance >= 80"
+          [class.to-green-600]="program.performance >= 80"></div>
+
+        <div class="p-5">
+          <div class="flex items-start justify-between mb-3">
+            <span class="bg-gray-100 text-gray-700 text-xs font-bold px-2.5 py-1 rounded-full"> #{{ idx + 1 }} </span>
+            <div
+              class="px-3 py-1 rounded-full text-xs font-bold"
+              [class.bg-red-50]="program.performance < 50"
+              [class.text-red-700]="program.performance < 50"
+              [class.bg-yellow-50]="program.performance >= 50 && program.performance < 80"
+              [class.text-yellow-700]="program.performance >= 50 && program.performance < 80"
+              [class.bg-green-50]="program.performance >= 80"
+              [class.text-green-700]="program.performance >= 80">
+              {{ program.performance < 50 ? 'Faible' : (program.performance < 80 ? 'Moyen' : 'Excellent') }}
+            </div>
+          </div>
+
+          <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2 min-h-[3.5rem]">{{ program.name }}</h3>
+          <div class="flex items-center gap-2 text-sm text-gray-600 mb-4">
+            <i class="pi pi-chart-line text-gray-400"></i>
+            <span>{{ program.indicators.length }} indicateur{{ program.indicators.length > 1 ? 's' : '' }}</span>
+          </div>
+
+          <div class="mb-4 space-y-2 max-h-20 scrollbar-hide overflow-y-auto pr-1">
+            @for (indicator of program.indicators; track indicator.name) {
+            <div
+              class="flex items-center justify-between text-xs bg-gray-50 rounded-lg p-2 hover:bg-gray-100 transition-colors">
+              <div class="flex-1 min-w-0 mr-2">
+                <p class="font-medium text-gray-700 truncate">{{ indicator.name }}</p>
+              </div>
+              <div class="flex items-center gap-2 flex-shrink-0">
+                <div class="flex items-center gap-1">
+                  <i class="pi pi-flag text-blue-500 text-[10px]"></i>
+                  <span class="font-bold text-blue-600">{{ indicator.target ?? 'N/A' }}</span>
+                </div>
+                <span class="text-gray-400">/</span>
+                <div class="flex items-center gap-1">
+                  <i class="pi pi-check text-green-500 text-[10px]"></i>
+                  <span class="font-bold text-green-600">{{ indicator.achieved }}</span>
+                </div>
+              </div>
+            </div>
+            }
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div class="flex-1">
+              <p class="text-xs text-gray-500 font-medium mb-2">Performance globale</p>
+              <div class="h-2.5 bg-gray-00 rounded-full overflow-hidden">
+                <div
+                  class="h-full transition-all duration-500 rounded-full"
+                  [class.bg-gradient-to-r]="true"
+                  [class.from-red-400]="program.performance < 50"
+                  [class.to-red-600]="program.performance < 50"
+                  [class.from-yellow-400]="program.performance >= 50 && program.performance < 80"
+                  [class.to-yellow-600]="program.performance >= 50 && program.performance < 80"
+                  [class.from-green-400]="program.performance >= 80"
+                  [class.to-green-600]="program.performance >= 80"
+                  [style.width.%]="program.performance > 100 ? 100 : program.performance"></div>
+              </div>
+            </div>
+            <div class="ml-4">
+              <div class="relative w-16 h-16 text-sm">
+                <svg class="transform -rotate-90 w-16 h-16">
+                  <circle
+                    cx="32"
+                    cy="32"
+                    r="28"
+                    stroke="currentColor"
+                    stroke-width="4"
+                    fill="transparent"
+                    class="text-gray-200" />
+                  <circle
+                    cx="32"
+                    cy="32"
+                    r="28"
+                    stroke="currentColor"
+                    stroke-width="4"
+                    fill="transparent"
+                    [attr.stroke-dasharray]="175.84"
+                    [attr.stroke-dashoffset]="175.84 - (175.84 * program.performance) / 100"
+                    class="transition-all duration-700"
+                    [class.text-red-500]="program.performance < 50"
+                    [class.text-yellow-500]="program.performance >= 50 && program.performance < 80"
+                    [class.text-green-500]="program.performance >= 80"
+                    stroke-linecap="round" />
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span
+                    class="text-sm font-black"
+                    [class.text-red-600]="program.performance < 50"
+                    [class.text-yellow-600]="program.performance >= 50 && program.performance < 80"
+                    [class.text-green-600]="program.performance >= 80">
+                    {{ program.performance }}%
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  } } @else {
   <app-user-stats />
   }
 </section>
