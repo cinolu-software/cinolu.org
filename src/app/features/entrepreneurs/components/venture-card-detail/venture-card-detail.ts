@@ -5,14 +5,14 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { GalleriaModule } from 'primeng/galleria';
-import { VentureDetailsStore } from '../../store/venture.store';
 import { Button } from 'primeng/button';
 import { VentureCardSkeleton } from '../venture-card-skeleton/venture-card-skeleton';
 import { IProduct } from '../../../../shared/models/entities.models';
+import { VentureStore } from '@features/entrepreneurs/store/venture.store';
 
 @Component({
   selector: 'app-venture-card-detail',
-  providers: [VentureDetailsStore],
+  providers: [VentureStore],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -29,7 +29,7 @@ export class VentureCardDetail implements OnInit {
   private route = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef);
 
-  store = inject(VentureDetailsStore);
+  store = inject(VentureStore);
   responsiveOptions = carouselConfig;
 
   icons = {
@@ -41,13 +41,11 @@ export class VentureCardDetail implements OnInit {
     globe: Globe
   };
 
-  // Computed signal pour les produits (pour une meilleure performance)
   products = computed<IProduct[]>(() => {
     const venture = this.store.venture();
     return venture?.products || [];
   });
 
-  // Computed signal pour vérifier si des produits existent
   hasProducts = computed<boolean>(() => this.products().length > 0);
 
   ngOnInit(): void {
