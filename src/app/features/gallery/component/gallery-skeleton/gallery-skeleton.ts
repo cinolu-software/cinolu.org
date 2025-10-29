@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './gallery-skeleton.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GallerySkeletonComponent {
+export class GallerySkeleton {
   count = input<number>(8);
 
   get placeholders() {
