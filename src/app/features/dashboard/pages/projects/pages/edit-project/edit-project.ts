@@ -11,7 +11,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { environment } from '@environments/environment';
-import { FileUpload, Tabs, PerformanceIndicatorComponent, MetricsTableComponent } from '@shared/components';
+import { FileUpload, Tabs, MetricsTableComponent } from '@shared/components';
 import { IProject } from '@shared/models';
 import { ApiImgPipe } from '@shared/pipes';
 import {
@@ -63,7 +63,6 @@ import { ProjectStore } from '../../store/projects/project.store';
     QuillEditorComponent,
     Tabs,
     ProjectReport,
-    PerformanceIndicatorComponent,
     MetricsTableComponent
   ]
 })
@@ -71,8 +70,6 @@ export class EditProjectComponent implements OnInit {
   readonly #fb = inject(FormBuilder);
   readonly #route = inject(ActivatedRoute);
   readonly #slug = this.#route.snapshot.params['slug'];
-
-  // Stores
   readonly projectStore = inject(ProjectStore);
   readonly galleryStore = inject(GalleryStore);
   readonly deleteImageStore = inject(DeleteGalleryStore);
@@ -81,13 +78,9 @@ export class EditProjectComponent implements OnInit {
   readonly programsStore = inject(UnpaginatedSubprogramsStore);
   readonly addMetricsStore = inject(AddMetricStore);
   readonly indicatorsStore = inject(IndicatorsStore);
-
-  // Form and state
   form!: FormGroup;
   metricsMap: MetricsMap = {};
   activeTab = signal('edit');
-
-  // Constants
   readonly url = `${environment.apiUrl}projects/cover/`;
   readonly galleryUrl = `${environment.apiUrl}projects/gallery/`;
   readonly icons = { trash: Trash2 };
@@ -97,8 +90,6 @@ export class EditProjectComponent implements OnInit {
     { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
     { label: 'Rapport', name: 'report', icon: FileText }
   ];
-
-  // Computed metrics
   readonly totalTargeted = computed(() => calculateMetricsTotal(this.metricsMap, 'target'));
   readonly totalAchieved = computed(() => calculateMetricsTotal(this.metricsMap, 'achieved'));
   readonly achievementPercentage = computed(() =>
@@ -129,15 +120,12 @@ export class EditProjectComponent implements OnInit {
   }
 
   #watchProjectChanges(): void {
-    effect(
-      () => {
-        const project = this.projectStore.project();
-        if (!project) return;
-        this.#initMetrics(project);
-        this.#patchForm(project);
-      },
-      { allowSignalWrites: true }
-    );
+    effect(() => {
+      const project = this.projectStore.project();
+      if (!project) return;
+      this.#initMetrics(project);
+      this.#patchForm(project);
+    });
   }
 
   #initMetrics(project: IProject): void {

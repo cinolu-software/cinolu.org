@@ -1,4 +1,3 @@
-import { ProgramStore } from './../../../../../landing/store/program.store';
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
@@ -10,15 +9,15 @@ import { Textarea } from 'primeng/textarea';
 import { UpdateProgramStore } from '../../store/programs/update-program.store';
 import { AddIndicatorStore } from '../../store/programs/add-indicators.store';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
-import { Tabs } from '../../../../../../shared/components/tabs/tabs';
+import { Tabs } from '@shared/components/tabs/tabs';
 import { ChartColumn, SquarePen } from 'lucide-angular';
 import { environment } from '../../../../../../../environments/environment';
 import { DatePicker } from 'primeng/datepicker';
-import { IProgram } from '../../../../../../shared/models/entities.models';
-import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
+import { IProgram } from '@shared/models/entities.models';
+import { FileUpload } from '@shared/components/file-upload/file-upload';
+import { ProgramStore } from '../../store/programs/program.store';
 
 interface IndicatorFormData {
-  indicatorId: string;
   name: string;
   target: number | null;
 }
@@ -52,7 +51,7 @@ export class UpdateProgram {
   addIndicatorStore = inject(AddIndicatorStore);
   indicatorsTab = signal<IndicatorFormData[]>([]);
   year = signal<Date>(new Date());
-  currentYear = new Date().getFullYear();
+  selectedYear = computed(() => this.year().getFullYear());
   tabs = [
     { label: 'Modifier le projet', name: 'edit', icon: SquarePen },
     { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn }
@@ -63,7 +62,6 @@ export class UpdateProgram {
     description: ['', Validators.required],
     category: ['', Validators.required]
   });
-  selectedYear = computed(() => this.year().getFullYear());
 
   constructor() {
     const slug = this.#route.snapshot.paramMap.get('slug');
@@ -88,7 +86,7 @@ export class UpdateProgram {
         }))
       );
     } else {
-      this.indicatorsTab.set([{ indicatorId: '', name: '', target: null }]);
+      this.indicatorsTab.set([{ name: '', target: null }]);
     }
   }
 
@@ -115,7 +113,7 @@ export class UpdateProgram {
     const validIndicators = this.indicatorsTab().filter((ind) => ind.name.trim() !== '' && ind.target !== null);
     if (!validIndicators.length) return;
     const metrics: Record<string, number>[] = validIndicators.map((indicator) => ({
-      [indicator.indicatorId || indicator.name]: indicator.target!
+      [indicator.name]: indicator.target!
     }));
     const indicators = { year: this.selectedYear(), metrics };
     this.addIndicatorStore.addIndicator({ id: program.id, indicators });

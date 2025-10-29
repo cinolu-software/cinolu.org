@@ -108,19 +108,12 @@
   } @if (activeTab() === 'report' && event) {
   <app-event-report [event]="event" />
   } @if (activeTab() === 'indicators') {
-  <div class="w-full md:w-2/3">
-    <app-performance-indicator
-      [totalTargeted]="totalTargeted()"
-      [totalAchieved]="totalAchieved()"
-      [percentage]="achievementPercentage()"
-      label="Performance de l'événement" />
-  </div>
-  <div class="w-full md:w-2/3">
-    <app-metrics-table
-      [indicators]="indicatorsStore.indicators()"
-      [metricsMap]="metricsMap"
-      [isLoading]="addMetricsStore.isLoading()"
-      (save)="onSaveMetrics()" />
-  </div>
+  <app-metrics-table
+    [indicators]="indicatorsStore.indicators()"
+    [metricsMap]="metricsMap"
+    [existingMetrics]="event?.metrics ?? []"
+    [isLoading]="addMetricsStore.isLoading()"
+    (saveKPIs)="onSaveMetrics()"
+    (saveReports)="onSaveMetrics()" />
   }
 </section>

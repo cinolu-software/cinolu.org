@@ -1,33 +1,208 @@
-@if (indicators()) {
-<div class="flex flex-col gap-4 w-full">
-  <table class="min-w-full rounded-lg">
-    <thead class="bg-gray-100">
-      <tr class="text-left">
-        <th class="p-2 font-medium">Indicateurs</th>
-        <th class="p-2 font-medium w-1/4">Attendus</th>
-        <th class="p-2 font-medium w-1/4">Obtenus</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (indicator of indicators(); track indicator.id) {
-      <tr>
-        <td class="pt-4 pr-2">
-          <input pInputText [value]="indicator.name" [disabled]="true" class="w-full" />
-        </td>
-        <td class="pt-4 pr-2">
-          <input pInputText type="number" [(ngModel)]="metricsMap()[indicator.id].target" />
-        </td>
-        <td class="pt-4 pr-2">
-          <input pInputText type="number" [(ngModel)]="metricsMap()[indicator.id].achieved" />
-        </td>
-      </tr>
-      }
-    </tbody>
-  </table>
-  <div class="flex justify-end">
-    <p-button pButton size="small" [disabled]="isLoading()" [loading]="isLoading()" (click)="onSave()">
-      Enregistrer les valeurs
-    </p-button>
+@if (indicators().length) {
+<div class="flex flex-col gap-6 w-full">
+  <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden w-full md:w-2/4">
+    <div class="p-5">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-base font-semibold text-gray-900 flex items-center gap-2">
+          <span>Performance Globale</span>
+        </h3>
+        <span class="text-xs text-gray-500">{{ totalIndicators() }} indicateurs</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <div class="flex-1 grid grid-cols-3 gap-3">
+          <div>
+            <p class="text-xs text-gray-500 mb-1">Attendu</p>
+            <p class="text-xl font-bold text-blue-600">{{ totalTarget() }}</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 mb-1">Obtenu</p>
+            <p class="text-xl font-bold text-green-600">{{ totalAchieved() }}</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 mb-1">Taux</p>
+            <p
+              class="text-xl font-bold"
+              [class.text-red-600]="overallPerformance() < 50"
+              [class.text-yellow-600]="overallPerformance() >= 50 && overallPerformance() < 80"
+              [class.text-green-600]="overallPerformance() >= 80">
+              {{ overallPerformance() }}%
+            </p>
+          </div>
+        </div>
+        <div class="flex-shrink-0">
+          <div class="relative w-20 h-20">
+            <svg class="transform -rotate-90 w-20 h-20">
+              <circle
+                cx="40"
+                cy="40"
+                r="32"
+                stroke="currentColor"
+                stroke-width="6"
+                fill="transparent"
+                class="text-gray-200" />
+              <circle
+                cx="40"
+                cy="40"
+                r="32"
+                stroke="currentColor"
+                stroke-width="6"
+                fill="transparent"
+                [attr.stroke-dasharray]="200.96"
+                [attr.stroke-dashoffset]="200.96 - (200.96 * overallPerformance()) / 100"
+                class="transition-all duration-500"
+                [class.text-red-500]="overallPerformance() < 50"
+                [class.text-yellow-500]="overallPerformance() >= 50 && overallPerformance() < 80"
+                [class.text-green-500]="overallPerformance() >= 80"
+                stroke-linecap="round" />
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span
+                class="text-sm font-bold"
+                [class.text-red-600]="overallPerformance() < 50"
+                [class.text-yellow-600]="overallPerformance() >= 50 && overallPerformance() < 80"
+                [class.text-green-600]="overallPerformance() >= 80">
+                {{ overallPerformance() }}%
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+    <div class="border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+      <div class="bg-gradient-to-r from-blue-50 to-blue-100 px-4 py-3 border-b border-blue-200">
+        <h3 class="text-lg font-semibold text-blue-900 flex items-center gap-2">
+          <span>Indicateurs de Performance (KPIs)</span>
+        </h3>
+        <p class="text-sm text-blue-700 mt-1">Valeurs cibles définies - Non modifiables après enregistrement</p>
+      </div>
+      <div class="p-4 bg-white">
+        <table class="min-w-full">
+          <thead class="bg-gray-50 border-b border-gray-200">
+            <tr class="text-left">
+              <th class="px-4 py-3 font-semibold text-gray-700">Indicateur</th>
+              <th class="px-4 py-3 font-semibold text-gray-700 w-1/4">Attendue</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            @for (indicator of indicators(); track indicator.id) {
+            <tr class="hover:bg-gray-50 transition-colors">
+              <td class="px-4 py-3">
+                <div class="flex items-center gap-2">
+                  <span class="font-medium text-gray-800">{{ indicator.name }}</span>
+                </div>
+              </td>
+              <td class="px-4 py-3">
+                <div class="flex items-center gap-2">
+                  <input
+                    pInputText
+                    type="number"
+                    [(ngModel)]="metricsMap()[indicator.id].target"
+                    [disabled]="hasExistingTarget(indicator.id)"
+                    [class.bg-gray-100]="hasExistingTarget(indicator.id)"
+                    [class.cursor-not-allowed]="hasExistingTarget(indicator.id)"
+                    class="w-full"
+                    placeholder="0" />
+                  @if (hasExistingTarget(indicator.id)) {
+                  <i class="pi pi-lock text-gray-400 text-sm" title="Valeur verrouillée"></i>
+                  }
+                </div>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+        <div class="flex justify-end mt-4 pt-4 border-t border-gray-200">
+          <p-button
+            pButton
+            size="small"
+            severity="info"
+            [disabled]="isLoading() || !hasUnsavedKPIs()"
+            [loading]="isLoading()"
+            (click)="onSaveKPIs()">
+            Enregistrer les KPIs
+          </p-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+      <div class="bg-gradient-to-r from-green-50 to-green-100 px-4 py-3 border-b border-green-200">
+        <h3 class="text-lg font-semibold text-green-900 flex items-center gap-2">
+          <span>Rapports de Performance</span>
+        </h3>
+        <p class="text-sm text-green-700 mt-1">Valeurs réellement obtenues - Modifiable à tout moment</p>
+      </div>
+      <div class="p-4 bg-white">
+        <table class="min-w-full">
+          <thead class="bg-gray-50 border-b border-gray-200">
+            <tr class="text-left">
+              <th class="px-4 py-3 font-semibold text-gray-700">Indicateur</th>
+              <th class="px-4 py-3 font-semibold text-gray-700 w-1/4">Obtenue</th>
+              <th class="px-4 py-3 font-semibold text-gray-700 w-1/6 text-center">Performance</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            @for (indicator of indicators(); track indicator.id) {
+            <tr class="hover:bg-gray-50 transition-colors">
+              <td class="px-4 py-3">
+                <div class="flex items-center gap-2">
+                  <span class="font-medium text-gray-800">{{ indicator.name }}</span>
+                </div>
+              </td>
+              <td class="px-4 py-3">
+                <input
+                  pInputText
+                  type="number"
+                  [(ngModel)]="metricsMap()[indicator.id].achieved"
+                  class="w-full"
+                  placeholder="0" />
+              </td>
+              <td class="px-4 py-3">
+                <div class="flex justify-center">
+                  @if (metricsMap()[indicator.id].target && metricsMap()[indicator.id].achieved !== null) { @let
+                  percentage = calculatePercentage(indicator.id);
+                  <div class="flex items-center gap-2">
+                    <div class="w-20 h-2 bg-gray-200 rounded-full overflow-hidden">
+                      <div
+                        class="h-full transition-all duration-300"
+                        [class.bg-red-500]="percentage < 50"
+                        [class.bg-yellow-500]="percentage >= 50 && percentage < 80"
+                        [class.bg-green-500]="percentage >= 80"
+                        [style.width.%]="percentage > 100 ? 100 : percentage"></div>
+                    </div>
+                    <span
+                      class="text-sm font-semibold min-w-[3rem] text-right"
+                      [class.text-red-600]="percentage < 50"
+                      [class.text-yellow-600]="percentage >= 50 && percentage < 80"
+                      [class.text-green-600]="percentage >= 80">
+                      {{ percentage }}%
+                    </span>
+                  </div>
+                  } @else {
+                  <span class="text-gray-400 text-sm">-</span>
+                  }
+                </div>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+        <div class="flex justify-end mt-4 pt-4 border-t border-gray-200">
+          <p-button
+            pButton
+            size="small"
+            severity="success"
+            [disabled]="isLoading()"
+            [loading]="isLoading()"
+            (click)="onSaveReports()">
+            Enregistrer les Rapports
+          </p-button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 }

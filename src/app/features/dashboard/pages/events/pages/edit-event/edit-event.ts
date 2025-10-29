@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { QuillEditorComponent } from 'ngx-quill';
 import { ChartColumn, FileText, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
 import { environment } from '@environments/environment';
-import { FileUpload, Tabs, PerformanceIndicatorComponent, MetricsTableComponent } from '@shared/components';
+import { FileUpload, Tabs, MetricsTableComponent } from '@shared/components';
 import { IEvent } from '@shared/models';
 import { ApiImgPipe } from '@shared/pipes';
 import {
@@ -65,7 +65,6 @@ import { IndicatorsStore } from '../../../programs/store/programs/indicators.sto
     LucideAngularModule,
     Tabs,
     EventReport,
-    PerformanceIndicatorComponent,
     MetricsTableComponent
   ]
 })
@@ -73,8 +72,6 @@ export class EditEventComponent implements OnInit {
   readonly #fb = inject(FormBuilder);
   readonly #route = inject(ActivatedRoute);
   readonly #slug = this.#route.snapshot.params['slug'];
-
-  // Stores
   readonly store = inject(UpdateEventStore);
   readonly categoriesStore = inject(UnpaginatedCategoriesStore);
   readonly programsStore = inject(UnpaginatedSubprogramsStore);
@@ -83,13 +80,10 @@ export class EditEventComponent implements OnInit {
   readonly deleteGalleryStore = inject(DeleteGalleryStore);
   readonly galleryStore = inject(GalleryStore);
   readonly addMetricsStore = inject(AddMetricStore);
-
-  // Form and state
   form!: FormGroup;
   metricsMap: MetricsMap = {};
   activeTab = signal('edit');
 
-  // Constants
   readonly url = `${environment.apiUrl}events/cover/`;
   readonly galleryUrl = `${environment.apiUrl}events/gallery/`;
   readonly icons = { trash: Trash2 };
