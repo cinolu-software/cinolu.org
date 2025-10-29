@@ -10,10 +10,10 @@ interface IVentureStore {
   venture: IVenture | null;
 }
 
-export const VentureDetailsStore = signalStore(
+export const VentureStore = signalStore(
   withState<IVentureStore>({ isLoading: false, venture: null }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadVenture: rxMethod<string>(
@@ -27,14 +27,10 @@ export const VentureDetailsStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, venture: null });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );
-
-
-
-
