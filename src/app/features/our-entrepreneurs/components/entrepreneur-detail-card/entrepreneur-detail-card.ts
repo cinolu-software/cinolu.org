@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
@@ -18,23 +18,23 @@ import { map } from 'rxjs';
   imports: [CommonModule, RouterModule, LucideAngularModule, ButtonModule, ApiImgPipe, HeroCard, NgOptimizedImage],
   templateUrl: './entrepreneur-detail-card.html'
 })
-export class EntrepreneurDetailCard implements OnInit {
+export class EntrepreneurDetailCard {
   private route = inject(ActivatedRoute);
-  private ventures = inject(EntrepreneursStore);
-  private destroyRef = inject(DestroyRef);
+  readonly ventures = inject(EntrepreneursStore);
 
-  socialLinks = SOCIAL_LINKS;
+  readonly socialLinks = SOCIAL_LINKS;
 
-  icons = {
+  readonly icons = {
     users: Users,
     moveRight: MoveRight
   };
 
-  private emailParam = toSignal(
-    this.route.paramMap.pipe(map((params) => decodeURIComponent(params.get('email') || '').toLowerCase()))
+  private readonly emailParam = toSignal(
+    this.route.paramMap.pipe(map((params) => decodeURIComponent(params.get('email') || '').toLowerCase())),
+    { initialValue: '' }
   );
 
-  entrepreneur = computed<IUser | null>(() => {
+  readonly entrepreneur = computed<IUser | null>(() => {
     const email = this.emailParam();
     const list = this.ventures.entrepreneurs();
 
@@ -45,15 +45,15 @@ export class EntrepreneurDetailCard implements OnInit {
     return list.find((e) => e.email.toLowerCase() === email) || null;
   });
 
-  publishedVentures = computed<IVenture[]>(() => {
+  readonly publishedVentures = computed<IVenture[]>(() => {
     const entrepreneur = this.entrepreneur();
     if (!entrepreneur?.ventures) return [];
     return entrepreneur.ventures.filter((venture) => venture.is_published);
   });
 
-  hasPublishedVentures = computed<boolean>(() => this.publishedVentures().length > 0);
+  readonly hasPublishedVentures = computed<boolean>(() => this.publishedVentures().length > 0);
 
-  ngOnInit(): void {
+  constructor() {
     this.ventures.loadEntrepreneurs();
   }
 }
