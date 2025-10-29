@@ -5,42 +5,36 @@
   [title]="entrepreneur()?.name || 'Nom non disponible'"
   [description]="entrepreneur()?.ventures?.[0]?.description || ''" />
 
-@if (entrepreneur()) {
+@if (entrepreneur(); as entrepreneur) {
 <div class="sm:py-16 md:py-20 px-6 sm:px-8 lg:px-16 xl:px-24 py-10 2xl:px-32 max-w-screen-2xl mx-auto">
   <div class="grid md:grid-cols-3 gap-10">
     <div
       class="md:col-span-1 bg-white shadow-md rounded-lg p-8 flex flex-col items-center text-center border border-gray-100 h-fit">
       <div class="relative w-40 h-40 rounded-full overflow-hidden shadow-md border-4 border-white mb-4">
-        <img
-          [ngSrc]="entrepreneur() | apiIMG: 'user'"
-          [alt]="entrepreneur()?.name"
-          class="object-cover"
-          loading="lazy"
-          fill
-          proiority />
+        <img [ngSrc]="entrepreneur | apiIMG: 'user'" [alt]="entrepreneur.name" class="object-cover" fill priority />
       </div>
 
-      <h2 class="text-2xl font-extrabold text-primary-500">{{ entrepreneur()?.name }}</h2>
-      <p class="text-sm text-gray-600 mb-1">{{ entrepreneur()?.ventures?.[0]?.sector || "Secteur non défini" }}</p>
+      <h2 class="text-2xl font-extrabold text-primary-500">{{ entrepreneur.name }}</h2>
+      <p class="text-sm text-gray-600 mb-1">{{ entrepreneur.ventures[0]?.sector || "Secteur non défini" }}</p>
       <p class="text-xs text-gray-500">
-        {{ entrepreneur()?.city || "Ville inconnue" }} - {{ entrepreneur()?.country || "Pays inconnu" }}
+        {{ entrepreneur.city || "Ville inconnue" }} - {{ entrepreneur?.country || "Pays inconnu" }}
       </p>
 
       <p class="text-sm text-primary-500 bg-primary-500/10 px-3 py-1 mt-4 rounded-full border border-primary-500/40">
-        {{ entrepreneur()?.ventures?.[0]?.stage || "Non défini" }}
+        {{ entrepreneur.ventures[0]?.stage || "Non défini" }}
       </p>
 
       <div class="flex justify-center items-center gap-3 mt-6">
-        @if (entrepreneur()?.ventures?.[0]?.linkedin_url) {
+        @if (entrepreneur.ventures[0]?.linkedin_url) {
         <a
-          [href]="entrepreneur()?.ventures?.[0]?.linkedin_url"
+          [href]="entrepreneur.ventures[0].linkedin_url"
           target="_blank"
           class="border border-primary-500 rounded-full p-1.5 h-9 w-9 flex items-center justify-center hover:bg-primary-500/10 hover:text-white transition-all duration-300">
           <img src="icons/linkedin.svg" alt="LinkedIn" class="h-4 w-4" />
         </a>
-        } @if (entrepreneur()?.ventures?.[0]?.website) {
+        } @if (entrepreneur.ventures[0]?.website) {
         <a
-          [href]="entrepreneur()?.ventures?.[0]?.website"
+          [href]="entrepreneur.ventures[0].website"
           target="_blank"
           class="border border-primary-500 rounded-full p-1.5 h-9 w-9 flex items-center justify-center hover:bg-primary-500/10 hover:text-white transition-all duration-300">
           <img src="icons/internet.svg" alt="Site web" class="h-4 w-4" />
@@ -53,18 +47,19 @@
       <div class="bg-white shadow-sm rounded-lg p-8 border border-gray-100">
         <h3 class="text-lg font-semibold text-primary-700 mb-4">À propos</h3>
         <p class="text-gray-700 leading-relaxed whitespace-pre-line">
-          {{ entrepreneur()?.biography || "Aucune biographie disponible." }}
+          {{ entrepreneur.biography || "Aucune biographie disponible." }}
         </p>
       </div>
 
       <div>
         <h3>
-          <h3 class="text-2xl font-extrabold text-gray-600 mb-6">Projets de {{ entrepreneur()?.name }}</h3>
+          <h3 class="text-2xl font-extrabold text-gray-600 mb-6">Projets de {{ entrepreneur.name }}</h3>
         </h3>
       </div>
 
+      @if (hasPublishedVentures()) {
       <div class="grid sm:grid-cols-2 gap-8">
-        @for (venture of entrepreneur()?.ventures; track venture.id) {
+        @for (venture of publishedVentures(); track venture.id) {
         <div
           class="group bg-white shadow-sm hover:shadow-lg rounded-lg overflow-hidden border border-gray-100 transition-all duration-300">
           <div class="relative w-full h-52">
@@ -102,6 +97,11 @@
         </div>
         }
       </div>
+      } @else {
+      <div class="bg-gray-50 rounded-lg p-12 text-center border border-gray-200">
+        <p class="text-gray-500 text-lg">Aucune entreprise publiée pour le moment.</p>
+      </div>
+      }
     </div>
   </div>
 </div>

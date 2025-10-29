@@ -1,5 +1,5 @@
-import { Component, HostListener, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, HostListener, ChangeDetectionStrategy, computed, signal, inject, OnDestroy } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { GALLERY_IMAGES, IGalleryImage } from '../../data/gallery.data';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LucideAngularModule, ReceiptText, StepBack, StepForward, X } from 'lucide-angular';
@@ -7,81 +7,89 @@ import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-gallery-card',
+  standalone: true,
   imports: [CommonModule, ReactiveFormsModule, LucideAngularModule, Button],
   templateUrl: './gallery-card.html',
-  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GalleryCard {
-  icons = {
+export class GalleryCardComponent implements OnDestroy {
+  private readonly document = inject(DOCUMENT);
+
+  readonly icons = {
     prev: StepForward,
     back: StepBack,
     close: X,
-    description: ReceiptText,
-  };
+    description: ReceiptText
+  } as const;
 
-  allPhotos: IGalleryImage[] = GALLERY_IMAGES;
+  private readonly allPhotos: IGalleryImage[] = GALLERY_IMAGES;
 
-  photos: IGalleryImage[] = [...this.allPhotos];
+  photos = signal<IGalleryImage[]>([...this.allPhotos]);
   activeCategory = signal<string | null>(null);
-
   page = signal(1);
-  perPage = 9;
+  readonly perPage = 9;
 
   currentIndex = signal(0);
   lightboxOpen = signal(false);
   current = signal<IGalleryImage | null>(null);
 
-  filtered = () => this.photos.slice(0, this.page() * this.perPage);
-
-  canLoadMore = () => this.filtered().length < this.photos.length;
+  filtered = computed(() => this.photos().slice(0, this.page() * this.perPage));
+  canLoadMore = computed(() => this.filtered().length < this.photos().length);
 
   loadMore() {
     this.page.update((p) => p + 1);
   }
 
   openLightbox(p: IGalleryImage) {
-    this.currentIndex.set(this.photos.findIndex((x) => x.src === p.src));
+    this.currentIndex.set(this.photos().findIndex((x) => x.src === p.src));
     this.current.set(p);
     this.lightboxOpen.set(true);
-    document.body.style.overflow = 'hidden';
+    try {
+      this.document.body.style.overflow = 'hidden';
+    } catch {
+      void 0;
+    }
   }
 
   closeLightbox() {
     this.lightboxOpen.set(false);
     this.current.set(null);
-    document.body.style.overflow = '';
+    try {
+      this.document.body.style.overflow = '';
+    } catch {
+      void 0;
+    }
   }
 
   prev(event?: Event) {
     event?.stopPropagation();
     const idx = this.currentIndex();
-    const newIdx = idx <= 0 ? this.photos.length - 1 : idx - 1;
+    const newIdx = idx <= 0 ? this.photos().length - 1 : idx - 1;
     this.currentIndex.set(newIdx);
-    this.current.set(this.photos[newIdx]);
+    this.current.set(this.photos()[newIdx]);
   }
 
   next(event?: Event) {
     event?.stopPropagation();
     const idx = this.currentIndex();
-    const newIdx = idx >= this.photos.length - 1 ? 0 : idx + 1;
+    const newIdx = idx >= this.photos().length - 1 ? 0 : idx + 1;
     this.currentIndex.set(newIdx);
-    this.current.set(this.photos[newIdx]);
+    this.current.set(this.photos()[newIdx]);
   }
 
   listCategories() {
-    const uniques = Array.from(new Set(this.allPhotos.map((photo) => photo.category).filter((c): c is string => !!c)));
-    return uniques;
+    return Array.from(new Set(this.allPhotos.map((photo) => photo.category).filter((c): c is string => !!c)));
   }
 
   filterByCategory(item: string): void {
-    this.photos = this.allPhotos.filter((photo) => photo.category === item);
+    this.photos.set(this.allPhotos.filter((photo) => photo.category === item));
     this.page.set(1);
     this.closeLightbox();
     this.activeCategory.set(item);
   }
 
   resetFilter(): void {
-    this.photos = [...this.allPhotos];
+    this.photos.set([...this.allPhotos]);
     this.page.set(1);
     this.activeCategory.set(null);
   }
@@ -90,11 +98,23 @@ export class GalleryCard {
     return this.activeCategory() === category;
   }
 
+  trackBySrc(_: number, item: IGalleryImage) {
+    return item.src;
+  }
+
   @HostListener('window:keydown', ['$event'])
   handleKey(event: KeyboardEvent) {
     if (!this.lightboxOpen()) return;
     if (event.key === 'ArrowRight') this.next();
     if (event.key === 'ArrowLeft') this.prev();
     if (event.key === 'Escape') this.closeLightbox();
+  }
+
+  ngOnDestroy(): void {
+    try {
+      if (this.document?.body) this.document.body.style.overflow = '';
+    } catch {
+      void 0;
+    }
   }
 }
