@@ -37,13 +37,13 @@ export const routes: Route[] = [
     path: 'entrepreneurs',
     component: Layout,
     data: { layout: 'fixed-layout' },
-    loadChildren: () => import('./features/our-entrepreneurs/entrepreneurs.routes').then((m) => m.entrepreneursRoutes)
+    loadChildren: () => import('./features/entrepreneurs/entrepreneurs.routes').then((m) => m.entrepreneursRoutes)
   },
   {
     path: 'entrepreneurs/:id',
     component: Layout,
     data: { layout: 'fixed-layout' },
-    loadChildren: () => import('./features/our-entrepreneurs/entrepreneurs.routes').then((m) => m.entrepreneursRoutes)
+    loadChildren: () => import('./features/entrepreneurs/entrepreneurs.routes').then((m) => m.entrepreneursRoutes)
   },
   {
     path: 'gallery',
