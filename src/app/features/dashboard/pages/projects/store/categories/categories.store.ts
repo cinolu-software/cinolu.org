@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
+import { buildQueryParams } from '@shared/helpers';
 import { ICategory } from '../../../../../../shared/models/entities.models';
 import { FilterProjectCategoriesDto } from '../../dto/categories/filter-categories.dto';
 
@@ -15,7 +15,7 @@ interface ICategoriesStore {
 export const CategoriesStore = signalStore(
   withState<ICategoriesStore>({ isLoading: false, categories: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadCategories: rxMethod<FilterProjectCategoriesDto>(
@@ -34,10 +34,10 @@ export const CategoriesStore = signalStore(
               catchError(() => {
                 patchState(store, { isLoading: false, categories: [[], 0] });
                 return of(null);
-              }),
+              })
             );
-        }),
-      ),
+        })
+      )
     ),
     addCategory: (category: ICategory): void => {
       const [categories, count] = store.categories();
@@ -52,6 +52,6 @@ export const CategoriesStore = signalStore(
       const [categories, count] = store.categories();
       const filtered = categories.filter((category) => category.id !== id);
       patchState(store, { categories: [filtered, count - 1] });
-    },
-  })),
+    }
+  }))
 );

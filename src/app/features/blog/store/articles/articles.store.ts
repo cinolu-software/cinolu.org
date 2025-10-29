@@ -5,7 +5,7 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { FilterArticlesDto } from '../../dto/filter-articles.dto';
 import { IArticle } from '../../../../shared/models/entities.models';
-import { buildQueryParams } from '../../../../shared/helpers/build-query-params';
+import { buildQueryParams } from '@shared/helpers';
 
 interface IArticlesStore {
   isLoading: boolean;
@@ -15,7 +15,7 @@ interface IArticlesStore {
 export const ArticlesStore = signalStore(
   withState<IArticlesStore>({ isLoading: false, articles: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadArticles: rxMethod<FilterArticlesDto>(
@@ -32,10 +32,10 @@ export const ArticlesStore = signalStore(
               catchError(() => {
                 patchState(store, { isLoading: false, articles: [[], 0] });
                 return of(null);
-              }),
+              })
             );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
+import { buildQueryParams } from '@shared/helpers';
 import { FilterEventsDto } from '../../../events/dto/categories/filter-events.dto';
 
 interface IDownloadUsersStore {
@@ -13,7 +13,7 @@ interface IDownloadUsersStore {
 export const DownloadUsersStore = signalStore(
   withState<IDownloadUsersStore>({ isLoading: false }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     downloadUsers: rxMethod<FilterEventsDto>(
@@ -34,10 +34,10 @@ export const DownloadUsersStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

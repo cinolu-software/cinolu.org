@@ -4,7 +4,6 @@
   badgeText="Profil Entrepreneur"
   [title]="entrepreneur()?.name || 'Nom non disponible'"
   [description]="entrepreneur()?.ventures?.[0]?.description || ''" />
-
 @if (entrepreneur(); as entrepreneur) {
 <div class="sm:py-16 md:py-20 px-6 sm:px-8 lg:px-16 xl:px-24 py-10 2xl:px-32 max-w-screen-2xl mx-auto">
   <div class="grid md:grid-cols-3 gap-10">
@@ -15,24 +14,22 @@
       </div>
 
       <h2 class="text-2xl font-extrabold text-primary-500">{{ entrepreneur.name }}</h2>
-      <p class="text-sm text-gray-600 mb-1">{{ entrepreneur.ventures[0]?.sector || "Secteur non défini" }}</p>
+      <p class="text-sm text-gray-600 mb-1">{{ entrepreneur.ventures[0].sector || "Secteur non défini" }}</p>
       <p class="text-xs text-gray-500">
-        {{ entrepreneur.city || "Ville inconnue" }} - {{ entrepreneur?.country || "Pays inconnu" }}
+        {{ entrepreneur.city || "Ville inconnue" }} - {{ entrepreneur.country || "Pays inconnu" }}
       </p>
-
       <p class="text-sm text-primary-500 bg-primary-500/10 px-3 py-1 mt-4 rounded-full border border-primary-500/40">
-        {{ entrepreneur.ventures[0]?.stage || "Non défini" }}
+        {{ entrepreneur.ventures[0].stage || "Non défini" }}
       </p>
-
       <div class="flex justify-center items-center gap-3 mt-6">
-        @if (entrepreneur.ventures[0]?.linkedin_url) {
+        @if (entrepreneur.ventures[0].linkedin_url) {
         <a
           [href]="entrepreneur.ventures[0].linkedin_url"
           target="_blank"
           class="border border-primary-500 rounded-full p-1.5 h-9 w-9 flex items-center justify-center hover:bg-primary-500/10 hover:text-white transition-all duration-300">
           <img src="icons/linkedin.svg" alt="LinkedIn" class="h-4 w-4" />
         </a>
-        } @if (entrepreneur.ventures[0]?.website) {
+        } @if (entrepreneur.ventures[0].website) {
         <a
           [href]="entrepreneur.ventures[0].website"
           target="_blank"
@@ -42,7 +39,6 @@
         }
       </div>
     </div>
-
     <div class="md:col-span-2 space-y-10">
       <div class="bg-white shadow-sm rounded-lg p-8 border border-gray-100">
         <h3 class="text-lg font-semibold text-primary-700 mb-4">À propos</h3>
@@ -50,13 +46,7 @@
           {{ entrepreneur.biography || "Aucune biographie disponible." }}
         </p>
       </div>
-
-      <div>
-        <h3>
-          <h3 class="text-2xl font-extrabold text-gray-600 mb-6">Projets de {{ entrepreneur.name }}</h3>
-        </h3>
-      </div>
-
+      <h3 class="text-2xl font-extrabold text-gray-600 mb-6">Projets de {{ entrepreneur.name }}</h3>
       @if (hasPublishedVentures()) {
       <div class="grid sm:grid-cols-2 gap-8">
         @for (venture of publishedVentures(); track venture.id) {
@@ -69,7 +59,6 @@
               [alt]="venture.name"
               priority
               class="object-cover group-hover:scale-105 transition-transform duration-300" />
-
             @if (venture.logo) {
             <div
               class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-16 h-16 rounded-full border-4 border-white shadow-md bg-white overflow-hidden">
@@ -77,14 +66,12 @@
             </div>
             }
           </div>
-
           <div class="p-6 pt-12">
             <h4 class="text-lg font-bold text-gray-700 mb-2">{{ venture.name }}</h4>
             <p class="text-sm text-gray-600 mb-3">{{ venture.description }}</p>
             @if (venture.stage) {
             <p class="text-xs text-gray-500 mb-4"><strong>Phase :</strong> {{ venture.stage }}</p>
             }
-
             <p-button [routerLink]="['/entrepreneurs/venture', venture.slug]" size="small" outlined severity="primary">
               <p class="flex items-center gap-2 group px-4">
                 Découvrir

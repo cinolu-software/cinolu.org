@@ -4,8 +4,8 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IComment } from '../../../../shared/models/entities.models';
-import { buildQueryParams } from '../../../../shared/helpers/build-query-params';
 import { FilterCommentsDto } from '../../dto/filter-comments.dto';
+import { buildQueryParams } from '@shared/helpers';
 
 interface ICommentsStore {
   isLoading: boolean;
@@ -20,7 +20,7 @@ interface ICommmentsParams {
 export const CommentsStore = signalStore(
   withState<ICommentsStore>({ isLoading: false, comments: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadComments: rxMethod<ICommmentsParams>(
@@ -28,21 +28,17 @@ export const CommentsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((p) => {
           const params = buildQueryParams(p.dto);
-          return _http
-            .get<{
-              data: [IComment[], number];
-            }>(`comments/article/${p.slug}`, { params })
-            .pipe(
-              tap(({ data }) => {
-                patchState(store, { isLoading: false, comments: data });
-              }),
-              catchError(() => {
-                patchState(store, { isLoading: false, comments: [[], 0] });
-                return of(null);
-              }),
-            );
-        }),
-      ),
+          return _http.get<{ data: [IComment[], number] }>(`comments/article/${p.slug}`, { params }).pipe(
+            tap(({ data }) => {
+              patchState(store, { isLoading: false, comments: data });
+            }),
+            catchError(() => {
+              patchState(store, { isLoading: false, comments: [[], 0] });
+              return of(null);
+            })
+          );
+        })
+      )
     ),
     addComment: (comment: IComment): void => {
       const [comments, count] = store.comments();
@@ -51,7 +47,7 @@ export const CommentsStore = signalStore(
     addComments: (comments: IComment[]): void => {
       const [currentComments, count] = store.comments();
       patchState(store, {
-        comments: [[...currentComments, ...comments], count + comments.length],
+        comments: [[...currentComments, ...comments], count + comments.length]
       });
     },
     updateComment: (comment: IComment): void => {
@@ -63,6 +59,6 @@ export const CommentsStore = signalStore(
       const [comments, count] = store.comments();
       const filtered = comments.filter((comment) => comment.id !== id);
       patchState(store, { comments: [filtered, count - 1] });
-    },
-  })),
+    }
+  }))
 );

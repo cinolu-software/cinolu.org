@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { buildQueryParams } from '../../../shared/helpers/build-query-params';
-import { IProject } from '../../../shared/models/entities.models';
 import { FilterProjectsDto } from '../dto/filter-projects.dto';
+import { IProject } from '@shared/models';
+import { buildQueryParams } from '@shared/helpers';
 
 interface IProjectsStore {
   isLoading: boolean;
@@ -15,7 +15,7 @@ interface IProjectsStore {
 export const ProjectsStore = signalStore(
   withState<IProjectsStore>({ isLoading: false, projects: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods((store, http = inject(HttpClient)) => ({
     loadProjects: rxMethod<FilterProjectsDto>(
@@ -32,10 +32,10 @@ export const ProjectsStore = signalStore(
               catchError(() => {
                 patchState(store, { isLoading: false, projects: [[], 0] });
                 return of(null);
-              }),
+              })
             );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterSubprogramsDto } from '../../dto/subprograms/filter-subprograms.dto';
-import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
+import { buildQueryParams } from '@shared/helpers';
 import { ISubprogram } from '../../../../../../shared/models/entities.models';
 
 interface IProgramsStore {
@@ -15,7 +15,7 @@ interface IProgramsStore {
 export const SubprogramsStore = signalStore(
   withState<IProgramsStore>({ isLoading: false, subprograms: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadPrograms: rxMethod<FilterSubprogramsDto>(
@@ -34,15 +34,15 @@ export const SubprogramsStore = signalStore(
               catchError(() => {
                 patchState(store, { isLoading: false, subprograms: [[], 0] });
                 return of(null);
-              }),
+              })
             );
-        }),
-      ),
+        })
+      )
     ),
     addProgram: (subprogram: ISubprogram): void => {
       const [subprograms, count] = store.subprograms();
       patchState(store, {
-        subprograms: [[subprogram, ...subprograms], count + 1],
+        subprograms: [[subprogram, ...subprograms], count + 1]
       });
     },
     updateProgram: (subprogram: ISubprogram): void => {
@@ -54,6 +54,6 @@ export const SubprogramsStore = signalStore(
       const [subprograms, count] = store.subprograms();
       const filtered = subprograms.filter((subprogram) => subprogram.id !== id);
       patchState(store, { subprograms: [filtered, count - 1] });
-    },
-  })),
+    }
+  }))
 );

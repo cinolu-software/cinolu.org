@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterRolesDto } from '../../dto/roles/filter-roles.dto';
-import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
+import { buildQueryParams } from '@shared/helpers';
 import { IRole } from '../../../../../../shared/models/entities.models';
 
 interface IRolesStore {
@@ -15,7 +15,7 @@ interface IRolesStore {
 export const RolesStore = signalStore(
   withState<IRolesStore>({ isLoading: false, roles: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadRoles: rxMethod<FilterRolesDto>(
@@ -30,10 +30,10 @@ export const RolesStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, roles: [[], 0] });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
+        })
+      )
     ),
     addRole: (role: IRole): void => {
       const [roles, count] = store.roles();
@@ -48,6 +48,6 @@ export const RolesStore = signalStore(
       const [roles, count] = store.roles();
       const filtered = roles.filter((role) => role.id !== id);
       patchState(store, { roles: [filtered, count - 1] });
-    },
-  })),
+    }
+  }))
 );

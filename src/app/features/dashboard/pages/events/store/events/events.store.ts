@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
+import { buildQueryParams } from '@shared/helpers';
 import { IEvent } from '../../../../../../shared/models/entities.models';
 import { FilterEventCategoriesDto } from '../../dto/categories/filter-categories.dto';
 
@@ -15,7 +15,7 @@ interface IEventsStore {
 export const EventsStore = signalStore(
   withState<IEventsStore>({ isLoading: false, events: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadEvents: rxMethod<FilterEventCategoriesDto>(
@@ -30,10 +30,10 @@ export const EventsStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, events: [[], 0] });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
+        })
+      )
     ),
     updateEvent: (event: IEvent): void => {
       const [events, count] = store.events();
@@ -44,6 +44,6 @@ export const EventsStore = signalStore(
       const [events, count] = store.events();
       const filtered = events.filter((event) => event.id !== id);
       patchState(store, { events: [filtered, count - 1] });
-    },
-  })),
+    }
+  }))
 );

@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterUsersDto } from '../../dto/users/filter-users.dto';
-import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
+import { buildQueryParams } from '@shared/helpers';
 import { IUser } from '../../../../../../shared/models/entities.models';
 
 interface IUsersStore {
@@ -15,7 +15,7 @@ interface IUsersStore {
 export const UsersStore = signalStore(
   withState<IUsersStore>({ isLoading: false, users: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadUsers: rxMethod<FilterUsersDto>(
@@ -30,10 +30,10 @@ export const UsersStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, users: [[], 0] });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

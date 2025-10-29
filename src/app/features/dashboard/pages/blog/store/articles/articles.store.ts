@@ -4,8 +4,8 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterArticlesTagsDto } from '../../dto/filter-tags.dto';
-import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
-import { IArticle } from '../../../../../../shared/models/entities.models';
+import { buildQueryParams } from '@shared/helpers';
+import { IArticle } from '@shared/models';
 
 interface IArticlesStore {
   isLoading: boolean;
@@ -15,7 +15,7 @@ interface IArticlesStore {
 export const ArticlesStore = signalStore(
   withState<IArticlesStore>({ isLoading: false, articles: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadArticles: rxMethod<FilterArticlesTagsDto>(
@@ -30,10 +30,10 @@ export const ArticlesStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, articles: [[], 0] });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
+        })
+      )
     ),
     updateArticle: (article: IArticle): void => {
       const [articles, count] = store.articles();
@@ -44,6 +44,6 @@ export const ArticlesStore = signalStore(
       const [articles, count] = store.articles();
       const filtered = articles.filter((article) => article.id !== id);
       patchState(store, { articles: [filtered, count - 1] });
-    },
-  })),
+    }
+  }))
 );

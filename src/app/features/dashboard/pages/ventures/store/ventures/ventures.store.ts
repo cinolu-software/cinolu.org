@@ -4,7 +4,7 @@ import { signalStore, withState, withMethods, patchState, withProps } from '@ngr
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, switchMap } from 'rxjs';
 import { FilterVenturesDto } from '../../dto/filter-venture.dto';
-import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
+import { buildQueryParams } from '@shared/helpers';
 import { IVenture } from '../../../../../../shared/models/entities.models';
 
 interface IVenturesStore {
@@ -15,7 +15,7 @@ interface IVenturesStore {
 export const VenturesStore = signalStore(
   withState<IVenturesStore>({ isLoading: false, ventures: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadVentures: rxMethod<FilterVenturesDto>(
@@ -28,15 +28,15 @@ export const VenturesStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, ventures: [[], 0] });
               return of([]);
-            }),
+            })
           );
-        }),
-      ),
+        })
+      )
     ),
     deleteVenture: (id: string) => {
       const [ventures, total] = store.ventures();
       const updatedVentures = ventures.filter((venture) => venture.id !== id);
       patchState(store, { ventures: [updatedVentures, total - 1] });
-    },
-  })),
+    }
+  }))
 );

@@ -4,7 +4,7 @@ import { signalStore, withState, withMethods, patchState, withProps } from '@ngr
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, switchMap } from 'rxjs';
 import { FilterProductsDto } from '../../dto/filter-product.dto';
-import { buildQueryParams } from '../../../../../../shared/helpers/build-query-params';
+import { buildQueryParams } from '@shared/helpers';
 import { IProduct } from '../../../../../../shared/models/entities.models';
 
 interface IProductsStore {
@@ -15,7 +15,7 @@ interface IProductsStore {
 export const ProductsStore = signalStore(
   withState<IProductsStore>({ isLoading: false, products: [[], 0] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadProducts: rxMethod<FilterProductsDto>(
@@ -28,15 +28,15 @@ export const ProductsStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, products: [[], 0] });
               return of([]);
-            }),
+            })
           );
-        }),
-      ),
+        })
+      )
     ),
     deleteProduct: (id: string) => {
       const [products, total] = store.products();
       const updatedProducts = products.filter((product) => product.id !== id);
       patchState(store, { products: [updatedProducts, total - 1] });
-    },
-  })),
+    }
+  }))
 );
