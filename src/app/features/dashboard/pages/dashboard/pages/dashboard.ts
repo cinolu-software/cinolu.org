@@ -36,8 +36,6 @@ export class Dashboard {
   reportStore = inject(AdminReportStore);
   year = signal<Date>(new Date());
   selectedYear = computed(() => this.year().getFullYear());
-
-  // Computed values for dashboard analytics
   totalIndicators = computed(() => {
     return this.reportStore.report().reduce((sum, program) => {
       return sum + program.indicators.length;
@@ -47,11 +45,9 @@ export class Dashboard {
   averagePerformance = computed(() => {
     const reports = this.reportStore.report();
     if (reports.length === 0) return 0;
-
     const totalPerformance = reports.reduce((sum, program) => {
       return sum + program.performance;
     }, 0);
-
     return Math.round(totalPerformance / reports.length);
   });
 
