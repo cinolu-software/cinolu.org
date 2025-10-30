@@ -5,7 +5,7 @@ import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CategoriesStore } from './categories.store';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { ICategory } from '../../../../../../shared/models/entities.models';
+import { ICategory } from '../../../../../../common/models/entities.models';
 import { EventCategoryDto } from '../../dto/events/event-category.dto';
 
 interface IAddCategoryStore {

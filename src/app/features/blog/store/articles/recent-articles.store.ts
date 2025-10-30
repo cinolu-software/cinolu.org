@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { IArticle } from '../../../../shared/models/entities.models';
+import { IArticle } from '@common/models';
 
 interface IRecentArticlesStore {
   isLoading: boolean;
@@ -24,15 +24,15 @@ export const RecentArticlesStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, articles: [] });
               return of([]);
-            }),
+            })
           );
-        }),
-      ),
-    ),
+        })
+      )
+    )
   })),
   withHooks({
     onInit: ({ loadArticles }) => {
       loadArticles();
-    },
-  }),
+    }
+  })
 );

@@ -2,7 +2,7 @@ import { Component, OnDestroy, signal, inject, input, effect } from '@angular/co
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { IEvent } from '../../../../../../shared/models/entities.models';
+import { IEvent } from '../../../../../../common/models/entities.models';
 
 @Component({
   selector: 'app-event-report',

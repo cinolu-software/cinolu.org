@@ -15,9 +15,9 @@ import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { Images, LucideAngularModule, SquarePen, Trash } from 'lucide-angular';
 import { ActivatedRoute } from '@angular/router';
-import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
-import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
-import { Tabs } from '../../../../../../shared/components/tabs/tabs';
+import { FileUpload } from '../../../../../../common/components/file-upload/file-upload';
+import { ApiImgPipe } from '../../../../../../common/pipes/api-img.pipe';
+import { Tabs } from '../../../../../../common/components/tabs/tabs';
 import { environment } from '../../../../../../../environments/environment';
 
 @Component({

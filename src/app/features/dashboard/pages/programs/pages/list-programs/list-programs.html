@@ -50,7 +50,10 @@ programList = store.programs()[0];
         programCount, }; track program.id ) {
         <tr class="border-b border-gray-200 last:border-none">
           <td class="px-6 py-2">
-            <p-avatar [image]="program | apiIMG: 'program'" />
+            <p-avatar
+              [image]="program | apiIMG: 'program'"
+              [size]="'large'"
+              [style]="{ width: '48px', height: '48px' }" />
           </td>
           <td class="px-6 py-2 font-medium text-gray-900 w-80 hyphens-auto">{{ program.name | titlecase }}</td>
           <td class="px-6 py-2 text-xs capitalize font-medium w-32">

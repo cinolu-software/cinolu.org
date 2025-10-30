@@ -5,7 +5,7 @@ import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { IEvent } from '../../../../../../shared/models/entities.models';
+import { IEvent } from '../../../../../../common/models/entities.models';
 import { EventDto } from '../../dto/events/event.dto';
 
 interface IUpdateEventStore {

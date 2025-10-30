@@ -9,13 +9,12 @@ import { Textarea } from 'primeng/textarea';
 import { UpdateProgramStore } from '../../store/programs/update-program.store';
 import { AddIndicatorStore } from '../../store/programs/add-indicators.store';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
-import { Tabs } from '@shared/components/tabs/tabs';
 import { ChartColumn, SquarePen } from 'lucide-angular';
 import { environment } from '../../../../../../../environments/environment';
 import { DatePicker } from 'primeng/datepicker';
-import { IProgram } from '@shared/models/entities.models';
-import { FileUpload } from '@shared/components/file-upload/file-upload';
 import { ProgramStore } from '../../store/programs/program.store';
+import { Tabs, FileUpload } from '@common/components';
+import { IProgram } from '@common/models';
 
 interface IndicatorFormData {
   name: string;

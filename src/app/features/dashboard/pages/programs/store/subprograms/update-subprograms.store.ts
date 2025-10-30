@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { SubprogramsStore } from './subprograms.store';
 import { SubprogramDto } from '../../dto/subprograms/subprograms.dto';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { ISubprogram } from '../../../../../../shared/models/entities.models';
+import { ISubprogram } from '../../../../../../common/models/entities.models';
 
 interface IUpdateSubprogramStore {
   isLoading: boolean;

@@ -4,8 +4,8 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ProgramsStore } from './programs.store';
-import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { IProgram } from '../../../../../../shared/models/entities.models';
+import { IProgram } from '@common/models';
+import { ToastrService } from '@core/services/toast';
 
 interface IHighlightStore {
   isLoading: boolean;
@@ -16,7 +16,7 @@ export const HighlightProgramStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _programsStore: inject(ProgramsStore),
-    _toast: inject(ToastrService),
+    _toast: inject(ToastrService)
   })),
   withMethods(({ _http, _programsStore, _toast, ...store }) => ({
     highlight: rxMethod<string>(
@@ -27,7 +27,7 @@ export const HighlightProgramStore = signalStore(
             map(({ data }) => {
               _programsStore.updateProgram(data);
               _toast.showSuccess(
-                data.is_highlighted ? 'Programme mis en avant' : 'Programme retiré de la mise en avant',
+                data.is_highlighted ? 'Programme mis en avant' : 'Programme retiré de la mise en avant'
               );
               patchState(store, { isLoading: false });
             }),
@@ -35,10 +35,10 @@ export const HighlightProgramStore = signalStore(
               _toast.showError('Erreur lors de la mise en avant du programme');
               patchState(store, { isLoading: false });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

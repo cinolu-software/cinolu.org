@@ -13,21 +13,21 @@ import { Button } from 'primeng/button';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GalleryCardComponent implements OnDestroy {
-  private readonly document = inject(DOCUMENT);
+  private document = inject(DOCUMENT);
 
-  readonly icons = {
+  icons = {
     prev: StepForward,
     back: StepBack,
     close: X,
     description: ReceiptText
   } as const;
 
-  private readonly allPhotos: IGalleryImage[] = GALLERY_IMAGES;
+  private allPhotos: IGalleryImage[] = GALLERY_IMAGES;
 
   photos = signal<IGalleryImage[]>([...this.allPhotos]);
   activeCategory = signal<string | null>(null);
   page = signal(1);
-  readonly perPage = 9;
+  perPage = 9;
 
   currentIndex = signal(0);
   lightboxOpen = signal(false);

@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, exhaustMap, map, of, pipe, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IProject } from '../../../../../../shared/models/entities.models';
+import { IProject } from '@common/models';
 
 interface IUnpaginatedProgramsStore {
   isLoading: boolean;
@@ -13,7 +13,7 @@ interface IUnpaginatedProgramsStore {
 export const UnpaginatedProgramsStore = signalStore(
   withState<IUnpaginatedProgramsStore>({ isLoading: false, programs: [] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadPrograms: rxMethod<void>(
@@ -27,15 +27,15 @@ export const UnpaginatedProgramsStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, programs: [] });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
+        })
+      )
+    )
   })),
   withHooks({
     onInit({ loadPrograms }) {
       loadPrograms();
-    },
-  }),
+    }
+  })
 );

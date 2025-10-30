@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Signal } from '@angular/core';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { IProgram, ISubprogram, IEvent, IProject, IArticle, IHighlight } from '../../../shared/models/entities.models';
+import { IProgram, ISubprogram, IEvent, IProject, IArticle, IHighlight } from '@common/models';
 
 export type HighlightSource = 'programs' | 'subprograms' | 'events' | 'projects' | 'articles';
 
@@ -24,10 +24,10 @@ export const HighlightsStore = signalStore(
   withState<IHighlightsStore>({
     isLoading: false,
     highlights: [],
-    _rawHighlights: null,
+    _rawHighlights: null
   }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadHighlights: rxMethod<void>(
@@ -38,41 +38,41 @@ export const HighlightsStore = signalStore(
             tap(({ data }) => {
               const highlights: HighlightItem[] = [
                 ...(data.programs?.map(
-                  (item) => ({ ...item, sourceKey: 'programs' }) as IProgram & { sourceKey: 'programs' },
+                  (item) => ({ ...item, sourceKey: 'programs' }) as IProgram & { sourceKey: 'programs' }
                 ) || []),
                 ...(data.subprograms?.map(
-                  (item) => ({ ...item, sourceKey: 'subprograms' }) as ISubprogram & { sourceKey: 'subprograms' },
+                  (item) => ({ ...item, sourceKey: 'subprograms' }) as ISubprogram & { sourceKey: 'subprograms' }
                 ) || []),
                 ...(data.events?.map(
-                  (item) => ({ ...item, sourceKey: 'events' }) as IEvent & { sourceKey: 'events' },
+                  (item) => ({ ...item, sourceKey: 'events' }) as IEvent & { sourceKey: 'events' }
                 ) || []),
                 ...(data.projects?.map(
-                  (item) => ({ ...item, sourceKey: 'projects' }) as IProject & { sourceKey: 'projects' },
+                  (item) => ({ ...item, sourceKey: 'projects' }) as IProject & { sourceKey: 'projects' }
                 ) || []),
                 ...(data.articles?.map(
-                  (item) => ({ ...item, sourceKey: 'articles' }) as IArticle & { sourceKey: 'articles' },
-                ) || []),
+                  (item) => ({ ...item, sourceKey: 'articles' }) as IArticle & { sourceKey: 'articles' }
+                ) || [])
               ];
 
               patchState(store, {
                 isLoading: false,
                 highlights,
-                _rawHighlights: data,
+                _rawHighlights: data
               });
             }),
             catchError((err) => {
               console.error('Failed to load highlights', err);
               patchState(store, { isLoading: false, highlights: [], _rawHighlights: null });
               return of(null);
-            }),
-          ),
-        ),
-      ),
+            })
+          )
+        )
+      )
     ),
 
     getFirstHighlight(
       highlightsSignal: Signal<IHighlight | null | undefined>,
-      categoryKeys: HighlightSource[] = ['programs', 'subprograms', 'events', 'projects', 'articles'],
+      categoryKeys: HighlightSource[] = ['programs', 'subprograms', 'events', 'projects', 'articles']
     ): HighlightItem | null {
       const highlights = highlightsSignal();
       if (!highlights) return null;
@@ -88,11 +88,11 @@ export const HighlightsStore = signalStore(
 
     getAllHighlights(): HighlightItem[] {
       return store.highlights();
-    },
+    }
   })),
   withHooks({
     onInit({ loadHighlights }) {
       loadHighlights();
-    },
-  }),
+    }
+  })
 );

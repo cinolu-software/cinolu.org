@@ -9,16 +9,15 @@ import { SelectModule } from 'primeng/select';
 import { DatePickerModule } from 'primeng/datepicker';
 import { Images, LucideAngularModule, SquarePen, Trash } from 'lucide-angular';
 import { ActivatedRoute } from '@angular/router';
-import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
-import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
-import { Tabs } from '../../../../../../shared/components/tabs/tabs';
-import { environment } from '../../../../../../../environments/environment';
-import { VentureStore } from '../../../ventures/store/ventures/venture.store';
-import { GalleryStore } from '../../../ventures/store/galleries/galeries.store';
-import { DeleteGalleryStore } from '../../../ventures/store/galleries/delete-gallery.store';
-import { SECTORS } from '../../../ventures/data/sectors.data';
-import { STAGES } from '../../../ventures/data/stage.data';
 import { UpdateVenturetore } from '../../store/update-venture.store';
+import { FileUpload, Tabs } from '@common/components';
+import { ApiImgPipe } from '@common/pipes';
+import { environment } from '@environments/environment';
+import { SECTORS } from '@features/dashboard/pages/ventures/data/sectors.data';
+import { STAGES } from '@features/dashboard/pages/ventures/data/stage.data';
+import { DeleteGalleryStore } from '@features/dashboard/pages/ventures/store/galleries/delete-gallery.store';
+import { GalleryStore } from '@features/dashboard/pages/ventures/store/galleries/galeries.store';
+import { VentureStore } from '@features/entrepreneurs/store/venture.store';
 
 @Component({
   selector: 'app-edit-venture',
@@ -36,9 +35,9 @@ import { UpdateVenturetore } from '../../store/update-venture.store';
     ApiImgPipe,
     NgOptimizedImage,
     LucideAngularModule,
-    Tabs,
+    Tabs
   ],
-  templateUrl: './edit-venture.html',
+  templateUrl: './edit-venture.html'
 })
 export class EditVentureComponent implements OnInit {
   #fb = inject(FormBuilder);
@@ -59,7 +58,7 @@ export class EditVentureComponent implements OnInit {
 
   tabs = [
     { label: 'Modifier la startup', name: 'edit', icon: SquarePen },
-    { label: 'Gérer la galerie', name: 'gallery', icon: Images },
+    { label: 'Gérer la galerie', name: 'gallery', icon: Images }
   ];
   activeTab = signal('edit');
 
@@ -69,7 +68,7 @@ export class EditVentureComponent implements OnInit {
       if (!venture) return;
       this.form.patchValue({
         ...venture,
-        founded_at: new Date(venture.founded_at),
+        founded_at: new Date(venture.founded_at)
       });
     });
     this.form = this.#fb.group({
@@ -84,7 +83,7 @@ export class EditVentureComponent implements OnInit {
       sector: [''],
       founded_at: [''],
       location: [''],
-      stage: [''],
+      stage: ['']
     });
   }
 
@@ -102,7 +101,7 @@ export class EditVentureComponent implements OnInit {
     const venture = this.store.venture();
     this.updateVentureStore.updateVenture({
       slug: venture?.slug || '',
-      payload: this.form.value,
+      payload: this.form.value
     });
   }
 

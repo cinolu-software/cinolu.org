@@ -13,7 +13,7 @@ import {
   RefreshCw,
   SquareCheck,
   SquarePen,
-  Trash,
+  Trash
 } from 'lucide-angular';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AvatarModule } from 'primeng/avatar';
@@ -21,7 +21,6 @@ import { ButtonModule } from 'primeng/button';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { InputTextModule } from 'primeng/inputtext';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { ConfirmationService } from 'primeng/api';
 import { DownloadUsersStore } from '../../../users/store/users/download-csv.store';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
@@ -31,8 +30,9 @@ import { DeleteVentureStore } from '../../store/delete-venture.store';
 import { VenturesStore } from '../../store/ventures.store';
 import { SECTORS } from '../../../ventures/data/sectors.data';
 import { Select } from 'primeng/select';
-import { IVenture } from '../../../../../../shared/models/entities.models';
 import { PublishVentureStore } from '../../store/publish-venture.store';
+import { IVenture } from '@common/models';
+import { ApiImgPipe } from '@common/pipes';
 
 @Component({
   selector: 'app-list-ventures',
@@ -50,9 +50,9 @@ import { PublishVentureStore } from '../../store/publish-venture.store';
     ConfirmPopup,
     RouterLink,
     ApiImgPipe,
-    Select,
+    Select
   ],
-  templateUrl: './list-ventures.html',
+  templateUrl: './list-ventures.html'
 })
 export class ListVentures implements OnInit {
   #route = inject(ActivatedRoute);
@@ -77,17 +77,17 @@ export class ListVentures implements OnInit {
     chevronDown: ChevronDown,
     chevronRight: ChevronRight,
     eyeOff: EyeOff,
-    eyeOpen: Eye,
+    eyeOpen: Eye
   };
 
   queryParams = signal<FilterEntrepreneursDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
-    q: this.#route.snapshot.queryParamMap.get('q'),
+    q: this.#route.snapshot.queryParamMap.get('q')
   });
 
   constructor() {
     this.searchForm = this.#fb.group({
-      q: [this.queryParams().q || ''],
+      q: [this.queryParams().q || '']
     });
   }
 
@@ -125,15 +125,15 @@ export class ListVentures implements OnInit {
       rejectButtonProps: {
         label: 'Annuler',
         severity: 'secondary',
-        outlined: true,
+        outlined: true
       },
       acceptButtonProps: {
         label: 'Confirmer',
-        severity: 'danger',
+        severity: 'danger'
       },
       accept: () => {
         this.deleteStore.deleteVenture(ventureId);
-      },
+      }
     });
   }
 

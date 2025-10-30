@@ -13,7 +13,7 @@ import { CategoriesStore } from '../../store/categories/categories.store';
 import { AddCategoryStore } from '../../store/categories/add-category.store';
 import { DeleteCategoryStore } from '../../store/categories/delete-category.store';
 import { UpdateCategoryStore } from '../../store/categories/update-category.store';
-import { ICategory } from '../../../../../../shared/models/entities.models';
+import { ICategory } from '../../../../../../common/models/entities.models';
 import { FilterProgramCategoriesDto } from '../../dto/categories/filter-categories.dto';
 import { ProgressSpinner } from 'primeng/progressspinner';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

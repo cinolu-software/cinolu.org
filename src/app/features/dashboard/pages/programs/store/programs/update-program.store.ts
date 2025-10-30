@@ -4,8 +4,8 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ProgramDto } from '../../dto/programs/program.dto';
-import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { IProgram } from '../../../../../../shared/models/entities.models';
+import { IProgram } from '@common/models';
+import { ToastrService } from '@core/services/toast';
 
 interface IUpdateProgramStore {
   isLoading: boolean;
@@ -20,7 +20,7 @@ export const UpdateProgramStore = signalStore(
   withState<IUpdateProgramStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _toast: inject(ToastrService),
+    _toast: inject(ToastrService)
   })),
   withMethods(({ _http, _toast, ...store }) => ({
     updateProgram: rxMethod<IUpdateProgramParams>(
@@ -36,10 +36,10 @@ export const UpdateProgramStore = signalStore(
               _toast.showError('Échec de la mise à jour');
               patchState(store, { isLoading: false });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

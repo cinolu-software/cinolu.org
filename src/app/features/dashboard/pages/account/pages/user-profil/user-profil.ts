@@ -1,16 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { AuthStore } from '../../../../../../core/auth/auth.store';
-import { LucideAngularModule, Phone, User, FileText, Edit, Lock, Camera, Calendar } from 'lucide-angular';
-import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
+import { LucideAngularModule, Phone, User, FileText, SquarePen, Lock, Camera, Calendar } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
-import { environment } from '../../../../../../../environments/environment';
-import { IUser } from '../../../../../../shared/models/entities.models';
+import { FileUpload } from '@common/components';
+import { IUser } from '@common/models';
+import { ApiImgPipe } from '@common/pipes';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-user-profil',
   imports: [LucideAngularModule, ApiImgPipe, CommonModule, NgOptimizedImage, FileUpload],
-  templateUrl: './user-profil.html',
+  templateUrl: './user-profil.html'
 })
 export class UserProfil {
   url = environment.apiUrl + 'users/image-profile';
@@ -22,9 +22,9 @@ export class UserProfil {
     phone: Phone,
     fileText: FileText,
     lock: Lock,
-    edit: Edit,
+    edit: SquarePen,
     camera: Camera,
-    calendar: Calendar,
+    calendar: Calendar
   };
 
   handleLoaded(): void {

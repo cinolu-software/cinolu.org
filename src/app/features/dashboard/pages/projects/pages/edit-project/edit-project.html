@@ -117,7 +117,5 @@
     [isLoading]="addMetricsStore.isLoading()"
     (saveKPIs)="onSaveMetrics()"
     (saveReports)="onSaveMetrics()" />
-  } @if (activeTab() === 'report' && project) {
-  <app-project-report [project]="project" />
   }
 </section>

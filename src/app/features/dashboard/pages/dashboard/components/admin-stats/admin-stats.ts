@@ -1,49 +1,59 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
+import { Component, computed, effect, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import {
-  Book,
-  BookOpen,
-  Calendar,
-  FileText,
-  Layers,
-  LucideAngularModule,
-  Newspaper,
-  User,
-  Users,
-} from 'lucide-angular';
 import { RouterModule } from '@angular/router';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { AdminStatsStore } from '../../store/admin-stats.store';
+import { AdminReportStore } from '../../store/admin-report.store';
+import { DatePicker } from 'primeng/datepicker';
+import { LucideAngularModule, Calendar } from 'lucide-angular';
+import { PerformanceOverviewComponent } from '../performance-overview/performance-overview';
+import { ProgramCardComponent } from '../program-card/program-card';
+import { PerformanceSkeletonComponent } from '../performance-skeleton/performance-skeleton';
+import { EmptyStateComponent } from '../empty-state/empty-state';
 
 @Component({
   selector: 'app-admin-stats',
   templateUrl: './admin-stats.html',
-  providers: [AdminStatsStore],
+  providers: [AdminReportStore],
   imports: [
-    ButtonModule,
     InputTextModule,
     CommonModule,
+    DatePicker,
     RouterModule,
-    ReactiveFormsModule,
+    FormsModule,
     LucideAngularModule,
-    NgxPaginationModule,
-    ConfirmPopupModule,
-  ],
+    PerformanceOverviewComponent,
+    ProgramCardComponent,
+    PerformanceSkeletonComponent,
+    EmptyStateComponent
+  ]
 })
 export class AdminStats {
-  store = inject(AdminStatsStore);
+  reportStore = inject(AdminReportStore);
+  year = signal<Date>(new Date());
+  selectedYear = computed(() => this.year().getFullYear());
   icons = {
-    user: User,
-    users: Users,
-    bookOpen: BookOpen,
-    book: Book,
-    file: FileText,
-    layers: Layers,
-    calendar: Calendar,
-    newsPaper: Newspaper,
+    calendar: Calendar
   };
+
+  totalIndicators = computed(() => {
+    return this.reportStore.report().reduce((sum, program) => {
+      return sum + program.indicators.length;
+    }, 0);
+  });
+
+  averagePerformance = computed(() => {
+    const reports = this.reportStore.report();
+    if (reports.length === 0) return 0;
+    const totalPerformance = reports.reduce((sum, program) => {
+      return sum + program.performance;
+    }, 0);
+    return Math.round(totalPerformance / reports.length);
+  });
+
+  constructor() {
+    effect(() => {
+      this.reportStore.getAdminReport(this.selectedYear());
+    });
+  }
 }

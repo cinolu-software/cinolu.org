@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, exhaustMap, map, of, pipe, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IRole } from '../../../../../../shared/models/entities.models';
+import { IRole } from '../../../../../../common/models/entities.models';
 
 interface IUnpaginatedRolesStore {
   isLoading: boolean;

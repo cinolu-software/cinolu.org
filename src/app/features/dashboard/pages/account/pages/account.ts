@@ -9,10 +9,10 @@ import { UpdatePasswordStore } from '../store/update-password.store';
 import { DatePickerModule } from 'primeng/datepicker';
 import { environment } from '../../../../../../environments/environment';
 import { AuthStore } from '../../../../../core/auth/auth.store';
-import { FileUpload } from '../../../../../shared/components/file-upload/file-upload';
-import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
+import { FileUpload } from '../../../../../common/components/file-upload/file-upload';
+import { ApiImgPipe } from '../../../../../common/pipes/api-img.pipe';
 import { Select, SelectModule } from 'primeng/select';
-import { GENDERS } from '../../../../../shared/data/genders.data';
+import { GENDERS } from '../../../../../common/data/genders.data';
 import { Textarea } from 'primeng/textarea';
 
 @Component({

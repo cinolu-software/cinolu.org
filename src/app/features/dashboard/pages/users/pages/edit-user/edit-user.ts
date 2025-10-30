@@ -12,9 +12,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { UpdateUserStore } from '../../store/users/update-user.store';
 import { UnpaginatedRolesStore } from '../../store/roles/unpaginated-roles.store';
 import { DatePickerModule } from 'primeng/datepicker';
-import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../../../common/pipes/api-img.pipe';
 import { SelectModule } from 'primeng/select';
-import { GENDERS } from '../../../../../../shared/data/genders.data';
+import { GENDERS } from '../../../../../../common/data/genders.data';
 
 @Component({
   selector: 'app-user-edit',

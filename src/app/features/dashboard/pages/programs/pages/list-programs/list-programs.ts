@@ -12,7 +12,7 @@ import { FilterProgramsDto } from '../../dto/programs/filter-programs.dto';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 import { DeleteProgramStore } from '../../store/programs/delete-program.store';
-import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../../../common/pipes/api-img.pipe';
 import { AvatarModule } from 'primeng/avatar';
 import { PublishProgramStore } from '../../store/programs/publish-program.store';
 import { HighlightProgramStore } from '../../store/programs/highlight-program.store';

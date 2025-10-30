@@ -2,13 +2,13 @@ import { Component, computed, DestroyRef, inject, OnInit } from '@angular/core';
 import { Building2, Globe, Linkedin, LucideAngularModule, Mail, MoveRight, Phone } from 'lucide-angular';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { GalleriaModule } from 'primeng/galleria';
 import { Button } from 'primeng/button';
 import { VentureCardSkeleton } from '../venture-card-skeleton/venture-card-skeleton';
-import { IProduct } from '../../../../shared/models/entities.models';
 import { VentureStore } from '@features/entrepreneurs/store/venture.store';
+import { IProduct } from '@common/models';
+import { ApiImgPipe } from '@common/pipes';
 
 @Component({
   selector: 'app-venture-card-detail',

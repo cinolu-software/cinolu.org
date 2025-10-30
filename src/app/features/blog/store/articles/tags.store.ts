@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { ITag } from '../../../../shared/models/entities.models';
+import { ITag } from '@common/models';
 
 interface ITagsStore {
   isLoading: boolean;
@@ -13,7 +13,7 @@ interface ITagsStore {
 export const TagsStore = signalStore(
   withState<ITagsStore>({ isLoading: false, tags: [] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadTags: rxMethod<void>(
@@ -27,15 +27,15 @@ export const TagsStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, tags: [] });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
+        })
+      )
+    )
   })),
   withHooks({
     onInit({ loadTags }) {
       loadTags();
-    },
-  }),
+    }
+  })
 );

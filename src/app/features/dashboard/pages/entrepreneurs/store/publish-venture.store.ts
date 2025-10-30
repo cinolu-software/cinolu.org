@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { VenturesStore } from './ventures.store';
-import { IVenture } from '../../../../../shared/models/entities.models';
+import { IVenture } from '@common/models';
 
 interface IPublishVentureStore {
   isLoading: boolean;
@@ -15,7 +15,7 @@ export const PublishVentureStore = signalStore(
   withState<IPublishVentureStore>({ isLoading: false, venture: null }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _venturesStore: inject(VenturesStore),
+    _venturesStore: inject(VenturesStore)
   })),
   withMethods(({ _http, _venturesStore, ...store }) => ({
     publishVenture: rxMethod<string>(
@@ -30,10 +30,10 @@ export const PublishVentureStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, venture: null });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

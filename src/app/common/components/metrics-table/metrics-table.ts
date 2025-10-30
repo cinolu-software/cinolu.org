@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InputText } from 'primeng/inputtext';
 import { Button } from 'primeng/button';
-import { IIndicator, IMetric } from '../../models/entities.models';
-import { MetricsMap } from '../../helpers/metrics.helper';
+import { LucideAngularModule, ChartColumn } from 'lucide-angular';
+import { MetricsMap } from '@common/helpers';
+import { IIndicator, IMetric } from '@common/models';
+import { CircularProgressComponent } from '../circular-progress/circular-progress';
 
 @Component({
   selector: 'app-metrics-table',
-  imports: [CommonModule, FormsModule, InputText, Button],
+  imports: [CommonModule, FormsModule, InputText, Button, LucideAngularModule, CircularProgressComponent],
   templateUrl: './metrics-table.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -17,9 +19,11 @@ export class MetricsTableComponent {
   metricsMap = input.required<MetricsMap>();
   existingMetrics = input<IMetric[]>([]);
   isLoading = input.required<boolean>();
-
   saveKPIs = output<void>();
   saveReports = output<void>();
+  icons = {
+    barChart: ChartColumn
+  };
 
   totalIndicators = computed(() => this.indicators().length);
 
@@ -44,7 +48,7 @@ export class MetricsTableComponent {
     return Math.round((achieved / target) * 100);
   });
 
-  private existingTargets = computed(() => {
+  #existingTargets = computed(() => {
     return new Set(
       this.existingMetrics()
         .filter((m) => m.target && m.target > 0)
@@ -53,7 +57,7 @@ export class MetricsTableComponent {
   });
 
   hasExistingTarget(indicatorId: string): boolean {
-    return this.existingTargets().has(indicatorId);
+    return this.#existingTargets().has(indicatorId);
   }
 
   hasUnsavedKPIs(): boolean {

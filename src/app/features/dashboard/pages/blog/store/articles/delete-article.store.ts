@@ -5,7 +5,7 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ArticlesStore } from './articles.store';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { IArticle } from '../../../../../../shared/models/entities.models';
+import { IArticle } from '../../../../../../common/models/entities.models';
 
 interface IDeleteArticleStore {
   isLoading: boolean;

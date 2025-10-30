@@ -7,7 +7,7 @@ import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight } from 'lucide-
 import { RecentProjectsStore } from '../../../projects/store/recent-projects.store';
 import { ProgramCardSkeletonComponent } from '../../../projects/components/project-card-skeleton/project-card-skeleton';
 import { ProjectCard } from '../../../projects/components/project-card/project-card';
-import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
+import { FadeInOnScrollDirective } from '../../../../common/directives/animations-on-scroll.directive';
 import { Button } from 'primeng/button';
 
 @Component({

@@ -3,8 +3,8 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { IProject } from '../../../../../../shared/models/entities.models';
+import { IProject } from '@common/models';
+import { ToastrService } from '@core/services/toast';
 
 interface IAddMetricStore {
   isLoading: boolean;
@@ -26,7 +26,7 @@ export const AddMetricStore = signalStore(
   withState<IAddMetricStore>({ isLoading: false, project: null }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _toast: inject(ToastrService),
+    _toast: inject(ToastrService)
   })),
   withMethods(({ _http, _toast, ...store }) => ({
     addMetrics: rxMethod<AddMetricsParams>(
@@ -42,10 +42,10 @@ export const AddMetricStore = signalStore(
               _toast.showError("Une erreur s'est produite");
               patchState(store, { isLoading: false, project: null });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

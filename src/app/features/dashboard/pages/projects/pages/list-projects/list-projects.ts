@@ -23,7 +23,7 @@ import { DeleteProjectStore } from '../../store/projects/delete-project.store';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { AvatarModule } from 'primeng/avatar';
 import { PublishProjectStore } from '../../store/projects/publish-project.store';
-import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../../../common/pipes/api-img.pipe';
 import { HighlightProjectStore } from '../../store/projects/highlight-project.store';
 import { FilterProjectsDto } from '../../dto/projects/filter-projects.dto';
 import { ProgressSpinner } from 'primeng/progressspinner';

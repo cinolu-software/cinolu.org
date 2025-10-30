@@ -13,11 +13,11 @@ import { UpdateProductStore } from '../../store/products/update-product.store';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { environment } from '../../../../../../../environments/environment';
-import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
-import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
+import { FileUpload } from '../../../../../../common/components/file-upload/file-upload';
+import { ApiImgPipe } from '../../../../../../common/pipes/api-img.pipe';
 import { Images, LucideAngularModule, SquarePen, Trash } from 'lucide-angular';
 import { NgOptimizedImage } from '@angular/common';
-import { Tabs } from '../../../../../../shared/components/tabs/tabs';
+import { Tabs } from '../../../../../../common/components/tabs/tabs';
 
 @Component({
   selector: 'app-product-add',

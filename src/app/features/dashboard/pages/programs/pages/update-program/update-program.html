@@ -15,7 +15,7 @@
         <div class="flex flex-col gap-1.5">
           <label for="categories" class="block font-medium text-gray-700">Catégories</label>
           <p-select
-            [inputId]="'categories'"
+            inputId="categories"
             [options]="categoriesStore.categories()"
             [optionValue]="'id'"
             [optionLabel]="'name'"
@@ -23,11 +23,18 @@
         </div>
         <div class="flex flex-col gap-1.5">
           <label for="name" class="font-medium">Nom du programme<span class="text-red-500">*</span></label>
-          <input pInputText id="name" formControlName="name" />
+          <input pInputText id="name" name="name" formControlName="name" autocomplete="off" />
         </div>
         <div class="flex flex-col gap-1.5 col-span-2">
           <label for="description" class="font-medium">Description<span class="text-red-500">*</span></label>
-          <textarea pTextarea id="description" formControlName="description" rows="8" cols="30"></textarea>
+          <textarea
+            pTextarea
+            id="description"
+            name="description"
+            formControlName="description"
+            rows="8"
+            cols="30"
+            autocomplete="off"></textarea>
         </div>
       </div>
       <p-button
@@ -46,16 +53,33 @@
     <div class="flex items-center justify-between mb-4">
       <div class="flex items-center gap-3">
         <label for="indicator-year" class="font-medium">Année</label>
-        <p-datepicker pSize="small" id="indicator-year" view="year" dateFormat="yy" [(ngModel)]="year" />
+        <p-datepicker
+          pSize="small"
+          inputId="indicator-year"
+          name="indicator-year"
+          view="year"
+          dateFormat="yy"
+          [(ngModel)]="year" />
       </div>
     </div>
     @for (ind of indicatorsTab(); track $index) {
     <div class="flex items-end gap-4 mb-3">
       <div class="flex flex-col gap-2 w-2/3">
-        <input pInputText placeholder="Indicateur" [(ngModel)]="ind.name" />
+        <input
+          pInputText
+          placeholder="Indicateur"
+          name="indicator-name-{{$index}}"
+          [(ngModel)]="ind.name"
+          autocomplete="off" />
       </div>
       <div class="flex flex-col gap-2">
-        <input pInputText placeholder="KPI" type="number" [(ngModel)]="ind.target" />
+        <input
+          pInputText
+          placeholder="KPI"
+          type="number"
+          name="indicator-target-{{$index}}"
+          [(ngModel)]="ind.target"
+          autocomplete="off" />
       </div>
       <p-button
         outlined

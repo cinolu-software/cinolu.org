@@ -2,7 +2,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { OnInit, inject, signal, effect, Component, computed } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { LucideAngularModule, Trash2, SquarePen, Images, ChartColumn, FileText } from 'lucide-angular';
+import { LucideAngularModule, Trash2, SquarePen, Images, ChartColumn } from 'lucide-angular';
 import { QuillEditorComponent } from 'ngx-quill';
 import { Button } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
@@ -11,26 +11,25 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { environment } from '@environments/environment';
-import { FileUpload, Tabs, MetricsTableComponent } from '@shared/components';
-import { IProject } from '@shared/models';
-import { ApiImgPipe } from '@shared/pipes';
+import { FileUpload, Tabs, MetricsTableComponent } from '@common/components';
 import {
   MetricsMap,
-  initializeMetricsMap,
-  metricsMapToDto,
   calculateMetricsTotal,
   calculateAchievementPercentage,
+  initializeMetricsMap,
+  metricsMapToDto,
   parseDate,
   extractCategoryIds
-} from '@shared/helpers';
-import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
-import { ProjectReport } from '../../components/project-report/project-report';
+} from '@common/helpers';
+import { IProject } from '@common/models';
+import { ApiImgPipe } from '@common/pipes';
+import { IndicatorsStore } from '@features/dashboard/pages/programs/store/programs/indicators.store';
+import { UnpaginatedSubprogramsStore } from '@features/dashboard/pages/programs/store/subprograms/unpaginated-subprograms.store';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { AddMetricStore } from '../../store/projects/add-metric.store';
 import { UpdateProjectStore } from '../../store/projects/update-project.store';
-import { IndicatorsStore } from '../../../programs/store/programs/indicators.store';
 import { ProjectStore } from '../../store/projects/project.store';
 
 @Component({
@@ -62,39 +61,35 @@ import { ProjectStore } from '../../store/projects/project.store';
     ApiImgPipe,
     QuillEditorComponent,
     Tabs,
-    ProjectReport,
     MetricsTableComponent
   ]
 })
 export class EditProjectComponent implements OnInit {
-  readonly #fb = inject(FormBuilder);
-  readonly #route = inject(ActivatedRoute);
-  readonly #slug = this.#route.snapshot.params['slug'];
-  readonly projectStore = inject(ProjectStore);
-  readonly galleryStore = inject(GalleryStore);
-  readonly deleteImageStore = inject(DeleteGalleryStore);
-  readonly updateProjectStore = inject(UpdateProjectStore);
-  readonly categoriesStore = inject(UnpaginatedCategoriesStore);
-  readonly programsStore = inject(UnpaginatedSubprogramsStore);
-  readonly addMetricsStore = inject(AddMetricStore);
-  readonly indicatorsStore = inject(IndicatorsStore);
+  #fb = inject(FormBuilder);
+  #route = inject(ActivatedRoute);
+  #slug = this.#route.snapshot.params['slug'];
+  projectStore = inject(ProjectStore);
+  galleryStore = inject(GalleryStore);
+  deleteImageStore = inject(DeleteGalleryStore);
+  updateProjectStore = inject(UpdateProjectStore);
+  categoriesStore = inject(UnpaginatedCategoriesStore);
+  programsStore = inject(UnpaginatedSubprogramsStore);
+  addMetricsStore = inject(AddMetricStore);
+  indicatorsStore = inject(IndicatorsStore);
   form!: FormGroup;
   metricsMap: MetricsMap = {};
   activeTab = signal('edit');
-  readonly url = `${environment.apiUrl}projects/cover/`;
-  readonly galleryUrl = `${environment.apiUrl}projects/gallery/`;
-  readonly icons = { trash: Trash2 };
-  readonly tabs = [
+  url = `${environment.apiUrl}projects/cover/`;
+  galleryUrl = `${environment.apiUrl}projects/gallery/`;
+  icons = { trash: Trash2 };
+  tabs = [
     { label: 'Modifier le projet', name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
-    { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
-    { label: 'Rapport', name: 'report', icon: FileText }
+    { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn }
   ];
-  readonly totalTargeted = computed(() => calculateMetricsTotal(this.metricsMap, 'target'));
-  readonly totalAchieved = computed(() => calculateMetricsTotal(this.metricsMap, 'achieved'));
-  readonly achievementPercentage = computed(() =>
-    calculateAchievementPercentage(this.totalTargeted(), this.totalAchieved())
-  );
+  totalTargeted = computed(() => calculateMetricsTotal(this.metricsMap, 'target'));
+  totalAchieved = computed(() => calculateMetricsTotal(this.metricsMap, 'achieved'));
+  achievementPercentage = computed(() => calculateAchievementPercentage(this.totalTargeted(), this.totalAchieved()));
 
   constructor() {
     this.form = this.#initForm();
