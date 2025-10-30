@@ -4,16 +4,16 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { LucideAngularModule } from 'lucide-angular';
-import { UpdateInfoStore } from '../store/update-info.store';
-import { UpdatePasswordStore } from '../store/update-password.store';
+import { UpdateInfoStore } from '../../store/update-info.store';
+import { UpdatePasswordStore } from '../../store/update-password.store';
 import { DatePickerModule } from 'primeng/datepicker';
-import { environment } from '../../../../../../environments/environment';
-import { AuthStore } from '../../../../../core/auth/auth.store';
-import { FileUpload } from '../../../../../common/components/file-upload/file-upload';
-import { ApiImgPipe } from '../../../../../common/pipes/api-img.pipe';
-import { Select, SelectModule } from 'primeng/select';
-import { GENDERS } from '../../../../../common/data/genders.data';
 import { Textarea } from 'primeng/textarea';
+import { FileUpload } from '@common/components';
+import { GENDERS } from '@common/data';
+import { ApiImgPipe } from '@common/pipes';
+import { AuthStore } from '@core/auth';
+import { environment } from '@environments/environment';
+import { SelectModule, Select } from 'primeng/select';
 
 @Component({
   selector: 'app-account',
@@ -31,8 +31,8 @@ import { Textarea } from 'primeng/textarea';
     LucideAngularModule,
     SelectModule,
     Textarea,
-    Select,
-  ],
+    Select
+  ]
 })
 export class Account implements OnInit {
   infoForm: FormGroup;
@@ -53,11 +53,11 @@ export class Account implements OnInit {
       gender: ['', Validators.required],
       birth_date: ['', Validators.required],
       phone_number: ['', [Validators.minLength(10)]],
-      name: ['', Validators.minLength(3)],
+      name: ['', Validators.minLength(3)]
     });
     this.passwordForm = this.#formBuilder.group({
       password: ['', [Validators.minLength(6), Validators.required]],
-      password_confirm: ['', [Validators.minLength(6), Validators.required]],
+      password_confirm: ['', [Validators.minLength(6), Validators.required]]
     });
   }
 
@@ -66,7 +66,7 @@ export class Account implements OnInit {
     if (!user) return;
     this.infoForm.patchValue({
       ...user,
-      birth_date: user.birth_date && new Date(user.birth_date),
+      birth_date: user.birth_date && new Date(user.birth_date)
     });
   }
 
