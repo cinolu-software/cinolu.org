@@ -25,14 +25,13 @@ import { IEvent } from '@common/models';
 import { ApiImgPipe } from '@common/pipes';
 import { IndicatorsStore } from '@features/dashboard/pages/programs/store/programs/indicators.store';
 import { UnpaginatedSubprogramsStore } from '@features/dashboard/pages/programs/store/subprograms/unpaginated-subprograms.store';
-import { EventStore } from '@features/events/store/event.store';
 import { EventsStore } from '@features/events/store/events.store';
-import { EventReport } from '../../components/event-report/event-report';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
 import { AddMetricStore } from '../../store/events/add-metric.store';
 import { UpdateEventStore } from '../../store/events/update-event.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { GalleryStore } from '../../store/galleries/galeries.store';
+import { EventStore } from '../../store/events/event.store';
 
 @Component({
   selector: 'app-event-edit',
@@ -64,7 +63,6 @@ import { GalleryStore } from '../../store/galleries/galeries.store';
     QuillEditorComponent,
     LucideAngularModule,
     Tabs,
-    EventReport,
     MetricsTableComponent
   ]
 })
