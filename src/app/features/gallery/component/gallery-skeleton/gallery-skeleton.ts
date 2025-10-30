@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-gallery-skeleton',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './gallery-skeleton.html',
   changeDetection: ChangeDetectionStrategy.OnPush

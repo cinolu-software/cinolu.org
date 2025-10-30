@@ -3,6 +3,7 @@ import { ILink } from '../../layout/data/links.data';
 
 @Pipe({
   name: 'getLinks',
+  pure: true
 })
 export class GetLinksPipe implements PipeTransform {
   transform(links: Record<string, ILink[]>, tab: string): ILink[] {

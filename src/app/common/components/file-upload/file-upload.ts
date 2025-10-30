@@ -1,4 +1,4 @@
-import { Component, input, OnInit, output, viewChild } from '@angular/core';
+import { Component, input, OnInit, output, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FilePondComponent, FilePondModule, registerPlugin } from 'ngx-filepond';
 import validateType from 'filepond-plugin-file-validate-type';
 import validateSize from 'filepond-plugin-file-validate-size';
@@ -9,6 +9,7 @@ registerPlugin(imagePreview, validateType, validateSize);
   selector: 'app-file-upload',
   imports: [FilePondModule],
   templateUrl: './file-upload.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileUpload implements OnInit {
   pond = viewChild<FilePondComponent>('pond');
@@ -36,9 +37,9 @@ export class FileUpload implements OnInit {
           withCredentials: true,
           onload: () => {
             this.handleLoaded();
-          },
-        },
-      },
+          }
+        }
+      }
     };
   }
 

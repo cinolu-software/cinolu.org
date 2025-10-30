@@ -2,8 +2,7 @@ import { Directive, ElementRef, OnInit, Renderer2, PLATFORM_ID, OnDestroy, input
 import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
-  selector: '[appCountUp]',
-  standalone: true,
+  selector: '[appCountUp]'
 })
 export class CountUpDirective implements OnInit, OnDestroy {
   end = input<number>(0);
@@ -23,7 +22,7 @@ export class CountUpDirective implements OnInit, OnDestroy {
           this.#observer?.disconnect();
         }
       },
-      { threshold: 0.6 },
+      { threshold: 0.6 }
     );
     this.#observer.observe(this.#el.nativeElement);
   }
@@ -50,7 +49,7 @@ export class CountUpDirective implements OnInit, OnDestroy {
         this.#renderer.setProperty(
           this.#el.nativeElement,
           'innerText',
-          `${this.end().toLocaleString()}${this.suffix()}`,
+          `${this.end().toLocaleString()}${this.suffix()}`
         );
       }
     };

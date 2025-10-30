@@ -13,7 +13,7 @@ import {
   ArrowRight,
   FileLock2,
   CalendarSync,
-  CalendarX,
+  CalendarX
 } from 'lucide-angular';
 import { EventStore } from '../../store/event.store';
 import { ActivatedRoute } from '@angular/router';
@@ -26,10 +26,9 @@ import { QuillViewComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-event',
-  standalone: true,
   providers: [EventStore, GalleryEventStore],
   imports: [CommonModule, EventSkeleton, LucideAngularModule, ApiImgPipe, Button, GalleriaModule, QuillViewComponent],
-  templateUrl: './detail-event.html',
+  templateUrl: './detail-event.html'
 })
 export class DetailEvent implements OnInit {
   images = model<IImage[]>([]);
@@ -45,7 +44,7 @@ export class DetailEvent implements OnInit {
     fileLock: FileLock2,
     calendarSync: CalendarSync,
     calendarX: CalendarX,
-    calendarCheck: CalendarDays,
+    calendarCheck: CalendarDays
   };
 
   #route = inject(ActivatedRoute);

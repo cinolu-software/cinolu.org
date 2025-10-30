@@ -12,7 +12,6 @@ export type HighlightSource = 'programs' | 'subprograms' | 'events' | 'projects'
 
 @Component({
   selector: 'app-highlight-card',
-  standalone: true,
   imports: [CommonModule, NgOptimizedImage, RouterLink, LucideAngularModule, ButtonModule, ApiImgPipe],
   templateUrl: './highlight-card.html'
 })
