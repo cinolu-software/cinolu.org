@@ -7,7 +7,6 @@ import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-gallery-card',
-  standalone: true,
   imports: [CommonModule, ReactiveFormsModule, LucideAngularModule, Button],
   templateUrl: './gallery-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush

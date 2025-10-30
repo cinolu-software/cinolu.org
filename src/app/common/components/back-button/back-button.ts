@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ArrowLeft, LucideAngularModule } from 'lucide-angular';
 
@@ -7,10 +7,11 @@ import { ArrowLeft, LucideAngularModule } from 'lucide-angular';
   imports: [LucideAngularModule],
   templateUrl: './back-button.html',
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BackButton {
   icons = {
-    back: ArrowLeft,
+    back: ArrowLeft
   };
 
   #location = inject(Location);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { BackButton } from '../../../common/components/back-button/back-button';
 
@@ -6,5 +6,6 @@ import { BackButton } from '../../../common/components/back-button/back-button';
   selector: 'app-empty-layout',
   templateUrl: './empty-layout.html',
   imports: [RouterOutlet, BackButton],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmptyLayout {}

@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 
 @Pipe({
   name: 'apiIMG',
+  pure: true
 })
 export class ApiImgPipe implements PipeTransform {
   transform(v: unknown, key: string): string {
@@ -20,7 +21,7 @@ export class ApiImgPipe implements PipeTransform {
       ventureCover: value['cover'] ? `${apiUrl}uploads/ventures/covers/${value['cover']}` : '/images/no-image.jpg',
       product: value['image'] ? `${apiUrl}uploads/products/images/${value['image']}` : '/images/no-image.jpg',
       article: value['image'] ? `${apiUrl}uploads/articles/${value['image']}` : '/images/no-image.jpg',
-      event: value['cover'] ? `${apiUrl}uploads/events/${value['cover']}` : '/images/no-image.jpg',
+      event: value['cover'] ? `${apiUrl}uploads/events/${value['cover']}` : '/images/no-image.jpg'
     };
     return images[key];
   }

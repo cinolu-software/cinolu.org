@@ -8,6 +8,7 @@ import {
   OnDestroy,
   signal,
   viewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
@@ -20,6 +21,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-topbar',
   imports: [CommonModule, NgOptimizedImage, RouterLink, MobileNav, DesktopNav],
   templateUrl: './app-topbar.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppTopbar implements OnDestroy {
   #elementRef = inject(ElementRef);

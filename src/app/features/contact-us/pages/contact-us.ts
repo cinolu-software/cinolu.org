@@ -28,14 +28,13 @@ import { HeroCard } from '../../../layout/components/hero-card/hero-card';
     InputGroup,
     SelectModule,
     ButtonModule,
-    HeroCard,
+    HeroCard
   ],
-  standalone: true,
-  templateUrl: './contact-us.html',
+  templateUrl: './contact-us.html'
 })
 export class ContactUs {
   icons = {
-    phone: Headset,
+    phone: Headset
   };
   countryItems = COUNTRY_CODE;
   contactItems = CONTACT_ITEMS;
@@ -52,7 +51,7 @@ export class ContactUs {
       email: ['', [Validators.email, Validators.required]],
       phone_number: ['', [Validators.required, Validators.pattern(/^\+?[1-9]\d{1,14}$/)]],
       country: ['', [Validators.required]],
-      message: ['', [Validators.required]],
+      message: ['', [Validators.required]]
     });
   }
 
@@ -65,12 +64,12 @@ export class ContactUs {
     this.store.contactUs({
       payload: {
         ...this.form.value,
-        phone_number: this.selectedCountryCode + this.form.value.phone_number,
+        phone_number: this.selectedCountryCode + this.form.value.phone_number
       },
       onSuccess: () => {
         this.form.reset();
         this.selectedCountryCode = '';
-      },
+      }
     });
   }
 }

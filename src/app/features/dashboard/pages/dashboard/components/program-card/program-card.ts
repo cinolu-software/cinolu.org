@@ -5,7 +5,6 @@ import { CircularProgressComponent } from '../../../../../../common/components/c
 
 @Component({
   selector: 'app-program-card',
-  standalone: true,
   imports: [LucideAngularModule, CircularProgressComponent],
   templateUrl: './program-card.html'
 })

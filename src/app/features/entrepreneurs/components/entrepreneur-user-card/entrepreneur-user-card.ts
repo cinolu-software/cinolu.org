@@ -9,8 +9,7 @@ import { ApiImgPipe } from '@common/pipes';
 @Component({
   selector: 'app-entrepreneur-user-card',
   imports: [CommonModule, LucideAngularModule, ApiImgPipe, NgOptimizedImage, RouterLink, Button],
-  templateUrl: './entrepreneur-user-card.html',
-  standalone: true
+  templateUrl: './entrepreneur-user-card.html'
 })
 export class EntrepreneurUserCard {
   entrepreneurs = input.required<IVenture>();

@@ -13,7 +13,6 @@ import { ApiImgPipe } from '@common/pipes';
 
 @Component({
   selector: 'app-entrepreneur-detail-card',
-  standalone: true,
   providers: [VentureStore],
   imports: [CommonModule, RouterModule, LucideAngularModule, ButtonModule, ApiImgPipe, HeroCard, NgOptimizedImage],
   templateUrl: './entrepreneur-detail-card.html'
