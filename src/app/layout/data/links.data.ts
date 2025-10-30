@@ -8,7 +8,7 @@ import {
   Group,
   Image,
   Layers,
-  Folders,
+  Folders
 } from 'lucide-angular';
 
 export interface ILink {
@@ -27,21 +27,21 @@ export const MY_CINOLU_LINKS: ILink[] = [
   {
     name: 'A propos',
     path: '/about-us',
-    fragment: 'about',
+    fragment: 'about'
   },
   {
     name: 'Vision',
     path: '/about-us',
-    fragment: 'vision',
-  },
+    fragment: 'vision'
+  }
 ];
 
 export const EXPLORATION_LINKS: ILink[] = [
   {
     icon: Calendar1,
-    name: 'Accueil',
-    path: '/',
-    exactUrl: true,
+    name: 'One Stop',
+    path: '/one-stop',
+    exactUrl: true
   },
   {
     icon: Info,
@@ -53,14 +53,14 @@ export const EXPLORATION_LINKS: ILink[] = [
       { name: 'Blog', path: '/blog-ressources', icon: BookOpen },
       { name: 'Galerie', path: '/gallery', icon: Image },
       { name: 'À propos', path: '/about-us' },
-      { name: 'Contacts', path: '/contact-us', icon: Image },
-    ],
+      { name: 'Contacts', path: '/contact-us', icon: Image }
+    ]
   },
   {
     icon: Calendar1,
     name: 'Évènements',
-    path: '/events',
-  },
+    path: '/events'
+  }
 ];
 
 export const ADMIN_LINKS: ILink[] = [
@@ -71,17 +71,17 @@ export const ADMIN_LINKS: ILink[] = [
     children: [
       {
         name: 'Tous les programmes',
-        path: '/dashboard/programs',
+        path: '/dashboard/programs'
       },
       {
         name: 'Les catégories',
-        path: '/dashboard/program-categories',
+        path: '/dashboard/program-categories'
       },
       {
         name: 'Sous programmes',
-        path: '/dashboard/subprograms',
-      },
-    ],
+        path: '/dashboard/subprograms'
+      }
+    ]
   },
   {
     name: 'Les projets',
@@ -90,13 +90,13 @@ export const ADMIN_LINKS: ILink[] = [
     children: [
       {
         name: 'Tous les projets',
-        path: '/dashboard/projects',
+        path: '/dashboard/projects'
       },
       {
         name: 'Les catégories',
-        path: '/dashboard/project-categories',
-      },
-    ],
+        path: '/dashboard/project-categories'
+      }
+    ]
   },
   {
     name: 'Les événements',
@@ -105,13 +105,13 @@ export const ADMIN_LINKS: ILink[] = [
     children: [
       {
         name: 'Tous les événements',
-        path: '/dashboard/events',
+        path: '/dashboard/events'
       },
       {
         name: 'Les catégories',
-        path: '/dashboard/event-categories',
-      },
-    ],
+        path: '/dashboard/event-categories'
+      }
+    ]
   },
   {
     name: 'Le blog',
@@ -120,13 +120,13 @@ export const ADMIN_LINKS: ILink[] = [
     children: [
       {
         name: 'Tous les articles',
-        path: '/dashboard/blog/articles',
+        path: '/dashboard/blog/articles'
       },
       {
         name: 'Les tags',
-        path: '/dashboard/blog/tags',
-      },
-    ],
+        path: '/dashboard/blog/tags'
+      }
+    ]
   },
 
   {
@@ -136,13 +136,13 @@ export const ADMIN_LINKS: ILink[] = [
     children: [
       {
         name: 'Les utilisateurs',
-        path: '/dashboard/users',
+        path: '/dashboard/users'
       },
       {
         name: 'Les rôles',
-        path: '/dashboard/roles',
-      },
-    ],
+        path: '/dashboard/roles'
+      }
+    ]
   },
   {
     name: 'Les entrepreneurs',
@@ -152,15 +152,15 @@ export const ADMIN_LINKS: ILink[] = [
       {
         name: 'Les entrepreneurs',
         path: '/dashboard/entrepreneurs',
-        exactUrl: true,
+        exactUrl: true
       },
       {
         name: 'Les entreprises',
         path: '/dashboard/entrepreneurs/ventures',
-        exactUrl: true,
-      },
-    ],
-  },
+        exactUrl: true
+      }
+    ]
+  }
 ];
 
 export const COMMON_LINKS: ILink[] = [
@@ -168,14 +168,14 @@ export const COMMON_LINKS: ILink[] = [
     name: 'Dashboard',
     path: '/dashboard',
     icon: LayoutGrid,
-    exactUrl: true,
+    exactUrl: true
   },
   {
     name: 'Mes informations',
     path: '/dashboard/account',
     icon: Info,
-    exactUrl: true,
-  },
+    exactUrl: true
+  }
 ];
 
 export const USER_LINKS: ILink[] = [
@@ -186,9 +186,9 @@ export const USER_LINKS: ILink[] = [
     children: [
       {
         name: 'Vulgarisation',
-        path: '/dashboard/community/outreach',
-      },
-    ],
+        path: '/dashboard/community/outreach'
+      }
+    ]
   },
   {
     name: 'Mes entreprises',
@@ -197,30 +197,30 @@ export const USER_LINKS: ILink[] = [
     children: [
       {
         name: 'Liste entreprises',
-        path: '/dashboard/ventures',
+        path: '/dashboard/ventures'
       },
       {
         name: 'Liste produits',
-        path: '/dashboard/products',
-      },
-    ],
-  },
+        path: '/dashboard/products'
+      }
+    ]
+  }
 ];
 
 export const SOCIAL_LINKS: ILink[] = [
   {
     name: 'Facebook',
     path: 'https://www.facebook.com/share/15cR36qNs8/?mibextid=kFxxJD',
-    external: true,
+    external: true
   },
   {
     name: 'Twitter',
     path: 'https://x.com/Lubumdigital?t=MYcaQ_OEdCO3KZDCQzMoeQ&s=09',
-    external: true,
+    external: true
   },
   {
     name: 'LinkedIn',
     path: 'https://www.linkedin.com/company/cinolu/',
-    external: true,
-  },
+    external: true
+  }
 ];
