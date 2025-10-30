@@ -1,0 +1,26 @@
+@if (advantage()) {
+<div
+  class="flex gap-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 h-full group">
+  <div class="w-20 flex flex-col">
+    <div [ngClass]="advantage().bgColor" class="flex-1 flex items-center justify-center">
+      <span [ngClass]="advantage().iconColor" class="text-3xl font-black font-satoshi"> {{ advantage().id }} </span>
+    </div>
+
+    <div
+      [ngClass]="advantage().iconColor.replace('text-', 'bg-')"
+      class="flex-1 transition-all duration-300 group-hover:flex-[1.2]"></div>
+  </div>
+
+  <div class="flex-1 flex flex-col p-6 gap-4">
+    <div
+      [ngClass]="[advantage().iconColor, advantage().bgColor]"
+      class="w-14 h-14 rounded-lg flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
+      <i-lucide [name]="advantage().icon" class="w-7 h-7" [ngClass]="advantage().iconColor" />
+    </div>
+
+    <p [ngClass]="advantage().textColor" class="text-base leading-relaxed hyphens-none">
+      {{ advantage().description }}
+    </p>
+  </div>
+</div>
+}
