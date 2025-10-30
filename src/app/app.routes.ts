@@ -71,6 +71,12 @@ export const routes: Route[] = [
     loadChildren: () => import('./features/blog/blogs.routes').then((m) => m.blogsRoutes)
   },
   {
+    path: 'one-stop',
+    component: Layout,
+    data: { layout: 'fixed-layout' },
+    loadChildren: () => import('./features/one-stop/one-stop.routes').then((m) => m.oneStopRoutes)
+  },
+  {
     path: '',
     component: Layout,
     data: { layout: 'full-layout' },
