@@ -129,15 +129,12 @@ export class EditEventComponent implements OnInit {
   }
 
   #watchEventChanges(): void {
-    effect(
-      () => {
-        const event = this.eventStore.event();
-        if (!event) return;
-        this.#patchForm(event);
-        this.#initMetrics(event);
-      },
-      { allowSignalWrites: true }
-    );
+    effect(() => {
+      const event = this.eventStore.event();
+      if (!event) return;
+      this.#patchForm(event);
+      this.#initMetrics(event);
+    });
   }
 
   #initMetrics(event: IEvent): void {

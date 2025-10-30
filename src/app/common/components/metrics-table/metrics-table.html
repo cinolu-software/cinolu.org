@@ -66,6 +66,7 @@
                     pInputText
                     type="number"
                     [(ngModel)]="metricsMap()[indicator.id].target"
+                    (ngModelChange)="onMetricChange()"
                     [disabled]="hasExistingTarget(indicator.id)"
                     placeholder="0" />
                   @if (hasExistingTarget(indicator.id)) {
@@ -119,6 +120,7 @@
                   pInputText
                   type="number"
                   [(ngModel)]="metricsMap()[indicator.id].achieved"
+                  (ngModelChange)="onMetricChange()"
                   class="w-full"
                   placeholder="0" />
               </td>

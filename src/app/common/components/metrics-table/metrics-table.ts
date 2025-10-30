@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, output, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InputText } from 'primeng/inputtext';
@@ -25,9 +25,14 @@ export class MetricsTableComponent {
     barChart: ChartColumn
   };
 
+  // Signal to track changes in metrics values
+  private metricsVersion = signal(0);
+
   totalIndicators = computed(() => this.indicators().length);
 
   totalTarget = computed(() => {
+    // Track metrics version to ensure reactivity
+    this.metricsVersion();
     return this.indicators().reduce((sum, indicator) => {
       const target = this.metricsMap()[indicator.id]?.target ?? 0;
       return sum + target;
@@ -35,6 +40,8 @@ export class MetricsTableComponent {
   });
 
   totalAchieved = computed(() => {
+    // Track metrics version to ensure reactivity
+    this.metricsVersion();
     return this.indicators().reduce((sum, indicator) => {
       const achieved = this.metricsMap()[indicator.id]?.achieved ?? 0;
       return sum + achieved;
@@ -75,6 +82,11 @@ export class MetricsTableComponent {
     }
     const achieved = metric.achieved ?? 0;
     return Math.round((achieved / metric.target) * 100);
+  }
+
+  onMetricChange(): void {
+    // Trigger recalculation of computed signals
+    this.metricsVersion.update((v) => v + 1);
   }
 
   onSaveKPIs(): void {
