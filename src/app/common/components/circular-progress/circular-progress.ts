@@ -1,11 +1,11 @@
-import { Component, input, computed } from '@angular/core';
+import { Component, input, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-circular-progress',
-  standalone: true,
   imports: [CommonModule],
-  templateUrl: './circular-progress.html'
+  templateUrl: './circular-progress.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CircularProgressComponent {
   percentage = input.required<number>();

@@ -7,7 +7,6 @@ import { getPerformanceStatus, getPerformanceColor } from '../helpers/metrics.he
  */
 @Pipe({
   name: 'performanceStatus',
-  standalone: true,
   pure: true
 })
 export class PerformanceStatusPipe implements PipeTransform {

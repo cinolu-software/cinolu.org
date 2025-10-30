@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DashboardSidebar } from '../../components/dashboard-sidebar/dashboard-sidebar';
 import { DashboardTopbar } from '../../components/dashboard-topbar/dashboard-topbar';
@@ -8,5 +8,6 @@ import { BackButton } from '../../../common/components/back-button/back-button';
   selector: 'app-dashboard-layout',
   templateUrl: './dashboard-layout.html',
   imports: [RouterOutlet, DashboardTopbar, DashboardSidebar, BackButton],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardLayout {}

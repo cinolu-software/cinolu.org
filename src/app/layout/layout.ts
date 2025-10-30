@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
 import { AppConfigService } from '../core/services/config/config.service';
@@ -13,6 +13,7 @@ import { Loader } from './components/loader/loader';
   selector: 'app-layout',
   templateUrl: './layout.html',
   imports: [FixedLayout, EmptyLayout, FullLayout, DashboardLayout, Loader],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Layout implements OnInit, OnDestroy {
   config: AppConfig = {} as AppConfig;
@@ -30,7 +31,7 @@ export class Layout implements OnInit, OnDestroy {
     this.#router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
-        takeUntil(this.#unsubscribeAll),
+        takeUntil(this.#unsubscribeAll)
       )
       .subscribe(() => {
         this._updateLayout();

@@ -36,7 +36,6 @@ import { ApiImgPipe } from '@common/pipes';
 
 @Component({
   selector: 'app-list-ventures',
-  standalone: true,
   providers: [DownloadUsersStore, ConfirmationService, DeleteVentureStore, VenturesStore, PublishVentureStore],
   imports: [
     LucideAngularModule,
