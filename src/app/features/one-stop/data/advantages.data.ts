@@ -12,7 +12,7 @@ export interface Advantage {
 export const ADVANTAGES: Advantage[] = [
   {
     id: 1,
-    description: 'Accédez à plus de 10 programmes d incubation et d accélération',
+    description: "Accédez à plus de 10 programmes d'incubation et d'accélération",
     icon: Compass,
     bgColor: 'bg-primary-50',
     iconColor: 'text-primary-600',
