@@ -38,9 +38,28 @@
       </form>
     </div>
     @if (userCount === 0 && !isLoading) {
-    <h4 class="font-medium text-gray-700 text-lg px-6 pb-8">
-      {{ hasQuery ? 'Aucun utilisateur trouvé avec ce filtre' : 'Aucun utilisateur trouvé' }}
-    </h4>
+    <div
+      class="mx-6 flex flex-col items-center justify-center py-16 px-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl border-2 border-dashed border-gray-300">
+      <div class="bg-white rounded-full w-20 h-20 flex items-center justify-center shadow-sm mb-6">
+        <i-lucide [name]="icons.plus" class="text-gray-400 w-10 h-10 stroke-[1.5]" />
+      </div>
+      <h3 class="text-2xl font-bold text-gray-800 mb-3">
+        {{ hasQuery ? 'Aucun utilisateur trouvé avec ce filtre' : 'Aucun utilisateur trouvé' }}
+      </h3>
+      <p class="text-gray-600 text-center max-w-md mb-6">
+        @if (hasQuery) { Essayez de modifier vos critères de recherche pour trouver des utilisateurs. } @else {
+        Commencez par ajouter votre premier utilisateur pour gérer l'accès à la plateforme. }
+      </p>
+      @if (!hasQuery) {
+      <p-button
+        [routerLink]="'/dashboard/users/add'"
+        [size]="'small'"
+        class="flex items-center gap-2 bg-primary-600 text-white hover:bg-primary-700 transition-colors duration-200">
+        <i-lucide [name]="icons.plus" class="size-4" />
+        <span class="font-medium">Ajouter un utilisateur</span>
+      </p-button>
+      }
+    </div>
     } @if (isLoading) {
     <div class="grid grid-cols-5 mx-6 my-6 border border-gray-200 rounded-lg">
       @for (i of skeletonArray; track $index) {

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { IEvent } from '../../../shared/models/entities.models';
+import { IEvent } from '@common/models';
 
 interface IRecentEventsStore {
   isLoading: boolean;
@@ -17,20 +17,20 @@ export const RecentEventsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
-          return http.get<{ data: IEvent[] }>('events/find-recent').pipe(
+          return http.get<{ data: IEvent[] }>('events/pfind-recent').pipe(
             tap(({ data }) => patchState(store, { isLoading: false, events: data })),
             catchError(() => {
               patchState(store, { isLoading: false, events: [] });
               return of([]);
-            }),
+            })
           );
-        }),
-      ),
-    ),
+        })
+      )
+    )
   })),
   withHooks({
     onInit: ({ loadEvents }) => {
       loadEvents();
-    },
-  }),
+    }
+  })
 );

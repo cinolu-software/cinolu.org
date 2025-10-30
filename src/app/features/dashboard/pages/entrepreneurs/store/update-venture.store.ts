@@ -4,9 +4,9 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ToastrService } from '../../../../../core/services/toast/toastr.service';
 import { VentureDto } from '../../ventures/dto/venture.dto';
-import { IVenture } from '../../../../../shared/models/entities.models';
+import { IVenture } from '@common/models';
+import { ToastrService } from '@core/services/toast';
 
 interface IUpdateVenturetore {
   isLoading: boolean;
@@ -17,7 +17,7 @@ export const UpdateVenturetore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _router: inject(Router),
+    _router: inject(Router)
   })),
   withMethods(({ _http, _toast, _router, ...store }) => ({
     updateVenture: rxMethod<{ slug: string; payload: VentureDto }>(
@@ -38,10 +38,10 @@ export const UpdateVenturetore = signalStore(
                 patchState(store, { isLoading: false });
                 _toast.showError('Erreur lors de la mise à jour');
                 return of(null);
-              }),
+              })
             );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { IUser } from '@common/models';
 import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, exhaustMap } from 'rxjs';
-import { IUser } from '../../../../../shared/models/entities.models';
 
 interface IEntrepreneursStore {
   isLoading: boolean;
@@ -22,10 +22,10 @@ export const EntrepreneursStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, entrepreneurs: [] });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

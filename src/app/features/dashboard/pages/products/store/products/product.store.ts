@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { signalStore, withState, withMethods, patchState, withProps } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, switchMap } from 'rxjs';
-import { IProduct } from '../../../../../../shared/models/entities.models';
+import { IProduct } from '../../../../../../common/models/entities.models';
 
 interface IProductStore {
   isLoading: boolean;

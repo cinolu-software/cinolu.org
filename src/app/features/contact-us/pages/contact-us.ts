@@ -2,15 +2,15 @@ import { Component, inject } from '@angular/core';
 import { Headset, LucideAngularModule } from 'lucide-angular';
 import { CONTACT_ITEMS, SOCIAL_LINKS } from '../data/contact.data';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { COUNTRY_CODE } from '../../../shared/data/country-item.data';
-import { FadeInOnScrollDirective } from '../../../shared/directives/animations-on-scroll.directive';
+import { COUNTRY_CODE } from '../../../common/data/country-item.data';
+import { FadeInOnScrollDirective } from '../../../common/directives/animations-on-scroll.directive';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { SelectChangeEvent, SelectModule } from 'primeng/select';
 import { InputGroupAddon } from 'primeng/inputgroupaddon';
 import { InputGroup } from 'primeng/inputgroup';
 import { ButtonModule } from 'primeng/button';
-import { GENDERS } from '../../../shared/data/genders.data';
+import { GENDERS } from '../../../common/data/genders.data';
 import { ContactUsStore } from '../store/contact-us.store';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 

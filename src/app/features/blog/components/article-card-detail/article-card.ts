@@ -7,17 +7,17 @@ import {
   MoveUpRight,
   Tag,
   ThumbsUp,
-  UserPlus,
+  UserPlus
 } from 'lucide-angular';
-import { IArticle } from '../../../../shared/models/entities.models';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { RouterLink } from '@angular/router';
+import { IArticle } from '@common/models';
+import { ApiImgPipe } from '@common/pipes';
 
 @Component({
   selector: 'app-article-card',
   imports: [LucideAngularModule, NgOptimizedImage, ApiImgPipe, RouterLink, CommonModule],
-  templateUrl: './article-card.html',
+  templateUrl: './article-card.html'
 })
 export class ArticleCardDetail {
   article = input.required<IArticle>();
@@ -28,7 +28,7 @@ export class ArticleCardDetail {
     comment: MessageCircleMore,
     like: ThumbsUp,
     calendar: Calendar1,
-    moveUp: MoveUpRight,
+    moveUp: MoveUpRight
   };
-  protected readonly ApiImgPipe = ApiImgPipe;
+  protected ApiImgPipe = ApiImgPipe;
 }

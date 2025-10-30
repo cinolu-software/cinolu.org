@@ -6,7 +6,7 @@ import { LucideAngularModule, LayoutGrid, LogOut, ChevronDown } from 'lucide-ang
 import { ILink } from '../../../data/links.data';
 import { ProgramsStore } from '../../../../features/landing/store/programs.store';
 import { AuthStore } from '../../../../core/auth/auth.store';
-import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../common/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-desktop-nav',

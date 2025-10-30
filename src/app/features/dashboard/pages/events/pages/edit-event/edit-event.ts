@@ -9,30 +9,29 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ActivatedRoute } from '@angular/router';
 import { QuillEditorComponent } from 'ngx-quill';
-import { ChartColumn, FileText, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
+import { ChartColumn, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
 import { environment } from '@environments/environment';
-import { FileUpload, Tabs, MetricsTableComponent } from '@shared/components';
-import { IEvent } from '@shared/models';
-import { ApiImgPipe } from '@shared/pipes';
+import { FileUpload, Tabs, MetricsTableComponent } from '@common/components';
 import {
   MetricsMap,
-  initializeMetricsMap,
-  metricsMapToDto,
   calculateMetricsTotal,
   calculateAchievementPercentage,
   parseDate,
-  extractCategoryIds
-} from '@shared/helpers';
+  extractCategoryIds,
+  initializeMetricsMap,
+  metricsMapToDto
+} from '@common/helpers';
+import { IEvent } from '@common/models';
+import { ApiImgPipe } from '@common/pipes';
+import { IndicatorsStore } from '@features/dashboard/pages/programs/store/programs/indicators.store';
+import { UnpaginatedSubprogramsStore } from '@features/dashboard/pages/programs/store/subprograms/unpaginated-subprograms.store';
+import { EventsStore } from '@features/events/store/events.store';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';
-import { UpdateEventStore } from '../../store/events/update-event.store';
-import { EventsStore } from '../../store/events/events.store';
-import { UnpaginatedSubprogramsStore } from '../../../programs/store/subprograms/unpaginated-subprograms.store';
-import { GalleryStore } from '../../store/galleries/galeries.store';
-import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
-import { EventReport } from '../../components/event-report/event-report';
 import { AddMetricStore } from '../../store/events/add-metric.store';
+import { UpdateEventStore } from '../../store/events/update-event.store';
+import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
+import { GalleryStore } from '../../store/galleries/galeries.store';
 import { EventStore } from '../../store/events/event.store';
-import { IndicatorsStore } from '../../../programs/store/programs/indicators.store';
 
 @Component({
   selector: 'app-event-edit',
@@ -64,42 +63,36 @@ import { IndicatorsStore } from '../../../programs/store/programs/indicators.sto
     QuillEditorComponent,
     LucideAngularModule,
     Tabs,
-    EventReport,
     MetricsTableComponent
   ]
 })
 export class EditEventComponent implements OnInit {
-  readonly #fb = inject(FormBuilder);
-  readonly #route = inject(ActivatedRoute);
-  readonly #slug = this.#route.snapshot.params['slug'];
-  readonly store = inject(UpdateEventStore);
-  readonly categoriesStore = inject(UnpaginatedCategoriesStore);
-  readonly programsStore = inject(UnpaginatedSubprogramsStore);
-  readonly eventStore = inject(EventStore);
-  readonly indicatorsStore = inject(IndicatorsStore);
-  readonly deleteGalleryStore = inject(DeleteGalleryStore);
-  readonly galleryStore = inject(GalleryStore);
-  readonly addMetricsStore = inject(AddMetricStore);
+  #fb = inject(FormBuilder);
+  #route = inject(ActivatedRoute);
+  #slug = this.#route.snapshot.params['slug'];
+  store = inject(UpdateEventStore);
+  categoriesStore = inject(UnpaginatedCategoriesStore);
+  programsStore = inject(UnpaginatedSubprogramsStore);
+  eventStore = inject(EventStore);
+  indicatorsStore = inject(IndicatorsStore);
+  deleteGalleryStore = inject(DeleteGalleryStore);
+  galleryStore = inject(GalleryStore);
+  addMetricsStore = inject(AddMetricStore);
   form!: FormGroup;
   metricsMap: MetricsMap = {};
   activeTab = signal('edit');
 
-  readonly url = `${environment.apiUrl}events/cover/`;
-  readonly galleryUrl = `${environment.apiUrl}events/gallery/`;
-  readonly icons = { trash: Trash2 };
-  readonly tabs = [
+  url = `${environment.apiUrl}events/cover/`;
+  galleryUrl = `${environment.apiUrl}events/gallery/`;
+  icons = { trash: Trash2 };
+  tabs = [
     { label: "Modifier l'événement", name: 'edit', icon: SquarePen },
     { label: 'Gérer la galerie', name: 'gallery', icon: Images },
-    { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn },
-    { label: 'Rapport', name: 'report', icon: FileText }
+    { label: 'Les indicateurs', name: 'indicators', icon: ChartColumn }
   ];
-
-  // Computed metrics
-  readonly totalTargeted = computed(() => calculateMetricsTotal(this.metricsMap, 'target'));
-  readonly totalAchieved = computed(() => calculateMetricsTotal(this.metricsMap, 'achieved'));
-  readonly achievementPercentage = computed(() =>
-    calculateAchievementPercentage(this.totalTargeted(), this.totalAchieved())
-  );
+  totalTargeted = computed(() => calculateMetricsTotal(this.metricsMap, 'target'));
+  totalAchieved = computed(() => calculateMetricsTotal(this.metricsMap, 'achieved'));
+  achievementPercentage = computed(() => calculateAchievementPercentage(this.totalTargeted(), this.totalAchieved()));
 
   constructor() {
     this.form = this.#initForm();
@@ -136,15 +129,12 @@ export class EditEventComponent implements OnInit {
   }
 
   #watchEventChanges(): void {
-    effect(
-      () => {
-        const event = this.eventStore.event();
-        if (!event) return;
-        this.#patchForm(event);
-        this.#initMetrics(event);
-      },
-      { allowSignalWrites: true }
-    );
+    effect(() => {
+      const event = this.eventStore.event();
+      if (!event) return;
+      this.#patchForm(event);
+      this.#initMetrics(event);
+    });
   }
 
   #initMetrics(event: IEvent): void {

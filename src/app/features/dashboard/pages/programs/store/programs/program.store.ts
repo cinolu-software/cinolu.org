@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IProgram } from '../../../../../../shared/models/entities.models';
+import { IProgram } from '@common/models';
 
 interface IProgramStore {
   isLoading: boolean;
@@ -14,7 +14,7 @@ export const ProgramStore = signalStore(
   { providedIn: 'root' },
   withState<IProgramStore>({ isLoading: false, program: null }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadProgram: rxMethod<string>(
@@ -28,10 +28,10 @@ export const ProgramStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, program: null });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

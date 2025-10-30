@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { IImage } from '../../../../../shared/models/entities.models';
+import { IImage } from '@common/models';
 
 interface IGalleryStore {
   isLoading: boolean;
@@ -13,7 +13,7 @@ interface IGalleryStore {
 export const GalleryVenturesStore = signalStore(
   withState<IGalleryStore>({ isLoading: false, gallery: [] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadGallery: rxMethod<string>(
@@ -29,10 +29,10 @@ export const GalleryVenturesStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

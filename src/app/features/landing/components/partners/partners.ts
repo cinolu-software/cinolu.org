@@ -3,7 +3,7 @@ import { PARTNERS, PARTNERS_CATEGORIES } from '../../data/partners.data';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
+import { FadeInOnScrollDirective } from '../../../../common/directives/animations-on-scroll.directive';
 import { UserPlus, LucideAngularModule, Heart, ShoppingCart, MoveUpRight } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
 import {} from '@angular/core';

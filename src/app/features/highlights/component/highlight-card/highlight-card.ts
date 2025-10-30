@@ -5,9 +5,8 @@ import { LucideAngularModule, ChevronLeft, ChevronRight, MoveUpRight } from 'luc
 import { ButtonModule } from 'primeng/button';
 import { interval, Subscription } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-
-import { IArticle, HighlightItem } from '../../../../shared/models/entities.models';
+import { HighlightItem, IArticle } from '@common/models';
+import { ApiImgPipe } from '@common/pipes';
 
 export type HighlightSource = 'programs' | 'subprograms' | 'events' | 'projects' | 'articles';
 
@@ -15,7 +14,7 @@ export type HighlightSource = 'programs' | 'subprograms' | 'events' | 'projects'
   selector: 'app-highlight-card',
   standalone: true,
   imports: [CommonModule, NgOptimizedImage, RouterLink, LucideAngularModule, ButtonModule, ApiImgPipe],
-  templateUrl: './highlight-card.html',
+  templateUrl: './highlight-card.html'
 })
 export class HighlightCard implements OnInit, OnChanges, OnDestroy {
   private sanitizer = inject(DomSanitizer);
@@ -28,7 +27,7 @@ export class HighlightCard implements OnInit, OnChanges, OnDestroy {
   icons = {
     prev: ChevronLeft,
     next: ChevronRight,
-    moveUp: MoveUpRight,
+    moveUp: MoveUpRight
   };
 
   ngOnInit(): void {

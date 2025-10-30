@@ -4,8 +4,8 @@ import { signalStore, withState, withMethods, patchState, withProps } from '@ngr
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, switchMap } from 'rxjs';
 import { FilterVenturesDto } from '../../dto/filter-venture.dto';
-import { buildQueryParams } from '@shared/helpers';
-import { IVenture } from '../../../../../../shared/models/entities.models';
+import { buildQueryParams } from '../../../../../../common/helpers';
+import { IVenture } from '../../../../../../common/models/entities.models';
 
 interface IVenturesStore {
   isLoading: boolean;

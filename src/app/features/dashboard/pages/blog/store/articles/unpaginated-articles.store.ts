@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, exhaustMap, map, of, pipe, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ITag } from '../../../../../../shared/models/entities.models';
+import { ITag } from '../../../../../../common/models/entities.models';
 
 interface IUnpaginatedArticlesStore {
   isLoading: boolean;

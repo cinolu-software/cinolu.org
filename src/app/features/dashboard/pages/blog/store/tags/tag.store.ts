@@ -4,8 +4,8 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterArticlesTagsDto } from '../../dto/filter-tags.dto';
-import { buildQueryParams } from '@shared/helpers';
-import { ITag } from '../../../../../../shared/models/entities.models';
+import { buildQueryParams } from '../../../../../../common/helpers';
+import { ITag } from '../../../../../../common/models/entities.models';
 
 interface ITagsStore {
   isLoading: boolean;

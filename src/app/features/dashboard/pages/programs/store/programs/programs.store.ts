@@ -4,8 +4,8 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterProgramsDto } from '../../dto/programs/filter-programs.dto';
-import { buildQueryParams } from '@shared/helpers';
-import { IProgram } from '../../../../../../shared/models/entities.models';
+import { buildQueryParams } from '@common/helpers';
+import { IProgram } from '@common/models';
 
 interface IProgramsStore {
   isLoading: boolean;

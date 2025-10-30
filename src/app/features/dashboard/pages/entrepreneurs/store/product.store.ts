@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IProduct } from '../../../../../shared/models/entities.models';
+import { IProduct } from '@common/models';
 
 interface IProductStore {
   isLoading: boolean;
@@ -13,7 +13,7 @@ interface IProductStore {
 export const ProductDetailsStore = signalStore(
   withState<IProductStore>({ isLoading: false, product: null }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadProduct: rxMethod<string>(
@@ -27,10 +27,10 @@ export const ProductDetailsStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, product: null });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

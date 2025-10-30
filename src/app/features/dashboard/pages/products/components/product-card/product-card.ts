@@ -1,5 +1,5 @@
 import { Component, inject, input } from '@angular/core';
-import { IProduct } from '../../../../../../shared/models/entities.models';
+import { IProduct } from '../../../../../../common/models/entities.models';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
 import { SquarePen, Eye, LucideAngularModule, Plus, Trash } from 'lucide-angular';

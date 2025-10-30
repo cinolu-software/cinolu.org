@@ -7,11 +7,11 @@ import {
   MoveUpRight,
   Tag,
   ThumbsUp,
-  UserPlus,
+  UserPlus
 } from 'lucide-angular';
-import { IArticle } from '../../../../shared/models/entities.models';
+import { IArticle } from '../../../../common/models/entities.models';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../common/pipes/api-img.pipe';
 import { RouterLink } from '@angular/router';
 import { CommentsStore } from '../../store/comments/comments.store';
 import { Button } from 'primeng/button';
@@ -19,7 +19,7 @@ import { Button } from 'primeng/button';
   selector: 'app-article-card',
   imports: [LucideAngularModule, NgOptimizedImage, ApiImgPipe, RouterLink, CommonModule, Button],
   providers: [CommentsStore],
-  templateUrl: './article-card.html',
+  templateUrl: './article-card.html'
 })
 export class ArticleCard {
   @Input() count = '';
@@ -32,9 +32,9 @@ export class ArticleCard {
     comment: MessageCircleMore,
     like: ThumbsUp,
     calendar: Calendar1,
-    moveUp: MoveUpRight,
+    moveUp: MoveUpRight
   };
-  protected readonly ApiImgPipe = ApiImgPipe;
+  protected ApiImgPipe = ApiImgPipe;
 
   get commentCount() {
     return (comments: unknown) => (Array.isArray(comments) ? comments.length : 0);
