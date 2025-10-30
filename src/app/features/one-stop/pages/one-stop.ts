@@ -1,19 +1,23 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { BookOpen, Goal, Lightbulb, LucideAngularModule, MoveRight } from 'lucide-angular';
+import { BookOpen, Lightbulb, LucideAngularModule, MoveRight, Users } from 'lucide-angular';
 import { Button } from 'primeng/button';
+import { AdvantageCard } from "../composant/advantage-card/advantage-card";
+import { ADVANTAGES } from '../data/advantages.data';
 
 @Component({
   selector: 'app-one-stop',
-  imports: [RouterLink, Button, LucideAngularModule, NgOptimizedImage],
+  imports: [RouterLink, Button, LucideAngularModule, NgOptimizedImage, AdvantageCard],
   templateUrl: './one-stop.html'
 })
 export class OneStop {
+
+  advantages = ADVANTAGES;
   icons = {
     moveRight: MoveRight,
     lightbulb: Lightbulb,
-    goal: Goal,
-    bookOpen: BookOpen
+    users: Users,
+    bookOpen: BookOpen,
   };
 }
