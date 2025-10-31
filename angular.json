@@ -14,13 +14,7 @@
           "builder": "@angular/build:application",
           "options": {
             "allowedCommonJsDependencies": [
-              "jspdf",
-              "jspdf-autotable",
-              "canvg",
-              "core-js",
               "@babel/runtime",
-              "raf",
-              "rgbcolor",
               "filepond",
               "quill-delta",
               "filepond-plugin-image-preview",
