@@ -14,6 +14,11 @@
       <app-entrepreneur-card-skeleton />
       }
     </div>
+    } @else if (venturesStore.ventures().length === 0) {
+    <app-empty-state
+      icon="users"
+      title="Aucun entrepreneur trouvé"
+      description="Il n'y a actuellement aucun entrepreneur dans notre base de données. Revenez bientôt pour découvrir nos talents innovants !" />
     } @else {
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6 md:mb-10">
       @for (venture of pagedVentures; track venture.id) {

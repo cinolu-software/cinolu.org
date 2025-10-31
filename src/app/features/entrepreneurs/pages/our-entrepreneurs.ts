@@ -1,19 +1,20 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { LucideAngularModule, Users } from 'lucide-angular';
+import { LucideAngularModule, Briefcase, Users } from 'lucide-angular';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { VenturesStore } from '../store/ventures.store';
 import { EntrepreneurUserCard } from '../components/entrepreneur-user-card/entrepreneur-user-card';
 import { EntrepreneurCardSkeleton } from '../components/entrepreneur-card-skeleton/entrepreneur-card-skeleton';
+import { EmptyState } from '../../../shared/components/empty-state/empty-state';
 
 @Component({
   selector: 'app-our-entrepreneurs',
   providers: [VenturesStore],
-  imports: [LucideAngularModule, HeroCard, PaginatorModule, EntrepreneurUserCard, EntrepreneurCardSkeleton],
+  imports: [LucideAngularModule, HeroCard, PaginatorModule, EntrepreneurUserCard, EntrepreneurCardSkeleton, EmptyState],
   templateUrl: './our-entrepreneurs.html'
 })
 export class OurEntrepreneurs implements OnInit {
-  icons = { users: Users };
+  icons = { users: Users, briefcase: Briefcase };
   venturesStore = inject(VenturesStore);
 
   first = 0;
