@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, MoveRight, HandCoins } from 'lucide-angular';
 import { IHeroSlide } from '../../../../data/hero-slides.data';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   standalone: true
 })
 export class HeroCard {
-  @Input({ required: true }) slide!: IHeroSlide;
+  slide = input.required<IHeroSlide>();
 
   icons = {
     arrowFlash: MoveRight,
