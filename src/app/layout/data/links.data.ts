@@ -49,7 +49,7 @@ export const EXPLORATION_LINKS: ILink[] = [
     path: '/mycinolu',
     children: [
       { name: 'Nos entrepreneurs', path: '/entrepreneurs', exactUrl: true },
-      { name: 'Jobs & Opportunités', path: '/jobs-opportunities' },
+      // { name: 'Jobs & Opportunités', path: '/jobs-opportunities' },
       { name: 'Blog', path: '/blog-ressources', icon: BookOpen },
       { name: 'Galerie', path: '/gallery', icon: Image },
       { name: 'À propos', path: '/about-us' },
