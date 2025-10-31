@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { InputText } from 'primeng/inputtext';
 import { Button } from 'primeng/button';
 import { LucideAngularModule, ChartColumn } from 'lucide-angular';
-import { MetricsMap } from '@common/helpers';
-import { IIndicator, IMetric } from '@common/models';
+import { MetricsMap } from '../../helpers';
+import { IIndicator, IMetric } from '../../models';
 import { CircularProgressComponent } from '../circular-progress/circular-progress';
 
 @Component({
