@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { LucideAngularModule, Users } from 'lucide-angular';
+import { LucideAngularModule, UserRound, Users } from 'lucide-angular';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { VenturesStore } from '../store/ventures.store';
@@ -13,7 +13,7 @@ import { EntrepreneurCardSkeleton } from '../components/entrepreneur-card-skelet
   templateUrl: './our-entrepreneurs.html'
 })
 export class OurEntrepreneurs implements OnInit {
-  icons = { users: Users };
+  icons = { users: Users, userRound: UserRound };
   venturesStore = inject(VenturesStore);
 
   first = 0;

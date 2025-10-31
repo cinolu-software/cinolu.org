@@ -73,7 +73,7 @@ export const HERO_SLIDES: IHeroSlide[] = [
     titleHighlight: 'En solutions innovantes',
     description:
       "Bénéficiez d'un accompagnement personnalisé, d'un accès à des ressources de qualité et d'un réseau d'entrepreneurs passionnés pour concrétiser vos projets.",
-    backgroundImage: '/images/cinolu-10.jpg',
+    backgroundImage: '/images/cinolu-11.jpg',
     primaryCta: {
       text: 'Nos programmes',
       link: '/programs'
