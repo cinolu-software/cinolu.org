@@ -7,8 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-hero-card',
   imports: [LucideAngularModule, RouterLink, CommonModule],
-  templateUrl: './hero-card.html',
-  standalone: true
+  templateUrl: './hero-card.html'
 })
 export class HeroCard {
   slide = input.required<IHeroSlide>();
