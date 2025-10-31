@@ -15,7 +15,7 @@ export class PageTitleStrategy extends TitleStrategy {
   override updateTitle(routerState: RouterStateSnapshot) {
     const title = this.buildTitle(routerState);
     if (title !== undefined) {
-      this.#title.setTitle(`One Stop CINOLU - ${title}`);
+      this.#title.setTitle(`One Stop - ${title}`);
     }
   }
 }
