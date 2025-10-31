@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { IProduct } from '../../../../../../common/models/entities.models';
+import { IProduct } from '../../../../../../shared/models/entities.models';
 import { ProductsStore } from './products.store';
 
 interface IDeleteProductStore {

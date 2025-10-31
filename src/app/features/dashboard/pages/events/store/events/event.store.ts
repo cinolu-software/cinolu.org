@@ -4,7 +4,7 @@ import { inject } from '@angular/core';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { IndicatorsStore } from '../../../programs/store/programs/indicators.store';
-import { IEvent } from '@common/models';
+import { IEvent } from '../../../../../../shared/models';
 
 interface IEventStore {
   isLoading: boolean;

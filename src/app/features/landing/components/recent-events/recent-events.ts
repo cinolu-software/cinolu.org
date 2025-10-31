@@ -7,7 +7,7 @@ import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight } from 'lucide-
 import { EventCardSkeleton } from '../../../events/components/event-card-skeleton/event-card-skeleton';
 import { EventCard } from '../../../events/components/event-card/event-card';
 import { RecentEventsStore } from '../../../events/store/recent-events.store';
-import { FadeInOnScrollDirective } from '../../../../common/directives/animations-on-scroll.directive';
+import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { Button } from 'primeng/button';
 
 @Component({

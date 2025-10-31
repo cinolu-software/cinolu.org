@@ -17,9 +17,9 @@ import {
 } from 'lucide-angular';
 import { EventStore } from '../../store/event.store';
 import { ActivatedRoute } from '@angular/router';
-import { ApiImgPipe } from '../../../../common/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { Button } from 'primeng/button';
-import { IEvent, IImage } from '../../../../common/models/entities.models';
+import { IEvent, IImage } from '../../../../shared/models/entities.models';
 import { GalleryEventStore } from '../../store/galleries.event.store';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { QuillViewComponent } from 'ngx-quill';

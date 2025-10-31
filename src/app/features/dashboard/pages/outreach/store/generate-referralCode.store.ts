@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../../../core/services/toast/toastr.service';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
-import { IUser } from '../../../../../common/models/entities.models';
+import { IUser } from '../../../../../shared/models/entities.models';
 import { AuthStore } from '../../../../../core/auth/auth.store';
 
 interface IReferralCode {

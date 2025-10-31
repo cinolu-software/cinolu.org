@@ -5,7 +5,7 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { VentureDto } from '../../ventures/dto/venture.dto';
-import { IVenture } from '@common/models';
+import { IVenture } from '../../../../../shared/models';
 import { ToastrService } from '@core/services/toast';
 
 interface IUpdateVenturetore {

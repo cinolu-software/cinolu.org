@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { VenturesStore } from './ventures.store';
-import { IVenture } from '@common/models';
+import { IVenture } from '../../../../../shared/models';
 
 interface IPublishVentureStore {
   isLoading: boolean;

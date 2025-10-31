@@ -5,7 +5,7 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { IVenture } from '../../../../../../common/models/entities.models';
+import { IVenture } from '../../../../../../shared/models/entities.models';
 import { ProductDto } from '../../dto/product.dto';
 
 interface IAddProductStore {

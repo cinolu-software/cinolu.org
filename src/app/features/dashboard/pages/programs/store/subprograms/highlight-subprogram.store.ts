@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { ISubprogram } from '../../../../../../common/models/entities.models';
+import { ISubprogram } from '../../../../../../shared/models/entities.models';
 import { SubprogramsStore } from './subprograms.store';
 
 interface IHighlightStore {

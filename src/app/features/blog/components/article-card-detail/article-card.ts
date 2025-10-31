@@ -11,8 +11,8 @@ import {
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { IArticle } from '@common/models';
-import { ApiImgPipe } from '@common/pipes';
+import { IArticle } from '../../../../shared/models';
+import { ApiImgPipe } from '../../../../shared/pipes';
 
 @Component({
   selector: 'app-article-card',

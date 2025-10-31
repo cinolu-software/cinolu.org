@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { VentureDto } from '../../dto/venture.dto';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { IVenture } from '../../../../../../common/models/entities.models';
+import { IVenture } from '../../../../../../shared/models/entities.models';
 
 interface IUpdateVenturetore {
   isLoading: boolean;

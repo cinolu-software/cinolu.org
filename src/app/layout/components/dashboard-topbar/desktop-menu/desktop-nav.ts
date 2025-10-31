@@ -2,8 +2,8 @@ import { Component, input, output } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule, LogOut, ChevronDown } from 'lucide-angular';
-import { IUser } from '../../../../common/models/entities.models';
-import { ApiImgPipe } from '../../../../common/pipes/api-img.pipe';
+import { IUser } from '../../../../shared/models/entities.models';
+import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-desktop-nav',

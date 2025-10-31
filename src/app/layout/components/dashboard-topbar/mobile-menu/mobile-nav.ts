@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Home, Menu, X, ChevronDown } from 'lucide-angular';
 import { USER_LINKS, ILink, ADMIN_LINKS, COMMON_LINKS } from '../../../data/links.data';
-import { IUser } from '../../../../common/models/entities.models';
+import { IUser } from '../../../../shared/models/entities.models';
 import { filter } from 'rxjs';
 import { AuthStore } from '../../../../core/auth/auth.store';
 import { RoleEnum } from '../../../../core/auth/role.enum';

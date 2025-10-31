@@ -13,8 +13,8 @@ import { ChartColumn, SquarePen } from 'lucide-angular';
 import { environment } from '../../../../../../../environments/environment';
 import { DatePicker } from 'primeng/datepicker';
 import { ProgramStore } from '../../store/programs/program.store';
-import { Tabs, FileUpload } from '@common/components';
-import { IProgram } from '@common/models';
+import { Tabs, FileUpload } from '../../../../../../shared/components';
+import { IProgram } from '../../../../../../shared/models';
 
 interface IndicatorFormData {
   name: string;

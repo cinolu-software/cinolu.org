@@ -12,7 +12,7 @@ import { AddTagStore } from '../../store/tags/add-tag.store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FilterArticlesTagsDto } from '../../dto/filter-tags.dto';
 import { CommonModule } from '@angular/common';
-import { ITag } from '../../../../../../common/models/entities.models';
+import { ITag } from '../../../../../../shared/models/entities.models';
 import { UpdateTagStore } from '../../store/tags/update-tag.store';
 import { DeleteTagStore } from '../../store/tags/delete-tag.store';
 import { ConfirmationService } from 'primeng/api';

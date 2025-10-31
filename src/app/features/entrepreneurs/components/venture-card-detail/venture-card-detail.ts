@@ -7,8 +7,8 @@ import { GalleriaModule } from 'primeng/galleria';
 import { Button } from 'primeng/button';
 import { VentureCardSkeleton } from '../venture-card-skeleton/venture-card-skeleton';
 import { VentureStore } from '@features/entrepreneurs/store/venture.store';
-import { IProduct } from '@common/models';
-import { ApiImgPipe } from '@common/pipes';
+import { IProduct } from '../../../../shared/models';
+import { ApiImgPipe } from '../../../../shared/pipes';
 
 @Component({
   selector: 'app-venture-card-detail',

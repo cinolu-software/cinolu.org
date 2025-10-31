@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { DatePickerModule } from 'primeng/datepicker';
 import { InputText } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { FileUpload } from '../../../../../../common/components/file-upload/file-upload';
-import { ApiImgPipe } from '../../../../../../common/pipes/api-img.pipe';
+import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
+import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { TextareaModule } from 'primeng/textarea';
 import { Button } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
@@ -20,7 +20,7 @@ import { QuillModule } from 'ngx-quill';
 import { GalleryStore } from '../../store/galleries/galeries.store';
 import { DeleteGalleryStore } from '../../store/galleries/delete-gallery.store';
 import { Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
-import { Tabs } from '../../../../../../common/components/tabs/tabs';
+import { Tabs } from '../../../../../../shared/components/tabs/tabs';
 
 @Component({
   selector: 'app-edit-article',

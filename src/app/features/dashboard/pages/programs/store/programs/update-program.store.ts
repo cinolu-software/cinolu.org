@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ProgramDto } from '../../dto/programs/program.dto';
-import { IProgram } from '@common/models';
+import { IProgram } from '../../../../../../shared/models';
 import { ToastrService } from '@core/services/toast';
 
 interface IUpdateProgramStore {

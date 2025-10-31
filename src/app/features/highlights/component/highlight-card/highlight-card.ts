@@ -5,8 +5,8 @@ import { LucideAngularModule, ChevronLeft, ChevronRight, MoveUpRight } from 'luc
 import { ButtonModule } from 'primeng/button';
 import { interval, Subscription } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { HighlightItem, IArticle } from '@common/models';
-import { ApiImgPipe } from '@common/pipes';
+import { HighlightItem, IArticle } from '../../../../shared/models';
+import { ApiImgPipe } from '../../../../shared/pipes';
 
 export type HighlightSource = 'programs' | 'subprograms' | 'events' | 'projects' | 'articles';
 

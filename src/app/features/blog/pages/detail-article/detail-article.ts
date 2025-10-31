@@ -18,7 +18,7 @@ import {
 } from 'lucide-angular';
 import { ArticleStore } from '../../../dashboard/pages/blog/store/articles/article.store';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ApiImgPipe } from '../../../../common/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ArticleCardSkeleton } from '../../components/article-card-skeleton/article-card-skeleton';
 import { RecentArticlesStore } from '../../store/articles/recent-articles.store';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -27,7 +27,7 @@ import { AddCommentStore } from '../../store/comments/add-comment.store';
 import { Button } from 'primeng/button';
 import { AuthStore } from '../../../../core/auth/auth.store';
 import { UpdateCommentStore } from '../../store/comments/update-comment.store';
-import { IComment } from '../../../../common/models/entities.models';
+import { IComment } from '../../../../shared/models/entities.models';
 import { Dialog } from 'primeng/dialog';
 import { DeleteCommentStore } from '../../store/comments/delete-comment';
 import { ConfirmationService } from 'primeng/api';

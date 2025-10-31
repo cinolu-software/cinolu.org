@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ProjectsStore } from './projects.store';
-import { IProject } from '../../../../../../common/models/entities.models';
+import { IProject } from '../../../../../../shared/models/entities.models';
 
 interface IPublishProjectStore {
   isLoading: boolean;

@@ -23,7 +23,7 @@ import { DeleteEventStore } from '../../store/events/delete-event.store';
 import { ConfirmPopup } from 'primeng/confirmpopup';
 import { AvatarModule } from 'primeng/avatar';
 import { PublishEventStore } from '../../store/events/publish-event.store';
-import { ApiImgPipe } from '../../../../../../common/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { HighlightEventStore } from '../../store/events/highlight-event.store';
 import { FilterEventsDto } from '../../dto/categories/filter-events.dto';
 import { ProgressSpinner } from 'primeng/progressspinner';

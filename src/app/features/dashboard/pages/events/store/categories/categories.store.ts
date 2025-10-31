@@ -3,8 +3,8 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { buildQueryParams } from '../../../../../../common/helpers';
-import { ICategory } from '../../../../../../common/models/entities.models';
+import { buildQueryParams } from '../../../../../../shared/helpers';
+import { ICategory } from '../../../../../../shared/models/entities.models';
 import { FilterEventCategoriesDto } from '../../dto/categories/filter-categories.dto';
 
 interface ICategoriesStore {

@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule, FileText, NotepadTextDashed } from 'lucide-angular';
-import { IProject } from '../../../../../common/models/entities.models';
+import { IProject } from '../../../../../shared/models/entities.models';
 
 @Component({
   selector: 'app-project-overview',

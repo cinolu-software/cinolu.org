@@ -13,9 +13,9 @@ import {
   MoveRight
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { FileUpload } from '@common/components';
-import { IUser } from '@common/models';
-import { ApiImgPipe } from '@common/pipes';
+import { FileUpload } from '../../../../../../shared/components';
+import { IUser } from '../../../../../../shared/models';
+import { ApiImgPipe } from '../../../../../../shared/pipes';
 import { environment } from '@environments/environment';
 import { RouterLink } from '@angular/router';
 import { Button } from 'primeng/button';

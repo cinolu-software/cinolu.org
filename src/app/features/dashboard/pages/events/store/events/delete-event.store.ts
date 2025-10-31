@@ -5,7 +5,7 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { EventsStore } from './events.store';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { IEvent } from '../../../../../../common/models/entities.models';
+import { IEvent } from '../../../../../../shared/models/entities.models';
 
 interface IDeleteEventStore {
   isLoading: boolean;

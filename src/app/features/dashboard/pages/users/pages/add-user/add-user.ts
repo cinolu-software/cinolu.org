@@ -12,7 +12,7 @@ import { AddUserStore } from '../../store/users/add-user.store';
 import { UnpaginatedRolesStore } from '../../store/roles/unpaginated-roles.store';
 import { DatePicker } from 'primeng/datepicker';
 import { Select } from 'primeng/select';
-import { GENDERS } from '../../../../../../common/data/genders.data';
+import { GENDERS } from '../../../../../../shared/data/genders.data';
 
 @Component({
   selector: 'app-user-add',

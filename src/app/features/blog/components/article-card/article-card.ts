@@ -9,12 +9,13 @@ import {
   ThumbsUp,
   UserPlus
 } from 'lucide-angular';
-import { IArticle } from '../../../../common/models/entities.models';
+import { IArticle } from '../../../../shared/models/entities.models';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ApiImgPipe } from '../../../../common/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { RouterLink } from '@angular/router';
 import { CommentsStore } from '../../store/comments/comments.store';
 import { Button } from 'primeng/button';
+
 @Component({
   selector: 'app-article-card',
   imports: [LucideAngularModule, NgOptimizedImage, ApiImgPipe, RouterLink, CommonModule, Button],

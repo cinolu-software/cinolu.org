@@ -15,7 +15,7 @@ import { AddRoleStore } from '../../store/roles/add-role.store';
 import { DeleteRoleStore } from '../../store/roles/delete-role.store';
 import { RolesStore } from '../../store/roles/roles.store';
 import { UpdateRoleStore } from '../../store/roles/update-role.store';
-import { IRole } from '../../../../../../common/models/entities.models';
+import { IRole } from '../../../../../../shared/models/entities.models';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 

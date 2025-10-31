@@ -5,7 +5,7 @@ import { ProgramsStore } from '../../../../features/landing/store/programs.store
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule, ChevronDown, Menu, X, ArrowLeft, ChevronRight, Minus } from 'lucide-angular';
 import { ILink } from '../../../data/links.data';
-import { ApiImgPipe } from '../../../../common/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { AuthStore } from '../../../../core/auth/auth.store';
 
 @Component({

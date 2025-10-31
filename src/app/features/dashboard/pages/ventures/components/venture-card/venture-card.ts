@@ -1,7 +1,7 @@
 import { Component, inject, input } from '@angular/core';
-import { IVenture } from '../../../../../../common/models/entities.models';
+import { IVenture } from '../../../../../../shared/models/entities.models';
 import { NgOptimizedImage } from '@angular/common';
-import { ApiImgPipe } from '../../../../../../common/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
 import { SquarePen, Eye, LucideAngularModule, Plus, Trash } from 'lucide-angular';

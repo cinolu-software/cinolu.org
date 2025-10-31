@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { ArticleDto } from '../../dto/article.dto';
 import { Router } from '@angular/router';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { IArticle } from '../../../../../../common/models/entities.models';
+import { IArticle } from '../../../../../../shared/models/entities.models';
 
 interface IUpdateArticleStore {
   isLoading: boolean;

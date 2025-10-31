@@ -3,8 +3,8 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Award, LucideAngularModule, MoveRight, Star } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
 import { Button } from 'primeng/button';
-import { IVenture } from '@common/models';
-import { ApiImgPipe } from '@common/pipes';
+import { IVenture } from '../../../../shared/models';
+import { ApiImgPipe } from '../../../../shared/pipes';
 
 @Component({
   selector: 'app-entrepreneur-user-card',
