@@ -4,7 +4,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { LucideAngularModule, MoveRight, Users, MapPin, Briefcase, TrendingUp, User, Package } from 'lucide-angular';
 import { SOCIAL_LINKS } from '../../../contact-us/data/contact.data';
-import { ButtonModule } from 'primeng/button';
+import { Button, ButtonModule } from 'primeng/button';
 import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
 import { map } from 'rxjs';
 import { VentureStore } from '@features/entrepreneurs/store/venture.store';
@@ -14,7 +14,16 @@ import { ApiImgPipe } from '../../../../shared/pipes';
 @Component({
   selector: 'app-entrepreneur-detail-card',
   providers: [VentureStore],
-  imports: [CommonModule, RouterModule, LucideAngularModule, ButtonModule, ApiImgPipe, HeroCard, NgOptimizedImage],
+  imports: [
+    CommonModule,
+    RouterModule,
+    LucideAngularModule,
+    ButtonModule,
+    ApiImgPipe,
+    HeroCard,
+    NgOptimizedImage,
+    Button
+  ],
   templateUrl: './entrepreneur-detail-card.html'
 })
 export class EntrepreneurDetailCard {
