@@ -31,8 +31,8 @@ import { VenturesStore } from '../../store/ventures.store';
 import { SECTORS } from '../../../ventures/data/sectors.data';
 import { Select } from 'primeng/select';
 import { PublishVentureStore } from '../../store/publish-venture.store';
-import { IVenture } from '@common/models';
-import { ApiImgPipe } from '@common/pipes';
+import { IVenture } from '../../../../../../shared/models';
+import { ApiImgPipe } from '../../../../../../shared/pipes';
 
 @Component({
   selector: 'app-list-ventures',

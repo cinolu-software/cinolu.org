@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { STATS } from '../../data/stats.data';
 import { LucideAngularModule, HandCoins, Lightbulb, MoveUpRight, User, UserPlus } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
-import { CountUpDirective } from '../../../../common/directives/count-up.directive';
-import { FadeInOnScrollDirective } from '../../../../common/directives/animations-on-scroll.directive';
+import { CountUpDirective } from '../../../../shared/directives/count-up.directive';
+import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { REASONS } from '../../data/reasons-join-us.data';
 
 @Component({

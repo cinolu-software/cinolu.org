@@ -27,10 +27,10 @@ import { AddSubprogramsStore } from '../../store/subprograms/add-subprograms.sto
 import { Textarea } from 'primeng/textarea';
 import { UpdateSubprogramsStore } from '../../store/subprograms/update-subprograms.store';
 import { DeleteSubprogramsStore } from '../../store/subprograms/delete-subprograms.store';
-import { ISubprogram } from '../../../../../../common/models/entities.models';
-import { FileUpload } from '../../../../../../common/components/file-upload/file-upload';
+import { ISubprogram } from '../../../../../../shared/models/entities.models';
+import { FileUpload } from '../../../../../../shared/components/file-upload/file-upload';
 import { environment } from '../../../../../../../environments/environment';
-import { ApiImgPipe } from '../../../../../../common/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { AvatarModule } from 'primeng/avatar';
 import { PublishSubprogramsStore } from '../../store/subprograms/publish-subprograms.store';
 import { UnpaginatedProgramsStore } from '../../store/programs/unpaginated-programs.store';

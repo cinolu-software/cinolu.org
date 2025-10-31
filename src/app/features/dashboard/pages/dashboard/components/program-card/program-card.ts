@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { LucideAngularModule, BarChart3, Flag, Check } from 'lucide-angular';
 import { ProgramReport } from '../../types/stats.type';
-import { CircularProgressComponent } from '../../../../../../common/components/circular-progress/circular-progress';
+import { CircularProgressComponent } from '../../../../../../shared/components/circular-progress/circular-progress';
 
 @Component({
   selector: 'app-program-card',

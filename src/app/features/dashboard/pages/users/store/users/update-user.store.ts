@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserDto } from '../../dto/users/user.dto';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { IUser } from '../../../../../../common/models/entities.models';
+import { IUser } from '../../../../../../shared/models/entities.models';
 
 interface IUpdateUserStore {
   isLoading: boolean;

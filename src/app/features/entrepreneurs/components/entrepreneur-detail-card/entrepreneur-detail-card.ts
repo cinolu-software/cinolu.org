@@ -8,8 +8,8 @@ import { ButtonModule } from 'primeng/button';
 import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
 import { map } from 'rxjs';
 import { VentureStore } from '@features/entrepreneurs/store/venture.store';
-import { IUser, IVenture } from '@common/models';
-import { ApiImgPipe } from '@common/pipes';
+import { IUser, IVenture } from '../../../../shared/models';
+import { ApiImgPipe } from '../../../../shared/pipes';
 
 @Component({
   selector: 'app-entrepreneur-detail-card',

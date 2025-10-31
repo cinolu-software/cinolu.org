@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, exhaustMap, map, of, pipe, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IProject } from '@common/models';
+import { IProject } from '../../../../../../shared/models';
 
 interface IUnpaginatedProgramsStore {
   isLoading: boolean;

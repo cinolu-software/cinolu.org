@@ -10,7 +10,7 @@ import { appConfig } from '../../app.config';
 import { LoadingService } from '../services/loading/loading.service';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, of } from 'rxjs';
-import { IUser } from '../../common/models/entities.models';
+import { IUser } from '../../shared/models/entities.models';
 import { AuthStore } from '../auth/auth.store';
 
 export const provideApp = (): EnvironmentProviders[] => {

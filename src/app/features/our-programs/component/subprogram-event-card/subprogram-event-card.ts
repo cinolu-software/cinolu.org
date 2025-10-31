@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { IEvent } from '../../../../common/models/entities.models';
+import { IEvent } from '../../../../shared/models/entities.models';
 import {
   BookmarkCheck,
   Calendar1,
@@ -16,7 +16,7 @@ import {
   ThumbsUp,
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ApiImgPipe } from '../../../../common/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { Tag } from 'primeng/tag';
 import { Button } from 'primeng/button';
 import { QuillModule } from 'ngx-quill';

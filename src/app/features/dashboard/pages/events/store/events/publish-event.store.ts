@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { EventsStore } from './events.store';
-import { IEvent } from '../../../../../../common/models/entities.models';
+import { IEvent } from '../../../../../../shared/models/entities.models';
 
 interface IPublishEventStore {
   isLoading: boolean;

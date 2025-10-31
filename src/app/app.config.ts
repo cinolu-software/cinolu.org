@@ -9,7 +9,7 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { providePrimeNG } from 'primeng/config';
 import { PageTitleStrategy } from './core/strategies/page-title.strategy';
-import { primeNGPreset } from './common/config/primeng.config';
+import { primeNGPreset } from './shared/config/primeng.config';
 import { provideApp } from './core/providers/app.provider';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { httpInterceptor } from './core/interceptors/http.interceptor';

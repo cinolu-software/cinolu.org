@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { IUser } from '../../../../../../common/models/entities.models';
+import { IUser } from '../../../../../../shared/models/entities.models';
 
 interface IUserStore {
   isLoading: boolean;

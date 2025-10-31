@@ -19,7 +19,7 @@ import { ProgramStore } from '../../../landing/store/program.store';
 import { SubprogramCardSkeleton } from '../../component/subprogram-card-skeleton/subprogram-card-skeleton';
 import { Subject, takeUntil } from 'rxjs';
 import { Button } from 'primeng/button';
-import { ApiImgPipe } from '../../../../common/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-detail-programs',

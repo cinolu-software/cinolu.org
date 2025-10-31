@@ -5,7 +5,7 @@ import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TagsStore } from './tag.store';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
-import { ITag } from '../../../../../../common/models/entities.models';
+import { ITag } from '../../../../../../shared/models/entities.models';
 
 interface IUpdateTagStore {
   isLoading: boolean;

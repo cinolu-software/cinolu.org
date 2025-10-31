@@ -4,8 +4,8 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterRolesDto } from '../../dto/roles/filter-roles.dto';
-import { buildQueryParams } from '../../../../../../common/helpers';
-import { IRole } from '../../../../../../common/models/entities.models';
+import { buildQueryParams } from '../../../../../../shared/helpers';
+import { IRole } from '../../../../../../shared/models/entities.models';
 
 interface IRolesStore {
   isLoading: boolean;

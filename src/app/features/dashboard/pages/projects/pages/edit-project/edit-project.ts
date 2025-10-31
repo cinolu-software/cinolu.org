@@ -11,7 +11,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { environment } from '@environments/environment';
-import { FileUpload, Tabs, MetricsTableComponent } from '@common/components';
+import { FileUpload, Tabs, MetricsTableComponent } from '../../../../../../shared/components';
 import {
   MetricsMap,
   calculateMetricsTotal,
@@ -20,9 +20,9 @@ import {
   metricsMapToDto,
   parseDate,
   extractCategoryIds
-} from '@common/helpers';
-import { IProject } from '@common/models';
-import { ApiImgPipe } from '@common/pipes';
+} from '../../../../../../shared/helpers';
+import { IProject } from '../../../../../../shared/models';
+import { ApiImgPipe } from '../../../../../../shared/pipes';
 import { IndicatorsStore } from '@features/dashboard/pages/programs/store/programs/indicators.store';
 import { UnpaginatedSubprogramsStore } from '@features/dashboard/pages/programs/store/subprograms/unpaginated-subprograms.store';
 import { UnpaginatedCategoriesStore } from '../../store/categories/unpaginated-categories.store';

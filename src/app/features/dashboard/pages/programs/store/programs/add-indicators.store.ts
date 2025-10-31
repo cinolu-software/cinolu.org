@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '@core/services/toast';
-import { IIndicator } from '@common/models';
+import { IIndicator } from '../../../../../../shared/models';
 
 interface IAddIndicatorStore {
   isLoading: boolean;

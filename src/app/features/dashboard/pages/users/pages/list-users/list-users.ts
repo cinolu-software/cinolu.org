@@ -14,7 +14,7 @@ import { FilterUsersDto } from '../../dto/users/filter-users.dto';
 import { ConfirmationService } from 'primeng/api';
 import { DeleteUserStore } from '../../store/users/delete-user.store';
 import { ConfirmPopup } from 'primeng/confirmpopup';
-import { ApiImgPipe } from '../../../../../../common/pipes/api-img.pipe';
+import { ApiImgPipe } from '../../../../../../shared/pipes/api-img.pipe';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 

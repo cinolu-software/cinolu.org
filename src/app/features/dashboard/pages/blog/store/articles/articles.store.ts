@@ -4,8 +4,8 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterArticlesTagsDto } from '../../dto/filter-tags.dto';
-import { buildQueryParams } from '../../../../../../common/helpers';
-import { IArticle } from '../../../../../../common/models';
+import { buildQueryParams } from '../../../../../../shared/helpers';
+import { IArticle } from '../../../../../../shared/models';
 
 interface IArticlesStore {
   isLoading: boolean;

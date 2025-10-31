@@ -3,7 +3,7 @@ import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { ProgramsStore } from '../../store/programs.store';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ApiImgPipe } from '@common/pipes';
+import { ApiImgPipe } from '../../../../shared/pipes';
 
 @Component({
   selector: 'app-our-programs',

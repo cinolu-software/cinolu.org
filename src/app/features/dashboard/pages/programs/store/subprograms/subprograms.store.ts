@@ -4,8 +4,8 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FilterSubprogramsDto } from '../../dto/subprograms/filter-subprograms.dto';
-import { buildQueryParams } from '../../../../../../common/helpers';
-import { ISubprogram } from '../../../../../../common/models/entities.models';
+import { buildQueryParams } from '../../../../../../shared/helpers';
+import { ISubprogram } from '../../../../../../shared/models/entities.models';
 
 interface IProgramsStore {
   isLoading: boolean;

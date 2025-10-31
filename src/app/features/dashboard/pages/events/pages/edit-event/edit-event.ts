@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { QuillEditorComponent } from 'ngx-quill';
 import { ChartColumn, Images, LucideAngularModule, SquarePen, Trash2 } from 'lucide-angular';
 import { environment } from '@environments/environment';
-import { FileUpload, Tabs, MetricsTableComponent } from '@common/components';
+import { FileUpload, Tabs, MetricsTableComponent } from '../../../../../../shared/components';
 import {
   MetricsMap,
   calculateMetricsTotal,
@@ -20,9 +20,9 @@ import {
   extractCategoryIds,
   initializeMetricsMap,
   metricsMapToDto
-} from '@common/helpers';
-import { IEvent } from '@common/models';
-import { ApiImgPipe } from '@common/pipes';
+} from '../../../../../../shared/helpers';
+import { IEvent } from '../../../../../../shared/models';
+import { ApiImgPipe } from '../../../../../../shared/pipes';
 import { IndicatorsStore } from '@features/dashboard/pages/programs/store/programs/indicators.store';
 import { UnpaginatedSubprogramsStore } from '@features/dashboard/pages/programs/store/subprograms/unpaginated-subprograms.store';
 import { EventsStore } from '@features/events/store/events.store';

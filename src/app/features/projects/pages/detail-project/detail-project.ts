@@ -18,8 +18,8 @@ import {
 } from 'lucide-angular';
 import { ProjectStore } from '../../store/project.store';
 import { ActivatedRoute } from '@angular/router';
-import { ApiImgPipe } from '../../../../common/pipes/api-img.pipe';
-import { IProject } from '../../../../common/models/entities.models';
+import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
+import { IProject } from '../../../../shared/models/entities.models';
 import { GalleriaModule } from 'primeng/galleria';
 import { Button } from 'primeng/button';
 import { QuillViewComponent } from 'ngx-quill';

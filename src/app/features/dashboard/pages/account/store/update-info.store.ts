@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { UpdateInfoDto } from '../dto/update-info.dto';
 import { AuthStore } from '../../../../../core/auth/auth.store';
 import { ToastrService } from '../../../../../core/services/toast/toastr.service';
-import { IUser } from '../../../../../common/models/entities.models';
+import { IUser } from '../../../../../shared/models/entities.models';
 
 interface IUpdateInfoStore {
   isLoading: boolean;

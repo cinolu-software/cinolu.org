@@ -16,7 +16,7 @@ import { DownloadUsersStore } from '../../../users/store/users/download-csv.stor
 import { DeleteUserStore } from '../../../users/store/users/delete-user.store';
 import { FilterEntrepreneursDto } from '../../dto/ventures/filter-ventures.dto';
 import { ConfirmPopup } from 'primeng/confirmpopup';
-import { ApiImgPipe } from '@common/pipes';
+import { ApiImgPipe } from '../../../../../../shared/pipes';
 
 @Component({
   selector: 'app-users-list',

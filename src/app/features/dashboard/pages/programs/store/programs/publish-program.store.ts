@@ -4,7 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ProgramsStore } from './programs.store';
-import { IProgram } from '@common/models';
+import { IProgram } from '../../../../../../shared/models';
 
 interface IPublishProgramStore {
   isLoading: boolean;

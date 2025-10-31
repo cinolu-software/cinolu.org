@@ -5,7 +5,7 @@ import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '../../../../../../core/services/toast/toastr.service';
 import { ArticlesStore } from './articles.store';
-import { IArticle } from '../../../../../../common/models/entities.models';
+import { IArticle } from '../../../../../../shared/models/entities.models';
 
 interface IHighlightStore {
   isLoading: boolean;

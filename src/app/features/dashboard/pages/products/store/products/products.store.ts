@@ -4,8 +4,8 @@ import { signalStore, withState, withMethods, patchState, withProps } from '@ngr
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, switchMap } from 'rxjs';
 import { FilterProductsDto } from '../../dto/filter-product.dto';
-import { buildQueryParams } from '../../../../../../common/helpers';
-import { IProduct } from '../../../../../../common/models/entities.models';
+import { buildQueryParams } from '../../../../../../shared/helpers';
+import { IProduct } from '../../../../../../shared/models/entities.models';
 
 interface IProductsStore {
   isLoading: boolean;

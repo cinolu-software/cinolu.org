@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { GalleriaModule } from 'primeng/galleria';
 import { ProductDetailSkeleton } from '../product-detail-skeleton/product-detail-skeleton';
-import { ApiImgPipe } from '@common/pipes';
+import { ApiImgPipe } from '../../../../shared/pipes';
 
 @Component({
   selector: 'app-product-detail',

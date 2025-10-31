@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IVenture } from '../../../../../../common/models/entities.models';
+import { IVenture } from '../../../../../../shared/models/entities.models';
 
 interface IVentureStore {
   isLoading: boolean;
