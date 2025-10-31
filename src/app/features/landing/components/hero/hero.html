@@ -11,11 +11,10 @@
       [value]="slides"
       [numVisible]="1"
       [numScroll]="1"
-      [circular]="true"
+      [circular]="false"
       [autoplayInterval]="7000"
-      [showNavigators]="true"
+      [showNavigators]="false"
       [showIndicators]="true"
-      [responsiveOptions]="responsiveOptions"
       (onPage)="onPageChange($event)"
       class="w-full hero-carousel">
       <ng-template let-slide #item>
