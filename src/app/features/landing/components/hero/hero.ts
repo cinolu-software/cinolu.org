@@ -1,24 +1,27 @@
 import { Component } from '@angular/core';
 import { STATS } from '../../data/stats.data';
-import { Lightbulb, MoveRight, HandCoins, LucideAngularModule } from 'lucide-angular';
-import { RouterLink } from '@angular/router';
-import { trigger, transition, style, animate } from '@angular/animations';
+import { HERO_SLIDES } from '../../data/hero-slides.data';
+import { LucideAngularModule } from 'lucide-angular';
+import { HeroCard } from './component/hero-card/hero-card';
+import { CommonModule } from '@angular/common';
+import { CarouselModule, CarouselPageEvent } from 'primeng/carousel';
+import { carouselConfig } from '@features/landing/config/carousel.config';
 
 @Component({
   selector: 'app-hero',
-  imports: [LucideAngularModule, RouterLink],
-  templateUrl: './hero.html',
-  animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(10px)' }),
-        animate('700ms ease-in-out', style({ opacity: 1, transform: 'translateY(0)' })),
-      ]),
-      transition(':leave', [animate('700ms ease-in-out', style({ opacity: 0, transform: 'translateY(-10px)' }))]),
-    ]),
-  ],
+  imports: [LucideAngularModule, HeroCard, CommonModule, CarouselModule],
+  templateUrl: './hero.html'
 })
 export class Hero {
   stats = STATS;
-  icons = { lightbulb: Lightbulb, arrowFlash: MoveRight, donate: HandCoins };
+  slides = HERO_SLIDES;
+  currentBgImage = this.slides[0].backgroundImage;
+
+  responsiveOptions = carouselConfig;
+
+  onPageChange(event: CarouselPageEvent): void {
+    if (event.page !== undefined) {
+      this.currentBgImage = this.slides[event.page].backgroundImage;
+    }
+  }
 }
