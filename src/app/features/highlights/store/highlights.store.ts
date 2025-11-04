@@ -53,15 +53,13 @@ export const HighlightsStore = signalStore(
                   (item) => ({ ...item, sourceKey: 'articles' }) as IArticle & { sourceKey: 'articles' }
                 ) || [])
               ];
-
               patchState(store, {
                 isLoading: false,
                 highlights,
                 _rawHighlights: data
               });
             }),
-            catchError((err) => {
-              console.error('Failed to load highlights', err);
+            catchError(() => {
               patchState(store, { isLoading: false, highlights: [], _rawHighlights: null });
               return of(null);
             })
