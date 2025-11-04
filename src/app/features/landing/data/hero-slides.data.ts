@@ -79,8 +79,8 @@ export const HERO_SLIDES: IHeroSlide[] = [
       link: '/programs'
     },
     secondaryCta: {
-      text: 'Nos projets',
-      link: '/programs'
+      text: 'Nos événements',
+      link: '/events'
     }
   }
 ];
