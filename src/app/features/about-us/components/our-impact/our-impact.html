@@ -1,33 +1,68 @@
-<section class="bg-gray-100 bg-grid" id="about">
+<section class="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 bg-grid overflow-hidden" id="about">
+  <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-primary-200/20 rounded-full blur-3xl"></div>
+
   <div
-    class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto fade-left-init py-12 sm:py-16 md:pb-20"
+    class="relative px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto fade-left-init py-16 md:py-24"
     appAnimationsOnScroll>
-    <h2
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-8 tracking-tight leading-tight pb-8">
-      Notre <span class="text-primary-500">impact</span>
-    </h2>
+    <div class="mb-16 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 rounded-full mb-6">
+        <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
+        <span class="text-sm font-semibold text-primary-700 uppercase tracking-wider">Impact & Résultats</span>
+      </div>
+      <h2
+        class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-satoshi mb-4 tracking-tight leading-[1.1]">
+        Notre <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">impact</span>
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Des chiffres qui témoignent de notre engagement et de notre impact sur le terrain
+      </p>
+    </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       <div
-        *ngFor="let item of our_impact"
-        class="bg-white shadow-md hover:shadow-xl rounded-lg p-6 w-full sm:max-w-xs mx-auto transition-transform duration-300 hover:scale-105 text-center">
-        <i-lucide [name]="item.icon" class="text-primary-500 size-10 sm:size-12 mx-auto mb-4" />
+        *ngFor="let item of our_impact; let i = index"
+        class="group relative bg-white rounded-2xl border border-gray-100 p-8 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-primary-50/0 to-primary-100/0 group-hover:from-primary-50/50 group-hover:to-primary-100/30 transition-all duration-500"></div>
 
-        <div class="flex gap-x-1 justify-center">
-          <p
-            appCountUp
-            suffix=""
-            [duration]="2000"
-            [end]="item.value"
-            class="text-3xl sm:text-4xl font-black text-primary-500 mb-2"></p>
-          @if (item.artefact) {
-          <span class="text-gray-500">{{ item.artefact }}</span>
-          }
+        <div
+          class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 to-primary-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+
+        <div class="relative z-10 flex flex-col items-center text-center space-y-4">
+          <div class="relative">
+            <div
+              class="absolute inset-0 bg-primary-500/10 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+            <div
+              class="relative bg-gradient-to-br from-primary-50 to-primary-100 p-4 rounded-2xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+              <i-lucide [name]="item.icon" class="text-primary-600 size-10 sm:size-12" />
+            </div>
+          </div>
+
+          <div class="flex items-baseline gap-1 justify-center">
+            <p
+              appCountUp
+              suffix=""
+              [duration]="2000"
+              [end]="item.value"
+              class="text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary-600 to-primary-700"></p>
+            @if (item.artefact) {
+            <span class="text-2xl font-bold text-primary-500">{{ item.artefact }}</span>
+            }
+          </div>
+
+          <h3
+            class="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-primary-700 transition-colors duration-300">
+            {{ item.title }}
+          </h3>
+
+          <p class="text-sm sm:text-base text-gray-600 leading-relaxed">{{ item.description }}</p>
         </div>
 
-        <h3 class="text-base sm:text-lg font-semibold text-gray-800 mb-2">{{ item.title }}</h3>
-
-        <p class="sm:text-base text-gray-500 break-words">{{ item.description }}</p>
+        <div
+          class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 group-hover:bg-primary-100 flex items-center justify-center text-xs font-bold text-gray-400 group-hover:text-primary-600 transition-all duration-300">
+          {{ i + 1 }}
+        </div>
       </div>
     </div>
   </div>

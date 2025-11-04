@@ -12,9 +12,9 @@
         [value]="partners"
         [numVisible]="5"
         [circular]="true"
-        autoplayInterval="2000"
-        showIndicators="false"
-        showNavigators="true"
+        [autoplayInterval]="2000"
+        [showIndicators]="false"
+        [showNavigators]="true"
         [responsiveOptions]="responsiveOptions">
         <ng-template let-partners #item>
           <div
@@ -24,7 +24,8 @@
                 <div class="w-full h-20 m-2 flex items-center justify-center rounded-lg">
                   <img
                     [ngSrc]="partners.image"
-                    alt="Logo partenaire"
+                    [alt]="'Logo de ' + partners.name"
+                    [title]="partners.name"
                     width="100"
                     height="100"
                     class="max-h-full object-contain w-full rounded-border" />
