@@ -18,7 +18,7 @@
           fill
           [ngSrc]="prevItemData | apiIMG: whatIsDisplayed(prevItemData)"
           class="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
-          [alt]="getItemTitle(prevItemData)"
+          alt="{{getItemTitle(prevItemData)}}"
           loading="lazy" />
       </div>
       <div class="p-3 flex flex-col justify-between gap-1 flex-1">
@@ -51,7 +51,7 @@
         <img
           [ngSrc]="currentItem | apiIMG: whatIsDisplayed(currentItem)"
           fill
-          [alt]="getItemTitle(currentItem)"
+          alt="{{getItemTitle(currentItem)}}"
           class="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
           loading="lazy" />
       </div>
@@ -88,7 +88,7 @@
           [ngSrc]="nextItemData | apiIMG: whatIsDisplayed(nextItemData)"
           class="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
           fill
-          [alt]="getItemTitle(nextItemData)"
+          alt="{{getItemTitle(nextItemData)}}"
           loading="lazy" />
       </div>
       <div class="p-3 flex flex-col justify-between gap-1 flex-1">
