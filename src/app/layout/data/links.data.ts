@@ -29,7 +29,7 @@ export const EXPLORATION_LINKS: ILink[] = [
   {
     icon: Calendar1,
     name: 'Accueil',
-    path: '',
+    path: '/',
     exactUrl: true
   },
   {
