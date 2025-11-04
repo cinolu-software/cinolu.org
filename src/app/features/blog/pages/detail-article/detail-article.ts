@@ -14,9 +14,8 @@ import {
   Tags,
   ThumbsUp,
   Trash,
-  UserPlus,
+  UserPlus
 } from 'lucide-angular';
-import { ArticleStore } from '../../../dashboard/pages/blog/store/articles/article.store';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ArticleCardSkeleton } from '../../components/article-card-skeleton/article-card-skeleton';
@@ -36,6 +35,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { QuillViewComponent } from 'ngx-quill';
 import { GalleriaModule } from 'primeng/galleria';
 import { carouselConfig } from '../../../landing/config/carousel.config';
+import { ArticleStore } from '@features/blog/store/articles/article.store';
 
 @Component({
   selector: 'app-detail-article',
@@ -46,7 +46,7 @@ import { carouselConfig } from '../../../landing/config/carousel.config';
     RecentArticlesStore,
     AddCommentStore,
     DeleteCommentStore,
-    ConfirmationService,
+    ConfirmationService
   ],
   imports: [
     LucideAngularModule,
@@ -61,9 +61,9 @@ import { carouselConfig } from '../../../landing/config/carousel.config';
     Dialog,
     ConfirmDialog,
     QuillViewComponent,
-    GalleriaModule,
+    GalleriaModule
   ],
-  templateUrl: './detail-article.html',
+  templateUrl: './detail-article.html'
 })
 export class DetailArticle implements OnInit, OnDestroy {
   #fb = inject(FormBuilder);
@@ -91,10 +91,10 @@ export class DetailArticle implements OnInit, OnDestroy {
     moveUp: MoveUpRight,
     info: BadgeInfo,
     edit: Pencil,
-    delete: Trash,
+    delete: Trash
   };
   queryParams = signal({
-    page: this.#route.snapshot.params['page'] || '1',
+    page: this.#route.snapshot.params['page'] || '1'
   });
   #slug = this.#route.snapshot.params['slug'];
   comment = signal<IComment | null>(null);
@@ -110,19 +110,19 @@ export class DetailArticle implements OnInit, OnDestroy {
   constructor() {
     this.form = this.#fb.group({
       content: ['', Validators.required],
-      articleId: [''],
+      articleId: ['']
     });
 
     this.updateCommentForm = this.#fb.group({
       id: ['', Validators.required],
-      content: ['', Validators.required],
+      content: ['', Validators.required]
     });
     effect(() => {
       this.isLoggedIn.set(!!this.profile.user());
       if (!this.isLoggedIn()) this.form.get('content')?.disable();
       this.commentsStore.loadComments({
         slug: this.#slug,
-        dto: this.queryParams(),
+        dto: this.queryParams()
       });
     });
   }
@@ -130,7 +130,7 @@ export class DetailArticle implements OnInit, OnDestroy {
   loadMore(): void {
     this.queryParams.update((params) => ({
       ...params,
-      page: +params.page + 1,
+      page: +params.page + 1
     }));
   }
 
@@ -153,7 +153,7 @@ export class DetailArticle implements OnInit, OnDestroy {
     this.comment.set(comment);
     this.updateCommentForm.patchValue({
       id: comment?.id || '',
-      content: comment?.content || '',
+      content: comment?.content || ''
     });
     this.showEditModal.set(true);
   }
@@ -167,7 +167,7 @@ export class DetailArticle implements OnInit, OnDestroy {
       payload: this.updateCommentForm.value,
       onSuccess: () => {
         this.showEditModal.set(false);
-      },
+      }
     });
   }
 
@@ -181,16 +181,16 @@ export class DetailArticle implements OnInit, OnDestroy {
       acceptButtonProps: {
         severity: 'danger',
         outlined: true,
-        size: 'small',
+        size: 'small'
       },
       rejectButtonProps: {
         severity: 'secondary',
         outlined: true,
-        size: 'small',
+        size: 'small'
       },
       accept: () => {
         this.deleteCommentStore.deleteComment({ id: commentId });
-      },
+      }
     });
   }
 }
