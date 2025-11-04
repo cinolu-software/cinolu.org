@@ -1,5 +1,4 @@
 import { Route } from '@angular/router';
-import { authGuard } from '@core/guards';
 import { Layout } from './layout/layout';
 
 export const routes: Route[] = [
@@ -57,25 +56,14 @@ export const routes: Route[] = [
     data: { layout: 'full-layout' },
     loadChildren: () => import('./features/contact-us/contact-us.routes').then((m) => m.contactUsRoutes)
   },
-  {
-    path: 'dashboard',
-    component: Layout,
-    data: { layout: 'dashboard-layout' },
-    canActivate: [authGuard],
-    loadChildren: () => import('./features/dashboard/dashboard.routes').then((m) => m.dashboardRoutes)
-  },
+
   {
     path: 'blog-ressources',
     component: Layout,
     data: { layout: 'fixed-layout' },
     loadChildren: () => import('./features/blog/blogs.routes').then((m) => m.blogsRoutes)
   },
-  {
-    path: 'one-stop',
-    component: Layout,
-    data: { layout: 'fixed-layout' },
-    loadChildren: () => import('./features/one-stop/one-stop.routes').then((m) => m.oneStopRoutes)
-  },
+
   {
     path: '',
     component: Layout,
