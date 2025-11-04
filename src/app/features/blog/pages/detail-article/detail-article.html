@@ -193,7 +193,7 @@ gallery = store.article()?.gallery || [];
             <div class="relative w-full overflow-hidden h-72 md:h-[24rem] rounded-lg">
               <img
                 [src]="img | apiIMG:'gallery'"
-                [alt]="img.image"
+                alt="{{img.image}}"
                 fill
                 priority
                 class="object-cover w-full h-full transition-transform duration-300 hover:scale-105" />
@@ -203,7 +203,7 @@ gallery = store.article()?.gallery || [];
           <ng-template pTemplate="thumbnail" let-img class="cursor-pointer gap-2">
             <img
               [src]="img | apiIMG:'gallery'"
-              [alt]="img.image"
+              alt="{{img.image}}"
               fill
               priority
               class="object-cover p-1 h-20 w-20 rounded-md" />
@@ -215,7 +215,7 @@ gallery = store.article()?.gallery || [];
             fill
             priority
             [src]="gallery | apiIMG:'ventureCover'"
-            [alt]="gallery?.[0]?.image"
+            alt="{{gallery?.[0]?.image}}"
             class="object-cover w-full h-full transition-transform duration-300 hover:scale-105" />
         </div>
         }
