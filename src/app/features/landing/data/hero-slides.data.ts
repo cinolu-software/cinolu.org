@@ -32,7 +32,7 @@ export const HERO_SLIDES: IHeroSlide[] = [
     titleHighlight: "D'impact et d'inspiration",
     description:
       'Depuis 2015, nous accompagnons les talents congolais et africains à transformer leurs idées en solutions durables.',
-    backgroundImage: '/images/cinolu-10.jpg',
+    backgroundImage: '/images/10-ANS.png',
     primaryCta: {
       text: 'Notre histoire',
       link: '/about-us'
@@ -73,14 +73,14 @@ export const HERO_SLIDES: IHeroSlide[] = [
     titleHighlight: 'En solutions innovantes',
     description:
       "Bénéficiez d'un accompagnement personnalisé, d'un accès à des ressources de qualité et d'un réseau d'entrepreneurs passionnés pour concrétiser vos projets.",
-    backgroundImage: '/images/cinolu-11.jpg',
+    backgroundImage: '/images/innovation.jpg',
     primaryCta: {
       text: 'Nos programmes',
       link: '/programs'
     },
     secondaryCta: {
-      text: 'Nos projets',
-      link: '/programs'
+      text: 'Nos événements',
+      link: '/events'
     }
   }
 ];

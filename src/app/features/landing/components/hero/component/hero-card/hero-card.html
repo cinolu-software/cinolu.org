@@ -12,13 +12,12 @@
 
     <div class="space-y-3 sm:space-y-4 md:space-y-5">
       <h2 class="font-black font-satoshi text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-        {{ slides.title }}
-        <span class="block text-primary-400 mt-1.5">{{ slides.titleHighlight }}</span>
+        <span class="line-clamp-1">{{ slides.title }}</span>
+        <span class="block text-primary-400 mt-1.5 line-clamp-1">{{ slides.titleHighlight }}</span>
       </h2>
-      <p
-        class="text-white/90 line-clamp-3 text-base sm:text-lg lg:text-xl font-light max-w-full sm:max-w-2xl leading-relaxed">
-        {{ slides.description }}
-      </p>
+      <div
+        class="text-white/90 line-clamp-3 text-base sm:text-lg lg:text-xl font-light max-w-full sm:max-w-2xl leading-relaxed"
+        [innerHTML]="slides.description"></div>
     </div>
 
     <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-6 pt-1 sm:pt-2">
@@ -37,7 +36,7 @@
         rel="noopener noreferrer"
         [href]="btn.link"
         target="_blank"
-        class="group relative w-full md:w-56 z-10 flex text-white items-center justify-center gap-2 px-6 py-2 border rounded-full border-primary-400 bg-primary-500/60 hover:bg-primary-600 duration-300">
+        class="group relative w-full md:w-fit z-10 flex text-white items-center justify-center gap-2 px-6 py-2 border rounded-full border-primary-400 bg-primary-500/60 hover:bg-primary-600 duration-300">
         {{btn.text}}
         <i-lucide [name]="icons.donate" class="mt-0.5 group-hover:translate-x-1 transition-all" />
       </a>
@@ -45,7 +44,7 @@
       } @else {
       <a
         [routerLink]="btn.link"
-        class="group relative w-full md:w-56 z-10 flex text-white items-center justify-center gap-2 px-6 py-2 border rounded-full border-primary-400 bg-primary-500/60 hover:bg-primary-600 duration-300">
+        class="group relative w-full md:w-56 lg:w-fit z-10 flex text-white items-center justify-center gap-2 px-6 py-2 border rounded-full border-primary-400 bg-primary-500/60 hover:bg-primary-600 duration-300">
         {{ btn.text }}
         <i-lucide [name]="icons.arrowFlash" class="size-4 sm:size-5 group-hover:translate-x-1 transition-transform" />
       </a>

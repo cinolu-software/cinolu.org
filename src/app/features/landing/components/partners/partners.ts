@@ -23,9 +23,9 @@ import { Tag } from 'primeng/tag';
     RouterLink,
     Carousel,
     ButtonModule,
-    Tag,
+    Tag
   ],
-  templateUrl: './partners.html',
+  templateUrl: './partners.html'
 })
 export class Partners {
   responsiveOptions: {
@@ -36,23 +36,23 @@ export class Partners {
     {
       breakpoint: '1280px',
       numVisible: 4,
-      numScroll: 1,
+      numScroll: 1
     },
     {
       breakpoint: '1199px',
       numVisible: 3,
-      numScroll: 1,
+      numScroll: 1
     },
     {
       breakpoint: '767px',
       numVisible: 2,
-      numScroll: 1,
+      numScroll: 1
     },
     {
       breakpoint: '575px',
       numVisible: 1,
-      numScroll: 1,
-    },
+      numScroll: 1
+    }
   ];
 
   partners = PARTNERS;
@@ -62,7 +62,7 @@ export class Partners {
     userPlus: UserPlus,
     piHeart: Heart,
     shoppingCart: ShoppingCart,
-    moveUp: MoveUpRight,
+    moveUp: MoveUpRight
   };
 
   selectedUserId = 0;

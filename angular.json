@@ -13,14 +13,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "allowedCommonJsDependencies": [
-              "@babel/runtime",
-              "filepond",
-              "quill-delta",
-              "filepond-plugin-image-preview",
-              "filepond-plugin-file-validate-size",
-              "filepond-plugin-file-validate-type"
-            ],
+            "allowedCommonJsDependencies": ["@babel/runtime", "quill-delta"],
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -29,12 +22,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles/styles.css",
-              "node_modules/notyf/notyf.min.css",
-              "node_modules/filepond/dist/filepond.min.css",
-              "node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
-            ],
+            "styles": ["src/styles/styles.css", "node_modules/notyf/notyf.min.css"],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
