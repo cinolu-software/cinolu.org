@@ -9,6 +9,7 @@
         <i-lucide
           class="size-5 transition-transform duration-300 group-hover:rotate-90 ml-0.5"
           [name]="icons.chevronRight" />
+        @if (link.children?.length) {
         <div
           class="absolute left-0 top-full pt-3 w-80 z-30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-top">
           <div class="flex text-left flex-col divide-y divide-gray-200 py-2 bg-white shadow-xl rounded-lg">
@@ -27,6 +28,7 @@
             }
           </div>
         </div>
+        }
       </button>
       } @else {
       <a
@@ -66,5 +68,63 @@
       </div>
       }
     </button>
+  </div>
+  <div>
+    @let user = authStore.user(); @if (user) {
+    <div class="flex gap-3">
+      <button class="group relative flex items-center gap-1">
+        <div class="flex items-center gap-1">
+          <div class="relative h-8 w-8">
+            <img
+              [ngSrc]="user | apiIMG: 'user'"
+              alt="User Image"
+              class="aspect-video object-cover ring-2 ring-primary-600 bg-gray-200 rounded-full"
+              fill />
+          </div>
+          <i-lucide
+            [name]="icons.chevronRight"
+            class="transition-transform size-5 group-hover:mt-0 ml-0.5 duration-300 group-hover:rotate-90" />
+        </div>
+        <div
+          class="invisible absolute right-0 top-full mt-2 w-56 rounded-lg bg-white shadow-xl opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100">
+          <div class="text-left flex flex-col divide-y divide-gray-200 py-2">
+            <div class="flex flex-col px-4 py-2">
+              <a
+                [routerLink]="'/dashboard'"
+                class="block rounded-lg px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600">
+                Mon compte
+              </a>
+            </div>
+            <div class="flex flex-col px-4 py-2">
+              <button
+                class="flex rounded-lg px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600"
+                (click)="onSignOut()">
+                Se déconnecter
+              </button>
+            </div>
+          </div>
+        </div>
+      </button>
+    </div>
+    } @else {
+    <div class="flex gap-4 items-center">
+      <a
+        routerLink="/sign-in"
+        class="relative inline-flex items-center justify-center px-6 py-2 rounded-full border-1 border-primary-500 font-semibold text-primary-500 overflow-hidden group transition duration-300 ease-out hover:text-white">
+        <span
+          class="absolute inset-0 bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out">
+        </span>
+        <span class="relative">Connexion</span>
+      </a>
+
+      <a
+        routerLink="/sign-up"
+        class="relative inline-flex items-center justify-center px-6 py-2 rounded-full border border-primary-500 font-semibold text-white overflow-hidden group transition duration-300 ease-out">
+        <span
+          class="absolute inset-0 bg-primary-500 scale-x-100 group-hover:scale-x-0 transition-transform origin-right duration-300 ease-out"></span>
+        <span class="relative group-hover:text-primary-500">Inscription</span>
+      </a>
+    </div>
+    }
   </div>
 </div>
