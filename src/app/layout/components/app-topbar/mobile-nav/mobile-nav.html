@@ -62,8 +62,8 @@
 
           <div
             class="flex flex-col bg-gray-50 transition-all duration-300 overflow-hidden"
-            [style.maxHeight]="programsOpen() ? programsStore.programs().length * 64 + 'px' : '0px'">
-            @for (p of programsStore.programs(); track $index) {
+            [style.maxHeight]="programsOpen() ? programs().length * 64 + 'px' : '0px'">
+            @for (p of programs(); track $index) {
             <a
               routerLinkActive="bg-primary-100 text-primary-500"
               [routerLink]="['/our-programs/' + p.slug]"
@@ -100,7 +100,8 @@
               <div class="text-left flex flex-col divide-y divide-gray-200 py-2">
                 <div class="flex flex-col px-4 py-2">
                   <a
-                    [routerLink]="'/dashboard'"
+                    [href]="onestopUrl()"
+                    target="_blank"
                     class="block text-lg rounded-lg px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600">
                     Mon compte
                   </a>

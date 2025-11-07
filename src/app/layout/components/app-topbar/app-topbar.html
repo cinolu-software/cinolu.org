@@ -17,8 +17,8 @@
       </a>
     </div>
     <div>
-      <app-mobile-nav [links]="links()" />
-      <app-desktop-nav [links]="links()" />
+      <app-mobile-nav [links]="links()" [programs]="programsStore.programs()" [onestopUrl]="onestopUrl" />
+      <app-desktop-nav [links]="links()" [programs]="programsStore.programs()" [onestopUrl]="onestopUrl" />
     </div>
   </nav>
 </header>

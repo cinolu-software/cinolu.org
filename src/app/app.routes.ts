@@ -79,7 +79,12 @@ export const routes: Route[] = [
   {
     path: '**',
     component: Layout,
-    data: { layout: 'full-layout' },
-    loadChildren: () => import('./features/landing/landing.routes').then((m) => m.landingRoutes)
+    data: { layout: 'empty-layout' },
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/not-found/not-found').then((c) => c.NotFoundPage)
+      }
+    ]
   }
 ];
