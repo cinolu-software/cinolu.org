@@ -4,7 +4,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { environment } from '../../../../../environments/environment';
+import { environment } from '@environments/environment';
 import { AuthCard } from '../../components/auth-card/auth-card';
 import { SignInStore } from '../../store/sign-in.store';
 import { Password } from 'primeng/password';
@@ -22,8 +22,8 @@ import { Password } from 'primeng/password';
     ReactiveFormsModule,
     NgOptimizedImage,
     CommonModule,
-    AuthCard,
-  ],
+    AuthCard
+  ]
 })
 export class SignIn {
   #formBuilder: FormBuilder = inject(FormBuilder);
@@ -33,7 +33,7 @@ export class SignIn {
   constructor() {
     this.form = this.#formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
@@ -41,7 +41,7 @@ export class SignIn {
     if (this.form.invalid) return;
     this.store.signIn({
       payload: this.form.value,
-      onSuccess: () => true,
+      onSuccess: () => true
     });
   }
 

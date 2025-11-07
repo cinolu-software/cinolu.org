@@ -16,9 +16,12 @@ import { EXPLORATION_LINKS } from '../../data/links.data';
 import { DesktopNav } from './desktop-nav/desktop-nav';
 import { MobileNav } from './mobile-nav/mobile-nav';
 import { RouterLink } from '@angular/router';
+import { ProgramsStore } from '@features/landing/store/programs.store';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-topbar',
+  providers: [ProgramsStore],
   imports: [CommonModule, NgOptimizedImage, RouterLink, MobileNav, DesktopNav],
   templateUrl: './app-topbar.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -28,7 +31,9 @@ export class AppTopbar implements OnDestroy {
   isFixed = signal(false);
   links = signal(EXPLORATION_LINKS);
   fixed = input(false);
+  programsStore = inject(ProgramsStore);
   mobileNav = viewChild(MobileNav);
+  onestopUrl = environment.onestopUrl;
   #destroy$ = new Subject<void>();
   #ngZone = inject(NgZone);
 

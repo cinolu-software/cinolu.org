@@ -1,9 +1,9 @@
-<section id="vision" class="relative px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-16 md:py-24 overflow-hidden">
-  <!-- Effets décoratifs -->
+<section
+  id="vision"
+  class="relative px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-16 md:py-24 overflow-hidden">
   <div class="absolute top-20 right-0 w-64 h-64 bg-primary-100/30 rounded-full blur-3xl -z-10"></div>
   <div class="absolute bottom-20 left-0 w-64 h-64 bg-primary-200/20 rounded-full blur-3xl -z-10"></div>
 
-  <!-- En-tête -->
   <div class="mb-16 text-center">
     <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 rounded-full mb-6">
       <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
@@ -18,35 +18,30 @@
   </div>
 
   <div class="relative flex flex-col items-center gap-4">
-    <div class="absolute left-8 sm:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-200 via-primary-300 to-primary-200 hidden sm:block"></div>
+    <div
+      class="absolute left-8 sm:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-200 via-primary-300 to-primary-200 hidden sm:block"></div>
 
     @for (item of historyData; track $index) {
     <div class="w-full group" [ngClass]="$index % 2 === 0 ? 'sm:pr-[calc(50%+3rem)]' : 'sm:pl-[calc(50%+3rem)]'">
-      <!-- Card moderne -->
-      <div class="relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden">
-        <!-- Indicateur de timeline (desktop) -->
+      <div
+        class="relative bg-white rounded-lg border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden">
         <div
           class="hidden sm:block absolute top-8 w-4 h-4 bg-primary-500 rounded-full ring-4 ring-white shadow-lg"
           [ngClass]="$index % 2 === 0 ? '-right-[calc(50%+2.5rem)]' : '-left-[calc(50%+2.5rem)]'">
           <div class="absolute inset-0 bg-primary-500 rounded-full animate-ping opacity-20"></div>
         </div>
 
-        <!-- Bouton accordéon -->
         <button
           class="w-full flex justify-between items-center p-6 lg:p-8 text-left transition-colors duration-300"
           [ngClass]="expandedMenu() === item.id ? 'bg-gradient-to-br from-primary-50/50 to-transparent' : 'hover:bg-gray-50/50'"
           (click)="toggleExpand(item.id)">
-
-          <!-- Date avec design moderne -->
           <div class="flex items-center gap-4">
-            <!-- Badge de statut -->
             <div
               class="flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide"
               [ngClass]="expandedMenu() === item.id ? 'bg-primary-500 text-white' : 'bg-gray-100 text-gray-600'">
               {{ item.status }}
             </div>
 
-            <!-- Date -->
             <h4
               [ngClass]="expandedMenu() === item.id ? 'text-primary-600' : 'text-gray-900'"
               class="text-2xl sm:text-3xl lg:text-4xl font-black font-satoshi transition-colors duration-300">
@@ -71,17 +66,16 @@
             <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-6"></div>
 
             <div class="relative pl-6">
-              <div class="absolute left-0 top-1 w-1 h-full bg-gradient-to-b from-primary-500 to-primary-300 rounded-full"></div>
+              <div
+                class="absolute left-0 top-1 w-1 h-full bg-gradient-to-b from-primary-500 to-primary-300 rounded-full"></div>
               <p class="text-gray-700 leading-relaxed text-lg">{{ item.description }}</p>
             </div>
           </div>
         </div>
 
-        <!-- Barre de couleur en bas -->
         <div
           class="h-1 bg-gradient-to-r from-primary-500 to-primary-600 transition-all duration-500"
-          [ngClass]="expandedMenu() === item.id ? 'w-full' : 'w-0'">
-        </div>
+          [ngClass]="expandedMenu() === item.id ? 'w-full' : 'w-0'"></div>
       </div>
     </div>
     }

@@ -1,24 +1,23 @@
 import { Component, inject, input, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ProgramsStore } from '../../../../features/landing/store/programs.store';
-
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule, ChevronDown, Menu, X, ArrowLeft, ChevronRight, Minus } from 'lucide-angular';
 import { ILink } from '../../../data/links.data';
-import { AuthStore } from '../../../../core/auth/auth.store';
+import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
+import { AuthStore } from '@core/auth/auth.store';
+import { IProgram } from '@shared/models';
 
 @Component({
   selector: 'app-mobile-nav',
-  imports: [RouterModule, CommonModule, LucideAngularModule],
-  providers: [ProgramsStore],
+  imports: [RouterModule, NgOptimizedImage, CommonModule, LucideAngularModule, ApiImgPipe],
   templateUrl: './mobile-nav.html'
 })
 export class MobileNav {
   isOpen = signal<boolean>(false);
   links = input.required<ILink[]>();
-  programsStore = inject(ProgramsStore);
-
+  programs = input.required<IProgram[]>();
   authStore = inject(AuthStore);
+  onestopUrl = input.required<string>();
   icons = {
     menu: Menu,
     close: X,
