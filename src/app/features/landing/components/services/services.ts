@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { SERVICES } from '../../data/services.data';
-import { LucideAngularModule } from 'lucide-angular';
-import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
+import { SERVICES } from '@features/landing/data/services.data';
+import { ServiceCard } from '../service-card/service-card';
 
 @Component({
-  selector: 'app-our-services',
-  imports: [LucideAngularModule, FadeInOnScrollDirective],
-  templateUrl: './services.html',
+  selector: 'app-services',
+  imports: [ServiceCard],
+  templateUrl: './services.html'
 })
 export class Services {
   services = SERVICES;
