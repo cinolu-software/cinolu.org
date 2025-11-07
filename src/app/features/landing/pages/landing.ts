@@ -5,12 +5,12 @@ import { RecentEvents } from '../components/recent-events/recent-events';
 import { RecentProjects } from '../components/recent-projects/recent-projects';
 import { Services } from '../components/services/services';
 import { WhyJoinUs } from '../components/why-join-us/why-join-us';
-import { OurPrograms } from '../components/our-programs/our-programs';
+import { RecentPrograms } from '../components/recent-programs/recent-programs';
 import { Highlights } from '../components/highlights/highlights';
 
 @Component({
-  selector: 'app-landing-page',
-  imports: [Hero, Services, RecentProjects, RecentEvents, Partners, WhyJoinUs, OurPrograms, Highlights],
-  templateUrl: './landing-page.html',
+  selector: 'app-landing',
+  imports: [Hero, Services, RecentProjects, RecentEvents, Partners, WhyJoinUs, RecentPrograms, Highlights],
+  templateUrl: './landing.html'
 })
-export class LandingPage {}
+export class Landing {}

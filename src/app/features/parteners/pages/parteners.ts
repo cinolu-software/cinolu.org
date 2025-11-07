@@ -8,14 +8,14 @@ import { Handshake, LucideAngularModule } from 'lucide-angular';
 import { Button } from 'primeng/button';
 
 @Component({
-  selector: 'app-our-parteners',
+  selector: 'app-parteners',
   imports: [CommonModule, AnimateOnScrollModule, Image, HeroCard, LucideAngularModule, Button],
-  templateUrl: './our-parteners.html',
+  templateUrl: './parteners.html'
 })
-export class OurParteners {
+export class Parteners {
   parteners = PARTNERS;
   icons = {
-    handshake: Handshake,
+    handshake: Handshake
   };
 
   allParteners: IPartner[] = PARTNERS;
@@ -40,7 +40,7 @@ export class OurParteners {
 
   listCategories() {
     const uniques = Array.from(
-      new Set(this.allParteners.map((photo) => photo.category).filter((c): c is string => !!c)),
+      new Set(this.allParteners.map((photo) => photo.category).filter((c): c is string => !!c))
     );
     return uniques;
   }

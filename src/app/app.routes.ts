@@ -12,13 +12,13 @@ export const routes: Route[] = [
     path: 'partners',
     component: Layout,
     data: { layout: 'fixed-layout' },
-    loadChildren: () => import('./features/our-parteners/parteners.routes').then((m) => m.OurParteners)
+    loadChildren: () => import('./features/parteners/parteners.routes').then((m) => m.OurParteners)
   },
   {
     path: 'our-programs',
     component: Layout,
     data: { layout: 'fixed-layout' },
-    loadChildren: () => import('./features/our-programs/programs.routes').then((m) => m.programsRoutes)
+    loadChildren: () => import('./features/programs/programs.routes').then((m) => m.programsRoutes)
   },
   {
     path: 'events',
