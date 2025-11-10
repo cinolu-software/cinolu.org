@@ -1,7 +1,8 @@
-import { Injectable, NgZone, inject } from '@angular/core';
+import { Injectable, NgZone, PLATFORM_ID, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 import { environment } from '@environments/environment';
+import { isPlatformBrowser } from '@angular/common';
 
 export enum AnalyticsEvent {
   PageView = 'page_view',
@@ -41,8 +42,11 @@ export class AnalyticsService {
   private scrollListenerAdded = false;
   private router = inject(Router);
   private zone = inject(NgZone);
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
 
   init(): void {
+    if (!this.isBrowser) return; // SSR guard
     if (this.routerInitialized) return;
     this.routerInitialized = true;
 
@@ -56,11 +60,14 @@ export class AnalyticsService {
   }
 
   trackPageView(path: string, title?: string): void {
-    this.sendEvent(AnalyticsEvent.PageView, {
+    if (!this.isBrowser) return;
+    const payload: Record<string, string | number | boolean | undefined> = {
       page_location: environment.appUrl + path.replace(/^\//, ''),
-      page_path: path,
-      page_title: title || document.title
-    });
+      page_path: path
+    };
+    const docTitle = typeof document !== 'undefined' ? document.title : undefined;
+    payload['page_title'] = title || docTitle;
+    this.sendEvent(AnalyticsEvent.PageView, payload);
   }
 
   trackBlogListView(): void {
@@ -68,6 +75,7 @@ export class AnalyticsService {
   }
 
   trackBlogArticleOpen(slug: string): void {
+    if (!this.isBrowser) return;
     this.currentArticleSlug = slug;
     this.currentRouteStart = performance.now();
     this.maxScrollDepth = 0;
@@ -76,6 +84,7 @@ export class AnalyticsService {
   }
 
   trackBlogArticleRead(payload: BlogArticleReadPayload): void {
+    if (!this.isBrowser) return;
     this.sendEvent(AnalyticsEvent.BlogArticleRead, payload);
     this.detachScrollDepthListener();
     this.currentArticleSlug = null;
@@ -98,6 +107,7 @@ export class AnalyticsService {
   }
 
   private handleBlogRoute(url: string): void {
+    if (!this.isBrowser) return;
     const wasOnArticle = this.currentArticleSlug;
     if (wasOnArticle && !url.includes('/blog-ressources/')) {
       const timeSpent = performance.now() - this.currentRouteStart;
@@ -122,6 +132,7 @@ export class AnalyticsService {
   }
 
   private attachScrollDepthListener(): void {
+    if (!this.isBrowser) return;
     if (this.scrollListenerAdded) return;
     this.scrollListenerAdded = true;
     this.zone.runOutsideAngular(() => {
@@ -130,12 +141,14 @@ export class AnalyticsService {
   }
 
   private detachScrollDepthListener(): void {
+    if (!this.isBrowser) return;
     if (!this.scrollListenerAdded) return;
     window.removeEventListener('scroll', this.onScroll);
     this.scrollListenerAdded = false;
   }
 
   private onScroll = () => {
+    if (!this.isBrowser) return;
     if (!this.currentArticleSlug) return;
     const doc = document.documentElement;
     const scrollTop = window.scrollY || doc.scrollTop;
@@ -155,6 +168,7 @@ export class AnalyticsService {
 
   /** Estimate number of words in article content (very rough) */
   private estimateArticleWordCount(): number | undefined {
+    if (!this.isBrowser) return undefined;
     const articleEl = document.querySelector('[data-article-content]');
     if (!articleEl) return undefined;
     const text = articleEl.textContent || '';
@@ -164,7 +178,8 @@ export class AnalyticsService {
 
   /** Safe gtag wrapper */
   private sendEvent(name: string, params: Record<string, string | number | boolean | undefined>): void {
-    if (typeof window.gtag !== 'function') return;
+    if (!this.isBrowser) return;
+    if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
     window.gtag('event', name, params);
   }
 }
