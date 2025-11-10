@@ -2,14 +2,14 @@
   class="py-10 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto fade-left-init"
   id="projects"
   appAnimationsOnScroll>
-  <div class="flex flex-wrap justify-between items-center">
-    <div class="mb-10">
-      <h3 class="text-3xl text-center sm:text-4xl lg:text-5xl font-black font-satoshi tracking-tight leading-tight">
+  <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6 lg:gap-4">
+    <div class="text-center lg:text-left">
+      <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black font-satoshi tracking-tight leading-tight">
         Les programmes récents
       </h3>
     </div>
 
-    <div class="flex items-center gap-4 place-self-end">
+    <div class="hidden lg:flex items-center gap-4">
       <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
         <i-lucide [name]="icons.moveLeft" class="size-3.5" />
       </button>
@@ -25,24 +25,39 @@
     }
   </div>
   }
-  <div class="space-y-4">
+  <div class="space-y-6 lg:space-y-8 mt-8 lg:mt-12">
     <p-carousel
       #carousel
       [value]="store.projects()"
-      [draggable]="false"
       [numVisible]="3"
       [numScroll]="1"
       [showIndicators]="false"
       [showNavigators]="false"
       [circular]="true"
       [responsiveOptions]="carouselConfig"
-      [autoplayInterval]="5000">
+      [autoplayInterval]="5000"
+      touchMoveThreshold="0"
+      class="no-touch-mobile">
       <ng-template let-project #item>
         <div class="sm:px-3">
           <app-project-card [project]="project" />
         </div>
       </ng-template>
     </p-carousel>
+
+    <div class="flex lg:hidden justify-center items-center gap-6 pt-4">
+      <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
+        <i-lucide [name]="icons.moveLeft" class="size-4" />
+      </button>
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 bg-primary-300 rounded-full"></span>
+        <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
+        <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
+      </div>
+      <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button">
+        <i-lucide [name]="icons.moveRight" class="size-4" />
+      </button>
+    </div>
 
     <div class="w-full flex justify-center items-center">
       <a routerLink="/programs" class="w-fit">
