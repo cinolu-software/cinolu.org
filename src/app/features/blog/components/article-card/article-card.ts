@@ -4,7 +4,7 @@ import {
   Info,
   LucideAngularModule,
   MessageCircleMore,
-  MoveUpRight,
+  MoveRight,
   Tag,
   ThumbsUp,
   UserPlus
@@ -33,7 +33,7 @@ export class ArticleCard {
     comment: MessageCircleMore,
     like: ThumbsUp,
     calendar: Calendar1,
-    moveUp: MoveUpRight
+    moveRight: MoveRight
   };
   protected ApiImgPipe = ApiImgPipe;
 
