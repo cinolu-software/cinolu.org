@@ -36,6 +36,7 @@ import { QuillViewComponent } from 'ngx-quill';
 import { GalleriaModule } from 'primeng/galleria';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { ArticleStore } from '@features/blog/store/articles/article.store';
+import { AnalyticsService } from '../../../../core/services/analytics/analytics.service';
 
 @Component({
   selector: 'app-detail-article',
@@ -101,8 +102,19 @@ export class DetailArticle implements OnInit, OnDestroy {
   showEditModal = signal(false);
   destroy$ = new Subject<void>();
   isLoggedIn = signal<boolean>(false);
+  #analytics = inject(AnalyticsService);
+  #articleOpenTime = performance.now();
 
   ngOnDestroy() {
+    // Send final read event if still on article
+    const article = this.store.article();
+    if (article) {
+      const timeSpent = performance.now() - this.#articleOpenTime;
+      this.#analytics.trackBlogArticleRead({
+        slug: article.slug,
+        time_spent_ms: Math.round(timeSpent)
+      });
+    }
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -138,6 +150,14 @@ export class DetailArticle implements OnInit, OnDestroy {
     this.#route.paramMap.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       const slug = params.get('slug');
       if (slug) this.store.loadArticle(slug);
+    });
+    // Track article open when data arrives
+    effect(() => {
+      const a = this.store.article();
+      if (a) {
+        this.#articleOpenTime = performance.now();
+        this.#analytics.trackBlogArticleOpen(a.slug);
+      }
     });
   }
 

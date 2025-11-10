@@ -21,11 +21,36 @@ The client is a modern Angular application that serves the website UI. It uses A
 
 ## Requirements
 
-- Node.js (recommended LTS — v18+ or later)
-- pnpm (the repository uses pnpm workspace; if you prefer npm or yarn, adapt commands accordingly)
-- A modern browser for development
-
 ## Setup
+
+The application now includes a lightweight GA4 analytics layer focused on blog engagement.
+
+Key features:
+
+- Automatic `page_view` events on every route change.
+- Blog list views (`blog_list_view`).
+- Article open (`blog_article_open`) and read completion (`blog_article_read`) with time spent (ms) and max scroll depth.
+- Scroll depth milestone events at 25%, 50%, 75%, 100% (`blog_scroll_depth`).
+- Blog filter usage (`blog_filter`) with selected tags count.
+- Pagination interactions (`blog_pagination`).
+
+Implementation details:
+
+- Service: `AnalyticsService` (`src/app/core/services/analytics/analytics.service.ts`) initialized via `APP_INITIALIZER` in `app.config.ts`.
+- Measurement ID configured in `environment.analyticsId` (both production & development).
+- Article content word count estimation looks for an element with `data-article-content`. Add that attribute to the main article content wrapper if more detailed metrics are needed.
+
+Extending:
+
+```ts
+// Track an outbound link click
+analytics.trackOutboundLink(url);
+
+// Track custom blog event
+analytics['sendEvent']('blog_custom_event', { slug, foo: 'bar' });
+```
+
+GA4 Debugging: In development, if `gtag` isn't available, events fail silently (remove the guard to console.log locally if needed).
 
 1. Install dependencies (pnpm is recommended):
 

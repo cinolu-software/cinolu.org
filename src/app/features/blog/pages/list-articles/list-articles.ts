@@ -10,22 +10,24 @@ import { TagsStore } from '../../store/articles/tags.store';
 import { MultiSelectChangeEvent, MultiSelectModule } from 'primeng/multiselect';
 import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
 import { Pen, LucideAngularModule } from 'lucide-angular';
+import { AnalyticsService } from '@core/services/analytics/analytics.service';
 
 @Component({
   selector: 'app-blog',
   providers: [ArticlesStore, TagsStore, LucideAngularModule],
   imports: [CommonModule, ArticleCard, NgxPaginationModule, ArticleCardSkeleton, MultiSelectModule, HeroCard],
-  templateUrl: './list-articles.html',
+  templateUrl: './list-articles.html'
 })
 export class ListArticles implements OnInit {
   store = inject(ArticlesStore);
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   tagsStore = inject(TagsStore);
+  #analytics = inject(AnalyticsService);
   arrSkeleton = Array.from({ length: 12 }).fill(0);
   queryParams = signal<FilterArticlesDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
-    tags: this.#route.snapshot.queryParamMap.get('tags'),
+    tags: this.#route.snapshot.queryParamMap.get('tags')
   });
   icons = { edit: Pen };
 
@@ -36,6 +38,11 @@ export class ListArticles implements OnInit {
   async onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'tags'): Promise<void> {
     this.queryParams().page = null;
     this.queryParams()[filter] = event.value;
+    if (filter === 'tags') {
+      const raw = (event.value || []) as unknown[];
+      const tags = raw.map((t) => (typeof t === 'string' ? t : ((t as { name?: string }).name ?? String(t))));
+      this.#analytics.trackBlogFilter(tags);
+    }
     await this.updateRouteAndArticles();
   }
 
@@ -47,6 +54,7 @@ export class ListArticles implements OnInit {
 
   async onPageChange(currentPage: number): Promise<void> {
     this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
+    this.#analytics.trackBlogPagination(currentPage);
     await this.updateRouteAndArticles();
   }
 
