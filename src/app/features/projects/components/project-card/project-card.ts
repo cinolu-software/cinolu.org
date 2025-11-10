@@ -9,13 +9,13 @@ import { Button } from 'primeng/button';
 @Component({
   selector: 'app-project-card',
   imports: [LucideAngularModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe, Button],
-  templateUrl: './project-card.html',
+  templateUrl: './project-card.html'
 })
 export class ProjectCard {
   project = input.required<IProject>();
   icons = {
     calendarCheck: CalendarCheck,
     calendarX: CalendarX,
-    moveRight: MoveRight,
+    moveRight: MoveRight
   };
 }
