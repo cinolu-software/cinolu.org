@@ -1,40 +1,75 @@
 <div
-  class="relative flex flex-col w-full my-6 bg-white shadow-sm hover:shadow-lg rounded-lg overflow-hidden transition-all duration-300">
-  <div class="group relative overflow-hidden h-56">
+  class="group relative flex flex-col w-full bg-white border border-gray-200/60 hover:border-primary-400 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10 hover:-translate-y-1">
+  <div class="absolute top-3 right-3 z-10">
+    <span
+      class="inline-flex items-center px-2.5 py-1 bg-white/90 backdrop-blur-sm text-primary-600 text-xs font-semibold rounded-full shadow-sm border border-primary-200">
+      Programme
+    </span>
+  </div>
+
+  <div class="relative overflow-hidden aspect-[4/3] sm:aspect-[16/10]">
     <img
       fill
       [ngSrc]="project() | apiIMG: 'project'"
       [alt]="project().name"
-      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-    <h6 class="absolute bottom-4 left-4 text-white text-2xl font-bold drop-shadow-lg line-clamp-1">
-      {{ project().name | titlecase }}
-    </h6>
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 transition-colors duration-300"></div>
+
+    <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+      <h3
+        class="font-black text-lg sm:text-xl font-satoshi text-white drop-shadow-lg transition-all duration-200 group-hover:text-primary-100 line-clamp-2 leading-tight">
+        {{ project().name | titlecase }}
+      </h3>
+    </div>
   </div>
 
-  <div class="p-5 space-y-4">
-    <p class="text-slate-700 text-base">
-      <span class="line-clamp-2 break-all" [innerHTML]="project().description"></span>
-    </p>
+  <div class="flex-1 flex flex-col p-5 sm:p-6 space-y-4">
+    <div class="flex-1">
+      <p
+        class="text-gray-700 text-sm sm:text-base leading-relaxed line-clamp-3"
+        [innerHTML]="project().description"></p>
+    </div>
 
-    <div class="flex justify-between gap-2 text-base text-slate-600 items-center">
+    <div class="flex items-center justify-between gap-4 py-3 px-4 bg-gray-50/80 rounded-lg">
       <div class="flex items-center gap-2">
-        <i-lucide class="size-5 text-primary-500" [name]="icons.calendarCheck" />
-        <span> {{ project().started_at | date: 'shortDate' }}</span>
+        <div class="flex items-center justify-center w-7 h-7 bg-green-100 rounded-full">
+          <i-lucide class="size-3.5 text-green-600" [name]="icons.calendarCheck" />
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xs text-gray-500 font-medium">Début</span>
+          <span class="text-sm font-semibold text-gray-800">{{ project().started_at | date: 'shortDate' }}</span>
+        </div>
       </div>
+
+      <div class="w-px h-8 bg-gray-300"></div>
+
       <div class="flex items-center gap-2">
-        <i-lucide class="size-5 text-red-500" [name]="icons.calendarX" />
-        <span>{{ project().ended_at | date: 'shortDate' }}</span>
+        <div class="flex items-center justify-center w-7 h-7 bg-red-100 rounded-full">
+          <i-lucide class="size-3.5 text-red-600" [name]="icons.calendarX" />
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xs text-gray-500 font-medium">Fin</span>
+          <span class="text-sm font-semibold text-gray-800">{{ project().ended_at | date: 'shortDate' }}</span>
+        </div>
       </div>
     </div>
 
-    <p-button [routerLink]="['/programs', project().slug]" size="small" outlined severity="primary">
-      <p class="flex items-center gap-2 group px-4">
-        Explorer ce programme
-        <i-lucide
-          class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
-          [name]="icons.moveRight" />
-      </p>
-    </p-button>
+    <div class="pt-2 w-fit group">
+      <p-button
+        [routerLink]="['/programs',project().slug]"
+        size="small"
+        outlined
+        severity="primary"
+        class="w-full"
+        [style]="{'min-height': '44px'}">
+        <div class="flex items-center justify-center gap-2 px-2 group/btn">
+          <span class="text-sm font-medium">Explorer ce programme</span>
+          <i-lucide
+            class="size-4 group-hover/btn:translate-x-1 transition-transform duration-300"
+            [name]="icons.moveRight" />
+        </div>
+      </p-button>
+    </div>
   </div>
 </div>

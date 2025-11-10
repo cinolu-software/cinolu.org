@@ -1,7 +1,7 @@
 @let slides = slide();
 <div
-  class="relative fadeInUp z-10 w-full px-8 py-8 sm:py-10 md:py-12 lg:py-16 pt-14 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
-  <div class="flex flex-col space-y-6 sm:space-y-7 md:space-y-8 max-w-5xl mx-auto lg:mx-0">
+  class="relative fadeInUp z-10 w-full px-8 py-8 sm:py-10 md:py-12 lg:py-16 pt-14 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto overflow-hidden">
+  <div class="flex flex-col space-y-6 sm:space-y-7 md:space-y-8 max-w-5xl mx-auto lg:mx-0 relative z-10">
     <div class="inline-flex self-start">
       <h1
         class="inline-flex items-start gap-2 px-4 py-2 my-2 rounded-full bg-neutral-300/20 backdrop-blur-[1px] border border-neutral-400/20 hover:bg-neutral-300/30 mb-2 text-primary-50 font-medium font-satoshi sm:text-base">
@@ -20,12 +20,12 @@
         [innerHTML]="slides.description"></div>
     </div>
 
-    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-6 pt-1 sm:pt-2">
-      <div class="relative inline-flex ring-pulse w-full sm:w-auto">
+    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-6 pt-1 sm:pt-2 relative overflow-hidden">
+      <div class="relative inline-flex w-full sm:w-auto">
         <a
           [routerLink]="slides.primaryCta.link"
           type="submit"
-          class="group w-full sm:w-auto relative z-10 flex text-white items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base border rounded-full border-primary-400 bg-primary-500 hover:bg-primary-600 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 duration-300 font-medium whitespace-nowrap">
+          class="group w-full sm:w-auto relative z-20 flex text-white items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base border rounded-full border-primary-400 bg-primary-500 hover:bg-primary-600 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 duration-300 font-medium whitespace-nowrap before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-primary-500/20 before:animate-ping before:scale-110">
           {{ slides.primaryCta.text }}
           <i-lucide [name]="icons.arrowFlash" class="size-4 sm:size-5 group-hover:translate-x-1 transition-transform" />
         </a>

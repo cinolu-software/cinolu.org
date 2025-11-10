@@ -196,4 +196,82 @@
   .secondary-link {
     @apply border border-white rounded-sm px-4 py-1.5 text-white hover:bg-white hover:text-primary-500 transition-colors duration-300;
   }
+
+  @media (max-width: 768px) {
+    .no-touch-mobile .p-carousel-content,
+    .no-touch-mobile .p-carousel-container,
+    .no-touch-mobile .p-carousel-items-content,
+    .no-touch-mobile .p-carousel-items-container {
+      touch-action: pan-y !important;
+      pointer-events: none !important;
+      -webkit-touch-callout: none !important;
+      -webkit-user-select: none !important;
+      -khtml-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
+      user-select: none !important;
+    }
+
+    .no-touch-mobile .p-carousel-item a,
+    .no-touch-mobile .p-carousel-item button,
+    .no-touch-mobile .p-carousel-item p-button,
+    .no-touch-mobile .p-carousel-item [routerLink] {
+      pointer-events: auto !important;
+      touch-action: manipulation !important;
+    }
+
+    section:has(.no-touch-mobile) {
+      touch-action: pan-y !important;
+      overflow-y: auto !important;
+    }
+  }
+
+  /* Contrôler les animations des boutons dans les carousels */
+  .no-touch-mobile .p-carousel-item {
+    overflow: hidden !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  .no-touch-mobile .p-carousel-item.p-carousel-item-active {
+    z-index: 10 !important;
+  }
+
+  /* Limiter les effets d'animation qui débordent */
+  .no-touch-mobile .p-carousel-items-container {
+    overflow: hidden !important;
+  }
+
+  /* Carousel partenaires - désactiver seulement le swipe, garder les contrôleurs */
+  @media (max-width: 768px) {
+    .partners-carousel .p-carousel-content,
+    .partners-carousel .p-carousel-container,
+    .partners-carousel .p-carousel-items-content,
+    .partners-carousel .p-carousel-items-container {
+      touch-action: pan-y !important;
+      -webkit-touch-callout: none !important;
+      -webkit-user-select: none !important;
+      -khtml-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
+      user-select: none !important;
+    }
+
+    /* Garder les contrôleurs fonctionnels */
+    .partners-carousel .p-carousel-prev,
+    .partners-carousel .p-carousel-next,
+    .partners-carousel .p-carousel-indicators {
+      pointer-events: auto !important;
+      touch-action: manipulation !important;
+    }
+
+    /* Permettre les interactions sur les éléments internes */
+    .partners-carousel .p-carousel-item a,
+    .partners-carousel .p-carousel-item button,
+    .partners-carousel .p-carousel-item p-button,
+    .partners-carousel .p-carousel-item [routerLink] {
+      pointer-events: auto !important;
+      touch-action: manipulation !important;
+    }
+  }
 }

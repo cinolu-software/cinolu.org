@@ -1,94 +1,144 @@
-<section class="bg-grid">
+<section class="bg-white">
   <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-15 md:pb-10">
     <div class="mb-16 text-center px-4">
       <h3
-        class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-3 tracking-tight leading-tight">
-        Écosystème & Partenaires
+        class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-satoshi mb-4 tracking-tight leading-tight">
+        Nos
+        <span class="bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">
+          Partenaires
+        </span>
       </h3>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        Un réseau de confiance qui nous accompagne dans notre mission d'innovation
+      </p>
     </div>
 
-    <div class="card">
+    <div class="relative">
       <p-carousel
         [value]="partners"
         [numVisible]="5"
         [circular]="true"
-        [autoplayInterval]="2000"
+        [autoplayInterval]="3000"
         [showIndicators]="false"
         [showNavigators]="true"
-        [responsiveOptions]="responsiveOptions">
+        [responsiveOptions]="responsiveOptions"
+        touchMoveThreshold="0"
+        class="w-full partners-carousel modern-carousel">
         <ng-template let-partners #item>
-          <div
-            class="border border-gray-900/10 dark:border-surface-700 rounded m-2 p-4 bg-white/70 backdrop-blur-[2px]">
-            <div class="mb-4">
-              <div class="relative mx-auto space-y-2">
-                <div class="w-full h-20 m-2 flex items-center justify-center rounded-lg">
+          <div class="p-3">
+            <div
+              class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-lg p-6 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[200px] flex flex-col">
+              <div class="absolute top-3 right-3">
+                <span
+                  class="inline-flex items-center px-2.5 py-1 bg-primary-50 text-primary-700 text-xs font-medium rounded-full border border-primary-200">
+                  {{ partners.category }}
+                </span>
+              </div>
+
+              <div class="flex-1 flex items-center justify-center mb-4 p-4">
+                <div class="w-full h-16 flex items-center justify-center">
                   <img
                     [ngSrc]="partners.image"
                     [alt]="'Logo de ' + partners.name"
                     [title]="partners.name"
-                    width="100"
-                    height="100"
-                    class="max-h-full object-contain w-full rounded-border" />
+                    width="120"
+                    height="60"
+                    class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
                 </div>
+              </div>
 
-                <p-tag
-                  [value]="partners.category"
-                  class="dark:!bg-surface-900 line-clamp-1"
-                  [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
+              <div class="text-center pt-3 border-t border-gray-100">
+                <h4
+                  class="font-bold text-gray-900 text-sm group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
+                  {{ partners.name }}
+                </h4>
               </div>
             </div>
-            <div class="mb-4 font-medium hyphens-none line-clamp-1">{{ partners.name }}</div>
           </div>
         </ng-template>
       </p-carousel>
 
-      <div class="w-full flex justify-center items-center mt-4 lg:mt-10">
-        <a routerLink="/partners" class="w-fit">
-          <p-button psize="large" rounded="full" outlined severity="primary">
-            <span class="group flex items-center gap-2 px-8">
-              Tous nos partenaires
-              <i-lucide
-                class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
-                [name]="icons.moveUp" />
-            </span>
-          </p-button>
+      <div class="w-full flex justify-center items-center mt-12">
+        <a routerLink="/partners" class="group relative">
+          <button
+            class="relative flex items-center gap-3 px-8 py-4 bg-white border-2 border-primary-500 text-primary-600 font-semibold rounded-full hover:bg-primary-50 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25">
+            <span>Découvrir tous nos partenaires</span>
+            <i-lucide
+              class="size-5 group-hover:translate-x-1 transition-transform duration-300"
+              [name]="icons.MoveRight" />
+          </button>
         </a>
       </div>
     </div>
 
-    <h4 class="text-gray-600 text-2xl sm:text-3xl lg:text-4xl font-satoshi font-bold tracking-tight leading-snug my-10">
-      Ensemble, on va plus loin !
-    </h4>
+    <div class="text-center my-16">
+      <h4 class="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-800 font-satoshi tracking-tight leading-tight">
+        Ensemble,
+
+        <span class="bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">
+          on va plus loin !
+        </span>
+      </h4>
+      <p class="text-gray-600 text-lg mt-4 max-w-2xl mx-auto">
+        Rejoignez notre écosystème d'innovation et de croissance
+      </p>
+    </div>
   </div>
 
-  <div class="relative h-96 bg-grid flex flex-col items-center justify-center bg-grid overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-primary-400 via-primary-500 to-primary-600 opacity-95"></div>
+  <div class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-50 via-primary-100 to-blue-50"></div>
+    <div class="absolute inset-0 bg-grid opacity-20"></div>
 
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]"></div>
-
-    <div class="absolute top-10 left-10 w-32 h-32 bg-white/5 rounded-full blur-2xl animate-pulse"></div>
+    <div class="absolute top-10 left-10 w-32 h-32 bg-primary-200/30 rounded-full blur-2xl animate-pulse"></div>
     <div
-      class="absolute bottom-10 right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl animate-pulse [animation-delay:1s]"></div>
+      class="absolute bottom-10 right-10 w-40 h-40 bg-primary-300/20 rounded-full blur-3xl animate-pulse [animation-delay:1s]"></div>
+    <div
+      class="absolute top-1/2 left-1/4 w-24 h-24 bg-primary-400/20 rounded-full blur-xl animate-pulse [animation-delay:2s]"></div>
 
-    <div class="relative z-10 flex flex-col items-center justify-center px-4 fade-right-init" appAnimationsOnScroll>
-      <p
-        class="max-w-3xl text-center text-3xl md:text-4xl lg:text-5xl font-black text-white font-satoshi mb-6 md:mb-8 tracking-tight leading-tight hyphens-none drop-shadow-sm">
-        Ce réseau est notre moteur de croissance collective, et une porte d'entrée vers des projets plus grands.
-      </p>
+    <div class="relative z-10 py-20 lg:py-28 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
+      <div class="text-center space-y-8">
+        <div class="pt-6">
+          <button
+            [routerLink]="'/sign-up'"
+            type="button"
+            class="group relative inline-flex items-center justify-center gap-3 px-10 py-3 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold text-lg rounded-lg shadow-xl shadow-primary-500/25 hover:shadow-2xl hover:shadow-primary-500/40 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
 
-      <button
-        [routerLink]="'/sign-up'"
-        type="button"
-        class="group relative flex items-center justify-center gap-3 px-8 py-4 border-2 border-white/20 bg-white text-primary-700 hover:bg-primary-50 font-semibold text-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/20 rounded-full">
-        <span class="relative z-10">Devenir Partenaire</span>
-        <i-lucide
-          [name]="icons.userPlus"
-          class="relative z-10 size-5 group-hover:translate-x-1 transition-all duration-300">
-        </i-lucide>
+            <span class="relative z-10 font-satoshi">Devenir Partenaire</span>
+            <i-lucide
+              [name]="icons.userPlus"
+              class="relative z-10 size-6 group-hover:translate-x-1 transition-all duration-300">
+            </i-lucide>
+          </button>
+        </div>
 
-        <div
-          class="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-      </button>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto">
+          <div class="text-center p-6 bg-white/60 backdrop-blur-sm rounded-lg border border-white/50">
+            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i-lucide [name]="icons.userPlus" class="size-6 text-primary-600" />
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Réseau Qualifié</h3>
+            <p class="text-gray-600 text-sm">Accédez à un écosystème d'entrepreneurs innovants</p>
+          </div>
+
+          <div class="text-center p-6 bg-white/60 backdrop-blur-sm rounded-lg border border-white/50">
+            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i-lucide [name]="icons.moveUp" class="size-6 text-primary-600" />
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Croissance Mutuelle</h3>
+            <p class="text-gray-600 text-sm">Développez votre activité ensemble</p>
+          </div>
+
+          <div class="text-center p-6 bg-white/60 backdrop-blur-sm rounded-lg border border-white/50">
+            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i-lucide [name]="icons.userPlus" class="size-6 text-primary-600" />
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Impact Collectif</h3>
+            <p class="text-gray-600 text-sm">Participez à des projets d'envergure</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

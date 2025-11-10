@@ -16,7 +16,8 @@
       [showNavigators]="false"
       [showIndicators]="true"
       (onPage)="onPageChange($event)"
-      class="w-full hero-carousel">
+      touchMoveThreshold="15"
+      class="w-full hero-carousel no-touch-mobile">
       <ng-template let-slide #item>
         <app-hero-card [slide]="slide" />
       </ng-template>

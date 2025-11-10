@@ -3,27 +3,23 @@ import { PARTNERS, PARTNERS_CATEGORIES } from '../../data/partners.data';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
-import { UserPlus, LucideAngularModule, Heart, ShoppingCart, MoveUpRight } from 'lucide-angular';
+import { UserPlus, LucideAngularModule, Heart, ShoppingCart, MoveUpRight, MoveRight } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
 import {} from '@angular/core';
 import { Carousel } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
-import { Tag } from 'primeng/tag';
 
 @Component({
   selector: 'app-partners',
   imports: [
     NgOptimizedImage,
     CommonModule,
-    FadeInOnScrollDirective,
     InputGroupModule,
     InputGroupAddonModule,
     LucideAngularModule,
     RouterLink,
     Carousel,
-    ButtonModule,
-    Tag
+    ButtonModule
   ],
   templateUrl: './partners.html'
 })
@@ -62,7 +58,8 @@ export class Partners {
     userPlus: UserPlus,
     piHeart: Heart,
     shoppingCart: ShoppingCart,
-    moveUp: MoveUpRight
+    moveUp: MoveUpRight,
+    MoveRight: MoveRight
   };
 
   selectedUserId = 0;
