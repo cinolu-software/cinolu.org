@@ -15,7 +15,9 @@
         [autoplayInterval]="2000"
         [showIndicators]="false"
         [showNavigators]="true"
-        [responsiveOptions]="responsiveOptions">
+        [responsiveOptions]="responsiveOptions"
+        touchMoveThreshold="0"
+        class="w-full partners-carousel">
         <ng-template let-partners #item>
           <div
             class="border border-gray-900/10 dark:border-surface-700 rounded m-2 p-4 bg-white/70 backdrop-blur-[2px]">
