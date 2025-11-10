@@ -14,7 +14,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-16 md:gap-8 lg:gap-4 mt-16">
       @for (p of store.programs(); track p.id) {
       <div
-        class="relative group flex flex-col bg-white hover:scale-[1.02] px-6 py-8 pt-16 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-300 rounded-lg overflow-visible min-h-[320px] sm:min-h-[300px] md:min-h-[280px]">
+        class="relative group flex flex-col bg-white hover:scale-[1.02] px-6 py-8 pt-16 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-300 rounded-lg overflow-visible min-h-[280px] sm:min-h-[300px] md:min-h-[280px]">
         <div
           class="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center justify-center w-20 h-20 bg-white border-4 border-primary-400 rounded-full shadow-xl group-hover:shadow-2xl group-hover:-translate-y-2 transition-all duration-300 overflow-hidden">
           <div class="p-4 w-full h-full flex items-center justify-center">
@@ -36,22 +36,18 @@
             <div class="w-12 h-0.5 bg-gradient-to-r from-primary-400 to-primary-600 mx-auto rounded-full"></div>
           </div>
 
-          <p class="text-gray-600 text-sm sm:text-base leading-relaxed line-clamp-3 md:flex-1">{{ p.description }}</p>
+          <p class="text-gray-600 text-base leading-relaxed line-clamp-3 md:flex-1">{{ p.description }}</p>
         </div>
 
-        <div class="mt-4">
-          <a
-            [routerLink]="['/our-programs/', p.slug]"
-            class="group/btn inline-flex items-center justify-center w-full px-5 py-3 border-2 border-primary-500 text-primary-600 font-medium text-sm rounded-full hover:bg-primary-500 hover:text-white hover:border-primary-500 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25">
-            <span>En savoir plus</span>
-            <svg
-              class="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
+        <div class="pt-2 mx-auto">
+          <p-button [routerLink]="['/our-programs/', p.slug]" size="small" outlined severity="primary" class="w-full">
+            <div class="flex items-center justify-center gap-2 group/btn px-2">
+              <span class="text-sm font-medium">En savoir plus</span>
+              <i-lucide
+                class="size-4 group-hover/btn:translate-x-1 transition-transform duration-300"
+                [name]="icons.MoveRight" />
+            </div>
+          </p-button>
         </div>
       </div>
       }
