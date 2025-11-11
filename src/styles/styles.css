@@ -73,7 +73,7 @@
   }
 
   .ql-editor {
-    @apply !text-base !leading-normal !font-mona !text-justify;
+    @apply !text-base !leading-normal !font-mona;
   }
 
   ::-webkit-scrollbar {
@@ -113,11 +113,6 @@
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
-  }
-
-  html,
-  body {
-    overflow-x: hidden;
   }
 
   .dashboard-main-content {
