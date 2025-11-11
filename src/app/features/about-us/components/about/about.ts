@@ -5,12 +5,12 @@ import { Lightbulb, MoveUpRight, UserPlus, LucideAngularModule } from 'lucide-an
 @Component({
   selector: 'app-about',
   imports: [LucideAngularModule, RouterLink],
-  templateUrl: './about.html',
+  templateUrl: './about.html'
 })
 export class About {
   icons = {
     lightbulb: Lightbulb,
     moveUp: MoveUpRight,
-    userPlus: UserPlus,
+    userPlus: UserPlus
   };
 }

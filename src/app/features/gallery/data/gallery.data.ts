@@ -8,7 +8,7 @@ export const GALLERY_IMAGES: IGalleryImage[] = [
   {
     src: 'images/gallery/1.jpg',
     alt: 'Présentation lors de l’atelier de formation',
-    category: 'Atelier',
+    category: 'Atelier'
   },
   { src: 'images/gallery/2.jpg', alt: 'Participants attentifs à l’atelier', category: 'Formation' },
   { src: 'images/gallery/3.jpg', alt: 'Intervenant expliquant un concept', category: 'Atelier' },
@@ -19,7 +19,7 @@ export const GALLERY_IMAGES: IGalleryImage[] = [
   {
     src: 'images/gallery/8.jpg',
     alt: 'Discussion interactive avec les formateurs',
-    category: 'Atelier',
+    category: 'Atelier'
   },
   { src: 'images/gallery/9.jpg', alt: 'Moment de questions-réponses', category: 'L-Impact' },
   { src: 'images/gallery/10.jpg', alt: 'Participants prenant des notes', category: 'cours' },
@@ -27,12 +27,12 @@ export const GALLERY_IMAGES: IGalleryImage[] = [
   {
     src: 'images/gallery/12.jpg',
     alt: 'Animation d’une session par le formateur',
-    category: 'Atelier',
+    category: 'Atelier'
   },
   {
     src: 'images/gallery/13.jpg',
     alt: 'Participants concentrés sur un exercice',
-    category: 'Atelier',
+    category: 'Atelier'
   },
   { src: 'images/gallery/14.jpg', alt: 'Ambiance conviviale de l’atelier', category: 'Cours' },
   { src: 'images/gallery/15.jpg', alt: 'Démonstration technique en direct', category: 'Atelier' },
@@ -43,18 +43,18 @@ export const GALLERY_IMAGES: IGalleryImage[] = [
   {
     src: 'images/gallery/20.jpg',
     alt: 'Discussion en binôme lors de l’atelier',
-    category: 'Atelier',
+    category: 'Atelier'
   },
   { src: 'images/gallery/21.jpg', alt: 'Présentation d’un travail de groupe', category: 'Atelier' },
   {
     src: 'images/gallery/22.jpg',
     alt: 'Focus sur un participant en intervention',
-    category: 'F-360',
+    category: 'F-360'
   },
   {
     src: 'images/gallery/23.jpg',
     alt: 'Travail collaboratif entre participants',
-    category: 'L-Impact',
+    category: 'L-Impact'
   },
   { src: 'images/gallery/24.jpg', alt: 'Séance de brainstorming', category: 'Atelier' },
   { src: 'images/gallery/25.jpg', alt: 'Participants posant une question', category: 'Atelier' },
@@ -65,17 +65,17 @@ export const GALLERY_IMAGES: IGalleryImage[] = [
   {
     src: 'images/gallery/30.jpg',
     alt: 'Participants en train de travailler sur un support',
-    category: 'Atelier',
+    category: 'Atelier'
   },
   { src: 'images/gallery/31.jpg', alt: 'Ambiance studieuse lors de l’atelier', category: 'Atelier' },
   {
     src: 'images/gallery/32.jpg',
     alt: 'Explication individuelle donnée par le formateur',
-    category: 'Atelier',
+    category: 'Atelier'
   },
   {
     src: 'images/gallery/33.jpg',
     alt: 'Clôture de la formation avec les participants',
-    category: 'Atelier',
-  },
+    category: 'Atelier'
+  }
 ];

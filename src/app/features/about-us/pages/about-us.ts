@@ -11,10 +11,10 @@ import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 @Component({
   selector: 'app-about-us',
   imports: [About, Vision, Mission, History, OurImpact, OurTeam, LucideAngularModule, HeroCard],
-  templateUrl: './about-us.html',
+  templateUrl: './about-us.html'
 })
 export class AboutUs {
   icons = {
-    info: Info,
+    info: Info
   };
 }

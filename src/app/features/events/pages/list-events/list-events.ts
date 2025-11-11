@@ -20,9 +20,9 @@ import { EventCategoriesStore } from '../../store/categories.store';
     MultiSelectModule,
     NgOptimizedImage,
     EventCard,
-    EventCardSkeleton,
+    EventCardSkeleton
   ],
-  templateUrl: './list-events.html',
+  templateUrl: './list-events.html'
 })
 export class ListEvents implements OnInit {
   #router = inject(Router);
@@ -32,7 +32,7 @@ export class ListEvents implements OnInit {
   categoriesStore = inject(EventCategoriesStore);
   queryParams = signal<FilterEventsDto>({
     page: this.#route.snapshot.queryParams?.['page'],
-    categories: this.#route.snapshot.queryParams?.['categories'],
+    categories: this.#route.snapshot.queryParams?.['categories']
   });
 
   ngOnInit(): void {

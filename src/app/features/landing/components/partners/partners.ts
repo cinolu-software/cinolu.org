@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { PARTNERS, PARTNERS_CATEGORIES } from '../../data/partners.data';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { UserPlus, LucideAngularModule, Heart, ShoppingCart, MoveUpRight, MoveRight } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
-import {} from '@angular/core';
 import { Carousel } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 
@@ -21,7 +20,8 @@ import { ButtonModule } from 'primeng/button';
     Carousel,
     ButtonModule
   ],
-  templateUrl: './partners.html'
+  templateUrl: './partners.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Partners {
   responsiveOptions: {

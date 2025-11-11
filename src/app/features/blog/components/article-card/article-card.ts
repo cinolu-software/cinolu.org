@@ -1,4 +1,4 @@
-import { Component, inject, Input, input } from '@angular/core';
+import { Component, inject, Input, input, ChangeDetectionStrategy } from '@angular/core';
 import {
   Calendar1,
   Info,
@@ -20,7 +20,8 @@ import { Button } from 'primeng/button';
   selector: 'app-article-card',
   imports: [LucideAngularModule, NgOptimizedImage, ApiImgPipe, RouterLink, CommonModule, Button],
   providers: [CommentsStore],
-  templateUrl: './article-card.html'
+  templateUrl: './article-card.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleCard {
   @Input() count = '';

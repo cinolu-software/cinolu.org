@@ -13,7 +13,7 @@ import {
   MoveRight,
   MoveUpRight,
   NotepadText,
-  ThumbsUp,
+  ThumbsUp
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
@@ -24,7 +24,7 @@ import { QuillModule } from 'ngx-quill';
 @Component({
   selector: 'app-subprogram-event-card',
   imports: [LucideAngularModule, CommonModule, NgOptimizedImage, ApiImgPipe, Tag, Button, QuillModule],
-  templateUrl: './subprogram-event-card.html',
+  templateUrl: './subprogram-event-card.html'
 })
 export class SubprogramEventCard {
   icons = {
@@ -40,7 +40,7 @@ export class SubprogramEventCard {
     arrow: MoveRight,
     place: MapPin,
     startedAt: CalendarCheck,
-    endedAt: CalendarMinus,
+    endedAt: CalendarMinus
   };
 
   event = input.required<IEvent>();

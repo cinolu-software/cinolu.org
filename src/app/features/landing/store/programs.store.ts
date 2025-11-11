@@ -1,4 +1,4 @@
-import { signalStore, withState, withMethods, patchState, withProps, withHooks } from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withProps } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
@@ -13,7 +13,7 @@ interface IProgramsStore {
 export const ProgramsStore = signalStore(
   withState<IProgramsStore>({ isLoading: false, programs: [] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods((store, http = inject(HttpClient)) => ({
     loadPrograms: rxMethod<void>(
@@ -25,15 +25,10 @@ export const ProgramsStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, programs: [] });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
-  withHooks({
-    onInit: ({ loadPrograms }) => {
-      loadPrograms();
-    },
-  }),
+        })
+      )
+    )
+  }))
 );

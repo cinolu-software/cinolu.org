@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'primeng/carousel';
@@ -9,6 +9,7 @@ import { ProgramCardSkeletonComponent } from '../../../projects/components/proje
 import { ProjectCard } from '../../../projects/components/project-card/project-card';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { Button } from 'primeng/button';
+import { IProject } from '../../../../shared/models';
 
 @Component({
   selector: 'app-recent-projects',
@@ -21,9 +22,10 @@ import { Button } from 'primeng/button';
     LucideAngularModule,
     ProgramCardSkeletonComponent,
     FadeInOnScrollDirective,
-    Button,
+    Button
   ],
   templateUrl: './recent-projects.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecentProjects {
   store = inject(RecentProjectsStore);
@@ -31,6 +33,15 @@ export class RecentProjects {
   icons = {
     moveUpRight: MoveUpRight,
     moveLeft: ArrowLeft,
-    moveRight: ArrowRight,
+    moveRight: ArrowRight
   };
+
+  constructor() {
+    // Charger les projets uniquement quand le composant est instancié
+    this.store.loadProjects();
+  }
+
+  trackByProjectId(_index: number, project: IProject): string {
+    return project.id;
+  }
 }

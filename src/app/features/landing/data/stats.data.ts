@@ -10,26 +10,26 @@ export const STATS: IStat[] = [
   {
     value: 7000,
     label: 'Bénéficiaires',
-    icon: UserCog,
+    icon: UserCog
   },
   {
     value: 500,
     label: 'Entrepreneurs accompagnés',
-    icon: Network,
+    icon: Network
   },
   {
     value: 10000,
     label: 'Femmes formées & inspirées avec F360',
-    icon: Network,
+    icon: Network
   },
   {
     value: 5,
     label: 'Programmes et forums d’innovation régionale',
-    icon: Lightbulb,
+    icon: Lightbulb
   },
   {
     value: 40,
     label: 'Un réseau de partenaires stratégique',
-    icon: Handshake,
-  },
+    icon: Handshake
+  }
 ];

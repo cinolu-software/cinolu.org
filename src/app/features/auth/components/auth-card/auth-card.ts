@@ -7,7 +7,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-auth-card',
   imports: [NgOptimizedImage, RouterLink, LucideAngularModule],
-  templateUrl: './auth-card.html',
+  templateUrl: './auth-card.html'
 })
 export class AuthCard {
   title = input.required<string>();

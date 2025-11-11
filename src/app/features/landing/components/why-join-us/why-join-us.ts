@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { STATS } from '../../data/stats.data';
 import { LucideAngularModule, HandCoins, Lightbulb, MoveUpRight, User, UserPlus } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
@@ -10,7 +10,7 @@ import { REASONS } from '../../data/reasons-join-us.data';
   selector: 'app-why-join-us',
   imports: [LucideAngularModule, ButtonModule, CountUpDirective, FadeInOnScrollDirective],
   templateUrl: './why-join-us.html',
-  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WhyJoinUs {
   stats = STATS;
@@ -20,6 +20,10 @@ export class WhyJoinUs {
     moveUp: MoveUpRight,
     donate: HandCoins,
     users: User,
-    userPlus: UserPlus,
+    userPlus: UserPlus
   };
+
+  trackByIndex(index: number): number {
+    return index;
+  }
 }

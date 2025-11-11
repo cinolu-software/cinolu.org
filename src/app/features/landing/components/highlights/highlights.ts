@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HighlightCard } from '../../../highlights/component/highlight-card/highlight-card';
 import { HighlightsStore } from '../../../highlights/store/highlights.store';
@@ -8,7 +8,8 @@ import { HighlightCardSkeleton } from '../../../highlights/component/highlight-c
   selector: 'app-highlights',
   imports: [CommonModule, HighlightCard, HighlightCardSkeleton],
   providers: [HighlightsStore],
-  templateUrl: './highlights.html'
+  templateUrl: './highlights.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Highlights implements OnInit {
   private store = inject(HighlightsStore);

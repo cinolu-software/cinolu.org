@@ -6,7 +6,7 @@ import { IProject } from '../../../../../shared/models/entities.models';
 @Component({
   selector: 'app-project-overview',
   imports: [LucideAngularModule, CommonModule],
-  templateUrl: './overview.html',
+  templateUrl: './overview.html'
 })
 export class ProjectOverviewComponent {
   project = input.required<IProject>();

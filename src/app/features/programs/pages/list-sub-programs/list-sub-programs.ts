@@ -8,7 +8,7 @@ import {
   ThumbsUp,
   UserPlus,
   MoveUpRight,
-  ArrowRight,
+  ArrowRight
 } from 'lucide-angular';
 import { SubprogramCard } from '../../component/subprogram-card/subprogram-card';
 import { CommonModule } from '@angular/common';
@@ -28,10 +28,10 @@ import { SubprogramEventCard } from '../../component/subprogram-event-card/subpr
     CarouselModule,
     SubprogramCard,
     SubprogramCardSkeleton,
-    SubprogramEventCard,
+    SubprogramEventCard
   ],
   templateUrl: './list-sub-programs.html',
-  styles: ``,
+  styles: ``
 })
 export class ListSubPrograms implements OnInit {
   icons = {
@@ -41,7 +41,7 @@ export class ListSubPrograms implements OnInit {
     thumbsUp: ThumbsUp,
     program: FolderOpenDot,
     arrow: MoveRight,
-    moveRight: ArrowRight,
+    moveRight: ArrowRight
   };
 
   #route = inject(ActivatedRoute);
@@ -50,23 +50,23 @@ export class ListSubPrograms implements OnInit {
     {
       breakpoint: '1280px',
       numVisible: 1,
-      numScroll: 1,
+      numScroll: 1
     },
     {
       breakpoint: '1199px',
       numVisible: 3,
-      numScroll: 1,
+      numScroll: 1
     },
     {
       breakpoint: '991px',
       numVisible: 1,
-      numScroll: 1,
+      numScroll: 1
     },
     {
       breakpoint: '575px',
       numVisible: 1,
-      numScroll: 1,
-    },
+      numScroll: 1
+    }
   ];
 
   ngOnInit(): void {

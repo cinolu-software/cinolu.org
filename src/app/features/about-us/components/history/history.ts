@@ -7,7 +7,7 @@ import { ArrowDown, CalendarClock, ChevronDown, ChevronRight, LucideAngularModul
 @Component({
   selector: 'app-history',
   imports: [CommonModule, LucideAngularModule, ButtonModule],
-  templateUrl: './history.html',
+  templateUrl: './history.html'
 })
 export class History {
   historyData = HISTORY_TIMELINE;
@@ -15,7 +15,7 @@ export class History {
     upArrow: ArrowDown,
     calendar: CalendarClock,
     chevronDown: ChevronDown,
-    chevronRight: ChevronRight,
+    chevronRight: ChevronRight
   };
 
   expandedMenu = signal<number | null>(null);

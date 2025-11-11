@@ -9,7 +9,7 @@ import { FadeInOnScrollDirective } from '../../../../shared/directives/animation
   selector: 'app-our-impact',
   imports: [CommonModule, LucideAngularModule, CountUpDirective, FadeInOnScrollDirective],
   templateUrl: './our-impact.html',
-  styles: ``,
+  styles: ``
 })
 export class OurImpact {
   our_impact = OUR_IMPACT_ITEMS;

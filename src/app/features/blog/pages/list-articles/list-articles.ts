@@ -15,7 +15,7 @@ import { Pen, LucideAngularModule } from 'lucide-angular';
   selector: 'app-blog',
   providers: [ArticlesStore, TagsStore, LucideAngularModule],
   imports: [CommonModule, ArticleCard, NgxPaginationModule, ArticleCardSkeleton, MultiSelectModule, HeroCard],
-  templateUrl: './list-articles.html',
+  templateUrl: './list-articles.html'
 })
 export class ListArticles implements OnInit {
   store = inject(ArticlesStore);
@@ -25,7 +25,7 @@ export class ListArticles implements OnInit {
   arrSkeleton = Array.from({ length: 12 }).fill(0);
   queryParams = signal<FilterArticlesDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
-    tags: this.#route.snapshot.queryParamMap.get('tags'),
+    tags: this.#route.snapshot.queryParamMap.get('tags')
   });
   icons = { edit: Pen };
 

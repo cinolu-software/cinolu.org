@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { carouselConfig } from '../../config/carousel.config';
@@ -9,6 +9,7 @@ import { EventCard } from '../../../events/components/event-card/event-card';
 import { RecentEventsStore } from '../../../events/store/recent-events.store';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { Button } from 'primeng/button';
+import { IEvent } from '../../../../shared/models';
 
 @Component({
   selector: 'app-recent-events',
@@ -21,9 +22,10 @@ import { Button } from 'primeng/button';
     LucideAngularModule,
     EventCardSkeleton,
     FadeInOnScrollDirective,
-    Button,
+    Button
   ],
   templateUrl: './recent-events.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecentEvents {
   store = inject(RecentEventsStore);
@@ -31,6 +33,15 @@ export class RecentEvents {
   icons = {
     moveUpRight: MoveUpRight,
     moveLeft: ArrowLeft,
-    moveRight: ArrowRight,
+    moveRight: ArrowRight
   };
+
+  constructor() {
+    // Charger les événements uniquement quand le composant est instancié
+    this.store.loadEvents();
+  }
+
+  trackByEventId(_index: number, event: IEvent): string {
+    return event.id;
+  }
 }

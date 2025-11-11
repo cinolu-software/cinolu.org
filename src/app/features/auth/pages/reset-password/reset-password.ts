@@ -11,7 +11,7 @@ import { ResetPasswordStore } from '../../store/reset-password.store';
   selector: 'app-reset-password',
   templateUrl: './reset-password.html',
   providers: [ResetPasswordStore],
-  imports: [FormsModule, RouterLink, ReactiveFormsModule, ButtonModule, PasswordModule, CommonModule, AuthCard],
+  imports: [FormsModule, RouterLink, ReactiveFormsModule, ButtonModule, PasswordModule, CommonModule, AuthCard]
 })
 export class ResetPassword {
   #token = inject(ActivatedRoute).snapshot.queryParams['token'];
@@ -22,7 +22,7 @@ export class ResetPassword {
   constructor() {
     this.form = this.#formBuilder.group({
       password: ['', Validators.required],
-      password_confirm: ['', Validators.required],
+      password_confirm: ['', Validators.required]
     });
   }
 

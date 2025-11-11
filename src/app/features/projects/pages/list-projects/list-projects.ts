@@ -22,9 +22,9 @@ import { FilterProjectsDto } from '../../dto/filter-projects.dto';
     NgOptimizedImage,
     ProjectCard,
     FormsModule,
-    ProgramCardSkeletonComponent,
+    ProgramCardSkeletonComponent
   ],
-  templateUrl: './list-projects.html',
+  templateUrl: './list-projects.html'
 })
 export class ListProjects implements OnInit {
   #router = inject(Router);
@@ -33,7 +33,7 @@ export class ListProjects implements OnInit {
   categoriesStore = inject(ProjectCategoriesStore);
   queryParams = signal<FilterProjectsDto>({
     page: this.#route.snapshot.queryParams?.['page'],
-    categories: this.#route.snapshot.queryParams?.['categories'],
+    categories: this.#route.snapshot.queryParams?.['categories']
   });
 
   ngOnInit(): void {

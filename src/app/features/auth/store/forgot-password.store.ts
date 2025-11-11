@@ -14,12 +14,12 @@ interface IForgotPasswordStore {
 
 export const ForgotPasswordStore = signalStore(
   withState<IForgotPasswordStore>({
-    isLoading: false,
+    isLoading: false
   }),
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _router: inject(Router),
+    _router: inject(Router)
   })),
   withMethods(({ _http, _router, _toast, ...store }) => ({
     forgotPassword: rxMethod<ForgotPasswordDto>(
@@ -36,10 +36,10 @@ export const ForgotPasswordStore = signalStore(
               patchState(store, { isLoading: false });
               _toast.showError('Erreur lors de la réinitialisation');
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

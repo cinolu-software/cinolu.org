@@ -18,7 +18,7 @@ export const SignUpStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _router: inject(Router),
+    _router: inject(Router)
   })),
   withMethods(({ _http, _toast, _router, ...store }) => ({
     signUp: rxMethod<SignUpDto>(
@@ -35,10 +35,10 @@ export const SignUpStore = signalStore(
               patchState(store, { isLoading: false });
               _toast.showError("Échec de l'inscription");
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

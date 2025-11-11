@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class LoadingService {
   #auto$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   #mode$: BehaviorSubject<'determinate' | 'indeterminate'> = new BehaviorSubject<'determinate' | 'indeterminate'>(
-    'indeterminate',
+    'indeterminate'
   );
   #progress$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(0);
   #show$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

@@ -4,6 +4,6 @@ export const galleryRoutes: Routes = [
   {
     path: '',
     title: 'Galerie',
-    loadComponent: () => import('./pages/gallery').then((c) => c.Gallery),
-  },
+    loadComponent: () => import('./pages/gallery').then((c) => c.Gallery)
+  }
 ];

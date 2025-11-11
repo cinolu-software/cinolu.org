@@ -14,7 +14,7 @@ import {
   FileLock2,
   CalendarSync,
   CalendarX,
-  MapPinHouse,
+  MapPinHouse
 } from 'lucide-angular';
 import { ProjectStore } from '../../store/project.store';
 import { ActivatedRoute } from '@angular/router';
@@ -37,9 +37,9 @@ import { carouselConfig } from '../../../landing/config/carousel.config';
     NgOptimizedImage,
     GalleriaModule,
     Button,
-    QuillViewComponent,
+    QuillViewComponent
   ],
-  templateUrl: './detail-project.html',
+  templateUrl: './detail-project.html'
 })
 export class DetailProject implements OnInit {
   #route = inject(ActivatedRoute);
@@ -57,7 +57,7 @@ export class DetailProject implements OnInit {
     calendarSync: CalendarSync,
     calendarX: CalendarX,
     map: MapPinHouse,
-    calendarCheck: CalendarX,
+    calendarCheck: CalendarX
   };
 
   responsiveOptions = carouselConfig;

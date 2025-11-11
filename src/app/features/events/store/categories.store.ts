@@ -22,15 +22,15 @@ export const EventCategoriesStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, categories: [] });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
+        })
+      )
+    )
   })),
   withHooks({
     onInit: ({ loadCategories }) => {
       loadCategories();
-    },
-  }),
+    }
+  })
 );

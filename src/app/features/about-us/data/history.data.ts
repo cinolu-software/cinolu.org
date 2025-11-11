@@ -8,7 +8,7 @@ export const HISTORY_TIMELINE = [
     icon: Flag,
     color: '#9C27B0',
     image: 'cinolu-launch.jpg',
-    description: 'Lancement du Cinolu, 1er hub d’innovation à Lubumbashi',
+    description: 'Lancement du Cinolu, 1er hub d’innovation à Lubumbashi'
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ export const HISTORY_TIMELINE = [
     date: '2017–2020',
     icon: Users,
     color: '#673AB7',
-    description: 'Mise en œuvre de programmes genre & jeunesse (F360, civic tech…)',
+    description: 'Mise en œuvre de programmes genre & jeunesse (F360, civic tech…)'
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ export const HISTORY_TIMELINE = [
     date: '2021',
     icon: Briefcase,
     color: '#FF9800',
-    description: 'Déploiement de l’incubateur Ushindi et de cohortes entrepreneuriales',
+    description: 'Déploiement de l’incubateur Ushindi et de cohortes entrepreneuriales'
   },
   {
     id: 4,
@@ -32,7 +32,7 @@ export const HISTORY_TIMELINE = [
     date: '2023–2024',
     icon: Globe,
     color: '#607D8B',
-    description: 'Déploiement régional (SOPA+, Afrilabs, Fikiri…) et création du Cinolu OneStop',
+    description: 'Déploiement régional (SOPA+, Afrilabs, Fikiri…) et création du Cinolu OneStop'
   },
   {
     id: 5,
@@ -40,6 +40,6 @@ export const HISTORY_TIMELINE = [
     date: '2025',
     icon: Settings,
     color: '#4CAF50',
-    description: 'Structuration numérique complète de l’accompagnement et de l’impact',
-  },
+    description: 'Structuration numérique complète de l’accompagnement et de l’impact'
+  }
 ];
