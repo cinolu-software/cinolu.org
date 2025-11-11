@@ -26,29 +26,29 @@
 
   <div class="flex-1 flex flex-col p-5 sm:p-6 space-y-4">
     <div class="flex-1">
-      <p class="text-gray-700 text-sm sm:text-base leading-relaxed line-clamp-2" [innerHTML]="event().description"></p>
+      <p class="text-gray-700 text-sm sm:text-base leading-relaxed line-clamp-3" [innerHTML]="event().description"></p>
     </div>
 
-    <div class="flex flex-col gap-3 py-3 px-4 bg-gray-50/80 rounded-lg">
-      <div class="flex items-center gap-3">
-        <div class="flex items-center justify-center w-7 h-7 bg-blue-100 rounded-full">
-          <i-lucide class="size-3.5 text-blue-600" [name]="icons.MapPin" />
+    <div class="flex items-center justify-between gap-4 py-3 px-4 bg-gray-50/80 rounded-lg">
+      <div class="flex items-center gap-2">
+        <div class="flex items-center justify-center w-7 h-7 bg-green-100 rounded-full">
+          <i-lucide class="size-3.5 text-green-600" [name]="icons.CalendarCheck" />
         </div>
         <div class="flex flex-col">
-          <span class="text-xs text-gray-500 font-medium">Lieu</span>
-          <span class="text-sm font-semibold text-gray-800 line-clamp-1"> {{ event().place | titlecase }} </span>
+          <span class="text-xs text-gray-500 font-medium">Début</span>
+          <span class="text-sm font-semibold text-gray-800">{{ event().started_at | date: 'shortDate' }}</span>
         </div>
       </div>
 
-      <div class="w-full h-px bg-gray-300"></div>
+      <div class="w-px h-8 bg-gray-300"></div>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2">
         <div class="flex items-center justify-center w-7 h-7 bg-red-100 rounded-full">
           <i-lucide class="size-3.5 text-red-600" [name]="icons.CalendarX" />
         </div>
         <div class="flex flex-col">
-          <span class="text-xs text-gray-500 font-medium">Date de fin</span>
-          <span class="text-sm font-semibold text-gray-800"> {{ event().ended_at | date: 'dd/MM/yyyy' }} </span>
+          <span class="text-xs text-gray-500 font-medium">Fin</span>
+          <span class="text-sm font-semibold text-gray-800">{{ event().ended_at | date: 'shortDate' }}</span>
         </div>
       </div>
     </div>

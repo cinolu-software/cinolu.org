@@ -4,7 +4,7 @@ import {
   Info,
   LucideAngularModule,
   MessageCircleMore,
-  MoveUpRight,
+  MoveRight,
   Tag,
   ThumbsUp,
   UserPlus
@@ -24,6 +24,7 @@ import { Button } from 'primeng/button';
 })
 export class ArticleCard {
   @Input() count = '';
+  @Input() isPriority = false;
   article = input.required<IArticle>();
   commentStore = inject(CommentsStore);
   icons = {
@@ -33,7 +34,7 @@ export class ArticleCard {
     comment: MessageCircleMore,
     like: ThumbsUp,
     calendar: Calendar1,
-    moveUp: MoveUpRight
+    moveRight: MoveRight
   };
   protected ApiImgPipe = ApiImgPipe;
 

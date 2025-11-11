@@ -37,7 +37,9 @@
         [showIndicators]="false"
         [showNavigators]="false"
         [circular]="true"
-        [responsiveOptions]="carouselOptions">
+        [responsiveOptions]="carouselOptions"
+        touchMoveThreshold="15"
+        class="w-full hero-carousel no-touch-mobile">
         <ng-template let-event #item>
           <div class="sm:px-3">
             <app-event-card [event]="event" />

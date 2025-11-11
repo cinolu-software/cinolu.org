@@ -1,11 +1,12 @@
-<section class="min-h-[85vh] py-15 lg:py-20 xl:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
-  <div class="text-center mb-12 lg:mb-16">
-    <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 rounded-full mb-6">
-      <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
-      <span class="text-sm font-semibold text-primary-700 uppercase tracking-wider">Plateforme Digitale</span>
+<section class="min-h-[85vh] py-7 sm:py-15 lg:py-20 xl:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
+  <div class="text-center sm:mb-12 lg:mb-16">
+    <div
+      class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
+      <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
+      Plateforme Digitale
     </div>
     <h3
-      class="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 font-satoshi mb-3 tracking-tight leading-[1.1]">
+      class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-3 tracking-tight leading-tight">
       Cinolu <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">OneStop</span>
     </h3>
   </div>
@@ -14,16 +15,15 @@
     <div class="lg:w-1/2 w-full text-center lg:text-left space-y-8">
       <div>
         <h2
-          class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 leading-[1.1] tracking-tight font-satoshi mb-6">
+          class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-gray-900 leading-[1.2] tracking-tight font-satoshi mb-5">
           Votre Guichet Unique <br class="hidden sm:block" />
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
             >d'Accompagnement Entrepreneurial</span
           >
         </h2>
 
-        <p class="text-lg sm:text-xl text-gray-700 hyphens-none leading-relaxed max-w-lg mx-auto lg:mx-0">
-          Connectez-vous pour poursuivre votre parcours d'entrepreneur, suivre vos candidatures, accéder à vos sessions
-          de formation et rejoindre notre communauté d'innovateurs.
+        <p class="text-base md:text-lg text-gray-700 hyphens-none leading-relaxed max-w-lg mx-auto lg:mx-0">
+          Connectez-vous pour gérer votre parcours, vos formations et rejoindre la communauté d’innovateurs.
         </p>
       </div>
 
@@ -32,13 +32,16 @@
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">Catégories</span>
           disponibles
         </p>
-        <div class="flex flex-wrap gap-2">
-          @for (category of categories; track $index) {
-          <span
-            class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-primary-100 text-primary-700 border border-primary-200">
-            {{ category }}
-          </span>
-          }
+        <!-- Conteneur avec défilement horizontal sur mobile -->
+        <div class="overflow-x-auto pb-2 -mx-2 px-2">
+          <div class="flex gap-2 sm:flex-wrap min-w-max sm:min-w-0">
+            @for (category of categories; track $index) {
+            <span
+              class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-primary-100 text-primary-700 border border-primary-200 whitespace-nowrap flex-shrink-0 hover:bg-primary-200 hover:border-primary-300 transition-colors duration-200">
+              {{ category }}
+            </span>
+            }
+          </div>
         </div>
       </div>
 

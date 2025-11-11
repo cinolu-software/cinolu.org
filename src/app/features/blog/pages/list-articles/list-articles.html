@@ -28,8 +28,9 @@
     @if (store.isLoading()) { @for (a of arrSkeleton; track $index) {
     <app-article-card-skeleton />
     } } @if (store.articles() && !store.isLoading()) { @for ( article of store.articles()[0] | paginate : {
-    itemsPerPage: 12, currentPage: queryParams().page || 1, totalItems: store.articles()[1], }; track article.id ) {
-    <app-article-card [article]="article" />
+    itemsPerPage: 12, currentPage: queryParams().page || 1, totalItems: store.articles()[1], }; track article.id; let
+    first = $first ) {
+    <app-article-card [article]="article" [isPriority]="first && (queryParams().page || 1) === 1" />
     } }
   </div>
   @if (tagsStore.tags().length <= 0) {
