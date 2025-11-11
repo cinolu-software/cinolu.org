@@ -24,6 +24,7 @@ import { Button } from 'primeng/button';
 })
 export class ArticleCard {
   @Input() count = '';
+  @Input() isPriority = false;
   article = input.required<IArticle>();
   commentStore = inject(CommentsStore);
   icons = {
