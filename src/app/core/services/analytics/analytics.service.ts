@@ -54,7 +54,7 @@ export class AnalyticsService {
       this.router.events.pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd)).subscribe((e) => {
         const url = e.urlAfterRedirects;
         this.trackPageView(url, document.title);
-        this.handleBlogRoute(url);
+        this.#handleBlogRoute(url);
       });
     });
   }
@@ -67,11 +67,11 @@ export class AnalyticsService {
     };
     const docTitle = typeof document !== 'undefined' ? document.title : undefined;
     payload['page_title'] = title || docTitle;
-    this.sendEvent(AnalyticsEvent.PageView, payload);
+    this.#sendEvent(AnalyticsEvent.PageView, payload);
   }
 
   trackBlogListView(): void {
-    this.sendEvent(AnalyticsEvent.BlogListView, {});
+    this.#sendEvent(AnalyticsEvent.BlogListView, {});
   }
 
   trackBlogArticleOpen(slug: string): void {
@@ -79,39 +79,39 @@ export class AnalyticsService {
     this.currentArticleSlug = slug;
     this.currentRouteStart = performance.now();
     this.maxScrollDepth = 0;
-    this.attachScrollDepthListener();
-    this.sendEvent(AnalyticsEvent.BlogArticleOpen, { slug });
+    this.#attachScrollDepthListener();
+    this.#sendEvent(AnalyticsEvent.BlogArticleOpen, { slug });
   }
 
   trackBlogArticleRead(payload: BlogArticleReadPayload): void {
     if (!this.isBrowser) return;
-    this.sendEvent(AnalyticsEvent.BlogArticleRead, payload);
-    this.detachScrollDepthListener();
+    this.#sendEvent(AnalyticsEvent.BlogArticleRead, payload);
+    this.#detachScrollDepthListener();
     this.currentArticleSlug = null;
   }
 
   trackScrollDepth(payload: ScrollDepthPayload): void {
-    this.sendEvent(AnalyticsEvent.BlogScrollDepth, payload);
+    this.#sendEvent(AnalyticsEvent.BlogScrollDepth, payload);
   }
 
   trackBlogFilter(appliedTags: string[]): void {
-    this.sendEvent(AnalyticsEvent.BlogFilter, { tags: appliedTags.join(','), count: appliedTags.length });
+    this.#sendEvent(AnalyticsEvent.BlogFilter, { tags: appliedTags.join(','), count: appliedTags.length });
   }
 
   trackBlogPagination(page: number): void {
-    this.sendEvent(AnalyticsEvent.BlogPagination, { page });
+    this.#sendEvent(AnalyticsEvent.BlogPagination, { page });
   }
 
   trackOutboundLink(url: string): void {
-    this.sendEvent(AnalyticsEvent.OutboundLink, { url });
+    this.#sendEvent(AnalyticsEvent.OutboundLink, { url });
   }
 
-  private handleBlogRoute(url: string): void {
+  #handleBlogRoute(url: string): void {
     if (!this.isBrowser) return;
     const wasOnArticle = this.currentArticleSlug;
     if (wasOnArticle && !url.includes('/blog-ressources/')) {
       const timeSpent = performance.now() - this.currentRouteStart;
-      const wordCount = this.estimateArticleWordCount();
+      const wordCount = this.#estimateArticleWordCount();
       this.trackBlogArticleRead({
         slug: wasOnArticle,
         time_spent_ms: Math.round(timeSpent),
@@ -119,11 +119,9 @@ export class AnalyticsService {
         scroll_depth_max: Math.round(this.maxScrollDepth)
       });
     }
-
     if (url === '/blog-ressources' || url.startsWith('/blog-ressources?')) {
       this.trackBlogListView();
     }
-
     const articleMatch = url.match(/^\/blog-ressources\/(.+)/);
     if (articleMatch) {
       const slug = articleMatch[1].split('?')[0];
@@ -131,23 +129,23 @@ export class AnalyticsService {
     }
   }
 
-  private attachScrollDepthListener(): void {
+  #attachScrollDepthListener(): void {
     if (!this.isBrowser) return;
     if (this.scrollListenerAdded) return;
     this.scrollListenerAdded = true;
     this.zone.runOutsideAngular(() => {
-      window.addEventListener('scroll', this.onScroll, { passive: true });
+      window.addEventListener('scroll', this.#onScroll, { passive: true });
     });
   }
 
-  private detachScrollDepthListener(): void {
+  #detachScrollDepthListener(): void {
     if (!this.isBrowser) return;
     if (!this.scrollListenerAdded) return;
-    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('scroll', this.#onScroll);
     this.scrollListenerAdded = false;
   }
 
-  private onScroll = () => {
+  #onScroll = () => {
     if (!this.isBrowser) return;
     if (!this.currentArticleSlug) return;
     const doc = document.documentElement;
@@ -166,8 +164,7 @@ export class AnalyticsService {
     }
   };
 
-  /** Estimate number of words in article content (very rough) */
-  private estimateArticleWordCount(): number | undefined {
+  #estimateArticleWordCount(): number | undefined {
     if (!this.isBrowser) return undefined;
     const articleEl = document.querySelector('[data-article-content]');
     if (!articleEl) return undefined;
@@ -176,8 +173,7 @@ export class AnalyticsService {
     return words.length;
   }
 
-  /** Safe gtag wrapper */
-  private sendEvent(name: string, params: Record<string, string | number | boolean | undefined>): void {
+  #sendEvent(name: string, params: Record<string, string | number | boolean | undefined>): void {
     if (!this.isBrowser) return;
     if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
     window.gtag('event', name, params);
