@@ -17,8 +17,16 @@
       </a>
     </div>
     <div>
-      <app-mobile-nav [links]="links()" [programs]="programsStore.programs()" [onestopUrl]="onestopUrl" />
-      <app-desktop-nav [links]="links()" [programs]="programsStore.programs()" [onestopUrl]="onestopUrl" />
+      <app-mobile-nav
+        [links]="links()"
+        [programs]="programsStore.programs()"
+        [onestopUrl]="onestopUrl"
+        [authStore]="authStore" />
+      <app-desktop-nav
+        [links]="links()"
+        [programs]="programsStore.programs()"
+        [onestopUrl]="onestopUrl"
+        [authStore]="authStore" />
     </div>
   </nav>
 </header>

@@ -18,6 +18,8 @@ import { MobileNav } from './mobile-nav/mobile-nav';
 import { RouterLink } from '@angular/router';
 import { ProgramsStore } from '@features/landing/store/programs.store';
 import { environment } from '@environments/environment';
+import { AuthStore } from '@core/auth/auth.store';
+import { TOPBAR_ANIMATION } from './topbar.config';
 
 @Component({
   selector: 'app-topbar',
@@ -27,15 +29,18 @@ import { environment } from '@environments/environment';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppTopbar implements OnDestroy {
-  #elementRef = inject(ElementRef);
-  isFixed = signal(false);
-  links = signal(EXPLORATION_LINKS);
-  fixed = input(false);
-  programsStore = inject(ProgramsStore);
-  mobileNav = viewChild(MobileNav);
-  onestopUrl = environment.onestopUrl;
-  #destroy$ = new Subject<void>();
-  #ngZone = inject(NgZone);
+  readonly #elementRef = inject(ElementRef);
+  readonly #ngZone = inject(NgZone);
+  readonly #destroy$ = new Subject<void>();
+
+  readonly authStore = inject(AuthStore);
+  readonly programsStore = inject(ProgramsStore);
+
+  readonly isFixed = signal(false);
+  readonly links = signal(EXPLORATION_LINKS);
+  readonly fixed = input(false);
+  readonly onestopUrl = environment.onestopUrl;
+  readonly mobileNav = viewChild(MobileNav);
 
   constructor() {
     // Charger les programmes pour le menu de navigation
@@ -55,15 +60,29 @@ export class AppTopbar implements OnDestroy {
   setupEventListeners(): void {
     const click$ = fromEvent(document, 'click');
     const scroll$ = fromEvent(window, 'scroll');
+
     click$.pipe(takeUntil(this.#destroy$)).subscribe((event: Event) => {
       const isInside = this.#elementRef.nativeElement.contains(event.target);
       const isMenuOpen = this.mobileNav()?.isOpen();
-      if (isMenuOpen && !isInside) this.closeNav();
+      if (isMenuOpen && !isInside) {
+        this.#ngZone.run(() => this.closeNav());
+      }
     });
+
     scroll$.pipe(takeUntil(this.#destroy$)).subscribe(() => {
-      const shouldFix = window.scrollY > 20;
-      if (this.isFixed() !== shouldFix) this.isFixed.set(shouldFix);
-      if (this.mobileNav()?.isOpen()) this.closeNav();
+      const shouldFix = window.scrollY > TOPBAR_ANIMATION.scrollThreshold;
+      const isMenuOpen = this.mobileNav()?.isOpen();
+
+      if (this.isFixed() !== shouldFix || isMenuOpen) {
+        this.#ngZone.run(() => {
+          if (this.isFixed() !== shouldFix) {
+            this.isFixed.set(shouldFix);
+          }
+          if (isMenuOpen) {
+            this.closeNav();
+          }
+        });
+      }
     });
   }
 

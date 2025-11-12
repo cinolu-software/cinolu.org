@@ -28,6 +28,12 @@
     "vision": "Vision",
     "blogResources": "Blog"
   },
+  "auth": {
+    "signIn": "Connexion",
+    "signUp": "Inscription",
+    "signOut": "Se déconnecter",
+    "myAccount": "Mon compte"
+  },
   "contact": {
     "title": "Restons",
     "titleHighlight": "en contact",

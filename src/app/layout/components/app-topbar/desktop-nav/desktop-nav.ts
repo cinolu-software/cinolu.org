@@ -1,13 +1,14 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy, computed } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { LucideAngularModule, LayoutGrid, LogOut, ChevronDown } from 'lucide-angular';
+import { LucideAngularModule } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ILink } from '../../../data/links.data';
 import { AuthStore } from '@core/auth/auth.store';
 import { ApiImgPipe, TranslateFieldPipe } from '@shared/pipes';
 import { IProgram } from '@shared/models';
 import { LanguageSwitcherComponent } from '../../language-switcher/language-switcher.component';
+import { TOPBAR_ICONS } from '../topbar.config';
 
 @Component({
   selector: 'app-desktop-nav',
@@ -21,16 +22,23 @@ import { LanguageSwitcherComponent } from '../../language-switcher/language-swit
     RouterModule,
     LanguageSwitcherComponent,
     TranslateModule
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DesktopNav {
-  authStore = inject(AuthStore);
-  links = input.required<ILink[]>();
-  programs = input.required<IProgram[]>();
-  onestopUrl = input.required<string>();
-  icons = { chevronRight: ChevronDown, dashboard: LayoutGrid, logOut: LogOut };
+  // Inputs
+  readonly links = input.required<ILink[]>();
+  readonly programs = input.required<IProgram[]>();
+  readonly onestopUrl = input.required<string>();
+  readonly authStore = input.required<InstanceType<typeof AuthStore>>();
+
+  // Configuration
+  readonly icons = TOPBAR_ICONS;
+
+  // Computed
+  readonly user = computed(() => this.authStore().user());
 
   onSignOut(): void {
-    this.authStore.signOut();
+    this.authStore().signOut();
   }
 }

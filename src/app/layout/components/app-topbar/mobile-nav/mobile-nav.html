@@ -1,5 +1,5 @@
 <div class="lg:hidden">
-  @let user = authStore.user();
+  @let currentUser = user();
   <button (click)="toggleNav()">
     <i-lucide [name]="isOpen() ? icons.close : icons.menu" class="size-6" />
   </button>
@@ -17,13 +17,13 @@
             {{ link.translationKey ? (link.translationKey | translate) : link.name }}
             <i-lucide
               class="size-5 transition-transform duration-300"
-              [ngClass]="{ 'rotate-90': link.open }"
+              [ngClass]="{ 'rotate-90': isLinkOpen(i) }"
               [name]="icons.chevronRight" />
           </button>
 
           <div
             class="flex flex-col bg-gray-50 transition-all duration-300 overflow-hidden"
-            [style.maxHeight]="link.open ? (link.children?.length ?? 0) * 48 + 'px' : '0px'">
+            [style.maxHeight]="isLinkOpen(i) ? getSubMenuMaxHeight(link.children?.length ?? 0) : '0px'">
             @for (sublink of link.children; track $index) {
             <a
               routerLinkActive="bg-primary-100 text-primary-600"
@@ -32,7 +32,7 @@
                       exact: sublink.exactUrl || false,
                     }"
               class="flex gap-2 items-center text-lg px-6 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 transition-colors duration-200">
-              <i-lucide [name]="icons.plus" class="size-3 text-inherit stroke-1" />
+              <i-lucide [name]="icons.minus" class="size-3 text-inherit stroke-1" />
               {{ sublink.translationKey ? (sublink.translationKey | translate) : sublink.name }}
             </a>
             }
@@ -62,7 +62,7 @@
 
           <div
             class="flex flex-col bg-gray-50 transition-all duration-300 overflow-hidden"
-            [style.maxHeight]="programsOpen() ? programs().length * 64 + 'px' : '0px'">
+            [style.maxHeight]="programsOpen() ? getProgramsMaxHeight() : '0px'">
             @for (p of programs(); track $index) {
             <a
               routerLinkActive="bg-primary-100 text-primary-500"
@@ -80,7 +80,7 @@
       </div>
 
       <div>
-        @if (authStore.user()) {
+        @if (currentUser) {
         <div class="space-y-4">
           <div class="flex justify-center">
             <app-language-switcher />
@@ -91,13 +91,13 @@
               class="flex items-center gap-3 border-1 border-primary-500 rounded-lg w-full px-4 py-2 hover:bg-gray-100 transition-colors duration-200">
               <div class="relative h-8 w-8">
                 <img
-                  [ngSrc]="user | apiIMG: 'user'"
+                  [ngSrc]="currentUser | apiIMG: 'user'"
                   alt="User Image"
                   class="aspect-video object-cover ring-2 ring-primary-600 bg-gray-200 rounded-full"
                   fill />
               </div>
 
-              <span>{{ user?.name }}</span>
+              <span>{{ currentUser.name }}</span>
             </div>
             <div
               class="invisible absolute bottom-16 border border-gray-200 bg-white right-0 w-full mt-2 opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100">
@@ -107,14 +107,14 @@
                     [href]="onestopUrl()"
                     target="_blank"
                     class="block text-lg rounded-lg px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600">
-                    Mon compte
+                    {{ 'auth.myAccount' | translate }}
                   </a>
                 </div>
                 <div class="flex flex-col px-4 py-2">
                   <button
                     class="flex rounded-lg text-lg px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600"
                     (click)="onSignOut()">
-                    Se déconnecter
+                    {{ 'auth.signOut' | translate }}
                   </button>
                 </div>
               </div>
@@ -133,7 +133,7 @@
             <span
               class="absolute inset-0 bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out">
             </span>
-            <span class="relative">Connexion</span>
+            <span class="relative">{{ 'auth.signIn' | translate }}</span>
           </a>
 
           <a
@@ -141,7 +141,7 @@
             class="relative inline-flex w-full items-center justify-center px-6 py-3 rounded-full border-primary-500 border-2 font-semibold text-white overflow-hidden group transition duration-300 ease-out">
             <span
               class="absolute inset-0 bg-primary-500 scale-x-100 group-hover:scale-x-0 transition-transform origin-right duration-300 ease-out"></span>
-            <span class="relative group-hover:text-primary-500">Inscription</span>
+            <span class="relative group-hover:text-primary-500">{{ 'auth.signUp' | translate }}</span>
           </a>
         </div>
         }

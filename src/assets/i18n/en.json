@@ -28,6 +28,12 @@
     "vision": "Vision",
     "blogResources": "Blog"
   },
+  "auth": {
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "signOut": "Sign out",
+    "myAccount": "My account"
+  },
   "contact": {
     "title": "Let's stay",
     "titleHighlight": "in touch",

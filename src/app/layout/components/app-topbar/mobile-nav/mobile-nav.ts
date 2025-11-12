@@ -1,13 +1,14 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, input, signal, ChangeDetectionStrategy, computed } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { LucideAngularModule, ChevronDown, Menu, X, ArrowLeft, ChevronRight, Minus } from 'lucide-angular';
+import { LucideAngularModule } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ILink } from '../../../data/links.data';
 import { ApiImgPipe, TranslateFieldPipe } from '@shared/pipes';
 import { AuthStore } from '@core/auth/auth.store';
 import { IProgram } from '@shared/models';
 import { LanguageSwitcherComponent } from '../../language-switcher/language-switcher.component';
+import { TOPBAR_ICONS, TOPBAR_ANIMATION } from '../topbar.config';
 
 @Component({
   selector: 'app-mobile-nav',
@@ -21,24 +22,27 @@ import { LanguageSwitcherComponent } from '../../language-switcher/language-swit
     LanguageSwitcherComponent,
     TranslateModule
   ],
-  templateUrl: './mobile-nav.html'
+  templateUrl: './mobile-nav.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MobileNav {
-  isOpen = signal<boolean>(false);
-  links = input.required<ILink[]>();
-  programs = input.required<IProgram[]>();
-  authStore = inject(AuthStore);
-  onestopUrl = input.required<string>();
-  icons = {
-    menu: Menu,
-    close: X,
-    arrowDown: ChevronDown,
-    moveLeft: ArrowLeft,
-    chevronRight: ChevronRight,
-    plus: Minus
-  };
+  // Inputs
+  readonly links = input.required<ILink[]>();
+  readonly programs = input.required<IProgram[]>();
+  readonly onestopUrl = input.required<string>();
+  readonly authStore = input.required<InstanceType<typeof AuthStore>>();
 
-  programsOpen = signal<boolean>(false);
+  // Signals
+  readonly isOpen = signal<boolean>(false);
+  readonly programsOpen = signal<boolean>(false);
+  readonly openLinkIndex = signal<number | null>(null);
+
+  // Configuration
+  readonly icons = TOPBAR_ICONS;
+  readonly animation = TOPBAR_ANIMATION;
+
+  // Computed
+  readonly user = computed(() => this.authStore().user());
 
   toggleNav(): void {
     this.isOpen.update((isOpen) => !isOpen);
@@ -46,18 +50,31 @@ export class MobileNav {
 
   closeNav(): void {
     this.isOpen.set(false);
+    this.openLinkIndex.set(null);
+    this.programsOpen.set(false);
   }
 
   onSignOut(): void {
-    this.authStore.signOut();
+    this.authStore().signOut();
   }
 
   toggleLink(index: number): void {
-    this.links().forEach((l, i) => {
-      l.open = i === index ? !l.open : false;
-    });
+    this.openLinkIndex.update((current) => (current === index ? null : index));
   }
+
+  isLinkOpen(index: number): boolean {
+    return this.openLinkIndex() === index;
+  }
+
   togglePrograms(): void {
     this.programsOpen.update((v) => !v);
+  }
+
+  getSubMenuMaxHeight(childrenLength: number): string {
+    return `${childrenLength * this.animation.mobileSubItemHeight}px`;
+  }
+
+  getProgramsMaxHeight(): string {
+    return `${this.programs().length * this.animation.mobileProgramItemHeight}px`;
   }
 }
