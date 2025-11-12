@@ -2,12 +2,14 @@
 gallery = store.article()?.gallery || []; @if (store.article(); as article) {
 <section class="min-h-screen bg-white">
   <div class="relative w-full h-[80vh] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
-    <img
-      [ngSrc]="article | apiIMG: 'article'"
-      alt="Photo de couverture de l'article {{ article.title }}"
-      class="object-cover w-full h-full opacity-90 mix-blend-luminosity"
-      fill
-      priority />
+    <div class="absolute inset-0">
+      <img
+        [ngSrc]="article | apiIMG: 'article'"
+        alt="Photo de couverture de l'article {{ article.title }}"
+        class="object-cover opacity-90 mix-blend-luminosity"
+        fill
+        priority />
+    </div>
     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
   </div>
 
@@ -193,28 +195,29 @@ gallery = store.article()?.gallery || []; @if (store.article(); as article) {
           <p-galleria
             [value]="gallery"
             [autoPlay]="true"
-            [circular]="true"
             [responsiveOptions]="responsiveOptions"
             [numVisible]="5"
-            [containerStyle]="{ 'max-width': '100%' }">
+            [containerStyle]="{ 'max-width': '100%' }"
+            [showThumbnails]="true"
+            [showItemNavigators]="false">
             <ng-template pTemplate="item" let-img>
-              <div class="relative w-full aspect-video overflow-hidden rounded-lg">
+              <div class="relative w-full aspect-video overflow-hidden rounded-lg bg-gray-100">
                 <img
                   [src]="img | apiIMG:'gallery'"
                   alt="{{img.image}}"
-                  fill
                   loading="lazy"
                   class="object-cover w-full h-full" />
               </div>
             </ng-template>
 
             <ng-template pTemplate="thumbnail" let-img>
-              <img
-                [src]="img | apiIMG:'gallery'"
-                alt="{{img.image}}"
-                fill
-                loading="lazy"
-                class="object-cover h-12 w-12 rounded-lg cursor-pointer hover:opacity-75 transition-opacity" />
+              <div class="relative w-16 h-16 overflow-hidden rounded-lg bg-gray-100">
+                <img
+                  [src]="img | apiIMG:'gallery'"
+                  alt="{{img.image}}"
+                  loading="lazy"
+                  class="object-cover w-full h-full cursor-pointer hover:opacity-75 transition-opacity" />
+              </div>
             </ng-template>
           </p-galleria>
         </div>

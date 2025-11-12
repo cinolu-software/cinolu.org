@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnDestroy, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import {
@@ -64,7 +64,8 @@ import { AnalyticsService } from '../../../../core/services/analytics/analytics.
     QuillViewComponent,
     GalleriaModule
   ],
-  templateUrl: './detail-article.html'
+  templateUrl: './detail-article.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailArticle implements OnInit, OnDestroy {
   #fb = inject(FormBuilder);
@@ -106,7 +107,6 @@ export class DetailArticle implements OnInit, OnDestroy {
   #articleOpenTime = performance.now();
 
   ngOnDestroy() {
-    // Send final read event if still on article
     const article = this.store.article();
     if (article) {
       const timeSpent = performance.now() - this.#articleOpenTime;
@@ -129,6 +129,8 @@ export class DetailArticle implements OnInit, OnDestroy {
       id: ['', Validators.required],
       content: ['', Validators.required]
     });
+
+    // Effect pour gérer l'authentification et le chargement des commentaires
     effect(() => {
       this.isLoggedIn.set(!!this.profile.user());
       if (!this.isLoggedIn()) this.form.get('content')?.disable();
@@ -136,6 +138,15 @@ export class DetailArticle implements OnInit, OnDestroy {
         slug: this.#slug,
         dto: this.queryParams()
       });
+    });
+
+    // Effect pour tracker l'ouverture d'article
+    effect(() => {
+      const a = this.store.article();
+      if (a) {
+        this.#articleOpenTime = performance.now();
+        this.#analytics.trackBlogArticleOpen(a.slug);
+      }
     });
   }
 
@@ -150,14 +161,6 @@ export class DetailArticle implements OnInit, OnDestroy {
     this.#route.paramMap.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       const slug = params.get('slug');
       if (slug) this.store.loadArticle(slug);
-    });
-    // Track article open when data arrives
-    effect(() => {
-      const a = this.store.article();
-      if (a) {
-        this.#articleOpenTime = performance.now();
-        this.#analytics.trackBlogArticleOpen(a.slug);
-      }
     });
   }
 
