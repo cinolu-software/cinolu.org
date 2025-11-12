@@ -6,7 +6,7 @@ import { HeroCard } from './component/hero-card/hero-card';
 import { CommonModule } from '@angular/common';
 import { CarouselModule, CarouselPageEvent } from 'primeng/carousel';
 import { carouselConfig } from '@features/landing/config/carousel.config';
-import { HighlightsStore, HighlightItem } from '../../../highlights/store/highlights.store';
+import { HighlightsStore, HighlightItem } from '../../store/highlights.store';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
@@ -20,6 +20,10 @@ export class Hero {
   private highlightsStore = inject(HighlightsStore);
 
   stats = STATS;
+
+  constructor() {
+    this.highlightsStore.loadHighlights();
+  }
 
   slides = computed(() => {
     const highlights = this.highlightsStore.highlights();
