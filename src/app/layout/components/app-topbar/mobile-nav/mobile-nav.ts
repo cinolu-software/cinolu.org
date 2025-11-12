@@ -2,14 +2,25 @@ import { Component, inject, input, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule, ChevronDown, Menu, X, ArrowLeft, ChevronRight, Minus } from 'lucide-angular';
+import { TranslateModule } from '@ngx-translate/core';
 import { ILink } from '../../../data/links.data';
-import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
+import { ApiImgPipe, TranslateFieldPipe } from '@shared/pipes';
 import { AuthStore } from '@core/auth/auth.store';
 import { IProgram } from '@shared/models';
+import { LanguageSwitcherComponent } from '../../language-switcher/language-switcher.component';
 
 @Component({
   selector: 'app-mobile-nav',
-  imports: [RouterModule, NgOptimizedImage, CommonModule, LucideAngularModule, ApiImgPipe],
+  imports: [
+    RouterModule,
+    NgOptimizedImage,
+    CommonModule,
+    LucideAngularModule,
+    ApiImgPipe,
+    TranslateFieldPipe,
+    LanguageSwitcherComponent,
+    TranslateModule
+  ],
   templateUrl: './mobile-nav.html'
 })
 export class MobileNav {

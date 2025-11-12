@@ -14,7 +14,7 @@
           <button
             class="flex justify-between items-center w-full px-4 py-2 text-lg font-medium text-gray-800 border-b border-gray-200"
             (click)="toggleLink(i)">
-            {{ link.name }}
+            {{ link.translationKey ? (link.translationKey | translate) : link.name }}
             <i-lucide
               class="size-5 transition-transform duration-300"
               [ngClass]="{ 'rotate-90': link.open }"
@@ -33,7 +33,7 @@
                     }"
               class="flex gap-2 items-center text-lg px-6 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 transition-colors duration-200">
               <i-lucide [name]="icons.plus" class="size-3 text-inherit stroke-1" />
-              {{ sublink.name }}
+              {{ sublink.translationKey ? (sublink.translationKey | translate) : sublink.name }}
             </a>
             }
           </div>
@@ -43,7 +43,7 @@
             routerLinkActive="text-primary-600"
             [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
             class="flex gap-2 text-lg w-full px-4 py-2 font-medium text-gray-800 border-b border-gray-200 hover:text-primary-500">
-            {{ link.name }}
+            {{ link.translationKey ? (link.translationKey | translate) : link.name }}
           </a>
           }
         </div>
@@ -53,7 +53,7 @@
           <button
             class="flex justify-between items-center w-full px-4 py-2 text-lg font-medium text-gray-800 border-b border-gray-200"
             (click)="togglePrograms()">
-            Programmes
+            {{ 'nav.programs' | translate }}
             <i-lucide
               class="size-5 transition-transform duration-300"
               [ngClass]="{ 'rotate-90': programsOpen() }"
@@ -69,10 +69,10 @@
               [routerLink]="['/our-programs/' + p.slug]"
               [routerLinkActiveOptions]="{ exact: true }"
               class="block px-6 py-3 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 transition-colors duration-200">
-              {{ p.name }}
-              <!-- <span class="block text-sm font-normal text-gray-500">
-                  {{ p?.category?.name }}
-                </span> -->
+              {{ p.name | translateField:'name':p }}
+              <span class="block text-sm font-normal text-gray-500">
+                {{ p?.category?.name | translateField:'name':p.category }}
+              </span>
             </a>
             }
           </div>
@@ -81,7 +81,11 @@
 
       <div>
         @if (authStore.user()) {
-        <div class="">
+        <div class="space-y-4">
+          <div class="flex justify-center">
+            <app-language-switcher />
+          </div>
+
           <button class="group relative flex items-center w-full gap-1">
             <div
               class="flex items-center gap-3 border-1 border-primary-500 rounded-lg w-full px-4 py-2 hover:bg-gray-100 transition-colors duration-200">
@@ -119,6 +123,10 @@
         </div>
         } @else {
         <div class="w-full space-y-4">
+          <div class="flex justify-center mb-4">
+            <app-language-switcher />
+          </div>
+
           <a
             routerLink="/sign-in"
             class="relative inline-flex w-full items-center justify-center px-6 py-3 rounded-full border-1 border-primary-500 font-semibold text-primary-500 overflow-hidden group transition duration-300 ease-out hover:text-white">

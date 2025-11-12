@@ -5,7 +5,7 @@
       @if (link.children?.length) {
       <button
         class="group flex items-center relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 hover:text-primary-500 hover:transition-colors hover:duration-200 before:content-[''] before:absolute before:left-0 before:top-full before:w-full before:h-4 before:z-20">
-        {{ link.name }}
+        {{ link.translationKey ? (link.translationKey | translate) : link.name }}
         <i-lucide
           class="size-5 transition-transform duration-300 group-hover:rotate-90 ml-0.5"
           [name]="icons.chevronRight" />
@@ -22,7 +22,7 @@
                           exact: sublink.exactUrl || false,
                         }"
                 class="block px-4 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-colors duration-200">
-                {{ sublink.name }}
+                {{ sublink.translationKey ? (sublink.translationKey | translate) : sublink.name }}
               </a>
             </div>
             }
@@ -36,7 +36,7 @@
         routerLinkActive="after:bg-primary-500"
         [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
         class="group flex items-center relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 hover:text-primary-500 hover:transition-colors hover:duration-200">
-        {{ link.name }}
+        {{ link.translationKey ? (link.translationKey | translate) : link.name }}
       </a>
       }
     </div>
@@ -44,7 +44,7 @@
 
     <button
       class="group flex items-center relative hover:text-primary-500 hover:transition-colors hover:duration-200 before:content-[''] before:absolute before:left-0 before:top-full before:w-full before:h-4 before:z-20">
-      Programmes
+      {{ 'nav.programs' | translate }}
       <i-lucide
         class="size-5 group-hover:mt-0 ml-0.5 transition-transform duration-300 group-hover:rotate-90"
         [name]="icons.chevronRight" />
@@ -59,8 +59,10 @@
               [routerLink]="['/our-programs/' + p.slug]"
               [routerLinkActiveOptions]="{ exact: true }"
               class="block px-4 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-colors duration-200">
-              {{ p.name }}
-              <span class="block text-base font-normal text-gray-500"> {{ p?.category?.name }} </span>
+              {{ p.name | translateField:'name':p }}
+              <span class="block text-base font-normal text-gray-500">
+                {{ p?.category?.name | translateField:'name':p.category }}
+              </span>
             </a>
           </div>
           }
@@ -71,7 +73,9 @@
   </div>
   <div>
     @let user = authStore.user(); @if (user) {
-    <div class="flex gap-3">
+    <div class="flex gap-3 items-center">
+      <app-language-switcher />
+
       <button class="group relative flex items-center gap-1">
         <div class="flex items-center gap-1">
           <div class="relative h-8 w-8">
@@ -109,6 +113,8 @@
     </div>
     } @else {
     <div class="flex gap-4 items-center">
+      <app-language-switcher />
+
       <a
         routerLink="/sign-in"
         class="relative inline-flex items-center justify-center px-6 py-2 rounded-full border-1 border-primary-500 font-semibold text-primary-500 overflow-hidden group transition duration-300 ease-out hover:text-white">
