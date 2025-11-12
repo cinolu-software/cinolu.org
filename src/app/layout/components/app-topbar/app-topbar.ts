@@ -38,6 +38,9 @@ export class AppTopbar implements OnDestroy {
   #ngZone = inject(NgZone);
 
   constructor() {
+    // Charger les programmes pour le menu de navigation
+    this.programsStore.loadPrograms();
+
     afterNextRender(() => {
       this.#ngZone.runOutsideAngular(() => {
         this.setupEventListeners();
