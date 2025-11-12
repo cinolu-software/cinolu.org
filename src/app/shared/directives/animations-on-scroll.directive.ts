@@ -11,26 +11,22 @@ export class FadeInOnScrollDirective implements OnDestroy {
   #observer: IntersectionObserver | null = null;
 
   constructor() {
-    // Ne pas exécuter côté serveur
     if (!isPlatformBrowser(this.#platformId)) return;
 
     afterNextRender(() => {
       this.initStyles();
 
-      // Options optimisées pour réduire les vérifications
       const options: IntersectionObserverInit = {
         threshold: 0.1,
-        rootMargin: '50px' // Déclencher 50px avant d'être visible
+        rootMargin: '50px'
       };
 
       this.#observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Utiliser requestAnimationFrame pour optimiser le rendering
             requestAnimationFrame(() => {
               this.#renderer.addClass(this.#el.nativeElement, 'animate-slide-in');
             });
-            // Déconnecter immédiatement après l'animation
             this.#observer?.unobserve(this.#el.nativeElement);
           }
         });
@@ -45,7 +41,6 @@ export class FadeInOnScrollDirective implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Nettoyer l'observer pour éviter les fuites mémoire
     this.#observer?.disconnect();
     this.#observer = null;
   }

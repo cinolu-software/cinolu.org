@@ -3,3 +3,4 @@
  */
 
 export * from './api-img.pipe';
+export * from './translate-field.pipe';
