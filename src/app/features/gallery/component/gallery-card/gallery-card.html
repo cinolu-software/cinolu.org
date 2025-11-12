@@ -1,76 +1,128 @@
-<section class="py-16 md:py-20 mx-auto bg-grid">
-  <div class="px-4 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
-    <div class="flex flex-wrap gap-2 justify-center items-center pb-16">
-      <p-button [outlined]="!!activeCategory()" (click)="resetFilter()" label="Tout"> </p-button>
+<section class="py-12 sm:py-16 md:py-20 bg-gray-50">
+  <div class="px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
+    <!-- Filtres -->
+    <div class="mb-10 sm:mb-12">
+      <div class="flex flex-col items-center text-center mb-6">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Notre galerie</h2>
+        <p class="text-gray-600 text-sm">
+          {{ filtered().length }} image{{ filtered().length > 1 ? 's' : '' }} @if(activeCategory()) { - {{
+          activeCategory() }} }
+        </p>
+      </div>
 
-      @for (item of listCategories(); track $index) {
-      <p-button [outlined]="!isActiveButton(item)" (click)="filterByCategory(item)" [label]="item" />
-      }
+      <!-- Scroll horizontal sur mobile -->
+      <div class="overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+        <div class="flex gap-2 sm:gap-3 sm:justify-center min-w-max sm:min-w-0">
+          <p-button [outlined]="!!activeCategory()" (onClick)="resetFilter()" label="Tout" size="small" />
+
+          @for (item of listCategories(); track item) {
+          <p-button [outlined]="!isActiveButton(item)" (onClick)="filterByCategory(item)" [label]="item" size="small" />
+          }
+        </div>
+      </div>
     </div>
 
-    <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4 min-h-72">
-      @for (p of filtered(); track p.src) {
+    <!-- Grille d'images -->
+    <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 sm:gap-4 space-y-3 sm:space-y-4 min-h-72">
+      @for (p of filtered(); track trackBySrc($index, p)) {
       <article
-        class="break-inside-avoid rounded-lg overflow-hidden relative border border-primary-600/20 group bg-white">
-        <img
-          tabindex="0"
-          (click)="openLightbox(p)"
-          (keydown)="($event.key === 'Enter' || $event.key === ' ') && openLightbox(p)"
-          [src]="p.src"
-          [alt]="p.alt"
-          loading="lazy"
-          class="w-full h-auto object-cover cursor-pointer transition-transform duration-500 group-hover:scale-105" />
+        class="break-inside-avoid rounded-lg overflow-hidden relative group bg-white shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer"
+        (click)="openLightbox(p)"
+        (keydown)="($event.key === 'Enter' || $event.key === ' ') && openLightbox(p)"
+        tabindex="0"
+        role="button"
+        [attr.aria-label]="'Voir ' + p.alt">
+        <div class="relative overflow-hidden">
+          <img
+            [src]="p.src"
+            [alt]="p.alt"
+            loading="lazy"
+            class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-110" />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
         <div
-          class="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-gradient-to-b from-black/70 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity">
-          <h3 class="font-semibold">{{ p.alt }}</h3>
+          class="absolute bottom-0 left-0 right-0 p-3 sm:p-4 text-white translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+          <h3 class="font-semibold text-sm sm:text-base line-clamp-2">{{ p.alt }}</h3>
+          @if (p.category) {
+          <p class="text-xs text-white/80 mt-1">{{ p.category }}</p>
+          }
         </div>
       </article>
       }
     </div>
 
-    <div class="mt-6 lg:mt-14 flex justify-center">
+    <div class="mt-8 sm:mt-10 lg:mt-14 flex justify-center">
       @if (canLoadMore()) {
-      <p-button outlined (click)="loadMore()">Plus d'images</p-button>
+      <p-button [outlined]="true" (onClick)="loadMore()" label="Afficher plus d'images" size="large" />
+      } @else if (filtered().length > 0) {
+      <p class="text-gray-500 text-sm">Toutes les images sont affichées</p>
       }
     </div>
 
     @if (lightboxOpen()) {
     <div
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
-      tabindex="0"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
       (click)="closeLightbox()"
-      (keydown)="($event.key === 'Enter' || $event.key === ' ') && closeLightbox()">
+      (keydown)="$event.key === 'Escape' && closeLightbox()"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="'Visualisation de ' + current()?.alt">
       <div
-        class="max-w-3xl w-full max-h-[90vh] overflow-hidden rounded-lg bg-white"
-        tabindex="0"
+        class="relative w-full max-w-6xl max-h-[95vh] flex flex-col bg-white rounded-lg shadow-2xl overflow-hidden"
         (click)="$event.stopPropagation()"
-        (keydown)="($event.key === 'Enter' || $event.key === ' ') && $event.stopPropagation()">
-        <div class="flex justify-between items-center p-3 md:px-6 border-b">
-          <div class="flex items-center gap-2">
-            <i-lucide [name]="icons.description" class="group-hover:translate-x-1 transition-all duration-300 stroke-1">
-            </i-lucide>
-            <h3 class="font-satoshi text-base">{{ current()?.alt }}</h3>
+        (keydown)="$event.stopPropagation()"
+        tabindex="0">
+        <div class="flex items-center justify-between p-4 sm:p-6 border-b bg-white">
+          <div class="flex items-center gap-3 min-w-0 flex-1">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center">
+              <i-lucide [name]="icons.description" class="size-5 text-primary-600"></i-lucide>
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-bold text-gray-900 text-sm sm:text-base line-clamp-1">{{ current()?.alt }}</h3>
+              <p class="text-xs text-gray-500 mt-0.5">{{ currentIndex() + 1 }} / {{ photos().length }}</p>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button (click)="prev($event)" class="p-2 rounded hover:bg-gray-100 text-primary-900">
-              <i-lucide [name]="icons.back" class="group-hover:translate-x-1 transition-all duration-300 stroke-1">
-              </i-lucide>
-            </button>
-            <button (click)="next($event)" class="p-2 rounded hover:bg-gray-100 text-primary-900">
-              <i-lucide [name]="icons.prev" class="group-hover:translate-x-1 transition-all duration-300 stroke-1">
-              </i-lucide>
-            </button>
-            <button (click)="closeLightbox()" class="p-2 rounded hover:bg-gray-100">
-              <i-lucide [name]="icons.close" class="group-hover:translate-x-1 transition-all duration-300 stroke-1">
-              </i-lucide>
-            </button>
-          </div>
+          <button
+            (click)="closeLightbox()"
+            class="flex-shrink-0 ml-4 p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 group"
+            aria-label="Fermer">
+            <i-lucide [name]="icons.close" class="size-5 text-gray-600 group-hover:text-gray-900"></i-lucide>
+          </button>
         </div>
 
-        <div class="p-4 flex items-center justify-center bg-black">
-          <img [src]="current()?.src" [alt]="current()?.alt" class="max-h-[75vh] object-contain" />
+        <div class="relative flex-1 bg-gray-900 flex items-center justify-center overflow-hidden">
+          <img [src]="current()?.src" [alt]="current()?.alt" class="max-w-full max-h-full object-contain" />
+
+          <button
+            (click)="prev($event)"
+            class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 hover:bg-white shadow-lg flex items-center justify-center transition-all duration-200 group"
+            aria-label="Image précédente">
+            <i-lucide
+              [name]="icons.back"
+              class="size-6 text-gray-900 group-hover:scale-110 transition-transform"></i-lucide>
+          </button>
+
+          <button
+            (click)="next($event)"
+            class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 hover:bg-white shadow-lg flex items-center justify-center transition-all duration-200 group"
+            aria-label="Image suivante">
+            <i-lucide
+              [name]="icons.prev"
+              class="size-6 text-gray-900 group-hover:scale-110 transition-transform"></i-lucide>
+          </button>
         </div>
+
+        @if (current()?.category) {
+        <div class="p-4 sm:p-6 bg-gray-50 border-t">
+          <div class="flex items-center gap-2 text-sm text-gray-600">
+            <span class="px-2 py-1 bg-primary-100 text-primary-700 rounded text-xs font-medium">
+              {{ current()?.category }}
+            </span>
+          </div>
+        </div>
+        }
       </div>
     </div>
     }

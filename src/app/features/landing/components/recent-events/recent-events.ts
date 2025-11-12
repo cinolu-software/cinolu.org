@@ -37,7 +37,6 @@ export class RecentEvents {
   };
 
   constructor() {
-    // Charger les événements uniquement quand le composant est instancié
     this.store.loadEvents();
   }
 

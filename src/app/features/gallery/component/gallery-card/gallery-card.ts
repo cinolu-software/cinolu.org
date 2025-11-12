@@ -2,7 +2,7 @@ import { Component, HostListener, ChangeDetectionStrategy, computed, signal, inj
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { GALLERY_IMAGES, IGalleryImage } from '../../data/gallery.data';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LucideAngularModule, ReceiptText, StepBack, StepForward, X } from 'lucide-angular';
+import { LucideAngularModule, ReceiptText, ChevronLeft, ChevronRight, X } from 'lucide-angular';
 import { Button } from 'primeng/button';
 
 @Component({
@@ -15,8 +15,8 @@ export class GalleryCardComponent implements OnDestroy {
   private document = inject(DOCUMENT);
 
   icons = {
-    prev: StepForward,
-    back: StepBack,
+    prev: ChevronRight,
+    back: ChevronLeft,
     close: X,
     description: ReceiptText
   } as const;

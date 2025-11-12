@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Headset, LucideAngularModule } from 'lucide-angular';
+import { Headset, LucideAngularModule, Phone, Mail, MapPin } from 'lucide-angular';
 import { CONTACT_ITEMS, SOCIAL_LINKS } from '../data/contact.data';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { COUNTRY_CODE } from '../../../shared/data/country-item.data';
@@ -13,6 +13,7 @@ import { ButtonModule } from 'primeng/button';
 import { GENDERS } from '../../../shared/data/genders.data';
 import { ContactUsStore } from '../store/contact-us.store';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-contact-us',
@@ -28,13 +29,17 @@ import { HeroCard } from '../../../layout/components/hero-card/hero-card';
     InputGroup,
     SelectModule,
     ButtonModule,
-    HeroCard
+    HeroCard,
+    TranslateModule
   ],
   templateUrl: './contact-us.html'
 })
 export class ContactUs {
   icons = {
-    phone: Headset
+    phone: Headset,
+    phoneIcon: Phone,
+    mail: Mail,
+    mapPin: MapPin
   };
   countryItems = COUNTRY_CODE;
   contactItems = CONTACT_ITEMS;

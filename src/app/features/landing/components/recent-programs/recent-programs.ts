@@ -21,7 +21,6 @@ export class RecentPrograms {
   store = inject(ProgramsStore);
 
   constructor() {
-    // Charger les programmes uniquement quand le composant est instancié
     this.store.loadPrograms();
   }
 

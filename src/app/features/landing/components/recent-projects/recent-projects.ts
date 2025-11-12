@@ -37,7 +37,6 @@ export class RecentProjects {
   };
 
   constructor() {
-    // Charger les projets uniquement quand le composant est instancié
     this.store.loadProjects();
   }
 
