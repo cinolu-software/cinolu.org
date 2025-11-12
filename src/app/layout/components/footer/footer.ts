@@ -3,10 +3,11 @@ import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { EXPLORATION_LINKS, MY_CINOLU_LINKS, SOCIAL_LINKS } from '../../data/links.data';
 import { LucideAngularModule, ArrowUpRight, ChevronRight } from 'lucide-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-footer',
-  imports: [RouterLink, NgOptimizedImage, LucideAngularModule],
+  imports: [RouterLink, NgOptimizedImage, LucideAngularModule, TranslateModule],
   templateUrl: './footer.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
