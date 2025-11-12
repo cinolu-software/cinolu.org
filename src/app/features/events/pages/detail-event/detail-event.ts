@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject, model, OnInit } from '@angular/core';
+import { Component, effect, inject, model, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { EventSkeleton } from '../../components/event-detail-skeleton/event-skeleton';
 import { GalleriaModule } from 'primeng/galleria';
 import {
@@ -28,7 +28,8 @@ import { QuillViewComponent } from 'ngx-quill';
   selector: 'app-event',
   providers: [EventStore, GalleryEventStore],
   imports: [CommonModule, EventSkeleton, LucideAngularModule, ApiImgPipe, Button, GalleriaModule, QuillViewComponent],
-  templateUrl: './detail-event.html'
+  templateUrl: './detail-event.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailEvent implements OnInit {
   images = model<IImage[]>([]);
