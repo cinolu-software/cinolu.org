@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   ArrowLeft,
@@ -33,7 +33,8 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
     ApiImgPipe,
     NgOptimizedImage
   ],
-  templateUrl: './detail-programs.html'
+  templateUrl: './detail-programs.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailPrograms implements OnInit, OnDestroy {
   icons = {
