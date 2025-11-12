@@ -12,7 +12,7 @@ interface Ihierarchy {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class RightsService {
   #hierarchies: Ihierarchy[] = [];

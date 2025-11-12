@@ -26,9 +26,9 @@ export const CONTACT_ITEMS: IContact[] = [
     children: [
       {
         label: 'Support client',
-        value: 'info@cinolu.org ',
-      },
-    ],
+        value: 'info@cinolu.org '
+      }
+    ]
   },
   {
     title: 'Appelez-nous',
@@ -37,9 +37,9 @@ export const CONTACT_ITEMS: IContact[] = [
     children: [
       {
         label: 'Téléphone',
-        value: '+243 976 807 000 ',
-      },
-    ],
+        value: '+243 976 807 000 '
+      }
+    ]
   },
   {
     title: 'Adresse',
@@ -48,9 +48,9 @@ export const CONTACT_ITEMS: IContact[] = [
     children: [
       {
         label: 'Adresse',
-        value: ' 221, Av. des usines, Makomeno, Lubumbashi, Haut-Katanga-RDC',
-      },
-    ],
+        value: ' 221, Av. des usines, Makomeno, Lubumbashi, Haut-Katanga-RDC'
+      }
+    ]
   },
   {
     title: 'Horaires d’ouverture',
@@ -59,46 +59,46 @@ export const CONTACT_ITEMS: IContact[] = [
     children: [
       {
         label: 'Lundi - Vendredi',
-        value: '08h00 - 17h00',
-      },
-    ],
+        value: '08h00 - 17h00'
+      }
+    ]
   },
   {
     title: 'Suivez-nous',
     icon: ScanFace,
-    description: 'Restez connectés à notre actualité.',
-  },
+    description: 'Restez connectés à notre actualité.'
+  }
 ];
 
 export const SOCIAL_LINKS: ISocialMedia[] = [
   {
     label: 'Facebook',
     link: 'https://www.facebook.com/cinolu',
-    icon: 'icons/facebook.svg',
+    icon: 'icons/facebook.svg'
   },
   {
     label: 'Instagram',
     link: 'https://www.instagram.com/centredinnovationdelubumbashi/',
-    icon: 'icons/instagram.svg',
+    icon: 'icons/instagram.svg'
   },
   {
     label: 'X',
     link: 'https://x.com/Lubumdigital',
-    icon: 'icons/twitter-x.svg',
+    icon: 'icons/twitter-x.svg'
   },
   {
     label: 'TikTok',
     link: 'https://www.tiktok.com/@cinolu',
-    icon: 'icons/tiktok.svg',
+    icon: 'icons/tiktok.svg'
   },
   {
     label: 'LinkedIn',
     link: 'https://www.linkedin.com/company/cinolu',
-    icon: 'icons/linkedin.svg',
+    icon: 'icons/linkedin.svg'
   },
   {
     label: 'YouTube',
     link: 'https://www.youtube.com/@centredinnovationdelubumba3607',
-    icon: 'icons/youtube.svg',
-  },
+    icon: 'icons/youtube.svg'
+  }
 ];

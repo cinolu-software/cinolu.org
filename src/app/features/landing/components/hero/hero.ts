@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { STATS } from '../../data/stats.data';
 import { HERO_SLIDES, IHeroSlide } from '../../data/hero-slides.data';
 import { LucideAngularModule, Sparkles, Calendar, Newspaper, Rocket, FolderKanban } from 'lucide-angular';
@@ -13,7 +13,8 @@ import { environment } from '../../../../../environments/environment';
   selector: 'app-hero',
   imports: [LucideAngularModule, HeroCard, CommonModule, CarouselModule],
   providers: [HighlightsStore],
-  templateUrl: './hero.html'
+  templateUrl: './hero.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Hero {
   private highlightsStore = inject(HighlightsStore);

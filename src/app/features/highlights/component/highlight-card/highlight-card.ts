@@ -1,4 +1,13 @@
-import { Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, inject } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnDestroy,
+  OnChanges,
+  SimpleChanges,
+  inject,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, ChevronLeft, ChevronRight, MoveUpRight } from 'lucide-angular';
@@ -13,7 +22,8 @@ export type HighlightSource = 'programs' | 'subprograms' | 'events' | 'projects'
 @Component({
   selector: 'app-highlight-card',
   imports: [CommonModule, NgOptimizedImage, RouterLink, LucideAngularModule, ButtonModule, ApiImgPipe],
-  templateUrl: './highlight-card.html'
+  templateUrl: './highlight-card.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HighlightCard implements OnInit, OnChanges, OnDestroy {
   private sanitizer = inject(DomSanitizer);

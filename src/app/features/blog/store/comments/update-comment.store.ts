@@ -26,7 +26,7 @@ export const UpdateCommentStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _commentsStore: inject(CommentsStore),
-    _toast: inject(ToastrService),
+    _toast: inject(ToastrService)
   })),
   withMethods(({ _http, _commentsStore, _toast, ...store }) => ({
     updateComment: rxMethod<IUpdateCommentParams>(
@@ -44,10 +44,10 @@ export const UpdateCommentStore = signalStore(
               _toast.showError('Échec de la mise à jour');
               patchState(store, { isLoading: false });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

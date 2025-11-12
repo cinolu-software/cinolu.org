@@ -13,7 +13,7 @@ interface IGalleryStore {
 export const GalleryProjectStore = signalStore(
   withState<IGalleryStore>({ isLoading: false, gallery: [] }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadGallery: rxMethod<string>(
@@ -27,10 +27,10 @@ export const GalleryProjectStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

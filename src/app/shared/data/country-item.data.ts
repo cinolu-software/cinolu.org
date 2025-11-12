@@ -110,5 +110,5 @@ export const COUNTRY_CODE: ICountryCode[] = [
   { name: 'Vietnam', code: '+84' },
   { name: 'Yémen', code: '+967' },
   { name: 'Zambie', code: '+260' },
-  { name: 'Zimbabwe', code: '+263' },
+  { name: 'Zimbabwe', code: '+263' }
 ];

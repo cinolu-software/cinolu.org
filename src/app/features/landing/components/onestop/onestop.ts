@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { BookOpen, Lightbulb, LucideAngularModule, MoveRight, Users } from 'lucide-angular';
@@ -8,7 +8,8 @@ import { ADVANTAGES } from '@features/landing/data/advantages.data';
 @Component({
   selector: 'app-onestop',
   imports: [RouterLink, Button, LucideAngularModule, NgOptimizedImage],
-  templateUrl: './onestop.html'
+  templateUrl: './onestop.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Onestop {
   advantages = ADVANTAGES;
@@ -19,4 +20,12 @@ export class Onestop {
     users: Users,
     bookOpen: BookOpen
   };
+
+  trackByIndex(index: number): number {
+    return index;
+  }
+
+  trackByCategory(index: number, item: string): string {
+    return item;
+  }
 }

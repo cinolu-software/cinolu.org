@@ -13,7 +13,7 @@ interface ISubprogramStore {
 export const SubprogramsStore = signalStore(
   withState<ISubprogramStore>({ isLoading: false, subprogram: null }),
   withProps(() => ({
-    _http: inject(HttpClient),
+    _http: inject(HttpClient)
   })),
   withMethods(({ _http, ...store }) => ({
     loadSubprogram: rxMethod<string>(
@@ -27,10 +27,10 @@ export const SubprogramsStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

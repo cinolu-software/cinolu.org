@@ -1,4 +1,4 @@
-import { signalStore, withState, withMethods, patchState, withProps, withHooks } from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withProps } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { inject, Signal } from '@angular/core';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
@@ -87,10 +87,5 @@ export const HighlightsStore = signalStore(
     getAllHighlights(): HighlightItem[] {
       return store.highlights();
     }
-  })),
-  withHooks({
-    onInit({ loadHighlights }) {
-      loadHighlights();
-    }
-  })
+  }))
 );

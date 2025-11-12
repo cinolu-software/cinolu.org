@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, MapPin, CalendarX } from 'lucide-angular';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
@@ -10,6 +10,7 @@ import { QuillViewComponent } from 'ngx-quill';
   selector: 'app-project-card',
   imports: [LucideAngularModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe, QuillViewComponent],
   templateUrl: './project-card.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventCard {
   program = input.required<IProject>();

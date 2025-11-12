@@ -7,7 +7,7 @@ import { LoadingService } from '../../../core/services/loading';
 @Component({
   selector: 'app-loading-bar',
   imports: [ProgressBar],
-  templateUrl: './loading-bar.html',
+  templateUrl: './loading-bar.html'
 })
 export class LoadingBar implements OnChanges, OnInit, OnDestroy {
   #loadingService = inject(LoadingService);

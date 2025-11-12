@@ -19,7 +19,7 @@ export const DeleteCommentStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _commentsStore: inject(CommentsStore),
+    _commentsStore: inject(CommentsStore)
   })),
   withMethods(({ _http, _commentsStore, _toast, ...store }) => ({
     deleteComment: rxMethod<IDeleteCommentParams>(
@@ -36,10 +36,10 @@ export const DeleteCommentStore = signalStore(
               patchState(store, { isLoading: false });
               _toast.showError("Une erreur s'est produite lors de la suppression");
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

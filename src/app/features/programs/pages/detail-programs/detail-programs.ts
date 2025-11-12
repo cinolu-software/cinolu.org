@@ -12,7 +12,7 @@ import {
   NotepadText,
   Tag,
   ThumbsUp,
-  UserPlus,
+  UserPlus
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ProgramStore } from '../../../landing/store/program.store';
@@ -31,9 +31,9 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
     SubprogramCardSkeleton,
     Button,
     ApiImgPipe,
-    NgOptimizedImage,
+    NgOptimizedImage
   ],
-  templateUrl: './detail-programs.html',
+  templateUrl: './detail-programs.html'
 })
 export class DetailPrograms implements OnInit, OnDestroy {
   icons = {
@@ -48,7 +48,7 @@ export class DetailPrograms implements OnInit, OnDestroy {
     moveUp: MoveUpRight,
     thumbsUp: ThumbsUp,
     program: FolderOpenDot,
-    arrow: MoveRight,
+    arrow: MoveRight
   };
   #route = inject(ActivatedRoute);
   store = inject(ProgramStore);

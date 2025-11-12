@@ -2,9 +2,7 @@ import {
   ApplicationConfig,
   LOCALE_ID,
   provideBrowserGlobalErrorListeners,
-  provideZonelessChangeDetection,
-  APP_INITIALIZER,
-  inject
+  provideZonelessChangeDetection
 } from '@angular/core';
 import { provideRouter, TitleStrategy, withInMemoryScrolling, withViewTransitions } from '@angular/router';
 import { routes } from './app.routes';
@@ -20,7 +18,6 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { provideQuillConfig } from 'ngx-quill';
-import { AnalyticsService } from './core/services/analytics/analytics.service';
 registerLocaleData(localeFr, 'fr');
 
 export const appConfig: ApplicationConfig = {
@@ -65,14 +62,6 @@ export const appConfig: ApplicationConfig = {
           }
         }
       }
-    }),
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      useFactory: () => {
-        const analytics = inject(AnalyticsService);
-        return () => analytics.init();
-      }
-    }
+    })
   ]
 };

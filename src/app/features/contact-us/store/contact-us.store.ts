@@ -17,11 +17,11 @@ interface ContactUsParams {
 
 export const ContactUsStore = signalStore(
   withState<IContactUsStore>({
-    isLoading: false,
+    isLoading: false
   }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _toast: inject(ToastrService),
+    _toast: inject(ToastrService)
   })),
   withMethods(({ _http, _toast, ...store }) => ({
     contactUs: rxMethod<ContactUsParams>(
@@ -38,10 +38,10 @@ export const ContactUsStore = signalStore(
               patchState(store, { isLoading: false });
               _toast.showError(err.error['message'] || 'Erreur de connexion');
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

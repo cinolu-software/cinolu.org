@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, CalendarCheck, CalendarX, MoveRight } from 'lucide-angular';
 import { IProject } from '../../../../shared/models/entities.models';
@@ -9,7 +9,8 @@ import { Button } from 'primeng/button';
 @Component({
   selector: 'app-project-card',
   imports: [LucideAngularModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe, Button],
-  templateUrl: './project-card.html'
+  templateUrl: './project-card.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectCard {
   project = input.required<IProject>();

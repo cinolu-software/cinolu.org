@@ -13,46 +13,69 @@ export class CountUpDirective implements OnInit, OnDestroy {
   #renderer = inject(Renderer2);
   #platformId = inject(PLATFORM_ID);
 
+  #animationFrameId: number | null = null;
+  #hasAnimated = false;
+
   ngOnInit(): void {
     if (!isPlatformBrowser(this.#platformId)) return;
-    this.#observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          this.animateCount();
-          this.#observer?.disconnect();
-        }
-      },
-      { threshold: 0.6 }
-    );
+
+    // Options optimisées pour déclencher plus tôt
+    const options: IntersectionObserverInit = {
+      threshold: 0.5, // Réduit de 0.6 à 0.5 pour démarrer plus tôt
+      rootMargin: '50px' // Anticiper l'animation
+    };
+
+    this.#observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !this.#hasAnimated) {
+        this.#hasAnimated = true;
+        // Utiliser setTimeout pour éviter le blocage initial
+        setTimeout(() => this.animateCount(), 100);
+        this.#observer?.disconnect();
+      }
+    }, options);
     this.#observer.observe(this.#el.nativeElement);
   }
 
   ngOnDestroy(): void {
+    // Nettoyer l'observer et l'animation frame
     this.#observer?.disconnect();
+    this.#observer = null;
+    if (this.#animationFrameId !== null) {
+      cancelAnimationFrame(this.#animationFrameId);
+      this.#animationFrameId = null;
+    }
   }
 
   private animateCount(): void {
     const start = 0;
-    const range = this.end() - start;
-    const frameRate = 1000 / 60;
-    const totalFrames = this.duration() / frameRate;
-    const increment = range / totalFrames;
+    const end = this.end();
+    const range = end - start;
+    const duration = this.duration();
+    const startTime = performance.now();
 
-    let current = start;
+    const step = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
 
-    const step = () => {
-      current += increment;
-      if (current < this.end()) {
+      // Utiliser une fonction d'easing pour une animation plus fluide
+      const easedProgress = this.easeOutQuad(progress);
+      const current = start + range * easedProgress;
+
+      if (progress < 1) {
         this.#renderer.setProperty(this.#el.nativeElement, 'innerText', Math.floor(current).toLocaleString());
-        requestAnimationFrame(step);
+        this.#animationFrameId = requestAnimationFrame(step);
       } else {
-        this.#renderer.setProperty(
-          this.#el.nativeElement,
-          'innerText',
-          `${this.end().toLocaleString()}${this.suffix()}`
-        );
+        // Animation terminée
+        this.#renderer.setProperty(this.#el.nativeElement, 'innerText', `${end.toLocaleString()}${this.suffix()}`);
+        this.#animationFrameId = null;
       }
     };
-    requestAnimationFrame(step);
+
+    this.#animationFrameId = requestAnimationFrame(step);
+  }
+
+  // Fonction d'easing pour une animation plus naturelle
+  private easeOutQuad(t: number): number {
+    return t * (2 - t);
   }
 }

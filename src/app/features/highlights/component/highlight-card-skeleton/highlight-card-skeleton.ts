@@ -6,6 +6,4 @@ import { Component } from '@angular/core';
   templateUrl: './highlight-card-skeleton.html',
   styles: ``
 })
-export class HighlightCardSkeleton {
-
-}
+export class HighlightCardSkeleton {}

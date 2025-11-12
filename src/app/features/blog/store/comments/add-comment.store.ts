@@ -18,7 +18,7 @@ export const AddCommentStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _commentsStore: inject(CommentsStore),
-    _toast: inject(ToastrService),
+    _toast: inject(ToastrService)
   })),
   withMethods(({ _http, _commentsStore, _toast, ...store }) => ({
     addComment: rxMethod<CommentDto>(
@@ -34,10 +34,10 @@ export const AddCommentStore = signalStore(
             catchError(() => {
               _toast.showError("Une erreur s'est produite lors de l'ajout");
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
+        })
+      )
+    )
+  }))
 );

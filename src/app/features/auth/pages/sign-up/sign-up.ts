@@ -38,8 +38,8 @@ import { GENDERS } from '../../../../shared/data/genders.data';
     CommonModule,
     InputGroupModule,
     InputGroupAddonModule,
-    ReactiveFormsModule,
-  ],
+    ReactiveFormsModule
+  ]
 })
 export class SignUp {
   #formBuilder: FormBuilder = inject(FormBuilder);
@@ -60,7 +60,7 @@ export class SignUp {
       phone_number: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       birth_date: ['', [Validators.required]],
-      country: ['', [Validators.required]],
+      country: ['', [Validators.required]]
     });
   }
 
@@ -70,7 +70,7 @@ export class SignUp {
       ...this.form.value,
       referral_code: this.ref,
       phone_number: this.selectedCountryCode + this.form.value.phone_number,
-      birth_date: new Date(this.form.value.birth_date),
+      birth_date: new Date(this.form.value.birth_date)
     });
   }
 

@@ -1,4 +1,4 @@
-import { signalStore, withState, withMethods, patchState, withHooks } from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, exhaustMap, of, pipe, tap } from 'rxjs';
@@ -13,7 +13,7 @@ interface IRecentProjectsStore {
 export const RecentProjectsStore = signalStore(
   withState<IRecentProjectsStore>({
     isLoading: false,
-    projects: [],
+    projects: []
   }),
   withMethods((store, http = inject(HttpClient)) => ({
     loadProjects: rxMethod<void>(
@@ -25,15 +25,10 @@ export const RecentProjectsStore = signalStore(
             catchError(() => {
               patchState(store, { isLoading: false, projects: [] });
               return of(null);
-            }),
+            })
           );
-        }),
-      ),
-    ),
-  })),
-  withHooks({
-    onInit: ({ loadProjects }) => {
-      loadProjects();
-    },
-  }),
+        })
+      )
+    )
+  }))
 );

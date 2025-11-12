@@ -23,6 +23,6 @@ export const LoadingInterceptor = (req: HttpRequest<unknown>, next: HttpHandlerF
     finalize(() => {
       // Set the status to false if there are any errors or the request is completed
       loadingService._setLoadingStatus(false, req.url);
-    }),
+    })
   );
 };

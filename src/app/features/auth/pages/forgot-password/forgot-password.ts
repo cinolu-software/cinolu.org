@@ -11,16 +11,7 @@ import { ForgotPasswordStore } from '../../store/forgot-password.store';
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.html',
   providers: [ForgotPasswordStore],
-  imports: [
-    FormsModule,
-    RouterLink,
-    ReactiveFormsModule,
-    ButtonModule,
-    InputText,
-    RouterModule,
-    CommonModule,
-    AuthCard,
-  ],
+  imports: [FormsModule, RouterLink, ReactiveFormsModule, ButtonModule, InputText, RouterModule, CommonModule, AuthCard]
 })
 export class ForgotPassword {
   #formBuilder = inject(FormBuilder);
@@ -29,7 +20,7 @@ export class ForgotPassword {
 
   constructor() {
     this.form = this.#formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
