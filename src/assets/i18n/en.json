@@ -1,0 +1,91 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "close": "Close",
+    "submit": "Submit",
+    "back": "Back"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "programs": "Programs",
+    "projects": "Projects",
+    "events": "Events",
+    "blog": "Blog",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "partners": "Partners",
+    "entrepreneurs": "Our entrepreneurs",
+    "myCinolu": "My Cinolu",
+    "vision": "Vision",
+    "blogResources": "Blog"
+  },
+  "contact": {
+    "title": "Let's stay",
+    "titleHighlight": "in touch",
+    "badge": "Contact",
+    "description": "Cinolu is at your disposal for any request for information, collaboration or partnership. Feel free to contact us.",
+    "form": {
+      "title": "Send us a message",
+      "subtitle": "Fill out the form below and we will get back to you as soon as possible.",
+      "name": "Full name",
+      "namePlaceholder": "John Doe",
+      "email": "Your email",
+      "emailPlaceholder": "john.doe@email.com",
+      "country": "Country",
+      "countryPlaceholder": "Select your country",
+      "phone": "Phone",
+      "phonePlaceholder": "979 998 877",
+      "message": "Your message",
+      "messagePlaceholder": "Describe your request or question...",
+      "submit": "Send message",
+      "sending": "Sending..."
+    },
+    "info": {
+      "title": "Contact information",
+      "subtitle": "You can also reach us directly using the contact details below.",
+      "address": "Address",
+      "addressText": "Cotonou, Benin",
+      "phone": "Phone",
+      "phoneText": "+229 97 99 98 77",
+      "email": "Email",
+      "emailText": "contact@cinolu.org",
+      "hours": "Opening hours",
+      "hoursText": "Monday - Friday: 9:00 AM - 6:00 PM"
+    },
+    "social": {
+      "title": "Follow us",
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram"
+    },
+    "success": {
+      "title": "Message sent!",
+      "message": "We have received your message and will respond to you as soon as possible."
+    },
+    "error": {
+      "title": "Error",
+      "message": "An error occurred while sending your message. Please try again."
+    }
+  },
+  "footer": {
+    "description": "Cinolu is an organization dedicated to developing entrepreneurial skills and innovation in Africa.",
+    "quickLinks": "Quick links",
+    "followUs": "Follow us",
+    "newsletter": "Newsletter",
+    "newsletterText": "Subscribe to receive our latest news",
+    "emailPlaceholder": "Your email",
+    "subscribe": "Subscribe",
+    "copyright": "© {{year}} Cinolu. All rights reserved.",
+    "allRightsReserved": "All rights reserved"
+  }
+}

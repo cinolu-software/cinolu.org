@@ -1,0 +1,91 @@
+{
+  "common": {
+    "welcome": "Bienvenue",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "search": "Rechercher",
+    "close": "Fermer",
+    "submit": "Soumettre",
+    "back": "Retour"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "programs": "Programmes",
+    "projects": "Projets",
+    "events": "Évènements",
+    "blog": "Blog",
+    "gallery": "Galerie",
+    "contact": "Contacts",
+    "partners": "Partenaires",
+    "entrepreneurs": "Nos entrepreneurs",
+    "myCinolu": "My Cinolu",
+    "vision": "Vision",
+    "blogResources": "Blog"
+  },
+  "contact": {
+    "title": "Restons",
+    "titleHighlight": "en contact",
+    "badge": "Contact",
+    "description": "Cinolu reste à votre disposition pour toute demande d'information, de collaboration ou de partenariat. N'hésitez pas à nous contacter.",
+    "form": {
+      "title": "Envoyez-nous un message",
+      "subtitle": "Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.",
+      "name": "Nom complet",
+      "namePlaceholder": "Jean Dupont",
+      "email": "Votre email",
+      "emailPlaceholder": "jean.dupont@email.com",
+      "country": "Pays",
+      "countryPlaceholder": "Sélectionnez votre pays",
+      "phone": "Téléphone",
+      "phonePlaceholder": "979 998 877",
+      "message": "Votre message",
+      "messagePlaceholder": "Décrivez votre demande ou votre question...",
+      "submit": "Envoyer le message",
+      "sending": "Envoi en cours..."
+    },
+    "info": {
+      "title": "Informations de contact",
+      "subtitle": "Vous pouvez également nous joindre directement via les coordonnées ci-dessous.",
+      "address": "Adresse",
+      "addressText": "Cotonou, Bénin",
+      "phone": "Téléphone",
+      "phoneText": "+229 97 99 98 77",
+      "email": "Email",
+      "emailText": "contact@cinolu.org",
+      "hours": "Horaires d'ouverture",
+      "hoursText": "Lundi - Vendredi: 9h00 - 18h00"
+    },
+    "social": {
+      "title": "Suivez-nous",
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram"
+    },
+    "success": {
+      "title": "Message envoyé !",
+      "message": "Nous avons bien reçu votre message et nous vous répondrons dans les plus brefs délais."
+    },
+    "error": {
+      "title": "Erreur",
+      "message": "Une erreur s'est produite lors de l'envoi de votre message. Veuillez réessayer."
+    }
+  },
+  "footer": {
+    "description": "Cinolu est une organisation dédiée au développement des compétences entrepreneuriales et à l'innovation en Afrique.",
+    "quickLinks": "Liens rapides",
+    "followUs": "Suivez-nous",
+    "newsletter": "Newsletter",
+    "newsletterText": "Inscrivez-vous pour recevoir nos dernières actualités",
+    "emailPlaceholder": "Votre email",
+    "subscribe": "S'abonner",
+    "copyright": "© {{year}} Cinolu. Tous droits réservés.",
+    "allRightsReserved": "Tous droits réservés"
+  }
+}

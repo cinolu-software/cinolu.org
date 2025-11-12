@@ -2,6 +2,7 @@ import { LucideIconData, Info, Calendar1, BookOpen, Image } from 'lucide-angular
 
 export interface ILink {
   name: string;
+  translationKey?: string; 
   external?: boolean;
   description?: string;
   fragment?: string;
@@ -15,11 +16,13 @@ export interface ILink {
 export const MY_CINOLU_LINKS: ILink[] = [
   {
     name: 'A propos',
+    translationKey: 'nav.about',
     path: '/about-us',
     fragment: 'about'
   },
   {
     name: 'Vision',
+    translationKey: 'nav.vision',
     path: '/about-us',
     fragment: 'vision'
   }
@@ -29,25 +32,28 @@ export const EXPLORATION_LINKS: ILink[] = [
   {
     icon: Calendar1,
     name: 'Accueil',
+    translationKey: 'nav.home',
     path: '/',
     exactUrl: true
   },
   {
     icon: Info,
     name: 'My Cinolu',
+    translationKey: 'nav.myCinolu',
     path: '/mycinolu',
     children: [
-      { name: 'Nos entrepreneurs', path: '/entrepreneurs', exactUrl: true },
+      { name: 'Nos entrepreneurs', translationKey: 'nav.entrepreneurs', path: '/entrepreneurs', exactUrl: true },
       // { name: 'Jobs & Opportunités', path: '/jobs-opportunities' },
-      { name: 'Blog', path: '/blog-ressources', icon: BookOpen },
-      { name: 'Galerie', path: '/gallery', icon: Image },
-      { name: 'À propos', path: '/about-us' },
-      { name: 'Contacts', path: '/contact-us', icon: Image }
+      { name: 'Blog', translationKey: 'nav.blogResources', path: '/blog-ressources', icon: BookOpen },
+      { name: 'Galerie', translationKey: 'nav.gallery', path: '/gallery', icon: Image },
+      { name: 'À propos', translationKey: 'nav.about', path: '/about-us' },
+      { name: 'Contacts', translationKey: 'nav.contact', path: '/contact-us', icon: Image }
     ]
   },
   {
     icon: Calendar1,
     name: 'Évènements',
+    translationKey: 'nav.events',
     path: '/events'
   }
 ];

@@ -11,14 +11,33 @@ import { providePrimeNG } from 'primeng/config';
 import { PageTitleStrategy } from './core/strategies/page-title.strategy';
 import { primeNGPreset } from './shared/config/primeng.config';
 import { provideApp } from './core/providers/app.provider';
-import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { httpInterceptor } from './core/interceptors/http.interceptor';
 import { LoadingInterceptor } from './core/services/loading';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { provideQuillConfig } from 'ngx-quill';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { importProvidersFrom } from '@angular/core';
+import { Observable } from 'rxjs';
+
 registerLocaleData(localeFr, 'fr');
+
+// Custom TranslateLoader
+export class CustomTranslateLoader implements TranslateLoader {
+  constructor(private http: HttpClient) {}
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getTranslation(lang: string): Observable<any> {
+    // Utiliser le chemin vers les fichiers de traduction
+    return this.http.get(`/assets/i18n/${lang}.json`);
+  }
+}
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new CustomTranslateLoader(http);
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -36,6 +55,17 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideHttpClient(withFetch(), withInterceptors([httpInterceptor, LoadingInterceptor])),
     provideClientHydration(withEventReplay()),
+    importProvidersFrom(
+      TranslateModule.forRoot({
+        defaultLanguage: 'fr',
+        fallbackLang: 'fr',
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      })
+    ),
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: TitleStrategy, useClass: PageTitleStrategy },
     provideQuillConfig({
