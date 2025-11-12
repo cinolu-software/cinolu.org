@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProjectSkeleton } from '../../components/project-skeleton/project-skeleton';
 import {
@@ -39,7 +39,8 @@ import { carouselConfig } from '../../../landing/config/carousel.config';
     Button,
     QuillViewComponent
   ],
-  templateUrl: './detail-project.html'
+  templateUrl: './detail-project.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailProject implements OnInit {
   #route = inject(ActivatedRoute);
