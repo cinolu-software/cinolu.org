@@ -47,11 +47,6 @@ export const GALLERY_IMAGES: IGalleryImage[] = [
   },
   { src: 'images/gallery/21.jpg', alt: 'Présentation d’un travail de groupe', category: 'Atelier' },
   {
-    src: 'images/gallery/22.jpg',
-    alt: 'Focus sur un participant en intervention',
-    category: 'F-360'
-  },
-  {
     src: 'images/gallery/23.jpg',
     alt: 'Travail collaboratif entre participants',
     category: 'L-Impact'
