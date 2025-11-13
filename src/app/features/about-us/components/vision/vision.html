@@ -24,19 +24,25 @@
           <i-lucide [name]="icons.vision" [strokeWidth]="1.5" class="text-primary-600 size-6" />
         </div>
         <h2 class="text-2xl font-black text-gray-900 font-satoshi">
-          Notre
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">Vision</span>
+          {{ 'about_us.vision.title' | translate }}
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
+            >{{ 'about_us.vision.title_highlight' | translate }}</span
+          >
         </h2>
       </div>
 
       <div class="hidden sm:block mb-8">
         <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 rounded-full mb-6">
           <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
-          <span class="text-sm font-semibold text-primary-700 uppercase tracking-wider">Vision</span>
+          <span class="text-sm font-semibold text-primary-700 uppercase tracking-wider"
+            >{{ 'about_us.vision.badge' | translate }}</span
+          >
         </div>
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-satoshi tracking-tight leading-[1.1]">
-          Notre
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">Vision</span>
+          {{ 'about_us.vision.title' | translate }}
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
+            >{{ 'about_us.vision.title_highlight' | translate }}</span
+          >
         </h2>
       </div>
 
@@ -45,12 +51,9 @@
           class="absolute -left-4 top-4 w-1 h-24 bg-gradient-to-b from-primary-500 to-primary-300 rounded-full"></div>
 
         <div class="border border-gray-100 p-8 lg:p-10 transition-all rounded-lg hyphens-none">
-          <p class="text-xl sm:text-2xl lg:text-3xl leading-relaxed text-gray-700 font-light">
-            Construire des villes africaines plus
-            <strong class="font-bold text-gray-900">intelligentes, inclusives et résilientes</strong>, en mobilisant
-            <strong class="font-bold text-primary-600">l'innovation locale</strong> comme levier de transformation
-            économique et sociale.
-          </p>
+          <p
+            class="text-xl sm:text-2xl lg:text-3xl leading-relaxed text-gray-700 font-light"
+            [innerHTML]="'about_us.vision.description' | translate"></p>
         </div>
       </div>
     </div>

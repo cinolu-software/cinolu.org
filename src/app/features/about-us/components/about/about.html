@@ -3,13 +3,15 @@
     <div class="mb-12 lg:mb-16">
       <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 rounded-full mb-6">
         <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
-        <span class="text-sm font-semibold text-primary-700 uppercase tracking-wider">Notre Histoire</span>
+        <span class="text-sm font-semibold text-primary-700 uppercase tracking-wider"
+          >{{ 'about_us.about.badge' | translate }}</span
+        >
       </div>
       <h2
         class="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 font-satoshi tracking-tight leading-[1.1] mb-6">
-        Qui
+        {{ 'about_us.about.title' | translate }}
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
-          >sommes-nous ?</span
+          >{{ 'about_us.about.title_highlight' | translate }}</span
         >
       </h2>
     </div>
@@ -19,21 +21,9 @@
 
       <div class="rounded-lg border border-gray-200 border-dashed p-8 lg:p-12 duration-500">
         <p class="text-lg sm:text-xl lg:text-2xl leading-relaxed text-gray-700 space-y-6">
-          <span class="block">
-            <strong class="font-bold text-gray-900">Cinolu – Centre d'Innovation de Lubumbashi</strong> est un espace
-            d'innovation, d'incubation et d'accompagnement né en
-            <strong class="font-bold text-primary-600">2015</strong>, dédié à catalyser le potentiel entrepreneurial et
-            technologique en République Démocratique du Congo.
-          </span>
-          <span class="block">
-            Nous agissons comme un <strong class="font-bold text-primary-600">guichet unique (OneStop)</strong> pour
-            connecter les talents aux opportunités à travers l'innovation, la technologie et l'entrepreneuriat pour un
-            impact social.
-          </span>
-          <span class="block">
-            La plateforme numérique Cinolu OneStop a été conçue pour centraliser les parcours d'accompagnement,
-            automatiser les processus (adhésion, candidature, mentorat) et valoriser l'impact collectif.
-          </span>
+          <span class="block" [innerHTML]="'about_us.about.paragraph_1' | translate"></span>
+          <span class="block" [innerHTML]="'about_us.about.paragraph_2' | translate"></span>
+          <span class="block" [innerHTML]="'about_us.about.paragraph_3' | translate"></span>
         </p>
       </div>
     </div>
@@ -49,13 +39,12 @@
     <div class="max-w-4xl">
       <p class="text-4xl sm:text-5xl lg:text-6xl font-black font-satoshi mb-6 tracking-tight leading-[1.15]">
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 via-primary-500 to-primary-700">
-          Innovons ensemble.
+          {{ 'about_us.about.quote' | translate }}
         </span>
       </p>
-      <p class="text-lg sm:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-        La plateforme numérique Cinolu OneStop a été conçue pour centraliser les parcours d'accompagnement, automatiser
-        les processus et valoriser l'impact collectif.
-      </p>
+      <p
+        class="text-lg sm:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed"
+        [innerHTML]="'about_us.about.paragraph_3' | translate"></p>
 
       <a
         routerLink="/sign-up"

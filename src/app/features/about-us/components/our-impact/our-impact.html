@@ -8,15 +8,18 @@
     <div class="mb-16 text-center">
       <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 rounded-full mb-6">
         <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
-        <span class="text-sm font-semibold text-primary-700 uppercase tracking-wider">Impact & Résultats</span>
+        <span class="text-sm font-semibold text-primary-700 uppercase tracking-wider"
+          >{{ 'about_us.our_impact.badge' | translate }}</span
+        >
       </div>
       <h2
         class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-satoshi mb-4 tracking-tight leading-[1.1]">
-        Notre <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">impact</span>
+        {{ 'about_us.our_impact.title' | translate }}
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
+          >{{ 'about_us.our_impact.title_highlight' | translate }}</span
+        >
       </h2>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Des chiffres qui témoignent de notre engagement et de notre impact sur le terrain
-      </p>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">{{ 'about_us.our_impact.subtitle' | translate }}</p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -53,10 +56,12 @@
 
           <h3
             class="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-primary-700 transition-colors duration-300">
-            {{ item.title }}
+            {{ 'about_us.our_impact.items.item_' + (i + 1) + '.title' | translate }}
           </h3>
 
-          <p class="text-sm sm:text-base text-gray-600 leading-relaxed">{{ item.description }}</p>
+          <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+            {{ 'about_us.our_impact.items.item_' + (i + 1) + '.description' | translate }}
+          </p>
         </div>
 
         <div

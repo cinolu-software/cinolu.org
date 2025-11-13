@@ -71,14 +71,10 @@
     @apply scroll-smooth hyphens-auto;
   }
 
-  html,
-  body {
-    @apply overflow-x-hidden;
-    max-width: 100vw;
-  }
-
   body {
     @apply w-full;
+    max-width: 100vw;
+    overflow-x: clip;
   }
 
   .ql-editor {
@@ -120,6 +116,10 @@
 
   header nav {
     overflow: visible !important;
+  }
+
+  section {
+    overflow: visible;
   }
 }
 

@@ -7,14 +7,17 @@
   <div class="mb-16 text-center">
     <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 rounded-full mb-6">
       <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
-      <span class="text-sm font-semibold text-primary-700 uppercase tracking-wider">Notre Histoire</span>
+      <span class="text-sm font-semibold text-primary-700 uppercase tracking-wider"
+        >{{ 'about_us.history.badge' | translate }}</span
+      >
     </div>
     <h3 class="mb-4 text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-satoshi tracking-tight">
-      Notre <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">parcours</span>
+      {{ 'about_us.history.title' | translate }}
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
+        >{{ 'about_us.history.title_highlight' | translate }}</span
+      >
     </h3>
-    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-      Découvrez les étapes clés qui ont façonné notre organisation au fil des ans.
-    </p>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto">{{ 'about_us.history.subtitle' | translate }}</p>
   </div>
 
   <div class="relative flex flex-col items-center gap-4">
@@ -39,13 +42,13 @@
             <div
               class="flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide"
               [ngClass]="expandedMenu() === item.id ? 'bg-primary-500 text-white' : 'bg-gray-100 text-gray-600'">
-              {{ item.status }}
+              {{ 'about_us.history.timeline.item_' + item.id + '.status' | translate }}
             </div>
 
             <h4
               [ngClass]="expandedMenu() === item.id ? 'text-primary-600' : 'text-gray-900'"
               class="text-2xl sm:text-3xl lg:text-4xl font-black font-satoshi transition-colors duration-300">
-              {{ item.date }}
+              {{ 'about_us.history.timeline.item_' + item.id + '.date' | translate }}
             </h4>
           </div>
 
@@ -68,7 +71,9 @@
             <div class="relative pl-6">
               <div
                 class="absolute left-0 top-1 w-1 h-full bg-gradient-to-b from-primary-500 to-primary-300 rounded-full"></div>
-              <p class="text-gray-700 leading-relaxed text-lg">{{ item.description }}</p>
+              <p class="text-gray-700 leading-relaxed text-lg">
+                {{ 'about_us.history.timeline.item_' + item.id + '.description' | translate }}
+              </p>
             </div>
           </div>
         </div>

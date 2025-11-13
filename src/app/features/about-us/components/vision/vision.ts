@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { LucideAngularModule, Telescope } from 'lucide-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-vision',
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, TranslateModule],
   templateUrl: './vision.html'
 })
 export class Vision {

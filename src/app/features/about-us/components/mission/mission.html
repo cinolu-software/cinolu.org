@@ -11,19 +11,25 @@
           <i-lucide [name]="icons.mission" [strokeWidth]="1.5" class="text-primary-600 size-6" />
         </div>
         <h2 class="text-2xl font-black text-gray-900 font-satoshi">
-          Notre
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">Mission</span>
+          {{ 'about_us.mission.title' | translate }}
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
+            >{{ 'about_us.mission.title_highlight' | translate }}</span
+          >
         </h2>
       </div>
 
       <div class="hidden sm:block mb-8">
         <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 rounded-full mb-6">
           <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
-          <span class="text-sm font-semibold text-primary-700 uppercase tracking-wider">Mission</span>
+          <span class="text-sm font-semibold text-primary-700 uppercase tracking-wider"
+            >{{ 'about_us.mission.badge' | translate }}</span
+          >
         </div>
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-satoshi tracking-tight leading-[1.1]">
-          Notre
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">Mission</span>
+          {{ 'about_us.mission.title' | translate }}
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
+            >{{ 'about_us.mission.title_highlight' | translate }}</span
+          >
         </h2>
       </div>
 
@@ -33,13 +39,9 @@
 
         <div
           class="backdrop-blur-sm border border-gray-100 p-8 lg:p-10 rounded-lg transition-all duration-500 hyphens-none">
-          <p class="text-xl sm:text-2xl lg:text-3xl leading-relaxed text-gray-700 font-light">
-            Accompagner les <strong class="font-bold text-gray-900">innovateurs, les entrepreneurs</strong> et les
-            structures d'appui à l'entrepreneuriat (ESO) dans le développement de
-            <strong class="font-bold text-primary-600">solutions durables et inclusives</strong>, en favorisant la
-            <strong class="font-bold text-gray-900">co-création, l'expérimentation</strong> et la collaboration
-            multi-acteurs.
-          </p>
+          <p
+            class="text-xl sm:text-2xl lg:text-3xl leading-relaxed text-gray-700 font-light"
+            [innerHTML]="'about_us.mission.description' | translate"></p>
         </div>
       </div>
     </div>
