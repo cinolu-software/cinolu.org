@@ -1,4 +1,4 @@
-import { Component, input, ChangeDetectionStrategy, computed } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy, computed, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
@@ -23,7 +23,10 @@ import { TOPBAR_ICONS } from '../topbar.config';
     LanguageSwitcherComponent,
     TranslateModule
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(document:click)': 'onDocumentClick($event)'
+  }
 })
 export class DesktopNav {
   // Inputs
@@ -37,6 +40,32 @@ export class DesktopNav {
 
   // Computed
   readonly user = computed(() => this.authStore().user());
+
+  // State for touch interactions
+  readonly openDropdown = signal<string | null>(null);
+
+  toggleDropdown(dropdownId: string, event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
+    if (this.openDropdown() === dropdownId) {
+      this.openDropdown.set(null);
+    } else {
+      this.openDropdown.set(dropdownId);
+    }
+  }
+
+  isDropdownOpen(dropdownId: string): boolean {
+    return this.openDropdown() === dropdownId;
+  }
+
+  onDocumentClick(event: Event): void {
+    // Fermer tous les dropdowns quand on clique ailleurs
+    const target = event.target as HTMLElement;
+    if (!target.closest('.group')) {
+      this.openDropdown.set(null);
+    }
+  }
 
   onSignOut(): void {
     this.authStore().signOut();

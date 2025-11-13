@@ -4,14 +4,20 @@
     <div class="relative group text-sm">
       @if (link.children?.length) {
       <button
+        (click)="toggleDropdown('link-' + $index, $event)"
         class="group flex items-center relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 hover:text-primary-500 hover:transition-colors hover:duration-200 before:content-[''] before:absolute before:left-0 before:top-full before:w-full before:h-4 before:z-20">
         {{ link.translationKey ? (link.translationKey | translate) : link.name }}
         <i-lucide
-          class="size-5 transition-transform duration-300 group-hover:rotate-90 ml-0.5"
+          class="size-5 transition-transform duration-300 ml-0.5"
+          [ngClass]="{'rotate-90': isDropdownOpen('link-' + $index)}"
           [name]="icons.chevronRight" />
         @if (link.children?.length) {
         <div
-          class="absolute left-0 top-full pt-3 w-80 z-30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-top">
+          class="absolute left-0 top-full pt-3 w-80 z-50 transition-all duration-300 origin-top"
+          [ngClass]="{
+            'opacity-100 visible': isDropdownOpen('link-' + $index),
+            'opacity-0 invisible': !isDropdownOpen('link-' + $index)
+          }">
           <div class="flex text-left flex-col divide-y divide-gray-200 py-2 bg-white shadow-xl rounded-lg">
             @for (sublink of link.children; track $index) {
             <div class="relative group/sub px-4 py-2">
@@ -43,14 +49,20 @@
     }
 
     <button
+      (click)="toggleDropdown('programs', $event)"
       class="group flex items-center relative hover:text-primary-500 hover:transition-colors hover:duration-200 before:content-[''] before:absolute before:left-0 before:top-full before:w-full before:h-4 before:z-20">
       {{ 'nav.programs' | translate }}
       <i-lucide
-        class="size-5 group-hover:mt-0 ml-0.5 transition-transform duration-300 group-hover:rotate-90"
+        class="size-5 ml-0.5 transition-transform duration-300"
+        [ngClass]="{'rotate-90': isDropdownOpen('programs')}"
         [name]="icons.chevronRight" />
       @if (programs()) {
       <div
-        class="absolute right-0 top-full pt-3 w-80 z-30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-top">
+        class="absolute right-0 top-full pt-3 w-80 z-50 transition-all duration-300 origin-top"
+        [ngClass]="{
+          'opacity-100 visible': isDropdownOpen('programs'),
+          'opacity-0 invisible': !isDropdownOpen('programs')
+        }">
         <div class="flex flex-col divide-y divide-gray-200 py-2 bg-white shadow-xl rounded-lg">
           @for (p of programs(); track $index) {
           <div class="relative group/sub px-4 py-2 text-left">
@@ -76,7 +88,7 @@
     <div class="flex gap-3 items-center">
       <app-language-switcher />
 
-      <button class="group relative flex items-center gap-1">
+      <button (click)="toggleDropdown('mycinolu', $event)" class="group relative flex items-center gap-1">
         <div class="flex items-center gap-1">
           <div class="relative h-8 w-8">
             <img
@@ -87,10 +99,15 @@
           </div>
           <i-lucide
             [name]="icons.chevronRight"
-            class="transition-transform size-5 group-hover:mt-0 ml-0.5 duration-300 group-hover:rotate-90" />
+            class="transition-transform size-5 ml-0.5 duration-300"
+            [ngClass]="{'rotate-90': isDropdownOpen('mycinolu')}" />
         </div>
         <div
-          class="invisible absolute right-0 top-full mt-2 w-56 rounded-lg bg-white shadow-xl opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100">
+          class="absolute right-0 top-full mt-2 w-56 rounded-lg bg-white shadow-xl transition-all duration-300 z-50"
+          [ngClass]="{
+            'visible opacity-100': isDropdownOpen('mycinolu'),
+            'invisible opacity-0': !isDropdownOpen('mycinolu')
+          }">
           <div class="text-left flex flex-col divide-y divide-gray-200 py-2">
             <div class="flex flex-col px-4 py-2">
               <a
