@@ -93,5 +93,39 @@
     "subscribe": "S'abonner",
     "copyright": "© {{year}} Cinolu. Tous droits réservés.",
     "allRightsReserved": "Tous droits réservés"
+  },
+  "onestop": {
+    "badge": "Plateforme Digitale",
+    "title": "Cinolu",
+    "title_highlight": "OneStop",
+    "heading": "Votre Guichet Unique",
+    "heading_highlight": "d'Accompagnement Entrepreneurial",
+    "description": "Connectez-vous pour gérer votre parcours, vos formations et rejoindre la communauté d'innovateurs.",
+    "categories_title": "Catégories",
+    "categories_available": "disponibles",
+    "contact_button": "Contactez-nous",
+    "programs_button": "Nos Programmes",
+    "image_alt": "Entrepreneur accompagné par Cinolu",
+    "cards": {
+      "resources": {
+        "title": "Accès aux Ressources",
+        "subtitle": "Formations & Guides"
+      },
+      "entrepreneurs": {
+        "title": "+500 Entrepreneurs",
+        "subtitle": "accompagnés"
+      },
+      "mentorship": {
+        "title": "Mentorat",
+        "subtitle": "& Réseautage"
+      }
+    },
+    "categories": {
+      "formation": "Formation",
+      "financement": "Financement",
+      "mentorat": "Mentorat",
+      "incubation": "Incubation",
+      "acceleration": "Accélération"
+    }
   }
 }

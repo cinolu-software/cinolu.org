@@ -93,5 +93,39 @@
     "subscribe": "Subscribe",
     "copyright": "© {{year}} Cinolu. All rights reserved.",
     "allRightsReserved": "All rights reserved"
+  },
+  "onestop": {
+    "badge": "Digital Platform",
+    "title": "Cinolu",
+    "title_highlight": "OneStop",
+    "heading": "Your One-Stop Shop",
+    "heading_highlight": "for Entrepreneurial Support",
+    "description": "Connect to manage your journey, training and join the community of innovators.",
+    "categories_title": "Categories",
+    "categories_available": "available",
+    "contact_button": "Contact us",
+    "programs_button": "Our Programs",
+    "image_alt": "Entrepreneur supported by Cinolu",
+    "cards": {
+      "resources": {
+        "title": "Access to Resources",
+        "subtitle": "Training & Guides"
+      },
+      "entrepreneurs": {
+        "title": "+500 Entrepreneurs",
+        "subtitle": "supported"
+      },
+      "mentorship": {
+        "title": "Mentorship",
+        "subtitle": "& Networking"
+      }
+    },
+    "categories": {
+      "formation": "Training",
+      "financement": "Funding",
+      "mentorat": "Mentoring",
+      "incubation": "Incubation",
+      "acceleration": "Acceleration"
+    }
   }
 }
