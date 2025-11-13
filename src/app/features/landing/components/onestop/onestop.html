@@ -3,11 +3,14 @@
     <div
       class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
       <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
-      Plateforme Digitale
+      {{ 'onestop.badge' | translate }}
     </div>
     <h3
       class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-3 tracking-tight leading-tight">
-      Cinolu <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">OneStop</span>
+      {{ 'onestop.title' | translate }}
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
+        >{{ 'onestop.title_highlight' | translate }}</span
+      >
     </h3>
   </div>
 
@@ -16,31 +19,33 @@
       <div>
         <h2
           class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-gray-900 leading-[1.2] tracking-tight font-satoshi mb-5">
-          Votre Guichet Unique <br class="hidden sm:block" />
+          {{ 'onestop.heading' | translate }} <br class="hidden sm:block" />
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
-            >d'Accompagnement Entrepreneurial</span
+            >{{ 'onestop.heading_highlight' | translate }}</span
           >
         </h2>
 
         <p class="text-base md:text-lg text-gray-700 hyphens-none leading-relaxed max-w-lg mx-auto lg:mx-0">
-          Connectez-vous pour gérer votre parcours, vos formations et rejoindre la communauté d’innovateurs.
+          {{ 'onestop.description' | translate }}
         </p>
       </div>
 
       <div
         class="bg-transparent sm:bg-gradient-to-br from-gray-50 to-white py-6 sm:px-6 rounded-lg sm:border border-gray-100">
         <p class="text-gray-900 font-bold text-base sm:text-lg mb-3 text-center sm:text-left">
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">Catégories</span>
-          disponibles
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
+            >{{ 'onestop.categories_title' | translate }}</span
+          >
+          {{ 'onestop.categories_available' | translate }}
         </p>
         <div class="relative">
           <div class="overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain">
             <div
               class="flex gap-2 sm:flex-wrap items-center justify-start sm:justify-center min-w-max sm:min-w-0 px-4 sm:px-0 py-4">
-              @for (category of categories; track trackByCategory($index, category)) {
+              @for (categoryKey of categoryKeys; track trackByCategoryKey($index, categoryKey)) {
               <span
                 class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-primary-100 text-primary-700 border border-primary-200 whitespace-nowrap flex-shrink-0 hover:bg-primary-200 hover:border-primary-300 transition-colors duration-200 snap-center">
-                {{ category }}
+                {{ 'onestop.categories.' + categoryKey | translate }}
               </span>
               }
             </div>
@@ -52,7 +57,7 @@
         class="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center justify-center lg:justify-start pt-2">
         <p-button [routerLink]="['/contact-us']" size="small" severity="primary" class="w-full sm:w-auto">
           <p class="flex items-center justify-center gap-2 group px-4 py-1">
-            <span>Contactez-nous</span>
+            <span>{{ 'onestop.contact_button' | translate }}</span>
             <i-lucide
               class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
               [name]="icons.moveRight" />
@@ -60,7 +65,7 @@
         </p-button>
 
         <p-button [routerLink]="['/programs']" size="small" outlined severity="primary" class="w-full sm:w-auto">
-          <p class="flex items-center justify-center gap-2 px-4 py-1">Nos Programmes</p>
+          <p class="flex items-center justify-center gap-2 px-4 py-1">{{ 'onestop.programs_button' | translate }}</p>
         </p-button>
       </div>
     </div>
@@ -71,7 +76,7 @@
           class="relative w-72 sm:w-80 md:w-96 lg:w-[380px] xl:w-[420px] h-[350px] sm:h-[400px] md:h-[450px] lg:h-[480px] xl:h-[520px] mx-auto">
           <img
             [ngSrc]="'images/entrepreneur-default.png'"
-            alt="Entrepreneur accompagné par Cinolu"
+            [alt]="'onestop.image_alt' | translate"
             class="object-contain drop-shadow-2xl"
             priority
             fill />
@@ -81,8 +86,12 @@
           class="absolute top-4 sm:top-8 left-1/2 -translate-x-1/2 sm:left-8 md:left-4 lg:left-8 xl:left-10 sm:translate-x-0 bg-white shadow-lg sm:shadow-xl rounded-lg sm:rounded-lg px-3 py-2 sm:px-5 sm:py-3 flex items-center gap-2 sm:gap-3 text-xs sm:text-sm border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 max-w-[200px] sm:max-w-none z-10">
           <i-lucide [name]="icons.bookOpen" class="size-4 sm:size-5 text-primary-500" />
           <div class="min-w-0">
-            <p class="font-bold text-gray-900 truncate text-xs sm:text-sm">Accès aux Ressources</p>
-            <p class="text-gray-600 text-[10px] sm:text-xs truncate">Formations & Guides</p>
+            <p class="font-bold text-gray-900 truncate text-xs sm:text-sm">
+              {{ 'onestop.cards.resources.title' | translate }}
+            </p>
+            <p class="text-gray-600 text-[10px] sm:text-xs truncate">
+              {{ 'onestop.cards.resources.subtitle' | translate }}
+            </p>
           </div>
         </div>
 
@@ -96,16 +105,22 @@
             }
           </div>
           <div class="min-w-0">
-            <p class="font-bold text-gray-900 whitespace-nowrap text-xs sm:text-sm">+500 Entrepreneurs</p>
-            <p class="text-gray-600 text-[10px] sm:text-xs truncate">accompagnés</p>
+            <p class="font-bold text-gray-900 whitespace-nowrap text-xs sm:text-sm">
+              {{ 'onestop.cards.entrepreneurs.title' | translate }}
+            </p>
+            <p class="text-gray-600 text-[10px] sm:text-xs truncate">
+              {{ 'onestop.cards.entrepreneurs.subtitle' | translate }}
+            </p>
           </div>
         </div>
 
         <div
           class="absolute top-1/2 -translate-y-1/2 -right-2 sm:right-0 md:-right-4 lg:right-0 bg-white shadow-lg sm:shadow-xl rounded-lg sm:rounded-lg px-3 py-2 sm:px-4 sm:py-3 flex flex-col items-center text-center border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:scale-105 z-10">
           <i-lucide [name]="icons.users" class="size-4 sm:size-5 text-primary-500 mb-1" />
-          <p class="font-bold text-gray-900 text-xs sm:text-sm whitespace-nowrap">Mentorat</p>
-          <p class="text-gray-600 text-[10px] sm:text-xs">& Réseautage</p>
+          <p class="font-bold text-gray-900 text-xs sm:text-sm whitespace-nowrap">
+            {{ 'onestop.cards.mentorship.title' | translate }}
+          </p>
+          <p class="text-gray-600 text-[10px] sm:text-xs">{{ 'onestop.cards.mentorship.subtitle' | translate }}</p>
         </div>
 
         <div
