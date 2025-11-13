@@ -1,6 +1,8 @@
 @if (true) {
-<app-topbar [fixed]="true" />
-<router-outlet />
-<app-footer />
-<app-back-button />
+<div class="w-full overflow-x-hidden">
+  <app-topbar [fixed]="true" />
+  <router-outlet />
+  <app-footer />
+  <app-back-button />
+</div>
 }
