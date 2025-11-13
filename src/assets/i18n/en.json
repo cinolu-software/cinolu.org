@@ -127,5 +127,43 @@
       "incubation": "Incubation",
       "acceleration": "Acceleration"
     }
+  },
+  "why_join_us": {
+    "badge": "Impact & Innovation",
+    "title": "Why join",
+    "title_highlight": "Cinolu",
+    "description": "Since 2015, Cinolu has been an innovation hub in Lubumbashi supporting youth, women and innovators through technology, entrepreneurship and collaboration.",
+    "stats": {
+      "beneficiaries": "Beneficiaries",
+      "entrepreneurs": "Supported Entrepreneurs",
+      "women_trained": "Women trained & inspired with F360",
+      "programs": "Regional innovation programs and forums",
+      "partners": "A network of strategic partners"
+    }
+  },
+  "services": {
+    "title": "Open Innovation & Partnerships",
+    "items": {
+      "innovative_solutions": {
+        "title": "Innovative Solutions",
+        "description": "Identify innovative solutions to specific challenges"
+      },
+      "co_creation": {
+        "title": "Startup Co-Creation",
+        "description": "Co-create with startups or local talents"
+      },
+      "innovation_challenges": {
+        "title": "Innovation Challenges",
+        "description": "Launch innovation calls or thematic challenges"
+      },
+      "project_management": {
+        "title": "Project Management",
+        "description": "Lead transformation or impact projects"
+      },
+      "ecosystem_mapping": {
+        "title": "Ecosystem Mapping",
+        "description": "Map or strengthen a local ecosystem"
+      }
+    }
   }
 }
