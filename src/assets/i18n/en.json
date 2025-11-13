@@ -142,7 +142,7 @@
     }
   },
   "services": {
-    "title": "Open Innovation & Partnerships",
+    "title": "Our Open Innovation approach",
     "items": {
       "innovative_solutions": {
         "title": "Innovative Solutions",
@@ -163,6 +163,128 @@
       "ecosystem_mapping": {
         "title": "Ecosystem Mapping",
         "description": "Map or strengthen a local ecosystem"
+      }
+    }
+  },
+  "hero": {
+    "slides": {
+      "slide_1": {
+        "badge_text": "10 years of innovation!",
+        "title": "Celebrating 10 years",
+        "title_highlight": "Of impact and inspiration",
+        "description": "Since 2015, we have been supporting Congolese and African talents to transform their ideas into sustainable solutions.",
+        "primary_cta": "Our story",
+        "secondary_cta": "Join us"
+      },
+      "slide_2": {
+        "badge_text": "Let's innovate together!",
+        "title": "Accelerating talents",
+        "title_highlight": "Connecting opportunities",
+        "description": "The Lubumbashi Innovation Center (Cinolu) is a vibrant space where ideas become solutions to build smart, inclusive and sustainable cities.",
+        "primary_cta": "Become a member",
+        "secondary_cta": "Donate"
+      },
+      "slide_3": {
+        "badge_text": "Launch your project!",
+        "title": "Transform your ideas",
+        "title_highlight": "Into innovative solutions",
+        "description": "Benefit from personalized support, access to quality resources and a network of passionate entrepreneurs to bring your projects to life.",
+        "primary_cta": "Our programs",
+        "secondary_cta": "Our events"
+      }
+    }
+  },
+  "about_us": {
+    "hero": {
+      "badge_text": "About us",
+      "title": "About",
+      "title_highlight": "us.",
+      "description": "Our history and passion guide a committed team, dedicated to providing you with impeccable service."
+    },
+    "about": {
+      "badge": "Our Story",
+      "title": "Who",
+      "title_highlight": "are we?",
+      "paragraph_1": "<strong class=\"font-bold text-gray-900\">Cinolu – Lubumbashi Innovation Center</strong> is an innovation, incubation and support space founded in <strong class=\"font-bold text-primary-600\">2015</strong>, dedicated to catalyzing entrepreneurial and technological potential in the Democratic Republic of Congo.",
+      "paragraph_2": "We act as a <strong class=\"font-bold text-primary-600\">one-stop shop (OneStop)</strong> to connect talents to opportunities through innovation, technology and entrepreneurship for social impact.",
+      "paragraph_3": "The Cinolu OneStop digital platform was designed to centralize support pathways, automate processes (membership, application, mentoring) and enhance collective impact.",
+      "quote": "Connecting talents to opportunities to transform our African cities through innovation, technology and entrepreneurship."
+    },
+    "vision": {
+      "badge": "Vision",
+      "title": "Our",
+      "title_highlight": "Vision",
+      "description": "Building <strong class=\"font-bold text-gray-900\">smarter, more inclusive and resilient</strong> African cities by mobilizing entrepreneurship, technological innovation and <strong class=\"font-bold text-primary-600\">multi-stakeholder collaboration</strong>."
+    },
+    "mission": {
+      "badge": "Mission",
+      "title": "Our",
+      "title_highlight": "Mission",
+      "description": "Supporting <strong class=\"font-bold text-gray-900\">innovators, entrepreneurs</strong> and entrepreneurship support organizations (ESOs) in developing <strong class=\"font-bold text-primary-600\">sustainable and inclusive solutions</strong>, by fostering <strong class=\"font-bold text-gray-900\">co-creation, experimentation</strong> and multi-stakeholder collaboration."
+    },
+    "history": {
+      "badge": "Our History",
+      "title": "Our",
+      "title_highlight": "journey",
+      "subtitle": "Discover the key milestones that have shaped our organization over the years.",
+      "timeline": {
+        "item_1": {
+          "status": "Launch",
+          "date": "2015",
+          "description": "Launch of Cinolu, the 1st innovation hub in Lubumbashi"
+        },
+        "item_2": {
+          "status": "Programs",
+          "date": "2017–2020",
+          "description": "Implementation of gender & youth programs (F360, civic tech…)"
+        },
+        "item_3": {
+          "status": "Incubator",
+          "date": "2021",
+          "description": "Deployment of the Ushindi incubator and entrepreneurial cohorts"
+        },
+        "item_4": {
+          "status": "Expansion",
+          "date": "2023–2024",
+          "description": "Regional deployment (SOPA+, Afrilabs, Fikiri…) and creation of Cinolu OneStop"
+        },
+        "item_5": {
+          "status": "Structuring",
+          "date": "2025",
+          "description": "Complete digital structuring of support and impact"
+        }
+      }
+    },
+    "our_impact": {
+      "badge": "Impact & Results",
+      "title": "Our",
+      "title_highlight": "impact",
+      "subtitle": "Figures that demonstrate our commitment and impact in the field",
+      "items": {
+        "item_1": {
+          "title": "Entrepreneurs supported",
+          "description": "Supporting aspiring entrepreneurs"
+        },
+        "item_2": {
+          "title": "Women beneficiaries",
+          "description": "Supporting aspiring entrepreneurs"
+        },
+        "item_3": {
+          "title": "Regional partner communities, National coverage",
+          "description": "Supporting aspiring entrepreneurs"
+        },
+        "item_4": {
+          "title": "Funding mobilized",
+          "description": "Supporting aspiring entrepreneurs"
+        },
+        "item_5": {
+          "title": "Solutions mapped via Fikiri",
+          "description": "Supporting aspiring entrepreneurs"
+        },
+        "item_6": {
+          "title": "Mentors, coaches and experts mobilized",
+          "description": "Supporting aspiring entrepreneurs"
+        }
       }
     }
   }

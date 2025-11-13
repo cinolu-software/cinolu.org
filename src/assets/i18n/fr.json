@@ -142,7 +142,7 @@
     }
   },
   "services": {
-    "title": "Open Innovation & Partenariats",
+    "title": "Notre approche d'Open Innovation",
     "items": {
       "innovative_solutions": {
         "title": "Innovative Solutions",
@@ -163,6 +163,128 @@
       "ecosystem_mapping": {
         "title": "Ecosystem Mapping",
         "description": "Cartographier ou renforcer un écosystème local"
+      }
+    }
+  },
+  "hero": {
+    "slides": {
+      "slide_1": {
+        "badge_text": "10 ans d'innovation !",
+        "title": "Célébrons 10 ans",
+        "title_highlight": "D'impact et d'inspiration",
+        "description": "Depuis 2015, nous accompagnons les talents congolais et africains à transformer leurs idées en solutions durables.",
+        "primary_cta": "Notre histoire",
+        "secondary_cta": "Rejoignez-nous"
+      },
+      "slide_2": {
+        "badge_text": "Innovons ensemble !",
+        "title": "Accélérons les talents",
+        "title_highlight": "Connectons les opportunités",
+        "description": "Le Centre d'Innovation de Lubumbashi (Cinolu) est un espace vivant où les idées deviennent des solutions pour bâtir des villes intelligentes, inclusives et durables.",
+        "primary_cta": "Devenir membre",
+        "secondary_cta": "Faire un don"
+      },
+      "slide_3": {
+        "badge_text": "Lancez votre projet !",
+        "title": "Transformez vos idées",
+        "title_highlight": "En solutions innovantes",
+        "description": "Bénéficiez d'un accompagnement personnalisé, d'un accès à des ressources de qualité et d'un réseau d'entrepreneurs passionnés pour concrétiser vos projets.",
+        "primary_cta": "Nos programmes",
+        "secondary_cta": "Nos événements"
+      }
+    }
+  },
+  "about_us": {
+    "hero": {
+      "badge_text": "À propos de nous",
+      "title": "À propos de",
+      "title_highlight": "nous.",
+      "description": "Notre histoire et notre passion guident une équipe engagée, dédiée à vous offrir un service irréprochable."
+    },
+    "about": {
+      "badge": "Notre Histoire",
+      "title": "Qui",
+      "title_highlight": "sommes-nous ?",
+      "paragraph_1": "<strong class=\"font-bold text-gray-900\">Cinolu – Centre d'Innovation de Lubumbashi</strong> est un espace d'innovation, d'incubation et d'accompagnement né en <strong class=\"font-bold text-primary-600\">2015</strong>, dédié à catalyser le potentiel entrepreneurial et technologique en République Démocratique du Congo.",
+      "paragraph_2": "Nous agissons comme un <strong class=\"font-bold text-primary-600\">guichet unique (OneStop)</strong> pour connecter les talents aux opportunités à travers l'innovation, la technologie et l'entrepreneuriat pour un impact social.",
+      "paragraph_3": "La plateforme numérique Cinolu OneStop a été conçue pour centraliser les parcours d'accompagnement, automatiser les processus (adhésion, candidature, mentorat) et valoriser l'impact collectif.",
+      "quote": "Connecter les talents aux opportunités pour transformer nos villes africaines à travers l'innovation, la technologie et l'entrepreneuriat."
+    },
+    "vision": {
+      "badge": "Vision",
+      "title": "Notre",
+      "title_highlight": "Vision",
+      "description": "Construire des villes africaines plus <strong class=\"font-bold text-gray-900\">intelligentes, inclusives et résilientes</strong>, en mobilisant l'entrepreneuriat, l'innovation technologique et la <strong class=\"font-bold text-primary-600\">collaboration multi-acteurs</strong>."
+    },
+    "mission": {
+      "badge": "Mission",
+      "title": "Notre",
+      "title_highlight": "Mission",
+      "description": "Accompagner les <strong class=\"font-bold text-gray-900\">innovateurs, les entrepreneurs</strong> et les structures d'appui à l'entrepreneuriat (ESO) dans le développement de <strong class=\"font-bold text-primary-600\">solutions durables et inclusives</strong>, en favorisant la <strong class=\"font-bold text-gray-900\">co-création, l'expérimentation</strong> et la collaboration multi-acteurs."
+    },
+    "history": {
+      "badge": "Notre Histoire",
+      "title": "Notre",
+      "title_highlight": "parcours",
+      "subtitle": "Découvrez les étapes clés qui ont façonné notre organisation au fil des ans.",
+      "timeline": {
+        "item_1": {
+          "status": "Lancement",
+          "date": "2015",
+          "description": "Lancement du Cinolu, 1er hub d'innovation à Lubumbashi"
+        },
+        "item_2": {
+          "status": "Programmes",
+          "date": "2017–2020",
+          "description": "Mise en œuvre de programmes genre & jeunesse (F360, civic tech…)"
+        },
+        "item_3": {
+          "status": "Incubateur",
+          "date": "2021",
+          "description": "Déploiement de l'incubateur Ushindi et de cohortes entrepreneuriales"
+        },
+        "item_4": {
+          "status": "Expansion",
+          "date": "2023–2024",
+          "description": "Déploiement régional (SOPA+, Afrilabs, Fikiri…) et création du Cinolu OneStop"
+        },
+        "item_5": {
+          "status": "Structuration",
+          "date": "2025",
+          "description": "Structuration numérique complète de l'accompagnement et de l'impact"
+        }
+      }
+    },
+    "our_impact": {
+      "badge": "Impact & Résultats",
+      "title": "Notre",
+      "title_highlight": "impact",
+      "subtitle": "Des chiffres qui témoignent de notre engagement et de notre impact sur le terrain",
+      "items": {
+        "item_1": {
+          "title": "Entrepreneurs accompagnés",
+          "description": "Accompagnement des entrepreneurs en devenir"
+        },
+        "item_2": {
+          "title": "Femmes bénéficiaires",
+          "description": "Accompagnement des entrepreneurs en devenir"
+        },
+        "item_3": {
+          "title": "Communautés régionales partenaires, Couverture nationale",
+          "description": "Accompagnement des entrepreneurs en devenir"
+        },
+        "item_4": {
+          "title": "Financements mobilisés",
+          "description": "Accompagnement des entrepreneurs en devenir"
+        },
+        "item_5": {
+          "title": "Solutions cartographiées via Fikiri",
+          "description": "Accompagnement des entrepreneurs en devenir"
+        },
+        "item_6": {
+          "title": "Mentors, coachs et experts mobilisés",
+          "description": "Accompagnement des entrepreneurs en devenir"
+        }
       }
     }
   }
