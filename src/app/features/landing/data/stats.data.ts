@@ -1,4 +1,4 @@
-import { UserCog, Lightbulb, Handshake, Network, LucideIconData } from 'lucide-angular';
+import { UserCog, Lightbulb, Handshake, Network, LucideIconData, Venus } from 'lucide-angular';
 
 interface IStat {
   value: number;
@@ -20,7 +20,7 @@ export const STATS: IStat[] = [
   {
     value: 10000,
     label: 'Femmes formées & inspirées avec F360',
-    icon: Network
+    icon: Venus
   },
   {
     value: 5,
