@@ -56,11 +56,6 @@ export const PARTNERS: IPartner[] = [
     category: 'Institution'
   },
   {
-    name: 'F-360',
-    image: '/images/partners/9.png',
-    category: 'Institution'
-  },
-  {
     name: "L'etudiant entrepreneur",
     image: '/images/partners/10.png',
     category: 'Institution'

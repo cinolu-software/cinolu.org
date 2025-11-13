@@ -1,44 +1,81 @@
 import { LucideIconData, Lightbulb, Rocket, PartyPopper } from 'lucide-angular';
 
-export interface IHeroSlide {
+export interface IHeroSlideBase {
   id: number;
   badge: {
     icon: LucideIconData;
-    text: string;
   };
-  title: string;
-  titleHighlight: string;
-  description: string;
   backgroundImage: string;
   primaryCta: {
-    text: string;
     link: string;
   };
   secondaryCta?: {
-    text: string;
     link: string;
     external?: boolean;
   };
 }
 
-export const HERO_SLIDES: IHeroSlide[] = [
+export interface IHeroSlide extends IHeroSlideBase {
+  badge: {
+    icon: LucideIconData;
+    text?: string;
+    textKey?: string;
+  };
+  title?: string;
+  titleKey?: string;
+  titleHighlight?: string;
+  titleHighlightKey?: string;
+  description?: string;
+  descriptionKey?: string;
+  primaryCta: {
+    text?: string;
+    textKey?: string;
+    link: string;
+  };
+  secondaryCta?: {
+    text?: string;
+    textKey?: string;
+    link: string;
+    external?: boolean;
+  };
+}
+
+export interface IHeroSlideStatic extends IHeroSlideBase {
+  badge: {
+    icon: LucideIconData;
+    textKey: string;
+  };
+  titleKey: string;
+  titleHighlightKey: string;
+  descriptionKey: string;
+  primaryCta: {
+    textKey: string;
+    link: string;
+  };
+  secondaryCta?: {
+    textKey: string;
+    link: string;
+    external?: boolean;
+  };
+}
+
+export const HERO_SLIDES: IHeroSlideStatic[] = [
   {
     id: 1,
     badge: {
       icon: PartyPopper,
-      text: "10 ans d'innovation !"
+      textKey: 'hero.slides.slide_1.badge_text'
     },
-    title: 'Célébrons 10 ans',
-    titleHighlight: "D'impact et d'inspiration",
-    description:
-      'Depuis 2015, nous accompagnons les talents congolais et africains à transformer leurs idées en solutions durables.',
+    titleKey: 'hero.slides.slide_1.title',
+    titleHighlightKey: 'hero.slides.slide_1.title_highlight',
+    descriptionKey: 'hero.slides.slide_1.description',
     backgroundImage: '/images/10-ANS.png',
     primaryCta: {
-      text: 'Notre histoire',
+      textKey: 'hero.slides.slide_1.primary_cta',
       link: '/about-us'
     },
     secondaryCta: {
-      text: 'Rejoignez-nous',
+      textKey: 'hero.slides.slide_1.secondary_cta',
       link: '/sign-up'
     }
   },
@@ -46,19 +83,18 @@ export const HERO_SLIDES: IHeroSlide[] = [
     id: 2,
     badge: {
       icon: Lightbulb,
-      text: 'Innovons ensemble !'
+      textKey: 'hero.slides.slide_2.badge_text'
     },
-    title: 'Accélérons les talents',
-    titleHighlight: 'Connectons les opportunités',
-    description:
-      "Le Centre d'Innovation de Lubumbashi (Cinolu) est un espace vivant où les idées deviennent des solutions pour bâtir des villes intelligentes, inclusives et durables.",
+    titleKey: 'hero.slides.slide_2.title',
+    titleHighlightKey: 'hero.slides.slide_2.title_highlight',
+    descriptionKey: 'hero.slides.slide_2.description',
     backgroundImage: '/images/hero.jpg',
     primaryCta: {
-      text: 'Devenir membre',
+      textKey: 'hero.slides.slide_2.primary_cta',
       link: '/sign-up'
     },
     secondaryCta: {
-      text: 'Faire un don',
+      textKey: 'hero.slides.slide_2.secondary_cta',
       link: 'https://www.every.org/centre-dinnovation-lubumbashi-asbl?utm_campaign=donate-link#/donate',
       external: true
     }
@@ -67,19 +103,18 @@ export const HERO_SLIDES: IHeroSlide[] = [
     id: 3,
     badge: {
       icon: Rocket,
-      text: 'Lancez votre projet !'
+      textKey: 'hero.slides.slide_3.badge_text'
     },
-    title: 'Transformez vos idées',
-    titleHighlight: 'En solutions innovantes',
-    description:
-      "Bénéficiez d'un accompagnement personnalisé, d'un accès à des ressources de qualité et d'un réseau d'entrepreneurs passionnés pour concrétiser vos projets.",
+    titleKey: 'hero.slides.slide_3.title',
+    titleHighlightKey: 'hero.slides.slide_3.title_highlight',
+    descriptionKey: 'hero.slides.slide_3.description',
     backgroundImage: '/images/innovation.jpg',
     primaryCta: {
-      text: 'Nos programmes',
+      textKey: 'hero.slides.slide_3.primary_cta',
       link: '/programs'
     },
     secondaryCta: {
-      text: 'Nos événements',
+      textKey: 'hero.slides.slide_3.secondary_cta',
       link: '/events'
     }
   }
