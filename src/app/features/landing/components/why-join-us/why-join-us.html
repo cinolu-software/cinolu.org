@@ -1,20 +1,21 @@
 <section
-  class="py-12 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-gradient-to-br from-primary-50 via-white to-blue-50/30">
+  class="py-12 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-gradient-to-br from-primary-50 via-white to-blue-50/30 overflow-hidden">
   <div class="text-center fade-left-init" appAnimationsOnScroll>
     <div
       class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
       <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
-      Impact & Innovation
+      {{ 'why_join_us.badge' | translate }}
     </div>
 
     <h3
       class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-4 tracking-tight leading-tight">
-      Pourquoi rejoindre
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">Cinolu</span>
+      {{ 'why_join_us.title' | translate }}
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
+        >{{ 'why_join_us.title_highlight' | translate }}</span
+      >
     </h3>
     <p class="text-base lg:text-lg max-w-3xl text-gray-600 mx-auto mb-16 leading-relaxed">
-      Depuis 2015, Cinolu est un hub d'innovation à Lubumbashi qui soutient jeunes, femmes et innovateurs à travers
-      technologie, entrepreneuriat et collaboration.
+      {{ 'why_join_us.description' | translate }}
     </p>
   </div>
 
@@ -70,7 +71,7 @@
 
           <p
             class="text-sm text-gray-600 leading-relaxed font-medium group-hover:text-gray-800 transition-colors duration-300">
-            {{ s.label }}
+            {{ getStatLabelKey(s.label) | translate }}
           </p>
         </div>
 
