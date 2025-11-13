@@ -6,7 +6,7 @@
     </h3>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-5 gap-8 lg:gap-8 mb-12 overflow-hidden">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-5 gap-8 lg:gap-8 mb-12">
     @for (service of services; track service.id) {
     <app-service-card
       [service]="service"
