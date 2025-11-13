@@ -19,21 +19,17 @@ export class LanguageService {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
 
-  // Signal pour la langue courante
   currentLanguage = signal<Language>('fr');
 
-  // Langues disponibles
   readonly availableLanguages: LanguageOption[] = [
     { code: 'fr', name: 'Français', flag: '🇫🇷' },
     { code: 'en', name: 'English', flag: '🇬🇧' }
   ];
 
   constructor() {
-    // Récupérer la langue sauvegardée ou utiliser la langue par défaut
     const savedLang = this.getSavedLanguage();
     this.setLanguage(savedLang);
 
-    // Persister la langue à chaque changement (seulement côté navigateur)
     if (this.isBrowser) {
       effect(() => {
         const lang = this.currentLanguage();
@@ -42,42 +38,27 @@ export class LanguageService {
     }
   }
 
-  /**
-   * Définir la langue active
-   */
   setLanguage(lang: Language): void {
-    console.log('🌐 Setting language to:', lang);
     this.translate.use(lang);
     this.currentLanguage.set(lang);
 
-    // Mettre à jour l'attribut lang du document HTML (seulement côté navigateur)
     if (this.isBrowser && typeof document !== 'undefined') {
       document.documentElement.lang = lang;
-      console.log('✅ Language set successfully:', lang);
     }
   }
 
-  /**
-   * Changer de langue
-   */
   switchLanguage(lang: Language): void {
     this.setLanguage(lang);
   }
 
-  /**
-   * Basculer entre les langues disponibles
-   */
   toggleLanguage(): void {
     const currentLang = this.currentLanguage();
     const newLang: Language = currentLang === 'fr' ? 'en' : 'fr';
     this.setLanguage(newLang);
   }
 
-  /**
-   * Récupérer la langue sauvegardée
-   */
+
   private getSavedLanguage(): Language {
-    // Seulement côté navigateur
     if (this.isBrowser && typeof localStorage !== 'undefined') {
       const saved = localStorage.getItem(this.STORAGE_KEY);
       if (saved === 'fr' || saved === 'en') {
@@ -85,7 +66,6 @@ export class LanguageService {
       }
     }
 
-    // Détection de la langue du navigateur (seulement côté navigateur)
     if (this.isBrowser && typeof navigator !== 'undefined') {
       const browserLang = navigator.language.split('-')[0];
       if (browserLang === 'fr' || browserLang === 'en') {
@@ -93,20 +73,16 @@ export class LanguageService {
       }
     }
 
-    return 'fr'; // Langue par défaut
+    return 'fr';
   }
 
-  /**
-   * Obtenir les informations de la langue courante
-   */
+
   getCurrentLanguageInfo(): LanguageOption {
     const lang = this.currentLanguage();
     return this.availableLanguages.find((l) => l.code === lang) || this.availableLanguages[0];
   }
 
-  /**
-   * Traduction instantanée
-   */
+
   instant(key: string, params?: object): string {
     return this.translate.instant(key, params);
   }
