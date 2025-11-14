@@ -10,14 +10,14 @@ import { TranslateModule } from '@ngx-translate/core';
     <div class="relative">
       <button
         (click)="toggleDropdown()"
-        class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+        class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-primary-500/10 active:bg-primary-500/20 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30"
         [attr.aria-label]="'Changer de langue'">
         <span class="text-xl">{{ currentLangInfo().flag }}</span>
-        <span class="text-sm font-medium text-gray-700 hidden sm:inline">
+        <span class="text-sm font-medium hidden sm:inline">
           {{ currentLangInfo().code.toUpperCase() }}
         </span>
         <svg
-          class="w-4 h-4 text-gray-600 transition-transform duration-200"
+          class="w-4 h-4 opacity-70 transition-transform duration-200"
           [class.rotate-180]="isOpen"
           fill="none"
           stroke="currentColor"
@@ -86,7 +86,6 @@ export class LanguageSwitcherComponent {
   }
 
   selectLanguage(lang: 'fr' | 'en') {
-    console.log('🌍 Changing language to:', lang);
     this.languageService.switchLanguage(lang);
     this.isOpen = false;
   }
