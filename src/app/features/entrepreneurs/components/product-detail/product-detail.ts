@@ -5,11 +5,12 @@ import { carouselConfig } from '../../../landing/config/carousel.config';
 import { GalleriaModule } from 'primeng/galleria';
 import { ProductDetailSkeleton } from '../product-detail-skeleton/product-detail-skeleton';
 import { ApiImgPipe } from '../../../../shared/pipes';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-detail',
   providers: [ProductDetailsStore],
-  imports: [ApiImgPipe, GalleriaModule, ProductDetailSkeleton],
+  imports: [ApiImgPipe, GalleriaModule, ProductDetailSkeleton, TranslateModule],
   templateUrl: './product-detail.html'
 })
 export class ProductDetail implements OnInit {

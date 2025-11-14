@@ -5,10 +5,11 @@ import { RouterLink } from '@angular/router';
 import { Button } from 'primeng/button';
 import { IVenture } from '../../../../shared/models';
 import { ApiImgPipe } from '../../../../shared/pipes';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-entrepreneur-user-card',
-  imports: [CommonModule, LucideAngularModule, ApiImgPipe, NgOptimizedImage, RouterLink, Button],
+  imports: [CommonModule, LucideAngularModule, ApiImgPipe, NgOptimizedImage, RouterLink, Button, TranslateModule],
   templateUrl: './entrepreneur-user-card.html'
 })
 export class EntrepreneurUserCard {

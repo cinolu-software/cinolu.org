@@ -1,13 +1,13 @@
 <app-hero-card
   background="/images/talent-default.jpg"
   [badgeIcon]="icons.users"
-  badgeText="Nos Entrepreneurs"
-  title="Découvrez"
-  highlight="nos talents."
-  description="Une communauté d’entrepreneurs visionnaires qui innovent, créent de la valeur et inspirent l’avenir de l’Afrique." />
+  badgeTextKey="entrepreneurs.badge"
+  titleKey="entrepreneurs.title"
+  highlightKey="entrepreneurs.title_highlight"
+  descriptionKey="entrepreneurs.description" />
 
 <section class="sm:py-16 min-h-[75vh] md:py-20 mx-auto bg-grid py-10">
-  <div class="px-4 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
+  <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
     @if (venturesStore.isLoading()) {
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6 md:mb-10">
       @for (i of [1, 2, 3, 4]; track $index) {
@@ -23,16 +23,17 @@
         <i-lucide [name]="icons.userRound" class="relative z-10 h-16 w-16 text-primary-500 stroke-[1.5]" />
       </div>
 
-      <h2 class="mb-3 text-center font-satoshi text-3xl font-bold text-gray-800">Aucun entrepreneur pour le moment</h2>
+      <h2 class="mb-3 text-center font-satoshi text-3xl font-bold text-gray-800">
+        {{ 'entrepreneurs.no_entrepreneurs_title' | translate }}
+      </h2>
 
       <p class="mb-8 max-w-md text-center text-lg text-gray-600">
-        Notre communauté d'entrepreneurs visionnaires est en cours de construction. Revenez bientôt pour découvrir les
-        talents qui façonnent l'avenir de l'Afrique.
+        {{ 'entrepreneurs.no_entrepreneurs_message' | translate }}
       </p>
 
       <div class="flex items-center gap-2 rounded-lg bg-primary-50 px-6 py-3 border border-primary-200">
         <i-lucide [name]="'sparkles'" class="h-5 w-5 text-primary-600" />
-        <span class="text-sm font-medium text-primary-700">De nouveaux talents arrivent bientôt !</span>
+        <span class="text-sm font-medium text-primary-700">{{ 'entrepreneurs.coming_soon' | translate }}</span>
       </div>
     </div>
     } @else {

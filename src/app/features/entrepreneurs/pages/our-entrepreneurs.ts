@@ -5,11 +5,19 @@ import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { VenturesStore } from '../store/ventures.store';
 import { EntrepreneurUserCard } from '../components/entrepreneur-user-card/entrepreneur-user-card';
 import { EntrepreneurCardSkeleton } from '../components/entrepreneur-card-skeleton/entrepreneur-card-skeleton';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-our-entrepreneurs',
   providers: [VenturesStore],
-  imports: [LucideAngularModule, HeroCard, PaginatorModule, EntrepreneurUserCard, EntrepreneurCardSkeleton],
+  imports: [
+    LucideAngularModule,
+    HeroCard,
+    PaginatorModule,
+    EntrepreneurUserCard,
+    EntrepreneurCardSkeleton,
+    TranslateModule
+  ],
   templateUrl: './our-entrepreneurs.html'
 })
 export class OurEntrepreneurs implements OnInit {

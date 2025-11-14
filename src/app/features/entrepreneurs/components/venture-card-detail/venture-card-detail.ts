@@ -1,5 +1,5 @@
 import { Component, computed, DestroyRef, inject, OnInit } from '@angular/core';
-import { Building2, Globe, Linkedin, LucideAngularModule, Mail, MoveRight, Phone } from 'lucide-angular';
+import { Building2, Globe, Linkedin, LucideAngularModule, Mail, MoveRight, Phone, TrendingUp } from 'lucide-angular';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { carouselConfig } from '../../../landing/config/carousel.config';
@@ -9,6 +9,7 @@ import { VentureCardSkeleton } from '../venture-card-skeleton/venture-card-skele
 import { VentureStore } from '@features/entrepreneurs/store/venture.store';
 import { IProduct } from '../../../../shared/models';
 import { ApiImgPipe } from '../../../../shared/pipes';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-venture-card-detail',
@@ -21,7 +22,8 @@ import { ApiImgPipe } from '../../../../shared/pipes';
     GalleriaModule,
     Button,
     RouterLink,
-    VentureCardSkeleton
+    VentureCardSkeleton,
+    TranslateModule
   ],
   templateUrl: './venture-card-detail.html'
 })
@@ -38,7 +40,8 @@ export class VentureCardDetail implements OnInit {
     phone: Phone,
     linkedin: Linkedin,
     email: Mail,
-    globe: Globe
+    globe: Globe,
+    trendingUp: TrendingUp
   };
 
   products = computed<IProduct[]>(() => {
