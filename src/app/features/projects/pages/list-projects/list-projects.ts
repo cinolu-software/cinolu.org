@@ -10,6 +10,7 @@ import { ChipModule } from 'primeng/chip';
 import { ProjectsStore } from '../../store/projects.store';
 import { ProjectCategoriesStore } from '../../store/categories.store';
 import { FilterProjectsDto } from '../../dto/filter-projects.dto';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-projects-list',
@@ -22,7 +23,8 @@ import { FilterProjectsDto } from '../../dto/filter-projects.dto';
     NgOptimizedImage,
     ProjectCard,
     FormsModule,
-    ProgramCardSkeletonComponent
+    ProgramCardSkeletonComponent,
+    TranslateModule
   ],
   templateUrl: './list-projects.html'
 })

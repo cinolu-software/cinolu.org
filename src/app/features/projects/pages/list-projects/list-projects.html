@@ -32,7 +32,7 @@
     <div class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10">
       @for ( project of store.projects()[0] | paginate : { itemsPerPage: 9, currentPage: queryParams().page ?? 1,
       totalItems: store.projects()[1], }; track project.id ) {
-      <app-project-card [project]="project" />
+      <app-project-card [project]="project" [buttonTextKey]="'recent_projects.explore'" />
       }
     </div>
     @if (store.projects()[1] > 9) {

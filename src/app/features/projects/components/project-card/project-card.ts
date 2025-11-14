@@ -5,15 +5,18 @@ import { LucideAngularModule, CalendarCheck, CalendarX, MoveRight } from 'lucide
 import { IProject } from '../../../../shared/models/entities.models';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { Button } from 'primeng/button';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-project-card',
-  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe, Button],
+  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe, Button, TranslateModule],
   templateUrl: './project-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectCard {
   project = input.required<IProject>();
+  buttonTextKey = input<string>('recent_projects.explore');
+
   icons = {
     calendarCheck: CalendarCheck,
     calendarX: CalendarX,

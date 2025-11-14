@@ -64,7 +64,7 @@
         class="w-full"
         [style]="{'min-height': '44px'}">
         <div class="flex items-center justify-center gap-2 px-2 group/btn">
-          <span class="text-sm font-medium">Explorer ce programme</span>
+          <span class="text-sm font-medium">{{ buttonTextKey() | translate }}</span>
           <i-lucide
             class="size-4 group-hover/btn:translate-x-1 transition-transform duration-300"
             [name]="icons.moveRight" />
