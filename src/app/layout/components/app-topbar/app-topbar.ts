@@ -43,7 +43,6 @@ export class AppTopbar implements OnDestroy {
   readonly mobileNav = viewChild(MobileNav);
 
   constructor() {
-    // Charger les programmes pour le menu de navigation
     this.programsStore.loadPrograms();
 
     afterNextRender(() => {
