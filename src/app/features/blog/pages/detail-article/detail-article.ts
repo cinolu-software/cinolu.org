@@ -3,14 +3,19 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import {
   ArrowLeft,
+  ArrowRight,
   BadgeInfo,
   Calendar1,
   FileText,
   LucideAngularModule,
+  MessageCircle,
   MessageCircleMore,
   MoveUpRight,
+  Newspaper,
   NotepadText,
   Pencil,
+  Search,
+  Tag,
   Tags,
   ThumbsUp,
   Trash,
@@ -18,7 +23,7 @@ import {
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-import { ArticleCardSkeleton } from '../../components/article-card-skeleton/article-card-skeleton';
+import { ArticleCardDetailSkeleton } from '../article-card-detail-skeleton/article-card-detail-skeleton';
 import { RecentArticlesStore } from '../../store/articles/recent-articles.store';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaModule } from 'primeng/textarea';
@@ -37,6 +42,7 @@ import { GalleriaModule } from 'primeng/galleria';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { ArticleStore } from '@features/blog/store/articles/article.store';
 import { AnalyticsService } from '../../../../core/services/analytics/analytics.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-detail-article',
@@ -53,7 +59,7 @@ import { AnalyticsService } from '../../../../core/services/analytics/analytics.
     LucideAngularModule,
     CommonModule,
     ApiImgPipe,
-    ArticleCardSkeleton,
+    ArticleCardDetailSkeleton,
     NgOptimizedImage,
     RouterLink,
     ReactiveFormsModule,
@@ -62,7 +68,8 @@ import { AnalyticsService } from '../../../../core/services/analytics/analytics.
     Dialog,
     ConfirmDialog,
     QuillViewComponent,
-    GalleriaModule
+    GalleriaModule,
+    TranslateModule
   ],
   templateUrl: './detail-article.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -83,17 +90,22 @@ export class DetailArticle implements OnInit, OnDestroy {
   updateCommentForm: FormGroup;
   icons = {
     moveLeft: ArrowLeft,
+    arrowRight: ArrowRight,
     fileText: FileText,
     notepadText: NotepadText,
     userPlus: UserPlus,
-    tag: Tags,
+    tag: Tag,
+    tags: Tags,
     comment: MessageCircleMore,
     like: ThumbsUp,
     calendar: Calendar1,
     moveUp: MoveUpRight,
     info: BadgeInfo,
     edit: Pencil,
-    delete: Trash
+    delete: Trash,
+    messageCircle: MessageCircle,
+    newspaper: Newspaper,
+    search: Search
   };
   queryParams = signal({
     page: this.#route.snapshot.params['page'] || '1'
