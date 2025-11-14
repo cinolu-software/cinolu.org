@@ -1,7 +1,6 @@
 <div
   class="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-primary-50 px-4">
   <div class="max-w-2xl w-full text-center">
-    <!-- Animated 404 -->
     <div class="relative mb-8">
       <div class="absolute inset-0 flex items-center justify-center">
         <div class="w-64 h-64 bg-primary-100 rounded-full opacity-20 animate-pulse"></div>
@@ -14,20 +13,17 @@
       </div>
     </div>
 
-    <!-- Icon -->
     <div class="flex justify-center mb-6">
       <div class="w-20 h-20 rounded-full bg-primary-100 flex items-center justify-center">
         <lucide-angular [img]="icons.searchX" class="w-10 h-10 text-primary-600" [strokeWidth]="2" />
       </div>
     </div>
 
-    <!-- Message -->
     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Page introuvable</h2>
     <p class="text-lg text-gray-600 mb-8 max-w-md mx-auto">
       Désolé, la page que vous recherchez n'existe pas ou a été déplacée.
     </p>
 
-    <!-- Actions -->
     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
       <button
         (click)="goBack()"
@@ -44,7 +40,6 @@
       </a>
     </div>
 
-    <!-- Decorative elements -->
     <div class="mt-16 grid grid-cols-3 gap-4 max-w-sm mx-auto opacity-50">
       <div class="h-2 bg-primary-200 rounded-full"></div>
       <div class="h-2 bg-primary-300 rounded-full"></div>
