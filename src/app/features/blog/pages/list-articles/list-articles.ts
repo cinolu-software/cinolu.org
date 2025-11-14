@@ -11,11 +11,20 @@ import { MultiSelectChangeEvent, MultiSelectModule } from 'primeng/multiselect';
 import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
 import { Pen, LucideAngularModule } from 'lucide-angular';
 import { AnalyticsService } from '@core/services/analytics/analytics.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-blog',
   providers: [ArticlesStore, TagsStore, LucideAngularModule],
-  imports: [CommonModule, ArticleCard, NgxPaginationModule, ArticleCardSkeleton, MultiSelectModule, HeroCard],
+  imports: [
+    CommonModule,
+    ArticleCard,
+    NgxPaginationModule,
+    ArticleCardSkeleton,
+    MultiSelectModule,
+    HeroCard,
+    TranslateModule
+  ],
   templateUrl: './list-articles.html'
 })
 export class ListArticles implements OnInit {
