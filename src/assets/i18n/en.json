@@ -83,17 +83,6 @@
       "message": "An error occurred while sending your message. Please try again."
     }
   },
-  "footer": {
-    "description": "Cinolu is an organization dedicated to developing entrepreneurial skills and innovation in Africa.",
-    "quickLinks": "Quick links",
-    "followUs": "Follow us",
-    "newsletter": "Newsletter",
-    "newsletterText": "Subscribe to receive our latest news",
-    "emailPlaceholder": "Your email",
-    "subscribe": "Subscribe",
-    "copyright": "© {{year}} Cinolu. All rights reserved.",
-    "allRightsReserved": "All rights reserved"
-  },
   "onestop": {
     "badge": "Digital Platform",
     "title": "Cinolu",
@@ -304,5 +293,75 @@
     "description": "Discover upcoming and past events that bring together our community of innovators and entrepreneurs.",
     "view_all": "Events list",
     "explore": "View event"
+  },
+  "partners": {
+    "title": "Our",
+    "title_highlight": "Partners",
+    "description": "A trusted network supporting us in our innovation mission",
+    "view_all": "Discover all our partners",
+    "together_title": "Together,",
+    "together_highlight": "we go further!",
+    "join_ecosystem": "Join our innovation and growth ecosystem",
+    "become_partner": "Become a Partner",
+    "benefits": {
+      "network": {
+        "title": "Qualified Network",
+        "description": "Access an ecosystem of innovative entrepreneurs"
+      },
+      "growth": {
+        "title": "Mutual Growth",
+        "description": "Grow your business together"
+      },
+      "impact": {
+        "title": "Collective Impact",
+        "description": "Participate in large-scale projects"
+      }
+    }
+  },
+  "blog": {
+    "badge": "News",
+    "title": "Our",
+    "title_highlight": "Articles",
+    "description": "Cinolu's blog, a space for ideas, stories and resources for Africa's innovators.",
+    "choose_tag": "Choose a tag",
+    "no_articles": "No articles available",
+    "recent_articles": "Recent Articles",
+    "gallery": "Gallery",
+    "comments": {
+      "title": "Comments",
+      "placeholder": "Share your opinion...",
+      "login_required": "Log in to leave a comment.",
+      "publish": "Publish comment",
+      "edit": "Edit",
+      "delete": "Delete",
+      "load_more": "Show more comments",
+      "edit_modal_title": "Edit comment",
+      "edit_placeholder": "Edit your comment...",
+      "update": "Update"
+    },
+    "not_found": {
+      "title": "Article not found",
+      "message": "This article does not exist or has been deleted.",
+      "discover": "Discover our articles"
+    }
+  },
+  "footer": {
+    "description": "Together, let's turn ideas into innovative realities that shape the future of our community.",
+    "sections": {
+      "explore": "Explore",
+      "my_cinolu": "My Cinolu",
+      "socials": "Socials"
+    },
+    "rights": "All rights reserved.",
+    "privacy_policy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "quickLinks": "Quick Links",
+    "followUs": "Follow Us",
+    "newsletter": "Newsletter",
+    "newsletterText": "Subscribe to receive our latest news",
+    "emailPlaceholder": "Your email",
+    "subscribe": "Subscribe",
+    "copyright": "© {{year}} Cinolu. All rights reserved.",
+    "allRightsReserved": "All rights reserved"
   }
 }

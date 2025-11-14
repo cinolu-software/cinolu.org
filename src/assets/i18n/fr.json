@@ -83,17 +83,6 @@
       "message": "Une erreur s'est produite lors de l'envoi de votre message. Veuillez réessayer."
     }
   },
-  "footer": {
-    "description": "Cinolu est une organisation dédiée au développement des compétences entrepreneuriales et à l'innovation en Afrique.",
-    "quickLinks": "Liens rapides",
-    "followUs": "Suivez-nous",
-    "newsletter": "Newsletter",
-    "newsletterText": "Inscrivez-vous pour recevoir nos dernières actualités",
-    "emailPlaceholder": "Votre email",
-    "subscribe": "S'abonner",
-    "copyright": "© {{year}} Cinolu. Tous droits réservés.",
-    "allRightsReserved": "Tous droits réservés"
-  },
   "onestop": {
     "badge": "Plateforme Digitale",
     "title": "Cinolu",
@@ -304,5 +293,75 @@
     "description": "Découvrez les événements à venir et passés qui rassemblent notre communauté d'innovateurs et d'entrepreneurs.",
     "view_all": "Liste des événements",
     "explore": "Voir l'événement"
+  },
+  "partners": {
+    "title": "Nos",
+    "title_highlight": "Partenaires",
+    "description": "Un réseau de confiance qui nous accompagne dans notre mission d'innovation",
+    "view_all": "Découvrir tous nos partenaires",
+    "together_title": "Ensemble,",
+    "together_highlight": "on va plus loin !",
+    "join_ecosystem": "Rejoignez notre écosystème d'innovation et de croissance",
+    "become_partner": "Devenir Partenaire",
+    "benefits": {
+      "network": {
+        "title": "Réseau Qualifié",
+        "description": "Accédez à un écosystème d'entrepreneurs innovants"
+      },
+      "growth": {
+        "title": "Croissance Mutuelle",
+        "description": "Développez votre activité ensemble"
+      },
+      "impact": {
+        "title": "Impact Collectif",
+        "description": "Participez à des projets d'envergure"
+      }
+    }
+  },
+  "blog": {
+    "badge": "Actualités",
+    "title": "Nos",
+    "title_highlight": "Articles",
+    "description": "Le blog de Cinolu, un espace d'idées, de récits et de ressources au service des innovateurs d'Afrique.",
+    "choose_tag": "Choisir un tag",
+    "no_articles": "Pas d'articles disponibles",
+    "recent_articles": "Articles récents",
+    "gallery": "Galerie",
+    "comments": {
+      "title": "Commentaires",
+      "placeholder": "Partagez votre opinion...",
+      "login_required": "Connectez-vous pour laisser un commentaire.",
+      "publish": "Publier le commentaire",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "load_more": "Afficher plus de commentaires",
+      "edit_modal_title": "Modifier le commentaire",
+      "edit_placeholder": "Modifiez votre commentaire...",
+      "update": "Mettre à jour"
+    },
+    "not_found": {
+      "title": "Article introuvable",
+      "message": "Cet article n'existe pas ou a été supprimé.",
+      "discover": "Découvrir nos articles"
+    }
+  },
+  "footer": {
+    "description": "Ensemble, transformons les idées en réalités innovantes qui façonnent l'avenir de notre communauté.",
+    "sections": {
+      "explore": "Parcourir",
+      "my_cinolu": "My Cinolu",
+      "socials": "Socials"
+    },
+    "rights": "Tous droits réservés.",
+    "privacy_policy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "quickLinks": "Liens rapides",
+    "followUs": "Suivez-nous",
+    "newsletter": "Newsletter",
+    "newsletterText": "Inscrivez-vous pour recevoir nos dernières actualités",
+    "emailPlaceholder": "Votre email",
+    "subscribe": "S'abonner",
+    "copyright": "© {{year}} Cinolu. Tous droits réservés.",
+    "allRightsReserved": "Tous droits réservés"
   }
 }
