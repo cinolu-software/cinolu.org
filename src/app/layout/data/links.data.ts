@@ -2,7 +2,7 @@ import { LucideIconData, Info, Calendar1, BookOpen, Image } from 'lucide-angular
 
 export interface ILink {
   name: string;
-  translationKey?: string; 
+  translationKey?: string;
   external?: boolean;
   description?: string;
   fragment?: string;
@@ -13,18 +13,45 @@ export interface ILink {
   open?: boolean;
 }
 
+export const PARCOURIR_LINKS: ILink[] = [
+  {
+    name: 'Accueil',
+    translationKey: 'nav.home',
+    path: '/'
+  },
+  {
+    name: 'Évènements',
+    translationKey: 'nav.events',
+    path: '/events'
+  },
+  {
+    name: 'Programmes',
+    translationKey: 'nav.programs',
+    path: '/programs'
+  }
+];
+
 export const MY_CINOLU_LINKS: ILink[] = [
   {
     name: 'A propos',
     translationKey: 'nav.about',
-    path: '/about-us',
-    fragment: 'about'
+    path: '/about-us'
   },
   {
     name: 'Vision',
     translationKey: 'nav.vision',
     path: '/about-us',
     fragment: 'vision'
+  },
+  {
+    name: 'Contact',
+    translationKey: 'nav.contact',
+    path: '/contact-us'
+  },
+  {
+    name: 'Blog',
+    translationKey: 'nav.blogResources',
+    path: '/blog-ressources'
   }
 ];
 
