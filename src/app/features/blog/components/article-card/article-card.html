@@ -3,7 +3,7 @@
   <div class="absolute top-3 right-3 z-10">
     <span
       class="inline-flex items-center px-2.5 py-1 bg-white/90 backdrop-blur-sm text-primary-600 text-xs font-semibold rounded-full shadow-sm border border-primary-200">
-      Article
+      {{ 'blog.article_badge' | translate }}
     </span>
   </div>
 
@@ -67,7 +67,7 @@
       <a [routerLink]="article().slug" class="block">
         <p-button size="small" outlined severity="primary" class="w-full" [style]="{'min-height': '44px'}">
           <div class="flex items-center justify-center gap-2 py-1 px-2">
-            <span class="text-sm font-medium">Lire l'article</span>
+            <span class="text-sm font-medium">{{ 'blog.read_article' | translate }}</span>
             <i-lucide
               class="size-4 group-hover/btn:translate-x-1 transition-transform duration-300"
               [name]="icons.moveRight" />
