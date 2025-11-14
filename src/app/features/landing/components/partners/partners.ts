@@ -7,6 +7,7 @@ import { UserPlus, LucideAngularModule, Heart, ShoppingCart, MoveUpRight, MoveRi
 import { RouterLink } from '@angular/router';
 import { Carousel } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-partners',
@@ -18,7 +19,8 @@ import { ButtonModule } from 'primeng/button';
     LucideAngularModule,
     RouterLink,
     Carousel,
-    ButtonModule
+    ButtonModule,
+    TranslateModule
   ],
   templateUrl: './partners.html',
   changeDetection: ChangeDetectionStrategy.OnPush
