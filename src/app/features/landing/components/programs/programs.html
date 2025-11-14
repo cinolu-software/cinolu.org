@@ -5,11 +5,10 @@
     <div class="mb-15 lg:mb-28 text-center">
       <h3
         class="text-3xl text-center sm:text-4xl lg:text-5xl font-black font-satoshi mb-3 tracking-tight leading-tight">
-        Nos Programmes
+        {{ 'programs.title' | translate }}
       </h3>
       <p class="max-w-3xl text-center text-base text-gray-600 m-auto hyphens-none">
-        Chez Cinolu, nous accompagnons chaque idée avec des programmes adaptés à votre profil, vos ambitions et votre
-        niveau de développement.
+        {{ 'programs.description' | translate }}
       </p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-16 md:gap-8 lg:gap-4 mt-16">
@@ -43,7 +42,7 @@
         <div class="pt-2 mx-auto">
           <p-button [routerLink]="['/our-programs/', p.slug]" size="small" outlined severity="primary" class="w-full">
             <div class="flex items-center justify-center gap-2 group/btn px-2">
-              <span class="text-sm font-medium">En savoir plus</span>
+              <span class="text-sm font-medium">{{ 'programs.learn_more' | translate }}</span>
               <i-lucide
                 class="size-4 group-hover/btn:translate-x-1 transition-transform duration-300"
                 [name]="icons.MoveRight" />

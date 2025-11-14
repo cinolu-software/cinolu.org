@@ -6,15 +6,16 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes';
 import { LucideAngularModule, MoveRight } from 'lucide-angular';
 import { IProgram } from '../../../../shared/models';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-recent-programs',
+  selector: 'app-programs',
   providers: [ProgramsStore],
-  imports: [ButtonModule, RouterLink, ApiImgPipe, CommonModule, NgOptimizedImage, LucideAngularModule],
-  templateUrl: './recent-programs.html',
+  imports: [ButtonModule, RouterLink, ApiImgPipe, CommonModule, NgOptimizedImage, LucideAngularModule, TranslateModule],
+  templateUrl: './programs.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RecentPrograms {
+export class Programs {
   icons = {
     MoveRight: MoveRight
   };

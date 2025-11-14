@@ -3,20 +3,25 @@
     class="py-10 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto fade-left-init"
     id="projects"
     appAnimationsOnScroll>
-    <div class="flex flex-wrap justify-between items-center mb-6">
-      <div class="mb-10">
-        <h3 class="text-3xl text-center sm:text-4xl lg:text-5xl font-black font-satoshi tracking-tight leading-tight">
-          Les événements récents
-        </h3>
-      </div>
+    <div class="mb-8 lg:mb-12">
+      <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6 lg:gap-4">
+        <div class="text-center lg:text-left flex-1">
+          <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black font-satoshi mb-3 tracking-tight leading-tight">
+            {{ 'recent_events.title' | translate }}
+          </h3>
+          <p class="max-w-3xl text-base text-gray-600 lg:text-left hyphens-none">
+            {{ 'recent_events.description' | translate }}
+          </p>
+        </div>
 
-      <div class="flex items-center gap-4 place-self-end">
-        <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
-          <i-lucide [name]="icons.moveLeft" class="size-3.5" />
-        </button>
-        <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button">
-          <i-lucide [name]="icons.moveRight" class="size-3.5" />
-        </button>
+        <div class="hidden lg:flex items-center gap-4">
+          <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
+            <i-lucide [name]="icons.moveLeft" class="size-3.5" />
+          </button>
+          <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button">
+            <i-lucide [name]="icons.moveRight" class="size-3.5" />
+          </button>
+        </div>
       </div>
     </div>
 
@@ -27,7 +32,7 @@
       }
     </div>
     }
-    <div class="flex flex-col gap-5">
+    <div class="space-y-6 lg:space-y-8">
       <p-carousel
         #carousel
         [value]="store.events()"
@@ -42,23 +47,23 @@
         class="w-full hero-carousel no-touch-mobile">
         <ng-template let-event #item>
           <div class="sm:px-3">
-            <app-event-card [event]="event" />
+            <app-event-card [event]="event" [buttonTextKey]="'recent_events.explore'" />
           </div>
         </ng-template>
       </p-carousel>
-    </div>
 
-    <div class="w-full flex justify-center items-center mt-4">
-      <a routerLink="/events" class="w-fit">
-        <p-button psize="large" rounded="full" outlined severity="primary">
-          <span class="group flex items-center gap-2 px-8">
-            Liste des événements
-            <i-lucide
-              class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
-              [name]="icons.moveUpRight" />
-          </span>
-        </p-button>
-      </a>
+      <div class="w-full flex justify-center items-center">
+        <a routerLink="/events" class="w-fit">
+          <p-button psize="large" rounded="full" outlined severity="primary">
+            <span class="group flex items-center gap-2 px-8">
+              {{ 'recent_events.view_all' | translate }}
+              <i-lucide
+                class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
+                [name]="icons.moveUpRight" />
+            </span>
+          </p-button>
+        </a>
+      </div>
     </div>
   </section>
 </div>

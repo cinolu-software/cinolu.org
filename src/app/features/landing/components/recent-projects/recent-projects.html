@@ -2,20 +2,25 @@
   class="py-10 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto fade-left-init overflow-hidden"
   id="projects"
   appAnimationsOnScroll>
-  <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6 lg:gap-4">
-    <div class="text-center lg:text-left">
-      <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black font-satoshi tracking-tight leading-tight">
-        Les programmes récents
-      </h3>
-    </div>
+  <div class="mb-8 lg:mb-12">
+    <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6 lg:gap-4">
+      <div class="text-center lg:text-left flex-1">
+        <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black font-satoshi mb-3 tracking-tight leading-tight">
+          {{ 'recent_projects.title' | translate }}
+        </h3>
+        <p class="max-w-3xl text-base text-gray-600 lg:text-left hyphens-none">
+          {{ 'recent_projects.description' | translate }}
+        </p>
+      </div>
 
-    <div class="hidden lg:flex items-center gap-4">
-      <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
-        <i-lucide [name]="icons.moveLeft" class="size-3.5" />
-      </button>
-      <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button">
-        <i-lucide [name]="icons.moveRight" class="size-3.5" />
-      </button>
+      <div class="hidden lg:flex items-center gap-4">
+        <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
+          <i-lucide [name]="icons.moveLeft" class="size-3.5" />
+        </button>
+        <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button">
+          <i-lucide [name]="icons.moveRight" class="size-3.5" />
+        </button>
+      </div>
     </div>
   </div>
   @if (store.isLoading()) {
@@ -40,7 +45,7 @@
       class="no-touch-mobile">
       <ng-template let-project #item>
         <div class="sm:px-3">
-          <app-project-card [project]="project" />
+          <app-project-card [project]="project" [buttonTextKey]="'recent_projects.explore'" />
         </div>
       </ng-template>
     </p-carousel>
@@ -63,7 +68,7 @@
       <a routerLink="/programs" class="w-fit">
         <p-button psize="large" rounded="full" outlined severity="primary">
           <span class="group flex items-center gap-2 px-8">
-            Tous les programmes
+            {{ 'recent_projects.view_all' | translate }}
             <i-lucide
               class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
               [name]="icons.moveUpRight" />

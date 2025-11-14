@@ -10,6 +10,7 @@ import { RecentEventsStore } from '../../../events/store/recent-events.store';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { Button } from 'primeng/button';
 import { IEvent } from '../../../../shared/models';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-recent-events',
@@ -22,7 +23,8 @@ import { IEvent } from '../../../../shared/models';
     LucideAngularModule,
     EventCardSkeleton,
     FadeInOnScrollDirective,
-    Button
+    Button,
+    TranslateModule
   ],
   templateUrl: './recent-events.html',
   changeDetection: ChangeDetectionStrategy.OnPush

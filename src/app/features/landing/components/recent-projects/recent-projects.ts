@@ -10,6 +10,7 @@ import { ProjectCard } from '../../../projects/components/project-card/project-c
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { Button } from 'primeng/button';
 import { IProject } from '../../../../shared/models';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-recent-projects',
@@ -22,7 +23,8 @@ import { IProject } from '../../../../shared/models';
     LucideAngularModule,
     ProgramCardSkeletonComponent,
     FadeInOnScrollDirective,
-    Button
+    Button,
+    TranslateModule
   ],
   templateUrl: './recent-projects.html',
   changeDetection: ChangeDetectionStrategy.OnPush
