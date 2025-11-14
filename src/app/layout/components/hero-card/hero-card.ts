@@ -1,6 +1,6 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { LucideIconData, LucideAngularModule } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -20,15 +20,15 @@ import { TranslateModule } from '@ngx-translate/core';
   ]
 })
 export class HeroCard {
-  @Input({ required: true }) background!: string;
-  @Input() badgeIcon!: LucideIconData;
-  @Input() badgeText?: string;
-  @Input() badgeTextKey?: string;
-  @Input() title?: string;
-  @Input() titleKey?: string;
-  @Input() highlight?: string;
-  @Input() highlightKey?: string;
-  @Input() description?: string;
-  @Input() descriptionKey?: string;
-  @Input() overlayColor = 'bg-black/60';
+  background = input.required<string>();
+  badgeIcon = input<LucideIconData>();
+  badgeText = input<string>();
+  badgeTextKey = input<string>();
+  title = input<string>();
+  titleKey = input<string>();
+  highlight = input<string>();
+  highlightKey = input<string>();
+  description = input<string>();
+  descriptionKey = input<string>();
+  overlayColor = input<string>('bg-black/60');
 }
