@@ -9,6 +9,7 @@ import { MultiSelectModule, MultiSelectChangeEvent } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
 import { EventsStore } from '../../store/events.store';
 import { EventCategoriesStore } from '../../store/categories.store';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-events',
@@ -20,7 +21,8 @@ import { EventCategoriesStore } from '../../store/categories.store';
     MultiSelectModule,
     NgOptimizedImage,
     EventCard,
-    EventCardSkeleton
+    EventCardSkeleton,
+    TranslateModule
   ],
   templateUrl: './list-events.html'
 })

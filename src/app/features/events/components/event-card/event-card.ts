@@ -5,14 +5,16 @@ import { LucideAngularModule, MoveRight, CalendarCheck, CalendarX } from 'lucide
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { IEvent } from '../../../../shared/models/entities.models';
 import { Button } from 'primeng/button';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-event-card',
-  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe, Button],
+  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, RouterLink, ApiImgPipe, Button, TranslateModule],
   templateUrl: './event-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventCard {
   event = input.required<IEvent>();
+  buttonTextKey = input<string>('recent_events.explore');
   icons = { MoveRight, CalendarCheck, CalendarX };
 }
