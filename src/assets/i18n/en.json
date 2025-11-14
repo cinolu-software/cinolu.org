@@ -287,5 +287,22 @@
         }
       }
     }
+  },
+  "programs": {
+    "title": "Our Programs",
+    "description": "At Cinolu, we support every idea with programs tailored to your profile, ambitions, and development level.",
+    "learn_more": "Learn more"
+  },
+  "recent_projects": {
+    "title": "Recent Programs",
+    "description": "Discover the programs we have recently launched to support entrepreneurs.",
+    "view_all": "All programs",
+    "explore": "Explore this program"
+  },
+  "recent_events": {
+    "title": "Recent Events",
+    "description": "Discover upcoming and past events that bring together our community of innovators and entrepreneurs.",
+    "view_all": "Events list",
+    "explore": "View event"
   }
 }
