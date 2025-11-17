@@ -3,10 +3,11 @@ import { TEAM } from '../../data/team.data';
 import { NgOptimizedImage } from '@angular/common';
 import { LucideAngularModule, ArrowLeft } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-auth-card',
-  imports: [NgOptimizedImage, RouterLink, LucideAngularModule],
+  imports: [NgOptimizedImage, RouterLink, LucideAngularModule, TranslateModule],
   templateUrl: './auth-card.html'
 })
 export class AuthCard {

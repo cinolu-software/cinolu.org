@@ -15,6 +15,20 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { COUNTRY_CODE } from '../../../../shared/data/country-item.data';
 import { GENDERS } from '../../../../shared/data/genders.data';
+import {
+  LucideAngularModule,
+  User,
+  Mail,
+  Calendar,
+  Users,
+  Globe,
+  Phone,
+  Lock,
+  AlertCircle,
+  ArrowRight,
+  Loader2
+} from 'lucide-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-up',
@@ -38,7 +52,9 @@ import { GENDERS } from '../../../../shared/data/genders.data';
     CommonModule,
     InputGroupModule,
     InputGroupAddonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LucideAngularModule,
+    TranslateModule
   ]
 })
 export class SignUp {
@@ -50,6 +66,19 @@ export class SignUp {
   countryItems = COUNTRY_CODE;
   selectedCountryCode = '';
   ref = this.#route.snapshot.queryParams['ref'] || null;
+
+  icons = {
+    user: User,
+    mail: Mail,
+    calendar: Calendar,
+    users: Users,
+    globe: Globe,
+    phone: Phone,
+    lock: Lock,
+    alertCircle: AlertCircle,
+    arrowRight: ArrowRight,
+    loader: Loader2
+  };
 
   constructor() {
     this.form = this.#formBuilder.group({

@@ -6,18 +6,36 @@ import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';
 import { AuthCard } from '../../components/auth-card/auth-card';
 import { ResetPasswordStore } from '../../store/reset-password.store';
+import { LucideAngularModule, Lock, AlertCircle, ArrowRight } from 'lucide-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.html',
   providers: [ResetPasswordStore],
-  imports: [FormsModule, RouterLink, ReactiveFormsModule, ButtonModule, PasswordModule, CommonModule, AuthCard]
+  imports: [
+    FormsModule,
+    RouterLink,
+    ReactiveFormsModule,
+    ButtonModule,
+    PasswordModule,
+    CommonModule,
+    AuthCard,
+    LucideAngularModule,
+    TranslateModule
+  ]
 })
 export class ResetPassword {
   #token = inject(ActivatedRoute).snapshot.queryParams['token'];
   #formBuilder = inject(FormBuilder);
   form: FormGroup;
   store = inject(ResetPasswordStore);
+
+  icons = {
+    lock: Lock,
+    alertCircle: AlertCircle,
+    arrowRight: ArrowRight
+  };
 
   constructor() {
     this.form = this.#formBuilder.group({

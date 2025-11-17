@@ -1,72 +1,263 @@
-<app-auth-card
-  title="S'inscrire"
-  description="Créez un compte pour accéder à toutes les fonctionnalités de notre plateforme.">
-  <div class="mb-5 text-sm">
-    <span class="text-gray-700">Vous avez déjà un compte? </span>
-    <a
-      class="text-md font-medium text-primary-400 underline not-[]:duration-300 hover:text-primary-500"
-      [routerLink]="['/sign-in']">
-      Se connecter
-    </a>
-  </div>
-  <form [formGroup]="form" class="flex flex-col" (ngSubmit)="onSignUp()">
-    <div class="flex flex-col gap-3">
-      <div class="flex flex-col gap-1.5">
-        <label for="name">Nom complet</label>
-        <input pInputText id="name" formControlName="name" />
+<app-auth-card [title]="'auth.signup.title' | translate" [description]="'auth.signup.description' | translate">
+  <div class="relative bg-white rounded-lg shadow-md shadow-gray-900/5 border border-gray-200/50 overflow-hidden">
+    <div class="h-2 bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700"></div>
+
+    <div class="p-8 sm:p-10">
+      <div class="mb-8 text-center">
+        <p class="text-sm text-gray-600">
+          {{ 'auth.signup.alreadyHaveAccount' | translate }}
+          <a
+            class="ml-1 font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-200 hover:underline"
+            [routerLink]="['/sign-in']">
+            {{ 'auth.signup.signInLink' | translate }}
+          </a>
+        </p>
       </div>
-      <div class="flex flex-col gap-1.5">
-        <label for="email">Adresse e-mail</label>
-        <input pInputText id="email" type="email" formControlName="email" />
-      </div>
-      <div class="flex flex-col gap-1.5">
-        <label for="birthdate">Date de naissance</label>
-        <p-datePicker [inputId]="'birthdate'" formControlName="birth_date" showIcon iconDisplay="input" />
-      </div>
-      <div class="flex flex-col gap-1.5">
-        <label for="gender">Genre</label>
-        <p-select [inputId]="'gender'" [options]="genderItems" formControlName="gender" />
-      </div>
-      <div class="flex flex-col gap-1.5 z-[999]">
-        <label for="country">Pays</label>
-        <p-select
-          (onChange)="onSelectCountry($event)"
-          class="z-[9999]"
-          [inputId]="'country'"
-          [options]="countryItems"
-          [optionLabel]="'name'"
-          [optionValue]="'name'"
-          formControlName="country" />
-      </div>
-      <div class="flex flex-col gap-1.5">
-        <label for="email">Téléphone</label>
-        <p-inputgroup>
-          <p-inputgroup-addon>{{ selectedCountryCode || '----' }}</p-inputgroup-addon>
-          <input pInputText id="phone" formControlName="phone_number" />
-        </p-inputgroup>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="flex flex-col gap-1.5">
-          <label for="password">Mot de passe</label>
-          <p-password formControlName="password" [feedback]="false" [toggleMask]="true" [inputId]="'password'" />
+
+      <form [formGroup]="form" class="space-y-4 md:space-y-6" (ngSubmit)="onSignUp()">
+        <div class="group">
+          <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
+            <span class="flex items-center gap-2">
+              <span
+                class="flex-shrink-0 w-5 h-5 md:w-7 md:h-7 rounded-md bg-gradient-to-br from-primary-50 to-primary-100/50 border border-primary-200/60 flex items-center justify-center group-focus-within:from-primary-100 group-focus-within:to-primary-200/50 group-focus-within:border-primary-300 transition-all duration-200">
+                <i-lucide [name]="icons.user" class="size-3.5 md:size-5 text-primary-600" />
+              </span>
+              {{ 'auth.signup.form.name' | translate }}
+            </span>
+          </label>
+          <input
+            pInputText
+            id="name"
+            formControlName="name"
+            [placeholder]="'auth.signup.form.namePlaceholder' | translate"
+            class="w-full px-4 py-3 rounded-md border-2 border-gray-200 focus:border-primary-500 transition-all duration-200 focus:ring-4 focus:ring-primary-500/10"
+            [class.!border-red-300]="form.get('name')?.invalid && form.get('name')?.touched"
+            [class.focus:!border-red-500]="form.get('name')?.invalid && form.get('name')?.touched" />
+          @if (form.get('name')?.invalid && form.get('name')?.touched) {
+          <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
+            <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
+            @if (form.get('name')?.hasError('required')) {
+            <span>{{ 'auth.signup.errors.nameRequired' | translate }}</span>
+            } @if (form.get('name')?.hasError('minlength')) {
+            <span>{{ 'auth.signup.errors.nameMinLength' | translate }}</span>
+            }
+          </p>
+          }
         </div>
-        <div class="flex flex-col gap-1.5">
-          <label for="password_confirm">Confirmer le mot de passe</label>
-          <p-password
-            formControlName="password_confirm"
-            [feedback]="false"
-            [toggleMask]="true"
-            [inputId]="'password_confirm'" />
+
+        <div class="group">
+          <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+            <span class="flex items-center gap-2">
+              <span
+                class="flex-shrink-0 w-5 h-5 md:w-7 md:h-7 rounded-md bg-gradient-to-br from-primary-50 to-primary-100/50 border border-primary-200/60 flex items-center justify-center group-focus-within:from-primary-100 group-focus-within:to-primary-200/50 group-focus-within:border-primary-300 transition-all duration-200">
+                <i-lucide [name]="icons.mail" class="size-3.5 md:size-5 text-primary-600" />
+              </span>
+              {{ 'auth.signup.form.email' | translate }}
+            </span>
+          </label>
+          <input
+            pInputText
+            id="email"
+            type="email"
+            formControlName="email"
+            [placeholder]="'auth.signup.form.emailPlaceholder' | translate"
+            class="w-full px-4 py-3 rounded-md border-2 border-gray-200 focus:border-primary-500 transition-all duration-200 focus:ring-4 focus:ring-primary-500/10"
+            [class.!border-red-300]="form.get('email')?.invalid && form.get('email')?.touched"
+            [class.focus:!border-red-500]="form.get('email')?.invalid && form.get('email')?.touched" />
+          @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
+            <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
+            @if (form.get('email')?.hasError('required')) {
+            <span>{{ 'auth.signup.errors.emailRequired' | translate }}</span>
+            } @if (form.get('email')?.hasError('email')) {
+            <span>{{ 'auth.signup.errors.emailInvalid' | translate }}</span>
+            }
+          </p>
+          }
         </div>
-      </div>
-      <button
-        pButton
-        class="w-full mt-6"
-        [loading]="store.isLoading()"
-        [disabled]="store.isLoading() || form.invalid"
-        type="submit">
-        S'inscrire
-      </button>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="group">
+            <label for="birthdate" class="block text-sm font-semibold text-gray-700 mb-2">
+              <span class="flex items-center gap-2">
+                <span
+                  class="flex-shrink-0 w-5 h-5 md:w-7 md:h-7 rounded-md bg-gradient-to-br from-primary-50 to-primary-100/50 border border-primary-200/60 flex items-center justify-center group-focus-within:from-primary-100 group-focus-within:to-primary-200/50 group-focus-within:border-primary-300 transition-all duration-200">
+                  <i-lucide [name]="icons.calendar" class="size-3.5 md:size-5 text-primary-600" />
+                </span>
+                {{ 'auth.signup.form.birthdate' | translate }}
+              </span>
+            </label>
+            <p-datePicker
+              [inputId]="'birthdate'"
+              formControlName="birth_date"
+              showIcon
+              iconDisplay="input"
+              styleClass="w-full" />
+            @if (form.get('birth_date')?.invalid && form.get('birth_date')?.touched) {
+            <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
+              <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
+              <span>{{ 'auth.signup.errors.birthdateRequired' | translate }}</span>
+            </p>
+            }
+          </div>
+
+          <div class="group">
+            <label for="gender" class="block text-sm font-semibold text-gray-700 mb-2">
+              <span class="flex items-center gap-2">
+                <span
+                  class="flex-shrink-0 w-5 h-5 md:w-7 md:h-7 rounded-md bg-gradient-to-br from-primary-50 to-primary-100/50 border border-primary-200/60 flex items-center justify-center group-focus-within:from-primary-100 group-focus-within:to-primary-200/50 group-focus-within:border-primary-300 transition-all duration-200">
+                  <i-lucide [name]="icons.users" class="size-3.5 md:size-5 text-primary-600" />
+                </span>
+                {{ 'auth.signup.form.gender' | translate }}
+              </span>
+            </label>
+            <p-select
+              [inputId]="'gender'"
+              [options]="genderItems"
+              formControlName="gender"
+              [placeholder]="'auth.signup.form.genderPlaceholder' | translate"
+              styleClass="w-full" />
+            @if (form.get('gender')?.invalid && form.get('gender')?.touched) {
+            <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
+              <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
+              <span>{{ 'auth.signup.errors.genderRequired' | translate }}</span>
+            </p>
+            }
+          </div>
+        </div>
+
+        <div class="group">
+          <label for="country" class="block text-sm font-semibold text-gray-700 mb-2">
+            <span class="flex items-center gap-2">
+              <span
+                class="flex-shrink-0 w-5 h-5 md:w-7 md:h-7 rounded-md bg-gradient-to-br from-primary-50 to-primary-100/50 border border-primary-200/60 flex items-center justify-center group-focus-within:from-primary-100 group-focus-within:to-primary-200/50 group-focus-within:border-primary-300 transition-all duration-200">
+                <i-lucide [name]="icons.globe" class="size-3.5 md:size-5 text-primary-600" />
+              </span>
+              {{ 'auth.signup.form.country' | translate }}
+            </span>
+          </label>
+          <p-select
+            (onChange)="onSelectCountry($event)"
+            [inputId]="'country'"
+            [options]="countryItems"
+            [optionLabel]="'name'"
+            [optionValue]="'name'"
+            formControlName="country"
+            [placeholder]="'auth.signup.form.countryPlaceholder' | translate"
+            styleClass="w-full" />
+          @if (form.get('country')?.invalid && form.get('country')?.touched) {
+          <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
+            <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
+            <span>{{ 'auth.signup.errors.countryRequired' | translate }}</span>
+          </p>
+          }
+        </div>
+
+        <div class="group">
+          <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">
+            <span class="flex items-center gap-2">
+              <span
+                class="flex-shrink-0 w-5 h-5 md:w-7 md:h-7 rounded-md bg-gradient-to-br from-primary-50 to-primary-100/50 border border-primary-200/60 flex items-center justify-center group-focus-within:from-primary-100 group-focus-within:to-primary-200/50 group-focus-within:border-primary-300 transition-all duration-200">
+                <i-lucide [name]="icons.phone" class="size-3.5 md:size-5 text-primary-600" />
+              </span>
+              {{ 'auth.signup.form.phone' | translate }}
+            </span>
+          </label>
+          <p-inputgroup>
+            <p-inputgroup-addon
+              class="bg-primary-50/50 border-2 border-r-0 border-gray-200 font-semibold text-gray-700 px-4">
+              {{ selectedCountryCode || '----' }}
+            </p-inputgroup-addon>
+            <input
+              pInputText
+              id="phone"
+              formControlName="phone_number"
+              [placeholder]="'auth.signup.form.phonePlaceholder' | translate"
+              class="flex-1 px-4 py-3 rounded-r-md border-2 border-l-0 border-gray-200 focus:border-primary-500 transition-all duration-200 focus:ring-4 focus:ring-primary-500/10"
+              [class.!border-red-300]="form.get('phone_number')?.invalid && form.get('phone_number')?.touched"
+              [class.focus:!border-red-500]="form.get('phone_number')?.invalid && form.get('phone_number')?.touched" />
+          </p-inputgroup>
+          @if (form.get('phone_number')?.invalid && form.get('phone_number')?.touched) {
+          <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
+            <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
+            <span>{{ 'auth.signup.errors.phoneRequired' | translate }}</span>
+          </p>
+          }
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="group">
+            <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
+              <span class="flex items-center gap-2">
+                <span
+                  class="flex-shrink-0 w-5 h-5 md:w-7 md:h-7 rounded-md bg-gradient-to-br from-primary-50 to-primary-100/50 border border-primary-200/60 flex items-center justify-center group-focus-within:from-primary-100 group-focus-within:to-primary-200/50 group-focus-within:border-primary-300 transition-all duration-200">
+                  <i-lucide [name]="icons.lock" class="size-3.5 md:size-5 text-primary-600" />
+                </span>
+                {{ 'auth.signup.form.password' | translate }}
+              </span>
+            </label>
+            <p-password
+              formControlName="password"
+              [feedback]="false"
+              [toggleMask]="true"
+              [inputId]="'password'"
+              [placeholder]="'auth.signup.form.passwordPlaceholder' | translate"
+              styleClass="w-full" />
+            @if (form.get('password')?.invalid && form.get('password')?.touched) {
+            <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
+              <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
+              @if (form.get('password')?.hasError('required')) {
+              <span>{{ 'auth.signup.errors.passwordRequired' | translate }}</span>
+              } @if (form.get('password')?.hasError('minlength')) {
+              <span>{{ 'auth.signup.errors.passwordMinLength' | translate }}</span>
+              }
+            </p>
+            }
+          </div>
+          <div class="group">
+            <label for="password_confirm" class="block text-sm font-semibold text-gray-700 mb-2">
+              <span class="flex items-center gap-2">
+                <span
+                  class="flex-shrink-0 w-5 h-5 md:w-7 md:h-7 rounded-md bg-gradient-to-br from-primary-50 to-primary-100/50 border border-primary-200/60 flex items-center justify-center group-focus-within:from-primary-100 group-focus-within:to-primary-200/50 group-focus-within:border-primary-300 transition-all duration-200">
+                  <i-lucide [name]="icons.lock" class="size-3.5 md:size-5 text-primary-600" />
+                </span>
+                {{ 'auth.signup.form.passwordConfirm' | translate }}
+              </span>
+            </label>
+            <p-password
+              formControlName="password_confirm"
+              [feedback]="false"
+              [toggleMask]="true"
+              [inputId]="'password_confirm'"
+              [placeholder]="'auth.signup.form.passwordConfirmPlaceholder' | translate"
+              styleClass="w-full" />
+            @if (form.get('password_confirm')?.invalid && form.get('password_confirm')?.touched) {
+            <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
+              <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
+              <span>{{ 'auth.signup.errors.passwordConfirmRequired' | translate }}</span>
+            </p>
+            }
+          </div>
+        </div>
+
+        <button
+          pButton
+          severity="primary"
+          [outlined]="true"
+          class="w-full group"
+          [loading]="store.isLoading()"
+          [disabled]="store.isLoading() || form.invalid"
+          type="submit">
+          <span class="flex items-center justify-center gap-2">
+            @if (!store.isLoading()) {
+            <span>{{ 'auth.signup.form.submit' | translate }}</span>
+            <i-lucide
+              [name]="icons.arrowRight"
+              class="size-5 transition-transform duration-300 group-hover:translate-x-1" />
+            }
+          </span>
+        </button>
+      </form>
     </div>
-  </form>
+  </div>
 </app-auth-card>

@@ -1,47 +1,122 @@
-<app-auth-card
-  description="Connectez-vous et accéder à votre compte et continuer à explorer notre plateforme."
-  title="Se connecter">
-  <div class="inline-flex items-center gap-1 justify-between">
-    <span class="text-gray-700">Pas encore de compte? </span>
-    <a
-      class="text-md font-medium text-primary-400 underline hover:text-primary-500 duration-300"
-      [routerLink]="['/sign-up']"
-      >S'inscrire!</a
-    >
-  </div>
-  <form class="mt-6 flex flex-col gap-4" (ngSubmit)="onSignIn()" [formGroup]="form">
-    <div class="flex flex-col gap-1.5">
-      <label for="email" class="font-medium">Adresse e-mail</label>
-      <input pInputText type="email" id="email" formControlName="email" autocomplete="off" />
-    </div>
-    <div class="flex flex-col gap-1.5">
-      <label for="password" class="font-medium">Mot de passe</label>
-      <p-password formControlName="password" [feedback]="false" [toggleMask]="true" [inputId]="'password'" />
-    </div>
-    <div class="inline-flex -mt-2 w-full items-center justify-between">
-      Mot de passe oublié?
-      <a class="text-md font-medium text-primary-400 hover:underline" [routerLink]="['/forgot-password']">
-        Réinitialiser!
-      </a>
-    </div>
-    <button
-      pButton
-      class="w-full"
-      [loading]="store.isLoading()"
-      [disabled]="store.isLoading() || form.invalid"
-      type="submit">
-      Se connecter
-    </button>
-    <div class="mt-2.5 flex items-center">
-      <div class="mt-px flex-auto border-t border-gray-200"></div>
-      <div class="text-gray-700 mx-2">Ou continuer avec</div>
-      <div class="mt-px flex-auto border-t border-gray-200"></div>
-    </div>
-    <button pButton class="w-full" [outlined]="true" [severity]="'primary'" (click)="signinWithGoogle()">
-      <div class="relative h-5 w-5">
-        <img ngSrc="/images/google.svg" alt="Google" fill />
+<app-auth-card [title]="'auth.signin.title' | translate" [description]="'auth.signin.description' | translate">
+  <div class="relative bg-white rounded-lg shadow-md shadow-gray-900/5 border border-gray-200/50 overflow-hidden">
+    <div class="h-2 bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700"></div>
+
+    <div class="p-8 sm:p-10">
+      <div class="mb-8 text-center">
+        <p class="text-sm text-gray-600">
+          {{ 'auth.signin.noAccount' | translate }}
+          <a
+            class="ml-1 font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-200 hover:underline"
+            [routerLink]="['/sign-up']">
+            {{ 'auth.signin.signUpLink' | translate }}
+          </a>
+        </p>
       </div>
-      <p class="-ml-2">oogle</p>
-    </button>
-  </form>
+
+      <form [formGroup]="form" class="space-y-4 md:space-y-6" (ngSubmit)="onSignIn()">
+        <div class="group">
+          <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+            <span class="flex items-center gap-2">
+              <span
+                class="flex-shrink-0 w-5 h-5 md:w-7 md:h-7 rounded-md bg-gradient-to-br from-primary-50 to-primary-100/50 border border-primary-200/60 flex items-center justify-center group-focus-within:from-primary-100 group-focus-within:to-primary-200/50 group-focus-within:border-primary-300 transition-all duration-200">
+                <i-lucide [name]="icons.mail" class="size-3.5 md:size-5 text-primary-600" />
+              </span>
+              {{ 'auth.signin.form.email' | translate }}
+            </span>
+          </label>
+          <input
+            pInputText
+            id="email"
+            type="email"
+            formControlName="email"
+            [placeholder]="'auth.signin.form.emailPlaceholder' | translate"
+            class="w-full px-4 py-3 rounded-md border-2 border-gray-200 focus:border-primary-500 transition-all duration-200 focus:ring-4 focus:ring-primary-500/10"
+            [class.!border-red-300]="form.get('email')?.invalid && form.get('email')?.touched"
+            [class.focus:!border-red-500]="form.get('email')?.invalid && form.get('email')?.touched" />
+          @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
+            <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
+            @if (form.get('email')?.hasError('required')) {
+            <span>{{ 'auth.signin.errors.emailRequired' | translate }}</span>
+            } @if (form.get('email')?.hasError('email')) {
+            <span>{{ 'auth.signin.errors.emailInvalid' | translate }}</span>
+            }
+          </p>
+          }
+        </div>
+
+        <div class="group">
+          <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
+            <span class="flex items-center gap-2">
+              <span
+                class="flex-shrink-0 w-5 h-5 md:w-7 md:h-7 rounded-md bg-gradient-to-br from-primary-50 to-primary-100/50 border border-primary-200/60 flex items-center justify-center group-focus-within:from-primary-100 group-focus-within:to-primary-200/50 group-focus-within:border-primary-300 transition-all duration-200">
+                <i-lucide [name]="icons.lock" class="size-3.5 md:size-5 text-primary-600" />
+              </span>
+              {{ 'auth.signin.form.password' | translate }}
+            </span>
+          </label>
+          <p-password
+            formControlName="password"
+            [feedback]="false"
+            [toggleMask]="true"
+            [inputId]="'password'"
+            [placeholder]="'auth.signin.form.passwordPlaceholder' | translate"
+            styleClass="w-full" />
+          @if (form.get('password')?.invalid && form.get('password')?.touched) {
+          <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
+            <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
+            <span>{{ 'auth.signin.errors.passwordRequired' | translate }}</span>
+          </p>
+          }
+        </div>
+
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-gray-600">{{ 'auth.signin.forgotPassword' | translate }}</span>
+          <a
+            class="font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-200 hover:underline"
+            [routerLink]="['/forgot-password']">
+            {{ 'auth.signin.resetLink' | translate }}
+          </a>
+        </div>
+
+        <button
+          pButton
+          severity="primary"
+          [outlined]="true"
+          class="w-full group"
+          [loading]="store.isLoading()"
+          [disabled]="store.isLoading() || form.invalid"
+          type="submit">
+          <span class="flex items-center justify-center gap-2">
+            @if (!store.isLoading()) {
+            <span>{{ 'auth.signin.form.submit' | translate }}</span>
+            <i-lucide
+              [name]="icons.arrowRight"
+              class="size-5 transition-transform duration-300 group-hover:translate-x-1" />
+            }
+          </span>
+        </button>
+
+        <div class="flex items-center">
+          <div class="flex-auto border-t border-gray-200"></div>
+          <div class="text-sm text-gray-600 mx-4">{{ 'auth.signin.orContinueWith' | translate }}</div>
+          <div class="flex-auto border-t border-gray-200"></div>
+        </div>
+
+        <button
+          pButton
+          class="w-full"
+          [outlined]="true"
+          [severity]="'primary'"
+          type="button"
+          (click)="signinWithGoogle()">
+          <div class="relative h-5 w-5">
+            <img ngSrc="/images/google.svg" alt="Google" fill />
+          </div>
+          <span class="-ml-2">oogle</span>
+        </button>
+      </form>
+    </div>
+  </div>
 </app-auth-card>

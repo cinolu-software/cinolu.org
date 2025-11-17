@@ -6,17 +6,36 @@ import { InputText } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { AuthCard } from '../../components/auth-card/auth-card';
 import { ForgotPasswordStore } from '../../store/forgot-password.store';
+import { LucideAngularModule, Mail, AlertCircle, ArrowRight } from 'lucide-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.html',
   providers: [ForgotPasswordStore],
-  imports: [FormsModule, RouterLink, ReactiveFormsModule, ButtonModule, InputText, RouterModule, CommonModule, AuthCard]
+  imports: [
+    FormsModule,
+    RouterLink,
+    ReactiveFormsModule,
+    ButtonModule,
+    InputText,
+    RouterModule,
+    CommonModule,
+    AuthCard,
+    LucideAngularModule,
+    TranslateModule
+  ]
 })
 export class ForgotPassword {
   #formBuilder = inject(FormBuilder);
   form: FormGroup;
   store = inject(ForgotPasswordStore);
+
+  icons = {
+    mail: Mail,
+    alertCircle: AlertCircle,
+    arrowRight: ArrowRight
+  };
 
   constructor() {
     this.form = this.#formBuilder.group({

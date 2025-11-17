@@ -8,6 +8,8 @@ import { environment } from '@environments/environment';
 import { AuthCard } from '../../components/auth-card/auth-card';
 import { SignInStore } from '../../store/sign-in.store';
 import { Password } from 'primeng/password';
+import { LucideAngularModule, Mail, Lock, AlertCircle, ArrowRight } from 'lucide-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,13 +24,22 @@ import { Password } from 'primeng/password';
     ReactiveFormsModule,
     NgOptimizedImage,
     CommonModule,
-    AuthCard
+    AuthCard,
+    LucideAngularModule,
+    TranslateModule
   ]
 })
 export class SignIn {
   #formBuilder: FormBuilder = inject(FormBuilder);
   form: FormGroup;
   store = inject(SignInStore);
+
+  icons = {
+    mail: Mail,
+    lock: Lock,
+    alertCircle: AlertCircle,
+    arrowRight: ArrowRight
+  };
 
   constructor() {
     this.form = this.#formBuilder.group({
