@@ -26,53 +26,46 @@
         [innerHTML]="slides.descriptionKey ? (slides.descriptionKey | translate) : slides.description"></div>
     </div>
 
-    <div class="flex flex-col sm:flex-row z-10 gap-3 sm:gap-4 lg:gap-6 pt-1 sm:pt-2 relative">
-      <div class="relative inline-flex w-fit sm:w-auto p-1">
-        <a
-          [routerLink]="slides.primaryCta.link"
-          type="submit"
-          class="group w-full sm:w-auto relative z-20 flex text-white items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base border rounded-full border-primary-400 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/50 transition-all duration-300 ease-out font-semibold whitespace-nowrap hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-300/50 overflow-hidden">
-          <span class="relative z-10">
-            @if (slides.primaryCta.textKey) { {{ slides.primaryCta.textKey | translate }} } @else { {{
-            slides.primaryCta.text }} }
-          </span>
-          <i-lucide
-            [name]="icons.arrowFlash"
-            class="size-4 sm:size-5 relative z-10 transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110" />
-          <span
-            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-[shimmer_3s_ease-in-out_infinite]"></span>
-        </a>
-      </div>
+    <div
+      class="flex flex-col sm:flex-row items-stretch sm:items-center z-10 gap-4 sm:gap-4 lg:gap-5 pt-2 sm:pt-3 relative">
+      <a
+        [routerLink]="slides.primaryCta.link"
+        type="submit"
+        class="group relative flex text-white items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base border rounded-full border-primary-400 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/50 transition-all duration-300 ease-out font-semibold whitespace-nowrap hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-300/50 overflow-hidden">
+        <span class="relative z-10">
+          @if (slides.primaryCta.textKey) { {{ slides.primaryCta.textKey | translate }} } @else { {{
+          slides.primaryCta.text }} }
+        </span>
+        <i-lucide
+          [name]="icons.arrowFlash"
+          class="size-4 sm:size-5 relative z-10 transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110" />
+        <span
+          class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-[shimmer_3s_ease-in-out_infinite]"></span>
+      </a>
       @if (slides.secondaryCta; as btn) { @if (btn.external) {
-
-      <div class="relative inline-flex w-fit sm:w-auto p-1">
-        <a
-          rel="noopener noreferrer"
-          [href]="btn.link"
-          target="_blank"
-          class="group relative w-full sm:w-auto z-20 flex text-white items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base border rounded-full border-primary-400 bg-primary-500/60 hover:bg-primary-600 shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/50 transition-all duration-300 ease-out font-semibold whitespace-nowrap active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-300/50 overflow-hidden">
-          <span class="relative z-10">
-            @if (btn.textKey) { {{ btn.textKey | translate }} } @else { {{ btn.text }} }
-          </span>
-          <i-lucide
-            [name]="icons.donate"
-            class="size-4 sm:size-5 relative z-10 transition-all duration-300 group-hover:rotate-12 group-hover:scale-110" />
-        </a>
-      </div>
-
+      <a
+        rel="noopener noreferrer"
+        [href]="btn.link"
+        target="_blank"
+        class="group relative flex text-white items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base border rounded-full border-primary-400 bg-primary-500/60 hover:bg-primary-600 shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/50 transition-all duration-300 ease-out font-semibold whitespace-nowrap active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-300/50 overflow-hidden">
+        <span class="relative z-10">
+          @if (btn.textKey) { {{ btn.textKey | translate }} } @else { {{ btn.text }} }
+        </span>
+        <i-lucide
+          [name]="icons.donate"
+          class="size-4 sm:size-5 relative z-10 transition-all duration-300 group-hover:rotate-12 group-hover:scale-110" />
+      </a>
       } @else {
-      <div class="relative inline-flex w-fit sm:w-auto p-1">
-        <a
-          [routerLink]="btn.link"
-          class="group relative w-full sm:w-auto z-20 flex text-white items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base border rounded-full border-primary-400 bg-primary-500/60 hover:bg-primary-600 shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/50 transition-all duration-300 ease-out font-semibold whitespace-nowrap active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-300/50 overflow-hidden">
-          <span class="relative z-10">
-            @if (btn.textKey) { {{ btn.textKey | translate }} } @else { {{ btn.text }} }
-          </span>
-          <i-lucide
-            [name]="icons.arrowFlash"
-            class="size-4 sm:size-5 relative z-10 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110" />
-        </a>
-      </div>
+      <a
+        [routerLink]="btn.link"
+        class="group relative flex text-white items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base border rounded-full border-primary-400 bg-primary-500/60 hover:bg-primary-600 shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/50 transition-all duration-300 ease-out font-semibold whitespace-nowrap active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-300/50 overflow-hidden">
+        <span class="relative z-10">
+          @if (btn.textKey) { {{ btn.textKey | translate }} } @else { {{ btn.text }} }
+        </span>
+        <i-lucide
+          [name]="icons.arrowFlash"
+          class="size-4 sm:size-5 relative z-10 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110" />
+      </a>
       } }
     </div>
   </div>
