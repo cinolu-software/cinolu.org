@@ -152,7 +152,7 @@
       <div class="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
         <h4 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
           <span class="w-1 h-6 bg-primary-500 rounded-full"></span>
-          Suivez-nous
+          {{ 'contact.social.title' | translate }}
         </h4>
         <div class="flex flex-wrap items-center gap-4">
           @for (item of socialMediaItems; track item.label) {
@@ -180,11 +180,9 @@
     <div class="mb-6">
       <h3 class="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2">
         <span class="w-1 h-6 bg-primary-500 rounded-full"></span>
-        Venez nous rendre visite
+        {{ 'contact.map.title' | translate }}
       </h3>
-      <p class="text-gray-600 text-sm ml-5">
-        Notre centre d'innovation est situé à Lubumbashi. N'hésitez pas à passer nous voir pour discuter de vos projets.
-      </p>
+      <p class="text-gray-600 text-sm ml-5">{{ 'contact.map.description' | translate }}</p>
     </div>
 
     <div
@@ -193,7 +191,7 @@
         class="w-full h-full border-0"
         loading="lazy"
         allowfullscreen
-        title="Localisation de Cinolu - Centre d'Innovation de Lubumbashi"
+        [title]="'contact.map.label' | translate"
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63035.155079005505!2d27.449214218656523!3d-11.665910227221612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19723f8f4deda58d%3A0xaa54c84125205d12!2sCentre%20d&#39;Innovation%20de%20Lubumbashi!5e0!3m2!1sfr!2scd!4v1694512345678!5m2!1sfr!2scd">
       </iframe>
 
@@ -203,7 +201,7 @@
         </div>
         <div>
           <p class="font-bold text-gray-900 text-sm">Cinolu</p>
-          <p class="text-gray-600 text-xs">Lubumbashi, RDC</p>
+          <p class="text-gray-600 text-xs">{{ 'contact.map.location' | translate }}</p>
         </div>
       </div>
     </div>
