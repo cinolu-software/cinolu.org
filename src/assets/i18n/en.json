@@ -417,6 +417,32 @@
     "view_all": "Events list",
     "explore": "View event"
   },
+  "networks": {
+    "title": "Networks where",
+    "title_highlight": "Cinolu is a member",
+    "description": "We are proud to be part of international networks that share our vision of innovation",
+    "member": "Member",
+    "visit_website": "Visit website",
+    "stats": {
+      "networks_count": "{{count}} Networks",
+      "global_reach": "Global reach",
+      "collaboration": "Active collaboration"
+    },
+    "items": {
+      "segal": {
+        "description": "Local philanthropy in Africa"
+      },
+      "afrilabs": {
+        "description": "African innovation hubs network"
+      },
+      "catalyst": {
+        "description": "Systemic social innovation movement"
+      },
+      "impacthub": {
+        "description": "Impact entrepreneurship spaces"
+      }
+    }
+  },
   "partners": {
     "title": "Our",
     "title_highlight": "Partners",
