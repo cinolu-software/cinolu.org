@@ -1,0 +1,95 @@
+<section class="bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+  <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-15">
+    <div class="mb-16 text-center px-4">
+      <h3
+        class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-satoshi mb-4 tracking-tight leading-tight">
+        {{ 'networks.title' | translate }}
+        <span class="bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">
+          {{ 'networks.title_highlight' | translate }}
+        </span>
+      </h3>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">{{ 'networks.description' | translate }}</p>
+    </div>
+
+    <div class="relative">
+      <p-carousel
+        [value]="networks"
+        [numVisible]="4"
+        [circular]="true"
+        [showIndicators]="false"
+        [showNavigators]="true"
+        [responsiveOptions]="responsiveOptions"
+        touchMoveThreshold="0"
+        class="w-full networks-carousel modern-carousel">
+        <ng-template let-network #item>
+          <div class="p-3">
+            <div
+              class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[240px] flex flex-col">
+              <div class="absolute top-3 right-3">
+                <span
+                  class="inline-flex items-center px-2.5 py-1 bg-primary-50 text-primary-500 text-xs font-medium rounded-full border border-primary-100">
+                  <i-lucide [name]="icons.network" class="size-3 mr-1" />
+                  {{ 'networks.member' | translate }}
+                </span>
+              </div>
+
+              <div class="flex-1 flex items-center justify-center mb-4 p-4">
+                <div class="w-full h-20 flex items-center justify-center">
+                  <img
+                    [ngSrc]="network.image"
+                    [alt]="'Logo de ' + network.name"
+                    [title]="network.name"
+                    width="140"
+                    height="70"
+                    class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
+                </div>
+              </div>
+
+              <div class="text-center pt-3 border-t border-gray-100 space-y-2">
+                <h4
+                  class="font-bold text-gray-900 text-base group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
+                  {{ network.name }}
+                </h4>
+                <p class="text-sm text-gray-600 line-clamp-2">{{ network.descriptionKey | translate }}</p>
+
+                @if (network.website) {
+                <a
+                  [href]="network.website"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 text-xs text-primary-600 hover:text-primary-700 font-medium mt-2">
+                  <i-lucide [name]="icons.globe" class="size-3" />
+                  {{ 'networks.visit_website' | translate }}
+                </a>
+                }
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+
+    <div class="text-center mt-16 space-y-4">
+      <div class="flex items-center justify-center gap-8 text-sm text-gray-600">
+        <div class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
+            <i-lucide [name]="icons.network" class="size-5 text-primary-600" />
+          </div>
+          <span class="font-medium">{{ 'networks.stats.networks_count' | translate: {count: networks.length} }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+            <i-lucide [name]="icons.globe" class="size-5 text-blue-600" />
+          </div>
+          <span class="font-medium">{{ 'networks.stats.global_reach' | translate }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+            <i-lucide [name]="icons.users" class="size-5 text-green-600" />
+          </div>
+          <span class="font-medium">{{ 'networks.stats.collaboration' | translate }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
