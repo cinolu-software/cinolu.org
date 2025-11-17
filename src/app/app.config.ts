@@ -24,14 +24,13 @@ import { Observable } from 'rxjs';
 
 registerLocaleData(localeFr, 'fr');
 
-// Custom TranslateLoader
 export class CustomTranslateLoader implements TranslateLoader {
   constructor(private http: HttpClient) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getTranslation(lang: string): Observable<any> {
-    // Utiliser le chemin vers les fichiers de traduction
-    return this.http.get(`/assets/i18n/${lang}.json`);
+    const cacheBuster = new Date().getTime();
+    return this.http.get(`/assets/i18n/${lang}.json?v=${cacheBuster}`);
   }
 }
 
@@ -57,7 +56,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     importProvidersFrom(
       TranslateModule.forRoot({
-        defaultLanguage: 'fr',
         fallbackLang: 'fr',
         loader: {
           provide: TranslateLoader,
