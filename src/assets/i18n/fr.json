@@ -12,6 +12,7 @@
     "close": "Fermer",
     "submit": "Soumettre",
     "back": "Retour",
+    "goBack": "Revenir en arrière",
     "cover_image": "Image de couverture",
     "verified": "Vérifié"
   },
@@ -23,7 +24,7 @@
     "events": "Évènements",
     "blog": "Blog",
     "gallery": "Galerie",
-    "contact": "Contacts",
+    "contact": "Contactez-nous",
     "partners": "Partenaires",
     "entrepreneurs": "Nos entrepreneurs",
     "myCinolu": "My Cinolu",
@@ -34,7 +35,121 @@
     "signIn": "Connexion",
     "signUp": "Inscription",
     "signOut": "Se déconnecter",
-    "myAccount": "Mon compte"
+    "myAccount": "Mon compte",
+    "backToHome": "Revenir à l'accueil",
+    "sidebar": {
+      "badge": "Plateforme sécurisée",
+      "title": "Rejoignez une communauté d'innovateurs",
+      "description": "Accédez à des programmes exclusifs, connectez-vous avec des entrepreneurs et donnez vie à vos projets.",
+      "socialProof": "Plus de 1000 utilisateurs",
+      "socialProofSub": "Nous rejoignent chaque jour",
+      "features": {
+        "programs": "Accès à tous les programmes et formations",
+        "network": "Réseau d'entrepreneurs et mentors",
+        "events": "Événements et opportunités exclusives"
+      }
+    },
+    "signup": {
+      "title": "S'inscrire",
+      "description": "Créez un compte pour accéder à toutes les fonctionnalités de notre plateforme.",
+      "backToHome": "Revenir à l'accueil",
+      "alreadyHaveAccount": "Vous avez déjà un compte?",
+      "signInLink": "Se connecter",
+      "form": {
+        "name": "Nom complet",
+        "namePlaceholder": "Ex: Prenom Nom",
+        "email": "Adresse e-mail",
+        "emailPlaceholder": "votre@email.com",
+        "birthdate": "Date de naissance",
+        "gender": "Genre",
+        "genderPlaceholder": "Sélectionnez votre genre",
+        "country": "Pays",
+        "countryPlaceholder": "Sélectionnez votre pays",
+        "phone": "Téléphone",
+        "phonePlaceholder": "Numéro de téléphone",
+        "password": "Mot de passe",
+        "passwordPlaceholder": "Minimum 6 caractères",
+        "passwordConfirm": "Confirmer le mot de passe",
+        "passwordConfirmPlaceholder": "Ressaisir le mot de passe",
+        "submit": "S'inscrire",
+        "submitting": "Inscription en cours..."
+      },
+      "errors": {
+        "nameRequired": "Le nom complet est requis",
+        "nameMinLength": "Le nom doit contenir au moins 5 caractères",
+        "emailRequired": "L'adresse e-mail est requise",
+        "emailInvalid": "L'adresse e-mail n'est pas valide",
+        "birthdateRequired": "La date de naissance est requise",
+        "genderRequired": "Le genre est requis",
+        "countryRequired": "Le pays est requis",
+        "phoneRequired": "Le numéro de téléphone est requis",
+        "passwordRequired": "Le mot de passe est requis",
+        "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
+        "passwordConfirmRequired": "La confirmation du mot de passe est requise",
+        "passwordMismatch": "Les mots de passe ne correspondent pas"
+      },
+      "socialProof": "Plus de 1000 utilisateurs"
+    },
+    "signin": {
+      "title": "Se connecter",
+      "description": "Connectez-vous et accédez à votre compte pour continuer à explorer notre plateforme.",
+      "noAccount": "Pas encore de compte?",
+      "signUpLink": "S'inscrire",
+      "forgotPassword": "Mot de passe oublié?",
+      "resetLink": "Réinitialiser",
+      "orContinueWith": "Ou continuer avec",
+      "form": {
+        "email": "Adresse e-mail",
+        "emailPlaceholder": "votre@email.com",
+        "password": "Mot de passe",
+        "passwordPlaceholder": "Votre mot de passe",
+        "submit": "Se connecter",
+        "submitting": "Connexion en cours..."
+      },
+      "errors": {
+        "emailRequired": "L'adresse e-mail est requise",
+        "emailInvalid": "L'adresse e-mail n'est pas valide",
+        "passwordRequired": "Le mot de passe est requis"
+      }
+    },
+    "forgotPassword": {
+      "title": "Mot de passe oublié",
+      "description": "Réinitialisez votre mot de passe et accédez à votre compte pour continuer à explorer notre plateforme.",
+      "instruction": "Saisissez votre adresse e-mail et un lien de réinitialisation vous sera envoyé.",
+      "haveAccount": "Vous avez déjà un compte?",
+      "signInLink": "Se connecter",
+      "rememberPassword": "Mot de passe retrouvé?",
+      "form": {
+        "email": "Adresse e-mail",
+        "emailPlaceholder": "votre@email.com",
+        "submit": "Réinitialiser",
+        "submitting": "Envoi en cours..."
+      },
+      "errors": {
+        "emailRequired": "L'adresse e-mail est requise",
+        "emailInvalid": "L'adresse e-mail n'est pas valide"
+      }
+    },
+    "resetPassword": {
+      "title": "Réinitialisation du mot de passe",
+      "description": "Créez un nouveau mot de passe pour accéder à votre compte et continuer à explorer notre plateforme.",
+      "instruction": "Veuillez saisir votre nouveau mot de passe pour réinitialiser votre compte.",
+      "noAccount": "Pas encore de compte?",
+      "signInLink": "Se connecter",
+      "form": {
+        "password": "Nouveau mot de passe",
+        "passwordPlaceholder": "Minimum 6 caractères",
+        "passwordConfirm": "Confirmer le mot de passe",
+        "passwordConfirmPlaceholder": "Ressaisir le mot de passe",
+        "submit": "Réinitialiser",
+        "submitting": "Réinitialisation en cours..."
+      },
+      "errors": {
+        "passwordRequired": "Le mot de passe est requis",
+        "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
+        "passwordConfirmRequired": "La confirmation du mot de passe est requise"
+      }
+    }
   },
   "contact": {
     "title": "Restons",
@@ -75,6 +190,12 @@
       "twitter": "Twitter",
       "linkedin": "LinkedIn",
       "instagram": "Instagram"
+    },
+    "map": {
+      "title": "Venez nous rendre visite",
+      "description": "Notre centre d'innovation est situé à Lubumbashi. N'hésitez pas à passer nous voir pour discuter de vos projets.",
+      "label": "Localisation de Cinolu - Centre d'Innovation de Lubumbashi",
+      "location": "Lubumbashi, RDC"
     },
     "success": {
       "title": "Message envoyé !",
@@ -348,6 +469,25 @@
       "message": "Cet article n'existe pas ou a été supprimé.",
       "discover": "Découvrir nos articles"
     }
+  },
+  "gallery": {
+    "badge": "Galerie",
+    "title": "Nos moments",
+    "title_highlight": "capturés",
+    "description": "Plongez dans l'univers visuel de Cinolu et découvrez les moments clés qui ont marqué notre parcours collectif.",
+    "our_gallery": "Notre galerie",
+    "images_count": "{{count}} photo",
+    "images_count_plural": "{{count}} photos",
+    "all": "Toutes",
+    "filter_by": "Filtrer par catégorie",
+    "load_more": "Voir plus de photos",
+    "all_images_displayed": "Vous avez tout vu !",
+    "view_image": "Voir {{alt}}",
+    "viewing": "Visualisation",
+    "close": "Fermer",
+    "previous_image": "Photo précédente",
+    "next_image": "Photo suivante",
+    "image_of": "{{current}} sur {{total}}"
   },
   "entrepreneurs": {
     "badge": "Nos Entrepreneurs",

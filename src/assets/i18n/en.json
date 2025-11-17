@@ -12,6 +12,7 @@
     "close": "Close",
     "submit": "Submit",
     "back": "Back",
+    "goBack": "Go back",
     "cover_image": "Cover image",
     "verified": "Verified"
   },
@@ -34,7 +35,121 @@
     "signIn": "Sign in",
     "signUp": "Sign up",
     "signOut": "Sign out",
-    "myAccount": "My account"
+    "myAccount": "My account",
+    "backToHome": "Back to home",
+    "sidebar": {
+      "badge": "Secure platform",
+      "title": "Join a community of innovators",
+      "description": "Access exclusive programs, connect with entrepreneurs and bring your projects to life.",
+      "socialProof": "More than 1000 users",
+      "socialProofSub": "Join us every day",
+      "features": {
+        "programs": "Access to all programs and training",
+        "network": "Network of entrepreneurs and mentors",
+        "events": "Exclusive events and opportunities"
+      }
+    },
+    "signup": {
+      "title": "Sign up",
+      "description": "Create an account to access all the features of our platform.",
+      "backToHome": "Back to home",
+      "alreadyHaveAccount": "Already have an account?",
+      "signInLink": "Sign in",
+      "form": {
+        "name": "Full name",
+        "namePlaceholder": "Ex: John Doe",
+        "email": "Email address",
+        "emailPlaceholder": "your@email.com",
+        "birthdate": "Date of birth",
+        "gender": "Gender",
+        "genderPlaceholder": "Select your gender",
+        "country": "Country",
+        "countryPlaceholder": "Select your country",
+        "phone": "Phone",
+        "phonePlaceholder": "Phone number",
+        "password": "Password",
+        "passwordPlaceholder": "Minimum 6 characters",
+        "passwordConfirm": "Confirm password",
+        "passwordConfirmPlaceholder": "Re-enter password",
+        "submit": "Sign up",
+        "submitting": "Signing up..."
+      },
+      "errors": {
+        "nameRequired": "Full name is required",
+        "nameMinLength": "Name must be at least 5 characters",
+        "emailRequired": "Email address is required",
+        "emailInvalid": "Email address is not valid",
+        "birthdateRequired": "Date of birth is required",
+        "genderRequired": "Gender is required",
+        "countryRequired": "Country is required",
+        "phoneRequired": "Phone number is required",
+        "passwordRequired": "Password is required",
+        "passwordMinLength": "Password must be at least 6 characters",
+        "passwordConfirmRequired": "Password confirmation is required",
+        "passwordMismatch": "Passwords do not match"
+      },
+      "socialProof": "More than 1000 users"
+    },
+    "signin": {
+      "title": "Sign in",
+      "description": "Sign in and access your account to continue exploring our platform.",
+      "noAccount": "Don't have an account yet?",
+      "signUpLink": "Sign up",
+      "forgotPassword": "Forgot password?",
+      "resetLink": "Reset",
+      "orContinueWith": "Or continue with",
+      "form": {
+        "email": "Email address",
+        "emailPlaceholder": "your@email.com",
+        "password": "Password",
+        "passwordPlaceholder": "Your password",
+        "submit": "Sign in",
+        "submitting": "Signing in..."
+      },
+      "errors": {
+        "emailRequired": "Email address is required",
+        "emailInvalid": "Email address is not valid",
+        "passwordRequired": "Password is required"
+      }
+    },
+    "forgotPassword": {
+      "title": "Forgot password",
+      "description": "Reset your password and access your account to continue exploring our platform.",
+      "instruction": "Enter your email address and a reset link will be sent to you.",
+      "haveAccount": "Already have an account?",
+      "signInLink": "Sign in",
+      "rememberPassword": "Remember password?",
+      "form": {
+        "email": "Email address",
+        "emailPlaceholder": "your@email.com",
+        "submit": "Reset",
+        "submitting": "Sending..."
+      },
+      "errors": {
+        "emailRequired": "Email address is required",
+        "emailInvalid": "Email address is not valid"
+      }
+    },
+    "resetPassword": {
+      "title": "Reset password",
+      "description": "Create a new password to access your account and continue exploring our platform.",
+      "instruction": "Please enter your new password to reset your account.",
+      "noAccount": "Don't have an account yet?",
+      "signInLink": "Sign in",
+      "form": {
+        "password": "New password",
+        "passwordPlaceholder": "Minimum 6 characters",
+        "passwordConfirm": "Confirm password",
+        "passwordConfirmPlaceholder": "Re-enter password",
+        "submit": "Reset",
+        "submitting": "Resetting..."
+      },
+      "errors": {
+        "passwordRequired": "Password is required",
+        "passwordMinLength": "Password must contain at least 6 characters",
+        "passwordConfirmRequired": "Password confirmation is required"
+      }
+    }
   },
   "contact": {
     "title": "Let's stay",
@@ -75,6 +190,12 @@
       "twitter": "Twitter",
       "linkedin": "LinkedIn",
       "instagram": "Instagram"
+    },
+    "map": {
+      "title": "Come visit us",
+      "description": "Our innovation center is located in Lubumbashi. Feel free to stop by to discuss your projects.",
+      "label": "Cinolu Location - Lubumbashi Innovation Center",
+      "location": "Lubumbashi, DRC"
     },
     "success": {
       "title": "Message sent!",
@@ -348,6 +469,25 @@
       "message": "This article does not exist or has been deleted.",
       "discover": "Discover our articles"
     }
+  },
+  "gallery": {
+    "badge": "Gallery",
+    "title": "Our captured",
+    "title_highlight": "moments",
+    "description": "Dive into Cinolu's visual universe and discover the key moments that have marked our collective journey.",
+    "our_gallery": "Our gallery",
+    "images_count": "{{count}} photo",
+    "images_count_plural": "{{count}} photos",
+    "all": "All",
+    "filter_by": "Filter by category",
+    "load_more": "View more photos",
+    "all_images_displayed": "You've seen it all!",
+    "view_image": "View {{alt}}",
+    "viewing": "Viewing",
+    "close": "Close",
+    "previous_image": "Previous photo",
+    "next_image": "Next photo",
+    "image_of": "{{current}} of {{total}}"
   },
   "entrepreneurs": {
     "badge": "Our Entrepreneurs",
