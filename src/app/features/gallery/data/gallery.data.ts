@@ -22,7 +22,7 @@ export const GALLERY_IMAGES: IGalleryImage[] = [
     category: 'Atelier'
   },
   { src: 'images/gallery/9.jpg', alt: 'Moment de questions-réponses', category: 'L-Impact' },
-  { src: 'images/gallery/10.jpg', alt: 'Participants prenant des notes', category: 'cours' },
+  { src: 'images/gallery/10.jpg', alt: 'Participants prenant des notes', category: 'Cours' },
   { src: 'images/gallery/11.jpg', alt: 'Atelier pratique en petits groupes', category: 'Atelier' },
   {
     src: 'images/gallery/12.jpg',

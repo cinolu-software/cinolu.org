@@ -1,10 +1,10 @@
 <app-hero-card
   background="/images/gallery/8.jpg"
   [badgeIcon]="icons.image"
-  badgeText="Gallery"
-  title="Des souvenirs"
-  highlight="à partager."
-  description="Découvrez les histoires derrière chaque photo et revivez avec nous les temps forts de notre parcours collectif.">
+  [badgeText]="'gallery.badge' | translate"
+  [title]="'gallery.title' | translate"
+  [highlight]="'gallery.title_highlight' | translate"
+  [description]="'gallery.description' | translate">
 </app-hero-card>
 
 @if (loading()) {

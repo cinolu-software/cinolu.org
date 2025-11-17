@@ -4,10 +4,11 @@ import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { Image } from 'lucide-angular';
 import { GalleryCardComponent } from '../component/gallery-card/gallery-card';
 import { GallerySkeleton } from '../component/gallery-skeleton/gallery-skeleton';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-gallery',
-  imports: [HeroCard, GalleryCardComponent, GallerySkeleton],
+  imports: [HeroCard, GalleryCardComponent, GallerySkeleton, TranslateModule],
   templateUrl: './gallery.html'
 })
 export class Gallery implements OnInit {

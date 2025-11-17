@@ -3,11 +3,11 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { GALLERY_IMAGES, IGalleryImage } from '../../data/gallery.data';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LucideAngularModule, ReceiptText, ChevronLeft, ChevronRight, X } from 'lucide-angular';
-import { Button } from 'primeng/button';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-gallery-card',
-  imports: [CommonModule, ReactiveFormsModule, LucideAngularModule, Button],
+  imports: [CommonModule, ReactiveFormsModule, LucideAngularModule, TranslateModule],
   templateUrl: './gallery-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
