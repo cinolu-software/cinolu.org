@@ -1,4 +1,31 @@
 {
+  "events": {
+    "list": {
+      "title": "Voir nos événements",
+      "subtitle": "Tous les événements",
+      "choose_category": "Choisir une catégorie",
+      "no_event": "Pas d'événement!"
+    }
+  },
+
+  "event_detail": {
+    "detail": {
+      "dates": "Dates",
+      "start": "Début :",
+      "end": "Fin :",
+      "categories": "Catégories",
+      "address": "Adresse",
+      "description": "Description",
+      "apply_now": "Postuler Maintenant",
+      "finished": "Événement terminé",
+      "not_found": "Aucun événement avec cet identifiant !",
+      "show_more": "Voir plus",
+      "show_less": "Voir moins",
+      "add_to_calendar": "Ajouter au calendrier",
+      "share": "Partager",
+      "cta_hint": "Réservez votre place ou ajoutez l'événement à votre calendrier."
+    }
+  },
   "common": {
     "welcome": "Bienvenue",
     "loading": "Chargement...",
@@ -403,7 +430,11 @@
   "programs": {
     "title": "Nos Programmes",
     "description": "Chez Cinolu, nous accompagnons chaque idée avec des programmes adaptés à votre profil, vos ambitions et votre niveau de développement.",
-    "learn_more": "En savoir plus"
+    "learn_more": "En savoir plus",
+    "projects_title": "Projets de {{name}}",
+    "logo_alt": "Logo de {{name}}",
+    "no_subprogram": "Aucun sous-programme",
+    "bad_path": "Mauvais chemin !"
   },
   "recent_projects": {
     "title": "Les programmes récents",

@@ -1,4 +1,30 @@
 {
+  "event_detail": {
+    "detail": {
+      "dates": "Dates",
+      "start": "Start:",
+      "end": "End:",
+      "categories": "Categories",
+      "address": "Address",
+      "description": "Description",
+      "apply_now": "Apply Now",
+      "finished": "Event finished",
+      "not_found": "No event with this ID!",
+      "show_more": "Show more",
+      "show_less": "Show less",
+      "add_to_calendar": "Add to calendar",
+      "share": "Share",
+      "cta_hint": "Secure your spot or add the event to your calendar."
+    }
+  },
+  "events": {
+    "list": {
+      "title": "See our events",
+      "subtitle": "All events",
+      "choose_category": "Choose a category",
+      "no_event": "No event!"
+    }
+  },
   "common": {
     "welcome": "Welcome",
     "loading": "Loading...",
@@ -24,7 +50,7 @@
     "events": "Events",
     "blog": "Blog",
     "gallery": "Gallery",
-    "contact": "Contact",
+    "contact": "Contact Us",
     "partners": "Partners",
     "entrepreneurs": "Our entrepreneurs",
     "myCinolu": "My Cinolu",
@@ -42,7 +68,7 @@
       "title": "Join a community of innovators",
       "description": "Access exclusive programs, connect with entrepreneurs and bring your projects to life.",
       "socialProof": "More than 1000 users",
-      "socialProofSub": "Join us every day",
+      "socialProofSub": "Joining us daily",
       "features": {
         "programs": "Access to all programs and training",
         "network": "Network of entrepreneurs and mentors",
@@ -57,7 +83,7 @@
       "signInLink": "Sign in",
       "form": {
         "name": "Full name",
-        "namePlaceholder": "Ex: John Doe",
+        "namePlaceholder": "Ex: Jane Doe",
         "email": "Email address",
         "emailPlaceholder": "your@email.com",
         "birthdate": "Date of birth",
@@ -403,7 +429,11 @@
   "programs": {
     "title": "Our Programs",
     "description": "At Cinolu, we support every idea with programs tailored to your profile, ambitions, and development level.",
-    "learn_more": "Learn more"
+    "learn_more": "Learn more",
+    "projects_title": "Projects of {{name}}",
+    "logo_alt": "Logo of {{name}}",
+    "no_subprogram": "No subprogram",
+    "bad_path": "Wrong path!"
   },
   "recent_projects": {
     "title": "Recent Programs",
