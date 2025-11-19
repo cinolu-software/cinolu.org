@@ -20,6 +20,7 @@ import { SubprogramCardSkeleton } from '../../component/subprogram-card-skeleton
 import { Subject, takeUntil } from 'rxjs';
 import { Button } from 'primeng/button';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-detail-programs',
@@ -31,7 +32,8 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
     SubprogramCardSkeleton,
     Button,
     ApiImgPipe,
-    NgOptimizedImage
+    NgOptimizedImage,
+    TranslateModule
   ],
   templateUrl: './detail-programs.html',
   changeDetection: ChangeDetectionStrategy.OnPush
