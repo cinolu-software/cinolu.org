@@ -1,15 +1,26 @@
-<section class="pt-14 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
-  <div class="my-10">
-    <h2 class="font-black font-satoshi mb-1 text-3xl">Voir nos événements</h2>
-    <p class="text-primary-500">Tous les événements</p>
+<section
+  class="py-16 pt-32 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto sm:px-8 bg-gradient-to-br from-gray-50 to-white min-h-screen">
+  <div class="mb-16 text-center">
+    <h2 class="text-4xl sm:text-5xl font-extrabold font-satoshi tracking-tight text-gray-900 mb-3 drop-shadow-sm">
+      {{ 'events.list.title' | translate }}
+    </h2>
+    <p class="text-lg text-primary-500 font-medium mb-2">{{ 'events.list.subtitle' | translate }}</p>
+    <div class="w-16 h-1 mx-auto bg-gradient-to-r from-primary-400 to-primary-600 rounded-full mb-4"></div>
   </div>
-  <div
-    class="relative h-60 md:h-96 w-full bg-gray-200 pb-8 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto mb-10">
-    <img ngSrc="/images/events.jpg" alt="events" class="aspect-video object-cover h-full opacity-90" fill priority />
+
+  <div class="relative h-64 sm:h-96 w-full rounded-lg overflow-hidden shadow-lg mb-12">
+    <img
+      ngSrc="/images/events.jpg"
+      alt="events"
+      class="object-cover w-full h-full opacity-90 scale-105 transition-transform duration-700 hover:scale-110"
+      fill
+      priority />
+    <div class="absolute inset-0 bg-gradient-to-t from-black-600/80 via-black-800/10 to-transparent"></div>
   </div>
-  <div class="flex flex-col">
+
+  <div class="flex flex-col items-center">
     @if (categoriesStore.categories().length > 0) {
-    <div class="mb-2 flex flex-wrap gap-4 md:w-1/4">
+    <div class="mb-6 flex flex-wrap gap-4 w-full max-w-md justify-center">
       <p-multiSelect
         [inputId]="'categoriesFilter'"
         [autocomplete]="'off'"
@@ -20,31 +31,45 @@
         [optionValue]="'id'"
         [optionLabel]="'name'"
         [showClear]="true"
-        placeholder="Choisir une catégorie"
-        class="w-full md:w-64" />
+        [placeholder]="'events.list.choose_category' | translate"
+        class="w-full md:w-64 rounded-xl border border-gray-200 shadow-sm focus:ring-primary-400 transition-all duration-200" />
     </div>
     } @if (store.events()[1] > 0 && !store.isLoading()) {
-    <div class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10">
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
       @for ( event of store.events()[0] | paginate : { itemsPerPage: 9, currentPage: queryParams().page || 1,
       totalItems: store.events()[1], }; track event.id ) {
-      <app-event-card [event]="event" [buttonTextKey]="'recent_events.explore'" />
+      <div
+        class="transition-transform h-fit duration-300 hover:scale-[1.02] hover:shadow-xl rounded-lg bg-white border border-gray-100 overflow-visible">
+        <app-event-card [event]="event" [buttonTextKey]="'recent_events.explore'" />
+      </div>
       }
     </div>
     @if (store.events()[1] > 9) {
-    <div class="flex justify-center mb-8">
+    <div class="flex justify-center mt-10 mb-8">
       <pagination-controls nextLabel="" previousLabel="" [maxSize]="5" (pageChange)="onPageChange($event)" class="pg" />
     </div>
     } } @if (!store.isLoading() && store.events()[1] === 0) {
     <div
-      class="flex flex-col justify-center items-center gap-6 my-10 w-full m-auto bg-gray-100 min-h-60 rounded-lg p-6 md:p-8">
-      <h2 class="text-3xl font-semibold px-4 mt-6 mb-14">Pas d'événement!</h2>
+      class="flex flex-col justify-center items-center gap-6 my-16 w-full bg-gray-100 min-h-60 rounded-2xl p-8 shadow-sm">
+      <svg
+        width="48"
+        height="48"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        class="text-gray-400 mb-2"
+        viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M8 12h8M12 8v8" />
+      </svg>
+      <h2 class="text-2xl font-semibold text-gray-500">{{ 'events.list.no_event' | translate }}</h2>
     </div>
     } @if (categoriesStore.isLoading()) {
-    <div class="pb-2 pt-10">
-      <div class="w-full md:w-64 bg-gray-200 rounded-lg h-10 animate-pulse"></div>
+    <div class="pb-2 pt-10 w-full max-w-md">
+      <div class="w-full bg-gray-200 rounded-lg h-10 animate-pulse"></div>
     </div>
     } @if (store.isLoading()) {
-    <div class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10">
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
       @for (i of skeletonArray; track $index) {
       <app-event-card-skeleton />
       }
