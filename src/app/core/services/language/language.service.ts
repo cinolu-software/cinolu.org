@@ -57,7 +57,6 @@ export class LanguageService {
     this.setLanguage(newLang);
   }
 
-
   private getSavedLanguage(): Language {
     if (this.isBrowser && typeof localStorage !== 'undefined') {
       const saved = localStorage.getItem(this.STORAGE_KEY);
@@ -76,12 +75,10 @@ export class LanguageService {
     return 'fr';
   }
 
-
   getCurrentLanguageInfo(): LanguageOption {
     const lang = this.currentLanguage();
     return this.availableLanguages.find((l) => l.code === lang) || this.availableLanguages[0];
   }
-
 
   instant(key: string, params?: object): string {
     return this.translate.instant(key, params);
