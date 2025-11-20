@@ -43,12 +43,23 @@
     "cover_image": "Image de couverture",
     "verified": "Vérifié"
   },
+  "sub_programs": {
+    "projects_of": "Projets de",
+    "events_of": "Événements de",
+    "bad_path": "Mauvais chemin !",
+    "bad_path_desc": "La page que vous recherchez n'existe pas ou le sous-programme est introuvable. Vérifiez l'URL ou revenez à la liste des programmes.",
+    "back_to_programs": "Retour aux programmes",
+    "no_project": "Aucun projet trouvé",
+    "no_project_desc": "Il n'y a actuellement aucun projet pour ce sous-programme.",
+    "no_event": "Aucun événement trouvé",
+    "no_event_desc": "Il n'y a actuellement aucun événement pour ce sous-programme."
+  },
   "nav": {
     "home": "Accueil",
     "about": "À propos",
     "programs": "Programmes",
     "projects": "Projets",
-    "events": "Évènements",
+    "events": "Événements",
     "blog": "Blog",
     "gallery": "Galerie",
     "contact": "Contactez-nous",

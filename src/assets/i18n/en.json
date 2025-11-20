@@ -42,6 +42,17 @@
     "cover_image": "Cover image",
     "verified": "Verified"
   },
+  "sub_programs": {
+    "projects_of": "Projects of",
+    "events_of": "Events of",
+    "bad_path": "Wrong path!",
+    "bad_path_desc": "The page you are looking for does not exist or the sub-program is not found. Please check the URL or return to the programs list.",
+    "back_to_programs": "Back to programs",
+    "no_project": "No project found",
+    "no_project_desc": "There are currently no projects for this sub-program.",
+    "no_event": "No event found",
+    "no_event_desc": "There are currently no events for this sub-program."
+  },
   "nav": {
     "home": "Home",
     "about": "About",
