@@ -437,6 +437,19 @@
       }
     }
   },
+  "project_detail": {
+    "detail": {
+      "dates": "Dates",
+      "start": "Start:",
+      "end": "End:",
+      "categories": "Categories",
+      "address": "Address",
+      "description": "Description",
+      "apply_now": "Apply Now",
+      "finished": "Project finished",
+      "not_found": "No project with this ID!"
+    }
+  },
   "programs": {
     "title": "Our Programs",
     "description": "At Cinolu, we support every idea with programs tailored to your profile, ambitions, and development level.",

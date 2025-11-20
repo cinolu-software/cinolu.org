@@ -438,6 +438,19 @@
       }
     }
   },
+  "project_detail": {
+    "detail": {
+      "dates": "Dates",
+      "start": "Début :",
+      "end": "Fin :",
+      "categories": "Catégories",
+      "address": "Adresse",
+      "description": "Description",
+      "apply_now": "Postuler Maintenant",
+      "finished": "Projet terminé",
+      "not_found": "Aucun projet avec cet identifiant !"
+    }
+  },
   "programs": {
     "title": "Nos Programmes",
     "description": "Chez Cinolu, nous accompagnons chaque idée avec des programmes adaptés à votre profil, vos ambitions et votre niveau de développement.",
