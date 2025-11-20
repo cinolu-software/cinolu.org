@@ -13,6 +13,7 @@
         </p>
       </div>
 
+      @if (store.projects()) {
       <div class="hidden lg:flex items-center gap-4">
         <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
           <i-lucide [name]="icons.moveLeft" class="size-3.5" />
@@ -21,6 +22,7 @@
           <i-lucide [name]="icons.moveRight" class="size-3.5" />
         </button>
       </div>
+      }
     </div>
   </div>
   @if (store.isLoading()) {
