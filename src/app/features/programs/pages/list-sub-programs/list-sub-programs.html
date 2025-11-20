@@ -1,94 +1,192 @@
 <section
-  class="lg:flex-row min-h-full gap-10 pt-20 md:pb-28 px-8 md:px-10 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-grid">
+  class="lg:flex-row min-h-full pt-20 md:pb-28 px-6 sm:px-8 md:px-10 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-grid">
+  <!-- LOADING -->
   @if (store.isLoading()) {
-  <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3 pb-10">
+  <div class="mt-14 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
     <app-subprogram-card-skeleton />
   </div>
-  } @else if (store.subprogram()) { @if (store.subprogram(); as program) {
-  <div class="w-full space-y-12 md:space-y-16 lg:space-y-20">
-    <div
-      class="flex flex-col gap-6 rounded-lg p-6 sm:p-8 bg-white/20 shadow-sm border backdrop-blur-[2px] border-slate-200 mt-10">
-      <h3 class="font-black flex items-center gap-4 sm:gap-6 font-satoshi text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-        <i-lucide [name]="icons.program" class="size-5 sm:size-6 lg:size-8" />
+  }
+
+  <!-- PROGRAM FOUND -->
+  @else if (store.subprogram()) { @if (store.subprogram(); as program) {
+
+  <div class="w-full space-y-20 lg:space-y-28">
+    <!-- PROGRAM HEADER -->
+    <div class="flex flex-col gap-6 rounded-xl p-8 bg-white/60 border border-gray-200/40 mt-10 lg:mt-16">
+      <h3
+        class="font-black flex items-center gap-4 font-satoshi text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary-900 tracking-tight">
+        <i-lucide [name]="icons.program" class="size-8 sm:size-10 lg:size-12 text-primary-500" />
         {{ program.name | titlecase }}
       </h3>
-      <div class="mt-0.5 line-clamp-2 break-all">{{ program.description }}</div>
+      <div class="mt-1 text-lg sm:text-xl text-gray-700 leading-relaxed break-words hyphens-none">
+        {{ program.description }}
+      </div>
     </div>
 
     @if (program.projects && program.projects.length > 0) {
-    <div class="space-y-6">
-      <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black font-satoshi tracking-tight leading-tight">
-        Projets de
-        <span class="text-primary-400">{{ program.name | titlecase }}</span>
-      </h3>
-      <div class="flex items-center gap-4 mb-4">
-        <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
-          <i-lucide [name]="icons.moveLeft" class="size-3.5" />
-        </button>
-        <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button">
-          <i-lucide [name]="icons.moveRight" class="size-3.5" />
-        </button>
+
+    <div class="mb-12">
+      <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6">
+        <div class="text-center lg:text-left flex-1">
+          <h3
+            class="text-3xl sm:text-4xl lg:text-5xl font-black font-satoshi mb-4 tracking-tight leading-tight text-primary-900">
+            {{ 'sub_programs.projects_of' | translate }}
+            <span class="text-primary-500">{{ program.name | titlecase }}</span>
+          </h3>
+        </div>
+
+        @if (program.projects.length >= 3) {
+        <div class="hidden lg:flex items-center gap-4">
+          <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
+            <i-lucide [name]="icons.moveLeft" class="size-5 text-primary-500" />
+          </button>
+          <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button">
+            <i-lucide [name]="icons.moveRight" class="size-5 text-primary-500" />
+          </button>
+        </div>
+        }
       </div>
-      @if (store.isLoading()) {
-      <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3 pb-10">
-        <app-subprogram-card-skeleton />
+    </div>
+
+    @if (store.isLoading()) {
+    <div class="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+      @for (p of [1,2,3]; track $index) {
+      <app-project-card-skeleton />
+      }
+    </div>
+    } @if (program.projects.length < 3) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+      @for (p of program.projects; track p.id) {
+      <div class="mx-auto w-full">
+        <app-project-card [project]="p" [buttonTextKey]="'recent_projects.explore'" />
       </div>
       }
-      <div class="flex flex-col gap-6">
-        <p-carousel
-          #carousel
-          [value]="program.projects"
-          [numVisible]="1"
-          [numScroll]="1"
-          [showIndicators]="false"
-          [showNavigators]="false"
-          [circular]="true"
-          [responsiveOptions]="carouselOptions"
-          [autoplayInterval]="5000">
-          <ng-template let-project #item>
-            <app-subprogram-card [project]="project" />
-          </ng-template>
-        </p-carousel>
+    </div>
+    } @else {
+    <div class="space-y-12 lg:space-y-16 mt-10">
+      <p-carousel
+        #carousel
+        [value]="program.projects"
+        [numVisible]="3"
+        [numScroll]="1"
+        [showIndicators]="false"
+        [showNavigators]="false"
+        [circular]="true"
+        [responsiveOptions]="carouselConfig"
+        [autoplayInterval]="5000"
+        touchMoveThreshold="0"
+        class="no-touch-mobile">
+        <ng-template let-project #item>
+          <div class="sm:px-4 max-w-sm mx-auto w-full">
+            <app-project-card [project]="project" [buttonTextKey]="'recent_projects.explore'" />
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+    } } @else {
+    <div class="w-full flex flex-col items-center justify-center py-20">
+      <div
+        class="flex flex-col items-center gap-5 px-8 py-12 rounded-2xl bg-gradient-to-br from-primary-50/60 via-white/80 to-primary-100/60 border border-primary-100/30">
+        <i-lucide [name]="icons.folderOpen" class="size-16 text-primary-300 mb-2 animate-bounce" />
+        <h4 class="text-2xl sm:text-3xl font-semibold text-primary-700 tracking-wide">
+          {{ 'sub_programs.no_project' | translate }}
+        </h4>
+        <p class="text-primary-400 text-base text-center max-w-md font-light">
+          {{ 'sub_programs.no_project_desc' | translate }}
+        </p>
       </div>
     </div>
     } @if (program.events && program.events.length > 0) {
-    <div class="space-y-6">
-      <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black font-satoshi tracking-tight leading-tight">
-        Événements de
-        <span class="text-primary-400">{{ program.name | titlecase }}</span>
-      </h3>
-      <div class="flex items-center gap-4 mb-4">
-        <button (click)="eventCarousel.navBackward($event)" class="carousel-nav-btn" type="button">
-          <i-lucide [name]="icons.moveLeft" class="size-3.5" />
-        </button>
-        <button (click)="eventCarousel.navForward($event)" class="carousel-nav-btn" type="button">
-          <i-lucide [name]="icons.moveRight" class="size-3.5" />
-        </button>
+
+    <div class="mb-12">
+      <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6">
+        <div class="text-center lg:text-left flex-1">
+          <h3
+            class="text-3xl sm:text-4xl lg:text-5xl font-black font-satoshi mb-4 tracking-tight leading-tight text-primary-900">
+            {{ 'sub_programs.events_of' | translate }}
+            <span class="text-primary-500">{{ program.name | titlecase }}</span>
+          </h3>
+        </div>
+
+        @if (program.events.length >= 3) {
+        <div class="hidden lg:flex items-center gap-4">
+          <button (click)="eventCarousel.navBackward($event)" class="carousel-nav-btn" type="button">
+            <i-lucide [name]="icons.moveLeft" class="size-5 text-primary-500" />
+          </button>
+          <button (click)="eventCarousel.navForward($event)" class="carousel-nav-btn" type="button">
+            <i-lucide [name]="icons.moveRight" class="size-5 text-primary-500" />
+          </button>
+        </div>
+        }
       </div>
-      <div class="flex flex-col gap-6">
-        <p-carousel
-          #eventCarousel
-          [value]="program.events"
-          [numVisible]="1"
-          [numScroll]="1"
-          [showIndicators]="false"
-          [showNavigators]="false"
-          [circular]="true"
-          [responsiveOptions]="carouselOptions"
-          [autoplayInterval]="5000">
-          <ng-template let-event #item>
-            <div class="p-2">
-              <app-subprogram-event-card [event]="event" />
-            </div>
-          </ng-template>
-        </p-carousel>
+    </div>
+
+    @if (program.events.length < 3) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (ev of program.events; track ev.id) {
+      <div class="mx-auto w-full">
+        <app-event-card [event]="ev" [buttonTextKey]="'recent_events.explore'" />
+      </div>
+      }
+    </div>
+    } @else {
+    <p-carousel
+      #eventCarousel
+      [value]="program.events"
+      [draggable]="false"
+      [numVisible]="3"
+      [numScroll]="1"
+      [showIndicators]="false"
+      [showNavigators]="false"
+      [circular]="true"
+      [responsiveOptions]="carouselConfig"
+      touchMoveThreshold="15"
+      class="w-full hero-carousel no-touch-mobile">
+      <ng-template let-event #item>
+        <div class="sm:px-4 max-w-sm mx-auto w-full">
+          <app-event-card [event]="event" [buttonTextKey]="'recent_events.explore'" />
+        </div>
+      </ng-template>
+    </p-carousel>
+    } } @else {
+    <div class="w-full flex flex-col items-center justify-center py-20">
+      <div
+        class="flex flex-col items-center gap-5 px-8 py-12 rounded-2xl bg-gradient-to-br from-primary-50/60 via-white/80 to-primary-100/60 border border-primary-100/30">
+        <i-lucide [name]="icons.folderOpen" class="size-16 text-primary-300 mb-2 animate-bounce" />
+        <h4 class="text-2xl sm:text-3xl font-semibold text-primary-700 tracking-wide">
+          {{ 'sub_programs.no_event' | translate }}
+        </h4>
+        <p class="text-primary-400 text-base text-center max-w-md font-light">
+          {{ 'sub_programs.no_event_desc' | translate }}
+        </p>
       </div>
     </div>
     }
   </div>
   } } @else if (!store.isLoading() && !store.subprogram()) {
-  <div class="min-h-[75vh] w-full flex flex-col justify-center items-center px-4">
-    <h2 class="text-2xl sm:text-3xl font-semibold">Mauvais chemin !</h2>
+  <div
+    class="min-h-[75vh] w-full flex flex-col mt-20 justify-center items-center px-4 text-center bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 relative overflow-hidden">
+    <div class="absolute top-[-50px] left-[-50px] w-64 h-64 bg-purple-200/30 rounded-full animate-pulse"></div>
+    <div
+      class="absolute bottom-[-50px] right-[-50px] w-72 h-72 bg-pink-200/30 rounded-full animate-pulse delay-500"></div>
+
+    <div class="relative z-10 flex flex-col items-center gap-4 animate-fadeIn">
+      <i-lucide [name]="icons.alertTriangle" class="size-16 text-primary-500 mb-2 animate-bounce" />
+
+      <h2
+        class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-pink-500">
+        {{ 'sub_programs.bad_path' | translate }}
+      </h2>
+
+      <p class="text-gray-600 text-base sm:text-lg max-w-lg">{{ 'sub_programs.bad_path_desc' | translate }}</p>
+
+      <a routerLink="/programs">
+        <button
+          class="mt-6 z-10 px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-xl shadow-lg transition-all transform hover:-translate-y-1 hover:scale-105">
+          {{ 'sub_programs.back_to_programs' | translate }}
+        </button>
+      </a>
+    </div>
   </div>
   }
 </section>

@@ -1,5 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   ArrowLeft,
   FolderOpenDot,
@@ -8,15 +8,19 @@ import {
   ThumbsUp,
   UserPlus,
   MoveUpRight,
-  ArrowRight
+  ArrowRight,
+  AlertTriangle
 } from 'lucide-angular';
-import { SubprogramCard } from '../../component/subprogram-card/subprogram-card';
 import { CommonModule } from '@angular/common';
 import { SubprogramsStore } from '../../../landing/store/subprogram.store';
 import { IProject } from '../../../../shared/models/entities.models';
-import { CarouselModule } from 'primeng/carousel';
+import { Carousel, CarouselModule } from 'primeng/carousel';
 import { SubprogramCardSkeleton } from '../../component/subprogram-card-skeleton/subprogram-card-skeleton';
-import { SubprogramEventCard } from '../../component/subprogram-event-card/subprogram-event-card';
+import { carouselConfig } from '@features/landing/config/carousel.config';
+import { TranslateModule } from '@ngx-translate/core';
+import { ProjectCard } from '@features/projects/components/project-card/project-card';
+import { ProgramCardSkeletonComponent } from '@features/projects/components/project-card-skeleton/project-card-skeleton';
+import { EventCard } from '@features/events/components/event-card/event-card';
 
 @Component({
   selector: 'app-list-sub-programs',
@@ -24,14 +28,15 @@ import { SubprogramEventCard } from '../../component/subprogram-event-card/subpr
   imports: [
     LucideAngularModule,
     CommonModule,
-    CommonModule,
     CarouselModule,
-    SubprogramCard,
     SubprogramCardSkeleton,
-    SubprogramEventCard
+    TranslateModule,
+    ProjectCard,
+    ProgramCardSkeletonComponent,
+    EventCard,
+    RouterLink
   ],
-  templateUrl: './list-sub-programs.html',
-  styles: ``
+  templateUrl: './list-sub-programs.html'
 })
 export class ListSubPrograms implements OnInit {
   icons = {
@@ -41,33 +46,18 @@ export class ListSubPrograms implements OnInit {
     thumbsUp: ThumbsUp,
     program: FolderOpenDot,
     arrow: MoveRight,
-    moveRight: ArrowRight
+    moveRight: ArrowRight,
+    folderOpen: FolderOpenDot,
+    alertTriangle: AlertTriangle
   };
+
+  carouselConfig = carouselConfig;
+
+  @ViewChild('carousel') carousel!: Carousel;
+  @ViewChild('eventCarousel') eventCarousel!: Carousel;
 
   #route = inject(ActivatedRoute);
   store = inject(SubprogramsStore);
-  carouselOptions = [
-    {
-      breakpoint: '1280px',
-      numVisible: 1,
-      numScroll: 1
-    },
-    {
-      breakpoint: '1199px',
-      numVisible: 3,
-      numScroll: 1
-    },
-    {
-      breakpoint: '991px',
-      numVisible: 1,
-      numScroll: 1
-    },
-    {
-      breakpoint: '575px',
-      numVisible: 1,
-      numScroll: 1
-    }
-  ];
 
   ngOnInit(): void {
     const slug = this.#route.snapshot.params['slug'];
