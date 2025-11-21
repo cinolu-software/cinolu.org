@@ -60,24 +60,66 @@ export interface IUser extends IBase {
   ventures: IVenture[];
 }
 
+// export interface IProject extends IBase {
+//   name: string;
+//   slug: string;
+//   cover?: string;
+//   description: string;
+//   started_at: Date;
+//   ended_at: Date;
+//   form_link?: string;
+//   report?: JSON;
+//   is_published: boolean;
+//   place?: string;
+//   is_highlighted?: boolean;
+//   program: ISubprogram;
+//   categories: ICategory[];
+//   gallery: IImage[];
+//   metrics: IMetric[];
+// }
+
 export interface IProject extends IBase {
   name: string;
+  is_highlighted: boolean;
   slug: string;
-  cover?: string;
+  cover: string;
   description: string;
   started_at: Date;
   ended_at: Date;
-  form_link?: string;
-  report?: JSON;
   is_published: boolean;
-  place?: string;
-  is_highlighted?: boolean;
+  context: string;
+  objectives: string;
+  duration_hours: number;
+  selection_criteria: string;
+  project_manager?: IUser;
   program: ISubprogram;
   categories: ICategory[];
   gallery: IImage[];
   metrics: IMetric[];
+  participants: IUser[];
 }
 
+export interface IEvent extends IBase {
+  name: string;
+  slug: string;
+  is_highlighted: boolean;
+  cover: string;
+  place: string;
+  description: string;
+  context: string;
+  objectives: string;
+  duration_hours: number;
+  event_manager?: IUser;
+  selection_criteria: string;
+  started_at: Date;
+  is_published: boolean;
+  ended_at: Date;
+  program: ISubprogram;
+  categories: ICategory[];
+  gallery: IImage[];
+  metrics: IMetric[];
+  participants: IUser[];
+}
 export interface IVenture extends IBase {
   name: string;
   slug: string;
@@ -125,22 +167,22 @@ export interface ISubprogram extends IBase {
   events: IEvent[];
 }
 
-export interface IEvent extends IBase {
-  name: string;
-  slug: string;
-  cover: string;
-  place: string;
-  description: string;
-  started_at: Date;
-  is_published: boolean;
-  is_highlighted: boolean;
-  link: string;
-  ended_at: Date;
-  program: ISubprogram;
-  categories: ICategory[];
-  gallery: IImage[];
-  metrics: IMetric[];
-}
+// export interface IEvent extends IBase {
+//   name: string;
+//   slug: string;
+//   cover: string;
+//   place: string;
+//   description: string;
+//   started_at: Date;
+//   is_published: boolean;
+//   is_highlighted: boolean;
+//   link: string;
+//   ended_at: Date;
+//   program: ISubprogram;
+//   categories: ICategory[];
+//   gallery: IImage[];
+//   metrics: IMetric[];
+// }
 
 export interface IMetric extends IBase {
   indicator: IIndicator;
