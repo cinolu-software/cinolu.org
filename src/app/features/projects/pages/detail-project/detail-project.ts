@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProjectSkeleton } from '../../components/project-skeleton/project-skeleton';
@@ -8,6 +8,7 @@ import {
   FileText,
   NotepadText,
   CalendarDays,
+  CalendarCheck,
   MapPin,
   Tag,
   ArrowRight,
@@ -16,7 +17,13 @@ import {
   CalendarX,
   MapPinHouse,
   Share2,
-  ChevronUp
+  ChevronUp,
+  Target,
+  Info,
+  Hourglass,
+  CheckCircle2,
+  UserCog,
+  Users
 } from 'lucide-angular';
 import { ProjectStore } from '../../store/project.store';
 import { ActivatedRoute } from '@angular/router';
@@ -35,7 +42,6 @@ import { TranslateModule } from '@ngx-translate/core';
     ApiImgPipe,
     ProjectSkeleton,
     LucideAngularModule,
-    NgOptimizedImage,
     GalleriaModule,
     TranslateModule
   ],
@@ -52,6 +58,7 @@ export class DetailProject implements OnInit {
     fileText: FileText,
     notepadText: NotepadText,
     calendarDays: CalendarDays,
+    calendarCheck: CalendarCheck,
     mapPin: MapPin,
     tag: Tag,
     arrow: ArrowRight,
@@ -59,9 +66,14 @@ export class DetailProject implements OnInit {
     calendarSync: CalendarSync,
     calendarX: CalendarX,
     map: MapPinHouse,
-    calendarCheck: CalendarX,
     share: Share2,
-    chevronUp: ChevronUp
+    chevronUp: ChevronUp,
+    target: Target,
+    info: Info,
+    hourglass: Hourglass,
+    checkCircle2: CheckCircle2,
+    userCog: UserCog,
+    users: Users
   };
 
   toggleDescription() {
@@ -119,8 +131,7 @@ export class DetailProject implements OnInit {
     const end = this.formatDateForCalendar(project.ended_at);
     const title = encodeURIComponent(project.name || 'Project');
     const details = encodeURIComponent(project.description?.replace(/\n/g, ' ') || '');
-    const location = encodeURIComponent(project.place || '');
-    const url = `https://calendar.google.com/calendar/r/eventedit?text=${title}&details=${details}&location=${location}&dates=${start}/${end}`;
+    const url = `https://calendar.google.com/calendar/r/eventedit?text=${title}&details=${details}&dates=${start}/${end}`;
     if (typeof window === 'undefined') return;
     window.open(url, '_blank');
   }
