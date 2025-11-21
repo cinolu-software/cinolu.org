@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { IEvent } from '../../../../shared/models/entities.models';
 import {
   BookmarkCheck,
@@ -19,11 +20,20 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { Tag } from 'primeng/tag';
 import { Button } from 'primeng/button';
-import { QuillModule } from 'ngx-quill';
+import { QuillViewComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-subprogram-event-card',
-  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, ApiImgPipe, Tag, Button, QuillModule],
+  imports: [
+    LucideAngularModule,
+    CommonModule,
+    NgOptimizedImage,
+    ApiImgPipe,
+    Tag,
+    Button,
+    QuillViewComponent,
+    RouterLink
+  ],
   templateUrl: './subprogram-event-card.html'
 })
 export class SubprogramEventCard {
@@ -45,10 +55,10 @@ export class SubprogramEventCard {
 
   event = input.required<IEvent>();
 
-  getStatut(project: IEvent): string {
+  getStatut(event: IEvent): string {
     const now = new Date();
-    const startedAt = new Date(project.started_at);
-    const endedAt = new Date(project.ended_at);
+    const startedAt = new Date(event.started_at);
+    const endedAt = new Date(event.ended_at);
 
     if (startedAt <= now && endedAt >= now) {
       return 'En cours';
@@ -57,5 +67,14 @@ export class SubprogramEventCard {
     } else {
       return 'Terminé';
     }
+  }
+
+  canApply(event: IEvent | null | undefined): boolean {
+    if (!event) {
+      return false;
+    }
+
+    const statut = this.getStatut(event);
+    return statut === 'En cours' || statut === 'À venir';
   }
 }

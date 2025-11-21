@@ -58,9 +58,8 @@
         </div>
       </div>
     </div>
-
-    @if (getStatut(event()) === 'En cours' || (getStatut(event()) === 'À venir' && event().link)) {
-    <p-button size="small" severity="primary" outlined>
+    @if (canApply(event())) {
+    <p-button [routerLink]="['/events', event().slug]" size="small" severity="primary" outlined>
       <p class="flex items-center gap-2 group px-4">
         Postuler
         <i-lucide class="size-4 group-hover:translate-x-0.5 transition-transform duration-300" [name]="icons.arrow" />
