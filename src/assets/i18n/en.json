@@ -465,6 +465,7 @@
       "apply_now": "Apply Now",
       "finished": "Project finished",
       "not_found": "No project with this ID!",
+      "empty": "Not provided",
       "add_to_calendar": "Add to calendar"
     }
   },

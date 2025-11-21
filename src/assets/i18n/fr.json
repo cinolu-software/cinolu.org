@@ -466,6 +466,7 @@
       "apply_now": "Postuler Maintenant",
       "finished": "Projet terminé",
       "not_found": "Aucun projet avec cet identifiant !",
+      "empty": "Non renseigné",
       "add_to_calendar": "Ajouter au calendrier"
     }
   },
