@@ -150,6 +150,8 @@ export interface IProgram extends IBase {
   is_published: boolean;
   is_highlighted: boolean;
   subprograms: ISubprogram[];
+  projects: IProject[];
+  events: IEvent[];
   category: ICategory;
   indicators: IIndicator[];
   indicators_grouped?: Record<string, IIndicator[]>;
