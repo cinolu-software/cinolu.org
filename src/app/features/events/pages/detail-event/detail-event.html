@@ -43,31 +43,115 @@
       </div>
 
       <div class="flex flex-col gap-5 md:gap-8">
-        <div class="md:col-span-3">
-          <div class="relative bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden">
-            <div class="p-6">
-              <div class="mb-6 flex items-center justify-between">
+        <div class="relative bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden">
+          <div class="p-6">
+            <div class="mb-6 flex items-center gap-3 justify-between">
+              <div class="flex items-center gap-3">
+                <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 text-primary-600">
+                  <i-lucide [name]="icons.chevronUp" class="size-6 stroke-[1.5]" />
+                </div>
                 <h4 class="text-xl font-semibold text-gray-900 mb-2">
                   {{ 'event_detail.detail.description' | translate }}
                 </h4>
-                <button
-                  type="button"
-                  class="ml-2 flex items-center justify-center w-10 h-10 rounded-full bg-primary-50 shadow-lg ring-2 ring-primary-300 hover:bg-primary-100 transition focus:outline-none focus:ring-4 focus:ring-primary-400"
-                  (click)="toggleDescription()">
-                  <i-lucide
-                    [name]="icons.chevronUp"
-                    class="size-7 transition-transform duration-300 drop-shadow-lg"
-                    [ngClass]="expandedDescription() ? 'rotate-180 text-primary-600' : 'rotate-0 text-primary-500'"></i-lucide>
-                </button>
               </div>
-              <div class="relative">
-                <p
-                  class="text-gray-700 leading-relaxed transition-all duration-500 ease-in-out overflow-hidden"
-                  [ngClass]="expandedDescription() ? 'max-h-[500px] opacity-100 border border-primary-100 bg-primary-50/30 rounded-lg p-3' : 'max-h-[3.5em] opacity-80 line-clamp-2'">
-                  {{ event.description }}
-                </p>
-              </div>
+              <button
+                type="button"
+                class="ml-2 flex items-center justify-center w-10 h-10 rounded-full bg-primary-50 shadow-lg ring-2 ring-primary-300 hover:bg-primary-100 transition focus:outline-none focus:ring-4 focus:ring-primary-400"
+                (click)="toggleDescription()">
+                <i-lucide
+                  [name]="icons.chevronUp"
+                  class="size-7 transition-transform duration-300 drop-shadow-lg"
+                  [ngClass]="expandedDescription() ? 'rotate-180 text-primary-600' : 'rotate-0 text-primary-500'" />
+              </button>
             </div>
+            <div class="relative">
+              <p
+                class="text-gray-700 leading-relaxed transition-all duration-500 ease-in-out overflow-hidden"
+                [ngClass]="expandedDescription() ? 'max-h-[500px] opacity-100 border border-primary-100 bg-primary-50/30 rounded-lg p-3' : 'max-h-[3.5em] opacity-80 line-clamp-2'">
+                {{ event.description ? event.description : ('event_detail.detail.empty' | translate) }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6">
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-50 text-primary-600">
+                <i-lucide [name]="icons.tag" class="size-5 stroke-[1.5]" />
+              </div>
+              <h4 class="text-lg font-semibold text-gray-700">{{ 'event_detail.detail.objectives' | translate }}</h4>
+            </div>
+            <p class="text-gray-500">
+              {{ event.objectives ? event.objectives : ('event_detail.detail.empty' | translate) }}
+            </p>
+          </div>
+          <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6">
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-50 text-primary-600">
+                <i-lucide [name]="icons.info" class="size-5 stroke-[1.5]" />
+              </div>
+              <h4 class="text-lg font-semibold text-gray-700">{{ 'event_detail.detail.context' | translate }}</h4>
+            </div>
+            <p class="text-gray-500">{{ event.context ? event.context : ('event_detail.detail.empty' | translate) }}</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6">
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-50 text-primary-600">
+                <i-lucide [name]="icons.hourglass" class="size-5 stroke-[1.5]" />
+              </div>
+              <h4 class="text-lg font-semibold text-gray-700">{{ 'event_detail.detail.duration' | translate }}</h4>
+            </div>
+            <p class="text-gray-500">
+              {{ event.duration_hours ? event.duration_hours : ('event_detail.detail.empty' | translate) }} {{
+              'event_detail.detail.duration_hours' | translate }}
+            </p>
+          </div>
+          <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6">
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-50 text-primary-600">
+                <i-lucide [name]="icons.checkCircle2" class="size-5 stroke-[1.5]" />
+              </div>
+              <h4 class="text-lg font-semibold text-gray-700">
+                {{ 'event_detail.detail.selection_criteria' | translate }}
+              </h4>
+            </div>
+            <p class="text-gray-500">
+              {{ event.selection_criteria ? event.selection_criteria : ('event_detail.detail.empty' | translate) }}
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6">
+          <div class="mb-4 flex items-center gap-3">
+            <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-50 text-primary-600">
+              <i-lucide [name]="icons.mapPin" class="size-5 stroke-[1.5]" />
+            </div>
+            <h4 class="text-lg font-semibold text-gray-700">{{ 'event_detail.detail.event_manager' | translate }}</h4>
+          </div>
+          <p class="text-gray-700">
+            {{ event.event_manager?.name ? event.event_manager?.name : ('event_detail.detail.empty' | translate) }}
+          </p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6">
+          <div class="mb-4 flex items-center gap-3">
+            <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-50 text-primary-600">
+              <i-lucide [name]="icons.users" class="size-5 stroke-[1.5]" />
+            </div>
+            <h4 class="text-lg font-semibold text-gray-700">{{ 'event_detail.detail.participants' | translate }}</h4>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            @for (user of event.participants; track $index) {
+            <span class="px-3 py-1 rounded-full bg-primary-50 text-gray-700 border border-primary-200 text-sm"
+              >{{ user.name }}</span
+            >
+            } @if (!event.participants || event.participants.length === 0) {
+            <span class="text-gray-500">{{ 'event_detail.detail.no_participant' | translate }}</span>
+            }
           </div>
         </div>
         <div
@@ -137,31 +221,10 @@
           </div>
 
           <div class="flex flex-col sm:flex-row sm:items-center gap-3 w-full sm:w-auto">
-            @if (getStatut(event) === 'En cours' || (getStatut(event) === 'À venir' && event.link)) {
-            <button
-              class="w-full sm:w-auto justify-center flex"
-              [ngClass]="getCTAButtonClasses(event)"
-              (click)="openLink(event.link)"
-              [disabled]="isPast(event)"
-              [attr.aria-disabled]="isPast(event)">
-              {{ 'event_detail.detail.apply_now' | translate }}
-              <i-lucide class="size-5 ml-2" [name]="icons.arrow"></i-lucide>
-            </button>
-            <!-- Bouton Google Form -->
-            @if (event.link) {
-            <button
-              type="button"
-              class="w-full sm:w-auto inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-600 text-white font-semibold shadow-md hover:bg-primary-700 transition justify-center"
-              (click)="openLink(event.link)">
-              <i-lucide class="size-5" [name]="icons.arrow"></i-lucide>
-              <span>{{ 'event_detail.detail.fill_form' | translate }}</span>
-            </button>
-            } } @else {
             <div
               class="px-4 py-2 rounded-lg bg-red-100 text-sm text-red-500 w-full sm:w-auto text-center border border-red-200 animate-pulse">
               {{ 'event_detail.detail.finished' | translate }}
             </div>
-            }
 
             <button
               type="button"

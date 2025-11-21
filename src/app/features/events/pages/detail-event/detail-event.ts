@@ -10,7 +10,11 @@ import {
   ArrowRight,
   CalendarSync,
   Share2,
-  ChevronUp
+  ChevronUp,
+  Info,
+  Hourglass,
+  CheckCircle2,
+  Users
 } from 'lucide-angular';
 import { EventStore } from '../../store/event.store';
 import { ActivatedRoute } from '@angular/router';
@@ -38,7 +42,11 @@ export class DetailEvent implements OnInit {
     arrow: ArrowRight,
     calendarSync: CalendarSync,
     share: Share2,
-    chevronUp: ChevronUp
+    chevronUp: ChevronUp,
+    info: Info,
+    hourglass: Hourglass,
+    checkCircle2: CheckCircle2,
+    users: Users
   };
 
   readonly #route = inject(ActivatedRoute);
