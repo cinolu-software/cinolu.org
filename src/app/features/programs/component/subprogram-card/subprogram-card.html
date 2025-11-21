@@ -42,35 +42,6 @@
         <p-tag severity="warn" value="{{ getStatut(project()) }}" />
         } }
       </div>
-
-      <div class="flex items-center justify-between gap-2 text-gray-700">
-        <i-lucide [name]="icons.place" class="size-4 sm:size-5" />
-        <div>
-          @if (project().place) {
-          <span><strong>Lieu :</strong> {{ project().place }}</span>
-          } @else {
-          <span class="text-primary-500 bg-primary-500/10 rounded-lg py-1 px-2">En ligne</span>
-          }
-        </div>
-      </div>
     </div>
-
-    @if (getStatut(project()) === 'En cours' || (getStatut(project()) === 'À venir' && project().form_link)) {
-    <a [href]="project().form_link" target="_blank" rel="noopener noreferrer" class="w-fit">
-      <p-button size="small" severity="primary" outlined>
-        <p class="flex items-center gap-2 group px-4">
-          Postuler
-          <i-lucide class="size-4 group-hover:translate-x-0.5 transition-transform duration-300" [name]="icons.arrow" />
-        </p>
-      </p-button>
-    </a>
-    } @else {
-    <p-button size="small" severity="danger" disabled outlined>
-      <p class="flex items-center gap-2 group px-4">
-        Postuler
-        <i-lucide class="size-4 group-hover:translate-x-0.5 transition-transform duration-300" [name]="icons.arrow" />
-      </p>
-    </p-button>
-    }
   </div>
 </div>

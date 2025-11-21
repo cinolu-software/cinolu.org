@@ -19,13 +19,12 @@ import {
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-import { Button } from 'primeng/button';
 import { Tag } from 'primeng/tag';
 import { QuillViewComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-subprogram-card',
-  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, ApiImgPipe, Button, Tag, QuillViewComponent],
+  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, ApiImgPipe, Tag, QuillViewComponent],
   templateUrl: './subprogram-card.html',
   styles: ``
 })
