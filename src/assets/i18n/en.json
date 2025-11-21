@@ -7,6 +7,14 @@
       "categories": "Categories",
       "address": "Address",
       "description": "Description",
+      "objectives": "Objectives",
+      "context": "Context",
+      "duration": "Duration",
+      "duration_hours": "Duration (hours)",
+      "selection_criteria": "Selection criteria",
+      "event_manager": "Event manager",
+      "participants": "Participants",
+      "no_participant": "No participant",
       "apply_now": "Apply Now",
       "finished": "Event finished",
       "not_found": "No event with this ID!",
@@ -14,7 +22,8 @@
       "show_less": "Show less",
       "add_to_calendar": "Add to calendar",
       "share": "Share",
-      "cta_hint": "Secure your spot or add the event to your calendar."
+      "cta_hint": "Secure your spot or add the event to your calendar.",
+      "empty": "Not provided"
     }
   },
   "events": {
@@ -439,15 +448,24 @@
   },
   "project_detail": {
     "detail": {
+      "no_participant": "No participant",
       "dates": "Dates",
       "start": "Start:",
       "end": "End:",
       "categories": "Categories",
       "address": "Address",
       "description": "Description",
+      "objectives": "Objectives",
+      "context": "Context",
+      "duration": "Duration",
+      "duration_hours": "Duration (hours)",
+      "selection_criteria": "Selection criteria",
+      "project_manager": "Project manager",
+      "participants": "Participants",
       "apply_now": "Apply Now",
       "finished": "Project finished",
-      "not_found": "No project with this ID!"
+      "not_found": "No project with this ID!",
+      "add_to_calendar": "Add to calendar"
     }
   },
   "programs": {

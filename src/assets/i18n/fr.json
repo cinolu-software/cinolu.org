@@ -16,6 +16,14 @@
       "categories": "Catégories",
       "address": "Adresse",
       "description": "Description",
+      "objectives": "Objectifs",
+      "context": "Contexte",
+      "duration": "Durée",
+      "duration_hours": "Durée (heures)",
+      "selection_criteria": "Critères de sélection",
+      "event_manager": "Responsable de l'événement",
+      "participants": "Participants",
+      "no_participant": "Aucun participant",
       "apply_now": "Postuler Maintenant",
       "finished": "Événement terminé",
       "not_found": "Aucun événement avec cet identifiant !",
@@ -23,7 +31,8 @@
       "show_less": "Voir moins",
       "add_to_calendar": "Ajouter au calendrier",
       "share": "Partager",
-      "cta_hint": "Réservez votre place ou ajoutez l'événement à votre calendrier."
+      "cta_hint": "Réservez votre place ou ajoutez l'événement à votre calendrier.",
+      "empty": "Non renseigné"
     }
   },
   "common": {
@@ -440,15 +449,24 @@
   },
   "project_detail": {
     "detail": {
+      "no_participant": "Aucun participant",
       "dates": "Dates",
       "start": "Début :",
       "end": "Fin :",
       "categories": "Catégories",
       "address": "Adresse",
       "description": "Description",
+      "objectives": "Objectifs",
+      "context": "Contexte",
+      "duration": "Durée",
+      "duration_hours": "Durée (heures)",
+      "selection_criteria": "Critères de sélection",
+      "project_manager": "Chef de projet",
+      "participants": "Participants",
       "apply_now": "Postuler Maintenant",
       "finished": "Projet terminé",
-      "not_found": "Aucun projet avec cet identifiant !"
+      "not_found": "Aucun projet avec cet identifiant !",
+      "add_to_calendar": "Ajouter au calendrier"
     }
   },
   "programs": {
@@ -488,7 +506,7 @@
         "description": "Philanthropie locale en Afrique"
       },
       "afrilabs": {
-        "description": "Réseau hubs d'innovation africains"
+        "add_to_calendar": "Ajouter au calendrier"
       },
       "catalyst": {
         "description": "Mouvement d'innovation sociale systémique"
