@@ -32,7 +32,8 @@ import {
   Hourglass,
   CheckCircle2,
   UserCog,
-  Users
+  Users,
+  Eye
 } from 'lucide-angular';
 import { ProjectStore } from '../../store/project.store';
 import { ActivatedRoute } from '@angular/router';
@@ -44,9 +45,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ProjectPhasesStore } from '@features/projects/store/project-phases.store';
 import { ProjectResourcesStore } from '@features/projects/store/project-resources.store';
 import { ProjectFormsStore } from '@features/projects/store/project-forms.store';
-import { Textarea } from 'primeng/textarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { Button } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 type FieldFormGroup = FormGroup<{
   id: FormControl<string>;
@@ -73,42 +75,88 @@ type PreviewFormGroup = FormGroup<Record<string, FormControl<unknown>>>;
     LucideAngularModule,
     GalleriaModule,
     TranslateModule,
-    Textarea,
     InputTextModule,
-    Button
+    Button,
+    DialogModule
   ],
   templateUrl: './detail-project.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailProject implements OnInit {
+  #sanitizer = inject(DomSanitizer);
   #route = inject(ActivatedRoute);
   store = inject(ProjectStore);
   phasesStore = inject(ProjectPhasesStore);
   resourcesStore = inject(ProjectResourcesStore);
   formsStore = inject(ProjectFormsStore);
-
-  expandedDescription = signal(false);
   #fb = inject(FormBuilder);
+
+  // --- SIGNAL DIALOGUE ---
+  showFormDialog = signal(false);
+  selectedForm = signal<IForm | null>(null);
+  selectedFormGroup = signal<PreviewFormGroup | null>(null);
+
+  // --- SIGNALS DE BASUCLLE ---
+  expandedCriteria = signal(false);
+  expandedDescription = signal(false);
+  showEditModal = signal(false);
+
+  // --- Store Data ---
   phases = this.phasesStore.phases;
   phasesLoading = this.phasesStore.isLoading;
   resources = this.resourcesStore.resources;
   resourcesLoading = this.resourcesStore.isLoading;
-  // previewingForm = signal<IForm | null>(null);
   previewSubmitted = signal<string | null>(null);
   previewFormGroups = new Map<string, PreviewFormGroup>();
 
+  // Placeholder form
   formForm = this.#fb.group({
-    title: ['', Validators.required],
-    description: [''],
-    welcome_message: [''],
-    is_active: [true],
-    settings: this.#fb.group({
-      allowMultipleSubmissions: [false],
-      confirmationMessage: [''],
-      submissionNote: ['']
-    }),
-    fields: this.#fb.array<FieldFormGroup>([])
+    /* ... */
   });
+
+  // --- Méthodes du dialogue (Formulaires de phase) ---
+  openFormDialog(form: IForm) {
+    this.selectedForm.set(form);
+    this.selectedFormGroup.set(this.getPreviewFormGroup(form));
+    this.showFormDialog.set(true);
+  }
+
+  closeFormDialog() {
+    this.showFormDialog.set(false);
+    this.selectedForm.set(null);
+    this.selectedFormGroup.set(null);
+    this.previewSubmitted.set(null);
+  }
+
+  openFormForPhase(phaseId: string) {
+    const forms = this.getFormsForPhase(phaseId);
+    if (forms && forms.length > 0) {
+      this.openFormDialog(forms[0]);
+    }
+  }
+
+  // --- Fonctions de bascule ---
+  toggleCriteria() {
+    this.expandedCriteria.update((v) => !v);
+  }
+  toggleDescription() {
+    this.expandedDescription.update((v) => !v);
+  }
+
+  // --- Méthodes des autres Modals (ajoutées pour la complétude) ---
+  onToggleEditModal(phaseId: string): IResource[] {
+    this.showEditModal.set(true);
+    return this.resources().filter((r: IResource) => r.phase?.id === phaseId);
+  }
+
+  closeModal(): void {
+    this.showEditModal.set(false);
+  }
+
+  // --- Utility Functions ---
+  renderSafeHtml(html: string | undefined | null): SafeHtml {
+    return this.#sanitizer.bypassSecurityTrustHtml(html || '');
+  }
 
   getResourcesForPhase(phaseId: string): IResource[] {
     return this.resources().filter((r: IResource) => r.phase?.id === phaseId);
@@ -135,15 +183,16 @@ export class DetailProject implements OnInit {
     checkCircle2: CheckCircle2,
     userCog: UserCog,
     users: Users,
-    success: CheckCircle2
+    success: CheckCircle2,
+    eye: Eye,
+    x: ArrowLeft
   };
+
   getFormsForPhase(phaseId: string): IForm[] {
     return this.formsStore.forms()[phaseId] || [];
   }
 
-  toggleDescription() {
-    this.expandedDescription.update((v) => !v);
-  }
+  // ... (Fonctions de formulaire) ...
 
   responsiveOptions = carouselConfig;
   ngOnInit(): void {
@@ -151,8 +200,9 @@ export class DetailProject implements OnInit {
     this.store.loadProject(slug);
   }
 
-  get fieldsArray(): FormArray<FieldFormGroup> {
-    return this.formForm.get('fields') as FormArray<FieldFormGroup>;
+  get fieldsArray(): FormArray<FieldFormGroup> | undefined {
+    const control = this.formForm.get('fields');
+    return control instanceof FormArray ? (control as FormArray<FieldFormGroup>) : undefined;
   }
 
   private _projectEffect = effect(() => {
@@ -327,8 +377,8 @@ export class DetailProject implements OnInit {
     return Array.isArray(value) ? (value as string[]) : [];
   }
 
-  onToggleCheckboxValue(formId: string, fieldId: string, optionValue: string, checked: boolean): void {
-    const control = this.previewFormGroups.get(formId)?.get(fieldId);
+  onToggleCheckboxValue(previewGroup: PreviewFormGroup, fieldId: string, optionValue: string, checked: boolean): void {
+    const control = previewGroup.get(fieldId);
     if (!control) return;
     const currentValue = (control.value as string[]) || [];
     if (checked) {

@@ -1,19 +1,16 @@
-<section class="px-6 lg:px-16 xl:px-24 2xl:px-32 bg-white bg-grid max-w-screen-2xl mx-auto pt-[7.5rem] pb-20">
+<section class="px-6 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-white pt-[7.5rem] pb-20">
   @if (store.project(); as project) {
 
   <div class="space-y-16">
-    <!-- Header -->
     <header class="text-center">
       <h1
-        class="font-black font-satoshi text-4xl md:text-6xl lg:text-7xl text-gray-900 leading-tight tracking-tight drop-shadow-md">
+        class="font-black font-satoshi text-4xl md:text-6xl text-gray-900 leading-tight tracking-tight drop-shadow-md">
         {{ project.name | titlecase }}
       </h1>
       <p class="text-lg text-gray-500 mt-2">Détails et étapes clés du projet.</p>
     </header>
 
-    <!-- Grid: Gallery + Info -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-      <!-- Gallery (sticky on desktop) -->
       <aside class="md:sticky md:top-28 self-start">
         @if (project.gallery && project.gallery.length > 0) {
         <p-galleria
@@ -23,15 +20,15 @@
           [responsiveOptions]="responsiveOptions"
           [numVisible]="5"
           [containerStyle]="{ 'max-width': '640px' }"
-          class="rounded-xl shadow-2xl bg-gradient-to-br from-white to-gray-50 transition-transform duration-500 hover:scale-105">
+          class="rounded-lg shadow-2xl bg-white">
           <ng-template pTemplate="item" let-img>
-            <figure class="relative h-80 md:h-[30rem] w-full rounded-xl overflow-hidden shadow-xl group">
-              <!-- img: use [src] and lazy loading. Remove invalid 'fill' attribute -->
+            <figure class="relative h-80 md:h-[30rem] w-full rounded-lg overflow-hidden shadow-xl group">
               <img
                 [src]="img | apiIMG: 'gallery'"
                 [alt]="img.image || project.name || 'gallery image'"
                 class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-[1.03]"
-                loading="lazy" />
+                loading="lazy"
+                fill />
               <span
                 class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition duration-500"
                 aria-hidden="true"></span>
@@ -47,7 +44,6 @@
           </ng-template>
         </p-galleria>
         } @else {
-        <!-- Fallback cover image -->
         <figure
           class="relative w-full overflow-hidden h-80 md:h-[34rem] rounded-xl shadow-2xl bg-gray-100 transition-transform hover:scale-105">
           <img
@@ -59,9 +55,7 @@
         }
       </aside>
 
-      <!-- Main info column -->
       <div class="flex flex-col gap-10">
-        <!-- Description (collapsible) -->
         <section
           class="bg-white rounded-xl shadow-xl border border-gray-50 overflow-hidden hover:shadow-2xl transition">
           <div class="p-6">
@@ -76,7 +70,7 @@
 
               <button
                 type="button"
-                class="w-10 h-10 rounded-full text-gray-500 hover:bg-gray-100 transition"
+                class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-100 transition"
                 (click)="toggleDescription()"
                 [attr.aria-expanded]="expandedDescription()"
                 aria-controls="project-description">
@@ -98,7 +92,41 @@
           </div>
         </section>
 
-        <!-- Objectives + Context -->
+        <div class="bg-white rounded-xl shadow-xl border border-gray-50 overflow-hidden hover:shadow-2xl transition">
+          <div class="p-6">
+            <div class="mb-6 flex items-center justify-between">
+              <div class="flex items-center gap-4">
+                <div
+                  class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-lg">
+                  <i-lucide [name]="icons.checkCircle2" class="size-6"></i-lucide>
+                </div>
+                <h2 class="font-semibold text-lg text-gray-700">Critères</h2>
+              </div>
+
+              <button
+                type="button"
+                class="w-10 h-10 rounded-full text-gray-500 flex items-center justify-center hover:bg-gray-100 border border-gray-200 transition"
+                (click)="toggleCriteria()"
+                [attr.aria-expanded]="expandedCriteria()"
+                aria-controls="criteria-description">
+                <i-lucide
+                  [name]="icons.chevronUp"
+                  class="size-5 transition-transform"
+                  [ngClass]="expandedCriteria() ? 'rotate-180 text-primary-600' : 'text-gray-500'" />
+              </button>
+            </div>
+
+            <p
+              id="criteria-description"
+              class="text-gray-700 leading-relaxed transition-all duration-500 overflow-hidden text-lg"
+              [ngClass]="expandedCriteria()
+                ? 'max-h-[500px] opacity-100 bg-primary-50/50 rounded-lg p-4 border border-primary-100'
+                : 'max-h-[4.5em] opacity-90 line-clamp-3'">
+              {{ project.selection_criteria || ('project_detail.detail.empty' | translate) }}
+            </p>
+          </div>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <article class="bg-white rounded-lg shadow-lg p-6 border border-gray-100 hover:shadow-2xl transition">
             <div class="flex items-center gap-3 mb-4">
@@ -115,13 +143,12 @@
               <div class="w-9 h-9 bg-primary-50 text-primary-600 flex items-center justify-center rounded-full">
                 <i-lucide [name]="icons.info" class="size-5"></i-lucide>
               </div>
-              <h3 class="font-semibold text-lg text-gray-800">Contexte</h3>
+              <h3 class="font-semibold text-lg text-gray-700">Contexte</h3>
             </div>
             <p class="text-gray-600">{{ project.context || ('project_detail.detail.empty' | translate) }}</p>
           </article>
         </div>
 
-        <!-- Duration + Criteria -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-100 hover:shadow-2xl transition">
             <div class="flex items-center gap-3 mb-4">
@@ -135,32 +162,6 @@
               'project_detail.detail.duration_hours' | translate }}
             </p>
           </div>
-
-          <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-100 hover:shadow-2xl transition">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-9 h-9 bg-primary-50 text-primary-600 flex items-center justify-center rounded-full">
-                <i-lucide [name]="icons.checkCircle2" class="size-5"></i-lucide>
-              </div>
-              <h4 class="font-semibold text-lg text-gray-800">Critères</h4>
-            </div>
-            <p class="text-gray-600">{{ project.selection_criteria || ('project_detail.detail.empty' | translate) }}</p>
-          </div>
-        </div>
-
-        <!-- Manager + Participants -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-100 hover:shadow-2xl transition">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-9 h-9 bg-primary-50 text-primary-600 flex items-center justify-center rounded-full">
-                <i-lucide [name]="icons.userCog" class="size-5"></i-lucide>
-              </div>
-              <h4 class="font-semibold text-lg text-gray-800">Responsable</h4>
-            </div>
-            <p class="text-gray-700 font-medium">
-              {{ project.project_manager?.name || ('project_detail.detail.empty' | translate) }}
-            </p>
-          </div>
-
           <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-100 hover:shadow-2xl transition">
             <div class="flex items-center gap-3 mb-4">
               <div class="w-9 h-9 bg-primary-50 text-primary-600 flex items-center justify-center rounded-full">
@@ -171,7 +172,7 @@
 
             <div class="flex flex-wrap gap-2">
               @if (project.participants && project.participants.length > 0) { @for (participant of project.participants;
-              track participant.id) {
+              track $index) {
               <span
                 class="px-3 py-1 rounded-full bg-primary-50 border border-primary-200 text-gray-700 text-sm hover:bg-primary-100 transition transform hover:scale-105"
                 >{{ participant.name }}</span
@@ -183,8 +184,7 @@
           </div>
         </div>
 
-        <!-- Dates & Categories -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 gap-6">
           <div class="bg-white rounded-lg shadow-xl border border-gray-100 p-6 hover:shadow-2xl transition">
             <div class="flex items-center gap-3 mb-6">
               <div class="w-9 h-9 bg-primary-50 text-primary-600 flex items-center justify-center rounded-full">
@@ -217,36 +217,33 @@
               </div>
             </dl>
           </div>
+        </div>
 
-          @if (project.categories && project.categories.length > 0) {
-          <div class="bg-white rounded-lg p-6 shadow-xl border border-primary-200/50 hover:shadow-2xl transition">
-            <div class="flex items-start gap-4 mb-6">
-              <div class="w-12 h-12 bg-primary-50 text-primary-600 flex items-center justify-center rounded-full">
-                <i-lucide [name]="icons.tag" class="size-6"></i-lucide>
-              </div>
-              <div>
-                <h3 class="text-gray-700 text-xl font-bold mb-1">Catégories</h3>
-                <p class="text-sm text-gray-600">{{ project.categories.length }} domaines d'activité</p>
-              </div>
+        @if (project.categories && project.categories.length > 0) {
+        <div class="bg-white rounded-lg p-6 shadow-xl border border-primary-200/50 hover:shadow-2xl transition">
+          <div class="flex items-start gap-4 mb-6">
+            <div class="w-12 h-12 bg-primary-50 text-primary-600 flex items-center justify-center rounded-full">
+              <i-lucide [name]="icons.tag" class="size-6"></i-lucide>
             </div>
-
-            <div class="flex flex-wrap gap-3">
-              @for (cat of project.categories; track cat.id) {
-              <span
-                class="px-4 py-2 rounded-full bg-white border border-primary-300/80 text-sm text-gray-800 font-medium hover:bg-primary-50 transition transform hover:scale-105"
-                >{{ cat.name || ('project_detail.detail.empty' | translate) }}</span
-              >
-              }
+            <div>
+              <h3 class="text-gray-700 text-xl font-bold mb-1">Catégories</h3>
+              <p class="text-sm text-gray-600">{{ project.categories.length }} domaines d'activité</p>
             </div>
           </div>
-          }
-        </div>
-      </div>
-      <!-- end main column -->
-    </div>
-    <!-- end grid -->
 
-    <!-- Actions bar -->
+          <div class="flex flex-wrap gap-3">
+            @for (cat of project.categories; track $index) {
+            <span
+              class="px-4 py-2 rounded-full bg-white border border-primary-300/80 text-sm text-gray-800 font-medium hover:bg-primary-50 transition transform hover:scale-105"
+              >{{ cat.name || ('project_detail.detail.empty' | translate) }}</span
+            >
+            }
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
     <div class="w-full pt-8">
       <div
         class="w-full bg-white rounded-xl p-6 md:p-8 shadow-2xl border border-gray-100/50 hover:shadow-2xl transition">
@@ -258,16 +255,10 @@
 
           <div class="flex flex-col sm:flex-row items-center gap-3 flex-wrap">
             <span
-              class="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-bold uppercase tracking-wider transition"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-bold tracking-wider transition"
               [ngClass]="getStatusBadgeClasses(project)">
               {{ getStatut(project) }}
             </span>
-
-            <div
-              class="px-4 py-2 rounded-full bg-red-100 text-sm text-red-600 border border-red-200 font-medium animate-pulse"
-              *ngIf="getStatut(project) === 'Terminé'">
-              Terminé
-            </div>
 
             <button
               type="button"
@@ -290,7 +281,6 @@
       </div>
     </div>
 
-    <!-- Project phases -->
     <div class="pt-8">
       <div class="flex items-center gap-8 mb-12">
         <div
@@ -313,7 +303,7 @@
 
       <div class="relative">
         <div class="flex gap-8 overflow-x-auto pb-4 lg:grid lg:grid-cols-2 lg:gap-10">
-          @for (phase of phases(); track phase.id) {
+          @for (phase of phases(); track $index) {
           <div class="relative group min-w-[320px] flex-shrink-0">
             <div
               class="bg-white rounded-lg shadow-xl border border-primary-200/50 p-8 transition hover:shadow-2xl hover:-translate-y-1">
@@ -356,7 +346,7 @@
                 <div class="text-gray-400 italic">{{ 'project_detail.detail.no_resource' | translate }}</div>
                 } @else {
                 <ul class="space-y-3">
-                  @for (resource of getResourcesForPhase(phase.id); track resource.id) {
+                  @for (resource of getResourcesForPhase(phase.id); track $index) {
                   <li
                     class="flex items-center justify-between gap-3 bg-white border border-gray-200 rounded-lg px-4 py-3 shadow-sm hover:bg-gray-50 hover:shadow-md transition cursor-pointer transform hover:scale-105">
                     <div class="flex items-center gap-3">
@@ -373,135 +363,13 @@
                   </li>
                   }
                 </ul>
-                } }
-
-                <!-- Forms for phase (preview) -->
-                @if (getFormsForPhase(phase.id).length > 0) {
-                <div class="mt-8">
-                  <h4 class="text-lg font-semibold text-primary-700 mb-3 flex items-center gap-2">
-                    <i-lucide [name]="icons.fileText" class="size-5 text-primary-400"></i-lucide>Formulaires de la phase
-                  </h4>
-                  @for (form of getFormsForPhase(phase.id); track form.id) { @let previewGroup =
-                  getPreviewFormGroup(form);
-                  <div
-                    class="rounded-2xl border border-primary-100 bg-gradient-to-br from-primary-50/40 to-white p-6 space-y-5">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                      <div>
-                        <h6 class="text-xl font-semibold text-gray-900">{{ form.title }}</h6>
-                      </div>
-                      <span
-                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold"
-                        [ngClass]="form.is_active ? 'bg-green-600/10 text-green-700 border border-green-200' : 'bg-gray-200 text-gray-700'"
-                        >{{ form.is_active ? 'Formulaire actif' : 'Formulaire inactif' }}</span
-                      >
-                    </div>
-                    <form class="space-y-4" [formGroup]="previewGroup" (ngSubmit)="onSubmitPreview(form)">
-                      @for (field of form.fields; track field.id) {
-                      <div class="bg-white/80 rounded-xl border border-gray-100 p-4 space-y-2">
-                        <label class="text-sm font-medium text-gray-800 block" for="{{ field.id }}"
-                          >{{ field.label }} @if (field.required) { <span class="text-red-500">*</span> }
-                        </label>
-                        @if (field.description) {
-                        <p class="text-xs text-gray-500">{{ field.description }}</p>
-                        } @switch (normalizeType(field.type)) { @case('SHORT_TEXT') {
-                        <input
-                          pInputText
-                          [formControlName]="field.id"
-                          [placeholder]="field.placeholder || ''"
-                          class="w-full" />
-                        } @case('LONG_TEXT') {
-                        <textarea
-                          pTextarea
-                          [formControlName]="field.id"
-                          rows="3"
-                          [placeholder]="field.placeholder || ''"
-                          class="w-full"></textarea>
-                        } @case('EMAIL') {
-                        <input
-                          pInputText
-                          type="email"
-                          [formControlName]="field.id"
-                          [placeholder]="field.placeholder || 'email@example.com'" />
-                        } @case('PHONE') {
-                        <input
-                          pInputText
-                          type="tel"
-                          [formControlName]="field.id"
-                          [placeholder]="field.placeholder || '+243...'" />
-                        } @case('NUMBER') {
-                        <input
-                          pInputText
-                          type="number"
-                          [formControlName]="field.id"
-                          [placeholder]="field.placeholder || ''" />
-                        } @case('DATE') {
-                        <input type="date" class="w-full border rounded-lg px-3 py-2" [formControlName]="field.id" />
-                        } @case('DROPDOWN') {
-                        <select class="w-full border rounded-lg px-3 py-2" [formControlName]="field.id">
-                          <option value="" disabled>Choisir une option</option>
-                          @for (option of field.options || []; track option.value) {
-                          <option [value]="option.value">{{ option.label }}</option>
-                          }
-                        </select>
-                        } @case('MULTI_SELECT') {
-                        <select class="w-full border rounded-lg px-3 py-2" [formControlName]="field.id" multiple>
-                          @for (option of field.options || []; track option.value) {
-                          <option [value]="option.value">{{ option.label }}</option>
-                          }
-                        </select>
-                        } @case('CHECKBOX') {
-                        <div class="flex flex-wrap gap-3">
-                          @for (option of field.options || []; track option.value) {
-                          <label class="inline-flex items-center gap-2 text-sm text-gray-700">
-                            <input
-                              type="checkbox"
-                              class="rounded border-gray-300 text-primary-600"
-                              [checked]="getFieldArrayValue(previewGroup, field.id).includes(option.value)"
-                              (change)="onToggleCheckboxValue(form.id, field.id, option.value, $any($event.target).checked)" />
-                            <span>{{ option.label }}</span>
-                          </label>
-                          }
-                        </div>
-                        } @case('RADIO') {
-                        <div class="flex flex-col gap-2">
-                          @for (option of field.options || []; track option.value) {
-                          <label class="inline-flex items-center gap-2 text-sm text-gray-700">
-                            <input
-                              type="radio"
-                              class="text-primary-600"
-                              [value]="option.value"
-                              [formControlName]="field.id" />
-                            <span>{{ option.label }}</span>
-                          </label>
-                          }
-                        </div>
-                        } @case('FILE_UPLOAD') {
-                        <input
-                          type="file"
-                          class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-primary-50 file:text-primary-700"
-                          (change)="previewGroup.get(field.id)?.setValue($any($event.target).files?.[0] ?? null)" />
-                        } @default {
-                        <input pInputText [formControlName]="field.id" [placeholder]="field.placeholder || ''" />
-                        } } @if (field.helperText) {
-                        <p class="text-xs text-gray-500">{{ field.helperText }}</p>
-                        } @if (previewGroup.get(field.id)?.invalid && previewGroup.get(field.id)?.touched) {
-                        <p class="text-xs text-red-500">Ce champ est requis.</p>
-                        }
-                      </div>
-                      }
-                      <div class="flex justify-end">
-                        <p-button type="submit" severity="primary" size="small">Simuler l'envoi</p-button>
-                      </div>
-                      @if (isPreviewSubmitted(form.id)) {
-                      <div class="flex items-start gap-3 p-4 rounded-lg bg-green-50 border border-green-100">
-                        <i-lucide [name]="icons.checkCircle2" class="size-5 text-green-600 shrink-0"></i-lucide>
-                        <div>
-                          <p class="text-sm font-semibold text-green-700">Soumission simulée</p>
-                        </div>
-                      </div>
-                      }
-                    </form>
-                  </div>
+                } } @if (getFormsForPhase(phase.id).length > 0) {
+                <div class="flex gap-2 flex-wrap justify-center mt-6">
+                  @for (form of getFormsForPhase(phase.id); track $index) {
+                  <p-button (click)="openFormDialog(form)">
+                    {{$index + 1}}. {{ form.title }}
+                    <i-lucide [name]="icons.arrow"></i-lucide>
+                  </p-button>
                   }
                 </div>
                 }
@@ -514,11 +382,170 @@
       }
     </div>
   </div>
-  }@else if (store.isLoading()) {
+  } @if (store.isLoading()) {
   <app-project-skeleton />
-  }@else {
+  } @else if (!store.project()) {
   <div class="min-h-[75vh] w-full flex flex-col justify-center items-center">
     <h2 class="text-3xl font-semibold text-gray-700">{{ 'project_detail.detail.not_found' | translate }}</h2>
   </div>
   }
 </section>
+
+@if (selectedFormGroup()) {
+<p-dialog
+  header="Formulaire de la phase"
+  [modal]="true"
+  [(visible)]="showFormDialog"
+  [style]="{ width: '70vw', minHeight: '600px', maxWidth: '1200px' }"
+  [contentStyle]="{ padding: '0', background: 'white', borderRadius: '0 0 1rem 1rem', overflowY: 'auto' }"
+  [baseZIndex]="1200"
+  [dismissableMask]="true"
+  [closeOnEscape]="true"
+  [draggable]="false"
+  [resizable]="false">
+  <ng-template pTemplate="header">
+    <div class="flex items-center justify-between w-full">
+      <span class="text-xl font-bold text-primary-700">{{ selectedForm()?.title || 'Formulaire' }}</span>
+      <button
+        type="button"
+        pButton
+        icon="pi pi-times"
+        (click)="closeFormDialog()"
+        class="p-button-rounded p-button-text text-gray-500 hover:text-primary-600"
+        aria-label="Fermer"></button>
+    </div>
+  </ng-template>
+
+  <div class="p-8 space-y-8">
+    @if (selectedForm(); as form) {
+    <div
+      class="rounded-xl border border-primary-100 bg-gradient-to-br from-primary-50/40 to-white shadow-lg p-6 space-y-5">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h6 class="text-xl font-semibold text-gray-900">{{ form.title }}</h6>
+        </div>
+        <span
+          class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold shadow-sm"
+          [ngClass]="form.is_active ? 'bg-green-600/10 text-green-700 border border-green-200' : 'bg-gray-200 text-gray-700'"
+          >{{ form.is_active ? 'Formulaire actif' : 'Formulaire inactif' }}</span
+        >
+      </div>
+
+      <form class="space-y-4" [formGroup]="selectedFormGroup()!" (ngSubmit)="onSubmitPreview(form)">
+        @for (field of form.fields; track $index) {
+        <div class="bg-white/80 rounded-lg border border-gray-100 p-4 space-y-2">
+          <label class="text-sm font-medium text-gray-800 block" for="{{ field.id }}"
+            >{{ field.label }} @if (field.required) { <span class="text-red-500">*</span> }
+          </label>
+
+          @if (field.description) {
+          <p class="text-xs text-gray-500">{{ field.description }}</p>
+          } @switch (normalizeType(field.type)) { @case('SHORT_TEXT') {
+          <input
+            type="text"
+            [formControlName]="field.id"
+            [placeholder]="field.placeholder || ''"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition duration-150" />
+          } @case('LONG_TEXT') {
+          <textarea
+            [formControlName]="field.id"
+            rows="3"
+            [placeholder]="field.placeholder || ''"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition duration-150"></textarea>
+          } @case('EMAIL') {
+          <input
+            type="email"
+            [formControlName]="field.id"
+            [placeholder]="field.placeholder || 'email@example.com'"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition duration-150" />
+          } @case('PHONE') {
+          <input
+            type="tel"
+            [formControlName]="field.id"
+            [placeholder]="field.placeholder || '+243...'"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition duration-150" />
+          } @case('NUMBER') {
+          <input
+            type="number"
+            [formControlName]="field.id"
+            [placeholder]="field.placeholder || ''"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition duration-150" />
+          } @case('DATE') {
+          <input
+            type="date"
+            [formControlName]="field.id"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition duration-150" />
+          } @case('DROPDOWN') {
+          <select
+            [formControlName]="field.id"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition duration-150">
+            <option value="" disabled>Choisir une option</option>
+            @for (option of field.options || []; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
+          } @case('MULTI_SELECT') {
+          <select
+            [formControlName]="field.id"
+            multiple
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition duration-150">
+            @for (option of field.options || []; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
+          } @case('CHECKBOX') {
+          <div class="flex flex-wrap gap-3">
+            @for (option of field.options || []; track option.value) {
+            <label class="inline-flex items-center gap-2 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                class="rounded border-gray-300 text-primary-600"
+                [checked]="getFieldArrayValue(selectedFormGroup()!, field.id).includes(option.value)"
+                (change)="onToggleCheckboxValue(selectedFormGroup()!, field.id, option.value, $any($event.target).checked)" />
+              <span>{{ option.label }}</span>
+            </label>
+            }
+          </div>
+          } @case('RADIO') {
+          <div class="flex flex-col gap-2">
+            @for (option of field.options || []; track option.value) {
+            <label class="inline-flex items-center gap-2 text-sm text-gray-700">
+              <input type="radio" class="text-primary-600" [value]="option.value" [formControlName]="field.id" />
+              <span>{{ option.label }}</span>
+            </label>
+            }
+          </div>
+          } @case('FILE_UPLOAD') {
+          <input
+            type="file"
+            class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-primary-50 file:text-primary-700"
+            (change)="selectedFormGroup()!.get(field.id)?.setValue($any($event.target).files?.[0] ?? null)" />
+          } @default {
+          <input
+            [formControlName]="field.id"
+            [placeholder]="field.placeholder || ''"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition duration-150" />
+          } } @if (field.helperText) {
+          <p class="text-xs text-gray-500">{{ field.helperText }}</p>
+          } @if (selectedFormGroup()!.get(field.id)?.invalid && selectedFormGroup()!.get(field.id)?.touched) {
+          <p class="text-xs text-red-500">Ce champ est requis.</p>
+          }
+        </div>
+        }
+        <div class="flex justify-end">
+          <p-button type="submit" severity="primary" size="small">Soumettre</p-button>
+        </div>
+        @if (isPreviewSubmitted(form.id)) {
+        <div class="flex items-start gap-3 p-4 rounded-lg bg-green-50 border border-green-100">
+          <i-lucide [name]="icons.checkCircle2" class="size-5 text-green-600 shrink-0"></i-lucide>
+          <div>
+            <p class="text-sm font-semibold text-green-700">Soumission simulée</p>
+          </div>
+        </div>
+        }
+      </form>
+    </div>
+    }
+  </div>
+</p-dialog>
+}
