@@ -449,6 +449,9 @@
   },
   "project_detail": {
     "detail": {
+      "resources": "Ressources associées",
+      "no_resource": "Aucune ressource pour cette phase",
+      "phases": "Phases du projet",
       "no_participant": "Aucun participant",
       "dates": "Dates",
       "start": "Début :",
