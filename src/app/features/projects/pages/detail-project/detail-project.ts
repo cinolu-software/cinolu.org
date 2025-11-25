@@ -1,6 +1,15 @@
 import { CommonModule } from '@angular/common';
+import { effect } from '@angular/core';
 import { Component, inject, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  Validators,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { ProjectSkeleton } from '../../components/project-skeleton/project-skeleton';
 import {
   LucideAngularModule,
@@ -28,22 +37,43 @@ import {
 import { ProjectStore } from '../../store/project.store';
 import { ActivatedRoute } from '@angular/router';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-import { IProject } from '../../../../shared/models/entities.models';
+import { IForm, IFormField, IProject, IResource, PhaseFormFieldType } from '../../../../shared/models/entities.models';
 import { GalleriaModule } from 'primeng/galleria';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProjectPhasesStore } from '@features/projects/store/project-phases.store';
+import { ProjectResourcesStore } from '@features/projects/store/project-resources.store';
+import { ProjectFormsStore } from '@features/projects/store/project-forms.store';
+import { Textarea } from 'primeng/textarea';
+import { InputTextModule } from 'primeng/inputtext';
+import { Button } from 'primeng/button';
+
+type FieldFormGroup = FormGroup<{
+  id: FormControl<string>;
+  label: FormControl<string>;
+  type: FormControl<PhaseFormFieldType>;
+  required: FormControl<boolean>;
+  placeholder: FormControl<string | null>;
+  helperText: FormControl<string | null>;
+  description: FormControl<string | null>;
+  options: FormArray<FormGroup<{ label: FormControl<string>; value: FormControl<string> }>>;
+}>;
 
 @Component({
   selector: 'app-project-detail',
-  providers: [ProjectStore],
+  providers: [ProjectStore, ProjectPhasesStore, ProjectResourcesStore, ProjectFormsStore],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     ApiImgPipe,
     ProjectSkeleton,
     LucideAngularModule,
     GalleriaModule,
-    TranslateModule
+    TranslateModule,
+    Textarea,
+    InputTextModule,
+    Button
   ],
   templateUrl: './detail-project.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -51,7 +81,36 @@ import { TranslateModule } from '@ngx-translate/core';
 export class DetailProject implements OnInit {
   #route = inject(ActivatedRoute);
   store = inject(ProjectStore);
+  phasesStore = inject(ProjectPhasesStore);
+  resourcesStore = inject(ProjectResourcesStore);
+  formsStore = inject(ProjectFormsStore);
+
   expandedDescription = signal(false);
+  #fb = inject(FormBuilder);
+  phases = this.phasesStore.phases;
+  phasesLoading = this.phasesStore.isLoading;
+  resources = this.resourcesStore.resources;
+  resourcesLoading = this.resourcesStore.isLoading;
+  previewingForm = signal<IForm | null>(null);
+  previewSubmitted = signal(false);
+  previewFormGroup = this.#fb.group<Record<string, FormControl<unknown>>>({});
+
+  formForm = this.#fb.group({
+    title: ['', Validators.required],
+    description: [''],
+    welcome_message: [''],
+    is_active: [true],
+    settings: this.#fb.group({
+      allowMultipleSubmissions: [false],
+      confirmationMessage: [''],
+      submissionNote: ['']
+    }),
+    fields: this.#fb.array<FieldFormGroup>([])
+  });
+
+  getResourcesForPhase(phaseId: string): IResource[] {
+    return this.resources().filter((r: IResource) => r.phase?.id === phaseId);
+  }
 
   icons = {
     moveLeft: ArrowLeft,
@@ -73,8 +132,12 @@ export class DetailProject implements OnInit {
     hourglass: Hourglass,
     checkCircle2: CheckCircle2,
     userCog: UserCog,
-    users: Users
+    users: Users,
+    success: CheckCircle2
   };
+  getFormsForPhase(phaseId: string): IForm[] {
+    return this.formsStore.forms()[phaseId] || [];
+  }
 
   toggleDescription() {
     this.expandedDescription.update((v) => !v);
@@ -85,6 +148,29 @@ export class DetailProject implements OnInit {
     const slug = this.#route.snapshot.params['slug'];
     this.store.loadProject(slug);
   }
+
+  get fieldsArray(): FormArray<FieldFormGroup> {
+    return this.formForm.get('fields') as FormArray<FieldFormGroup>;
+  }
+
+  private _projectEffect = effect(() => {
+    const project = this.store.project();
+    if (project && project.id) {
+      this.phasesStore.loadPhasesByProject(project.id);
+      this.resourcesStore.loadResourcesByProject(project.id);
+    }
+  });
+
+  private _phasesEffect = effect(() => {
+    const phases = this.phases();
+    if (phases && phases.length > 0) {
+      phases.forEach((phase) => {
+        if (phase.id) {
+          this.formsStore.loadFormsByPhase(phase.id);
+        }
+      });
+    }
+  });
 
   getStatut(project: IProject): string {
     const now = new Date();
@@ -161,6 +247,62 @@ export class DetailProject implements OnInit {
       }
     } catch {
       // ignore (user cancelled or not supported)
+    }
+  }
+
+  #multiValueTypes = new Set<PhaseFormFieldType>([
+    'MULTI_SELECT',
+    'multiselect',
+    'multi_select',
+    'CHECKBOX',
+    'checkbox'
+  ]);
+
+  isMultiValueField(type: PhaseFormFieldType): boolean {
+    return this.#multiValueTypes.has(type);
+  }
+  private createPreviewControl(field: IFormField): FormControl<unknown> {
+    const validators = field.required ? [Validators.required] : [];
+    if (this.isMultiValueField(field.type)) {
+      return this.#fb.control<string[]>([], validators);
+    }
+    if (field.type === 'FILE_UPLOAD' || field.type === 'file' || field.type === 'file_upload') {
+      return this.#fb.control<File | null>(null, validators);
+    }
+    return this.#fb.control('', validators);
+  }
+
+  onPreviewForm(form: IForm): void {
+    this.previewingForm.set(form);
+    this.previewSubmitted.set(false);
+    const controls: Record<string, FormControl<unknown>> = {};
+    form.fields.forEach((field) => {
+      controls[field.id] = this.createPreviewControl(field);
+    });
+    this.previewFormGroup = this.#fb.group(controls);
+  }
+
+  onSubmitPreview(): void {
+    if (!this.previewingForm()) return;
+    if (this.previewFormGroup.invalid) {
+      this.previewFormGroup.markAllAsTouched();
+      return;
+    }
+    this.previewSubmitted.set(true);
+  }
+
+  normalizeType(type: PhaseFormFieldType): string {
+    return (type || 'SHORT_TEXT').toString().toUpperCase();
+  }
+
+  onToggleCheckboxValue(fieldId: string, optionValue: string, checked: boolean): void {
+    const control = this.previewFormGroup.get(fieldId);
+    if (!control) return;
+    const currentValue = (control.value as string[]) || [];
+    if (checked) {
+      control.setValue([...currentValue, optionValue]);
+    } else {
+      control.setValue(currentValue.filter((val) => val !== optionValue));
     }
   }
 }
