@@ -11,6 +11,7 @@ export interface ITag extends IBase {
 
 export interface IIndicator extends IBase {
   name: string;
+  category: string;
   target: number | null;
   year: number | null;
 }
@@ -42,41 +43,28 @@ export interface IArticle extends IBase {
 export interface IUser extends IBase {
   email: string;
   name: string;
-  password?: string;
-  biography?: string;
-  gender?: string;
+  password: string;
+  biography: string;
+  phone_number: string;
+  city: string;
+  country: string;
+  gender: string;
+  birth_date: Date;
+  google_image: string;
+  profile: string;
+  referral_code: string;
+  referred_by: IUser;
   referralsCount?: number;
-  phone_number?: string;
-  city?: string;
-  country?: string;
-  birth_date?: Date;
-  referral_code?: string;
-  referrals?: IUser[];
-  referred_by?: IUser;
-  reason: string;
-  google_image?: string;
-  profile?: string;
-  roles: IRole[];
+  referrals: IUser[];
   ventures: IVenture[];
+  roles: IRole[];
+  participated_projects: IProject[];
+  participated_events: IEvent[];
+  managed_projects: IProject[];
+  managed_events: IEvent[];
+  articles: IArticle[];
+  comments: IComment[];
 }
-
-// export interface IProject extends IBase {
-//   name: string;
-//   slug: string;
-//   cover?: string;
-//   description: string;
-//   started_at: Date;
-//   ended_at: Date;
-//   form_link?: string;
-//   report?: JSON;
-//   is_published: boolean;
-//   place?: string;
-//   is_highlighted?: boolean;
-//   program: ISubprogram;
-//   categories: ICategory[];
-//   gallery: IImage[];
-//   metrics: IMetric[];
-// }
 
 export interface IProject extends IBase {
   name: string;
@@ -91,84 +79,12 @@ export interface IProject extends IBase {
   objectives: string;
   duration_hours: number;
   selection_criteria: string;
-  project_manager?: IUser;
+  project_manager: IUser | null;
   program: ISubprogram;
   categories: ICategory[];
   gallery: IImage[];
   metrics: IMetric[];
   participants: IUser[];
-}
-
-export type ResourceType = 'PDF' | 'LINK' | 'IMAGE' | 'OTHER';
-
-export interface IResource extends IBase {
-  title: string;
-  url: string;
-  type: ResourceType;
-  phase: IPhase;
-  project: IProject;
-}
-
-export interface IFormFieldOption {
-  label: string;
-  value: string;
-}
-export type PhaseFormFieldType =
-  | 'SHORT_TEXT'
-  | 'LONG_TEXT'
-  | 'EMAIL'
-  | 'PHONE'
-  | 'NUMBER'
-  | 'DATE'
-  | 'DROPDOWN'
-  | 'MULTI_SELECT'
-  | 'CHECKBOX'
-  | 'RADIO'
-  | 'FILE_UPLOAD'
-  | 'text'
-  | 'textarea'
-  | 'email'
-  | 'phone'
-  | 'number'
-  | 'date'
-  | 'select'
-  | 'dropdown'
-  | 'multiselect'
-  | 'multi_select'
-  | 'radio'
-  | 'checkbox'
-  | 'file'
-  | 'file_upload';
-
-export interface IFormField {
-  id: string;
-  label: string;
-  type: PhaseFormFieldType;
-  required: boolean;
-  placeholder?: string;
-  helperText?: string;
-  description?: string;
-  options?: IFormFieldOption[];
-  validation?: Record<string, unknown>;
-}
-
-export interface IForm extends IBase {
-  title: string;
-  description?: string;
-  is_active: boolean;
-  phase: IPhase | string;
-  fields: IFormField[];
-}
-
-export interface IPhase extends IBase {
-  name: string;
-  description: string;
-  order: number;
-  started_at: Date;
-  ended_at: Date;
-  is_active: boolean;
-  project: IProject;
-  resources?: IResource[];
 }
 
 export interface IEvent extends IBase {
@@ -192,6 +108,7 @@ export interface IEvent extends IBase {
   metrics: IMetric[];
   participants: IUser[];
 }
+
 export interface IVenture extends IBase {
   name: string;
   slug: string;
@@ -222,8 +139,6 @@ export interface IProgram extends IBase {
   is_published: boolean;
   is_highlighted: boolean;
   subprograms: ISubprogram[];
-  projects: IProject[];
-  events: IEvent[];
   category: ICategory;
   indicators: IIndicator[];
   indicators_grouped?: Record<string, IIndicator[]>;
@@ -240,23 +155,6 @@ export interface ISubprogram extends IBase {
   projects: IProject[];
   events: IEvent[];
 }
-
-// export interface IEvent extends IBase {
-//   name: string;
-//   slug: string;
-//   cover: string;
-//   place: string;
-//   description: string;
-//   started_at: Date;
-//   is_published: boolean;
-//   is_highlighted: boolean;
-//   link: string;
-//   ended_at: Date;
-//   program: ISubprogram;
-//   categories: ICategory[];
-//   gallery: IImage[];
-//   metrics: IMetric[];
-// }
 
 export interface IMetric extends IBase {
   indicator: IIndicator;
@@ -303,3 +201,76 @@ export type HighlightItem =
   | (IEvent & { sourceKey: 'events' })
   | (IProject & { sourceKey: 'projects' })
   | (IArticle & { sourceKey: 'articles' });
+
+export interface IPhase extends IBase {
+  name: string;
+  description: string;
+  order: number;
+  started_at: Date;
+  ended_at: Date;
+  is_active: boolean;
+  project: IProject;
+  resources?: IResource[];
+}
+
+export type ResourceType = 'PDF' | 'LINK' | 'IMAGE' | 'OTHER';
+
+export interface IResource extends IBase {
+  title: string;
+  url: string;
+  type: ResourceType;
+  phase: IPhase;
+  project: IProject;
+}
+
+export type PhaseFormFieldType =
+  | 'SHORT_TEXT'
+  | 'LONG_TEXT'
+  | 'EMAIL'
+  | 'PHONE'
+  | 'NUMBER'
+  | 'DATE'
+  | 'DROPDOWN'
+  | 'MULTI_SELECT'
+  | 'CHECKBOX'
+  | 'RADIO'
+  | 'FILE_UPLOAD'
+  | 'text'
+  | 'textarea'
+  | 'email'
+  | 'phone'
+  | 'number'
+  | 'date'
+  | 'select'
+  | 'dropdown'
+  | 'multiselect'
+  | 'multi_select'
+  | 'radio'
+  | 'checkbox'
+  | 'file'
+  | 'file_upload';
+
+export interface IFormFieldOption {
+  label: string;
+  value: string;
+}
+
+export interface IFormField {
+  id: string;
+  label: string;
+  type: PhaseFormFieldType;
+  required: boolean;
+  placeholder?: string;
+  helperText?: string;
+  description?: string;
+  options?: IFormFieldOption[];
+  validation?: Record<string, unknown>;
+}
+
+export interface IForm extends IBase {
+  title: string;
+  description?: string;
+  is_active: boolean;
+  phase: IPhase | string;
+  fields: IFormField[];
+}
