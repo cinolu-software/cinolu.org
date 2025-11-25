@@ -291,7 +291,7 @@
     </div>
 
     <!-- Project phases -->
-    <section class="pt-8">
+    <div class="pt-8">
       <div class="flex items-center gap-8 mb-12">
         <div
           class="w-16 h-16 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center shadow-2xl">
@@ -314,7 +314,7 @@
       <div class="relative">
         <div class="flex gap-8 overflow-x-auto pb-4 lg:grid lg:grid-cols-2 lg:gap-10">
           @for (phase of phases(); track phase.id) {
-          <article class="relative group min-w-[320px] flex-shrink-0">
+          <div class="relative group min-w-[320px] flex-shrink-0">
             <div
               class="bg-white rounded-lg shadow-xl border border-primary-200/50 p-8 transition hover:shadow-2xl hover:-translate-y-1">
               <div class="flex items-center gap-4 mb-4">
@@ -381,163 +381,139 @@
                   <h4 class="text-lg font-semibold text-primary-700 mb-3 flex items-center gap-2">
                     <i-lucide [name]="icons.fileText" class="size-5 text-primary-400"></i-lucide>Formulaires de la phase
                   </h4>
-
-                  @for (form of getFormsForPhase(phase.id); track form.id) {
-                  <div class="bg-white rounded-xl border border-primary-100 p-4 mb-4 shadow">
-                    <div class="flex items-center justify-between mb-2">
-                      <strong class="font-semibold text-gray-900">{{ form.title }}</strong>
+                  @for (form of getFormsForPhase(phase.id); track form.id) { @let previewGroup =
+                  getPreviewFormGroup(form);
+                  <div
+                    class="rounded-2xl border border-primary-100 bg-gradient-to-br from-primary-50/40 to-white p-6 space-y-5">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                      <div>
+                        <h6 class="text-xl font-semibold text-gray-900">{{ form.title }}</h6>
+                      </div>
                       <span
-                        class="px-2 py-1 rounded-full text-xs font-medium"
-                        [ngClass]="form.is_active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'"
-                        >{{ form.is_active ? 'Actif' : 'Inactif' }}</span
+                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold"
+                        [ngClass]="form.is_active ? 'bg-green-600/10 text-green-700 border border-green-200' : 'bg-gray-200 text-gray-700'"
+                        >{{ form.is_active ? 'Formulaire actif' : 'Formulaire inactif' }}</span
                       >
                     </div>
-                    <p class="text-gray-600 text-sm mb-2">{{ form.description }}</p>
-                    <ul class="space-y-1">
+                    <form class="space-y-4" [formGroup]="previewGroup" (ngSubmit)="onSubmitPreview(form)">
                       @for (field of form.fields; track field.id) {
-                      <li class="text-xs text-gray-700">• {{ field.label }}</li>
+                      <div class="bg-white/80 rounded-xl border border-gray-100 p-4 space-y-2">
+                        <label class="text-sm font-medium text-gray-800 block" for="{{ field.id }}"
+                          >{{ field.label }} @if (field.required) { <span class="text-red-500">*</span> }
+                        </label>
+                        @if (field.description) {
+                        <p class="text-xs text-gray-500">{{ field.description }}</p>
+                        } @switch (normalizeType(field.type)) { @case('SHORT_TEXT') {
+                        <input
+                          pInputText
+                          [formControlName]="field.id"
+                          [placeholder]="field.placeholder || ''"
+                          class="w-full" />
+                        } @case('LONG_TEXT') {
+                        <textarea
+                          pTextarea
+                          [formControlName]="field.id"
+                          rows="3"
+                          [placeholder]="field.placeholder || ''"
+                          class="w-full"></textarea>
+                        } @case('EMAIL') {
+                        <input
+                          pInputText
+                          type="email"
+                          [formControlName]="field.id"
+                          [placeholder]="field.placeholder || 'email@example.com'" />
+                        } @case('PHONE') {
+                        <input
+                          pInputText
+                          type="tel"
+                          [formControlName]="field.id"
+                          [placeholder]="field.placeholder || '+243...'" />
+                        } @case('NUMBER') {
+                        <input
+                          pInputText
+                          type="number"
+                          [formControlName]="field.id"
+                          [placeholder]="field.placeholder || ''" />
+                        } @case('DATE') {
+                        <input type="date" class="w-full border rounded-lg px-3 py-2" [formControlName]="field.id" />
+                        } @case('DROPDOWN') {
+                        <select class="w-full border rounded-lg px-3 py-2" [formControlName]="field.id">
+                          <option value="" disabled>Choisir une option</option>
+                          @for (option of field.options || []; track option.value) {
+                          <option [value]="option.value">{{ option.label }}</option>
+                          }
+                        </select>
+                        } @case('MULTI_SELECT') {
+                        <select class="w-full border rounded-lg px-3 py-2" [formControlName]="field.id" multiple>
+                          @for (option of field.options || []; track option.value) {
+                          <option [value]="option.value">{{ option.label }}</option>
+                          }
+                        </select>
+                        } @case('CHECKBOX') {
+                        <div class="flex flex-wrap gap-3">
+                          @for (option of field.options || []; track option.value) {
+                          <label class="inline-flex items-center gap-2 text-sm text-gray-700">
+                            <input
+                              type="checkbox"
+                              class="rounded border-gray-300 text-primary-600"
+                              [checked]="getFieldArrayValue(previewGroup, field.id).includes(option.value)"
+                              (change)="onToggleCheckboxValue(form.id, field.id, option.value, $any($event.target).checked)" />
+                            <span>{{ option.label }}</span>
+                          </label>
+                          }
+                        </div>
+                        } @case('RADIO') {
+                        <div class="flex flex-col gap-2">
+                          @for (option of field.options || []; track option.value) {
+                          <label class="inline-flex items-center gap-2 text-sm text-gray-700">
+                            <input
+                              type="radio"
+                              class="text-primary-600"
+                              [value]="option.value"
+                              [formControlName]="field.id" />
+                            <span>{{ option.label }}</span>
+                          </label>
+                          }
+                        </div>
+                        } @case('FILE_UPLOAD') {
+                        <input
+                          type="file"
+                          class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-primary-50 file:text-primary-700"
+                          (change)="previewGroup.get(field.id)?.setValue($any($event.target).files?.[0] ?? null)" />
+                        } @default {
+                        <input pInputText [formControlName]="field.id" [placeholder]="field.placeholder || ''" />
+                        } } @if (field.helperText) {
+                        <p class="text-xs text-gray-500">{{ field.helperText }}</p>
+                        } @if (previewGroup.get(field.id)?.invalid && previewGroup.get(field.id)?.touched) {
+                        <p class="text-xs text-red-500">Ce champ est requis.</p>
+                        }
+                      </div>
                       }
-                    </ul>
+                      <div class="flex justify-end">
+                        <p-button type="submit" severity="primary" size="small">Simuler l'envoi</p-button>
+                      </div>
+                      @if (isPreviewSubmitted(form.id)) {
+                      <div class="flex items-start gap-3 p-4 rounded-lg bg-green-50 border border-green-100">
+                        <i-lucide [name]="icons.checkCircle2" class="size-5 text-green-600 shrink-0"></i-lucide>
+                        <div>
+                          <p class="text-sm font-semibold text-green-700">Soumission simulée</p>
+                        </div>
+                      </div>
+                      }
+                    </form>
                   </div>
                   }
                 </div>
                 }
               </div>
             </div>
-          </article>
+          </div>
           }
         </div>
       </div>
-
       }
-    </section>
-
-    <!-- Preview form panel -->
-    <section class="pt-8">
-      @if (previewingForm(); as form) {
-      <div class="rounded-2xl border border-primary-100 bg-gradient-to-br from-primary-50/40 to-white p-6 space-y-5">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div>
-            <p class="text-xs uppercase tracking-wider text-primary-600 font-semibold">Prévisualisation</p>
-            <h6 class="text-xl font-semibold text-gray-900">{{ form.title }}</h6>
-          </div>
-
-          <span
-            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold"
-            [ngClass]="form.is_active ? 'bg-green-600/10 text-green-700 border border-green-200' : 'bg-gray-200 text-gray-700'"
-            >{{ form.is_active ? 'Formulaire actif' : 'Formulaire inactif' }}</span
-          >
-        </div>
-
-        <form class="space-y-4" [formGroup]="previewFormGroup" (ngSubmit)="onSubmitPreview()">
-          @for (field of form.fields; track field.id) {
-          <div class="bg-white/80 rounded-xl border border-gray-100 p-4 space-y-2">
-            <label class="text-sm font-medium text-gray-800 block" for="{{ field.id }}"
-              >{{ field.label }} @if (field.required) { <span class="text-red-500">*</span> }
-            </label>
-
-            @if (field.description) {
-            <p class="text-xs text-gray-500">{{ field.description }}</p>
-            } @switch (normalizeType(field.type)) { @case('SHORT_TEXT') {
-            <input
-              pInputText
-              [formControlName]="field.id"
-              [placeholder]="field.placeholder || ''"
-              class="w-full"
-              id="{{ field.id }}" />
-            } @case('LONG_TEXT') {
-            <textarea
-              pTextarea
-              [formControlName]="field.id"
-              rows="3"
-              [placeholder]="field.placeholder || ''"
-              class="w-full"
-              id="{{ field.id }}"></textarea>
-            } @case('EMAIL') {
-            <input
-              pInputText
-              type="email"
-              [formControlName]="field.id"
-              [placeholder]="field.placeholder || 'email@example.com'" />
-            } @case('PHONE') {
-            <input pInputText type="tel" [formControlName]="field.id" [placeholder]="field.placeholder || '+243...'" />
-            } @case('NUMBER') {
-            <input pInputText type="number" [formControlName]="field.id" [placeholder]="field.placeholder || ''" />
-            } @case('DATE') {
-            <input type="date" class="w-full border rounded-lg px-3 py-2" [formControlName]="field.id" />
-            } @case('DROPDOWN') {
-            <select class="w-full border rounded-lg px-3 py-2" [formControlName]="field.id">
-              <option value="" disabled>Choisir une option</option>
-              @for (option of field.options || []; track option.value) {
-              <option [value]="option.value">{{ option.label }}</option>
-              }
-            </select>
-            } @case('MULTI_SELECT') {
-            <select class="w-full border rounded-lg px-3 py-2" [formControlName]="field.id" multiple>
-              @for (option of field.options || []; track option.value) {
-              <option [value]="option.value">{{ option.label }}</option>
-              }
-            </select>
-            } @case('CHECKBOX') {
-            <div class="flex flex-wrap gap-3">
-              @for (option of field.options || []; track option.value) {
-              <label class="inline-flex items-center gap-2 text-sm text-gray-700">
-                <input
-                  type="checkbox"
-                  class="rounded border-gray-300 text-primary-600"
-                  [checked]="(previewFormGroup.get(field.id)?.value || []).includes(option.value)"
-                  (change)="onToggleCheckboxValue(field.id, option.value, true)" />
-                <span>{{ option.label }}</span>
-              </label>
-              }
-            </div>
-            } @case('RADIO') {
-            <div class="flex flex-col gap-2">
-              @for (option of field.options || []; track option.value) {
-              <label class="inline-flex items-center gap-2 text-sm text-gray-700">
-                <input type="radio" class="text-primary-600" [value]="option.value" [formControlName]="field.id" />
-                <span>{{ option.label }}</span>
-              </label>
-              }
-            </div>
-            } @case('FILE_UPLOAD') {
-            <input
-              type="file"
-              class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-primary-50 file:text-primary-700"
-              (change)="previewFormGroup.get(field.id)?.setValue($any($event.target).files?.[0] ?? null)" />
-            } @default {
-            <input pInputText [formControlName]="field.id" [placeholder]="field.placeholder || ''" />
-            } } @if (field.helperText) {
-            <p class="text-xs text-gray-500">{{ field.helperText }}</p>
-            } @if (previewFormGroup.get(field.id)?.invalid && previewFormGroup.get(field.id)?.touched) {
-            <p class="text-xs text-red-500">Ce champ est requis.</p>
-            }
-          </div>
-          }
-
-          <div class="flex justify-end">
-            <p-button type="submit" severity="primary" size="small">Simuler l'envoi</p-button>
-          </div>
-
-          @if (previewSubmitted()) {
-          <div class="flex items-start gap-3 p-4 rounded-lg bg-green-50 border border-green-100">
-            <i-lucide [name]="icons.checkCircle2" class="size-5 text-green-600 shrink-0"></i-lucide>
-            <div>
-              <p class="text-sm font-semibold text-green-700">Soumission simulée</p>
-            </div>
-          </div>
-          }
-        </form>
-      </div>
-      } @else {
-      <div class="rounded-2xl border border-dashed border-gray-200 p-8 text-center text-gray-500">
-        <p class="text-sm">Sélectionnez un formulaire pour afficher la prévisualisation.</p>
-      </div>
-      }
-    </section>
+    </div>
   </div>
-  <!-- end .space-y-16 -->
-
   }@else if (store.isLoading()) {
   <app-project-skeleton />
   }@else {

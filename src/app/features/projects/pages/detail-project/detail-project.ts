@@ -59,6 +59,8 @@ type FieldFormGroup = FormGroup<{
   options: FormArray<FormGroup<{ label: FormControl<string>; value: FormControl<string> }>>;
 }>;
 
+type PreviewFormGroup = FormGroup<Record<string, FormControl<unknown>>>;
+
 @Component({
   selector: 'app-project-detail',
   providers: [ProjectStore, ProjectPhasesStore, ProjectResourcesStore, ProjectFormsStore],
@@ -91,9 +93,9 @@ export class DetailProject implements OnInit {
   phasesLoading = this.phasesStore.isLoading;
   resources = this.resourcesStore.resources;
   resourcesLoading = this.resourcesStore.isLoading;
-  previewingForm = signal<IForm | null>(null);
-  previewSubmitted = signal(false);
-  previewFormGroup = this.#fb.group<Record<string, FormControl<unknown>>>({});
+  // previewingForm = signal<IForm | null>(null);
+  previewSubmitted = signal<string | null>(null);
+  previewFormGroups = new Map<string, PreviewFormGroup>();
 
   formForm = this.#fb.group({
     title: ['', Validators.required],
@@ -170,6 +172,18 @@ export class DetailProject implements OnInit {
         }
       });
     }
+  });
+
+  private _formsEffect = effect(() => {
+    const formsByPhase = this.formsStore.forms();
+    const groups = new Map<string, PreviewFormGroup>();
+    Object.values(formsByPhase).forEach((forms) => {
+      forms.forEach((form) => {
+        groups.set(form.id, this.createPreviewFormGroup(form));
+      });
+    });
+    this.previewFormGroups = groups;
+    this.previewSubmitted.set(null);
   });
 
   getStatut(project: IProject): string {
@@ -272,31 +286,49 @@ export class DetailProject implements OnInit {
     return this.#fb.control('', validators);
   }
 
-  onPreviewForm(form: IForm): void {
-    this.previewingForm.set(form);
-    this.previewSubmitted.set(false);
+  private createPreviewFormGroup(form: IForm): PreviewFormGroup {
     const controls: Record<string, FormControl<unknown>> = {};
     form.fields.forEach((field) => {
       controls[field.id] = this.createPreviewControl(field);
     });
-    this.previewFormGroup = this.#fb.group(controls);
+    return this.#fb.group(controls);
   }
 
-  onSubmitPreview(): void {
-    if (!this.previewingForm()) return;
-    if (this.previewFormGroup.invalid) {
-      this.previewFormGroup.markAllAsTouched();
+  getPreviewFormGroup(form: IForm): PreviewFormGroup {
+    const existing = this.previewFormGroups.get(form.id);
+    if (existing) {
+      return existing;
+    }
+    const newGroup = this.createPreviewFormGroup(form);
+    this.previewFormGroups.set(form.id, newGroup);
+    return newGroup;
+  }
+
+  onSubmitPreview(form: IForm): void {
+    const previewGroup = this.previewFormGroups.get(form.id) ?? this.getPreviewFormGroup(form);
+    if (!previewGroup) return;
+    if (previewGroup.invalid) {
+      form.fields.forEach((field) => previewGroup.get(field.id)?.markAsTouched());
       return;
     }
-    this.previewSubmitted.set(true);
+    this.previewSubmitted.set(form.id);
   }
 
   normalizeType(type: PhaseFormFieldType): string {
     return (type || 'SHORT_TEXT').toString().toUpperCase();
   }
 
-  onToggleCheckboxValue(fieldId: string, optionValue: string, checked: boolean): void {
-    const control = this.previewFormGroup.get(fieldId);
+  isPreviewSubmitted(formId: string): boolean {
+    return this.previewSubmitted() === formId;
+  }
+
+  getFieldArrayValue(previewGroup: PreviewFormGroup, fieldId: string): string[] {
+    const value = previewGroup.get(fieldId)?.value;
+    return Array.isArray(value) ? (value as string[]) : [];
+  }
+
+  onToggleCheckboxValue(formId: string, fieldId: string, optionValue: string, checked: boolean): void {
+    const control = this.previewFormGroups.get(formId)?.get(fieldId);
     if (!control) return;
     const currentValue = (control.value as string[]) || [];
     if (checked) {
