@@ -99,6 +99,78 @@ export interface IProject extends IBase {
   participants: IUser[];
 }
 
+export type ResourceType = 'PDF' | 'LINK' | 'IMAGE' | 'OTHER';
+
+export interface IResource extends IBase {
+  title: string;
+  url: string;
+  type: ResourceType;
+  phase: IPhase;
+  project: IProject;
+}
+
+export interface IFormFieldOption {
+  label: string;
+  value: string;
+}
+export type PhaseFormFieldType =
+  | 'SHORT_TEXT'
+  | 'LONG_TEXT'
+  | 'EMAIL'
+  | 'PHONE'
+  | 'NUMBER'
+  | 'DATE'
+  | 'DROPDOWN'
+  | 'MULTI_SELECT'
+  | 'CHECKBOX'
+  | 'RADIO'
+  | 'FILE_UPLOAD'
+  | 'text'
+  | 'textarea'
+  | 'email'
+  | 'phone'
+  | 'number'
+  | 'date'
+  | 'select'
+  | 'dropdown'
+  | 'multiselect'
+  | 'multi_select'
+  | 'radio'
+  | 'checkbox'
+  | 'file'
+  | 'file_upload';
+
+export interface IFormField {
+  id: string;
+  label: string;
+  type: PhaseFormFieldType;
+  required: boolean;
+  placeholder?: string;
+  helperText?: string;
+  description?: string;
+  options?: IFormFieldOption[];
+  validation?: Record<string, unknown>;
+}
+
+export interface IForm extends IBase {
+  title: string;
+  description?: string;
+  is_active: boolean;
+  phase: IPhase | string;
+  fields: IFormField[];
+}
+
+export interface IPhase extends IBase {
+  name: string;
+  description: string;
+  order: number;
+  started_at: Date;
+  ended_at: Date;
+  is_active: boolean;
+  project: IProject;
+  resources?: IResource[];
+}
+
 export interface IEvent extends IBase {
   name: string;
   slug: string;
