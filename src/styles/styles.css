@@ -3,6 +3,7 @@
 @import 'tailwindcss';
 @import './overrides/main.css';
 @import 'quill/dist/quill.snow.css';
+@import './form-input.css';
 
 @theme {
   --font-mona: 'Mona Sans', sans-serif;
