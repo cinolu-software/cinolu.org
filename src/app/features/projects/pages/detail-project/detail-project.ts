@@ -100,6 +100,19 @@ export class DetailProject implements OnInit {
   expandedCriteria = signal(false);
   expandedDescription = signal(false);
   showEditModal = signal(false);
+  expandedResources = signal<Record<string, boolean>>({});
+
+  // --- Méthodes pour gérer l'expansion des ressources par phase ---
+  toggleExpandedResources(phaseId: string) {
+    this.expandedResources.update((state) => ({
+      ...state,
+      [phaseId]: !state[phaseId]
+    }));
+  }
+
+  isResourcesExpanded(phaseId: string): boolean {
+    return !!this.expandedResources()[phaseId];
+  }
 
   // --- Store Data ---
   phases = this.phasesStore.phases;
@@ -159,7 +172,7 @@ export class DetailProject implements OnInit {
   }
 
   getResourcesForPhase(phaseId: string): IResource[] {
-    return this.resources().filter((r: IResource) => r.phase?.id === phaseId);
+    return this.resourcesStore.loadResourcesByPhase(phaseId), this.resources();
   }
 
   icons = {
@@ -361,6 +374,11 @@ export class DetailProject implements OnInit {
       form.fields.forEach((field) => previewGroup.get(field.id)?.markAsTouched());
       return;
     }
+
+    const formData: Record<string, unknown> = {};
+    form.fields.forEach((field) => {
+      formData[field.id] = previewGroup.get(field.id)?.value;
+    });
     this.previewSubmitted.set(form.id);
   }
 
@@ -386,5 +404,12 @@ export class DetailProject implements OnInit {
     } else {
       control.setValue(currentValue.filter((val) => val !== optionValue));
     }
+  }
+
+  showResourcesByPhase: Record<string, boolean> = {};
+
+  // Toggle l'affichage des ressources pour une phase
+  toggleResources(phaseId: string) {
+    this.showResourcesByPhase[phaseId] = !this.showResourcesByPhase[phaseId];
   }
 }
