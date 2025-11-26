@@ -1,5 +1,5 @@
 <section class="bg-gradient-to-br from-gray-50 to-white overflow-hidden">
-  <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-15">
+  <div class="px-4 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-15">
     <div class="mb-16 text-center px-4">
       <h3
         class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-satoshi mb-4 tracking-tight leading-tight">
@@ -71,19 +71,19 @@
 
     <div class="text-center mt-16 space-y-4">
       <div class="flex items-center justify-center gap-8 text-sm text-gray-600">
-        <div class="flex items-center gap-2">
+        <div class="flex items-center flex-col lg:flex-row gap-2">
           <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
             <i-lucide [name]="icons.network" class="size-5 text-primary-600" />
           </div>
           <span class="font-medium">{{ 'networks.stats.networks_count' | translate: {count: networks.length} }}</span>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center flex-col lg:flex-row gap-2">
           <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
             <i-lucide [name]="icons.globe" class="size-5 text-blue-600" />
           </div>
           <span class="font-medium">{{ 'networks.stats.global_reach' | translate }}</span>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center flex-col lg:flex-row gap-2">
           <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
             <i-lucide [name]="icons.users" class="size-5 text-green-600" />
           </div>
