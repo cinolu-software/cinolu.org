@@ -13,7 +13,7 @@ import {
 import { ProjectSkeleton } from '../../components/project-skeleton/project-skeleton';
 import {
   LucideAngularModule,
-  ArrowLeft,
+  X,
   FileText,
   NotepadText,
   CalendarDays,
@@ -105,6 +105,9 @@ export class DetailProject implements OnInit {
   expandedDescription = signal(false);
   showEditModal = signal(false);
   expandedResources = signal<Record<string, boolean>>({});
+  // Dialog de ressources (Option A)
+  showResourcesDialog = signal(false);
+  selectedResourcesPhaseId = signal<string | null>(null);
 
   toggleExpandedResources(phaseId: string) {
     const next = !this.expandedResources()[phaseId];
@@ -182,7 +185,6 @@ export class DetailProject implements OnInit {
   }
 
   icons = {
-    moveLeft: ArrowLeft,
     fileText: FileText,
     notepadText: NotepadText,
     calendarDays: CalendarDays,
@@ -204,11 +206,22 @@ export class DetailProject implements OnInit {
     users: Users,
     success: CheckCircle2,
     eye: Eye,
-    x: ArrowLeft
+    x: X
   };
 
   getFormsForPhase(phaseId: string): IForm[] {
     return this.formsStore.forms()[phaseId] || [];
+  }
+
+  // Helpers for resources/forms displayed in the resources dialog
+  selectedResources(): IResource[] {
+    const id = this.selectedResourcesPhaseId();
+    return id ? this.getResourcesForPhase(id) : [];
+  }
+
+  selectedForms(): IForm[] {
+    const id = this.selectedResourcesPhaseId();
+    return id ? this.getFormsForPhase(id) : [];
   }
 
   responsiveOptions = carouselConfig;
@@ -445,5 +458,21 @@ export class DetailProject implements OnInit {
 
   toggleResources(phaseId: string) {
     this.showResourcesByPhase[phaseId] = !this.showResourcesByPhase[phaseId];
+  }
+
+  openResourcesDialog(phaseId: string) {
+    this.selectedResourcesPhaseId.set(phaseId);
+    // Charger les ressources et formulaires pour la phase
+    this.resourcesStore.loadResourcesByPhase(phaseId);
+    const existingForms = this.formsStore.forms()[phaseId];
+    if (!existingForms || existingForms.length === 0) {
+      this.formsStore.loadFormsByPhase(phaseId);
+    }
+    this.showResourcesDialog.set(true);
+  }
+
+  closeResourcesDialog() {
+    this.showResourcesDialog.set(false);
+    this.selectedResourcesPhaseId.set(null);
   }
 }

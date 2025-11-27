@@ -344,8 +344,8 @@
                 <button
                   type="button"
                   class="mb-3 px-4 py-2 rounded-lg bg-primary-50 text-primary-700 border border-primary-200 hover:bg-primary-100 transition font-semibold text-sm flex items-center gap-2"
-                  (click)="toggleExpandedResources(phase.id)"
-                  [attr.aria-expanded]="isResourcesExpanded(phase.id)">
+                  (click)="openResourcesDialog(phase.id)"
+                  [attr.aria-expanded]="showResourcesDialog()">
                   <i-lucide
                     [name]="icons.chevronUp"
                     class="size-4"
@@ -423,6 +423,77 @@
   }
 </section>
 
+<p-dialog
+  header="Ressources de la phase"
+  [visible]="showResourcesDialog()"
+  (visibleChange)="showResourcesDialog.set($event)"
+  [modal]="true"
+  [dismissableMask]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [baseZIndex]="1200"
+  [style]="{ width: 'min(720px, 90vw)' }"
+  [contentStyle]="{ padding: '0.5rem', background: 'white', overflowY: 'auto', maxHeight: '80vh', minHeight: '50vh' }">
+  <ng-template pTemplate="header">
+    <div class="flex items-center justify-between w-full py-1">
+      <h2 class="text-lg sm:text-xl font-semibold text-primary-700 truncate">Ressources</h2>
+    </div>
+  </ng-template>
+
+  <div class="p-4">
+    @if (resourcesLoading()) {
+    <div class="text-gray-500 italic p-4">Chargement des ressources...</div>
+    } @else { @if (selectedResources().length === 0) {
+    <div class="text-gray-500 italic p-4">Aucune ressource disponible pour cette phase.</div>
+    } @else {
+    <ul class="space-y-2 sm:space-y-3 p-2">
+      @for (resource of selectedResources(); track $index) {
+      <li
+        class="flex items-center justify-between gap-2 sm:gap-3 bg-white border border-gray-200 rounded-lg px-3 py-2 sm:px-4 sm:py-3 shadow-sm hover:bg-gray-50 hover:shadow-md transition cursor-pointer transform hover:scale-102">
+        <div class="flex items-center gap-2 sm:gap-3">
+          <span
+            class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center flex-shrink-0">
+            <i-lucide [name]="icons.fileText" class="size-4"></i-lucide>
+          </span>
+          <span class="font-semibold text-gray-900 line-clamp-1 text-xs sm:text-sm">{{ resource.title }}</span>
+        </div>
+        <span
+          class="px-2 py-1 max-w-[ch] rounded-full bg-primary-100 text-primary-700 text-xs font-medium flex-shrink-0"
+          >{{ resource.type }}</span
+        >
+        <div class="flex items-center gap-2">
+          @if (resource.type === 'LINK') {
+          <a [href]="resource.url" target="_blank" rel="noopener" class="p-button p-button-sm p-button-outlined"
+            >Ouvrir le lien</a
+          >
+          } @else if (resource.type === 'PDF' || resource.type === 'OTHER') {
+          <a [href]="resource.url" download class="p-button p-button-sm p-button-outlined">Télécharger</a>
+          } @else if (resource.type === 'IMAGE') {
+          <a [href]="resource.url" target="_blank" rel="noopener">
+            <img [src]="resource.url" alt="{{ resource.title }}" class="h-8 w-8 rounded shadow border" />
+          </a>
+          } @else {
+          <a [href]="resource.url" target="_blank" rel="noopener" class="p-button p-button-sm p-button-outlined"
+            >Voir</a
+          >
+          }
+        </div>
+      </li>
+      }
+    </ul>
+    } @if (selectedForms().length > 0) {
+    <div class="mt-6 flex gap-2 flex-wrap justify-center p-2">
+      @for (form of selectedForms(); track $index) {
+      <p-button (click)="openFormDialog(form)" class="p-button-sm">
+        {{$index + 1}}. {{ form.title }}
+        <i-lucide [name]="icons.arrow"></i-lucide>
+      </p-button>
+      }
+    </div>
+    } }
+  </div>
+</p-dialog>
+
 @if (selectedFormGroup()) {
 <p-dialog
   header="Formulaire de la phase"
@@ -433,22 +504,14 @@
   [draggable]="false"
   [resizable]="false"
   [baseZIndex]="1200"
-  [style]="{ width: '90vw', maxWidth: '900px' }"
-  [contentStyle]="{ padding: '0', background: 'white', borderRadius: '0 0 1rem 1rem', overflowY: 'auto' }">
+  [style]="{ width: 'min(900px, 90vw)' }"
+  [contentStyle]="{ padding: '0', background: 'white', borderRadius: '0 0 1rem 1rem', overflowY: 'auto', maxHeight: '85vh', minHeight: '50vh' }">
   <!-- Header -->
   <ng-template pTemplate="header">
     <div class="flex items-center justify-between w-full py-1">
       <h2 class="text-lg sm:text-xl font-semibold text-primary-700 truncate">
         {{ selectedForm()?.title || 'Formulaire' }}
       </h2>
-
-      <button
-        type="button"
-        pButton
-        class="p-button-rounded p-button-text text-gray-500 hover:text-primary-600"
-        (click)="closeFormDialog()">
-        <i-lucide [name]="icons.x" class="size-5"></i-lucide>
-      </button>
     </div>
   </ng-template>
 
