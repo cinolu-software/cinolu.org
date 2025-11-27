@@ -49,6 +49,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Button } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { SubscriptionStore } from '@features/projects/store/subscription.store';
+import { AuthStore } from '@core/auth';
+import { ToastrService } from '@core/services/toast/toastr.service';
 
 type FieldFormGroup = FormGroup<{
   id: FormControl<string>;
@@ -65,7 +68,7 @@ type PreviewFormGroup = FormGroup<Record<string, FormControl<unknown>>>;
 
 @Component({
   selector: 'app-project-detail',
-  providers: [ProjectStore, ProjectPhasesStore, ProjectResourcesStore, ProjectFormsStore],
+  providers: [ProjectStore, ProjectPhasesStore, SubscriptionStore, ProjectResourcesStore, ProjectFormsStore],
   imports: [
     CommonModule,
     FormsModule,
@@ -89,20 +92,20 @@ export class DetailProject implements OnInit {
   phasesStore = inject(ProjectPhasesStore);
   resourcesStore = inject(ProjectResourcesStore);
   formsStore = inject(ProjectFormsStore);
+  user = inject(AuthStore);
+  subscriptionStore = inject(SubscriptionStore);
+  toast = inject(ToastrService);
   #fb = inject(FormBuilder);
 
-  // --- SIGNAL DIALOGUE ---
   showFormDialog = signal(false);
   selectedForm = signal<IForm | null>(null);
   selectedFormGroup = signal<PreviewFormGroup | null>(null);
 
-  // --- SIGNALS DE BASUCLLE ---
   expandedCriteria = signal(false);
   expandedDescription = signal(false);
   showEditModal = signal(false);
   expandedResources = signal<Record<string, boolean>>({});
 
-  // --- Méthodes pour gérer l'expansion des ressources par phase ---
   toggleExpandedResources(phaseId: string) {
     const next = !this.expandedResources()[phaseId];
     this.expandedResources.update((state) => ({
@@ -110,12 +113,8 @@ export class DetailProject implements OnInit {
       [phaseId]: next
     }));
 
-    // Lorsqu'on ouvre l'accordéon des ressources pour une phase, on déclenche
-    // le chargement des ressources associées à cette phase via le store.
     if (next) {
       this.resourcesStore.loadResourcesByPhase(phaseId);
-      // Si les formulaires pour cette phase ne sont pas encore chargés,
-      // on les charge également afin que les boutons de formulaire apparaissent.
       const existingForms = this.formsStore.forms()[phaseId];
       if (!existingForms || existingForms.length === 0) {
         this.formsStore.loadFormsByPhase(phaseId);
@@ -179,8 +178,6 @@ export class DetailProject implements OnInit {
   }
 
   getResourcesForPhase(phaseId: string): IResource[] {
-    // Ne pas déclencher de chargement depuis le getter (effets secondaires).
-    // Le chargement est fait dans `toggleExpandedResources` lors de l'ouverture.
     return this.resources().filter((r: IResource) => r.phase?.id === phaseId);
   }
 
@@ -382,35 +379,42 @@ export class DetailProject implements OnInit {
       return;
     }
 
-    // Construire un objet des valeurs pour l'affichage en console.
-    const submission: Record<string, unknown> = {};
+    if (!this.user.user()) {
+      this.toast.showError('Vous devez être connecté pour soumettre le formulaire');
+      return;
+    }
+
+    const submissionByLabel: Record<string, unknown> = {};
     form.fields.forEach((field) => {
       const control = previewGroup.get(field.id);
       const value = control?.value;
-      // Si c'est un fichier, loggons seulement le méta (nom, taille, type)
+      const key = (field.label && field.label.trim()) || field.id;
+
       if (value instanceof File) {
-        submission[field.id] = {
+        submissionByLabel[key] = {
           __file: true,
           name: value.name,
           size: value.size,
           type: value.type
         };
       } else if (Array.isArray(value)) {
-        submission[field.id] = [...value];
+        submissionByLabel[key] = [...value];
       } else {
-        submission[field.id] = value;
+        submissionByLabel[key] = value;
       }
     });
 
-    // Log structuré pour faciliter le futur dispatch vers le store.
-    console.info('Preview form submitted', {
-      formId: form.id,
-      formTitle: form.title,
-      submittedAt: new Date().toISOString(),
-      values: submission
-    });
+    try {
+      this.subscriptionStore.submitForm({
+        formId: form.id,
+        responses: [submissionByLabel]
+      });
+    } catch {
+      // console.error("Erreur lors de l'appel à subscriptionStore.submitForm", e);
+    }
 
     this.previewSubmitted.set(form.id);
+    this.showFormDialog.set(false);
   }
 
   normalizeType(type: PhaseFormFieldType): string {
@@ -439,7 +443,6 @@ export class DetailProject implements OnInit {
 
   showResourcesByPhase: Record<string, boolean> = {};
 
-  // Toggle l'affichage des ressources pour une phase
   toggleResources(phaseId: string) {
     this.showResourcesByPhase[phaseId] = !this.showResourcesByPhase[phaseId];
   }

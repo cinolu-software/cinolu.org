@@ -570,14 +570,6 @@
         <div class="flex justify-end">
           <p-button type="submit" severity="primary" size="small" styleClass="w-full sm:w-auto"> Soumettre </p-button>
         </div>
-
-        <!-- Preview success -->
-        @if (isPreviewSubmitted(form.id)) {
-        <div class="flex items-start gap-2 p-4 bg-primary-50 border border-primary-100 rounded-lg">
-          <i-lucide [name]="icons.checkCircle2" class="size-5 text-primary-600"></i-lucide>
-          <p class="text-sm font-medium text-primary-700">Soumission simulée</p>
-        </div>
-        }
       </form>
     </div>
 
