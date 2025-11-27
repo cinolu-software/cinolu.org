@@ -8,9 +8,7 @@ import { ToastrService } from '@core/services/toast/toastr.service';
 
 interface FormSubmissionDto {
   formId: string;
-  phaseId: string;
-  projectId: string;
-  data: Record<string, unknown>;
+  responses: Record<string, unknown>[];
 }
 
 interface SubscriptionStoreState {
