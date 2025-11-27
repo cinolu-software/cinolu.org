@@ -21,14 +21,18 @@ export const ProjectResourcesStore = signalStore(
     _toast: inject(ToastrService)
   })),
   withMethods(({ _http, _toast, ...store }) => ({
-    // Load resources by phase ID
     loadResourcesByPhase: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((phaseId) => {
           return _http.get<{ data: IResource[] }>(`resources/phase/${phaseId}`).pipe(
             map(({ data }) => {
-              patchState(store, { isLoading: false, resources: data });
+              type MaybeResource = IResource & { phase?: { id: string } };
+              const resourcesWithPhase: IResource[] = data.map((r: MaybeResource) => ({
+                ...r,
+                phase: r.phase ?? { id: phaseId }
+              }));
+              patchState(store, { isLoading: false, resources: resourcesWithPhase });
             }),
             catchError(() => {
               patchState(store, { isLoading: false, resources: [] });
@@ -40,7 +44,6 @@ export const ProjectResourcesStore = signalStore(
       )
     ),
 
-    // Load resources by project ID
     loadResourcesByProject: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
