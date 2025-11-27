@@ -104,17 +104,29 @@ export class DetailProject implements OnInit {
 
   // --- Méthodes pour gérer l'expansion des ressources par phase ---
   toggleExpandedResources(phaseId: string) {
+    const next = !this.expandedResources()[phaseId];
     this.expandedResources.update((state) => ({
       ...state,
-      [phaseId]: !state[phaseId]
+      [phaseId]: next
     }));
+
+    // Lorsqu'on ouvre l'accordéon des ressources pour une phase, on déclenche
+    // le chargement des ressources associées à cette phase via le store.
+    if (next) {
+      this.resourcesStore.loadResourcesByPhase(phaseId);
+      // Si les formulaires pour cette phase ne sont pas encore chargés,
+      // on les charge également afin que les boutons de formulaire apparaissent.
+      const existingForms = this.formsStore.forms()[phaseId];
+      if (!existingForms || existingForms.length === 0) {
+        this.formsStore.loadFormsByPhase(phaseId);
+      }
+    }
   }
 
   isResourcesExpanded(phaseId: string): boolean {
     return !!this.expandedResources()[phaseId];
   }
 
-  // --- Store Data ---
   phases = this.phasesStore.phases;
   phasesLoading = this.phasesStore.isLoading;
   resources = this.resourcesStore.resources;
@@ -122,12 +134,10 @@ export class DetailProject implements OnInit {
   previewSubmitted = signal<string | null>(null);
   previewFormGroups = new Map<string, PreviewFormGroup>();
 
-  // Placeholder form
   formForm = this.#fb.group({
     /* ... */
   });
 
-  // --- Méthodes du dialogue (Formulaires de phase) ---
   openFormDialog(form: IForm) {
     this.selectedForm.set(form);
     this.selectedFormGroup.set(this.getPreviewFormGroup(form));
@@ -148,7 +158,6 @@ export class DetailProject implements OnInit {
     }
   }
 
-  // --- Fonctions de bascule ---
   toggleCriteria() {
     this.expandedCriteria.update((v) => !v);
   }
@@ -156,7 +165,6 @@ export class DetailProject implements OnInit {
     this.expandedDescription.update((v) => !v);
   }
 
-  // --- Méthodes des autres Modals (ajoutées pour la complétude) ---
   onToggleEditModal(phaseId: string): IResource[] {
     this.showEditModal.set(true);
     return this.resources().filter((r: IResource) => r.phase?.id === phaseId);
@@ -166,13 +174,14 @@ export class DetailProject implements OnInit {
     this.showEditModal.set(false);
   }
 
-  // --- Utility Functions ---
   renderSafeHtml(html: string | undefined | null): SafeHtml {
     return this.#sanitizer.bypassSecurityTrustHtml(html || '');
   }
 
   getResourcesForPhase(phaseId: string): IResource[] {
-    return this.resourcesStore.loadResourcesByPhase(phaseId), this.resources();
+    // Ne pas déclencher de chargement depuis le getter (effets secondaires).
+    // Le chargement est fait dans `toggleExpandedResources` lors de l'ouverture.
+    return this.resources().filter((r: IResource) => r.phase?.id === phaseId);
   }
 
   icons = {
@@ -204,8 +213,6 @@ export class DetailProject implements OnInit {
   getFormsForPhase(phaseId: string): IForm[] {
     return this.formsStore.forms()[phaseId] || [];
   }
-
-  // ... (Fonctions de formulaire) ...
 
   responsiveOptions = carouselConfig;
   ngOnInit(): void {
@@ -375,10 +382,34 @@ export class DetailProject implements OnInit {
       return;
     }
 
-    const formData: Record<string, unknown> = {};
+    // Construire un objet des valeurs pour l'affichage en console.
+    const submission: Record<string, unknown> = {};
     form.fields.forEach((field) => {
-      formData[field.id] = previewGroup.get(field.id)?.value;
+      const control = previewGroup.get(field.id);
+      const value = control?.value;
+      // Si c'est un fichier, loggons seulement le méta (nom, taille, type)
+      if (value instanceof File) {
+        submission[field.id] = {
+          __file: true,
+          name: value.name,
+          size: value.size,
+          type: value.type
+        };
+      } else if (Array.isArray(value)) {
+        submission[field.id] = [...value];
+      } else {
+        submission[field.id] = value;
+      }
     });
+
+    // Log structuré pour faciliter le futur dispatch vers le store.
+    console.info('Preview form submitted', {
+      formId: form.id,
+      formTitle: form.title,
+      submittedAt: new Date().toISOString(),
+      values: submission
+    });
+
     this.previewSubmitted.set(form.id);
   }
 
