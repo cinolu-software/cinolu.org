@@ -33,7 +33,8 @@ import {
   CheckCircle2,
   UserCog,
   Users,
-  Eye
+  Eye,
+  SquaresSubtract
 } from 'lucide-angular';
 import { ProjectStore } from '../../store/project.store';
 import { ActivatedRoute } from '@angular/router';
@@ -206,7 +207,8 @@ export class DetailProject implements OnInit {
     users: Users,
     success: CheckCircle2,
     eye: Eye,
-    x: X
+    x: X,
+    squaresSubtract: SquaresSubtract
   };
 
   getFormsForPhase(phaseId: string): IForm[] {
@@ -282,9 +284,19 @@ export class DetailProject implements OnInit {
   getStatusBadgeClasses(project: IProject | null | undefined): string {
     if (!project) return 'bg-gray-100 border-gray-200 text-gray-700';
     const statut = this.getStatut(project);
-    if (statut === 'En cours') return 'bg-green-50 border-green-100 text-green-700';
-    if (statut === 'À venir') return 'bg-amber-50 border-amber-100 text-amber-700';
-    return 'bg-gray-100 border-gray-200 text-gray-700';
+    switch (statut) {
+      case 'En cours':
+        return 'bg-primary-50 border-primary-200 text-primary-700';
+
+      case 'À venir':
+        return 'bg-amber-50 border-amber-200 text-amber-700';
+
+      case 'Terminé':
+        return 'bg-blue-50 border-blue-200 text-blue-700';
+
+      default:
+        return 'bg-gray-100 border-gray-200 text-gray-700';
+    }
   }
 
   openLink(url?: string): void {
