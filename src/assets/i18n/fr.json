@@ -450,6 +450,8 @@
   "project_detail": {
     "detail": {
       "resources": "Ressources associées",
+      "resources_label": "ressources",
+      "categories_label": "domaines d'activité",
       "no_resource": "Aucune ressource pour cette phase",
       "phases": "Phases du projet",
       "no_participant": "Aucun participant",
@@ -470,7 +472,26 @@
       "finished": "Projet terminé",
       "not_found": "Aucun projet avec cet identifiant !",
       "empty": "Non renseigné",
-      "add_to_calendar": "Ajouter au calendrier"
+      "add_to_calendar": "Ajouter au calendrier",
+      "subtitle": "Détails et étapes clés du projet.",
+      "actions_status": "Actions et suivi du statut.",
+      "phases_subtitle": "Découvrez les étapes clés et les ressources associées à chaque phase.",
+      "show_resources": "Afficher les ressources",
+      "hide_resources": "Masquer les ressources",
+      "phase_resources": "Ressources de la phase",
+      "form_title": "Formulaire de la phase",
+      "form_active": "Formulaire actif",
+      "form_inactive": "Formulaire inactif",
+      "open_link": "Ouvrir le lien",
+      "download": "Télécharger",
+      "view": "Voir",
+      "share_project_aria": "Partager le projet",
+      "choose_option": "Choisir une option",
+      "validation": {
+        "required": "Ce champ est requis.",
+        "email": "Veuillez entrer une adresse email valide.",
+        "phone": "Veuillez entrer un numéro de téléphone valide."
+      }
     }
   },
   "programs": {

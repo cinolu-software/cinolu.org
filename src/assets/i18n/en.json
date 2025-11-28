@@ -466,7 +466,31 @@
       "finished": "Project finished",
       "not_found": "No project with this ID!",
       "empty": "Not provided",
-      "add_to_calendar": "Add to calendar"
+      "add_to_calendar": "Add to calendar",
+      "subtitle": "Project details and key milestones.",
+      "actions_status": "Actions and status tracking.",
+      "phases": "Project phases",
+      "phases_subtitle": "Discover key steps and resources associated with each phase.",
+      "show_resources": "Show resources",
+      "hide_resources": "Hide resources",
+      "phase_resources": "Phase resources",
+      "resources": "Associated resources",
+      "resources_label": "resources",
+      "categories_label": "areas of activity",
+      "no_resource": "No resource for this phase",
+      "form_title": "Phase form",
+      "form_active": "Active form",
+      "form_inactive": "Inactive form",
+      "open_link": "Open link",
+      "download": "Download",
+      "view": "View",
+      "share_project_aria": "Share project",
+      "choose_option": "Choose an option",
+      "validation": {
+        "required": "This field is required.",
+        "email": "Please enter a valid email address.",
+        "phone": "Please enter a valid phone number."
+      }
     }
   },
   "programs": {
