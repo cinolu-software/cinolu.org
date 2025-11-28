@@ -34,7 +34,8 @@ import {
   UserCog,
   Users,
   Eye,
-  SquaresSubtract
+  SquaresSubtract,
+  ExternalLink
 } from 'lucide-angular';
 import { ProjectStore } from '../../store/project.store';
 import { ActivatedRoute } from '@angular/router';
@@ -50,9 +51,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Button } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 import { SubscriptionStore } from '@features/projects/store/subscription.store';
 import { AuthStore } from '@core/auth';
 import { ToastrService } from '@core/services/toast/toastr.service';
+import { environment } from '@environments/environment.development';
 
 type FieldFormGroup = FormGroup<{
   id: FormControl<string>;
@@ -88,6 +91,7 @@ type PreviewFormGroup = FormGroup<Record<string, FormControl<unknown>>>;
 })
 export class DetailProject implements OnInit {
   #sanitizer = inject(DomSanitizer);
+  http = inject(HttpClient);
   #route = inject(ActivatedRoute);
   store = inject(ProjectStore);
   phasesStore = inject(ProjectPhasesStore);
@@ -208,7 +212,8 @@ export class DetailProject implements OnInit {
     success: CheckCircle2,
     eye: Eye,
     x: X,
-    squaresSubtract: SquaresSubtract
+    squaresSubtract: SquaresSubtract,
+    external: ExternalLink
   };
 
   getFormsForPhase(phaseId: string): IForm[] {
@@ -354,6 +359,11 @@ export class DetailProject implements OnInit {
     } catch {
       // ignore (user cancelled or not supported)
     }
+  }
+
+  getResourceUrl(resource: IResource): string {
+    if (resource.url.startsWith('http')) return resource.url;
+    return `${environment.apiUrl}uploads/projects/resources/${resource.url}`;
   }
 
   #multiValueTypes = new Set<PhaseFormFieldType>([

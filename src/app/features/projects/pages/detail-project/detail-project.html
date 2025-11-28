@@ -1,4 +1,4 @@
-<section class="px-6 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-white pt-[7.5rem] pb-20">
+<section class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-white pt-[7.5rem] pb-20">
   @if (store.project(); as project) {
 
   <div class="space-y-16">
@@ -10,7 +10,7 @@
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-      <aside class="sticky top-28 self-start z-10 md:top-28">
+      <aside class="md:sticky top-28 self-start z-10 md:top-28">
         @if (project.gallery && project.gallery.length > 0) {
         <p-galleria
           [value]="project.gallery"
@@ -295,7 +295,7 @@
     </div>
 
     <div class="pt-8">
-      <div class="flex items-center gap-8 mb-12">
+      <div class="flex items-center flex-col md:flex-row gap-4 md:gap-8 mb-12">
         <div
           class="w-16 h-16 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center shadow-2xl">
           <i-lucide [name]="icons.notepadText" class="size-10 text-white"></i-lucide>
@@ -400,12 +400,16 @@
                         >{{ 'project_detail.detail.open_link' | translate }}</a
                       >
                       } @else if (resource.type === 'PDF' || resource.type === 'OTHER') {
+
                       <a
-                        [href]="resource.url"
-                        download
-                        class="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-gray-200 text-sm bg-white hover:bg-gray-50"
-                        >{{ 'project_detail.detail.download' | translate }}</a
-                      >
+                        [href]="getResourceUrl(resource)"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-1.5 text-xs text-primary-600 hover:text-primary-700 font-medium hover:underline transition-colors duration-200">
+                        <span>Voir la ressource</span>
+                        <i-lucide [name]="icons.external" class="size-3" />
+                      </a>
+
                       } @else if (resource.type === 'IMAGE') {
                       <a [href]="resource.url" target="_blank" rel="noopener">
                         <img [src]="resource.url" alt="{{ resource.title }}" class="h-8 w-8 rounded shadow border" />
@@ -496,12 +500,16 @@
             >Ouvrir le lien</a
           >
           } @else if (resource.type === 'PDF' || resource.type === 'OTHER') {
+
           <a
-            [href]="resource.url"
-            download
-            class="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-gray-200 text-sm bg-white hover:bg-gray-50"
-            >Télécharger</a
-          >
+            [href]="getResourceUrl(resource)"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 text-xs text-primary-600 hover:text-primary-700 font-medium hover:underline transition-colors duration-200">
+            <span>Voir la ressource</span>
+            <i-lucide [name]="icons.external" class="size-3" />
+          </a>
+
           } @else if (resource.type === 'IMAGE') {
           <a [href]="resource.url" target="_blank" rel="noopener">
             <img [src]="resource.url" alt="{{ resource.title }}" class="h-8 w-8 rounded shadow border" />
