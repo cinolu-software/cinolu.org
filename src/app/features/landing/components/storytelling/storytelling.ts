@@ -44,7 +44,7 @@ export class Storytelling {
   journey: JourneyStep[] = [
     { key: 'ideation', image: 'blog.jpg', icon: Lightbulb },
     { key: 'prototype', image: 'events.webp', icon: Rocket },
-    { key: 'scale', image: 'joinUs.jpg', icon: TrendingUp }
+    { key: 'scale', image: 'member.jpg', icon: TrendingUp }
   ];
 
   stats: Stat[] = [
