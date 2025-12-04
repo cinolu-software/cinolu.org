@@ -287,6 +287,42 @@
       "acceleration": "Accélération"
     }
   },
+  "storytelling": {
+    "badge": "Notre Histoire • Notre Mission",
+    "title": "Bâtir l'Afrique de demain",
+    "title_highlight": "avec ses entrepreneurs",
+    "description": "Nous créons des villes intelligentes, des économies fortes et des opportunités pour tous. Soutenir un entrepreneur, c'est créer des emplois, résoudre des problèmes réels et construire un avenir meilleur.",
+    "cta_programs": "Rejoignez l'aventure",
+    "cta_projects": "Découvrez nos réussites",
+    "image_event_title": "Des événements qui inspirent",
+    "image_event_desc": "Forums, hackathons et rencontres pour connecter l'écosystème",
+    "image_projects": "120+ Projets lancés",
+    "image_hub": "Notre Hub",
+    "journey_title": "Avec les entrepreneurs",
+    "journey_description": "Un accompagnement complet et sur-mesure, de l'idée au succès entrepreneurial.",
+    "journey": {
+      "ideation": {
+        "title": "Former & Renforcer",
+        "description": "Des formations pratiques, du coaching personnalisé et du mentorat pour développer les compétences entrepreneuriales et techniques nécessaires à la réussite."
+      },
+      "prototype": {
+        "title": "Connecter & Animer",
+        "description": "Un réseau actif de partenaires, d'investisseurs et d'entrepreneurs. Des espaces de co-création où les idées prennent vie et les collaborations naissent."
+      },
+      "scale": {
+        "title": "Innover & Impacter",
+        "description": "Des projets structurants qui utilisent la technologie pour résoudre des défis locaux et créer un impact durable à grande échelle."
+      }
+    },
+    "quote": "Ce n'est pas juste un hub d'innovation. C'est un lieu où les rêves deviennent des entreprises, où les talents trouvent leur voie, et où chaque succès inspire toute une génération d'entrepreneurs.",
+    "author": "Cinolu — Collectif",
+    "author_role": "Lubumbashi • RDC • Afrique",
+    "stats": {
+      "projects": "Entrepreneurs accompagnés",
+      "partners": "Partenaires actifs",
+      "beneficiaries": "Emplois créés"
+    }
+  },
   "why_join_us": {
     "badge": "Impact & Innovation",
     "title": "Pourquoi rejoindre",

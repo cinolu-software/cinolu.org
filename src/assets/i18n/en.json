@@ -286,6 +286,42 @@
       "acceleration": "Acceleration"
     }
   },
+  "storytelling": {
+    "badge": "Our Story • Our Mission",
+    "title": "Building Africa’s future",
+    "title_highlight": "with its entrepreneurs",
+    "description": "We create smart cities, strong economies, and opportunities for all. Supporting an entrepreneur means creating jobs, solving real problems, and building a better future.",
+    "cta_programs": "Join the adventure",
+    "cta_projects": "Discover our successes",
+    "image_event_title": "Events that inspire",
+    "image_event_desc": "Forums, hackathons and meetups to connect the ecosystem",
+    "image_projects": "120+ Projects launched",
+    "image_hub": "Our Hub",
+    "journey_title": "With Entrepreneurs",
+    "journey_description": "Complete and tailored support, from idea to entrepreneurial success.",
+    "journey": {
+      "ideation": {
+        "title": "Train & Strengthen",
+        "description": "Practical training, personalized coaching and mentorship to develop the entrepreneurial and technical skills needed for success."
+      },
+      "prototype": {
+        "title": "Connect & Animate",
+        "description": "An active network of partners, investors and entrepreneurs. Co-creation spaces where ideas come to life and collaborations are born."
+      },
+      "scale": {
+        "title": "Innovate & Impact",
+        "description": "Structuring projects that use technology to solve local challenges and create sustainable impact at scale."
+      }
+    },
+    "quote": "It's not just an innovation hub. It's a place where dreams become businesses, where talents find their way, and where each success inspires an entire generation of entrepreneurs.",
+    "author": "Cinolu — Collective",
+    "author_role": "Lubumbashi • DRC • Africa",
+    "stats": {
+      "projects": "Entrepreneurs supported",
+      "partners": "Active partners",
+      "beneficiaries": "Jobs created"
+    }
+  },
   "why_join_us": {
     "badge": "Impact & Innovation",
     "title": "Why join",
