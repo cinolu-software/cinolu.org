@@ -43,7 +43,7 @@ export class Storytelling {
 
   journey: JourneyStep[] = [
     { key: 'ideation', image: 'blog.jpg', icon: Lightbulb },
-    { key: 'prototype', image: 'innovation.jpg', icon: Rocket },
+    { key: 'prototype', image: 'events.webp', icon: Rocket },
     { key: 'scale', image: 'joinUs.jpg', icon: TrendingUp }
   ];
 

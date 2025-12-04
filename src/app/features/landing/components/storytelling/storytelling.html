@@ -21,10 +21,7 @@
           [height]="360" />
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent pointer-events-none"></div>
 
-        <div
-          class="absolute top-4 left-4 w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center"
-          role="img"
-          [attr.aria-label]="'Étape ' + ($index + 1)">
+        <div class="absolute top-4 left-4 w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center">
           <span
             class="text-2xl font-black bg-gradient-to-br from-primary-600 to-primary-700 bg-clip-text text-transparent">
             {{ $index + 1 }}
@@ -38,7 +35,8 @@
       </div>
 
       <div class="space-y-3">
-        <h4 class="text-2xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors duration-300">
+        <h4
+          class="text-2xl font-bold font-satoshi text-gray-900 group-hover:text-primary-600 transition-colors duration-300">
           {{ 'storytelling.journey.' + step.key + '.title' | translate }}
         </h4>
         <p class="text-gray-600 leading-relaxed">
@@ -65,15 +63,14 @@
         alt=""
         class="w-full h-full object-cover"
         loading="lazy"
-        decoding="async"
-        aria-hidden="true" />
+        decoding="async" />
     </picture>
     <div
       class="absolute inset-0 bg-gradient-to-br from-gray-900/90 via-gray-900/85 to-primary-900/80 pointer-events-none"></div>
   </div>
 
   <div class="relative z-10 max-w-screen-2xl mx-auto px-8 lg:px-16 xl:px-24 2xl:px-32">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
       <div class="lg:col-span-7 space-y-6 fade-left-init" appAnimationsOnScroll>
         <header class="space-y-4">
           <div
@@ -136,115 +133,47 @@
         </div>
       </div>
 
-      <aside class="lg:col-span-5 fade-right-init" appAnimationsOnScroll aria-label="Galerie d'images">
-        <div class="grid grid-cols-2 gap-3">
-          <figure class="col-span-2 relative group overflow-hidden rounded-lg shadow-xl">
-            <img
-              src="/images/events.jpg"
-              alt="Événements d'innovation"
-              class="w-full h-56 object-cover group-hover:scale-105 will-change-transform transition-transform duration-500"
-              loading="lazy"
-              decoding="async"
-              width="640"
-              height="360" />
-            <div
-              class="absolute inset-0 bg-gradient-to-t from-gray-900/70 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-            <figcaption
-              class="absolute bottom-0 left-0 right-0 p-5 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-              <p class="text-lg font-bold mb-1">{{ 'storytelling.image_event_title' | translate }}</p>
-              <p class="text-xs text-gray-300">{{ 'storytelling.image_event_desc' | translate }}</p>
-            </figcaption>
+      <aside class="lg:col-span-5 fade-right-init" appAnimationsOnScroll aria-label="Galerie de vidéos">
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Vidéo 1 -->
+          <figure class="col-span-2 relative group overflow-hidden rounded-lg shadow-xl aspect-video">
+            <iframe
+              class="w-full h-full"
+              src="https://www.youtube.com/embed/tbW6Y-4AuIg"
+              title="Vidéo YouTube"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy"></iframe>
           </figure>
 
-          <figure class="relative group overflow-hidden rounded-lg shadow-lg">
-            <img
-              src="/images/projects.jpg"
-              alt="Projets innovants"
-              class="w-full h-40 object-cover group-hover:scale-105 will-change-transform transition-transform duration-500"
-              loading="lazy"
-              decoding="async"
-              width="320"
-              height="240" />
-            <div
-              class="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-            <figcaption class="absolute bottom-3 left-3 text-white">
-              <p class="text-sm font-bold">{{ 'storytelling.image_projects' | translate }}</p>
-            </figcaption>
+          <!-- Vidéo 2 -->
+          <figure class="relative group overflow-hidden rounded-lg shadow-lg aspect-video">
+            <iframe
+              class="w-full h-full"
+              src="https://www.youtube.com/embed/QSODPVHZkmM"
+              title="Vidéo YouTube"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy"></iframe>
           </figure>
 
-          <figure class="relative group overflow-hidden rounded-lg shadow-lg">
-            <img
-              src="/images/talent-default.jpg"
-              alt="Hub d'innovation"
-              class="w-full h-40 object-cover group-hover:scale-105 will-change-transform transition-transform duration-500"
-              loading="lazy"
-              decoding="async"
-              width="320"
-              height="240" />
-            <div
-              class="absolute inset-0 bg-gradient-to-t from-secondary-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-            <figcaption class="absolute bottom-3 left-3 text-white">
-              <p class="text-sm font-bold">{{ 'storytelling.image_hub' | translate }}</p>
-            </figcaption>
+          <!-- Vidéo 3 -->
+          <figure class="relative group overflow-hidden rounded-lg shadow-lg aspect-video">
+            <iframe
+              class="w-full h-full"
+              src="https://www.youtube.com/embed/4MtYhnmFTdI"
+              title="Vidéo YouTube"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy"></iframe>
           </figure>
+
+          <!-- Vidéo 4 -->
         </div>
       </aside>
     </div>
-  </div>
-</section>
-
-<section
-  class="py-16 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 bg-gradient-to-br from-primary-50 via-white to-secondary-50">
-  <div class="max-w-5xl mx-auto">
-    <article class="relative bg-white rounded-lg overflow-hidden shadow-xl fade-up-init" appAnimationsOnScroll>
-      <div
-        class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-primary-500 via-primary-600 to-secondary-500"
-        aria-hidden="true"></div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-5 gap-0">
-        <figure class="lg:col-span-2 relative h-64 lg:h-auto">
-          <img
-            src="/images/about.jpg"
-            alt=""
-            class="w-full h-full object-cover"
-            loading="lazy"
-            decoding="async"
-            width="400"
-            height="300" />
-          <div
-            class="absolute inset-0 bg-gradient-to-br from-primary-600/20 to-transparent pointer-events-none"
-            aria-hidden="true"></div>
-        </figure>
-
-        <div class="lg:col-span-3 p-8 lg:p-12 flex flex-col justify-center">
-          <i-lucide [name]="icons.quote" class="w-16 h-16 text-primary-200 mb-6" aria-hidden="true"></i-lucide>
-
-          <blockquote class="text-xl lg:text-2xl text-gray-900 font-semibold leading-relaxed mb-8 italic">
-            {{ 'storytelling.quote' | translate }}
-          </blockquote>
-
-          <footer class="flex items-center gap-4">
-            <div
-              class="w-16 h-16 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-black text-2xl shadow-lg"
-              role="img"
-              aria-label="Avatar Cinolu">
-              C
-            </div>
-            <div>
-              <cite class="not-italic font-bold text-gray-900 text-lg">{{ 'storytelling.author' | translate }}</cite>
-              <p class="text-gray-600">{{ 'storytelling.author_role' | translate }}</p>
-              <div class="flex gap-1 mt-2" role="img" aria-label="5 étoiles sur 5">
-                @for (star of [1,2,3,4,5]; track $index) {
-                <i-lucide
-                  [name]="icons.star"
-                  class="w-4 h-4 text-yellow-400 fill-yellow-400"
-                  aria-hidden="true"></i-lucide>
-                }
-              </div>
-            </div>
-          </footer>
-        </div>
-      </div>
-    </article>
   </div>
 </section>
