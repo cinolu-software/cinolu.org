@@ -706,5 +706,13 @@
     "subscribe": "Subscribe",
     "copyright": "© {{year}} Cinolu. All rights reserved.",
     "allRightsReserved": "All rights reserved"
+  },
+  "projects": {
+    "list": {
+      "title": "See our programs",
+      "subtitle": "All programs",
+      "choose_category": "Choose a category",
+      "no_project": "No program!"
+    }
   }
 }

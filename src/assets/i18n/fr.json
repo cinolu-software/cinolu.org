@@ -52,6 +52,7 @@
     "cover_image": "Image de couverture",
     "verified": "Vérifié"
   },
+
   "sub_programs": {
     "projects_of": "Projets de",
     "events_of": "Événements de",
@@ -707,5 +708,13 @@
     "subscribe": "S'abonner",
     "copyright": "© {{year}} Cinolu. Tous droits réservés.",
     "allRightsReserved": "Tous droits réservés"
+  },
+  "projects": {
+    "list": {
+      "title": "Voir nos programmes",
+      "subtitle": "Tous les programmes",
+      "choose_category": "Choisir une catégorie",
+      "no_project": "Pas de programme!"
+    }
   }
 }
