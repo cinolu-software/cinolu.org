@@ -22,8 +22,8 @@ export class LanguageService {
   currentLanguage = signal<Language>('fr');
 
   readonly availableLanguages: LanguageOption[] = [
-    { code: 'fr', name: 'Français', flag: '🇫🇷' },
-    { code: 'en', name: 'English', flag: '🇬🇧' }
+    { code: 'fr', name: 'Français', flag: '/icons/fr.svg' },
+    { code: 'en', name: 'English', flag: '/icons/gb.svg' }
   ];
 
   constructor() {
