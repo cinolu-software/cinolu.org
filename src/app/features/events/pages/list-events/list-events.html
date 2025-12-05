@@ -1,14 +1,14 @@
 <section
   class="py-16 pt-32 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto sm:px-8 bg-gradient-to-br from-gray-50 to-white min-h-screen">
   <div class="mb-16 text-center">
-    <h2 class="text-4xl sm:text-5xl font-extrabold font-satoshi tracking-tight text-gray-900 mb-3 drop-shadow-sm">
+    <h2 class="text-4xl sm:text-5xl font-extrabold font-satoshi tracking-tight text-gray-900 mb-3">
       {{ 'events.list.title' | translate }}
     </h2>
     <p class="text-lg text-primary-500 font-medium mb-2">{{ 'events.list.subtitle' | translate }}</p>
     <div class="w-16 h-1 mx-auto bg-gradient-to-r from-primary-400 to-primary-600 rounded-full mb-4"></div>
   </div>
 
-  <div class="relative h-64 sm:h-96 w-full rounded-lg overflow-hidden shadow-lg mb-12">
+  <div class="relative h-64 sm:h-96 w-full overflow-hidden shadow-lg mb-12">
     <img
       ngSrc="/images/events.jpg"
       alt="events"
@@ -50,19 +50,9 @@
     </div>
     } } @if (!store.isLoading() && store.events()[1] === 0) {
     <div
-      class="flex flex-col justify-center items-center gap-6 my-16 w-full bg-gray-100 min-h-60 rounded-2xl p-8 shadow-sm">
-      <svg
-        width="48"
-        height="48"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        class="text-gray-400 mb-2"
-        viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M8 12h8M12 8v8" />
-      </svg>
-      <h2 class="text-2xl font-semibold text-gray-500">{{ 'events.list.no_event' | translate }}</h2>
+      class="flex flex-col justify-center text-gray-500 items-center gap-6 my-16 w-full bg-gray-100 min-h-60 rounded-lg p-8 shadow-sm">
+      <i-lucide [name]="icons.circlePlus" class="lg:h-10 lg:w-10" />
+      <h2 class="text-2xl font-semibold">{{ 'events.list.no_event' | translate }}</h2>
     </div>
     } @if (categoriesStore.isLoading()) {
     <div class="pb-2 pt-10 w-full max-w-md">

@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { EventsStore } from '../../store/events.store';
 import { EventCategoriesStore } from '../../store/categories.store';
 import { TranslateModule } from '@ngx-translate/core';
+import { CirclePlus, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-events',
@@ -22,7 +23,8 @@ import { TranslateModule } from '@ngx-translate/core';
     NgOptimizedImage,
     EventCard,
     EventCardSkeleton,
-    TranslateModule
+    TranslateModule,
+    LucideAngularModule
   ],
   templateUrl: './list-events.html'
 })
@@ -36,6 +38,10 @@ export class ListEvents implements OnInit {
     page: this.#route.snapshot.queryParams?.['page'],
     categories: this.#route.snapshot.queryParams?.['categories']
   });
+
+  icons = {
+    circlePlus: CirclePlus
+  };
 
   ngOnInit(): void {
     this.store.loadEvents(this.queryParams());
