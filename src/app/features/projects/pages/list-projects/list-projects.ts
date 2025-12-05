@@ -11,6 +11,7 @@ import { ProjectsStore } from '../../store/projects.store';
 import { ProjectCategoriesStore } from '../../store/categories.store';
 import { FilterProjectsDto } from '../../dto/filter-projects.dto';
 import { TranslateModule } from '@ngx-translate/core';
+import { CirclePlus, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-projects-list',
@@ -24,7 +25,8 @@ import { TranslateModule } from '@ngx-translate/core';
     ProjectCard,
     FormsModule,
     ProgramCardSkeletonComponent,
-    TranslateModule
+    TranslateModule,
+    LucideAngularModule
   ],
   templateUrl: './list-projects.html'
 })
@@ -37,6 +39,10 @@ export class ListProjects implements OnInit {
     page: this.#route.snapshot.queryParams?.['page'],
     categories: this.#route.snapshot.queryParams?.['categories']
   });
+
+  icons = {
+    circlePlus: CirclePlus
+  };
 
   ngOnInit(): void {
     this.store.loadProjects(this.queryParams());

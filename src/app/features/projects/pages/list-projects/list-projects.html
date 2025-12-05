@@ -1,8 +1,13 @@
-<section class="pt-14 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
-  <div class="py-10">
-    <h2 class="font-black font-satoshi mb-2 text-3xl">Voir nos programmes</h2>
-    <p class="text-primary-500">Tous les programmes</p>
+<section
+  class="py-16 pt-32 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto sm:px-8 bg-gradient-to-br from-gray-50 to-white min-h-screen">
+  <div class="text-center mb-10 lg:mb-16">
+    <h2 class="text-4xl sm:text-5xl font-extrabold font-satoshi tracking-tight text-gray-900 mb-3">
+      {{ 'projects.list.title' | translate }}
+    </h2>
+    <p class="text-lg text-primary-500 font-medium mb-2">{{ 'projects.list.subtitle' | translate }}</p>
+    <div class="w-16 h-1 mx-auto bg-gradient-to-r from-primary-400 to-primary-600 rounded-full mb-4"></div>
   </div>
+
   <div class="relative h-60 md:h-96 w-full bg-gray-200 pb-8 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
     <img
       ngSrc="/images/projects.jpg"
@@ -24,7 +29,7 @@
         [optionValue]="'id'"
         [optionLabel]="'name'"
         [showClear]="true"
-        placeholder="Choisir une catégorie"
+        placeholder="{{ 'projects.list.choose_category' | translate }}"
         class="w-full md:w-64">
       </p-multiselect>
     </div>
@@ -40,7 +45,11 @@
       <pagination-controls nextLabel="" previousLabel="" [maxSize]="5" (pageChange)="onPageChange($event)" class="pg" />
     </div>
     } } @if (!store.isLoading() && store.projects()[1] === 0) {
-    <h2 class="text-3xl font-semibold px-4 pt-6 pb-14">Pas de programme!</h2>
+    <div
+      class="flex flex-col justify-center text-gray-500 items-center gap-6 my-10 lg:my-16 w-full bg-gray-100 min-h-60 lg:h-80 rounded-lg p-8 shadow-sm">
+      <i-lucide [name]="icons.circlePlus" class="lg:h-10 lg:w-10" />
+      <h2 class="text-2xl font-semibold">{{ 'projects.list.no_project' | translate }}</h2>
+    </div>
     } @if (categoriesStore.isLoading()) {
     <div class="pb-2 pt-10">
       <div class="w-full md:w-64 bg-gray-200 rounded-lg h-10 animate-pulse"></div>
