@@ -704,6 +704,7 @@
     "newsletterText": "Subscribe to receive our latest news",
     "emailPlaceholder": "Your email",
     "subscribe": "Subscribe",
+    "subscribeSuccess": "Thank you! You are now subscribed to our newsletter.",
     "copyright": "© {{year}} Cinolu. All rights reserved.",
     "allRightsReserved": "All rights reserved"
   },
