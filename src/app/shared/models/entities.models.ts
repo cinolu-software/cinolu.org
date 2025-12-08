@@ -274,3 +274,10 @@ export interface IForm extends IBase {
   phase: IPhase | string;
   fields: IFormField[];
 }
+
+export interface FAQItem {
+  question: string;
+  answer: string;
+  category: 'general' | 'programs' | 'events' | 'entrepreneurs' | 'technical';
+  open?: boolean;
+}
