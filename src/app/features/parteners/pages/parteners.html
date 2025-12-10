@@ -18,6 +18,8 @@
         <p-button [outlined]="!isActiveButton(item)" (click)="filterByCategory(item)">{{ item }}</p-button>
         }
       </div>
+      <!-- DEBUG: afficher longueur filtrée et noms (temporaire) -->
+
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-6">
         @for (item of filtered(); track $index) {
         <app-parteners-card [partner]="item"></app-parteners-card>

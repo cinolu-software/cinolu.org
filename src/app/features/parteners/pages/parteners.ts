@@ -27,7 +27,7 @@ export class Parteners {
     handshake: Handshake
   };
 
-  loading = signal(true);
+  loading = signal(false);
 
   allParteners: IPartner[] = PARTNERS;
 
@@ -47,10 +47,6 @@ export class Parteners {
 
   loadMore() {
     this.page.update((p) => p + 1);
-  }
-
-  constructor() {
-    setTimeout(() => this.loading.set(false), 350);
   }
 
   listCategories() {
