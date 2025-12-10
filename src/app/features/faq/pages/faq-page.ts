@@ -2,8 +2,8 @@ import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule, ChevronDown, Mail, Phone, MessageCircle } from 'lucide-angular';
-import { FaqPageSkeleton } from '../../components/faq-page-skeleton/faq-page-skeleton';
 import { FAQItem } from '@shared/models';
+import { FaqPageSkeleton } from '../components/faq-page-skeleton/faq-page-skeleton';
 
 @Component({
   selector: 'app-faq',
