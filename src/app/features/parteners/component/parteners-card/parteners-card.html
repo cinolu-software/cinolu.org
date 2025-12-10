@@ -1,0 +1,16 @@
+<div
+  class="bg-white p-4 rounded-lg border border-gray-100 shadow-xs hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1">
+  <div class="flex items-center gap-4">
+    <div class="flex-shrink-0 h-18 w-18 rounded-md bg-gray-50 flex items-center justify-center overflow-hidden">
+      @if (partner()?.image) {
+      <img [src]="partner()?.image" [alt]="'logo de ' + (partner()?.name || '')" class="object-contain h-12 w-full" />
+      } @else {
+      <div class="h-10 w-10 bg-gray-100 rounded-md"></div>
+      }
+    </div>
+
+    <div class="flex-1 min-w-0">
+      <p class="text-sm font-semibold text-gray-800 truncate">{{ partner()?.name }}</p>
+    </div>
+  </div>
+</div>
