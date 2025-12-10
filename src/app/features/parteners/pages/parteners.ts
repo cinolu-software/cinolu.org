@@ -2,14 +2,23 @@ import { Component, signal } from '@angular/core';
 import { IPartner, PARTNERS } from '../../landing/data/partners.data';
 import { CommonModule } from '@angular/common';
 import { AnimateOnScrollModule } from 'primeng/animateonscroll';
-import { Image } from 'primeng/image';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { Handshake, LucideAngularModule } from 'lucide-angular';
+import { PartenersSkeleton } from '../component/parteners-skeleton/parteners-skeleton';
+import { PartenersCard } from '../component/parteners-card/parteners-card';
 import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-parteners',
-  imports: [CommonModule, AnimateOnScrollModule, Image, HeroCard, LucideAngularModule, Button],
+  imports: [
+    CommonModule,
+    AnimateOnScrollModule,
+    HeroCard,
+    LucideAngularModule,
+    Button,
+    PartenersCard,
+    PartenersSkeleton
+  ],
   templateUrl: './parteners.html'
 })
 export class Parteners {
@@ -17,6 +26,8 @@ export class Parteners {
   icons = {
     handshake: Handshake
   };
+
+  loading = signal(true);
 
   allParteners: IPartner[] = PARTNERS;
 
@@ -36,6 +47,10 @@ export class Parteners {
 
   loadMore() {
     this.page.update((p) => p + 1);
+  }
+
+  constructor() {
+    setTimeout(() => this.loading.set(false), 350);
   }
 
   listCategories() {
