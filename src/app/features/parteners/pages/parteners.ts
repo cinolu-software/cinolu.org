@@ -3,7 +3,7 @@ import { IPartner, PARTNERS } from '../../landing/data/partners.data';
 import { CommonModule } from '@angular/common';
 import { AnimateOnScrollModule } from 'primeng/animateonscroll';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
-import { Handshake, LucideAngularModule } from 'lucide-angular';
+import { ArrowRight, Handshake, LucideAngularModule } from 'lucide-angular';
 import { PartenersSkeleton } from '../component/parteners-skeleton/parteners-skeleton';
 import { PartenersCard } from '../component/parteners-card/parteners-card';
 import { Button } from 'primeng/button';
@@ -24,7 +24,8 @@ import { Button } from 'primeng/button';
 export class Parteners {
   parteners = PARTNERS;
   icons = {
-    handshake: Handshake
+    handshake: Handshake,
+    arrowRight: ArrowRight
   };
 
   loading = signal(false);
