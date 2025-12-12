@@ -1,86 +1,87 @@
-<section
-  class="py-12 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-gradient-to-br from-primary-50 via-white to-blue-50/30 overflow-hidden">
-  <div class="text-center fade-left-init" appAnimationsOnScroll>
-    <div
-      class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
-      <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
-      {{ 'why_join_us.badge' | translate }}
+<section class="bg-gradient-to-br from-primary-50 via-white to-blue-50/30 overflow-hidden">
+  <div class="py-12 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
+    <div class="text-center fade-left-init" appAnimationsOnScroll>
+      <div
+        class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
+        <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
+        {{ 'why_join_us.badge' | translate }}
+      </div>
+
+      <h3
+        class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-4 tracking-tight leading-tight hyphens-none">
+        {{ 'why_join_us.title' | translate }}
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
+          >{{ 'why_join_us.title_highlight' | translate }}</span
+        >
+      </h3>
+      <p class="text-base lg:text-lg max-w-3xl text-gray-600 mx-auto mb-16 leading-relaxed">
+        {{ 'why_join_us.description' | translate }}
+      </p>
     </div>
 
-    <h3
-      class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-4 tracking-tight leading-tight hyphens-none">
-      {{ 'why_join_us.title' | translate }}
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
-        >{{ 'why_join_us.title_highlight' | translate }}</span
-      >
-    </h3>
-    <p class="text-base lg:text-lg max-w-3xl text-gray-600 mx-auto mb-16 leading-relaxed">
-      {{ 'why_join_us.description' | translate }}
-    </p>
-  </div>
-
-  <div class="fade-right-init" appAnimationsOnScroll>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-10 mb-8">
-      @for (s of stats; track trackByIndex($index)) {
-      <div
-        class="relative flex flex-col p-6 lg:p-8 bg-white/95 backdrop-blur-sm rounded-lg border border-gray-200/60 hover:border-primary-300/80 hover:shadow-lg hover:-translate-y-2 transition-all duration-500 group h-full overflow-hidden">
+    <div class="fade-right-init" appAnimationsOnScroll>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-10 mb-8">
+        @for (s of stats; track trackByIndex($index)) {
         <div
-          class="absolute inset-0 bg-gradient-to-br from-primary-50/0 via-primary-50/20 to-secondary-50/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          class="relative flex flex-col p-6 lg:p-8 bg-white/95 backdrop-blur-sm rounded-lg border border-gray-200/60 hover:border-primary-300/80 hover:shadow-lg hover:-translate-y-2 transition-all duration-500 group h-full overflow-hidden">
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-primary-50/0 via-primary-50/20 to-secondary-50/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-        <div class="flex items-start justify-between mb-6">
-          <div class="relative z-10 flex-shrink-0">
-            <div
-              class="w-14 h-14 bg-gradient-to-br from-primary-100 via-primary-200 to-primary-300 rounded-lg flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-sm group-hover:shadow-md">
-              <i-lucide
-                [name]="s.icon"
-                class="w-7 h-7 text-primary-600 stroke-[2.5] group-hover:text-primary-700 transition-all duration-300"
-                aria-hidden="true"
-                focusable="false">
-              </i-lucide>
-            </div>
-
-            <div
-              class="absolute inset-0 w-14 h-14 bg-gradient-to-br from-primary-400/20 to-primary-600/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
-          </div>
-
-          <div class="relative z-10 text-right flex-1 ml-4">
-            <div class="relative inline-block">
-              <p
-                appCountUp
-                [duration]="2000"
-                [end]="s.value"
-                class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600 bg-clip-text text-transparent font-satoshi leading-none group-hover:scale-105 transition-transform duration-300"></p>
+          <div class="flex items-start justify-between mb-6">
+            <div class="relative z-10 flex-shrink-0">
+              <div
+                class="w-14 h-14 bg-gradient-to-br from-primary-100 via-primary-200 to-primary-300 rounded-lg flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-sm group-hover:shadow-md">
+                <i-lucide
+                  [name]="s.icon"
+                  class="w-7 h-7 text-primary-600 stroke-[2.5] group-hover:text-primary-700 transition-all duration-300"
+                  aria-hidden="true"
+                  focusable="false">
+                </i-lucide>
+              </div>
 
               <div
-                class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out opacity-0 group-hover:opacity-100"></div>
+                class="absolute inset-0 w-14 h-14 bg-gradient-to-br from-primary-400/20 to-primary-600/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
             </div>
 
-            <div class="flex justify-end mt-2">
+            <div class="relative z-10 text-right flex-1 ml-4">
+              <div class="relative inline-block">
+                <p
+                  appCountUp
+                  [duration]="2000"
+                  [end]="s.value"
+                  class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600 bg-clip-text text-transparent font-satoshi leading-none group-hover:scale-105 transition-transform duration-300"></p>
+
+                <div
+                  class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out opacity-0 group-hover:opacity-100"></div>
+              </div>
+
+              <div class="flex justify-end mt-2">
+                <div
+                  class="w-8 h-0.5 bg-gradient-to-r from-primary-400 to-primary-500 rounded-full group-hover:w-12 transition-all duration-300"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative z-10">
+            <div class="flex items-center mb-3">
               <div
-                class="w-8 h-0.5 bg-gradient-to-r from-primary-400 to-primary-500 rounded-full group-hover:w-12 transition-all duration-300"></div>
+                class="w-2 h-2 bg-primary-500 rounded-full mr-3 group-hover:scale-125 transition-transform duration-300"></div>
+              <div class="flex-1 h-px bg-gradient-to-r from-gray-200 to-transparent"></div>
             </div>
-          </div>
-        </div>
 
-        <div class="relative z-10">
-          <div class="flex items-center mb-3">
-            <div
-              class="w-2 h-2 bg-primary-500 rounded-full mr-3 group-hover:scale-125 transition-transform duration-300"></div>
-            <div class="flex-1 h-px bg-gradient-to-r from-gray-200 to-transparent"></div>
+            <p
+              class="text-sm text-gray-600 leading-relaxed font-medium group-hover:text-gray-800 transition-colors duration-300">
+              {{ getStatLabelKey(s.label) | translate }}
+            </p>
           </div>
 
-          <p
-            class="text-sm text-gray-600 leading-relaxed font-medium group-hover:text-gray-800 transition-colors duration-300">
-            {{ getStatLabelKey(s.label) | translate }}
-          </p>
+          <div
+            class="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-primary-100/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div
+            class="absolute bottom-4 left-4 w-8 h-8 bg-gradient-to-br from-secondary-100/30 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
         </div>
-
-        <div
-          class="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-primary-100/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        <div
-          class="absolute bottom-4 left-4 w-8 h-8 bg-gradient-to-br from-secondary-100/30 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+        }
       </div>
-      }
     </div>
   </div>
 </section>
