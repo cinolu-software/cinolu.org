@@ -33,7 +33,13 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class DetailEvent implements OnInit {
   images = model<IImage[]>([]);
-  expandedDescription = signal(false);
+  // active expanded section: 'description' | 'objectives' | 'context' | 'selectionCriteria' | null
+  activeSection = signal<string | null>(null);
+
+  expandedDescription = computed(() => this.activeSection() === 'description');
+  expandedObjectives = computed(() => this.activeSection() === 'objectives');
+  expandedContext = computed(() => this.activeSection() === 'context');
+  expandedSelectionCriteria = computed(() => this.activeSection() === 'selectionCriteria');
 
   icons = {
     calendarDays: CalendarDays,
@@ -79,8 +85,24 @@ export class DetailEvent implements OnInit {
     return 'Terminé';
   }
 
+  private toggleSection(name: string) {
+    this.activeSection.set(this.activeSection() === name ? null : name);
+  }
+
   toggleDescription() {
-    this.expandedDescription.update((v) => !v);
+    this.toggleSection('description');
+  }
+
+  toggleObjectives() {
+    this.toggleSection('objectives');
+  }
+
+  toggleContext() {
+    this.toggleSection('context');
+  }
+
+  toggleSelectionCriteria() {
+    this.toggleSection('selectionCriteria');
   }
 
   openLink(url?: string): void {
