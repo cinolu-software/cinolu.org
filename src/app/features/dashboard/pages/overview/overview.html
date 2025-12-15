@@ -1,0 +1,140 @@
+<div class="w-full mx-auto">
+  <!-- Welcome Section -->
+  <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-200 mb-8">
+    <div class="flex items-center gap-4">
+      <div class="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center">
+        <span class="material-icons text-primary-600 text-[32px]">waving_hand</span>
+      </div>
+      <div>
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
+          {{ getGreeting() }}, {{ authStore.user()?.name }}
+        </h1>
+        <p class="text-gray-600 text-sm md:text-base">Voici un aperçu de votre activité entrepreneuriale</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  @if (statsStore.isLoading()) {
+  <div class="flex justify-center items-center py-16">
+    <div class="w-10 h-10 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+  } @else if (statsStore.stats()) {
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+    <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-primary-100 flex items-center justify-center">
+          <span class="material-icons text-primary-600 text-[24px]">business_center</span>
+        </div>
+        <div class="flex-1">
+          <p class="text-gray-600 text-sm font-medium mb-1">Ventures</p>
+          <p class="text-3xl font-bold text-gray-900">{{ statsStore.stats()?.totalVentures || 0 }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
+          <span class="material-icons text-purple-600 text-[24px]">people</span>
+        </div>
+        <div class="flex-1">
+          <p class="text-gray-600 text-sm font-medium mb-1">Parrainages</p>
+          <p class="text-3xl font-bold text-gray-900">{{ statsStore.stats()?.referralsCount || 0 }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+
+  <!-- Quick Actions -->
+  <div class="mb-8">
+    <h2 class="text-xl font-bold text-gray-900 mb-4">Actions rapides</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <a
+        routerLink="/dashboard/ventures/create"
+        class="group bg-primary-600 hover:bg-primary-700 rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200">
+        <div class="flex flex-col items-center text-center text-white gap-3">
+          <span class="material-icons text-[32px]">add_business</span>
+          <span class="font-semibold">Créer une Venture</span>
+        </div>
+      </a>
+      <a
+        routerLink="/dashboard/products/create"
+        class="group bg-white border-2 border-gray-200 hover:border-primary-500 rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200">
+        <div class="flex flex-col items-center text-center text-gray-700 group-hover:text-primary-600 gap-3">
+          <span class="material-icons text-[32px]">add_shopping_cart</span>
+          <span class="font-semibold">Ajouter un Produit</span>
+        </div>
+      </a>
+      <a
+        routerLink="/dashboard/profile"
+        class="group bg-white border-2 border-gray-200 hover:border-primary-500 rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200">
+        <div class="flex flex-col items-center text-center text-gray-700 group-hover:text-primary-600 gap-3">
+          <span class="material-icons text-[32px]">edit</span>
+          <span class="font-semibold">Modifier le Profil</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Recent Ventures -->
+  @if (!venturesStore.isLoading() && recentVentures.length > 0) {
+  <div>
+    <div class="flex justify-between items-center mb-5">
+      <h2 class="text-xl font-bold text-gray-900">Vos ventures récentes</h2>
+      <a
+        routerLink="/dashboard/ventures"
+        class="flex items-center gap-1 text-primary-600 hover:text-primary-700 font-semibold text-sm transition-colors">
+        Voir tout
+        <span class="material-icons text-[18px]">arrow_forward</span>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      @for (venture of recentVentures; track venture.id) {
+      <div
+        class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden">
+        @if (venture.logo) {
+        <div class="h-32 bg-gray-50 flex items-center justify-center p-4 border-b border-gray-200">
+          <img [src]="venture.logo" [alt]="venture.name" class="max-h-full max-w-full object-contain" />
+        </div>
+        } @else {
+        <div class="h-32 bg-primary-50 flex items-center justify-center border-b border-gray-200">
+          <span class="material-icons text-primary-600 text-[48px]">business</span>
+        </div>
+        }
+
+        <div class="p-5">
+          <h3 class="text-lg font-bold text-gray-900 mb-1 truncate">{{ venture.name }}</h3>
+          @if (venture.sector) {
+          <p class="text-sm text-gray-600 mb-3">{{ venture.sector }}</p>
+          }
+          <div class="flex items-center justify-between">
+            <span
+              class="px-3 py-1 rounded-full text-xs font-semibold"
+              [class]="venture.is_published ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'">
+              {{ venture.is_published ? 'Publié' : 'Brouillon' }}
+            </span>
+            <div class="flex gap-2">
+              <a
+                [routerLink]="['/dashboard/ventures', venture.slug]"
+                class="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-primary-100 text-gray-600 hover:text-primary-600 transition-colors"
+                title="Voir">
+                <span class="material-icons text-[18px]">visibility</span>
+              </a>
+              <a
+                [routerLink]="['/dashboard/ventures/edit', venture.slug]"
+                class="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-primary-100 text-gray-600 hover:text-primary-600 transition-colors"
+                title="Modifier">
+                <span class="material-icons text-[18px]">edit</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+  }
+</div>
