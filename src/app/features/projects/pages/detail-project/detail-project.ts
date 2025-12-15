@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { effect } from '@angular/core';
+import { effect, computed } from '@angular/core';
 import { Component, inject, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
 import {
   FormArray,
@@ -106,8 +106,14 @@ export class DetailProject implements OnInit {
   selectedForm = signal<IForm | null>(null);
   selectedFormGroup = signal<PreviewFormGroup | null>(null);
 
-  expandedCriteria = signal(false);
-  expandedDescription = signal(false);
+  // Active section: 'description' | 'criteria' | 'objectives' | 'context' | null
+  activeSection = signal<string | null>(null);
+
+  expandedDescription = computed(() => this.activeSection() === 'description');
+  expandedCriteria = computed(() => this.activeSection() === 'criteria');
+  expandedObjectives = computed(() => this.activeSection() === 'objectives');
+  expandedContext = computed(() => this.activeSection() === 'context');
+
   showEditModal = signal(false);
   expandedResources = signal<Record<string, boolean>>({});
   // Dialog de ressources (Option A)
@@ -165,11 +171,24 @@ export class DetailProject implements OnInit {
     }
   }
 
-  toggleCriteria() {
-    this.expandedCriteria.update((v) => !v);
+  private toggleSection(name: string) {
+    this.activeSection.set(this.activeSection() === name ? null : name);
   }
+
   toggleDescription() {
-    this.expandedDescription.update((v) => !v);
+    this.toggleSection('description');
+  }
+
+  toggleCriteria() {
+    this.toggleSection('criteria');
+  }
+
+  toggleObjectives() {
+    this.toggleSection('objectives');
+  }
+
+  toggleContext() {
+    this.toggleSection('context');
   }
 
   onToggleEditModal(phaseId: string): IResource[] {
