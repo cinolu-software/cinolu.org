@@ -8,6 +8,7 @@ import { IUser } from '@shared/models/entities.models';
 import { SignInDto } from '../dto/sign-in.dto';
 import { AuthStore } from '@core/auth/auth.store';
 import { environment } from '@environments/environment';
+import { Router } from '@angular/router';
 
 interface ISignInStore {
   isLoading: boolean;
@@ -25,9 +26,10 @@ export const SignInStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _authStore: inject(AuthStore)
+    _authStore: inject(AuthStore),
+    _router: inject(Router)
   })),
-  withMethods(({ _http, _toast, _authStore, ...store }) => ({
+  withMethods(({ _http, _toast, _authStore, _router, ...store }) => ({
     signIn: rxMethod<ISignInParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
@@ -37,7 +39,19 @@ export const SignInStore = signalStore(
               patchState(store, { isLoading: false });
               _authStore.setUser(data);
               _toast.showSuccess('Connexion réussie');
-              window.location.href = environment.onestopUrl;
+
+              const userRoles = data.roles.map((role) => (typeof role === 'string' ? role : role.name));
+
+              setTimeout(() => {
+                if (userRoles.includes('user')) {
+                  _router.navigate(['/dashboard']);
+                } else if (userRoles.includes('admin') || userRoles.includes('staff')) {
+                  window.location.href = environment.onestopUrl;
+                } else {
+                  _router.navigate(['/']);
+                }
+              }, 100);
+
               onSuccess();
             }),
             catchError((err) => {
