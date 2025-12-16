@@ -2,8 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
-import { VenturesStore } from '../../services/ventures.store';
-import { ReferralsStore } from '@features/dashboard/services/referrals.store';
+import { VenturesStore } from '../../store/ventures.store';
+import { ReferralsStore } from '@features/dashboard/store/referrals.store';
 
 @Component({
   selector: 'app-dashboard-overview',
