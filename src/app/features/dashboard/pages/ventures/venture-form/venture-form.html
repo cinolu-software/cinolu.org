@@ -1,0 +1,187 @@
+<div class="w-full">
+  <div class="mb-8">
+    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+      {{ isEditMode() ? 'Modifier l’entreprise' : 'Créer une entreprise' }}
+    </h1>
+    <p class="text-gray-600">
+      {{ isEditMode() ? 'Mettez à jour les informations de votre entreprise' : 'Ajoutez votre projet entrepreneurial' }}
+    </p>
+  </div>
+
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div>
+        <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
+          Nom de l'entreprise <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"
+          placeholder="Ex: Ma Startup" />
+        @if (form.get('name')?.invalid && form.get('name')?.touched) {
+        <p class="text-red-500 text-sm mt-1">Le nom est requis</p>
+        }
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Adresse e-mail</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"
+          placeholder="contact@entreprise.com" />
+      </div>
+
+      <div>
+        <label for="phone_number" class="block text-sm font-semibold text-gray-700 mb-2">Numéro de téléphone</label>
+        <input
+          id="phone_number"
+          type="tel"
+          formControlName="phone_number"
+          class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"
+          placeholder="+243 XX XXX XXXX" />
+      </div>
+
+      <div>
+        <label for="website" class="block text-sm font-semibold text-gray-700 mb-2">Site web</label>
+        <input
+          id="website"
+          type="url"
+          formControlName="website"
+          class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"
+          placeholder="https://www.exemple.com" />
+      </div>
+
+      <div>
+        <label for="linkedin_url" class="block text-sm font-semibold text-gray-700 mb-2">URL LinkedIn</label>
+        <input
+          id="linkedin_url"
+          type="url"
+          formControlName="linkedin_url"
+          class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"
+          placeholder="https://linkedin.com/company/..." />
+      </div>
+
+      <div>
+        <label for="sector" class="block text-sm font-semibold text-gray-700 mb-2">Secteur</label>
+        <select
+          id="sector"
+          formControlName="sector"
+          class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors">
+          <option value="">Sélectionner un secteur</option>
+          @for (sector of sectors; track sector) {
+          <option [value]="sector">{{ sector }}</option>
+          }
+        </select>
+      </div>
+
+      <div>
+        <label for="stage" class="block text-sm font-semibold text-gray-700 mb-2">Étape</label>
+        <select
+          id="stage"
+          formControlName="stage"
+          class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors">
+          <option value="">Sélectionner une étape</option>
+          @for (stage of stages; track stage) {
+          <option [value]="stage">{{ stage }}</option>
+          }
+        </select>
+      </div>
+
+      <div>
+        <label for="location" class="block text-sm font-semibold text-gray-700 mb-2">Localisation (Pays - Ville)</label>
+        <input
+          id="location"
+          type="text"
+          formControlName="location"
+          class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors"
+          placeholder="RDC - Lubumbashi" />
+      </div>
+
+      <div>
+        <label for="founded_at" class="block text-sm font-semibold text-gray-700 mb-2">Date de création</label>
+        <p-datepicker
+          inputId="founded_at"
+          formControlName="founded_at"
+          dateFormat="dd/mm/yy"
+          [showIcon]="true"
+          placeholder="Sélectionner une date"
+          [fluid]="true"
+          styleClass="w-full" />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 mb-6">
+      <div>
+        <label for="description" class="block text-sm font-semibold text-gray-700 mb-2">
+          Description de l'entreprise <span class="text-red-500">*</span>
+        </label>
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="4"
+          class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors resize-none"
+          placeholder="Décrivez votre entreprise..."></textarea>
+        @if (form.get('description')?.invalid && form.get('description')?.touched) {
+        <p class="text-red-500 text-sm mt-1">La description est requise</p>
+        }
+      </div>
+
+      <div>
+        <label for="problem_solved" class="block text-sm font-semibold text-gray-700 mb-2">
+          Problème résolu <span class="text-red-500">*</span>
+        </label>
+        <textarea
+          id="problem_solved"
+          formControlName="problem_solved"
+          rows="4"
+          class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors resize-none"
+          placeholder="Quel problème votre entreprise résout-elle ?"></textarea>
+        @if (form.get('problem_solved')?.invalid && form.get('problem_solved')?.touched) {
+        <p class="text-red-500 text-sm mt-1">Ce champ est requis</p>
+        }
+      </div>
+
+      <div>
+        <label for="target_market" class="block text-sm font-semibold text-gray-700 mb-2">
+          Marché cible <span class="text-red-500">*</span>
+        </label>
+        <textarea
+          id="target_market"
+          formControlName="target_market"
+          rows="4"
+          class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors resize-none"
+          placeholder="Qui sont vos clients cibles ?"></textarea>
+        @if (form.get('target_market')?.invalid && form.get('target_market')?.touched) {
+        <p class="text-red-500 text-sm mt-1">Ce champ est requis</p>
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-3 justify-end pt-6 border-t border-gray-200">
+      <button
+        type="button"
+        (click)="cancel()"
+        class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg transition-colors">
+        Annuler
+      </button>
+      <button
+        type="submit"
+        [disabled]="form.invalid || venturesStore.isLoading()"
+        class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 justify-center">
+        @if (venturesStore.isLoading()) {
+        <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+        <span>{{ isEditMode() ? 'Mise à jour...' : 'Création...' }}</span>
+        } @else {
+        <span>{{ isEditMode() ? 'Mettre à jour' : 'Créer l’entreprise' }}</span>
+        }
+      </button>
+    </div>
+  </form>
+</div>
