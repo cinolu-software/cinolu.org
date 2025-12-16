@@ -1,5 +1,4 @@
 <div class="w-full mx-auto">
-  <!-- Welcome Section -->
   <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-200 mb-8">
     <div class="flex items-center gap-4">
       <div class="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center">
@@ -14,12 +13,11 @@
     </div>
   </div>
 
-  <!-- Stats Cards -->
-  @if (statsStore.isLoading()) {
+  @if (venturesStore.isLoading()) {
   <div class="flex justify-center items-center py-16">
     <div class="w-10 h-10 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
   </div>
-  } @else if (statsStore.stats()) {
+  } @else if (venturesStore.ventures()) {
   <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
     <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-200">
       <div class="flex items-start gap-4">
@@ -28,7 +26,7 @@
         </div>
         <div class="flex-1">
           <p class="text-gray-600 text-sm font-medium mb-1">Ventures</p>
-          <p class="text-3xl font-bold text-gray-900">{{ statsStore.stats()?.totalVentures || 0 }}</p>
+          <p class="text-3xl font-bold text-gray-900">{{ venturesStore.ventures().length || 0 }}</p>
         </div>
       </div>
     </div>
@@ -40,14 +38,13 @@
         </div>
         <div class="flex-1">
           <p class="text-gray-600 text-sm font-medium mb-1">Parrainages</p>
-          <p class="text-3xl font-bold text-gray-900">{{ statsStore.stats()?.referralsCount || 0 }}</p>
+          <p class="text-3xl font-bold text-gray-900">{{ referralsStore.referrals().length || 0 }}</p>
         </div>
       </div>
     </div>
   </div>
   }
 
-  <!-- Quick Actions -->
   <div class="mb-8">
     <h2 class="text-xl font-bold text-gray-900 mb-4">Actions rapides</h2>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -78,7 +75,6 @@
     </div>
   </div>
 
-  <!-- Recent Ventures -->
   @if (!venturesStore.isLoading() && recentVentures.length > 0) {
   <div>
     <div class="flex justify-between items-center mb-5">

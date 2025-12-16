@@ -2,28 +2,26 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
-import { StatsStore } from '../../services/stats.store';
 import { VenturesStore } from '../../services/ventures.store';
+import { ReferralsStore } from '@features/dashboard/services/referrals.store';
 
 @Component({
   selector: 'app-dashboard-overview',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  providers: [StatsStore, VenturesStore],
   templateUrl: './overview.html'
 })
 export class DashboardOverview implements OnInit {
   authStore = inject(AuthStore);
-  statsStore = inject(StatsStore);
   venturesStore = inject(VenturesStore);
+  referralsStore = inject(ReferralsStore);
 
   ngOnInit() {
-    this.statsStore.loadUserStats();
-    this.venturesStore.loadMyVentures({ page: 1 });
+    this.venturesStore.loadAllVentures();
   }
 
   get recentVentures() {
-    return this.venturesStore.ventures().slice(0, 3);
+    return this.venturesStore.ventures()?.slice(0, 3) || [];
   }
 
   getGreeting(): string {
