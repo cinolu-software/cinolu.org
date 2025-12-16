@@ -69,7 +69,10 @@ export const routes: Route[] = [
     data: { layout: 'full-layout' },
     loadChildren: () => import('./features/blog/blogs.routes').then((m) => m.blogsRoutes)
   },
-
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./features/dashboard/dashboard.routes').then((m) => m.dashboardRoutes)
+  },
   {
     path: '',
     component: Layout,
