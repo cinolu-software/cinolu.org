@@ -1,0 +1,85 @@
+/* PrimeNG Custom Styles for Dashboard */
+
+/* DatePicker Styles */
+.p-datepicker {
+  @apply rounded-lg shadow-lg border border-gray-200;
+}
+
+.p-datepicker input {
+  @apply px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors;
+}
+
+.p-datepicker .p-inputtext:enabled:focus {
+  @apply border-primary-500 shadow-sm;
+}
+
+.p-datepicker-panel {
+  @apply bg-white rounded-lg shadow-xl border border-gray-100;
+}
+
+.p-datepicker-header {
+  @apply bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-t-lg;
+}
+
+.p-datepicker .p-datepicker-calendar td > span {
+  @apply rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors;
+}
+
+.p-datepicker .p-datepicker-calendar td.p-datepicker-today > span {
+  @apply bg-primary-100 text-primary-700 font-semibold;
+}
+
+.p-datepicker .p-datepicker-calendar td > span.p-highlight {
+  @apply bg-primary-600 text-white font-bold;
+}
+
+/* ConfirmDialog Styles */
+.p-confirmdialog {
+  @apply rounded-xl shadow-2xl border border-gray-200;
+}
+
+.p-confirmdialog .p-dialog-header {
+  @apply bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200 rounded-t-xl;
+}
+
+.p-confirmdialog .p-dialog-title {
+  @apply text-xl font-bold text-gray-900;
+}
+
+.p-confirmdialog .p-dialog-content {
+  @apply p-6 text-gray-700;
+}
+
+.p-confirmdialog .p-dialog-footer {
+  @apply bg-gray-50 border-t border-gray-200 rounded-b-xl px-6 py-4;
+}
+
+.p-confirmdialog .p-button {
+  @apply px-5 py-2.5 rounded-lg font-semibold transition-all duration-200;
+}
+
+.p-confirmdialog .p-button-danger {
+  @apply bg-red-600 hover:bg-red-700 text-white shadow-sm hover:shadow-md;
+}
+
+.p-confirmdialog .p-button-secondary {
+  @apply bg-gray-200 hover:bg-gray-300 text-gray-700;
+}
+
+.p-confirmdialog .p-confirm-dialog-icon {
+  @apply text-yellow-500;
+}
+
+/* Fluid DatePicker */
+.p-datepicker.p-fluid {
+  @apply w-full;
+}
+
+.p-datepicker.p-fluid input {
+  @apply w-full;
+}
+
+/* Icon in DatePicker */
+.p-datepicker .p-datepicker-input-icon-container {
+  @apply text-gray-400 hover:text-primary-600 transition-colors;
+}

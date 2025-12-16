@@ -2,8 +2,11 @@
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,401,500,501,700,701,900,901,1,2&display=swap');
 @import 'tailwindcss';
 @import './overrides/main.css';
+@import './overrides/primeng.css';
 @import 'quill/dist/quill.snow.css';
 @import './form-input.css';
+@import 'filepond/dist/filepond.min.css';
+@import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
 
 @theme {
   --font-mona: 'Mona Sans', sans-serif;
@@ -309,4 +312,65 @@
     pointer-events: auto !important;
     touch-action: manipulation !important;
   }
+}
+
+/* FilePond Custom Styles */
+.filepond--root {
+  font-family: var(--font-satoshi);
+}
+
+.filepond--drop-label {
+  min-height: 200px;
+  border: 2px dashed #c3e1b5;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f1f8ed 0%, #ffffff 100%);
+  transition: all 0.3s ease;
+}
+
+.filepond--drop-label:hover {
+  border-color: #5d9c46;
+  background: linear-gradient(135deg, #dfefd8 0%, #ffffff 100%);
+}
+
+.filepond--panel-root {
+  background-color: transparent;
+  border-radius: 16px;
+}
+
+.filepond--item-panel {
+  background-color: #f1f8ed;
+  border-radius: 12px;
+}
+
+.filepond--drip-blob {
+  background-color: #5d9c46;
+}
+
+.filepond--file-action-button {
+  cursor: pointer;
+}
+
+.filepond--file-action-button:hover {
+  box-shadow: 0 0 0 0.125em rgba(93, 156, 70, 0.3);
+}
+
+.filepond--file-action-button[data-align*='remove'] {
+  color: #ef4444;
+}
+
+.filepond--file-action-button[data-align*='remove']:hover {
+  box-shadow: 0 0 0 0.125em rgba(239, 68, 68, 0.3);
+}
+
+.filepond-custom-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Custom DatePicker Styles */
+.custom-datepicker input {
+  border-radius: 12px !important;
 }
