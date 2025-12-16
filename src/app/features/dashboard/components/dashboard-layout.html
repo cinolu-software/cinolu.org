@@ -1,0 +1,77 @@
+<div class="flex min-h-screen bg-gray-50">
+  <header
+    class="md:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 z-40">
+    <button (click)="toggleSidebar()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+      <span class="material-icons text-gray-700">menu</span>
+    </button>
+    <div class="font-bold text-xl text-primary-600">Cinolu</div>
+    <div class="w-9 h-9 rounded-full overflow-hidden bg-primary-500 flex items-center justify-center">
+      @if (authStore.user()?.profile || authStore.user()?.google_image) {
+      <img
+        [src]="authStore.user()?.profile || authStore.user()?.google_image"
+        [alt]="authStore.user()?.name"
+        class="w-full h-full object-cover" />
+      } @else {
+      <span class="text-white text-sm font-semibold">{{ authStore.user()?.name?.charAt(0) || 'U' }}</span>
+      }
+    </div>
+  </header>
+
+  @if (isSidebarOpen()) {
+  <div
+    class="md:hidden fixed inset-0 bg-black/50 z-45 animate-in fade-in duration-200"
+    (click)="closeSidebar()"
+    (keydown.escape)="closeSidebar()"
+    role="button"
+    tabindex="0"
+    aria-label="Fermer le menu"></div>
+  }
+
+  <aside
+    class="fixed top-0 h-screen w-72 bg-white border-r border-gray-200 flex flex-col transition-all duration-300 z-50"
+    [class]="isSidebarOpen() ? 'left-0' : '-left-72 md:left-0'">
+    <div class="h-16 flex items-center justify-between px-4 border-b border-gray-200">
+      <div class="font-bold text-xl text-primary-600">Cinolu Dashboard</div>
+      <button
+        (click)="closeSidebar()"
+        aria-label="Fermer"
+        class="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors">
+        <span class="material-icons text-gray-700">close</span>
+      </button>
+    </div>
+
+    <nav class="flex-1 overflow-y-auto py-4">
+      @for (item of menuItems; track item.path) {
+      <a
+        [routerLink]="item.path"
+        (click)="closeSidebar()"
+        class="flex items-center gap-3 px-5 py-3.5 mx-3 mb-1 rounded-xl font-medium transition-all duration-200"
+        [class]="isActive(item.path)
+            ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/30'
+            : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'">
+        <span class="material-icons text-[22px]">{{ item.icon }}</span>
+        <span class="text-[15px]">{{ item.label }}</span>
+      </a>
+      }
+    </nav>
+
+    <div class="border-t border-gray-200 p-4">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="min-w-0 flex-1">
+          <p class="text-sm font-semibold text-gray-900 truncate">{{ authStore.user()?.name }}</p>
+          <p class="text-xs text-gray-500 truncate">{{ authStore.user()?.email }}</p>
+        </div>
+      </div>
+      <button
+        (click)="signOut()"
+        class="w-full flex items-center justify-center gap-2 px-2.5 py-2.5 bg-red-50 text-red-600 rounded-lg font-medium hover:bg-red-100 transition-colors">
+        <span class="material-icons text-[20px]">logout</span>
+        <span class="text-sm">Déconnexion</span>
+      </button>
+    </div>
+  </aside>
+  <main class="flex-1 mt-16 md:mt-0 md:ml-72 p-5 md:p-8 min-h-screen">
+    <router-outlet></router-outlet>
+  </main>
+</div>
+<app-back-button />
