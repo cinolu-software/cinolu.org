@@ -1,0 +1,34 @@
+import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { VenturesStore } from '../../../store/ventures.store';
+
+@Component({
+  selector: 'app-venture-details',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  templateUrl: './venture-details.html'
+})
+export class VentureDetails implements OnInit {
+  route = inject(ActivatedRoute);
+  router = inject(Router);
+  venturesStore = inject(VenturesStore);
+
+  ngOnInit() {
+    const slug = this.route.snapshot.paramMap.get('slug');
+    if (slug) {
+      this.venturesStore.loadVentureBySlug(slug);
+    }
+  }
+
+  editVenture() {
+    const slug = this.route.snapshot.paramMap.get('slug');
+    if (slug) {
+      this.router.navigate(['/dashboard/ventures/edit', slug]);
+    }
+  }
+
+  goBack() {
+    this.router.navigate(['/dashboard/ventures']);
+  }
+}
