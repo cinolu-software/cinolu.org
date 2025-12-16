@@ -8,12 +8,13 @@ import { Router } from '@angular/router';
 import { ToastrService } from '../services/toast/toastr.service';
 
 interface IAuthStore {
+  isLoading: boolean;
   user: IUser | null;
 }
 
 export const AuthStore = signalStore(
   { providedIn: 'root' },
-  withState<IAuthStore>({ user: null }),
+  withState<IAuthStore>({ user: null, isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
     _router: inject(Router),
@@ -24,7 +25,9 @@ export const AuthStore = signalStore(
       pipe(
         exhaustMap(() =>
           _http.get<{ data: IUser }>('auth/profile').pipe(
-            tap(({ data }) => patchState(store, { user: data })),
+            tap(({ data }) => {
+              patchState(store, { user: data });
+            }),
             catchError(() => {
               patchState(store, { user: null });
               return of(null);
@@ -33,6 +36,7 @@ export const AuthStore = signalStore(
         )
       )
     ),
+
     signOut: rxMethod<void>(
       pipe(
         exhaustMap(() =>
