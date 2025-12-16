@@ -1,171 +1,230 @@
-<div class="w-full mx-auto">
+<div class="w-full mx-auto max-w-7xl">
+  <!-- Header Section -->
   <div class="mb-8">
-    <h1 class="text-2xl md:text-3xl font-bold text-gray-900">Mon Profil</h1>
+    <h1
+      class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
+      Mon Profil
+    </h1>
+    <p class="text-gray-600 mt-2">Gérez vos informations personnelles et votre photo de profil</p>
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <!-- Profile Picture Section -->
     <div class="lg:col-span-1">
-      <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+      <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 sticky top-6">
+        <h2 class="text-lg font-bold text-gray-900 mb-6">Photo de profil</h2>
+
         <div class="flex flex-col items-center">
-          <div class="relative mb-4">
+          <!-- Current Profile Picture -->
+          <div class="relative mb-6 group">
             @if (authStore.user()?.profile || authStore.user()?.google_image) {
             <img
-              [src]="authStore.user()?.profile || authStore.user()?.google_image"
+              [src]="authStore.user() | apiIMG: 'user'"
               [alt]="authStore.user()?.name"
-              class="w-32 h-32 rounded-full object-cover border-4 border-primary-100" />
+              class="w-40 h-40 rounded-full object-cover border-4 border-primary-100 shadow-lg transition-transform group-hover:scale-105" />
             } @else {
             <div
-              class="w-32 h-32 rounded-full bg-gradient-to-br from-primary-500 to-purple-600 flex items-center justify-center border-4 border-primary-100">
-              <span class="material-icons text-white text-[48px]">person</span>
+              class="w-40 h-40 rounded-full bg-gradient-to-br from-primary-500 to-purple-600 flex items-center justify-center border-4 border-primary-100 shadow-lg transition-transform group-hover:scale-105">
+              <span class="material-icons text-white text-[64px]">person</span>
             </div>
-            } @if (isLoading()) {
-            <div class="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center">
-              <div class="w-8 h-8 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
+            } @if (authStore.isLoading()) {
+            <div class="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center backdrop-blur-sm">
+              <div class="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
             </div>
             }
           </div>
 
-          <label
-            for="profile-picture"
-            class="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-primary-100 text-gray-700 hover:text-primary-600 font-medium rounded-lg cursor-pointer transition-colors">
-            <span class="material-icons text-[20px]">photo_camera</span>
-            Changer la photo
-            <input type="file" id="profile-picture" accept="image/*" (change)="onFileSelected($event)" hidden />
-          </label>
+          <div class="w-full space-y-4">
+            <app-file-upload [name]="'profile'" [url]="url" (loaded)="handleLoaded()" />
+
+            <div class="text-center">
+              <p class="text-sm text-gray-500">
+                <span class="material-icons text-xs align-middle">info</span>
+                JPG, PNG ou WEBP. Max 1MB
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Profile Info Form -->
     <div class="lg:col-span-2">
-      <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+      <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-lg font-bold text-gray-900">Informations personnelles</h2>
+          @if (!isEditing()) {
+          <button
+            type="button"
+            (click)="toggleEdit()"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-600 to-purple-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
+            <span class="material-icons text-[18px]">edit</span>
+            Modifier
+          </button>
+          }
+        </div>
+
         <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-            <div>
-              <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Nom complet *</label>
+          <!-- Name and Email -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="form-group">
+              <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
+                <span class="material-icons text-[16px] align-middle mr-1">person</span>
+                Nom complet <span class="text-red-500">*</span>
+              </label>
               <input
                 id="name"
                 type="text"
                 formControlName="name"
                 [readonly]="!isEditing()"
-                class="w-full px-4 py-3 rounded-lg border-2 transition-colors"
-                [class]="isEditing() ? 'border-gray-200 focus:border-primary-500 focus:outline-none' : 'border-gray-100 bg-gray-50'" />
+                class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-200"
+                [class]="isEditing()
+                  ? 'border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white'
+                  : 'border-gray-100 bg-gray-50 text-gray-700'" />
             </div>
 
-            <div>
-              <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+            <div class="form-group">
+              <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                <span class="material-icons text-[16px] align-middle mr-1">email</span>
+                Email
+              </label>
               <input
                 id="email"
                 type="email"
                 [value]="authStore.user()?.email"
                 readonly
-                class="w-full px-4 py-3 rounded-lg border-2 border-gray-100 bg-gray-50" />
+                class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 bg-gray-50 text-gray-500" />
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-            <div>
-              <label for="phone_number" class="block text-sm font-semibold text-gray-700 mb-2">Téléphone</label>
+          <!-- Phone and Gender -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="form-group">
+              <label for="phone_number" class="block text-sm font-semibold text-gray-700 mb-2">
+                <span class="material-icons text-[16px] align-middle mr-1">phone</span>
+                Téléphone
+              </label>
               <input
                 id="phone_number"
                 type="tel"
                 formControlName="phone_number"
                 [readonly]="!isEditing()"
-                class="w-full px-4 py-3 rounded-lg border-2 transition-colors"
-                [class]="isEditing() ? 'border-gray-200 focus:border-primary-500 focus:outline-none' : 'border-gray-100 bg-gray-50'" />
+                class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-200"
+                [class]="isEditing()
+                  ? 'border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white'
+                  : 'border-gray-100 bg-gray-50 text-gray-700'" />
             </div>
 
-            <div>
-              <label for="gender" class="block text-sm font-semibold text-gray-700 mb-2">Genre</label>
+            <div class="form-group">
+              <label for="gender" class="block text-sm font-semibold text-gray-700 mb-2">
+                <span class="material-icons text-[16px] align-middle mr-1">wc</span>
+                Genre
+              </label>
               <select
                 id="gender"
                 formControlName="gender"
-                class="w-full px-4 py-3 rounded-lg border-2 transition-colors"
-                [class]="isEditing() ? 'border-gray-200 focus:border-primary-500 focus:outline-none' : 'border-gray-100 bg-gray-50 pointer-events-none'">
+                class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-200"
+                [class]="isEditing()
+                  ? 'border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white'
+                  : 'border-gray-100 bg-gray-50 text-gray-700 pointer-events-none'">
                 <option value="">Sélectionner</option>
                 <option value="male">Homme</option>
                 <option value="female">Femme</option>
-                <option value="other">Autre</option>
               </select>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-            <div>
-              <label for="city" class="block text-sm font-semibold text-gray-700 mb-2">Ville</label>
+          <!-- City and Country -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="form-group">
+              <label for="city" class="block text-sm font-semibold text-gray-700 mb-2">
+                <span class="material-icons text-[16px] align-middle mr-1">location_city</span>
+                Ville
+              </label>
               <input
                 id="city"
                 type="text"
                 formControlName="city"
                 [readonly]="!isEditing()"
-                class="w-full px-4 py-3 rounded-lg border-2 transition-colors"
-                [class]="isEditing() ? 'border-gray-200 focus:border-primary-500 focus:outline-none' : 'border-gray-100 bg-gray-50'" />
+                class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-200"
+                [class]="isEditing()
+                  ? 'border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white'
+                  : 'border-gray-100 bg-gray-50 text-gray-700'" />
             </div>
 
-            <div>
-              <label for="country" class="block text-sm font-semibold text-gray-700 mb-2">Pays</label>
+            <div class="form-group">
+              <label for="country" class="block text-sm font-semibold text-gray-700 mb-2">
+                <span class="material-icons text-[16px] align-middle mr-1">public</span>
+                Pays
+              </label>
               <input
                 id="country"
                 type="text"
                 formControlName="country"
                 [readonly]="!isEditing()"
-                class="w-full px-4 py-3 rounded-lg border-2 transition-colors"
-                [class]="isEditing() ? 'border-gray-200 focus:border-primary-500 focus:outline-none' : 'border-gray-100 bg-gray-50'" />
+                class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-200"
+                [class]="isEditing()
+                  ? 'border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white'
+                  : 'border-gray-100 bg-gray-50 text-gray-700'" />
             </div>
           </div>
 
-          <div class="mb-5">
-            <label for="birth_date" class="block text-sm font-semibold text-gray-700 mb-2">Date de naissance</label>
-            <input
-              id="birth_date"
-              type="date"
+          <!-- Birth Date -->
+          <div class="mb-6">
+            <label for="birth_date" class="block text-sm font-semibold text-gray-700 mb-2">
+              <span class="material-icons text-[16px] align-middle mr-1">cake</span>
+              Date de naissance
+            </label>
+            <p-datepicker
+              inputId="birth_date"
               formControlName="birth_date"
-              [readonly]="!isEditing()"
-              class="w-full px-4 py-3 rounded-lg border-2 transition-colors"
-              [class]="isEditing() ? 'border-gray-200 focus:border-primary-500 focus:outline-none' : 'border-gray-100 bg-gray-50'" />
+              dateFormat="dd/mm/yy"
+              [showIcon]="isEditing()"
+              placeholder="Sélectionner une date"
+              [fluid]="true"
+              styleClass="w-full custom-datepicker" />
           </div>
 
-          <div class="mb-6">
-            <label for="biography" class="block text-sm font-semibold text-gray-700 mb-2">Biographie</label>
+          <!-- Biography -->
+          <div class="mb-8">
+            <label for="biography" class="block text-sm font-semibold text-gray-700 mb-2">
+              <span class="material-icons text-[16px] align-middle mr-1">description</span>
+              Biographie
+            </label>
             <textarea
               id="biography"
               formControlName="biography"
               [readonly]="!isEditing()"
-              class="w-full px-4 py-3 rounded-lg border-2 transition-colors resize-none"
-              [class]="isEditing() ? 'border-gray-200 focus:border-primary-500 focus:outline-none' : 'border-gray-100 bg-gray-50'"
-              rows="4"
+              class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-200 resize-none"
+              [class]="isEditing()
+                ? 'border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white'
+                : 'border-gray-100 bg-gray-50 text-gray-700'"
+              rows="5"
               placeholder="Parlez-nous de vous..."></textarea>
           </div>
 
-          <div class="flex flex-col sm:flex-row gap-3 justify-end">
-            @if (!isEditing()) {
-            <button
-              type="button"
-              (click)="toggleEdit()"
-              class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-purple-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
-              <span class="material-icons text-[20px]">edit</span>
-              Modifier le profil
-            </button>
-            } @else {
+          <!-- Action Buttons -->
+          @if (isEditing()) {
+          <div class="flex flex-col sm:flex-row gap-3 justify-end pt-6 border-t border-gray-100">
             <button
               type="button"
               (click)="cancelEdit()"
-              class="inline-flex items-center justify-center px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg transition-colors">
+              class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all">
+              <span class="material-icons text-[20px]">close</span>
               Annuler
             </button>
             <button
               type="submit"
-              [disabled]="profileForm.invalid || isLoading()"
-              class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-purple-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">
-              @if (isLoading()) {
+              [disabled]="profileForm.invalid || authStore.isLoading()"
+              class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-purple-600 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+              @if (authStore.isLoading()) {
               <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
               Enregistrement... } @else {
               <span class="material-icons text-[20px]">save</span>
-              Enregistrer }
+              Enregistrer les modifications }
             </button>
-            }
           </div>
+          }
         </form>
       </div>
     </div>

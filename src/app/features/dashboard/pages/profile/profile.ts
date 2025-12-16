@@ -5,21 +5,29 @@ import { AuthStore } from '@core/auth/auth.store';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '@core/services/toast/toastr.service';
 import { IUser } from '@shared/models/entities.models';
+import { DatePicker } from 'primeng/datepicker';
+import { UpdateInfoStore } from '@features/dashboard/store/update-info.store';
+import { UpdateInfoDto } from '@features/dashboard/dto/update-info.dto';
+import { FileUpload } from '@shared/components/file-upload/file-upload';
+import { environment } from '@environments/environment';
+import { ApiImgPipe } from '@shared/pipes';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, DatePicker, FileUpload, ApiImgPipe],
+  providers: [UpdateInfoStore],
   templateUrl: './profile.html'
 })
 export class ProfilePage implements OnInit {
   authStore = inject(AuthStore);
+  updateInfoStore = inject(UpdateInfoStore);
   fb = inject(FormBuilder);
   http = inject(HttpClient);
   toast = inject(ToastrService);
+  url = environment.apiUrl + 'users/image-profile';
 
   isEditing = signal(false);
-  isLoading = signal(false);
   selectedFile = signal<File | null>(null);
 
   profileForm = this.fb.group({
@@ -29,7 +37,7 @@ export class ProfilePage implements OnInit {
     city: [''],
     country: [''],
     gender: [''],
-    birth_date: ['']
+    birth_date: [null as Date | null]
   });
 
   ngOnInit() {
@@ -42,7 +50,7 @@ export class ProfilePage implements OnInit {
         city: user.city || '',
         country: user.country || '',
         gender: user.gender || '',
-        birth_date: user.birth_date ? new Date(user.birth_date).toISOString().split('T')[0] : ''
+        birth_date: user.birth_date ? new Date(user.birth_date) : null
       });
       this.profileForm.disable();
     }
@@ -67,6 +75,11 @@ export class ProfilePage implements OnInit {
     }
   }
 
+  handleLoaded(): void {
+    // Recharger le profil utilisateur pour afficher la nouvelle image
+    this.authStore.getProfile();
+  }
+
   uploadProfilePicture() {
     const file = this.selectedFile();
     const userId = this.authStore.user()?.id;
@@ -76,16 +89,13 @@ export class ProfilePage implements OnInit {
     const formData = new FormData();
     formData.append('file', file);
 
-    this.isLoading.set(true);
     this.http.post<IUser>(`users/${userId}/profile-picture`, formData).subscribe({
       next: (updatedUser) => {
         this.authStore.setUser(updatedUser);
         this.toast.showSuccess('Photo de profil mise à jour');
-        this.isLoading.set(false);
       },
       error: (err) => {
         this.toast.showError(err.error?.message || "Erreur lors de l'upload");
-        this.isLoading.set(false);
       }
     });
   }
@@ -93,20 +103,29 @@ export class ProfilePage implements OnInit {
   saveProfile() {
     if (this.profileForm.invalid) return;
 
-    this.isLoading.set(true);
-    this.http.patch<IUser>('auth/profile', this.profileForm.value).subscribe({
-      next: (updatedUser) => {
-        this.authStore.setUser(updatedUser);
-        this.toast.showSuccess('Profil mis à jour');
-        this.isEditing.set(false);
-        this.profileForm.disable();
-        this.isLoading.set(false);
-      },
-      error: (err) => {
-        this.toast.showError(err.error?.message || 'Erreur lors de la mise à jour');
-        this.isLoading.set(false);
-      }
-    });
+    const current = this.authStore.user();
+    if (!current) return;
+
+    const fv = this.profileForm.value;
+    type WithAddress = IUser & { address?: string };
+    const address = (current as WithAddress).address ?? '';
+    const birthDate: Date = fv.birth_date ? new Date(fv.birth_date) : (current.birth_date ?? new Date());
+
+    const payload: UpdateInfoDto = {
+      email: current.email ?? '',
+      address: address,
+      phone_number: fv.phone_number ?? '',
+      name: fv.name ?? current.name ?? '',
+      birth_date: birthDate,
+      country: fv.country ?? '',
+      city: fv.city ?? '',
+      biography: fv.biography ?? '',
+      gender: fv.gender ?? ''
+    };
+
+    this.updateInfoStore.updateInfo(payload);
+    this.isEditing.set(false);
+    this.profileForm.disable();
   }
 
   cancelEdit() {
