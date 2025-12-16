@@ -1,0 +1,123 @@
+<div class="max-w-7xl mx-auto">
+  <p-confirmDialog />
+
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+    <div>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">Mes entreprises</h1>
+      <p class="text-gray-600">Gérez vos projets entrepreneuriaux</p>
+    </div>
+    <a
+      routerLink="/dashboard/ventures/create"
+      class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-200">
+      <span class="material-icons text-[20px]">add</span>
+      <span>Créer une venture</span>
+    </a>
+  </div>
+
+  @if (venturesStore.isLoading()) {
+  <div class="flex flex-col items-center justify-center py-20">
+    <div class="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+    <p class="text-gray-600">Chargement de vos ventures...</p>
+  </div>
+  } @else if (venturesStore.ventures().length === 0) {
+  <div class="flex flex-col items-center justify-center py-20 px-4">
+    <span class="material-icons text-gray-300 text-[80px] mb-4">business_center</span>
+    <h2 class="text-2xl font-bold text-gray-900 mb-2">Aucune entreprise</h2>
+    <p class="text-gray-600 mb-6 text-center">
+      Commencez votre parcours entrepreneurial en créant votre première entreprise
+    </p>
+    <a
+      routerLink="/dashboard/ventures/create"
+      class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl shadow-sm hover:shadow-md transition-all">
+      <span class="material-icons text-[20px]">add</span>
+      Créer ma première entreprise
+    </a>
+  </div>
+  } @else {
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @for (venture of venturesStore.ventures(); track venture.id) {
+    <div
+      class="bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col">
+      <div class="relative h-48 bg-gray-50">
+        @if (venture.cover) {
+        <img [src]="venture.cover" [alt]="venture.name" class="w-full h-full object-cover" />
+        } @else if (venture.logo) {
+        <div class="w-full h-full flex items-center justify-center p-6">
+          <img [src]="venture.logo" [alt]="venture.name" class="max-h-full max-w-full object-contain" />
+        </div>
+        } @else {
+        <div class="w-full h-full flex items-center justify-center bg-primary-50">
+          <span class="material-icons text-primary-600 text-[64px]">business</span>
+        </div>
+        }
+
+        <div class="absolute top-3 right-3">
+          <span
+            class="px-3 py-1 rounded-full text-xs font-semibold shadow-md"
+            [class]="venture.is_published ? 'bg-green-500 text-white' : 'bg-gray-800 text-white'">
+            {{ venture.is_published ? 'Publié' : 'Brouillon' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="flex-1 p-5 flex flex-col">
+        <h3 class="text-lg font-bold text-gray-900 mb-2">{{ venture.name }}</h3>
+
+        @if (venture.description) {
+        <p class="text-sm text-gray-600 mb-4 line-clamp-3">
+          {{ venture.description.length > 120 ? venture.description.substring(0, 120) + '...' : venture.description }}
+        </p>
+        }
+
+        <div class="flex flex-wrap gap-2 mb-4">
+          @if (venture.sector) {
+          <span class="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-xs font-medium"
+            >{{ venture.sector }}</span
+          >
+          } @if (venture.stage) {
+          <span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-medium"
+            >{{ venture.stage }}</span
+          >
+          }
+        </div>
+
+        <div class="flex flex-col gap-2 text-sm text-gray-600 mb-4">
+          @if (venture.location) {
+          <span class="flex items-center gap-1">
+            <span class="material-icons text-[16px]">location_on</span>
+            {{ venture.location }}
+          </span>
+          } @if (venture.products && venture.products.length > 0) {
+          <span class="flex items-center gap-1">
+            <span class="material-icons text-[16px]">shopping_bag</span>
+            {{ venture.products.length }} produit(s)
+          </span>
+          }
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 mt-auto">
+          <a
+            [routerLink]="['/dashboard/ventures', venture.slug]"
+            class="flex flex-col items-center justify-center gap-1 py-2 px-2 bg-gray-100 hover:bg-primary-100 text-gray-700 hover:text-primary-600 rounded-lg transition-colors text-center">
+            <span class="material-icons text-[18px]">visibility</span>
+            <span class="text-xs font-medium">Voir</span>
+          </a>
+          <a
+            [routerLink]="['/dashboard/ventures/edit', venture.slug]"
+            class="flex flex-col items-center justify-center gap-1 py-2 px-2 bg-gray-100 hover:bg-primary-100 text-gray-700 hover:text-primary-600 rounded-lg transition-colors text-center">
+            <span class="material-icons text-[18px]">edit</span>
+            <span class="text-xs font-medium">Modifier</span>
+          </a>
+          <button
+            (click)="deleteVenture(venture.id, venture.name)"
+            class="flex flex-col items-center justify-center gap-1 py-2 px-2 bg-red-50 hover:bg-red-100 text-red-600 hover:text-red-700 rounded-lg transition-colors text-center">
+            <span class="material-icons text-[18px]">delete</span>
+            <span class="text-xs font-medium">Supprimer</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+</div>
