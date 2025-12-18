@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { filter } from 'rxjs';
-import { BackButton } from "@shared/components";
+import { BackButton } from '@shared/components';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -22,21 +22,21 @@ export class DashboardLayout implements OnInit {
     {
       path: '/dashboard/overview',
       label: 'Accueil',
-      icon: 'home'
+      icon: 'grid_view'
     },
     {
       path: '/dashboard/ventures',
-      label: 'Mes Ventures',
+      label: 'Entreprises',
       icon: 'business'
     },
     {
       path: '/dashboard/products',
-      label: 'Mes Produits',
-      icon: 'shopping_bag'
+      label: 'Produits',
+      icon: 'inventory_2'
     },
     {
       path: '/dashboard/profile',
-      label: 'Profil',
+      label: 'Mon Profil',
       icon: 'person'
     },
     {
@@ -66,6 +66,22 @@ export class DashboardLayout implements OnInit {
 
   isActive(path: string): boolean {
     return this.currentRoute().startsWith(path);
+  }
+
+  getCurrentPageTitle(): string {
+    const titles: Record<string, string> = {
+      '/dashboard/overview': 'Accueil Dashboard',
+      '/dashboard/ventures': 'Gestion des Entreprises',
+      '/dashboard/products': 'Catalogue Commercial',
+      '/dashboard/profile': 'Mon Profil Hub',
+      '/dashboard/referrals': 'Mes Parrainages'
+    };
+
+    const route = this.currentRoute();
+    for (const [path, title] of Object.entries(titles)) {
+      if (route.startsWith(path)) return title;
+    }
+    return 'Dashboard';
   }
 
   signOut() {
