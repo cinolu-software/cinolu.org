@@ -1,26 +1,34 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, effect, inject, OnInit, output, signal } from '@angular/core';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { VenturesStore } from '../../../store/ventures.store';
-import { IProduct } from '@shared/models/entities.models';
+import { IProduct, IImage } from '@shared/models/entities.models';
 import { ProductsStore } from '@features/dashboard/store/products.store';
+import { FileUpload } from '@shared/components/file-upload/file-upload';
+import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
+import { ProductGalleryStore } from '@features/dashboard/store/product-gallery.store';
 
 @Component({
   selector: 'app-product-form',
+  providers: [ProductGalleryStore],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FileUpload, ApiImgPipe, NgOptimizedImage],
   templateUrl: './product-form.html'
 })
 export class ProductForm implements OnInit {
   fb = inject(FormBuilder);
   route = inject(ActivatedRoute);
-  router = inject(Router);
   productsStore = inject(ProductsStore);
   venturesStore = inject(VenturesStore);
 
   isEditMode = signal(false);
   currentSlug: string | null = null;
+  product = signal<IProduct | null>(null);
+  galleryImages = signal<IImage[]>([]);
+  galleryStore = inject(ProductGalleryStore);
+
+  galleryUploaded = output<void>();
 
   form = this.fb.group({
     ventureId: ['', Validators.required],
@@ -33,6 +41,7 @@ export class ProductForm implements OnInit {
     effect(() => {
       const product = this.productsStore.selectedProduct();
       if (product && this.isEditMode() && !this.productsStore.isLoading()) {
+        this.product.set(product);
         this.form.patchValue(
           {
             ventureId: product.venture?.id || '',
@@ -42,6 +51,18 @@ export class ProductForm implements OnInit {
           },
           { emitEvent: false }
         );
+
+        if (product.gallery && product.gallery.length > 0) {
+          this.galleryImages.set(product.gallery);
+        }
+      }
+    });
+
+    // Sync gallery images with the ProductGalleryStore
+    effect(() => {
+      const gallery = this.galleryStore.gallery();
+      if (gallery) {
+        this.galleryImages.set(gallery);
       }
     });
   }
@@ -51,6 +72,7 @@ export class ProductForm implements OnInit {
     if (this.currentSlug) {
       this.isEditMode.set(true);
       this.productsStore.loadProductBySlug(this.currentSlug);
+      this.galleryStore.loadAll(this.currentSlug);
     }
   }
   onSubmit() {
@@ -64,18 +86,31 @@ export class ProductForm implements OnInit {
     if (this.isEditMode() && this.currentSlug) {
       this.productsStore.updateProduct({
         slug: this.currentSlug,
-        data: formData as Partial<IProduct>,
-        onSuccess: () => this.router.navigate(['/dashboard/products'])
+        data: formData as Partial<IProduct>
       });
     } else {
-      this.productsStore.createProduct({
-        data: formData as Partial<IProduct> & { ventureId: string },
-        onSuccess: () => this.router.navigate(['/dashboard/products'])
-      });
+      this.productsStore.createProduct(formData as Partial<IProduct> & { ventureId: string });
     }
   }
 
+  handleGalleryLoaded(): void {
+    if (this.currentSlug) {
+      this.productsStore.loadProductBySlug(this.currentSlug);
+      this.galleryStore.loadAll(this.currentSlug);
+    }
+  }
+
+  getGalleryUploadUrl(): string {
+    const productId = this.product()?.id;
+    return productId ? `products/gallery/${productId}` : '';
+  }
+
+  removeGalleryImage(imageId: string | number): void {
+    const id = String(imageId);
+    this.galleryStore.delete(id);
+  }
+
   cancel() {
-    this.router.navigate(['/dashboard/products']);
+    this.productsStore.resetSelection();
   }
 }
