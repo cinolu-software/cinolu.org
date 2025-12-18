@@ -1,8 +1,9 @@
-import { Component, input, OnInit, output, viewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, OnInit, output, viewChild, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FilePondComponent, FilePondModule, registerPlugin } from 'ngx-filepond';
 import validateType from 'filepond-plugin-file-validate-type';
 import validateSize from 'filepond-plugin-file-validate-size';
 import imagePreview from 'filepond-plugin-image-preview';
+import { HttpClient, HttpEvent, HttpEventType } from '@angular/common/http';
 registerPlugin(imagePreview, validateType, validateSize);
 
 @Component({
@@ -18,6 +19,7 @@ export class FileUpload implements OnInit {
   multiple = input<boolean>(false);
   loaded = output<void>();
   pondOptions: unknown;
+  http = inject(HttpClient);
 
   ngOnInit(): void {
     this.pondOptions = {
@@ -40,13 +42,47 @@ export class FileUpload implements OnInit {
         </div>
       `,
       server: {
-        process: {
-          url: this.url(),
-          method: 'POST',
-          withCredentials: true,
-          onload: () => {
-            this.handleLoaded();
-          }
+        process: (
+          fieldName: string,
+          file: File,
+          metadata: unknown,
+          load: (p: string | unknown) => void,
+          error: (errorText: string) => void,
+          progress: (computable: boolean, loadedSize: number, totalSize: number) => void,
+          abort: () => void
+        ) => {
+          const formData = new FormData();
+          formData.append(this.name(), file, file.name);
+
+          const request = this.http
+            .post<{
+              cover?: string;
+              logo?: string;
+              image?: string;
+              id?: string;
+            }>(this.url(), formData, { reportProgress: true, observe: 'events' })
+            .subscribe({
+              next: (event: HttpEvent<{ cover?: string; logo?: string; image?: string; id?: string }>) => {
+                if (event.type === HttpEventType.Response) {
+                  const response = event.body;
+                  const fileId = response?.cover || response?.logo || response?.image || response?.id || file.name;
+                  load(fileId);
+                  this.handleLoaded();
+                } else if (event.type === HttpEventType.UploadProgress && event.total) {
+                  progress(true, event.loaded, event.total);
+                }
+              },
+              error: () => {
+                error('Erreur lors du téléchargement');
+              }
+            });
+
+          return {
+            abort: () => {
+              request.unsubscribe();
+              abort();
+            }
+          };
         }
       }
     };
