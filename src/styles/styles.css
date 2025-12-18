@@ -369,8 +369,3 @@
   justify-content: center;
   padding: 20px;
 }
-
-/* Custom DatePicker Styles */
-.custom-datepicker input {
-  border-radius: 12px !important;
-}
