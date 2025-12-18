@@ -4,11 +4,12 @@ import { RouterModule } from '@angular/router';
 import { VenturesStore } from '../../../store/ventures.store';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { ApiImgPipe } from "../../../../../shared/pipes/api-img.pipe";
 
 @Component({
   selector: 'app-ventures-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, ConfirmDialogModule],
+  imports: [CommonModule, RouterModule, ConfirmDialogModule, ApiImgPipe],
   providers: [ConfirmationService],
   templateUrl: './ventures-list.html'
 })
