@@ -28,7 +28,7 @@ export class ProductsList implements OnInit {
       rejectLabel: 'Annuler',
       acceptButtonStyleClass: 'p-button-danger',
       accept: () => {
-        this.productsStore.deleteProduct({ id });
+        this.productsStore.deleteProduct(id);
       }
     });
   }
