@@ -13,7 +13,6 @@ registerPlugin(imagePreview, validateType, validateSize);
 })
 export class FileUpload implements OnInit {
   pond = viewChild<FilePondComponent>('pond');
-  pondLabel = viewChild<HTMLElement>('pondLabel');
   name = input.required<string>();
   url = input.required<string>();
   multiple = input<boolean>(false);
@@ -21,8 +20,6 @@ export class FileUpload implements OnInit {
   pondOptions: unknown;
 
   ngOnInit(): void {
-    const labelHtml = this.pondLabel?.() ? this.pondLabel()?.innerHTML : '';
-
     this.pondOptions = {
       name: this.name(),
       acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
@@ -35,7 +32,13 @@ export class FileUpload implements OnInit {
       allowRevert: false,
       allowMultiple: this.multiple(),
       imagePreviewHeight: 200,
-      labelIdle: labelHtml || `Glissez-déposez votre fichier`,
+      labelIdle: `
+        <div class="filepond-custom-label">
+          <span class="material-icons" style="font-size: 48px; color: #5d9c46;">cloud_upload</span>
+          <p style="margin: 8px 0; font-weight: 600; color: #2b4225;">Glissez-déposez votre image ici</p>
+          <p style="margin: 0; font-size: 14px; color: #7cb764;">ou <span style="color: #5d9c46; text-decoration: underline;">parcourir</span></p>
+        </div>
+      `,
       server: {
         process: {
           url: this.url(),
