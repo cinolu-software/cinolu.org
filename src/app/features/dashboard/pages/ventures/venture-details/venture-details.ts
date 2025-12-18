@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { VenturesStore } from '../../../store/ventures.store';
+import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-venture-details',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ApiImgPipe],
   templateUrl: './venture-details.html'
 })
 export class VentureDetails implements OnInit {
