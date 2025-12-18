@@ -11,6 +11,9 @@ importers:
       '@angular/animations':
         specifier: ^20.1.4
         version: 20.1.6(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))
+      '@angular/cdk':
+        specifier: ^21.0.3
+        version: 21.0.3(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2)
       '@angular/common':
         specifier: ^20.1.0
         version: 20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2)
@@ -50,6 +53,9 @@ importers:
       '@tailwindcss/postcss':
         specifier: ^4.1.11
         version: 4.1.11
+      chart.js:
+        specifier: ^4.5.1
+        version: 4.5.1
       express:
         specifier: ^5.1.0
         version: 5.1.0
@@ -71,6 +77,9 @@ importers:
       lucide-angular:
         specifier: ^0.536.0
         version: 0.536.0(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))
+      ng2-charts:
+        specifier: ^8.0.0
+        version: 8.0.0(@angular/cdk@21.0.3(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(@angular/platform-browser@20.1.6(@angular/animations@20.1.6(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)))(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)))(chart.js@4.5.1)(rxjs@7.8.2)
       ngx-filepond:
         specifier: ^7.0.3
         version: 7.0.3(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(filepond@4.32.10)
@@ -88,7 +97,7 @@ importers:
         version: 8.5.6
       primeng:
         specifier: ^20.0.1
-        version: 20.0.1(d6b2cace40c08d897225eefdd864689e)
+        version: 20.0.1(fb0a8d41eb6aa844ec576a98ee77f80c)
       quill:
         specifier: ^2.0.3
         version: 2.0.3
@@ -345,11 +354,11 @@ packages:
       vitest:
         optional: true
 
-  '@angular/cdk@20.1.5':
-    resolution: {integrity: sha512-uJezXaVPAbumxTCv5JA7oIuWCgPlz9/Fj6dJl6bxcRD7DfMyHGq3dtoLhthuU/uk+OfK0FlTklR92Yss5frFUw==}
+  '@angular/cdk@21.0.3':
+    resolution: {integrity: sha512-abfckeZfFvovdpxuQHRE4gS1VLNa05Dx0ZSKLGVL9DsQsi4pgn6wWg1y9TkXMlmtpG/EhLmCBxUc6LOHfdeWQA==}
     peerDependencies:
-      '@angular/common': ^20.0.0 || ^21.0.0
-      '@angular/core': ^20.0.0 || ^21.0.0
+      '@angular/common': ^21.0.0 || ^22.0.0
+      '@angular/core': ^21.0.0 || ^22.0.0
       rxjs: ^6.5.3 || ^7.4.0
 
   '@angular/cli@20.1.5':
@@ -968,6 +977,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.29':
     resolution: {integrity: sha512-uw6guiW/gcAGPDhLmd77/6lW8QLeiV5RUTsAX46Db6oLhGaVj4lhnPwb184s1bkc8kdVg/+h988dro8GRDpmYQ==}
+
+  '@kurkle/color@0.3.4':
+    resolution: {integrity: sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==}
 
   '@listr2/prompt-adapter-inquirer@2.0.22':
     resolution: {integrity: sha512-hV36ZoY+xKL6pYOt1nPNnkciFkn89KZwqLhAFzJvYysAvL5uBQdiADZx/8bIDXIukzzwG0QlPYolgMzQUtKgpQ==}
@@ -1877,6 +1889,10 @@ packages:
 
   chardet@0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
+
+  chart.js@4.5.1:
+    resolution: {integrity: sha512-GIjfiT9dbmHRiYi6Nl2yFCq7kkwdkp1W/lp2J99rX0yo9tgJGn3lKQATztIjb5tVtevcBtIdICNWqlq5+E8/Pw==}
+    engines: {pnpm: '>=8'}
 
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
@@ -3070,6 +3086,16 @@ packages:
     resolution: {integrity: sha512-8Ofs/AUQh8MaEcrlq5xOX0CQ9ypTF5dl78mjlMNfOK08fzpgTHQRQPBxcPlEtIw0yRpws+Zo/3r+5WRby7u3Gg==}
     engines: {node: '>= 0.6'}
 
+  ng2-charts@8.0.0:
+    resolution: {integrity: sha512-nofsNHI2Zt+EAwT+BJBVg0kgOhNo9ukO4CxULlaIi7VwZSr7I1km38kWSoU41Oq6os6qqIh5srnL+CcV+RFPFA==}
+    peerDependencies:
+      '@angular/cdk': '>=19.0.0'
+      '@angular/common': '>=19.0.0'
+      '@angular/core': '>=19.0.0'
+      '@angular/platform-browser': '>=19.0.0'
+      chart.js: ^3.4.0 || ^4.0.0
+      rxjs: ^6.5.3 || ^7.4.0
+
   ngx-filepond@7.0.3:
     resolution: {integrity: sha512-B0Cm9PSu1MSXqloUDvU0F3B3b0OW9Jok4P/eDmN06YEv3Cyu9/ietWq9Q2fldOC7/EiJVa1918NMTQT7q0L6DA==}
     peerDependencies:
@@ -4171,7 +4197,7 @@ snapshots:
       - tsx
       - yaml
 
-  '@angular/cdk@20.1.5(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2)':
+  '@angular/cdk@21.0.3(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2)':
     dependencies:
       '@angular/common': 20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2)
       '@angular/core': 20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)
@@ -4823,6 +4849,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.4
+
+  '@kurkle/color@0.3.4': {}
 
   '@listr2/prompt-adapter-inquirer@2.0.22(@inquirer/prompts@7.6.0(@types/node@20.19.9))':
     dependencies:
@@ -5741,6 +5769,10 @@ snapshots:
   chalk@5.5.0: {}
 
   chardet@0.7.0: {}
+
+  chart.js@4.5.1:
+    dependencies:
+      '@kurkle/color': 0.3.4
 
   chokidar@3.6.0:
     dependencies:
@@ -6984,6 +7016,17 @@ snapshots:
 
   negotiator@1.0.0: {}
 
+  ng2-charts@8.0.0(@angular/cdk@21.0.3(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(@angular/platform-browser@20.1.6(@angular/animations@20.1.6(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)))(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)))(chart.js@4.5.1)(rxjs@7.8.2):
+    dependencies:
+      '@angular/cdk': 21.0.3(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2)
+      '@angular/common': 20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2)
+      '@angular/core': 20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)
+      '@angular/platform-browser': 20.1.6(@angular/animations@20.1.6(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)))(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))
+      chart.js: 4.5.1
+      lodash-es: 4.17.21
+      rxjs: 7.8.2
+      tslib: 2.8.1
+
   ngx-filepond@7.0.3(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(filepond@4.32.10):
     dependencies:
       '@angular/common': 20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2)
@@ -7249,10 +7292,10 @@ snapshots:
 
   prettier@3.5.3: {}
 
-  primeng@20.0.1(d6b2cace40c08d897225eefdd864689e):
+  primeng@20.0.1(fb0a8d41eb6aa844ec576a98ee77f80c):
     dependencies:
       '@angular/animations': 20.1.6(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))
-      '@angular/cdk': 20.1.5(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2)
+      '@angular/cdk': 21.0.3(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2)
       '@angular/common': 20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2)
       '@angular/core': 20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)
       '@angular/forms': 20.1.6(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(@angular/platform-browser@20.1.6(@angular/animations@20.1.6(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)))(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)))(rxjs@7.8.2)

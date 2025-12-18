@@ -21,6 +21,7 @@ import { provideQuillConfig } from 'ngx-quill';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { importProvidersFrom } from '@angular/core';
 import { Observable } from 'rxjs';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -52,6 +53,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideApp(),
     provideAnimations(),
+    provideCharts(withDefaultRegisterables()),
     provideHttpClient(withFetch(), withInterceptors([httpInterceptor, LoadingInterceptor])),
     provideClientHydration(withEventReplay()),
     importProvidersFrom(

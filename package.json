@@ -15,6 +15,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^20.1.4",
+    "@angular/cdk": "^21.0.3",
     "@angular/common": "^20.1.0",
     "@angular/compiler": "^20.1.0",
     "@angular/core": "^20.1.0",
@@ -28,6 +29,7 @@
     "@ngx-translate/http-loader": "^17.0.0",
     "@primeng/themes": "^20.0.1",
     "@tailwindcss/postcss": "^4.1.11",
+    "chart.js": "^4.5.1",
     "express": "^5.1.0",
     "filepond": "^4.32.10",
     "filepond-plugin-file-validate-size": "^2.2.8",
@@ -35,6 +37,7 @@
     "filepond-plugin-image-preview": "^4.6.12",
     "lodash-es": "^4.17.21",
     "lucide-angular": "^0.536.0",
+    "ng2-charts": "^8.0.0",
     "ngx-filepond": "^7.0.3",
     "ngx-pagination": "6.0.3",
     "ngx-quill": "^28.0.1",
