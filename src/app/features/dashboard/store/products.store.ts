@@ -1,10 +1,11 @@
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject, computed } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, of, pipe, switchMap, tap } from 'rxjs';
+import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '@core/services/toast/toastr.service';
 import { IProduct } from '@shared/models/entities.models';
+import { Router } from '@angular/router';
 
 interface IProductsStore {
   products: IProduct[];
@@ -23,129 +24,132 @@ export const ProductsStore = signalStore(
   }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _toast: inject(ToastrService)
+    _toast: inject(ToastrService),
+    _router: inject(Router)
   })),
   withComputed(({ products, totalCount }) => ({
-    hasMorePages: computed(() => (products()?.length ?? 0) < (totalCount() ?? 0)),
-    isEmpty: computed(() => (products()?.length ?? 0) === 0)
+    hasMorePages: computed(() => products().length < totalCount()),
+    isEmpty: computed(() => products().length === 0)
   })),
-  withMethods(({ _http, _toast, ...store }) => ({
+  withMethods(({ _http, _toast, _router, ...store }) => ({
     loadAllProducts: rxMethod<void>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(() => {
-          return _http.get<{ data: [IProduct[], number] }>('products/by-user').pipe(
-            tap(({ data }) => {
-              const [products, totalCount] = data;
-              patchState(store, {
-                products,
-                totalCount,
-                isLoading: false
-              });
+        switchMap(() =>
+          _http.get<{ data: [IProduct[], number] }>('products/by-user').pipe(
+            map(({ data: [products, totalCount] }) => {
+              patchState(store, { products, totalCount, isLoading: false });
             }),
-            catchError((err) => {
+            catchError(() => {
               patchState(store, { isLoading: false });
-              _toast.showError(err.error?.message || 'Erreur lors du chargement');
+              _toast.showError('Erreur lors du chargement');
               return of(null);
             })
-          );
-        })
+          )
+        )
       )
     ),
+
     loadProductBySlug: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap((slug) => {
-          return _http.get<{ data: { product: IProduct } }>(`products/${slug}`).pipe(
-            tap(({ data }) => {
-              const product = data.product || data;
+        switchMap((slug) =>
+          _http.get<{ data: IProduct | { product: IProduct } }>(`products/${slug}`).pipe(
+            map(({ data }) => {
+              const product = 'product' in data ? data.product : data;
+              console.log('product', product);
               patchState(store, { selectedProduct: product, isLoading: false });
             }),
-            catchError((err) => {
-              patchState(store, { isLoading: false });
-              _toast.showError(err.error?.message || 'Erreur lors du chargement');
+            catchError(() => {
+              patchState(store, { isLoading: false, selectedProduct: null });
+              _toast.showError('Erreur lors du chargement');
               return of(null);
             })
-          );
-        })
+          )
+        )
       )
     ),
 
-    createProduct: rxMethod<{ data: Partial<IProduct> & { ventureId: string }; onSuccess?: () => void }>(
+    createProduct: rxMethod<Partial<IProduct> & { ventureId: string }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(({ data, onSuccess }) => {
-          return _http.post<{ data: { product: IProduct } }>('products', data).pipe(
-            tap(({ data }) => {
-              const { product } = data;
+        switchMap((data) =>
+          _http.post<{ data: IProduct | { product: IProduct } }>('products', data).pipe(
+            map(({ data }) => {
+              const product = 'product' in data ? data.product : data;
               patchState(store, {
-                products: [product, ...(store.products() ?? [])],
-                totalCount: (store.totalCount() ?? 0) + 1,
+                products: [product, ...store.products()],
+                totalCount: store.totalCount() + 1,
+                selectedProduct: product,
                 isLoading: false
               });
               _toast.showSuccess('Produit créé avec succès');
-              onSuccess?.();
+              setTimeout(() => {
+                _router.navigate(['/dashboard/products', product.slug, 'edit']);
+              }, 100);
             }),
-            catchError((err) => {
+            catchError(() => {
               patchState(store, { isLoading: false });
-              _toast.showError(err.error?.message || 'Erreur lors de la création');
+              _toast.showError('Erreur lors de la création');
               return of(null);
             })
-          );
-        })
+          )
+        )
       )
     ),
 
-    updateProduct: rxMethod<{ slug: string; data: Partial<IProduct>; onSuccess?: () => void }>(
+    updateProduct: rxMethod<{ slug: string; data: Partial<IProduct> }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(({ slug, data, onSuccess }) => {
-          return _http.patch<{ data: { product: IProduct } }>(`products/${slug}`, data).pipe(
-            tap(({ data }) => {
-              const { product: updated } = data;
-              const updatedList = (store.products() ?? []).map((p) => (p.slug === slug ? updated : p));
+        switchMap(({ slug, data }) =>
+          _http.patch<{ data: IProduct | { product: IProduct } }>(`products/${slug}`, data).pipe(
+            map(({ data }) => {
+              const updated = 'product' in data ? data.product : data;
               patchState(store, {
-                products: updatedList,
+                products: store.products().map((p) => (p.slug === slug ? updated : p)),
                 selectedProduct: store.selectedProduct()?.slug === slug ? updated : store.selectedProduct(),
                 isLoading: false
               });
               _toast.showSuccess('Produit mis à jour');
-              onSuccess?.();
+              _router.navigate(['/dashboard/products']);
             }),
-            catchError((err) => {
+            catchError(() => {
               patchState(store, { isLoading: false });
-              _toast.showError(err.error?.message || 'Erreur lors de la mise à jour');
+              _toast.showError('Erreur lors de la mise à jour');
               return of(null);
             })
-          );
-        })
+          )
+        )
       )
     ),
 
-    deleteProduct: rxMethod<{ id: string; onSuccess?: () => void }>(
+    deleteProduct: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(({ id, onSuccess }) => {
-          return _http.delete<void>(`products/${id}`).pipe(
-            tap(() => {
-              const filteredList = (store.products() ?? []).filter((p) => p.id !== id);
+        switchMap((id) =>
+          _http.delete<void>(`products/${id}`).pipe(
+            map(() => {
               patchState(store, {
-                products: filteredList,
+                products: store.products().filter((p) => p.id !== id),
                 totalCount: Math.max(0, store.totalCount() - 1),
                 isLoading: false
               });
               _toast.showSuccess('Produit supprimé');
-              onSuccess?.();
+              _router.navigate(['/dashboard/products']);
             }),
-            catchError((err) => {
+            catchError(() => {
               patchState(store, { isLoading: false });
-              _toast.showError(err.error?.message || 'Erreur lors de la suppression');
+              _toast.showError('Erreur lors de la suppression');
               return of(null);
             })
-          );
-        })
+          )
+        )
       )
     ),
-    resetSelection: () => patchState(store, { selectedProduct: null })
+
+    resetSelection: () => {
+      patchState(store, { selectedProduct: null });
+      _router.navigate(['/dashboard/products']);
+    }
   }))
 );
