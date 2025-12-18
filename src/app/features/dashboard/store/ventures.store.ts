@@ -73,7 +73,7 @@ export const VenturesStore = signalStore(
       )
     ),
 
-    createVenture: rxMethod<{ data: Partial<IVenture>; onSuccess?: () => void }>(
+    createVenture: rxMethod<{ data: Partial<IVenture>; onSuccess?: (venture: IVenture) => void }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ data, onSuccess }) => {
@@ -84,7 +84,8 @@ export const VenturesStore = signalStore(
                 isLoading: false
               });
               _toast.showSuccess('Entreprise créée avec succès');
-              onSuccess?.();
+              _router.navigate(['/dashboard/ventures']);
+              onSuccess?.(venture);
             }),
             catchError((err) => {
               patchState(store, { isLoading: false });
@@ -168,13 +169,47 @@ export const VenturesStore = signalStore(
         switchMap(({ id, file, onSuccess }) => {
           const formData = new FormData();
           formData.append('cover', file);
-          return _http.post<{ cover: string }>(`ventures/add-cover/${id}`, formData).pipe(
+          return _http.post<{ cover: string }>(`/ventures/add-cover/${id}`, formData).pipe(
             tap(() => {
               _toast.showSuccess('Cover uploadée avec succès');
               onSuccess?.();
             }),
             catchError((err) => {
               _toast.showError(err.error?.message || "Erreur lors de l'upload");
+              return of(null);
+            })
+          );
+        })
+      )
+    ),
+
+    removeCover: rxMethod<{ id: string; onSuccess?: () => void }>(
+      pipe(
+        switchMap(({ id, onSuccess }) => {
+          return _http.delete<void>(`ventures/${id}/cover`).pipe(
+            tap(() => {
+              _toast.showSuccess('Cover supprimée');
+              onSuccess?.();
+            }),
+            catchError((err) => {
+              _toast.showError(err.error?.message || 'Erreur lors de la suppression');
+              return of(null);
+            })
+          );
+        })
+      )
+    ),
+
+    removeGalleryImage: rxMethod<{ id: string; imageId: string; onSuccess?: () => void }>(
+      pipe(
+        switchMap(({ id, imageId, onSuccess }) => {
+          return _http.delete<void>(`ventures/${id}/gallery/${imageId}`).pipe(
+            tap(() => {
+              _toast.showSuccess('Image supprimée de la galerie');
+              onSuccess?.();
+            }),
+            catchError((err) => {
+              _toast.showError(err.error?.message || 'Erreur lors de la suppression');
               return of(null);
             })
           );
