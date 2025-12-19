@@ -115,8 +115,12 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
         @for (image of galleryImages(); track image.id) {
         <div class="relative group aspect-video rounded-lg overflow-hidden border-2 border-gray-200 bg-gray-100">
-          @if ((image | apiIMG: 'gallery'); as imgSrc) {
-          <img [ngSrc]="imgSrc" alt="Image de galerie" fill class="object-cover" priority />
+          @if (image.image) {
+          <img [ngSrc]="image | apiIMG: 'gallery'" alt="Image de galerie" fill class="object-cover" priority />
+          } @else {
+          <div class="w-full h-full flex items-center justify-center bg-gray-200 text-gray-400">
+            <span class="material-icons text-4xl">image</span>
+          </div>
           }
           <button
             type="button"
