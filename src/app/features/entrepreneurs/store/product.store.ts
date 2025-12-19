@@ -5,13 +5,13 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IProduct } from '../../../shared/models';
 
-interface IProductStore {
+interface IPublicProductStore {
   isLoading: boolean;
   product: IProduct | null;
 }
 
-export const ProductDetailsStore = signalStore(
-  withState<IProductStore>({ isLoading: false, product: null }),
+export const PublicProductStore = signalStore(
+  withState<IPublicProductStore>({ isLoading: false, product: null }),
   withProps(() => ({
     _http: inject(HttpClient)
   })),

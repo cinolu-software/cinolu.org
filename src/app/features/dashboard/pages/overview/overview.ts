@@ -59,10 +59,6 @@ export class DashboardOverview implements OnInit {
     this.updateProfileCompletion();
   }
 
-  get recentVentures() {
-    return this.venturesStore.ventures()?.slice(0, 3) || [];
-  }
-
   get productsCount() {
     return this.productsStore.products()?.length || 0;
   }
@@ -77,10 +73,6 @@ export class DashboardOverview implements OnInit {
     const highlight = this.featuredHighlight();
     if (!highlight) return "Mise à l'échelle du réseau PNUD";
     return 'title' in highlight ? highlight.title : highlight.name;
-  }
-
-  trackByVentureId(index: number, venture: IVenture): string {
-    return venture.id || index.toString();
   }
 
   getHighlightDescription(): string {

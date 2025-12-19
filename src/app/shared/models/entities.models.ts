@@ -183,10 +183,6 @@ export interface IRole extends IBase {
   label: string;
 }
 
-export interface ITag extends IBase {
-  name: string;
-}
-
 export interface IHighlight {
   programs?: IProgram[];
   subprograms?: ISubprogram[];

@@ -5,13 +5,13 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IVenture } from '../../../shared/models';
 
-interface IVentureStore {
+interface IPublicVentureStore {
   isLoading: boolean;
   venture: IVenture | null;
 }
 
-export const VentureStore = signalStore(
-  withState<IVentureStore>({ isLoading: false, venture: null }),
+export const PublicVentureStore = signalStore(
+  withState<IPublicVentureStore>({ isLoading: false, venture: null }),
   withProps(() => ({
     _http: inject(HttpClient)
   })),

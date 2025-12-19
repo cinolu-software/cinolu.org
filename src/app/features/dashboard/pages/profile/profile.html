@@ -33,7 +33,7 @@
           </div>
 
           <div class="w-full space-y-4">
-            <app-file-upload [name]="'profile'" [url]="url" (loaded)="handleLoaded()" />
+            <app-file-upload [name]="'profile'" [url]="getUploadUrl()" (loaded)="handleLoaded()" />
 
             <div class="text-center">
               <p class="text-sm text-gray-500">

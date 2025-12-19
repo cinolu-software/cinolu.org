@@ -4,7 +4,7 @@ export interface IPartner {
   category: string;
 }
 
-interface ICategory {
+interface IPartnerCategory {
   id: number;
   name: string;
 }
@@ -223,7 +223,7 @@ export const PARTNERS: IPartner[] = [
   }
 ];
 
-export const PARTNERS_CATEGORIES: ICategory[] = [
+export const PARTNERS_CATEGORIES: IPartnerCategory[] = [
   {
     id: 0,
     name: 'Tous les partenaires'

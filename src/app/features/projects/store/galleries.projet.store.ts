@@ -5,13 +5,13 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { IImage } from '../../../shared/models/entities.models';
 
-interface IGalleryStore {
+interface IProjectGalleryStore {
   isLoading: boolean;
   gallery: IImage[];
 }
 
 export const GalleryProjectStore = signalStore(
-  withState<IGalleryStore>({ isLoading: false, gallery: [] }),
+  withState<IProjectGalleryStore>({ isLoading: false, gallery: [] }),
   withProps(() => ({
     _http: inject(HttpClient)
   })),

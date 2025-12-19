@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ProductDetailsStore } from '../../store/product.store';
+import { PublicProductStore } from '../../store/product.store';
 import { ActivatedRoute } from '@angular/router';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { GalleriaModule } from 'primeng/galleria';
@@ -9,12 +9,12 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-detail',
-  providers: [ProductDetailsStore],
+  providers: [PublicProductStore],
   imports: [ApiImgPipe, GalleriaModule, ProductDetailSkeleton, TranslateModule],
   templateUrl: './product-detail.html'
 })
 export class ProductDetail implements OnInit {
-  store = inject(ProductDetailsStore);
+  store = inject(PublicProductStore);
   route = inject(ActivatedRoute);
   responsiveOptions = carouselConfig;
 

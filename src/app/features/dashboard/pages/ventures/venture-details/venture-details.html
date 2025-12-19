@@ -73,7 +73,8 @@
       [ngSrc]="venture | apiIMG: 'ventureCover'"
       alt="Cover"
       width="1200"
-      height="256"
+      height="800"
+      priority
       class="w-full h-64 object-cover" />
     } @else if (venture.logo) {
     <div class="w-full h-64 bg-gray-50 flex items-center justify-center p-8">
@@ -98,9 +99,8 @@
         <img
           [ngSrc]="image | apiIMG: 'gallery'"
           [alt]="'Gallery image ' + $index"
-          width="300"
-          height="300"
-          class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+          fill
+          class="object-cover transition-transform duration-300 group-hover:scale-110" />
         <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity"></div>
       </div>
       }

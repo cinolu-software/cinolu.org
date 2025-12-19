@@ -9,7 +9,6 @@ import { DatePicker } from 'primeng/datepicker';
 import { UpdateInfoStore } from '@features/dashboard/store/update-info.store';
 import { UpdateInfoDto } from '@features/dashboard/dto/update-info.dto';
 import { FileUpload } from '@shared/components/file-upload/file-upload';
-import { environment } from '@environments/environment';
 import { ApiImgPipe } from '@shared/pipes';
 
 @Component({
@@ -26,7 +25,6 @@ export class ProfilePage implements OnInit {
   fb = inject(FormBuilder);
   http = inject(HttpClient);
   toast = inject(ToastrService);
-  url = environment.apiUrl + 'users/image-profile';
 
   isEditing = signal(false);
   selectedFile = signal<File | null>(null);
@@ -76,6 +74,11 @@ export class ProfilePage implements OnInit {
     }
   }
 
+  getUploadUrl(): string {
+    const userId = this.authStore.user()?.id;
+    return userId ? `users/${userId}/profile-picture` : '';
+  }
+
   handleLoaded(): void {
     // Recharger le profil utilisateur pour afficher la nouvelle image
     this.authStore.getProfile();
@@ -89,7 +92,6 @@ export class ProfilePage implements OnInit {
 
     const formData = new FormData();
     formData.append('file', file);
-
     this.http.post<IUser>(`users/${userId}/profile-picture`, formData).subscribe({
       next: (updatedUser) => {
         this.authStore.setUser(updatedUser);

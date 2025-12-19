@@ -5,13 +5,13 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { IImage } from '../../../shared/models';
 
-interface IGalleryStore {
+interface IEventGalleryStore {
   isLoading: boolean;
-  gallery: IImage[];
+  images: IImage[];
 }
 
 export const GalleryEventStore = signalStore(
-  withState<IGalleryStore>({ isLoading: false, gallery: [] }),
+  withState<IEventGalleryStore>({ isLoading: false, images: [] }),
   withProps(() => ({
     _http: inject(HttpClient)
   })),
@@ -22,7 +22,7 @@ export const GalleryEventStore = signalStore(
         switchMap((slug) => {
           return _http.get<{ data: IImage[] }>(`galleries/event/${slug}`).pipe(
             tap(({ data }) => {
-              patchState(store, { isLoading: false, gallery: data });
+              patchState(store, { isLoading: false, images: data });
             }),
             catchError(() => {
               patchState(store, { isLoading: false });

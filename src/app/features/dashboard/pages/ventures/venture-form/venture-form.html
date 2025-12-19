@@ -153,6 +153,21 @@
           @if (venture()?.cover && !showCoverUpload()) {
           <div class="relative group">
             <img [src]="venture() | apiIMG: 'ventureCover'" alt="Cover" class="w-full h-48 object-cover rounded-lg" />
+            <div
+              class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-200 rounded-lg flex items-center justify-center gap-3">
+              <button
+                type="button"
+                (click)="showCoverUpload.set(true)"
+                class="opacity-0 group-hover:opacity-100 transition-opacity px-4 py-2 bg-white text-gray-900 rounded-lg hover:bg-gray-100 font-medium text-sm shadow-lg">
+                Modifier
+              </button>
+              <button
+                type="button"
+                (click)="removeCover()"
+                class="opacity-0 group-hover:opacity-100 transition-opacity px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 font-medium text-sm shadow-lg">
+                Supprimer
+              </button>
+            </div>
           </div>
           } @else {
           <app-file-upload [name]="'cover'" [url]="getCoverUploadUrl()" (loaded)="handleCoverLoaded()" />

@@ -6,14 +6,14 @@ import { carouselConfig } from '../../../landing/config/carousel.config';
 import { GalleriaModule } from 'primeng/galleria';
 import { Button } from 'primeng/button';
 import { VentureCardSkeleton } from '../venture-card-skeleton/venture-card-skeleton';
-import { VentureStore } from '@features/entrepreneurs/store/venture.store';
+import { PublicVentureStore } from '@features/entrepreneurs/store/venture.store';
 import { IProduct } from '../../../../shared/models';
 import { ApiImgPipe } from '../../../../shared/pipes';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-venture-card-detail',
-  providers: [VentureStore],
+  providers: [PublicVentureStore],
   imports: [
     LucideAngularModule,
     CommonModule,
@@ -31,7 +31,7 @@ export class VentureCardDetail implements OnInit {
   private route = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef);
 
-  store = inject(VentureStore);
+  store = inject(PublicVentureStore);
   responsiveOptions = carouselConfig;
 
   icons = {

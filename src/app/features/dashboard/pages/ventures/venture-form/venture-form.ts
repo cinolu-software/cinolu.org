@@ -31,9 +31,6 @@ export class VentureForm implements OnInit {
   galleryStore = inject(VentureGalleryStore);
   showCoverUpload = signal(true);
 
-  coverUploaded = output<void>();
-  galleryUploaded = output<void>();
-
   sectors = [
     'Agriculture',
     'Technologie',
@@ -102,7 +99,7 @@ export class VentureForm implements OnInit {
     });
 
     effect(() => {
-      const gallery = this.galleryStore.gallery();
+      const gallery = this.galleryStore.images();
       if (gallery) {
         this.galleryImages.set(gallery);
       }

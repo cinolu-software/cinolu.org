@@ -5,13 +5,13 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, catchError, of, exhaustMap } from 'rxjs';
 
-interface IVenturesStore {
+interface IPublicVenturesStore {
   isLoading: boolean;
   ventures: IVenture[];
 }
 
-export const VenturesStore = signalStore(
-  withState<IVenturesStore>({ isLoading: false, ventures: [] }),
+export const PublicVenturesStore = signalStore(
+  withState<IPublicVenturesStore>({ isLoading: false, ventures: [] }),
   withMethods((store, http = inject(HttpClient)) => ({
     loadVentures: rxMethod<void>(
       pipe(

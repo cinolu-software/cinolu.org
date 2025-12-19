@@ -3,14 +3,14 @@ import { LucideAngularModule, UserRound, Users } from 'lucide-angular';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { IVenture } from '@shared/models/entities.models';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
-import { VenturesStore } from '../store/ventures.store';
+import { PublicVenturesStore } from '../store/ventures.store';
 import { EntrepreneurUserCard } from '../components/entrepreneur-user-card/entrepreneur-user-card';
 import { EntrepreneurCardSkeleton } from '../components/entrepreneur-card-skeleton/entrepreneur-card-skeleton';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-our-entrepreneurs',
-  providers: [VenturesStore],
+  providers: [PublicVenturesStore],
   imports: [
     LucideAngularModule,
     HeroCard,
@@ -24,7 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class OurEntrepreneurs implements OnInit {
   icons = { users: Users, userRound: UserRound };
-  venturesStore = inject(VenturesStore);
+  venturesStore = inject(PublicVenturesStore);
 
   first = 0;
   rows = 8;

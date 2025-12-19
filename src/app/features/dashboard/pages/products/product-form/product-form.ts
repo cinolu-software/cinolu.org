@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, output, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, effect, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -28,8 +28,6 @@ export class ProductForm implements OnInit {
   product = signal<IProduct | null>(null);
   galleryImages = signal<IImage[]>([]);
   galleryStore = inject(ProductGalleryStore);
-
-  galleryUploaded = output<void>();
 
   form = this.fb.group({
     ventureId: ['', Validators.required],
@@ -61,7 +59,7 @@ export class ProductForm implements OnInit {
 
     // Sync gallery images with the ProductGalleryStore
     effect(() => {
-      const gallery = this.galleryStore.gallery();
+      const gallery = this.galleryStore.images();
       if (gallery) {
         this.galleryImages.set(gallery);
       }

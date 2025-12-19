@@ -8,11 +8,11 @@ import { ToastrService } from '@core/services/toast';
 
 interface IProductGalleryStore {
   isLoading: boolean;
-  gallery: IImage[];
+  images: IImage[];
 }
 
 export const ProductGalleryStore = signalStore(
-  withState<IProductGalleryStore>({ isLoading: false, gallery: [] }),
+  withState<IProductGalleryStore>({ isLoading: false, images: [] }),
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService)
@@ -24,10 +24,10 @@ export const ProductGalleryStore = signalStore(
         switchMap((slug) =>
           _http.get<{ data: IImage[] }>(`products/gallery/${slug}`).pipe(
             map(({ data }) => {
-              patchState(store, { isLoading: false, gallery: data });
+              patchState(store, { isLoading: false, images: data });
             }),
             catchError(() => {
-              patchState(store, { isLoading: false, gallery: [] });
+              patchState(store, { isLoading: false, images: [] });
               return of(null);
             })
           )
@@ -40,9 +40,9 @@ export const ProductGalleryStore = signalStore(
         switchMap((id) =>
           _http.delete<void>(`products/gallery/remove/${id}`).pipe(
             map(() => {
-              const current = store.gallery();
-              const filtered = current.filter((img) => img.id !== id);
-              patchState(store, { isLoading: false, gallery: filtered });
+              const current = store.images();
+              const filtered = current.filter((img: IImage) => img.id !== id);
+              patchState(store, { isLoading: false, images: filtered });
               _toast.showSuccess('Image supprimée avec succès');
             }),
             catchError(() => {

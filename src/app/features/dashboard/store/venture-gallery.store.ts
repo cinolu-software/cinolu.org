@@ -6,13 +6,13 @@ import { HttpClient } from '@angular/common/http';
 import { IImage } from '@shared/models';
 import { ToastrService } from '@core/services/toast';
 
-interface IGalleryStore {
+interface IVentureGalleryStore {
   isLoading: boolean;
-  gallery: IImage[];
+  images: IImage[];
 }
 
 export const VentureGalleryStore = signalStore(
-  withState<IGalleryStore>({ isLoading: false, gallery: [] }),
+  withState<IVentureGalleryStore>({ isLoading: false, images: [] }),
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService)
@@ -24,10 +24,10 @@ export const VentureGalleryStore = signalStore(
         switchMap((slug) =>
           _http.get<{ data: IImage[] }>(`ventures/gallery/${slug}`).pipe(
             map(({ data }) => {
-              patchState(store, { isLoading: false, gallery: data });
+              patchState(store, { isLoading: false, images: data });
             }),
             catchError(() => {
-              patchState(store, { isLoading: false, gallery: [] });
+              patchState(store, { isLoading: false, images: [] });
               return of(null);
             })
           )
@@ -40,9 +40,9 @@ export const VentureGalleryStore = signalStore(
         switchMap((id) =>
           _http.delete<void>(`ventures/gallery/remove/${id}`).pipe(
             map(() => {
-              const current = store.gallery();
-              const filtered = current.filter((img) => String(img.id) !== String(id));
-              patchState(store, { isLoading: false, gallery: filtered });
+              const current = store.images();
+              const filtered = current.filter((img: IImage) => String(img.id) !== String(id));
+              patchState(store, { isLoading: false, images: filtered });
               _toast.showSuccess('Image supprimée avec succès');
             }),
             catchError(() => {

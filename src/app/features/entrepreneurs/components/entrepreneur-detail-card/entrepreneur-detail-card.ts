@@ -18,14 +18,14 @@ import {
 import { ButtonModule } from 'primeng/button';
 import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
 import { map } from 'rxjs';
-import { VentureStore } from '@features/entrepreneurs/store/venture.store';
+import { PublicVentureStore } from '@features/entrepreneurs/store/venture.store';
 import { IUser, IVenture } from '../../../../shared/models';
 import { ApiImgPipe } from '../../../../shared/pipes';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-entrepreneur-detail-card',
-  providers: [VentureStore],
+  providers: [PublicVentureStore],
   imports: [
     CommonModule,
     RouterModule,
@@ -40,7 +40,7 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class EntrepreneurDetailCard {
   #route = inject(ActivatedRoute);
-  ventureStore = inject(VentureStore);
+  ventureStore = inject(PublicVentureStore);
 
   icons = {
     users: Users,
