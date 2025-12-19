@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule, ChevronDown, Mail, Phone, MessageCircle } from 'lucide-angular';
@@ -8,7 +8,8 @@ import { FaqPageSkeleton } from '../components/faq-page-skeleton/faq-page-skelet
 @Component({
   selector: 'app-faq',
   imports: [CommonModule, TranslateModule, LucideAngularModule, FaqPageSkeleton],
-  templateUrl: './faq-page.html'
+  templateUrl: './faq-page.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FaqPage {
   icons = { chevronDown: ChevronDown, mail: Mail, phone: Phone, messageCircle: MessageCircle };

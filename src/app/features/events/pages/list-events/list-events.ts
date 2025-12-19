@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EventCard } from '../../components/event-card/event-card';
@@ -26,7 +26,8 @@ import { CirclePlus, LucideAngularModule } from 'lucide-angular';
     TranslateModule,
     LucideAngularModule
   ],
-  templateUrl: './list-events.html'
+  templateUrl: './list-events.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListEvents implements OnInit {
   #router = inject(Router);
@@ -45,6 +46,10 @@ export class ListEvents implements OnInit {
 
   ngOnInit(): void {
     this.store.loadEvents(this.queryParams());
+  }
+
+  trackByEventId(index: number, event: any): string {
+    return event.id || index.toString();
   }
 
   async onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'categories'): Promise<void> {

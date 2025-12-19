@@ -27,6 +27,7 @@
                 "output": "/assets"
               }
             ],
+            "serviceWorker": "ngsw-config.json",
             "styles": ["src/styles/styles.css", "node_modules/notyf/notyf.min.css"],
             "server": "src/main.server.ts",
             "outputMode": "server",
@@ -36,7 +37,14 @@
           },
           "configurations": {
             "production": {
-              "optimization": true,
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": true
+                },
+                "fonts": true
+              },
               "sourceMap": false,
               "budgets": [
                 {
@@ -50,7 +58,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "namedChunks": false
             },
             "development": {
               "optimization": false,

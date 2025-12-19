@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProjectCard } from '../../components/project-card/project-card';
@@ -28,7 +28,8 @@ import { CirclePlus, LucideAngularModule } from 'lucide-angular';
     TranslateModule,
     LucideAngularModule
   ],
-  templateUrl: './list-projects.html'
+  templateUrl: './list-projects.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListProjects implements OnInit {
   #router = inject(Router);
@@ -46,6 +47,10 @@ export class ListProjects implements OnInit {
 
   ngOnInit(): void {
     this.store.loadProjects(this.queryParams());
+  }
+
+  trackByProjectId(index: number, project: any): string {
+    return project.id || index.toString();
   }
 
   onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'categories'): void {

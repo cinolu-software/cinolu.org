@@ -42,6 +42,10 @@ export class Hero {
     }
   }
 
+  trackBySlideId(index: number, slide: IHeroSlide): string | number {
+    return slide.id || index;
+  }
+
   private mapHighlightsToSlides(highlights: HighlightItem[]): IHeroSlide[] {
     return highlights
       .filter((item) => {

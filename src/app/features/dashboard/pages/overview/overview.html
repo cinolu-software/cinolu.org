@@ -86,12 +86,18 @@
             <span class="material-icons text-primary-500 text-lg">person</span>
           </div>
         </div>
+        @defer (on viewport) {
         <div class="relative w-32 h-32 mx-auto mb-4">
           <canvas baseChart [data]="doughnutChartData" [options]="doughnutChartOptions" type="doughnut"></canvas>
           <div class="absolute inset-0 flex items-center justify-center">
             <span class="text-3xl font-black text-gray-900">{{ profileCompletion }}%</span>
           </div>
         </div>
+        } @placeholder {
+        <div class="relative w-32 h-32 mx-auto mb-4">
+          <div class="w-32 h-32 rounded-full bg-gray-200 animate-pulse"></div>
+        </div>
+        }
         <p class="text-xs text-gray-600 text-center font-medium">
           {{ profileCompletion === 100 ? 'Profil complet !' : 'Complétez votre profil' }}
         </p>

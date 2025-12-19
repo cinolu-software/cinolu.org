@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { LucideAngularModule, UserRound, Users } from 'lucide-angular';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
@@ -18,7 +18,8 @@ import { TranslateModule } from '@ngx-translate/core';
     EntrepreneurCardSkeleton,
     TranslateModule
   ],
-  templateUrl: './our-entrepreneurs.html'
+  templateUrl: './our-entrepreneurs.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OurEntrepreneurs implements OnInit {
   icons = { users: Users, userRound: UserRound };
@@ -39,5 +40,9 @@ export class OurEntrepreneurs implements OnInit {
   onPageChange(event: PaginatorState) {
     this.first = event.first ?? 0;
     this.rows = event.rows ?? 8;
+  }
+
+  trackByVentureId(index: number, venture: any): string {
+    return venture.id || index.toString();
   }
 }

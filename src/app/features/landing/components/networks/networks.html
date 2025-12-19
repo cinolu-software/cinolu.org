@@ -34,15 +34,13 @@
               </div>
 
               <div class="flex-1 flex items-center justify-center mb-4 p-4">
-                <div class="w-full h-20 flex items-center justify-center">
-                  <img
-                    [ngSrc]="network.image"
-                    [alt]="'Logo de ' + network.name"
-                    [title]="network.name"
-                    width="140"
-                    height="70"
-                    class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
-                </div>
+                <img
+                  [ngSrc]="network.image"
+                  [alt]="'Logo de ' + network.name"
+                  [title]="network.name"
+                  width="140"
+                  height="70"
+                  class="object-contain max-w-full max-h-20 group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
               </div>
 
               <div class="text-center pt-3 border-t border-gray-100 space-y-2">

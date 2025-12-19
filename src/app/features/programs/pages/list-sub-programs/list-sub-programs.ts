@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   ArrowLeft,
@@ -36,7 +36,8 @@ import { EventCard } from '@features/events/components/event-card/event-card';
     EventCard,
     RouterLink
   ],
-  templateUrl: './list-sub-programs.html'
+  templateUrl: './list-sub-programs.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListSubPrograms implements OnInit {
   icons = {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Hero } from '../components/hero/hero';
 import { Partners } from '../components/partners/partners';
 import { Networks } from '../components/networks/networks';
@@ -26,6 +26,7 @@ import { TestimonialsSection } from '../components/testimonials-section/testimon
     Storytelling,
     TestimonialsSection
   ],
-  templateUrl: './landing.html'
+  templateUrl: './landing.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Landing {}

@@ -45,6 +45,10 @@ export class ListArticles implements OnInit {
     this.store.loadArticles(this.queryParams());
   }
 
+  trackByArticleId(index: number, article: any): string {
+    return article.id || index.toString();
+  }
+
   async onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'tags'): Promise<void> {
     this.queryParams().page = null;
     this.queryParams()[filter] = event.value;

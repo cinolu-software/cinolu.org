@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { Headset, LucideAngularModule, Phone, Mail, MapPin } from 'lucide-angular';
 import { CONTACT_ITEMS, SOCIAL_LINKS } from '../data/contact.data';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -32,7 +32,8 @@ import { TranslateModule } from '@ngx-translate/core';
     HeroCard,
     TranslateModule
   ],
-  templateUrl: './contact-us.html'
+  templateUrl: './contact-us.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactUs {
   icons = {

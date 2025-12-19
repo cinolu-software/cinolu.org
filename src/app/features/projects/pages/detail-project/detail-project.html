@@ -471,7 +471,11 @@
 
                       } @else if (resource.type === 'IMAGE') {
                       <a [href]="resource.url" target="_blank" rel="noopener">
-                        <img [src]="resource.url" alt="{{ resource.title }}" class="h-8 w-8 rounded shadow border" />
+                        <img
+                          [src]="resource.url"
+                          alt="{{ resource.title }}"
+                          class="h-8 w-8 rounded shadow border"
+                          loading="lazy" />
                       </a>
                       }
                     </div>

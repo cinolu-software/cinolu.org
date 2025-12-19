@@ -78,6 +78,10 @@ export class DashboardOverview implements OnInit {
     return 'title' in highlight ? highlight.title : highlight.name;
   }
 
+  trackByVentureId(index: number, venture: any): string {
+    return venture.id || index.toString();
+  }
+
   getHighlightDescription(): string {
     const highlight = this.featuredHighlight();
     if (!highlight) return 'Appel à solutions locales innovantes.';

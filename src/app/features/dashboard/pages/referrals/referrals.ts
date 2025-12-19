@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReferralsStore } from '../../store/referrals.store';
 import { AuthStore } from '@core/auth/auth.store';
@@ -8,7 +8,8 @@ import { ToastrService } from '@core/services/toast/toastr.service';
   selector: 'app-referrals',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './referrals.html'
+  templateUrl: './referrals.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReferralsPage implements OnInit {
   referralsStore = inject(ReferralsStore);

@@ -3,7 +3,11 @@
   <div class="flex items-center gap-4">
     <div class="flex-shrink-0 h-18 w-18 rounded-md bg-gray-50 flex items-center justify-center overflow-hidden">
       @if (partner()?.image) {
-      <img [src]="partner()?.image" [alt]="'logo de ' + (partner()?.name || '')" class="object-contain h-12 w-full" />
+      <img
+        [src]="partner()?.image"
+        [alt]="'logo de ' + (partner()?.name || '')"
+        class="object-contain h-12 w-full"
+        loading="lazy" />
       } @else {
       <div class="h-10 w-10 bg-gray-100 rounded-md"></div>
       }

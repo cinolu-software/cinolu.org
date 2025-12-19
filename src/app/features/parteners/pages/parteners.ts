@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { IPartner, PARTNERS } from '../../landing/data/partners.data';
 import { CommonModule } from '@angular/common';
 import { AnimateOnScrollModule } from 'primeng/animateonscroll';
@@ -19,7 +19,8 @@ import { Button } from 'primeng/button';
     PartenersCard,
     PartenersSkeleton
   ],
-  templateUrl: './parteners.html'
+  templateUrl: './parteners.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Parteners {
   parteners = PARTNERS;

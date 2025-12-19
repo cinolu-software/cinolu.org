@@ -4,9 +4,16 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection
 } from '@angular/core';
-import { provideRouter, TitleStrategy, withInMemoryScrolling, withViewTransitions } from '@angular/router';
+import {
+  provideRouter,
+  TitleStrategy,
+  withInMemoryScrolling,
+  withViewTransitions,
+  withPreloading,
+  PreloadAllModules
+} from '@angular/router';
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { provideClientHydration, withEventReplay, withHttpTransferCacheOptions } from '@angular/platform-browser';
 import { providePrimeNG } from 'primeng/config';
 import { PageTitleStrategy } from './core/strategies/page-title.strategy';
 import { primeNGPreset } from './shared/config/primeng.config';
@@ -19,9 +26,10 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { provideQuillConfig } from 'ngx-quill';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { importProvidersFrom } from '@angular/core';
+import { importProvidersFrom, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { provideServiceWorker } from '@angular/service-worker';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -48,6 +56,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withViewTransitions(),
+      withPreloading(PreloadAllModules),
       withInMemoryScrolling({
         scrollPositionRestoration: 'enabled',
         anchorScrolling: 'enabled'
@@ -57,7 +66,12 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideCharts(withDefaultRegisterables()),
     provideHttpClient(withFetch(), withInterceptors([httpInterceptor, LoadingInterceptor])),
-    provideClientHydration(withEventReplay()),
+    provideClientHydration(
+      withEventReplay(),
+      withHttpTransferCacheOptions({
+        includePostRequests: true
+      })
+    ),
     importProvidersFrom(
       TranslateModule.forRoot({
         fallbackLang: 'fr',
@@ -94,6 +108,10 @@ export const appConfig: ApplicationConfig = {
           }
         }
       }
+    }),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000'
     })
   ]
 };
