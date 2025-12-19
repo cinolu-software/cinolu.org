@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { IVenture } from '@shared/models/entities.models';
 import { AuthStore } from '@core/auth/auth.store';
 import { VenturesStore } from '../../store/ventures.store';
 import { ReferralsStore } from '@features/dashboard/store/referrals.store';
