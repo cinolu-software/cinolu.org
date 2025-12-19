@@ -41,7 +41,7 @@ export const VentureGalleryStore = signalStore(
           _http.delete<void>(`ventures/gallery/remove/${id}`).pipe(
             map(() => {
               const current = store.gallery();
-              const filtered = current.filter((img) => img.id !== id);
+              const filtered = current.filter((img) => String(img.id) !== String(id));
               patchState(store, { isLoading: false, gallery: filtered });
               _toast.showSuccess('Image supprimée avec succès');
             }),
