@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
@@ -7,11 +7,14 @@ import { ReferralsStore } from '@features/dashboard/store/referrals.store';
 import { ProductsStore } from '../../store/products.store';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration } from 'chart.js';
+import { HighlightsStore } from '@features/landing/store/highlights.store';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-dashboard-overview',
   standalone: true,
   imports: [CommonModule, RouterModule, BaseChartDirective],
+  providers: [HighlightsStore],
   templateUrl: './overview.html'
 })
 export class DashboardOverview implements OnInit {
@@ -19,6 +22,7 @@ export class DashboardOverview implements OnInit {
   venturesStore = inject(VenturesStore);
   referralsStore = inject(ReferralsStore);
   productsStore = inject(ProductsStore);
+  highlightsStore = inject(HighlightsStore);
 
   // Configuration du graphique de progression
   public doughnutChartData: ChartConfiguration<'doughnut'>['data'] = {
@@ -49,6 +53,7 @@ export class DashboardOverview implements OnInit {
   ngOnInit() {
     this.venturesStore.loadAllVentures();
     this.productsStore.loadAllProducts();
+    this.highlightsStore.loadHighlights();
     this.updateProfileCompletion();
   }
 
@@ -58,6 +63,94 @@ export class DashboardOverview implements OnInit {
 
   get productsCount() {
     return this.productsStore.products()?.length || 0;
+  }
+
+  // Computed pour obtenir le premier highlight mis en avant
+  featuredHighlight = computed(() => {
+    const highlights = this.highlightsStore.highlights();
+    return highlights.find((item) => 'is_highlighted' in item && item.is_highlighted) || highlights[0] || null;
+  });
+
+  getHighlightTitle(): string {
+    const highlight = this.featuredHighlight();
+    if (!highlight) return "Mise à l'échelle du réseau PNUD";
+    return 'title' in highlight ? highlight.title : highlight.name;
+  }
+
+  getHighlightDescription(): string {
+    const highlight = this.featuredHighlight();
+    if (!highlight) return 'Appel à solutions locales innovantes.';
+    if ('summary' in highlight && highlight.summary) return this.truncateText(highlight.summary, 100);
+    if ('description' in highlight && highlight.description) return this.truncateText(highlight.description, 100);
+    return 'Découvrez cette nouveauté.';
+  }
+
+  getHighlightBadge(): string {
+    const highlight = this.featuredHighlight();
+    if (!highlight) return 'ACCELERATE 2025';
+    switch (highlight.sourceKey) {
+      case 'programs':
+        return 'PROGRAMME';
+      case 'subprograms':
+        return 'SOUS-PROGRAMME';
+      case 'events':
+        return 'ÉVÉNEMENT';
+      case 'projects':
+        return 'PROJET';
+      case 'articles':
+        return 'ARTICLE';
+      default:
+        return 'À LA UNE';
+    }
+  }
+
+  getHighlightLink(): string {
+    const highlight = this.featuredHighlight();
+    if (!highlight) return '#';
+    switch (highlight.sourceKey) {
+      case 'programs':
+        return `/our-programs/${highlight.slug}`;
+      case 'subprograms':
+        return `/our-programs/subprograms/${highlight.slug}`;
+      case 'events':
+        return `/events/${highlight.slug}`;
+      case 'projects':
+        return `/programs/${highlight.slug}`;
+      case 'articles':
+        return `/blog-ressources/${highlight.slug}`;
+      default:
+        return '#';
+    }
+  }
+
+  getHighlightImage(): string {
+    const highlight = this.featuredHighlight();
+    if (!highlight) return 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1000';
+
+    const apiUrl = environment.apiUrl;
+
+    if (highlight.sourceKey === 'programs' && 'logo' in highlight && highlight.logo) {
+      return `${apiUrl}uploads/programs/${highlight.logo}`;
+    }
+    if (highlight.sourceKey === 'subprograms' && 'logo' in highlight && highlight.logo) {
+      return `${apiUrl}uploads/subprograms/${highlight.logo}`;
+    }
+    if (highlight.sourceKey === 'events' && 'cover' in highlight && highlight.cover) {
+      return `${apiUrl}uploads/events/${highlight.cover}`;
+    }
+    if (highlight.sourceKey === 'projects' && 'cover' in highlight && highlight.cover) {
+      return `${apiUrl}uploads/projects/${highlight.cover}`;
+    }
+    if (highlight.sourceKey === 'articles' && 'image' in highlight && highlight.image) {
+      return `${apiUrl}uploads/articles/${highlight.image}`;
+    }
+
+    return 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1000';
+  }
+
+  private truncateText(text: string, maxLength: number): string {
+    if (!text) return '';
+    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
   }
 
   /**
