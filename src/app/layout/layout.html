@@ -1,12 +1,12 @@
-@if (layout === 'empty-layout') { @defer (on immediate) {
+@if (layout() === 'empty-layout') { @defer (on immediate) {
 <app-empty-layout />
 } @placeholder {
 <app-loader />
-} } @if (layout === 'full-layout') { @defer (on immediate) {
+} } @if (layout() === 'full-layout') { @defer (on immediate) {
 <app-full-layout />
 } @placeholder {
 <app-loader />
-} } @if (layout === 'fixed-layout') { @defer (on immediate) {
+} } @if (layout() === 'fixed-layout') { @defer (on immediate) {
 <app-fixed-topbar-layout />
 } @placeholder {
 <app-loader />

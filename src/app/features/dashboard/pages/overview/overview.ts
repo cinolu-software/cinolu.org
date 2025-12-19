@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, computed } from '@angular/core';
+import { Component, inject, OnInit, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
@@ -15,7 +15,8 @@ import { environment } from '@environments/environment';
   standalone: true,
   imports: [CommonModule, RouterModule, BaseChartDirective],
   providers: [HighlightsStore],
-  templateUrl: './overview.html'
+  templateUrl: './overview.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardOverview implements OnInit {
   authStore = inject(AuthStore);

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ArticlesStore } from '../../store/articles/articles.store';
@@ -25,7 +25,8 @@ import { TranslateModule } from '@ngx-translate/core';
     HeroCard,
     TranslateModule
   ],
-  templateUrl: './list-articles.html'
+  templateUrl: './list-articles.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListArticles implements OnInit {
   store = inject(ArticlesStore);

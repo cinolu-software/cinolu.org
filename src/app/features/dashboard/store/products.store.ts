@@ -57,7 +57,6 @@ export const ProductsStore = signalStore(
           _http.get<{ data: IProduct | { product: IProduct } }>(`products/${slug}`).pipe(
             map(({ data }) => {
               const product = 'product' in data ? data.product : data;
-              console.log('product', product);
               patchState(store, { selectedProduct: product, isLoading: false });
             }),
             catchError(() => {

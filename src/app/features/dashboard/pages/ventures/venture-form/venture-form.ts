@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, output, signal } from '@angular/core';
+import { Component, effect, inject, OnInit, output, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,7 +14,8 @@ import { VentureGalleryStore } from '@features/dashboard/store/venture-gallery.s
   providers: [VentureGalleryStore],
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, DatePicker, FileUpload, ApiImgPipe],
-  templateUrl: './venture-form.html'
+  templateUrl: './venture-form.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VentureForm implements OnInit {
   fb = inject(FormBuilder);
@@ -152,7 +153,6 @@ export class VentureForm implements OnInit {
   }
 
   handleGalleryLoaded(): void {
-    console.log('Gallery image loaded, reloading gallery data...');
     if (this.currentSlug) {
       this.venturesStore.loadVentureBySlug(this.currentSlug);
       setTimeout(() => {
@@ -166,9 +166,7 @@ export class VentureForm implements OnInit {
     if (!ventureId) {
       return '';
     }
-    const url = `ventures/add-cover/${ventureId}`;
-    console.log('Cover upload URL:', url);
-    return url;
+    return `ventures/add-cover/${ventureId}`;
   }
 
   getGalleryUploadUrl(): string {

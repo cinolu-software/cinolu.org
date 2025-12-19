@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { VenturesStore } from '../../../store/ventures.store';
@@ -8,7 +8,8 @@ import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
   selector: 'app-venture-details',
   standalone: true,
   imports: [CommonModule, RouterModule, ApiImgPipe, NgOptimizedImage],
-  templateUrl: './venture-details.html'
+  templateUrl: './venture-details.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VentureDetails implements OnInit {
   route = inject(ActivatedRoute);

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthStore } from '@core/auth/auth.store';
@@ -17,7 +17,8 @@ import { ApiImgPipe } from '@shared/pipes';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, DatePicker, FileUpload, ApiImgPipe],
   providers: [UpdateInfoStore],
-  templateUrl: './profile.html'
+  templateUrl: './profile.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfilePage implements OnInit {
   authStore = inject(AuthStore);

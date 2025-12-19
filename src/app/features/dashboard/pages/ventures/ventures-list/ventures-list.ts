@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { VenturesStore } from '../../../store/ventures.store';
@@ -11,7 +11,8 @@ import { ApiImgPipe } from "../../../../../shared/pipes/api-img.pipe";
   standalone: true,
   imports: [CommonModule, RouterModule, ConfirmDialogModule, ApiImgPipe],
   providers: [ConfirmationService],
-  templateUrl: './ventures-list.html'
+  templateUrl: './ventures-list.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VenturesList implements OnInit {
   venturesStore = inject(VenturesStore);

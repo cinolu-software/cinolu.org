@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ChangeDetectionStrategy, signal, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
 import { AppConfigService } from '../core/services/config/config.service';
@@ -15,16 +15,17 @@ import { Loader } from './components/loader/loader';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Layout implements OnInit, OnDestroy {
-  config: AppConfig = {} as AppConfig;
-  layout = 'full-layout';
+  config = signal<AppConfig>({} as AppConfig);
+  layout = signal('full-layout');
   #unsubscribeAll = new Subject();
   #router = inject(Router);
   #activatedRoute = inject(ActivatedRoute);
   #configService = inject(AppConfigService);
+  #cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
     this.#configService.config$.pipe(takeUntil(this.#unsubscribeAll)).subscribe((config) => {
-      this.config = config as AppConfig;
+      this.config.set(config as AppConfig);
       this._updateLayout();
     });
     this.#router.events
@@ -42,18 +43,21 @@ export class Layout implements OnInit, OnDestroy {
     while (route.firstChild) {
       route = route.firstChild;
     }
-    this.layout = this.config.layout;
+    const currentConfig = this.config();
+    let newLayout = currentConfig.layout || 'full-layout';
     const layoutFromQueryParam = route.snapshot.queryParamMap.get('layout');
     if (layoutFromQueryParam) {
-      this.layout = layoutFromQueryParam;
-      if (this.config) this.config.layout = layoutFromQueryParam;
+      newLayout = layoutFromQueryParam;
+      this.config.update(cfg => ({ ...cfg, layout: layoutFromQueryParam }));
     }
     const paths = route.pathFromRoot;
     paths.forEach((path) => {
-      if (path.routeConfig && path.routeConfig.data && path.routeConfig.data['layout']) {
-        this.layout = path.routeConfig.data['layout'];
+      if (path.routeConfig?.data?.['layout']) {
+        newLayout = path.routeConfig.data['layout'];
       }
     });
+    this.layout.set(newLayout);
+    this.#cdr.markForCheck();
   }
 
   ngOnDestroy(): void {

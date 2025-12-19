@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProductsStore } from '@features/dashboard/store/products.store';
@@ -9,7 +9,8 @@ import { ConfirmationService } from 'primeng/api';
   selector: 'app-products-list',
   imports: [CommonModule, RouterModule, ConfirmDialogModule],
   providers: [ConfirmationService],
-  templateUrl: './products-list.html'
+  templateUrl: './products-list.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsList implements OnInit {
   productsStore = inject(ProductsStore);

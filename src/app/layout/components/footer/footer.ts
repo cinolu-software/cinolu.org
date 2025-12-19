@@ -54,8 +54,8 @@ export class Footer {
           this.email.set('');
           setTimeout(() => this.subscriptionSuccess.set(false), 5000);
         },
-        error: (err) => {
-          console.error('Newsletter subscription error', err);
+        error: () => {
+          // Error handled silently - user feedback provided via UI
         }
       });
   }

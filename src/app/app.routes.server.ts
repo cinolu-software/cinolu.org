@@ -51,6 +51,18 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Client
   },
   {
+    path: 'dashboard/ventures/edit/:slug',
+    renderMode: RenderMode.Client
+  },
+  {
+    path: 'dashboard/ventures/:slug',
+    renderMode: RenderMode.Client
+  },
+  {
+    path: 'dashboard/products/edit/:slug',
+    renderMode: RenderMode.Client
+  },
+  {
     path: '**',
     renderMode: RenderMode.Prerender
   }

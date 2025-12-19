@@ -26,12 +26,14 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 registerLocaleData(localeFr, 'fr');
 
 export class CustomTranslateLoader implements TranslateLoader {
+  // Static cache buster - only changes on app build/reload, not on every request
+  private static readonly CACHE_BUSTER = Date.now().toString();
+
   constructor(private http: HttpClient) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getTranslation(lang: string): Observable<any> {
-    const cacheBuster = new Date().getTime();
-    return this.http.get(`/assets/i18n/${lang}.json?v=${cacheBuster}`);
+    return this.http.get(`/assets/i18n/${lang}.json?v=${CustomTranslateLoader.CACHE_BUSTER}`);
   }
 }
 

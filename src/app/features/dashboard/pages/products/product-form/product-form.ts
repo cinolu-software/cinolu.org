@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, output, signal } from '@angular/core';
+import { Component, effect, inject, OnInit, output, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -14,7 +14,8 @@ import { ProductGalleryStore } from '@features/dashboard/store/product-gallery.s
   providers: [ProductGalleryStore],
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FileUpload, ApiImgPipe, NgOptimizedImage],
-  templateUrl: './product-form.html'
+  templateUrl: './product-form.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductForm implements OnInit {
   fb = inject(FormBuilder);

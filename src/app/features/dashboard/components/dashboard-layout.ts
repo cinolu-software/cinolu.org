@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
@@ -10,7 +10,8 @@ import { BackButton } from "@shared/components";
   selector: 'app-dashboard-layout',
   standalone: true,
   imports: [CommonModule, RouterModule, ApiImgPipe, NgOptimizedImage, BackButton],
-  templateUrl: './dashboard-layout.html'
+  templateUrl: './dashboard-layout.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardLayout implements OnInit {
   authStore = inject(AuthStore);
