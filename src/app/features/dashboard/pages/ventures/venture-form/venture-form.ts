@@ -6,7 +6,6 @@ import { VenturesStore } from '../../../store/ventures.store';
 import { IVenture, IImage } from '@shared/models/entities.models';
 import { DatePicker } from 'primeng/datepicker';
 import { FileUpload } from '@shared/components/file-upload/file-upload';
-import { environment } from '@environments/environment';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { VentureGalleryStore } from '@features/dashboard/store/venture-gallery.store';
 
@@ -101,8 +100,6 @@ export class VentureForm implements OnInit {
       }
     });
 
-    // Sync gallery images with the VentureGalleryStore so updates (delete/upload)
-    // are reflected automatically in the form component.
     effect(() => {
       const gallery = this.galleryStore.gallery();
       if (gallery) {
@@ -143,33 +140,44 @@ export class VentureForm implements OnInit {
 
   handleCoverLoaded(): void {
     if (this.currentSlug) {
-      // Force reload to get the updated cover
       this.venturesStore.loadVentureBySlug(this.currentSlug);
-      // Hide upload component immediately
       setTimeout(() => {
         const updatedVenture = this.venturesStore.selectedVenture();
         if (updatedVenture?.cover) {
           this.showCoverUpload.set(false);
+          this.coverPreview.set(updatedVenture.cover);
         }
-      }, 500);
+      }, 1000);
     }
   }
 
   handleGalleryLoaded(): void {
+    console.log('Gallery image loaded, reloading gallery data...');
     if (this.currentSlug) {
       this.venturesStore.loadVentureBySlug(this.currentSlug);
-      this.galleryStore.loadAll(this.currentSlug);
+      setTimeout(() => {
+        this.galleryStore.loadAll(this.currentSlug!);
+      }, 500);
     }
   }
 
   getCoverUploadUrl(): string {
     const ventureId = this.venture()?.id;
-    return ventureId ? `${environment.apiUrl}ventures/add-cover/${ventureId}` : '';
+    if (!ventureId) {
+      return '';
+    }
+    const url = `ventures/add-cover/${ventureId}`;
+    console.log('Cover upload URL:', url);
+    return url;
   }
 
   getGalleryUploadUrl(): string {
     const ventureId = this.venture()?.id;
-    return ventureId ? `${environment.apiUrl}ventures/gallery/${ventureId}` : '';
+    if (!ventureId) {
+      return '';
+    }
+    const url = `ventures/gallery/${ventureId}`;
+    return url;
   }
 
   removeCover(): void {
@@ -189,13 +197,10 @@ export class VentureForm implements OnInit {
   }
 
   removeGalleryImage(imageId: string | number): void {
-    // Ensure we pass a string id to the gallery store delete method.
     const id = String(imageId);
     this.galleryStore.delete(id);
   }
-
   triggerCoverUpload(): void {
-    // Remove current cover from server first
     this.removeCover();
   }
 
