@@ -1,6 +1,7 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IProject } from '@shared/models/entities.models';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProjectCard } from '../../components/project-card/project-card';
 import { ProgramCardSkeletonComponent } from '../../components/project-card-skeleton/project-card-skeleton';
@@ -49,7 +50,7 @@ export class ListProjects implements OnInit {
     this.store.loadProjects(this.queryParams());
   }
 
-  trackByProjectId(index: number, project: any): string {
+  trackByProjectId(index: number, project: IProject): string {
     return project.id || index.toString();
   }
 

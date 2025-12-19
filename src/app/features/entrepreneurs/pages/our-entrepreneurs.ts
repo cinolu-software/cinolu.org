@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { LucideAngularModule, UserRound, Users } from 'lucide-angular';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
+import { IVenture } from '@shared/models/entities.models';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { VenturesStore } from '../store/ventures.store';
 import { EntrepreneurUserCard } from '../components/entrepreneur-user-card/entrepreneur-user-card';
@@ -42,7 +43,7 @@ export class OurEntrepreneurs implements OnInit {
     this.rows = event.rows ?? 8;
   }
 
-  trackByVentureId(index: number, venture: any): string {
+  trackByVentureId(index: number, venture: IVenture): string {
     return venture.id || index.toString();
   }
 }

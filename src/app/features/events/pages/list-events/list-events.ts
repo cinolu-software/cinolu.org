@@ -1,6 +1,7 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IEvent } from '@shared/models/entities.models';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EventCard } from '../../components/event-card/event-card';
 import { EventCardSkeleton } from '../../components/event-card-skeleton/event-card-skeleton';
@@ -48,7 +49,7 @@ export class ListEvents implements OnInit {
     this.store.loadEvents(this.queryParams());
   }
 
-  trackByEventId(index: number, event: any): string {
+  trackByEventId(index: number, event: IEvent): string {
     return event.id || index.toString();
   }
 

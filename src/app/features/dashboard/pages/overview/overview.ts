@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { IVenture } from '@shared/models/entities.models';
 import { AuthStore } from '@core/auth/auth.store';
 import { VenturesStore } from '../../store/ventures.store';
 import { ReferralsStore } from '@features/dashboard/store/referrals.store';
@@ -78,7 +79,7 @@ export class DashboardOverview implements OnInit {
     return 'title' in highlight ? highlight.title : highlight.name;
   }
 
-  trackByVentureId(index: number, venture: any): string {
+  trackByVentureId(index: number, venture: IVenture): string {
     return venture.id || index.toString();
   }
 

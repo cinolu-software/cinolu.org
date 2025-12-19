@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { IArticle } from '@shared/models/entities.models';
 import { ArticlesStore } from '../../store/articles/articles.store';
 import { ArticleCard } from '../../components/article-card/article-card';
 import { FilterArticlesDto } from '../../dto/filter-articles.dto';
@@ -45,7 +46,7 @@ export class ListArticles implements OnInit {
     this.store.loadArticles(this.queryParams());
   }
 
-  trackByArticleId(index: number, article: any): string {
+  trackByArticleId(index: number, article: IArticle): string {
     return article.id || index.toString();
   }
 
