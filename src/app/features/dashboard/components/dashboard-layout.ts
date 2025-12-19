@@ -3,13 +3,13 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { filter } from 'rxjs';
-import { BackButton } from '@shared/components';
 import { ApiImgPipe } from '@shared/pipes';
+import { BackButton } from "@shared/components";
 
 @Component({
   selector: 'app-dashboard-layout',
   standalone: true,
-  imports: [CommonModule, RouterModule, BackButton, ApiImgPipe, NgOptimizedImage],
+  imports: [CommonModule, RouterModule, ApiImgPipe, NgOptimizedImage, BackButton],
   templateUrl: './dashboard-layout.html'
 })
 export class DashboardLayout implements OnInit {
@@ -74,7 +74,7 @@ export class DashboardLayout implements OnInit {
       '/dashboard/overview': 'Accueil Dashboard',
       '/dashboard/ventures': 'Gestion des Entreprises',
       '/dashboard/products': 'Catalogue Commercial',
-      '/dashboard/profile': 'Mon Profil Hub',
+      '/dashboard/profile': 'Mon Profil',
       '/dashboard/referrals': 'Mes Parrainages'
     };
 
