@@ -193,6 +193,10 @@ section {
   border-radius: 10px;
 }
 
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgb(93, 156, 70);
+}
+
 .custom-scroll::-webkit-scrollbar-track {
   background: rgb(243, 244, 246);
 }
