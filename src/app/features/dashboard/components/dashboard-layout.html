@@ -1,5 +1,4 @@
 <div class="min-h-screen flex bg-gray-50">
-  <!-- Animated background blobs -->
   <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
     <div
       class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary-500/10 rounded-full blur-[120px] animate-float"></div>
@@ -7,7 +6,6 @@
       class="absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] bg-primary-600/5 rounded-full blur-[100px] animate-float animation-delay-2s"></div>
   </div>
 
-  <!-- Sidebar Desktop -->
   <aside
     class="w-72 bg-white m-4 rounded-lg flex-col py-6 border border-gray-200 hidden xl:flex shadow-sm sticky top-4 h-[calc(100vh-2rem)]">
     <div class="px-6 mb-8 flex items-center gap-3">
@@ -67,9 +65,7 @@
     </div>
   </aside>
 
-  <!-- Main Content -->
   <main class="flex-1 flex flex-col min-h-screen">
-    <!-- Header -->
     <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
       <div class="px-4 xl:px-8 py-4">
         <div class="flex justify-between items-center">
@@ -101,10 +97,13 @@
               </div>
               <div class="relative">
                 @if (authStore.user()?.profile || authStore.user()?.google_image) {
-                <img
-                  [src]="authStore.user()?.profile || authStore.user()?.google_image"
-                  [alt]="authStore.user()?.name"
-                  class="w-10 h-10 rounded-lg object-cover border-2 border-gray-200" />
+                <div class="relative h-10 w-10">
+                  <img
+                    [ngSrc]="authStore.user() | apiIMG: 'user'"
+                    [alt]="authStore.user()?.name"
+                    fill
+                    class="rounded-lg object-cover border-2 border-gray-200" />
+                </div>
                 } @else {
                 <div
                   class="w-10 h-10 rounded-lg bg-primary-500 flex items-center justify-center font-bold text-white text-sm shadow-sm border-2 border-primary-400">
@@ -120,13 +119,11 @@
       </div>
     </header>
 
-    <!-- Page Content -->
     <div class="flex-1 p-4 xl:p-8">
       <router-outlet></router-outlet>
     </div>
   </main>
 
-  <!-- Mobile Sidebar Overlay -->
   @if (isSidebarOpen()) {
   <div
     class="xl:hidden fixed inset-0 bg-black/30 z-40 animate-in fade-in duration-200 backdrop-blur-sm"

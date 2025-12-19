@@ -1,14 +1,15 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { filter } from 'rxjs';
 import { BackButton } from '@shared/components';
+import { ApiImgPipe } from '@shared/pipes';
 
 @Component({
   selector: 'app-dashboard-layout',
   standalone: true,
-  imports: [CommonModule, RouterModule, BackButton],
+  imports: [CommonModule, RouterModule, BackButton, ApiImgPipe, NgOptimizedImage],
   templateUrl: './dashboard-layout.html'
 })
 export class DashboardLayout implements OnInit {
