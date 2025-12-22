@@ -9,7 +9,7 @@ import { Programs } from '../components/programs/programs';
 import { Onestop } from '../components/onestop/onestop';
 import { Services } from '../components/services/services';
 import { Storytelling } from '../components/storytelling/storytelling';
-import { TestimonialsSection } from '../components/testimonials-section/testimonials-section';
+// import { TestimonialsSection } from '../components/testimonials-section/testimonials-section';
 
 @Component({
   selector: 'app-landing',
@@ -23,8 +23,8 @@ import { TestimonialsSection } from '../components/testimonials-section/testimon
     Programs,
     Onestop,
     Services,
-    Storytelling,
-    TestimonialsSection
+    Storytelling
+    // TestimonialsSection
   ],
   templateUrl: './landing.html',
   changeDetection: ChangeDetectionStrategy.OnPush
