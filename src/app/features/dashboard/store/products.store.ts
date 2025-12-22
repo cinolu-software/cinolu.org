@@ -42,7 +42,6 @@ export const ProductsStore = signalStore(
             }),
             catchError(() => {
               patchState(store, { isLoading: false });
-              _toast.showError('Erreur lors du chargement');
               return of(null);
             })
           )

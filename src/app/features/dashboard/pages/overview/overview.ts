@@ -12,7 +12,6 @@ import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-dashboard-overview',
-  standalone: true,
   imports: [CommonModule, RouterModule, BaseChartDirective],
   providers: [HighlightsStore],
   templateUrl: './overview.html',
@@ -24,6 +23,7 @@ export class DashboardOverview implements OnInit {
   referralsStore = inject(ReferralsStore);
   productsStore = inject(ProductsStore);
   highlightsStore = inject(HighlightsStore);
+  onestopUrl = environment.onestopUrl;
 
   // Configuration du graphique de progression
   public doughnutChartData: ChartConfiguration<'doughnut'>['data'] = {
@@ -179,6 +179,12 @@ export class DashboardOverview implements OnInit {
   updateProfileCompletion() {
     const completion = this.calculateProfileCompletion();
     this.doughnutChartData.datasets[0].data = [completion, 100 - completion];
+  }
+
+  isAdmin(): boolean {
+    const user = this.authStore.user();
+    const roles = user?.roles as unknown as string[];
+    return roles.some((role) => role === 'admin' || role === 'staff');
   }
 
   get profileCompletion(): number {

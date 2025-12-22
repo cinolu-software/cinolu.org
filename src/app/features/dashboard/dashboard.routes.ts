@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 import { authGuard } from '@core/guards/auth.guard';
-import { userGuard } from '@core/guards/role.guard';
+// import { userGuard } from '@core/guards/role.guard';
 
 export const dashboardRoutes: Routes = [
   {
     path: '',
-    canActivate: [authGuard, userGuard],
+    canActivate: [authGuard],
     loadComponent: () => import('./components/dashboard-layout').then((c) => c.DashboardLayout),
     children: [
       {

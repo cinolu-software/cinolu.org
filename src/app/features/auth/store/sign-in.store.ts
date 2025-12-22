@@ -7,7 +7,6 @@ import { ToastrService } from '@core/services/toast/toastr.service';
 import { IUser } from '@shared/models/entities.models';
 import { SignInDto } from '../dto/sign-in.dto';
 import { AuthStore } from '@core/auth/auth.store';
-import { environment } from '@environments/environment';
 import { Router } from '@angular/router';
 
 interface ISignInStore {
@@ -39,19 +38,7 @@ export const SignInStore = signalStore(
               patchState(store, { isLoading: false });
               _authStore.setUser(data);
               _toast.showSuccess('Connexion réussie');
-
-              const userRoles = data.roles.map((role) => (typeof role === 'string' ? role : role.name));
-
-              setTimeout(() => {
-                if (userRoles.includes('user')) {
-                  _router.navigate(['/dashboard']);
-                } else if (userRoles.includes('admin') || userRoles.includes('staff')) {
-                  window.location.href = environment.onestopUrl;
-                } else {
-                  _router.navigate(['/']);
-                }
-              }, 100);
-
+              _router.navigate(['/dashboard']);
               onSuccess();
             }),
             catchError((err) => {

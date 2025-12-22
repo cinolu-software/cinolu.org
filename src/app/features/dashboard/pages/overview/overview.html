@@ -18,7 +18,17 @@
               <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-0.5">
                 {{ getGreeting() }}, {{ authStore.user()?.name }}
               </h1>
+              @if (isAdmin()) {
+              <div class="text-gray-800 text-sm md:text-base">
+                Tableau de bord administrateur
+                <a class="underline text-primary-700" [href]="onestopUrl" target="_blank" rel="noopener noreferrer">
+                  admin.cinolu.org
+                </a>
+              </div>
+              } @else {
               <p class="text-gray-600 text-sm md:text-base">Voici un aperçu de votre écosystème entrepreneurial</p>
+
+              }
             </div>
           </div>
         </div>
