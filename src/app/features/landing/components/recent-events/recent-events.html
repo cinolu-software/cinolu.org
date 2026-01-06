@@ -43,8 +43,7 @@
         [showNavigators]="false"
         [circular]="true"
         [responsiveOptions]="carouselOptions"
-        touchMoveThreshold="15"
-        class="w-full hero-carousel no-touch-mobile">
+        class="w-full events-carousel">
         <ng-template let-event #item>
           <div class="sm:px-3">
             <app-event-card [event]="event" [buttonTextKey]="'recent_events.explore'" />
