@@ -36,7 +36,6 @@ export class ReferralsPage implements OnInit {
       navigator.clipboard.writeText(code).then(() => {
         this.copied.set(true);
         this.toast.showSuccess('Code copié !');
-        setTimeout(() => this.copied.set(false), 2000);
       });
     }
   }
