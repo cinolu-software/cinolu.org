@@ -315,19 +315,75 @@ section {
   color: rgb(93, 156, 70);
 }
 
+/* Hero Main Carousel - Un seul slide visible */
+.hero-main-carousel .p-carousel-content {
+  overflow: hidden !important;
+  width: 100% !important;
+  touch-action: pan-y pinch-zoom !important;
+}
+
+.hero-main-carousel .p-carousel-container {
+  overflow: hidden !important;
+  width: 100% !important;
+  touch-action: pan-y pinch-zoom !important;
+}
+
+.hero-main-carousel .p-carousel-items-content {
+  overflow: hidden !important;
+  width: 100% !important;
+  display: flex !important;
+  touch-action: pan-y pinch-zoom !important;
+}
+
+.hero-main-carousel .p-carousel-items-container {
+  display: flex !important;
+  transition: transform 0.5s ease-in-out !important;
+  width: 100% !important;
+  touch-action: pan-y pinch-zoom !important;
+}
+
+.hero-main-carousel .p-carousel-item {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  touch-action: pan-y pinch-zoom !important;
+}
+
+/* Events Carousel - Plusieurs cards visibles */
+.events-carousel .p-carousel-content,
+.events-carousel .p-carousel-container,
+.events-carousel .p-carousel-items-content {
+  touch-action: pan-y pinch-zoom !important;
+}
+
 @media (max-width: 768px) {
-  .no-touch-mobile .p-carousel-content,
-  .no-touch-mobile .p-carousel-container,
-  .no-touch-mobile .p-carousel-items-content,
-  .no-touch-mobile .p-carousel-items-container {
-    touch-action: pan-y !important;
-    pointer-events: none !important;
-    -webkit-touch-callout: none !important;
-    -webkit-user-select: none !important;
-    user-select: none !important;
+  .hero-main-carousel .p-carousel-content,
+  .hero-main-carousel .p-carousel-container,
+  .hero-main-carousel .p-carousel-items-content {
+    overflow: hidden !important;
+    touch-action: pan-y pinch-zoom !important;
   }
 
-  .no-touch-mobile .p-carousel-item {
+  .hero-main-carousel .p-carousel-items-container {
+    pointer-events: none !important;
+  }
+
+  .hero-main-carousel .p-carousel-item > * {
+    pointer-events: auto !important;
+  }
+
+  .events-carousel .p-carousel-content,
+  .events-carousel .p-carousel-container,
+  .events-carousel .p-carousel-items-content {
+    touch-action: pan-y pinch-zoom !important;
+  }
+
+  .hero-carousel .p-carousel-items-container {
+    pointer-events: none !important;
+  }
+
+  .hero-carousel .p-carousel-item > * {
     pointer-events: auto !important;
   }
 }
