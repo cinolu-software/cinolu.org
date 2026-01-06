@@ -84,7 +84,7 @@
   <!-- Referrals List -->
   <div>
     <div class="mb-5">
-      <h2 class="text-xl font-bold text-gray-900">Mes filleuls ({{ referralsStore.totalCount() }})</h2>
+      <h2 class="text-xl font-bold text-gray-900">Mes filleuls ({{ referralsStore.totalCount()? referralsStore.totalCount() : 0 }})</h2>
     </div>
 
     @if (referralsStore.isLoading()) {
