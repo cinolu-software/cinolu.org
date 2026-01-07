@@ -55,7 +55,7 @@ export class ContactUs {
     this.form = this.#formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(5)]],
       email: ['', [Validators.email, Validators.required]],
-      phone_number: ['', [Validators.required, Validators.pattern(/^\+?[1-9]\d{1,14}$/)]],
+      phone_number: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       country: ['', [Validators.required]],
       message: ['', [Validators.required]]
     });
@@ -77,5 +77,12 @@ export class ContactUs {
         this.selectedCountryCode = '';
       }
     });
+  }
+
+  get formattedCountryCode(): string {
+    if (!this.selectedCountryCode) return '---';
+    return this.selectedCountryCode.toString().startsWith('+')
+      ? this.selectedCountryCode
+      : `+${this.selectedCountryCode}`;
   }
 }
