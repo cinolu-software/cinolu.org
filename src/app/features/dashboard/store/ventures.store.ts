@@ -183,23 +183,6 @@ export const VenturesStore = signalStore(
       )
     ),
 
-    removeCover: rxMethod<{ id: string; onSuccess?: () => void }>(
-      pipe(
-        switchMap(({ id, onSuccess }) => {
-          return _http.delete<void>(`ventures/${id}/cover`).pipe(
-            tap(() => {
-              _toast.showSuccess('Cover supprimée');
-              onSuccess?.();
-            }),
-            catchError((err) => {
-              _toast.showError(err.error?.message || 'Erreur lors de la suppression');
-              return of(null);
-            })
-          );
-        })
-      )
-    ),
-
     removeGalleryImage: rxMethod<{ id: string; imageId: string; onSuccess?: () => void }>(
       pipe(
         switchMap(({ id, imageId, onSuccess }) => {
