@@ -157,7 +157,7 @@
           class="bg-white rounded-lg border border-gray-200 shadow-sm p-5 flex items-center gap-4 hover:bg-gray-50 transition-all cursor-pointer group">
           @if (venture.logo) {
           <img
-            [src]="venture.logo"
+            [src]="venture | apiIMG : 'venture'"
             [alt]="venture.name"
             class="w-14 h-14 rounded-lg object-cover border border-gray-200 flex-shrink-0" />
           } @else {

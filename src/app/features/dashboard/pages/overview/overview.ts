@@ -9,10 +9,11 @@ import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration } from 'chart.js';
 import { HighlightsStore } from '@features/landing/store/highlights.store';
 import { environment } from '@environments/environment';
+import { ApiImgPipe } from "../../../../shared/pipes/api-img.pipe";
 
 @Component({
   selector: 'app-dashboard-overview',
-  imports: [CommonModule, RouterModule, BaseChartDirective],
+  imports: [CommonModule, RouterModule, BaseChartDirective, ApiImgPipe],
   providers: [HighlightsStore],
   templateUrl: './overview.html',
   changeDetection: ChangeDetectionStrategy.OnPush
