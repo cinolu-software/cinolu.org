@@ -2,8 +2,6 @@ import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@ang
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthStore } from '@core/auth/auth.store';
-import { HttpClient } from '@angular/common/http';
-import { ToastrService } from '@core/services/toast/toastr.service';
 import { IUser } from '@shared/models/entities.models';
 import { DatePicker } from 'primeng/datepicker';
 import { UpdateInfoStore } from '@features/dashboard/store/update-info.store';
@@ -23,11 +21,8 @@ export class ProfilePage implements OnInit {
   authStore = inject(AuthStore);
   updateInfoStore = inject(UpdateInfoStore);
   fb = inject(FormBuilder);
-  http = inject(HttpClient);
-  toast = inject(ToastrService);
 
   isEditing = signal(false);
-  selectedFile = signal<File | null>(null);
 
   profileForm = this.fb.group({
     name: ['', Validators.required],
@@ -66,41 +61,12 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      this.selectedFile.set(input.files[0]);
-      this.uploadProfilePicture();
-    }
-  }
-
   getUploadUrl(): string {
-    const userId = this.authStore.user()?.id;
-    return userId ? `users/${userId}/profile-picture` : '';
+    return 'users/image-profile';
   }
 
   handleLoaded(): void {
-    // Recharger le profil utilisateur pour afficher la nouvelle image
     this.authStore.getProfile();
-  }
-
-  uploadProfilePicture() {
-    const file = this.selectedFile();
-    const userId = this.authStore.user()?.id;
-
-    if (!file || !userId) return;
-
-    const formData = new FormData();
-    formData.append('file', file);
-    this.http.post<IUser>(`users/${userId}/profile-picture`, formData).subscribe({
-      next: (updatedUser) => {
-        this.authStore.setUser(updatedUser);
-        this.toast.showSuccess('Photo de profil mise à jour');
-      },
-      error: (err) => {
-        this.toast.showError(err.error?.message || "Erreur lors de l'upload");
-      }
-    });
   }
 
   saveProfile() {
