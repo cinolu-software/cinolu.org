@@ -1,12 +1,45 @@
+/* Form Input Styles - Unified across all forms */
+
+/* Base input styles for regular HTML inputs */
+input[type='text'].form-input,
+input[type='email'].form-input,
+input[type='password'].form-input,
+input[type='number'].form-input,
+input[type='tel'].form-input,
+input[type='url'].form-input,
+input[type='search'].form-input,
+input[type='date'].form-input,
 .form-input,
 .form-select,
 .form-textarea {
-  @apply w-full px-3.5 py-2.5 text-sm bg-white
-    border border-gray-300 rounded-xl
-    shadow-xs
-    transition-all duration-200 ease-out
+  @apply w-full px-4 py-3 rounded-lg border-2 border-gray-200
+    focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 focus:outline-none
+    transition-all duration-200
     placeholder:text-gray-400
-    focus:border-primary-500 focus:ring-2 focus:ring-primary-200
-    focus:bg-white focus:shadow-sm
-    hover:border-gray-400;
+    hover:border-gray-300;
+}
+
+/* Textarea specific */
+textarea.form-textarea {
+  @apply resize-none;
+}
+
+/* Error states */
+.form-input.ng-invalid.ng-touched,
+.form-select.ng-invalid.ng-touched,
+.form-textarea.ng-invalid.ng-touched {
+  @apply border-red-300;
+}
+
+.form-input.ng-invalid.ng-touched:focus,
+.form-select.ng-invalid.ng-touched:focus,
+.form-textarea.ng-invalid.ng-touched:focus {
+  @apply border-red-500 ring-4 ring-red-500/10;
+}
+
+/* Disabled state */
+.form-input:disabled,
+.form-select:disabled,
+.form-textarea:disabled {
+  @apply bg-gray-50 text-gray-500 cursor-not-allowed border-gray-100;
 }

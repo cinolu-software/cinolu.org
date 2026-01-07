@@ -155,7 +155,6 @@ section {
   overflow: visible;
 }
 
-/* Sidebar Active Item */
 .sidebar-item-active {
   background: linear-gradient(90deg, rgb(241, 248, 237) 0%, transparent 100%) !important;
   border-left: 3px solid rgb(93, 156, 70) !important;
@@ -315,7 +314,6 @@ section {
   color: rgb(93, 156, 70);
 }
 
-/* Hero Main Carousel - Un seul slide visible */
 .hero-main-carousel .p-carousel-content {
   overflow: hidden !important;
   width: 100% !important;
@@ -350,7 +348,6 @@ section {
   touch-action: pan-y pinch-zoom !important;
 }
 
-/* Events Carousel - Plusieurs cards visibles */
 .events-carousel .p-carousel-content,
 .events-carousel .p-carousel-container,
 .events-carousel .p-carousel-items-content {

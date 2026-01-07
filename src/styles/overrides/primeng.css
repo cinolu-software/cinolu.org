@@ -1,28 +1,43 @@
-/* PrimeNG Custom Styles for Dashboard */
+/* PrimeNG Custom Styles - Harmonized with form-input.css */
+
+/* Base Input Styles - Harmonized across all inputs */
+.p-inputtext {
+  @apply w-full px-4 py-3 rounded-lg border-2 border-gray-200
+    focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 focus:outline-none
+    transition-all duration-200
+    hover:border-gray-300;
+}
+
+.p-inputtext:enabled:hover {
+  @apply border-gray-300;
+}
+
+.p-inputtext:enabled:focus {
+  @apply border-primary-500 ring-4 ring-primary-500/10;
+}
 
 /* DatePicker Styles */
 .p-datepicker {
-  @apply rounded-lg shadow-lg border border-gray-200;
+  @apply w-full;
 }
 
 .p-datepicker input {
-  @apply px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors;
-}
-
-.p-datepicker .p-inputtext:enabled:focus {
-  @apply border-primary-500 shadow-sm;
+  @apply w-full px-4 py-3 rounded-lg border-2 border-gray-200
+    focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 focus:outline-none
+    transition-all duration-200
+    hover:border-gray-300;
 }
 
 .p-datepicker-panel {
-  @apply bg-white rounded-lg shadow-xl border border-gray-100;
+  @apply bg-white rounded-sm shadow-xl border border-gray-100;
 }
 
 .p-datepicker-header {
-  @apply bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-t-lg;
+  @apply bg-gradient-to-r from-primary-400 to-primary-600 text-white rounded-t-lg;
 }
 
 .p-datepicker .p-datepicker-calendar td > span {
-  @apply rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors;
+  @apply rounded-sm hover:bg-primary-50 hover:text-primary-700 transition-colors;
 }
 
 .p-datepicker .p-datepicker-calendar td.p-datepicker-today > span {
@@ -31,6 +46,143 @@
 
 .p-datepicker .p-datepicker-calendar td > span.p-highlight {
   @apply bg-primary-600 text-white font-bold;
+}
+
+.p-datepicker .p-datepicker-input-icon-container {
+  @apply text-gray-400 hover:text-primary-600 transition-colors;
+}
+
+/* Select Styles */
+.p-select {
+  @apply w-full;
+}
+
+.p-select-label {
+  @apply px-4 py-3;
+}
+
+.p-select .p-inputtext {
+  @apply px-4 py-3;
+}
+
+/* Password Styles */
+.p-password {
+  @apply w-full;
+}
+
+.p-password input {
+  @apply w-full px-4 py-3 rounded-lg border-2 border-gray-200
+    focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 focus:outline-none
+    transition-all duration-200
+    hover:border-gray-300;
+}
+
+.p-password-toggle-icon {
+  @apply text-gray-400 hover:text-primary-600 transition-colors;
+}
+
+.p-inputgroup {
+  @apply flex w-full;
+}
+
+.p-inputgroup-addon {
+  @apply px-4 py-3 bg-primary-50/50 border-2 border-gray-200
+    font-semibold text-gray-700 text-sm
+    flex items-center justify-center
+    transition-all duration-200;
+}
+
+.p-inputgroup > .p-inputgroup-addon:first-child {
+  @apply rounded-l-lg border-r-0;
+}
+
+.p-inputgroup > .p-inputgroup-addon:last-child {
+  @apply rounded-r-lg border-l-0;
+}
+
+/* Input after addon */
+.p-inputgroup > .p-inputgroup-addon:first-child + .p-inputtext {
+  @apply rounded-r-lg border-l-0;
+}
+
+/* Input before addon */
+.p-inputgroup > .p-inputtext:not(:last-child) {
+  @apply rounded-l-lg border-r-0;
+}
+
+/* Input standalone in group */
+.p-inputgroup > .p-inputtext:only-child {
+  @apply rounded-lg;
+}
+
+/* Hover state for the whole group */
+.p-inputgroup:hover > .p-inputgroup-addon {
+  @apply border-gray-300;
+}
+
+.p-inputgroup:hover > .p-inputtext {
+  @apply border-gray-300;
+}
+
+/* Focus state - highlight both addon and input */
+.p-inputgroup:has(.p-inputtext:focus) > .p-inputgroup-addon {
+  @apply border-primary-500;
+}
+
+.p-inputgroup:has(.p-inputtext:focus) > .p-inputtext {
+  @apply border-primary-500 ring-4 ring-primary-500/10;
+}
+
+/* Error state for inputgroup */
+.p-inputgroup:has(.p-inputtext.ng-invalid.ng-touched) > .p-inputgroup-addon {
+  @apply border-red-300 bg-red-50/30;
+}
+
+.p-inputgroup:has(.p-inputtext.ng-invalid.ng-touched) > .p-inputtext {
+  @apply border-red-300;
+}
+
+.p-inputgroup:has(.p-inputtext.ng-invalid.ng-touched:focus) > .p-inputgroup-addon {
+  @apply border-red-500;
+}
+
+.p-inputgroup:has(.p-inputtext.ng-invalid.ng-touched:focus) > .p-inputtext {
+  @apply border-red-500 ring-4 ring-red-500/10;
+}
+
+/* Textarea Styles */
+.p-textarea {
+  @apply w-full px-4 py-3 rounded-lg border-2 border-gray-200
+    focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 focus:outline-none
+    transition-all duration-200
+    hover:border-gray-300
+    resize-none;
+}
+
+/* Error States */
+.p-inputtext.ng-invalid.ng-touched,
+.p-password.ng-invalid.ng-touched input,
+.p-datepicker.ng-invalid.ng-touched input,
+.p-select.ng-invalid.ng-touched .p-inputtext,
+.p-textarea.ng-invalid.ng-touched {
+  @apply border-red-300;
+}
+
+.p-inputtext.ng-invalid.ng-touched:focus,
+.p-password.ng-invalid.ng-touched input:focus,
+.p-datepicker.ng-invalid.ng-touched input:focus,
+.p-select.ng-invalid.ng-touched .p-inputtext:focus,
+.p-textarea.ng-invalid.ng-touched:focus {
+  @apply border-red-500 ring-4 ring-red-500/10;
+}
+
+/* Disabled States */
+.p-inputtext:disabled,
+.p-password input:disabled,
+.p-datepicker input:disabled,
+.p-select:disabled .p-inputtext,
+.p-textarea:disabled {
+  @apply bg-gray-50 text-gray-500 cursor-not-allowed border-gray-100;
 }
 
 /* ConfirmDialog Styles */
@@ -68,18 +220,4 @@
 
 .p-confirmdialog .p-confirm-dialog-icon {
   @apply text-yellow-500;
-}
-
-/* Fluid DatePicker */
-.p-datepicker.p-fluid {
-  @apply w-full;
-}
-
-.p-datepicker.p-fluid input {
-  @apply w-full;
-}
-
-/* Icon in DatePicker */
-.p-datepicker .p-datepicker-input-icon-container {
-  @apply text-gray-400 hover:text-primary-600 transition-colors;
 }
