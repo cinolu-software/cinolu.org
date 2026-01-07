@@ -131,6 +131,7 @@
         "genderRequired": "Le genre est requis",
         "countryRequired": "Le pays est requis",
         "phoneRequired": "Le numéro de téléphone est requis",
+        "phoneInvalid": "Le numéro de téléphone n'est pas valide",
         "passwordRequired": "Le mot de passe est requis",
         "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
         "passwordConfirmRequired": "La confirmation du mot de passe est requise",

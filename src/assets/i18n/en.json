@@ -129,6 +129,7 @@
         "genderRequired": "Gender is required",
         "countryRequired": "Country is required",
         "phoneRequired": "Phone number is required",
+        "phoneInvalid": "Phone number is not valid",
         "passwordRequired": "Password is required",
         "passwordMinLength": "Password must be at least 6 characters",
         "passwordConfirmRequired": "Password confirmation is required",
