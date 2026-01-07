@@ -30,10 +30,7 @@
             id="email"
             type="email"
             formControlName="email"
-            [placeholder]="'auth.signin.form.emailPlaceholder' | translate"
-            class="w-full px-4 py-3 rounded-md border-2 border-gray-200 focus:border-primary-500 transition-all duration-200 focus:ring-4 focus:ring-primary-500/10"
-            [class.!border-red-300]="form.get('email')?.invalid && form.get('email')?.touched"
-            [class.focus:!border-red-500]="form.get('email')?.invalid && form.get('email')?.touched" />
+            [placeholder]="'auth.signin.form.emailPlaceholder' | translate" />
           @if (form.get('email')?.invalid && form.get('email')?.touched) {
           <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
             <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
@@ -61,8 +58,7 @@
             [feedback]="false"
             [toggleMask]="true"
             [inputId]="'password'"
-            [placeholder]="'auth.signin.form.passwordPlaceholder' | translate"
-            styleClass="w-full" />
+            [placeholder]="'auth.signin.form.passwordPlaceholder' | translate" />
           @if (form.get('password')?.invalid && form.get('password')?.touched) {
           <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
             <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
