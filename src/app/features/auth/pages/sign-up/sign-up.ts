@@ -1,5 +1,13 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
@@ -81,16 +89,47 @@ export class SignUp {
   };
 
   constructor() {
-    this.form = this.#formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(5)]],
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      password_confirm: ['', [Validators.required, Validators.minLength(6)]],
-      phone_number: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      birth_date: ['', [Validators.required]],
-      country: ['', [Validators.required]]
-    });
+    this.form = this.#formBuilder.group(
+      {
+        name: ['', [Validators.required, Validators.minLength(5)]],
+        email: ['', [Validators.email, Validators.required]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        password_confirm: ['', [Validators.required, Validators.minLength(6)]],
+        phone_number: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        gender: ['', [Validators.required]],
+        birth_date: ['', [Validators.required]],
+        country: ['', [Validators.required]]
+      },
+      {
+        validators: this.passwordMatchValidator
+      }
+    );
+  }
+
+  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+    const password = control.get('password');
+    const passwordConfirm = control.get('password_confirm');
+
+    if (!password || !passwordConfirm) {
+      return null;
+    }
+
+    if (!passwordConfirm.touched) {
+      return null;
+    }
+
+    if (password.value !== passwordConfirm.value) {
+      passwordConfirm.setErrors({ ...passwordConfirm.errors, passwordMismatch: true });
+      return { passwordMismatch: true };
+    } else {
+      if (passwordConfirm.hasError('passwordMismatch')) {
+        const errors = { ...passwordConfirm.errors };
+        delete errors['passwordMismatch'];
+        passwordConfirm.setErrors(Object.keys(errors).length > 0 ? errors : null);
+      }
+    }
+
+    return null;
   }
 
   onSignUp(): void {
@@ -106,5 +145,12 @@ export class SignUp {
   onSelectCountry(event: SelectChangeEvent): void {
     const value = event.value;
     this.selectedCountryCode = this.countryItems.find((item) => item.name === value)?.code || '';
+  }
+
+  get formattedCountryCode(): string {
+    if (!this.selectedCountryCode) return '---';
+    return this.selectedCountryCode.toString().startsWith('+')
+      ? this.selectedCountryCode
+      : `+${this.selectedCountryCode}`;
   }
 }
