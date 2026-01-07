@@ -1,5 +1,5 @@
 import { Component, effect, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VenturesStore } from '../../../store/ventures.store';
@@ -13,7 +13,7 @@ import { VentureGalleryStore } from '@features/dashboard/store/venture-gallery.s
   selector: 'app-venture-form',
   providers: [VentureGalleryStore],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DatePicker, FileUpload, ApiImgPipe],
+  imports: [CommonModule, ReactiveFormsModule, DatePicker, FileUpload, ApiImgPipe, NgOptimizedImage],
   templateUrl: './venture-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -30,6 +30,7 @@ export class VentureForm implements OnInit {
   galleryImages = signal<IImage[]>([]);
   galleryStore = inject(VentureGalleryStore);
   showCoverUpload = signal(true);
+  showLogoUpload = signal(true);
 
   sectors = [
     'Agriculture',
@@ -92,6 +93,13 @@ export class VentureForm implements OnInit {
           this.coverPreview.set(null);
           this.showCoverUpload.set(true);
         }
+
+        if (selectedVenture.logo) {
+          this.showLogoUpload.set(false);
+        } else {
+          this.showLogoUpload.set(true);
+        }
+
         if (selectedVenture.gallery && selectedVenture.gallery.length > 0) {
           this.galleryImages.set(selectedVenture.gallery);
         }
@@ -136,6 +144,18 @@ export class VentureForm implements OnInit {
     }
   }
 
+  handleLogoLoaded(): void {
+    if (this.currentSlug) {
+      this.venturesStore.loadVentureBySlug(this.currentSlug);
+      setTimeout(() => {
+        const updatedVenture = this.venturesStore.selectedVenture();
+        if (updatedVenture?.logo) {
+          this.showLogoUpload.set(false);
+        }
+      }, 1000);
+    }
+  }
+
   handleCoverLoaded(): void {
     if (this.currentSlug) {
       this.venturesStore.loadVentureBySlug(this.currentSlug);
@@ -166,6 +186,14 @@ export class VentureForm implements OnInit {
     return `ventures/add-cover/${ventureId}`;
   }
 
+  getLogoUploadUrl(): string {
+    const ventureId = this.venture()?.id;
+    if (!ventureId) {
+      return '';
+    }
+    return `ventures/add-logo/${ventureId}`;
+  }
+
   getGalleryUploadUrl(): string {
     const ventureId = this.venture()?.id;
     if (!ventureId) {
@@ -175,28 +203,9 @@ export class VentureForm implements OnInit {
     return url;
   }
 
-  removeCover(): void {
-    const ventureId = this.venture()?.id;
-    if (ventureId) {
-      this.venturesStore.removeCover({
-        id: ventureId,
-        onSuccess: () => {
-          this.coverPreview.set(null);
-          this.showCoverUpload.set(true);
-          if (this.currentSlug) {
-            this.venturesStore.loadVentureBySlug(this.currentSlug);
-          }
-        }
-      });
-    }
-  }
-
   removeGalleryImage(imageId: string | number): void {
     const id = String(imageId);
     this.galleryStore.delete(id);
-  }
-  triggerCoverUpload(): void {
-    this.removeCover();
   }
 
   cancel() {
