@@ -1,0 +1,75 @@
+<div class="activity-list bg-white rounded-lg shadow-sm border border-gray-200">
+  @if (title()) {
+  <div class="px-6 py-4 border-b border-gray-200">
+    <h3 class="text-lg font-semibold text-gray-900">{{ title() }}</h3>
+  </div>
+  } @if (items() && items().length > 0) {
+  <div class="divide-y divide-gray-100">
+    @for (item of items(); track item.id) {
+    <div class="p-4 hover:bg-gray-50 transition-colors duration-150">
+      <div class="flex items-start gap-4">
+        <!-- Icon/Avatar -->
+        <div
+          class="flex items-center justify-center w-10 h-10 rounded-full"
+          [ngClass]="getIconBgClass(item.iconColor || 'primary')">
+          <i-lucide
+            [img]="item.icon || defaultIcon"
+            [ngClass]="getIconColorClass(item.iconColor || 'primary')"
+            class="w-5 h-5" />
+        </div>
+
+        <!-- Content -->
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between gap-2 mb-1">
+            <h4 class="text-sm font-semibold text-gray-900 truncate">{{ item.title }}</h4>
+            @if (item.badge) {
+            <p-chip [label]="item.badge.label" [styleClass]="getBadgeClass(item.badge.color)"></p-chip>
+            }
+          </div>
+
+          @if (item.subtitle) {
+          <p class="text-sm text-gray-600 mb-2">{{ item.subtitle }}</p>
+          } @if (item.meta) {
+          <div class="flex items-center justify-between text-xs text-gray-500">
+            @if (item.meta.left) {
+            <span>{{ item.meta.left }}</span>
+            } @if (item.meta.right) {
+            <span>{{ item.meta.right }}</span>
+            }
+          </div>
+          }
+
+          <!-- Actions -->
+          @if (actions() && actions()!.length > 0) {
+          <div class="flex gap-2 mt-3">
+            @for (action of actions(); track action.label) {
+            <button
+              pButton
+              [label]="action.label"
+              class="p-button-sm p-button-text p-button-secondary"
+              (click)="action.callback(item)">
+              <i-lucide [img]="action.icon" class="w-4 h-4 mr-2" />
+            </button>
+            }
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  } @else {
+  <!-- Empty State -->
+  <div class="flex flex-col items-center justify-center py-12 px-6">
+    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+      <i-lucide [img]="emptyIcon()" class="w-8 h-8 text-gray-400" />
+    </div>
+    <p class="text-gray-600 text-center mb-4">{{ emptyMessage() }}</p>
+    @if (emptyAction()) {
+    <button pButton [label]="emptyAction()!.label" class="p-button-sm" (click)="emptyAction()!.callback()">
+      <i-lucide [img]="emptyAction()!.icon" class="w-4 h-4 mr-2" />
+    </button>
+    }
+  </div>
+  }
+</div>
