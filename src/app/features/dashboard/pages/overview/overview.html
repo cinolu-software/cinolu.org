@@ -1,200 +1,303 @@
-<div class="w-full max-w-7xl mx-auto pb-20 px-4 md:px-6 lg:px-8">
+<div class="dashboard-container pb-20">
   @if (venturesStore.isLoading()) {
-  <div class="flex justify-center items-center py-16">
-    <div class="w-10 h-10 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
+  <!-- Loading State Premium -->
+  <div class="flex flex-col justify-center items-center py-24">
+    <div class="relative">
+      <div class="w-16 h-16 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin"></div>
+      <div
+        class="absolute inset-0 w-16 h-16 border-4 border-transparent border-b-brand-400 rounded-full animate-ping"></div>
+    </div>
+    <p class="mt-6 text-slate-600 font-medium animate-pulse">Chargement de votre écosystème...</p>
   </div>
   } @else {
-  <div class="grid grid-cols-12 gap-6 lg:gap-8">
+  <!-- Content Grid -->
+  <div class="dashboard-grid">
+    <!-- Welcome Banner Premium avec Glass Morphism -->
     <div class="col-span-12">
-      <div class="bg-white rounded-lg border border-gray-200 shadow-md p-6 md:p-8 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-primary-100 rounded-full blur-[100px] -z-0"></div>
-        <div class="relative z-10">
-          <div class="flex items-center gap-4">
+      <div class="dashboard-card-elevated p-8 md:p-10 relative overflow-hidden group cursor-default">
+        <!-- Animated Gradient Background -->
+        <div
+          class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-brand-400/20 to-emerald-400/20 rounded-full blur-3xl -z-0 group-hover:scale-110 transition-transform duration-700"></div>
+        <div
+          class="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-blue-400/10 to-purple-400/10 rounded-full blur-3xl -z-0 group-hover:scale-110 transition-transform duration-700"></div>
+
+        <div class="relative z-10 flex items-start gap-5">
+          <!-- Icon Premium -->
+          <div
+            class="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-xl shadow-brand-500/30 flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
+            <span class="material-icons text-white text-4xl md:text-5xl">waving_hand</span>
+          </div>
+
+          <!-- Welcome Text -->
+          <div class="flex-1 min-w-0">
+            <h1 class="dashboard-heading-2 mb-2">
+              {{ getGreeting() }}, <span class="dashboard-text-gradient-primary">{{ authStore.user()?.name }}</span>
+            </h1>
+            @if (isAdmin()) {
+            <div class="flex items-center gap-2 text-slate-700 text-base md:text-lg flex-wrap">
+              <span class="dashboard-badge-purple">
+                <span class="material-icons text-[14px]">admin_panel_settings</span>
+                Administrateur
+              </span>
+              <span class="text-slate-400">•</span>
+              <a
+                class="inline-flex items-center gap-1.5 font-semibold text-brand-600 hover:text-brand-700 transition-colors"
+                [href]="onestopUrl"
+                target="_blank"
+                rel="noopener noreferrer">
+                <span>admin.cinolu.org</span>
+                <span class="material-icons text-[16px]">open_in_new</span>
+              </a>
+            </div>
+            } @else {
+            <p class="dashboard-text-body">Voici un aperçu complet de votre écosystème entrepreneurial</p>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Section Header Premium -->
+    <div class="col-span-12">
+      <div class="dashboard-card p-5 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div
+            class="w-11 h-11 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+            <span class="material-icons text-white text-xl">insights</span>
+          </div>
+          <div>
+            <h2 class="dashboard-heading-5">Statistiques clés</h2>
+            <p class="dashboard-text-tiny">Vue synthétique de vos indicateurs</p>
+          </div>
+        </div>
+        <span class="dashboard-badge-neutral hidden sm:inline-flex">
+          <span class="material-icons text-[12px]">update</span>
+          <span>Temps réel</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Stat Cards Premium - Grid Responsive -->
+    <div class="col-span-12 md:col-span-6 lg:col-span-3">
+      <div class="dashboard-stat-card">
+        <div class="flex items-start justify-between mb-4">
+          <div class="dashboard-stat-icon bg-gradient-to-br from-brand-500 to-brand-700 shadow-lg shadow-brand-500/30">
+            <span class="material-icons text-white text-2xl">{{ businessIcon }}</span>
+          </div>
+          <div class="dashboard-badge-success">
+            <span class="material-icons text-[12px]">trending_up</span>
+          </div>
+        </div>
+        <div class="space-y-1">
+          <p class="dashboard-stat-label">Mes Entreprises</p>
+          <h3 class="dashboard-stat-value">{{ venturesStore.ventures().length || 0 }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-12 md:col-span-6 lg:col-span-3">
+      <div class="dashboard-stat-card">
+        <div class="flex items-start justify-between mb-4">
+          <div class="dashboard-stat-icon bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/30">
+            <span class="material-icons text-white text-2xl">{{ packageIcon }}</span>
+          </div>
+          <div class="dashboard-badge-info">
+            <span class="material-icons text-[12px]">inventory_2</span>
+          </div>
+        </div>
+        <div class="space-y-1">
+          <p class="dashboard-stat-label">Produits Actifs</p>
+          <h3 class="dashboard-stat-value">{{ productsCount || 0 }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-12 md:col-span-6 lg:col-span-3">
+      <div class="dashboard-stat-card">
+        <div class="flex items-start justify-between mb-4">
+          <div
+            class="dashboard-stat-icon bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/30">
+            <span class="material-icons text-white text-2xl">{{ userPlusIcon }}</span>
+          </div>
+          <div class="dashboard-badge-success">
+            <span class="material-icons text-[12px]">people</span>
+          </div>
+        </div>
+        <div class="space-y-1">
+          <p class="dashboard-stat-label">Parrainages</p>
+          <h3 class="dashboard-stat-value">{{ authStore.user()?.referralsCount || 0 }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-12 md:col-span-6 lg:col-span-3">
+      <div class="dashboard-stat-card">
+        <div class="flex items-start justify-between mb-4">
+          <div class="dashboard-stat-icon bg-gradient-to-br from-amber-500 to-orange-600 shadow-lg shadow-amber-500/30">
+            <span class="material-icons text-white text-2xl">{{ usersIcon }}</span>
+          </div>
+          <div class="dashboard-badge-warning">
+            <span class="material-icons text-[12px]">person</span>
+          </div>
+        </div>
+        <div class="space-y-1">
+          <p class="dashboard-stat-label">Profil</p>
+          <h3 class="dashboard-stat-value">{{ profileCompletion }}<span class="text-xl">%</span></h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Completion Chart Premium -->
+    <div class="col-span-12 lg:col-span-6">
+      <div class="dashboard-card-elevated p-6 md:p-8 h-full flex flex-col">
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center gap-3">
             <div
-              class="w-12 h-12 md:w-14 md:h-14 rounded-lg bg-primary-100 flex items-center justify-center border border-primary-200">
-              <span class="material-icons text-primary-500 text-2xl md:text-[28px]">waving_hand</span>
+              class="w-11 h-11 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
+              <span class="material-icons text-white text-xl">pie_chart</span>
             </div>
             <div>
-              <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-0.5">
-                {{ getGreeting() }}, {{ authStore.user()?.name }}
-              </h1>
-              @if (isAdmin()) {
-              <div class="text-gray-800 text-sm md:text-base">
-                Tableau de bord administrateur
-                <a class="underline text-primary-700" [href]="onestopUrl" target="_blank" rel="noopener noreferrer">
-                  admin.cinolu.org
-                </a>
-              </div>
-              } @else {
-              <p class="text-gray-600 text-sm md:text-base">Voici un aperçu de votre écosystème entrepreneurial</p>
-
-              }
+              <h3 class="dashboard-heading-5">Complétion du Profil</h3>
+              <p class="dashboard-text-tiny">Progression en temps réel</p>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="col-span-12 flex items-center justify-between gap-3 bg-white rounded-lg border border-gray-200 shadow-sm px-4 py-3">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center border border-primary-100">
-          <span class="material-icons text-primary-500 text-base">insights</span>
-        </div>
-        <div>
-          <h2 class="text-sm md:text-base font-bold text-gray-900">Statistiques clés</h2>
-          <p class="text-[11px] text-gray-500">Vue synthétique de vos indicateurs.</p>
-        </div>
-      </div>
-      <span
-        class="text-[11px] font-medium text-gray-500 bg-gray-50 border border-gray-200 px-3 py-1 rounded-full hidden sm:inline-block"
-        >Mise à jour régulière</span
-      >
-    </div>
-
-    <div class="col-span-12 md:col-span-6 lg:col-span-3">
-      <app-stat-card
-        [title]="'Mes Entreprises'"
-        [value]="venturesStore.ventures().length || 0"
-        [icon]="businessIcon"
-        color="primary">
-      </app-stat-card>
-    </div>
-
-    <div class="col-span-12 md:col-span-6 lg:col-span-3">
-      <app-stat-card [title]="'Produits Actifs'" [value]="productsCount || 0" [icon]="packageIcon" color="info">
-      </app-stat-card>
-    </div>
-
-    <div class="col-span-12 md:col-span-6 lg:col-span-3">
-      <app-stat-card
-        [title]="'Parrainages'"
-        [value]="authStore.user()?.referralsCount || 0"
-        [icon]="userPlusIcon"
-        color="success">
-      </app-stat-card>
-    </div>
-
-    <div class="col-span-12 md:col-span-6 lg:col-span-3">
-      <app-stat-card [title]="'Profil'" [value]="profileCompletion + '%'" [icon]="usersIcon" color="warning">
-      </app-stat-card>
-    </div>
-
-    <div class="col-span-12 lg:col-span-6">
-      <div
-        class="bg-white rounded-lg border border-gray-200 shadow-md hover:shadow-lg transition-all p-6 h-full flex flex-col">
-        <div class="flex items-center justify-between mb-4">
-          <div class="flex items-center gap-2">
-            <span class="material-icons text-primary-500">pie_chart</span>
-            <h3 class="text-lg font-semibold text-gray-900">Complétion du Profil</h3>
-          </div>
-          <span class="text-xs text-gray-500">Mise à jour en temps réel</span>
+          <span class="dashboard-badge-primary">
+            <span class="dashboard-status-online"></span>
+            <span>Live</span>
+          </span>
         </div>
         @defer (on viewport) {
-        <div class="relative h-80 flex items-center justify-center">
+        <div class="relative flex-1 flex items-center justify-center min-h-[320px]">
           <canvas
             baseChart
             [data]="doughnutChartData"
             [options]="doughnutChartOptions"
             type="doughnut"
-            class="w-56 h-56"></canvas>
-          <div class="absolute inset-0 flex items-center justify-center">
+            class="w-64 h-64 max-w-full"></canvas>
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div class="text-center">
-              <span class="text-5xl font-black text-gray-900">{{ profileCompletion }}%</span>
-              <p class="text-sm text-gray-600 font-medium mt-2">
-                {{ profileCompletion === 100 ? 'Profil complet !' : 'Complétez votre profil' }}
+              <span class="text-6xl font-black tracking-tighter dashboard-text-gradient-primary"
+                >{{ profileCompletion }}</span
+              >
+              <span class="text-3xl font-black text-slate-400">%</span>
+              <p class="text-sm text-slate-600 font-semibold mt-3">
+                {{ profileCompletion === 100 ? '✨ Profil complet !' : 'Complétez votre profil' }}
               </p>
             </div>
           </div>
         </div>
         } @placeholder {
-        <div class="h-80 flex items-center justify-center">
-          <div class="w-64 h-64 rounded-full bg-gray-200 animate-pulse"></div>
+        <div class="flex-1 flex items-center justify-center min-h-[320px]">
+          <div class="dashboard-shimmer w-64 h-64 rounded-full"></div>
         </div>
         }
       </div>
     </div>
 
     <div class="col-span-12 lg:col-span-6">
-      <div class="flex items-center justify-between mb-4">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-amber-50 flex items-center justify-center border border-amber-100">
-            <span class="material-icons text-amber-500 text-base">bolt</span>
+      <div class="dashboard-card p-5 mb-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-11 h-11 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg">
+              <span class="material-icons text-white text-xl">bolt</span>
+            </div>
+            <div>
+              <h2 class="dashboard-heading-5">À la une</h2>
+              <p class="dashboard-text-tiny">Mise en avant dynamique</p>
+            </div>
           </div>
-          <div>
-            <h2 class="text-base font-bold text-gray-900">À la une</h2>
-            <p class="text-[11px] text-gray-500">Mise en avant dynamique</p>
-          </div>
+          <span class="dashboard-badge-warning">
+            <span class="material-icons text-[12px]">auto_awesome</span>
+            <span>Featured</span>
+          </span>
         </div>
-        <span class="text-[11px] font-medium text-amber-700 bg-amber-50 border border-amber-100 px-3 py-1 rounded-full"
-          >Actualisé</span
-        >
       </div>
+
       <a
         [routerLink]="getHighlightLink()"
-        class="relative bg-white rounded-lg border border-gray-200 shadow-md hover:shadow-lg h-[320px] overflow-hidden p-6 flex flex-col justify-end group cursor-pointer hover:bg-gray-50 transition-all">
-        <img
-          [src]="getHighlightImage()"
-          class="absolute inset-0 w-full h-full object-cover group-hover:opacity-80 transition-opacity duration-500"
-          [alt]="getHighlightTitle()" />
-        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent"></div>
-        <div class="relative z-10">
+        class="relative dashboard-card-hover overflow-hidden group cursor-pointer h-[360px] flex flex-col justify-end p-8">
+        <!-- Background Image avec overlay -->
+        <div class="absolute inset-0 overflow-hidden">
+          <img
+            [src]="getHighlightImage()"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            [alt]="getHighlightTitle()" />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+        </div>
+
+        <!-- Content Premium -->
+        <div class="relative z-10 space-y-4">
           <span
-            class="bg-primary-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg mb-3 inline-block uppercase tracking-wider shadow-lg shadow-primary-500/30">
-            {{ getHighlightBadge() }}
+            class="dashboard-badge bg-gradient-to-r from-brand-500 to-brand-700 text-white border-0 shadow-xl inline-flex">
+            <span class="material-icons text-[14px]">star</span>
+            <span class="uppercase tracking-wider font-bold text-xs">{{ getHighlightBadge() }}</span>
           </span>
-          <h4 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2">{{ getHighlightTitle() }}</h4>
-          <p class="text-sm text-gray-600 font-medium line-clamp-2">{{ getHighlightDescription() }}</p>
+          <h4 class="text-2xl font-black text-white leading-tight dashboard-line-clamp-2">{{ getHighlightTitle() }}</h4>
+          <p class="text-slate-200 text-sm leading-relaxed dashboard-line-clamp-2">{{ getHighlightDescription() }}</p>
+          <div class="flex items-center gap-2 text-white font-semibold pt-2">
+            <span class="text-sm">Découvrir</span>
+            <span class="material-icons text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </div>
         </div>
       </a>
     </div>
 
+    <!-- Recent Activity Section Premium -->
     <div class="col-span-12">
-      <div
-        class="flex items-center justify-between gap-3 mb-4 bg-white rounded-lg border border-gray-200 shadow-sm px-4 py-3">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-green-50 flex items-center justify-center border border-green-100">
-            <span class="material-icons text-green-500 text-base">history</span>
+      <div class="dashboard-card p-5 mb-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div
+              class="w-11 h-11 rounded-lg bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center shadow-lg">
+              <span class="material-icons text-white text-xl">history</span>
+            </div>
+            <div>
+              <h2 class="dashboard-heading-5">Activité Récente</h2>
+              <p class="dashboard-text-tiny">Dernières actions sur vos entreprises</p>
+            </div>
           </div>
-          <div>
-            <h2 class="text-base font-bold text-gray-900">Activité Récente</h2>
-            <p class="text-[11px] text-gray-500">Dernières actions sur vos ventures</p>
-          </div>
+          <span class="dashboard-badge-success hidden sm:inline-flex">
+            <span class="material-icons text-[12px]">auto_awesome</span>
+            <span>{{ venturesStore.ventures().slice(0, 3).length }} actives</span>
+          </span>
         </div>
-        <span
-          class="text-[11px] font-medium text-gray-600 bg-gray-50 border border-gray-200 px-3 py-1 rounded-full hidden sm:inline-block"
-          >3 dernières activités</span
-        >
       </div>
 
       @if (venturesStore.ventures() && venturesStore.ventures().length > 0) {
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="dashboard-grid-3">
         @for (venture of venturesStore.ventures().slice(0, 3); track venture.id) {
         <a
           [routerLink]="['/dashboard/ventures', venture.slug]"
-          class="bg-white rounded-lg border border-gray-200 shadow-md p-5 flex items-center gap-4 hover:bg-gray-50 hover:shadow-lg transition-all cursor-pointer group">
+          class="dashboard-card-hover p-6 flex items-center gap-4 group cursor-pointer">
+          <!-- Logo Premium -->
           @if (venture.logo) {
-          <img
-            [src]="venture | apiIMG : 'venture'"
-            [alt]="venture.name"
-            class="w-14 h-14 rounded-lg object-cover border border-gray-200 flex-shrink-0" />
+          <div
+            class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 ring-2 ring-slate-100 group-hover:ring-brand-200 transition-all duration-300 shadow-md">
+            <img [src]="venture | apiIMG : 'venture'" [alt]="venture.name" class="w-full h-full object-cover" />
+          </div>
           } @else {
           <div
-            class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center font-bold text-primary-500 border border-primary-200 text-lg flex-shrink-0">
+            class="w-16 h-16 bg-gradient-to-br from-brand-500 to-brand-700 rounded-lg flex items-center justify-center font-black text-white text-lg shadow-lg flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
             {{ venture.name.charAt(0) }}{{ (venture.name.split(' ')[1] || '').charAt(0) }}
           </div>
           }
+
+          <!-- Info -->
           <div class="flex-1 min-w-0">
-            <h5 class="font-bold text-gray-900 group-hover:text-primary-500 transition-colors truncate mb-1">
+            <h5 class="font-bold text-slate-900 group-hover:text-brand-600 transition-colors truncate text-base mb-1">
               {{ venture.name }}
             </h5>
-            <p class="text-[10px] text-gray-600 uppercase tracking-wider font-medium">
+            <p class="dashboard-text-tiny uppercase tracking-wider font-semibold text-slate-500">
               {{ venture.sector || 'Secteur non défini' }}
             </p>
           </div>
+
+          <!-- Arrow Icon Premium -->
           <div
-            class="w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center group-hover:bg-primary-100 transition-colors border border-primary-100 flex-shrink-0">
-            <span class="material-icons text-primary-500 group-hover:text-primary-500 transition-colors text-lg"
+            class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center group-hover:bg-brand-50 transition-all duration-300 flex-shrink-0 shadow-sm">
+            <span
+              class="material-icons text-slate-400 group-hover:text-brand-600 group-hover:translate-x-0.5 transition-all text-xl"
               >arrow_forward</span
             >
           </div>
@@ -202,70 +305,96 @@
         }
       </div>
       } @else {
-      <div class="bg-white rounded-lg border border-gray-200 shadow-md p-10 text-center">
+      <!-- Empty State Premium -->
+      <div class="dashboard-card-elevated p-12 text-center">
         <div
-          class="w-16 h-16 rounded-xl bg-primary-50 flex items-center justify-center mx-auto mb-4 border border-primary-100">
-          <span class="material-icons text-primary-500 text-3xl">business_center</span>
+          class="w-20 h-20 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-brand-500/30">
+          <span class="material-icons text-white text-4xl">business_center</span>
         </div>
-        <p class="text-gray-600 font-medium text-sm mb-4">Aucune entreprise enregistrée</p>
-        <a
-          [routerLink]="['/dashboard/ventures/new']"
-          class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-500 text-white rounded-xl text-sm font-semibold hover:bg-primary-600 transition-colors shadow-lg shadow-primary-500/30">
-          <span class="material-icons text-base">add</span>
-          Créer une entreprise
+        <h3 class="dashboard-heading-4 mb-3">Aucune entreprise enregistrée</h3>
+        <p class="dashboard-text-body mb-6 max-w-md mx-auto">
+          Commencez votre parcours entrepreneurial en créant votre première entreprise
+        </p>
+        <a [routerLink]="['/dashboard/ventures/new']" class="dashboard-btn-primary dashboard-btn-lg inline-flex">
+          <span class="material-icons text-xl">add</span>
+          <span>Créer ma première entreprise</span>
         </a>
       </div>
       }
     </div>
 
+    <!-- Quick Actions Section Premium -->
     <div class="col-span-12">
-      <div
-        class="flex items-center justify-between gap-3 mb-4 bg-white rounded-lg border border-gray-200 shadow-sm px-4 py-3">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-indigo-50 flex items-center justify-center border border-indigo-100">
-            <span class="material-icons text-indigo-500 text-base">flash_on</span>
+      <div class="dashboard-card p-5 mb-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div
+              class="w-11 h-11 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+              <span class="material-icons text-white text-xl">flash_on</span>
+            </div>
+            <div>
+              <h2 class="dashboard-heading-5">Actions rapides</h2>
+              <p class="dashboard-text-tiny">Accès immédiat aux tâches essentielles</p>
+            </div>
           </div>
-          <div>
-            <h2 class="text-base font-bold text-gray-900">Actions rapides</h2>
-            <p class="text-[11px] text-gray-500">Accès immédiat aux tâches clés</p>
-          </div>
+          <span class="dashboard-badge-info hidden sm:inline-flex">
+            <span class="material-icons text-[12px]">rocket_launch</span>
+            <span>3 raccourcis</span>
+          </span>
         </div>
-        <span
-          class="text-[11px] font-medium text-gray-600 bg-gray-50 border border-gray-200 px-3 py-1 rounded-full hidden sm:inline-block"
-          >3 raccourcis essentiels</span
-        >
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <div class="dashboard-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Action 1: Créer Venture -->
         <a
           routerLink="/dashboard/ventures/create"
-          class="group bg-gradient-to-br from-primary-600 to-primary-700 hover:from-primary-500 hover:to-primary-600 rounded-lg p-6 shadow-lg shadow-primary-500/20 hover:shadow-2xl hover:shadow-primary-500/30 transition-all duration-200">
-          <div class="flex flex-col items-center text-center text-white gap-3">
-            <div class="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center border border-white/10">
-              <span class="material-icons text-3xl">add_business</span>
+          class="group relative overflow-hidden rounded-lg p-8 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+          <!-- Gradient Background Premium -->
+          <div class="absolute inset-0 bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700"></div>
+          <div
+            class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIwLjUiIG9wYWNpdHk9IjAuMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
+
+          <div class="relative z-10 flex flex-col items-center text-center text-white gap-4">
+            <div
+              class="w-16 h-16 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30 shadow-2xl group-hover:scale-110 transition-transform duration-300">
+              <span class="material-icons text-4xl">add_business</span>
             </div>
-            <span class="font-semibold text-sm">Créer une Venture</span>
+            <div>
+              <h4 class="font-black text-lg mb-1">Créer une entreprise</h4>
+              <p class="text-white/80 text-sm">Lancez votre projet</p>
+            </div>
           </div>
         </a>
-        <a
-          routerLink="/dashboard/products/create"
-          class="group bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-50 p-6 hover:shadow-2xl transition-all duration-200">
-          <div class="flex flex-col items-center text-center text-gray-600 group-hover:text-gray-900 gap-3">
+
+        <!-- Action 2: Ajouter Produit -->
+        <a routerLink="/dashboard/products/create" class="dashboard-card-hover p-8 group cursor-pointer">
+          <div class="flex flex-col items-center text-center gap-4">
             <div
-              class="w-14 h-14 rounded-xl bg-primary-50 group-hover:bg-primary-100 flex items-center justify-center border border-primary-100 transition-colors">
-              <span class="material-icons text-3xl text-primary-500">add_shopping_cart</span>
+              class="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-xl shadow-blue-500/30 group-hover:scale-110 transition-transform duration-300">
+              <span class="material-icons text-white text-4xl">add_shopping_cart</span>
             </div>
-            <span class="font-semibold text-sm">Ajouter un Produit</span>
+            <div>
+              <h4 class="font-black text-lg text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">
+                Ajouter un Produit
+              </h4>
+              <p class="dashboard-text-small">Créez votre catalogue</p>
+            </div>
           </div>
         </a>
-        <a
-          routerLink="/dashboard/profile"
-          class="group bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-50 p-6 hover:shadow-2xl transition-all duration-200">
-          <div class="flex flex-col items-center text-center text-gray-600 group-hover:text-gray-900 gap-3">
+
+        <!-- Action 3: Modifier Profil -->
+        <a routerLink="/dashboard/profile" class="dashboard-card-hover p-8 group cursor-pointer">
+          <div class="flex flex-col items-center text-center gap-4">
             <div
-              class="w-14 h-14 rounded-xl bg-primary-50 group-hover:bg-primary-100 flex items-center justify-center border border-primary-100 transition-colors">
-              <span class="material-icons text-3xl text-primary-500">edit</span>
+              class="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-xl shadow-purple-500/30 group-hover:scale-110 transition-transform duration-300">
+              <span class="material-icons text-white text-4xl">edit</span>
             </div>
-            <span class="font-semibold text-sm">Modifier le Profil</span>
+            <div>
+              <h4 class="font-black text-lg text-slate-900 mb-1 group-hover:text-purple-600 transition-colors">
+                Modifier le Profil
+              </h4>
+              <p class="dashboard-text-small">Mettez à jour vos infos</p>
+            </div>
           </div>
         </a>
       </div>

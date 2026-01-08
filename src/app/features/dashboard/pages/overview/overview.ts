@@ -10,12 +10,9 @@ import { ChartConfiguration } from 'chart.js';
 import { HighlightsStore } from '@features/landing/store/highlights.store';
 import { environment } from '@environments/environment';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-import { StatCardComponent } from '@shared/components/stat-card/stat-card';
-import { Briefcase, Users, Package, UserPlus } from 'lucide-angular';
-
 @Component({
   selector: 'app-dashboard-overview',
-  imports: [CommonModule, RouterModule, ApiImgPipe, StatCardComponent, BaseChartDirective],
+  imports: [CommonModule, RouterModule, ApiImgPipe, BaseChartDirective],
   providers: [HighlightsStore],
   templateUrl: './overview.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -28,11 +25,11 @@ export class DashboardOverview implements OnInit {
   highlightsStore = inject(HighlightsStore);
   onestopUrl = environment.onestopUrl;
 
-  // Icônes Lucide
-  businessIcon = Briefcase;
-  usersIcon = Users;
-  packageIcon = Package;
-  userPlusIcon = UserPlus;
+  // Icônes Material Icons (noms de strings)
+  businessIcon = 'business_center';
+  usersIcon = 'groups';
+  packageIcon = 'inventory_2';
+  userPlusIcon = 'person_add';
 
   public doughnutChartData: ChartConfiguration<'doughnut'>['data'] = {
     labels: ['Complété', 'Restant'],
