@@ -10,7 +10,7 @@ import { ChartConfiguration } from 'chart.js';
 import { HighlightsStore } from '@features/landing/store/highlights.store';
 import { environment } from '@environments/environment';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-import { StatCardComponent } from '@shared/components/components/stat-card/stat-card';
+import { StatCardComponent } from '@shared/components/stat-card/stat-card';
 import { Briefcase, Users, Package, UserPlus } from 'lucide-angular';
 
 @Component({
