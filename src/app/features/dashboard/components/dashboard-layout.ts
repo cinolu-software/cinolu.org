@@ -4,7 +4,7 @@ import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { filter } from 'rxjs';
 import { ApiImgPipe } from '@shared/pipes';
-import { BackButton } from "@shared/components";
+import { BackButton } from '@shared/components';
 
 @Component({
   selector: 'app-dashboard-layout',

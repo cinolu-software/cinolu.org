@@ -1,132 +1,178 @@
-<div class="min-h-screen flex bg-gray-50">
-  <!-- Sidebar Desktop -->
+<div class="min-h-screen flex bg-slate-50">
+  <!-- Sidebar Desktop - Ultra-moderne -->
   <aside
-    class="w-72 bg-white m-4 rounded-lg flex-col py-8 border border-gray-200 hidden xl:flex sticky top-4 h-[calc(100vh-2rem)] shadow-sm">
-    <a [routerLink]="['/']" class="px-10 mb-12 flex items-center gap-3 rounded-lg" aria-label="Accueil CINOLU">
-      <div class="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center shadow-sm">
-        <span class="material-icons text-white">verified</span>
+    class="w-[280px] bg-white/80 backdrop-blur-xl m-5 rounded-lg flex-col py-8 border border-slate-200/60 hidden xl:flex sticky top-5 h-[calc(100vh-2.5rem)] shadow-xl">
+    <!-- Logo Premium -->
+    <a [routerLink]="['/']" class="px-8 mb-10 flex items-center gap-3 group" aria-label="Accueil CINOLU">
+      <div
+        class="w-11 h-11 bg-gradient-to-br from-primary-400 to-primary-500 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300 group-hover:scale-105">
+        <span class="material-icons text-white text-[22px]">verified</span>
       </div>
-      <span class="text-2xl font-black tracking-tighter text-gray-900 uppercase">CINOLU</span>
+      <span
+        class="text-2xl font-black tracking-tighter text-slate-900 uppercase group-hover:text-brand-600 transition-colors"
+        >CINOLU</span
+      >
     </a>
 
-    <nav class="flex-1 space-y-2 px-4 overflow-y-auto">
-      <div class="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-bold px-6 mb-4">Menu Principal</div>
+    <!-- Navigation Ultra-moderne -->
+    <nav class="flex-1 space-y-1.5 px-4 overflow-y-auto dashboard-scrollbar">
+      <div class="text-[10px] uppercase tracking-[0.15em] text-slate-400 font-bold px-5 mb-5 flex items-center gap-2">
+        <div class="w-1 h-1 rounded-full bg-slate-300"></div>
+        Menu Principal
+      </div>
       @for (item of menuItems; track item.path) {
       <a
         [routerLink]="item.path"
-        class="w-full flex items-center gap-4 px-6 py-4 text-gray-600 hover:text-gray-900 transition-all rounded-lg group"
+        class="w-full flex items-center gap-3.5 px-5 py-3.5 text-slate-600 hover:text-slate-900 transition-all duration-200 rounded-lg group relative overflow-hidden"
         [class.sidebar-item-active]="isActive(item.path)">
-        <span class="material-icons">{{ item.icon }}</span>
-        <span class="font-medium text-sm">{{ item.label }}</span>
+        <!-- Icône avec effet premium -->
+        <div
+          class="relative z-10 w-8 h-8 flex items-center justify-center rounded-xl bg-slate-100 group-hover:bg-brand-50 transition-all duration-200">
+          <span class="material-icons text-[20px] group-hover:text-brand-600">{{ item.icon }}</span>
+        </div>
+        <!-- Label -->
+        <span class="font-semibold text-[15px] relative z-10">{{ item.label }}</span>
       </a>
       }
     </nav>
 
-    <div class="px-6 mt-auto">
+    <!-- Divider élégant -->
+    <div class="mx-8 my-6 border-t border-slate-200"></div>
+
+    <!-- Bouton de déconnexion premium -->
+    <div class="px-6">
       <button
         (click)="signOut()"
-        class="w-full flex items-center justify-center gap-2 px-3 py-3 bg-red-50 text-red-600 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-red-600 hover:text-white transition-all border border-red-200">
-        <span class="material-icons text-base">logout</span>
-        Déconnexion
+        class="w-full flex items-center justify-center gap-2.5 px-4 py-3.5 bg-red-50 text-red-600 rounded-lg text-sm font-bold hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 hover:text-white transition-all duration-300 border border-red-200 hover:border-red-600 group hover:shadow-lg hover:-translate-y-0.5">
+        <span class="material-icons text-[18px]">logout</span>
+        <span>Déconnexion</span>
       </button>
     </div>
   </aside>
 
-  <!-- Main Content -->
-  <main class="flex-1 h-screen overflow-y-auto px-4 md:px-6 xl:px-8 py-4 xl:py-8">
-    <!-- Header -->
+  <main class="flex-1 h-screen overflow-y-auto px-4 md:px-6 xl:px-10 py-5 xl:py-10 dashboard-scrollbar">
     <header
-      class="flex justify-between items-center bg-white p-4 rounded-lg border border-gray-200 mb-6 md:mb-8 shadow-sm">
+      class="flex justify-between items-center bg-white/80 backdrop-blur-xl p-5 rounded-lg border border-slate-200/60 mb-8 shadow-lg">
       <div class="flex items-center gap-6">
-        <button (click)="toggleSidebar()" class="xl:hidden p-2 hover:bg-gray-50 rounded-lg transition-colors">
-          <span class="material-icons text-gray-600">menu</span>
+        <!-- Menu Mobile -->
+        <button
+          (click)="toggleSidebar()"
+          class="xl:hidden p-2.5 hover:bg-slate-100 rounded-xl transition-all duration-200">
+          <span class="material-icons text-slate-700">menu</span>
         </button>
-        <h1 class="text-lg uppercase md:text-xl font-bold font-satoshi ml-4 text-gray-900">
-          {{ getCurrentPageTitle() }}
-        </h1>
+        <!-- Title avec gradient -->
+        <div class="flex items-center gap-3">
+          <div class="w-1.5 h-8 bg-gradient-to-b from-brand-400 to-brand-600 rounded-full hidden md:block"></div>
+          <h1 class="text-xl md:text-2xl font-black tracking-tight text-slate-900">{{ getCurrentPageTitle() }}</h1>
+        </div>
       </div>
 
       <div class="flex items-center gap-4">
-        <div class="hidden md:flex items-center gap-2 bg-gray-100 rounded-full px-4 py-2 border border-gray-200">
-          <span class="material-icons text-primary-500 text-sm">key</span>
-          <span class="text-xs font-mono text-gray-700">{{ authStore.user()?.referral_code || 'N/A' }}</span>
+        <!-- Code de parrainage premium -->
+        <div
+          class="hidden md:flex items-center gap-2.5 bg-gradient-to-br from-brand-50 to-brand-100/50 rounded-lg px-5 py-2.5 border border-brand-200/60 shadow-sm">
+          <span class="material-icons text-brand-600 text-[18px]">key</span>
+          <span class="text-xs font-bold text-brand-700 tracking-wider"
+            >{{ authStore.user()?.referral_code || 'N/A' }}</span
+          >
         </div>
-        <div class="flex items-center gap-3 pl-4 border-l border-gray-200">
+
+        <!-- Profile section premium -->
+        <div class="flex items-center gap-3.5 pl-5 border-l border-slate-200">
           <div class="text-right hidden sm:block">
-            <p class="text-sm font-bold text-gray-900 leading-none">{{ authStore.user()?.name }}</p>
-            <!-- <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-1 italic">Entrepreneur</p> -->
+            <p class="text-sm font-bold text-slate-900 leading-tight">{{ authStore.user()?.name }}</p>
+            <p class="text-xs text-slate-500 mt-0.5">Entrepreneur</p>
           </div>
-          <div class="relative">
+          <div class="relative group cursor-pointer">
             @if (authStore.user()?.profile || authStore.user()?.google_image) {
-            <div class="relative h-12 w-12">
+            <div
+              class="relative h-12 w-12 rounded-lg overflow-hidden ring-2 ring-brand-100 group-hover:ring-brand-300 transition-all duration-200">
               <img
                 [ngSrc]="authStore.user() | apiIMG: 'user'"
                 [alt]="authStore.user()?.name"
                 fill
-                class="rounded-full object-cover border-2 border-gray-200" />
+                class="object-cover" />
             </div>
             } @else {
             <div
-              class="w-12 h-12 rounded-full bg-primary-500 flex items-center justify-center font-bold text-white text-sm shadow-sm border-2 border-primary-400">
+              class="w-12 h-12 rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center font-bold text-white text-base shadow-md ring-2 ring-brand-100 group-hover:ring-brand-300 transition-all duration-200">
               {{ authStore.user()?.name?.charAt(0) || 'U' }}
             </div>
             }
-            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-primary-500 border-2 border-white rounded-full"></div>
+            <!-- Status indicator online -->
+            <div
+              class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full shadow-sm"></div>
           </div>
         </div>
       </div>
     </header>
 
-    <!-- Page Content avec marges cohérentes -->
-    <div>
+    <!-- Page Content avec animation d'apparition -->
+    <div class="dashboard-fade-in-up">
       <router-outlet></router-outlet>
     </div>
   </main>
 
-  <!-- Mobile Sidebar -->
+  <!-- Mobile Sidebar Ultra-moderne -->
   @if (isSidebarOpen()) {
+  <!-- Backdrop avec blur -->
   <div
-    class="xl:hidden fixed inset-0 bg-black/50 z-40 animate-in fade-in duration-200"
+    class="xl:hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 animate-in fade-in duration-300"
     (click)="closeSidebar()"
     (keydown.escape)="closeSidebar()"
     role="button"
     tabindex="0"
     aria-label="Fermer le menu"></div>
 
+  <!-- Sidebar Mobile -->
   <aside
-    class="xl:hidden fixed top-0 left-0 h-screen w-80 bg-white rounded-r-lg flex flex-col py-8 z-50 animate-in slide-in-from-left duration-300 shadow-xl border-r border-gray-200">
-    <div class="px-10 mb-12 flex items-center justify-between">
-      <button type="button" [routerLink]="['/']" class="flex items-center gap-3" aria-label="Accueil CINOLU">
-        <span class="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center shadow-sm">
-          <span class="material-icons text-white" aria-hidden="true">verified</span>
+    class="xl:hidden fixed top-0 left-0 h-screen w-[320px] bg-white/95 backdrop-blur-2xl rounded-r-lg flex flex-col py-8 z-50 animate-in slide-in-from-left duration-300 shadow-2xl border-r border-slate-200/60">
+    <!-- Header avec logo et fermeture -->
+    <div class="px-8 mb-10 flex items-center justify-between">
+      <button type="button" [routerLink]="['/']" class="flex items-center gap-3 group" aria-label="Accueil CINOLU">
+        <span
+          class="w-11 h-11 bg-gradient-to-br from-brand-500 to-brand-700 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300">
+          <span class="material-icons text-white text-[22px]" aria-hidden="true">verified</span>
         </span>
-        <span class="text-2xl font-black tracking-tighter text-gray-900 uppercase">CINOLU</span>
+        <span
+          class="text-2xl font-black tracking-tighter text-slate-900 uppercase group-hover:text-brand-600 transition-colors"
+          >CINOLU</span
+        >
       </button>
-      <button (click)="closeSidebar()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-        <span class="material-icons text-gray-600">close</span>
+      <button (click)="closeSidebar()" class="p-2.5 hover:bg-slate-100 rounded-xl transition-all duration-200">
+        <span class="material-icons text-slate-700">close</span>
       </button>
     </div>
 
-    <nav class="flex-1 space-y-2 px-4 overflow-y-auto">
-      <div class="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-bold px-6 mb-4">Menu Principal</div>
+    <!-- Navigation -->
+    <nav class="flex-1 space-y-1.5 px-4 overflow-y-auto dashboard-scrollbar">
+      <div class="text-[10px] uppercase tracking-[0.15em] text-slate-400 font-bold px-5 mb-5 flex items-center gap-2">
+        <div class="w-1 h-1 rounded-full bg-slate-300"></div>
+        Menu Principal
+      </div>
       @for (item of menuItems; track item.path) {
       <a
         [routerLink]="item.path"
         (click)="closeSidebar()"
-        class="w-full flex items-center gap-4 px-6 py-4 text-gray-600 hover:text-gray-900 transition-all rounded-lg group"
+        class="w-full flex items-center gap-3.5 px-5 py-3.5 text-slate-600 hover:text-slate-900 transition-all duration-200 rounded-lg group relative overflow-hidden"
         [class.sidebar-item-active]="isActive(item.path)">
-        <span class="material-icons">{{ item.icon }}</span>
-        <span class="font-medium text-sm">{{ item.label }}</span>
+        <div
+          class="relative z-10 w-8 h-8 flex items-center justify-center rounded-xl bg-slate-100 group-hover:bg-brand-50 transition-all duration-200">
+          <span class="material-icons text-[20px] group-hover:text-brand-600">{{ item.icon }}</span>
+        </div>
+        <span class="font-semibold text-[15px] relative z-10">{{ item.label }}</span>
       </a>
       }
     </nav>
 
-    <div class="px-6 mt-auto space-y-3 pt-4">
+    <div class="mx-8 my-6 border-t border-slate-200"></div>
+
+    <div class="px-6">
       <button
         (click)="signOut()"
-        class="w-full flex items-center justify-center gap-2 px-3 py-3 bg-red-50 text-red-600 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-red-600 hover:text-white transition-all border border-red-200">
-        <span class="material-icons text-base">logout</span>
-        Déconnexion
+        class="w-full flex items-center justify-center gap-2.5 px-4 py-3.5 bg-red-50 text-red-600 rounded-lg text-sm font-bold hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 hover:text-white transition-all duration-300 border border-red-200 hover:border-red-600 group">
+        <span class="material-icons text-[18px]">logout</span>
+        <span>Déconnexion</span>
       </button>
     </div>
   </aside>
