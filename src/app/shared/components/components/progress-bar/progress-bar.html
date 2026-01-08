@@ -1,0 +1,27 @@
+<div class="progress-container">
+  @if (type() === 'linear') {
+  <div class="space-y-2">
+    @if (label()) {
+    <div class="flex justify-between text-sm">
+      <span class="font-medium text-gray-700">{{ label() }}</span>
+      <span class="font-semibold text-gray-900">{{ value() }}%</span>
+    </div>
+    }
+    <p-progressBar [value]="value()" [showValue]="!label()" [styleClass]="getProgressBarClass()"> </p-progressBar>
+  </div>
+  } @else {
+  <div class="flex flex-col items-center">
+    <p-knob
+      [(ngModel)]="value"
+      [readonly]="true"
+      [size]="size() === 'large' ? 150 : 100"
+      [strokeWidth]="8"
+      [valueColor]="getKnobColor()"
+      [rangeColor]="'#e5e7eb'">
+    </p-knob>
+    @if (label()) {
+    <p class="mt-3 text-sm font-medium text-gray-700">{{ label() }}</p>
+    }
+  </div>
+  }
+</div>

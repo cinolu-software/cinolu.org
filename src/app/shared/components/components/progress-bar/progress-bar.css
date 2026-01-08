@@ -1,0 +1,17 @@
+:host ::ng-deep {
+  .p-progressbar {
+    height: 0.75rem;
+    background-color: #e5e7eb;
+    border-radius: 9999px;
+  }
+
+  .p-progressbar .p-progressbar-value {
+    border-radius: 9999px;
+    transition: width 0.5s ease-in-out;
+  }
+
+  .p-knob-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+}
