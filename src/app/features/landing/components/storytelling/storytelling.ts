@@ -48,8 +48,8 @@ export class Storytelling {
   ];
 
   stats: Stat[] = [
-    { key: 'projects', value: 120 },
+    { key: 'projects', value: 500 },
     { key: 'partners', value: 30 },
-    { key: 'beneficiaries', value: 10000 }
+    { key: 'beneficiaries', value: 1000 }
   ];
 }
