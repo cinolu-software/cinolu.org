@@ -363,14 +363,6 @@
   },
   "hero": {
     "slides": {
-      "slide_1": {
-        "badge_text": "10 years of innovation!",
-        "title": "Celebrating 10 years",
-        "title_highlight": "Of impact and inspiration",
-        "description": "Since 2015, we have been supporting Congolese and African talents to transform their ideas into sustainable solutions.",
-        "primary_cta": "Our story",
-        "secondary_cta": "Join us"
-      },
       "slide_2": {
         "badge_text": "Let's innovate together!",
         "title": "Accelerating talents",

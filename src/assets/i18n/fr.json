@@ -365,14 +365,6 @@
   },
   "hero": {
     "slides": {
-      "slide_1": {
-        "badge_text": "10 ans d'innovation !",
-        "title": "Célébrons 10 ans",
-        "title_highlight": "D'impact et d'inspiration",
-        "description": "Depuis 2015, nous accompagnons les talents congolais et africains à transformer leurs idées en solutions durables.",
-        "primary_cta": "Notre histoire",
-        "secondary_cta": "Rejoignez-nous"
-      },
       "slide_2": {
         "badge_text": "Innovons ensemble !",
         "title": "Accélérons les talents",
