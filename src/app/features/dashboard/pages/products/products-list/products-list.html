@@ -1,85 +1,106 @@
-<div class="max-w-7xl mx-auto px-4 md:px-6">
+<div class="dashboard-container">
   <p-confirmDialog />
 
-  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 md:mb-8">
+  <!-- Page Header Premium -->
+  <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 dashboard-section">
     <div>
-      <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">Mes Produits</h1>
-      <p class="text-gray-600">Gérez vos produits et services</p>
+      <div class="flex items-center gap-3 mb-3">
+        <div
+          class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center shadow-lg">
+          <span class="material-icons text-white text-2xl">shopping_bag</span>
+        </div>
+        <h1 class="dashboard-heading-2">
+          Mes
+          <span class="bg-gradient-to-r from-primary-400 to-primary-500 bg-clip-text text-transparent">Produits</span>
+        </h1>
+      </div>
+      <p class="dashboard-text-body">Gérez votre catalogue de produits et services</p>
     </div>
     <a
       routerLink="/dashboard/products/create"
-      class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-primary-400 to-primary-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5">
-      <span class="material-icons text-[20px]">add</span>
+      class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-gradient-to-br from-primary-400 to-primary-500 text-white font-bold rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-105">
+      <span class="material-icons text-xl">add</span>
       <span>Ajouter un produit</span>
     </a>
   </div>
 
+  <!-- Loading State Premium -->
   @if (productsStore.isLoading()) {
-  <div class="flex flex-col items-center justify-center py-20">
-    <div class="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-    <p class="text-gray-600">Chargement...</p>
+  <div class="flex flex-col items-center justify-center py-24">
+    <div class="relative">
+      <div class="w-16 h-16 border-4 border-indigo-200 border-t-primary-500 rounded-full animate-spin"></div>
+      <div
+        class="absolute inset-0 w-16 h-16 border-4 border-transparent border-b-primary-400 rounded-full animate-ping"></div>
+    </div>
+    <p class="mt-6 dashboard-text-body animate-pulse">Chargement de vos produits...</p>
   </div>
+
+  <!-- Empty State Premium -->
   } @else if (productsStore.isEmpty()) {
   <div class="flex flex-col items-center justify-center py-20 px-4">
-    <span class="material-icons text-gray-300 text-[80px] mb-4">shopping_bag</span>
-    <h2 class="text-2xl font-bold text-gray-900 mb-2">Aucun produit</h2>
-    <p class="text-gray-600 mb-6 text-center">Ajoutez vos premiers produits ou services</p>
+    <div
+      class="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center shadow-2xl shadow-indigo-500/30 mb-6">
+      <span class="material-icons text-white text-5xl">shopping_bag</span>
+    </div>
+    <h2 class="dashboard-heading-3 mb-3">Aucun produit</h2>
+    <p class="dashboard-text-body mb-8 text-center max-w-md">
+      Ajoutez vos premiers produits ou services pour commencer à vendre
+    </p>
     <a
       routerLink="/dashboard/products/create"
-      class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-400 to-primary-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl transition-all">
-      <span class="material-icons text-[20px]">add</span>
-      Créer mon premier produit
+      class="inline-flex items-center gap-2.5 px-6 py-3.5 bg-gradient-to-br from-primary-400 to-primary-500 text-white font-bold rounded-lg shadow-xl hover:shadow-2xl transition-all">
+      <span class="material-icons text-xl">add</span>
+      <span>Créer mon premier produit</span>
     </a>
   </div>
+
+  <!-- Products Grid Premium -->
   } @else {
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div class="dashboard-grid-3">
     @for (product of productsStore.products(); track product.id) {
-    <div
-      class="group bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col h-full">
-      <!-- Header avec badge entreprise -->
-      <div class="p-6 pb-4 border-b border-gray-50">
+    <div class="dashboard-card-hover overflow-hidden flex flex-col h-full group">
+      <!-- Product Header Premium -->
+      <div class="p-6 pb-4 border-b border-slate-100">
         @if (product.venture) {
-        <div class="mb-3">
-          <span
-            class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-primary-50 text-primary-700 rounded-lg text-xs font-medium border border-primary-100">
+        <div class="mb-4">
+          <span class="dashboard-badge-primary">
             <span class="material-icons text-[14px]">business</span>
-            {{ product.venture.name }}
+            <span>{{ product.venture.name }}</span>
           </span>
         </div>
         }
 
-        <div class="flex items-start justify-between gap-3">
-          <h3
-            class="text-lg font-bold text-gray-900 leading-tight flex-1 group-hover:text-primary-600 transition-colors">
-            {{ product.name }}
-          </h3>
+        <div class="flex items-start justify-between gap-4">
+          <h3 class="dashboard-heading-5 flex-1 group-hover:text-primary-600 transition-colors">{{ product.name }}</h3>
+          <!-- Price Tag Premium -->
           <div class="flex-shrink-0">
-            <div
-              class="px-3 py-1.5 bg-gradient-to-r from-primary-50 to-primary-100 rounded-lg border border-primary-200">
-              <span class="text-lg font-bold text-primary-700">{{ product.price | number:'1.2-2' }}</span>
-              <span class="text-xs text-primary-600 ml-0.5">$</span>
+            <div class="px-4 py-2.5 bg-gradient-to-br from-primary-400 to-primary-500 rounded-lg shadow-lg">
+              <div class="flex items-baseline gap-0.5">
+                <span class="text-xl font-black text-white">{{ product.price | number:'1.0-0' }}</span>
+                <span class="text-sm text-white/80 font-bold">$</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Description -->
+      <!-- Product Description -->
       <div class="px-6 py-4 flex-1">
-        <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">{{ product.description }}</p>
+        <p class="dashboard-text-small dashboard-line-clamp-3 leading-relaxed">{{ product.description }}</p>
       </div>
 
-      <!-- Actions -->
-      <div class="px-6 pb-6 pt-4 border-t border-gray-50 flex gap-3">
+      <!-- Product Actions Premium -->
+      <div class="px-6 pb-6 pt-4 border-t border-slate-100 flex gap-3">
         <a
           [routerLink]="['/dashboard/products/edit', product.slug]"
-          class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 bg-white hover:bg-primary-50 text-primary-600 font-medium rounded-xl border-2 border-primary-200 hover:border-primary-300 transition-all duration-200 hover:shadow-sm">
-          <span class="material-icons text-[18px]">edit</span>
-          <span>Modifier</span>
+          class="flex-1 dashboard-btn-primary py-3 !rounded-lg group/btn">
+          <span class="material-icons text-[18px] group-hover/btn:rotate-12 transition-transform">edit</span>
+          <span class="font-bold">Modifier</span>
         </a>
         <button
           (click)="deleteProduct(product.id, product.name)"
-          class="flex items-center justify-center gap-2 py-2.5 px-4 bg-white hover:bg-red-50 text-red-600 font-medium rounded-xl border-2 border-red-200 hover:border-red-300 transition-all duration-200 hover:shadow-sm">
-          <span class="material-icons text-[18px]">delete</span>
+          class="flex items-center justify-center gap-2 py-3 px-4 bg-red-50 hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 hover:text-white text-red-600 font-bold rounded-lg border-2 border-red-200 hover:border-red-600 transition-all duration-300 hover:shadow-lg group/btn">
+          <span class="material-icons text-[18px] group-hover/btn:scale-110 transition-transform">delete</span>
         </button>
       </div>
     </div>
