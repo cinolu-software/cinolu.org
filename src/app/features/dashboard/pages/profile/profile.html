@@ -1,5 +1,5 @@
-<div class="dashboard-container px-4 md:px-6">
-  <!-- Page Header Premium -->
+<div class="dashboard-container">
+  <!-- Page Header  -->
   <div class="dashboard-section">
     <div class="flex items-center gap-4 mb-3">
       <div
@@ -14,13 +14,13 @@
   </div>
 
   <div class="dashboard-grid grid-cols-1 lg:grid-cols-3 gap-8">
-    <!-- Photo de profil Premium - Sidebar -->
+    <!-- Photo de profil  - Sidebar -->
     <div class="lg:col-span-1">
       <div class="dashboard-card-elevated p-8 sticky top-[120px]">
         <h2 class="dashboard-heading-5 mb-6">Photo de profil</h2>
 
         <div class="flex flex-col items-center">
-          <!-- Avatar Premium avec border animé -->
+          <!-- Avatar  avec border animé -->
           <div class="relative mb-6 group">
             <div
               class="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-brand-500 rounded-full blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
@@ -44,7 +44,7 @@
             }
           </div>
 
-          <!-- Upload Section Premium -->
+          <!-- Upload Section  -->
           <div class="w-full space-y-4">
             <app-file-upload [name]="'profile'" [url]="getUploadUrl()" (loaded)="handleLoaded()" />
 
@@ -59,7 +59,7 @@
       </div>
     </div>
 
-    <!-- Profile Form Premium -->
+    <!-- Profile Form  -->
     <div class="lg:col-span-2">
       <div class="dashboard-card-elevated p-8">
         <!-- Header with Edit Button -->
@@ -198,7 +198,7 @@
               placeholder="Parlez-nous de vous..."></textarea>
           </div>
 
-          <!-- Action Buttons Premium -->
+          <!-- Action Buttons  -->
           @if (isEditing()) {
           <div class="flex flex-col-reverse sm:flex-row gap-3 justify-end pt-8 border-t border-slate-100">
             <button type="button" (click)="cancelEdit()" class="dashboard-btn-secondary">
