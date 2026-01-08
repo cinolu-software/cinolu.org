@@ -35,95 +35,92 @@
       </div>
     </div>
 
-    <div class="col-span-12 md:col-span-4">
-      <div
-        class="bg-white rounded-lg border border-gray-200 shadow-sm p-6 hover:bg-gray-50 transition-all h-full flex flex-col group">
-        <div class="flex items-center justify-between mb-6">
-          <h3 class="text-[10px] text-gray-600 font-bold uppercase tracking-wider">Mes Entreprises</h3>
-          <div
-            class="w-10 h-10 rounded-lg bg-primary-100 flex items-center justify-center border border-primary-200 group-hover:bg-primary-100 transition-all">
-            <span class="material-icons text-primary-500 text-lg">business</span>
-          </div>
+    <div class="col-span-12 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center border border-primary-200">
+          <span class="material-icons text-primary-500 text-base">insights</span>
         </div>
-        <div class="flex-1 flex flex-col justify-center">
-          <p class="text-5xl font-black text-gray-900 mb-2">{{ venturesStore.ventures().length || 0 }}</p>
-          <p class="text-xs text-gray-600 font-medium">Écosystème entrepreneurial</p>
-        </div>
+        <h2 class="text-base font-bold text-gray-900">Statistiques clés</h2>
       </div>
+      <p class="text-xs text-gray-500">Vue synthétique de vos indicateurs.</p>
     </div>
 
-    <div class="col-span-12 md:col-span-4">
-      <div
-        class="bg-white rounded-lg border border-gray-200 shadow-sm p-6 hover:bg-gray-50 transition-all h-full flex flex-col group">
-        <div class="flex items-center justify-between mb-6">
-          <h3 class="text-[10px] text-gray-600 uppercase tracking-wider font-bold">Produits Actifs</h3>
-          <div
-            class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center border border-purple-200 group-hover:bg-purple-100 transition-all">
-            <span class="material-icons text-purple-500 text-lg">inventory_2</span>
-          </div>
-        </div>
-        <div class="flex-1 flex flex-col justify-center">
-          <p class="text-5xl font-black text-gray-900 mb-2">{{ productsCount || 0 }}</p>
-          <p class="text-xs text-gray-600 font-medium">Catalogue commercial</p>
-        </div>
-      </div>
+    <div class="col-span-12 md:col-span-6 lg:col-span-3">
+      <app-stat-card
+        [title]="'Mes Entreprises'"
+        [value]="venturesStore.ventures().length || 0"
+        [icon]="businessIcon"
+        color="primary">
+      </app-stat-card>
     </div>
 
-    <div class="col-span-12 md:col-span-4">
-      <div
-        class="bg-white rounded-lg border border-gray-200 shadow-sm p-6 hover:bg-gray-50 transition-all h-full flex flex-col group">
-        <div class="flex items-center justify-between mb-6">
-          <h3 class="text-[10px] text-gray-600 uppercase tracking-wider font-bold">Parrainages</h3>
-          <div
-            class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center border border-blue-200 group-hover:bg-blue-100 transition-all">
-            <span class="material-icons text-blue-500 text-lg">group_add</span>
-          </div>
-        </div>
-        <div class="flex-1 flex flex-col justify-center">
-          <p class="text-5xl font-black text-gray-900 mb-2">{{ authStore.user()?.referralsCount || 0 }}</p>
-          <p class="text-xs text-gray-600 font-medium">Réseau Cinolu</p>
-        </div>
-      </div>
+    <div class="col-span-12 md:col-span-6 lg:col-span-3">
+      <app-stat-card [title]="'Produits Actifs'" [value]="productsCount || 0" [icon]="packageIcon" color="info">
+      </app-stat-card>
     </div>
 
-    <!-- SECTION STATUT: Complétion profil - Carte secondaire sous les KPI -->
-    <div class="col-span-12 md:col-span-6 lg:col-span-4">
-      <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-6 hover:bg-gray-50 transition-all group">
+    <div class="col-span-12 md:col-span-6 lg:col-span-3">
+      <app-stat-card
+        [title]="'Parrainages'"
+        [value]="authStore.user()?.referralsCount || 0"
+        [icon]="userPlusIcon"
+        color="success">
+      </app-stat-card>
+    </div>
+
+    <div class="col-span-12 md:col-span-6 lg:col-span-3">
+      <app-stat-card [title]="'Profil'" [value]="profileCompletion + '%'" [icon]="usersIcon" color="warning">
+      </app-stat-card>
+    </div>
+
+    <div class="col-span-12 lg:col-span-6">
+      <div
+        class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-all p-6 h-full flex flex-col">
         <div class="flex items-center justify-between mb-4">
-          <h3 class="text-[10px] text-gray-600 font-bold uppercase tracking-wider">Complétion Profil</h3>
-          <div
-            class="w-10 h-10 rounded-lg bg-primary-100 flex items-center justify-center border border-primary-200 group-hover:bg-primary-100 transition-all">
-            <span class="material-icons text-primary-500 text-lg">person</span>
+          <div class="flex items-center gap-2">
+            <span class="material-icons text-primary-500">pie_chart</span>
+            <h3 class="text-lg font-semibold text-gray-900">Complétion du Profil</h3>
           </div>
+          <span class="text-xs text-gray-500">Mise à jour en temps réel</span>
         </div>
         @defer (on viewport) {
-        <div class="relative w-32 h-32 mx-auto mb-4">
-          <canvas baseChart [data]="doughnutChartData" [options]="doughnutChartOptions" type="doughnut"></canvas>
+        <div class="relative h-80 flex items-center justify-center">
+          <canvas
+            baseChart
+            [data]="doughnutChartData"
+            [options]="doughnutChartOptions"
+            type="doughnut"
+            class="w-56 h-56"></canvas>
           <div class="absolute inset-0 flex items-center justify-center">
-            <span class="text-3xl font-black text-gray-900">{{ profileCompletion }}%</span>
+            <div class="text-center">
+              <span class="text-5xl font-black text-gray-900">{{ profileCompletion }}%</span>
+              <p class="text-sm text-gray-600 font-medium mt-2">
+                {{ profileCompletion === 100 ? 'Profil complet !' : 'Complétez votre profil' }}
+              </p>
+            </div>
           </div>
         </div>
         } @placeholder {
-        <div class="relative w-32 h-32 mx-auto mb-4">
-          <div class="w-32 h-32 rounded-full bg-gray-200 animate-pulse"></div>
+        <div class="h-80 flex items-center justify-center">
+          <div class="w-64 h-64 rounded-full bg-gray-200 animate-pulse"></div>
         </div>
         }
-        <p class="text-xs text-gray-600 text-center font-medium">
-          {{ profileCompletion === 100 ? 'Profil complet !' : 'Complétez votre profil' }}
-        </p>
       </div>
     </div>
 
-    <div class="col-span-12 md:col-span-6 lg:col-span-8">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center border border-amber-200">
-          <span class="material-icons text-amber-500 text-base">bolt</span>
+    <div class="col-span-12 lg:col-span-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center border border-amber-200">
+            <span class="material-icons text-amber-500 text-base">bolt</span>
+          </div>
+          <h2 class="text-base font-bold text-gray-900">À la une</h2>
         </div>
-        <h2 class="text-base font-bold text-gray-900">À la une</h2>
+        <span class="text-xs text-gray-500">Mise en avant dynamique</span>
       </div>
       <a
         [routerLink]="getHighlightLink()"
-        class="relative bg-white rounded-lg border border-gray-200 shadow-sm h-[280px] overflow-hidden p-6 flex flex-col justify-end group cursor-pointer hover:bg-gray-50 transition-all">
+        class="relative bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md h-[320px] overflow-hidden p-6 flex flex-col justify-end group cursor-pointer hover:bg-gray-50 transition-all">
         <img
           [src]="getHighlightImage()"
           class="absolute inset-0 w-full h-full object-cover group-hover:opacity-80 transition-opacity duration-500"
@@ -140,7 +137,6 @@
       </a>
     </div>
 
-    <!-- SECTION ACTIVITÉ: Liste ventures récentes -->
     <div class="col-span-12">
       <div class="flex items-center gap-3 mb-4">
         <div class="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center border border-green-200">

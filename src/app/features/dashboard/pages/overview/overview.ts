@@ -9,11 +9,13 @@ import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration } from 'chart.js';
 import { HighlightsStore } from '@features/landing/store/highlights.store';
 import { environment } from '@environments/environment';
-import { ApiImgPipe } from "../../../../shared/pipes/api-img.pipe";
+import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
+import { StatCardComponent } from '@shared/components/components/stat-card/stat-card';
+import { Briefcase, Users, Package, UserPlus } from 'lucide-angular';
 
 @Component({
   selector: 'app-dashboard-overview',
-  imports: [CommonModule, RouterModule, BaseChartDirective, ApiImgPipe],
+  imports: [CommonModule, RouterModule, ApiImgPipe, StatCardComponent, BaseChartDirective],
   providers: [HighlightsStore],
   templateUrl: './overview.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -26,7 +28,12 @@ export class DashboardOverview implements OnInit {
   highlightsStore = inject(HighlightsStore);
   onestopUrl = environment.onestopUrl;
 
-  // Configuration du graphique de progression
+  // Icônes Lucide
+  businessIcon = Briefcase;
+  usersIcon = Users;
+  packageIcon = Package;
+  userPlusIcon = UserPlus;
+
   public doughnutChartData: ChartConfiguration<'doughnut'>['data'] = {
     labels: ['Complété', 'Restant'],
     datasets: [
