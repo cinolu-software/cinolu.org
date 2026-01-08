@@ -26,7 +26,7 @@ export class CircularProgressComponent {
     const perc = this.percentage();
     if (perc < 50) return 'text-red-500';
     if (perc < 80) return 'text-yellow-500';
-    return 'text-green-500';
+    return 'text-primary-500';
   });
 
   textColor = computed(() => {
