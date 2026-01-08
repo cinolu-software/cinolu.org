@@ -1,44 +1,57 @@
-<div class="w-full mx-auto max-w-7xl px-4 md:px-6">
-  <!-- Header Section -->
-  <div class="mb-6 md:mb-8">
-    <h1
-      class="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary-400 to-primary-500 bg-clip-text text-transparent">
-      Mon Profil
-    </h1>
-    <p class="text-gray-600 mt-2">Gérez vos informations personnelles et votre photo de profil</p>
+<div class="dashboard-container px-4 md:px-6">
+  <!-- Page Header Premium -->
+  <div class="dashboard-section">
+    <div class="flex items-center gap-4 mb-3">
+      <div
+        class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
+        <span class="material-icons text-white text-2xl">person</span>
+      </div>
+      <div>
+        <h1 class="dashboard-heading-2">Mon <span class="dashboard-text-gradient-purple">Profil</span></h1>
+        <p class="dashboard-text-small">Gérez vos informations personnelles et votre photo de profil</p>
+      </div>
+    </div>
   </div>
 
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+  <div class="dashboard-grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Photo de profil Premium - Sidebar -->
     <div class="lg:col-span-1">
-      <div class="bg-white rounded-lg shadow-lg p-8 border border-gray-100 sticky top-6">
-        <h2 class="text-lg font-bold text-gray-900 mb-6">Photo de profil</h2>
+      <div class="dashboard-card-elevated p-8 sticky top-[120px]">
+        <h2 class="dashboard-heading-5 mb-6">Photo de profil</h2>
 
         <div class="flex flex-col items-center">
+          <!-- Avatar Premium avec border animé -->
           <div class="relative mb-6 group">
+            <div
+              class="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-brand-500 rounded-full blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
             @if (authStore.user()?.profile || authStore.user()?.google_image) {
-            <img
-              [src]="authStore.user() | apiIMG: 'user'"
-              [alt]="authStore.user()?.name"
-              class="w-40 h-40 rounded-full object-cover border-4 border-primary-100 shadow-lg transition-transform group-hover:scale-105" />
+            <div class="relative">
+              <img
+                [src]="authStore.user() | apiIMG: 'user'"
+                [alt]="authStore.user()?.name"
+                class="relative w-44 h-44 rounded-full object-cover border-4 border-white shadow-2xl transition-transform group-hover:scale-105 duration-300" />
+            </div>
             } @else {
             <div
-              class="w-40 h-40 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center border-4 border-primary-100 shadow-lg transition-transform group-hover:scale-105">
-              <span class="material-icons text-white text-[64px]">person</span>
+              class="relative w-44 h-44 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center border-4 border-white shadow-2xl transition-transform group-hover:scale-105 duration-300">
+              <span class="material-icons text-white text-[80px]">person</span>
             </div>
             } @if (authStore.isLoading()) {
-            <div class="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center backdrop-blur-sm">
-              <div class="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+            <div
+              class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm rounded-full flex items-center justify-center">
+              <div class="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
             </div>
             }
           </div>
 
+          <!-- Upload Section Premium -->
           <div class="w-full space-y-4">
             <app-file-upload [name]="'profile'" [url]="getUploadUrl()" (loaded)="handleLoaded()" />
 
-            <div class="text-center">
-              <p class="text-sm text-gray-500">
-                <span class="material-icons text-xs align-middle">info</span>
-                JPG, PNG ou WEBP. Max 1MB
+            <div class="dashboard-card p-3 text-center">
+              <p class="dashboard-text-tiny flex items-center justify-center gap-1.5">
+                <span class="material-icons text-slate-400 text-[14px]">info</span>
+                <span>JPG, PNG ou WEBP • Max 1MB</span>
               </p>
             </div>
           </div>
@@ -46,85 +59,83 @@
       </div>
     </div>
 
-    <!-- Profile Info Form -->
+    <!-- Profile Form Premium -->
     <div class="lg:col-span-2">
-      <div class="bg-white rounded-lg shadow-lg p-8 border border-gray-100">
-        <div class="flex items-center justify-between flex-wrap gap-2.5 mb-6">
-          <h2 class="text-lg font-bold text-gray-900">Informations personnelles</h2>
+      <div class="dashboard-card-elevated p-8">
+        <!-- Header with Edit Button -->
+        <div class="flex items-center justify-between flex-wrap gap-3 mb-8 pb-6 border-b border-slate-100">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+              <span class="material-icons text-white text-xl">badge</span>
+            </div>
+            <div>
+              <h2 class="dashboard-heading-5">Informations personnelles</h2>
+              <p class="dashboard-text-tiny">Mettez à jour vos coordonnées</p>
+            </div>
+          </div>
           @if (!isEditing()) {
-          <button
-            type="button"
-            (click)="toggleEdit()"
-            class="inline-flex max-sm:w-full items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-400 to-primary-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
+          <button type="button" (click)="toggleEdit()" class="dashboard-btn-primary inline-flex max-sm:w-full">
             <span class="material-icons text-[18px]">edit</span>
-            Modifier
+            <span>Modifier</span>
           </button>
           }
         </div>
 
-        <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+        <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" class="space-y-6">
           <!-- Name and Email -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="dashboard-grid-2">
             <div class="form-group">
-              <label for="name" class="flex items-center text-sm font-semibold text-gray-700 mb-2">
-                <span class="material-icons text-[16px] align-middle mr-1">person</span>
-                Nom complet <span class="text-red-500">*</span>
+              <label for="name" class="dashboard-label">
+                <span class="material-icons text-[16px] text-brand-600">person</span>
+                <span>Nom complet <span class="text-red-500">*</span></span>
               </label>
               <input
                 id="name"
                 type="text"
                 formControlName="name"
                 [readonly]="!isEditing()"
-                class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-200"
-                [class]="isEditing()
-                  ? 'border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white'
-                  : 'border-gray-100 bg-gray-50 text-gray-700'" />
+                [class]="isEditing() ? 'dashboard-input' : 'dashboard-input !bg-slate-50 !border-slate-100 text-slate-600'" />
             </div>
 
             <div class="form-group">
-              <label for="email" class="flex items-center text-sm font-semibold text-gray-700 mb-2">
-                <span class="material-icons text-[16px] align-middle mr-1">email</span>
-                Email
+              <label for="email" class="dashboard-label">
+                <span class="material-icons text-[16px] text-indigo-600">email</span>
+                <span>Email</span>
               </label>
               <input
                 id="email"
                 type="email"
                 [value]="authStore.user()?.email"
                 readonly
-                class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 bg-gray-50 text-gray-500" />
+                class="dashboard-input !bg-slate-50 !border-slate-100 text-slate-500 cursor-not-allowed" />
             </div>
           </div>
 
           <!-- Phone and Gender -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="dashboard-grid-2">
             <div class="form-group">
-              <label for="phone_number" class="flex items-center text-sm font-semibold text-gray-700 mb-2">
-                <span class="material-icons text-[16px] align-middle mr-1">phone</span>
-                Téléphone
+              <label for="phone_number" class="dashboard-label">
+                <span class="material-icons text-[16px] text-blue-600">phone</span>
+                <span>Téléphone</span>
               </label>
               <input
                 id="phone_number"
                 type="tel"
                 formControlName="phone_number"
                 [readonly]="!isEditing()"
-                class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-200"
-                [class]="isEditing()
-                  ? 'border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white'
-                  : 'border-gray-100 bg-gray-50 text-gray-700'" />
+                [class]="isEditing() ? 'dashboard-input' : 'dashboard-input !bg-slate-50 !border-slate-100 text-slate-600'" />
             </div>
 
             <div class="form-group">
-              <label for="gender" class="flex items-center text-sm font-semibold text-gray-700 mb-2">
-                <span class="material-icons text-[16px] align-middle mr-1">wc</span>
-                Genre
+              <label for="gender" class="dashboard-label">
+                <span class="material-icons text-[16px] text-purple-600">wc</span>
+                <span>Genre</span>
               </label>
               <select
                 id="gender"
                 formControlName="gender"
-                class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-200"
-                [class]="isEditing()
-                  ? 'border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white'
-                  : 'border-gray-100 bg-gray-50 text-gray-700 pointer-events-none'">
+                [class]="isEditing() ? 'dashboard-select' : 'dashboard-select !bg-slate-50 !border-slate-100 text-slate-600 pointer-events-none'">
                 <option value="">Sélectionner</option>
                 <option value="male">Homme</option>
                 <option value="female">Femme</option>
@@ -132,46 +143,38 @@
             </div>
           </div>
 
-          <!-- City and Country -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="dashboard-grid-2">
             <div class="form-group">
-              <label for="city" class="flex items-center text-sm font-semibold text-gray-700 mb-2">
-                <span class="material-icons text-[16px] align-middle mr-1">location_city</span>
-                Ville
+              <label for="city" class="dashboard-label">
+                <span class="material-icons text-[16px] text-teal-600">location_city</span>
+                <span>Ville</span>
               </label>
               <input
                 id="city"
                 type="text"
                 formControlName="city"
                 [readonly]="!isEditing()"
-                class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-200"
-                [class]="isEditing()
-                  ? 'border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white'
-                  : 'border-gray-100 bg-gray-50 text-gray-700'" />
+                [class]="isEditing() ? 'dashboard-input' : 'dashboard-input !bg-slate-50 !border-slate-100 text-slate-600'" />
             </div>
 
             <div class="form-group">
-              <label for="country" class="flex items-center text-sm font-semibold text-gray-700 mb-2">
-                <span class="material-icons text-[16px] align-middle mr-1">public</span>
-                Pays
+              <label for="country" class="dashboard-label">
+                <span class="material-icons text-[16px] text-emerald-600">public</span>
+                <span>Pays</span>
               </label>
               <input
                 id="country"
                 type="text"
                 formControlName="country"
                 [readonly]="!isEditing()"
-                class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-200"
-                [class]="isEditing()
-                  ? 'border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white'
-                  : 'border-gray-100 bg-gray-50 text-gray-700'" />
+                [class]="isEditing() ? 'dashboard-input' : 'dashboard-input !bg-slate-50 !border-slate-100 text-slate-600'" />
             </div>
           </div>
 
-          <!-- Birth Date -->
-          <div class="mb-6">
-            <label for="birth_date" class="text-sm font-semibold text-gray-700 mb-2 flex items-center">
-              <span class="material-icons text-[16px] align-middle mr-1">cake</span>
-              Date de naissance
+          <div>
+            <label for="birth_date" class="dashboard-label">
+              <span class="material-icons text-[16px] text-pink-600">cake</span>
+              <span>Date de naissance</span>
             </label>
             <p-datepicker
               inputId="birth_date"
@@ -182,43 +185,37 @@
               [fluid]="true" />
           </div>
 
-          <!-- Biography -->
-          <div class="mb-8">
-            <label for="biography" class="flex items-center text-sm font-semibold text-gray-700 mb-2">
-              <span class="material-icons text-[16px] align-middle mr-1">description</span>
-              Biographie
+          <div>
+            <label for="biography" class="dashboard-label">
+              <span class="material-icons text-[16px] text-amber-600">description</span>
+              <span>Biographie</span>
             </label>
             <textarea
               id="biography"
               formControlName="biography"
               [readonly]="!isEditing()"
-              class="w-full px-4 py-3 rounded-xl border-2 transition-all duration-200 resize-none"
-              [class]="isEditing()
-                ? 'border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white'
-                : 'border-gray-100 bg-gray-50 text-gray-700'"
-              rows="5"
+              [class]="isEditing() ? 'dashboard-textarea' : 'dashboard-textarea !bg-slate-50 !border-slate-100 text-slate-600'"
               placeholder="Parlez-nous de vous..."></textarea>
           </div>
 
-          <!-- Action Buttons -->
+          <!-- Action Buttons Premium -->
           @if (isEditing()) {
-          <div class="flex flex-col sm:flex-row gap-3 justify-end pt-6 border-t border-gray-100">
-            <button
-              type="button"
-              (click)="cancelEdit()"
-              class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all">
-              <span class="material-icons text-[20px]">close</span>
-              Annuler
+          <div class="flex flex-col-reverse sm:flex-row gap-3 justify-end pt-8 border-t border-slate-100">
+            <button type="button" (click)="cancelEdit()" class="dashboard-btn-secondary">
+              <span class="material-icons text-[18px]">close</span>
+              <span>Annuler</span>
             </button>
             <button
               type="submit"
               [disabled]="profileForm.invalid || authStore.isLoading()"
-              class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-400 to-primary-600 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+              class="dashboard-btn-primary">
               @if (authStore.isLoading()) {
               <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              Enregistrement... } @else {
-              <span class="material-icons text-[20px]">save</span>
-              Enregistrer les modifications }
+              <span>Enregistrement...</span>
+              } @else {
+              <span class="material-icons text-[18px]">save</span>
+              <span>Enregistrer les modifications</span>
+              }
             </button>
           </div>
           }
