@@ -1,4 +1,4 @@
-import { LucideIconData, Lightbulb, Rocket, PartyPopper } from 'lucide-angular';
+import { LucideIconData, Lightbulb, Rocket } from 'lucide-angular';
 
 export interface IHeroSlideBase {
   id: number;
@@ -60,25 +60,6 @@ export interface IHeroSlideStatic extends IHeroSlideBase {
 }
 
 export const HERO_SLIDES: IHeroSlideStatic[] = [
-  {
-    id: 1,
-    badge: {
-      icon: PartyPopper,
-      textKey: 'hero.slides.slide_1.badge_text'
-    },
-    titleKey: 'hero.slides.slide_1.title',
-    titleHighlightKey: 'hero.slides.slide_1.title_highlight',
-    descriptionKey: 'hero.slides.slide_1.description',
-    backgroundImage: '/images/10-ANS.png',
-    primaryCta: {
-      textKey: 'hero.slides.slide_1.primary_cta',
-      link: '/about-us'
-    },
-    secondaryCta: {
-      textKey: 'hero.slides.slide_1.secondary_cta',
-      link: '/sign-up'
-    }
-  },
   {
     id: 2,
     badge: {

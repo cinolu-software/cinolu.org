@@ -18,7 +18,7 @@ export const STATS: IStat[] = [
     icon: Network
   },
   {
-    value: 10000,
+    value: 1000,
     label: 'Femmes formées & inspirées avec F360',
     icon: Venus
   },
