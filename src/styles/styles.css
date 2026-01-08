@@ -1,15 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,401,500,501,700,701,900,901,1,2&display=swap');
+
 @import 'tailwindcss';
-@import './overrides/main.css';
-@import './overrides/primeng.css';
-@import 'quill/dist/quill.snow.css';
-@import './form-input.css';
-@import './components.css';
-@import 'filepond/dist/filepond.min.css';
-@import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
 
 @theme {
+  --color-brand-50: #f1f8ed;
+  --color-brand-100: #dfefd8;
+  --color-brand-200: #c3e1b5;
+  --color-brand-300: #9ecc8a;
+  --color-brand-400: #7cb764;
+  --color-brand-500: #5d9c46;
+  --color-brand-600: #508c3c;
+  --color-brand-700: #385f2c;
+  --color-brand-800: #2f4d27;
+  --color-brand-900: #2b4225;
+  --color-brand-950: #142310;
+
   --color-primary-50: #f1f8ed;
   --color-primary-100: #dfefd8;
   --color-primary-200: #c3e1b5;
@@ -22,57 +28,18 @@
   --color-primary-900: #2b4225;
   --color-primary-950: #142310;
 
-  --color-success-50: #f0fdf4;
-  --color-success-100: #dcfce7;
-  --color-success-200: #bbf7d0;
-  --color-success-300: #86efac;
-  --color-success-400: #4ade80;
-  --color-success-500: #22c55e;
-  --color-success-600: #16a34a;
-  --color-success-700: #15803d;
-  --color-success-800: #166534;
-  --color-success-900: #14532d;
-  --color-success-950: #052e16;
-
-  --color-warning-50: #fffbeb;
-  --color-warning-100: #fef3c7;
-  --color-warning-200: #fde68a;
-  --color-warning-300: #fcd34d;
-  --color-warning-400: #fbbf24;
-  --color-warning-500: #f59e0b;
-  --color-warning-600: #d97706;
-  --color-warning-700: #b45309;
-  --color-warning-800: #92400e;
-  --color-warning-900: #78350f;
-  --color-warning-950: #451a03;
-
-  --color-danger-50: #fef2f2;
-  --color-danger-100: #fee2e2;
-  --color-danger-200: #fecaca;
-  --color-danger-300: #fca5a5;
-  --color-danger-400: #f87171;
-  --color-danger-500: #ef4444;
-  --color-danger-600: #dc2626;
-  --color-danger-700: #b91c1c;
-  --color-danger-800: #991b1b;
-  --color-danger-900: #7f1d1d;
-  --color-danger-950: #450a0a;
-
-  --color-info-50: #eff6ff;
-  --color-info-100: #dbeafe;
-  --color-info-200: #bfdbfe;
-  --color-info-300: #93c5fd;
-  --color-info-400: #60a5fa;
-  --color-info-500: #3b82f6;
-  --color-info-600: #2563eb;
-  --color-info-700: #1d4ed8;
-  --color-info-800: #1e40af;
-  --color-info-900: #1e3a8a;
-  --color-info-950: #172554;
-
-  --font-mona: 'Mona Sans', sans-serif;
-  --font-satoshi: 'Satoshi', sans-serif;
+  --font-family-mona: 'Mona Sans', sans-serif;
+  --font-family-satoshi: 'Satoshi', sans-serif;
 }
+
+@import './dashboard-design-system-v2.css';
+@import './overrides/main.css';
+@import './overrides/primeng.css';
+@import 'quill/dist/quill.snow.css';
+@import './form-input.css';
+@import './components.css';
+@import 'filepond/dist/filepond.min.css';
+@import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
 
 @keyframes float {
   0%,
@@ -142,6 +109,7 @@
 html {
   scroll-behavior: smooth;
   hyphens: auto;
+  font-family: var(--font-family-mona);
 }
 
 body {
@@ -204,13 +172,6 @@ section {
   overflow: visible;
 }
 
-.sidebar-item-active {
-  background: linear-gradient(90deg, rgb(241, 248, 237) 0%, transparent 100%) !important;
-  border-left: 3px solid rgb(93, 156, 70) !important;
-  color: rgb(17, 24, 39) !important;
-  font-weight: 600 !important;
-}
-
 .animation-delay-2s {
   animation-delay: 2s;
 }
@@ -249,16 +210,6 @@ section {
   background: rgb(243, 244, 246);
 }
 
-.dashboard-main-content {
-  background: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-  padding-left: 2rem;
-  padding-right: 2rem;
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-
 .ring-pulse::before {
   content: '';
   position: absolute;
@@ -269,10 +220,6 @@ section {
   border: 2px solid rgba(34, 197, 94, 0.5);
   animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   z-index: -1;
-}
-
-.stat-card {
-  cursor: default;
 }
 
 .bg-grid {

@@ -1,1 +1,30 @@
-@import "./ngx-pagination.css";
+@import './ngx-pagination.css';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   🎨 SIDEBAR ITEM ACTIVE STATE - Ultra-moderne
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.sidebar-item-active {
+  @apply bg-gradient-to-br from-brand-50 to-brand-100/70 text-brand-700 shadow-sm border border-brand-200/50;
+  position: relative;
+}
+
+.sidebar-item-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60%;
+  background: linear-gradient(to bottom, #4ade80, #22c55e);
+  border-radius: 0 4px 4px 0;
+}
+
+.sidebar-item-active .material-icons {
+  @apply text-brand-600;
+}
+
+.sidebar-item-active span:not(.material-icons) {
+  @apply font-bold;
+}
