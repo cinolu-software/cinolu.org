@@ -1,122 +1,146 @@
-<div class="max-w-7xl mx-auto px-4 md:px-6">
+<div class="dashboard-container">
   <p-confirmDialog />
 
-  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+  <!-- Page Header Premium -->
+  <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 dashboard-section">
     <div>
-      <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">Mes entreprises</h1>
-      <p class="text-gray-600">Gérez vos projets entrepreneuriaux</p>
+      <div class="flex items-center gap-3 mb-3">
+        <div
+          class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center shadow-lg">
+          <span class="material-icons text-white text-2xl">business</span>
+        </div>
+        <h1 class="dashboard-heading-2">Mes Entreprises</h1>
+      </div>
+      <p class="dashboard-text-body">Gérez et développez vos projets entrepreneuriaux</p>
     </div>
-    <a
-      routerLink="/dashboard/ventures/create"
-      class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-200">
-      <span class="material-icons text-[20px]">add</span>
+    <a routerLink="/dashboard/ventures/create" class="dashboard-btn-primary inline-flex">
+      <span class="material-icons text-xl">add</span>
       <span>Créer une venture</span>
     </a>
   </div>
 
+  <!-- Loading State Premium -->
   @if (venturesStore.isLoading()) {
-  <div class="flex flex-col items-center justify-center py-20">
-    <div class="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-    <p class="text-gray-600">Chargement de vos ventures...</p>
+  <div class="flex flex-col items-center justify-center py-24">
+    <div class="relative">
+      <div class="w-16 h-16 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin"></div>
+      <div
+        class="absolute inset-0 w-16 h-16 border-4 border-transparent border-b-brand-400 rounded-full animate-ping"></div>
+    </div>
+    <p class="mt-6 dashboard-text-body animate-pulse">Chargement de vos ventures...</p>
   </div>
+
+  <!-- Empty State Premium -->
   } @else if (venturesStore.ventures().length === 0) {
   <div class="flex flex-col items-center justify-center py-20 px-4">
-    <span class="material-icons text-gray-300 text-[80px] mb-4">business_center</span>
-    <h2 class="text-2xl font-bold text-gray-900 mb-2">Aucune entreprise</h2>
-    <p class="text-gray-600 mb-6 text-center">
+    <div
+      class="w-24 h-24 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-2xl shadow-brand-500/30 mb-6">
+      <span class="material-icons text-white text-5xl">business_center</span>
+    </div>
+    <h2 class="dashboard-heading-3 mb-3">Aucune entreprise</h2>
+    <p class="dashboard-text-body mb-8 text-center max-w-md">
       Commencez votre parcours entrepreneurial en créant votre première entreprise
     </p>
-    <a
-      routerLink="/dashboard/ventures/create"
-      class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl shadow-sm hover:shadow-md transition-all">
-      <span class="material-icons text-[20px]">add</span>
-      Créer ma première entreprise
+    <a routerLink="/dashboard/ventures/create" class="dashboard-btn-primary dashboard-btn-lg inline-flex">
+      <span class="material-icons text-xl">add</span>
+      <span>Créer ma première entreprise</span>
     </a>
   </div>
+
+  <!-- Ventures Grid Premium -->
   } @else {
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div class="dashboard-grid-3">
     @for (venture of venturesStore.ventures(); track venture.id) {
-    <div
-      class="bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col">
-      <div class="relative h-48 bg-gray-50">
+    <div class="dashboard-card-hover overflow-hidden flex flex-col group">
+      <!-- Cover Image Premium -->
+      <div class="relative h-32 md:h-44 bg-slate-100 overflow-hidden">
         @if (venture.cover) {
         <img
           [src]="venture | apiIMG: 'ventureCover'"
           [alt]="venture.name"
-          class="w-full h-full object-cover"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy" />
         } @else if (venture.logo) {
-        <div class="w-full h-full flex items-center justify-center p-6">
+        <div class="w-full h-full flex items-center justify-center p-8 bg-gradient-to-br from-slate-50 to-slate-100">
           <img [src]="venture.logo" [alt]="venture.name" class="max-h-full max-w-full object-contain" loading="lazy" />
         </div>
         } @else {
-        <div class="w-full h-full flex items-center justify-center bg-primary-50">
-          <span class="material-icons text-primary-600 text-[64px]">business</span>
+        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-50 to-brand-100">
+          <span class="material-icons text-brand-600 text-7xl">business</span>
         </div>
         }
 
-        <div class="absolute top-3 right-3">
-          <span
-            class="px-3 py-1 rounded-full text-xs font-semibold shadow-md"
-            [class]="venture.is_published ? 'bg-green-500 text-white' : 'bg-gray-800 text-white'">
-            {{ venture.is_published ? 'Publié' : 'Brouillon' }}
+        <!-- Overlay Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+
+        <!-- Status Badge Premium -->
+        <div class="absolute top-4 right-4 z-10">
+          @if (venture.is_published) {
+          <span class="dashboard-badge-success shadow-lg backdrop-blur-sm bg-emerald-500/90 text-white border-0">
+            <span class="dashboard-status-online !animate-none"></span>
+            <span class="font-bold">Publié</span>
           </span>
+          } @else {
+          <span class="dashboard-badge-neutral shadow-lg backdrop-blur-sm bg-slate-700/90 text-white border-0">
+            <span class="material-icons text-[14px]">visibility_off</span>
+            <span class="font-bold">Brouillon</span>
+          </span>
+          }
         </div>
       </div>
 
-      <div class="flex-1 p-5 flex flex-col">
-        <h3 class="text-lg font-bold text-gray-900 mb-2">{{ venture.name }}</h3>
+      <!-- Card Content Premium -->
+      <div class="flex-1 p-6 flex flex-col">
+        <!-- Title -->
+        <h3 class="dashboard-heading-5 mb-3 group-hover:text-brand-600 transition-colors">{{ venture.name }}</h3>
 
+        <!-- Description -->
         @if (venture.description) {
-        <p class="text-sm text-gray-600 mb-4 line-clamp-3">
-          {{ venture.description.length > 120 ? venture.description.substring(0, 120) + '...' : venture.description }}
-        </p>
+        <p class="dashboard-text-small mb-4 line-clamp-1 leading-relaxed">{{ venture.description }}</p>
         }
 
+        <!-- Tags Premium -->
         <div class="flex flex-wrap gap-2 mb-4">
           @if (venture.sector) {
-          <span class="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-xs font-medium"
-            >{{ venture.sector }}</span
-          >
+          <span class="dashboard-badge-primary">
+            <span class="material-icons text-[12px]">category</span>
+            <span>{{ venture.sector }}</span>
+          </span>
           } @if (venture.stage) {
-          <span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-medium"
-            >{{ venture.stage }}</span
-          >
-          }
-        </div>
-
-        <div class="flex flex-col gap-2 text-sm text-gray-600 mb-4">
-          @if (venture.location) {
-          <span class="flex items-center gap-1">
-            <span class="material-icons text-[16px]">location_on</span>
-            {{ venture.location }}
-          </span>
-          } @if (venture.products && venture.products.length > 0) {
-          <span class="flex items-center gap-1">
-            <span class="material-icons text-[16px]">shopping_bag</span>
-            {{ venture.products.length }} produit(s)
+          <span class="dashboard-badge-purple">
+            <span class="material-icons text-[12px]">rocket_launch</span>
+            <span>{{ venture.stage }}</span>
           </span>
           }
         </div>
 
-        <div class="grid grid-cols-3 gap-2 mt-auto">
+        <!-- Meta Info Premium -->
+        <div class="flex flex-col gap-2.5 mb-5 text-sm text-slate-600">
+          @if (venture.products && venture.products.length > 0) {
+          <span class="flex items-center gap-2">
+            <span class="material-icons text-[18px] text-blue-600">shopping_bag</span>
+            <span class="font-semibold">{{ venture.products.length }}</span>
+            <span>produit{{ venture.products.length > 1 ? 's' : '' }}</span>
+          </span>
+          }
+        </div>
+
+        <!-- Actions Premium -->
+        <div class="grid grid-cols-3 gap-2 mt-auto pt-4 border-t border-slate-100">
           <a
             [routerLink]="['/dashboard/ventures', venture.slug]"
-            class="flex flex-col items-center justify-center gap-1 py-2 px-2 bg-gray-100 hover:bg-primary-100 text-gray-700 hover:text-primary-600 rounded-lg transition-colors text-center">
-            <span class="material-icons text-[18px]">visibility</span>
-            <span class="text-xs font-medium">Voir</span>
+            class="flex flex-col items-center justify-center gap-1 py-2.5 px-2 bg-brand-50 hover:bg-brand-100 text-brand-700 rounded-lg transition-all duration-200 hover:shadow-md group/btn">
+            <span class="material-icons text-[18px] group-hover/btn:scale-110 transition-transform">visibility</span>
           </a>
           <a
             [routerLink]="['/dashboard/ventures/edit', venture.slug]"
-            class="flex flex-col items-center justify-center gap-1 py-2 px-2 bg-gray-100 hover:bg-primary-100 text-gray-700 hover:text-primary-600 rounded-lg transition-colors text-center">
-            <span class="material-icons text-[18px]">edit</span>
-            <span class="text-xs font-medium">Modifier</span>
+            class="flex flex-col items-center justify-center gap-1 py-2.5 px-2 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg transition-all duration-200 hover:shadow-md group/btn">
+            <span class="material-icons text-[18px] group-hover/btn:rotate-12 transition-transform">edit</span>
           </a>
           <button
             (click)="deleteVenture(venture.id, venture.name)"
-            class="flex flex-col items-center justify-center gap-1 py-2 px-2 bg-red-50 hover:bg-red-100 text-red-600 hover:text-red-700 rounded-lg transition-colors text-center">
-            <span class="material-icons text-[18px]">delete</span>
-            <span class="text-xs font-medium">Supprimer</span>
+            class="flex flex-col items-center justify-center gap-1 py-2.5 px-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition-all duration-200 hover:shadow-md group/btn">
+            <span class="material-icons text-[18px] group-hover/btn:scale-110 transition-transform">delete</span>
           </button>
         </div>
       </div>
