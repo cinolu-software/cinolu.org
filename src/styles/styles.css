@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,401,500,501,700,701,900,901,1,2&display=swap');
 
-@import 'tailwindcss';
-
 @theme {
   --color-brand-50: #f1f8ed;
   --color-brand-100: #dfefd8;
@@ -40,6 +38,8 @@
 @import './components.css';
 @import 'filepond/dist/filepond.min.css';
 @import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
+
+@import 'tailwindcss';
 
 @keyframes float {
   0%,
