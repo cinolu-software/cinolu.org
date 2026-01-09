@@ -40,7 +40,9 @@ export class ApiImgPipe implements PipeTransform {
     const value = obj as Record<string, unknown>;
     switch (type) {
       case 'program':
-        return typeof value['logo'] === 'string' && value['logo'] ? `${apiUrl}uploads/programs/${value['logo']}` : '';
+        return typeof value['logo'] === 'string' && value['logo']
+          ? `${apiUrl}uploads/programs/${value['logo']}`
+          : '/images/no-image.jpg';
       case 'gallery':
         return typeof value['image'] === 'string' && value['image']
           ? `${apiUrl}uploads/galleries/${value['image']}`
