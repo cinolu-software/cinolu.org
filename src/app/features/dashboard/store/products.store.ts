@@ -83,7 +83,7 @@ export const ProductsStore = signalStore(
               });
               _toast.showSuccess('Produit créé avec succès');
               setTimeout(() => {
-                _router.navigate(['/dashboard/products', product.slug, 'edit']);
+                _router.navigate(['/dashboard/ventures'], { fragment: 'products' });
               }, 100);
             }),
             catchError(() => {
@@ -109,7 +109,7 @@ export const ProductsStore = signalStore(
                 isLoading: false
               });
               _toast.showSuccess('Produit mis à jour');
-              _router.navigate(['/dashboard/products']);
+              _router.navigate(['/dashboard/ventures'], { fragment: 'products' });
             }),
             catchError(() => {
               patchState(store, { isLoading: false });
@@ -133,7 +133,7 @@ export const ProductsStore = signalStore(
                 isLoading: false
               });
               _toast.showSuccess('Produit supprimé');
-              _router.navigate(['/dashboard/products']);
+              _router.navigate(['/dashboard/ventures'], { fragment: 'products' });
             }),
             catchError(() => {
               patchState(store, { isLoading: false });
@@ -147,7 +147,7 @@ export const ProductsStore = signalStore(
 
     resetSelection: () => {
       patchState(store, { selectedProduct: null });
-      _router.navigate(['/dashboard/products']);
+      _router.navigate(['/dashboard/ventures'], { fragment: 'products' });
     }
   }))
 );
