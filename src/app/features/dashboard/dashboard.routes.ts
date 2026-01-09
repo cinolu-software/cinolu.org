@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { authGuard } from '@core/guards/auth.guard';
-// import { userGuard } from '@core/guards/role.guard';
 
 export const dashboardRoutes: Routes = [
   {
@@ -20,28 +19,23 @@ export const dashboardRoutes: Routes = [
       },
       {
         path: 'ventures',
-        title: 'Mes Ventures',
-        loadComponent: () => import('./pages/ventures/ventures-list/ventures-list').then((c) => c.VenturesList)
+        title: 'Mes Entreprises',
+        loadComponent: () => import('./pages/ventures/ventures-list/ventures-list').then((c) => c.VenturesUnified)
       },
       {
         path: 'ventures/create',
-        title: 'Créer une Venture',
+        title: 'Créer une Entreprise',
         loadComponent: () => import('./pages/ventures/venture-form/venture-form').then((c) => c.VentureForm)
       },
       {
         path: 'ventures/edit/:slug',
-        title: 'Modifier une Venture',
+        title: 'Modifier une Entreprise',
         loadComponent: () => import('./pages/ventures/venture-form/venture-form').then((c) => c.VentureForm)
       },
       {
         path: 'ventures/:slug',
-        title: 'Détails de la Venture',
+        title: "Détails de l'Entreprise",
         loadComponent: () => import('./pages/ventures/venture-details/venture-details').then((c) => c.VentureDetails)
-      },
-      {
-        path: 'products',
-        title: 'Mes Produits',
-        loadComponent: () => import('./pages/products/products-list/products-list').then((c) => c.ProductsList)
       },
       {
         path: 'products/create',
