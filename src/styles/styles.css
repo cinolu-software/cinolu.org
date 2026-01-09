@@ -112,6 +112,10 @@ html {
   font-family: var(--font-family-mona);
 }
 
+.font-satoshi {
+  font-family: var(--font-family-satoshi);
+}
+
 body {
   width: 100%;
   max-width: 100vw;
