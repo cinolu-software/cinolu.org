@@ -1,7 +1,7 @@
 <div class="dashboard-container">
   <p-confirmDialog />
 
-  <!-- Page Header Premium -->
+  <!-- Page Header  -->
   <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 dashboard-section">
     <div>
       <div class="flex items-center gap-3 mb-3">
@@ -24,7 +24,7 @@
     </a>
   </div>
 
-  <!-- Loading State Premium -->
+  <!-- Loading State  -->
   @if (productsStore.isLoading()) {
   <div class="flex flex-col items-center justify-center py-24">
     <div class="relative">
@@ -35,7 +35,7 @@
     <p class="mt-6 dashboard-text-body animate-pulse">Chargement de vos produits...</p>
   </div>
 
-  <!-- Empty State Premium -->
+  <!-- Empty State  -->
   } @else if (productsStore.isEmpty()) {
   <div class="flex flex-col items-center justify-center py-20 px-4">
     <div
@@ -54,12 +54,10 @@
     </a>
   </div>
 
-  <!-- Products Grid Premium -->
   } @else {
   <div class="dashboard-grid-3">
     @for (product of productsStore.products(); track product.id) {
     <div class="dashboard-card-hover overflow-hidden flex flex-col h-full group">
-      <!-- Product Header Premium -->
       <div class="p-6 pb-4 border-b border-slate-100">
         @if (product.venture) {
         <div class="mb-4">
@@ -72,7 +70,6 @@
 
         <div class="flex items-start justify-between gap-4">
           <h3 class="dashboard-heading-5 flex-1 group-hover:text-primary-600 transition-colors">{{ product.name }}</h3>
-          <!-- Price Tag Premium -->
           <div class="flex-shrink-0">
             <div class="px-4 py-2.5 bg-gradient-to-br from-primary-400 to-primary-500 rounded-lg shadow-lg">
               <div class="flex items-baseline gap-0.5">
@@ -84,12 +81,10 @@
         </div>
       </div>
 
-      <!-- Product Description -->
       <div class="px-6 py-4 flex-1">
         <p class="dashboard-text-small dashboard-line-clamp-3 leading-relaxed">{{ product.description }}</p>
       </div>
 
-      <!-- Product Actions Premium -->
       <div class="px-6 pb-6 pt-4 border-t border-slate-100 flex gap-3">
         <a
           [routerLink]="['/dashboard/products/edit', product.slug]"
