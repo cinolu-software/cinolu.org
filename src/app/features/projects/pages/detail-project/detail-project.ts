@@ -38,6 +38,7 @@ import {
   ExternalLink
 } from 'lucide-angular';
 import { ProjectStore } from '../../store/project.store';
+import { formatDateForGoogleCalendarUTC, openExternalUrl } from '@shared/helpers';
 import { ActivatedRoute } from '@angular/router';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { IForm, IFormField, IProject, IResource, PhaseFormFieldType } from '../../../../shared/models/entities.models';
@@ -324,32 +325,18 @@ export class DetailProject implements OnInit {
   }
 
   openLink(url?: string): void {
-    if (!url) return;
-    if (typeof window === 'undefined') return;
-    window.open(url, '_blank');
-  }
-
-  private formatDateForCalendar(d: string | Date) {
-    const dt = new Date(d);
-    const yyyy = dt.getUTCFullYear().toString().padStart(4, '0');
-    const mm = (dt.getUTCMonth() + 1).toString().padStart(2, '0');
-    const dd = dt.getUTCDate().toString().padStart(2, '0');
-    const hh = dt.getUTCHours().toString().padStart(2, '0');
-    const min = dt.getUTCMinutes().toString().padStart(2, '0');
-    const ss = dt.getUTCSeconds().toString().padStart(2, '0');
-    return `${yyyy}${mm}${dd}T${hh}${min}${ss}Z`;
+    openExternalUrl(url);
   }
 
   addToCalendar() {
     const project = this.store.project();
     if (!project) return;
-    const start = this.formatDateForCalendar(project.started_at);
-    const end = this.formatDateForCalendar(project.ended_at);
+    const start = formatDateForGoogleCalendarUTC(project.started_at);
+    const end = formatDateForGoogleCalendarUTC(project.ended_at);
     const title = encodeURIComponent(project.name || 'Project');
     const details = encodeURIComponent(project.description?.replace(/\n/g, ' ') || '');
     const url = `https://calendar.google.com/calendar/r/eventedit?text=${title}&details=${details}&dates=${start}/${end}`;
-    if (typeof window === 'undefined') return;
-    window.open(url, '_blank');
+    openExternalUrl(url);
   }
 
   async shareProject() {

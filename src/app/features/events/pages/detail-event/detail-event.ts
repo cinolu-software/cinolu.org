@@ -23,6 +23,7 @@ import { IEvent, IImage } from '../../../../shared/models/entities.models';
 import { GalleryEventStore } from '../../store/galleries.event.store';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { TranslateModule } from '@ngx-translate/core';
+import { formatDateForGoogleCalendarUTC, openExternalUrl } from '@shared/helpers';
 
 @Component({
   selector: 'app-event',
@@ -33,7 +34,6 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class DetailEvent implements OnInit {
   images = model<IImage[]>([]);
-  // active expanded section: 'description' | 'objectives' | 'context' | 'selectionCriteria' | null
   activeSection = signal<string | null>(null);
 
   expandedDescription = computed(() => this.activeSection() === 'description');
@@ -106,33 +106,19 @@ export class DetailEvent implements OnInit {
   }
 
   openLink(url?: string): void {
-    if (!url) return;
-    if (typeof window === 'undefined') return;
-    window.open(url, '_blank');
-  }
-
-  private formatDateForCalendar(d: string | Date) {
-    const dt = new Date(d);
-    const yyyy = dt.getUTCFullYear().toString().padStart(4, '0');
-    const mm = (dt.getUTCMonth() + 1).toString().padStart(2, '0');
-    const dd = dt.getUTCDate().toString().padStart(2, '0');
-    const hh = dt.getUTCHours().toString().padStart(2, '0');
-    const min = dt.getUTCMinutes().toString().padStart(2, '0');
-    const ss = dt.getUTCSeconds().toString().padStart(2, '0');
-    return `${yyyy}${mm}${dd}T${hh}${min}${ss}Z`;
+    openExternalUrl(url);
   }
 
   addToCalendar() {
     const event = this.store.event();
     if (!event) return;
-    const start = this.formatDateForCalendar(event.started_at);
-    const end = this.formatDateForCalendar(event.ended_at);
+    const start = formatDateForGoogleCalendarUTC(event.started_at);
+    const end = formatDateForGoogleCalendarUTC(event.ended_at);
     const title = encodeURIComponent(event.name || 'Event');
     const details = encodeURIComponent(event.description?.replace(/\n/g, ' ') || '');
     const location = encodeURIComponent(event.place || '');
     const url = `https://calendar.google.com/calendar/r/eventedit?text=${title}&details=${details}&location=${location}&dates=${start}/${end}`;
-    if (typeof window === 'undefined') return;
-    window.open(url, '_blank');
+    openExternalUrl(url);
   }
 
   async shareEvent() {
