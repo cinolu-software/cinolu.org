@@ -20,31 +20,48 @@ export class DashboardLayout implements OnInit {
   isSidebarOpen = signal(false);
   currentRoute = signal('');
 
-  menuItems = [
+  navigationSections = [
     {
-      path: '/dashboard/overview',
-      label: 'Accueil',
-      icon: 'grid_view'
+      title: 'Menu',
+      items: [
+        {
+          path: '/dashboard/overview',
+          label: 'Accueil',
+          icon: 'dashboard',
+          badge: null
+        }
+      ]
     },
     {
-      path: '/dashboard/ventures',
-      label: 'Entreprises',
-      icon: 'business'
-    },
+      title: 'Général',
+      items: [
+        {
+          path: '/dashboard/ventures',
+          label: 'Entreprises',
+          icon: 'business_center',
+          badge: null
+        },
+        {
+          path: '/dashboard/profile',
+          label: 'Mon Profil',
+          icon: 'account_circle',
+          badge: null
+        },
+        {
+          path: '/dashboard/referrals',
+          label: 'Parrainages',
+          icon: 'group_add',
+          badge: null
+        }
+      ]
+    }
+  ];
+
+  quickActions = [
     {
-      path: '/dashboard/products',
-      label: 'Produits',
-      icon: 'inventory_2'
-    },
-    {
-      path: '/dashboard/profile',
-      label: 'Mon Profil',
-      icon: 'person'
-    },
-    {
-      path: '/dashboard/referrals',
-      label: 'Parrainages',
-      icon: 'group_add'
+      icon: 'add_business',
+      label: 'Nouvelle entreprise',
+      action: () => this.router.navigate(['/dashboard/ventures/create'])
     }
   ];
 
@@ -74,7 +91,6 @@ export class DashboardLayout implements OnInit {
     const titles: Record<string, string> = {
       '/dashboard/overview': 'Accueil Dashboard',
       '/dashboard/ventures': 'Gestion des Entreprises',
-      '/dashboard/products': 'Catalogue Commercial',
       '/dashboard/profile': 'Mon Profil',
       '/dashboard/referrals': 'Mes Parrainages'
     };
