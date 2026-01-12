@@ -8,6 +8,7 @@ import { AuthCard } from '../../components/auth-card/auth-card';
 import { ForgotPasswordStore } from '../../store/forgot-password.store';
 import { LucideAngularModule, Mail, AlertCircle, ArrowRight } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormManager } from '@shared/components/form-manager/form-manager';
 
 @Component({
   selector: 'app-forgot-password',
@@ -22,6 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
     RouterModule,
     CommonModule,
     AuthCard,
+    FormManager,
     LucideAngularModule,
     TranslateModule
   ]
