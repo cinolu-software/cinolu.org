@@ -8,12 +8,13 @@ import { DatePicker } from 'primeng/datepicker';
 import { FileUpload } from '@shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { VentureGalleryStore } from '@features/dashboard/store/venture-gallery.store';
+import { FormManager, StepConfig } from '@shared/components/form-manager/form-manager';
 
 @Component({
   selector: 'app-venture-form',
   providers: [VentureGalleryStore],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DatePicker, FileUpload, ApiImgPipe, NgOptimizedImage],
+  imports: [CommonModule, ReactiveFormsModule, DatePicker, FileUpload, ApiImgPipe, NgOptimizedImage, FormManager],
   templateUrl: './venture-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -45,6 +46,16 @@ export class VentureForm implements OnInit {
   ];
 
   stages = ['Idée', 'Prototype', 'MVP', 'Croissance', 'Expansion', 'Maturité'];
+
+  // Configuration stepper : 3 étapes logiques pour 12 champs
+  stepConfig: StepConfig[] = [
+    { label: 'Informations essentielles', controls: ['name', 'description', 'email', 'phone_number'] },
+    {
+      label: 'Profil & Marché',
+      controls: ['sector', 'stage', 'location', 'founded_at', 'target_market', 'problem_solved']
+    },
+    { label: 'Présence en ligne', controls: ['website', 'linkedin_url'] }
+  ];
 
   form = this.fb.group({
     name: ['', Validators.required],
