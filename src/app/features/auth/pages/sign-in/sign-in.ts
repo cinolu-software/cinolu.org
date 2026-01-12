@@ -10,6 +10,7 @@ import { SignInStore } from '../../store/sign-in.store';
 import { Password } from 'primeng/password';
 import { LucideAngularModule, Mail, Lock, AlertCircle, ArrowRight } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormManager } from '@shared/components/form-manager/form-manager';
 
 @Component({
   selector: 'app-sign-in',
@@ -25,6 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NgOptimizedImage,
     CommonModule,
     AuthCard,
+    FormManager,
     LucideAngularModule,
     TranslateModule
   ],
