@@ -8,12 +8,13 @@ import { ProductsStore } from '@features/dashboard/store/products.store';
 import { FileUpload } from '@shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { ProductGalleryStore } from '@features/dashboard/store/product-gallery.store';
+import { FormManager } from '@shared/components/form-manager/form-manager';
 
 @Component({
   selector: 'app-product-form',
   providers: [ProductGalleryStore],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FileUpload, ApiImgPipe, NgOptimizedImage],
+  imports: [CommonModule, ReactiveFormsModule, FileUpload, ApiImgPipe, NgOptimizedImage, FormManager],
   templateUrl: './product-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
