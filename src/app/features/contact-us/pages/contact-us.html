@@ -17,102 +17,105 @@
       </div>
 
       <form class="space-y-6 w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="flex flex-col gap-2.5">
-            <label for="name" class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-              {{ 'contact.form.name' | translate }}
-            </label>
-            <input
-              pInputText
-              id="name"
-              [placeholder]="'contact.form.namePlaceholder' | translate"
-              formControlName="name"
-              autocomplete="off"
-              [attr.aria-label]="'contact.form.name' | translate" />
-          </div>
-          <div class="flex flex-col gap-2.5">
-            <label for="email" class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-              {{ 'contact.form.email' | translate }}
-            </label>
-            <input
-              pInputText
-              id="email"
-              [placeholder]="'contact.form.emailPlaceholder' | translate"
-              formControlName="email"
-              autocomplete="off"
-              [attr.aria-label]="'contact.form.email' | translate" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="flex flex-col gap-2.5">
-            <label for="country" class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-              {{ 'contact.form.country' | translate }}
-            </label>
-            <p-select
-              (onChange)="onSelectCountry($event)"
-              [inputId]="'country'"
-              [options]="countryItems"
-              [optionLabel]="'name'"
-              [optionValue]="'name'"
-              [showClear]="true"
-              formControlName="country"
-              [attr.aria-label]="'contact.form.country' | translate"
-              [placeholder]="'contact.form.countryPlaceholder' | translate" />
-          </div>
-          <div class="flex flex-col gap-2.5">
-            <label for="phone" class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-              {{ 'contact.form.phone' | translate }}
-            </label>
-            <p-inputgroup>
-              <p-inputgroup-addon id="phone-addon" role="text">{{ formattedCountryCode }}</p-inputgroup-addon>
+        <app-form-manager [form]="form" [loading]="store.isLoading()">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex flex-col gap-2.5">
+              <label for="name" class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                {{ 'contact.form.name' | translate }}
+              </label>
               <input
                 pInputText
-                id="phone"
-                inputmode="tel"
-                pattern="[0-9]*"
-                [placeholder]="'contact.form.phonePlaceholder' | translate"
-                formControlName="phone_number"
-                autocomplete="off" />
-            </p-inputgroup>
+                id="name"
+                [placeholder]="'contact.form.namePlaceholder' | translate"
+                formControlName="name"
+                autocomplete="off"
+                [attr.aria-label]="'contact.form.name' | translate" />
+            </div>
+            <div class="flex flex-col gap-2.5">
+              <label for="email" class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                {{ 'contact.form.email' | translate }}
+              </label>
+              <input
+                pInputText
+                id="email"
+                [placeholder]="'contact.form.emailPlaceholder' | translate"
+                formControlName="email"
+                autocomplete="off"
+                [attr.aria-label]="'contact.form.email' | translate" />
+            </div>
           </div>
-        </div>
 
-        <div class="flex flex-col gap-2.5">
-          <label for="message" class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-            {{ 'contact.form.message' | translate }}
-          </label>
-          <textarea
-            pTextarea
-            id="message"
-            [placeholder]="'contact.form.messagePlaceholder' | translate"
-            formControlName="message"
-            rows="5"
-            resize="none"
-            autocomplete="off"
-            [attr.aria-label]="'contact.form.message' | translate"></textarea>
-        </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex flex-col gap-2.5">
+              <label for="country" class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                {{ 'contact.form.country' | translate }}
+              </label>
+              <p-select
+                (onChange)="onSelectCountry($event)"
+                [inputId]="'country'"
+                [options]="countryItems"
+                [optionLabel]="'name'"
+                [optionValue]="'name'"
+                [showClear]="true"
+                formControlName="country"
+                [attr.aria-label]="'contact.form.country' | translate"
+                [placeholder]="'contact.form.countryPlaceholder' | translate" />
+            </div>
+            <div class="flex flex-col gap-2.5">
+              <label for="phone" class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                {{ 'contact.form.phone' | translate }}
+              </label>
+              <p-inputgroup>
+                <p-inputgroup-addon id="phone-addon" role="text">{{ formattedCountryCode }}</p-inputgroup-addon>
+                <input
+                  pInputText
+                  id="phone"
+                  inputmode="tel"
+                  pattern="[0-9]*"
+                  [placeholder]="'contact.form.phonePlaceholder' | translate"
+                  formControlName="phone_number"
+                  autocomplete="off" />
+              </p-inputgroup>
+            </div>
+          </div>
 
-        <div class="pt-4">
-          <button
-            [loading]="store.isLoading()"
-            [disabled]="form.invalid || store.isLoading()"
-            pButton
-            type="submit"
-            severity="primary"
-            class="w-full py-3 font-semibold text-base rounded-lg transition-all duration-300 hover:shadow-lg">
-            <span class="flex items-center gap-2 justify-center">
-              @if (!store.isLoading()) {
-              <i-lucide [name]="icons.mail" class="size-5"></i-lucide>
-              } {{ store.isLoading() ? ('contact.form.sending' | translate) : ('contact.form.submit' | translate) }}
-            </span>
-          </button>
-        </div>
+          <div class="flex flex-col gap-2.5">
+            <label for="message" class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+              {{ 'contact.form.message' | translate }}
+            </label>
+            <textarea
+              pTextarea
+              id="message"
+              [placeholder]="'contact.form.messagePlaceholder' | translate"
+              formControlName="message"
+              rows="5"
+              resize="none"
+              autocomplete="off"
+              [attr.aria-label]="'contact.form.message' | translate"></textarea>
+          </div>
+
+          <div class="pt-4">
+            <button
+              formActions
+              [loading]="store.isLoading()"
+              [disabled]="form.invalid || store.isLoading()"
+              pButton
+              type="submit"
+              severity="primary"
+              class="w-full py-3 font-semibold text-base rounded-lg transition-all duration-300 hover:shadow-lg">
+              <span class="flex items-center gap-2 justify-center">
+                @if (!store.isLoading()) {
+                <i-lucide [name]="icons.mail" class="size-5"></i-lucide>
+                } {{ store.isLoading() ? ('contact.form.sending' | translate) : ('contact.form.submit' | translate) }}
+              </span>
+            </button>
+          </div>
+        </app-form-manager>
       </form>
     </div>
 

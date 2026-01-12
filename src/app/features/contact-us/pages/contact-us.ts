@@ -14,6 +14,7 @@ import { GENDERS } from '../../../shared/data/genders.data';
 import { ContactUsStore } from '../store/contact-us.store';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormManager } from '@shared/components/form-manager/form-manager';
 
 @Component({
   selector: 'app-contact-us',
@@ -30,7 +31,8 @@ import { TranslateModule } from '@ngx-translate/core';
     SelectModule,
     ButtonModule,
     HeroCard,
-    TranslateModule
+    TranslateModule,
+    FormManager
   ],
   templateUrl: './contact-us.html',
   changeDetection: ChangeDetectionStrategy.OnPush
