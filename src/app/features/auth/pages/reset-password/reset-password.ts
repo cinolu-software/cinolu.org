@@ -8,6 +8,7 @@ import { AuthCard } from '../../components/auth-card/auth-card';
 import { ResetPasswordStore } from '../../store/reset-password.store';
 import { LucideAngularModule, Lock, AlertCircle, ArrowRight } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormManager } from '@shared/components/form-manager/form-manager';
 
 @Component({
   selector: 'app-reset-password',
@@ -21,6 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
     PasswordModule,
     CommonModule,
     AuthCard,
+    FormManager,
     LucideAngularModule,
     TranslateModule
   ]
