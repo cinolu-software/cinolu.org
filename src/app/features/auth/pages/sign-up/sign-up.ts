@@ -37,6 +37,7 @@ import {
   Loader2
 } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormManager, StepConfig } from '@shared/components/form-manager/form-manager';
 
 @Component({
   selector: 'app-sign-up',
@@ -50,17 +51,14 @@ import { TranslateModule } from '@ngx-translate/core';
     RouterLink,
     ReactiveFormsModule,
     AuthCard,
-    InputTextModule,
-    FormsModule,
     FloatLabelModule,
-    PasswordModule,
     SelectModule,
     DatePickerModule,
     TextareaModule,
     CommonModule,
     InputGroupModule,
     InputGroupAddonModule,
-    ReactiveFormsModule,
+    FormManager,
     LucideAngularModule,
     TranslateModule
   ]
@@ -74,6 +72,13 @@ export class SignUp {
   countryItems = COUNTRY_CODE;
   selectedCountryCode = '';
   ref = this.#route.snapshot.queryParams['ref'] || null;
+
+  // Configuration stepper : 3 étapes logiques
+  stepConfig: StepConfig[] = [
+    { label: 'Identité', controls: ['name', 'email'] },
+    { label: 'Coordonnées', controls: ['phone_number', 'country', 'gender', 'birth_date'] },
+    { label: 'Sécurité', controls: ['password', 'password_confirm'] }
+  ];
 
   icons = {
     user: User,
