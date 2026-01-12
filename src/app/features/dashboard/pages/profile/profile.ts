@@ -8,11 +8,12 @@ import { UpdateInfoStore } from '@features/dashboard/store/update-info.store';
 import { UpdateInfoDto } from '@features/dashboard/dto/update-info.dto';
 import { FileUpload } from '@shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '@shared/pipes';
+import { FormManager } from '@shared/components/form-manager/form-manager';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DatePicker, FileUpload, ApiImgPipe],
+  imports: [CommonModule, ReactiveFormsModule, DatePicker, FileUpload, ApiImgPipe, FormManager],
   providers: [UpdateInfoStore],
   templateUrl: './profile.html',
   changeDetection: ChangeDetectionStrategy.OnPush
