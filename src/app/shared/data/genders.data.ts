@@ -1,1 +1,4 @@
-export const GENDERS = ['Femme', 'Homme'];
+export const GENDERS = [
+  { label: 'Femme', value: 'Femme' },
+  { label: 'Homme', value: 'Homme' }
+];
