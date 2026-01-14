@@ -64,6 +64,7 @@ export interface IUser extends IBase {
   managed_events: IEvent[];
   articles: IArticle[];
   comments: IComment[];
+  mentor_profile?: IMentorProfile;
 }
 
 export interface IProject extends IBase {
@@ -276,4 +277,111 @@ export interface FAQItem {
   answer: string;
   category: 'general' | 'programs' | 'events' | 'entrepreneurs' | 'technical';
   open?: boolean;
+}
+
+//interface Mentor
+
+export enum MentorStatus {
+  PENDING = 'pending',
+  APPROVED = 'approved',
+  REJECTED = 'rejected'
+}
+
+export interface IMentorProfile extends IBase {
+  years_experience: number;
+  cv: string | null;
+  status: MentorStatus;
+  owner: IUser;
+  experiences: IExperience[];
+  expertises: IExpertise[];
+}
+
+export interface IExperience extends IBase {
+  company_name: string;
+  job_title: string;
+  start_date: Date;
+  end_date: Date | null;
+  is_current: boolean;
+  mentor_profile: IMentorProfile;
+}
+
+export interface IExpertise extends IBase {
+  name: string;
+  mentors_profiles: IMentorProfile[];
+}
+
+export interface CreateMentorProfileDto {
+  years_experience: number;
+  expertises: string[];
+  experiences: CreateExperienceDto[];
+}
+
+export interface CreateExperienceDto {
+  id?: string;
+  company_name: string;
+  job_title: string;
+  is_current: boolean;
+  start_date: Date | string;
+  end_date?: Date | string | null;
+}
+
+export interface UpdateMentorProfileDto {
+  years_experience?: number;
+  expertises?: string[];
+  experiences?: CreateExperienceDto[];
+}
+
+export interface FilterMentorsProfileDto {
+  page?: string | null;
+  q?: string | null;
+  status?: MentorStatus | null;
+}
+
+export interface MentorDashboardStats {
+  totalSessions: number;
+  upcomingSessions: number;
+  completedSessions: number;
+  totalMentees: number;
+  activeMentees: number;
+  pendingRequests: number;
+  averageRating: number;
+}
+
+export interface IMentorActivity extends IBase {
+  type: 'session' | 'request' | 'message' | 'review';
+  message: string;
+  icon: string;
+  date: Date;
+  relatedEntityId?: string;
+}
+
+export interface IMentorRequest extends IBase {
+  entrepreneur: IUser;
+  mentor: IUser;
+  status: 'pending' | 'accepted' | 'rejected';
+  message: string;
+  expertise_requested: string;
+}
+
+export interface IMentorSession extends IBase {
+  mentor: IUser;
+  mentee: IUser;
+  title: string;
+  description: string;
+  scheduled_at: Date;
+  duration_minutes: number;
+  status: 'scheduled' | 'completed' | 'cancelled';
+  meeting_link?: string;
+  notes?: string;
+}
+
+export interface IMentee extends IBase {
+  user: IUser;
+  mentor: IUser;
+  status: 'active' | 'inactive' | 'completed';
+  start_date: Date;
+  end_date?: Date;
+  total_sessions: number;
+  last_session_date?: Date;
+  progress_notes?: string;
 }
