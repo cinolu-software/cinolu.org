@@ -5,6 +5,7 @@ import { catchError, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from '@core/services/toast/toastr.service';
+import { AuthStore } from '@core/auth/auth.store';
 import {
   IExpertise,
   UpdateMentorProfileDto,
@@ -12,6 +13,7 @@ import {
   CreateMentorProfileDto,
   IMentorProfile
 } from '@shared/models';
+import { environment } from '@environments/environment.development';
 
 interface MentorProfileState {
   profile: IMentorProfile | null;
@@ -33,48 +35,38 @@ export const MentorProfileStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _router: inject(Router)
+    _router: inject(Router),
+    _authStore: inject(AuthStore)
   })),
   withComputed((state) => ({
     hasProfile: computed(() => !!state.profile()),
     isApproved: computed(() => state.profile()?.status === MentorStatus.APPROVED),
     isPending: computed(() => state.profile()?.status === MentorStatus.PENDING),
     isRejected: computed(() => state.profile()?.status === MentorStatus.REJECTED),
-    cvUrl: computed(() => state.profile()?.cv || null),
-    sortedExperiences: computed(() => {
-      const experiences = state.profile()?.experiences || [];
-      return [...experiences].sort((a, b) => {
-        if (a.is_current) return -1;
-        if (b.is_current) return 1;
-        return new Date(b.start_date).getTime() - new Date(a.start_date).getTime();
-      });
+    cvUrl: computed(() => {
+      const cv = state.profile()?.cv;
+      if (!cv) return null;
+      return `${environment.apiUrl}uploads/mentors/cvs/${cv}`;
     })
   })),
 
-  withMethods(({ _http, _toast, _router, ...store }) => ({
-    loadProfile: rxMethod<string>(
-      pipe(
-        tap(() => patchState(store, { isLoading: true, error: null })),
-        switchMap((mentorProfileId) =>
-          _http.get<{ data: IMentorProfile }>(`mentor-profiles/${mentorProfileId}`).pipe(
-            tap(({ data }) => {
-              patchState(store, {
-                profile: data,
-                isLoading: false
-              });
-            }),
-            catchError((err) => {
-              patchState(store, {
-                isLoading: false,
-                error: err.error?.message || 'Erreur lors du chargement'
-              });
-              _toast.showError(err.error?.message || 'Erreur lors du chargement du profil');
-              return of(null);
-            })
-          )
-        )
-      )
-    ),
+  withMethods(({ _http, _toast, _router, _authStore, ...store }) => ({
+    loadProfileFromAuth: () => {
+      const user = _authStore.user();
+      if (user?.mentor_profile) {
+        patchState(store, {
+          profile: user.mentor_profile,
+          isLoading: false,
+          error: null
+        });
+      } else {
+        patchState(store, {
+          profile: null,
+          isLoading: false,
+          error: 'Profil mentor non trouvé'
+        });
+      }
+    },
 
     loadExpertises: rxMethod<void>(
       pipe(
