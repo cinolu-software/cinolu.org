@@ -7,7 +7,6 @@
   cursor: default;
 }
 
-/* Couleurs personnalisées pour les composants */
 :root {
   --color-success-50: #f0fdf4;
   --color-success-100: #dcfce7;

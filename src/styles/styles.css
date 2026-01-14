@@ -30,7 +30,7 @@
   --font-family-satoshi: 'Satoshi', sans-serif;
 }
 
-@import './dashboard-design-system-v2.css';
+@import './dashboard-design.css';
 @import './overrides/main.css';
 @import './overrides/primeng.css';
 @import 'quill/dist/quill.snow.css';
@@ -387,4 +387,33 @@ section {
   .hero-carousel .p-carousel-item > * {
     pointer-events: auto !important;
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
 }
