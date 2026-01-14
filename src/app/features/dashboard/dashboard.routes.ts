@@ -76,12 +76,18 @@ export const dashboardRoutes: Routes = [
         loadComponent: () =>
           import('./pages/mentor/application-rejected/application-rejected').then((c) => c.MentorApplicationRejected)
       },
-      // Route pour le dashboard mentor (protégée)
+      // Routes pour le dashboard mentor (protégées)
       {
         path: 'mentor',
         title: 'Dashboard Mentor',
         canActivate: [mentorGuard],
         loadComponent: () => import('./pages/mentor/dashboard/mentor-dashboard').then((c) => c.MentorDashboard)
+      },
+      {
+        path: 'mentor/profile',
+        title: 'Mon Profil Mentor',
+        canActivate: [mentorGuard],
+        loadComponent: () => import('./pages/mentor/profile/mentor-profile').then((c) => c.MentorProfile)
       }
     ]
   }
