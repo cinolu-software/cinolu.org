@@ -711,5 +711,155 @@
       "choose_category": "Choose a category",
       "no_project": "No program!"
     }
+  },
+  "mentor": {
+    "apply": {
+      "title": "Become a Mentor",
+      "subtitle": "Share your expertise and guide tomorrow's entrepreneurs",
+      "step": "Step",
+      "of": "of",
+      "completed": "completed",
+      "experience_step": {
+        "title": "Your Experience",
+        "subtitle": "Indicate your years of professional experience",
+        "years_label": "Years of experience",
+        "years_placeholder": "Ex: 5",
+        "years_help": "Indicate the total number of relevant professional experience years",
+        "why_title": "Why this information?",
+        "why_text": "This information helps us better understand your background and match you with entrepreneurs who will benefit most from your expertise."
+      },
+      "expertise_step": {
+        "title": "Your Areas of Expertise",
+        "subtitle": "Select at least one area in which you excel",
+        "no_expertise": "No expertise available",
+        "error_required": "Please select at least one expertise"
+      },
+      "experience_step_detail": {
+        "title": "Your Professional Journey",
+        "subtitle": "Add your relevant professional experiences",
+        "add_button": "Add",
+        "company_label": "Company",
+        "company_placeholder": "Ex: Google",
+        "job_title_label": "Position",
+        "job_title_placeholder": "Ex: Senior Developer",
+        "start_date_label": "Start date",
+        "end_date_label": "End date",
+        "current_position": "I currently hold this position"
+      },
+      "navigation": {
+        "back_to_profile": "Back to profile",
+        "previous": "Previous",
+        "next": "Next",
+        "submit": "Submit my application",
+        "submitting": "Submitting..."
+      },
+      "steps": {
+        "experience": "Experience",
+        "expertises": "Expertises",
+        "journey": "Journey"
+      }
+    },
+    "profile_cta": {
+      "title": "Become a Mentor",
+      "description": "Share your expertise and guide tomorrow's entrepreneurs. Join our community of mentors and make a difference.",
+      "apply_button": "Apply now",
+      "benefits": {
+        "impact": {
+          "title": "Impact",
+          "description": "Guide entrepreneurs"
+        },
+        "recognition": {
+          "title": "Recognition",
+          "description": "Showcase your expertise"
+        },
+        "network": {
+          "title": "Network",
+          "description": "Expand your connections"
+        }
+      }
+    },
+    "status": {
+      "title": "Mentor Status",
+      "subtitle": "Your journey as a mentor",
+      "approved": {
+        "label": "Approved",
+        "title": "Congratulations!",
+        "message": "Your mentor profile has been approved. You can now access your mentor dashboard and start supporting entrepreneurs.",
+        "button": "Access Mentor Dashboard"
+      },
+      "pending": {
+        "label": "Pending",
+        "title": "Application under review",
+        "message": "Your application to become a mentor is currently under review. Our team will contact you soon with a response."
+      },
+      "rejected": {
+        "label": "Rejected",
+        "title": "Application rejected",
+        "message": "Unfortunately, your application has not been accepted at this time. You may submit a new application after gaining more experience."
+      }
+    },
+    "application_pending": {
+      "title": "Application pending",
+      "message": "Your application to become a mentor has been received and is currently under review by our team.",
+      "next_steps": "Next steps",
+      "steps": {
+        "review": {
+          "title": "Application review",
+          "description": "Our team is reviewing your profile, experiences, and areas of expertise."
+        },
+        "evaluation": {
+          "title": "Evaluation (3-5 days)",
+          "description": "We will verify that your profile meets our mentorship criteria."
+        },
+        "notification": {
+          "title": "Email notification",
+          "description": "You will receive an email with the final decision and next steps."
+        }
+      },
+      "meanwhile": {
+        "title": "In the meantime...",
+        "message": "While we review your application, you can continue to use the platform normally and explore available opportunities.",
+        "tip": "We recommend completing your profile and adding your biography to increase your chances of approval."
+      },
+      "actions": {
+        "profile": "Back to profile",
+        "dashboard": "Go to dashboard"
+      }
+    },
+    "application_rejected": {
+      "title": "Application rejected",
+      "message": "Thank you for your interest in becoming a mentor. Unfortunately, your application has not been accepted at this time.",
+      "reasons_title": "Possible reasons",
+      "reasons": {
+        "experience": {
+          "title": "Insufficient experience",
+          "description": "We are looking for mentors with solid experience in their field."
+        },
+        "expertise": {
+          "title": "Areas of expertise",
+          "description": "The selected areas of expertise do not match our current needs."
+        },
+        "profile": {
+          "title": "Incomplete profile",
+          "description": "Some important information is missing from your profile or application."
+        }
+      },
+      "next_steps": {
+        "title": "What to do now?",
+        "steps": {
+          "develop": "Continue to develop your expertise and professional experience",
+          "complete": "Complete your profile with more details about your background",
+          "reapply": "You can submit a new application in 3 months"
+        }
+      },
+      "encouragement": {
+        "title": "Don't get discouraged!",
+        "message": "This decision is not final. We encourage all passionate professionals to continue developing their skills and apply again when their profile is more aligned with our criteria. Your desire to share your expertise is valuable and we thank you for your commitment to our community."
+      },
+      "actions": {
+        "improve_profile": "Improve my profile",
+        "dashboard": "Back to dashboard"
+      }
+    }
   }
 }

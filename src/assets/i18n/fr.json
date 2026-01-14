@@ -713,5 +713,155 @@
       "choose_category": "Choisir une catégorie",
       "no_project": "Pas de programme!"
     }
+  },
+  "mentor": {
+    "apply": {
+      "title": "Devenir Mentor",
+      "subtitle": "Partagez votre expertise et guidez les entrepreneurs de demain",
+      "step": "Étape",
+      "of": "sur",
+      "completed": "complété",
+      "experience_step": {
+        "title": "Votre Expérience",
+        "subtitle": "Indiquez vos années d'expérience professionnelle",
+        "years_label": "Années d'expérience",
+        "years_placeholder": "Ex: 5",
+        "years_help": "Indiquez le nombre total d'années d'expérience professionnelle pertinente",
+        "why_title": "Pourquoi cette information ?",
+        "why_text": "Cette information nous aide à mieux comprendre votre parcours et à vous associer avec des entrepreneurs qui bénéficieront le plus de votre expertise."
+      },
+      "expertise_step": {
+        "title": "Vos Domaines d'Expertise",
+        "subtitle": "Sélectionnez au moins un domaine dans lequel vous excellez",
+        "no_expertise": "Aucune expertise disponible",
+        "error_required": "Veuillez sélectionner au moins une expertise"
+      },
+      "experience_step_detail": {
+        "title": "Votre Parcours Professionnel",
+        "subtitle": "Ajoutez vos expériences professionnelles pertinentes",
+        "add_button": "Ajouter",
+        "company_label": "Entreprise",
+        "company_placeholder": "Ex: Google",
+        "job_title_label": "Poste",
+        "job_title_placeholder": "Ex: Développeur Senior",
+        "start_date_label": "Date de début",
+        "end_date_label": "Date de fin",
+        "current_position": "J'occupe actuellement ce poste"
+      },
+      "navigation": {
+        "back_to_profile": "Retour au profil",
+        "previous": "Précédent",
+        "next": "Suivant",
+        "submit": "Soumettre ma candidature",
+        "submitting": "Soumission en cours..."
+      },
+      "steps": {
+        "experience": "Expérience",
+        "expertises": "Expertises",
+        "journey": "Parcours"
+      }
+    },
+    "profile_cta": {
+      "title": "Devenez Mentor",
+      "description": "Partagez votre expertise et guidez les entrepreneurs de demain. Rejoignez notre communauté de mentors et faites la différence.",
+      "apply_button": "Postuler maintenant",
+      "benefits": {
+        "impact": {
+          "title": "Impact",
+          "description": "Guidez des entrepreneurs"
+        },
+        "recognition": {
+          "title": "Reconnaissance",
+          "description": "Valorisez votre expertise"
+        },
+        "network": {
+          "title": "Réseau",
+          "description": "Élargissez vos connexions"
+        }
+      }
+    },
+    "status": {
+      "title": "Statut Mentor",
+      "subtitle": "Votre parcours en tant que mentor",
+      "approved": {
+        "label": "Approuvé",
+        "title": "Félicitations !",
+        "message": "Votre profil de mentor a été approuvé. Vous pouvez maintenant accéder à votre dashboard mentor et commencer à accompagner des entrepreneurs.",
+        "button": "Accéder au Dashboard Mentor"
+      },
+      "pending": {
+        "label": "En attente",
+        "title": "Candidature en cours d'examen",
+        "message": "Votre candidature pour devenir mentor est en cours d'examen. Notre équipe vous contactera sous peu avec une réponse."
+      },
+      "rejected": {
+        "label": "Refusé",
+        "title": "Candidature refusée",
+        "message": "Malheureusement, votre candidature n'a pas été retenue pour le moment. Vous pourrez soumettre une nouvelle candidature après avoir acquis plus d'expérience."
+      }
+    },
+    "application_pending": {
+      "title": "Candidature en attente",
+      "message": "Votre candidature pour devenir mentor a bien été reçue et est actuellement en cours d'examen par notre équipe.",
+      "next_steps": "Prochaines étapes",
+      "steps": {
+        "review": {
+          "title": "Examen de la candidature",
+          "description": "Notre équipe examine votre profil, vos expériences et vos domaines d'expertise."
+        },
+        "evaluation": {
+          "title": "Évaluation (3-5 jours)",
+          "description": "Nous vérifierons que votre profil correspond à nos critères de mentorat."
+        },
+        "notification": {
+          "title": "Notification par email",
+          "description": "Vous recevrez un email avec la décision finale et les prochaines étapes."
+        }
+      },
+      "meanwhile": {
+        "title": "En attendant...",
+        "message": "Pendant que nous examinons votre candidature, vous pouvez continuer à utiliser la plateforme normalement et explorer les opportunités disponibles.",
+        "tip": "Nous vous recommandons de compléter votre profil et d'ajouter votre biographie pour augmenter vos chances d'approbation."
+      },
+      "actions": {
+        "profile": "Retour au profil",
+        "dashboard": "Aller au tableau de bord"
+      }
+    },
+    "application_rejected": {
+      "title": "Candidature refusée",
+      "message": "Nous vous remercions pour votre intérêt à devenir mentor. Malheureusement, votre candidature n'a pas été retenue pour le moment.",
+      "reasons_title": "Raisons possibles",
+      "reasons": {
+        "experience": {
+          "title": "Expérience insuffisante",
+          "description": "Nous recherchons des mentors avec une expérience solide dans leur domaine."
+        },
+        "expertise": {
+          "title": "Domaines d'expertise",
+          "description": "Les domaines d'expertise sélectionnés ne correspondent pas à nos besoins actuels."
+        },
+        "profile": {
+          "title": "Profil incomplet",
+          "description": "Certaines informations importantes manquent dans votre profil ou votre candidature."
+        }
+      },
+      "next_steps": {
+        "title": "Que faire maintenant ?",
+        "steps": {
+          "develop": "Continuez à développer votre expertise et votre expérience professionnelle",
+          "complete": "Complétez votre profil avec plus de détails sur votre parcours",
+          "reapply": "Vous pourrez soumettre une nouvelle candidature dans 3 mois"
+        }
+      },
+      "encouragement": {
+        "title": "Ne vous découragez pas !",
+        "message": "Cette décision n'est pas définitive. Nous encourageons tous les professionnels passionnés à continuer à développer leurs compétences et à postuler à nouveau lorsque leur profil sera plus aligné avec nos critères. Votre désir de partager votre expertise est précieux et nous vous remercions de votre engagement envers notre communauté."
+      },
+      "actions": {
+        "improve_profile": "Améliorer mon profil",
+        "dashboard": "Retour au tableau de bord"
+      }
+    }
   }
 }
