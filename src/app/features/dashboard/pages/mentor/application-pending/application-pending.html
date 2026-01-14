@@ -1,0 +1,98 @@
+<div class="dashboard-container pb-20">
+  <div class="w-full">
+    <!-- Header -->
+    <div class="text-center mb-10">
+      <div
+        class="inline-flex w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 items-center justify-center shadow-2xl mb-6 animate-bounce-slow">
+        <span class="material-icons text-white text-6xl">schedule</span>
+      </div>
+      <h1 class="dashboard-heading-2 mb-3">
+        Candidature <span class="dashboard-text-gradient-warning">en attente</span>
+      </h1>
+      <p class="dashboard-text-base text-slate-600 max-w-xl mx-auto">
+        Votre candidature pour devenir mentor a bien été reçue et est actuellement en cours d'examen par notre équipe.
+      </p>
+    </div>
+
+    <!-- Status Card -->
+    <div class="dashboard-card-elevated p-8 mb-8">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-yellow-100 flex items-center justify-center flex-shrink-0">
+          <span class="material-icons text-yellow-600 text-2xl">info</span>
+        </div>
+        <div>
+          <h2 class="dashboard-heading-4 mb-2">Prochaines étapes</h2>
+          <p class="dashboard-text-small text-slate-600">Voici ce qui va se passer maintenant :</p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg">
+          <div class="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <span class="material-icons text-brand-600 text-sm">check</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 text-sm mb-1">Examen de la candidature</h3>
+            <p class="text-slate-600 text-xs leading-relaxed">
+              Notre équipe examine votre profil, vos expériences et vos domaines d'expertise.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg">
+          <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <span class="material-icons text-slate-500 text-sm">schedule</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 text-sm mb-1">Évaluation (3-5 jours)</h3>
+            <p class="text-slate-600 text-xs leading-relaxed">
+              Nous vérifierons que votre profil correspond à nos critères de mentorat.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg">
+          <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <span class="material-icons text-slate-500 text-sm">email</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 text-sm mb-1">Notification par email</h3>
+            <p class="text-slate-600 text-xs leading-relaxed">
+              Vous recevrez un email avec la décision finale et les prochaines étapes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info Box -->
+    <div class="dashboard-card bg-blue-50 border border-blue-100 p-6 mb-8">
+      <div class="flex items-start gap-3">
+        <span class="material-icons text-blue-600 text-2xl">lightbulb</span>
+        <div>
+          <h3 class="font-semibold text-blue-900 text-sm mb-2">En attendant...</h3>
+          <p class="text-blue-700 text-xs leading-relaxed mb-3">
+            Pendant que nous examinons votre candidature, vous pouvez continuer à utiliser la plateforme normalement et
+            explorer les opportunités disponibles.
+          </p>
+          <p class="text-blue-700 text-xs leading-relaxed">
+            Nous vous recommandons de compléter votre profil et d'ajouter votre biographie pour augmenter vos chances
+            d'approbation.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a routerLink="/dashboard/profile" class="dashboard-btn-secondary">
+        <span class="material-icons text-[18px]">person</span>
+        <span>Retour au profil</span>
+      </a>
+      <a routerLink="/dashboard/overview" class="dashboard-btn-primary">
+        <span class="material-icons text-[18px]">dashboard</span>
+        <span>Aller au tableau de bord</span>
+      </a>
+    </div>
+  </div>
+</div>
