@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from '@core/guards/auth.guard';
+import { mentorGuard } from '@core/guards/mentor.guard';
 
 export const dashboardRoutes: Routes = [
   {
@@ -56,6 +57,31 @@ export const dashboardRoutes: Routes = [
         path: 'referrals',
         title: 'Parrainages',
         loadComponent: () => import('./pages/referrals/referrals').then((c) => c.ReferralsPage)
+      },
+      // Routes pour la candidature mentor
+      {
+        path: 'mentor/apply',
+        title: 'Devenir Mentor',
+        loadComponent: () => import('./pages/mentor/apply/mentor-apply').then((c) => c.MentorApply)
+      },
+      {
+        path: 'mentor/application-pending',
+        title: 'Candidature en attente',
+        loadComponent: () =>
+          import('./pages/mentor/application-pending/application-pending').then((c) => c.MentorApplicationPending)
+      },
+      {
+        path: 'mentor/application-rejected',
+        title: 'Candidature refusée',
+        loadComponent: () =>
+          import('./pages/mentor/application-rejected/application-rejected').then((c) => c.MentorApplicationRejected)
+      },
+      // Route pour le dashboard mentor (protégée)
+      {
+        path: 'mentor',
+        title: 'Dashboard Mentor',
+        canActivate: [mentorGuard],
+        loadComponent: () => import('./pages/mentor/dashboard/mentor-dashboard').then((c) => c.MentorDashboard)
       }
     ]
   }
