@@ -32,14 +32,14 @@
             </h1>
             <p class="dashboard-text-body">Voici un aperçu complet de votre espace de mentorat</p>
 
-            @if (profileStore.isApproved()) {
+            @if (profileStore) {
             <div class="flex items-center gap-2 text-slate-700 text-base md:text-lg flex-wrap">
               <span class="dashboard-badge-success">
                 <span class="material-icons text-[14px]">verified</span>
                 Mentor Approuvé
               </span>
             </div>
-            } @else if (profileStore.isPending()) {
+            } @else if (authStore.user()?.mentor_profile?.status === 'pending') {
             <div class="flex items-center gap-2 text-slate-700 text-base md:text-lg flex-wrap">
               <span class="dashboard-badge-warning">
                 <span class="material-icons text-[14px]">schedule</span>
@@ -85,7 +85,7 @@
         </div>
         <div class="space-y-1">
           <p class="dashboard-stat-label">Sessions totales</p>
-          <h3 class="dashboard-stat-value">{{ stats.totalSessions }}</h3>
+          <h3 class="dashboard-stat-value">0</h3>
         </div>
       </div>
     </div>
@@ -103,7 +103,7 @@
         </div>
         <div class="space-y-1">
           <p class="dashboard-stat-label">Entrepreneurs suivis</p>
-          <h3 class="dashboard-stat-value">{{ stats.totalMentees }}</h3>
+          <h3 class="dashboard-stat-value">0</h3>
         </div>
       </div>
     </div>
@@ -143,19 +143,18 @@
         </div>
         <div class="space-y-1">
           <p class="dashboard-stat-label">Note moyenne</p>
-          <h3 class="dashboard-stat-value">{{ stats.averageRating }}<span class="text-xl">/5</span></h3>
+          <h3 class="dashboard-stat-value">0<span class="text-xl">/5</span></h3>
         </div>
       </div>
     </div>
     }
 
-    <!-- Actions rapides -->
     <div class="col-span-12">
       <div class="dashboard-card p-6">
         <h2 class="dashboard-heading-4 mb-4">Actions rapides</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <a
-            routerLink="/dashboard/mentor/profile"
+            routerLink="/dashboard/profile"
             class="flex items-center gap-4 p-4 rounded-lg border-2 border-slate-200/60 hover:border-brand-500 hover:bg-brand-50/30 transition-all group">
             <div
               class="dashboard-stat-icon bg-gradient-to-br from-brand-500 to-brand-700 shadow-lg shadow-brand-500/20 group-hover:shadow-brand-500/40 transition-shadow">
@@ -171,7 +170,6 @@
           </a>
 
           <a
-            routerLink="/dashboard/mentor/requests"
             class="flex items-center gap-4 p-4 rounded-lg border-2 border-slate-200/60 hover:border-amber-500 hover:bg-amber-50/30 transition-all group">
             <div
               class="dashboard-stat-icon bg-gradient-to-br from-amber-500 to-orange-600 shadow-lg shadow-amber-500/20 group-hover:shadow-amber-500/40 transition-shadow">
@@ -192,7 +190,6 @@
           </a>
 
           <a
-            routerLink="/dashboard/mentor/sessions"
             class="flex items-center gap-4 p-4 rounded-lg border-2 border-slate-200/60 hover:border-blue-500 hover:bg-blue-50/30 transition-all group">
             <div
               class="dashboard-stat-icon bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-shadow">
@@ -206,7 +203,6 @@
           </a>
 
           <a
-            routerLink="/dashboard/mentor/mentees"
             class="flex items-center gap-4 p-4 rounded-lg border-2 border-slate-200/60 hover:border-emerald-500 hover:bg-emerald-50/30 transition-all group">
             <div
               class="dashboard-stat-icon bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/20 group-hover:shadow-emerald-500/40 transition-shadow">
@@ -235,23 +231,6 @@
           </span>
         </div>
 
-        @if (dashboardStore.recentActivity().length > 0) {
-        <div class="space-y-3">
-          @for (activity of dashboardStore.recentActivity(); track activity.id) {
-          <div class="flex items-start gap-4 p-4 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors group">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-sm">
-              <span class="material-icons text-brand-600 text-xl">notifications</span>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-slate-900 group-hover:text-brand-700 transition-colors">
-                {{ activity.message }}
-              </p>
-              <p class="text-xs text-slate-500 mt-1">{{ activity.date | date: 'dd/MM/yyyy à HH:mm' }}</p>
-            </div>
-          </div>
-          }
-        </div>
-        } @else {
         <div class="flex flex-col items-center justify-center py-12 px-4">
           <div
             class="w-20 h-20 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center shadow-lg mb-4">
@@ -260,7 +239,6 @@
           <h3 class="dashboard-heading-5 mb-2">Aucune activité récente</h3>
           <p class="dashboard-text-body text-center max-w-md">Vos dernières actions s'afficheront ici</p>
         </div>
-        }
       </div>
     </div>
   </div>
