@@ -58,12 +58,14 @@
     @if (activeTab() === 'ventures') {
     <div class="dashboard-fade-in-up">
       <!-- Actions Header -->
+      @if (venturesStore.ventures().length > 0) {
       <div class="flex justify-end mb-6">
         <a routerLink="/dashboard/ventures/create" class="dashboard-btn-primary inline-flex">
           <span class="material-icons text-xl">add</span>
           <span>Créer une entreprise</span>
         </a>
       </div>
+      }
 
       <!-- Loading State -->
       @if (venturesStore.isLoading()) {
@@ -76,7 +78,6 @@
         <p class="mt-6 dashboard-text-body animate-pulse">Chargement de vos entreprises...</p>
       </div>
 
-      <!-- Empty State -->
       } @else if (venturesStore.ventures().length === 0) {
       <div class="flex flex-col items-center justify-center py-20 px-4">
         <div
@@ -208,12 +209,15 @@
     @if (activeTab() === 'products') {
     <div class="dashboard-fade-in-up">
       <!-- Actions Header -->
+
+      @if (!productsStore.isEmpty()) {
       <div class="flex justify-end mb-6">
         <a routerLink="/dashboard/products/create" class="dashboard-btn-primary inline-flex">
           <span class="material-icons text-xl">add</span>
           <span>Ajouter un produit</span>
         </a>
       </div>
+      }
 
       <!-- Loading State -->
       @if (productsStore.isLoading()) {
@@ -226,7 +230,6 @@
         <p class="mt-6 dashboard-text-body animate-pulse">Chargement de vos produits...</p>
       </div>
 
-      <!-- Empty State -->
       } @else if (productsStore.isEmpty()) {
       <div class="flex flex-col items-center justify-center py-20 px-4">
         <div
