@@ -1,0 +1,346 @@
+<div class="dashboard-container pb-20">
+  <div class="dashboard-section mb-8">
+    <div class="flex items-center gap-4 mb-6">
+      <div
+        class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shadow-lg">
+        <span class="material-icons text-white text-3xl">school</span>
+      </div>
+      <div>
+        <h1 class="dashboard-heading-2">Devenir <span class="dashboard-text-gradient-primary">Mentor</span></h1>
+        <p class="dashboard-text-small">Partagez votre expertise et guidez les entrepreneurs de demain</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+      <div class="flex items-center justify-between mb-3">
+        <span class="dashboard-text-small font-semibold text-slate-700">
+          Étape {{ currentStep() }} sur {{ maxSteps }}
+        </span>
+        <span class="dashboard-text-small font-semibold text-brand-600"> {{ getProgressPercentage() }}% complété </span>
+      </div>
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div
+          class="bg-gradient-to-r from-purple-500 to-brand-600 h-2.5 rounded-full transition-all duration-500"
+          [style.width.%]="getProgressPercentage()"></div>
+      </div>
+
+      <div class="flex items-center justify-between mt-6">
+        <div
+          class="flex items-center gap-2"
+          [class.text-brand-600]="currentStep() >= 1"
+          [class.text-slate-400]="currentStep() < 1">
+          <div
+            class="w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all"
+            [class.bg-brand-600]="currentStep() >= 1"
+            [class.border-brand-600]="currentStep() >= 1"
+            [class.border-slate-300]="currentStep() < 1">
+            <span class="material-icons text-sm" [class.text-white]="currentStep() >= 1">person</span>
+          </div>
+          <span class="dashboard-text-tiny font-medium hidden sm:inline">Expérience</span>
+        </div>
+
+        <div
+          class="flex-1 h-0.5 mx-2"
+          [class.bg-brand-600]="currentStep() > 1"
+          [class.bg-slate-300]="currentStep() <= 1"></div>
+
+        <div
+          class="flex items-center gap-2"
+          [class.text-brand-600]="currentStep() >= 2"
+          [class.text-slate-400]="currentStep() < 2">
+          <div
+            class="w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all"
+            [class.bg-brand-600]="currentStep() >= 2"
+            [class.border-brand-600]="currentStep() >= 2"
+            [class.border-slate-300]="currentStep() < 2">
+            <span class="material-icons text-sm" [class.text-white]="currentStep() >= 2">star</span>
+          </div>
+          <span class="dashboard-text-tiny font-medium hidden sm:inline">Expertises</span>
+        </div>
+
+        <div
+          class="flex-1 h-0.5 mx-2"
+          [class.bg-brand-600]="currentStep() > 2"
+          [class.bg-slate-300]="currentStep() <= 2"></div>
+
+        <div
+          class="flex items-center gap-2"
+          [class.text-brand-600]="currentStep() >= 3"
+          [class.text-slate-400]="currentStep() < 3">
+          <div
+            class="w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all"
+            [class.bg-brand-600]="currentStep() >= 3"
+            [class.border-brand-600]="currentStep() >= 3"
+            [class.border-slate-300]="currentStep() < 3">
+            <span class="material-icons text-sm" [class.text-white]="currentStep() >= 3">work</span>
+          </div>
+          <span class="dashboard-text-tiny font-medium hidden sm:inline">Parcours</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="applicationForm" (ngSubmit)="submitApplication()">
+    <app-form-manager [form]="applicationForm" [loading]="mentorProfileStore.isLoading()">
+      @if (currentStep() === 1) {
+      <div class="dashboard-card-elevated p-8 animate-fade-in">
+        <div class="flex items-center gap-3 mb-6 pb-6 border-b border-slate-100">
+          <div
+            class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
+            <span class="material-icons text-white text-2xl">person</span>
+          </div>
+          <div>
+            <h2 class="dashboard-heading-4">Votre Expérience</h2>
+            <p class="dashboard-text-small">Indiquez vos années d'expérience professionnelle</p>
+          </div>
+        </div>
+
+        <div class="w-full mx-auto space-y-6">
+          <div>
+            <label for="years_experience" class="dashboard-label">
+              <span class="material-icons text-[16px] text-brand-600">calendar_today</span>
+              <span>Années d'expérience <span class="text-red-500">*</span></span>
+            </label>
+            <input
+              id="years_experience"
+              type="number"
+              formControlName="years_experience"
+              min="0"
+              class="dashboard-input"
+              placeholder="Ex: 5" />
+            <p class="dashboard-text-tiny text-slate-500 mt-2">
+              Indiquez le nombre total d'années d'expérience professionnelle pertinente
+            </p>
+          </div>
+
+          <div class="dashboard-card bg-blue-50 border border-blue-100 p-5">
+            <div class="flex items-start gap-3">
+              <span class="material-icons text-blue-600 text-xl">info</span>
+              <div>
+                <h4 class="font-semibold text-blue-900 text-sm mb-1">Pourquoi cette information ?</h4>
+                <p class="text-blue-700 text-xs leading-relaxed">
+                  Cette information nous aide à mieux comprendre votre parcours et à vous associer avec des
+                  entrepreneurs qui bénéficieront le plus de votre expertise.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      } @if (currentStep() === 2) {
+      <div class="dashboard-card-elevated p-8 animate-fade-in">
+        <div class="flex items-center gap-3 mb-6 pb-6 border-b border-slate-100">
+          <div
+            class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
+            <span class="material-icons text-white text-2xl">star</span>
+          </div>
+          <div>
+            <h2 class="dashboard-heading-4">Vos Domaines d'Expertise</h2>
+            <p class="dashboard-text-small">Sélectionnez au moins un domaine dans lequel vous excellez</p>
+          </div>
+        </div>
+
+        @if (mentorProfileStore.isLoading()) {
+        <div class="flex justify-center py-12">
+          <div class="w-12 h-12 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin"></div>
+        </div>
+        } @else {
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          @for (expertise of availableExpertises(); track expertise.id) {
+          <button
+            type="button"
+            (click)="toggleExpertise(expertise.id)"
+            class="dashboard-card p-5 text-left transition-all cursor-pointer group"
+            [class.!border-brand-500]="isExpertiseSelected(expertise.id)"
+            [class.!bg-brand-50]="isExpertiseSelected(expertise.id)">
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex items-center gap-3 flex-1">
+                <div
+                  class="w-10 h-10 rounded-lg flex items-center justify-center transition-all"
+                  [class.bg-brand-100]="isExpertiseSelected(expertise.id)"
+                  [class.bg-slate-100]="!isExpertiseSelected(expertise.id)">
+                  <span
+                    class="material-icons text-xl transition-colors"
+                    [class.text-brand-600]="isExpertiseSelected(expertise.id)"
+                    [class.text-slate-500]="!isExpertiseSelected(expertise.id)">
+                    lightbulb
+                  </span>
+                </div>
+                <span
+                  class="font-medium text-sm transition-colors"
+                  [class.text-brand-700]="isExpertiseSelected(expertise.id)"
+                  [class.text-slate-700]="!isExpertiseSelected(expertise.id)">
+                  {{ expertise.name }}
+                </span>
+              </div>
+              @if (isExpertiseSelected(expertise.id)) {
+              <span class="material-icons text-brand-600 text-xl">check_circle</span>
+              }
+            </div>
+          </button>
+          }
+        </div>
+
+        @if (availableExpertises().length === 0) {
+        <div class="text-center py-12">
+          <span class="material-icons text-slate-300 text-6xl mb-3">info</span>
+          <p class="dashboard-text-base text-slate-500">Aucune expertise disponible</p>
+        </div>
+        } } @if (applicationForm.get('expertises')?.hasError('required') && applicationForm.get('expertises')?.touched)
+        {
+        <p class="text-red-500 text-sm mt-4 flex items-center gap-2">
+          <span class="material-icons text-[18px]">error</span>
+          <span>Veuillez sélectionner au moins une expertise</span>
+        </p>
+        }
+      </div>
+      } @if (currentStep() === 3) {
+      <div class="dashboard-card-elevated p-8 animate-fade-in">
+        <div class="flex items-center justify-between mb-6 pb-6 border-b border-slate-100">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center shadow-lg">
+              <span class="material-icons text-white text-2xl">work</span>
+            </div>
+            <div>
+              <h2 class="dashboard-heading-4">Votre Parcours Professionnel</h2>
+              <p class="dashboard-text-small">Ajoutez vos expériences professionnelles pertinentes</p>
+            </div>
+          </div>
+          <button type="button" (click)="addExperience()" class="dashboard-btn-secondary text-sm">
+            <span class="material-icons text-[18px]">add</span>
+            <span class="hidden sm:inline">Ajouter</span>
+          </button>
+        </div>
+
+        <div class="space-y-6" formArrayName="experiences">
+          @for (experience of experiences.controls; track $index; let i = $index) {
+          <div [formGroupName]="i" class="dashboard-card border border-slate-200 p-6 relative">
+            @if (experiences.length > 1) {
+            <button
+              type="button"
+              (click)="removeExperience(i)"
+              class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 flex items-center justify-center transition-colors">
+              <span class="material-icons text-[18px]">close</span>
+            </button>
+            }
+
+            <div class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label [for]="'company_' + i" class="dashboard-label">
+                    <span class="material-icons text-[16px] text-brand-600">business</span>
+                    <span>Entreprise <span class="text-red-500">*</span></span>
+                  </label>
+                  <input
+                    [id]="'company_' + i"
+                    type="text"
+                    formControlName="company_name"
+                    class="dashboard-input"
+                    placeholder="Ex: Google" />
+                </div>
+
+                <div>
+                  <label [for]="'job_' + i" class="dashboard-label">
+                    <span class="material-icons text-[16px] text-purple-600">work</span>
+                    <span>Poste <span class="text-red-500">*</span></span>
+                  </label>
+                  <input
+                    [id]="'job_' + i"
+                    type="text"
+                    formControlName="job_title"
+                    class="dashboard-input"
+                    placeholder="Ex: Développeur Senior" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label [for]="'start_' + i" class="dashboard-label">
+                    <span class="material-icons text-[16px] text-primary-600">event</span>
+                    <span>Date de début <span class="text-red-500">*</span></span>
+                  </label>
+                  <p-datepicker
+                    [inputId]="'start_' + i"
+                    formControlName="start_date"
+                    dateFormat="mm/yy"
+                    view="month"
+                    [showIcon]="true"
+                    placeholder="MM/YYYY"
+                    [fluid]="true" />
+                </div>
+
+                <div>
+                  <label [for]="'end_' + i" class="dashboard-label">
+                    <span class="material-icons text-[16px] text-red-600">event</span>
+                    <span>Date de fin</span>
+                  </label>
+                  <p-datepicker
+                    [inputId]="'end_' + i"
+                    formControlName="end_date"
+                    dateFormat="mm/yy"
+                    view="month"
+                    [showIcon]="true"
+                    placeholder="MM/YYYY"
+                    [fluid]="true"
+                    [disabled]="experience.get('is_current')?.value" />
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <input
+                  [id]="'current_' + i"
+                  type="checkbox"
+                  formControlName="is_current"
+                  class="w-4 h-4 text-brand-600 bg-gray-100 border-gray-300 rounded focus:ring-brand-500" />
+                <label [for]="'current_' + i" class="dashboard-text-small cursor-pointer">
+                  J'occupe actuellement ce poste
+                </label>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+      }
+
+      <div class="flex flex-col-reverse sm:flex-row gap-3 justify-between mt-8">
+        <div class="flex gap-3">
+          <a routerLink="/dashboard/profile" class="dashboard-btn-secondary">
+            <span class="material-icons text-[18px]">arrow_back</span>
+            <span>Retour au profil</span>
+          </a>
+          @if (currentStep() > 1) {
+          <button formActions type="button" (click)="previousStep()" class="dashboard-btn-secondary">
+            <span class="material-icons text-[18px]">chevron_left</span>
+            <span>Précédent</span>
+          </button>
+          }
+        </div>
+
+        <div class="flex gap-3">
+          @if (currentStep() < maxSteps) {
+          <button formActions type="button" (click)="nextStep()" class="dashboard-btn-primary">
+            <span>Suivant</span>
+            <span class="material-icons text-[18px]">chevron_right</span>
+          </button>
+          } @else {
+          <button
+            formActions
+            type="submit"
+            [disabled]="applicationForm.invalid || mentorProfileStore.isLoading()"
+            class="dashboard-btn-primary">
+            @if (mentorProfileStore.isLoading()) {
+            <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            <span>Soumission en cours...</span>
+            } @else {
+            <span class="material-icons text-[18px]">send</span>
+            <span>Soumettre ma candidature</span>
+            }
+          </button>
+          }
+        </div>
+      </div>
+    </app-form-manager>
+  </form>
+</div>
