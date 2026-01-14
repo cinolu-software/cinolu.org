@@ -1,9 +1,9 @@
-import { Component, inject, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { MentorDashboardStore } from '../../../store/mentor-dashboard.store';
-import { IUser } from '@shared/models';
+import { MentorProfileStore } from '../../../store/mentor-profile.store';
 
 @Component({
   selector: 'app-mentor-dashboard',
@@ -13,9 +13,8 @@ import { IUser } from '@shared/models';
 })
 export class MentorDashboard implements OnInit {
   authStore = inject(AuthStore);
-  profileStore = this.authStore.getProfile();
+  profileStore = inject(MentorProfileStore);
   dashboardStore = inject(MentorDashboardStore);
-  user = signal<IUser | null>(null);
 
   dashboardIcon = 'dashboard';
   profileIcon = 'person';
@@ -24,9 +23,17 @@ export class MentorDashboard implements OnInit {
   menteesIcon = 'groups';
   ratingIcon = 'star';
 
+  constructor() {
+    // Charger le profil mentor quand l'utilisateur change
+    effect(() => {
+      const user = this.authStore.user();
+      if (user?.mentor_profile) {
+        this.profileStore.loadProfileFromAuth();
+      }
+    });
+  }
+
   ngOnInit(): void {
-    this.user.set(this.authStore.user());
-    console.log('Current user:', this.user());
     this.dashboardStore.loadStats();
   }
 }

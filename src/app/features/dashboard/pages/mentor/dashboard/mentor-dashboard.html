@@ -32,14 +32,14 @@
             </h1>
             <p class="dashboard-text-body">Voici un aperçu complet de votre espace de mentorat</p>
 
-            @if (profileStore) {
+            @if (profileStore.isApproved()) {
             <div class="flex items-center gap-2 text-slate-700 text-base md:text-lg flex-wrap">
               <span class="dashboard-badge-success">
                 <span class="material-icons text-[14px]">verified</span>
                 Mentor Approuvé
               </span>
             </div>
-            } @else if (authStore.user()?.mentor_profile?.status === 'pending') {
+            } @else if (profileStore.isPending()) {
             <div class="flex items-center gap-2 text-slate-700 text-base md:text-lg flex-wrap">
               <span class="dashboard-badge-warning">
                 <span class="material-icons text-[14px]">schedule</span>
@@ -154,7 +154,7 @@
         <h2 class="dashboard-heading-4 mb-4">Actions rapides</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <a
-            routerLink="/dashboard/profile"
+            routerLink="/dashboard/mentor/profile"
             class="flex items-center gap-4 p-4 rounded-lg border-2 border-slate-200/60 hover:border-brand-500 hover:bg-brand-50/30 transition-all group">
             <div
               class="dashboard-stat-icon bg-gradient-to-br from-brand-500 to-brand-700 shadow-lg shadow-brand-500/20 group-hover:shadow-brand-500/40 transition-shadow">
