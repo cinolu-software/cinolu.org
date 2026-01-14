@@ -77,7 +77,7 @@
         <div class="flex items-center gap-3.5 pl-5 border-l border-slate-200">
           <div class="text-right hidden sm:block">
             <p class="text-sm font-bold text-slate-900 leading-tight">{{ authStore.user()?.name }}</p>
-            <p class="text-xs text-slate-500 mt-0.5">Entrepreneur</p>
+            <p class="text-xs text-slate-500 mt-0.5">{{ getRoleLabel() }}</p>
           </div>
           <div class="relative group cursor-pointer">
             @if (authStore.user()?.profile || authStore.user()?.google_image) {
@@ -95,7 +95,6 @@
               {{ authStore.user()?.name?.charAt(0) || 'U' }}
             </div>
             }
-            <!-- Status indicator online -->
             <div
               class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full shadow-sm"></div>
           </div>
@@ -120,10 +119,8 @@
     tabindex="0"
     aria-label="Fermer le menu"></div>
 
-  <!-- Sidebar Mobile -->
   <aside
     class="xl:hidden fixed top-0 left-0 h-screen w-[320px] bg-white/95 backdrop-blur-2xl rounded-r-lg flex flex-col py-8 z-50 animate-in slide-in-from-left duration-300 shadow-2xl border-r border-slate-200/60">
-    <!-- Header avec logo et fermeture -->
     <div class="px-8 mb-10 flex items-center justify-between">
       <button type="button" [routerLink]="['/']" class="flex items-center gap-3 group" aria-label="Accueil CINOLU">
         <span

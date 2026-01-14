@@ -5,6 +5,7 @@ import { AuthStore } from '@core/auth/auth.store';
 import { filter } from 'rxjs';
 import { ApiImgPipe } from '@shared/pipes';
 import { BackButton } from '@shared/components';
+import { IRole } from '@shared/models';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -104,5 +105,12 @@ export class DashboardLayout implements OnInit {
 
   signOut() {
     this.authStore.signOut();
+  }
+
+  getRoleLabel(): string {
+    const user = this.authStore.user();
+    if (!user || !user.roles) return 'Entrepreneur';
+    if (user.roles.includes('mentor' as unknown as IRole)) return 'Mentor';
+    return 'Entrepreneur';
   }
 }
