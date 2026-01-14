@@ -1,8 +1,9 @@
 import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
-import { IUser } from '@shared/models/entities.models';
+import { IUser, MentorStatus } from '@shared/models/entities.models';
 import { DatePicker } from 'primeng/datepicker';
 import { UpdateInfoStore } from '@features/dashboard/store/update-info.store';
 import { UpdateInfoDto } from '@features/dashboard/dto/update-info.dto';
@@ -13,7 +14,7 @@ import { FormManager } from '@shared/components/form-manager/form-manager';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DatePicker, FileUpload, ApiImgPipe, FormManager],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, DatePicker, FileUpload, ApiImgPipe, FormManager],
   providers: [UpdateInfoStore],
   templateUrl: './profile.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -22,6 +23,7 @@ export class ProfilePage implements OnInit {
   authStore = inject(AuthStore);
   updateInfoStore = inject(UpdateInfoStore);
   fb = inject(FormBuilder);
+  router = inject(Router);
 
   isEditing = signal(false);
 
@@ -102,5 +104,31 @@ export class ProfilePage implements OnInit {
     this.isEditing.set(false);
     this.profileForm.disable();
     this.ngOnInit();
+  }
+
+  // Vérifier si l'utilisateur est déjà mentor
+  isMentor(): boolean {
+    const user = this.authStore.user();
+    return !!user?.roles?.some((role) => role.name === 'mentor');
+  }
+
+  // Vérifier si l'utilisateur a un profil mentor
+  hasMentorProfile(): boolean {
+    return !!this.authStore.user()?.mentor_profile;
+  }
+
+  // Obtenir le statut du profil mentor
+  getMentorStatus(): MentorStatus | null {
+    return this.authStore.user()?.mentor_profile?.status || null;
+  }
+
+  // Naviguer vers la page de candidature mentor
+  applyAsMentor() {
+    this.router.navigate(['/dashboard/mentor/apply']);
+  }
+
+  // Naviguer vers le dashboard mentor
+  goToMentorDashboard() {
+    this.router.navigate(['/dashboard/mentor']);
   }
 }

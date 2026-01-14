@@ -1,20 +1,164 @@
 <div class="dashboard-container">
-  <!-- Page Header  -->
-  <div class="dashboard-section">
-    <div class="flex items-center gap-4 mb-3">
-      <div
-        class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
-        <span class="material-icons text-white text-2xl">person</span>
-      </div>
-      <div>
-        <h1 class="dashboard-heading-2">Mon <span class="dashboard-text-gradient-purple">Profil</span></h1>
-        <p class="dashboard-text-small">Gérez vos informations personnelles et votre photo de profil</p>
-      </div>
-    </div>
-  </div>
-
   <div class="dashboard-grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Mentor Section -->
+
+    <div class="lg:col-span-3">
+      @if (!hasMentorProfile()) {
+      <!-- Call to Action - Devenir Mentor -->
+      <div class="dashboard-card-elevated p-8 relative overflow-hidden group">
+        <!-- Background Pattern -->
+        <div
+          class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-purple-400/20 to-indigo-400/20 rounded-full blur-3xl -z-0 group-hover:scale-110 transition-transform duration-700"></div>
+        <div
+          class="absolute bottom-0 left-0 w-56 h-56 bg-gradient-to-tr from-blue-400/10 to-teal-400/10 rounded-full blur-3xl -z-0 group-hover:scale-110 transition-transform duration-700"></div>
+
+        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <!-- Icon & Content -->
+          <div class="flex items-center gap-5 flex-1">
+            <div
+              class="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shadow-xl flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
+              <span class="material-icons text-white text-3xl">school</span>
+            </div>
+            <div class="text-center md:text-left">
+              <h3 class="dashboard-heading-4 mb-1">
+                Devenez <span class="dashboard-text-gradient-primary">Mentor</span>
+              </h3>
+              <p class="dashboard-text-small max-w-lg">
+                Partagez votre expertise et guidez les entrepreneurs de demain. Rejoignez notre communauté de mentors et
+                faites la différence.
+              </p>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <button
+            type="button"
+            (click)="applyAsMentor()"
+            class="dashboard-btn-primary flex-shrink-0 whitespace-nowrap shadow-lg hover:shadow-xl">
+            <span class="material-icons text-[18px]">rocket_launch</span>
+            <span>Postuler maintenant</span>
+          </button>
+        </div>
+
+        <div class="relative z-10 mt-8 pt-8 border-t border-slate-100">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0">
+                <span class="material-icons text-purple-600 text-xl">groups</span>
+              </div>
+              <div>
+                <p class="dashboard-text-small font-semibold text-slate-800">Impact</p>
+                <p class="dashboard-text-tiny text-slate-600">Guidez des entrepreneurs</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center flex-shrink-0">
+                <span class="material-icons text-indigo-600 text-xl">star</span>
+              </div>
+              <div>
+                <p class="dashboard-text-small font-semibold text-slate-800">Reconnaissance</p>
+                <p class="dashboard-text-tiny text-slate-600">Valorisez votre expertise</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
+                <span class="material-icons text-blue-600 text-xl">network_check</span>
+              </div>
+              <div>
+                <p class="dashboard-text-small font-semibold text-slate-800">Réseau</p>
+                <p class="dashboard-text-tiny text-slate-600">Élargissez vos connexions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      } @else {
+      <div class="dashboard-card-elevated p-8">
+        <div class="flex items-center justify-between flex-wrap gap-4 mb-6 pb-6 border-b border-slate-100">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shadow-lg">
+              <span class="material-icons text-white text-2xl">school</span>
+            </div>
+            <div>
+              <h3 class="dashboard-heading-5">Statut Mentor</h3>
+              <p class="dashboard-text-tiny">Votre parcours en tant que mentor</p>
+            </div>
+          </div>
+
+          @if (getMentorStatus() === 'approved') {
+          <span class="dashboard-badge-success">
+            <span class="material-icons text-[14px]">verified</span>
+            Approuvé
+          </span>
+          } @else if (getMentorStatus() === 'pending') {
+          <span class="dashboard-badge-warning">
+            <span class="material-icons text-[14px]">schedule</span>
+            En attente
+          </span>
+          } @else if (getMentorStatus() === 'rejected') {
+          <span class="dashboard-badge-danger">
+            <span class="material-icons text-[14px]">cancel</span>
+            Refusé
+          </span>
+          }
+        </div>
+
+        <div class="space-y-4">
+          @if (getMentorStatus() === 'approved') {
+          <div class="dashboard-card bg-primary-50 border border-primary-100 p-5">
+            <div class="flex items-start gap-3">
+              <span class="material-icons text-primary-600 text-2xl">check_circle</span>
+              <div class="flex-1">
+                <h4 class="font-semibold text-primary-900 text-sm mb-2">Félicitations !</h4>
+                <p class="text-primary-700 text-xs leading-relaxed mb-4">
+                  Votre profil de mentor a été approuvé. Vous pouvez maintenant accéder à votre dashboard mentor et
+                  commencer à accompagner des entrepreneurs.
+                </p>
+                <button
+                  type="button"
+                  (click)="goToMentorDashboard()"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white text-sm font-medium rounded-lg transition-colors">
+                  <span class="material-icons text-[18px]">dashboard</span>
+                  <span>Accéder au Dashboard Mentor</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          } @else if (getMentorStatus() === 'pending') {
+          <div class="dashboard-card bg-yellow-50 border border-yellow-100 p-5">
+            <div class="flex items-start gap-3">
+              <span class="material-icons text-yellow-600 text-2xl">schedule</span>
+              <div>
+                <h4 class="font-semibold text-yellow-900 text-sm mb-2">Candidature en cours d'examen</h4>
+                <p class="text-yellow-700 text-xs leading-relaxed">
+                  Votre candidature pour devenir mentor est en cours d'examen. Notre équipe vous contactera sous peu
+                  avec une réponse.
+                </p>
+              </div>
+            </div>
+          </div>
+          } @else if (getMentorStatus() === 'rejected') {
+          <div class="dashboard-card bg-red-50 border border-red-100 p-5">
+            <div class="flex items-start gap-3">
+              <span class="material-icons text-red-600 text-2xl">cancel</span>
+              <div>
+                <h4 class="font-semibold text-red-900 text-sm mb-2">Candidature refusée</h4>
+                <p class="text-red-700 text-xs leading-relaxed">
+                  Malheureusement, votre candidature n'a pas été retenue pour le moment. Vous pourrez soumettre une
+                  nouvelle candidature après avoir acquis plus d'expérience.
+                </p>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+      }
+    </div>
+
     <!-- Photo de profil  - Sidebar -->
+
     <div class="lg:col-span-1">
       <div class="dashboard-card-elevated p-8 sticky top-[120px]">
         <h2 class="dashboard-heading-5 mb-6">Photo de profil</h2>
