@@ -1,6 +1,33 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
+  // Static pages - Prerender
+  {
+    path: '',
+    renderMode: RenderMode.Prerender
+  },
+  {
+    path: 'about-us',
+    renderMode: RenderMode.Prerender
+  },
+  {
+    path: 'contact-us',
+    renderMode: RenderMode.Prerender
+  },
+  {
+    path: 'gallery',
+    renderMode: RenderMode.Prerender
+  },
+  {
+    path: 'faq',
+    renderMode: RenderMode.Prerender
+  },
+  {
+    path: 'partners',
+    renderMode: RenderMode.Prerender
+  },
+
+  // Dynamic pages - Client-side rendering
   {
     path: 'programs/:slug',
     renderMode: RenderMode.Client
@@ -45,23 +72,36 @@ export const serverRoutes: ServerRoute[] = [
     path: 'entrepreneurs/venture/:slug',
     renderMode: RenderMode.Client
   },
-
   {
     path: 'entrepreneurs/:id/venture/:slug',
     renderMode: RenderMode.Client
   },
+
+  // Dashboard routes - Client-side only (authenticated)
   {
-    path: 'dashboard/ventures/edit/:slug',
+    path: 'dashboard/**',
+    renderMode: RenderMode.Client
+  },
+
+  // Auth routes - Client-side only
+  {
+    path: 'login',
     renderMode: RenderMode.Client
   },
   {
-    path: 'dashboard/ventures/:slug',
+    path: 'register',
     renderMode: RenderMode.Client
   },
   {
-    path: 'dashboard/products/edit/:slug',
+    path: 'forgot-password',
     renderMode: RenderMode.Client
   },
+  {
+    path: 'reset-password',
+    renderMode: RenderMode.Client
+  },
+
+  // Fallback - Prerender remaining routes
   {
     path: '**',
     renderMode: RenderMode.Prerender
