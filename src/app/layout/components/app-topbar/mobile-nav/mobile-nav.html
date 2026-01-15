@@ -1,147 +1,193 @@
 <div class="lg:hidden">
   @let currentUser = user();
-  <button (click)="toggleNav()">
-    <i-lucide [name]="isOpen() ? icons.close : icons.menu" class="size-6" />
-  </button>
-  <div
-    class="fixed top-16 left-0 bottom-0 w-full bg-white transition-transform duration-300 border-t border-gray-300 z-40"
-    [ngClass]="isOpen() ? 'translate-x-0' : 'translate-x-full'">
-    <div class="inline-flex flex-col justify-between py-10 px-8 h-full text-gray-900 w-full">
-      <div class="flex flex-col items-start gap-4 w-full">
-        @for (link of links(); track $index; let i = $index) {
-        <div class="w-full">
-          @if (link.children?.length) {
-          <button
-            class="flex justify-between items-center w-full px-4 py-2 text-lg font-medium text-gray-800 border-b border-gray-200"
-            (click)="toggleLink(i)">
-            {{ link.translationKey ? (link.translationKey | translate) : link.name }}
-            <i-lucide
-              class="size-5 transition-transform duration-300"
-              [ngClass]="{ 'rotate-90': isLinkOpen(i) }"
-              [name]="icons.chevronRight" />
-          </button>
 
-          <div
-            class="flex flex-col bg-gray-50 transition-all duration-300 overflow-hidden"
-            [style.maxHeight]="isLinkOpen(i) ? getSubMenuMaxHeight(link.children?.length ?? 0) : '0px'">
-            @for (sublink of link.children; track $index) {
+  <button
+    (click)="toggleNav()"
+    class="relative z-50 p-2 -mr-2 group"
+    [attr.aria-label]="isOpen() ? 'Fermer le menu' : 'Ouvrir le menu'"
+    [attr.aria-expanded]="isOpen()">
+    <div class="w-6 h-5 flex flex-col justify-between">
+      <span
+        class="w-full h-0.5 bg-current transform transition-all duration-300 ease-in-out origin-left"
+        [ngClass]="{
+          'rotate-45 translate-y-0.5': isOpen(),
+          'rotate-0 translate-y-0': !isOpen()
+        }">
+      </span>
+      <span
+        class="w-full h-0.5 bg-current transition-all duration-300 ease-in-out"
+        [ngClass]="{
+          'opacity-0 scale-x-0': isOpen(),
+          'opacity-100 scale-x-100': !isOpen()
+        }">
+      </span>
+      <span
+        class="w-full h-0.5 bg-current transform transition-all duration-300 ease-in-out origin-left"
+        [ngClass]="{
+          '-rotate-45 -translate-y-0.5': isOpen(),
+          'rotate-0 translate-y-0': !isOpen()
+        }">
+      </span>
+    </div>
+  </button>
+
+  <div
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 z-40"
+    [ngClass]="{
+      'opacity-100 pointer-events-auto': isOpen(),
+      'opacity-0 pointer-events-none': !isOpen()
+    }"
+    tabindex="0"
+    role="button"
+    aria-label="Fermer le menu"
+    (click)="closeNav()"
+    (keyup)="($event.key === 'Enter' || $event.key === ' ') && closeNav()"
+    (keydown)="($event.key === 'Enter' || $event.key === ' ') && $event.preventDefault()"></div>
+
+  <div
+    class="fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-white shadow-2xl transition-transform duration-300 ease-in-out z-50"
+    [ngClass]="isOpen() ? 'translate-x-0' : 'translate-x-full'">
+    <div class="flex flex-col h-full">
+      <div class="flex items-center justify-between px-6 py-5 border-b border-gray-200">
+        <a routerLink="/" (click)="closeNav()" class="inline-block">
+          <img [ngSrc]="'images/logo/logo-g.png'" width="64" height="68" alt="logo" class="w-8 h-9" />
+        </a>
+        <button
+          (click)="closeNav()"
+          class="p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+          aria-label="Fermer le menu">
+          <i-lucide [name]="icons.close" class="size-5 text-gray-600" />
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto overscroll-contain">
+        <div class="flex flex-col py-2">
+          @for (link of links(); track $index; let i = $index) {
+          <div>
+            @if (link.children?.length) {
+            <button
+              class="flex justify-between items-center w-full px-6 py-4 text-base font-medium text-gray-800 hover:bg-gray-50 transition-colors duration-200"
+              (click)="toggleLink(i)">
+              <span>{{ link.translationKey ? (link.translationKey | translate) : link.name }}</span>
+              <i-lucide
+                class="size-4 text-gray-500 transition-transform duration-300"
+                [ngClass]="{ 'rotate-180': isLinkOpen(i) }"
+                [name]="icons.chevronDown" />
+            </button>
+
+            <div
+              class="bg-gray-50 transition-all duration-300 overflow-hidden"
+              [style.maxHeight]="isLinkOpen(i) ? getSubMenuMaxHeight(link.children?.length ?? 0) : '0px'">
+              @for (sublink of link.children; track $index) {
+              <a
+                routerLinkActive="bg-primary-50 text-primary-600"
+                [routerLink]="sublink.path"
+                (click)="closeNav()"
+                [routerLinkActiveOptions]="{
+                  exact: sublink.exactUrl || false
+                }"
+                class="flex items-center gap-3 px-6 py-3 pl-12 text-sm font-medium text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-all duration-200">
+                <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
+                <span>{{ sublink.translationKey ? (sublink.translationKey | translate) : sublink.name }}</span>
+              </a>
+              }
+            </div>
+            } @else {
             <a
-              routerLinkActive="bg-primary-100 text-primary-600"
-              [routerLink]="sublink.path"
-              [routerLinkActiveOptions]="{
-                      exact: sublink.exactUrl || false,
-                    }"
-              class="flex gap-2 items-center text-lg px-6 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 transition-colors duration-200">
-              <i-lucide [name]="icons.minus" class="size-3 text-inherit stroke-1" />
-              {{ sublink.translationKey ? (sublink.translationKey | translate) : sublink.name }}
+              [routerLink]="link.path"
+              (click)="closeNav()"
+              routerLinkActive="bg-primary-50 text-primary-600"
+              [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
+              class="flex items-center px-6 py-4 text-base font-medium text-gray-800 hover:bg-gray-50 transition-colors duration-200">
+              {{ link.translationKey ? (link.translationKey | translate) : link.name }}
             </a>
             }
           </div>
-          } @else {
-          <a
-            [routerLink]="link.path"
-            routerLinkActive="text-primary-600"
-            [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
-            class="flex gap-2 text-lg w-full px-4 py-2 font-medium text-gray-800 border-b border-gray-200 hover:text-primary-500">
-            {{ link.translationKey ? (link.translationKey | translate) : link.name }}
-          </a>
           }
-        </div>
-        }
 
-        <div class="w-full">
-          <button
-            class="flex justify-between items-center w-full px-4 py-2 text-lg font-medium text-gray-800 border-b border-gray-200"
-            (click)="togglePrograms()">
-            {{ 'nav.programs' | translate }}
-            <i-lucide
-              class="size-5 transition-transform duration-300"
-              [ngClass]="{ 'rotate-90': programsOpen() }"
-              [name]="icons.chevronRight" />
-          </button>
+          <div>
+            <button
+              class="flex justify-between items-center w-full px-6 py-4 text-base font-medium text-gray-800 hover:bg-gray-50 transition-colors duration-200"
+              (click)="togglePrograms()">
+              <span>{{ 'nav.programs' | translate }}</span>
+              <i-lucide
+                class="size-4 text-gray-500 transition-transform duration-300"
+                [ngClass]="{ 'rotate-180': programsOpen() }"
+                [name]="icons.chevronDown" />
+            </button>
 
-          <div
-            class="flex flex-col bg-gray-50 transition-all duration-300 overflow-hidden"
-            [style.maxHeight]="programsOpen() ? getProgramsMaxHeight() : '0px'">
-            @for (p of programs(); track $index) {
-            <a
-              routerLinkActive="bg-primary-100 text-primary-500"
-              [routerLink]="['/our-programs/' + p.slug]"
-              [routerLinkActiveOptions]="{ exact: true }"
-              class="block px-6 py-3 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 transition-colors duration-200">
-              {{ p.name | translateField:'name':p }}
-              <span class="block text-sm font-normal text-gray-500">
-                {{ p?.category?.name | translateField:'name':p.category }}
-              </span>
-            </a>
-            }
+            <div
+              class="bg-gray-50 transition-all duration-300 overflow-hidden"
+              [style.maxHeight]="programsOpen() ? getProgramsMaxHeight() : '0px'">
+              @for (p of programs(); track $index) {
+              <a
+                routerLinkActive="bg-primary-50 text-primary-600"
+                [routerLink]="['/our-programs/' + p.slug]"
+                (click)="closeNav()"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="block px-6 py-3 pl-12 hover:bg-primary-50 hover:text-primary-600 transition-all duration-200">
+                <span class="font-medium text-sm">{{ p.name | translateField:'name':p }}</span>
+                <span class="block text-xs text-gray-500 mt-0.5">
+                  {{ p?.category?.name | translateField:'name':p.category }}
+                </span>
+              </a>
+              }
+            </div>
           </div>
         </div>
       </div>
 
-      <div>
+      <!-- Footer -->
+      <div class="border-t border-gray-200 bg-gray-50 px-6 py-5">
+        <div class="flex justify-center mb-4">
+          <app-language-switcher />
+        </div>
+
         @if (currentUser) {
-        <div class="space-y-4">
-          <div class="flex justify-center">
-            <app-language-switcher />
+        <div class="space-y-3">
+          <div class="flex items-center gap-3 px-3 py-2">
+            <div class="relative h-10 w-10 flex-shrink-0">
+              <img
+                [ngSrc]="currentUser | apiIMG: 'user'"
+                alt="User Image"
+                class="aspect-video object-cover ring-2 ring-primary-500 bg-gray-200 rounded-full"
+                fill />
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">{{ currentUser.name }}</p>
+              <p class="text-xs text-gray-500 truncate">{{ currentUser.email }}</p>
+            </div>
           </div>
 
-          <button class="group relative flex items-center w-full gap-1">
-            <div
-              class="flex items-center gap-3 border-1 border-primary-500 rounded-lg w-full px-4 py-2 hover:bg-gray-100 transition-colors duration-200">
-              <div class="relative h-8 w-8">
-                <img
-                  [ngSrc]="currentUser | apiIMG: 'user'"
-                  alt="User Image"
-                  class="aspect-video object-cover ring-2 ring-primary-600 bg-gray-200 rounded-full"
-                  fill />
-              </div>
-
-              <span>{{ currentUser.name }}</span>
-            </div>
-            <div
-              class="invisible absolute bottom-16 border border-gray-200 bg-white right-0 w-full mt-2 opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100">
-              <div class="text-left flex flex-col divide-y divide-gray-200 py-2">
-                <div class="flex flex-col px-4 py-2">
-                  <a
-                    [href]="onestopUrl()"
-                    target="_blank"
-                    class="block text-lg rounded-lg px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600">
-                    {{ 'auth.myAccount' | translate }}
-                  </a>
-                </div>
-                <div class="flex flex-col px-4 py-2">
-                  <button
-                    class="flex rounded-lg text-lg px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:bg-primary-100 hover:text-primary-600"
-                    (click)="onSignOut()">
-                    {{ 'auth.signOut' | translate }}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </button>
+          <div class="flex flex-col gap-2">
+            <a
+              routerLink="/dashboard"
+              target="_blank"
+              class="flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-primary-600 bg-white border border-primary-200 rounded-lg hover:bg-primary-50 transition-colors duration-200">
+              <i-lucide [name]="icons.dashboard" class="size-4" />
+              <span>{{ 'auth.myAccount' | translate }}</span>
+            </a>
+            <button
+              (click)="onSignOut()"
+              class="flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-red-600 bg-white border border-red-200 rounded-lg hover:bg-red-50 transition-colors duration-200">
+              <i-lucide [name]="icons.logOut" class="size-4" />
+              <span>{{ 'auth.signOut' | translate }}</span>
+            </button>
+          </div>
         </div>
         } @else {
-        <div class="w-full space-y-4">
-          <div class="flex justify-center mb-4">
-            <app-language-switcher />
-          </div>
-
+        <div class="space-y-3">
           <a
             routerLink="/sign-in"
-            class="relative inline-flex w-full items-center justify-center px-6 py-3 rounded-full border-1 border-primary-500 font-semibold text-primary-500 overflow-hidden group transition duration-300 ease-out hover:text-white">
-            <span
-              class="absolute inset-0 bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out">
-            </span>
-            <span class="relative">{{ 'auth.signIn' | translate }}</span>
+            (click)="closeNav()"
+            class="flex items-center justify-center w-full px-6 py-3 text-sm font-semibold text-primary-600 bg-white border-2 border-primary-500 rounded-full hover:bg-primary-50 transition-all duration-200">
+            {{ 'auth.signIn' | translate }}
           </a>
-
           <a
             routerLink="/sign-up"
-            class="relative inline-flex w-full items-center justify-center px-6 py-3 rounded-full border-primary-500 border-2 font-semibold text-white overflow-hidden group transition duration-300 ease-out">
-            <span
-              class="absolute inset-0 bg-primary-500 scale-x-100 group-hover:scale-x-0 transition-transform origin-right duration-300 ease-out"></span>
-            <span class="relative group-hover:text-primary-500">{{ 'auth.signUp' | translate }}</span>
+            (click)="closeNav()"
+            class="flex items-center justify-center w-full px-6 py-3 text-sm font-semibold text-white bg-primary-500 border-2 border-primary-500 rounded-full hover:bg-primary-600 transition-all duration-200">
+            {{ 'auth.signUp' | translate }}
           </a>
         </div>
         }

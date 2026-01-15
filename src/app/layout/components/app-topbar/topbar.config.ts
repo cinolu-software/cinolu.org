@@ -1,8 +1,5 @@
 import { Menu, X, ChevronDown, ArrowLeft, ChevronRight, Minus, LayoutGrid, LogOut } from 'lucide-angular';
 
-/**
- * Configuration centralisée des icônes Lucide pour la barre de navigation
- */
 export const TOPBAR_ICONS = {
   chevronDown: ChevronDown,
   chevronRight: ChevronRight,
@@ -17,7 +14,7 @@ export const TOPBAR_ICONS = {
 } as const;
 
 export const TOPBAR_ANIMATION = {
-  mobileSubItemHeight: 48,
-  mobileProgramItemHeight: 64,
+  mobileSubItemHeight: 44,
+  mobileProgramItemHeight: 60,
   scrollThreshold: 20
 } as const;

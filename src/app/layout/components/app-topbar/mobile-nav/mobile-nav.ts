@@ -26,23 +26,19 @@ import { TOPBAR_ICONS, TOPBAR_ANIMATION } from '../topbar.config';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MobileNav {
-  // Inputs
-  readonly links = input.required<ILink[]>();
-  readonly programs = input.required<IProgram[]>();
-  readonly onestopUrl = input.required<string>();
-  readonly authStore = input.required<InstanceType<typeof AuthStore>>();
+  links = input.required<ILink[]>();
+  programs = input.required<IProgram[]>();
+  onestopUrl = input.required<string>();
+  authStore = input.required<InstanceType<typeof AuthStore>>();
 
-  // Signals
-  readonly isOpen = signal<boolean>(false);
-  readonly programsOpen = signal<boolean>(false);
-  readonly openLinkIndex = signal<number | null>(null);
+  isOpen = signal<boolean>(false);
+  programsOpen = signal<boolean>(false);
+  openLinkIndex = signal<number | null>(null);
 
-  // Configuration
-  readonly icons = TOPBAR_ICONS;
-  readonly animation = TOPBAR_ANIMATION;
+  icons = TOPBAR_ICONS;
+  animation = TOPBAR_ANIMATION;
 
-  // Computed
-  readonly user = computed(() => this.authStore().user());
+  user = computed(() => this.authStore().user());
 
   toggleNav(): void {
     this.isOpen.update((isOpen) => !isOpen);
