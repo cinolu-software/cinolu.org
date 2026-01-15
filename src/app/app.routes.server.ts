@@ -85,11 +85,11 @@ export const serverRoutes: ServerRoute[] = [
 
   // Auth routes - Client-side only
   {
-    path: 'login',
+    path: 'sign-in',
     renderMode: RenderMode.Client
   },
   {
-    path: 'register',
+    path: 'sign-up',
     renderMode: RenderMode.Client
   },
   {
