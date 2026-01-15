@@ -1,5 +1,4 @@
 import { Component, signal, computed, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule, ChevronDown, Mail, Phone, MessageCircle } from 'lucide-angular';
 import { FAQItem } from '@shared/models';
@@ -7,7 +6,7 @@ import { FaqPageSkeleton } from '../components/faq-page-skeleton/faq-page-skelet
 
 @Component({
   selector: 'app-faq',
-  imports: [CommonModule, TranslateModule, LucideAngularModule, FaqPageSkeleton],
+  imports: [TranslateModule, LucideAngularModule, FaqPageSkeleton],
   templateUrl: './faq-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

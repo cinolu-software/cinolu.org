@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, signal, effect, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
@@ -9,8 +8,7 @@ import { ToastrService } from '@core/services/toast/toastr.service';
 
 @Component({
   selector: 'app-mentor-profile',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './mentor-profile.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

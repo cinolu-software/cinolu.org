@@ -1,5 +1,4 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { carouselConfig } from '../../config/carousel.config';
 import { CarouselModule } from 'primeng/carousel';
@@ -16,7 +15,6 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-recent-events',
   providers: [RecentEventsStore],
   imports: [
-    CommonModule,
     EventCard,
     CarouselModule,
     RouterModule,

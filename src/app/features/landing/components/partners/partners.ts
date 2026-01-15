@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { PARTNERS, PARTNERS_CATEGORIES } from '../../data/partners.data';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { UserPlus, LucideAngularModule, Heart, ShoppingCart, MoveUpRight, MoveRight } from 'lucide-angular';
@@ -13,7 +13,6 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-partners',
   imports: [
     NgOptimizedImage,
-    CommonModule,
     InputGroupModule,
     InputGroupAddonModule,
     LucideAngularModule,

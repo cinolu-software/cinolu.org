@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, computed, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { VenturesStore } from '../../store/ventures.store';
@@ -12,7 +11,7 @@ import { environment } from '@environments/environment';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 @Component({
   selector: 'app-dashboard-overview',
-  imports: [CommonModule, RouterModule, ApiImgPipe, BaseChartDirective],
+  imports: [RouterModule, ApiImgPipe, BaseChartDirective],
   providers: [HighlightsStore],
   templateUrl: './overview.html',
   changeDetection: ChangeDetectionStrategy.OnPush

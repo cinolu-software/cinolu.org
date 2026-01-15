@@ -1,5 +1,4 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'primeng/carousel';
 import { carouselConfig } from '../../config/carousel.config';
@@ -16,7 +15,6 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-recent-projects',
   providers: [RecentProjectsStore],
   imports: [
-    CommonModule,
     ProjectCard,
     CarouselModule,
     RouterModule,

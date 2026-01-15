@@ -1,9 +1,8 @@
 import { Component, input, computed, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-circular-progress',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './circular-progress.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

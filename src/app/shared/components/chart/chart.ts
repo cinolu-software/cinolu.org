@@ -1,12 +1,10 @@
 import { Component, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-chart',
-  standalone: true,
-  imports: [CommonModule, LucideAngularModule],
-  templateUrl: './chart.html',
+  imports: [LucideAngularModule],
+  templateUrl: './chart.html'
 })
 export class ChartComponent {
   title = input.required<string>();

@@ -10,7 +10,6 @@ import {
   inject,
   signal
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AbstractControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -26,8 +25,7 @@ export interface StepConfig {
 
 @Component({
   selector: 'app-form-manager',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './form-manager.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

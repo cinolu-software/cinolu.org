@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { IMemberItem, TEAM_MEMBERS } from '../../data/our-team.data';
-import { CommonModule } from '@angular/common';
 import { SOCIAL_LINKS } from '@features/contact-us/data/contact.data';
 
 @Component({
   selector: 'app-our-team',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './our-team.html'
 })
 export class OurTeam {

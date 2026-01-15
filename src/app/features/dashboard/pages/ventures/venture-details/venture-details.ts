@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage, DecimalPipe, DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { VenturesStore } from '../../../store/ventures.store';
 import { ProductsStore } from '../../../store/products.store';
@@ -9,8 +9,7 @@ import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-venture-details',
-  standalone: true,
-  imports: [CommonModule, RouterModule, ApiImgPipe, NgOptimizedImage, ConfirmDialogModule],
+  imports: [RouterModule, ApiImgPipe, NgOptimizedImage, ConfirmDialogModule, DecimalPipe, DatePipe],
   providers: [ConfirmationService],
   templateUrl: './venture-details.html',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,5 +1,5 @@
 import { Component, input, signal, ChangeDetectionStrategy, computed } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage, NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -15,12 +15,12 @@ import { TOPBAR_ICONS, TOPBAR_ANIMATION } from '../topbar.config';
   imports: [
     RouterModule,
     NgOptimizedImage,
-    CommonModule,
     LucideAngularModule,
     ApiImgPipe,
     TranslateFieldPipe,
     LanguageSwitcherComponent,
-    TranslateModule
+    TranslateModule,
+    NgClass
   ],
   templateUrl: './mobile-nav.html',
   changeDetection: ChangeDetectionStrategy.OnPush

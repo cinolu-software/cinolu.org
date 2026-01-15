@@ -1,5 +1,5 @@
 import { Component, inject, signal, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { filter } from 'rxjs';
@@ -9,8 +9,7 @@ import { IRole } from '@shared/models';
 
 @Component({
   selector: 'app-dashboard-layout',
-  standalone: true,
-  imports: [CommonModule, RouterModule, ApiImgPipe, NgOptimizedImage, BackButton],
+  imports: [RouterModule, ApiImgPipe, NgOptimizedImage, BackButton],
   templateUrl: './dashboard-layout.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

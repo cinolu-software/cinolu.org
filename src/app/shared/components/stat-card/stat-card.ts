@@ -1,12 +1,11 @@
 import { Component, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { LucideAngularModule, LucideIconData, Users } from 'lucide-angular';
 
 @Component({
   selector: 'app-stat-card',
-  standalone: true,
-  imports: [CommonModule, CardModule, LucideAngularModule],
+  imports: [CardModule, LucideAngularModule, NgClass],
   templateUrl: './stat-card.html'
 })
 export class StatCardComponent {

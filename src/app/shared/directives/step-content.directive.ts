@@ -1,8 +1,7 @@
 import { Directive, Input, TemplateRef, ViewContainerRef, inject, effect, Signal } from '@angular/core';
 
 @Directive({
-  selector: '[appStepContent]',
-  standalone: true
+  selector: '[appStepContent]'
 })
 export class StepContentDirective {
   #templateRef = inject(TemplateRef);

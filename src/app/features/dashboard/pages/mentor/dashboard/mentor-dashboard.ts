@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, ChangeDetectionStrategy, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { MentorDashboardStore } from '../../../store/mentor-dashboard.store';
@@ -7,7 +6,7 @@ import { MentorProfileStore } from '../../../store/mentor-profile.store';
 
 @Component({
   selector: 'app-mentor-dashboard',
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   templateUrl: './mentor-dashboard.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

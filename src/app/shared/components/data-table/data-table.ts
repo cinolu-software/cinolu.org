@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DatePipe, DecimalPipe, NgClass } from '@angular/common';
 import { TableModule, TableLazyLoadEvent } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ChipModule } from 'primeng/chip';
@@ -23,8 +23,7 @@ export interface TableAction {
 
 @Component({
   selector: 'app-data-table',
-  standalone: true,
-  imports: [CommonModule, TableModule, ButtonModule, ChipModule, LucideAngularModule],
+  imports: [TableModule, ButtonModule, ChipModule, LucideAngularModule, DatePipe, DecimalPipe, NgClass],
   templateUrl: './data-table.html',
   styleUrl: './data-table.css'
 })

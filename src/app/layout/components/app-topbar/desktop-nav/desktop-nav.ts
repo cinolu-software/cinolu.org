@@ -1,5 +1,5 @@
 import { Component, input, ChangeDetectionStrategy, computed, signal } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage, NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,14 +14,14 @@ import { TOPBAR_ICONS } from '../topbar.config';
   selector: 'app-desktop-nav',
   templateUrl: './desktop-nav.html',
   imports: [
-    CommonModule,
     LucideAngularModule,
     ApiImgPipe,
     TranslateFieldPipe,
     NgOptimizedImage,
     RouterModule,
     LanguageSwitcherComponent,
-    TranslateModule
+    TranslateModule,
+    NgClass
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

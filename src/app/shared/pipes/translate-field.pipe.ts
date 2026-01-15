@@ -10,7 +10,6 @@ import { LanguageService } from '@core/services/language/language.service';
  */
 @Pipe({
   name: 'translateField',
-  standalone: true,
   pure: false // Pour réagir aux changements de langue
 })
 export class TranslateFieldPipe implements PipeTransform {

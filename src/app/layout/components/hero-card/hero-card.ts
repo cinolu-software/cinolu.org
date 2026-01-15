@@ -1,12 +1,12 @@
 import { trigger, transition, style, animate } from '@angular/animations';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { LucideIconData, LucideAngularModule } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hero-card',
-  imports: [LucideAngularModule, CommonModule, TranslateModule],
+  imports: [LucideAngularModule, TranslateModule, NgClass],
   templateUrl: './hero-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [

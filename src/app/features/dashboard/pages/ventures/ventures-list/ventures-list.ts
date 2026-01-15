@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { VenturesStore } from '../../../store/ventures.store';
 import { ProductsStore } from '../../../store/products.store';
@@ -9,8 +9,7 @@ import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-ventures-list',
-  standalone: true,
-  imports: [CommonModule, RouterModule, ConfirmDialogModule, ApiImgPipe],
+  imports: [RouterModule, ConfirmDialogModule, ApiImgPipe, DecimalPipe],
   providers: [ConfirmationService],
   templateUrl: './ventures-list.html',
   changeDetection: ChangeDetectionStrategy.OnPush

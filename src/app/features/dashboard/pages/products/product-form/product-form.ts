@@ -1,5 +1,5 @@
 import { Component, effect, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { VenturesStore } from '../../../store/ventures.store';
@@ -13,8 +13,7 @@ import { FormManager } from '@shared/components/form-manager/form-manager';
 @Component({
   selector: 'app-product-form',
   providers: [ProductGalleryStore],
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FileUpload, ApiImgPipe, NgOptimizedImage, FormManager],
+  imports: [ReactiveFormsModule, FileUpload, ApiImgPipe, NgOptimizedImage, FormManager],
   templateUrl: './product-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

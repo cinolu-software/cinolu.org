@@ -1,13 +1,12 @@
 import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { ReferralsStore } from '../../store/referrals.store';
 import { AuthStore } from '../../../../core/auth/auth.store';
 import { ToastrService } from '../../../../core/services/toast/toastr.service';
 
 @Component({
   selector: 'app-referrals',
-  standalone: true,
-  imports: [CommonModule],
+  imports: [DatePipe],
   templateUrl: './referrals.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

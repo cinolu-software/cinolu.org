@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { DataViewModule } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
 import { ChipModule } from 'primeng/chip';
@@ -30,8 +30,7 @@ export interface ActivityAction {
 
 @Component({
   selector: 'app-activity-list',
-  standalone: true,
-  imports: [CommonModule, DataViewModule, ButtonModule, ChipModule, AvatarModule, LucideAngularModule],
+  imports: [DataViewModule, ButtonModule, ChipModule, AvatarModule, LucideAngularModule, NgClass],
   templateUrl: './activity-list.html'
 })
 export class ActivityListComponent {

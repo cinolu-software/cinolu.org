@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProductsStore } from '@features/dashboard/store/products.store';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -7,7 +7,7 @@ import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-products-list',
-  imports: [CommonModule, RouterModule, ConfirmDialogModule],
+  imports: [RouterModule, ConfirmDialogModule, DecimalPipe],
   providers: [ConfirmationService],
   templateUrl: './products-list.html',
   changeDetection: ChangeDetectionStrategy.OnPush

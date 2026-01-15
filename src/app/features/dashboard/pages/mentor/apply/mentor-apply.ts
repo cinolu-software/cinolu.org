@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { DatePicker } from 'primeng/datepicker';
@@ -10,8 +9,7 @@ import { CreateExperienceDto } from '@shared/models';
 
 @Component({
   selector: 'app-mentor-apply',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, DatePicker, FormManager],
+  imports: [ReactiveFormsModule, RouterModule, DatePicker, FormManager],
   templateUrl: './mentor-apply.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

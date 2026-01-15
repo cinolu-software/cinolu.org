@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
@@ -13,8 +12,7 @@ import { FormManager } from '@shared/components/form-manager/form-manager';
 
 @Component({
   selector: 'app-profile',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, DatePicker, FileUpload, ApiImgPipe, FormManager],
+  imports: [ReactiveFormsModule, RouterModule, DatePicker, FileUpload, ApiImgPipe, FormManager],
   providers: [UpdateInfoStore],
   templateUrl: './profile.html',
   changeDetection: ChangeDetectionStrategy.OnPush

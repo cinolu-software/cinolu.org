@@ -1,5 +1,5 @@
 import { Component, effect, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VenturesStore } from '../../../store/ventures.store';
@@ -13,8 +13,7 @@ import { FormManager, StepConfig } from '@shared/components/form-manager/form-ma
 @Component({
   selector: 'app-venture-form',
   providers: [VentureGalleryStore],
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DatePicker, FileUpload, ApiImgPipe, NgOptimizedImage, FormManager],
+  imports: [ReactiveFormsModule, DatePicker, FileUpload, ApiImgPipe, NgOptimizedImage, FormManager],
   templateUrl: './venture-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
