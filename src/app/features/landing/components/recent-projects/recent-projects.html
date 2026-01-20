@@ -44,9 +44,9 @@
       [responsiveOptions]="carouselConfig"
       [autoplayInterval]="5000"
       touchMoveThreshold="0"
-      class="no-touch-mobile">
+      class="projects-carousel">
       <ng-template let-project #item>
-        <div class="sm:px-3">
+        <div class="carousel-item-wrapper">
           <app-project-card [project]="project" [buttonTextKey]="'recent_projects.explore'" />
         </div>
       </ng-template>
@@ -56,11 +56,7 @@
       <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
         <i-lucide [name]="icons.moveLeft" class="size-4" />
       </button>
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 bg-primary-300 rounded-full"></span>
-        <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
-        <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
-      </div>
+
       <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button">
         <i-lucide [name]="icons.moveRight" class="size-4" />
       </button>

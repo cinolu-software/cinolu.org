@@ -45,7 +45,7 @@
         [responsiveOptions]="carouselOptions"
         class="w-full events-carousel">
         <ng-template let-event #item>
-          <div class="sm:px-3">
+          <div class="carousel-item-wrapper">
             <app-event-card [event]="event" [buttonTextKey]="'recent_events.explore'" />
           </div>
         </ng-template>
