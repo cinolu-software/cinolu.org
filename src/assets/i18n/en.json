@@ -502,6 +502,7 @@
       "subtitle": "Project details and key milestones.",
       "actions_status": "Actions and status tracking.",
       "phases": "Project phases",
+      "no_phase": "No phase available for this project",
       "phases_subtitle": "Discover key steps and resources associated with each phase.",
       "show_resources": "Show resources",
       "hide_resources": "Hide resources",

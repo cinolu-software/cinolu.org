@@ -487,6 +487,7 @@
       "categories_label": "domaines d'activité",
       "no_resource": "Aucune ressource pour cette phase",
       "phases": "Phases du projet",
+      "no_phase": "Aucune phase disponible pour ce projet",
       "no_participant": "Aucun participant",
       "dates": "Dates",
       "start": "Début :",
