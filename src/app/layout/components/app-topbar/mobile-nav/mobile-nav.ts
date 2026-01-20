@@ -65,12 +65,4 @@ export class MobileNav {
   togglePrograms(): void {
     this.programsOpen.update((v) => !v);
   }
-
-  getSubMenuMaxHeight(childrenLength: number): string {
-    return `${childrenLength * this.animation.mobileSubItemHeight}px`;
-  }
-
-  getProgramsMaxHeight(): string {
-    return `${this.programs().length * this.animation.mobileProgramItemHeight}px`;
-  }
 }
