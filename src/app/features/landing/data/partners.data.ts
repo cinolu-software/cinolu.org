@@ -4,7 +4,7 @@ export interface IPartner {
   category: string;
 }
 
-interface IPartnerCategory {
+export interface IPartnerCategory {
   id: number;
   name: string;
 }
