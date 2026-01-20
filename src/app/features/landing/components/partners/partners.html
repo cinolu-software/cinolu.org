@@ -1,5 +1,7 @@
 <section class="bg-white overflow-hidden">
-  <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-15 md:pb-10">
+  <!-- <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-15 md:pb-10"> -->
+
+  <div class="mx-auto pt-20 pb-15 md:pb-10">
     <div class="mb-16 text-center px-4">
       <h3
         class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-satoshi mb-4 tracking-tight leading-tight">
@@ -11,48 +13,134 @@
       <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">{{ 'partners.description' | translate }}</p>
     </div>
 
-    <div class="relative">
-      <p-carousel
-        [value]="partners"
-        [numVisible]="5"
-        [circular]="true"
-        [autoplayInterval]="3000"
-        [showIndicators]="false"
-        [showNavigators]="true"
-        [responsiveOptions]="responsiveOptions"
-        touchMoveThreshold="0"
-        class="w-full partners-carousel modern-carousel">
-        <ng-template let-partners #item>
-          <div class="p-3">
+    <div class="relative overflow-hidden py-8">
+      <div class="partners-scroll-container mb-8">
+        <div class="partners-scroll-track partners-scroll-right">
+          @for (partner of firstRow; track $index) {
+          <div class="partners-scroll-item">
             <div
-              class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-lg p-6 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[200px] flex flex-col">
-              <div class="absolute top-3 right-3">
+              class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-lg p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px]">
+              <div class="absolute top-2 right-2">
                 <span
-                  class="inline-flex items-center px-2.5 py-1 bg-primary-50 text-primary-700 text-xs font-medium rounded-full border border-primary-200">
-                  {{ partners.category }}
+                  class="inline-flex items-center px-2 py-0.5 bg-primary-50 text-primary-700 text-[10px] sm:text-xs font-medium rounded-full border border-primary-200">
+                  {{ partner.category }}
                 </span>
               </div>
 
-              <div class="flex-1 flex items-center justify-center mb-4 p-4">
+              <div class="flex-1 flex items-center justify-center mb-2 sm:mb-3 p-2 sm:p-3">
                 <img
-                  [ngSrc]="partners.image"
-                  [alt]="'Logo de ' + partners.name"
-                  [title]="partners.name"
-                  width="140"
-                  height="70"
-                  class="object-contain max-w-full max-h-16 group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
+                  [ngSrc]="partner.image"
+                  [alt]="'Logo de ' + partner.name"
+                  [title]="partner.name"
+                  width="120"
+                  height="60"
+                  class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
               </div>
 
-              <div class="text-center pt-3 border-t border-gray-100">
+              <div class="text-center pt-2 border-t border-gray-100">
                 <h4
-                  class="font-bold text-gray-900 text-sm group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
-                  {{ partners.name }}
+                  class="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
+                  {{ partner.name }}
                 </h4>
               </div>
             </div>
           </div>
-        </ng-template>
-      </p-carousel>
+          } @for (partner of firstRow; track $index) {
+          <div class="partners-scroll-item">
+            <div
+              class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-lg p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px]">
+              <div class="absolute top-2 right-2">
+                <span
+                  class="inline-flex items-center px-2 py-0.5 bg-primary-50 text-primary-700 text-[10px] sm:text-xs font-medium rounded-full border border-primary-200">
+                  {{ partner.category }}
+                </span>
+              </div>
+
+              <div class="flex-1 flex items-center justify-center mb-2 sm:mb-3 p-2 sm:p-3">
+                <img
+                  [ngSrc]="partner.image"
+                  [alt]="'Logo de ' + partner.name"
+                  [title]="partner.name"
+                  width="120"
+                  height="60"
+                  class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
+              </div>
+
+              <div class="text-center pt-2 border-t border-gray-100">
+                <h4
+                  class="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
+                  {{ partner.name }}
+                </h4>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+
+      <div class="partners-scroll-container">
+        <div class="partners-scroll-track partners-scroll-left">
+          @for (partner of secondRow; track $index) {
+          <div class="partners-scroll-item">
+            <div
+              class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-lg p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px]">
+              <div class="absolute top-2 right-2">
+                <span
+                  class="inline-flex items-center px-2 py-0.5 bg-primary-50 text-primary-700 text-[10px] sm:text-xs font-medium rounded-full border border-primary-200">
+                  {{ partner.category }}
+                </span>
+              </div>
+
+              <div class="flex-1 flex items-center justify-center mb-2 sm:mb-3 p-2 sm:p-3">
+                <img
+                  [ngSrc]="partner.image"
+                  [alt]="'Logo de ' + partner.name"
+                  [title]="partner.name"
+                  width="120"
+                  height="60"
+                  class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
+              </div>
+
+              <div class="text-center pt-2 border-t border-gray-100">
+                <h4
+                  class="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
+                  {{ partner.name }}
+                </h4>
+              </div>
+            </div>
+          </div>
+          } @for (partner of secondRow; track $index) {
+          <div class="partners-scroll-item">
+            <div
+              class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-lg p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px]">
+              <div class="absolute top-2 right-2">
+                <span
+                  class="inline-flex items-center px-2 py-0.5 bg-primary-50 text-primary-700 text-[10px] sm:text-xs font-medium rounded-full border border-primary-200">
+                  {{ partner.category }}
+                </span>
+              </div>
+
+              <div class="flex-1 flex items-center justify-center mb-2 sm:mb-3 p-2 sm:p-3">
+                <img
+                  [ngSrc]="partner.image"
+                  [alt]="'Logo de ' + partner.name"
+                  [title]="partner.name"
+                  width="120"
+                  height="60"
+                  class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
+              </div>
+
+              <div class="text-center pt-2 border-t border-gray-100">
+                <h4
+                  class="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
+                  {{ partner.name }}
+                </h4>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
 
       <div class="w-full flex justify-center items-center mt-12">
         <a routerLink="/partners" class="group relative">

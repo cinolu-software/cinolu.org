@@ -1,11 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { PARTNERS, PARTNERS_CATEGORIES } from '../../data/partners.data';
+import { PARTNERS, PARTNERS_CATEGORIES, IPartner } from '../../data/partners.data';
 import { NgOptimizedImage } from '@angular/common';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { UserPlus, LucideAngularModule, Heart, ShoppingCart, MoveUpRight, MoveRight } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
-import { Carousel } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -17,7 +16,6 @@ import { TranslateModule } from '@ngx-translate/core';
     InputGroupAddonModule,
     LucideAngularModule,
     RouterLink,
-    Carousel,
     ButtonModule,
     TranslateModule
   ],
@@ -25,35 +23,11 @@ import { TranslateModule } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Partners {
-  responsiveOptions: {
-    breakpoint: string;
-    numVisible: number;
-    numScroll: number;
-  }[] = [
-    {
-      breakpoint: '1280px',
-      numVisible: 4,
-      numScroll: 1
-    },
-    {
-      breakpoint: '1199px',
-      numVisible: 3,
-      numScroll: 1
-    },
-    {
-      breakpoint: '767px',
-      numVisible: 2,
-      numScroll: 1
-    },
-    {
-      breakpoint: '575px',
-      numVisible: 1,
-      numScroll: 1
-    }
-  ];
-
   partners = PARTNERS;
   categoryParteners = PARTNERS_CATEGORIES;
+
+  firstRow: IPartner[] = [];
+  secondRow: IPartner[] = [];
 
   icons = {
     userPlus: UserPlus,
@@ -64,6 +38,16 @@ export class Partners {
   };
 
   selectedUserId = 0;
+
+  constructor() {
+    this.splitPartnersIntoRows();
+  }
+
+  private splitPartnersIntoRows(): void {
+    const mid = Math.ceil(this.partners.length / 2);
+    this.firstRow = this.partners.slice(0, mid);
+    this.secondRow = this.partners.slice(mid);
+  }
 
   selectPartenerType(type: number) {
     this.selectedUserId = type;
