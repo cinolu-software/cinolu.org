@@ -11,10 +11,10 @@
         <!-- Icon/Avatar -->
         <div
           class="flex items-center justify-center w-10 h-10 rounded-full"
-          [ngClass]="getIconBgClass(item.iconColor || 'primary')">
+          [ngClass]="iconBgClassFn()(item.iconColor || 'primary')">
           <i-lucide
             [img]="item.icon || defaultIcon"
-            [ngClass]="getIconColorClass(item.iconColor || 'primary')"
+            [ngClass]="iconColorClassFn()(item.iconColor || 'primary')"
             class="w-5 h-5" />
         </div>
 
@@ -23,7 +23,7 @@
           <div class="flex items-center justify-between gap-2 mb-1">
             <h4 class="text-sm font-semibold text-gray-900 truncate">{{ item.title }}</h4>
             @if (item.badge) {
-            <p-chip [label]="item.badge.label" [styleClass]="getBadgeClass(item.badge.color)"></p-chip>
+            <p-chip [label]="item.badge.label" [styleClass]="badgeClassFn()(item.badge.color)"></p-chip>
             }
           </div>
 
