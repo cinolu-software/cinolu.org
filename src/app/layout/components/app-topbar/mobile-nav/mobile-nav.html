@@ -62,7 +62,7 @@
 
       <div class="flex-1 overflow-y-auto overscroll-contain min-h-0">
         <div class="flex flex-col py-2">
-          @for (link of links(); track $index; let i = $index) {
+          @for (link of links(); track link.path || link.name; let i = $index) {
           <div>
             @if (link.children?.length) {
             <button
@@ -82,7 +82,7 @@
                 'max-h-screen opacity-100': isLinkOpen(i)
               }"
               [style.overflow]="isLinkOpen(i) ? 'visible' : 'hidden'">
-              @for (sublink of link.children; track $index) {
+              @for (sublink of link.children; track sublink.path || sublink.name) {
               <a
                 routerLinkActive="bg-primary-50 text-primary-600"
                 [routerLink]="sublink.path"
@@ -127,16 +127,16 @@
                 'max-h-screen opacity-100': programsOpen()
               }"
               [style.overflow]="programsOpen() ? 'visible' : 'hidden'">
-              @for (p of programs(); track $index) {
+              @for (p of programs(); track p.slug) {
               <a
                 routerLinkActive="bg-primary-50 text-primary-600"
                 [routerLink]="['/our-programs/' + p.slug]"
                 (click)="closeNav()"
                 [routerLinkActiveOptions]="{ exact: true }"
                 class="block px-6 py-3 pl-12 hover:bg-primary-50 text-gray-700 hover:text-primary-600 transition-all duration-200">
-                <span class="font-medium text-sm">{{ p.name | translateField:'name':p }}</span>
+                <span class="font-medium text-sm">{{ translateField()(p.name, 'name', p) }}</span>
                 <span class="block text-xs text-gray-500 mt-0.5">
-                  {{ p?.category?.name | translateField:'name':p.category }}
+                  {{ translateField()(p?.category?.name, 'name', p.category) }}
                 </span>
               </a>
               }

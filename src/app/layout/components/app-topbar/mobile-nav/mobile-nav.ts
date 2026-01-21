@@ -1,14 +1,15 @@
-import { Component, input, signal, ChangeDetectionStrategy, computed } from '@angular/core';
+import { Component, input, signal, computed, inject } from '@angular/core';
 import { NgOptimizedImage, NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ILink } from '../../../data/links.data';
-import { ApiImgPipe, TranslateFieldPipe } from '@shared/pipes';
+import { ApiImgPipe } from '@shared/pipes';
 import { AuthStore } from '@core/auth/auth.store';
 import { IProgram } from '@shared/models';
 import { LanguageSwitcherComponent } from '../../language-switcher/language-switcher.component';
 import { TOPBAR_ICONS, TOPBAR_ANIMATION } from '../topbar.config';
+import { LanguageService } from '@core/services/language/language.service';
 
 @Component({
   selector: 'app-mobile-nav',
@@ -17,15 +18,16 @@ import { TOPBAR_ICONS, TOPBAR_ANIMATION } from '../topbar.config';
     NgOptimizedImage,
     LucideAngularModule,
     ApiImgPipe,
-    TranslateFieldPipe,
     LanguageSwitcherComponent,
     TranslateModule,
     NgClass
   ],
-  templateUrl: './mobile-nav.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './mobile-nav.html'
 })
 export class MobileNav {
+  // Services
+  private languageService = inject(LanguageService);
+
   links = input.required<ILink[]>();
   programs = input.required<IProgram[]>();
   onestopUrl = input.required<string>();
@@ -39,6 +41,22 @@ export class MobileNav {
   animation = TOPBAR_ANIMATION;
 
   user = computed(() => this.authStore().user());
+
+  // Helper computed pour traduire les champs selon la langue active (remplace pipe impure)
+  translateField = computed(() => {
+    const currentLang = this.languageService.currentLanguage();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (value: string | null | undefined, fieldName: string, obj: any): string => {
+      if (!value) return '';
+      if (currentLang === 'fr') return value;
+      if (obj && fieldName) {
+        const translatedField = `${fieldName}_${currentLang}`;
+        const translatedValue = obj[translatedField];
+        return (translatedValue as string) || value;
+      }
+      return value;
+    };
+  });
 
   toggleNav(): void {
     this.isOpen.update((isOpen) => !isOpen);

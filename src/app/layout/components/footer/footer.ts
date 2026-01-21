@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, inject, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { PARCOURIR_LINKS, MY_CINOLU_LINKS, SOCIAL_LINKS } from '../../data/links.data';
@@ -32,6 +32,10 @@ export class Footer {
     email: ['', [Validators.required, Validators.email]]
   });
 
+  // Computed signal pour l'année courante
+  currentYear = computed(() => new Date().getFullYear());
+
+  /** @deprecated Use currentYear computed signal instead */
   getYear(): number {
     return new Date().getFullYear();
   }

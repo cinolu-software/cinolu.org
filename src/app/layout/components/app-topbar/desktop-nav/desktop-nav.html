@@ -1,6 +1,6 @@
 <div class="hidden lg:flex justify-between gap-8 w-full text-sm font-bold">
   <div class="flex items-center gap-6">
-    @for (link of links(); track $index) {
+    @for (link of links(); track link.path || link.name) {
     <div class="relative group text-sm">
       @if (link.children?.length) {
       <button
@@ -19,7 +19,7 @@
             'opacity-0 invisible': !isDropdownOpen('link-' + $index)
           }">
           <div class="flex text-left flex-col divide-y divide-gray-200 py-2 bg-white shadow-xl rounded-lg">
-            @for (sublink of link.children; track $index) {
+            @for (sublink of link.children; track sublink.path || sublink.name) {
             <div class="relative group/sub px-4 py-2">
               <a
                 routerLinkActive="bg-primary-100 text-primary-600"
@@ -64,16 +64,16 @@
           'opacity-0 invisible': !isDropdownOpen('programs')
         }">
         <div class="flex flex-col divide-y divide-gray-200 py-2 bg-white shadow-xl rounded-lg">
-          @for (p of programs(); track $index) {
+          @for (p of programs(); track p.slug) {
           <div class="relative group/sub px-4 py-2 text-left">
             <a
               routerLinkActive="bg-primary-100 text-primary-600"
               [routerLink]="['/our-programs/' + p.slug]"
               [routerLinkActiveOptions]="{ exact: true }"
               class="block px-4 py-2 text-gray-700 font-medium hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-colors duration-200">
-              {{ p.name | translateField:'name':p }}
+              {{ translateField()(p.name, 'name', p) }}
               <span class="block text-base font-normal text-gray-500">
-                {{ p?.category?.name | translateField:'name':p.category }}
+                {{ translateField()(p?.category?.name, 'name', p.category) }}
               </span>
             </a>
           </div>

@@ -1,14 +1,15 @@
-import { Component, input, ChangeDetectionStrategy, computed, signal } from '@angular/core';
+import { Component, input, computed, signal, inject } from '@angular/core';
 import { NgOptimizedImage, NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ILink } from '../../../data/links.data';
 import { AuthStore } from '@core/auth/auth.store';
-import { ApiImgPipe, TranslateFieldPipe } from '@shared/pipes';
+import { ApiImgPipe } from '@shared/pipes';
 import { IProgram } from '@shared/models';
 import { LanguageSwitcherComponent } from '../../language-switcher/language-switcher.component';
 import { TOPBAR_ICONS } from '../topbar.config';
+import { LanguageService } from '@core/services/language/language.service';
 
 @Component({
   selector: 'app-desktop-nav',
@@ -16,19 +17,20 @@ import { TOPBAR_ICONS } from '../topbar.config';
   imports: [
     LucideAngularModule,
     ApiImgPipe,
-    TranslateFieldPipe,
     NgOptimizedImage,
     RouterModule,
     LanguageSwitcherComponent,
     TranslateModule,
     NgClass
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '(document:click)': 'onDocumentClick($event)'
   }
 })
 export class DesktopNav {
+  // Services
+  private languageService = inject(LanguageService);
+
   // Inputs
   readonly links = input.required<ILink[]>();
   readonly programs = input.required<IProgram[]>();
@@ -43,6 +45,23 @@ export class DesktopNav {
 
   // State for touch interactions
   readonly openDropdown = signal<string | null>(null);
+
+  // Helper computed pour traduire les champs selon la langue active
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  translateField = computed(() => {
+    const currentLang = this.languageService.currentLanguage();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (value: string | null | undefined, fieldName: string, obj: any): string => {
+      if (!value) return '';
+      if (currentLang === 'fr') return value;
+      if (obj && fieldName) {
+        const translatedField = `${fieldName}_${currentLang}`;
+        const translatedValue = obj[translatedField];
+        return (translatedValue as string) || value;
+      }
+      return value;
+    };
+  });
 
   toggleDropdown(dropdownId: string, event?: Event): void {
     if (event) {
