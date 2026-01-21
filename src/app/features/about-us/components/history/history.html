@@ -24,7 +24,7 @@
     <div
       class="absolute left-8 sm:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-200 via-primary-300 to-primary-200 hidden sm:block"></div>
 
-    @for (item of historyData; track $index) {
+    @for (item of historyData; track item.id) {
     <div class="w-full group" [ngClass]="$index % 2 === 0 ? 'sm:pr-[calc(50%+3rem)]' : 'sm:pl-[calc(50%+3rem)]'">
       <div
         class="relative bg-white rounded-lg border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden">
