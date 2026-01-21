@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Hero } from '../components/hero/hero';
 import { Partners } from '../components/partners/partners';
 import { Networks } from '../components/networks/networks';
 import { RecentEvents } from '../components/recent-events/recent-events';
@@ -14,7 +13,6 @@ import { Storytelling } from '../components/storytelling/storytelling';
 @Component({
   selector: 'app-landing',
   imports: [
-    Hero,
     RecentProjects,
     RecentEvents,
     Networks,
