@@ -1,6 +1,20 @@
-<section class="bg-gradient-to-br from-gray-50 to-white overflow-hidden">
-  <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-15">
+<section class="relative bg-gradient-to-br from-gray-50 via-white to-primary-50/30 overflow-hidden">
+  <!-- Décoration arrière-plan -->
+  <div class="absolute inset-0 opacity-30">
+    <div
+      class="absolute top-20 right-10 w-72 h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+    <div
+      class="absolute bottom-20 left-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl animate-pulse [animation-delay:2s]"></div>
+  </div>
+
+  <div class="relative px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-15">
     <div class="mb-16 text-center px-4">
+      <div
+        class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
+        <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
+        Réseaux Partenaires
+      </div>
+
       <h3
         class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-satoshi mb-4 tracking-tight leading-tight">
         {{ 'networks.title' | translate }}
@@ -11,26 +25,35 @@
       <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">{{ 'networks.description' | translate }}</p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 mb-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 lg:gap-6 mb-16 max-w-7xl mx-auto">
       @for (network of networks; track $index) {
       <div class="group h-full">
         <div
-          class="relative bg-white rounded-lg overflow-hidden h-full flex flex-col border border-gray-100/80 hover:border-gray-300 transition-all duration-300 hover:shadow-md">
-          <div class="relative bg-white p-10 flex items-center justify-center min-h-[200px]">
-            <img
-              [ngSrc]="network.image"
-              [alt]="network.name"
-              [title]="network.name"
-              width="140"
-              height="70"
-              class="object-contain max-w-full max-h-20 filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />
+          class="relative bg-white rounded-xl overflow-hidden h-full flex flex-col border border-gray-200 hover:border-primary-400 transition-all duration-500 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-1">
+          <div
+            class="absolute top-2 right-2 w-8 h-8 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <i-lucide [name]="icons.globe" class="size-3.5 text-primary-600" />
           </div>
 
-          <div class="flex-1 p-6 flex flex-col">
-            <div class="flex-1 space-y-2 mb-4">
-              <h4 class="font-semibold text-sm text-gray-900 line-clamp-2 leading-snug">{{ network.name }}</h4>
+          <div
+            class="relative bg-gradient-to-br from-gray-50 to-white p-6 flex items-center justify-center min-h-[160px] border-b border-gray-100">
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <img
+              src="{{ network.image }}"
+              [alt]="network.name"
+              [title]="network.name"
+              class="relative z-10 object-contain max-w-full max-h-20 w-auto h-auto filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105" />
+          </div>
 
-              <p class="text-xs text-gray-400 line-clamp-2 leading-relaxed">{{ network.descriptionKey | translate }}</p>
+          <div class="flex-1 p-4 flex flex-col">
+            <div class="flex-1 space-y-2 mb-3">
+              <h4
+                class="font-bold text-sm text-gray-900 line-clamp-2 leading-snug group-hover:text-primary-700 transition-colors duration-300">
+                {{ network.name }}
+              </h4>
+
+              <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">{{ network.descriptionKey | translate }}</p>
             </div>
 
             @if (network.website) {
@@ -38,9 +61,9 @@
               [href]="network.website"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-1.5 py-2 text-[11px] text-gray-500 hover:text-gray-900 font-medium transition-colors duration-200 group/link border-t border-gray-100 -mx-6 px-6 -mb-6">
+              class="inline-flex items-center justify-center gap-2 py-2.5 text-xs text-primary-600 hover:text-white font-semibold transition-all duration-300 group/link border-t border-gray-100 -mx-4 px-4 -mb-4 hover:bg-gradient-to-r hover:from-primary-600 hover:to-primary-700 hover:border-transparent rounded-b-xl">
               <span class="uppercase tracking-wide">{{ 'networks.visit' | translate }}</span>
-              <i-lucide [name]="icons.globe" class="size-3.5 group-hover/link:translate-x-0.5 transition-transform" />
+              <i-lucide [name]="icons.globe" class="size-3.5 group-hover/link:translate-x-1 transition-transform" />
             </a>
             }
           </div>
@@ -49,28 +72,53 @@
       }
     </div>
 
-    <div class="text-center mt-16">
+    <div class="relative max-w-5xl mx-auto">
       <div
-        class="inline-flex items-center justify-center gap-6 lg:gap-12 text-xs lg:text-sm text-gray-500 px-6 py-4 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200/60 shadow-sm">
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-            <i-lucide [name]="icons.network" class="size-4 text-primary-500" />
+        class="absolute inset-0 bg-gradient-to-r from-primary-500/10 via-transparent to-primary-500/10 blur-3xl"></div>
+
+      <div class="relative text-center">
+        <div
+          class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-10 text-sm text-gray-700 px-4 sm:px-6 lg:px-8 py-4 lg:py-5 bg-white/90 backdrop-blur-lg rounded-xl border border-gray-200 shadow-lg shadow-gray-200/40">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center shadow-md shadow-primary-500/30">
+              <i-lucide [name]="icons.network" class="size-4 lg:size-5 text-white" />
+            </div>
+            <div class="text-left">
+              <div class="font-black text-xl lg:text-2xl text-gray-900">{{ networks.length }}</div>
+              <div class="text-xs font-medium text-gray-600 uppercase tracking-wide">Réseaux</div>
+            </div>
           </div>
-          <span class="font-medium">{{ networks.length }} réseaux</span>
-        </div>
-        <div class="h-4 w-px bg-gray-300"></div>
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-            <i-lucide [name]="icons.globe" class="size-4 text-primary-500" />
+
+          <div
+            class="hidden sm:block h-10 lg:h-12 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
+          <div class="sm:hidden w-20 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-md shadow-blue-500/30">
+              <i-lucide [name]="icons.globe" class="size-4 lg:size-5 text-white" />
+            </div>
+            <div class="text-left">
+              <div class="font-black text-xl lg:text-2xl text-gray-900">Global</div>
+              <div class="text-xs font-medium text-gray-600 uppercase tracking-wide">Portée mondiale</div>
+            </div>
           </div>
-          <span class="font-medium">Portée mondiale</span>
-        </div>
-        <div class="h-4 w-px bg-gray-300"></div>
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-            <i-lucide [name]="icons.users" class="size-4 text-primary-500" />
+
+          <div
+            class="hidden sm:block h-10 lg:h-12 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
+          <div class="sm:hidden w-20 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center shadow-md shadow-primary-500/30">
+              <i-lucide [name]="icons.users" class="size-4 lg:size-5 text-white" />
+            </div>
+            <div class="text-left">
+              <div class="font-black text-xl lg:text-2xl text-gray-900">Actif</div>
+              <div class="text-xs font-medium text-gray-600 uppercase tracking-wide">Collaboration</div>
+            </div>
           </div>
-          <span class="font-medium">Collaboration active</span>
         </div>
       </div>
     </div>
