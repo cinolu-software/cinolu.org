@@ -56,7 +56,7 @@ import { HttpClient } from '@angular/common/http';
 import { SubscriptionStore } from '@features/projects/store/subscription.store';
 import { AuthStore } from '@core/auth';
 import { ToastrService } from '@core/services/toast/toastr.service';
-import { environment } from '@environments/environment.development';
+import { environment } from '@environments/environment';
 
 type FieldFormGroup = FormGroup<{
   id: FormControl<string>;
@@ -147,6 +147,38 @@ export class DetailProject implements OnInit {
   resourcesLoading = this.resourcesStore.isLoading;
   previewSubmitted = signal<string | null>(null);
   previewFormGroups = new Map<string, PreviewFormGroup>();
+
+  // Computed signals pour remplacer les appels de fonctions
+  projectStatus = computed(() => {
+    const project = this.store.project();
+    if (!project) return null;
+
+    const now = new Date();
+    const startedAt = new Date(project.started_at);
+    const endedAt = new Date(project.ended_at);
+
+    if (startedAt <= now && endedAt >= now) {
+      return 'En cours';
+    } else if (startedAt > now) {
+      return 'À venir';
+    } else {
+      return 'Terminé';
+    }
+  });
+
+  statusBadgeClasses = computed(() => {
+    const statut = this.projectStatus();
+    switch (statut) {
+      case 'En cours':
+        return 'bg-primary-50 border-primary-200 text-primary-700';
+      case 'À venir':
+        return 'bg-amber-50 border-amber-200 text-amber-700';
+      case 'Terminé':
+        return 'bg-blue-50 border-blue-200 text-blue-700';
+      default:
+        return 'bg-gray-100 border-gray-200 text-gray-700';
+    }
+  });
 
   formForm = this.#fb.group({
     /* ... */
