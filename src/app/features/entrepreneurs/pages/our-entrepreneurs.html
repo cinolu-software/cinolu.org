@@ -10,7 +10,7 @@
   <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
     @if (venturesStore.isLoading()) {
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6 md:mb-10">
-      @for (i of [1, 2, 3, 4]; track $index) {
+      @for (i of [1, 2, 3, 4]; track i) {
       <app-entrepreneur-card-skeleton />
       }
     </div>
