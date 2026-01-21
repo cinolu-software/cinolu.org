@@ -27,7 +27,7 @@
 
     @if (store.isLoading()) {
     <div class="mt-8 grid grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 pb-10">
-      @for (project of [1, 3, 3]; track $index) {
+      @for (project of [1, 3, 3]; track project) {
       <app-event-card-skeleton />
       }
     </div>

@@ -16,7 +16,7 @@
     <div class="relative overflow-hidden py-8">
       <div class="partners-scroll-container mb-8">
         <div class="partners-scroll-track partners-scroll-right">
-          @for (partner of firstRow; track $index) {
+          @for (partner of firstRow; track partner.name || partner.image) {
           <div class="partners-scroll-item">
             <div
               class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-lg p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px]">
@@ -32,6 +32,8 @@
                   src="{{ partner.image }}"
                   [alt]="'Logo de ' + partner.name"
                   [title]="partner.name"
+                  loading="lazy"
+                  decoding="async"
                   class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 w-auto h-auto group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
               </div>
 
@@ -43,7 +45,7 @@
               </div>
             </div>
           </div>
-          } @for (partner of firstRow; track $index) {
+          } @for (partner of firstRow; track partner.name || partner.image) {
           <div class="partners-scroll-item">
             <div
               class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-lg p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px]">
@@ -59,6 +61,8 @@
                   src="{{ partner.image }}"
                   [alt]="'Logo de ' + partner.name"
                   [title]="partner.name"
+                  loading="lazy"
+                  decoding="async"
                   class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 w-auto h-auto group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
               </div>
 
@@ -76,7 +80,7 @@
 
       <div class="partners-scroll-container">
         <div class="partners-scroll-track partners-scroll-left">
-          @for (partner of secondRow; track $index) {
+          @for (partner of secondRow; track partner.name || partner.image) {
           <div class="partners-scroll-item">
             <div
               class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-lg p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px]">
@@ -92,6 +96,8 @@
                   src="{{ partner.image }}"
                   [alt]="'Logo de ' + partner.name"
                   [title]="partner.name"
+                  loading="lazy"
+                  decoding="async"
                   class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 w-auto h-auto group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
               </div>
 
@@ -103,7 +109,7 @@
               </div>
             </div>
           </div>
-          } @for (partner of secondRow; track $index) {
+          } @for (partner of secondRow; track partner.name || partner.image) {
           <div class="partners-scroll-item">
             <div
               class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-lg p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px]">
@@ -119,6 +125,8 @@
                   src="{{ partner.image }}"
                   [alt]="'Logo de ' + partner.name"
                   [title]="partner.name"
+                  loading="lazy"
+                  decoding="async"
                   class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 w-auto h-auto group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
               </div>
 
@@ -216,5 +224,3 @@
     </div>
   </div>
 </section>
-
-
