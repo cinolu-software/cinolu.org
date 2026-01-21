@@ -13,12 +13,12 @@
     <div class="mx-auto">
       <div class="flex flex-wrap gap-2 justify-center items-center pb-16">
         <p-button [outlined]="!!isActiveCategory()" (click)="resetFilter()">Tout</p-button>
-        @for (item of listCategories(); track $index) {
+        @for (item of listCategories(); track item) {
         <p-button [outlined]="!isActiveButton(item)" (click)="filterByCategory(item)">{{ item }}</p-button>
         }
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-6">
-        @for (item of filtered(); track $index) {
+        @for (item of filtered(); track item.name || item.image) {
         <app-parteners-card [partner]="item"></app-parteners-card>
         }
       </div>
