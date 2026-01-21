@@ -21,7 +21,7 @@ gallery = store.article()?.gallery || []; @if (store.article(); as article) {
           <header class="p-6 sm:p-8 lg:p-12 bg-gradient-to-br from-white via-gray-50/50 to-primary-50/30">
             @if (article.tags && article.tags.length > 0) {
             <div class="flex flex-wrap gap-2 mb-6">
-              @for (tag of article.tags; track $index) {
+              @for (tag of article.tags; track tag.id) {
               <span
                 class="px-4 py-1.5 text-xs font-semibold text-primary-700 bg-primary-50 rounded-full border border-primary-200/50">
                 {{ tag.name }}
@@ -119,7 +119,7 @@ gallery = store.article()?.gallery || []; @if (store.article(); as article) {
 
             @if (count > 0) {
             <div class="space-y-4">
-              @for (comment of comments; track $index) {
+              @for (comment of comments; track comment.id) {
               <div class="bg-white rounded-lg p-5 border border-gray-200 hover:border-gray-300 transition-colors">
                 <div class="flex gap-3">
                   <div class="flex-shrink-0">
@@ -182,7 +182,7 @@ gallery = store.article()?.gallery || []; @if (store.article(); as article) {
           </h2>
 
           <div class="space-y-5">
-            @for (article of storeArticle.articles(); track $index; let first = $first) {
+            @for (article of storeArticle.articles(); track article.id; let first = $first) {
             <a
               [routerLink]="['/blog-ressources', article.slug]"
               class="group block p-3 rounded-lg hover:bg-primary-50/30 transition-colors">

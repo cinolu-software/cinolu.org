@@ -24,7 +24,7 @@
   </div>
   }
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-8">
-    @if (store.isLoading()) { @for (a of arrSkeleton; track $index) {
+    @if (store.isLoading()) { @for (a of arrSkeleton; track a) {
     <app-article-card-skeleton />
     } } @if (store.articles() && !store.isLoading()) { @for ( article of store.articles()[0] | paginate : {
     itemsPerPage: 12, currentPage: queryParams().page || 1, totalItems: store.articles()[1], }; track article.id; let
