@@ -65,7 +65,7 @@
           <!-- Avatars équipe -->
           <div class="flex items-center gap-4 pt-4">
             <div class="flex -space-x-3">
-              @for (member of team; track $index) {
+              @for (member of team; track member.name) {
               <div
                 class="relative h-12 w-12 rounded-full ring-4 ring-primary-600 transition-transform duration-300 hover:scale-110 hover:z-10">
                 <img class="rounded-full object-cover w-full h-full" [ngSrc]="member.image" [alt]="member.name" fill />
