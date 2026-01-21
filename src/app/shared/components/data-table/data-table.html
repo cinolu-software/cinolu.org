@@ -32,18 +32,18 @@
         @for (col of columns; track col.key) {
         <td>
           @switch (col.format) { @case ('badge') {
-          <p-chip [label]="rowData[col.key]?.toString()" [styleClass]="getBadgeClass(rowData[col.key])"> </p-chip>
+          <p-chip [label]="rowData[col.key]?.toString()" [styleClass]="badgeClassFn()(rowData[col.key])"> </p-chip>
           } @case ('date') { {{ rowData[col.key] | date: 'dd/MM/yyyy HH:mm' }} } @case ('number') { {{ rowData[col.key]
           | number }} } @default { {{ rowData[col.key] }} } }
         </td>
         } @if (actions() && actions()!.length > 0) {
         <td>
           <div class="flex gap-2 items-center">
-            @for (action of getVisibleActions(rowData); track action.label) {
+            @for (action of visibleActionsFn()(rowData); track action.label) {
             <button
               pButton
               [title]="action.label"
-              [ngClass]="getActionButtonClass(action)"
+              [ngClass]="actionButtonClassFn()(action)"
               class="!p-2.5 !rounded-lg !transition-all !shadow-sm hover:!shadow-md"
               (click)="action.callback(rowData)">
               <i-lucide [img]="action.icon" class="w-4 h-4"></i-lucide>

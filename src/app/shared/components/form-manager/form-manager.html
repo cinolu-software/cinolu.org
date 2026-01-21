@@ -22,7 +22,7 @@
   @if (isStepper() && steps && steps.length > 0) {
   <div class="mb-8">
     <div class="flex items-center justify-between relative">
-      @for (step of steps; track $index) {
+      @for (step of steps; track step.label) {
       <div class="flex flex-col items-center flex-1 relative z-10">
         <button
           type="button"

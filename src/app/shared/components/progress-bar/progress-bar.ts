@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProgressBarModule } from 'primeng/progressbar';
@@ -9,7 +9,8 @@ import { KnobModule } from 'primeng/knob';
   standalone: true,
   imports: [CommonModule, FormsModule, ProgressBarModule, KnobModule],
   templateUrl: './progress-bar.html',
-  styleUrl: './progress-bar.css'
+  styleUrl: './progress-bar.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProgressBarComponent {
   value = input<number>(0);

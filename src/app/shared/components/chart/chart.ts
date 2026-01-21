@@ -1,10 +1,11 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-chart',
   imports: [LucideAngularModule],
-  templateUrl: './chart.html'
+  templateUrl: './chart.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChartComponent {
   title = input.required<string>();

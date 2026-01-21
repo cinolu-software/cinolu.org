@@ -1,20 +1,18 @@
 <div
   class="stat-card bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
-  [ngClass]="getBorderClass()">
+  [ngClass]="borderClass()">
   <div class="p-6">
     <div class="flex items-center justify-between mb-4">
-      <div class="flex items-center justify-center w-12 h-12 rounded-lg" [ngClass]="getIconBgClass()">
-        <i-lucide [img]="icon()" [ngClass]="getIconColorClass()" class="text-2xl" />
+      <div class="flex items-center justify-center w-12 h-12 rounded-lg" [ngClass]="iconBgClass()">
+        <i-lucide [img]="icon()" [ngClass]="iconColorClass()" class="text-2xl" />
       </div>
-      @if (trend() !== undefined) {
-      <span [ngClass]="'text-sm font-medium ' + (trend()! > 0 ? 'text-green-600' : 'text-red-600')">
-        {{ trend()! > 0 ? '↑' : '↓' }} {{ Math.abs(trend()!) }}%
-      </span>
+      @if (trendDisplay(); as display) {
+      <span [ngClass]="'text-sm font-medium ' + display.colorClass"> {{ display.symbol }} {{ display.value }}% </span>
       }
     </div>
     <div>
       <p class="text-sm font-medium text-gray-600 mb-1">{{ title() }}</p>
-      <p class="text-3xl font-bold text-gray-900">{{ formattedValue }}</p>
+      <p class="text-3xl font-bold text-gray-900">{{ formattedValue() }}</p>
       @if (subtitle()) {
       <p class="text-xs text-gray-500 mt-2">{{ subtitle() }}</p>
       }
