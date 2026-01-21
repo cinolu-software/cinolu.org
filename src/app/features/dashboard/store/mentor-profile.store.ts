@@ -13,7 +13,7 @@ import {
   CreateMentorProfileDto,
   IMentorProfile
 } from '@shared/models';
-import { environment } from '@environments/environment.development';
+import { environment } from '@environments/environment';
 
 interface MentorProfileState {
   profile: IMentorProfile | null;

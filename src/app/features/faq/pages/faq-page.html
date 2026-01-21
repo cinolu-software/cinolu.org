@@ -17,7 +17,7 @@
   </div>
 
   <div class="flex flex-wrap justify-center gap-3 mb-12">
-    @for (cat of categories; track $index) {
+    @for (cat of categories; track cat.key) {
     <button
       (click)="selectedCategory.set(cat.key)"
       [class.bg-primary-600]="selectedCategory() === cat.key"
@@ -31,7 +31,7 @@
   </div>
 
   <div class="max-w-4xl mx-auto space-y-4">
-    @for (item of filteredFAQ(); track $index) {
+    @for (item of filteredFAQ(); track item.question) {
     <div
       class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden transition-all duration-200 hover:shadow-md">
       <button
