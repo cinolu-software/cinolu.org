@@ -293,10 +293,10 @@
     }
   },
   "storytelling": {
-    "badge": "Notre Histoire • Notre Mission",
-    "title": "Bâtir l'Afrique de demain",
-    "title_highlight": "avec ses entrepreneurs",
-    "description": "Nous co-créons des villes intelligentes, des économies fortes et des opportunités pour tous. Soutenir un entrepreneur, c'est créer des emplois, résoudre des problèmes réels et construire un avenir meilleur.",
+    "badge": "Innovons ensemble !",
+    "title": "Batir le corridor d'innovation",
+    "title_highlight": "de l'Afrique Centrale au monde.",
+    "description": "Nous relions l'innovation locale aux transformations mondiales en transformant les défis en opportunités de marché.",
     "cta_programs": "Rejoignez l'aventure",
     "cta_projects": "Nos entrepreneurs",
     "image_event_title": "Des événements qui inspirent",
@@ -324,8 +324,7 @@
     "author_role": "Lubumbashi • RDC • Afrique",
     "stats": {
       "projects": "Entrepreneurs accompagnés",
-      "partners": "Partenaires actifs",
-      "beneficiaries": "Emplois créés"
+      "partners": "Partenaires actifs"
     }
   },
   "why_join_us": {

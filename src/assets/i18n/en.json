@@ -291,10 +291,10 @@
     }
   },
   "storytelling": {
-    "badge": "Our Story • Our Mission",
-    "title": "Building Africa’s future",
-    "title_highlight": "with its entrepreneurs",
-    "description": "We create smart cities, strong economies, and opportunities for all. Supporting an entrepreneur means creating jobs, solving real problems, and building a better future.",
+    "badge": "Let's innovate together!",
+    "title": "Building the innovation corridor",
+    "title_highlight": "from Central Africa to the world.",
+    "description": "We connect local innovation to global transformations by turning challenges into market opportunities.",
     "cta_programs": "Join the adventure",
     "cta_projects": "Our entrepreneurs",
     "image_event_title": "Events that inspire",
@@ -322,8 +322,7 @@
     "author_role": "Lubumbashi • DRC • Africa",
     "stats": {
       "projects": "Entrepreneurs supported",
-      "partners": "Active partners",
-      "beneficiaries": "Jobs created"
+      "partners": "Active partners"
     }
   },
   "why_join_us": {
