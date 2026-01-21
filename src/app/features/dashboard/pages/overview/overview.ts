@@ -72,12 +72,114 @@ export class DashboardOverview implements OnInit {
     return highlights.find((item) => 'is_highlighted' in item && item.is_highlighted) || highlights[0] || null;
   });
 
+  // Computed signal pour le greeting
+  greeting = computed(() => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Bonjour';
+    if (hour < 18) return 'Bon après-midi';
+    return 'Bonsoir';
+  });
+
+  // Computed signal pour vérifier si l'utilisateur est admin
+  isAdminUser = computed(() => {
+    const user = this.authStore.user();
+    const roles = user?.roles as unknown as string[];
+    return roles.some((role) => role === 'admin' || role === 'staff');
+  });
+
+  // Computed signal pour le titre du highlight
+  highlightTitle = computed(() => {
+    const highlight = this.featuredHighlight();
+    if (!highlight) return "Mise à l'échelle du réseau PNUD";
+    return 'title' in highlight ? highlight.title : highlight.name;
+  });
+
+  // Computed signal pour la description du highlight
+  highlightDescription = computed(() => {
+    const highlight = this.featuredHighlight();
+    if (!highlight) return 'Appel à solutions locales innovantes.';
+    if ('summary' in highlight && highlight.summary) return this.truncateText(highlight.summary, 100);
+    if ('description' in highlight && highlight.description) return this.truncateText(highlight.description, 100);
+    return 'Découvrez cette nouveauté.';
+  });
+
+  // Computed signal pour le badge du highlight
+  highlightBadge = computed(() => {
+    const highlight = this.featuredHighlight();
+    if (!highlight) return 'ACCELERATE 2025';
+    switch (highlight.sourceKey) {
+      case 'programs':
+        return 'PROGRAMME';
+      case 'subprograms':
+        return 'SOUS-PROGRAMME';
+      case 'events':
+        return 'ÉVÉNEMENT';
+      case 'projects':
+        return 'PROJET';
+      case 'articles':
+        return 'ARTICLE';
+      default:
+        return 'À LA UNE';
+    }
+  });
+
+  // Computed signal pour le lien du highlight
+  highlightLink = computed(() => {
+    const highlight = this.featuredHighlight();
+    if (!highlight) return '#';
+    switch (highlight.sourceKey) {
+      case 'programs':
+        return `/our-programs/${highlight.slug}`;
+      case 'subprograms':
+        return `/our-programs/subprograms/${highlight.slug}`;
+      case 'events':
+        return `/events/${highlight.slug}`;
+      case 'projects':
+        return `/programs/${highlight.slug}`;
+      case 'articles':
+        return `/blog-ressources/${highlight.slug}`;
+      default:
+        return '#';
+    }
+  });
+
+  // Computed signal pour l'image du highlight
+  highlightImage = computed(() => {
+    const highlight = this.featuredHighlight();
+    if (!highlight) return 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1000';
+
+    const apiUrl = environment.apiUrl;
+
+    if (highlight.sourceKey === 'programs' && 'logo' in highlight && highlight.logo) {
+      return `${apiUrl}uploads/programs/${highlight.logo}`;
+    }
+    if (highlight.sourceKey === 'subprograms' && 'logo' in highlight && highlight.logo) {
+      return `${apiUrl}uploads/subprograms/${highlight.logo}`;
+    }
+    if (highlight.sourceKey === 'events' && 'cover' in highlight && highlight.cover) {
+      return `${apiUrl}uploads/events/${highlight.cover}`;
+    }
+    if (highlight.sourceKey === 'projects' && 'cover' in highlight && highlight.cover) {
+      return `${apiUrl}uploads/projects/${highlight.cover}`;
+    }
+    if (highlight.sourceKey === 'articles' && 'image' in highlight && highlight.image) {
+      return `${apiUrl}uploads/articles/${highlight.image}`;
+    }
+
+    return 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1000';
+  });
+
+  // Computed signal pour la complétion du profil
+  profileCompletion = computed(() => this.calculateProfileCompletion());
+
+  /** @deprecated Use highlightTitle computed signal instead */
   getHighlightTitle(): string {
     const highlight = this.featuredHighlight();
     if (!highlight) return "Mise à l'échelle du réseau PNUD";
     return 'title' in highlight ? highlight.title : highlight.name;
   }
 
+  /** @deprecated Use highlightDescription computed signal instead */
   getHighlightDescription(): string {
     const highlight = this.featuredHighlight();
     if (!highlight) return 'Appel à solutions locales innovantes.';
@@ -86,6 +188,7 @@ export class DashboardOverview implements OnInit {
     return 'Découvrez cette nouveauté.';
   }
 
+  /** @deprecated Use highlightBadge computed signal instead */
   getHighlightBadge(): string {
     const highlight = this.featuredHighlight();
     if (!highlight) return 'ACCELERATE 2025';
@@ -105,6 +208,7 @@ export class DashboardOverview implements OnInit {
     }
   }
 
+  /** @deprecated Use highlightLink computed signal instead */
   getHighlightLink(): string {
     const highlight = this.featuredHighlight();
     if (!highlight) return '#';
@@ -124,6 +228,7 @@ export class DashboardOverview implements OnInit {
     }
   }
 
+  /** @deprecated Use highlightImage computed signal instead */
   getHighlightImage(): string {
     const highlight = this.featuredHighlight();
     if (!highlight) return 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1000';
@@ -147,6 +252,21 @@ export class DashboardOverview implements OnInit {
     }
 
     return 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1000';
+  }
+
+  /** @deprecated Use isAdminUser computed signal instead */
+  isAdmin(): boolean {
+    const user = this.authStore.user();
+    const roles = user?.roles as unknown as string[];
+    return roles.some((role) => role === 'admin' || role === 'staff');
+  }
+
+  /** @deprecated Use greeting computed signal instead */
+  getGreeting(): string {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Bonjour';
+    if (hour < 18) return 'Bon après-midi';
+    return 'Bonsoir';
   }
 
   private truncateText(text: string, maxLength: number): string {
@@ -183,22 +303,5 @@ export class DashboardOverview implements OnInit {
   updateProfileCompletion() {
     const completion = this.calculateProfileCompletion();
     this.doughnutChartData.datasets[0].data = [completion, 100 - completion];
-  }
-
-  isAdmin(): boolean {
-    const user = this.authStore.user();
-    const roles = user?.roles as unknown as string[];
-    return roles.some((role) => role === 'admin' || role === 'staff');
-  }
-
-  get profileCompletion(): number {
-    return this.calculateProfileCompletion();
-  }
-
-  getGreeting(): string {
-    const hour = new Date().getHours();
-    if (hour < 12) return 'Bonjour';
-    if (hour < 18) return 'Bon après-midi';
-    return 'Bonsoir';
   }
 }
