@@ -35,7 +35,7 @@
 
         @if (program.subprograms.length > 0) {
         <div class="grid sm:grid-cols-2 gap-6">
-          @for (sub of program.subprograms; track $index) {
+          @for (sub of program.subprograms; track sub.slug || sub.id) {
           <div
             class="space-y-4 p-5 bg-white/60 backdrop-blur-md border border-gray-100 shadow-md rounded-lg hover:shadow-xl transition-all duration-300">
             <h3 class="font-semibold text-gray-900 flex items-center gap-3">
