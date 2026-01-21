@@ -74,7 +74,7 @@
 
       <div class="w-full md:w-2/3">
         <div class="hidden sm:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          @for (item of our_team; track $index) {
+          @for (item of our_team; track item.id) {
           <button
             (click)="selectMember(item)"
             class="group relative rounded-lg overflow-hidden border border-gray-100 bg-white shadow-sm hover:shadow-lg transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-primary-300"
@@ -106,7 +106,7 @@
           }
         </div>
         <div class="sm:hidden flex flex-row w-full gap-3 py-2 overflow-x-auto scrollbar-hide">
-          @for (item of our_team; track $index) {
+          @for (item of our_team; track item.id) {
           <button
             (click)="selectMember(item)"
             class="group relative rounded-lg overflow-hidden border border-gray-100 bg-white shadow-sm w-28 h-28 flex-shrink-0 transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-300">
