@@ -1,4 +1,4 @@
 export interface FilterEventsDto {
-  page: string | null;
+  page: number;
   categories: string | null;
 }
