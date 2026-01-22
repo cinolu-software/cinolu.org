@@ -36,17 +36,21 @@
     </div>
     } @if (store.events()[1] > 0 && !store.isLoading()) {
     <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-      @for ( event of store.events()[0] | paginate : { itemsPerPage: 9, currentPage: queryParams().page || 1,
-      totalItems: store.events()[1], }; track event.id ) {
+      @for ( event of store.events()[0] | paginate : { itemsPerPage: itemsPerPage, currentPage: queryParams().page,
+      totalItems: store.events()[1] }; track event.id ?? $index ) {
       <div
         class="transition-transform h-fit duration-300 hover:scale-[1.02] hover:shadow-xl rounded-lg bg-white border border-gray-100 overflow-visible">
         <app-event-card [event]="event" [buttonTextKey]="'recent_events.explore'" />
       </div>
       }
     </div>
-    @if (store.events()[1] > 9) {
+    @if (shouldShowPagination()) {
     <div class="flex justify-center mt-10 mb-8">
-      <pagination-controls nextLabel="" previousLabel="" [maxSize]="5" (pageChange)="onPageChange($event)" class="pg" />
+      <pagination-controls
+        previousLabel="Précédent"
+        nextLabel="Suivant"
+        (pageChange)="onPageChange($event)"
+        class="pg" />
     </div>
     } } @if (!store.isLoading() && store.events()[1] === 0) {
     <div

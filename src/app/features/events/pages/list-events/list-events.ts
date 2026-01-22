@@ -1,7 +1,6 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IEvent } from '@shared/models/entities.models';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EventCard } from '../../components/event-card/event-card';
 import { EventCardSkeleton } from '../../components/event-card-skeleton/event-card-skeleton';
@@ -37,7 +36,7 @@ export class ListEvents implements OnInit {
   store = inject(EventsStore);
   categoriesStore = inject(EventCategoriesStore);
   queryParams = signal<FilterEventsDto>({
-    page: this.#route.snapshot.queryParams?.['page'],
+    page: this.#route.snapshot.queryParams?.['page'] ? Number(this.#route.snapshot.queryParams['page']) : 1,
     categories: this.#route.snapshot.queryParams?.['categories']
   });
 
@@ -45,34 +44,49 @@ export class ListEvents implements OnInit {
     circlePlus: CirclePlus
   };
 
+  readonly itemsPerPage = 9;
+
+  shouldShowPagination = computed(() => {
+    const totalItems = this.store.events()[1];
+    return totalItems > this.itemsPerPage;
+  });
+
   ngOnInit(): void {
     this.store.loadEvents(this.queryParams());
   }
 
-  trackByEventId(index: number, event: IEvent): string {
-    return event.id || index.toString();
-  }
-
   async onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'categories'): Promise<void> {
-    this.queryParams().page = null;
-    this.queryParams()[filter] = event.value;
+    this.queryParams.update((params) => ({
+      ...params,
+      page: 1,
+      [filter]: event.value
+    }));
     await this.updateRouteAndEvents();
   }
 
   async onClear(): Promise<void> {
-    this.queryParams().page = null;
-    this.queryParams().categories = null;
+    this.queryParams.update((params) => ({
+      ...params,
+      page: 1,
+      categories: null
+    }));
     await this.updateRouteAndEvents();
   }
 
   async onPageChange(currentPage: number): Promise<void> {
-    this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
-    await this.updateRouteAndEvents();
+    this.queryParams.update((params) => ({
+      ...params,
+      page: currentPage
+    }));
+    await this.updateRoute();
   }
 
   async updateRoute(): Promise<void> {
     const { page, categories } = this.queryParams();
-    const queryParams = { page, categories };
+    const queryParams = {
+      page: page === 1 ? null : page,
+      categories
+    };
     await this.#router.navigate(['/events'], { queryParams });
   }
 
