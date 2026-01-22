@@ -569,6 +569,9 @@
       },
       "impacthub": {
         "description": "Impact entrepreneurship spaces"
+      },
+      "aeip": {
+        "description": "The Africa-Europe Innovation Platform"
       }
     }
   },

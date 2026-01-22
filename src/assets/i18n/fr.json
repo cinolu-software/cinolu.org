@@ -572,6 +572,9 @@
       },
       "impacthub": {
         "description": "Espaces d'entrepreneuriat à impact"
+      },
+      "aeip": {
+        "description": "La Plateforme d'Innovation Afrique-Europe"
       }
     }
   },
