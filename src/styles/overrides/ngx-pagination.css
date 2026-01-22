@@ -5,3 +5,12 @@
 .pg .ngx-pagination a {
   @apply bg-white border text-primary-800 border-primary-800 mr-1.5 inline-flex rounded-full items-center justify-center h-8 w-8 hover:bg-primary-800 hover:text-white transition-colors duration-300;
 }
+
+.pg .ngx-pagination .pagination-previous a,
+.pg .ngx-pagination .pagination-next a {
+  @apply px-4 w-auto rounded-lg;
+}
+
+.pg .ngx-pagination .disabled {
+  @apply opacity-50 cursor-not-allowed pointer-events-none;
+}
