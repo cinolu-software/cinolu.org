@@ -25,11 +25,11 @@
       <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">{{ 'networks.description' | translate }}</p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 lg:gap-6 mb-16 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-6 mb-16 max-w-7xl mx-auto">
       @for (network of networks; track network.name) {
       <div class="group h-full">
         <div
-          class="relative bg-white rounded-xl overflow-hidden h-full flex flex-col border border-gray-200 hover:border-primary-400 transition-all duration-500 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-1">
+          class="relative bg-white rounded-lg overflow-hidden h-full flex flex-col border border-gray-200 hover:border-primary-400 transition-all duration-500 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-1">
           <div
             class="absolute top-2 right-2 w-8 h-8 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
             <i-lucide [name]="icons.globe" class="size-3.5 text-primary-600" />
@@ -61,7 +61,7 @@
               [href]="network.website"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2 py-2.5 text-xs text-primary-600 hover:text-white font-semibold transition-all duration-300 group/link border-t border-gray-100 -mx-4 px-4 -mb-4 hover:bg-gradient-to-r hover:from-primary-600 hover:to-primary-700 hover:border-transparent rounded-b-xl">
+              class="inline-flex items-center justify-center gap-2 py-2.5 text-xs text-primary-600 hover:text-white font-semibold transition-all duration-300 group/link border-t border-gray-100 -mx-4 px-4 -mb-4 hover:bg-gradient-to-r hover:from-primary-600 hover:to-primary-700 hover:border-transparent rounded-b-lg">
               <span class="uppercase tracking-wide">{{ 'networks.visit' | translate }}</span>
               <i-lucide [name]="icons.globe" class="size-3.5 group-hover/link:translate-x-1 transition-transform" />
             </a>
