@@ -31,9 +31,9 @@ export const SignUpStore = signalStore(
               _toast.showSuccess('Inscription réussie');
               _router.navigate(['/sign-in']);
             }),
-            catchError(() => {
+            catchError((err) => {
               patchState(store, { isLoading: false });
-              _toast.showError("Échec de l'inscription");
+              _toast.showError(err.error['message'] || "Erreur d'inscription");
               return of(null);
             })
           );
