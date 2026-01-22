@@ -29,5 +29,11 @@ export const NETWORKS: INetwork[] = [
     image: '/images/networks/impact-hub.jpeg',
     descriptionKey: 'networks.items.impacthub.description',
     website: 'https://www.impacthub.net/'
+  },
+  {
+    name: 'AEIP',
+    image: '/images/networks/logo-aiep.webp',
+    descriptionKey: 'networks.items.aeip.description',
+    website: 'https://www.africaeuropeinnovation.net/fr/'
   }
 ];
