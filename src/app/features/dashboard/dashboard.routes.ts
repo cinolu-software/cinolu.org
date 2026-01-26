@@ -58,6 +58,12 @@ export const dashboardRoutes: Routes = [
         title: 'Parrainages',
         loadComponent: () => import('./pages/referrals/referrals').then((c) => c.ReferralsPage)
       },
+      {
+        path: 'opportunities',
+        title: 'Opportunités pour vous',
+        loadComponent: () =>
+          import('./pages/opportunities/dashboard-opportunities').then((c) => c.DashboardOpportunities)
+      },
       // Routes pour la candidature mentor
       {
         path: 'mentor/apply',
