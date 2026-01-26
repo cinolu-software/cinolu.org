@@ -1,0 +1,229 @@
+<section class="relative min-h-screen overflow-hidden bg-gray-50">
+  @if (store.isLoading() || !opportunity()) {
+  <!-- Skeleton -->
+  <div class="py-16 pt-32 px-6 lg:px-12 xl:px-20 2xl:px-28 max-w-screen-2xl mx-auto">
+    <div class="space-y-6">
+      <div class="h-16 bg-gray-200 rounded-lg animate-pulse w-3/4 mx-auto"></div>
+      <div class="h-80 bg-gray-200 rounded-lg animate-pulse"></div>
+      <div class="space-y-3">
+        <div class="h-5 bg-gray-200 rounded-lg animate-pulse w-full"></div>
+        <div class="h-5 bg-gray-200 rounded-lg animate-pulse w-5/6"></div>
+      </div>
+    </div>
+  </div>
+  } @else { @if (opportunity(); as opp) {
+
+  <!-- Hero Section -->
+  <div class="relative py-16 pt-32 pb-20">
+    <div class="relative px-6 lg:px-12 xl:px-20 2xl:px-28 max-w-screen-2xl mx-auto">
+      <!-- Badges de statut -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
+        <span
+          [class]="'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border ' + getStatusBadgeClasses(opp)">
+          <span class="relative flex h-2 w-2">
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+              [class]="isOngoing(opp) ? 'bg-green-500' : 'bg-gray-400'"></span>
+            <span
+              class="relative inline-flex rounded-full h-2 w-2"
+              [class]="isOngoing(opp) ? 'bg-green-600' : 'bg-gray-500'"></span>
+          </span>
+          {{ getStatus(opp) }}
+        </span>
+
+        @if (isOngoing(opp) && getDaysLeft(opp) > 0 && getDaysLeft(opp) <= 7) {
+        <span
+          class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold bg-red-50 border border-red-200 text-red-700">
+          <i-lucide [name]="icons.clock" class="size-4" />
+          {{ 'opportunities.days_left' | translate: {days: getDaysLeft(opp)} }}
+        </span>
+        }
+      </div>
+
+      <!-- Titre principal -->
+      <div class="text-center mb-8">
+        <h1
+          class="text-4xl sm:text-5xl lg:text-6xl font-black font-satoshi tracking-tight text-gray-900 leading-tight px-4">
+          {{ opp.title }}
+        </h1>
+      </div>
+
+      <!-- Tags -->
+      @if (opp.tags.length > 0) {
+      <div class="flex flex-wrap gap-2.5 justify-center mb-8">
+        @for (tag of opp.tags; track tag.id) {
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-50 text-primary-700 rounded-full border border-primary-200 text-sm font-medium">
+          <i-lucide [name]="icons.tag" class="size-3.5" />
+          {{ tag.name }}
+        </span>
+        }
+      </div>
+      }
+
+      <!-- Boutons d'action -->
+      <div class="flex flex-wrap gap-4 justify-center mt-10">
+        @if (opp.link) {
+        <p-button
+          (click)="openLink(opp.link)"
+          severity="primary"
+          size="large"
+          styleClass="!bg-primary-600 !border-0 !rounded-lg !shadow-sm hover:!bg-primary-700 !px-6 !py-3">
+          <div class="flex items-center gap-2.5">
+            <span class="text-base font-semibold">{{ 'opportunities.apply_now' | translate }}</span>
+            <i-lucide [name]="icons.externalLink" class="size-4" />
+          </div>
+        </p-button>
+        }
+        <p-button
+          (click)="shareOpportunity()"
+          severity="secondary"
+          [outlined]="true"
+          size="large"
+          styleClass="!bg-white !border !border-gray-300 !rounded-lg !shadow-sm hover:!border-gray-400 !px-6 !py-3">
+          <div class="flex items-center gap-2.5">
+            <i-lucide [name]="icons.share" class="size-4" />
+            <span class="text-base font-semibold">{{ 'opportunities.share' | translate }}</span>
+          </div>
+        </p-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenu principal -->
+  <div class="px-6 lg:px-12 xl:px-20 2xl:px-28 max-w-screen-2xl mx-auto pb-16">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+      <!-- Colonne principale -->
+      <div class="lg:col-span-2 space-y-6">
+        <!-- Card Description -->
+        <div class="bg-white rounded-lg border border-gray-200/60 shadow-sm p-6 sm:p-8">
+          <!-- Header cliquable -->
+          <div
+            class="flex items-center justify-between mb-6 cursor-pointer"
+            (click)="toggleDescription()"
+            (keydown.enter)="toggleDescription()"
+            (keydown.space)="toggleDescription()"
+            tabindex="0"
+            role="button">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100">
+                <i-lucide [name]="icons.info" class="size-5 text-gray-600" />
+              </div>
+              <h3 class="text-xl font-bold text-gray-800">{{ 'opportunities.description' | translate }}</h3>
+            </div>
+            <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100">
+              <i-lucide
+                [name]="icons.chevronUp"
+                class="size-5 text-gray-500"
+                [class.rotate-180]="!expandedDescription()" />
+            </div>
+          </div>
+
+          <!-- Contenu -->
+          @if (expandedDescription()) {
+          <div class="prose max-w-none text-gray-700" [innerHTML]="opp.description"></div>
+          } @else {
+          <p class="text-gray-600 text-base leading-relaxed line-clamp-3" [innerHTML]="opp.description"></p>
+          <button
+            (click)="toggleDescription()"
+            class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium text-sm hover:bg-gray-200 transition-colors">
+            {{ 'opportunities.show_more' | translate }}
+            <i-lucide [name]="icons.chevronUp" class="size-4 rotate-180" />
+          </button>
+          }
+        </div>
+
+        <!-- Card Pièces jointes -->
+        @if (opp.attachments && opp.attachments.length > 0) {
+        <div class="bg-white rounded-lg border border-gray-200/60 shadow-sm p-6 sm:p-8">
+          <!-- Header -->
+          <div class="flex items-center gap-3 mb-6">
+            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100">
+              <i-lucide [name]="icons.fileText" class="size-5 text-gray-600" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800">{{ 'opportunities.attachments' | translate }}</h3>
+          </div>
+
+          <!-- Liste des fichiers -->
+          <div class="space-y-3">
+            @for (attachment of opp.attachments; track attachment.id) {
+            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200/60">
+              <div class="flex items-center gap-3">
+                <div class="flex items-center justify-center w-10 h-10 bg-white rounded-lg">
+                  <i-lucide [name]="icons.fileText" class="size-5 text-gray-500" />
+                </div>
+                <span class="font-medium text-gray-700">{{ attachment.filename }}</span>
+              </div>
+              <button
+                (click)="downloadAttachment(attachment.filename)"
+                class="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg font-medium text-sm hover:bg-primary-700 transition-colors">
+                <i-lucide [name]="icons.download" class="size-4" />
+                <span>{{ 'opportunities.download' | translate }}</span>
+              </button>
+            </div>
+            }
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- Colonne latérale -->
+      <div class="space-y-5 lg:space-y-6">
+        <!-- Card Dates -->
+        <div class="sticky top-8 bg-white rounded-lg border border-gray-200/60 shadow-sm p-5">
+          <!-- Header -->
+          <div class="flex items-center gap-3 mb-5">
+            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100">
+              <i-lucide [name]="icons.calendarDays" class="size-5 text-gray-600" />
+            </div>
+            <h4 class="text-lg font-bold text-gray-800">{{ 'opportunities.dates' | translate }}</h4>
+          </div>
+
+          <!-- Dates identiques au style card -->
+          <div class="flex items-center justify-between gap-4 py-3 px-4 bg-gray-50/80 rounded-lg">
+            <!-- Date début -->
+            <div class="flex items-center gap-2">
+              <div class="flex items-center justify-center w-7 h-7 bg-green-100 rounded-full">
+                <i-lucide [name]="icons.calendarDays" class="size-3.5 text-green-600" />
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xs text-gray-500 font-medium">Début</span>
+                <span class="text-sm font-semibold text-gray-800">{{ opp.started_at | date: 'shortDate' }}</span>
+              </div>
+            </div>
+
+            <!-- Séparateur -->
+            <div class="w-px h-8 bg-gray-300"></div>
+
+            <!-- Date fin -->
+            <div class="flex items-center gap-2">
+              <div class="flex items-center justify-center w-7 h-7 bg-red-100 rounded-full">
+                <i-lucide [name]="icons.clock" class="size-3.5 text-red-600" />
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xs text-gray-500 font-medium">Fin</span>
+                <span class="text-sm font-semibold text-gray-800">{{ opp.ended_at | date: 'shortDate' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Créateur -->
+        @if (opp.creator) {
+        <div class="bg-white rounded-lg border border-gray-200/60 shadow-sm p-5">
+          <!-- Header -->
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100">
+              <i-lucide [name]="icons.info" class="size-5 text-gray-600" />
+            </div>
+            <h4 class="text-lg font-bold text-gray-800">{{ 'opportunities.published_by' | translate }}</h4>
+          </div>
+          <!-- Nom du créateur -->
+          <p class="text-base font-semibold text-gray-800 px-4 py-2.5 bg-gray-50 rounded-lg">{{ opp.creator.name }}</p>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  } }
+</section>
