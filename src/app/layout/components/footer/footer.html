@@ -76,7 +76,7 @@
                 class="absolute -bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full"></span>
             </h5>
             <ul class="space-y-2.5 sm:space-y-3">
-              @for (url of link.urls; track url.path || url.name) { @if (url.external) {
+              @for (url of link.urls; track $index) { @if (url.external) {
               <li>
                 <a
                   target="_blank"
