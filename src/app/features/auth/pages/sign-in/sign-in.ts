@@ -1,7 +1,7 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { environment } from '@environments/environment';
@@ -34,6 +34,7 @@ import { FormManager } from '@shared/components/form-manager/form-manager';
 })
 export class SignIn {
   #formBuilder: FormBuilder = inject(FormBuilder);
+  #route = inject(ActivatedRoute);
   form: FormGroup;
   store = inject(SignInStore);
 
@@ -53,9 +54,14 @@ export class SignIn {
 
   onSignIn(): void {
     if (this.form.invalid) return;
+
+    // Récupérer le returnUrl depuis les query params
+    const returnUrl = this.#route.snapshot.queryParams['returnUrl'] || '/dashboard';
+
     this.store.signIn({
       payload: this.form.value,
-      onSuccess: () => true
+      onSuccess: () => true,
+      returnUrl
     });
   }
 
