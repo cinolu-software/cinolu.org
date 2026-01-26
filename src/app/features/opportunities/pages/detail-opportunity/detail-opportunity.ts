@@ -13,12 +13,14 @@ import {
   Clock
 } from 'lucide-angular';
 import { OpportunityStore } from '../../store/opportunity.store';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IOpportunity } from '../../../../shared/models/entities.models';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { openExternalUrl } from '@shared/helpers';
 import { Button } from 'primeng/button';
 import { environment } from '@environments/environment';
+import { AuthStore } from '@core/auth/auth.store';
+import { ToastrService } from '@core/services/toast/toastr.service';
 
 @Component({
   selector: 'app-opportunity',
@@ -44,6 +46,10 @@ export class DetailOpportunity implements OnInit {
   };
 
   readonly #route = inject(ActivatedRoute);
+  readonly #router = inject(Router);
+  readonly #authStore = inject(AuthStore);
+  readonly #toastService = inject(ToastrService);
+  readonly #translate = inject(TranslateService);
   readonly store = inject(OpportunityStore);
   readonly opportunity = computed(() => this.store.opportunity());
 
@@ -66,6 +72,17 @@ export class DetailOpportunity implements OnInit {
   }
 
   openLink(url?: string) {
+    // Vérifier si l'utilisateur est connecté
+    if (!this.#authStore.user()) {
+      // Afficher un message et rediriger vers sign-in avec returnUrl
+      this.#toastService.showError(this.#translate.instant('opportunities.login_to_apply'));
+
+      const currentUrl = this.#router.url;
+      this.#router.navigate(['/sign-in'], { queryParams: { returnUrl: currentUrl } });
+      return;
+    }
+
+    // Si connecté, ouvrir le lien normalement
     openExternalUrl(url);
   }
 
