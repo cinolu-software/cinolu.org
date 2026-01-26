@@ -1,0 +1,43 @@
+<div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+      <div class="flex items-center gap-3 mb-2">
+        <lucide-icon [img]="icons.sparkles" class="w-8 h-8 text-primary-500"></lucide-icon>
+        <h1 class="text-3xl font-bold text-gray-900">{{ 'opportunities.list.title' | translate }}</h1>
+      </div>
+      <p class="text-gray-600">
+        {{ 'opportunities.published_by' | translate }} {{ totalCount() }} {{ totalCount() > 1 ? 'opportunités' :
+        'opportunité' }}
+      </p>
+    </div>
+
+    <!-- Loading State -->
+    @if (store.isLoading()) {
+    <div class="flex flex-col items-center justify-center py-20">
+      <lucide-icon [img]="icons.loader" class="w-12 h-12 text-primary-500 animate-spin mb-4"></lucide-icon>
+      <p class="text-gray-600">{{ 'common.loading' | translate }}</p>
+    </div>
+    }
+
+    <!-- Empty State -->
+    @else if (opportunities().length === 0) {
+    <div class="flex flex-col items-center justify-center py-20 bg-white rounded-lg shadow-sm border border-gray-200">
+      <lucide-icon [img]="icons.search" class="w-16 h-16 text-gray-400 mb-4"></lucide-icon>
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ 'opportunities.list.no_opportunity' | translate }}</h3>
+      <p class="text-gray-600 text-center max-w-md">
+        Aucune opportunité personnalisée n'est disponible pour le moment. Revenez plus tard !
+      </p>
+    </div>
+    }
+
+    <!-- Opportunities Grid -->
+    @else {
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (opportunity of opportunities(); track opportunity.id) {
+      <app-opportunity-card [opportunity]="opportunity" />
+      }
+    </div>
+    }
+  </div>
+</div>
