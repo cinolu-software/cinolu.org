@@ -279,7 +279,7 @@ export interface FAQItem {
   open?: boolean;
 }
 
-//interface Mentor
+// Mentor Profiles
 
 export enum MentorStatus {
   PENDING = 'pending',
@@ -384,4 +384,28 @@ export interface IMentee extends IBase {
   total_sessions: number;
   last_session_date?: Date;
   progress_notes?: string;
+}
+
+
+//interface Opportunity
+
+export interface IOpportunity extends IBase {
+  title: string;
+  slug: string;
+  description: string;
+  link: string | null;
+  started_at: Date;
+  ended_at: Date;
+  tags: IOpportunityTag[];
+  creator: IUser;
+  attachments: IOpportunityAttachment[];
+}
+
+export interface IOpportunityTag extends IBase {
+  name: string;
+}
+
+export interface IOpportunityAttachment extends IBase {
+  filename: string;
+  opportunity: IOpportunity;
 }
