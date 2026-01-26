@@ -33,6 +33,17 @@ export class DashboardLayout implements OnInit {
       ]
     },
     {
+      title: 'Opportunités',
+      items: [
+        {
+          path: '/dashboard/opportunities',
+          label: 'Mes opportunités',
+          icon: 'star',
+          badge: null
+        }
+      ]
+    },
+    {
       title: 'Général',
       items: [
         {
@@ -91,6 +102,7 @@ export class DashboardLayout implements OnInit {
     const titles: Record<string, string> = {
       '/dashboard/overview': 'Accueil Dashboard',
       '/dashboard/ventures': 'Gestion des Entreprises',
+      '/dashboard/opportunities': 'Opportunités pour vous',
       '/dashboard/profile': 'Mon Profil',
       '/dashboard/referrals': 'Mes Parrainages'
     };
