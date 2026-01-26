@@ -19,7 +19,6 @@ export class OpportunityCard {
   buttonTextKey = input<string>('opportunities.explore');
   icons = { MoveRight, CalendarCheck, CalendarX, ExternalLink, Tag };
 
-  // Computed signals avec guards de sécurité
   buttonLabelKey = computed(() => this.buttonTextKey());
   buttonLabel = computed(() => this.translateService.instant(this.buttonLabelKey()));
 
