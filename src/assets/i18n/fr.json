@@ -59,6 +59,8 @@
     "share": "Partager",
     "published_by": "Publié par",
     "dates": "Dates",
+    "login_required": "Connexion requise",
+    "login_to_apply": "Veuillez vous connecter pour postuler à cette opportunité",
     "status": {
       "upcoming": "À venir",
       "ongoing": "En cours",

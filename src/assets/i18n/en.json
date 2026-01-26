@@ -58,6 +58,8 @@
     "share": "Share",
     "published_by": "Published by",
     "dates": "Dates",
+    "login_required": "Login required",
+    "login_to_apply": "Please log in to apply for this opportunity",
     "status": {
       "upcoming": "Upcoming",
       "ongoing": "Ongoing",
