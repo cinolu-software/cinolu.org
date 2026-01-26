@@ -16,6 +16,7 @@ interface ISignInStore {
 interface ISignInParams {
   payload: SignInDto;
   onSuccess: () => void;
+  returnUrl?: string;
 }
 
 export const SignInStore = signalStore(
@@ -32,13 +33,13 @@ export const SignInStore = signalStore(
     signIn: rxMethod<ISignInParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(({ payload, onSuccess }) => {
+        switchMap(({ payload, onSuccess, returnUrl }) => {
           return _http.post<{ data: IUser }>('auth/sign-in', payload).pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false });
               _authStore.setUser(data);
               _toast.showSuccess('Connexion réussie');
-              _router.navigate(['/dashboard']);
+              _router.navigateByUrl(returnUrl || '/dashboard');
               onSuccess();
             }),
             catchError((err) => {
