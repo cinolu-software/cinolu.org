@@ -3,12 +3,11 @@ import { Component, input, computed, ChangeDetectionStrategy, inject } from '@an
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, MoveRight, CalendarCheck, CalendarX, ExternalLink, Tag } from 'lucide-angular';
 import { IOpportunity } from '../../../../shared/models/entities.models';
-import { Button } from 'primeng/button';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-opportunity-card',
-  imports: [LucideAngularModule, CommonModule, RouterLink, Button, TranslateModule],
+  imports: [LucideAngularModule, CommonModule, RouterLink, TranslateModule],
   templateUrl: './opportunity-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
