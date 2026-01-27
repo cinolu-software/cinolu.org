@@ -1,7 +1,7 @@
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, of, pipe, switchMap, tap } from 'rxjs';
+import { catchError, finalize, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthStore } from '@core/auth/auth.store';
 import { ToastrService } from '@core/services/toast/toastr.service';
@@ -19,45 +19,40 @@ export const UpdateInfoStore = signalStore(
     _toast: inject(ToastrService),
     _authStore: inject(AuthStore)
   })),
-  withMethods(({ _http, _toast, _authStore, ...store }) => ({
-    updateInfo: rxMethod<UpdateInfoDto>(
-      pipe(
-        tap(() => patchState(store, { isLoading: true })),
-        switchMap((payload) => {
-          return _http.patch<{ data: IUser }>('auth/profile', payload).pipe(
-            tap(({ data }) => {
-              patchState(store, { isLoading: false });
-              _toast.showSuccess('Profil mis à jour');
-              _authStore.setUser(data);
-            }),
-            catchError(() => {
-              patchState(store, { isLoading: false });
-              _toast.showError('Erreur lors de la mise à jour');
-              return of(null);
-            })
-          );
-        })
-      )
-    ),
+  withMethods(({ _http, _toast, _authStore, ...store }) => {
+    const makeRequest = <T>(url: string, payload: T, successMessage: string, errorMessage: string) =>
+      rxMethod<T>(
+        pipe(
+          tap(() => patchState(store, { isLoading: true })),
+          switchMap((data) =>
+            _http.patch<{ data: IUser }>(url, data).pipe(
+              tap(({ data: user }) => {
+                _toast.showSuccess(successMessage);
+                _authStore.setUser(user);
+              }),
+              catchError(() => {
+                _toast.showError(errorMessage);
+                return of(null);
+              }),
+              finalize(() => patchState(store, { isLoading: false }))
+            )
+          )
+        )
+      );
 
-    updateInterests: rxMethod<string[]>(
-      pipe(
-        tap(() => patchState(store, { isLoading: true })),
-        switchMap((interests) => {
-          return _http.patch<{ data: IUser }>('users/my-interests', { interests }).pipe(
-            tap(({ data }) => {
-              patchState(store, { isLoading: false });
-              _toast.showSuccess("Centres d'intérêt mis à jour");
-              _authStore.setUser(data);
-            }),
-            catchError(() => {
-              patchState(store, { isLoading: false });
-              _toast.showError("Erreur lors de la mise à jour des centres d'intérêt");
-              return of(null);
-            })
-          );
-        })
+    return {
+      updateInfo: makeRequest<UpdateInfoDto>(
+        'auth/profile',
+        {} as UpdateInfoDto,
+        'Profil mis à jour',
+        'Erreur lors de la mise à jour'
+      ),
+      updateInterests: makeRequest<{ interests: string[] }>(
+        'users/my-interests',
+        { interests: [] },
+        "Centres d'intérêt mis à jour",
+        "Erreur lors de la mise à jour des centres d'intérêt"
       )
-    )
-  }))
+    };
+  })
 );
