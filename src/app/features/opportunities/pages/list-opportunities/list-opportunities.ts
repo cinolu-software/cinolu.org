@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { OpportunitiesStore } from '../../store/opportunities.store';
 import { OpportunityTagsStore } from '../../store/opportunity-tags.store';
 import { TranslateModule } from '@ngx-translate/core';
-import { Search, LucideAngularModule } from 'lucide-angular';
+import { Search, LucideAngularModule, CirclePlus } from 'lucide-angular';
 import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
@@ -45,7 +45,8 @@ export class ListOpportunities implements OnInit {
   selectedTags = signal<string[]>([]);
 
   icons = {
-    search: Search
+    search: Search,
+    circlePlus: CirclePlus
   };
 
   readonly itemsPerPage = 20; // Selon la documentation API
