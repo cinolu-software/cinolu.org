@@ -10,14 +10,15 @@ import {
   ExternalLink,
   FileText,
   Download,
-  Clock
+  Clock,
+  ChevronDown,
+  User
 } from 'lucide-angular';
 import { OpportunityStore } from '../../store/opportunity.store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IOpportunity } from '../../../../shared/models/entities.models';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { openExternalUrl } from '@shared/helpers';
-import { Button } from 'primeng/button';
 import { environment } from '@environments/environment';
 import { AuthStore } from '@core/auth/auth.store';
 import { ToastrService } from '@core/services/toast/toastr.service';
@@ -25,7 +26,7 @@ import { ToastrService } from '@core/services/toast/toastr.service';
 @Component({
   selector: 'app-opportunity',
   providers: [OpportunityStore],
-  imports: [CommonModule, LucideAngularModule, TranslateModule, Button],
+  imports: [CommonModule, LucideAngularModule, TranslateModule],
   templateUrl: './detail-opportunity.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -42,7 +43,9 @@ export class DetailOpportunity implements OnInit {
     externalLink: ExternalLink,
     fileText: FileText,
     download: Download,
-    clock: Clock
+    clock: Clock,
+    chevronDown: ChevronDown,
+    user:User
   };
 
   readonly #route = inject(ActivatedRoute);

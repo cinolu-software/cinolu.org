@@ -1,227 +1,274 @@
-<section class="relative min-h-screen overflow-hidden bg-gray-50">
+<section class="px-6 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-grid pt-[7.5rem] pb-16">
   @if (store.isLoading() || !opportunity()) {
   <!-- Skeleton -->
-  <div class="py-16 pt-32 px-6 lg:px-12 xl:px-20 2xl:px-28 max-w-screen-2xl mx-auto">
-    <div class="space-y-6">
-      <div class="h-16 bg-gray-200 rounded-lg animate-pulse w-3/4 mx-auto"></div>
-      <div class="h-80 bg-gray-200 rounded-lg animate-pulse"></div>
-      <div class="space-y-3">
-        <div class="h-5 bg-gray-200 rounded-lg animate-pulse w-full"></div>
-        <div class="h-5 bg-gray-200 rounded-lg animate-pulse w-5/6"></div>
-      </div>
+  <div class="py-6 px-6 max-w-[1400px] mx-auto">
+    <div class="mb-5 space-y-2.5 animate-pulse">
+      <div class="h-3 bg-slate-100 rounded w-32"></div>
+      <div class="h-7 bg-slate-200 rounded w-2/3"></div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <div class="lg:col-span-2 h-96 bg-slate-50 rounded-lg"></div>
+      <div class="h-64 bg-slate-50 rounded-lg"></div>
     </div>
   </div>
   } @else { @if (opportunity(); as opp) {
-
-  <!-- Hero Section -->
-  <div class="relative py-16 pt-32 pb-20">
-    <div class="relative px-6 lg:px-12 xl:px-20 2xl:px-28 max-w-screen-2xl mx-auto">
-      <!-- Badges de statut -->
-      <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
-        <span
-          [class]="'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border ' + getStatusBadgeClasses(opp)">
-          <span class="relative flex h-2 w-2">
-            <span
-              class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
-              [class]="isOngoing(opp) ? 'bg-green-500' : 'bg-gray-400'"></span>
-            <span
-              class="relative inline-flex rounded-full h-2 w-2"
-              [class]="isOngoing(opp) ? 'bg-green-600' : 'bg-gray-500'"></span>
-          </span>
-          {{ getStatus(opp) }}
-        </span>
-
-        @if (isOngoing(opp) && getDaysLeft(opp) > 0 && getDaysLeft(opp) <= 7) {
-        <span
-          class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold bg-red-50 border border-red-200 text-red-700">
-          <i-lucide [name]="icons.clock" class="size-4" />
-          {{ 'opportunities.days_left' | translate: {days: getDaysLeft(opp)} }}
-        </span>
-        }
-      </div>
-
-      <!-- Titre principal -->
-      <div class="text-center mb-8">
-        <h1
-          class="text-4xl sm:text-5xl lg:text-6xl font-black font-satoshi tracking-tight text-gray-900 leading-tight px-4">
-          {{ opp.title }}
-        </h1>
-      </div>
-
-      <!-- Tags -->
-      @if (opp.tags.length > 0) {
-      <div class="flex flex-wrap gap-2.5 justify-center mb-8">
-        @for (tag of opp.tags; track tag.id) {
-        <span
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-50 text-primary-700 rounded-full border border-primary-200 text-sm font-medium">
-          <i-lucide [name]="icons.tag" class="size-3.5" />
-          {{ tag.name }}
-        </span>
-        }
-      </div>
-      }
-
-      <!-- Boutons d'action -->
-      <div class="flex flex-wrap gap-4 justify-center mt-10">
-        @if (opp.link) {
-        <p-button
-          (click)="openLink(opp.link)"
-          severity="primary"
-          size="large"
-          styleClass="!bg-primary-600 !border-0 !rounded-lg !shadow-sm hover:!bg-primary-700 !px-6 !py-3">
-          <div class="flex items-center gap-2.5">
-            <span class="text-base font-semibold">{{ 'opportunities.apply_now' | translate }}</span>
-            <i-lucide [name]="icons.externalLink" class="size-4" />
-          </div>
-        </p-button>
-        }
-        <p-button
-          (click)="shareOpportunity()"
-          severity="secondary"
-          [outlined]="true"
-          size="large"
-          styleClass="!bg-white !border !border-gray-300 !rounded-lg !shadow-sm hover:!border-gray-400 !px-6 !py-3">
-          <div class="flex items-center gap-2.5">
-            <i-lucide [name]="icons.share" class="size-4" />
-            <span class="text-base font-semibold">{{ 'opportunities.share' | translate }}</span>
-          </div>
-        </p-button>
-      </div>
+  <div class="space-y-12">
+    <div class="text-center">
+      <h2 class="font-black font-satoshi text-3xl md:text-5xl lg:text-6xl text-gray-900 leading-tight tracking-tight">
+        {{ opp.title | titlecase }}
+      </h2>
     </div>
-  </div>
+    <!-- Banner Glassmorphism -->
+    <div class="relative overflow-hidden">
+      <!-- Background gradient -->
+      <div class="absolute inset-0 bg-gradient-to-br from-primary-50/30 via-slate-50/50 to-primary-100/20"></div>
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-primary-100/20 via-transparent to-transparent"></div>
 
-  <!-- Contenu principal -->
-  <div class="px-6 lg:px-12 xl:px-20 2xl:px-28 max-w-screen-2xl mx-auto pb-16">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-      <!-- Colonne principale -->
-      <div class="lg:col-span-2 space-y-6">
-        <!-- Card Description -->
-        <div class="bg-white rounded-lg border border-gray-200/60 shadow-sm p-6 sm:p-8">
-          <!-- Header cliquable -->
-          <div
-            class="flex items-center justify-between mb-6 cursor-pointer"
-            (click)="toggleDescription()"
-            (keydown.enter)="toggleDescription()"
-            (keydown.space)="toggleDescription()"
-            tabindex="0"
-            role="button">
-            <div class="flex items-center gap-3">
-              <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100">
-                <i-lucide [name]="icons.info" class="size-5 text-gray-600" />
-              </div>
-              <h3 class="text-xl font-bold text-gray-800">{{ 'opportunities.description' | translate }}</h3>
-            </div>
-            <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100">
-              <i-lucide
-                [name]="icons.chevronUp"
-                class="size-5 text-gray-500"
-                [class.rotate-180]="!expandedDescription()" />
-            </div>
+      <!-- Glassmorphism container -->
+      <div class="relative max-w-[1400px] mx-auto px-6 py-12">
+        <div class="backdrop-blur-xl bg-white/40 border border-white/60 rounded-2xl shadow-lg shadow-slate-200/50 p-8">
+          <!-- Breadcrumb -->
+          <div class="flex items-center gap-2 mb-4 text-xs">
+            <a routerLink="/opportunities" class="text-slate-600 hover:text-slate-900 font-medium transition-colors"
+              >Opportunités</a
+            >
+            <span class="text-slate-400">/</span>
+            <span class="text-slate-900 font-semibold truncate max-w-md">{{ opp.title }}</span>
           </div>
 
-          <!-- Contenu -->
-          @if (expandedDescription()) {
-          <div class="prose max-w-none text-gray-700" [innerHTML]="opp.description"></div>
-          } @else {
-          <p class="text-gray-600 text-base leading-relaxed line-clamp-3" [innerHTML]="opp.description"></p>
-          <button
-            (click)="toggleDescription()"
-            class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium text-sm hover:bg-gray-200 transition-colors">
-            {{ 'opportunities.show_more' | translate }}
-            <i-lucide [name]="icons.chevronUp" class="size-4 rotate-180" />
-          </button>
-          }
-        </div>
+          <!-- Titre et badges -->
+          <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+            <div class="flex-1">
+              <h1 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-3 tracking-tight leading-tight">
+                {{ opp.title }}
+              </h1>
+              <div class="flex flex-wrap items-center gap-2">
+                <span
+                  [class]="'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold backdrop-blur-sm ' + getStatusBadgeClasses(opp)">
+                  <span
+                    class="w-2 h-2 rounded-full"
+                    [class]="isOngoing(opp) ? 'bg-green-600 animate-pulse' : 'bg-slate-500'"></span>
+                  {{ getStatus(opp) }}
+                </span>
+                @if (isOngoing(opp) && getDaysLeft(opp) > 0 && getDaysLeft(opp) <= 7) {
+                <span
+                  class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-orange-100/80 text-orange-800 backdrop-blur-sm">
+                  <i-lucide [name]="icons.clock" class="w-3.5 h-3.5" />
+                  {{ 'opportunities.days_left' | translate: {days: getDaysLeft(opp)} }}
+                </span>
+                }
 
-        <!-- Card Pièces jointes -->
-        @if (opp.attachments && opp.attachments.length > 0) {
-        <div class="bg-white rounded-lg border border-gray-200/60 shadow-sm p-6 sm:p-8">
-          <!-- Header -->
-          <div class="flex items-center gap-3 mb-6">
-            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100">
-              <i-lucide [name]="icons.fileText" class="size-5 text-gray-600" />
-            </div>
-            <h3 class="text-xl font-bold text-gray-800">{{ 'opportunities.attachments' | translate }}</h3>
-          </div>
-
-          <!-- Liste des fichiers -->
-          <div class="space-y-3">
-            @for (attachment of opp.attachments; track attachment.id) {
-            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200/60">
-              <div class="flex items-center gap-3">
-                <div class="flex items-center justify-center w-10 h-10 bg-white rounded-lg">
-                  <i-lucide [name]="icons.fileText" class="size-5 text-gray-500" />
-                </div>
-                <span class="font-medium text-gray-700">{{ attachment.filename }}</span>
+                <!-- Tags dans le header -->
+                @if (opp.tags.length > 0) { @for (tag of opp.tags.slice(0, 3); track tag.id) {
+                <span
+                  class="inline-flex items-center px-2.5 py-1 bg-white/60 backdrop-blur-sm text-slate-700 rounded-lg text-xs font-medium border border-white/40">
+                  #{{ tag.name }}
+                </span>
+                } @if (opp.tags.length > 3) {
+                <span
+                  class="inline-flex items-center px-2.5 py-1 bg-white/40 backdrop-blur-sm text-slate-600 rounded-lg text-xs">
+                  +{{ opp.tags.length - 3 }}
+                </span>
+                } }
               </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-2">
+              @if (opp.link) {
               <button
-                (click)="downloadAttachment(attachment.filename)"
-                class="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg font-medium text-sm hover:bg-primary-700 transition-colors">
-                <i-lucide [name]="icons.download" class="size-4" />
-                <span>{{ 'opportunities.download' | translate }}</span>
+                (click)="openLink(opp.link)"
+                class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-lg text-sm font-semibold hover:bg-primary-700 shadow-lg shadow-primary-200/50 transition-all hover:scale-105">
+                <span>{{ 'opportunities.apply_now' | translate }}</span>
+                <i-lucide [name]="icons.externalLink" class="w-4 h-4" />
+              </button>
+              }
+              <button
+                (click)="shareOpportunity()"
+                class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/80 backdrop-blur-sm text-slate-700 rounded-lg text-sm font-semibold border border-white/60 hover:bg-white transition-all">
+                <i-lucide [name]="icons.share" class="w-4 h-4" />
               </button>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <!-- Sticky sidebar (dates et créateur) -->
+      <div class="md:sticky md:top-28 2xl:top-36 self-start space-y-6">
+        <!-- Dates avec dégradé -->
+        <div
+          class="relative flex flex-col gap-4 group bg-gradient-to-br from-primary-50 to-white backdrop-blur-md border border-primary-200 rounded-xl p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-start gap-3">
+            <div
+              class="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-primary-100 to-primary-200 text-primary-700">
+              <i-lucide [name]="icons.calendarDays" class="size-6 stroke-[1.5]"></i-lucide>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg text-gray-900">{{ 'opportunities.dates' | translate }}</h3>
+              <p class="text-sm text-gray-600">
+                {{ opp.started_at | date: 'fullDate' }} — {{ opp.ended_at | date: 'fullDate' }}
+              </p>
+            </div>
+          </div>
+          <div class="mt-2 flex gap-2 flex-wrap">
+            <span
+              class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-sm font-semibold shadow-sm"
+              [ngClass]="getStatusBadgeClasses(opp)">
+              {{ getStatus(opp) }}
+            </span>
+            @if (isOngoing(opp) && getDaysLeft(opp) > 0 && getDaysLeft(opp) <= 7) {
+            <span
+              class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 text-orange-700 text-sm font-semibold">
+              <i-lucide [name]="icons.clock" class="size-4"></i-lucide>
+              {{ getDaysLeft(opp) }}j restants
+            </span>
+            }
+          </div>
+        </div>
+
+        <!-- Tags avec dégradé -->
+        @if (opp.tags.length > 0) {
+        <div
+          class="relative group border flex flex-col gap-4 border-green-200 bg-gradient-to-br from-green-50 to-white rounded-xl p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-start gap-3">
+            <div
+              class="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-green-100 to-green-200 text-green-700">
+              <i-lucide [name]="icons.tag" class="size-6 stroke-[1.5]"></i-lucide>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg text-gray-900">Tags</h3>
+              <p class="text-sm text-gray-600">{{ opp.tags.length }} {{ opp.tags.length > 1 ? 'tags' : 'tag' }}</p>
+            </div>
+          </div>
+          <div class="mt-3 flex flex-wrap gap-3">
+            @for (tag of opp.tags; track tag.id) {
+            <span
+              class="px-4 py-1.5 rounded-full bg-white border border-green-300 text-sm text-gray-700 font-medium shadow-sm hover:shadow-md hover:border-green-400 transition-all">
+              {{ tag.name }}
+            </span>
             }
           </div>
         </div>
         }
       </div>
 
-      <!-- Colonne latérale -->
-      <div class="space-y-5 lg:space-y-6">
-        <!-- Card Dates -->
-        <div class="sticky top-8 bg-white rounded-lg border border-gray-200/60 shadow-sm p-5">
-          <!-- Header -->
-          <div class="flex items-center gap-3 mb-5">
-            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100">
-              <i-lucide [name]="icons.calendarDays" class="size-5 text-gray-600" />
+      <!-- Colonne principale -->
+      <div class="flex flex-col gap-5 md:gap-8">
+        <!-- Description -->
+        <div
+          class="relative bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div class="p-6">
+            <div class="mb-6 flex items-center gap-3 justify-between">
+              <div class="flex items-center gap-3">
+                <div
+                  class="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 text-primary-600">
+                  <i-lucide [name]="icons.info" class="size-6 stroke-[1.5]" />
+                </div>
+                <h4 class="text-xl font-bold text-gray-900">{{ 'opportunities.description' | translate }}</h4>
+              </div>
+              <button
+                type="button"
+                class="flex items-center justify-center w-9 h-9 rounded-full bg-primary-100 hover:bg-primary-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
+                (click)="toggleDescription()">
+                <i-lucide
+                  [name]="icons.chevronUp"
+                  class="size-5 transition-transform duration-300"
+                  [ngClass]="expandedDescription() ? 'rotate-180 text-primary-700' : 'rotate-0 text-primary-600'" />
+              </button>
             </div>
-            <h4 class="text-lg font-bold text-gray-800">{{ 'opportunities.dates' | translate }}</h4>
-          </div>
-
-          <!-- Dates identiques au style card -->
-          <div class="flex items-center justify-between gap-4 py-3 px-4 bg-gray-50/80 rounded-lg">
-            <!-- Date début -->
-            <div class="flex items-center gap-2">
-              <div class="flex items-center justify-center w-7 h-7 bg-green-100 rounded-full">
-                <i-lucide [name]="icons.calendarDays" class="size-3.5 text-green-600" />
-              </div>
-              <div class="flex flex-col">
-                <span class="text-xs text-gray-500 font-medium">Début</span>
-                <span class="text-sm font-semibold text-gray-800">{{ opp.started_at | date: 'shortDate' }}</span>
-              </div>
-            </div>
-
-            <!-- Séparateur -->
-            <div class="w-px h-8 bg-gray-300"></div>
-
-            <!-- Date fin -->
-            <div class="flex items-center gap-2">
-              <div class="flex items-center justify-center w-7 h-7 bg-red-100 rounded-full">
-                <i-lucide [name]="icons.clock" class="size-3.5 text-red-600" />
-              </div>
-              <div class="flex flex-col">
-                <span class="text-xs text-gray-500 font-medium">Fin</span>
-                <span class="text-sm font-semibold text-gray-800">{{ opp.ended_at | date: 'shortDate' }}</span>
-              </div>
+            <div class="relative">
+              <p
+                class="text-gray-700 leading-relaxed transition-all duration-500 ease-in-out overflow-hidden"
+                [ngClass]="expandedDescription() ? 'max-h-[500px] opacity-100 border border-primary-100 bg-primary-50/30 rounded-lg p-3' : 'max-h-[3.5em] opacity-80 line-clamp-2'">
+                {{ opp.description }}
+              </p>
             </div>
           </div>
         </div>
 
-        <!-- Card Créateur -->
-        @if (opp.creator) {
-        <div class="bg-white rounded-lg border border-gray-200/60 shadow-sm p-5">
-          <!-- Header -->
-          <div class="flex items-center gap-3 mb-4">
-            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100">
-              <i-lucide [name]="icons.info" class="size-5 text-gray-600" />
-            </div>
-            <h4 class="text-lg font-bold text-gray-800">{{ 'opportunities.published_by' | translate }}</h4>
+        <!-- Tags -->
+        @if (opp.tags.length > 0) {
+        <div class="bg-slate-50 rounded-lg p-5">
+          <h2 class="flex items-center gap-2 text-base font-semibold text-slate-900 mb-3">
+            <i-lucide [name]="icons.tag" class="w-4 h-4 text-slate-500" />
+            Tags
+          </h2>
+          <div class="flex flex-wrap gap-1.5">
+            @for (tag of opp.tags; track tag.id) {
+            <span class="inline-flex items-center px-2.5 py-1 bg-white text-slate-700 rounded text-[13px] font-medium">
+              {{ tag.name }}
+            </span>
+            }
           </div>
-          <!-- Nom du créateur -->
-          <p class="text-base font-semibold text-gray-800 px-4 py-2.5 bg-gray-50 rounded-lg">{{ opp.creator.name }}</p>
         </div>
         }
+
+        <!-- Pièces jointes -->
+        @if (opp.attachments.length) {
+        <div
+          class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div class="p-6">
+            <div class="mb-6 flex items-center gap-3">
+              <div
+                class="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100 text-blue-600">
+                <i-lucide [name]="icons.fileText" class="size-6 stroke-[1.5]" />
+              </div>
+              <h4 class="text-xl font-bold text-gray-900">{{ 'opportunities.attachments' | translate }}</h4>
+            </div>
+            <div class="space-y-2">
+              @for (attachment of opp.attachments; track attachment.id) {
+              <div
+                class="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-100 hover:border-primary-200 hover:bg-white transition-all">
+                <div class="flex items-center gap-3 overflow-hidden">
+                  <div class="p-2 bg-white rounded-lg shadow-sm">
+                    <i-lucide [name]="icons.fileText" class="w-4 h-4 text-slate-400" />
+                  </div>
+                  <span class="text-sm text-slate-700 truncate font-medium">{{ attachment.filename }}</span>
+                </div>
+                <button
+                  (click)="downloadAttachment(attachment.filename)"
+                  class="p-2 text-slate-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors">
+                  <i-lucide [name]="icons.download" class="w-4 h-4" />
+                </button>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+        }
+
+        <!-- CTA Bar -->
+        <div class="flex flex-col items-center gap-6 mt-10 w-full">
+          <div class="w-full bg-white rounded-lg p-6 md:p-8 shadow-sm border border-gray-100">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div class="mb-3 sm:mb-0">
+                <h3 class="text-lg md:text-xl font-semibold text-gray-900">{{ opp.title | titlecase }}</h3>
+              </div>
+
+              <div class="flex flex-col sm:flex-row sm:items-center gap-3 w-full sm:w-auto">
+                @if (opp.link) {
+                <a
+                  [href]="opp.link"
+                  target="_blank"
+                  class="w-full sm:w-auto inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 justify-center font-semibold transition-colors">
+                  <span class="text-sm">{{ 'opportunities.apply_now' | translate }}</span>
+                  <i-lucide class="size-4" [name]="icons.externalLink"></i-lucide>
+                </a>
+                }
+
+                <button
+                  type="button"
+                  class="w-full rounded-lg border border-gray-200 sm:bg-transparent sm:w-fit inline-flex items-center gap-2 px-3 py-2 text-gray-500 hover:bg-gray-50 justify-center"
+                  (click)="shareOpportunity()">
+                  <i-lucide class="size-4" [name]="icons.share"></i-lucide>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
