@@ -15,7 +15,6 @@
     <!-- Welcome Banner  avec Glass Morphism -->
     <div class="col-span-12">
       <div class="dashboard-card-elevated p-8 md:p-10 relative overflow-hidden group cursor-default">
-        <!-- Animated Gradient Background -->
         <div
           class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-brand-400/20 to-emerald-400/20 rounded-full blur-3xl -z-0 group-hover:scale-110 transition-transform duration-700"></div>
         <div
@@ -57,7 +56,6 @@
       </div>
     </div>
 
-    <!-- Stats Section Header  -->
     <div class="col-span-12">
       <div class="dashboard-card p-5 flex items-center justify-between">
         <div class="flex items-center gap-4">
@@ -77,7 +75,6 @@
       </div>
     </div>
 
-    <!-- Stat Cards  - Grid Responsive -->
     <div class="col-span-12 md:col-span-6 lg:col-span-3">
       <div class="dashboard-stat-card">
         <div class="flex items-start justify-between mb-4">
@@ -147,7 +144,6 @@
       </div>
     </div>
 
-    <!-- Profile Completion Chart  -->
     <div class="col-span-12 lg:col-span-6">
       <div class="dashboard-card-elevated p-6 md:p-8 h-full flex flex-col">
         <div class="flex items-center justify-between mb-6">
@@ -217,7 +213,6 @@
       <a
         [routerLink]="highlightLink()"
         class="relative dashboard-card-hover overflow-hidden group cursor-pointer h-[360px] flex flex-col justify-end p-8">
-        <!-- Background Image avec overlay -->
         <div class="absolute inset-0 overflow-hidden">
           <img
             [src]="highlightImage()"
@@ -243,7 +238,6 @@
       </a>
     </div>
 
-    <!-- Recent Activity Section  -->
     <div class="col-span-12">
       <div class="dashboard-card p-5 mb-6">
         <div class="flex items-center justify-between">
@@ -315,7 +309,7 @@
         <p class="dashboard-text-body mb-6 max-w-md mx-auto">
           Commencez votre parcours entrepreneurial en créant votre première entreprise
         </p>
-        <a [routerLink]="['/dashboard/ventures/new']" class="dashboard-btn-primary inline-flex">
+        <a [routerLink]="['/dashboard/ventures']" class="dashboard-btn-primary inline-flex">
           <span class="material-icons text-xl">add</span>
           <span>Créer ma première entreprise</span>
         </a>

@@ -64,6 +64,14 @@ export const dashboardRoutes: Routes = [
         loadComponent: () =>
           import('./pages/opportunities/dashboard-opportunities').then((c) => c.DashboardOpportunities)
       },
+      {
+        path: 'opportunities/:slug',
+        title: 'Détail Opportunité',
+        loadComponent: () =>
+          import('./pages/opportunities/opportunity-detail/opportunity-detail').then(
+            (c) => c.OpportunityDetail
+          )
+      },
       // Routes pour la candidature mentor
       {
         path: 'mentor/apply',
