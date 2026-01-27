@@ -102,7 +102,7 @@ export class DashboardLayout implements OnInit {
     const titles: Record<string, string> = {
       '/dashboard/overview': 'Accueil Dashboard',
       '/dashboard/ventures': 'Gestion des Entreprises',
-      '/dashboard/opportunities': 'Opportunités pour vous',
+      '/dashboard/opportunities': 'Mes Opportunités',
       '/dashboard/profile': 'Mon Profil',
       '/dashboard/referrals': 'Mes Parrainages'
     };
