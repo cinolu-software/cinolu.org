@@ -8,4 +8,5 @@ export interface UpdateInfoDto {
   city: string;
   biography: string;
   gender?: string;
+  interests?: string[];
 }
