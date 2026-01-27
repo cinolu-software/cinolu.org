@@ -21,13 +21,11 @@ export class DashboardOpportunities implements OnInit {
     search: Search
   };
 
-  // Computed pour extraire les opportunités du tuple [items, total]
   opportunities = computed(() => {
     const data = this.store.opportunities();
     return data ? data[0] : [];
   });
 
-  // Computed pour le nombre total
   totalCount = computed(() => {
     const data = this.store.opportunities();
     return data ? data[1] : 0;
