@@ -36,7 +36,6 @@ export interface IArticle extends IBase {
   is_highlighted: boolean;
   tags: ITag[];
   comments: IComment[];
-  interests?: IOpportunityTag[];
   author: IUser;
   gallery?: IImage[];
 }
@@ -66,6 +65,7 @@ export interface IUser extends IBase {
   articles: IArticle[];
   comments: IComment[];
   mentor_profile?: IMentorProfile;
+  interests?: IOpportunityTag[];
 }
 
 export interface IProject extends IBase {
