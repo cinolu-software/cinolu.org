@@ -22,10 +22,11 @@ export const OpportunityStore = signalStore(
         switchMap((slug) => {
           return _http.get<{ data: IOpportunity }>(`opportunities/slug/${slug}`).pipe(
             tap(({ data }) => {
+              console.log('Loaded opportunity:', data);
               patchState(store, { isLoading: false, opportunity: data });
             }),
             catchError(() => {
-              patchState(store, { isLoading: false });
+              patchState(store, { isLoading: false, opportunity: null });
               return of(null);
             })
           );
