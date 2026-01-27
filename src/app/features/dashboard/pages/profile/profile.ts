@@ -1,8 +1,8 @@
-import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy, effect, computed } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
-import { IUser, MentorStatus } from '@shared/models/entities.models';
+import { IUser } from '@shared/models/entities.models';
 import { DatePicker } from 'primeng/datepicker';
 import { UpdateInfoStore } from '@features/dashboard/store/update-info.store';
 import { UpdateInfoDto } from '@features/dashboard/dto/update-info.dto';
@@ -19,7 +19,7 @@ import { MultiSelect } from 'primeng/multiselect';
   templateUrl: './profile.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage {
   authStore = inject(AuthStore);
   updateInfoStore = inject(UpdateInfoStore);
   tagsStore = inject(OpportunityTagsStore);
@@ -27,6 +27,11 @@ export class ProfilePage implements OnInit {
   router = inject(Router);
 
   isEditing = signal(false);
+
+  // Computed signals pour réactivité
+  user = computed(() => this.authStore.user());
+  hasMentorProfile = computed(() => !!this.user()?.mentor_profile);
+  mentorStatus = computed(() => this.user()?.mentor_profile?.status || null);
 
   profileForm = this.fb.group({
     name: ['', Validators.required],
@@ -39,37 +44,32 @@ export class ProfilePage implements OnInit {
     interests: [[] as string[]]
   });
 
-  ngOnInit() {
-    const user = this.authStore.user();
-    console.log('==== PROFIL UTILISATEUR ====');
-    console.log('User complet:', user);
-    console.log("Centres d'intérêt:", user?.interests);
-    console.log(
-      "IDs des centres d'intérêt:",
-      user?.interests?.map((tag) => tag.id)
-    );
-    console.log('============================');
-
-    if (user) {
-      this.profileForm.patchValue({
-        name: user.name,
-        biography: user.biography || '',
-        phone_number: user.phone_number || '',
-        city: user.city || '',
-        country: user.country || '',
-        gender: user.gender || '',
-        birth_date: user.birth_date ? new Date(user.birth_date) : null,
-        interests: user.interests?.map((tag) => tag.id) || []
-      });
-      this.profileForm.disable();
-    }
+  constructor() {
+    // Effect pour synchroniser le formulaire avec les changements du user
+    effect(() => {
+      const user = this.user();
+      if (user && !this.isEditing()) {
+        this.profileForm.patchValue(
+          {
+            name: user.name,
+            biography: user.biography || '',
+            phone_number: user.phone_number || '',
+            city: user.city || '',
+            country: user.country || '',
+            gender: user.gender || '',
+            birth_date: user.birth_date ? new Date(user.birth_date) : null,
+            interests: user.interests?.map((tag) => tag.id) || []
+          },
+          { emitEvent: false }
+        );
+        this.profileForm.disable();
+      }
+    });
   }
 
   toggleEdit() {
-    const newState = !this.isEditing();
-    this.isEditing.set(newState);
-
-    if (newState) {
+    this.isEditing.update((v) => !v);
+    if (this.isEditing()) {
       this.profileForm.enable();
     } else {
       this.profileForm.disable();
@@ -85,32 +85,27 @@ export class ProfilePage implements OnInit {
   }
 
   saveProfile() {
-    if (this.profileForm.invalid) return;
+    if (this.profileForm.invalid || !this.user()) return;
 
-    const current = this.authStore.user();
-    if (!current) return;
-
-    const fv = this.profileForm.value;
-    type WithAddress = IUser & { address?: string };
-    const address = (current as WithAddress).address ?? '';
-    const birthDate: Date = fv.birth_date ? new Date(fv.birth_date) : (current.birth_date ?? new Date());
+    const user = this.user()!;
+    const formValue = this.profileForm.getRawValue();
 
     const payload: UpdateInfoDto = {
-      email: current.email ?? '',
-      address: address,
-      phone_number: fv.phone_number ?? '',
-      name: fv.name ?? current.name ?? '',
-      birth_date: birthDate,
-      country: fv.country ?? '',
-      city: fv.city ?? '',
-      biography: fv.biography ?? '',
-      gender: fv.gender ?? ''
+      email: user.email ?? '',
+      address: (user as IUser & { address?: string }).address ?? '',
+      phone_number: formValue.phone_number ?? '',
+      gender: formValue.gender ?? '',
+      name: formValue.name ?? user.name ?? '',
+      birth_date: formValue.birth_date ? new Date(formValue.birth_date) : (user.birth_date ?? new Date()),
+      country: formValue.country ?? '',
+      city: formValue.city ?? '',
+      biography: formValue.biography ?? ''
     };
 
     this.updateInfoStore.updateInfo(payload);
-    if (fv.interests && fv.interests.length > 0) {
-      this.updateInfoStore.updateInterests(fv.interests);
-    }
+
+    // Toujours mettre à jour les centres d'intérêt, même si le tableau est vide (pour permettre la suppression)
+    this.updateInfoStore.updateInterests({ interests: formValue.interests ?? [] });
 
     this.isEditing.set(false);
     this.profileForm.disable();
@@ -119,20 +114,21 @@ export class ProfilePage implements OnInit {
   cancelEdit() {
     this.isEditing.set(false);
     this.profileForm.disable();
-    this.ngOnInit();
-  }
 
-  isMentor(): boolean {
-    const user = this.authStore.user();
-    return !!user?.roles?.some((role) => role.name === 'mentor');
-  }
-
-  hasMentorProfile(): boolean {
-    return !!this.authStore.user()?.mentor_profile;
-  }
-
-  getMentorStatus(): MentorStatus | null {
-    return this.authStore.user()?.mentor_profile?.status || null;
+    // Re-synchroniser avec les données actuelles du signal
+    const user = this.user();
+    if (user) {
+      this.profileForm.patchValue({
+        name: user.name,
+        biography: user.biography || '',
+        phone_number: user.phone_number || '',
+        city: user.city || '',
+        country: user.country || '',
+        gender: user.gender || '',
+        birth_date: user.birth_date ? new Date(user.birth_date) : null,
+        interests: user.interests?.map((tag) => tag.id) || []
+      });
+    }
   }
 
   applyAsMentor() {

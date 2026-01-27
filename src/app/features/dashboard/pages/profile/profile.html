@@ -86,17 +86,17 @@
             </div>
           </div>
 
-          @if (getMentorStatus() === 'approved') {
+          @if (mentorStatus() === 'approved') {
           <span class="dashboard-badge-success">
             <span class="material-icons text-[14px]">verified</span>
             Approuvé
           </span>
-          } @else if (getMentorStatus() === 'pending') {
+          } @else if (mentorStatus() === 'pending') {
           <span class="dashboard-badge-warning">
             <span class="material-icons text-[14px]">schedule</span>
             En attente
           </span>
-          } @else if (getMentorStatus() === 'rejected') {
+          } @else if (mentorStatus() === 'rejected') {
           <span class="dashboard-badge-danger">
             <span class="material-icons text-[14px]">cancel</span>
             Refusé
@@ -105,7 +105,7 @@
         </div>
 
         <div class="space-y-4">
-          @if (getMentorStatus() === 'approved') {
+          @if (mentorStatus() === 'approved') {
           <div class="dashboard-card bg-primary-50 border border-primary-100 p-5">
             <div class="flex items-start gap-3">
               <span class="material-icons text-primary-600 text-2xl">check_circle</span>
@@ -125,7 +125,7 @@
               </div>
             </div>
           </div>
-          } @else if (getMentorStatus() === 'pending') {
+          } @else if (mentorStatus() === 'pending') {
           <div class="dashboard-card bg-yellow-50 border border-yellow-100 p-5">
             <div class="flex items-start gap-3">
               <span class="material-icons text-yellow-600 text-2xl">schedule</span>
@@ -138,7 +138,7 @@
               </div>
             </div>
           </div>
-          } @else if (getMentorStatus() === 'rejected') {
+          } @else if (mentorStatus() === 'rejected') {
           <div class="dashboard-card bg-red-50 border border-red-100 p-5">
             <div class="flex items-start gap-3">
               <span class="material-icons text-red-600 text-2xl">cancel</span>
