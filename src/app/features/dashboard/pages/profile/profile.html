@@ -343,6 +343,29 @@
                 placeholder="Parlez-nous de vous..."></textarea>
             </div>
 
+            <!-- Interests Section -->
+            <div>
+              <label for="interests" class="dashboard-label">
+                <span class="material-icons text-[16px] text-primary-600">interests</span>
+                <span>Centres d'intérêt</span>
+              </label>
+              <p-multiselect
+                inputId="interests"
+                formControlName="interests"
+                [options]="tagsStore.tags()"
+                optionLabel="name"
+                optionValue="id"
+                placeholder="Sélectionner vos centres d'intérêt"
+                [disabled]="!isEditing()"
+                [showClear]="true"
+                display="chip"
+                [fluid]="true">
+              </p-multiselect>
+              <p class="dashboard-text-tiny text-slate-500 mt-2">
+                Sélectionnez les domaines qui vous intéressent pour recevoir des opportunités personnalisées
+              </p>
+            </div>
+
             <!-- Action Buttons  -->
             @if (isEditing()) {
             <div class="flex flex-col-reverse sm:flex-row gap-3 justify-end pt-8 border-t border-slate-100">

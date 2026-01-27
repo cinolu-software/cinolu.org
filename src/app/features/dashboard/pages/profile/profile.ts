@@ -9,17 +9,20 @@ import { UpdateInfoDto } from '@features/dashboard/dto/update-info.dto';
 import { FileUpload } from '@shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '@shared/pipes';
 import { FormManager } from '@shared/components/form-manager/form-manager';
+import { OpportunityTagsStore } from '@features/opportunities/store/opportunity-tags.store';
+import { MultiSelect } from 'primeng/multiselect';
 
 @Component({
   selector: 'app-profile',
-  imports: [ReactiveFormsModule, RouterModule, DatePicker, FileUpload, ApiImgPipe, FormManager],
-  providers: [UpdateInfoStore],
+  imports: [ReactiveFormsModule, RouterModule, DatePicker, FileUpload, ApiImgPipe, FormManager, MultiSelect],
+  providers: [UpdateInfoStore, OpportunityTagsStore],
   templateUrl: './profile.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfilePage implements OnInit {
   authStore = inject(AuthStore);
   updateInfoStore = inject(UpdateInfoStore);
+  tagsStore = inject(OpportunityTagsStore);
   fb = inject(FormBuilder);
   router = inject(Router);
 
@@ -32,11 +35,21 @@ export class ProfilePage implements OnInit {
     city: [''],
     country: [''],
     gender: [''],
-    birth_date: [null as Date | null]
+    birth_date: [null as Date | null],
+    interests: [[] as string[]]
   });
 
   ngOnInit() {
     const user = this.authStore.user();
+    console.log('==== PROFIL UTILISATEUR ====');
+    console.log('User complet:', user);
+    console.log("Centres d'intérêt:", user?.interests);
+    console.log(
+      "IDs des centres d'intérêt:",
+      user?.interests?.map((tag) => tag.id)
+    );
+    console.log('============================');
+
     if (user) {
       this.profileForm.patchValue({
         name: user.name,
@@ -45,7 +58,8 @@ export class ProfilePage implements OnInit {
         city: user.city || '',
         country: user.country || '',
         gender: user.gender || '',
-        birth_date: user.birth_date ? new Date(user.birth_date) : null
+        birth_date: user.birth_date ? new Date(user.birth_date) : null,
+        interests: user.interests?.map((tag) => tag.id) || []
       });
       this.profileForm.disable();
     }
@@ -94,6 +108,10 @@ export class ProfilePage implements OnInit {
     };
 
     this.updateInfoStore.updateInfo(payload);
+    if (fv.interests && fv.interests.length > 0) {
+      this.updateInfoStore.updateInterests(fv.interests);
+    }
+
     this.isEditing.set(false);
     this.profileForm.disable();
   }
@@ -104,28 +122,23 @@ export class ProfilePage implements OnInit {
     this.ngOnInit();
   }
 
-  // Vérifier si l'utilisateur est déjà mentor
   isMentor(): boolean {
     const user = this.authStore.user();
     return !!user?.roles?.some((role) => role.name === 'mentor');
   }
 
-  // Vérifier si l'utilisateur a un profil mentor
   hasMentorProfile(): boolean {
     return !!this.authStore.user()?.mentor_profile;
   }
 
-  // Obtenir le statut du profil mentor
   getMentorStatus(): MentorStatus | null {
     return this.authStore.user()?.mentor_profile?.status || null;
   }
 
-  // Naviguer vers la page de candidature mentor
   applyAsMentor() {
     this.router.navigate(['/dashboard/mentor/apply']);
   }
 
-  // Naviguer vers le dashboard mentor
   goToMentorDashboard() {
     this.router.navigate(['/dashboard/mentor']);
   }
