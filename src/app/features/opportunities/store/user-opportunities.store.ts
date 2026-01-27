@@ -21,7 +21,12 @@ export const UserOpportunitiesStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(() => {
           return _http.get<{ data: [IOpportunity[], number] }>('opportunities/for-me').pipe(
-            tap(({ data }) => patchState(store, { isLoading: false, opportunities: data })),
+            tap(({ data }) => {
+              const opportunities = Array.isArray(data[0]) ? data[0] : [];
+              const count = data[1] || 0;
+
+              patchState(store, { isLoading: false, opportunities: [opportunities, count] });
+            }),
             catchError(() => {
               patchState(store, { isLoading: false, opportunities: [[], 0] });
               return of(null);
