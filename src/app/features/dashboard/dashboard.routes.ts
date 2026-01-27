@@ -60,7 +60,7 @@ export const dashboardRoutes: Routes = [
       },
       {
         path: 'opportunities',
-        title: 'Opportunités pour vous',
+        title: 'Mes Opportunités',
         loadComponent: () =>
           import('./pages/opportunities/dashboard-opportunities').then((c) => c.DashboardOpportunities)
       },

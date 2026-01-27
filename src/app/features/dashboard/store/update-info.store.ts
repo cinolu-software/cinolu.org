@@ -38,6 +38,26 @@ export const UpdateInfoStore = signalStore(
           );
         })
       )
+    ),
+
+    updateInterests: rxMethod<string[]>(
+      pipe(
+        tap(() => patchState(store, { isLoading: true })),
+        switchMap((interests) => {
+          return _http.patch<{ data: IUser }>('users/my-interests', { interests }).pipe(
+            tap(({ data }) => {
+              patchState(store, { isLoading: false });
+              _toast.showSuccess("Centres d'intérêt mis à jour");
+              _authStore.setUser(data);
+            }),
+            catchError(() => {
+              patchState(store, { isLoading: false });
+              _toast.showError("Erreur lors de la mise à jour des centres d'intérêt");
+              return of(null);
+            })
+          );
+        })
+      )
     )
   }))
 );
