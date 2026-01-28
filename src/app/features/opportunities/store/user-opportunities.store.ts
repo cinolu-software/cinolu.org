@@ -23,7 +23,6 @@ export const UserOpportunitiesStore = signalStore(
           return _http.get<{ data: [IOpportunity[], number] }>('opportunities/for-me').pipe(
             tap(({ data }) => {
               const [opportunities, count] = data;
-              console.log('Fetched opportunities for user:', opportunities);
               patchState(store, { isLoading: false, opportunities: [opportunities, count] });
             }),
             catchError(() => {
