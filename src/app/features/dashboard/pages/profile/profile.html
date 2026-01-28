@@ -343,29 +343,6 @@
                 placeholder="Parlez-nous de vous..."></textarea>
             </div>
 
-            <!-- Interests Section -->
-            <div>
-              <label for="interests" class="dashboard-label">
-                <span class="material-icons text-[16px] text-primary-600">interests</span>
-                <span>Centres d'intérêt</span>
-              </label>
-              <p-multiselect
-                inputId="interests"
-                formControlName="interests"
-                [options]="tagsStore.tags()"
-                optionLabel="name"
-                optionValue="id"
-                placeholder="Sélectionner vos centres d'intérêt"
-                [disabled]="!isEditing()"
-                [showClear]="true"
-                display="chip"
-                [fluid]="true">
-              </p-multiselect>
-              <p class="dashboard-text-tiny text-slate-500 mt-2">
-                Sélectionnez les domaines qui vous intéressent pour recevoir des opportunités personnalisées
-              </p>
-            </div>
-
             <!-- Action Buttons  -->
             @if (isEditing()) {
             <div class="flex flex-col-reverse sm:flex-row gap-3 justify-end pt-8 border-t border-slate-100">
@@ -389,6 +366,73 @@
             </div>
             }
           </app-form-manager>
+        </form>
+      </div>
+
+      <!-- Interests Section -->
+      <div class="dashboard-card-elevated p-8 mt-6">
+        <div class="flex items-center justify-between flex-wrap gap-3 mb-8 pb-6 border-b border-slate-100">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-lg bg-primary-500 flex items-center justify-center">
+              <span class="material-icons text-white text-xl">interests</span>
+            </div>
+            <div>
+              <h2 class="dashboard-heading-5">Centres d'intérêt</h2>
+              <p class="dashboard-text-tiny">Personnalisez vos préférences</p>
+            </div>
+          </div>
+          @if (!isEditingInterests()) {
+          <button type="button" (click)="toggleEditInterests()" class="dashboard-btn-primary inline-flex max-sm:w-full">
+            <span class="material-icons text-[18px]">edit</span>
+            <span>Modifier</span>
+          </button>
+          }
+        </div>
+
+        <form [formGroup]="interestsForm" (ngSubmit)="saveInterests()" class="space-y-6">
+          <div>
+            <label for="interests" class="dashboard-label">
+              <span class="material-icons text-[16px] text-primary-600">interests</span>
+              <span>Vos centres d'intérêt</span>
+            </label>
+            <p-multiselect
+              inputId="interests"
+              formControlName="interests"
+              [options]="tagsStore.tags()"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Sélectionner vos centres d'intérêt"
+              [disabled]="!isEditingInterests()"
+              [showClear]="true"
+              display="chip"
+              [fluid]="true">
+            </p-multiselect>
+            <p class="dashboard-text-tiny text-slate-500 mt-2">
+              Sélectionnez les domaines qui vous intéressent pour recevoir des opportunités personnalisées
+            </p>
+          </div>
+
+          @if (isEditingInterests()) {
+          <div class="flex flex-col-reverse sm:flex-row gap-3 justify-end pt-8 border-t border-slate-100">
+            <button formActions type="button" (click)="cancelEditInterests()" class="dashboard-btn-secondary">
+              <span class="material-icons text-[18px]">close</span>
+              <span>Annuler</span>
+            </button>
+            <button
+              formActions
+              type="submit"
+              [disabled]="interestsForm.invalid || authStore.isLoading()"
+              class="dashboard-btn-primary">
+              @if (authStore.isLoading()) {
+              <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              <span>Enregistrement...</span>
+              } @else {
+              <span class="material-icons text-[18px]">save</span>
+              <span>Enregistrer</span>
+              }
+            </button>
+          </div>
+          }
         </form>
       </div>
     </div>

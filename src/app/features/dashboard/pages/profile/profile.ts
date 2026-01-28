@@ -28,6 +28,7 @@ export class ProfilePage {
   router = inject(Router);
 
   isEditing = signal(false);
+  isEditingInterests = signal(false);
 
   // Computed signals pour réactivité
   user = computed(() => this.authStore.user());
@@ -41,29 +42,43 @@ export class ProfilePage {
     city: [''],
     country: [''],
     gender: [''],
-    birth_date: [null as Date | null],
+    birth_date: [null as Date | null]
+  });
+
+  interestsForm = this.fb.group({
     interests: [[] as string[]]
   });
 
   constructor() {
-    // Effect pour synchroniser le formulaire avec les changements du user
+    // Effect pour synchroniser les formulaires avec les changements du user
     effect(() => {
       const user = this.user();
-      if (user && !this.isEditing()) {
-        this.profileForm.patchValue(
-          {
-            name: user.name,
-            biography: user.biography || '',
-            phone_number: user.phone_number || '',
-            city: user.city || '',
-            country: user.country || '',
-            gender: user.gender || '',
-            birth_date: user.birth_date ? new Date(user.birth_date) : null,
-            interests: user.interests?.map((tag) => tag.id) || []
-          },
-          { emitEvent: false }
-        );
-        this.profileForm.disable();
+      if (user) {
+        if (!this.isEditing()) {
+          this.profileForm.patchValue(
+            {
+              name: user.name,
+              biography: user.biography || '',
+              phone_number: user.phone_number || '',
+              city: user.city || '',
+              country: user.country || '',
+              gender: user.gender || '',
+              birth_date: user.birth_date ? new Date(user.birth_date) : null
+            },
+            { emitEvent: false }
+          );
+          this.profileForm.disable();
+        }
+
+        if (!this.isEditingInterests()) {
+          this.interestsForm.patchValue(
+            {
+              interests: user.interests?.map((tag) => tag.id) || []
+            },
+            { emitEvent: false }
+          );
+          this.interestsForm.disable();
+        }
       }
     });
   }
@@ -74,6 +89,15 @@ export class ProfilePage {
       this.profileForm.enable();
     } else {
       this.profileForm.disable();
+    }
+  }
+
+  toggleEditInterests() {
+    this.isEditingInterests.update((v) => !v);
+    if (this.isEditingInterests()) {
+      this.interestsForm.enable();
+    } else {
+      this.interestsForm.disable();
     }
   }
 
@@ -105,11 +129,18 @@ export class ProfilePage {
 
     this.updateInfoStore.updateInfo(payload);
 
-    // Toujours mettre à jour les centres d'intérêt, même si le tableau est vide (pour permettre la suppression)
-    this.updateInfoStore.updateInterests({ interests: formValue.interests ?? [] });
-
     this.isEditing.set(false);
     this.profileForm.disable();
+  }
+
+  saveInterests() {
+    if (this.interestsForm.invalid || !this.user()) return;
+
+    const formValue = this.interestsForm.getRawValue();
+    this.updateInfoStore.updateInterests({ interests: formValue.interests ?? [] });
+
+    this.isEditingInterests.set(false);
+    this.interestsForm.disable();
   }
 
   cancelEdit() {
@@ -126,7 +157,19 @@ export class ProfilePage {
         city: user.city || '',
         country: user.country || '',
         gender: user.gender || '',
-        birth_date: user.birth_date ? new Date(user.birth_date) : null,
+        birth_date: user.birth_date ? new Date(user.birth_date) : null
+      });
+    }
+  }
+
+  cancelEditInterests() {
+    this.isEditingInterests.set(false);
+    this.interestsForm.disable();
+
+    // Re-synchroniser avec les données actuelles du signal
+    const user = this.user();
+    if (user) {
+      this.interestsForm.patchValue({
         interests: user.interests?.map((tag) => tag.id) || []
       });
     }
