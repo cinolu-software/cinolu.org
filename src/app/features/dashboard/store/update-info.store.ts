@@ -7,6 +7,7 @@ import { AuthStore } from '@core/auth/auth.store';
 import { ToastrService } from '@core/services/toast/toastr.service';
 import { IUser } from '@shared/models/entities.models';
 import { UpdateInfoDto } from '../dto/update-info.dto';
+import { UserOpportunitiesStore } from '@features/opportunities/store/user-opportunities.store';
 
 interface IUpdateInfoStore {
   isLoading: boolean;
@@ -16,17 +17,19 @@ export const UpdateInfoStore = signalStore(
   withState<IUpdateInfoStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
+    _OpportunitiesStore: inject(UserOpportunitiesStore),
     _toast: inject(ToastrService),
     _authStore: inject(AuthStore)
   })),
-  withMethods(({ _http, _toast, _authStore, ...store }) => {
-    const makeRequest = <T>(url: string, payload: T, successMessage: string, errorMessage: string) =>
+  withMethods(({ _http, _toast, _authStore, _OpportunitiesStore, ...store }) => {
+    const makeRequest = <T>(url: string, _: T, successMessage: string, errorMessage: string) =>
       rxMethod<T>(
         pipe(
           tap(() => patchState(store, { isLoading: true })),
           switchMap((data) =>
             _http.patch<{ data: IUser }>(url, data).pipe(
               tap(({ data: user }) => {
+                _OpportunitiesStore.loadOpportunitiesForUser();
                 _toast.showSuccess(successMessage);
                 _authStore.setUser(user);
               }),
