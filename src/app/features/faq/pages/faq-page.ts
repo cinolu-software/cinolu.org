@@ -47,7 +47,7 @@ export class FaqPage {
     {
       question: 'Comment puis-je être informé des nouveautés ?',
       answer:
-        'Inscrivez-vous à la newsletter en bas de page et suivez Cinolu sur les réseaux sociaux (Facebook, LinkedIn, Instagram, Twitter).',
+        'Suivez Cinolu sur les réseaux sociaux (Facebook, LinkedIn, Instagram, Twitter) pour rester informé des dernières actualités.',
       category: 'general'
     },
 
