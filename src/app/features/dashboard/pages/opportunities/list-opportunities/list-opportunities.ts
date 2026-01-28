@@ -4,13 +4,13 @@ import { DashboardOpportunityCard } from '@features/dashboard/components/dashboa
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-dashboard-opportunities',
+  selector: 'app-list-opportunities',
   providers: [UserOpportunitiesStore],
   imports: [DashboardOpportunityCard, TranslateModule],
-  templateUrl: './dashboard-opportunities.html',
+  templateUrl: './list-opportunities.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardOpportunities implements OnInit {
+export class ListOpportunities implements OnInit {
   readonly store = inject(UserOpportunitiesStore);
 
   opportunities = computed(() => {
