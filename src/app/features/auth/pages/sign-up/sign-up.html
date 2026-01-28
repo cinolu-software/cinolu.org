@@ -1,9 +1,10 @@
 <app-auth-card [title]="'auth.signup.title' | translate" [description]="'auth.signup.description' | translate">
-  <div class="relative bg-white rounded-lg shadow-md shadow-gray-900/5 border border-gray-200/50 overflow-hidden">
+  <div
+    class="relative md:bg-white rounded-lg md:shadow-md md:shadow-gray-900/5 md:border border-gray-200/50 overflow-hidden">
     <div class="h-2 bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700"></div>
 
-    <div class="p-8 sm:p-10">
-      <div class="mb-8 text-center">
+    <div class="py-8 md:px-10">
+      <div class="mb-8">
         <p class="text-sm text-gray-600">
           {{ 'auth.signup.alreadyHaveAccount' | translate }}
           <a
@@ -40,16 +41,6 @@
                 id="name"
                 formControlName="name"
                 [placeholder]="'auth.signup.form.namePlaceholder' | translate" />
-              @if (form.get('name')?.invalid && form.get('name')?.touched) {
-              <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
-                <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
-                @if (form.get('name')?.hasError('required')) {
-                <span>{{ 'auth.signup.errors.nameRequired' | translate }}</span>
-                } @if (form.get('name')?.hasError('minlength')) {
-                <span>{{ 'auth.signup.errors.nameMinLength' | translate }}</span>
-                }
-              </p>
-              }
             </div>
 
             <div class="group">
@@ -68,22 +59,47 @@
                 type="email"
                 formControlName="email"
                 [placeholder]="'auth.signup.form.emailPlaceholder' | translate" />
-              @if (form.get('email')?.invalid && form.get('email')?.touched) {
-              <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
-                <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
-                @if (form.get('email')?.hasError('required')) {
-                <span>{{ 'auth.signup.errors.emailRequired' | translate }}</span>
-                } @if (form.get('email')?.hasError('email')) {
-                <span>{{ 'auth.signup.errors.emailInvalid' | translate }}</span>
-                }
-              </p>
-              }
             </div>
           </div>
           }
 
           <!-- Étape 2/3 : Coordonnées (phone, country, gender, birth_date) -->
           @if (formManager.currentStep() === 1) {
+          <div class="group">
+            <label for="country" class="block text-sm font-semibold text-gray-700 mb-2">
+              <span class="flex items-center gap-2">
+                <span
+                  class="flex-shrink-0 w-5 h-5 md:w-7 md:h-7 rounded-md bg-gradient-to-br from-primary-50 to-primary-100/50 border border-primary-200/60 flex items-center justify-center group-focus-within:from-primary-100 group-focus-within:to-primary-200/50 group-focus-within:border-primary-300 transition-all duration-200">
+                  <i-lucide [name]="icons.globe" class="size-3.5 md:size-5 text-primary-600" />
+                </span>
+                {{ 'auth.signup.form.country' | translate }}
+              </span>
+            </label>
+            <p-select
+              id="country"
+              formControlName="country"
+              [options]="countryItems"
+              optionLabel="name"
+              optionValue="name"
+              [filter]="true"
+              filterBy="name"
+              [placeholder]="'auth.signup.form.countryPlaceholder' | translate"
+              (onChange)="onSelectCountry($event)"
+              class="w-full">
+              <ng-template #selectedItem let-selectedOption>
+                <div class="flex items-center gap-2">
+                  <span>{{ selectedOption.flag }}</span>
+                  <span>{{ selectedOption.name }}</span>
+                </div>
+              </ng-template>
+              <ng-template let-country #item>
+                <div class="flex items-center gap-2">
+                  <span>{{ country.flag }}</span>
+                  <span>{{ country.name }}</span>
+                </div>
+              </ng-template>
+            </p-select>
+          </div>
           <div class="space-y-6">
             <div class="group">
               <label for="phone_number" class="block text-sm font-semibold text-gray-700 mb-2">
@@ -105,58 +121,6 @@
                   formControlName="phone_number"
                   [placeholder]="'auth.signup.form.phonePlaceholder' | translate" />
               </p-inputgroup>
-              @if (form.get('phone_number')?.invalid && form.get('phone_number')?.touched) {
-              <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
-                <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
-                @if (form.get('phone_number')?.hasError('required')) {
-                <span>{{ 'auth.signup.errors.phoneRequired' | translate }}</span>
-                } @if (form.get('phone_number')?.hasError('pattern')) {
-                <span>{{ 'auth.signup.errors.phoneInvalid' | translate }}</span>
-                }
-              </p>
-              }
-            </div>
-
-            <div class="group">
-              <label for="country" class="block text-sm font-semibold text-gray-700 mb-2">
-                <span class="flex items-center gap-2">
-                  <span
-                    class="flex-shrink-0 w-5 h-5 md:w-7 md:h-7 rounded-md bg-gradient-to-br from-primary-50 to-primary-100/50 border border-primary-200/60 flex items-center justify-center group-focus-within:from-primary-100 group-focus-within:to-primary-200/50 group-focus-within:border-primary-300 transition-all duration-200">
-                    <i-lucide [name]="icons.globe" class="size-3.5 md:size-5 text-primary-600" />
-                  </span>
-                  {{ 'auth.signup.form.country' | translate }}
-                </span>
-              </label>
-              <p-select
-                id="country"
-                formControlName="country"
-                [options]="countryItems"
-                optionLabel="name"
-                optionValue="name"
-                [filter]="true"
-                filterBy="name"
-                [placeholder]="'auth.signup.form.countryPlaceholder' | translate"
-                (onChange)="onSelectCountry($event)"
-                class="w-full">
-                <ng-template #selectedItem let-selectedOption>
-                  <div class="flex items-center gap-2">
-                    <span>{{ selectedOption.flag }}</span>
-                    <span>{{ selectedOption.name }}</span>
-                  </div>
-                </ng-template>
-                <ng-template let-country #item>
-                  <div class="flex items-center gap-2">
-                    <span>{{ country.flag }}</span>
-                    <span>{{ country.name }}</span>
-                  </div>
-                </ng-template>
-              </p-select>
-              @if (form.get('country')?.invalid && form.get('country')?.touched) {
-              <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
-                <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
-                <span>{{ 'auth.signup.errors.countryRequired' | translate }}</span>
-              </p>
-              }
             </div>
 
             <div class="group">
@@ -177,12 +141,6 @@
                 optionValue="value"
                 [placeholder]="'auth.signup.form.genderPlaceholder' | translate"
                 class="w-full" />
-              @if (form.get('gender')?.invalid && form.get('gender')?.touched) {
-              <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
-                <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
-                <span>{{ 'auth.signup.errors.genderRequired' | translate }}</span>
-              </p>
-              }
             </div>
 
             <div class="group">
@@ -202,18 +160,9 @@
                 [showIcon]="true"
                 iconDisplay="input"
                 class="w-full" />
-              @if (form.get('birth_date')?.invalid && form.get('birth_date')?.touched) {
-              <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
-                <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
-                <span>{{ 'auth.signup.errors.birthDateRequired' | translate }}</span>
-              </p>
-              }
             </div>
           </div>
-          }
-
-          <!-- Étape 3/3 : Sécurité (password, password_confirm) -->
-          @if (formManager.currentStep() === 2) {
+          } @if (formManager.currentStep() === 2) {
           <div class="space-y-6">
             <div class="group">
               <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
@@ -232,16 +181,6 @@
                 [feedback]="false"
                 class="w-full"
                 inputStyleClass="w-full" />
-              @if (form.get('password')?.invalid && form.get('password')?.touched) {
-              <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
-                <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
-                @if (form.get('password')?.hasError('required')) {
-                <span>{{ 'auth.signup.errors.passwordRequired' | translate }}</span>
-                } @if (form.get('password')?.hasError('minlength')) {
-                <span>{{ 'auth.signup.errors.passwordMinLength' | translate }}</span>
-                }
-              </p>
-              }
             </div>
 
             <div class="group">
@@ -261,18 +200,6 @@
                 [feedback]="false"
                 class="w-full"
                 inputStyleClass="w-full" />
-              @if (form.get('password_confirm')?.invalid && form.get('password_confirm')?.touched) {
-              <p class="mt-1.5 text-xs text-red-600 flex items-center gap-1.5">
-                <i-lucide [name]="icons.alertCircle" class="size-3.5 md:size-5 flex-shrink-0" />
-                @if (form.get('password_confirm')?.hasError('required')) {
-                <span>{{ 'auth.signup.errors.passwordConfirmRequired' | translate }}</span>
-                } @if (form.get('password_confirm')?.hasError('minlength')) {
-                <span>{{ 'auth.signup.errors.passwordMinLength' | translate }}</span>
-                } @if (form.get('password_confirm')?.hasError('passwordMismatch')) {
-                <span>{{ 'auth.signup.errors.passwordMismatch' | translate }}</span>
-                }
-              </p>
-              }
             </div>
           </div>
           }
