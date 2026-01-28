@@ -32,7 +32,7 @@
     </p>
   </div>
   } @else {
-  <div class="dashboard-grid">
+  <div class="dashboard-grid flex flex-col gap-6 md:gap-8 lg:gap-10 md:grid md:grid-cols-12">
     @for (opportunity of opportunities(); track opportunity.id) {
     <div class="col-span-12 md:col-span-6 lg:col-span-4">
       <app-dashboard-opportunity-card [opportunity]="opportunity" />
