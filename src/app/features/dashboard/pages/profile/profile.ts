@@ -11,11 +11,12 @@ import { ApiImgPipe } from '@shared/pipes';
 import { FormManager } from '@shared/components/form-manager/form-manager';
 import { OpportunityTagsStore } from '@features/opportunities/store/opportunity-tags.store';
 import { MultiSelect } from 'primeng/multiselect';
+import { UserOpportunitiesStore } from '@features/opportunities/store/user-opportunities.store';
 
 @Component({
   selector: 'app-profile',
   imports: [ReactiveFormsModule, RouterModule, DatePicker, FileUpload, ApiImgPipe, FormManager, MultiSelect],
-  providers: [UpdateInfoStore, OpportunityTagsStore],
+  providers: [UpdateInfoStore, OpportunityTagsStore, UserOpportunitiesStore],
   templateUrl: './profile.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
