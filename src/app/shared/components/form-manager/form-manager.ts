@@ -36,6 +36,7 @@ export class FormManager implements OnInit {
   @Input() messages?: string[];
   @Input() loading = false;
   @Input() stickyProgress = false;
+  @Input() showProgress = true;
 
   @Output() submitted = new EventEmitter<FormManagerSubmittedPayload>();
   @Output() stepChanged = new EventEmitter<number>();

@@ -1,6 +1,7 @@
 <div [formGroup]="form" class="relative" [attr.aria-busy]="loading ? 'true' : 'false'">
   <!-- Sticky Progress Bar -->
-  <!-- <div
+  @if (showProgress) {
+  <div
     [class]="
       stickyProgress
         ? 'sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm py-4 px-6 -mx-6 mb-6'
@@ -17,9 +18,8 @@
         [style.background]="progressGradient()"
         [style.width.%]="progressPercent()"></div>
     </div>
-  </div> -->
-
-  @if (isStepper() && steps && steps.length > 0) {
+  </div>
+  } @if (isStepper() && steps && steps.length > 0) {
   <div class="mb-8">
     <div class="flex items-center justify-between relative">
       @for (step of steps; track step.label) {
