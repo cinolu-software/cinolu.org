@@ -1,28 +1,33 @@
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject, computed } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, of, pipe, switchMap, tap } from 'rxjs';
+import { catchError, exhaustMap, of, pipe, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from '@core/services/toast/toastr.service';
 import { IUser } from '@shared/models/entities.models';
 
 interface IReferralsStore {
   referralCode: string | null;
-  referrals: IUser[];
-  totalCount: number;
+  referredUsers: IUser[];
+  referredUsersPage: number;
+  referredUsersTotalCount: number;
   isLoading: boolean;
+  isLoadingReferredUsers: boolean;
 }
 
 export const ReferralsStore = signalStore(
   { providedIn: 'root' },
   withState<IReferralsStore>({
     referralCode: null,
-    referrals: [],
-    totalCount: 0,
-    isLoading: false
+    referredUsers: [],
+    referredUsersPage: 1,
+    referredUsersTotalCount: 0,
+    isLoading: false,
+    isLoadingReferredUsers: false
   }),
-  withComputed(({ referrals }) => ({
-    isEmpty: computed(() => !referrals() || referrals().length === 0)
+  withComputed(({ referredUsers }) => ({
+    isEmpty: computed(() => !referredUsers() || referredUsers().length === 0),
+    hasReferredUsers: computed(() => referredUsers() && referredUsers().length > 0)
   })),
   withProps(() => ({
     _http: inject(HttpClient),
@@ -48,17 +53,23 @@ export const ReferralsStore = signalStore(
       )
     ),
 
-    loadReferrals: rxMethod<void>(
+    loadReferredUsers: rxMethod<{ page?: number }>(
       pipe(
-        tap(() => patchState(store, { isLoading: true })),
-        switchMap(() => {
-          return _http.post<{ referrals: IUser[]; totalCount: number }>('users/find-referrals', {}).pipe(
-            tap(({ referrals, totalCount }) => {
-              patchState(store, { referrals, totalCount, isLoading: false });
+        tap(() => patchState(store, { isLoadingReferredUsers: true })),
+        exhaustMap(({ page = 1 }) => {
+          return _http.get<{ data: [IUser[], number] }>(`users/find-referred-users/?page=${page}`).pipe(
+            tap(({ data }) => {
+              const [users, totalCount] = data;
+              patchState(store, {
+                referredUsers: users,
+                referredUsersPage: page,
+                referredUsersTotalCount: totalCount,
+                isLoadingReferredUsers: false
+              });
             }),
             catchError((err) => {
-              patchState(store, { isLoading: false });
-              _toast.showError(err.error?.message || 'Erreur lors du chargement');
+              patchState(store, { isLoadingReferredUsers: false });
+              _toast.showError(err.error?.message || 'Erreur lors du chargement des utilisateurs référés');
               return of(null);
             })
           );

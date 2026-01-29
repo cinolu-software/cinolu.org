@@ -65,7 +65,12 @@ export const VenturesStore = signalStore(
             }),
             catchError((err) => {
               patchState(store, { isLoading: false });
-              _toast.showError(err.error?.message || 'Erreur lors du chargement');
+              if (err.status === 404) {
+                _toast.showError('Entreprise introuvable');
+                _router.navigate(['/dashboard/ventures']);
+              } else {
+                _toast.showError(err.error?.message || 'Erreur lors du chargement');
+              }
               return of(null);
             })
           );
