@@ -70,15 +70,14 @@ export class ProfilePage {
           this.profileForm.disable();
         }
 
-        if (!this.isEditingInterests()) {
-          this.interestsForm.patchValue(
-            {
-              interests: user.interests?.map((tag) => tag.id) || []
-            },
-            { emitEvent: false }
-          );
-          this.interestsForm.disable();
-        }
+        // Toujours synchroniser et activer le formulaire des centres d'intérêt
+        this.interestsForm.patchValue(
+          {
+            interests: user.interests?.map((tag) => tag.id) || []
+          },
+          { emitEvent: false }
+        );
+        this.interestsForm.enable();
       }
     });
   }
@@ -138,9 +137,6 @@ export class ProfilePage {
 
     const formValue = this.interestsForm.getRawValue();
     this.updateInfoStore.updateInterests({ interests: formValue.interests ?? [] });
-
-    this.isEditingInterests.set(false);
-    this.interestsForm.disable();
   }
 
   cancelEdit() {
@@ -163,9 +159,6 @@ export class ProfilePage {
   }
 
   cancelEditInterests() {
-    this.isEditingInterests.set(false);
-    this.interestsForm.disable();
-
     // Re-synchroniser avec les données actuelles du signal
     const user = this.user();
     if (user) {
