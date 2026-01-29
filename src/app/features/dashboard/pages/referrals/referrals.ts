@@ -22,7 +22,7 @@ export class ReferralsPage implements OnInit {
     if (user?.referral_code) {
       this.referralsStore.setReferralCode(user.referral_code);
     }
-    this.referralsStore.loadReferrals();
+    this.referralsStore.loadReferredUsers({ page: 1 });
   }
 
   generateCode() {
