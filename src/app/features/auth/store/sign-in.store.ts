@@ -7,7 +7,6 @@ import { ToastrService } from '@core/services/toast/toastr.service';
 import { IUser } from '@shared/models/entities.models';
 import { SignInDto } from '../dto/sign-in.dto';
 import { AuthStore } from '@core/auth/auth.store';
-import { Router } from '@angular/router';
 
 interface ISignInStore {
   isLoading: boolean;
@@ -26,10 +25,9 @@ export const SignInStore = signalStore(
   withProps(() => ({
     _http: inject(HttpClient),
     _toast: inject(ToastrService),
-    _authStore: inject(AuthStore),
-    _router: inject(Router)
+    _authStore: inject(AuthStore)
   })),
-  withMethods(({ _http, _toast, _authStore, _router, ...store }) => ({
+  withMethods(({ _http, _toast, _authStore, ...store }) => ({
     signIn: rxMethod<ISignInParams>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
@@ -39,7 +37,10 @@ export const SignInStore = signalStore(
               patchState(store, { isLoading: false });
               _authStore.setUser(data);
               _toast.showSuccess('Connexion réussie');
-              _router.navigateByUrl(returnUrl || '/dashboard');
+
+              const dashboardUrl = window.location.origin + (returnUrl || '/dashboard');
+              window.open(dashboardUrl, '_blank');
+
               onSuccess();
             }),
             catchError((err) => {
