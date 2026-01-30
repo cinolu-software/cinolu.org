@@ -35,42 +35,7 @@
       "empty": "Non renseigné"
     }
   },
-  "opportunities": {
-    "list": {
-      "title": "Découvrez les opportunités",
-      "subtitle": "Toutes les opportunités",
-      "search_placeholder": "Rechercher une opportunité...",
-      "choose_tag": "Choisir un tag",
-      "no_opportunity": "Aucune opportunité disponible !",
-      "explore": "Explorer"
-    },
-    "explore": "Explorer",
-    "ending_soon": "Se termine bientôt",
-    "days_left": "{{days}} jours restants",
-    "start": "Début",
-    "end": "Fin",
-    "start_date": "Date de début",
-    "end_date": "Date de fin",
-    "description": "Description",
-    "tags": "Tags",
-    "attachments": "Pièces jointes",
-    "download": "Télécharger",
-    "apply_now": "Postuler maintenant",
-    "share": "Partager",
-    "published_by": "Publié par",
-    "dates": "Dates",
-    "login_required": "Connexion requise",
-    "login_to_apply": "Veuillez vous connecter pour postuler à cette opportunité",
-    "status": {
-      "upcoming": "À venir",
-      "ongoing": "En cours",
-      "ended": "Terminée"
-    },
-    "show_more": "Voir plus",
-    "show_less": "Voir moins",
-    "link_copied": "Lien copié dans le presse-papiers !",
-    "not_found": "Opportunité introuvable"
-  },
+
   "common": {
     "welcome": "Bienvenue",
     "loading": "Chargement...",
@@ -106,7 +71,6 @@
     "programs": "Programmes",
     "projects": "Projets",
     "events": "Événements",
-    "opportunities": "Opportunités",
     "blog": "Blog",
     "gallery": "Galerie",
     "contact": "Contactez-nous",

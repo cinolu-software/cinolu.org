@@ -34,42 +34,7 @@
       "no_event": "No event!"
     }
   },
-  "opportunities": {
-    "list": {
-      "title": "Discover opportunities",
-      "subtitle": "All opportunities",
-      "search_placeholder": "Search for an opportunity...",
-      "choose_tag": "Choose a tag",
-      "no_opportunity": "No opportunities available!",
-      "explore": "Explore"
-    },
-    "explore": "Explore",
-    "ending_soon": "Ending soon",
-    "days_left": "{{days}} days left",
-    "start": "Start",
-    "end": "End",
-    "start_date": "Start date",
-    "end_date": "End date",
-    "description": "Description",
-    "tags": "Tags",
-    "attachments": "Attachments",
-    "download": "Download",
-    "apply_now": "Apply now",
-    "share": "Share",
-    "published_by": "Published by",
-    "dates": "Dates",
-    "login_required": "Login required",
-    "login_to_apply": "Please log in to apply for this opportunity",
-    "status": {
-      "upcoming": "Upcoming",
-      "ongoing": "Ongoing",
-      "ended": "Ended"
-    },
-    "show_more": "Show more",
-    "show_less": "Show less",
-    "link_copied": "Link copied to clipboard!",
-    "not_found": "Opportunity not found"
-  },
+
   "common": {
     "welcome": "Welcome",
     "loading": "Loading...",
@@ -104,7 +69,6 @@
     "programs": "Programs",
     "projects": "Projects",
     "events": "Events",
-    "opportunities": "Opportunities",
     "blog": "Blog",
     "gallery": "Gallery",
     "contact": "Contact Us",

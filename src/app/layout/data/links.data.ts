@@ -24,11 +24,7 @@ export const PARCOURIR_LINKS: ILink[] = [
     translationKey: 'nav.events',
     path: '/events'
   },
-  {
-    name: 'Opportunités',
-    translationKey: 'nav.opportunities',
-    path: '/opportunities'
-  },
+
   {
     name: 'Programmes',
     translationKey: 'nav.programs',
@@ -75,7 +71,6 @@ export const EXPLORATION_LINKS: ILink[] = [
     path: '/mycinolu',
     children: [
       { name: 'Nos entrepreneurs', translationKey: 'nav.entrepreneurs', path: '/entrepreneurs', exactUrl: true },
-      // { name: 'Jobs & Opportunités', path: '/jobs-opportunities' },
       { name: 'Blog', translationKey: 'nav.blogResources', path: '/blog-ressources', icon: BookOpen },
       { name: 'Galerie', translationKey: 'nav.gallery', path: '/gallery', icon: Image },
       { name: 'À propos', translationKey: 'nav.about', path: '/about-us' },
@@ -87,12 +82,6 @@ export const EXPLORATION_LINKS: ILink[] = [
     name: 'Évènements',
     translationKey: 'nav.events',
     path: '/events'
-  },
-  {
-    icon: Calendar1,
-    name: 'Opportunités',
-    translationKey: 'nav.opportunities',
-    path: '/opportunities'
   }
 ];
 
