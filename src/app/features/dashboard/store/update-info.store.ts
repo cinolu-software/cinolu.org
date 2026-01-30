@@ -7,7 +7,6 @@ import { AuthStore } from '@core/auth/auth.store';
 import { ToastrService } from '@core/services/toast/toastr.service';
 import { IUser } from '@shared/models/entities.models';
 import { UpdateInfoDto } from '../dto/update-info.dto';
-import { UserOpportunitiesStore } from '@features/opportunities/store/user-opportunities.store';
 
 interface IUpdateInfoStore {
   isLoading: boolean;
@@ -17,11 +16,10 @@ export const UpdateInfoStore = signalStore(
   withState<IUpdateInfoStore>({ isLoading: false }),
   withProps(() => ({
     _http: inject(HttpClient),
-    _OpportunitiesStore: inject(UserOpportunitiesStore),
     _toast: inject(ToastrService),
     _authStore: inject(AuthStore)
   })),
-  withMethods(({ _http, _toast, _authStore, _OpportunitiesStore, ...store }) => {
+  withMethods(({ _http, _toast, _authStore, ...store }) => {
     const makeRequest = <T>(url: string, _: T, successMessage: string, errorMessage: string) =>
       rxMethod<T>(
         pipe(
@@ -29,7 +27,6 @@ export const UpdateInfoStore = signalStore(
           switchMap((data) =>
             _http.patch<{ data: IUser }>(url, data).pipe(
               tap(({ data: user }) => {
-                _OpportunitiesStore.loadOpportunitiesForUser();
                 _toast.showSuccess(successMessage);
                 _authStore.setUser(user);
               }),
@@ -49,12 +46,6 @@ export const UpdateInfoStore = signalStore(
         {} as UpdateInfoDto,
         'Profil mis à jour',
         'Erreur lors de la mise à jour'
-      ),
-      updateInterests: makeRequest<{ interests: string[] }>(
-        'users/my-interests',
-        { interests: [] },
-        "Centres d'intérêt mis à jour",
-        "Erreur lors de la mise à jour des centres d'intérêt"
       )
     };
   })

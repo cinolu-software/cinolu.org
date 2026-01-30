@@ -1,4 +1,4 @@
-<div class="dashboard-container">
+<div>
   <div class="dashboard-grid grid-cols-1 lg:grid-cols-3 gap-8">
     <!-- Mentor Section -->
 
@@ -367,64 +367,6 @@
               </button>
             </div>
             }
-          </app-form-manager>
-        </form>
-      </div>
-
-      <!-- Interests Section -->
-      <div class="sm:bg-white sm:rounded-2xl sm:shadow-lg sm:border sm:border-gray-100 sm:p-8 mt-6">
-        <div class="flex items-center gap-3 mb-6 pb-6 border-b border-slate-100">
-          <div
-            class="w-11 h-11 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-lg">
-            <span class="material-icons text-white text-xl">interests</span>
-          </div>
-          <div class="flex-1">
-            <h2 class="dashboard-heading-5">Centres d'intérêt</h2>
-            <p class="dashboard-text-tiny">Personnalisez vos préférences</p>
-          </div>
-        </div>
-
-        <form [formGroup]="interestsForm" (ngSubmit)="saveInterests()" class="space-y-4">
-          <app-form-manager [form]="interestsForm" [loading]="authStore.isLoading()" [showProgress]="false">
-            <div class="space-y-3">
-              <label for="interests" class="dashboard-label">
-                <span class="material-icons text-[16px] text-primary-600">interests</span>
-                <span>Vos centres d'intérêt</span>
-              </label>
-              <p-multiselect
-                inputId="interests"
-                formControlName="interests"
-                [options]="tagsStore.tags()"
-                optionLabel="name"
-                optionValue="id"
-                placeholder="Sélectionner vos centres d'intérêt"
-                [showClear]="true"
-                display="chip"
-                [fluid]="true">
-              </p-multiselect>
-              <p class="dashboard-text-tiny text-slate-500 flex items-center gap-1.5">
-                <span class="material-icons text-[14px] text-slate-400 mt-0.5">info</span>
-                <span
-                  >Sélectionnez les domaines qui vous intéressent pour recevoir des opportunités personnalisées</span
-                >
-              </p>
-            </div>
-
-            <div class="flex justify-end pt-6 border-t border-slate-100">
-              <button
-                formActions
-                type="submit"
-                [disabled]="interestsForm.invalid || authStore.isLoading()"
-                class="dashboard-btn-primary">
-                @if (authStore.isLoading()) {
-                <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                <span>Enregistrement...</span>
-                } @else {
-                <span class="material-icons text-[18px]">save</span>
-                <span>Mettre à jour</span>
-                }
-              </button>
-            </div>
           </app-form-manager>
         </form>
       </div>

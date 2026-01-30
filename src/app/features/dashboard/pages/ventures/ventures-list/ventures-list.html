@@ -1,7 +1,6 @@
-<div class="dashboard-container">
+<div>
   <p-confirmDialog />
 
-  <!-- Page Header  -->
   <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 dashboard-section">
     <div>
       <div class="flex items-center gap-3 mb-3">
@@ -50,14 +49,9 @@
     </div>
   </div>
 
-  <!-- Custom Modern Tab Navigation -->
   <div class="dashboard-section">
-    <!-- Tab Headers -->
-
-    <!-- Tab Content: Ventures -->
     @if (activeTab() === 'ventures') {
     <div class="dashboard-fade-in-up">
-      <!-- Actions Header -->
       @if (venturesStore.ventures().length > 0) {
       <div class="flex justify-end mb-6">
         <a routerLink="/dashboard/ventures/create" class="dashboard-btn-primary inline-flex">
@@ -65,10 +59,7 @@
           <span>Créer une entreprise</span>
         </a>
       </div>
-      }
-
-      <!-- Loading State -->
-      @if (venturesStore.isLoading()) {
+      } @if (venturesStore.isLoading()) {
       <div class="flex flex-col items-center justify-center py-24">
         <div class="relative">
           <div class="w-16 h-16 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin"></div>
@@ -94,12 +85,10 @@
         </a>
       </div>
 
-      <!-- Ventures Grid -->
       } @else {
       <div class="dashboard-grid-3">
         @for (venture of venturesStore.ventures(); track venture.id) {
         <div class="dashboard-card-hover overflow-hidden flex flex-col group">
-          <!-- Cover Image -->
           <div class="relative h-32 md:h-44 bg-slate-100 overflow-hidden">
             @if (venture.cover) {
             <img
@@ -122,10 +111,8 @@
             </div>
             }
 
-            <!-- Overlay Gradient -->
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
 
-            <!-- Status Badge -->
             <div class="absolute top-4 right-4 z-10">
               @if (venture.is_published) {
               <span class="dashboard-badge-success shadow-lg backdrop-blur-sm bg-emerald-500/90 text-white border-0">
@@ -166,7 +153,6 @@
               }
             </div>
 
-            <!-- Meta Info -->
             <div class="flex flex-col gap-2.5 mb-5 text-sm text-slate-600">
               @if (venture.products && venture.products.length > 0) {
               <span class="flex items-center gap-2">
@@ -177,7 +163,6 @@
               }
             </div>
 
-            <!-- Actions -->
             <div class="grid grid-cols-3 gap-2 mt-auto pt-4 border-t border-slate-100">
               <a
                 [routerLink]="['/dashboard/ventures', venture.slug]"
@@ -251,7 +236,6 @@
       <div class="dashboard-grid-3">
         @for (product of productsStore.products(); track product.id) {
         <div class="dashboard-card-hover overflow-hidden flex flex-col h-full group">
-          <!-- Product Header -->
           <div class="p-6 pb-4 border-b border-slate-100">
             @if (product.venture) {
             <div class="mb-4">
@@ -268,7 +252,6 @@
               <h3 class="dashboard-heading-5 flex-1 group-hover:text-primary-600 transition-colors">
                 {{ product.name }}
               </h3>
-              <!-- Price Tag -->
               <div class="flex-shrink-0">
                 <div class="px-4 py-2.5 bg-gradient-to-br from-primary-400 to-primary-500 rounded-lg shadow-lg">
                   <div class="flex items-baseline gap-0.5">
@@ -280,12 +263,10 @@
             </div>
           </div>
 
-          <!-- Product Description -->
           <div class="px-6 py-4 flex-1">
             <p class="dashboard-text-small dashboard-line-clamp-3 leading-relaxed">{{ product.description }}</p>
           </div>
 
-          <!-- Product Actions -->
           <div class="px-6 pb-6 pt-4 border-t border-slate-100 flex gap-3">
             <a
               [routerLink]="['/dashboard/products/edit', product.slug]"

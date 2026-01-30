@@ -9,21 +9,17 @@ import { UpdateInfoDto } from '@features/dashboard/dto/update-info.dto';
 import { FileUpload } from '@shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '@shared/pipes';
 import { FormManager } from '@shared/components/form-manager/form-manager';
-import { OpportunityTagsStore } from '@features/opportunities/store/opportunity-tags.store';
-import { MultiSelect } from 'primeng/multiselect';
-import { UserOpportunitiesStore } from '@features/opportunities/store/user-opportunities.store';
 
 @Component({
   selector: 'app-profile',
-  imports: [ReactiveFormsModule, RouterModule, DatePicker, FileUpload, ApiImgPipe, FormManager, MultiSelect],
-  providers: [UpdateInfoStore, OpportunityTagsStore, UserOpportunitiesStore],
+  imports: [ReactiveFormsModule, RouterModule, DatePicker, FileUpload, ApiImgPipe, FormManager],
+  providers: [UpdateInfoStore],
   templateUrl: './profile.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfilePage {
   authStore = inject(AuthStore);
   updateInfoStore = inject(UpdateInfoStore);
-  tagsStore = inject(OpportunityTagsStore);
   fb = inject(FormBuilder);
   router = inject(Router);
 
@@ -43,10 +39,6 @@ export class ProfilePage {
     country: [''],
     gender: [''],
     birth_date: [null as Date | null]
-  });
-
-  interestsForm = this.fb.group({
-    interests: [[] as string[]]
   });
 
   constructor() {
@@ -69,15 +61,6 @@ export class ProfilePage {
           );
           this.profileForm.disable();
         }
-
-        // Toujours synchroniser et activer le formulaire des centres d'intérêt
-        this.interestsForm.patchValue(
-          {
-            interests: user.interests?.map((tag) => tag.id) || []
-          },
-          { emitEvent: false }
-        );
-        this.interestsForm.enable();
       }
     });
   }
@@ -88,15 +71,6 @@ export class ProfilePage {
       this.profileForm.enable();
     } else {
       this.profileForm.disable();
-    }
-  }
-
-  toggleEditInterests() {
-    this.isEditingInterests.update((v) => !v);
-    if (this.isEditingInterests()) {
-      this.interestsForm.enable();
-    } else {
-      this.interestsForm.disable();
     }
   }
 
@@ -132,13 +106,6 @@ export class ProfilePage {
     this.profileForm.disable();
   }
 
-  saveInterests() {
-    if (this.interestsForm.invalid || !this.user()) return;
-
-    const formValue = this.interestsForm.getRawValue();
-    this.updateInfoStore.updateInterests({ interests: formValue.interests ?? [] });
-  }
-
   cancelEdit() {
     this.isEditing.set(false);
     this.profileForm.disable();
@@ -154,16 +121,6 @@ export class ProfilePage {
         country: user.country || '',
         gender: user.gender || '',
         birth_date: user.birth_date ? new Date(user.birth_date) : null
-      });
-    }
-  }
-
-  cancelEditInterests() {
-    // Re-synchroniser avec les données actuelles du signal
-    const user = this.user();
-    if (user) {
-      this.interestsForm.patchValue({
-        interests: user.interests?.map((tag) => tag.id) || []
       });
     }
   }

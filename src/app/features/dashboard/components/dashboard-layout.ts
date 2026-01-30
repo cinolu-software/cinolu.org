@@ -1,127 +1,48 @@
-import { Component, inject, signal, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
-import { RouterModule, Router, NavigationEnd } from '@angular/router';
-import { AuthStore } from '@core/auth/auth.store';
-import { filter } from 'rxjs';
-import { ApiImgPipe } from '@shared/pipes';
+import { Component, inject, signal, OnInit, ChangeDetectionStrategy, HostListener } from '@angular/core';
+import { RouterModule, Router } from '@angular/router';
 import { BackButton } from '@shared/components';
-import { IRole } from '@shared/models';
+import { DashboardSidebar } from './dashboard-sidebar/dashboard-sidebar';
+import { DashboardHeader } from './dashboard-header/dashboard-header';
 
 @Component({
   selector: 'app-dashboard-layout',
-  imports: [RouterModule, ApiImgPipe, NgOptimizedImage, BackButton],
+  imports: [RouterModule, BackButton, DashboardSidebar, DashboardHeader],
   templateUrl: './dashboard-layout.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardLayout implements OnInit {
-  authStore = inject(AuthStore);
-  router = inject(Router);
+  private router = inject(Router);
 
-  isSidebarOpen = signal(false);
-  currentRoute = signal('');
+  isSidebarCollapsed = signal(false);
+  isMobileSidebarOpen = signal(false);
+  isMobile = signal(false);
 
-  navigationSections = [
-    {
-      title: 'Menu',
-      items: [
-        {
-          path: '/dashboard/overview',
-          label: 'Accueil',
-          icon: 'dashboard',
-          badge: null
-        }
-      ]
-    },
-    {
-      title: 'Opportunités',
-      items: [
-        {
-          path: '/dashboard/opportunities',
-          label: 'Mes opportunités',
-          icon: 'star',
-          badge: null
-        }
-      ]
-    },
-    {
-      title: 'Général',
-      items: [
-        {
-          path: '/dashboard/ventures',
-          label: 'Entreprises',
-          icon: 'business_center',
-          badge: null
-        },
-        {
-          path: '/dashboard/profile',
-          label: 'Mon Profil',
-          icon: 'account_circle',
-          badge: null
-        },
-        {
-          path: '/dashboard/referrals',
-          label: 'Parrainages',
-          icon: 'group_add',
-          badge: null
-        }
-      ]
+  ngOnInit(): void {
+    this.checkScreenSize();
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.checkScreenSize();
+  }
+
+  private checkScreenSize(): void {
+    this.isMobile.set(window.innerWidth < 1024);
+  }
+
+  toggleSidebar(): void {
+    if (this.isMobile()) {
+      this.isMobileSidebarOpen.update((v) => !v);
+    } else {
+      this.isSidebarCollapsed.update((v) => !v);
     }
-  ];
-
-  quickActions = [
-    {
-      icon: 'add_business',
-      label: 'Nouvelle entreprise',
-      action: () => this.router.navigate(['/dashboard/ventures/create'])
-    }
-  ];
-
-  ngOnInit() {
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.currentRoute.set(event.url);
-      }
-    });
-
-    this.currentRoute.set(this.router.url);
   }
 
-  toggleSidebar() {
-    this.isSidebarOpen.update((v) => !v);
+  closeMobileSidebar(): void {
+    this.isMobileSidebarOpen.set(false);
   }
 
-  closeSidebar() {
-    this.isSidebarOpen.set(false);
-  }
-
-  isActive(path: string): boolean {
-    return this.currentRoute().startsWith(path);
-  }
-
-  getCurrentPageTitle(): string {
-    const titles: Record<string, string> = {
-      '/dashboard/overview': 'Accueil Dashboard',
-      '/dashboard/ventures': 'Gestion des Entreprises',
-      '/dashboard/opportunities': 'Mes Opportunités',
-      '/dashboard/profile': 'Mon Profil',
-      '/dashboard/referrals': 'Mes Parrainages'
-    };
-
-    const route = this.currentRoute();
-    for (const [path, title] of Object.entries(titles)) {
-      if (route.startsWith(path)) return title;
-    }
-    return 'Dashboard';
-  }
-
-  signOut() {
-    this.authStore.signOut();
-  }
-
-  getRoleLabel(): string {
-    const user = this.authStore.user();
-    if (!user || !user.roles) return 'Entrepreneur';
-    if (user.roles.includes('mentor' as unknown as IRole)) return 'Mentor';
-    return 'Entrepreneur';
+  navigateTo(path: string): void {
+    this.router.navigate([path]);
   }
 }

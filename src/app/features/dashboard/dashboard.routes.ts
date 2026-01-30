@@ -49,6 +49,11 @@ export const dashboardRoutes: Routes = [
         loadComponent: () => import('./pages/products/product-form/product-form').then((c) => c.ProductForm)
       },
       {
+        path: 'products',
+        title: 'Mes Produits',
+        loadComponent: () => import('./pages/products/products-list/products-list').then((c) => c.ProductsList)
+      },
+      {
         path: 'profile',
         title: 'Mon Profil',
         loadComponent: () => import('./pages/profile/profile').then((c) => c.ProfilePage)
@@ -58,17 +63,7 @@ export const dashboardRoutes: Routes = [
         title: 'Parrainages',
         loadComponent: () => import('./pages/referrals/referrals').then((c) => c.ReferralsPage)
       },
-      {
-        path: 'opportunities',
-        title: 'Mes Opportunités',
-        loadComponent: () => import('./pages/opportunities/list-opportunities/list-opportunities').then((c) => c.ListOpportunities)
-      },
-      {
-        path: 'opportunities/:slug',
-        title: 'Détail Opportunité',
-        loadComponent: () =>
-          import('./pages/opportunities/opportunity-detail/opportunity-detail').then((c) => c.OpportunityDetail)
-      },
+
       // Routes pour la candidature mentor
       {
         path: 'mentor/apply',

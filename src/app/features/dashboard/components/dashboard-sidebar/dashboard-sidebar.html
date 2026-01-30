@@ -1,0 +1,215 @@
+<aside
+  [ngClass]="{
+    'w-64': !isCollapsed() && !isMobile(),
+    'w-20': isCollapsed() && !isMobile(),
+    'w-72': isMobile(),
+    'fixed': isMobile(),
+    'sticky': !isMobile()
+  }"
+  class="h-screen bg-white border-r border-slate-200 flex flex-col transition-all duration-300 ease-in-out z-50"
+  [class.top-0]="!isMobile()"
+  role="navigation"
+  aria-label="Menu principal du dashboard">
+  <div
+    class="h-16 flex items-center justify-between px-4 border-b border-slate-200 flex-shrink-0"
+    [ngClass]="{ 'justify-center': isCollapsed() && !isMobile() }">
+    @if (!isCollapsed() || isMobile()) {
+    <a [routerLink]="['/']" class="flex items-center gap-2.5 group" aria-label="Accueil CINOLU">
+      <div
+        class="w-9 h-9 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-200">
+        <span class="material-icons text-white text-[20px]" aria-hidden="true">verified</span>
+      </div>
+      <span
+        class="text-xl font-black tracking-tight text-slate-900 uppercase group-hover:text-primary-600 transition-colors"
+        >CINOLU</span
+      >
+    </a>
+    } @else {
+    <a [routerLink]="['/']" class="flex items-center justify-center group" aria-label="Accueil CINOLU">
+      <div
+        class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-200">
+        <span class="material-icons text-white text-[22px]" aria-hidden="true">verified</span>
+      </div>
+    </a>
+    } @if (isMobile()) {
+    <button
+      (click)="closeSidebar.emit()"
+      class="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+      aria-label="Fermer le menu">
+      <span class="material-icons text-slate-600 text-[20px]">close</span>
+    </button>
+    }
+  </div>
+
+  <nav class="flex-1 overflow-y-auto py-4 px-2 space-y-1" aria-label="Menu principal">
+    @for (section of menuConfig(); track section.title) { @if (section.title && (!isCollapsed() || isMobile())) {
+    <div
+      class="px-3 pt-4 pb-2 text-[10px] uppercase tracking-widest text-slate-400 font-bold flex items-center gap-2"
+      role="presentation">
+      <span class="w-1 h-1 rounded-full bg-slate-300" aria-hidden="true"></span>
+      <span>{{ section.title }}</span>
+    </div>
+    } @for (item of section.items; track item.id) {
+    <div class="relative">
+      @if (item.children && item.children.length > 0) {
+      <button
+        type="button"
+        (click)="onMenuClick(item, $event)"
+        (keydown)="onKeyDown($event, item)"
+        [disabled]="item.disabled"
+        [attr.aria-expanded]="isMenuExpanded(item.id)"
+        [attr.aria-label]="item.label"
+        [title]="item.tooltip || item.label"
+        [ngClass]="{
+          'bg-primary-50 text-primary-700 font-semibold': isActive(item),
+          'text-slate-600 hover:text-slate-900 hover:bg-slate-50': !isActive(item),
+          'opacity-50 cursor-not-allowed': item.disabled,
+          'justify-center': isCollapsed() && !isMobile(),
+          'justify-between': !isCollapsed() || isMobile()
+        }"
+        class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group">
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+          <div
+            [ngClass]="{
+              'bg-primary-100': isActive(item),
+              'bg-slate-100 group-hover:bg-primary-50': !isActive(item)
+            }"
+            class="w-9 h-9 flex items-center justify-center rounded-lg transition-colors flex-shrink-0">
+            <span
+              [ngClass]="{ 'text-primary-600': isActive(item), 'text-slate-600 group-hover:text-primary-600': !isActive(item) }"
+              class="material-icons text-[20px]"
+              aria-hidden="true"
+              >{{ item.icon }}</span
+            >
+          </div>
+
+          @if (!isCollapsed() || isMobile()) {
+          <span class="font-medium text-sm truncate">{{ item.label }}</span>
+          }
+        </div>
+
+        @if (!isCollapsed() || isMobile()) {
+        <span
+          [ngClass]="{ 'rotate-180': isMenuExpanded(item.id) }"
+          class="material-icons text-[18px] transition-transform duration-200 flex-shrink-0"
+          aria-hidden="true"
+          >expand_more</span
+        >
+        } @if (item.badge && (!isCollapsed() || isMobile())) {
+        <span
+          [ngClass]="getBadgeColorClass(item.badge.color)"
+          class="px-2 py-0.5 rounded-full text-[10px] font-bold flex-shrink-0"
+          >{{ item.badge.count }}</span
+        >
+        }
+      </button>
+
+      <div
+        [ngClass]="{
+          'max-h-0 opacity-0': !isMenuExpanded(item.id),
+          'max-h-[500px] opacity-100': isMenuExpanded(item.id)
+        }"
+        class="overflow-hidden transition-all duration-300 ease-in-out"
+        [attr.aria-hidden]="!isMenuExpanded(item.id)">
+        <div class="py-1 space-y-0.5" [ngClass]="{ 'pl-4': !isCollapsed() || isMobile() }">
+          @for (child of item.children; track child.id) {
+          <a
+            [routerLink]="child.path"
+            (click)="onChildClick(child)"
+            [attr.aria-label]="child.label"
+            [title]="child.tooltip || child.label"
+            [ngClass]="{
+              'bg-primary-100 text-primary-700 font-semibold': isChildActive(child),
+              'text-slate-600 hover:text-slate-900 hover:bg-slate-50': !isChildActive(child),
+              'opacity-50 cursor-not-allowed pointer-events-none': child.disabled
+            }"
+            class="flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all duration-200 group">
+            <span
+              [ngClass]="{
+                'text-primary-600': isChildActive(child),
+                'text-slate-400 group-hover:text-slate-600': !isChildActive(child)
+              }"
+              class="material-icons text-[18px] flex-shrink-0"
+              aria-hidden="true"
+              >{{ child.icon }}</span
+            >
+
+            @if (!isCollapsed() || isMobile()) {
+            <span class="text-sm truncate">{{ child.label }}</span>
+            } @if (child.badge && (!isCollapsed() || isMobile())) {
+            <span
+              [ngClass]="getBadgeColorClass(child.badge.color)"
+              class="ml-auto px-2 py-0.5 rounded-full text-[10px] font-bold flex-shrink-0"
+              >{{ child.badge.count }}</span
+            >
+            } @if (child.disabled && (!isCollapsed() || isMobile())) {
+            <span class="ml-auto text-[10px] text-slate-400 font-medium flex-shrink-0">Bientôt</span>
+            }
+          </a>
+          }
+        </div>
+      </div>
+      } @else {
+      <a
+        [routerLink]="item.path"
+        (click)="onMenuClick(item)"
+        [attr.aria-label]="item.label"
+        [title]="item.tooltip || item.label"
+        [ngClass]="{
+          'bg-primary-50 text-primary-700 font-semibold': isActive(item),
+          'text-slate-600 hover:text-slate-900 hover:bg-slate-50': !isActive(item),
+          'opacity-50 cursor-not-allowed pointer-events-none': item.disabled,
+          'justify-center': isCollapsed() && !isMobile()
+        }"
+        class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group">
+        <div
+          [ngClass]="{
+            'bg-primary-100': isActive(item),
+            'bg-slate-100 group-hover:bg-primary-50': !isActive(item)
+          }"
+          class="w-9 h-9 flex items-center justify-center rounded-lg transition-colors flex-shrink-0">
+          <span
+            [ngClass]="{
+              'text-primary-600': isActive(item),
+              'text-slate-600 group-hover:text-primary-600': !isActive(item)
+            }"
+            class="material-icons text-[20px]"
+            aria-hidden="true"
+            >{{ item.icon }}</span
+          >
+        </div>
+
+        @if (!isCollapsed() || isMobile()) {
+        <span class="font-medium text-sm truncate flex-1">{{ item.label }}</span>
+        } @if (item.badge && (!isCollapsed() || isMobile())) {
+        <span
+          [ngClass]="getBadgeColorClass(item.badge.color)"
+          class="px-2 py-0.5 rounded-full text-[10px] font-bold flex-shrink-0"
+          >{{ item.badge.count }}</span
+        >
+        } @if (item.disabled && (!isCollapsed() || isMobile())) {
+        <span class="text-[10px] text-slate-400 font-medium flex-shrink-0">Bientôt</span>
+        }
+      </a>
+      }
+    </div>
+    } }
+  </nav>
+
+  <div class="border-t border-slate-200 p-3 flex-shrink-0">
+    <button
+      (click)="signOut()"
+      type="button"
+      [ngClass]="{
+        'justify-center': isCollapsed() && !isMobile(),
+        'justify-start': !isCollapsed() || isMobile()
+      }"
+      class="w-full flex items-center gap-2.5 px-3 py-2.5 bg-red-50 hover:bg-red-600 text-red-600 hover:text-white rounded-lg transition-all duration-200 border border-red-200 hover:border-red-600 group"
+      aria-label="Se déconnecter">
+      <span class="material-icons text-[20px]" aria-hidden="true">logout</span>
+      @if (!isCollapsed() || isMobile()) {
+      <span class="font-semibold text-sm">Déconnexion</span>
+      }
+    </button>
+  </div>
+</aside>
