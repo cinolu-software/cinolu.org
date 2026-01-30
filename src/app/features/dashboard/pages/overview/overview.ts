@@ -9,9 +9,18 @@ import { ChartConfiguration } from 'chart.js';
 import { HighlightsStore } from '@features/landing/store/highlights.store';
 import { environment } from '@environments/environment';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
+import { ReferralBadgeCardComponent } from '../../components/referral-badge-card/referral-badge-card';
+import { ReferralActivityTimelineComponent } from '../../components/referral-activity-timeline/referral-activity-timeline';
+import { ToastrService } from '@core/services/toast/toastr.service';
 @Component({
   selector: 'app-dashboard-overview',
-  imports: [RouterModule, ApiImgPipe, BaseChartDirective],
+  imports: [
+    RouterModule,
+    ApiImgPipe,
+    BaseChartDirective,
+    ReferralBadgeCardComponent,
+    ReferralActivityTimelineComponent
+  ],
   providers: [HighlightsStore],
   templateUrl: './overview.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -22,6 +31,7 @@ export class DashboardOverview implements OnInit {
   referralsStore = inject(ReferralsStore);
   productsStore = inject(ProductsStore);
   highlightsStore = inject(HighlightsStore);
+  toast = inject(ToastrService);
   onestopUrl = environment.onestopUrl;
 
   // Icônes Material Icons (noms de strings)
@@ -60,6 +70,13 @@ export class DashboardOverview implements OnInit {
     this.productsStore.loadAllProducts();
     this.highlightsStore.loadHighlights();
     this.updateProfileCompletion();
+
+    // Charger les données de parrainage
+    const user = this.authStore.user();
+    if (user?.referral_code) {
+      this.referralsStore.setReferralCode(user.referral_code);
+    }
+    this.referralsStore.loadReferredUsers({ page: 1 });
   }
 
   get productsCount() {
@@ -303,5 +320,29 @@ export class DashboardOverview implements OnInit {
   updateProfileCompletion() {
     const completion = this.calculateProfileCompletion();
     this.doughnutChartData.datasets[0].data = [completion, 100 - completion];
+  }
+
+  /**
+   * Gère le partage du lien de parrainage
+   */
+  onShareReferral(link: string) {
+    // Ouvrir un menu de partage ou copier le lien
+    this.onCopyReferral(link);
+  }
+
+  /**
+   * Copie le lien de parrainage dans le presse-papier
+   */
+  onCopyReferral(link: string) {
+    if (link) {
+      navigator.clipboard
+        .writeText(link)
+        .then(() => {
+          this.toast.showSuccess('Lien de parrainage copié !');
+        })
+        .catch(() => {
+          this.toast.showError('Erreur lors de la copie du lien');
+        });
+    }
   }
 }
