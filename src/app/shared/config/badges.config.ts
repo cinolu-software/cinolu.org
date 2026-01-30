@@ -26,7 +26,7 @@ export const BADGE_LEVELS: BadgeLevel[] = [
   {
     level: 1,
     name: 'Ambassadeur',
-    threshold: 1,
+    threshold: 0,
     color: 'text-blue-600',
     progressColor: 'bg-blue-600',
     icon: 'award',
