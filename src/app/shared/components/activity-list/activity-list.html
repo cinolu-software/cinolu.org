@@ -8,7 +8,6 @@
     @for (item of items(); track item.id) {
     <div class="p-4 hover:bg-gray-50 transition-colors duration-150">
       <div class="flex items-start gap-4">
-        <!-- Icon/Avatar -->
         <div
           class="flex items-center justify-center w-10 h-10 rounded-full"
           [ngClass]="iconBgClassFn()(item.iconColor || 'primary')">
@@ -18,7 +17,6 @@
             class="w-5 h-5" />
         </div>
 
-        <!-- Content -->
         <div class="flex-1 min-w-0">
           <div class="flex items-center justify-between gap-2 mb-1">
             <h4 class="text-sm font-semibold text-gray-900 truncate">{{ item.title }}</h4>
@@ -37,10 +35,7 @@
             <span>{{ item.meta.right }}</span>
             }
           </div>
-          }
-
-          <!-- Actions -->
-          @if (actions() && actions()!.length > 0) {
+          } @if (actions() && actions()!.length > 0) {
           <div class="flex gap-2 mt-3">
             @for (action of actions(); track action.label) {
             <button
@@ -59,7 +54,6 @@
     }
   </div>
   } @else {
-  <!-- Empty State -->
   <div class="flex flex-col items-center justify-center py-12 px-6">
     <div class="flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
       <i-lucide [img]="emptyIcon()" class="w-8 h-8 text-gray-400" />
