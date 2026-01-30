@@ -65,7 +65,6 @@ export interface IUser extends IBase {
   articles: IArticle[];
   comments: IComment[];
   mentor_profile?: IMentorProfile;
-  interests?: IOpportunityTag[];
 }
 
 export interface IProject extends IBase {
@@ -387,25 +386,7 @@ export interface IMentee extends IBase {
   progress_notes?: string;
 }
 
-//interface Opportunity
 
-export interface IOpportunity extends IBase {
-  title: string;
-  slug: string;
-  description: string;
-  link: string | null;
-  started_at: Date;
-  ended_at: Date;
-  tags: IOpportunityTag[];
-  creator: IUser;
-  attachments: IOpportunityAttachment[];
-}
 
-export interface IOpportunityTag extends IBase {
-  name: string;
-}
 
-export interface IOpportunityAttachment extends IBase {
-  filename: string;
-  opportunity: IOpportunity;
-}
+

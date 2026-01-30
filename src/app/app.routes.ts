@@ -26,12 +26,7 @@ export const routes: Route[] = [
     data: { layout: 'fixed-layout' },
     loadChildren: () => import('./features/events/events.routes').then((m) => m.eventsRoutes)
   },
-  {
-    path: 'opportunities',
-    component: Layout,
-    data: { layout: 'fixed-layout' },
-    loadChildren: () => import('./features/opportunities/opportunities.routes').then((m) => m.opportunitiesRoutes)
-  },
+
   {
     path: 'about-us',
     component: Layout,
