@@ -1,0 +1,132 @@
+<article
+  class="relative flex flex-col bg-white border border-gray-200/60 hover:border-primary-400 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10">
+  <!-- Badge niveau max -->
+  @if (badgeInfo().isMaxLevel) {
+  <div class="absolute top-4 right-4 z-10">
+    <span
+      class="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500 text-white rounded-full text-xs font-semibold animate-pulse"
+      role="status"
+      aria-label="Niveau maximum atteint">
+      <lucide-icon [img]="icons.trophy" class="w-3 h-3" />
+      Niveau Max
+    </span>
+  </div>
+  }
+
+  <div class="flex-1 flex flex-col p-6 sm:p-8 space-y-6">
+    <!-- En-tête avec badge -->
+    <div class="flex items-start justify-between gap-4">
+      <div class="flex-1">
+        <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Système de Parrainage</h2>
+        <p class="text-sm text-gray-600">Partage ton lien et débloque des badges exclusifs</p>
+      </div>
+
+      <!-- Icône du badge actuel -->
+      <div
+        [ngClass]="badgeInfo().currentBadge.color"
+        class="relative flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 shadow-md border border-gray-200/50">
+        <lucide-icon [img]="getBadgeIcon()" class="w-8 h-8 sm:w-10 sm:h-10" />
+
+        <!-- Effet de glow pour niveau max -->
+        @if (badgeInfo().isMaxLevel) {
+        <div class="absolute inset-0 rounded-lg bg-amber-400/20 animate-pulse"></div>
+        }
+      </div>
+    </div>
+
+    <!-- Badge actuel -->
+    <div>
+      <div class="flex items-center gap-3 mb-2">
+        <span [ngClass]="badgeInfo().currentBadge.color" class="text-2xl sm:text-3xl font-bold">
+          {{ badgeInfo().currentBadge.name }}
+        </span>
+      </div>
+
+      <p class="text-gray-600 text-sm">{{ badgeInfo().currentBadge.description }}</p>
+    </div>
+
+    <!-- Impact -->
+    <div class="p-4 bg-gradient-to-br from-primary-50 to-primary-50/30 rounded-lg border border-primary-200/50">
+      <p class="text-base sm:text-lg text-gray-900">
+        Tu as permis à
+        <span class="font-bold text-primary-600">
+          {{ badgeInfo().currentCount }} personne{{ badgeInfo().currentCount > 1 ? 's' : '' }}
+        </span>
+        de rejoindre Cinolu
+      </p>
+    </div>
+
+    <!-- Barre de progression -->
+    @if (!badgeInfo().isMaxLevel) {
+    <app-badge-progress-bar
+      [currentBadge]="badgeInfo().currentBadge"
+      [nextBadge]="badgeInfo().nextBadge"
+      [currentCount]="badgeInfo().currentCount"
+      [progressPercentage]="badgeInfo().progressPercentage"
+      [isMaxLevel]="badgeInfo().isMaxLevel" />
+    }
+
+    <!-- Message motivationnel -->
+    <div class="p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border border-blue-200/50">
+      <p class="text-sm sm:text-base text-gray-900 font-medium">{{ badgeInfo().motivationMessage }}</p>
+
+      @if (!badgeInfo().isMaxLevel && badgeInfo().nextBadge) {
+      <p class="text-xs sm:text-sm text-gray-600 mt-2 flex items-center gap-2">
+        <lucide-icon [img]="icons.target" class="w-3.5 h-3.5 text-gray-500" />
+        <span>
+          Prochain badge :
+          <span [ngClass]="badgeInfo().nextBadge!.color" class="font-semibold">
+            {{ badgeInfo().nextBadge!.name }}
+          </span>
+        </span>
+      </p>
+      }
+    </div>
+
+    <!-- Lien de parrainage -->
+    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+      <p class="text-xs text-gray-500 mb-2 font-semibold uppercase tracking-wide">Ton lien de parrainage</p>
+      <div class="flex items-center gap-2">
+        <p class="text-sm font-mono text-gray-700 truncate flex-1">{{ referralLink() }}</p>
+        <button
+          (click)="onCopyClick()"
+          type="button"
+          class="flex-shrink-0 p-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 hover:border-gray-300 transition-all group"
+          title="Copier le lien">
+          <lucide-icon
+            [img]="icons.copy"
+            class="w-4 h-4 text-gray-600 group-hover:text-primary-600 transition-colors" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <button
+        (click)="onShareClick()"
+        type="button"
+        class="inline-flex items-center justify-center gap-2 px-4 py-3 bg-primary-600 text-white rounded-lg text-sm font-semibold hover:bg-primary-700 transition-all hover:shadow-lg hover:shadow-primary-500/30 group">
+        <lucide-icon [img]="icons.share" class="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+        <span>Partager mon lien</span>
+      </button>
+
+      <button
+        (click)="onCopyClick()"
+        type="button"
+        class="inline-flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 text-gray-700 rounded-lg text-sm font-semibold hover:bg-gray-200 border border-gray-200 hover:border-gray-300 transition-all group">
+        <lucide-icon [img]="icons.copy" class="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+        <span>Copier le lien</span>
+      </button>
+    </div>
+  </div>
+</article>
+
+<!-- Modal de partage -->
+@if (showShareModal()) {
+<app-share-modal
+  [link]="referralLink()"
+  [shareMessage]="badgeInfo().shareMessage"
+  [referralCount]="badgeInfo().currentCount"
+  (closeModal)="showShareModal.set(false)"
+  (copied)="onCopySuccess()" />
+}
