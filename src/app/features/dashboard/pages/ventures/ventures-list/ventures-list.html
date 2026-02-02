@@ -128,17 +128,13 @@
             </div>
           </div>
 
-          <!-- Card Content -->
           <div class="flex-1 p-6 flex flex-col">
-            <!-- Title -->
             <h3 class="dashboard-heading-5 mb-3 group-hover:text-brand-600 transition-colors">{{ venture.name }}</h3>
 
-            <!-- Description -->
             @if (venture.description) {
             <p class="dashboard-text-small mb-4 line-clamp-1 leading-relaxed">{{ venture.description }}</p>
             }
 
-            <!-- Tags -->
             <div class="flex flex-wrap gap-2 mb-4">
               @if (venture.sector) {
               <span class="dashboard-badge-primary">
@@ -188,13 +184,8 @@
       </div>
       }
     </div>
-    }
-
-    <!-- Tab Content: Products -->
-    @if (activeTab() === 'products') {
+    } @if (activeTab() === 'products') {
     <div class="dashboard-fade-in-up">
-      <!-- Actions Header -->
-
       @if (!productsStore.isEmpty()) {
       <div class="flex justify-end mb-6">
         <a routerLink="/dashboard/products/create" class="dashboard-btn-primary inline-flex">
@@ -202,10 +193,7 @@
           <span>Ajouter un produit</span>
         </a>
       </div>
-      }
-
-      <!-- Loading State -->
-      @if (productsStore.isLoading()) {
+      } @if (productsStore.isLoading()) {
       <div class="flex flex-col items-center justify-center py-24">
         <div class="relative">
           <div class="w-16 h-16 border-4 border-indigo-200 border-t-primary-500 rounded-full animate-spin"></div>
@@ -231,7 +219,6 @@
         </a>
       </div>
 
-      <!-- Products Grid -->
       } @else {
       <div class="dashboard-grid-3">
         @for (product of productsStore.products(); track product.id) {
