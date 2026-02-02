@@ -153,8 +153,7 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
             label: 'Sécurité',
             icon: 'security',
             path: '/dashboard/profile/security',
-            tooltip: 'Mot de passe et sécurité',
-            disabled: true // À implémenter
+            tooltip: 'Mot de passe et sécurité'
           },
           {
             id: 'profile-notifications',
