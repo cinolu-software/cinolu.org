@@ -1,19 +1,18 @@
 <section class="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-  <ng-container *ngIf="store.isLoading()">
-    <app-venture-card-skeleton />
-  </ng-container>
-  @if (store.venture(); as venture) {
+  @if (store.isLoading()) {
+  <app-venture-card-skeleton />
+  } @if (store.venture(); as venture) {
 
-  <div class="relative w-full h-[60vh] lg:h-[70vh] overflow-visible">
+  <div class="relative h-[60vh] lg:h-[70vh] overflow-visible">
     <img [ngSrc]="venture | apiIMG:'ventureCover'" fill alt="cover" class="object-cover w-full h-full" priority />
     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
 
-    <div class="absolute bottom-24 left-0 right-0 text-center px-8 z-10">
+    <div class="absolute bottom-24 left-0 right-0 text-center px-6 lg:px-8 z-10">
       <div class="max-w-4xl mx-auto space-y-4">
         <h1 class="text-4xl lg:text-5xl font-black text-white drop-shadow-2xl">{{ venture.name }}</h1>
-        <div class="flex items-center justify-center gap-3 text-white/90 text-sm lg:text-base">
+        <div class="flex items-center justify-center gap-3 text-white/90 text-sm lg:text-base flex-wrap">
           <span class="px-4 py-1.5 bg-white/20 backdrop-blur-md rounded-full font-medium">{{ venture.sector }}</span>
-          <span>•</span>
+          <span class="hidden sm:inline">•</span>
           <span class="px-4 py-1.5 bg-white/20 backdrop-blur-md rounded-full font-medium">{{ venture.location }}</span>
         </div>
       </div>
@@ -21,34 +20,34 @@
   </div>
 
   @if (venture.logo) {
-  <div class="relative -mt-16 mb-16 flex justify-center">
+  <div class="relative -mt-16 mb-12 flex justify-center">
     <div
-      class="w-32 h-32 rounded-full border border-white bg-white overflow-hidden shadow-lg group hover:scale-105 transition-transform duration-300">
-      <img [ngSrc]="venture | apiIMG:'venture'" fill alt="logo" class="object-cover w-full h-full" />
+      class="relative w-32 h-32 rounded-full border-4 border-white bg-white overflow-hidden shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+      <img [ngSrc]="venture | apiIMG:'venture'" fill alt="logo" class="object-cover" priority />
     </div>
   </div>
   }
 
-  <div class="max-w-screen-xl mx-auto px-6 lg:px-16 pb-20">
-    <div class="flex justify-center pb-12">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
+    <div class="flex justify-center mb-12">
       <div
-        class="relative inline-flex items-center gap-3 px-8 py-4 bg-white rounded-lg shadow-sm border-2 border-primary-200 hover:shadow-md transition-shadow duration-300">
+        class="relative inline-flex items-center gap-3 px-6 py-3 bg-white rounded-xl shadow-md border-2 border-primary-200 hover:shadow-lg hover:border-primary-300 transition-all duration-300">
         <div
-          class="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600">
-          <i-lucide [name]="icons.trendingUp" size="20" class="text-white" />
+          class="flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 shadow-sm">
+          <i-lucide [name]="icons.trendingUp" size="24" class="text-white" />
         </div>
         <div class="flex flex-col">
           <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">
             {{ 'entrepreneurs.development_stage' | translate }}
           </span>
-          <span class="text-base font-bold text-primary-600">{{ venture.stage }}</span>
+          <span class="text-lg font-bold text-primary-600">{{ venture.stage }}</span>
         </div>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
       <div class="lg:col-span-7 space-y-6">
-        <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 p-2 sticky top-4">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 p-3 sticky top-4">
           @if (venture.gallery && venture.gallery.length) {
           <p-galleria
             [value]="venture.gallery"
@@ -58,13 +57,13 @@
             [showIndicators]="true"
             [containerStyle]="{ 'max-width': '100%' }">
             <ng-template pTemplate="item" let-img>
-              <div class="relative w-full h-[400px] lg:h-[500px] rounded-lg overflow-hidden bg-gray-900">
+              <div class="relative w-full h-[400px] lg:h-[500px] rounded-lg overflow-hidden bg-gray-100">
                 <img
                   [src]="img | apiIMG:'gallery'"
                   [alt]="img.image"
                   loading="lazy"
                   decoding="async"
-                  class="object-cover w-full h-full transition-transform duration-500 hover:scale-105" />
+                  class="object-cover w-full h-full transition-transform duration-300 hover:scale-105" />
               </div>
             </ng-template>
 
@@ -75,18 +74,18 @@
                   [alt]="img.image"
                   loading="lazy"
                   decoding="async"
-                  class="object-cover h-20 w-20 rounded-lg border-2 border-transparent hover:border-primary-400 transition-all" />
+                  class="object-cover h-20 w-20 rounded-md border-2 border-transparent hover:border-primary-500 transition-all duration-200" />
               </div>
             </ng-template>
           </p-galleria>
           } @else {
-          <div class="relative w-full h-[400px] lg:h-[500px] rounded-lg overflow-hidden">
+          <div class="relative w-full h-[400px] lg:h-[500px] rounded-lg overflow-hidden bg-gray-100">
             <img
               [src]="venture | apiIMG:'ventureCover'"
               [alt]="venture.name"
               loading="lazy"
               decoding="async"
-              class="object-cover w-full h-full" />
+              class="object-cover w-full h-full transition-transform duration-300 hover:scale-105" />
           </div>
           }
         </div>
@@ -94,12 +93,12 @@
 
       <div class="lg:col-span-5 space-y-6">
         @if (venture.description) {
-        <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+        <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
           <div class="bg-gradient-to-r from-primary-500 to-primary-600 px-6 py-4">
             <h2 class="text-xl font-bold text-white">{{ 'entrepreneurs.venture_description' | translate }}</h2>
           </div>
           <div class="p-6">
-            <p class="text-gray-700 leading-relaxed text-justify">{{ venture.description }}</p>
+            <p class="text-gray-700 leading-relaxed">{{ venture.description }}</p>
           </div>
         </div>
         }
@@ -107,64 +106,75 @@
         <div class="space-y-4">
           @if (venture.problem_solved) {
           <div
-            class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-300">
+            class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300">
             <div
               class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-orange-50 to-orange-100 border-b border-orange-200">
-              <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center flex-shrink-0">
-                <i-lucide [name]="icons.building" size="16" class="text-white" />
+              <div class="w-10 h-10 rounded-lg bg-orange-500 flex items-center justify-center flex-shrink-0">
+                <i-lucide [name]="icons.building" size="20" class="text-white" />
               </div>
               <h3 class="text-base font-bold text-orange-900">{{ 'entrepreneurs.problem_solved' | translate }}</h3>
             </div>
             <div class="p-6">
-              <p class="text-gray-700 leading-relaxed text-justify">{{ venture.problem_solved }}</p>
+              <p class="text-gray-700 leading-relaxed">{{ venture.problem_solved }}</p>
             </div>
           </div>
           } @if (venture.target_market) {
           <div
-            class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-300">
+            class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300">
             <div
               class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-green-50 to-green-100 border-b border-green-200">
-              <div class="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0">
-                <i-lucide [name]="icons.building" size="16" class="text-white" />
+              <div class="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0">
+                <i-lucide [name]="icons.building" size="20" class="text-white" />
               </div>
               <h3 class="text-base font-bold text-green-900">{{ 'entrepreneurs.target_market' | translate }}</h3>
             </div>
             <div class="p-6">
-              <p class="text-gray-700 leading-relaxed text-justify">{{ venture.target_market }}</p>
+              <p class="text-gray-700 leading-relaxed">{{ venture.target_market }}</p>
             </div>
           </div>
           }
         </div>
 
-        <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
-          <h3 class="text-lg font-bold text-gray-800 mb-4">Contact</h3>
-          <div class="grid grid-cols-2 gap-3">
+        <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+          <h3 class="text-lg font-bold text-gray-800 mb-6">Contact</h3>
+          <div class="grid grid-cols-2 gap-4">
             @if (venture.website) {
             <a
               [href]="venture.website"
               target="_blank"
-              class="group flex flex-col items-center justify-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200 hover:shadow-md hover:scale-105 transition-all duration-200">
-              <i-lucide [name]="icons.globe" size="24" class="text-blue-600 mb-2" />
+              rel="noopener noreferrer"
+              class="group flex flex-col items-center justify-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border-2 border-blue-200 hover:border-blue-300 hover:shadow-md hover:scale-105 transition-all duration-300">
+              <i-lucide
+                [name]="icons.globe"
+                size="24"
+                class="text-blue-600 mb-2 group-hover:scale-110 transition-transform" />
               <span class="text-xs font-semibold text-blue-700">{{ 'entrepreneurs.website' | translate }}</span>
             </a>
             } @if (venture.linkedin_url) {
             <a
               [href]="venture.linkedin_url"
               target="_blank"
-              class="group flex flex-col items-center justify-center p-4 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg border border-cyan-200 hover:shadow-md hover:scale-105 transition-all duration-200">
-              <i-lucide [name]="icons.linkedin" size="24" class="text-cyan-600 mb-2" />
+              rel="noopener noreferrer"
+              class="group flex flex-col items-center justify-center p-4 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg border-2 border-cyan-200 hover:border-cyan-300 hover:shadow-md hover:scale-105 transition-all duration-300">
+              <i-lucide
+                [name]="icons.linkedin"
+                size="24"
+                class="text-cyan-600 mb-2 group-hover:scale-110 transition-transform" />
               <span class="text-xs font-semibold text-cyan-700">LinkedIn</span>
             </a>
             } @if (venture.email) {
             <a
               href="mailto:{{ venture.email }}"
-              class="group flex flex-col items-center justify-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg border border-purple-200 hover:shadow-md hover:scale-105 transition-all duration-200">
-              <i-lucide [name]="icons.email" size="24" class="text-purple-600 mb-2" />
+              class="group flex flex-col items-center justify-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg border-2 border-purple-200 hover:border-purple-300 hover:shadow-md hover:scale-105 transition-all duration-300">
+              <i-lucide
+                [name]="icons.email"
+                size="24"
+                class="text-purple-600 mb-2 group-hover:scale-110 transition-transform" />
               <span class="text-xs font-semibold text-purple-700 truncate max-w-full">{{ venture.email }}</span>
             </a>
             } @if (venture.phone_number) {
             <div
-              class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg border border-green-200">
+              class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg border-2 border-green-200">
               <i-lucide [name]="icons.phone" size="24" class="text-green-600 mb-2" />
               <span class="text-xs font-semibold text-green-700">{{ venture.phone_number }}</span>
             </div>
@@ -174,12 +184,12 @@
       </div>
     </div>
 
-    <div class="mt-20">
+    <div class="mt-16">
       <div class="text-center mb-12">
-        <div class="inline-flex items-center gap-3 mb-3">
-          <div class="h-1 w-12 bg-gradient-to-r from-transparent to-primary-500 rounded-full"></div>
-          <h2 class="text-3xl font-black text-gray-800">{{ 'entrepreneurs.products' | translate }}</h2>
-          <div class="h-1 w-12 bg-gradient-to-l from-transparent to-primary-500 rounded-full"></div>
+        <div class="inline-flex items-center gap-4 mb-4">
+          <div class="h-1 w-16 bg-gradient-to-r from-transparent to-primary-500 rounded-full"></div>
+          <h2 class="text-3xl lg:text-4xl font-black text-gray-800">{{ 'entrepreneurs.products' | translate }}</h2>
+          <div class="h-1 w-16 bg-gradient-to-l from-transparent to-primary-500 rounded-full"></div>
         </div>
       </div>
 
@@ -187,7 +197,7 @@
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @for (product of products(); track product.id) {
         <div
-          class="group bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 hover:border-primary-200">
+          class="group bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-primary-300 hover:-translate-y-1">
           <div class="relative w-full h-56 overflow-hidden bg-gray-100">
             @if (product?.gallery?.[0]) {
             <img
@@ -195,20 +205,17 @@
               [alt]="product.name"
               loading="lazy"
               decoding="async"
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
             } @else {
-            <img
-              src="/images/no-image.jpg"
-              [alt]="'entrepreneurs.no_image' | translate"
-              loading="lazy"
-              decoding="async"
-              class="w-full h-full object-cover opacity-50 grayscale" />
+            <div class="w-full h-full flex items-center justify-center bg-gray-200">
+              <i-lucide [name]="icons.building" size="48" class="text-gray-400" />
+            </div>
             }
             <div
               class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
-          <div class="p-6 space-y-3">
-            <h3 class="text-lg font-bold text-gray-800 group-hover:text-primary-600 transition-colors truncate">
+          <div class="p-6 space-y-4">
+            <h3 class="text-lg font-bold text-gray-800 group-hover:text-primary-600 transition-colors line-clamp-1">
               {{ product.name }}
             </h3>
             <p class="text-sm text-gray-600 line-clamp-2 min-h-[40px]">{{ product.description }}</p>
@@ -218,16 +225,16 @@
               size="small"
               [outlined]="true"
               severity="primary"
-              class="w-full" />
+              styleClass="w-full" />
           </div>
         </div>
         }
       </div>
       } @else {
       <div
-        class="flex flex-col items-center justify-center py-16 px-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border-2 border-dashed border-gray-300">
-        <div class="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center mb-4">
-          <i-lucide [name]="icons.building" size="40" class="text-gray-400" />
+        class="flex flex-col items-center justify-center py-16 px-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border-2 border-dashed border-gray-300">
+        <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm">
+          <i-lucide [name]="icons.building" size="48" class="text-gray-400" />
         </div>
         <p class="text-gray-600 text-lg font-semibold">{{ 'entrepreneurs.no_products' | translate }}</p>
       </div>
@@ -237,8 +244,8 @@
 
   } @else {
   <div class="flex flex-col items-center justify-center min-h-[60vh] py-20 px-6">
-    <div class="w-32 h-32 bg-red-100 rounded-full flex items-center justify-center mb-6">
-      <svg class="w-16 h-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="w-32 h-32 bg-red-100 rounded-full flex items-center justify-center mb-6 shadow-md">
+      <svg class="w-20 h-20 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
