@@ -14,7 +14,7 @@
     </div>
 
     <div
-      class="bg-white rounded-xl p-2 shadow-sm border border-slate-200/60 inline-flex gap-2 mb-8 dashboard-fade-in-up">
+      class="bg-white rounded-lg p-2 shadow-sm border border-slate-200/60 inline-flex gap-2 mb-8 dashboard-fade-in-up">
       <button
         (click)="switchTab('ventures')"
         [class.ventures-tab-active]="activeTab() === 'ventures'"
@@ -206,7 +206,7 @@
       } @else if (productsStore.isEmpty()) {
       <div class="flex flex-col items-center justify-center py-20 px-4">
         <div
-          class="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center shadow-2xl shadow-indigo-500/30 mb-6">
+          class="w-24 h-24 rounded-lg bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center shadow-2xl shadow-indigo-500/30 mb-6">
           <span class="material-icons text-white text-5xl">shopping_bag</span>
         </div>
         <h2 class="dashboard-heading-3 mb-3">Aucun produit</h2>

@@ -9,18 +9,10 @@ import { ChartConfiguration } from 'chart.js';
 import { HighlightsStore } from '@features/landing/store/highlights.store';
 import { environment } from '@environments/environment';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-import { ReferralBadgeCardComponent } from '../../components/referral-badge-card/referral-badge-card';
-import { ReferralActivityTimelineComponent } from '../../components/referral-activity-timeline/referral-activity-timeline';
 import { ToastrService } from '@core/services/toast/toastr.service';
 @Component({
   selector: 'app-dashboard-overview',
-  imports: [
-    RouterModule,
-    ApiImgPipe,
-    BaseChartDirective,
-    ReferralBadgeCardComponent,
-    ReferralActivityTimelineComponent
-  ],
+  imports: [RouterModule, ApiImgPipe, BaseChartDirective],
   providers: [HighlightsStore],
   templateUrl: './overview.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -71,7 +63,6 @@ export class DashboardOverview implements OnInit {
     this.highlightsStore.loadHighlights();
     this.updateProfileCompletion();
 
-    // Charger les données de parrainage
     const user = this.authStore.user();
     if (user?.referral_code) {
       this.referralsStore.setReferralCode(user.referral_code);
@@ -83,13 +74,11 @@ export class DashboardOverview implements OnInit {
     return this.productsStore.products()?.length || 0;
   }
 
-  // Computed pour obtenir le premier highlight mis en avant
   featuredHighlight = computed(() => {
     const highlights = this.highlightsStore.highlights();
     return highlights.find((item) => 'is_highlighted' in item && item.is_highlighted) || highlights[0] || null;
   });
 
-  // Computed signal pour le greeting
   greeting = computed(() => {
     const hour = new Date().getHours();
     if (hour < 12) return 'Bonjour';
@@ -97,21 +86,18 @@ export class DashboardOverview implements OnInit {
     return 'Bonsoir';
   });
 
-  // Computed signal pour vérifier si l'utilisateur est admin
   isAdminUser = computed(() => {
     const user = this.authStore.user();
     const roles = user?.roles as unknown as string[];
     return roles.some((role) => role === 'admin' || role === 'staff');
   });
 
-  // Computed signal pour le titre du highlight
   highlightTitle = computed(() => {
     const highlight = this.featuredHighlight();
     if (!highlight) return "Mise à l'échelle du réseau PNUD";
     return 'title' in highlight ? highlight.title : highlight.name;
   });
 
-  // Computed signal pour la description du highlight
   highlightDescription = computed(() => {
     const highlight = this.featuredHighlight();
     if (!highlight) return 'Appel à solutions locales innovantes.';
@@ -120,7 +106,6 @@ export class DashboardOverview implements OnInit {
     return 'Découvrez cette nouveauté.';
   });
 
-  // Computed signal pour le badge du highlight
   highlightBadge = computed(() => {
     const highlight = this.featuredHighlight();
     if (!highlight) return 'ACCELERATE 2025';
@@ -140,7 +125,6 @@ export class DashboardOverview implements OnInit {
     }
   });
 
-  // Computed signal pour le lien du highlight
   highlightLink = computed(() => {
     const highlight = this.featuredHighlight();
     if (!highlight) return '#';
@@ -160,131 +144,32 @@ export class DashboardOverview implements OnInit {
     }
   });
 
-  // Computed signal pour l'image du highlight
   highlightImage = computed(() => {
     const highlight = this.featuredHighlight();
     if (!highlight) return 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1000';
 
-    const apiUrl = environment.apiUrl;
+    // Utilisation du pipe ApiImgPipe pour générer l'URL
+    const apiImgPipe = new ApiImgPipe();
 
-    if (highlight.sourceKey === 'programs' && 'logo' in highlight && highlight.logo) {
-      return `${apiUrl}uploads/programs/${highlight.logo}`;
+    switch (highlight.sourceKey) {
+      case 'programs':
+        return apiImgPipe.transform(highlight, 'program');
+      case 'subprograms':
+        return apiImgPipe.transform(highlight, 'subprogram');
+      case 'events':
+        return apiImgPipe.transform(highlight, 'event');
+      case 'projects':
+        return apiImgPipe.transform(highlight, 'project');
+      case 'articles':
+        return apiImgPipe.transform(highlight, 'article');
+      default:
+        return 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1000';
     }
-    if (highlight.sourceKey === 'subprograms' && 'logo' in highlight && highlight.logo) {
-      return `${apiUrl}uploads/subprograms/${highlight.logo}`;
-    }
-    if (highlight.sourceKey === 'events' && 'cover' in highlight && highlight.cover) {
-      return `${apiUrl}uploads/events/${highlight.cover}`;
-    }
-    if (highlight.sourceKey === 'projects' && 'cover' in highlight && highlight.cover) {
-      return `${apiUrl}uploads/projects/${highlight.cover}`;
-    }
-    if (highlight.sourceKey === 'articles' && 'image' in highlight && highlight.image) {
-      return `${apiUrl}uploads/articles/${highlight.image}`;
-    }
-
-    return 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1000';
   });
 
   // Computed signal pour la complétion du profil
   profileCompletion = computed(() => this.calculateProfileCompletion());
 
-  /** @deprecated Use highlightTitle computed signal instead */
-  getHighlightTitle(): string {
-    const highlight = this.featuredHighlight();
-    if (!highlight) return "Mise à l'échelle du réseau PNUD";
-    return 'title' in highlight ? highlight.title : highlight.name;
-  }
-
-  /** @deprecated Use highlightDescription computed signal instead */
-  getHighlightDescription(): string {
-    const highlight = this.featuredHighlight();
-    if (!highlight) return 'Appel à solutions locales innovantes.';
-    if ('summary' in highlight && highlight.summary) return this.truncateText(highlight.summary, 100);
-    if ('description' in highlight && highlight.description) return this.truncateText(highlight.description, 100);
-    return 'Découvrez cette nouveauté.';
-  }
-
-  /** @deprecated Use highlightBadge computed signal instead */
-  getHighlightBadge(): string {
-    const highlight = this.featuredHighlight();
-    if (!highlight) return 'ACCELERATE 2025';
-    switch (highlight.sourceKey) {
-      case 'programs':
-        return 'PROGRAMME';
-      case 'subprograms':
-        return 'SOUS-PROGRAMME';
-      case 'events':
-        return 'ÉVÉNEMENT';
-      case 'projects':
-        return 'PROJET';
-      case 'articles':
-        return 'ARTICLE';
-      default:
-        return 'À LA UNE';
-    }
-  }
-
-  /** @deprecated Use highlightLink computed signal instead */
-  getHighlightLink(): string {
-    const highlight = this.featuredHighlight();
-    if (!highlight) return '#';
-    switch (highlight.sourceKey) {
-      case 'programs':
-        return `/our-programs/${highlight.slug}`;
-      case 'subprograms':
-        return `/our-programs/subprograms/${highlight.slug}`;
-      case 'events':
-        return `/events/${highlight.slug}`;
-      case 'projects':
-        return `/programs/${highlight.slug}`;
-      case 'articles':
-        return `/blog-ressources/${highlight.slug}`;
-      default:
-        return '#';
-    }
-  }
-
-  /** @deprecated Use highlightImage computed signal instead */
-  getHighlightImage(): string {
-    const highlight = this.featuredHighlight();
-    if (!highlight) return 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1000';
-
-    const apiUrl = environment.apiUrl;
-
-    if (highlight.sourceKey === 'programs' && 'logo' in highlight && highlight.logo) {
-      return `${apiUrl}uploads/programs/${highlight.logo}`;
-    }
-    if (highlight.sourceKey === 'subprograms' && 'logo' in highlight && highlight.logo) {
-      return `${apiUrl}uploads/subprograms/${highlight.logo}`;
-    }
-    if (highlight.sourceKey === 'events' && 'cover' in highlight && highlight.cover) {
-      return `${apiUrl}uploads/events/${highlight.cover}`;
-    }
-    if (highlight.sourceKey === 'projects' && 'cover' in highlight && highlight.cover) {
-      return `${apiUrl}uploads/projects/${highlight.cover}`;
-    }
-    if (highlight.sourceKey === 'articles' && 'image' in highlight && highlight.image) {
-      return `${apiUrl}uploads/articles/${highlight.image}`;
-    }
-
-    return 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1000';
-  }
-
-  /** @deprecated Use isAdminUser computed signal instead */
-  isAdmin(): boolean {
-    const user = this.authStore.user();
-    const roles = user?.roles as unknown as string[];
-    return roles.some((role) => role === 'admin' || role === 'staff');
-  }
-
-  /** @deprecated Use greeting computed signal instead */
-  getGreeting(): string {
-    const hour = new Date().getHours();
-    if (hour < 12) return 'Bonjour';
-    if (hour < 18) return 'Bon après-midi';
-    return 'Bonsoir';
-  }
 
   private truncateText(text: string, maxLength: number): string {
     if (!text) return '';
