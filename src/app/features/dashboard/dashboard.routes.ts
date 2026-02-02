@@ -59,6 +59,11 @@ export const dashboardRoutes: Routes = [
         loadComponent: () => import('./pages/profile/profile').then((c) => c.ProfilePage)
       },
       {
+        path: 'profile/security',
+        title: 'Sécurité',
+        loadComponent: () => import('./pages/profile-security/profile-security').then((c) => c.ProfileSecurity)
+      },
+      {
         path: 'referrals',
         title: 'Parrainages',
         loadComponent: () => import('./pages/referrals/referrals').then((c) => c.ReferralsPage)
