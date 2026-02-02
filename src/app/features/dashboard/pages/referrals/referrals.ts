@@ -3,10 +3,12 @@ import { DatePipe } from '@angular/common';
 import { ReferralsStore } from '../../store/referrals.store';
 import { AuthStore } from '../../../../core/auth/auth.store';
 import { ToastrService } from '../../../../core/services/toast/toastr.service';
+import { ReferralActivityTimelineComponent } from '@features/dashboard/components/referral-activity-timeline/referral-activity-timeline';
+import { ReferralBadgeCardComponent } from '@features/dashboard/components/referral-badge-card/referral-badge-card';
 
 @Component({
   selector: 'app-referrals',
-  imports: [DatePipe],
+  imports: [DatePipe, ReferralActivityTimelineComponent, ReferralBadgeCardComponent],
   templateUrl: './referrals.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -50,6 +52,23 @@ export class ReferralsPage implements OnInit {
       navigator.clipboard.writeText(link).then(() => {
         this.toast.showSuccess('Lien copié !');
       });
+    }
+  }
+
+  onShareReferral() {
+    this.copyReferralLink();
+  }
+
+  onCopyReferral(link: string) {
+    if (link) {
+      navigator.clipboard
+        .writeText(link)
+        .then(() => {
+          this.toast.showSuccess('Lien de parrainage copié !');
+        })
+        .catch(() => {
+          this.toast.showError('Erreur lors de la copie du lien');
+        });
     }
   }
 }
