@@ -63,10 +63,27 @@ export const dashboardRoutes: Routes = [
         title: 'Sécurité',
         loadComponent: () => import('./pages/profile-security/profile-security').then((c) => c.ProfileSecurity)
       },
+
+      // Routes pour le module Parrainage
       {
-        path: 'referrals',
-        title: 'Parrainages',
-        loadComponent: () => import('./pages/referrals/referrals').then((c) => c.ReferralsPage)
+        path: 'referral/link',
+        title: 'Mon lien de parrainage',
+        loadComponent: () => import('./pages/referral/my-link/my-link').then((c) => c.MyReferralLink)
+      },
+      {
+        path: 'referral/referred-users',
+        title: 'Mes filleuls',
+        loadComponent: () => import('./pages/referral/my-referrals/my-referrals').then((c) => c.MyReferrals)
+      },
+      {
+        path: 'referral/badges',
+        title: 'Badges & Progression',
+        loadComponent: () => import('./pages/referral/badges/badges').then((c) => c.ReferralBadges)
+      },
+      {
+        path: 'referral/activity',
+        title: 'Activité récente',
+        loadComponent: () => import('./pages/referral/activity/activity').then((c) => c.ReferralActivity)
       },
 
       // Routes pour la candidature mentor
