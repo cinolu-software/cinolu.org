@@ -1,94 +1,106 @@
-<div>
-  <p-confirmDialog />
+<p-confirmDialog />
 
-  <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 dashboard-section">
-    <div>
-      <div class="flex items-center gap-3 mb-3">
+<div class="dashboard-fade-in-up flex flex-col gap-6 lg:gap-8">
+  <div class="pb-6 border-b border-slate-200">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div class="flex items-center gap-3 flex-1">
         <div
-          class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-400/90 to-primary-500/85 flex items-center justify-center shadow-lg">
-          <span class="material-icons text-white text-2xl">shopping_bag</span>
+          class="w-14 h-14 rounded-lg bg-gradient-to-br from-primary-500/90 to-primary-700/85 flex items-center justify-center shadow-lg">
+          <span class="material-icons text-white text-3xl">shopping_bag</span>
         </div>
-        <h1 class="text-2xl font-bold text-slate-900">Mes Produits</h1>
+        <div>
+          <h1 class="dashboard-heading-2">Mes Produits</h1>
+          <p class="dashboard-text-body text-slate-600">Gérez votre catalogue de produits et services</p>
+        </div>
       </div>
-      <p class="text-slate-600">Gérez votre catalogue de produits et services</p>
+
+      <div class="flex items-center gap-3">
+        <span class="dashboard-badge-success">
+          <span class="material-icons text-sm text-emerald-600">inventory_2</span>
+          <span class="font-bold">{{ productsStore.products().length || 0 }}</span>
+          <span class="text-slate-500">Produit{{ productsStore.products().length > 1 ? 's' : '' }}</span>
+        </span>
+        <a routerLink="/dashboard/products/create" class="dashboard-btn-primary">
+          <span class="material-icons text-xl">add</span>
+          <span>Nouveau produit</span>
+        </a>
+      </div>
     </div>
-    <a routerLink="/dashboard/products/create" class="dashboard-btn-primary">
-      <span class="material-icons text-xl">add</span>
-      <span>Ajouter un produit</span>
-    </a>
   </div>
 
   @if (productsStore.isLoading()) {
-  <div class="flex flex-col items-center justify-center py-24">
+  <div class="flex flex-col justify-center items-center py-24">
     <div class="relative">
-      <div class="w-16 h-16 border-4 border-indigo-200 border-t-primary-500 rounded-full animate-spin"></div>
+      <div class="w-16 h-16 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
     </div>
     <p class="mt-6 text-slate-600 font-medium">Chargement de vos produits...</p>
   </div>
 
   } @else if (productsStore.isEmpty()) {
-  <div class="flex flex-col items-center justify-center py-20 px-4">
-    <div
-      class="w-24 h-24 rounded-xl bg-gradient-to-br from-primary-400/90 to-primary-500/85 flex items-center justify-center shadow-lg mb-6">
-      <span class="material-icons text-white text-5xl">shopping_bag</span>
+  <div class="dashboard-card-elevated p-12 text-center">
+    <div class="flex flex-col items-center">
+      <div
+        class="w-20 h-20 rounded-lg bg-gradient-to-br from-primary-500/90 to-primary-700/85 flex items-center justify-center shadow-lg mb-6">
+        <span class="material-icons text-white text-5xl">shopping_bag</span>
+      </div>
+      <h2 class="text-2xl font-bold text-slate-900 mb-3">Aucun produit</h2>
+      <p class="text-slate-600 mb-8 max-w-md">Ajoutez vos premiers produits ou services pour commencer à vendre</p>
+      <a routerLink="/dashboard/products/create" class="dashboard-btn-primary">
+        <span class="material-icons text-xl">add</span>
+        <span>Créer mon premier produit</span>
+      </a>
     </div>
-    <h2 class="text-2xl font-bold text-slate-900 mb-3">Aucun produit</h2>
-    <p class="text-slate-600 mb-8 text-center max-w-md">
-      Ajoutez vos premiers produits ou services pour commencer à vendre
-    </p>
-    <a routerLink="/dashboard/products/create" class="dashboard-btn-primary">
-      <span class="material-icons text-xl">add</span>
-      <span>Créer mon premier produit</span>
-    </a>
   </div>
-
   } @else {
-  <div class="dashboard-grid-3">
+  <div class="dashboard-grid-2">
     @for (product of productsStore.products(); track product.id) {
-    <div class="dashboard-card-hover overflow-hidden flex flex-col h-full group">
-      <div class="p-6 pb-4 border-b border-slate-100">
+    <article class="dashboard-card flex flex-col h-full group">
+      <div class="p-6 pb-4 space-y-4">
         @if (product.venture) {
-        <div class="mb-4">
-          <span class="dashboard-badge-primary">
-            <span class="material-icons text-sm">business</span>
-            <span>{{ product.venture.name }}</span>
+        <div>
+          <span class="dashboard-badge-primary text-xs">
+            <span class="material-icons text-xs">business</span>
+            <span class="font-semibold">{{ product.venture.name }}</span>
           </span>
         </div>
         }
 
         <div class="flex items-start justify-between gap-4">
-          <h3 class="text-lg font-bold text-slate-900 flex-1 group-hover:text-primary-600 transition-colors">
+          <h3 class="dashboard-heading-5 flex-1 group-hover:text-primary-600 transition-colors leading-snug">
             {{ product.name }}
           </h3>
           <div class="flex-shrink-0">
-            <div class="px-4 py-2.5 bg-gradient-to-br from-primary-400/90 to-primary-500/85 rounded-lg shadow-lg">
-              <div class="flex items-baseline gap-0.5">
-                <span class="text-xl font-black text-white">{{ product.price | number:'1.0-0' }}</span>
-                <span class="text-sm text-white/80 font-bold">$</span>
-              </div>
-            </div>
+            <span class="dashboard-badge-primary">
+              <span class="text-lg font-bold">{{ product.price | number:'1.0-0' }}</span>
+              <span class="text-xs font-bold text-white/90">$</span>
+            </span>
           </div>
         </div>
       </div>
 
-      <div class="px-6 py-4 flex-1">
-        <p class="text-sm text-slate-600 line-clamp-3 leading-relaxed">{{ product.description }}</p>
+      <div class="px-6 py-4 flex-1 border-t border-slate-100">
+        <p class="dashboard-text-small dashboard-line-clamp-3 leading-relaxed text-slate-600">
+          {{ product.description }}
+        </p>
       </div>
 
-      <div class="px-6 pb-6 pt-4 border-t border-slate-100 flex gap-3">
-        <a
-          [routerLink]="['/dashboard/products/edit', product.slug]"
-          class="flex-1 dashboard-btn-primary py-3 !rounded-lg group/btn">
-          <span class="material-icons text-[18px] group-hover/btn:rotate-12 transition-transform">edit</span>
-          <span class="font-bold">Modifier</span>
-        </a>
-        <button
-          (click)="deleteProduct(product.id, product.name)"
-          class="flex items-center justify-center gap-2 py-3 px-4 bg-red-50 hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 hover:text-white text-red-600 font-bold rounded-lg border-2 border-red-200 hover:border-red-600 transition-all duration-300 hover:shadow-lg group/btn">
-          <span class="material-icons text-[18px] group-hover/btn:scale-110 transition-transform">delete</span>
-        </button>
+      <div class="px-6 pb-6 pt-4 border-t border-slate-100">
+        <div class="grid grid-cols-2 gap-3">
+          <a
+            [routerLink]="['/dashboard/products/edit', product.slug]"
+            class="dashboard-btn-primary w-full py-2.5 text-sm font-semibold">
+            <span class="material-icons text-base">edit</span>
+            <span>Modifier</span>
+          </a>
+          <button
+            (click)="deleteProduct(product.id, product.name)"
+            class="dashboard-btn-outline w-full py-2.5 text-sm text-red-600 border-red-200 hover:border-red-300 hover:bg-red-50 transition-colors">
+            <span class="material-icons text-base">delete</span>
+            <span>Supprimer</span>
+          </button>
+        </div>
       </div>
-    </div>
+    </article>
     }
   </div>
   }
