@@ -104,32 +104,9 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
       }
     ]
   },
-
   {
     title: 'Communauté',
     items: [
-      {
-        id: 'referrals',
-        label: 'Parrainages',
-        icon: 'group_add',
-        children: [
-          {
-            id: 'referrals-overview',
-            label: "Vue d'ensemble",
-            icon: 'insights',
-            path: '/dashboard/referrals',
-            tooltip: 'Statistiques de parrainage'
-          },
-          {
-            id: 'referrals-badges',
-            label: 'Badges & Récompenses',
-            icon: 'emoji_events',
-            path: '/dashboard/referrals#badges',
-            tooltip: 'Mes badges et niveaux',
-            disabled: true // Scroll to section
-          }
-        ]
-      },
       {
         id: 'referral',
         label: 'Parrainage',
@@ -191,12 +168,11 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
             tooltip: 'Mot de passe et sécurité'
           },
           {
-            id: 'profile-notifications',
-            label: 'Notifications',
-            icon: 'notifications',
-            path: '/dashboard/profile/notifications',
-            tooltip: 'Préférences de notification',
-            disabled: true // À implémenter
+            id: 'profile-mentorship',
+            label: 'Mentorat',
+            icon: 'school',
+            path: '/dashboard/mentor/apply',
+            tooltip: 'Devenir mentor ou gérer ma candidature'
           }
         ]
       }
