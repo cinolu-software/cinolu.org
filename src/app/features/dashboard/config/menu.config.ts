@@ -129,6 +129,41 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
             disabled: true // Scroll to section
           }
         ]
+      },
+      {
+        id: 'referral',
+        label: 'Parrainage',
+        icon: 'card_giftcard',
+        children: [
+          {
+            id: 'referral-link',
+            label: 'Mon lien de parrainage',
+            icon: 'link',
+            path: '/dashboard/referral/link',
+            tooltip: 'Générer et partager mon lien'
+          },
+          {
+            id: 'referral-referred-users',
+            label: 'Mes filleuls',
+            icon: 'people',
+            path: '/dashboard/referral/referred-users',
+            tooltip: 'Voir mes utilisateurs référés'
+          },
+          {
+            id: 'referral-badges',
+            label: 'Badges & progression',
+            icon: 'military_tech',
+            path: '/dashboard/referral/badges',
+            tooltip: 'Mes badges et niveaux'
+          },
+          {
+            id: 'referral-activity',
+            label: 'Activité récente',
+            icon: 'history',
+            path: '/dashboard/referral/activity',
+            tooltip: 'Timeline de mes parrainages'
+          }
+        ]
       }
     ]
   },
