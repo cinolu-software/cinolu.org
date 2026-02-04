@@ -12,7 +12,7 @@
       </div>
 
       <div class="flex flex-wrap items-center gap-3 lg:ml-auto">
-        <div class="px-4 py-2 rounded-lg bg-primary-50 border dashboard-badge-primary border-primary-200">
+        <div class="px-4 py-2 rounded-lg bg-primary-50/80 border dashboard-badge-primary border-primary-200/60">
           <p class="dashboard-text-tiny text-primary-700 uppercase tracking-wide">Total :</p>
           <p class="font-bold text-primary-700 leading-none">{{ totalInvitations() }}</p>
         </div>
@@ -33,7 +33,7 @@
     <div class="relative">
       <div class="w-16 h-16 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
     </div>
-    <p class="mt-6 text-slate-600 font-medium animate-pulse">Chargement des personnes invitées...</p>
+    <p class="mt-6 text-slate-600 font-medium">Chargement des personnes invitées...</p>
   </div>
   } @else {
   <div class="dashboard-card p-6 mb-6">
@@ -71,7 +71,7 @@
           </div>
           } @else {
           <div
-            class="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center font-black text-white text-base shadow-lg flex-shrink-0 group-hover:scale-105 transition-transform">
+            class="w-14 h-14 bg-gradient-to-br from-primary-500/90 to-primary-700/85 rounded-lg flex items-center justify-center font-black text-white text-base shadow-lg flex-shrink-0">
             {{ getUserInitials(user) }}
           </div>
           }
@@ -111,7 +111,7 @@
         [attr.aria-current]="currentPage() === $index + 1 ? 'page' : null"
         [class]="
           currentPage() === $index + 1
-            ? 'px-4 py-2 rounded-lg bg-primary-600 text-white font-bold shadow-lg shadow-primary-500/20'
+            ? 'px-4 py-2 rounded-lg bg-primary-600 text-white font-bold'
             : 'px-4 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors'
         ">
         {{ $index + 1 }}
