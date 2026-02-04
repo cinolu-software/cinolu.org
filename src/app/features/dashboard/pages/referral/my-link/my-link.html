@@ -1,0 +1,453 @@
+﻿<div class="dashboard-fade-in-up flex flex-col gap-5 lg:gap-10">
+  <div class="pb-6 border-b border-slate-200">
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+      <div class="flex items-center gap-3 flex-1">
+        <div
+          class="w-14 h-14 rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-xl shadow-brand-500/30">
+          <span class="material-icons text-white text-3xl">link</span>
+        </div>
+        <div>
+          <h1 class="dashboard-heading-2">Mon lien de parrainage</h1>
+          <p class="dashboard-text-body text-slate-600 hyphens-none">
+            Partagez votre lien et développez la communauté Cinolu
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (referralsStore.isLoading()) {
+  <div class="flex flex-col justify-center items-center py-24">
+    <div class="relative">
+      <div class="w-16 h-16 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin"></div>
+    </div>
+    <p class="mt-6 text-slate-600 font-medium animate-pulse">Génération en cours...</p>
+  </div>
+  } @else if (referralLink()) {
+  <div class="grid lg:grid-cols-3 gap-6">
+    <div class="lg:col-span-2 space-y-6">
+      <div class="dashboard-card-elevated p-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div
+            class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-lg shadow-primary-500/20">
+            <span class="material-icons text-white text-lg">link</span>
+          </div>
+          <div>
+            <h3 class="dashboard-heading-5">Votre lien de parrainage</h3>
+            <p class="dashboard-text-tiny text-slate-500">Partagez et développez votre réseau</p>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="relative group">
+            <input
+              type="text"
+              readonly
+              [value]="referralLink()"
+              class="w-full px-4 py-3.5 pr-28 bg-slate-50 border border-slate-200 rounded-lg font-mono text-sm text-slate-700 focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100 transition-all" />
+            <button
+              (click)="onCopyLink()"
+              aria-label="Copier le lien de parrainage dans le presse-papier"
+              class="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium text-sm transition-all hover:scale-105 active:scale-95 flex items-center gap-2">
+              <span class="material-icons text-base">content_copy</span>
+              <span class="hidden sm:inline">Copier</span>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2 text-slate-500 dashboard-text-tiny">
+            <span class="material-icons text-sm">info</span>
+            <span>Ce lien reste actif de manière permanente</span>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-5 border-t border-slate-100">
+          <h4 class="dashboard-text-small font-semibold text-slate-700 mb-3">Partager rapidement</h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <button
+              (click)="shareOnWhatsApp()"
+              aria-label="Partager mon lien de parrainage sur WhatsApp"
+              class="flex flex-col items-center gap-2 p-3 rounded-lg bg-white hover:bg-[#25D366]/10 text-slate-700 hover:text-[#1B8E4B] border border-slate-200 hover:border-[#25D366]/50 transition-all duration-200">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              <span class="text-xs font-medium">WhatsApp</span>
+            </button>
+
+            <button
+              (click)="shareOnLinkedIn()"
+              aria-label="Partager mon lien de parrainage sur LinkedIn"
+              class="flex flex-col items-center gap-2 p-3 rounded-lg bg-white hover:bg-[#0A66C2]/10 text-slate-700 hover:text-[#0A66C2] border border-slate-200 hover:border-[#0A66C2]/50 transition-all duration-200">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+              <span class="text-xs font-medium">LinkedIn</span>
+            </button>
+
+            <button
+              (click)="shareOnFacebook()"
+              aria-label="Partager mon lien de parrainage sur Facebook"
+              class="flex flex-col items-center gap-2 p-3 rounded-lg bg-white hover:bg-[#1877F2]/10 text-slate-700 hover:text-[#1877F2] border border-slate-200 hover:border-[#1877F2]/50 transition-all duration-200">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              </svg>
+              <span class="text-xs font-medium">Facebook</span>
+            </button>
+
+            <button
+              (click)="shareOnTwitter()"
+              aria-label="Partager mon lien de parrainage sur Twitter"
+              class="flex flex-col items-center gap-2 p-3 rounded-lg bg-white hover:bg-black/10 text-slate-700 hover:text-black border border-slate-200 hover:border-black/40 transition-all duration-200">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+              <span class="text-xs font-medium">Twitter</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-card p-6 lg:p-8 bg-gradient-to-br from-primary-50 to-white border-l-4 border-primary-500">
+        <div class="mb-6">
+          <div class="flex items-start gap-3 mb-3">
+            <div
+              class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-lg shadow-primary-500/20 flex-shrink-0">
+              <span class="material-icons text-white text-lg">workspace_premium</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="dashboard-heading-5 mb-1">Pourquoi partager votre lien de parrainage ?</h3>
+              <p class="dashboard-text-small text-slate-600">
+                En partageant votre lien de parrainage Cinolu, vous contribuez à la croissance de la plateforme tout en
+                renforçant la visibilité de votre entreprise.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <!-- Avantage 1 -->
+          <div class="flex items-start gap-3 p-3 rounded-lg bg-white border border-slate-100">
+            <div class="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center flex-shrink-0">
+              <span class="material-icons text-primary-700 text-base">campaign</span>
+            </div>
+            <div class="flex-1">
+              <h5 class="font-semibold text-slate-900 text-sm mb-1">Gagner en visibilité</h5>
+              <p class="dashboard-text-tiny text-slate-600">Mise en avant progressive de votre entreprise sur Cinolu</p>
+            </div>
+          </div>
+
+          <!-- Avantage 2 -->
+          <div class="flex items-start gap-3 p-3 rounded-lg bg-white border border-slate-100">
+            <div class="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center flex-shrink-0">
+              <span class="material-icons text-primary-700 text-base">business</span>
+            </div>
+            <div class="flex-1">
+              <h5 class="font-semibold text-slate-900 text-sm mb-1">Faire reconnaître votre entreprise</h5>
+              <p class="dashboard-text-tiny text-slate-600">
+                Identification comme acteur engagé de l'écosystème Cinolu
+              </p>
+            </div>
+          </div>
+
+          <!-- Avantage 3 -->
+          <div class="flex items-start gap-3 p-3 rounded-lg bg-white border border-slate-100">
+            <div class="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center flex-shrink-0">
+              <span class="material-icons text-primary-700 text-base">verified</span>
+            </div>
+            <div class="flex-1">
+              <h5 class="font-semibold text-slate-900 text-sm mb-1">Reconnaissance officielle de Cinolu</h5>
+              <p class="dashboard-text-tiny text-slate-600">
+                Statut Ambassadeur Cinolu visible sur le dashboard avec niveau évolutif
+              </p>
+            </div>
+          </div>
+
+          <!-- Bouton "Voir plus" -->
+          @if (!showAllBenefits()) {
+          <button
+            (click)="showAllBenefits.set(true)"
+            aria-label="Afficher tous les avantages du parrainage"
+            class="w-full py-2 text-sm font-medium text-primary-600 hover:text-primary-700 flex items-center justify-center gap-1 transition-colors">
+            <span>Voir tous les avantages</span>
+            <span class="material-icons text-base">expand_more</span>
+          </button>
+          } @else {
+          <!-- Avantages supplémentaires -->
+          <div class="space-y-3 pt-1">
+            <!-- Avantage 4 -->
+            <div class="flex items-start gap-3 p-3 rounded-lg bg-white border border-slate-100">
+              <div class="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center flex-shrink-0">
+                <span class="material-icons text-primary-700 text-base">podcasts</span>
+              </div>
+              <div class="flex-1">
+                <h5 class="font-semibold text-slate-900 text-sm mb-1">Accès aux canaux de communication Cinolu</h5>
+                <p class="dashboard-text-tiny text-slate-600">
+                  Possibilités de mise en avant via newsletters, réseaux sociaux, contenus éditoriaux
+                </p>
+              </div>
+            </div>
+
+            <!-- Avantage 5 -->
+            <div class="flex items-start gap-3 p-3 rounded-lg bg-white border border-slate-100">
+              <div class="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center flex-shrink-0">
+                <span class="material-icons text-primary-700 text-base">trending_up</span>
+              </div>
+              <div class="flex-1">
+                <h5 class="font-semibold text-slate-900 text-sm mb-1">Renforcer votre image de marque</h5>
+                <p class="dashboard-text-tiny text-slate-600">
+                  Positionnement comme partenaire, pas simple utilisateur
+                </p>
+              </div>
+            </div>
+
+            <button
+              (click)="showAllBenefits.set(false)"
+              aria-label="Masquer les avantages supplémentaires"
+              class="w-full py-2 text-sm font-medium text-primary-600 hover:text-primary-700 flex items-center justify-center gap-1 transition-colors">
+              <span>Voir moins</span>
+              <span class="material-icons text-base">expand_less</span>
+            </button>
+          </div>
+          }
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-slate-200">
+          <a
+            routerLink="/dashboard/referral/badges"
+            aria-label="Découvrir mes niveaux de badges ambassadeur"
+            class="dashboard-btn-secondary w-full flex items-center justify-center gap-2 py-2.5 text-sm">
+            <span class="material-icons text-base">military_tech</span>
+            <span>Découvrir mes niveaux</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="dashboard-card p-6 bg-slate-50 border border-slate-100">
+        <div class="mb-5">
+          <h3 class="dashboard-heading-5 mb-1 flex items-center gap-2">
+            <span class="material-icons text-primary-600 text-lg">tips_and_updates</span>
+            <span>Conseils pour maximiser vos parrainages</span>
+          </h3>
+          <p class="dashboard-text-small text-slate-500">Stratégies recommandées</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="p-4 rounded-lg bg-white border border-slate-200 hover:border-primary-300 transition-colors">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 flex-shrink-0 rounded-lg bg-emerald-100 flex items-center justify-center">
+                <span class="material-icons text-emerald-700 text-base">people</span>
+              </div>
+              <div>
+                <h5 class="font-semibold text-slate-900 text-sm mb-1">Réseau personnel</h5>
+                <p class="dashboard-text-tiny text-slate-600">
+                  Partagez avec vos contacts entrepreneurs et porteurs de projets
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-lg bg-white border border-slate-200 hover:border-primary-300 transition-colors">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 flex-shrink-0 rounded-lg bg-blue-100 flex items-center justify-center">
+                <span class="material-icons text-blue-700 text-base">forum</span>
+              </div>
+              <div>
+                <h5 class="font-semibold text-slate-900 text-sm mb-1">Réseaux sociaux</h5>
+                <p class="dashboard-text-tiny text-slate-600">
+                  Publiez régulièrement sur LinkedIn, Facebook et Twitter
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-lg bg-white border border-slate-200 hover:border-primary-300 transition-colors">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 flex-shrink-0 rounded-lg bg-purple-100 flex items-center justify-center">
+                <span class="material-icons text-purple-700 text-base">qr_code_2</span>
+              </div>
+              <div>
+                <h5 class="font-semibold text-slate-900 text-sm mb-1">Supports physiques</h5>
+                <p class="dashboard-text-tiny text-slate-600">Intégrez le QR code sur vos cartes de visite et flyers</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-6">
+      <div class="dashboard-card p-6">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center">
+            <span class="material-icons text-purple-700 text-base">qr_code_2</span>
+          </div>
+          <div>
+            <h3 class="dashboard-heading-5">QR Code</h3>
+          </div>
+        </div>
+
+        @if (isGeneratingQR()) {
+        <div class="flex justify-center items-center py-12">
+          <div class="w-10 h-10 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
+        </div>
+        } @else if (qrCodeDataUrl()) {
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex items-center justify-center">
+            <img [src]="qrCodeDataUrl()" alt="QR Code" class="w-full max-w-[200px] h-auto" />
+          </div>
+          <button
+            (click)="downloadQRCode()"
+            aria-label="Télécharger le QR Code de mon lien de parrainage"
+            class="w-full dashboard-btn-secondary flex items-center justify-center gap-2 py-2.5 text-sm">
+            <span class="material-icons text-base">download</span>
+            <span>Télécharger</span>
+          </button>
+        </div>
+        } @else {
+        <div class="py-12 text-center">
+          <span class="material-icons text-slate-300 text-5xl mb-2">qr_code_scanner</span>
+          <p class="dashboard-text-small text-slate-500">Non disponible</p>
+        </div>
+        }
+      </div>
+
+      <div class="dashboard-card p-6">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center">
+            <span class="material-icons text-primary-700 text-base">insights</span>
+          </div>
+          <h3 class="dashboard-heading-5">Statistiques</h3>
+        </div>
+
+        <div class="space-y-4">
+          <div class="bg-gradient-to-br from-primary-50 to-white p-4 rounded-lg border border-primary-200">
+            <div class="flex items-center justify-between mb-1">
+              <span class="dashboard-text-small text-slate-600">Filleuls inscrits</span>
+              <span class="text-2xl font-bold text-primary-600">{{ authStore.user()?.referralsCount || 0 }}</span>
+            </div>
+            <p class="dashboard-text-tiny text-slate-500">Membres parrainés avec succès</p>
+          </div>
+
+          <a
+            routerLink="/dashboard/referral/referred-users"
+            aria-label="Consulter la liste de mes filleuls"
+            class="dashboard-btn-secondary w-full flex items-center justify-center gap-2 py-2.5">
+            <span>Voir mes filleuls</span>
+            <span class="material-icons text-sm">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  } @else {
+  <div class="dashboard-card-elevated p-8 sm:p-12 text-center max-w-4xl mx-auto">
+    <div
+      class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-brand-500/30 animate-pulse">
+      <span class="material-icons text-white text-4xl sm:text-5xl">link</span>
+    </div>
+    <h3 class="dashboard-heading-3 mb-3">Générez votre lien de parrainage</h3>
+    <p class="dashboard-text-body text-slate-600 mb-8 max-w-md mx-auto">
+      Créez votre lien unique pour inviter vos contacts à rejoindre Cinolu et développer votre réseau
+    </p>
+
+    <!-- Section avantages AVANT le CTA pour améliorer la conversion -->
+    <div
+      class="mb-8 p-6 sm:p-8 bg-gradient-to-br from-primary-50 to-white rounded-lg border-l-4 border-primary-500 text-left">
+      <div class="mb-6">
+        <div class="flex items-start gap-3 mb-3">
+          <div
+            class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-lg shadow-primary-500/20 flex-shrink-0">
+            <span class="material-icons text-white text-lg">workspace_premium</span>
+          </div>
+          <div class="flex-1">
+            <h4 class="dashboard-heading-5 mb-1">Pourquoi partager votre lien de parrainage ?</h4>
+            <p class="dashboard-text-small text-slate-600">
+              En partageant votre lien de parrainage Cinolu, vous contribuez à la croissance de la plateforme tout en
+              renforçant la visibilité de votre entreprise.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <!-- Avantage 1 -->
+        <div class="flex items-start gap-3 p-3 rounded-lg bg-white border border-slate-100">
+          <div class="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center flex-shrink-0">
+            <span class="material-icons text-primary-700 text-base">campaign</span>
+          </div>
+          <div class="flex-1">
+            <h5 class="font-semibold text-slate-900 text-sm mb-1">Gagner en visibilité</h5>
+            <p class="dashboard-text-tiny text-slate-600">Mise en avant progressive de votre entreprise sur Cinolu</p>
+          </div>
+        </div>
+
+        <!-- Avantage 2 -->
+        <div class="flex items-start gap-3 p-3 rounded-lg bg-white border border-slate-100">
+          <div class="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center flex-shrink-0">
+            <span class="material-icons text-primary-700 text-base">business</span>
+          </div>
+          <div class="flex-1">
+            <h5 class="font-semibold text-slate-900 text-sm mb-1">Faire reconnaître votre entreprise</h5>
+            <p class="dashboard-text-tiny text-slate-600">Identification comme acteur engagé de l'écosystème Cinolu</p>
+          </div>
+        </div>
+
+        <!-- Avantage 3 -->
+        <div class="flex items-start gap-3 p-3 rounded-lg bg-white border border-slate-100">
+          <div class="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center flex-shrink-0">
+            <span class="material-icons text-primary-700 text-base">verified</span>
+          </div>
+          <div class="flex-1">
+            <h5 class="font-semibold text-slate-900 text-sm mb-1">Reconnaissance officielle de Cinolu</h5>
+            <p class="dashboard-text-tiny text-slate-600">
+              Statut Ambassadeur Cinolu visible sur le dashboard avec niveau évolutif
+            </p>
+          </div>
+        </div>
+
+        <!-- Avantage 4 -->
+        <div class="flex items-start gap-3 p-3 rounded-lg bg-white border border-slate-100">
+          <div class="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center flex-shrink-0">
+            <span class="material-icons text-primary-700 text-base">podcasts</span>
+          </div>
+          <div class="flex-1">
+            <h5 class="font-semibold text-slate-900 text-sm mb-1">Accès aux canaux de communication Cinolu</h5>
+            <p class="dashboard-text-tiny text-slate-600">
+              Possibilités de mise en avant via newsletters, réseaux sociaux, contenus éditoriaux
+            </p>
+          </div>
+        </div>
+
+        <!-- Avantage 5 -->
+        <div class="flex items-start gap-3 p-3 rounded-lg bg-white border border-slate-100">
+          <div class="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center flex-shrink-0">
+            <span class="material-icons text-primary-700 text-base">trending_up</span>
+          </div>
+          <div class="flex-1">
+            <h5 class="font-semibold text-slate-900 text-sm mb-1">Renforcer votre image de marque</h5>
+            <p class="dashboard-text-tiny text-slate-600">Positionnement comme partenaire, pas simple utilisateur</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button
+      (click)="onGenerateCode()"
+      aria-label="Générer mon lien de parrainage unique"
+      class="dashboard-btn-primary inline-flex hover:scale-105 active:scale-95 transition-transform shadow-xl hover:shadow-2xl">
+      <span class="material-icons text-xl">add_link</span>
+      <span>Générer mon lien</span>
+    </button>
+
+    <div class="mt-8 pt-6 border-t border-slate-200">
+      <p class="dashboard-text-small text-slate-500 flex items-center justify-center gap-2">
+        <span class="material-icons text-[16px] text-brand-600">security</span>
+        <span>Votre lien sera unique et sécurisé</span>
+      </p>
+    </div>
+  </div>
+  }
+</div>
