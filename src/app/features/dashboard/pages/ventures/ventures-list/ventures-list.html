@@ -5,12 +5,12 @@
     <div>
       <div class="flex items-center gap-3 mb-3">
         <div
-          class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center shadow-lg">
+          class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-400/90 to-primary-500/85 flex items-center justify-center shadow-lg">
           <span class="material-icons text-white text-2xl">business</span>
         </div>
-        <h1 class="dashboard-heading-2">Mes Entreprises</h1>
+        <h1 class="text-2xl font-bold text-slate-900">Mes Entreprises</h1>
       </div>
-      <p class="dashboard-text-body">Gérez vos projets entrepreneuriaux et vos produits</p>
+      <p class="text-slate-600">Gérez vos projets entrepreneuriaux et vos produits</p>
     </div>
 
     <div
@@ -19,7 +19,7 @@
         (click)="switchTab('ventures')"
         [class.ventures-tab-active]="activeTab() === 'ventures'"
         class="ventures-tab-btn flex items-center gap-2.5 px-5 py-3 rounded-lg font-semibold text-sm transition-all duration-200">
-        <span class="material-icons text-[20px]">business</span>
+        <span class="material-icons text-xl">business</span>
         <span>Entreprises</span>
         <span
           class="ml-1 px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px] text-center"
@@ -35,7 +35,7 @@
         (click)="switchTab('products')"
         [class.ventures-tab-active]="activeTab() === 'products'"
         class="ventures-tab-btn flex items-center gap-2.5 px-5 py-3 rounded-lg font-semibold text-sm transition-all duration-200">
-        <span class="material-icons text-[20px]">shopping_bag</span>
+        <span class="material-icons text-xl">shopping_bag</span>
         <span>Produits</span>
         <span
           class="ml-1 px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px] text-center"
@@ -63,23 +63,21 @@
       <div class="flex flex-col items-center justify-center py-24">
         <div class="relative">
           <div class="w-16 h-16 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin"></div>
-          <div
-            class="absolute inset-0 w-16 h-16 border-4 border-transparent border-b-brand-400 rounded-full animate-ping"></div>
         </div>
-        <p class="mt-6 dashboard-text-body animate-pulse">Chargement de vos entreprises...</p>
+        <p class="mt-6 text-slate-600 font-medium">Chargement de vos entreprises...</p>
       </div>
 
       } @else if (venturesStore.ventures().length === 0) {
       <div class="flex flex-col items-center justify-center py-20 px-4">
         <div
-          class="w-24 h-24 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-2xl shadow-brand-500/30 mb-6">
+          class="w-24 h-24 rounded-xl bg-gradient-to-br from-brand-500/90 to-brand-700/85 flex items-center justify-center shadow-lg mb-6">
           <span class="material-icons text-white text-5xl">business_center</span>
         </div>
-        <h2 class="dashboard-heading-3 mb-3">Aucune entreprise</h2>
-        <p class="dashboard-text-body mb-8 text-center max-w-md">
+        <h2 class="text-2xl font-bold text-slate-900 mb-3">Aucune entreprise</h2>
+        <p class="text-slate-600 mb-8 text-center max-w-md">
           Commencez votre parcours entrepreneurial en créant votre première entreprise
         </p>
-        <a routerLink="/dashboard/ventures/create" class="dashboard-btn-primary dashboard-btn-lg inline-flex">
+        <a routerLink="/dashboard/ventures/create" class="dashboard-btn-primary inline-flex">
           <span class="material-icons text-xl">add</span>
           <span>Créer ma première entreprise</span>
         </a>
@@ -88,7 +86,7 @@
       } @else {
       <div class="dashboard-grid-3">
         @for (venture of venturesStore.ventures(); track venture.id) {
-        <div class="dashboard-card-hover overflow-hidden flex flex-col group">
+        <div class="bg-white rounded-lg overflow-hidden flex flex-col group">
           <div class="relative h-32 md:h-44 bg-slate-100 overflow-hidden">
             @if (venture.cover) {
             <img
@@ -115,13 +113,13 @@
 
             <div class="absolute top-4 right-4 z-10">
               @if (venture.is_published) {
-              <span class="dashboard-badge-success shadow-lg backdrop-blur-sm bg-emerald-500/90 text-white border-0">
-                <span class="dashboard-status-online !animate-none"></span>
+              <span class="dashboard-badge-critical shadow-lg backdrop-blur-sm bg-emerald-500/90 text-white border-0">
+                <span class="w-2 h-2 rounded-full bg-white"></span>
                 <span class="font-bold">Publié</span>
               </span>
               } @else {
               <span class="dashboard-badge-neutral shadow-lg backdrop-blur-sm bg-slate-700/90 text-white border-0">
-                <span class="material-icons text-[14px]">visibility_off</span>
+                <span class="material-icons text-sm">visibility_off</span>
                 <span class="font-bold">En attente</span>
               </span>
               }
@@ -206,14 +204,14 @@
       } @else if (productsStore.isEmpty()) {
       <div class="flex flex-col items-center justify-center py-20 px-4">
         <div
-          class="w-24 h-24 rounded-lg bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center shadow-2xl shadow-indigo-500/30 mb-6">
+          class="w-24 h-24 rounded-xl bg-gradient-to-br from-primary-400/90 to-primary-500/85 flex items-center justify-center shadow-lg mb-6">
           <span class="material-icons text-white text-5xl">shopping_bag</span>
         </div>
-        <h2 class="dashboard-heading-3 mb-3">Aucun produit</h2>
-        <p class="dashboard-text-body mb-8 text-center max-w-md">
+        <h2 class="text-2xl font-bold text-slate-900 mb-3">Aucun produit</h2>
+        <p class="text-slate-600 mb-8 text-center max-w-md">
           Ajoutez vos premiers produits ou services pour commencer à vendre
         </p>
-        <a routerLink="/dashboard/products/create" class="dashboard-btn-primary dashboard-btn-lg inline-flex">
+        <a routerLink="/dashboard/products/create" class="dashboard-btn-primary inline-flex">
           <span class="material-icons text-xl">add</span>
           <span>Créer mon premier produit</span>
         </a>
