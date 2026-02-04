@@ -129,7 +129,6 @@
       </div>
       }
 
-      <!-- Produits Section - Enhanced -->
       @if (venture.products && venture.products.length > 0) {
       <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <div class="flex items-center justify-between mb-6">
@@ -165,7 +164,6 @@
               </div>
               <p class="text-sm text-gray-600 leading-relaxed line-clamp-2 mb-4">{{ product.description }}</p>
 
-              <!-- Product Actions -->
               <div class="flex gap-2 mt-auto pt-4 border-t border-gray-100">
                 <a
                   [routerLink]="['/dashboard/products/edit', product.slug]"
@@ -208,9 +206,7 @@
       }
     </div>
 
-    <!-- Sidebar -->
     <div class="lg:col-span-1 space-y-6">
-      <!-- Statut et étape -->
       <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h2 class="text-lg font-bold text-gray-900 mb-4">Informations</h2>
         <div class="space-y-3">
@@ -245,7 +241,6 @@
         </div>
       </div>
 
-      <!-- Contact -->
       <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h2 class="text-lg font-bold text-gray-900 mb-5 flex items-center gap-2">
           <span class="material-icons text-primary-600">connect_without_contact</span>

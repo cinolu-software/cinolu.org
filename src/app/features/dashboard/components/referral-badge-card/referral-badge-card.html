@@ -1,5 +1,4 @@
 <article class="dashboard-card-elevated overflow-hidden group hover:shadow-xl transition-all duration-300">
-  <!-- Badge niveau max - Positioning amélioré -->
   @if (badgeInfo().isMaxLevel) {
   <div class="absolute top-6 right-6 z-20">
     <span
@@ -13,7 +12,6 @@
   }
 
   <div class="flex flex-col">
-    <!-- En-tête avec badge - Design amélioré -->
     <div class="relative bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 p-8 overflow-hidden">
       <div class="absolute top-0 right-0 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
       <div class="absolute bottom-0 left-0 w-56 h-56 bg-white/5 rounded-full blur-2xl"></div>
@@ -25,7 +23,6 @@
             <p class="text-sm text-white/90">Partage ton lien et débloque des badges exclusifs</p>
           </div>
 
-          <!-- Icône du badge actuel - Design amélioré -->
           <div
             class="relative flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md shadow-2xl border-2 border-white/40 group-hover:scale-110 transition-transform duration-300">
             <lucide-icon
@@ -39,7 +36,6 @@
           </div>
         </div>
 
-        <!-- Badge actuel - Design repensé -->
         <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
           <div class="flex items-center gap-3 mb-3">
             <span
@@ -53,11 +49,7 @@
       </div>
     </div>
 
-    <!-- Contenu principal -->
-
-    <!-- Contenu principal -->
     <div class="p-6 sm:p-8 space-y-6">
-      <!-- Impact - Design amélioré -->
       <div class="p-6 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 rounded-xl border-2 border-emerald-200">
         <div class="flex items-center gap-3 mb-2">
           <div class="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center">
@@ -71,7 +63,6 @@
         </p>
       </div>
 
-      <!-- Barre de progression -->
       @if (!badgeInfo().isMaxLevel) {
       <app-badge-progress-bar
         [currentBadge]="badgeInfo().currentBadge"
@@ -81,7 +72,6 @@
         [isMaxLevel]="badgeInfo().isMaxLevel" />
       }
 
-      <!-- Message motivationnel - Design amélioré -->
       <div class="p-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-xl border-2 border-blue-200">
         <div class="flex items-start gap-3">
           <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -105,7 +95,6 @@
         </div>
       </div>
 
-      <!-- Lien de parrainage - Design amélioré -->
       <div class="p-5 bg-slate-50 rounded-xl border-2 border-slate-200">
         <div class="flex items-center justify-between mb-3">
           <p class="text-xs text-slate-600 font-bold uppercase tracking-wider flex items-center gap-2">
@@ -130,7 +119,6 @@
         </div>
       </div>
 
-      <!-- Actions - Design amélioré -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <button
           (click)="onShareClick()"
@@ -152,7 +140,6 @@
   </div>
 </article>
 
-<!-- Modal de partage -->
 @if (showShareModal()) {
 <app-share-modal
   [link]="referralLink()"

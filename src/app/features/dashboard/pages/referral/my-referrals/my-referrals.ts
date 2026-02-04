@@ -20,10 +20,8 @@ export class MyReferrals implements OnInit {
   currentPage = signal(1);
   itemsPerPage = 12;
 
-  // Liste simple des utilisateurs invités
   invitedUsers = computed(() => this.referralsStore.referredUsers());
 
-  // Pagination
   paginatedUsers = computed(() => {
     const users = this.invitedUsers();
     const page = this.currentPage();
@@ -36,7 +34,6 @@ export class MyReferrals implements OnInit {
     return Math.ceil(this.invitedUsers().length / this.itemsPerPage);
   });
 
-  // Stats simples
   totalInvitations = computed(() => this.referralsStore.referredUsers().length);
 
   ngOnInit() {

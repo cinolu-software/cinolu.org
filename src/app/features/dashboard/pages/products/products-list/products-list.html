@@ -1,7 +1,6 @@
 <div>
   <p-confirmDialog />
 
-  <!-- Page Header  -->
   <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 dashboard-section">
     <div>
       <div class="flex items-center gap-3 mb-3">
@@ -24,7 +23,6 @@
     </a>
   </div>
 
-  <!-- Loading State  -->
   @if (productsStore.isLoading()) {
   <div class="flex flex-col items-center justify-center py-24">
     <div class="relative">
@@ -35,7 +33,6 @@
     <p class="mt-6 dashboard-text-body animate-pulse">Chargement de vos produits...</p>
   </div>
 
-  <!-- Empty State  -->
   } @else if (productsStore.isEmpty()) {
   <div class="flex flex-col items-center justify-center py-20 px-4">
     <div

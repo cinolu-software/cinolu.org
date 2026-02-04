@@ -1,17 +1,14 @@
 <section
   class="lg:flex-row min-h-full pt-20 md:pb-28 px-6 sm:px-8 md:px-10 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-grid">
-  <!-- LOADING -->
   @if (store.isLoading()) {
   <div class="mt-14 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
     <app-subprogram-card-skeleton />
   </div>
   }
 
-  <!-- PROGRAM FOUND -->
   @else if (store.subprogram()) { @if (store.subprogram(); as program) {
 
   <div class="w-full space-y-20 lg:space-y-28">
-    <!-- PROGRAM HEADER -->
     <div class="flex flex-col gap-6 rounded-xl p-8 bg-white/60 border border-gray-200/40 mt-10 lg:mt-16">
       <h3
         class="font-black flex items-center gap-4 font-satoshi text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary-900 tracking-tight">

@@ -1,6 +1,5 @@
 <div class="pb-20">
   @if (profileStore.isLoading()) {
-  <!-- Loading State -->
   <div class="flex flex-col justify-center items-center py-24">
     <div class="relative">
       <div class="w-16 h-16 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin"></div>
@@ -10,9 +9,7 @@
     <p class="mt-6 text-slate-600 font-medium animate-pulse">Chargement du profil...</p>
   </div>
   } @else { @if (profileStore.profile(); as profile) {
-  <!-- Content -->
   <div class="dashboard-grid">
-    <!-- Header avec statut -->
     <div class="col-span-12">
       <div class="dashboard-card p-6">
         <div class="flex items-center justify-between flex-wrap gap-4">
@@ -44,10 +41,8 @@
       </div>
     </div>
 
-    <!-- Formulaire -->
     <div class="col-span-12">
       <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-        <!-- Expérience professionnelle -->
         <div class="dashboard-card p-6 mb-6">
           <div class="flex items-center gap-3 mb-6">
             <div class="dashboard-stat-icon bg-gradient-to-br from-blue-500 to-indigo-600">
@@ -110,7 +105,6 @@
           </div>
         </div>
 
-        <!-- Expériences professionnelles -->
         <div class="dashboard-card p-6 mb-6">
           <div class="flex items-center justify-between mb-6">
             <div class="flex items-center gap-3">

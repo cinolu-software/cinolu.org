@@ -5,7 +5,6 @@
     aria-hidden="true"></div>
 
   <div class="grid grid-cols-1 lg:grid-cols-5 gap-0 lg:h-[60vh] items-stretch">
-    <!-- Image optionnelle à gauche (responsive) -->
     @if (item.avatar) {
     <figure class="lg:col-span-2 relative h-56 sm:h-64 lg:h-full flex">
       <img
@@ -21,24 +20,19 @@
         aria-hidden="true"></div>
     </figure>
     }
-
-    <!-- Contenu -->
     <div
       [ngClass]="{ 'lg:col-span-3': item.avatar, 'lg:col-span-5': !item.avatar }"
       class="p-6 sm:p-8 lg:p-10 flex flex-col justify-center h-full">
-      <!-- Icône quote -->
       <i-lucide
         [name]="quoteIcon"
         class="w-12 h-12 sm:w-14 sm:h-14 text-primary-200 mb-4 sm:mb-6"
         aria-hidden="true"></i-lucide>
 
-      <!-- Citation -->
       <blockquote
         class="text-base sm:text-lg lg:text-xl text-gray-900 font-semibold leading-relaxed mb-6 sm:mb-8 italic">
         "{{ item.quote }}"
       </blockquote>
 
-      <!-- Footer avec avatar initiale et infos -->
       <footer class="flex items-center gap-3 sm:gap-4 mt-2">
         <div
           class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-black text-lg sm:text-xl shadow-lg"
@@ -49,7 +43,6 @@
         <div class="flex-1 min-w-0">
           <cite class="not-italic font-bold text-gray-900 text-sm sm:text-base truncate">{{ item.name }}</cite>
           <p class="text-gray-600 text-xs sm:text-sm truncate">{{ item.role }}</p>
-          <!-- Rating étoiles -->
           <div class="flex gap-1 mt-2" role="img" aria-label="5 étoiles sur 5">
             @for (star of [1,2,3,4,5]; track star) {
             <i-lucide [name]="starIcon" class="w-4 h-4 text-yellow-400 fill-yellow-400" aria-hidden="true"></i-lucide>

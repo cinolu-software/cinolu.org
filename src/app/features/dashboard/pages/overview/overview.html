@@ -1,6 +1,5 @@
 <div class="pb-20">
   @if (venturesStore.isLoading()) {
-  <!-- Loading State  -->
   <div class="flex flex-col justify-center items-center py-24">
     <div class="relative">
       <div class="w-16 h-16 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin"></div>
@@ -10,9 +9,7 @@
     <p class="mt-6 text-slate-600 font-medium animate-pulse">Chargement de votre écosystème...</p>
   </div>
   } @else {
-  <!-- Content Grid -->
   <div class="dashboard-grid">
-    <!-- Welcome Banner  avec Glass Morphism -->
     <div class="col-span-12">
       <div class="dashboard-card-elevated p-8 md:p-10 relative overflow-hidden group cursor-default">
         <div
@@ -21,13 +18,11 @@
           class="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-blue-400/10 to-purple-400/10 rounded-full blur-3xl -z-0 group-hover:scale-110 transition-transform duration-700"></div>
 
         <div class="relative z-10 flex items-start gap-5">
-          <!-- Icon  -->
           <div
             class="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-xl shadow-brand-500/30 flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
             <span class="material-icons text-white text-4xl md:text-5xl">waving_hand</span>
           </div>
 
-          <!-- Welcome Text -->
           <div class="flex-1 min-w-0">
             <h1 class="dashboard-heading-2 mb-2">
               {{ greeting() }}, <span class="dashboard-text-gradient-primary">{{ authStore.user()?.name }}</span>
@@ -221,7 +216,6 @@
           <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
         </div>
 
-        <!-- Content  -->
         <div class="relative z-10 space-y-4">
           <span
             class="dashboard-badge bg-gradient-to-r from-brand-500 to-brand-700 text-white border-0 shadow-xl inline-flex">
@@ -264,7 +258,6 @@
         <a
           [routerLink]="['/dashboard/ventures', venture.slug]"
           class="dashboard-card-hover p-6 flex items-center gap-4 group cursor-pointer">
-          <!-- Logo  -->
           @if (venture.logo) {
           <div
             class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 ring-2 ring-slate-100 group-hover:ring-brand-200 transition-all duration-300 shadow-md">
@@ -277,7 +270,6 @@
           </div>
           }
 
-          <!-- Info -->
           <div class="flex-1 min-w-0">
             <h5 class="font-bold text-slate-900 group-hover:text-brand-600 transition-colors truncate text-base mb-1">
               {{ venture.name }}
@@ -287,7 +279,6 @@
             </p>
           </div>
 
-          <!-- Arrow Icon  -->
           <div
             class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center group-hover:bg-brand-50 transition-all duration-300 flex-shrink-0 shadow-sm">
             <span
@@ -299,7 +290,6 @@
         }
       </div>
       } @else {
-      <!-- Empty State  -->
       <div class="dashboard-card-elevated p-12 text-center">
         <div
           class="w-20 h-20 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-brand-500/30">
@@ -317,7 +307,6 @@
       }
     </div>
 
-    <!-- Quick Actions Section -->
     <div class="col-span-12">
       <div class="dashboard-card p-5 mb-6">
         <div class="flex items-center justify-between">
@@ -342,7 +331,6 @@
         <a
           routerLink="/dashboard/ventures/create"
           class="group relative overflow-hidden rounded-lg p-8 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-          <!-- Gradient Background  -->
           <div class="absolute inset-0 bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700"></div>
           <div
             class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIwLjUiIG9wYWNpdHk9IjAuMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
@@ -359,7 +347,6 @@
           </div>
         </a>
 
-        <!-- Action 2: Ajouter Produit -->
         <a routerLink="/dashboard/products/create" class="dashboard-card-hover p-8 group cursor-pointer">
           <div class="flex flex-col items-center text-center gap-4">
             <div

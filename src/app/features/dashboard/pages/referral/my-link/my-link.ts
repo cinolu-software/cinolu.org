@@ -37,9 +37,6 @@ export class MyReferralLink implements OnInit {
     }
   }
 
-  /**
-   * Charge le QR Code depuis le cache ou le génère si nécessaire
-   */
   private loadQRCodeFromCache(code: string) {
     try {
       const cacheKey = REFERRAL_CONFIG.QR_CODE_CACHE_KEY;
@@ -49,7 +46,6 @@ export class MyReferralLink implements OnInit {
         const cache: QRCodeCache = JSON.parse(cached);
         const now = Date.now();
 
-        // Vérifier si le cache est valide et correspond au bon code
         if (cache.referralCode === code && now - cache.timestamp < REFERRAL_CONFIG.QR_CODE_CACHE_TTL) {
           this.qrCodeDataUrl.set(cache.dataUrl);
           return;
@@ -59,21 +55,17 @@ export class MyReferralLink implements OnInit {
       console.error('Erreur lors du chargement du cache QR Code:', error);
     }
 
-    // Si pas de cache valide, générer un nouveau QR Code
     this.generateQRCode();
   }
 
   onGenerateCode() {
     this.referralsStore.generateReferralCode();
-    // Le QR Code sera généré automatiquement quand referralLink() change
     const unsubscribe = setInterval(() => {
       if (this.referralLink()) {
         this.generateQRCode();
         clearInterval(unsubscribe);
       }
     }, 100);
-
-    // Timeout de sécurité après 5 secondes
     setTimeout(() => clearInterval(unsubscribe), 5000);
   }
 
@@ -134,7 +126,6 @@ export class MyReferralLink implements OnInit {
       const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(link)}`;
       this.qrCodeDataUrl.set(qrApiUrl);
 
-      // Sauvegarder dans le cache
       const cache: QRCodeCache = {
         dataUrl: qrApiUrl,
         referralCode: code,
