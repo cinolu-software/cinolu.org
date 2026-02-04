@@ -4,7 +4,7 @@
 
 /* Container principal pour le contenu du dashboard */
 .container-dashboard {
-  @apply px-4 md:px-6 lg:px-8 py-6 md:py-8 max-w-7xl mx-auto;
+  @apply px-6 lg:px-8 py-6 md:py-8 max-w-7xl mx-auto;
 }
 
 /* Scrollbar personnalisée pour le dashboard */
