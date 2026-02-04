@@ -5,19 +5,14 @@
     <div>
       <div class="flex items-center gap-3 mb-3">
         <div
-          class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center shadow-lg">
+          class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-400/90 to-primary-500/85 flex items-center justify-center shadow-lg">
           <span class="material-icons text-white text-2xl">shopping_bag</span>
         </div>
-        <h1 class="dashboard-heading-2">
-          Mes
-          <span class="bg-gradient-to-r from-primary-400 to-primary-500 bg-clip-text text-transparent">Produits</span>
-        </h1>
+        <h1 class="text-2xl font-bold text-slate-900">Mes Produits</h1>
       </div>
-      <p class="dashboard-text-body">Gérez votre catalogue de produits et services</p>
+      <p class="text-slate-600">Gérez votre catalogue de produits et services</p>
     </div>
-    <a
-      routerLink="/dashboard/products/create"
-      class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-gradient-to-br from-primary-400 to-primary-500 text-white font-bold rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-105">
+    <a routerLink="/dashboard/products/create" class="dashboard-btn-primary">
       <span class="material-icons text-xl">add</span>
       <span>Ajouter un produit</span>
     </a>
@@ -27,25 +22,21 @@
   <div class="flex flex-col items-center justify-center py-24">
     <div class="relative">
       <div class="w-16 h-16 border-4 border-indigo-200 border-t-primary-500 rounded-full animate-spin"></div>
-      <div
-        class="absolute inset-0 w-16 h-16 border-4 border-transparent border-b-primary-400 rounded-full animate-ping"></div>
     </div>
-    <p class="mt-6 dashboard-text-body animate-pulse">Chargement de vos produits...</p>
+    <p class="mt-6 text-slate-600 font-medium">Chargement de vos produits...</p>
   </div>
 
   } @else if (productsStore.isEmpty()) {
   <div class="flex flex-col items-center justify-center py-20 px-4">
     <div
-      class="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center shadow-2xl shadow-indigo-500/30 mb-6">
+      class="w-24 h-24 rounded-xl bg-gradient-to-br from-primary-400/90 to-primary-500/85 flex items-center justify-center shadow-lg mb-6">
       <span class="material-icons text-white text-5xl">shopping_bag</span>
     </div>
-    <h2 class="dashboard-heading-3 mb-3">Aucun produit</h2>
-    <p class="dashboard-text-body mb-8 text-center max-w-md">
+    <h2 class="text-2xl font-bold text-slate-900 mb-3">Aucun produit</h2>
+    <p class="text-slate-600 mb-8 text-center max-w-md">
       Ajoutez vos premiers produits ou services pour commencer à vendre
     </p>
-    <a
-      routerLink="/dashboard/products/create"
-      class="inline-flex items-center gap-2.5 px-6 py-3.5 bg-gradient-to-br from-primary-400 to-primary-500 text-white font-bold rounded-lg shadow-xl hover:shadow-2xl transition-all">
+    <a routerLink="/dashboard/products/create" class="dashboard-btn-primary">
       <span class="material-icons text-xl">add</span>
       <span>Créer mon premier produit</span>
     </a>
@@ -59,16 +50,18 @@
         @if (product.venture) {
         <div class="mb-4">
           <span class="dashboard-badge-primary">
-            <span class="material-icons text-[14px]">business</span>
+            <span class="material-icons text-sm">business</span>
             <span>{{ product.venture.name }}</span>
           </span>
         </div>
         }
 
         <div class="flex items-start justify-between gap-4">
-          <h3 class="dashboard-heading-5 flex-1 group-hover:text-primary-600 transition-colors">{{ product.name }}</h3>
+          <h3 class="text-lg font-bold text-slate-900 flex-1 group-hover:text-primary-600 transition-colors">
+            {{ product.name }}
+          </h3>
           <div class="flex-shrink-0">
-            <div class="px-4 py-2.5 bg-gradient-to-br from-primary-400 to-primary-500 rounded-lg shadow-lg">
+            <div class="px-4 py-2.5 bg-gradient-to-br from-primary-400/90 to-primary-500/85 rounded-lg shadow-lg">
               <div class="flex items-baseline gap-0.5">
                 <span class="text-xl font-black text-white">{{ product.price | number:'1.0-0' }}</span>
                 <span class="text-sm text-white/80 font-bold">$</span>
@@ -79,7 +72,7 @@
       </div>
 
       <div class="px-6 py-4 flex-1">
-        <p class="dashboard-text-small dashboard-line-clamp-3 leading-relaxed">{{ product.description }}</p>
+        <p class="text-sm text-slate-600 line-clamp-3 leading-relaxed">{{ product.description }}</p>
       </div>
 
       <div class="px-6 pb-6 pt-4 border-t border-slate-100 flex gap-3">
