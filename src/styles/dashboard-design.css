@@ -119,30 +119,35 @@
 .dashboard-card {
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.04);
-  border: 1px solid rgb(226 232 240 / 0.5);
+  box-shadow: 0 1px 2px 0 rgb(15 23 42 / 0.04);
+  border: 1px solid rgb(226 232 240 / 0.8);
   transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dashboard-card-hover {
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.04);
-  border: 1px solid rgb(226 232 240 / 0.5);
+  box-shadow: 0 1px 2px 0 rgb(15 23 42 / 0.04);
+  border: 1px solid rgb(226 232 240 / 0.8);
   transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dashboard-card-hover:hover {
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.08);
-  border-color: rgb(203 213 225 / 0.7);
+  box-shadow: 0 12px 24px -12px rgb(15 23 42 / 0.18);
+  border-color: rgb(203 213 225);
   transform: translateY(-2px);
 }
 
 .dashboard-card-elevated {
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.06);
-  border: 1px solid rgb(226 232 240 / 0.6);
+  box-shadow: 0 10px 22px -12px rgb(15 23 42 / 0.2);
+  border: 1px solid rgb(226 232 240 / 0.85);
+}
+
+.dashboard-card-soft {
+  background-color: rgb(248 250 252);
+  border: 1px solid rgb(226 232 240 / 0.9);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
