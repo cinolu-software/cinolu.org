@@ -865,5 +865,45 @@
         "dashboard": "Back to dashboard"
       }
     }
+  },
+
+  "ambassadors": {
+    "badge": "Ambassadors",
+    "landing": {
+      "title": "Top 3 Ambassadors",
+      "subtitle": "The 3 most active entrepreneurs driving our community by sponsoring new talents."
+    },
+    "page": {
+      "title": "All Ambassadors",
+      "description": "Our ambassadors build Cinolu by sponsoring entrepreneurs and innovators. Discover those who grow the ecosystem.",
+      "totalCount": "ambassadors",
+      "noAmbassadors": "No ambassadors at the moment",
+      "checkBackLater": "Check back soon to discover our ambassadors."
+    },
+    "detail": {
+      "backToList": "Back to ambassadors",
+      "activeStatus": "Active Ambassador",
+      "impactPoints": "Impact Points",
+      "globalRank": "Global Rank",
+      "badgesEarned": "Badges Earned",
+      "badgesSection": "Badges & Rewards",
+      "accomplishments": "Accomplishments",
+      "unlockBadges": "Unlock new badges by continuing to contribute",
+      "recentActivity": "Recent Activity",
+      "lastActions": "Latest Actions",
+      "notFound": "Ambassador not found",
+      "notFoundMessage": "This ambassador does not exist or has been deleted.",
+      "badges": {
+        "firstAmbassador": "First Ambassador",
+        "activeMentor": "Active Mentor",
+        "starContributor": "Star Contributor",
+        "communityLeader": "Community Leader",
+        "topSponsor": "Top Sponsor",
+        "eliteAmbassador": "Elite Ambassador"
+      }
+    },
+    "referrals": "referrals",
+    "viewAll": "Discover all ambassadors",
+    "noData": "No data available"
   }
 }

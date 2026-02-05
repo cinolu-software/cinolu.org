@@ -868,5 +868,45 @@
         "dashboard": "Retour au tableau de bord"
       }
     }
+  },
+
+  "ambassadors": {
+    "badge": "Ambassadeurs",
+    "landing": {
+      "title": "Le Top 3 des Ambassadeurs",
+      "subtitle": "Les 3 entrepreneurs les plus actifs qui propulsent notre communauté en parrainant de nouveaux talents."
+    },
+    "page": {
+      "title": "Tous les Ambassadeurs",
+      "description": "Nos ambassadeurs bâtissent Cinolu en parrainant entrepreneurs et innovateurs. Découvrez ceux qui font grandir l'écosystème.",
+      "totalCount": "ambassadeurs",
+      "noAmbassadors": "Aucun ambassadeur pour le moment",
+      "checkBackLater": "Revenez bientôt pour découvrir nos ambassadeurs."
+    },
+    "detail": {
+      "backToList": "Retour aux ambassadeurs",
+      "activeStatus": "Ambassadeur Actif",
+      "impactPoints": "Points d'Impact",
+      "globalRank": "Classement Global",
+      "badgesEarned": "Badges Obtenus",
+      "badgesSection": "Badges & Récompenses",
+      "accomplishments": "Accomplissements",
+      "unlockBadges": "Débloquez de nouveaux badges en continuant à contribuer",
+      "recentActivity": "Activité Récente",
+      "lastActions": "Dernières Actions",
+      "notFound": "Ambassadeur introuvable",
+      "notFoundMessage": "Cet ambassadeur n'existe pas ou a été supprimé.",
+      "badges": {
+        "firstAmbassador": "Premier Ambassadeur",
+        "activeMentor": "Mentor Actif",
+        "starContributor": "Contributeur Star",
+        "communityLeader": "Leader Communauté",
+        "topSponsor": "Top Parrain",
+        "eliteAmbassador": "Ambassadeur Elite"
+      }
+    },
+    "referrals": "parrainages",
+    "viewAll": "Découvrir tous les ambassadeurs",
+    "noData": "Aucune donnée disponible"
   }
 }
