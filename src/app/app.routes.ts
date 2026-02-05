@@ -26,6 +26,12 @@ export const routes: Route[] = [
     data: { layout: 'fixed-layout' },
     loadChildren: () => import('./features/events/events.routes').then((m) => m.eventsRoutes)
   },
+  {
+    path: 'ambassadeurs',
+    component: Layout,
+    data: { layout: 'fixed-layout' },
+    loadChildren: () => import('./features/ambassadors/ambassadors.routes').then((m) => m.ambassadorsRoutes)
+  },
 
   {
     path: 'about-us',
