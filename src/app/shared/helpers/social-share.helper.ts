@@ -1,17 +1,11 @@
 import { calculateBadgeInfo } from './badges.helper';
 
-/**
- * Options de partage sur les réseaux sociaux
- */
 export interface ShareOptions {
   platform: 'whatsapp' | 'linkedin' | 'facebook' | 'twitter';
   link: string;
   referralCount: number;
 }
 
-/**
- * Génère un message de partage personnalisé selon le niveau du badge
- */
 export function generateShareMessage(referralCount: number): string {
   const badgeInfo = calculateBadgeInfo(referralCount);
   return badgeInfo.shareMessage;
