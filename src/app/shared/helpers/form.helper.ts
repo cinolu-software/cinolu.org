@@ -1,27 +1,16 @@
 import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 
-/**
- * Vérifie si un control a le validator `Validators.required`.
- */
 export function isRequired(control: AbstractControl | null): boolean {
   if (!control) return false;
   const validator = control.validator?.({} as AbstractControl);
   return !!(validator && validator['required']);
 }
 
-/**
- * Détermine si on doit afficher une erreur (invalid + (dirty OU touched)).
- */
 export function shouldShowError(control: AbstractControl | null): boolean {
   if (!control) return false;
   return control.invalid && (control.dirty || control.touched);
 }
 
-/**
- * Retourne le premier message d'erreur pour un control donné.
- * @param control - le FormControl
- * @param customMessages - map optionnelle { errorKey: message }
- */
 export function getErrorMessage(control: AbstractControl | null, customMessages?: Record<string, string>): string {
   if (!control || !control.errors) return '';
 
@@ -32,7 +21,6 @@ export function getErrorMessage(control: AbstractControl | null, customMessages?
     return customMessages[errorKey];
   }
 
-  // Messages par défaut
   switch (errorKey) {
     case 'required':
       return 'Ce champ est requis';
@@ -53,9 +41,6 @@ export function getErrorMessage(control: AbstractControl | null, customMessages?
   }
 }
 
-/**
- * Marque tous les controls d'un FormGroup comme touched (pour déclencher les erreurs).
- */
 export function markAllAsTouched(form: FormGroup): void {
   Object.keys(form.controls).forEach((key) => {
     const control = form.controls[key];
@@ -66,9 +51,6 @@ export function markAllAsTouched(form: FormGroup): void {
   });
 }
 
-/**
- * Compte le nombre total de controls dans un FormGroup (récursif).
- */
 export function countControls(group: FormGroup): number {
   let count = 0;
   for (const key of Object.keys(group.controls)) {
@@ -83,9 +65,6 @@ export function countControls(group: FormGroup): number {
   return count;
 }
 
-/**
- * Compte le nombre de controls valides dans un FormGroup (récursif).
- */
 export function countValidControls(group: FormGroup): number {
   let count = 0;
   for (const key of Object.keys(group.controls)) {
