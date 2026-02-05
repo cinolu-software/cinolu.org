@@ -8,11 +8,22 @@ import { Programs } from '../components/programs/programs';
 import { Onestop } from '../components/onestop/onestop';
 import { Services } from '../components/services/services';
 import { Hero } from '../components/hero/hero';
-// import { TestimonialsSection } from '../components/testimonials-section/testimonials-section';
+import { TopAmbassadors } from '../components/top-ambassadors/top-ambassadors';
 
 @Component({
   selector: 'app-landing',
-  imports: [RecentProjects, RecentEvents, Networks, Partners, WhyJoinUs, Programs, Onestop, Services, Hero],
+  imports: [
+    RecentProjects,
+    RecentEvents,
+    Networks,
+    Partners,
+    WhyJoinUs,
+    Programs,
+    Onestop,
+    Services,
+    Hero,
+    TopAmbassadors
+  ],
   templateUrl: './landing.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

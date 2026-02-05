@@ -1,6 +1,11 @@
 <div class="relative overflow-x-hidden">
   <app-hero />
   <app-why-join-us />
+  @defer (on viewport) {
+  <app-top-ambassadors />
+  } @placeholder {
+  <div class="h-96 bg-gray-50"></div>
+  }
   <app-onestop />
   <app-services />
   @defer (on viewport) {
