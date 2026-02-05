@@ -1,4 +1,4 @@
-<div class="pb-20">
+﻿<div class="pb-20">
   @if (venturesStore.isLoading()) {
   <div class="flex flex-col justify-center items-center py-24">
     <div class="relative">
@@ -52,133 +52,143 @@
       <p class="text-sm text-slate-600">Vue synthétique de vos indicateurs</p>
     </div>
 
-    <div class="col-span-12 md:col-span-6 lg:col-span-3">
-      <div class="dashboard-stat-card">
-        <div class="flex items-start justify-between mb-4">
-          <div class="dashboard-stat-icon bg-gradient-to-br from-brand-500/90 to-brand-700/85 shadow-lg">
-            <span class="material-icons text-white text-2xl">{{ businessIcon }}</span>
-          </div>
-        </div>
-        <div class="space-y-1">
-          <p class="dashboard-stat-label">Mes Entreprises</p>
-          <h3 class="dashboard-stat-value">{{ venturesStore.ventures().length || 0 }}</h3>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-span-12 md:col-span-6 lg:col-span-3">
-      <div class="dashboard-stat-card">
-        <div class="flex items-start justify-between mb-4">
-          <div class="dashboard-stat-icon bg-gradient-to-br from-blue-500/90 to-indigo-600/85 shadow-lg">
-            <span class="material-icons text-white text-2xl">{{ packageIcon }}</span>
-          </div>
-        </div>
-        <div class="space-y-1">
-          <p class="dashboard-stat-label">Produits Actifs</p>
-          <h3 class="dashboard-stat-value">{{ productsCount || 0 }}</h3>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-span-12 md:col-span-6 lg:col-span-3">
-      <div class="dashboard-stat-card">
-        <div class="flex items-start justify-between mb-4">
-          <div class="dashboard-stat-icon bg-gradient-to-br from-emerald-500/90 to-teal-600/85 shadow-lg">
-            <span class="material-icons text-white text-2xl">{{ userPlusIcon }}</span>
-          </div>
-        </div>
-        <div class="space-y-1">
-          <p class="dashboard-stat-label">Parrainages</p>
-          <h3 class="dashboard-stat-value">{{ authStore.user()?.referralsCount || 0 }}</h3>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-span-12 md:col-span-6 lg:col-span-3">
-      <div class="dashboard-stat-card">
-        <div class="flex items-start justify-between mb-4">
-          <div class="dashboard-stat-icon bg-gradient-to-br from-amber-500/90 to-orange-600/85 shadow-lg">
-            <span class="material-icons text-white text-2xl">{{ usersIcon }}</span>
-          </div>
-        </div>
-        <div class="space-y-1">
-          <p class="dashboard-stat-label">Profil</p>
-          <h3 class="dashboard-stat-value">{{ profileCompletion() }}<span class="text-xl">%</span></h3>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-span-12 lg:col-span-6">
-      <div class="dashboard-card-elevated flex flex-col">
-        <div class="flex items-center justify-between mb-6">
-          <div>
-            <h3 class="text-lg font-bold text-slate-900 mb-1">Complétion du Profil</h3>
-            <p class="text-sm text-slate-600">Progression en temps réel</p>
-          </div>
-          <span class="dashboard-badge-critical">
-            <span class="dashboard-status-online"></span>
-            <span>Live</span>
-          </span>
-        </div>
-        @defer (on viewport) {
-        <div class="relative flex-1 flex items-center justify-center min-h-[2px]">
-          <canvas
-            baseChart
-            [data]="doughnutChartData"
-            [options]="doughnutChartOptions"
-            type="doughnut"
-            class="w-64 h-64 lg:h-72 lg:w-72 max-w-full"></canvas>
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="text-center">
-              <span class="text-6xl font-black tracking-tighter dashboard-text-gradient-primary"
-                >{{ profileCompletion() }}</span
-              >
-              <span class="text-3xl font-black text-slate-400">%</span>
-              <p class="text-sm text-slate-600 font-semibold mt-3">
-                {{ profileCompletion() === 100 ? '✨ Profil complet !' : 'Complétez votre profil' }}
-              </p>
+    <div class="col-span-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="dashboard-stat-card">
+          <div class="flex items-start justify-between mb-4">
+            <div class="dashboard-stat-icon bg-gradient-to-br from-brand-500/90 to-brand-700/85 shadow-lg">
+              <span class="material-icons text-white text-2xl">{{ businessIcon }}</span>
             </div>
           </div>
+          <div class="space-y-1">
+            <p class="dashboard-stat-label">Mes Entreprises</p>
+            <h3 class="dashboard-stat-value">{{ venturesStore.ventures().length || 0 }}</h3>
+          </div>
         </div>
-        } @placeholder {
-        <div class="flex-1 flex items-center justify-center min-h-[320px]">
-          <div class="dashboard-shimmer w-64 h-64 rounded-full"></div>
+
+        <div class="dashboard-stat-card">
+          <div class="flex items-start justify-between mb-4">
+            <div class="dashboard-stat-icon bg-gradient-to-br from-blue-500/90 to-indigo-600/85 shadow-lg">
+              <span class="material-icons text-white text-2xl">{{ packageIcon }}</span>
+            </div>
+          </div>
+          <div class="space-y-1">
+            <p class="dashboard-stat-label">Produits Actifs</p>
+            <h3 class="dashboard-stat-value">{{ productsCount || 0 }}</h3>
+          </div>
         </div>
-        }
+
+        <div class="dashboard-stat-card">
+          <div class="flex items-start justify-between mb-4">
+            <div class="dashboard-stat-icon bg-gradient-to-br from-emerald-500/90 to-teal-600/85 shadow-lg">
+              <span class="material-icons text-white text-2xl">{{ userPlusIcon }}</span>
+            </div>
+          </div>
+          <div class="space-y-1">
+            <p class="dashboard-stat-label">Parrainages</p>
+            <h3 class="dashboard-stat-value">{{ authStore.user()?.referralsCount || 0 }}</h3>
+          </div>
+        </div>
+
+        <div class="dashboard-stat-card">
+          <div class="flex items-start justify-between mb-4">
+            <div class="dashboard-stat-icon bg-gradient-to-br from-amber-500/90 to-orange-600/85 shadow-lg">
+              <span class="material-icons text-white text-2xl">{{ usersIcon }}</span>
+            </div>
+          </div>
+          <div class="space-y-1">
+            <p class="dashboard-stat-label">Profil</p>
+            <h3 class="dashboard-stat-value">{{ profileCompletion() }}<span class="text-xl">%</span></h3>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="col-span-12 lg:col-span-6">
-      <div class="mb-4">
-        <h2 class="text-xl font-bold text-slate-900 mb-1">À la une</h2>
-        <p class="text-sm text-slate-600">Mise en avant dynamique</p>
-      </div>
-
-      <a
-        [routerLink]="highlightLink()"
-        class="relative dashboard-card-hover overflow-hidden group cursor-pointer h-[360px] flex flex-col justify-end">
-        <div class="absolute inset-0 overflow-hidden">
-          <img
-            [src]="highlightImage()"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            [alt]="highlightTitle()" />
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
-        </div>
-
-        <div class="relative z-10 space-y-4 p-8">
-          <span
-            class="dashboard-badge bg-gradient-to-r from-brand-500/90 to-brand-700/85 text-white border-0 shadow-lg inline-flex">
-            <span class="material-icons text-sm">star</span>
-            <span class="uppercase tracking-wider font-bold text-xs">{{ highlightBadge() }}</span>
-          </span>
-          <h4 class="text-2xl font-black text-white leading-tight dashboard-line-clamp-2">{{ highlightTitle() }}</h4>
-          <p class="text-slate-200 text-sm leading-relaxed dashboard-line-clamp-2">{{ highlightDescription() }}</p>
-          <div class="flex items-center gap-2 text-white font-semibold pt-2">
-            <span class="text-sm">Découvrir</span>
-            <span class="material-icons text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+    <div class="col-span-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="dashboard-card-elevated flex flex-col">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 mb-1">Complétion du Profil</h3>
+              <p class="text-sm text-slate-600">Progression en temps réel</p>
+            </div>
+            <span class="dashboard-badge-critical">
+              <span class="dashboard-status-online"></span>
+              <span>Live</span>
+            </span>
           </div>
+          @defer (on viewport) {
+          <div class="relative flex-1 flex items-center justify-center min-h-[2px]">
+            <svg class="w-64 h-64 lg:h-72 lg:w-72 max-w-full transform -rotate-90" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="85" stroke="#e5e7eb" stroke-width="16" fill="none" />
+              <circle
+                cx="100"
+                cy="100"
+                r="85"
+                stroke="#5d9c46"
+                stroke-width="16"
+                fill="none"
+                [attr.stroke-dasharray]="534.07"
+                [attr.stroke-dashoffset]="534.07 * (1 - profileCompletion() / 100)"
+                stroke-linecap="round"
+                class="transition-all duration-1000 ease-out" />
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div class="text-center">
+                <span class="text-6xl font-black tracking-tighter dashboard-text-gradient-primary"
+                  >{{ profileCompletion() }}</span
+                >
+                <span class="text-3xl font-black text-slate-400">%</span>
+                <p class="text-sm text-slate-600 font-semibold mt-3">
+                  {{ profileCompletion() === 100 ? '✨ Profil complet !' : 'Complétez votre profil' }}
+                </p>
+              </div>
+            </div>
+          </div>
+          } @placeholder {
+          <div class="flex-1 flex items-center justify-center min-h-[320px]">
+            <div class="dashboard-shimmer w-64 h-64 rounded-full"></div>
+          </div>
+          }
         </div>
-      </a>
+
+        <div class="">
+          <div class="mb-4">
+            <h2 class="text-xl font-bold text-slate-900 mb-1">À la une</h2>
+            <p class="text-sm text-slate-600">Mise en avant dynamique</p>
+          </div>
+
+          <a
+            [routerLink]="highlightLink()"
+            class="relative dashboard-card-hover overflow-hidden group cursor-pointer h-[360px] flex flex-col justify-end">
+            <div class="absolute inset-0 overflow-hidden">
+              <img
+                [src]="highlightImage()"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                [alt]="highlightTitle()" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 space-y-4 p-8">
+              <span
+                class="dashboard-badge bg-gradient-to-r from-brand-500/90 to-brand-700/85 text-white border-0 shadow-lg inline-flex">
+                <span class="material-icons text-sm">star</span>
+                <span class="uppercase tracking-wider font-bold text-xs">{{ highlightBadge() }}</span>
+              </span>
+              <h4 class="text-2xl font-black text-white leading-tight dashboard-line-clamp-2">
+                {{ highlightTitle() }}
+              </h4>
+              <p class="text-slate-200 text-sm leading-relaxed dashboard-line-clamp-2">{{ highlightDescription() }}</p>
+              <div class="flex items-center gap-2 text-white font-semibold pt-2">
+                <span class="text-sm">Découvrir</span>
+                <span class="material-icons text-base group-hover:translate-x-1 transition-transform"
+                  >arrow_forward</span
+                >
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
 
     <div class="col-span-12">
@@ -249,7 +259,7 @@
         <p class="text-sm text-slate-600">Accès immédiat aux tâches essentielles</p>
       </div>
 
-      <div class="dashboard-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <a
           routerLink="/dashboard/ventures/create"
           class="dashboard-card-hover group cursor-pointer overflow-hidden bg-gradient-to-br from-brand-500/90 via-brand-600/85 to-brand-700/85 p-8">

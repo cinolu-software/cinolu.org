@@ -4,14 +4,7 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection
 } from '@angular/core';
-import {
-  provideRouter,
-  TitleStrategy,
-  withInMemoryScrolling,
-  withViewTransitions,
-  withPreloading,
-  PreloadAllModules
-} from '@angular/router';
+import { provideRouter, TitleStrategy, withInMemoryScrolling, withViewTransitions } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay, withHttpTransferCacheOptions } from '@angular/platform-browser';
 import { providePrimeNG } from 'primeng/config';
@@ -28,7 +21,6 @@ import { provideQuillConfig } from 'ngx-quill';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { importProvidersFrom, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
-import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { provideServiceWorker } from '@angular/service-worker';
 
 registerLocaleData(localeFr, 'fr');
@@ -56,7 +48,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withViewTransitions(),
-      withPreloading(PreloadAllModules),
       withInMemoryScrolling({
         scrollPositionRestoration: 'enabled',
         anchorScrolling: 'enabled'
@@ -64,7 +55,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideApp(),
     provideAnimations(),
-    provideCharts(withDefaultRegisterables()),
     provideHttpClient(withFetch(), withInterceptors([httpInterceptor, LoadingInterceptor])),
     provideClientHydration(
       withEventReplay(),
