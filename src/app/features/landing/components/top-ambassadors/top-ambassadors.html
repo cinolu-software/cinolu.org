@@ -1,0 +1,163 @@
+<section class="bg-gradient-to-br bg-grid from-primary-500 via-white to-blue-500/30 overflow-hidden min-h-2/3">
+  <div class="py-12 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
+    <div class="text-center mb-12 lg:mb-16">
+      <div
+        class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
+        <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
+        {{ 'ambassadors.badge' | translate }}
+      </div>
+
+      <h3
+        class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-4 tracking-tight leading-tight hyphens-none">
+        {{ 'ambassadors.landing.title' | translate }}
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">Cinolu</span>
+      </h3>
+
+      <p class="text-base lg:text-lg max-w-3xl text-gray-600 mx-auto mb-16 leading-relaxed">
+        {{ 'ambassadors.landing.subtitle' | translate }}
+      </p>
+    </div>
+
+    @if (store.isLoading()) {
+    <div class="flex flex-col justify-center items-center py-20 gap-4">
+      <div class="relative">
+        <lucide-icon
+          [name]="icons.sparkles"
+          class="w-12 h-12 text-primary-600 animate-spin"
+          [strokeWidth]="2"></lucide-icon>
+      </div>
+      <p class="text-gray-500 font-medium">{{ 'common.loading' | translate }}</p>
+    </div>
+    } @if (!store.isLoading() && store.ambassadors().length > 0) {
+    <div class="flex items-end justify-center gap-4 md:gap-8 mb-12 lg:mb-20 px-4">
+      @if (store.ambassadors().length >= 2) {
+      <a
+        [routerLink]="['/ambassadeurs', store.ambassadors()[1].email]"
+        class="flex flex-col items-center flex-1 max-w-[200px] transform translate-y-8 hover:scale-105 transition-transform cursor-pointer group">
+        <div class="relative mb-4">
+          <div
+            class="absolute -inset-2 bg-gradient-to-r from-slate-400 to-slate-500 rounded-full blur opacity-40 group-hover:opacity-70 transition"></div>
+          @if (store.ambassadors()[1].profile) {
+          <img
+            [src]="store.ambassadors()[1] | apiIMG: 'user'"
+            [alt]="store.ambassadors()[1].name"
+            class="relative w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-slate-400 shadow-xl" />
+          } @else {
+          <div
+            class="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center text-white font-bold text-2xl border-4 border-slate-400 shadow-xl">
+            {{ getInitials(store.ambassadors()[1].name) }}
+          </div>
+          }
+          <div
+            class="absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-br from-slate-400 to-slate-500 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+            <lucide-icon [name]="icons.medal" class="w-5 h-5 text-gray-900" [strokeWidth]="2.5"></lucide-icon>
+          </div>
+        </div>
+        <div
+          class="bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg p-4 w-full text-center shadow-lg border border-slate-300">
+          <h4 class="font-bold text-gray-900 text-sm md:text-base truncate mb-1">{{ store.ambassadors()[1].name }}</h4>
+          <p class="text-xs text-gray-600 mb-2 truncate">{{ store.ambassadors()[1].city }}</p>
+          <div class="inline-flex items-center px-3 py-1 bg-slate-500 text-white rounded-full text-xs font-semibold">
+            {{ store.ambassadors()[1].referralsCount }} {{ 'ambassadors.referrals' | translate }}
+          </div>
+        </div>
+      </a>
+      }
+
+      <a
+        [routerLink]="['/ambassadeurs', store.ambassadors()[0].email]"
+        class="flex flex-col items-center flex-1 max-w-[240px] hover:scale-105 transition-transform cursor-pointer group">
+        <div class="relative mb-4 group">
+          <div
+            class="absolute -inset-3 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-full blur opacity-50 group-hover:opacity-80 transition animate-pulse"></div>
+          @if (store.ambassadors()[0].profile) {
+          <img
+            [src]="store.ambassadors()[0] | apiIMG: 'user'"
+            [alt]="store.ambassadors()[0].name"
+            class="relative w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-yellow-400 shadow-2xl" />
+          } @else {
+          <div
+            class="relative w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-yellow-300 to-yellow-600 flex items-center justify-center text-white font-bold text-3xl border-4 border-yellow-400 shadow-2xl">
+            {{ getInitials(store.ambassadors()[0].name) }}
+          </div>
+          }
+          <div
+            class="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-xl border-3 border-white animate-bounce">
+            <lucide-icon [name]="icons.crown" class="w-6 h-6 text-gray-900" [strokeWidth]="2.5"></lucide-icon>
+          </div>
+          <div
+            class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center shadow-xl border-3 border-white">
+            <lucide-icon [name]="icons.trophy" class="w-6 h-6 text-gray-900" [strokeWidth]="2.5"></lucide-icon>
+          </div>
+        </div>
+        <div
+          class="bg-gradient-to-br from-yellow-100 via-yellow-200 to-yellow-300 rounded-lg p-5 w-full text-center shadow-2xl border-2 border-yellow-400">
+          <div
+            class="inline-flex items-center gap-1.5 px-4 py-1.5 bg-gradient-to-r from-yellow-500 to-amber-500 text-white rounded-full text-xs font-bold mb-3 shadow-md">
+            <lucide-icon [name]="icons.sparkles" class="w-3.5 h-3.5" [strokeWidth]="3"></lucide-icon>
+            #1 Ambassadeur
+          </div>
+          <h4 class="font-black text-gray-900 text-base md:text-lg truncate mb-1">{{ store.ambassadors()[0].name }}</h4>
+          <p class="text-xs text-gray-700 mb-3 truncate">{{ store.ambassadors()[0].city }}</p>
+          <div
+            class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-full text-sm font-bold shadow-md">
+            {{ store.ambassadors()[0].referralsCount }} {{ 'ambassadors.referrals' | translate }}
+          </div>
+        </div>
+      </a>
+
+      @if (store.ambassadors().length >= 3) {
+      <a
+        [routerLink]="['/ambassadeurs', store.ambassadors()[2].email]"
+        class="flex flex-col items-center flex-1 max-w-[220px] transform translate-y-8 hover:scale-105 transition-transform cursor-pointer group">
+        <div class="relative mb-4 group">
+          <div
+            class="absolute -inset-2 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full blur opacity-40 group-hover:opacity-70 transition"></div>
+          @if (store.ambassadors()[2].profile) {
+          <img
+            [src]="store.ambassadors()[2] | apiIMG: 'user'"
+            [alt]="store.ambassadors()[2].name"
+            class="relative w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-orange-400 shadow-xl" />
+          } @else {
+          <div
+            class="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-orange-300 to-orange-500 flex items-center justify-center text-white font-bold text-2xl border-4 border-orange-400 shadow-xl">
+            {{ getInitials(store.ambassadors()[2].name) }}
+          </div>
+          }
+          <div
+            class="absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+            <lucide-icon [name]="icons.medal" class="w-5 h-5 text-gray-900" [strokeWidth]="2.5"></lucide-icon>
+          </div>
+        </div>
+        <div
+          class="bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg p-4 w-full text-center shadow-lg border border-orange-300">
+          <h4 class="font-bold text-gray-900 text-sm md:text-base truncate mb-1">{{ store.ambassadors()[2].name }}</h4>
+          <p class="text-xs text-gray-600 mb-2 truncate">{{ store.ambassadors()[2].city }}</p>
+          <div class="inline-flex items-center px-3 py-1 bg-orange-500 text-white rounded-full text-xs font-semibold">
+            {{ store.ambassadors()[2].referralsCount }} {{ 'ambassadors.referrals' | translate }}
+          </div>
+        </div>
+      </a>
+      }
+    </div>
+
+    <div class="text-center">
+      <a routerLink="/ambassadeurs" class="dashboard-btn-primary inline-flex items-center gap-2 group">
+        {{ 'ambassadors.viewAll' | translate }}
+        <lucide-icon
+          [name]="icons.arrowRight"
+          class="w-5 h-5 transition-transform group-hover:translate-x-1"
+          [strokeWidth]="2.5"></lucide-icon>
+      </a>
+    </div>
+    } @if (!store.isLoading() && store.ambassadors().length === 0) {
+    <div class="text-center py-20">
+      <div
+        class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full mb-6 shadow-inner">
+        <lucide-icon [name]="icons.users" class="w-10 h-10 text-gray-400" [strokeWidth]="2"></lucide-icon>
+      </div>
+      <p class="text-gray-500 text-lg font-medium">{{ 'ambassadors.noData' | translate }}</p>
+    </div>
+    }
+  </div>
+</section>
