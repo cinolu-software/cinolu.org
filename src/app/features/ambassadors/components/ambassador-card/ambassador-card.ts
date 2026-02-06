@@ -9,7 +9,7 @@ import { getInitials, getAmbassadorLevel } from '../../../../shared/helpers/amba
 
 @Component({
   selector: 'app-ambassador-card',
-  standalone: true,
+
   imports: [CommonModule, RouterLink, TranslateModule, LucideAngularModule, ApiImgPipe],
   templateUrl: './ambassador-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush
