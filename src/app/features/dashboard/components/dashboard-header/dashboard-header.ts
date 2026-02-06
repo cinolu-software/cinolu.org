@@ -6,7 +6,7 @@ import { IRole } from '@shared/models';
 
 @Component({
   selector: 'app-dashboard-header',
-  standalone: true,
+
   imports: [NgClass, NgOptimizedImage, ApiImgPipe, CommonModule],
   templateUrl: './dashboard-header.html',
   changeDetection: ChangeDetectionStrategy.OnPush
