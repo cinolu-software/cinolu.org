@@ -1,19 +1,19 @@
 import { Component, inject, OnInit, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AmbassadorsStore } from '../../store/ambassadors.store';
 import { getAmbassadorLevel, getInitials } from '../../../../shared/helpers/ambassador.helpers';
 import { environment } from '../../../../../environments/environment';
 import { IUser } from '../../../../shared/models';
-import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { HeroCard } from 'src/app/layout/components/hero-card/hero-card';
-import { Edit, LucideAngularModule } from 'lucide-angular';
+import { ArrowLeft, ArrowRight, Edit, LucideAngularModule, MapPin, Star, Users } from 'lucide-angular';
+import { AmbassadorCard } from '../../components/ambassador-card/ambassador-card';
+import { AmbassadorSkeleton } from '../../components/ambassador-skeleton/ambassador-skeleton';
 
 @Component({
   selector: 'app-list-ambassadors',
   standalone: true,
-  imports: [CommonModule, RouterLink, TranslateModule, ApiImgPipe, HeroCard, LucideAngularModule],
+  imports: [CommonModule, TranslateModule, HeroCard, LucideAngularModule, AmbassadorCard, AmbassadorSkeleton],
   providers: [AmbassadorsStore],
   templateUrl: './list-ambassadors.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -22,12 +22,16 @@ export class ListAmbassadors implements OnInit {
   store = inject(AmbassadorsStore);
 
   icons = {
-    edit: Edit
+    edit: Edit,
+    users: Users,
+    star: Star,
+    mapPin: MapPin,
+    arrowLeft: ArrowLeft,
+    arrowRight: ArrowRight
   };
 
-  // État local pour la pagination
   currentPage = 1;
-  limit = 12;
+  limit = 20;
 
   // Computed signals pour accéder aux données du store
   ambassadorsList = computed(() => this.store.ambassadors()[0]);
