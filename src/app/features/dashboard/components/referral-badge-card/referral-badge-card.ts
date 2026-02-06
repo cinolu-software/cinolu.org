@@ -9,7 +9,7 @@ import { LucideAngularModule, Award, TrendingUp, Crown, Sparkles, Trophy, Share2
 
 @Component({
   selector: 'app-referral-badge-card',
-  standalone: true,
+
   imports: [NgClass, BadgeProgressBarComponent, ShareModalComponent, LucideAngularModule],
   templateUrl: './referral-badge-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-referral-cta-card',
-  standalone: true,
+
   imports: [CommonModule, RouterModule],
   templateUrl: './referral-cta-card.html'
 })

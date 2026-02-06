@@ -14,7 +14,7 @@ interface ReferralActivity {
 
 @Component({
   selector: 'app-referral-activity-timeline',
-  standalone: true,
+
   imports: [DatePipe, LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './referral-activity-timeline.html'
