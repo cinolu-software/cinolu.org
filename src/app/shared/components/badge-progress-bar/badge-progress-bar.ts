@@ -4,7 +4,7 @@ import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-badge-progress-bar',
-  standalone: true,
+
   imports: [NgClass],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './badge-progress-bar.html'

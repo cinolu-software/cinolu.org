@@ -5,7 +5,7 @@ import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-user-badge-indicator',
-  standalone: true,
+
   imports: [NgClass, LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './user-badge-indicator.html'

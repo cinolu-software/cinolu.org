@@ -6,7 +6,7 @@ import { KnobModule } from 'primeng/knob';
 
 @Component({
   selector: 'app-progress-bar',
-  standalone: true,
+
   imports: [CommonModule, FormsModule, ProgressBarModule, KnobModule],
   templateUrl: './progress-bar.html',
   styleUrl: './progress-bar.css',

@@ -4,7 +4,7 @@ import { LucideAngularModule, X, Copy, MessageCircle, Linkedin, Facebook, Chevro
 
 @Component({
   selector: 'app-share-modal',
-  standalone: true,
+
   imports: [LucideAngularModule],
   templateUrl: './share-modal.html',
   changeDetection: ChangeDetectionStrategy.OnPush
