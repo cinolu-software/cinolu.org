@@ -29,7 +29,12 @@ export class TopAmbassadors {
 
   store = {
     isLoading: this._store.isLoading,
-    ambassadors: computed(() => this._store.ambassadors()[0].slice(0, 3))
+    ambassadors: computed(() =>
+      this._store
+        .ambassadors()[0]
+        .sort((a, b) => (b.referralsCount ?? 0) - (a.referralsCount ?? 0))
+        .slice(0, 3)
+    )
   };
 
   constructor() {
