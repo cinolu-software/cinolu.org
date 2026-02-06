@@ -12,7 +12,7 @@ import {
 
 @Component({
   selector: 'app-dashboard-sidebar',
-  standalone: true,
+
   imports: [NgClass, RouterModule],
   templateUrl: './dashboard-sidebar.html',
   changeDetection: ChangeDetectionStrategy.OnPush
