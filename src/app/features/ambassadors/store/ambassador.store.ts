@@ -20,7 +20,7 @@ export const AmbassadorStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((email) => {
-          return _http.get<{ data: IUser }>(`users/${email}`).pipe(
+          return _http.get<{ data: IUser }>(`users/find-ambassadors/${email}`).pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false, ambassador: data });
             }),
