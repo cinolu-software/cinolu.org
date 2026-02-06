@@ -1,16 +1,34 @@
 import { Component, inject, OnInit, ChangeDetectionStrategy, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { LucideAngularModule, MapPin, Mail, Phone, Award, Users, TrendingUp, ChevronUp, Info } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  MapPin,
+  Mail,
+  Phone,
+  Award,
+  Users,
+  TrendingUp,
+  ChevronUp,
+  Info,
+  ChevronDown,
+  ArrowLeft,
+  Globe,
+  Linkedin,
+  Target,
+  Package,
+  ChevronLeft,
+  ChevronRight
+} from 'lucide-angular';
 import { AmbassadorStore } from '../../store/ambassador.store';
 import { getAmbassadorLevel, getInitials } from '../../../../shared/helpers/ambassador.helpers';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-detail-ambassador',
-  standalone: true,
-  imports: [CommonModule, RouterLink, TranslateModule, ApiImgPipe, LucideAngularModule],
+
+  imports: [CommonModule, TranslateModule, ApiImgPipe, LucideAngularModule],
   providers: [AmbassadorStore],
   templateUrl: './detail-ambassador.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -20,6 +38,7 @@ export class DetailAmbassador implements OnInit {
   store = inject(AmbassadorStore);
 
   activeSection = signal<string | null>(null);
+  galleryIndexes = signal<Map<string | number, number>>(new Map());
 
   expandedBiography = computed(() => this.activeSection() === 'biography');
 
@@ -31,7 +50,15 @@ export class DetailAmbassador implements OnInit {
     users: Users,
     trendingUp: TrendingUp,
     chevronUp: ChevronUp,
-    info: Info
+    info: Info,
+    chevronDown: ChevronDown,
+    arrowLeft: ArrowLeft,
+    globe: Globe,
+    linkedin: Linkedin,
+    target: Target,
+    package: Package,
+    chevronLeft: ChevronLeft,
+    chevronRight: ChevronRight
   };
 
   ambassador = computed(() => this.store.ambassador());
@@ -54,5 +81,31 @@ export class DetailAmbassador implements OnInit {
 
   toggleBiography() {
     this.toggleSection('biography');
+  }
+
+  getGalleryIndex(productId: string | number): number {
+    return this.galleryIndexes().get(productId) ?? 0;
+  }
+
+  nextImage(productId: string | number, galleryLength: number): void {
+    const currentIndex = this.getGalleryIndex(productId);
+    const newIndex = (currentIndex + 1) % galleryLength;
+    const newMap = new Map(this.galleryIndexes());
+    newMap.set(productId, newIndex);
+    this.galleryIndexes.set(newMap);
+  }
+
+  previousImage(productId: string | number, galleryLength: number): void {
+    const currentIndex = this.getGalleryIndex(productId);
+    const newIndex = (currentIndex - 1 + galleryLength) % galleryLength;
+    const newMap = new Map(this.galleryIndexes());
+    newMap.set(productId, newIndex);
+    this.galleryIndexes.set(newMap);
+  }
+
+  goToImage(productId: string | number, index: number): void {
+    const newMap = new Map(this.galleryIndexes());
+    newMap.set(productId, index);
+    this.galleryIndexes.set(newMap);
   }
 }

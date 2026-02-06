@@ -12,7 +12,7 @@ import { AmbassadorSkeleton } from '../../components/ambassador-skeleton/ambassa
 
 @Component({
   selector: 'app-list-ambassadors',
-  standalone: true,
+
   imports: [CommonModule, TranslateModule, HeroCard, LucideAngularModule, AmbassadorCard, AmbassadorSkeleton],
   providers: [AmbassadorsStore],
   templateUrl: './list-ambassadors.html',
