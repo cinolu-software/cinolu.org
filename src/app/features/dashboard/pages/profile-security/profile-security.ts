@@ -13,7 +13,7 @@ import { UpdatePasswordStore } from '../../store/update-password.store';
 
 @Component({
   selector: 'app-profile-security',
-  standalone: true,
+
   imports: [ReactiveFormsModule, NgClass],
   templateUrl: './profile-security.html',
   providers: [UpdatePasswordStore],
