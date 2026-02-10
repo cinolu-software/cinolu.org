@@ -27,13 +27,13 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender
   },
   {
-    path: 'ambassadeurs',
+    path: 'ambassadors',
     renderMode: RenderMode.Prerender
   },
 
   // Dynamic pages - Client-side rendering
   {
-    path: 'ambassadeurs/:email',
+    path: 'ambassadors/:email',
     renderMode: RenderMode.Client
   },
   {
