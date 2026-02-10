@@ -2,12 +2,11 @@ import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'primeng/carousel';
 import { carouselConfig } from '../../config/carousel.config';
-import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight } from 'lucide-angular';
+import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight, MoveRight } from 'lucide-angular';
 import { RecentProjectsStore } from '../../../projects/store/recent-projects.store';
 import { ProgramCardSkeletonComponent } from '../../../projects/components/project-card-skeleton/project-card-skeleton';
 import { ProjectCard } from '../../../projects/components/project-card/project-card';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
-import { Button } from 'primeng/button';
 import { IProject } from '../../../../shared/models';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -21,7 +20,6 @@ import { TranslateModule } from '@ngx-translate/core';
     LucideAngularModule,
     ProgramCardSkeletonComponent,
     FadeInOnScrollDirective,
-    Button,
     TranslateModule
   ],
   templateUrl: './recent-projects.html',
@@ -33,7 +31,8 @@ export class RecentProjects {
   icons = {
     moveUpRight: MoveUpRight,
     moveLeft: ArrowLeft,
-    moveRight: ArrowRight
+    moveRight: ArrowRight,
+    MoveRight: MoveRight
   };
 
   constructor() {

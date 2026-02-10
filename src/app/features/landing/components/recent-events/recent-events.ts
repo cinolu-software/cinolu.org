@@ -2,12 +2,11 @@ import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { carouselConfig } from '../../config/carousel.config';
 import { CarouselModule } from 'primeng/carousel';
-import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight } from 'lucide-angular';
+import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight, MoveRight } from 'lucide-angular';
 import { EventCardSkeleton } from '../../../events/components/event-card-skeleton/event-card-skeleton';
 import { EventCard } from '../../../events/components/event-card/event-card';
 import { RecentEventsStore } from '../../../events/store/recent-events.store';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
-import { Button } from 'primeng/button';
 import { IEvent } from '../../../../shared/models';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -21,7 +20,6 @@ import { TranslateModule } from '@ngx-translate/core';
     LucideAngularModule,
     EventCardSkeleton,
     FadeInOnScrollDirective,
-    Button,
     TranslateModule
   ],
   templateUrl: './recent-events.html',
@@ -33,7 +31,8 @@ export class RecentEvents {
   icons = {
     moveUpRight: MoveUpRight,
     moveLeft: ArrowLeft,
-    moveRight: ArrowRight
+    moveRight: ArrowRight,
+    MoveRight: MoveRight
   };
 
   constructor() {

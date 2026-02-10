@@ -2,7 +2,7 @@ import { Component, inject, ChangeDetectionStrategy, computed } from '@angular/c
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { LucideAngularModule, Crown, Medal, Trophy, Users, Sparkles, ArrowRight } from 'lucide-angular';
+import { LucideAngularModule, Crown, Medal, Trophy, Users, Sparkles, ArrowRight, MoveRight } from 'lucide-angular';
 import { AmbassadorsStore } from '../../../ambassadors/store/ambassadors.store';
 import { getAmbassadorLevel, getInitials } from '../../../../shared/helpers/ambassador.helpers';
 import { IUser } from '../../../../shared/models';
@@ -24,7 +24,8 @@ export class TopAmbassadors {
     trophy: Trophy,
     users: Users,
     sparkles: Sparkles,
-    arrowRight: ArrowRight
+    arrowRight: ArrowRight,
+    MoveRight: MoveRight
   };
 
   store = {

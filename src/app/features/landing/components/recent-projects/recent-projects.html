@@ -62,16 +62,15 @@
       </button>
     </div>
 
-    <div class="w-full flex justify-center items-center">
-      <a routerLink="/programs" class="w-fit">
-        <p-button psize="large" rounded="full" outlined severity="primary">
-          <span class="group flex items-center gap-2 px-8">
-            {{ 'recent_projects.view_all' | translate }}
-            <i-lucide
-              class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
-              [name]="icons.moveUpRight" />
-          </span>
-        </p-button>
+    <div class="w-full flex justify-center items-center mt-12">
+      <a routerLink="/programs" class="group relative">
+        <button
+          class="relative flex items-center gap-3 px-8 py-4 bg-white border-2 border-primary-500 text-primary-600 font-semibold rounded-full hover:bg-primary-50 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25">
+          <span>{{ 'recent_projects.view_all' | translate }}</span>
+          <i-lucide
+            class="size-5 group-hover:translate-x-1 transition-transform duration-300"
+            [name]="icons.MoveRight" />
+        </button>
       </a>
     </div>
   </div>
