@@ -3,26 +3,28 @@
     class="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10"></div>
 
   @if (store.ambassador(); as ambassador) {
-  <div class="px-6 lg:px-0 max-w-screen-xl mx-auto space-y-24">
-    <div class="space-y-16">
+  <div class="px-4 sm:px-6 lg:px-12 xl:px-16 2xl:px-32 max-w-screen-2xl mx-auto space-y-16 lg:space-y-24">
+    <div class="space-y-12 lg:space-y-16">
       <header class="text-center lg:text-left">
         <nav
           class="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-primary-600 mb-4 justify-center lg:justify-start">
           <span class="w-8 h-px bg-primary-600"></span>
           {{ 'common.ambassador' | translate }}
         </nav>
-        <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
+        <h1
+          class="text-3xl md:text-4xl lg:text-5xl font-satoshi font-extrabold text-slate-900 tracking-tight leading-[1.1]">
           {{ ambassador.name }}
         </h1>
       </header>
 
-      <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center lg:items-start text-center lg:text-left">
-        <div class="w-full max-w-[320px] lg:max-w-none lg:w-5/12 md:sticky md:top-32">
+      <div
+        class="flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-center lg:items-start text-center lg:text-left">
+        <div class="w-full max-w-[240px] md:max-w-[280px] lg:max-w-none lg:w-4/12 md:sticky md:top-[300px]">
           <div class="group relative">
             <div
-              class="absolute -inset-4 bg-gradient-to-br from-primary-100 to-primary-50 rounded-[2.5rem] rotate-3 transition-all duration-500 group-hover:rotate-2 group-hover:scale-105"></div>
+              class="absolute -inset-3 bg-gradient-to-br from-primary-100 to-primary-50 rounded-[2rem] rotate-3 transition-all duration-500 group-hover:rotate-2 group-hover:scale-105"></div>
             <div
-              class="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-slate-200 shadow-2xl ring-1 ring-slate-900/5">
+              class="relative aspect-[1/1.1] w-full overflow-hidden rounded-[1.5rem] bg-slate-200 shadow-xl ring-1 ring-slate-900/5">
               @if (ambassador.profile) {
               <img
                 [src]="ambassador | apiIMG: 'user'"
@@ -38,8 +40,8 @@
           </div>
         </div>
 
-        <div class="w-full lg:w-7/12 space-y-10 lg:space-y-12">
-          <div class="grid grid-cols-2 gap-8 border-b border-slate-200 pb-12">
+        <div class="w-full lg:w-7/12 space-y-8 lg:space-y-10">
+          <div class="grid grid-cols-2 gap-6 md:gap-8 border-b border-slate-200 pb-8 lg:pb-10">
             <div class="space-y-1">
               <span class="text-xs font-bold uppercase tracking-tighter text-slate-400">Impact Global</span>
               <div class="flex items-baseline gap-2">
@@ -55,20 +57,22 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-12 gap-y-6 lg:gap-y-8">
             @if (ambassador.city) {
-            <div class="space-y-3">
-              <h4 class="text-sm font-black uppercase text-slate-900 flex items-center gap-2">
+            <div class="space-y-2 lg:space-y-3">
+              <h4 class="text-xs sm:text-sm font-black uppercase text-slate-900 flex items-center gap-2">
                 <i-lucide [name]="icons.mapPin" class="size-4 text-primary-500" /> Localisation
               </h4>
-              <p class="text-slate-600 font-medium">{{ ambassador.city }}, {{ ambassador.country }}</p>
+              <p class="text-sm lg:text-base text-slate-600 font-medium">
+                {{ ambassador.city }}, {{ ambassador.country }}
+              </p>
             </div>
             }
-            <div class="space-y-3">
-              <h4 class="text-sm font-black uppercase text-slate-900 flex items-center gap-2">
+            <div class="space-y-2 lg:space-y-3">
+              <h4 class="text-xs sm:text-sm font-black uppercase text-slate-900 flex items-center gap-2">
                 <i-lucide [name]="icons.mail" class="size-4 text-primary-500" /> Contact
               </h4>
-              <div class="flex flex-col gap-1 text-slate-600">
+              <div class="flex flex-col gap-1 text-sm lg:text-base text-slate-600">
                 <span class="truncate">{{ ambassador.email }}</span>
                 <span>{{ ambassador.phone_number }}</span>
               </div>
@@ -76,8 +80,10 @@
 
             @if (ambassador.biography) {
             <div class="md:col-span-2">
-              <h4 class="text-sm font-black uppercase text-slate-900 mb-4 tracking-widest">Vision & Biographie</h4>
-              <p class="text-slate-600 leading-relaxed italic border-l-4 border-primary-100 pl-6">
+              <h4 class="text-xs sm:text-sm font-black uppercase text-slate-900 mb-3 lg:mb-4 tracking-widest">
+                Vision & Biographie
+              </h4>
+              <p class="text-sm lg:text-base text-slate-600 italic border-l-4 border-primary-100 pl-4 lg:pl-6">
                 " {{ ambassador.biography }} "
               </p>
             </div>
@@ -87,9 +93,10 @@
       </div>
     </div>
 
-    <div class="space-y-8 md:space-y-12 pt-12 border-t border-slate-200">
+    <div class="space-y-8 md:space-y-10 lg:space-y-12 pt-8 lg:pt-12 border-t border-slate-200">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+        <h2
+          class="text-2xl md:text-3xl lg:text-4xl font-black font-satoshi text-slate-900 tracking-tight flex items-center gap-3">
           Projets & Produits
           <span class="text-xs sm:text-sm font-bold bg-slate-100 text-slate-500 px-2.5 py-1 rounded-full"
             >{{ ambassador.ventures.length }}</span
@@ -97,10 +104,9 @@
         </h2>
       </div>
 
-      <div class="space-y-12 md:space-y-16 -mx-6 lg:-mx-0">
+      <div class="space-y-10 md:space-y-12 lg:space-y-16">
         @for (venture of ambassador.ventures; track venture.id) {
-        <div
-          class="bg-white border-y lg:border lg:rounded-xl border-slate-100 shadow-xl shadow-slate-200/50 overflow-hidden group/v transition-all hover:shadow-2xl lg:max-w-screen-2xl lg:mx-auto">
+        <div class="rounded-lg overflow-hidden group/v transition-all">
           <div class="relative h-48 sm:h-56 md:h-64 lg:h-72 overflow-hidden">
             <img
               [src]="venture | apiIMG: 'ventureCover'"
@@ -110,29 +116,31 @@
               class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent opacity-80"></div>
 
             <div
-              class="absolute bottom-4 sm:bottom-6 md:bottom-8 left-4 sm:left-6 md:left-8 right-4 sm:right-6 md:right-8 flex flex-col gap-4 md:flex-row md:items-end justify-between">
-              <div class="flex items-center gap-3 sm:gap-4 md:gap-6">
+              class="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-4 sm:left-6 lg:left-8 right-4 sm:right-6 lg:right-8 flex flex-col gap-3 md:gap-4 md:flex-row md:items-end justify-between">
+              <div class="flex items-center gap-3 sm:gap-4 lg:gap-6">
                 <div
-                  class="size-14 sm:size-16 md:size-20 lg:size-24 rounded-xl md:rounded-2xl bg-white p-1 md:p-1.5 shadow-2xl flex-shrink-0">
+                  class="size-14 sm:size-16 md:size-18 lg:size-20 xl:size-24 rounded-lg bg-white p-1 md:p-1.5 shadow-md flex-shrink-0">
                   <img
                     [src]="venture | apiIMG: 'venture'"
                     alt="programme"
-                    class="w-full h-full object-contain rounded-lg md:rounded-xl" />
+                    class="w-full h-full object-contain rounded-lg" />
                 </div>
                 <div class="text-white flex-1 min-w-0">
-                  <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1 sm:mb-2">
-                    <h3 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black truncate">{{ venture.name }}</h3>
+                  <div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
+                    <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-black truncate">
+                      {{ venture.name }}
+                    </h3>
                     <span
-                      class="px-2 py-0.5 md:px-3 md:py-1 bg-primary-500 text-[9px] md:text-[10px] font-bold uppercase rounded-md md:rounded-lg shadow-lg w-fit flex-shrink-0"
+                      class="px-2 py-0.5 sm:px-2.5 sm:py-1 md:px-3 bg-primary-500 text-[9px] sm:text-[10px] font-bold uppercase rounded-md sm:rounded-lg shadow-lg w-fit flex-shrink-0"
                       >Stage: {{ venture.stage }}</span
                     >
                   </div>
-                  <p class="text-xs sm:text-sm md:text-base text-slate-200 font-medium line-clamp-1 md:line-clamp-2">
+                  <p class="text-xs sm:text-sm md:text-base text-slate-200 font-medium line-clamp-1 sm:line-clamp-2">
                     {{ venture.description }}
                   </p>
                 </div>
               </div>
-              <div class="flex gap-2 sm:gap-3 flex-shrink-0">
+              <div class="flex gap-2 sm:gap-2.5 flex-shrink-0">
                 <a
                   [href]="venture.website"
                   target="_blank"
@@ -149,112 +157,162 @@
             </div>
           </div>
 
-          <div class="p-4 sm:p-6 md:p-8 lg:p-12 space-y-8 md:space-y-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
-              <div class="space-y-3 md:space-y-4">
-                <h5 class="text-xs font-black uppercase text-primary-600 tracking-widest flex items-center gap-2">
-                  <i-lucide [name]="icons.target" class="size-3 md:size-4 flex-shrink-0" /> Problème résolu
+          <div class="space-y-8 lg:space-y-10 py-6 sm:py-8 lg:py-10 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 xl:gap-10">
+              <div class="space-y-2 lg:space-y-3">
+                <h5
+                  class="text-xs sm:text-sm font-black uppercase text-primary-600 tracking-widest flex items-center gap-2">
+                  <i-lucide [name]="icons.target" class="size-4 flex-shrink-0" /> Problème résolu
                 </h5>
-                <p class="text-sm md:text-base text-slate-700 leading-relaxed">{{ venture.problem_solved }}</p>
+                <p class="text-sm lg:text-base text-slate-700 leading-relaxed">{{ venture.problem_solved }}</p>
               </div>
-              <div class="space-y-3 md:space-y-4">
-                <h5 class="text-xs font-black uppercase text-primary-600 tracking-widest flex items-center gap-2">
-                  <i-lucide [name]="icons.users" class="size-3 md:size-4 flex-shrink-0" /> Marché cible
+              <div class="space-y-2 lg:space-y-3">
+                <h5
+                  class="text-xs sm:text-sm font-black uppercase text-primary-600 tracking-widest flex items-center gap-2">
+                  <i-lucide [name]="icons.users" class="size-4 flex-shrink-0" /> Marché cible
                 </h5>
-                <p class="text-sm md:text-base text-slate-700 leading-relaxed">{{ venture.target_market }}</p>
+                <p class="text-sm lg:text-base text-slate-700 leading-relaxed">{{ venture.target_market }}</p>
               </div>
             </div>
 
             @if (venture.products.length > 0) {
-            <div class="space-y-6 md:space-y-8">
-              <h4
-                class="text-base md:text-lg font-black text-slate-900 uppercase tracking-tighter border-b border-slate-100 pb-3 md:pb-4">
-                Catalogue Produits
-              </h4>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+            <div class="space-y-8 lg:space-y-10">
+              <div class="flex flex-col gap-2">
+                <h4
+                  class="text-xl md:text-2xl lg:text-3xl font-satoshi font-black text-slate-900 uppercase tracking-tighter">
+                  Catalogue Produits
+                </h4>
+                <div class="h-1.5 w-16 lg:w-20 bg-primary-600 rounded-full"></div>
+              </div>
+
+              <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8 xl:gap-10">
                 @for (product of venture.products; track product.id) {
                 <div
-                  class="bg-slate-50/50 border border-slate-100 rounded-lg group/p hover:bg-white hover:shadow-xl transition-all">
+                  class="group/p bg-white rounded-lg border border-slate-100 shadow-md shadow-slate-200/40 overflow-hidden hover:shadow-lg hover:shadow-primary-900/10 transition-all duration-700 flex flex-col md:flex-row h-auto md:h-[480px] lg:h-[520px]">
                   <div
-                    class="h-48 md:h-72 rounded-lg overflow-hidden mb-3 sm:mb-4 md:mb-6 bg-white border border-slate-100 relative group/gallery">
-                    @if (product.gallery && product.gallery.length > 0) {
-                    <div class="relative w-full h-full">
-                      @for (image of product.gallery; track image.id; let idx = $index) {
+                    class="flex flex-row md:flex-col gap-3 md:gap-4 lg:gap-5 p-3 md:p-4 lg:p-6 bg-slate-50/30 border-b md:border-b-0 md:border-r border-slate-100 w-full md:w-28 lg:w-36 xl:w-40">
+                    @if (product.gallery && product.gallery.length > 0) { @for (image of product.gallery | slice:0:3;
+                    track image.id; let idx = $index) {
+                    <button
+                      type="button"
+                      (mouseenter)="goToImage(product.id, idx)"
+                      (click)="goToImage(product.id, idx)"
+                      class="flex-1 relative aspect-square md:aspect-auto md:h-1/3 rounded-md lg:rounded-lg overflow-hidden transition-all duration-300 ring-2 ring-offset-2 md:ring-offset-3 lg:ring-offset-4"
+                      [class.ring-primary-500]="idx === getGalleryIndex(product.id)"
+                      [class.ring-transparent]="idx !== getGalleryIndex(product.id)"
+                      [class.opacity-100]="idx === getGalleryIndex(product.id)"
+                      [class.scale-105]="idx === getGalleryIndex(product.id)"
+                      [class.opacity-40]="idx !== getGalleryIndex(product.id)">
+                      <img
+                        [src]="image | apiIMG: 'gallery'"
+                        alt="{{ product.name }}"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <div
+                        class="absolute inset-0 bg-white/20 transition-opacity"
+                        [class.opacity-0]="idx === getGalleryIndex(product.id)"
+                        [class.opacity-100]="idx !== getGalleryIndex(product.id)"></div>
+                    </button>
+                    } @if (product.gallery.length > 3) {
+                    <div
+                      class="hidden md:flex flex-col items-center justify-center py-1.5 lg:py-2 text-[9px] lg:text-[10px] font-black text-slate-300 uppercase tracking-tighter">
+                      <span class="text-base lg:text-lg text-slate-400">+{{ product.gallery.length - 3 }}</span>
+                      <span>visuels</span>
+                    </div>
+                    } } @else { @for (i of [1,2,3]; track i) {
+                    <div
+                      class="flex-1 rounded-lg lg:rounded-xl bg-slate-100 flex items-center justify-center text-slate-200">
+                      <i-lucide [name]="icons.package" class="size-5 lg:size-6" />
+                    </div>
+                    } }
+                  </div>
+
+                  <div class="flex-1 flex flex-col relative overflow-hidden">
+                    <div class="relative flex-1 overflow-hidden bg-slate-50">
+                      @if (product.gallery && product.gallery.length > 0) { @for (image of product.gallery; track
+                      image.id; let idx = $index) {
                       <img
                         [src]="image | apiIMG: 'gallery'"
                         [alt]="product.name"
-                        class="absolute inset-0 w-full h-full object-cover transition-all duration-500"
+                        class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]"
                         [class.opacity-0]="idx !== getGalleryIndex(product.id)"
                         [class.opacity-100]="idx === getGalleryIndex(product.id)"
-                        [class.scale-110]="idx === getGalleryIndex(product.id)" />
-                      } @if (product.gallery.length > 1) {
-                      <div
-                        class="absolute inset-0 opacity-0 group-hover/gallery:opacity-100 transition-opacity duration-300">
-                        <button
-                          type="button"
-                          (click)="previousImage(product.id, product.gallery.length)"
-                          class="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 size-6 sm:size-8 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all hover:scale-110 flex items-center justify-center z-10">
-                          <i-lucide [name]="icons.chevronLeft" class="size-3 sm:size-4 text-slate-700" />
-                        </button>
-                        <button
-                          type="button"
-                          (click)="nextImage(product.id, product.gallery.length)"
-                          class="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 size-6 sm:size-8 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all hover:scale-110 flex items-center justify-center z-10">
-                          <i-lucide [name]="icons.chevronRight" class="size-3 sm:size-4 text-slate-700" />
-                        </button>
-                      </div>
-
-                      <div
-                        class="absolute bottom-2 sm:bottom-3 left-0 right-0 flex justify-center gap-1 sm:gap-1.5 z-10">
-                        @for (dot of product.gallery; track dot.id; let i = $index) {
-                        <button
-                          type="button"
-                          (click)="goToImage(product.id, i)"
-                          [attr.aria-label]="'Image ' + (i + 1)"
-                          [ngClass]="{
-                            'size-1': true,
-                            'sm:size-1.5': true,
-                            'rounded-full': true,
-                            'transition-all': true,
-                            'duration-300': true,
-                            'cursor-pointer': true,
-                            'hover:scale-125': true,
-                            'bg-white': i === getGalleryIndex(product.id),
-                            'w-4': i === getGalleryIndex(product.id),
-                            'sm:w-6': i === getGalleryIndex(product.id),
-                            'bg-white/50': i !== getGalleryIndex(product.id)
-                          }">
-                          <span class="sr-only">Image {{ i + 1 }}</span>
-                        </button>
-                        }
-                      </div>
-
-                      <div
-                        class="absolute top-2 sm:top-3 right-2 sm:right-3 px-1.5 py-0.5 sm:px-2.5 sm:py-1 bg-slate-900/75 backdrop-blur-sm rounded-full text-white text-[10px] sm:text-xs font-bold shadow-lg">
-                        {{ getGalleryIndex(product.id) + 1 }}/{{ product.gallery.length }}
+                        [class.scale-110]="idx === getGalleryIndex(product.id)"
+                        [class.translate-x-12]="idx !== getGalleryIndex(product.id)"
+                        [class.translate-x-0]="idx === getGalleryIndex(product.id)" />
+                      } } @else {
+                      <div class="w-full h-full flex items-center justify-center bg-slate-50 text-slate-200">
+                        <i-lucide [name]="icons.package" class="size-24" />
                       </div>
                       }
+
+                      <div
+                        class="absolute inset-x-0 top-0 p-4 sm:p-6 lg:p-8 flex justify-between items-start pointer-events-none">
+                        <span class="dashboard-badge-primary text-xs sm:text-sm">{{ product.price }} $</span>
+                      </div>
                     </div>
-                    } @else {
-                    <div class="w-full h-full flex items-center justify-center bg-slate-100 text-slate-300">
-                      <i-lucide [name]="icons.package" class="size-8 sm:size-10 md:size-12" />
+
+                    <div class="p-4 sm:p-6 lg:p-8 space-y-4 lg:space-y-6 bg-white relative">
+                      <div class="space-y-3 lg:space-y-4">
+                        <h6
+                          class="text-lg md:text-xl lg:text-2xl font-black font-satoshi text-slate-900 tracking-tight leading-none group-hover/p:text-primary-600 transition-colors">
+                          {{ product.name }}
+                        </h6>
+                        <p class="text-sm lg:text-base text-slate-500 line-clamp-2 font-medium leading-relaxed">
+                          {{ product.description }}
+                        </p>
+                      </div>
+
+                      <div class="flex items-center gap-3 lg:gap-4 pt-2 lg:pt-4">
+                        <button
+                          class="flex-1 dashboard-btn-primary text-sm lg:text-base group-hover/p:bg-primary-600 transition-colors">
+                          Découvrir le produit
+                        </button>
+                      </div>
                     </div>
-                    }
-                  </div>
-                  <div class="space-y-1.5 sm:space-y-2 p-3 md:p-6">
-                    <div class="flex items-start justify-between gap-2">
-                      <h6 class="font-bold font-satoshi text-xs sm:text-sm md:text-base text-slate-900 line-clamp-2 flex-1">
-                        {{ product.name }}
-                      </h6>
-                      <span class="dashboard-badge-primary !text-2xl !font-extrabold">{{ product.price }} $</span>
-                    </div>
-                    <p class="text-xs md:text-base text-slate-700 leading-relaxed">{{ product.description }}</p>
                   </div>
                 </div>
                 }
               </div>
             </div>
             }
+          </div>
+        </div>
+        } @empty {
+        <div class="py-12 md:py-16 lg:py-20 px-4 sm:px-6 text-center">
+          <div class="max-w-2xl mx-auto space-y-6 md:space-y-8">
+            <div class="relative inline-block">
+              <div
+                class="absolute -inset-4 md:-inset-6 bg-gradient-to-br from-primary-100 to-primary-50 rounded-full blur-xl md:blur-2xl opacity-50"></div>
+              <div
+                class="relative w-24 h-24 md:w-32 md:h-32 mx-auto bg-gradient-to-br from-slate-100 to-slate-50 rounded-full flex items-center justify-center border border-slate-200/50 shadow-lg">
+                <i-lucide [name]="icons.building" class="size-12 md:size-16 text-slate-300" />
+              </div>
+            </div>
+
+            <div class="space-y-3 md:space-y-4">
+              <h3 class="text-xl md:text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">
+                Aucune entreprise pour le moment
+              </h3>
+              <p class="text-sm md:text-base lg:text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
+                Cet ambassadeur n'a pas encore d'entreprise associée. Les futurs projets et produits apparaîtront ici
+                dès leur lancement.
+              </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center pt-2 md:pt-4">
+              <a
+                routerLink="/entrepreneurs"
+                class="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-primary-600 text-white text-sm md:text-base font-bold rounded-lg md:rounded-xl hover:bg-primary-700 transition-all shadow-lg shadow-primary-600/20 hover:shadow-xl hover:shadow-primary-600/30">
+                <i-lucide [name]="icons.building" class="size-4 md:size-5" />
+                Découvrir d'autres entrepreneurs
+              </a>
+              <a
+                routerLink="/ambassadors"
+                class="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-slate-100 text-slate-700 text-sm md:text-base font-bold rounded-lg md:rounded-xl hover:bg-slate-200 transition-all">
+                <i-lucide [name]="icons.users" class="size-4 md:size-5" />
+                Voir tous les ambassadeurs
+              </a>
+            </div>
           </div>
         </div>
         }

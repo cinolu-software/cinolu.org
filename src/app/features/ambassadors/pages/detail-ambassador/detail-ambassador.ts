@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, ChangeDetectionStrategy, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   LucideAngularModule,
@@ -19,7 +19,8 @@ import {
   Target,
   Package,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Building2
 } from 'lucide-angular';
 import { AmbassadorStore } from '../../store/ambassador.store';
 import { getAmbassadorLevel, getInitials } from '../../../../shared/helpers/ambassador.helpers';
@@ -28,7 +29,7 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 @Component({
   selector: 'app-detail-ambassador',
 
-  imports: [CommonModule, TranslateModule, ApiImgPipe, LucideAngularModule],
+  imports: [CommonModule, TranslateModule, ApiImgPipe, LucideAngularModule, RouterLink],
   providers: [AmbassadorStore],
   templateUrl: './detail-ambassador.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -58,7 +59,8 @@ export class DetailAmbassador implements OnInit {
     target: Target,
     package: Package,
     chevronLeft: ChevronLeft,
-    chevronRight: ChevronRight
+    chevronRight: ChevronRight,
+    building: Building2
   };
 
   ambassador = computed(() => this.store.ambassador());
