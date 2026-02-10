@@ -1,10 +1,9 @@
-import { Component, computed, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { Building2, Globe, Linkedin, LucideAngularModule, Mail, MoveRight, Phone, TrendingUp } from 'lucide-angular';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { GalleriaModule } from 'primeng/galleria';
-import { Button } from 'primeng/button';
 import { VentureCardSkeleton } from '../venture-card-skeleton/venture-card-skeleton';
 import { PublicVentureStore } from '@features/entrepreneurs/store/venture.store';
 import { IProduct } from '../../../../shared/models';
@@ -18,18 +17,16 @@ import { TranslateModule } from '@ngx-translate/core';
     LucideAngularModule,
     CommonModule,
     ApiImgPipe,
-    NgOptimizedImage,
     GalleriaModule,
-    Button,
     RouterLink,
     VentureCardSkeleton,
-    TranslateModule
+    TranslateModule,
+    NgOptimizedImage
   ],
   templateUrl: './venture-card-detail.html'
 })
 export class VentureCardDetail implements OnInit {
   private route = inject(ActivatedRoute);
-  private destroyRef = inject(DestroyRef);
 
   store = inject(PublicVentureStore);
   responsiveOptions = carouselConfig;

@@ -1,259 +1,216 @@
-<section class="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+<section class="relative min-h-screen bg-[#F8FAFC]">
+  <div class="absolute inset-0 overflow-hidden -z-10 pointer-events-none">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-100/40 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-100/30 rounded-full blur-[120px]"></div>
+    <div
+      class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
+  </div>
+
   @if (store.isLoading()) {
   <app-venture-card-skeleton />
   } @if (store.venture(); as venture) {
+  <header class="relative h-[85vh] w-full overflow-hidden">
+    <div class="absolute inset-0 scale-105 animate-pulse-slow">
+      <img
+        [ngSrc]="venture | apiIMG:'ventureCover'"
+        fill
+        alt="{{ venture.name }}"
+        class="object-cover w-full h-full brightness-[0.7] contrast-[1.1]"
+        priority />
+    </div>
 
-  <div class="relative h-[60vh] lg:h-[70vh] overflow-visible">
-    <img [ngSrc]="venture | apiIMG:'ventureCover'" fill alt="cover" class="object-cover w-full h-full" priority />
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-[#0F172A]/40"></div>
 
-    <div class="absolute bottom-24 left-0 right-0 text-center px-6 lg:px-8 z-10">
-      <div class="max-w-4xl mx-auto space-y-4">
-        <h1 class="text-4xl lg:text-5xl font-black text-white drop-shadow-2xl">{{ venture.name }}</h1>
-        <div class="flex items-center justify-center gap-3 text-white/90 text-sm lg:text-base flex-wrap">
-          <span class="px-4 py-1.5 bg-white/20 backdrop-blur-md rounded-full font-medium">{{ venture.sector }}</span>
-          <span class="hidden sm:inline">•</span>
-          <span class="px-4 py-1.5 bg-white/20 backdrop-blur-md rounded-full font-medium">{{ venture.location }}</span>
+    <div class="relative h-full max-w-7xl mx-auto px-6 flex flex-col justify-end pb-32">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+        <div class="max-w-4xl space-y-6">
+          <div
+            class="inline-flex items-center px-3 py-1 rounded-full bg-primary-500/20 backdrop-blur-md border border-primary-400/30">
+            <span class="size-2 rounded-full bg-primary-400 animate-ping mr-2"></span>
+            <span class="text-primary-100 text-[10px] font-bold uppercase tracking-[0.3em]">
+              {{ venture.sector }}
+            </span>
+          </div>
+
+          <h1 class="text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.9]">{{ venture.name }}</h1>
+
+          <div class="flex flex-wrap items-center gap-6 text-slate-300">
+            <div class="flex items-center gap-2 group">
+              <div class="p-2 rounded-full bg-white/10 group-hover:bg-primary-500/20 transition-colors">
+                <i-lucide [name]="icons.globe" class="size-5" />
+              </div>
+              <span class="text-lg font-medium tracking-tight">{{ venture.location }}</span>
+            </div>
+            <div class="h-8 w-px bg-white/20 hidden md:block"></div>
+            <div class="flex items-center gap-2">
+              <span class="text-slate-400 uppercase text-xs font-bold tracking-widest">Stage:</span>
+              <span class="text-white font-bold bg-white/10 px-3 py-1 rounded-lg backdrop-blur-sm">
+                {{ venture.stage }}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  @if (venture.logo) {
-  <div class="relative -mt-16 mb-12 flex justify-center">
-    <div
-      class="relative w-32 h-32 rounded-full border-4 border-white bg-white overflow-hidden shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
-      <img [ngSrc]="venture | apiIMG:'venture'" fill alt="logo" class="object-cover" priority />
+    <div class="absolute bottom-10 left-10 hidden xl:flex items-center gap-4 text-white/50">
+      <span class="text-[10px] font-bold uppercase tracking-[0.4em] [writing-mode:vertical-lr]">Scroll</span>
+      <div class="w-px h-12 bg-gradient-to-b from-white/50 to-transparent"></div>
     </div>
-  </div>
-  }
+  </header>
 
-  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
-    <div class="flex justify-center mb-12">
-      <div
-        class="relative inline-flex items-center gap-3 px-6 py-3 bg-white rounded-xl shadow-md border-2 border-primary-200 hover:shadow-lg hover:border-primary-300 transition-all duration-300">
+  <main class="max-w-7xl mx-auto px-6 lg:px-12 -mt-24 relative z-30 pb-32">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <aside class="lg:col-span-4 space-y-8">
         <div
-          class="flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 shadow-sm">
-          <i-lucide [name]="icons.trendingUp" size="24" class="text-white" />
-        </div>
-        <div class="flex flex-col">
-          <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-            {{ 'entrepreneurs.development_stage' | translate }}
-          </span>
-          <span class="text-lg font-bold text-primary-600">{{ venture.stage }}</span>
-        </div>
-      </div>
-    </div>
+          class="bg-white rounded-lg p-8 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-200/60 relative overflow-hidden group">
+          <div
+            class="absolute top-0 right-0 w-32 h-32 bg-primary-50 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150 duration-700"></div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      <div class="lg:col-span-7 space-y-6">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 p-3 sticky top-4">
+          <div class="relative flex flex-col items-center">
+            <div class="size-36 rounded-2xl bg-slate-50 p-6 ring-1 ring-slate-100 shadow-inner mb-8 overflow-hidden">
+              @if (venture.logo) {
+              <img
+                [src]="venture | apiIMG:'venture'"
+                alt="{{ venture.name }} logo"
+                class="w-full h-full object-contain" />
+              } @else {
+              <i-lucide [name]="icons.building" class="size-full text-slate-200" />
+              }
+            </div>
+
+            <div class="text-center">
+              <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary-500 mb-4">About the Venture</h3>
+              <p class="text-slate-600 leading-relaxed text-[15px] font-medium">{{ venture.description }}</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 w-full mt-10">
+              @if (venture.website) {
+              <a
+                [href]="venture.website"
+                target="_blank"
+                class="flex flex-col items-center p-4 rounded-2xl bg-slate-50 hover:bg-primary-500 hover:text-white transition-all group/l">
+                <i-lucide [name]="icons.globe" class="size-5 mb-2" />
+                <span class="text-[10px] font-bold uppercase">Website</span>
+              </a>
+              } @if (venture.linkedin_url) {
+              <a
+                [href]="venture.linkedin_url"
+                target="_blank"
+                class="flex flex-col items-center p-4 rounded-2xl bg-slate-50 hover:bg-[#0077b5] hover:text-white transition-all group/l">
+                <i-lucide [name]="icons.linkedin" class="size-5 mb-2" />
+                <span class="text-[10px] font-bold uppercase">LinkedIn</span>
+              </a>
+              }
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="lg:col-span-8 space-y-12">
+        <section class="bg-white rounded-lg p-4 shadow-sm border border-slate-200/60">
           @if (venture.gallery && venture.gallery.length) {
           <p-galleria
             [value]="venture.gallery"
             [circular]="true"
-            [responsiveOptions]="responsiveOptions"
-            [numVisible]="3"
             [showIndicators]="true"
-            [containerStyle]="{ 'max-width': '100%' }">
+            [showItemNavigators]="true"
+            [containerStyle]="{'border-radius': '1.5rem', 'overflow': 'hidden'}">
             <ng-template pTemplate="item" let-img>
-              <div class="relative w-full h-[400px] lg:h-[500px] rounded-lg overflow-hidden bg-gray-100">
+              <div class="aspect-[16/9] w-full">
                 <img
                   [src]="img | apiIMG:'gallery'"
-                  [alt]="img.image"
-                  loading="lazy"
-                  decoding="async"
-                  class="object-cover w-full h-full transition-transform duration-300 hover:scale-105" />
-              </div>
-            </ng-template>
-
-            <ng-template pTemplate="thumbnail" let-img>
-              <div class="cursor-pointer p-1">
-                <img
-                  [src]="img | apiIMG:'gallery'"
-                  [alt]="img.image"
-                  loading="lazy"
-                  decoding="async"
-                  class="object-cover h-20 w-20 rounded-md border-2 border-transparent hover:border-primary-500 transition-all duration-200" />
+                  alt="{{ venture.name }} gallery image"
+                  class="object-cover w-full h-full" />
               </div>
             </ng-template>
           </p-galleria>
+          }
+        </section>
+
+        <section class="grid md:grid-cols-2 gap-6">
+          <div class="bg-[#FFF7ED] rounded-lg p-8 border border-orange-100 group">
+            <div
+              class="size-12 rounded-2xl bg-orange-500 text-white flex items-center justify-center mb-6 shadow-lg shadow-orange-200">
+              <i-lucide [name]="icons.building" class="size-6" />
+            </div>
+            <h4 class="text-lg font-black text-orange-950 uppercase tracking-tight mb-3">The Problem</h4>
+            <p class="text-orange-900/70 font-medium leading-relaxed">{{ venture.problem_solved }}</p>
+          </div>
+
+          <div class="bg-[#F0FDF4] rounded-lg p-8 border border-green-100">
+            <div
+              class="size-12 rounded-2xl bg-primary-500 text-white flex items-center justify-center mb-6 shadow-lg shadow-green-200">
+              <i-lucide [name]="icons.trendingUp" class="size-6" />
+            </div>
+            <h4 class="text-lg font-black text-green-950 uppercase tracking-tight mb-3">Market Opportunity</h4>
+            <p class="text-green-900/70 font-medium leading-relaxed">{{ venture.target_market }}</p>
+          </div>
+        </section>
+
+        <section class="space-y-8">
+          <div class="flex items-end justify-between border-b border-slate-200 pb-6">
+            <div>
+              <h2 class="text-4xl font-black text-slate-900 tracking-tighter">Marketplace</h2>
+              <p class="text-slate-500 font-medium">Explorez les solutions de {{ venture.name }}</p>
+            </div>
+            <div class="hidden md:flex gap-2">
+              <div class="px-4 py-2 rounded-full bg-slate-100 text-[10px] font-black uppercase text-slate-400">
+                Products: {{ products().length }}
+              </div>
+            </div>
+          </div>
+
+          @if (hasProducts()) {
+          <div class="grid sm:grid-cols-2 gap-6">
+            @for (product of products(); track product.id) {
+            <div
+              class="group bg-white rounded-lg border border-slate-200/60 overflow-hidden hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] transition-all duration-500 hover:-translate-y-2">
+              <div class="relative h-72 overflow-hidden">
+                <img
+                  [src]="product?.gallery?.[0] | apiIMG:'gallery'"
+                  alt="{{ product.name }}"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+
+                <div
+                  class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-sm border border-white/20">
+                  <span class="text-xl font-black text-slate-900">{{ product.price }}</span>
+                  <span class="text-sm font-bold text-primary-500 ml-1">$</span>
+                </div>
+              </div>
+
+              <div class="p-8">
+                <h4 class="text-xl font-black text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">
+                  {{ product.name }}
+                </h4>
+                <p class="text-slate-500 text-sm line-clamp-2 mb-8 font-medium leading-relaxed">
+                  {{ product.description }}
+                </p>
+
+                <button
+                  [routerLink]="[product.slug]"
+                  class="w-full py-4 rounded-lg bg-slate-900 text-white text-xs font-black uppercase tracking-[0.2em] hover:bg-primary-600 transition-all flex items-center justify-center gap-3 group/btn">
+                  Voir le produit
+                  <i-lucide
+                    [name]="icons.moveRight"
+                    class="size-4 group-hover/btn:translate-x-2 transition-transform" />
+                </button>
+              </div>
+            </div>
+            }
+          </div>
           } @else {
-          <div class="relative w-full h-[400px] lg:h-[500px] rounded-lg overflow-hidden bg-gray-100">
-            <img
-              [src]="venture | apiIMG:'ventureCover'"
-              [alt]="venture.name"
-              loading="lazy"
-              decoding="async"
-              class="object-cover w-full h-full transition-transform duration-300 hover:scale-105" />
+          <div class="bg-white rounded-lg border-2 border-dashed border-slate-200 p-20 text-center">
+            <div class="size-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i-lucide [name]="icons.building" class="size-10 text-slate-300" />
+            </div>
+            <h3 class="text-xl font-black text-slate-900 mb-2">Catalogue vide</h3>
+            <p class="text-slate-500">Les produits de cette entreprise arrivent très prochainement.</p>
           </div>
           }
-        </div>
-      </div>
-
-      <div class="lg:col-span-5 space-y-6">
-        @if (venture.description) {
-        <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
-          <div class="bg-gradient-to-r from-primary-500 to-primary-600 px-6 py-4">
-            <h2 class="text-xl font-bold text-white">{{ 'entrepreneurs.venture_description' | translate }}</h2>
-          </div>
-          <div class="p-6">
-            <p class="text-gray-700 leading-relaxed">{{ venture.description }}</p>
-          </div>
-        </div>
-        }
-
-        <div class="space-y-4">
-          @if (venture.problem_solved) {
-          <div
-            class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300">
-            <div
-              class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-orange-50 to-orange-100 border-b border-orange-200">
-              <div class="w-10 h-10 rounded-lg bg-orange-500 flex items-center justify-center flex-shrink-0">
-                <i-lucide [name]="icons.building" size="20" class="text-white" />
-              </div>
-              <h3 class="text-base font-bold text-orange-900">{{ 'entrepreneurs.problem_solved' | translate }}</h3>
-            </div>
-            <div class="p-6">
-              <p class="text-gray-700 leading-relaxed">{{ venture.problem_solved }}</p>
-            </div>
-          </div>
-          } @if (venture.target_market) {
-          <div
-            class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300">
-            <div
-              class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-green-50 to-green-100 border-b border-green-200">
-              <div class="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0">
-                <i-lucide [name]="icons.building" size="20" class="text-white" />
-              </div>
-              <h3 class="text-base font-bold text-green-900">{{ 'entrepreneurs.target_market' | translate }}</h3>
-            </div>
-            <div class="p-6">
-              <p class="text-gray-700 leading-relaxed">{{ venture.target_market }}</p>
-            </div>
-          </div>
-          }
-        </div>
-
-        <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-          <h3 class="text-lg font-bold text-gray-800 mb-6">Contact</h3>
-          <div class="grid grid-cols-2 gap-4">
-            @if (venture.website) {
-            <a
-              [href]="venture.website"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group flex flex-col items-center justify-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border-2 border-blue-200 hover:border-blue-300 hover:shadow-md hover:scale-105 transition-all duration-300">
-              <i-lucide
-                [name]="icons.globe"
-                size="24"
-                class="text-blue-600 mb-2 group-hover:scale-110 transition-transform" />
-              <span class="text-xs font-semibold text-blue-700">{{ 'entrepreneurs.website' | translate }}</span>
-            </a>
-            } @if (venture.linkedin_url) {
-            <a
-              [href]="venture.linkedin_url"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group flex flex-col items-center justify-center p-4 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg border-2 border-cyan-200 hover:border-cyan-300 hover:shadow-md hover:scale-105 transition-all duration-300">
-              <i-lucide
-                [name]="icons.linkedin"
-                size="24"
-                class="text-cyan-600 mb-2 group-hover:scale-110 transition-transform" />
-              <span class="text-xs font-semibold text-cyan-700">LinkedIn</span>
-            </a>
-            } @if (venture.email) {
-            <a
-              href="mailto:{{ venture.email }}"
-              class="group flex flex-col items-center justify-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg border-2 border-purple-200 hover:border-purple-300 hover:shadow-md hover:scale-105 transition-all duration-300">
-              <i-lucide
-                [name]="icons.email"
-                size="24"
-                class="text-purple-600 mb-2 group-hover:scale-110 transition-transform" />
-              <span class="text-xs font-semibold text-purple-700 truncate max-w-full">{{ venture.email }}</span>
-            </a>
-            } @if (venture.phone_number) {
-            <div
-              class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg border-2 border-green-200">
-              <i-lucide [name]="icons.phone" size="24" class="text-green-600 mb-2" />
-              <span class="text-xs font-semibold text-green-700">{{ venture.phone_number }}</span>
-            </div>
-            }
-          </div>
-        </div>
+        </section>
       </div>
     </div>
-
-    <div class="mt-16">
-      <div class="text-center mb-12">
-        <div class="inline-flex items-center gap-4 mb-4">
-          <div class="h-1 w-16 bg-gradient-to-r from-transparent to-primary-500 rounded-full"></div>
-          <h2 class="text-3xl lg:text-4xl font-black text-gray-800">{{ 'entrepreneurs.products' | translate }}</h2>
-          <div class="h-1 w-16 bg-gradient-to-l from-transparent to-primary-500 rounded-full"></div>
-        </div>
-      </div>
-
-      @if (hasProducts()) {
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        @for (product of products(); track product.id) {
-        <div
-          class="group bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-primary-300 hover:-translate-y-1">
-          <div class="relative w-full h-56 overflow-hidden bg-gray-100">
-            @if (product?.gallery?.[0]) {
-            <img
-              [src]="product?.gallery?.[0] | apiIMG:'gallery'"
-              [alt]="product.name"
-              loading="lazy"
-              decoding="async"
-              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
-            } @else {
-            <div class="w-full h-full flex items-center justify-center bg-gray-200">
-              <i-lucide [name]="icons.building" size="48" class="text-gray-400" />
-            </div>
-            }
-            <div
-              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </div>
-          <div class="p-6 space-y-4">
-            <h3 class="text-lg font-bold text-gray-800 group-hover:text-primary-600 transition-colors line-clamp-1">
-              {{ product.name }}
-            </h3>
-            <p class="text-sm text-gray-600 line-clamp-2 min-h-[40px]">{{ product.description }}</p>
-            <p-button
-              [routerLink]="[product.slug]"
-              [label]="'entrepreneurs.view_product' | translate"
-              size="small"
-              [outlined]="true"
-              severity="primary"
-              styleClass="w-full" />
-          </div>
-        </div>
-        }
-      </div>
-      } @else {
-      <div
-        class="flex flex-col items-center justify-center py-16 px-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border-2 border-dashed border-gray-300">
-        <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm">
-          <i-lucide [name]="icons.building" size="48" class="text-gray-400" />
-        </div>
-        <p class="text-gray-600 text-lg font-semibold">{{ 'entrepreneurs.no_products' | translate }}</p>
-      </div>
-      }
-    </div>
-  </div>
-
-  } @else {
-  <div class="flex flex-col items-center justify-center min-h-[60vh] py-20 px-6">
-    <div class="w-32 h-32 bg-red-100 rounded-full flex items-center justify-center mb-6 shadow-md">
-      <svg class="w-20 h-20 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-      </svg>
-    </div>
-    <p class="text-2xl font-bold text-gray-800 mb-2">{{ 'entrepreneurs.no_venture' | translate }}</p>
-  </div>
+  </main>
   }
 </section>
