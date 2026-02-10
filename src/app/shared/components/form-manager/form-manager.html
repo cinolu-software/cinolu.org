@@ -8,7 +8,7 @@
     ">
     <div class="flex items-center justify-between gap-3 mb-2">
       <p class="text-xs font-semibold" [style.color]="progressTextColor()">{{ progressPercent() }}%</p>
-      <p class="text-xs text-gray-500" aria-live="polite">{{ currentMessage() }}</p>
+      <p class="text-xs text-slate-600" aria-live="polite">{{ currentMessage() }}</p>
     </div>
 
     <div class="h-2 w-full rounded-full bg-gray-100 overflow-hidden">
@@ -34,13 +34,13 @@
           [class.bg-green-500]="$index < currentStep()"
           [class.text-white]="$index < currentStep()"
           [class.bg-gray-200]="$index > currentStep()"
-          [class.text-gray-500]="$index > currentStep()"
+          [class.text-slate-600]="$index > currentStep()"
           [class.cursor-pointer]="$index <= currentStep()"
           [class.cursor-not-allowed]="$index > currentStep()"
           [attr.aria-label]="'Étape ' + ($index + 1) + ': ' + step.label"
           [attr.aria-current]="$index === currentStep() ? 'step' : null">
           @if ($index < currentStep()) {
-          <span class="material-icons text-[18px]">check</span>
+          <span class="material-icons text-lg">check</span>
           } @else {
           <span>{{ $index + 1 }}</span>
           }
@@ -50,7 +50,7 @@
           class="text-xs font-medium text-center transition-colors duration-300 max-w-[120px]"
           [class.text-primary-600]="$index === currentStep()"
           [class.text-green-600]="$index < currentStep()"
-          [class.text-gray-500]="$index > currentStep()">
+          [class.text-slate-600]="$index > currentStep()">
           {{ step.label }}
         </p>
       </div>
@@ -79,7 +79,7 @@
       [size]="'small'"
       (click)="prevStep()"
       [disabled]="!canGoPrev() || loading">
-      <span class="material-icons text-[18px]">arrow_back</span>
+      <span class="material-icons text-lg">arrow_back</span>
       <span>Précédent</span>
     </button>
 
@@ -92,7 +92,7 @@
       (click)="nextStep()"
       [disabled]="!canGoNext() || loading">
       <span>Suivant</span>
-      <span class="material-icons text-[18px]">arrow_forward</span>
+      <span class="material-icons text-lg">arrow_forward</span>
     </button>
     } @else {
     <ng-content select="[formActions]" />

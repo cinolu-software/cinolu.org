@@ -11,33 +11,33 @@
     (keydown)="$event.stopPropagation()"
     role="document">
     <div class="flex items-center justify-between mb-6">
-      <h3 class="text-xl font-bold text-gray-900">Partager mon lien</h3>
+      <h3 class="text-xl font-bold text-slate-900">Partager mon lien</h3>
       <button
         (click)="closeModal.emit()"
         type="button"
-        class="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors"
+        class="min-w-[44px] min-h-[44px] p-2 rounded-lg hover:bg-slate-100 flex items-center justify-center transition-colors"
         aria-label="Fermer">
-        <lucide-icon [img]="icons.x" class="w-5 h-5 text-gray-500" />
+        <lucide-icon [img]="icons.x" class="w-5 h-5 text-slate-600" />
       </button>
     </div>
 
     <div class="mb-6 p-4 bg-gradient-to-br from-primary-50 to-primary-50/30 rounded-lg border border-primary-200/50">
-      <p class="text-sm text-gray-900 font-medium">{{ shareMessage() }}</p>
+      <p class="text-sm text-slate-900 font-medium">{{ shareMessage() }}</p>
     </div>
 
-    <div class="mb-6 p-3 bg-gray-50 rounded-lg border border-gray-200 flex items-center gap-2">
-      <p class="text-sm font-mono text-gray-700 truncate flex-1">{{ link() }}</p>
+    <div class="mb-6 p-3 bg-slate-50 rounded-lg border border-slate-200 flex items-center gap-2">
+      <p class="text-sm font-mono text-slate-700 truncate flex-1">{{ link() }}</p>
       <button
         (click)="onCopy()"
         type="button"
-        class="flex-shrink-0 p-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 hover:border-primary-300 transition-all group"
+        class="flex-shrink-0 min-w-[44px] min-h-[44px] p-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 hover:border-primary-300 transition-all group"
         title="Copier le lien">
-        <lucide-icon [img]="icons.copy" class="w-4 h-4 text-gray-600 group-hover:text-primary-600 transition-colors" />
+        <lucide-icon [img]="icons.copy" class="w-5 h-5 text-slate-600 group-hover:text-primary-600 transition-colors" />
       </button>
     </div>
 
     <div class="space-y-3">
-      <p class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">Partager sur :</p>
+      <p class="text-xs font-bold text-slate-600 uppercase tracking-wide mb-3">Partager sur :</p>
 
       <button
         (click)="shareOn('whatsapp')"
@@ -48,12 +48,12 @@
           <lucide-icon [img]="icons.messageCircle" class="w-6 h-6 text-white" />
         </div>
         <div class="flex-1 text-left">
-          <p class="font-semibold text-gray-900 group-hover:text-green-600 transition-colors">WhatsApp</p>
-          <p class="text-xs text-gray-500">Partager par message</p>
+          <p class="font-semibold text-slate-900 group-hover:text-green-600 transition-colors">WhatsApp</p>
+          <p class="text-xs text-slate-600">Partager par message</p>
         </div>
         <lucide-icon
           [img]="icons.chevronRight"
-          class="w-5 h-5 text-gray-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all" />
+          class="w-5 h-5 text-slate-600 group-hover:text-green-600 group-hover:translate-x-1 transition-all" />
       </button>
 
       <button
@@ -65,12 +65,12 @@
           <lucide-icon [img]="icons.linkedin" class="w-6 h-6 text-white" />
         </div>
         <div class="flex-1 text-left">
-          <p class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">LinkedIn</p>
-          <p class="text-xs text-gray-500">Partager sur ton réseau professionnel</p>
+          <p class="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">LinkedIn</p>
+          <p class="text-xs text-slate-600">Partager sur ton réseau professionnel</p>
         </div>
         <lucide-icon
           [img]="icons.chevronRight"
-          class="w-5 h-5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+          class="w-5 h-5 text-slate-600 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
       </button>
 
       <button
@@ -82,12 +82,12 @@
           <lucide-icon [img]="icons.facebook" class="w-6 h-6 text-white" />
         </div>
         <div class="flex-1 text-left">
-          <p class="font-semibold text-gray-900 group-hover:text-blue-500 transition-colors">Facebook</p>
-          <p class="text-xs text-gray-500">Partager sur ton fil d'actualité</p>
+          <p class="font-semibold text-slate-900 group-hover:text-blue-500 transition-colors">Facebook</p>
+          <p class="text-xs text-slate-600">Partager sur ton fil d'actualité</p>
         </div>
         <lucide-icon
           [img]="icons.chevronRight"
-          class="w-5 h-5 text-gray-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
+          class="w-5 h-5 text-slate-600 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
       </button>
     </div>
   </div>
