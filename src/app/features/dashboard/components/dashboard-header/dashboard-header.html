@@ -49,7 +49,7 @@
           @if (user()?.profile || user()?.google_image) {
           <div
             class="relative w-9 h-9 rounded-lg overflow-hidden ring-2 ring-slate-200 group-hover:ring-primary-300 transition-all">
-            <img [ngSrc]="user() | apiIMG: 'user'" [alt]="user()?.name" fill class="object-cover" />
+            <img priority [ngSrc]="user() | apiIMG: 'user'" [alt]="user()?.name" fill class="object-cover" />
           </div>
           } @else {
           <div
