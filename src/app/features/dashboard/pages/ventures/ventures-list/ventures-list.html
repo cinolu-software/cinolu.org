@@ -136,12 +136,12 @@
             <div class="flex flex-wrap gap-2 mb-4">
               @if (venture.sector) {
               <span class="dashboard-badge-primary">
-                <span class="material-icons text-[12px]">category</span>
+                <span class="material-icons text-xs">category</span>
                 <span>{{ venture.sector }}</span>
               </span>
               } @if (venture.stage) {
               <span class="dashboard-badge-purple">
-                <span class="material-icons text-[12px]">rocket_launch</span>
+                <span class="material-icons text-xs">rocket_launch</span>
                 <span>{{ venture.stage }}</span>
               </span>
               }
@@ -150,7 +150,7 @@
             <div class="flex flex-col gap-2.5 mb-5 text-sm text-slate-600">
               @if (venture.products && venture.products.length > 0) {
               <span class="flex items-center gap-2">
-                <span class="material-icons text-[18px] text-blue-600">shopping_bag</span>
+                <span class="material-icons text-lg text-blue-600">shopping_bag</span>
                 <span class="font-semibold">{{ venture.products.length }}</span>
                 <span>produit{{ venture.products.length > 1 ? 's' : '' }}</span>
               </span>
@@ -161,19 +161,19 @@
               <a
                 [routerLink]="['/dashboard/ventures', venture.slug]"
                 class="flex flex-col items-center justify-center gap-1 py-2.5 px-2 bg-brand-50 hover:bg-brand-100 text-brand-700 rounded-lg transition-all duration-200 hover:shadow-md group/btn">
-                <span class="material-icons text-[18px] group-hover/btn:scale-110 transition-transform"
+                <span class="material-icons text-lg group-hover/btn:scale-110 transition-transform"
                   >visibility</span
                 >
               </a>
               <a
                 [routerLink]="['/dashboard/ventures/edit', venture.slug]"
                 class="flex flex-col items-center justify-center gap-1 py-2.5 px-2 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg transition-all duration-200 hover:shadow-md group/btn">
-                <span class="material-icons text-[18px] group-hover/btn:rotate-12 transition-transform">edit</span>
+                <span class="material-icons text-lg group-hover/btn:rotate-12 transition-transform">edit</span>
               </a>
               <button
                 (click)="deleteVenture(venture.id, venture.name)"
                 class="flex flex-col items-center justify-center gap-1 py-2.5 px-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition-all duration-200 hover:shadow-md group/btn">
-                <span class="material-icons text-[18px] group-hover/btn:scale-110 transition-transform">delete</span>
+                <span class="material-icons text-lg group-hover/btn:scale-110 transition-transform">delete</span>
               </button>
             </div>
           </div>
@@ -227,7 +227,7 @@
               <a
                 [routerLink]="['/dashboard/ventures', product.venture.slug]"
                 class="dashboard-badge-primary hover:bg-brand-600 hover:text-white transition-all duration-200">
-                <span class="material-icons text-[14px]">business</span>
+                <span class="material-icons text-sm">business</span>
                 <span>{{ product.venture.name }}</span>
               </a>
             </div>
@@ -256,13 +256,13 @@
             <a
               [routerLink]="['/dashboard/products/edit', product.slug]"
               class="flex-1 dashboard-btn-primary py-3 !rounded-lg group/btn">
-              <span class="material-icons text-[18px] group-hover/btn:rotate-12 transition-transform">edit</span>
+              <span class="material-icons text-lg group-hover/btn:rotate-12 transition-transform">edit</span>
               <span class="font-bold">Modifier</span>
             </a>
             <button
               (click)="deleteProduct(product.id, product.name)"
               class="flex items-center justify-center gap-2 py-3 px-4 bg-red-50 hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 hover:text-white text-red-600 font-bold rounded-lg border-2 border-red-200 hover:border-red-600 transition-all duration-300 hover:shadow-lg group/btn">
-              <span class="material-icons text-[18px] group-hover/btn:scale-110 transition-transform">delete</span>
+              <span class="material-icons text-lg group-hover/btn:scale-110 transition-transform">delete</span>
             </button>
           </div>
         </div>

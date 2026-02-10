@@ -32,14 +32,14 @@
             @if (profileStore.isApproved()) {
             <div class="flex items-center gap-2 text-slate-700 text-base md:text-lg flex-wrap">
               <span class="dashboard-badge-success">
-                <span class="material-icons text-[14px]">verified</span>
+                <span class="material-icons text-sm">verified</span>
                 Mentor Approuvé
               </span>
             </div>
             } @else if (profileStore.isPending()) {
             <div class="flex items-center gap-2 text-slate-700 text-base md:text-lg flex-wrap">
               <span class="dashboard-badge-warning">
-                <span class="material-icons text-[14px]">schedule</span>
+                <span class="material-icons text-sm">schedule</span>
                 En attente d'approbation
               </span>
             </div>
@@ -62,7 +62,7 @@
           </div>
         </div>
         <span class="dashboard-badge-neutral hidden sm:inline-flex">
-          <span class="material-icons text-[12px]">update</span>
+          <span class="material-icons text-xs">update</span>
           <span>Temps réel</span>
         </span>
       </div>
@@ -76,7 +76,7 @@
             <span class="material-icons text-white text-2xl">{{ sessionsIcon }}</span>
           </div>
           <div class="dashboard-badge-info">
-            <span class="material-icons text-[12px]">schedule</span>
+            <span class="material-icons text-xs">schedule</span>
           </div>
         </div>
         <div class="space-y-1">
@@ -94,7 +94,7 @@
             <span class="material-icons text-white text-2xl">{{ menteesIcon }}</span>
           </div>
           <div class="dashboard-badge-success">
-            <span class="material-icons text-[12px]">people</span>
+            <span class="material-icons text-xs">people</span>
           </div>
         </div>
         <div class="space-y-1">
@@ -112,11 +112,11 @@
           </div>
           @if (stats.pendingRequests > 0) {
           <div class="dashboard-badge-warning">
-            <span class="material-icons text-[12px]">notifications_active</span>
+            <span class="material-icons text-xs">notifications_active</span>
           </div>
           } @else {
           <div class="dashboard-badge-neutral">
-            <span class="material-icons text-[12px]">done_all</span>
+            <span class="material-icons text-xs">done_all</span>
           </div>
           }
         </div>
@@ -134,7 +134,7 @@
             <span class="material-icons text-white text-2xl">{{ ratingIcon }}</span>
           </div>
           <div class="dashboard-badge-success">
-            <span class="material-icons text-[12px]">trending_up</span>
+            <span class="material-icons text-xs">trending_up</span>
           </div>
         </div>
         <div class="space-y-1">
@@ -221,7 +221,7 @@
         <div class="flex items-center justify-between mb-6">
           <h2 class="dashboard-heading-4">Activité récente</h2>
           <span class="dashboard-badge-neutral">
-            <span class="material-icons text-[12px]">history</span>
+            <span class="material-icons text-xs">history</span>
             <span>Dernières actions</span>
           </span>
         </div>

@@ -22,9 +22,9 @@
         <div class="w-full max-w-[240px] md:max-w-[280px] lg:max-w-none lg:w-4/12 md:sticky md:top-[300px]">
           <div class="group relative">
             <div
-              class="absolute -inset-3 bg-gradient-to-br from-primary-100 to-primary-50 rounded-[2rem] rotate-3 transition-all duration-500 group-hover:rotate-2 group-hover:scale-105"></div>
+              class="absolute -inset-3 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl rotate-3 transition-all duration-500 group-hover:rotate-2 group-hover:scale-105"></div>
             <div
-              class="relative aspect-[1/1.1] w-full overflow-hidden rounded-[1.5rem] bg-slate-200 shadow-xl ring-1 ring-slate-900/5">
+              class="relative aspect-[1/1.1] w-full overflow-hidden rounded-xl bg-slate-200 shadow-xl ring-1 ring-slate-900/5">
               @if (ambassador.profile) {
               <img
                 [src]="ambassador | apiIMG: 'user'"
@@ -43,16 +43,16 @@
         <div class="w-full lg:w-7/12 space-y-8 lg:space-y-10">
           <div class="grid grid-cols-2 gap-6 md:gap-8 border-b border-slate-200 pb-8 lg:pb-10">
             <div class="space-y-1">
-              <span class="text-xs font-bold uppercase tracking-tighter text-slate-400"
+              <span class="text-xs font-bold uppercase tracking-tighter text-slate-600"
                 >{{ 'ambassadors.detail.globalImpact' | translate }}</span
               >
               <div class="flex items-baseline gap-2">
                 <span class="text-5xl font-black text-slate-900">{{ ambassador.referralsCount || 0 }}</span>
-                <span class="text-sm font-medium text-slate-500">{{ 'ambassadors.referrals' | translate }}</span>
+                <span class="text-sm font-medium text-slate-600">{{ 'ambassadors.referrals' | translate }}</span>
               </div>
             </div>
             <div class="space-y-1">
-              <span class="text-xs font-bold uppercase tracking-tighter text-slate-400"
+              <span class="text-xs font-bold uppercase tracking-tighter text-slate-600"
                 >{{ 'ambassadors.detail.referralCode' | translate }}</span
               >
               <div class="text-2xl font-black text-primary-600 font-mono tracking-wider">
@@ -104,7 +104,7 @@
         <h2
           class="text-2xl md:text-3xl lg:text-4xl font-black font-satoshi text-slate-900 tracking-tight flex items-center gap-3">
           {{ 'ambassadors.detail.projectsProducts' | translate }}
-          <span class="text-xs sm:text-sm font-bold bg-slate-100 text-slate-500 px-2.5 py-1 rounded-full"
+          <span class="text-xs sm:text-sm font-bold bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"
             >{{ ambassador.ventures.length }}</span
           >
         </h2>
@@ -138,7 +138,7 @@
                       {{ venture.name }}
                     </h3>
                     <span
-                      class="px-2 py-0.5 sm:px-2.5 sm:py-1 md:px-3 bg-primary-500 text-xsm sm:text-[10px] font-bold uppercase rounded-md sm:rounded-lg shadow-lg w-fit flex-shrink-0"
+                      class="px-2 py-0.5 sm:px-2.5 sm:py-1 md:px-3 bg-primary-500 text-xs font-bold uppercase rounded-lg shadow-lg w-fit flex-shrink-0"
                       >{{ 'ambassadors.detail.stage' | translate }}: {{ venture.stage }}</span
                     >
                   </div>
@@ -151,13 +151,13 @@
                 <a
                   [href]="venture.website"
                   target="_blank"
-                  class="p-2 md:p-3 bg-white/10 backdrop-blur-md rounded-lg md:rounded-xl text-white hover:bg-white hover:text-slate-900 transition-all">
+                  class="p-2 md:p-3 bg-white/10 backdrop-blur-md rounded-lg text-white hover:bg-white hover:text-slate-900 transition-all">
                   <i-lucide [name]="icons.globe" class="size-4 md:size-5" />
                 </a>
                 <a
                   [href]="venture.linkedin_url"
                   target="_blank"
-                  class="p-2 md:p-3 bg-white/10 backdrop-blur-md rounded-lg md:rounded-xl text-white hover:bg-white hover:text-slate-900 transition-all">
+                  class="p-2 md:p-3 bg-white/10 backdrop-blur-md rounded-lg text-white hover:bg-white hover:text-slate-900 transition-all">
                   <i-lucide [name]="icons.linkedin" class="size-4 md:size-5" />
                 </a>
               </div>
@@ -258,7 +258,7 @@
                       type="button"
                       (click)="goToImage(product.id, thumb.actualIndex)"
                       [attr.aria-label]="'Sélectionner l\'image ' + (thumb.actualIndex + 1)"
-                      class="flex-none md:flex-1 relative aspect-square md:aspect-auto md:h-1/3 rounded-md lg:rounded-lg overflow-hidden transition-all duration-300 ring-2 ring-offset-1 md:ring-offset-2 lg:ring-offset-3 cursor-pointer"
+                      class="flex-none md:flex-1 relative aspect-square md:aspect-auto md:h-1/3 rounded-lg overflow-hidden transition-all duration-300 ring-2 ring-offset-2 cursor-pointer"
                       [class.ring-primary-500]="thumb.actualIndex === getGalleryIndex(product.id)"
                       [class.ring-slate-200]="thumb.actualIndex !== getGalleryIndex(product.id)"
                       [class.opacity-100]="thumb.actualIndex === getGalleryIndex(product.id)"
@@ -276,8 +276,7 @@
                     } } @else {
                     <!-- Placeholders si pas d'images -->
                     @for (i of [1,2,3]; track i) {
-                    <div
-                      class="flex-1 rounded-lg lg:rounded-xl bg-slate-100 flex items-center justify-center text-slate-200">
+                    <div class="flex-1 rounded-lg bg-slate-100 flex items-center justify-center text-slate-200">
                       <i-lucide [name]="icons.package" class="size-4 md:size-5 lg:size-6" />
                     </div>
                     } }
@@ -328,7 +327,7 @@
                           class="text-lg md:text-xl lg:text-2xl font-black font-satoshi text-slate-900 tracking-tight leading-none group-hover/p:text-primary-600 transition-colors">
                           {{ product.name }}
                         </h6>
-                        <p class="text-sm lg:text-base text-slate-500 line-clamp-2 font-medium leading-relaxed">
+                        <p class="text-sm lg:text-base text-slate-600 line-clamp-2 font-medium leading-relaxed">
                           {{ product.description }}
                         </p>
                       </div>
@@ -357,7 +356,7 @@
               <h3 class="text-xl md:text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">
                 {{ 'ambassadors.detail.noCompanyYet' | translate }}
               </h3>
-              <p class="text-sm md:text-base lg:text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
+              <p class="text-sm md:text-base lg:text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
                 {{ 'ambassadors.detail.noCompanyMessage' | translate }}
               </p>
             </div>
@@ -365,13 +364,13 @@
             <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center pt-2 md:pt-4">
               <a
                 routerLink="/entrepreneurs"
-                class="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-primary-600 text-white text-sm md:text-base font-bold rounded-lg md:rounded-xl hover:bg-primary-700 transition-all shadow-lg shadow-primary-600/20 hover:shadow-xl hover:shadow-primary-600/30">
+                class="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-primary-600 text-white text-sm md:text-base font-bold rounded-lg hover:bg-primary-700 transition-all shadow-lg shadow-primary-600/20 hover:shadow-xl hover:shadow-primary-600/30">
                 <i-lucide [name]="icons.building" class="size-4 md:size-5" />
                 {{ 'ambassadors.detail.discoverEntrepreneurs' | translate }}
               </a>
               <a
                 routerLink="/ambassadors"
-                class="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-slate-100 text-slate-700 text-sm md:text-base font-bold rounded-lg md:rounded-xl hover:bg-slate-200 transition-all">
+                class="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-slate-100 text-slate-700 text-sm md:text-base font-bold rounded-lg hover:bg-slate-200 transition-all">
                 <i-lucide [name]="icons.users" class="size-4 md:size-5" />
                 {{ 'ambassadors.detail.viewAllAmbassadors' | translate }}
               </a>

@@ -53,7 +53,7 @@
             <button
               (click)="editVenture()"
               class="inline-flex items-center gap-2 px-5 py-3 bg-white border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:shadow-sm transition-shadow">
-              <span class="material-icons text-[20px]">edit</span>
+              <span class="material-icons text-xl">edit</span>
               Modifier
             </button>
           </div>
@@ -138,7 +138,7 @@
             routerLink="/dashboard/products/create"
             [queryParams]="{ venture: venture.id }"
             class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-lg text-sm font-semibold transition-all duration-200 hover:shadow-md">
-            <span class="material-icons text-[18px]">add</span>
+            <span class="material-icons text-lg">add</span>
             <span>Ajouter un produit</span>
           </a>
         </div>
@@ -166,13 +166,13 @@
                 <a
                   [routerLink]="['/dashboard/products/edit', product.slug]"
                   class="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg text-sm font-semibold transition-all duration-200 hover:shadow-md group/btn">
-                  <span class="material-icons text-[16px] group-hover/btn:rotate-12 transition-transform">edit</span>
+                  <span class="material-icons text-base group-hover/btn:rotate-12 transition-transform">edit</span>
                   <span>Modifier</span>
                 </a>
                 <button
                   (click)="deleteProduct(product.id, product.name)"
                   class="flex items-center justify-center gap-1.5 py-2 px-3 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg text-sm font-semibold transition-all duration-200 hover:shadow-md group/btn">
-                  <span class="material-icons text-[16px] group-hover/btn:scale-110 transition-transform">delete</span>
+                  <span class="material-icons text-base group-hover/btn:scale-110 transition-transform">delete</span>
                   <span>Supprimer</span>
                 </button>
               </div>
@@ -196,7 +196,7 @@
             routerLink="/dashboard/products/create"
             [queryParams]="{ venture: venture.id }"
             class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-br from-primary-400 to-primary-500 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5">
-            <span class="material-icons text-[20px]">add</span>
+            <span class="material-icons text-xl">add</span>
             <span>Ajouter un produit</span>
           </a>
         </div>
@@ -231,7 +231,7 @@
           <div>
             <p class="text-sm text-gray-600 mb-1">Localisation</p>
             <p class="font-medium text-gray-900 flex items-center gap-1">
-              <span class="material-icons text-[18px] text-gray-600">location_on</span>
+              <span class="material-icons text-lg text-gray-600">location_on</span>
               {{ venture.location }}
             </p>
           </div>
@@ -251,7 +251,7 @@
             class="group flex items-center gap-3 p-3 rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50/50 transition-all duration-200 hover:shadow-sm">
             <div
               class="w-10 h-10 flex-shrink-0 rounded-xl bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-110 transition-all duration-200">
-              <span class="material-icons text-white text-[20px]">email</span>
+              <span class="material-icons text-white text-xl">email</span>
             </div>
             <span class="text-sm text-gray-700 group-hover:text-blue-700 font-medium truncate"
               >{{ venture.email }}</span
@@ -263,7 +263,7 @@
             class="group flex items-center gap-3 p-3 rounded-lg hover:bg-gradient-to-r hover:from-primary-50 hover:to-primary-50/50 transition-all duration-200 hover:shadow-sm">
             <div
               class="w-10 h-10 flex-shrink-0 rounded-xl bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-110 transition-all duration-200">
-              <span class="material-icons text-white text-[20px]">phone</span>
+              <span class="material-icons text-white text-xl">phone</span>
             </div>
             <span class="text-sm text-gray-700 group-hover:text-primary-700 font-medium"
               >{{ venture.phone_number }}</span
@@ -276,13 +276,13 @@
             class="group flex items-center gap-3 p-3 rounded-lg hover:bg-gradient-to-r hover:from-purple-50 hover:to-purple-50/50 transition-all duration-200 hover:shadow-sm">
             <div
               class="w-10 h-10 flex-shrink-0 rounded-xl bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-110 transition-all duration-200">
-              <span class="material-icons text-white text-[20px]">language</span>
+              <span class="material-icons text-white text-xl">language</span>
             </div>
             <span class="text-sm text-gray-700 group-hover:text-purple-700 font-medium truncate flex-1"
               >{{ venture.website }}</span
             >
             <span
-              class="material-icons text-gray-400 text-[16px] group-hover:text-purple-500 group-hover:translate-x-1 transition-all duration-200"
+              class="material-icons text-gray-400 text-base group-hover:text-purple-500 group-hover:translate-x-1 transition-all duration-200"
               >open_in_new</span
             >
           </a>
@@ -293,11 +293,11 @@
             class="group flex items-center gap-3 p-3 rounded-lg hover:bg-gradient-to-r hover:from-cyan-50 hover:to-cyan-50/50 transition-all duration-200 hover:shadow-sm">
             <div
               class="w-10 h-10 flex-shrink-0 rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-110 transition-all duration-200">
-              <span class="material-icons text-white text-[20px]">link</span>
+              <span class="material-icons text-white text-xl">link</span>
             </div>
             <span class="text-sm text-gray-700 group-hover:text-cyan-700 font-medium">LinkedIn</span>
             <span
-              class="material-icons text-gray-400 text-[16px] group-hover:text-cyan-500 group-hover:translate-x-1 transition-all duration-200"
+              class="material-icons text-gray-400 text-base group-hover:text-cyan-500 group-hover:translate-x-1 transition-all duration-200"
               >open_in_new</span
             >
           </a>

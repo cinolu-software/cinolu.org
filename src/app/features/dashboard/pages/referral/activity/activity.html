@@ -28,7 +28,7 @@
           <span class="material-icons text-white text-xl">timeline</span>
         </div>
         <div class="dashboard-badge-info">
-          <span class="material-icons text-[12px]">event_available</span>
+          <span class="material-icons text-xs">event_available</span>
         </div>
       </div>
       <h3 class="dashboard-heading-3 mb-1">{{ totalEvents() }}</h3>
@@ -42,7 +42,7 @@
           <span class="material-icons text-white text-xl">person_add</span>
         </div>
         <div class="dashboard-badge-success">
-          <span class="material-icons text-[12px]">people</span>
+          <span class="material-icons text-xs">people</span>
         </div>
       </div>
       <h3 class="dashboard-heading-3 mb-1">{{ referralEvents() }}</h3>
@@ -56,7 +56,7 @@
           <span class="material-icons text-white text-xl">military_tech</span>
         </div>
         <div class="dashboard-badge-warning">
-          <span class="material-icons text-[12px]">emoji_events</span>
+          <span class="material-icons text-xs">emoji_events</span>
         </div>
       </div>
       <h3 class="dashboard-heading-3 mb-1">{{ badgeEvents() }}</h3>
@@ -74,7 +74,7 @@
       Commence à partager ton lien de parrainage pour voir apparaître tes événements ici
     </p>
     <a routerLink="/dashboard/referral/link" class="dashboard-btn-primary inline-flex">
-      <span class="material-icons text-[18px]">share</span>
+      <span class="material-icons text-lg">share</span>
       <span>Partager mon lien</span>
     </a>
   </div>
@@ -127,11 +127,11 @@
                 class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 pt-3 border-t"
                 [class]="getColorClasses(event.color).border">
                 <span class="dashboard-badge-success text-[11px] px-2 py-1">
-                  <span class="material-icons text-[10px]">person</span>
+                  <span class="material-icons text-xs">person</span>
                   <span>Inscription</span>
                 </span>
                 <p class="dashboard-text-tiny truncate">
-                  <span class="material-icons text-[12px] align-middle">email</span>
+                  <span class="material-icons text-xs align-middle">email</span>
                   {{ event.user.email }}
                 </p>
               </div>
@@ -142,7 +142,7 @@
                 <span
                   class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold text-white shadow-lg"
                   [class]="'bg-gradient-to-r from-' + event.badge.color + '-400 to-' + event.badge.color + '-600'">
-                  <span class="material-icons text-[12px]">{{ event.badge.icon }}</span>
+                  <span class="material-icons text-xs">{{ event.badge.icon }}</span>
                   <span>Niveau {{ event.badge.level }}</span>
                 </span>
                 <p class="dashboard-text-tiny">{{ event.badge.description }}</p>
@@ -162,7 +162,7 @@
         class="dashboard-btn-secondary inline-flex"
         aria-label="Fonctionnalité de chargement supplémentaire à venir"
         disabled>
-        <span class="material-icons text-[18px]">expand_more</span>
+        <span class="material-icons text-lg">expand_more</span>
         <span>Charger plus (bientôt disponible)</span>
       </button>
     </div>

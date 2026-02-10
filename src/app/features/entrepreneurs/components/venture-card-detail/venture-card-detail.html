@@ -27,9 +27,7 @@
           <div
             class="inline-flex items-center px-3 py-1 rounded-full bg-primary-500/20 backdrop-blur-md border border-primary-400/30">
             <span class="size-2 rounded-full bg-primary-400 animate-ping mr-2"></span>
-            <span class="text-primary-100 text-[10px] font-bold uppercase tracking-[0.3em]">
-              {{ venture.sector }}
-            </span>
+            <span class="text-primary-100 text-xs font-bold uppercase tracking-[0.3em]"> {{ venture.sector }} </span>
           </div>
 
           <h1 class="text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.9]">{{ venture.name }}</h1>
@@ -43,7 +41,7 @@
             </div>
             <div class="h-8 w-px bg-white/20 hidden md:block"></div>
             <div class="flex items-center gap-2">
-              <span class="text-slate-400 uppercase text-xs font-bold tracking-widest">Stage:</span>
+              <span class="text-slate-600 uppercase text-xs font-bold tracking-widest">Stage:</span>
               <span class="text-white font-bold bg-white/10 px-3 py-1 rounded-lg backdrop-blur-sm">
                 {{ venture.stage }}
               </span>
@@ -54,7 +52,7 @@
     </div>
 
     <div class="absolute bottom-10 left-10 hidden xl:flex items-center gap-4 text-white/50">
-      <span class="text-[10px] font-bold uppercase tracking-[0.4em] [writing-mode:vertical-lr]">Scroll</span>
+      <span class="text-xs font-bold uppercase tracking-[0.4em] [writing-mode:vertical-lr]">Scroll</span>
       <div class="w-px h-12 bg-gradient-to-b from-white/50 to-transparent"></div>
     </div>
   </header>
@@ -80,7 +78,7 @@
             </div>
 
             <div class="text-center">
-              <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary-500 mb-4">About the Venture</h3>
+              <h3 class="text-xs font-black uppercase tracking-[0.3em] text-primary-500 mb-4">About the Venture</h3>
               <p class="text-slate-600 leading-relaxed text-[15px] font-medium">{{ venture.description }}</p>
             </div>
 
@@ -91,7 +89,7 @@
                 target="_blank"
                 class="flex flex-col items-center p-4 rounded-2xl bg-slate-50 hover:bg-primary-500 hover:text-white transition-all group/l">
                 <i-lucide [name]="icons.globe" class="size-5 mb-2" />
-                <span class="text-[10px] font-bold uppercase">Website</span>
+                <span class="text-xs font-bold uppercase">Website</span>
               </a>
               } @if (venture.linkedin_url) {
               <a
@@ -99,7 +97,7 @@
                 target="_blank"
                 class="flex flex-col items-center p-4 rounded-2xl bg-slate-50 hover:bg-[#0077b5] hover:text-white transition-all group/l">
                 <i-lucide [name]="icons.linkedin" class="size-5 mb-2" />
-                <span class="text-[10px] font-bold uppercase">LinkedIn</span>
+                <span class="text-xs font-bold uppercase">LinkedIn</span>
               </a>
               }
             </div>
@@ -155,7 +153,7 @@
               <p class="text-slate-500 font-medium">Explorez les solutions de {{ venture.name }}</p>
             </div>
             <div class="hidden md:flex gap-2">
-              <div class="px-4 py-2 rounded-full bg-slate-100 text-[10px] font-black uppercase text-slate-400">
+              <div class="px-4 py-2 rounded-full bg-slate-100 text-xs font-black uppercase text-slate-600">
                 Products: {{ products().length }}
               </div>
             </div>

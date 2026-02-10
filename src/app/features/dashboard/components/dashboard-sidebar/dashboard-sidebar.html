@@ -17,7 +17,7 @@
     <a [routerLink]="['/']" class="flex items-center gap-2.5 group" aria-label="Accueil CINOLU">
       <div
         class="w-9 h-9 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-200">
-        <span class="material-icons text-white text-[20px]" aria-hidden="true">verified</span>
+        <span class="material-icons text-white text-xl" aria-hidden="true">verified</span>
       </div>
       <span
         class="text-xl font-black tracking-tight text-slate-900 uppercase group-hover:text-primary-600 transition-colors"
@@ -28,7 +28,7 @@
     <a [routerLink]="['/']" class="flex items-center justify-center group" aria-label="Accueil CINOLU">
       <div
         class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-200">
-        <span class="material-icons text-white text-[22px]" aria-hidden="true">verified</span>
+        <span class="material-icons text-white text-2xl" aria-hidden="true">verified</span>
       </div>
     </a>
     } @if (isMobile()) {
@@ -36,7 +36,7 @@
       (click)="closeSidebar.emit()"
       class="p-2 hover:bg-slate-100 rounded-lg transition-colors"
       aria-label="Fermer le menu">
-      <span class="material-icons text-slate-600 text-[20px]">close</span>
+      <span class="material-icons text-slate-600 text-xl">close</span>
     </button>
     }
   </div>
@@ -44,7 +44,7 @@
   <nav class="flex-1 overflow-y-auto py-4 px-2 space-y-1" aria-label="Menu principal">
     @for (section of menuConfig(); track section.title) { @if (section.title && (!isCollapsed() || isMobile())) {
     <div
-      class="px-3 pt-4 pb-2 text-[10px] uppercase tracking-widest text-slate-400 font-bold flex items-center gap-2"
+      class="px-3 pt-4 pb-2 text-xs uppercase tracking-widest text-slate-600 font-bold flex items-center gap-2"
       role="presentation">
       <span class="w-1 h-1 rounded-full bg-slate-300" aria-hidden="true"></span>
       <span>{{ section.title }}</span>
@@ -77,7 +77,7 @@
             class="w-9 h-9 flex items-center justify-center rounded-lg transition-colors flex-shrink-0">
             <span
               [ngClass]="{ 'text-primary-600': isActive(item), 'text-slate-600 group-hover:text-primary-600': !isActive(item) }"
-              class="material-icons text-[20px]"
+              class="material-icons text-xl"
               aria-hidden="true"
               >{{ item.icon }}</span
             >
@@ -91,14 +91,14 @@
         @if (!isCollapsed() || isMobile()) {
         <span
           [ngClass]="{ 'rotate-180': isMenuExpanded(item.id) }"
-          class="material-icons text-[18px] transition-transform duration-200 flex-shrink-0"
+          class="material-icons text-lg transition-transform duration-200 flex-shrink-0"
           aria-hidden="true"
           >expand_more</span
         >
         } @if (item.badge && (!isCollapsed() || isMobile())) {
         <span
           [ngClass]="getBadgeColorClass(item.badge.color)"
-          class="px-2 py-0.5 rounded-full text-[10px] font-bold flex-shrink-0"
+          class="px-2 py-0.5 rounded-full text-xs font-bold flex-shrink-0"
           >{{ item.badge.count }}</span
         >
         }
@@ -127,9 +127,9 @@
             <span
               [ngClass]="{
                 'text-primary-600': isChildActive(child),
-                'text-slate-400 group-hover:text-slate-600': !isChildActive(child)
+                'text-slate-600 group-hover:text-slate-700': !isChildActive(child)
               }"
-              class="material-icons text-[18px] flex-shrink-0"
+              class="material-icons text-lg flex-shrink-0"
               aria-hidden="true"
               >{{ child.icon }}</span
             >
@@ -139,11 +139,11 @@
             } @if (child.badge && (!isCollapsed() || isMobile())) {
             <span
               [ngClass]="getBadgeColorClass(child.badge.color)"
-              class="ml-auto px-2 py-0.5 rounded-full text-[10px] font-bold flex-shrink-0"
+              class="ml-auto px-2 py-0.5 rounded-full text-xs font-bold flex-shrink-0"
               >{{ child.badge.count }}</span
             >
             } @if (child.disabled && (!isCollapsed() || isMobile())) {
-            <span class="ml-auto text-[10px] text-slate-400 font-medium flex-shrink-0">Bientôt</span>
+            <span class="ml-auto text-xs text-slate-600 font-medium flex-shrink-0">Bientôt</span>
             }
           </a>
           }
@@ -173,7 +173,7 @@
               'text-primary-600': isActive(item),
               'text-slate-600 group-hover:text-primary-600': !isActive(item)
             }"
-            class="material-icons text-[20px]"
+            class="material-icons text-xl"
             aria-hidden="true"
             >{{ item.icon }}</span
           >
@@ -184,11 +184,11 @@
         } @if (item.badge && (!isCollapsed() || isMobile())) {
         <span
           [ngClass]="getBadgeColorClass(item.badge.color)"
-          class="px-2 py-0.5 rounded-full text-[10px] font-bold flex-shrink-0"
+          class="px-2 py-0.5 rounded-full text-xs font-bold flex-shrink-0"
           >{{ item.badge.count }}</span
         >
         } @if (item.disabled && (!isCollapsed() || isMobile())) {
-        <span class="text-[10px] text-slate-400 font-medium flex-shrink-0">Bientôt</span>
+        <span class="text-xs text-slate-600 font-medium flex-shrink-0">Bientôt</span>
         }
       </a>
       }
@@ -206,7 +206,7 @@
       }"
       class="w-full flex items-center gap-2.5 px-3 py-2.5 bg-red-50 hover:bg-red-600 text-red-600 hover:text-white rounded-lg transition-all duration-200 border border-red-200 hover:border-red-600 group"
       aria-label="Se déconnecter">
-      <span class="material-icons text-[20px]" aria-hidden="true">logout</span>
+      <span class="material-icons text-xl" aria-hidden="true">logout</span>
       @if (!isCollapsed() || isMobile()) {
       <span class="font-semibold text-sm">Déconnexion</span>
       }
