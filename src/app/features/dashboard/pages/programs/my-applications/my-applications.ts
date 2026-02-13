@@ -40,7 +40,6 @@ export class MyApplications implements OnInit {
       };
     }
 
-    // Récupérer la dernière phase (phase actuelle)
     const currentPhase = participation.phases[participation.phases.length - 1];
     const totalPhases = participation.project.phases?.length || 0;
     const isLastPhase = participation.phases.length === totalPhases;
