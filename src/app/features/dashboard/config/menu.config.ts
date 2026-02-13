@@ -76,6 +76,39 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
     ]
   },
   {
+    title: 'Programmes',
+    items: [
+      {
+        id: 'programs',
+        label: 'Programmes',
+        icon: 'school',
+        children: [
+          {
+            id: 'programs-discover',
+            label: 'Découvrir',
+            icon: 'explore',
+            path: '/dashboard/programs/discover',
+            tooltip: 'Explorer les programmes disponibles'
+          },
+          {
+            id: 'programs-applications',
+            label: 'Mes candidatures',
+            icon: 'folder_open',
+            path: '/dashboard/programs/my-applications',
+            tooltip: 'Suivre mes candidatures actives'
+          },
+          {
+            id: 'programs-accepted',
+            label: 'Programmes acceptés',
+            icon: 'check_circle',
+            path: '/dashboard/programs/accepted',
+            tooltip: 'Accéder à mes programmes acceptés'
+          }
+        ]
+      }
+    ]
+  },
+  {
     title: 'Mentorat',
     items: [
       {
