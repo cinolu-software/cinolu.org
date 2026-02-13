@@ -17,7 +17,7 @@
     <a [routerLink]="['/']" class="flex items-center gap-2.5 group" aria-label="Accueil CINOLU">
       <div
         class="w-9 h-9 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-200">
-        <span class="material-icons text-white text-xl" aria-hidden="true">verified</span>
+        <span class="material-icons text-white text-xl">verified</span>
       </div>
       <span
         class="text-xl font-black tracking-tight text-slate-900 uppercase group-hover:text-primary-600 transition-colors"
@@ -28,14 +28,11 @@
     <a [routerLink]="['/']" class="flex items-center justify-center group" aria-label="Accueil CINOLU">
       <div
         class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-200">
-        <span class="material-icons text-white text-2xl" aria-hidden="true">verified</span>
+        <span class="material-icons text-white text-2xl">verified</span>
       </div>
     </a>
     } @if (isMobile()) {
-    <button
-      (click)="closeSidebar.emit()"
-      class="p-2 hover:bg-slate-100 rounded-lg transition-colors"
-      aria-label="Fermer le menu">
+    <button (click)="closeSidebar.emit()" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
       <span class="material-icons text-slate-600 text-xl">close</span>
     </button>
     }
@@ -46,7 +43,7 @@
     <div
       class="px-3 pt-4 pb-2 text-xs uppercase tracking-widest text-slate-600 font-bold flex items-center gap-2"
       role="presentation">
-      <span class="w-1 h-1 rounded-full bg-slate-300" aria-hidden="true"></span>
+      <span class="w-1 h-1 rounded-full bg-slate-300"></span>
       <span>{{ section.title }}</span>
     </div>
     } @for (item of section.items; track item.id) {
@@ -78,7 +75,6 @@
             <span
               [ngClass]="{ 'text-primary-600': isActive(item), 'text-slate-600 group-hover:text-primary-600': !isActive(item) }"
               class="material-icons text-xl"
-              aria-hidden="true"
               >{{ item.icon }}</span
             >
           </div>
@@ -92,7 +88,6 @@
         <span
           [ngClass]="{ 'rotate-180': isMenuExpanded(item.id) }"
           class="material-icons text-lg transition-transform duration-200 flex-shrink-0"
-          aria-hidden="true"
           >expand_more</span
         >
         } @if (item.badge && (!isCollapsed() || isMobile())) {
@@ -109,8 +104,7 @@
           'max-h-0 opacity-0': !isMenuExpanded(item.id),
           'max-h-[500px] opacity-100': isMenuExpanded(item.id)
         }"
-        class="overflow-hidden transition-all duration-300 ease-in-out"
-        [attr.aria-hidden]="!isMenuExpanded(item.id)">
+        class="overflow-hidden transition-all duration-300 ease-in-out">
         <div class="py-1 space-y-0.5" [ngClass]="{ 'pl-4': !isCollapsed() || isMobile() }">
           @for (child of item.children; track child.id) {
           <a
@@ -130,7 +124,6 @@
                 'text-slate-600 group-hover:text-slate-700': !isChildActive(child)
               }"
               class="material-icons text-lg flex-shrink-0"
-              aria-hidden="true"
               >{{ child.icon }}</span
             >
 
@@ -174,7 +167,6 @@
               'text-slate-600 group-hover:text-primary-600': !isActive(item)
             }"
             class="material-icons text-xl"
-            aria-hidden="true"
             >{{ item.icon }}</span
           >
         </div>
@@ -206,7 +198,7 @@
       }"
       class="w-full flex items-center gap-2.5 px-3 py-2.5 bg-red-50 hover:bg-red-600 text-red-600 hover:text-white rounded-lg transition-all duration-200 border border-red-200 hover:border-red-600 group"
       aria-label="Se déconnecter">
-      <span class="material-icons text-xl" aria-hidden="true">logout</span>
+      <span class="material-icons text-xl">logout</span>
       @if (!isCollapsed() || isMobile()) {
       <span class="font-semibold text-sm">Déconnexion</span>
       }
