@@ -86,6 +86,7 @@ export interface IProject extends IBase {
   gallery: IImage[];
   metrics: IMetric[];
   participants: IUser[];
+  phases?: IPhase[];
 }
 
 export interface IEvent extends IBase {
