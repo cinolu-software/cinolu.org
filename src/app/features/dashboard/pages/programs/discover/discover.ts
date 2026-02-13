@@ -16,7 +16,7 @@ export class DiscoverPrograms implements OnInit {
   participationsStore = inject(ParticipationsStore);
 
   ngOnInit(): void {
-    this.projectsStore.loadProjects({ page: '1', categories: null });
+    this.projectsStore.loadProjects({ page: '1', categories: null, status: 'current' });
     this.participationsStore.myParticipations();
   }
 
