@@ -386,7 +386,19 @@ export interface IMentee extends IBase {
   progress_notes?: string;
 }
 
+// Participations (Candidatures aux programmes)
 
+export enum ParticipationStatus {
+  DRAFT = 'draft',
+  SUBMITTED = 'submitted',
+  UNDER_REVIEW = 'under_review',
+  SHORTLISTED = 'shortlisted',
+  ACCEPTED = 'accepted',
+  REJECTED = 'rejected'
+}
 
-
-
+export interface IParticipation extends IBase {
+  project: IProject;
+  phases?: IPhase[];
+  venture: IVenture;
+}
