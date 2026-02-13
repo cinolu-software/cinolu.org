@@ -1,0 +1,493 @@
+<div class="min-h-screen">
+  <p-confirmDialog />
+
+  @if (projectStore.isLoading()) {
+  <div class="flex items-center justify-center py-32">
+    <div class="text-center">
+      <div class="relative w-20 h-20 mx-auto mb-8">
+        <div class="absolute inset-0 rounded-full border-4 border-primary-100"></div>
+        <div class="absolute inset-0 rounded-full border-4 border-primary-600 border-t-transparent animate-spin"></div>
+      </div>
+      <div class="space-y-2">
+        <p class="text-xl font-bold text-slate-900">Chargement</p>
+        <p class="text-slate-600">Préparation du programme...</p>
+      </div>
+    </div>
+  </div>
+  } @else { @if (projectStore.project(); as project) {
+  <div class="relative overflow-hidden">
+    <div class="absolute inset-0 h-[500px]">
+      @if (project.cover) {
+      <img [src]="project | apiIMG: 'project'" [alt]="project.name" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-slate-900/80 to-primary-900/70"></div>
+      } @else {
+      <div class="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900"></div>
+      }
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent_70%)]"></div>
+    </div>
+
+    <div class="relative pt-10 lg:pt-16 pb-24">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex items-start justify-between gap-8 flex-wrap">
+          <div class="flex-1 max-w-3xl">
+            <div class="flex items-center gap-3 mb-6">
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg backdrop-blur-md border-2 text-sm font-bold"
+                [ngClass]="statusBadgeClasses()">
+                <span
+                  class="w-2 h-2 rounded-full animate-pulse"
+                  [ngClass]="{'bg-primary-400': !isProgramClosed(), 'bg-red-400': isProgramClosed()}"></span>
+                {{ projectStatus() }}
+              </div>
+
+              @if (hasApplied()) {
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-bold border-2 border-blue-400/30">
+                <span class="material-icons text-base">verified</span>
+                <span>Candidature soumise</span>
+              </div>
+              }
+            </div>
+
+            <h1 class="text-5xl lg:text-6xl font-black text-white mb-8 leading-tight tracking-tight">
+              {{ project.name }}
+            </h1>
+
+            <div class="flex items-center gap-6 mb-8 flex-wrap">
+              @if (project.duration_hours) {
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-12 h-12 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+                  <span class="material-icons text-white">schedule</span>
+                </div>
+                <div>
+                  <p class="text-white/60 text-xs font-semibold uppercase tracking-wider">Durée</p>
+                  <p class="text-white text-lg font-bold">{{ project.duration_hours }}h</p>
+                </div>
+              </div>
+              } @if (project.started_at) {
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-12 h-12 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+                  <span class="material-icons text-white">event</span>
+                </div>
+                <div>
+                  <p class="text-white/60 text-xs font-semibold uppercase tracking-wider">Début</p>
+                  <p class="text-white text-lg font-bold">{{ project.started_at | date: 'dd/MM/yyyy' }}</p>
+                </div>
+              </div>
+              }
+            </div>
+          </div>
+
+          @if (!isProgramClosed() && !hasApplied()) {
+          <div class="flex flex-col items-end gap-3">
+            <button
+              (click)="onApplyClick()"
+              class="group relative px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white rounded-lg font-bold border-2 border-primary-400/30 transition-all duration-300 transform hover:scale-105 overflow-hidden">
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+              <div class="relative flex items-center gap-3">
+                <span class="material-icons text-xl">rocket_launch</span>
+                <span class="text-lg">Postuler maintenant</span>
+              </div>
+            </button>
+            <p class="text-white/70 text-sm">Rejoignez cette aventure</p>
+          </div>
+          } @else if (hasApplied()) {
+          <div class="flex flex-col items-end gap-3">
+            <div
+              class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-lg font-bold border-2 border-white/30 flex items-center gap-3">
+              <span class="material-icons">check_circle</span>
+              <span>Candidature envoyée</span>
+            </div>
+            <p class="text-white/70 text-sm">Nous reviendrons vers vous</p>
+          </div>
+          } @else {
+          <div class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white/60 rounded-lg font-bold border border-white/20">
+            <div class="flex items-center gap-3">
+              <span class="material-icons">lock</span>
+              <span>Programme fermé</span>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-0 left-0 right-0 max-sm:hidden">
+      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+        <path
+          d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V120Z"
+          fill="white"
+          fill-opacity="0.1" />
+        <path
+          d="M0 120L60 105C120 90 240 60 360 50C480 40 600 50 720 60C840 70 960 80 1080 80C1200 80 1320 70 1380 65L1440 60V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V120Z"
+          fill="url(#paint0_linear)"
+          fill-opacity="0.5" />
+        <defs>
+          <linearGradient id="paint0_linear" x1="720" y1="40" x2="720" y2="120" gradientUnits="userSpaceOnUse">
+            <stop stop-color="white" stop-opacity="0.8" />
+            <stop offset="1" stop-color="white" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </div>
+
+  <div class="relative">
+    <div class="max-w-7xl mx-auto max-w-sm:px-6 py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <div class="lg:col-span-2 space-y-8">
+          <div
+            class="relative group bg-white/80 backdrop-blur-xl rounded-lg border-2 border-slate-200 hover:border-primary-300 p-8 transition-all duration-500 overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary-500 to-primary-600"></div>
+
+            <div class="flex items-start gap-4 mb-6">
+              <div class="relative">
+                <div
+                  class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
+                  <span class="material-icons text-white text-xl">description</span>
+                </div>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-2xl font-bold text-slate-900 mb-1">Description du programme</h2>
+                <p class="text-slate-600 text-sm">Présentation générale</p>
+              </div>
+            </div>
+
+            <div class="prose prose-slate max-w-none">
+              <p class="text-slate-700 leading-relaxed text-base whitespace-pre-line">{{ project.description }}</p>
+            </div>
+          </div>
+
+          @if (project.context) {
+          <div
+            class="group relative bg-white/80 backdrop-blur-xl rounded-lg border-2 border-slate-200 hover:border-blue-400 p-8 transition-all duration-500 overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-blue-500 to-blue-600"></div>
+
+            <div class="flex items-start gap-4 mb-6">
+              <div class="relative">
+                <div
+                  class="w-14 h-14 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span class="material-icons text-white text-2xl">lightbulb</span>
+                </div>
+                <div class="absolute -top-1 -right-1 w-4 h-4 bg-blue-400 rounded-full animate-ping"></div>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-2xl font-bold text-slate-900 mb-1">Contexte du programme</h2>
+                <p class="text-slate-600 text-sm">Comprenez les enjeux et l'origine</p>
+              </div>
+            </div>
+            <div class="prose prose-slate max-w-none">
+              <p class="text-slate-700 leading-relaxed whitespace-pre-line text-base">{{ project.context }}</p>
+            </div>
+          </div>
+          } @if (project.objectives) {
+          <div
+            class="group relative bg-white/80 backdrop-blur-xl rounded-lg border-2 border-slate-200 hover:border-amber-400 p-8 transition-all duration-500 overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-amber-500 to-orange-600"></div>
+
+            <div class="flex items-start gap-4 mb-6">
+              <div class="relative">
+                <div
+                  class="w-14 h-14 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span class="material-icons text-white text-2xl">emoji_events</span>
+                </div>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-2xl font-bold text-slate-900 mb-1">Objectifs visés</h2>
+                <p class="text-slate-600 text-sm">Les résultats attendus et impacts</p>
+              </div>
+            </div>
+            <div class="prose prose-slate max-w-none">
+              <p class="text-slate-700 leading-relaxed whitespace-pre-line text-base">{{ project.objectives }}</p>
+            </div>
+          </div>
+          } @if (project.selection_criteria) {
+          <div
+            class="group relative bg-white/80 backdrop-blur-xl rounded-lg border-2 border-slate-200 hover:border-primary-400 p-8 transition-all duration-500 overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary-500 to-primary-600"></div>
+
+            <div class="flex items-start gap-4 mb-6">
+              <div class="relative">
+                <div
+                  class="w-14 h-14 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span class="material-icons text-white text-2xl">verified</span>
+                </div>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-2xl font-bold text-slate-900 mb-1">Critères de sélection</h2>
+                <p class="text-slate-600 text-sm">Ce que nous recherchons</p>
+              </div>
+            </div>
+            <div class="prose prose-slate max-w-none">
+              <p class="text-slate-700 leading-relaxed whitespace-pre-line text-base">
+                {{ project.selection_criteria }}
+              </p>
+            </div>
+          </div>
+          }
+        </div>
+
+        <div class="lg:col-span-1">
+          <div
+            class="relative bg-gradient-to-br from-white via-white to-primary-50/30 backdrop-blur-xl rounded-lg border-2 border-primary-200 hover:border-primary-300 p-6 transition-all duration-500 overflow-hidden">
+            <div
+              class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary-200/30 to-transparent rounded-full -mr-12 -mt-12 blur-2xl"></div>
+
+            <div class="relative">
+              <div class="flex items-center gap-3 mb-6">
+                <div
+                  class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
+                  <span class="material-icons text-white text-lg">info</span>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900">Informations clés</h3>
+              </div>
+
+              <div class="space-y-4">
+                @if (project.duration_hours) {
+                <div
+                  class="flex items-start gap-3 p-3 rounded-lg border-2 border-purple-100 hover:border-purple-300 transition-colors duration-300">
+                  <div
+                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center flex-shrink-0">
+                    <span class="material-icons text-purple-600 text-lg">schedule</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Durée</p>
+                    <p class="text-sm text-slate-900 font-bold">{{ project.duration_hours }}h</p>
+                  </div>
+                </div>
+                } @if (project.started_at) {
+                <div
+                  class="flex items-start gap-3 p-3 rounded-lg border-2 border-primary-100 hover:border-primary-300 transition-colors duration-300">
+                  <div
+                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-100 to-primary-50 flex items-center justify-center flex-shrink-0">
+                    <span class="material-icons text-primary-600 text-lg">event</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Début</p>
+                    <p class="text-sm text-slate-900 font-bold">{{ project.started_at | date: 'dd/MM/yy' }}</p>
+                  </div>
+                </div>
+                } @if (project.ended_at) {
+                <div
+                  class="flex items-start gap-3 p-3 rounded-lg border-2 border-red-100 hover:border-red-300 transition-colors duration-300">
+                  <div
+                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center flex-shrink-0">
+                    <span class="material-icons text-red-600 text-lg">event_busy</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Fin</p>
+                    <p class="text-sm text-slate-900 font-bold">{{ project.ended_at | date: 'dd/MM/yy' }}</p>
+                  </div>
+                </div>
+                } @if (project.project_manager) {
+                <div
+                  class="flex items-start gap-3 p-3 rounded-lg border-2 border-indigo-100 hover:border-indigo-300 transition-colors duration-300">
+                  <div
+                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-100 to-indigo-50 flex items-center justify-center flex-shrink-0">
+                    <span class="material-icons text-indigo-600 text-lg">person</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Responsable</p>
+                    <p class="text-sm text-slate-900 font-bold truncate">{{ project.project_manager.name }}</p>
+                  </div>
+                </div>
+                }
+              </div>
+
+              @if (project.categories && project.categories.length > 0) {
+              <div class="mt-6 pt-6 border-t border-slate-200">
+                <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-3 flex items-center gap-2">
+                  <span class="material-icons text-xs">label</span>
+                  Catégories
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  @for (category of project.categories; track category.id) {
+                  <span
+                    class="inline-flex items-center px-2.5 py-1 bg-gradient-to-r from-primary-50 to-primary-100/50 text-primary-700 rounded-lg text-xs font-bold border border-primary-200">
+                    {{ category.name }}
+                  </span>
+                  }
+                </div>
+              </div>
+              }
+
+              <div class="mt-6 pt-6 border-t border-slate-200">
+                @if (!isProgramClosed() && !hasApplied()) {
+                <button
+                  (click)="onApplyClick()"
+                  class="group/btn relative w-full px-4 py-3 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white rounded-lg font-bold transition-all duration-300 flex items-center justify-center gap-2 border-2 border-primary-400/30 overflow-hidden text-sm">
+                  <div
+                    class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
+                  <span class="material-icons text-lg relative">send</span>
+                  <span class="relative">Postuler</span>
+                </button>
+                } @else if (hasApplied()) {
+                <div
+                  class="w-full px-4 py-3 bg-gradient-to-r from-primary-50 to-primary-100/50 text-primary-700 rounded-lg font-bold border-2 border-primary-200 flex items-center justify-center gap-2 text-sm">
+                  <span class="material-icons text-lg">check_circle</span>
+                  <span>Candidature envoyée</span>
+                </div>
+                } @else {
+                <div
+                  class="w-full px-4 py-3 bg-gradient-to-r from-red-50 to-red-100/50 text-red-700 rounded-lg font-bold border-2 border-red-300 flex items-center justify-center gap-2 text-sm">
+                  <span class="material-icons text-lg">lock</span>
+                  <span>Fermé</span>
+                </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        @if (project.gallery && project.gallery.length > 0) {
+        <div
+          class="group relative bg-white/80 backdrop-blur-xl rounded-lg border-2 border-slate-200 hover:border-purple-400 p-6 transition-all duration-500 overflow-hidden">
+          <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500 to-pink-600"></div>
+
+          <div class="flex items-start gap-4 mb-6">
+            <div class="relative">
+              <div
+                class="w-14 h-14 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <span class="material-icons text-white text-2xl">collections</span>
+              </div>
+            </div>
+            <div class="flex-1">
+              <h2 class="text-2xl font-bold text-slate-900 mb-1">Galerie photos</h2>
+              <p class="text-slate-600 text-sm">Découvrez l'ambiance du programme</p>
+            </div>
+          </div>
+
+          <div class="rounded-lg overflow-hidden border-2 border-slate-200">
+            <p-galleria
+              [value]="project.gallery"
+              [autoPlay]="true"
+              [circular]="true"
+              [responsiveOptions]="responsiveOptions"
+              [numVisible]="5">
+              <ng-template pTemplate="item" let-img>
+                <figure class="relative h-96 w-full">
+                  <img
+                    [src]="img | apiIMG: 'gallery'"
+                    [alt]="img.image || project.name"
+                    class="object-cover w-full h-full" />
+                </figure>
+              </ng-template>
+
+              <ng-template pTemplate="thumbnail" let-img>
+                <img [src]="img | apiIMG: 'gallery'" [alt]="'thumbnail'" class="object-cover h-16 w-16 rounded-lg" />
+              </ng-template>
+            </p-galleria>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  } @else {
+  <div class="flex flex-col items-center justify-center py-32 px-6">
+    <div class="relative mb-8">
+      <div
+        class="absolute inset-0 rounded-full bg-gradient-to-br from-slate-200 to-slate-100 animate-pulse blur-xl opacity-60"></div>
+      <div
+        class="relative w-32 h-32 rounded-full bg-gradient-to-br from-slate-100 to-white flex items-center justify-center border-4 border-slate-200">
+        <span class="material-icons text-7xl text-slate-300">search_off</span>
+      </div>
+    </div>
+
+    <h2 class="text-3xl font-black text-slate-900 mb-3">Programme introuvable</h2>
+    <p class="text-slate-600 text-lg mb-8 text-center max-w-md">
+      Ce programme n'existe pas ou n'est plus disponible. Il a peut-être été supprimé ou archivé.
+    </p>
+  </div>
+  } }
+
+  <p-dialog
+    [(visible)]="showVentureSelectionModal"
+    [modal]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [closable]="true"
+    (onHide)="closeVentureModal()"
+    [style]="{ width: '600px' }"
+    [contentStyle]="{ padding: '0', 'border-radius': '12px', overflow: 'hidden' }">
+    <ng-template pTemplate="header">
+      <div class="w-full p-8 bg-gradient-to-r from-primary-600 to-primary-500">
+        <div class="flex items-center gap-4 mb-3">
+          <div class="w-14 h-14 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
+            <span class="material-icons text-white text-2xl">business_center</span>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold text-white">Choisissez votre entreprise</h3>
+            <p class="text-white/80 text-sm mt-1">Sélectionnez l'entreprise avec laquelle postuler</p>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="p-8 bg-white">
+      <div class="mb-6 p-4 bg-primary-50 border-l-4 border-primary-500 rounded-r-lg">
+        <p class="text-slate-700 leading-relaxed">
+          Vous postulez au programme
+          <span class="font-bold text-primary-700">{{ projectStore.project()?.name }}</span>. Choisissez l'entreprise
+          qui participera à ce programme.
+        </p>
+      </div>
+
+      <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
+        @for (venture of venturesStore.ventures(); track venture.id) {
+        <button
+          (click)="submitApplication(venture.id)"
+          [disabled]="participationsStore.isLoading()"
+          class="group relative w-full p-5 border-2 border-slate-200 rounded-lg hover:border-primary-400 hover:bg-gradient-to-r hover:from-primary-50 hover:to-white transition-all duration-300 text-left disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden">
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+
+          <div class="relative flex items-center gap-5">
+            @if (venture.logo) {
+            <div class="w-16 h-16 rounded-lg overflow-hidden border-2 border-white flex-shrink-0">
+              <img [src]="venture | apiIMG: 'venture'" [alt]="venture.name" class="w-full h-full object-cover" />
+            </div>
+            } @else {
+            <div
+              class="w-16 h-16 rounded-lg bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center border-2 border-slate-200 flex-shrink-0">
+              <span class="material-icons text-slate-400 text-2xl">business</span>
+            </div>
+            }
+
+            <div class="flex-1 min-w-0">
+              <h4 class="font-bold text-slate-900 text-lg group-hover:text-primary-700 transition-colors mb-1 truncate">
+                {{ venture.name }}
+              </h4>
+              <p class="text-sm text-slate-600 line-clamp-2 leading-relaxed">
+                {{ venture.description || 'Aucune description disponible' }}
+              </p>
+            </div>
+
+            <div
+              class="w-10 h-10 rounded-lg bg-slate-100 group-hover:bg-primary-500 flex items-center justify-center transition-colors duration-300 flex-shrink-0">
+              <span class="material-icons text-slate-400 group-hover:text-white transition-colors duration-300">
+                arrow_forward
+              </span>
+            </div>
+          </div>
+        </button>
+        }
+      </div>
+
+      @if (venturesStore.ventures().length === 0) {
+      <div class="text-center py-12">
+        <div class="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
+          <span class="material-icons text-4xl text-slate-400">business</span>
+        </div>
+        <h4 class="text-lg font-bold text-slate-900 mb-2">Aucune entreprise</h4>
+        <p class="text-slate-600 text-sm">Vous devez d'abord créer une entreprise pour postuler.</p>
+      </div>
+      }
+    </div>
+  </p-dialog>
+</div>
