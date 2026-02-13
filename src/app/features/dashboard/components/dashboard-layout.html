@@ -1,12 +1,12 @@
-<div class="flex h-screen overflow-hidden bg-slate-50">
+<div class="flex h-screen overflow-hidden bg-slate-50 safe-area-dashboard">
   @if (!isMobile()) {
   <app-dashboard-sidebar [isCollapsed]="isSidebarCollapsed()" [isMobile]="false" (navigate)="navigateTo($event)" />
   }
 
-  <div class="flex-1 flex flex-col overflow-hidden">
+  <div class="flex-1 flex flex-col overflow-hidden min-w-0">
     <app-dashboard-header [isMobile]="isMobile()" (toggleSidebar)="toggleSidebar()" />
 
-    <main class="flex-1 overflow-y-auto">
+    <main class="flex-1 overflow-y-auto overflow-x-hidden overscroll-contain dashboard-main-scroll">
       <div class="container-dashboard">
         <router-outlet />
       </div>

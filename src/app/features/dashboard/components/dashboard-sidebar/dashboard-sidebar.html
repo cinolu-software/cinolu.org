@@ -32,7 +32,11 @@
       </div>
     </a>
     } @if (isMobile()) {
-    <button (click)="closeSidebar.emit()" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
+    <button
+      (click)="closeSidebar.emit()"
+      type="button"
+      class="min-h-[44px] min-w-[44px] flex items-center justify-center hover:bg-slate-100 rounded-lg transition-colors"
+      aria-label="Fermer le menu">
       <span class="material-icons text-slate-600 text-xl">close</span>
     </button>
     }
@@ -64,7 +68,7 @@
           'justify-center': isCollapsed() && !isMobile(),
           'justify-between': !isCollapsed() || isMobile()
         }"
-        class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group">
+        class="w-full flex items-center gap-3 px-3 py-2.5 min-h-[44px] rounded-lg transition-all duration-200 group">
         <div class="flex items-center gap-3 flex-1 min-w-0">
           <div
             [ngClass]="{
@@ -117,7 +121,7 @@
               'text-slate-600 hover:text-slate-900 hover:bg-slate-50': !isChildActive(child),
               'opacity-50 cursor-not-allowed pointer-events-none': child.disabled
             }"
-            class="flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all duration-200 group">
+            class="flex items-center gap-2.5 px-3 py-2 min-h-[44px] rounded-lg transition-all duration-200 group">
             <span
               [ngClass]="{
                 'text-primary-600': isChildActive(child),
@@ -154,7 +158,7 @@
           'opacity-50 cursor-not-allowed pointer-events-none': item.disabled,
           'justify-center': isCollapsed() && !isMobile()
         }"
-        class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group">
+        class="w-full flex items-center gap-3 px-3 py-2.5 min-h-[44px] rounded-lg transition-all duration-200 group">
         <div
           [ngClass]="{
             'bg-primary-100': isActive(item),
@@ -196,7 +200,7 @@
         'justify-center': isCollapsed() && !isMobile(),
         'justify-start': !isCollapsed() || isMobile()
       }"
-      class="w-full flex items-center gap-2.5 px-3 py-2.5 bg-red-50 hover:bg-red-600 text-red-600 hover:text-white rounded-lg transition-all duration-200 border border-red-200 hover:border-red-600 group"
+      class="w-full flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] bg-red-50 hover:bg-red-600 text-red-600 hover:text-white rounded-lg transition-all duration-200 border border-red-200 hover:border-red-600 group"
       aria-label="Se déconnecter">
       <span class="material-icons text-xl">logout</span>
       @if (!isCollapsed() || isMobile()) {

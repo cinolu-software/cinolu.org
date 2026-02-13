@@ -35,17 +35,38 @@
   DASHBOARD LAYOUT & NAVIGATION
   ═══════════════════════════════════════════════════════════════════════ */
 
+/* Safe-area pour encoche / barre d’accueil (mobile) */
+.safe-area-dashboard {
+  padding-left: env(safe-area-inset-left, 0);
+  padding-right: env(safe-area-inset-right, 0);
+  padding-top: env(safe-area-inset-top, 0);
+}
+
+.dashboard-header-safe-area {
+  padding-left: max(1rem, env(safe-area-inset-left, 0));
+  padding-right: max(1rem, env(safe-area-inset-right, 0));
+}
+
 /* Container principal pour le contenu du dashboard */
 .container-dashboard {
-  padding: 1rem;
+  padding: 0.75rem;
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0));
   max-width: 90rem;
   margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .container-dashboard {
+    padding: 1rem;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom, 0));
+  }
 }
 
 @media (min-width: 1024px) {
   .container-dashboard {
     padding-left: 3rem;
     padding-right: 3rem;
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0));
   }
 }
 
@@ -71,6 +92,11 @@
 
 .dashboard-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: rgb(148 163 184);
+}
+
+/* Zone de scroll principale (mobile : défilement fluide iOS) */
+.dashboard-main-scroll {
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Animation pour le contenu de page */

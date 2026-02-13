@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit, ChangeDetectionStrategy, HostListener } from '@angular/core';
+import { Component, inject, signal, OnInit, ChangeDetectionStrategy, HostListener, effect } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { BackButton } from '@shared/components';
 import { DashboardSidebar } from './dashboard-sidebar/dashboard-sidebar';
@@ -16,6 +16,16 @@ export class DashboardLayout implements OnInit {
   isSidebarCollapsed = signal(false);
   isMobileSidebarOpen = signal(false);
   isMobile = signal(false);
+
+  constructor() {
+    effect(() => {
+      const open = this.isMobileSidebarOpen();
+      document.body.style.overflow = open ? 'hidden' : '';
+      return () => {
+        document.body.style.overflow = '';
+      };
+    });
+  }
 
   ngOnInit(): void {
     this.checkScreenSize();
