@@ -86,7 +86,28 @@ export const dashboardRoutes: Routes = [
         loadComponent: () => import('./pages/referral/activity/activity').then((c) => c.ReferralActivity)
       },
 
-      // Routes pour la candidature mentor
+      {
+        path: 'programs/discover',
+        title: 'Découvrir les Programmes',
+        loadComponent: () => import('./pages/programs/discover/discover').then((c) => c.DiscoverPrograms)
+      },
+      {
+        path: 'programs/my-applications',
+        title: 'Mes Candidatures',
+        loadComponent: () => import('./pages/programs/my-applications/my-applications').then((c) => c.MyApplications)
+      },
+      {
+        path: 'programs/accepted',
+        title: 'Programmes Acceptés',
+        loadComponent: () =>
+          import('./pages/programs/accepted-programs/accepted-programs').then((c) => c.AcceptedPrograms)
+      },
+      {
+        path: 'programs/:slug',
+        title: 'Détail du Programme',
+        loadComponent: () => import('./pages/programs/program-detail/program-detail').then((c) => c.ProgramDetail)
+      },
+
       {
         path: 'mentor/apply',
         title: 'Devenir Mentor',
