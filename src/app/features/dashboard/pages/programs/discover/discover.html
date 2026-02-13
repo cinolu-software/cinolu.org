@@ -1,0 +1,44 @@
+<div>
+  <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 dashboard-section mb-8">
+    <div>
+      <div class="flex items-center gap-3 mb-3">
+        <div
+          class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-400/90 to-primary-500/85 flex items-center justify-center shadow-lg">
+          <span class="material-icons text-white text-2xl">explore</span>
+        </div>
+        <h1 class="text-2xl font-bold text-slate-900">Découvrir les Programmes</h1>
+      </div>
+      <p class="text-slate-600">
+        Explorez nos programmes d'accompagnement et trouvez celui qui correspond à vos ambitions
+      </p>
+    </div>
+  </div>
+
+  @if (projectsStore.isLoading()) {
+  <div class="flex items-center justify-center py-20">
+    <div class="text-center">
+      <i class="pi pi-spin pi-spinner text-4xl text-primary-600 mb-4"></i>
+      <p class="text-slate-600">Chargement des programmes...</p>
+    </div>
+  </div>
+  } @else if (projectsStore.projects()[0].length > 0) {
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    @for (project of projectsStore.projects()[0]; track project.id) {
+    <app-program-card
+      [project]="project"
+      [isProgramClosed]="isProgramClosed(project)"
+      [hasApplied]="hasApplied(project.id)" />
+    }
+  </div>
+  } @else {
+  <div class="text-center py-20">
+    <div class="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
+      <span class="material-icons text-4xl text-slate-400">search_off</span>
+    </div>
+    <h3 class="text-lg font-semibold text-slate-900 mb-2">Aucun programme disponible</h3>
+    <p class="text-slate-600 mb-6">
+      Il n'y a pas de programmes ouverts pour le moment. Revenez bientôt pour découvrir de nouvelles opportunités !
+    </p>
+  </div>
+  }
+</div>
