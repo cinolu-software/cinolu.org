@@ -510,6 +510,11 @@
       "add_to_calendar": "Ajouter au calendrier",
       "subtitle": "Détails et étapes clés du projet.",
       "actions_status": "Actions et suivi du statut.",
+      "quick_actions": "Actions rapides",
+      "share_project": "Partager le projet",
+      "cta_title": "Rejoignez ce projet dès maintenant !",
+      "cta_subtitle": "Saisissez cette opportunité de participer à un projet enrichissant et développez vos compétences.",
+      "cta_hint": "Postulez dès maintenant et accédez au programme",
       "phases_subtitle": "Découvrez les étapes clés et les ressources associées à chaque phase.",
       "show_resources": "Afficher les ressources",
       "hide_resources": "Masquer les ressources",
@@ -527,6 +532,18 @@
         "email": "Veuillez entrer une adresse email valide.",
         "phone": "Veuillez entrer un numéro de téléphone valide."
       }
+    },
+    "error": {
+      "title": "Projet introuvable",
+      "subtitle": "Le projet que vous recherchez n'existe pas ou a été supprimé.",
+      "description": "Il se peut que le lien soit invalide, que le projet ait été archivé, ou que vous n'ayez pas les permissions nécessaires pour y accéder. Vérifiez l'URL ou explorez nos autres projets disponibles.",
+      "cta_primary": "Explorer les projets",
+      "cta_secondary": "Retour à l'accueil",
+      "back": "Retour aux projets",
+      "suggestions_title": "Vous pourriez être intéressé par :",
+      "suggestion_programs": "Nos programmes",
+      "suggestion_events": "Nos événements",
+      "suggestion_contact": "Nous contacter"
     }
   },
   "programs": {
@@ -717,7 +734,17 @@
       "title": "Voir nos programmes",
       "subtitle": "Tous les programmes",
       "choose_category": "Choisir une catégorie",
-      "no_project": "Pas de programme!"
+      "no_project": "Pas de programme!",
+      "filter_by_status": "Période :",
+      "filter_by_type": "Type :",
+      "filter_status_all": "Tous",
+      "filter_status_past": "Passés",
+      "filter_status_current": "En cours",
+      "filter_status_future": "À venir",
+      "filter_all": "Tous",
+      "filter_published": "Publiés",
+      "filter_drafts": "Brouillons",
+      "filter_highlighted": "En vedette"
     }
   },
   "mentor": {

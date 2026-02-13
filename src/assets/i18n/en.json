@@ -502,6 +502,11 @@
       "add_to_calendar": "Add to calendar",
       "subtitle": "Project details and key milestones.",
       "actions_status": "Actions and status tracking.",
+      "quick_actions": "Quick actions",
+      "share_project": "Share project",
+      "cta_title": "Join this project now!",
+      "cta_subtitle": "Seize this opportunity to participate in an enriching project and develop your skills.",
+      "cta_hint": "Apply now and access the program",
       "phases": "Project phases",
       "no_phase": "No phase available for this project",
       "phases_subtitle": "Discover key steps and resources associated with each phase.",
@@ -525,6 +530,18 @@
         "email": "Please enter a valid email address.",
         "phone": "Please enter a valid phone number."
       }
+    },
+    "error": {
+      "title": "Project Not Found",
+      "subtitle": "The project you're looking for doesn't exist or has been deleted.",
+      "description": "The link might be invalid, the project may have been archived, or you might not have the necessary permissions to access it. Please check the URL or explore our other available projects.",
+      "cta_primary": "Explore Projects",
+      "cta_secondary": "Back to Home",
+      "back": "Back to Projects",
+      "suggestions_title": "You might be interested in:",
+      "suggestion_programs": "Our Programs",
+      "suggestion_events": "Our Events",
+      "suggestion_contact": "Contact Us"
     }
   },
   "programs": {
@@ -714,7 +731,17 @@
       "title": "See our programs",
       "subtitle": "All programs",
       "choose_category": "Choose a category",
-      "no_project": "No program!"
+      "no_project": "No program!",
+      "filter_by_status": "Period:",
+      "filter_by_type": "Type:",
+      "filter_status_all": "All",
+      "filter_status_past": "Past",
+      "filter_status_current": "Current",
+      "filter_status_future": "Upcoming",
+      "filter_all": "All",
+      "filter_published": "Published",
+      "filter_drafts": "Drafts",
+      "filter_highlighted": "Highlighted"
     }
   },
   "mentor": {
