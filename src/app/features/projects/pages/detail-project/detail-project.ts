@@ -16,11 +16,15 @@ import {
   CheckCircle2,
   Users,
   SquaresSubtract,
-  UserPlus
+  UserPlus,
+  AlertCircle,
+  Home,
+  ArrowLeft,
+  Search
 } from 'lucide-angular';
 import { ProjectStore } from '../../store/project.store';
 import { formatDateForGoogleCalendarUTC, openExternalUrl } from '@shared/helpers';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { GalleriaModule } from 'primeng/galleria';
 import { carouselConfig } from '../../../landing/config/carousel.config';
@@ -29,7 +33,15 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-project-detail',
   providers: [ProjectStore],
-  imports: [CommonModule, ApiImgPipe, ProjectSkeleton, LucideAngularModule, GalleriaModule, TranslateModule],
+  imports: [
+    CommonModule,
+    ApiImgPipe,
+    ProjectSkeleton,
+    LucideAngularModule,
+    GalleriaModule,
+    TranslateModule,
+    RouterLink
+  ],
   templateUrl: './detail-project.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -38,7 +50,6 @@ export class DetailProject implements OnInit {
   #router = inject(Router);
   store = inject(ProjectStore);
 
-  // Active section: 'description' | 'criteria' | 'objectives' | 'context' | null
   activeSection = signal<string | null>(null);
 
   expandedDescription = computed(() => this.activeSection() === 'description');
@@ -116,7 +127,11 @@ export class DetailProject implements OnInit {
     checkCircle2: CheckCircle2,
     users: Users,
     squaresSubtract: SquaresSubtract,
-    userPlus: UserPlus
+    userPlus: UserPlus,
+    alertCircle: AlertCircle,
+    home: Home,
+    arrowLeft: ArrowLeft,
+    search: Search
   };
 
   responsiveOptions = carouselConfig;
@@ -167,7 +182,7 @@ export class DetailProject implements OnInit {
 
   applyToProject() {
     const project = this.store.project();
-    if (!project?.program?.slug) return;
+    if (!project?.slug) return;
     this.#router.navigate(['/dashboard/programs', project.slug]);
   }
 }
