@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgClass, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProject } from '@shared/models/entities.models';
@@ -19,6 +19,7 @@ import { CirclePlus, LucideAngularModule } from 'lucide-angular';
   providers: [ProjectsStore, ProjectCategoriesStore],
   imports: [
     CommonModule,
+    NgClass,
     NgxPaginationModule,
     ChipModule,
     MultiSelectModule,
@@ -39,8 +40,16 @@ export class ListProjects implements OnInit {
   categoriesStore = inject(ProjectCategoriesStore);
   queryParams = signal<FilterProjectsDto>({
     page: this.#route.snapshot.queryParams?.['page'],
-    categories: this.#route.snapshot.queryParams?.['categories']
+    categories: this.#route.snapshot.queryParams?.['categories'],
+    status: this.#route.snapshot.queryParams?.['status'] ?? null
   });
+
+  statusOptions: { value: FilterProjectsDto['status']; labelKey: string }[] = [
+    { value: null, labelKey: 'projects.list.filter_status_all' },
+    { value: 'past', labelKey: 'projects.list.filter_status_past' },
+    { value: 'current', labelKey: 'projects.list.filter_status_current' },
+    { value: 'future', labelKey: 'projects.list.filter_status_future' }
+  ];
 
   icons = {
     circlePlus: CirclePlus
@@ -55,25 +64,35 @@ export class ListProjects implements OnInit {
   }
 
   onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'categories'): void {
-    this.queryParams().page = null;
-    this.queryParams()[filter] = event.value;
+    this.queryParams.update((p: FilterProjectsDto) => ({ ...p, page: null, [filter]: event.value }));
     this.updateRouteAndprojects();
   }
 
   onClear(): void {
-    this.queryParams().page = null;
-    this.queryParams().categories = null;
+    this.queryParams.update((p: FilterProjectsDto) => ({ ...p, page: null, categories: null }));
+    this.updateRouteAndprojects();
+  }
+
+  onStatusChange(status: FilterProjectsDto['status']): void {
+    this.queryParams.update((p: FilterProjectsDto) => ({ ...p, page: null, status }));
     this.updateRouteAndprojects();
   }
 
   onPageChange(currentPage: number): void {
-    this.queryParams().page = currentPage === 1 ? null : currentPage.toString();
+    this.queryParams.update((p: FilterProjectsDto) => ({
+      ...p,
+      page: currentPage === 1 ? null : currentPage.toString()
+    }));
     this.updateRouteAndprojects();
   }
 
   updateRoute(): void {
-    const { page, categories } = this.queryParams();
-    const queryParams = { page, categories };
+    const { page, categories, status } = this.queryParams();
+    const queryParams: Record<string, string | string[] | null | undefined> = {
+      page,
+      categories,
+      status: status ?? undefined
+    };
     this.#router.navigate(['/programs'], { queryParams }).then();
   }
 
