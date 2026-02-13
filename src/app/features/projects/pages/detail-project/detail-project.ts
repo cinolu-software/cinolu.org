@@ -15,11 +15,12 @@ import {
   Hourglass,
   CheckCircle2,
   Users,
-  SquaresSubtract
+  SquaresSubtract,
+  UserPlus
 } from 'lucide-angular';
 import { ProjectStore } from '../../store/project.store';
 import { formatDateForGoogleCalendarUTC, openExternalUrl } from '@shared/helpers';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { GalleriaModule } from 'primeng/galleria';
 import { carouselConfig } from '../../../landing/config/carousel.config';
@@ -28,19 +29,13 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-project-detail',
   providers: [ProjectStore],
-  imports: [
-    CommonModule,
-    ApiImgPipe,
-    ProjectSkeleton,
-    LucideAngularModule,
-    GalleriaModule,
-    TranslateModule
-  ],
+  imports: [CommonModule, ApiImgPipe, ProjectSkeleton, LucideAngularModule, GalleriaModule, TranslateModule],
   templateUrl: './detail-project.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailProject implements OnInit {
   #route = inject(ActivatedRoute);
+  #router = inject(Router);
   store = inject(ProjectStore);
 
   // Active section: 'description' | 'criteria' | 'objectives' | 'context' | null
@@ -66,6 +61,11 @@ export class DetailProject implements OnInit {
     } else {
       return 'Terminé';
     }
+  });
+
+  isProjectOpen = computed(() => {
+    const status = this.projectStatus();
+    return status === 'En cours' || status === 'À venir';
   });
 
   statusBadgeClasses = computed(() => {
@@ -115,7 +115,8 @@ export class DetailProject implements OnInit {
     hourglass: Hourglass,
     checkCircle2: CheckCircle2,
     users: Users,
-    squaresSubtract: SquaresSubtract
+    squaresSubtract: SquaresSubtract,
+    userPlus: UserPlus
   };
 
   responsiveOptions = carouselConfig;
@@ -162,5 +163,11 @@ export class DetailProject implements OnInit {
     } catch {
       // ignore (user cancelled or not supported)
     }
+  }
+
+  applyToProject() {
+    const project = this.store.project();
+    if (!project?.program?.slug) return;
+    this.#router.navigate(['/dashboard/programs', project.slug]);
   }
 }
