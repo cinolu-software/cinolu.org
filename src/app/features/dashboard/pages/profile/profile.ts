@@ -75,7 +75,7 @@ export class ProfilePage {
   }
 
   getUploadUrl(): string {
-    return 'users/image-profile';
+    return 'users/me/profile-image';
   }
 
   handleLoaded(): void {
