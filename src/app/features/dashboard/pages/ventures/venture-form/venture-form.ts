@@ -193,7 +193,7 @@ export class VentureForm implements OnInit {
     if (!ventureId) {
       return '';
     }
-    return `ventures/add-cover/${ventureId}`;
+    return `ventures/${ventureId}/cover/`;
   }
 
   getLogoUploadUrl(): string {
@@ -201,7 +201,7 @@ export class VentureForm implements OnInit {
     if (!ventureId) {
       return '';
     }
-    return `ventures/add-logo/${ventureId}`;
+    return `ventures/${ventureId}/logo/`;
   }
 
   getGalleryUploadUrl(): string {
