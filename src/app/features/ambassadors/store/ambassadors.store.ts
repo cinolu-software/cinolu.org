@@ -23,7 +23,7 @@ export const AmbassadorsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          return _http.get<{ data: [IUser[], number] }>('users/find-ambassadors', { params }).pipe(
+          return _http.get<{ data: [IUser[], number] }>('users/ambassadors', { params }).pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false, ambassadors: data });
             }),

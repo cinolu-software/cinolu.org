@@ -37,7 +37,7 @@ export const UpdatePasswordStore = signalStore(
           })
         ),
         switchMap((payload) => {
-          return _http.patch<{ message: string }>('auth/update-password', payload).pipe(
+          return _http.patch<{ message: string }>('auth/me/password', payload).pipe(
             tap(() => {
               patchState(store, {
                 isLoading: false,

@@ -20,7 +20,7 @@ export const RecentProjectsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
-          return http.get<{ data: IProject[] }>('projects/find-recent').pipe(
+          return http.get<{ data: IProject[] }>('projects/recent').pipe(
             tap(({ data }) => patchState(store, { isLoading: false, projects: data })),
             catchError(() => {
               patchState(store, { isLoading: false, projects: [] });

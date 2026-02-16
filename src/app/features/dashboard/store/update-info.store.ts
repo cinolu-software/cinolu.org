@@ -42,7 +42,7 @@ export const UpdateInfoStore = signalStore(
 
     return {
       updateInfo: makeRequest<UpdateInfoDto>(
-        'auth/profile',
+        'auth/me',
         {} as UpdateInfoDto,
         'Profil mis à jour',
         'Erreur lors de la mise à jour'

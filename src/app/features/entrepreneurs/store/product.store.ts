@@ -20,7 +20,7 @@ export const PublicProductStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true, product: null })),
         switchMap((slug) => {
-          return _http.get<{ data: IProduct }>(`products/${slug}`).pipe(
+          return _http.get<{ data: IProduct }>(`products/by-slug/${slug}`).pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false, product: data });
             }),

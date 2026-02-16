@@ -25,7 +25,7 @@ export const SignUpStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((payload) => {
-          return _http.post<{ data: IUser }>('auth/sign-up', payload).pipe(
+          return _http.post<{ data: IUser }>('auth/signup', payload).pipe(
             tap(() => {
               patchState(store, { isLoading: false });
               _toast.showSuccess('Inscription réussie');

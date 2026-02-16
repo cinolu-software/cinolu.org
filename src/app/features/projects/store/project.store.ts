@@ -20,7 +20,7 @@ export const ProjectStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true, project: null })),
         switchMap((slug) => {
-          return _http.get<{ data: IProject }>(`projects/slug/${slug}`).pipe(
+          return _http.get<{ data: IProject }>(`projects/by-slug/${slug}`).pipe(
             tap(({ data }) => patchState(store, { isLoading: false, project: data })),
             catchError(() => {
               patchState(store, { isLoading: false, project: null });

@@ -38,7 +38,7 @@ export const ReferralsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(() => {
-          return _http.post<{ referral_code: string }>('users/generate/referralCode', {}).pipe(
+          return _http.post<{ referral_code: string }>('users/referral-code/generate', {}).pipe(
             tap(({ referral_code }) => {
               patchState(store, { referralCode: referral_code, isLoading: false });
               _toast.showSuccess('Code de parrainage généré');
@@ -57,7 +57,7 @@ export const ReferralsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoadingReferredUsers: true })),
         exhaustMap(({ page = 1 }) => {
-          return _http.get<{ data: [IUser[], number] }>(`users/find-referred-users/?page=${page}`).pipe(
+          return _http.get<{ data: [IUser[], number] }>('users/me/referred-users', { params: { page } }).pipe(
             tap(({ data }) => {
               const [users, totalCount] = data;
               patchState(store, {

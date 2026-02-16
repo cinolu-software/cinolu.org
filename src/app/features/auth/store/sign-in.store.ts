@@ -32,7 +32,7 @@ export const SignInStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ payload, onSuccess, returnUrl }) => {
-          return _http.post<{ data: IUser }>('auth/sign-in', payload).pipe(
+          return _http.post<{ data: IUser }>('auth/signin', payload).pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false });
               _authStore.setUser(data);

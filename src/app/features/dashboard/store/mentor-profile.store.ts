@@ -144,7 +144,7 @@ export const MentorProfileStore = signalStore(
         switchMap(({ id, file }) => {
           const formData = new FormData();
           formData.append('cv', file);
-          return _http.post<{ data: IMentorProfile }>(`mentors/add-cv/${id}`, formData).pipe(
+          return _http.post<{ data: IMentorProfile }>(`mentors/${id}/cv`, formData).pipe(
             tap(({ data }) => {
               patchState(store, {
                 profile: data,

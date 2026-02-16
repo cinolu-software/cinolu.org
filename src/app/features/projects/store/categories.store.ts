@@ -17,7 +17,7 @@ export const ProjectCategoriesStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
-          return http.get<{ data: ICategory[] }>('project-categories').pipe(
+          return http.get<{ data: ICategory[] }>('projects/categories').pipe(
             tap(({ data }) => patchState(store, { isLoading: false, categories: data })),
             catchError(() => {
               patchState(store, { isLoading: false, categories: [] });

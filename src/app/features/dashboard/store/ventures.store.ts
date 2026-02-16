@@ -36,7 +36,7 @@ export const VenturesStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(() => {
-          return _http.get<{ data: IVenture[] }>('ventures/by-user/unpaginated').pipe(
+          return _http.get<{ data: IVenture[] }>('ventures/me').pipe(
             tap(({ data }) => {
               patchState(store, {
                 ventures: data,
@@ -155,7 +155,7 @@ export const VenturesStore = signalStore(
         switchMap(({ id, file, onSuccess }) => {
           const formData = new FormData();
           formData.append('logo', file);
-          return _http.post<{ logo: string }>(`ventures/add-logo/${id}`, formData).pipe(
+          return _http.post<{ logo: string }>(`ventures/${id}/logo`, formData).pipe(
             tap(() => {
               _toast.showSuccess('Logo uploadé avec succès');
               onSuccess?.();
@@ -174,7 +174,7 @@ export const VenturesStore = signalStore(
         switchMap(({ id, file, onSuccess }) => {
           const formData = new FormData();
           formData.append('cover', file);
-          return _http.post<{ cover: string }>(`/ventures/add-cover/${id}`, formData).pipe(
+          return _http.post<{ cover: string }>(`ventures/${id}/cover`, formData).pipe(
             tap(() => {
               _toast.showSuccess('Cover uploadée avec succès');
               onSuccess?.();
@@ -191,7 +191,7 @@ export const VenturesStore = signalStore(
     removeGalleryImage: rxMethod<{ id: string; imageId: string; onSuccess?: () => void }>(
       pipe(
         switchMap(({ id, imageId, onSuccess }) => {
-          return _http.delete<void>(`ventures/${id}/gallery/${imageId}`).pipe(
+          return _http.delete<void>(`ventures/gallery/${imageId}`).pipe(
             tap(() => {
               _toast.showSuccess('Image supprimée de la galerie');
               onSuccess?.();

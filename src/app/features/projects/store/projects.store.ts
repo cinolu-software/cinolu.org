@@ -26,7 +26,7 @@ export const ProjectsStore = signalStore(
           return http
             .get<{
               data: [IProject[], number];
-            }>('projects/find-published', { params })
+            }>('projects/published', { params })
             .pipe(
               tap(({ data }) => patchState(store, { isLoading: false, projects: data })),
               catchError(() => {

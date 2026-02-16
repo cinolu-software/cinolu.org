@@ -20,7 +20,7 @@ export const SubprogramsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((slug) => {
-          return _http.get<{ data: ISubprogram }>(`subprograms/slug/${slug}`).pipe(
+          return _http.get<{ data: ISubprogram }>(`subprograms/by-slug/${slug}`).pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false, subprogram: data });
             }),

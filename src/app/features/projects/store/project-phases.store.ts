@@ -71,7 +71,14 @@ export const ProjectPhasesStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((phaseDto) => {
-          return _http.post<{ data: IPhase }>('phases', phaseDto).pipe(
+          const projectId = phaseDto.project;
+          const body = {
+            name: phaseDto.name,
+            description: phaseDto.description ?? '',
+            started_at: phaseDto.started_at,
+            ended_at: phaseDto.ended_at
+          };
+          return _http.post<{ data: IPhase }>(`phases/${projectId}`, body).pipe(
             map(({ data }) => {
               const currentPhases = store.phases();
               patchState(store, {

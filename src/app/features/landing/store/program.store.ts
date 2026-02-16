@@ -20,7 +20,7 @@ export const ProgramStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((slug) => {
-          return _http.get<{ data: IProgram }>(`programs/slug/${slug}`).pipe(
+          return _http.get<{ data: IProgram }>(`programs/by-slug/${slug}`).pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false, program: data });
             }),

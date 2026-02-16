@@ -23,7 +23,7 @@ export const EventsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           const params = buildQueryParams(queryParams);
-          return _http.get<{ data: [IEvent[], number] }>('events/find-published', { params }).pipe(
+          return _http.get<{ data: [IEvent[], number] }>('events/published', { params }).pipe(
             tap(({ data }) => patchState(store, { isLoading: false, events: data })),
             catchError(() => {
               patchState(store, { isLoading: false, events: [[], 0] });

@@ -17,7 +17,7 @@ export const EventCategoriesStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
-          return http.get<{ data: ICategory[] }>('event-categories').pipe(
+          return http.get<{ data: ICategory[] }>('events/categories').pipe(
             tap(({ data }) => patchState(store, { isLoading: false, categories: data })),
             catchError(() => {
               patchState(store, { isLoading: false, categories: [] });

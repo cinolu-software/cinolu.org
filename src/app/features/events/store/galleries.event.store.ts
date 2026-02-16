@@ -20,7 +20,7 @@ export const GalleryEventStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((slug) => {
-          return _http.get<{ data: IImage[] }>(`galleries/event/${slug}`).pipe(
+          return _http.get<{ data: IImage[] }>(`events/by-slug/${slug}/gallery`).pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false, images: data });
             }),

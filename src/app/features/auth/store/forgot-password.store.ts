@@ -26,7 +26,7 @@ export const ForgotPasswordStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((payload) => {
-          return _http.post<{ data: IUser }>('auth/forgot-password', payload).pipe(
+          return _http.post<{ data: IUser }>('auth/password/forgot', payload).pipe(
             tap(() => {
               patchState(store, { isLoading: false });
               _toast.showSuccess('Lien de réinitialisation envoyé par e-mail');

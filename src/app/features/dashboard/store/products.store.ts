@@ -36,7 +36,7 @@ export const ProductsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(() =>
-          _http.get<{ data: [IProduct[], number] }>('products/by-user').pipe(
+          _http.get<{ data: [IProduct[], number] }>('products/me').pipe(
             map(({ data: [products, totalCount] }) => {
               patchState(store, { products, totalCount, isLoading: false });
             }),
@@ -53,7 +53,7 @@ export const ProductsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((slug) =>
-          _http.get<{ data: IProduct | { product: IProduct } }>(`products/${slug}`).pipe(
+          _http.get<{ data: IProduct | { product: IProduct } }>(`products/by-slug/${slug}`).pipe(
             map(({ data }) => {
               const product = 'product' in data ? data.product : data;
               patchState(store, { selectedProduct: product, isLoading: false });
@@ -100,7 +100,7 @@ export const ProductsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ slug, data }) =>
-          _http.patch<{ data: IProduct | { product: IProduct } }>(`products/${slug}`, data).pipe(
+          _http.patch<{ data: IProduct | { product: IProduct } }>(`products/by-slug/${slug}`, data).pipe(
             map(({ data }) => {
               const updated = 'product' in data ? data.product : data;
               patchState(store, {

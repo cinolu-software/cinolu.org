@@ -34,7 +34,7 @@ export const ParticipationsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(() => {
-          return _http.get<{ data: IParticipation[] }>('projects/user/participations').pipe(
+          return _http.get<{ data: IParticipation[] }>('projects/me/participations').pipe(
             tap(({ data }) => {
               patchState(store, {
                 participations: data,

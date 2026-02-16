@@ -28,7 +28,7 @@ export const CommentsStore = signalStore(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((p) => {
           const params = buildQueryParams(p.dto);
-          return _http.get<{ data: [IComment[], number] }>(`comments/article/${p.slug}`, { params }).pipe(
+          return _http.get<{ data: [IComment[], number] }>(`comments/by-article/${p.slug}`, { params }).pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false, comments: data });
             }),

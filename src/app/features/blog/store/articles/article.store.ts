@@ -20,7 +20,7 @@ export const ArticleStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((slug) => {
-          return _http.get<{ data: IArticle }>(`articles/slug/${slug}`).pipe(
+          return _http.get<{ data: IArticle }>(`articles/by-slug/${slug}`).pipe(
             tap(({ data }) => patchState(store, { isLoading: false, article: data })),
             catchError(() => {
               patchState(store, { isLoading: false });

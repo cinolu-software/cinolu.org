@@ -22,7 +22,7 @@ export const VentureGalleryStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((slug) =>
-          _http.get<{ data: IImage[] }>(`ventures/gallery/${slug}`).pipe(
+          _http.get<{ data: IImage[] }>(`ventures/by-slug/${slug}/gallery`).pipe(
             map(({ data }) => {
               patchState(store, { isLoading: false, images: data });
             }),
@@ -38,7 +38,7 @@ export const VentureGalleryStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((id) =>
-          _http.delete<void>(`ventures/gallery/remove/${id}`).pipe(
+          _http.delete<void>(`ventures/gallery/${id}`).pipe(
             map(() => {
               const current = store.images();
               const filtered = current.filter((img: IImage) => String(img.id) !== String(id));

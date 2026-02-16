@@ -26,7 +26,7 @@ export const ArticlesStore = signalStore(
           return _http
             .get<{
               data: [IArticle[], number];
-            }>('articles/find-published', { params })
+            }>('articles/published', { params })
             .pipe(
               tap(({ data }) => patchState(store, { isLoading: false, articles: data })),
               catchError(() => {

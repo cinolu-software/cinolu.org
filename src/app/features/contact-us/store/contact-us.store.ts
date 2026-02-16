@@ -28,7 +28,13 @@ export const ContactUsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ payload, onSuccess }) => {
-          return _http.post<void>('users/contact-us', payload).pipe(
+          return _http.post<void>('auth/support/contact', {
+          email: payload.email,
+          name: payload.name,
+          country: payload.country,
+          phone_number: payload.phone,
+          message: payload.message
+        }).pipe(
             tap(() => {
               patchState(store, { isLoading: false });
               _toast.showSuccess('Message envoyé avec succès');

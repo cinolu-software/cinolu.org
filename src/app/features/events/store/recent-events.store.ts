@@ -17,7 +17,7 @@ export const RecentEventsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         exhaustMap(() => {
-          return http.get<{ data: IEvent[] }>('events/find-recent').pipe(
+          return http.get<{ data: IEvent[] }>('events/recent').pipe(
             tap(({ data }) => patchState(store, { isLoading: false, events: data })),
             catchError(() => {
               patchState(store, { isLoading: false, events: [] });

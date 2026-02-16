@@ -24,7 +24,7 @@ export const AuthStore = signalStore(
     getProfile: rxMethod<void>(
       pipe(
         exhaustMap(() =>
-          _http.get<{ data: IUser }>('auth/profile').pipe(
+          _http.get<{ data: IUser }>('auth/me').pipe(
             tap(({ data }) => {
               patchState(store, { user: data });
             }),
@@ -40,7 +40,7 @@ export const AuthStore = signalStore(
     signOut: rxMethod<void>(
       pipe(
         exhaustMap(() =>
-          _http.post<void>('auth/sign-out', {}).pipe(
+          _http.post<void>('auth/signout', {}).pipe(
             tap(() => {
               _router.navigate(['/sign-in']);
               _toast.showSuccess('Déconnexion réussie');

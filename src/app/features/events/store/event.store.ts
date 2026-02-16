@@ -20,7 +20,7 @@ export const EventStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((slug) => {
-          return _http.get<{ data: IEvent }>(`events/slug/${slug}`).pipe(
+          return _http.get<{ data: IEvent }>(`events/by-slug/${slug}`).pipe(
             tap(({ data }) => {
               patchState(store, { isLoading: false, event: data });
             }),

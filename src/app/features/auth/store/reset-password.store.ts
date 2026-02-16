@@ -24,7 +24,7 @@ export const ResetPasswordStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((payload) => {
-          return _http.post<{ data: IUser }>('auth/reset-password', payload).pipe(
+          return _http.post<{ data: IUser }>('auth/password/reset', payload).pipe(
             tap(() => {
               patchState(store, { isLoading: false });
               _toast.showSuccess('Mot de passe réinitialisé avec succès');
