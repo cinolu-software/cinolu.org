@@ -150,44 +150,6 @@ export const VenturesStore = signalStore(
       )
     ),
 
-    uploadLogo: rxMethod<{ id: string; file: File; onSuccess?: () => void }>(
-      pipe(
-        switchMap(({ id, file, onSuccess }) => {
-          const formData = new FormData();
-          formData.append('logo', file);
-          return _http.post<{ logo: string }>(`ventures/${id}/logo`, formData).pipe(
-            tap(() => {
-              _toast.showSuccess('Logo uploadé avec succès');
-              onSuccess?.();
-            }),
-            catchError((err) => {
-              _toast.showError(err.error?.message || "Erreur lors de l'upload");
-              return of(null);
-            })
-          );
-        })
-      )
-    ),
-
-    uploadCover: rxMethod<{ id: string; file: File; onSuccess?: () => void }>(
-      pipe(
-        switchMap(({ id, file, onSuccess }) => {
-          const formData = new FormData();
-          formData.append('cover', file);
-          return _http.post<{ cover: string }>(`ventures/${id}/cover`, formData).pipe(
-            tap(() => {
-              _toast.showSuccess('Cover uploadée avec succès');
-              onSuccess?.();
-            }),
-            catchError((err) => {
-              _toast.showError(err.error?.message || "Erreur lors de l'upload");
-              return of(null);
-            })
-          );
-        })
-      )
-    ),
-
     removeGalleryImage: rxMethod<{ id: string; imageId: string; onSuccess?: () => void }>(
       pipe(
         switchMap(({ imageId, onSuccess }) => {
