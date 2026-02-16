@@ -47,7 +47,6 @@ export class DesktopNav {
   readonly openDropdown = signal<string | null>(null);
 
   // Helper computed pour traduire les champs selon la langue active
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   translateField = computed(() => {
     const currentLang = this.languageService.currentLanguage();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
