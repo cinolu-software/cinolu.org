@@ -190,7 +190,7 @@ export const VenturesStore = signalStore(
 
     removeGalleryImage: rxMethod<{ id: string; imageId: string; onSuccess?: () => void }>(
       pipe(
-        switchMap(({ id, imageId, onSuccess }) => {
+        switchMap(({ imageId, onSuccess }) => {
           return _http.delete<void>(`ventures/gallery/${imageId}`).pipe(
             tap(() => {
               _toast.showSuccess('Image supprimée de la galerie');
