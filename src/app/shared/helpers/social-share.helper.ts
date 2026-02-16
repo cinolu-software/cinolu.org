@@ -35,6 +35,18 @@ export function shareToTwitter(link: string, referralCount: number): void {
   window.open(url, '_blank', 'noopener,noreferrer,width=600,height=600');
 }
 
+/** Partage avec un message personnalisé (ex: lien de parrainage) */
+export function shareToWhatsAppWithMessage(link: string, message: string): void {
+  const text = encodeURIComponent(message.replace('{LINK}', link));
+  window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
+}
+
+export function shareToTwitterWithMessage(link: string, message: string): void {
+  const text = encodeURIComponent(message);
+  const url = encodeURIComponent(link);
+  window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'noopener,noreferrer');
+}
+
 export function shareToSocial(options: ShareOptions): void {
   const { platform, link, referralCount } = options;
 

@@ -1,4 +1,13 @@
-import { Component, inject, OnInit, computed, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  computed,
+  signal,
+  ChangeDetectionStrategy,
+  PLATFORM_ID
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -7,17 +16,25 @@ import { AuthStore } from '@core/auth/auth.store';
 import { ToastrService } from '@core/services/toast/toastr.service';
 import { environment } from '@environments/environment';
 import { REFERRAL_CONFIG, QRCodeCache } from '@features/dashboard/config/referral.constants';
+import {
+  shareToLinkedIn,
+  shareToFacebook,
+  shareToWhatsAppWithMessage,
+  shareToTwitterWithMessage
+} from '@shared/helpers/social-share.helper';
 
 @Component({
   selector: 'app-my-referral-link',
   imports: [CommonModule, RouterModule],
-  templateUrl: './my-link.html'
+  templateUrl: './my-link.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyReferralLink implements OnInit {
   referralsStore = inject(ReferralsStore);
   authStore = inject(AuthStore);
   toast = inject(ToastrService);
   sanitizer = inject(DomSanitizer);
+  private platformId = inject(PLATFORM_ID);
 
   qrCodeDataUrl = signal<string | null>(null);
   isGeneratingQR = signal(false);
@@ -38,6 +55,7 @@ export class MyReferralLink implements OnInit {
   }
 
   private loadQRCodeFromCache(code: string) {
+    if (!isPlatformBrowser(this.platformId)) return;
     try {
       const cacheKey = REFERRAL_CONFIG.QR_CODE_CACHE_KEY;
       const cached = localStorage.getItem(cacheKey);
@@ -86,33 +104,25 @@ export class MyReferralLink implements OnInit {
   shareOnWhatsApp() {
     const link = this.referralLink();
     if (!link) return;
-
-    const message = REFERRAL_CONFIG.SOCIAL_MESSAGES.WHATSAPP.replace('{LINK}', link);
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/?text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
+    shareToWhatsAppWithMessage(link, REFERRAL_CONFIG.SOCIAL_MESSAGES.WHATSAPP);
   }
 
   shareOnLinkedIn() {
     const link = this.referralLink();
     if (!link) return;
-    const url = encodeURIComponent(link);
-    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'noopener,noreferrer');
+    shareToLinkedIn(link);
   }
 
   shareOnFacebook() {
     const link = this.referralLink();
     if (!link) return;
-    const url = encodeURIComponent(link);
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'noopener,noreferrer');
+    shareToFacebook(link);
   }
 
   shareOnTwitter() {
     const link = this.referralLink();
     if (!link) return;
-
-    const text = encodeURIComponent(REFERRAL_CONFIG.SOCIAL_MESSAGES.TWITTER);
-    const url = encodeURIComponent(link);
-    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'noopener,noreferrer');
+    shareToTwitterWithMessage(link, REFERRAL_CONFIG.SOCIAL_MESSAGES.TWITTER);
   }
 
   private async generateQRCode() {
@@ -131,7 +141,9 @@ export class MyReferralLink implements OnInit {
         referralCode: code,
         timestamp: Date.now()
       };
-      localStorage.setItem(REFERRAL_CONFIG.QR_CODE_CACHE_KEY, JSON.stringify(cache));
+      if (isPlatformBrowser(this.platformId)) {
+        localStorage.setItem(REFERRAL_CONFIG.QR_CODE_CACHE_KEY, JSON.stringify(cache));
+      }
     } catch (error) {
       console.error('Erreur génération QR code:', error);
       this.toast.showError('Erreur lors de la génération du QR code');

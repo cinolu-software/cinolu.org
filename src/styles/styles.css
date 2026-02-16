@@ -2,18 +2,7 @@
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,401,500,501,700,701,900,901,1,2&display=swap');
 
 @theme {
-  --color-brand-50: #f1f8ed;
-  --color-brand-100: #dfefd8;
-  --color-brand-200: #c3e1b5;
-  --color-brand-300: #9ecc8a;
-  --color-brand-400: #7cb764;
-  --color-brand-500: #5d9c46;
-  --color-brand-600: #508c3c;
-  --color-brand-700: #385f2c;
-  --color-brand-800: #2f4d27;
-  --color-brand-900: #2b4225;
-  --color-brand-950: #142310;
-
+  /* Palette primaire (brand = alias de primary) */
   --color-primary-50: #f1f8ed;
   --color-primary-100: #dfefd8;
   --color-primary-200: #c3e1b5;
@@ -25,6 +14,17 @@
   --color-primary-800: #2f4d27;
   --color-primary-900: #2b4225;
   --color-primary-950: #142310;
+  --color-brand-50: var(--color-primary-50);
+  --color-brand-100: var(--color-primary-100);
+  --color-brand-200: var(--color-primary-200);
+  --color-brand-300: var(--color-primary-300);
+  --color-brand-400: var(--color-primary-400);
+  --color-brand-500: var(--color-primary-500);
+  --color-brand-600: var(--color-primary-600);
+  --color-brand-700: var(--color-primary-700);
+  --color-brand-800: var(--color-primary-800);
+  --color-brand-900: var(--color-primary-900);
+  --color-brand-950: var(--color-primary-950);
 
   --font-family-mona: 'Mona Sans', sans-serif;
   --font-family-satoshi: 'Satoshi', sans-serif;
@@ -59,15 +59,6 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
 

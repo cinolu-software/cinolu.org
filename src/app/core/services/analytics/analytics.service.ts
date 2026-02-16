@@ -1,4 +1,5 @@
-import { Injectable, NgZone, PLATFORM_ID, inject } from '@angular/core';
+import { Injectable, NgZone, PLATFORM_ID, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 import { environment } from '@environments/environment';
@@ -43,6 +44,7 @@ export class AnalyticsService {
   private router = inject(Router);
   private zone = inject(NgZone);
   private platformId = inject(PLATFORM_ID);
+  private destroyRef = inject(DestroyRef);
   private isBrowser = isPlatformBrowser(this.platformId);
 
   init(): void {
@@ -51,11 +53,16 @@ export class AnalyticsService {
     this.routerInitialized = true;
 
     this.zone.runOutsideAngular(() => {
-      this.router.events.pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd)).subscribe((e) => {
-        const url = e.urlAfterRedirects;
-        this.trackPageView(url, document.title);
-        this.#handleBlogRoute(url);
-      });
+      this.router.events
+        .pipe(
+          filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+          takeUntilDestroyed(this.destroyRef)
+        )
+        .subscribe((e) => {
+          const url = e.urlAfterRedirects;
+          this.trackPageView(url, document.title);
+          this.#handleBlogRoute(url);
+        });
     });
   }
 

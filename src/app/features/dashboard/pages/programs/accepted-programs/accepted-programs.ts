@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ParticipationsStore } from '../../../store/participations.store';
@@ -36,7 +36,8 @@ interface StatusConfig {
   imports: [CommonModule, RouterLink, ButtonModule, ApiImgPipe],
   providers: [],
   templateUrl: './accepted-programs.html',
-  styleUrls: []
+  styleUrls: [],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AcceptedPrograms implements OnInit {
   participationsStore = inject(ParticipationsStore);
