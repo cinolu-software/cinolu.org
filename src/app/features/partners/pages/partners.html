@@ -1,0 +1,41 @@
+<app-hero-card
+  background="/images/parteners-default.jpg"
+  [badgeIcon]="icons.handshake"
+  badgeText="Partenaires"
+  title="Ils nous font"
+  highlight="confiance"
+  description="Ensemble avec nos partenaires, nous soutenons les entrepreneurs dans leur parcours, favorisons les synergies et transformons les idées en succès durables." />
+@if (loading()) {
+<app-partners-skeleton />
+} @else {
+<section class="min-h-fit backdrop-blur-[1px] bg-grid items-center content-center">
+  <div class="px-8 min-h-dvh xl:min-h-[800px] lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 md:py-28">
+    <div class="mx-auto">
+      <div class="flex flex-wrap gap-2 justify-center items-center pb-16">
+        <p-button [outlined]="!!isActiveCategory()" (click)="resetFilter()">Tout</p-button>
+        @for (item of listCategories(); track item) {
+        <p-button [outlined]="!isActiveButton(item)" (click)="filterByCategory(item)">{{ item }}</p-button>
+        }
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-6">
+        @for (item of filtered(); track item.name || item.image) {
+        <app-partners-card [partner]="item"></app-partners-card>
+        }
+      </div>
+
+      <div class="mt-6 lg:mt-14 flex justify-center">
+        @if (canLoadMore()) {
+        <button
+          type="button"
+          (click)="loadMore()"
+          class="inline-flex items-center gap-3 px-5 py-2 rounded-lg bg-gradient-to-r from-primary-500 to-primary-400 text-white font-semibold shadow-lg hover:brightness-105 active:scale-95 transition-transform duration-200"
+          aria-label="Charger plus de partenaires">
+          <span>Plus de partenaires</span>
+          <i-lucide [name]="icons.arrowRight"></i-lucide>
+        </button>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+}
