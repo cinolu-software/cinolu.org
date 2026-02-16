@@ -1,4 +1,15 @@
-import { Component, input, output, signal, computed, ChangeDetectionStrategy, inject, effect } from '@angular/core';
+import {
+  Component,
+  input,
+  output,
+  signal,
+  computed,
+  ChangeDetectionStrategy,
+  inject,
+  effect,
+  DestroyRef
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { filter } from 'rxjs';
@@ -20,6 +31,7 @@ import {
 export class DashboardSidebar {
   private router = inject(Router);
   private authStore = inject(AuthStore);
+  private destroyRef = inject(DestroyRef);
 
   // Inputs
   isCollapsed = input<boolean>(false);
@@ -41,12 +53,17 @@ export class DashboardSidebar {
 
   constructor() {
     // Track route changes
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.currentPath.set(event.url);
-        this.autoExpandActiveMenus();
-      }
-    });
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          this.currentPath.set(event.url);
+          this.autoExpandActiveMenus();
+        }
+      });
 
     // Auto-expand active menus on init
     effect(
