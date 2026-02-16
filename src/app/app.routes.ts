@@ -12,7 +12,7 @@ export const routes: Route[] = [
     path: 'partners',
     component: Layout,
     data: { layout: 'fixed-layout' },
-    loadChildren: () => import('./features/parteners/parteners.routes').then((m) => m.OurParteners)
+    loadChildren: () => import('./features/partners/partners.routes').then((m) => m.partnersRoutes)
   },
   {
     path: 'our-programs',
