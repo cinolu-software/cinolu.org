@@ -1,74 +1,68 @@
-<section class="bg-white overflow-hidden">
-  <div class="mx-auto pt-20 pb-15 md:pb-10">
-    <div class="mb-16 text-center px-4">
-      <h3
-        class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-satoshi mb-4 tracking-tight leading-tight">
+<section class="bg-white bg-grid overflow-hidden">
+  <div class="mx-auto pt-16 md:pt-20 pb-12 md:pb-16">
+    <div class="mb-12 md:mb-16 text-center px-4">
+      <h2
+        class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 font-satoshi mb-4 tracking-tight leading-tight">
         {{ 'partners.title' | translate }}
         <span class="bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">
           {{ 'partners.title_highlight' | translate }}
         </span>
-      </h3>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">{{ 'partners.description' | translate }}</p>
+      </h2>
+      <p class="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">{{ 'partners.description' | translate }}</p>
     </div>
 
-    <div class="relative overflow-hidden py-8">
-      <div class="partners-scroll-container mb-8">
+    <div class="relative overflow-hidden py-6 md:py-8">
+      <div class="partners-scroll-container mb-6 md:mb-8">
         <div class="partners-scroll-track partners-scroll-right">
           @for (partner of firstRow; track partner.name || partner.image) {
           <div class="partners-scroll-item">
             <div
-              class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-lg p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px]">
-              <div class="absolute top-2 right-2">
+              class="group relative bg-white border border-slate-200/60 hover:border-primary-300 rounded-xl p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-1 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px] shrink-0">
+              <div class="absolute top-2 right-2 z-[1]">
                 <span
-                  class="inline-flex items-center px-2 py-0.5 bg-primary-50 text-primary-700 text-xs sm:text-xs font-medium rounded-full border border-primary-200">
+                  class="inline-flex items-center px-2 py-0.5 bg-primary-50 text-primary-700 text-xs font-medium rounded-full border border-primary-200">
                   {{ partner.category }}
                 </span>
               </div>
-
-              <div class="flex-1 flex items-center justify-center mb-2 sm:mb-3 p-2 sm:p-3">
+              <div class="flex-1 flex items-center justify-center mb-2 sm:mb-3 p-2 sm:p-3 min-h-0">
                 <img
-                  src="{{ partner.image }}"
+                  [src]="partner.image"
                   [alt]="'Logo de ' + partner.name"
                   [title]="partner.name"
                   loading="lazy"
                   decoding="async"
-                  class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 w-auto h-auto group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
+                  class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 w-auto h-auto group-hover:scale-105 transition-transform duration-300 grayscale group-hover:grayscale-0" />
               </div>
-
-              <div class="text-center pt-2 border-t border-gray-100">
-                <h4
-                  class="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
+              <div class="text-center pt-2 border-t border-slate-100">
+                <h3 class="font-bold text-slate-900 text-xs sm:text-sm group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
                   {{ partner.name }}
-                </h4>
+                </h3>
               </div>
             </div>
           </div>
           } @for (partner of firstRow; track partner.name || partner.image) {
           <div class="partners-scroll-item">
             <div
-              class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-lg p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px]">
-              <div class="absolute top-2 right-2">
+              class="group relative bg-white border border-slate-200/60 hover:border-primary-300 rounded-xl p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-1 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px] shrink-0">
+              <div class="absolute top-2 right-2 z-[1]">
                 <span
-                  class="inline-flex items-center px-2 py-0.5 bg-primary-50 text-primary-700 text-xs sm:text-xs font-medium rounded-full border border-primary-200">
+                  class="inline-flex items-center px-2 py-0.5 bg-primary-50 text-primary-700 text-xs font-medium rounded-full border border-primary-200">
                   {{ partner.category }}
                 </span>
               </div>
-
-              <div class="flex-1 flex items-center justify-center mb-2 sm:mb-3 p-2 sm:p-3">
+              <div class="flex-1 flex items-center justify-center mb-2 sm:mb-3 p-2 sm:p-3 min-h-0">
                 <img
-                  src="{{ partner.image }}"
+                  [src]="partner.image"
                   [alt]="'Logo de ' + partner.name"
                   [title]="partner.name"
                   loading="lazy"
                   decoding="async"
-                  class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 w-auto h-auto group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
+                  class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 w-auto h-auto group-hover:scale-105 transition-transform duration-300 grayscale group-hover:grayscale-0" />
               </div>
-
-              <div class="text-center pt-2 border-t border-gray-100">
-                <h4
-                  class="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
+              <div class="text-center pt-2 border-t border-slate-100">
+                <h3 class="font-bold text-slate-900 text-xs sm:text-sm group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
                   {{ partner.name }}
-                </h4>
+                </h3>
               </div>
             </div>
           </div>
@@ -81,58 +75,52 @@
           @for (partner of secondRow; track partner.name || partner.image) {
           <div class="partners-scroll-item">
             <div
-              class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-lg p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px]">
-              <div class="absolute top-2 right-2">
+              class="group relative bg-white border border-slate-200/60 hover:border-primary-300 rounded-xl p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-1 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px] shrink-0">
+              <div class="absolute top-2 right-2 z-[1]">
                 <span
-                  class="inline-flex items-center px-2 py-0.5 bg-primary-50 text-primary-700 text-xs sm:text-xs font-medium rounded-full border border-primary-200">
+                  class="inline-flex items-center px-2 py-0.5 bg-primary-50 text-primary-700 text-xs font-medium rounded-full border border-primary-200">
                   {{ partner.category }}
                 </span>
               </div>
-
-              <div class="flex-1 flex items-center justify-center mb-2 sm:mb-3 p-2 sm:p-3">
+              <div class="flex-1 flex items-center justify-center mb-2 sm:mb-3 p-2 sm:p-3 min-h-0">
                 <img
-                  src="{{ partner.image }}"
+                  [src]="partner.image"
                   [alt]="'Logo de ' + partner.name"
                   [title]="partner.name"
                   loading="lazy"
                   decoding="async"
-                  class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 w-auto h-auto group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
+                  class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 w-auto h-auto group-hover:scale-105 transition-transform duration-300 grayscale group-hover:grayscale-0" />
               </div>
-
-              <div class="text-center pt-2 border-t border-gray-100">
-                <h4
-                  class="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
+              <div class="text-center pt-2 border-t border-slate-100">
+                <h3 class="font-bold text-slate-900 text-xs sm:text-sm group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
                   {{ partner.name }}
-                </h4>
+                </h3>
               </div>
             </div>
           </div>
           } @for (partner of secondRow; track partner.name || partner.image) {
           <div class="partners-scroll-item">
             <div
-              class="group relative bg-white border border-gray-200/60 hover:border-primary-300 rounded-lg p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px]">
-              <div class="absolute top-2 right-2">
+              class="group relative bg-white border border-slate-200/60 hover:border-primary-300 rounded-xl p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-1 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px] shrink-0">
+              <div class="absolute top-2 right-2 z-[1]">
                 <span
-                  class="inline-flex items-center px-2 py-0.5 bg-primary-50 text-primary-700 text-xs sm:text-xs font-medium rounded-full border border-primary-200">
+                  class="inline-flex items-center px-2 py-0.5 bg-primary-50 text-primary-700 text-xs font-medium rounded-full border border-primary-200">
                   {{ partner.category }}
                 </span>
               </div>
-
-              <div class="flex-1 flex items-center justify-center mb-2 sm:mb-3 p-2 sm:p-3">
+              <div class="flex-1 flex items-center justify-center mb-2 sm:mb-3 p-2 sm:p-3 min-h-0">
                 <img
-                  src="{{ partner.image }}"
+                  [src]="partner.image"
                   [alt]="'Logo de ' + partner.name"
                   [title]="partner.name"
                   loading="lazy"
                   decoding="async"
-                  class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 w-auto h-auto group-hover:scale-110 transition-transform duration-300 filter grayscale group-hover:grayscale-0" />
+                  class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 w-auto h-auto group-hover:scale-105 transition-transform duration-300 grayscale group-hover:grayscale-0" />
               </div>
-
-              <div class="text-center pt-2 border-t border-gray-100">
-                <h4
-                  class="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
+              <div class="text-center pt-2 border-t border-slate-100">
+                <h3 class="font-bold text-slate-900 text-xs sm:text-sm group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
                   {{ partner.name }}
-                </h4>
+                </h3>
               </div>
             </div>
           </div>
@@ -140,82 +128,67 @@
         </div>
       </div>
 
-      <div class="w-full flex justify-center items-center mt-12">
-        <a routerLink="/partners" class="group relative">
-          <button
-            class="relative flex items-center gap-3 px-8 py-4 bg-white border-2 border-primary-500 text-primary-600 font-semibold rounded-full hover:bg-primary-50 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25">
-            <span>{{ 'partners.view_all' | translate }}</span>
-            <i-lucide
-              class="size-5 group-hover:translate-x-1 transition-transform duration-300"
-              [name]="icons.MoveRight" />
-          </button>
+      <div class="w-full flex justify-center items-center mt-10 md:mt-12">
+        <a
+          routerLink="/partners"
+          class="inline-flex items-center gap-3 px-8 py-4 bg-white border-2 border-primary-500 text-primary-600 font-semibold rounded-full hover:bg-primary-50 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25 group">
+          <span>{{ 'partners.view_all' | translate }}</span>
+          <i-lucide class="size-5 group-hover:translate-x-1 transition-transform duration-300" [name]="icons.MoveRight" />
         </a>
       </div>
     </div>
 
-    <div class="text-center my-16">
-      <h4 class="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-800 font-satoshi tracking-tight leading-tight">
+    <div class="text-center my-12 md:my-16 px-4">
+      <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-800 font-satoshi tracking-tight leading-tight">
         {{ 'partners.together_title' | translate }}
-
         <span class="bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">
           {{ 'partners.together_highlight' | translate }}
         </span>
-      </h4>
-      <p class="text-gray-600 text-lg mt-4 max-w-2xl mx-auto">{{ 'partners.join_ecosystem' | translate }}</p>
+      </h3>
+      <p class="text-slate-600 text-lg mt-4 max-w-2xl mx-auto">{{ 'partners.join_ecosystem' | translate }}</p>
     </div>
   </div>
 
   <div class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-primary-50 via-primary-100 to-blue-50"></div>
-    <div class="absolute inset-0 bg-grid opacity-20"></div>
+    <div class="absolute inset-0 z-0 bg-gradient-to-br from-primary-50 via-primary-100/80 to-slate-50"></div>
+    <div class="absolute inset-0 z-0 bg-grid opacity-20" aria-hidden="true"></div>
+    <div class="absolute top-10 left-10 z-0 w-32 h-32 bg-primary-200/30 rounded-full blur-2xl animate-pulse" aria-hidden="true"></div>
+    <div class="absolute bottom-10 right-10 z-0 w-40 h-40 bg-primary-300/20 rounded-full blur-3xl animate-pulse [animation-delay:1s]" ></div>
+    <div class="absolute top-1/2 left-1/4 z-0 w-24 h-24 bg-primary-400/20 rounded-full blur-xl animate-pulse [animation-delay:2s]" aria-hidden="true"></div>
 
-    <div class="absolute top-10 left-10 w-32 h-32 bg-primary-200/30 rounded-full blur-2xl animate-pulse"></div>
-    <div
-      class="absolute bottom-10 right-10 w-40 h-40 bg-primary-300/20 rounded-full blur-3xl animate-pulse [animation-delay:1s]"></div>
-    <div
-      class="absolute top-1/2 left-1/4 w-24 h-24 bg-primary-400/20 rounded-full blur-xl animate-pulse [animation-delay:2s]"></div>
-
-    <div class="relative z-10 py-20 lg:py-28 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
-      <div class="text-center space-y-8">
-        <div class="pt-6">
-          <button
-            [routerLink]="'/sign-up'"
-            type="button"
-            class="group relative inline-flex items-center justify-center gap-3 px-10 py-3 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold text-lg rounded-lg shadow-xl shadow-primary-500/25 hover:shadow-2xl hover:shadow-primary-500/40 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
-            <div
-              class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
-
+    <div class="relative z-10 py-16 lg:py-24 px-6 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
+      <div class="text-center space-y-10">
+        <div>
+          <a
+            routerLink="/sign-up"
+            class="group relative inline-flex items-center justify-center gap-3 px-8 py-3.5 md:px-10 md:py-4 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold text-base md:text-lg rounded-xl shadow-xl shadow-primary-500/25 hover:shadow-2xl hover:shadow-primary-500/30 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden">
+            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" aria-hidden="true"></span>
             <span class="relative z-10 font-satoshi">{{ 'partners.become_partner' | translate }}</span>
-            <i-lucide
-              [name]="icons.userPlus"
-              class="relative z-10 size-6 group-hover:translate-x-1 transition-all duration-300">
-            </i-lucide>
-          </button>
+            <i-lucide [name]="icons.userPlus" class="relative z-10 size-5 md:size-6 group-hover:translate-x-1 transition-transform duration-300" />
+          </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto">
-          <div class="text-center p-6 bg-white/60 backdrop-blur-sm rounded-lg border border-white/50">
-            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mt-12 md:mt-16 max-w-4xl mx-auto">
+          <div class="text-center p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-slate-200/50 shadow-sm">
+            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mx-auto mb-4">
               <i-lucide [name]="icons.userPlus" class="size-6 text-primary-600" />
             </div>
-            <h3 class="font-bold text-gray-900 mb-2">{{ 'partners.benefits.network.title' | translate }}</h3>
-            <p class="text-gray-600 text-sm">{{ 'partners.benefits.network.description' | translate }}</p>
+            <h3 class="font-bold text-slate-900 mb-2">{{ 'partners.benefits.network.title' | translate }}</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">{{ 'partners.benefits.network.description' | translate }}</p>
           </div>
-
-          <div class="text-center p-6 bg-white/60 backdrop-blur-sm rounded-lg border border-white/50">
-            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div class="text-center p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-slate-200/50 shadow-sm">
+            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mx-auto mb-4">
               <i-lucide [name]="icons.moveUp" class="size-6 text-primary-600" />
             </div>
-            <h3 class="font-bold text-gray-900 mb-2">{{ 'partners.benefits.growth.title' | translate }}</h3>
-            <p class="text-gray-600 text-sm">{{ 'partners.benefits.growth.description' | translate }}</p>
+            <h3 class="font-bold text-slate-900 mb-2">{{ 'partners.benefits.growth.title' | translate }}</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">{{ 'partners.benefits.growth.description' | translate }}</p>
           </div>
-
-          <div class="text-center p-6 bg-white/60 backdrop-blur-sm rounded-lg border border-white/50">
-            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <i-lucide [name]="icons.userPlus" class="size-6 text-primary-600" />
+          <div class="text-center p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-slate-200/50 shadow-sm">
+            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <i-lucide [name]="icons.piHeart" class="size-6 text-primary-600" />
             </div>
-            <h3 class="font-bold text-gray-900 mb-2">{{ 'partners.benefits.impact.title' | translate }}</h3>
-            <p class="text-gray-600 text-sm">{{ 'partners.benefits.impact.description' | translate }}</p>
+            <h3 class="font-bold text-slate-900 mb-2">{{ 'partners.benefits.impact.title' | translate }}</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">{{ 'partners.benefits.impact.description' | translate }}</p>
           </div>
         </div>
       </div>
