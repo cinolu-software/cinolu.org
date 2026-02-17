@@ -343,6 +343,7 @@
     }
   },
   "services": {
+    "badge": "Open Innovation",
     "title": "Notre approche d'Open Innovation",
     "items": {
       "innovative_solutions": {
@@ -547,6 +548,7 @@
     }
   },
   "programs": {
+    "badge": "Accompagnement",
     "title": "Nos Programmes",
     "description": "Chez Cinolu, nous accompagnons chaque idée avec des programmes adaptés à votre profil, vos ambitions et votre niveau de développement.",
     "learn_more": "En savoir plus",
@@ -556,12 +558,14 @@
     "bad_path": "Mauvais chemin !"
   },
   "recent_projects": {
+    "badge": "Programmes récents",
     "title": "Les programmes récents",
     "description": "Découvrez les programmes que nous avons récemment lancés pour soutenir les entrepreneurs.",
     "view_all": "Tous les programmes",
     "explore": "Explorer ce programme"
   },
   "recent_events": {
+    "badge": "Événements",
     "title": "Les événements récents",
     "description": "Découvrez les événements à venir et passés qui rassemblent notre communauté d'innovateurs et d'entrepreneurs.",
     "view_all": "Liste des événements",
@@ -598,6 +602,7 @@
     }
   },
   "partners": {
+    "badge": "Partenaires",
     "title": "Nos",
     "title_highlight": "Partenaires",
     "description": "Un réseau de confiance qui nous accompagne dans notre mission d'innovation",
