@@ -1,4 +1,7 @@
-<section class="min-h-[85vh] py-7 sm:py-15 lg:py-20 xl:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
+<section
+  class="min-h-[85vh] py-7 sm:py-15 lg:py-20 xl:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
+  [attr.inert]="ready() ? null : ''"
+  tabindex="-1">
   <div class="text-center sm:mb-12 lg:mb-16">
     <div
       class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
@@ -55,18 +58,19 @@
 
       <div
         class="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center justify-center lg:justify-start pt-2">
-        <p-button [routerLink]="['/contact-us']" size="small" severity="primary" class="w-full sm:w-auto">
-          <p class="flex items-center justify-center gap-2 group px-4 py-1">
-            <span>{{ 'onestop.contact_button' | translate }}</span>
-            <i-lucide
-              class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
-              [name]="icons.moveRight" />
-          </p>
-        </p-button>
-
-        <p-button [routerLink]="['/programs']" size="small" outlined severity="primary" class="w-full sm:w-auto">
-          <p class="flex items-center justify-center gap-2 px-4 py-1">{{ 'onestop.programs_button' | translate }}</p>
-        </p-button>
+        <a
+          routerLink="/contact-us"
+          class="inline-flex items-center justify-center gap-2 group px-4 py-2 rounded-lg font-semibold text-sm w-full sm:w-auto bg-primary-600 hover:bg-primary-700 text-white transition-colors">
+          <span>{{ 'onestop.contact_button' | translate }}</span>
+          <i-lucide
+            class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
+            [name]="icons.moveRight" />
+        </a>
+        <a
+          routerLink="/programs"
+          class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm w-full sm:w-auto border-2 border-primary-600 text-primary-600 hover:bg-primary-50 transition-colors">
+          {{ 'onestop.programs_button' | translate }}
+        </a>
       </div>
     </div>
 
@@ -75,11 +79,13 @@
         <div
           class="relative w-72 sm:w-80 md:w-96 lg:w-[380px] xl:w-[420px] h-[350px] sm:h-[400px] md:h-[450px] lg:h-[480px] xl:h-[520px] mx-auto">
           <img
-            [ngSrc]="'images/entrepreneur-default.png'"
+            src="images/entrepreneur-default.png"
             [alt]="'onestop.image_alt' | translate"
-            class="object-contain drop-shadow-2xl"
-            priority
-            fill />
+            loading="eager"
+            decoding="async"
+            class="w-full h-full object-contain drop-shadow-2xl"
+            width="420"
+            height="520" />
         </div>
 
         <div
