@@ -1,11 +1,11 @@
 <app-auth-card [title]="'auth.signin.title' | translate" [description]="'auth.signin.description' | translate">
   <div
-    class="relative md:bg-white rounded-lg md:shadow-md md:shadow-gray-900/5 md:border border-gray-200/50 overflow-hidden">
+    class="relative md:bg-white rounded-lg md:shadow-md md:shadow-slate-900/5 md:border border-slate-200/50 overflow-hidden">
     <div class="h-2 bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700"></div>
 
     <div class="py-8 md:px-10">
       <div class="mb-8">
-        <p class="text-sm text-gray-600">
+        <p class="text-sm text-slate-600">
           {{ 'auth.signin.noAccount' | translate }}
           <a
             class="ml-1 font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-200 hover:underline"
@@ -17,7 +17,7 @@
       <form [formGroup]="form" class="space-y-4 md:space-y-6" (ngSubmit)="onSignIn()">
         <app-form-manager [form]="form" [loading]="store.isLoading()" [showProgress]="false">
           <div class="group">
-            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+            <label for="email" class="block text-sm font-semibold text-slate-700 mb-2">
               {{ 'auth.signin.form.email' | translate }}
             </label>
             <input
@@ -28,7 +28,7 @@
               [placeholder]="'auth.signin.form.emailPlaceholder' | translate" />
           </div>
           <div class="group">
-            <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
+            <label for="password" class="block text-sm font-semibold text-slate-700 mb-2">
               {{ 'auth.signin.form.password' | translate }}
             </label>
             <p-password
@@ -39,7 +39,7 @@
               [placeholder]="'auth.signin.form.passwordPlaceholder' | translate" />
           </div>
           <div class="flex items-center justify-between text-sm">
-            <span class="text-gray-600">{{ 'auth.signin.forgotPassword' | translate }}</span>
+            <span class="text-slate-600">{{ 'auth.signin.forgotPassword' | translate }}</span>
             <a
               class="font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-200 hover:underline"
               [routerLink]="['/forgot-password']">
@@ -59,9 +59,9 @@
           </button>
 
           <div class="flex items-center">
-            <div class="flex-auto border-t border-gray-200"></div>
-            <div class="text-sm text-gray-600 mx-4">{{ 'auth.signin.orContinueWith' | translate }}</div>
-            <div class="flex-auto border-t border-gray-200"></div>
+            <div class="flex-auto border-t border-slate-200"></div>
+            <div class="text-sm text-slate-600 mx-4">{{ 'auth.signin.orContinueWith' | translate }}</div>
+            <div class="flex-auto border-t border-slate-200"></div>
           </div>
 
           <button
