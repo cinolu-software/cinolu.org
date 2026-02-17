@@ -323,12 +323,7 @@ section {
   touch-action: pan-y pinch-zoom !important;
 }
 
-.events-carousel .p-carousel-content,
-.events-carousel .p-carousel-container,
-.events-carousel .p-carousel-items-content {
-  touch-action: pan-y pinch-zoom !important;
-}
-
+/* Mobile: allow horizontal swipe (carousel) and vertical scroll (page) */
 .projects-carousel .p-carousel-content,
 .projects-carousel .p-carousel-container,
 .projects-carousel .p-carousel-items-content,
@@ -337,11 +332,20 @@ section {
 .events-carousel .p-carousel-items-content {
   overflow: hidden !important;
   width: 100% !important;
+  touch-action: pan-x pan-y !important;
+  -webkit-overflow-scrolling: touch;
 }
 
 .projects-carousel .p-carousel-items-container,
 .events-carousel .p-carousel-items-container {
   display: flex !important;
+  touch-action: pan-x pan-y !important;
+  cursor: grab;
+}
+
+.projects-carousel .p-carousel-items-container:active,
+.events-carousel .p-carousel-items-container:active {
+  cursor: grabbing;
 }
 
 .projects-carousel .p-carousel-item,
@@ -397,8 +401,11 @@ section {
 
   .events-carousel .p-carousel-content,
   .events-carousel .p-carousel-container,
-  .events-carousel .p-carousel-items-content {
-    touch-action: pan-y pinch-zoom !important;
+  .events-carousel .p-carousel-items-content,
+  .projects-carousel .p-carousel-content,
+  .projects-carousel .p-carousel-container,
+  .projects-carousel .p-carousel-items-content {
+    touch-action: pan-x pan-y !important;
   }
 
   .hero-carousel .p-carousel-items-container {

@@ -7,14 +7,13 @@ import {
   ValidationErrors,
   Validators
 } from '@angular/forms';
-import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { UpdatePasswordStore } from '../../store/update-password.store';
 
 @Component({
   selector: 'app-profile-security',
 
-  imports: [ReactiveFormsModule, NgClass],
+  imports: [ReactiveFormsModule],
   templateUrl: './profile-security.html',
   providers: [UpdatePasswordStore],
   changeDetection: ChangeDetectionStrategy.OnPush

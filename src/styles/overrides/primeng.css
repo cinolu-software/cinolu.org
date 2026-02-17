@@ -1,35 +1,45 @@
-/* PrimeNG Custom Styles - Harmonized with form-input.css */
+/* PrimeNG — Global input system (source: profile/security) */
 
-/* Base Input Styles - Harmonized across all inputs */
 .p-inputtext {
-  @apply w-full px-4 py-3 rounded-lg border-2 border-gray-200
-    focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 focus:outline-none
-    transition-all duration-200
-    hover:border-gray-300;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  border: 1px solid rgb(203 213 225);
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .p-inputtext:enabled:hover {
-  @apply border-gray-300;
+  border-color: rgb(148 163 184);
 }
 
 .p-inputtext:enabled:focus {
-  @apply border-primary-500 ring-4 ring-primary-500/10;
+  border-color: rgb(80 140 60);
+  box-shadow: 0 0 0 4px rgb(80 140 60 / 0.2);
 }
 
-/* DatePicker Styles */
 .p-datepicker {
-  @apply w-full;
+  width: 100%;
 }
 
 .p-datepicker input {
-  @apply w-full px-4 py-3 rounded-lg border-2 border-gray-200
-    focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 focus:outline-none
-    transition-all duration-200
-    hover:border-gray-300;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  border: 1px solid rgb(203 213 225);
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.p-datepicker input:focus {
+  border-color: rgb(80 140 60);
+  box-shadow: 0 0 0 4px rgb(80 140 60 / 0.2);
 }
 
 .p-datepicker-panel {
-  @apply bg-white rounded-sm shadow-xl border border-gray-100;
+  @apply bg-white rounded-sm shadow-xl border border-slate-100;
 }
 
 .p-datepicker-header {
@@ -49,7 +59,7 @@
 }
 
 .p-datepicker .p-datepicker-input-icon-container {
-  @apply text-gray-400 hover:text-primary-600 transition-colors;
+  @apply text-slate-400 hover:text-primary-600 transition-colors;
 }
 
 /* Select Styles */
@@ -71,14 +81,22 @@
 }
 
 .p-password input {
-  @apply w-full px-4 py-3 rounded-lg border-2 border-gray-200
-    focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 focus:outline-none
-    transition-all duration-200
-    hover:border-gray-300;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  border: 1px solid rgb(203 213 225);
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.p-password input:focus {
+  border-color: rgb(80 140 60);
+  box-shadow: 0 0 0 4px rgb(80 140 60 / 0.2);
 }
 
 .p-password-toggle-icon {
-  @apply text-gray-400 hover:text-primary-600 transition-colors;
+  @apply text-slate-400 hover:text-primary-600 transition-colors;
 }
 
 .p-inputgroup {
@@ -86,10 +104,16 @@
 }
 
 .p-inputgroup-addon {
-  @apply px-4 py-3 bg-primary-50/50 border-2 border-gray-200
-    font-semibold text-gray-700 text-sm
-    flex items-center justify-center
-    transition-all duration-200;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid rgb(203 213 225);
+  background: rgb(241 248 237 / 0.5);
+  color: rgb(51 65 85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
 }
 
 .p-inputgroup > .p-inputgroup-addon:first-child {
@@ -115,57 +139,58 @@
   @apply rounded-lg;
 }
 
-/* Hover state for the whole group */
-.p-inputgroup:hover > .p-inputgroup-addon {
-  @apply border-gray-300;
-}
-
+.p-inputgroup:hover > .p-inputgroup-addon,
 .p-inputgroup:hover > .p-inputtext {
-  @apply border-gray-300;
+  border-color: rgb(148 163 184);
 }
 
-/* Focus state - highlight both addon and input */
-.p-inputgroup:has(.p-inputtext:focus) > .p-inputgroup-addon {
-  @apply border-primary-500;
+.p-inputgroup:has(.p-inputtext:focus) > .p-inputgroup-addon,
+.p-inputgroup:has(.p-inputtext:focus) > .p-inputtext {
+  border-color: rgb(80 140 60);
 }
 
 .p-inputgroup:has(.p-inputtext:focus) > .p-inputtext {
-  @apply border-primary-500 ring-4 ring-primary-500/10;
+  box-shadow: 0 0 0 4px rgb(80 140 60 / 0.2);
 }
 
 /* Error state for inputgroup */
 .p-inputgroup:has(.p-inputtext.ng-invalid.ng-touched) > .p-inputgroup-addon {
-  @apply border-red-300 bg-red-50/30;
+  border-color: rgb(248 113 113);
+  background: rgb(254 242 242 / 0.3);
 }
 
 .p-inputgroup:has(.p-inputtext.ng-invalid.ng-touched) > .p-inputtext {
-  @apply border-red-300;
-}
-
-.p-inputgroup:has(.p-inputtext.ng-invalid.ng-touched:focus) > .p-inputgroup-addon {
-  @apply border-red-500;
+  border-color: rgb(248 113 113);
 }
 
 .p-inputgroup:has(.p-inputtext.ng-invalid.ng-touched:focus) > .p-inputtext {
-  @apply border-red-500 ring-4 ring-red-500/10;
+  border-color: rgb(239 68 68);
+  box-shadow: 0 0 0 4px rgb(239 68 68 / 0.2);
 }
 
-/* Textarea Styles */
 .p-textarea {
-  @apply w-full px-4 py-3 rounded-lg border-2 border-gray-200
-    focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 focus:outline-none
-    transition-all duration-200
-    hover:border-gray-300
-    resize-none;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  border: 1px solid rgb(203 213 225);
+  border-radius: 0.5rem;
+  outline: none;
+  resize: none;
+  min-height: 120px;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* Error States */
+.p-textarea:enabled:focus {
+  border-color: rgb(80 140 60);
+  box-shadow: 0 0 0 4px rgb(80 140 60 / 0.2);
+}
+
 .p-inputtext.ng-invalid.ng-touched,
 .p-password.ng-invalid.ng-touched input,
 .p-datepicker.ng-invalid.ng-touched input,
 .p-select.ng-invalid.ng-touched .p-inputtext,
 .p-textarea.ng-invalid.ng-touched {
-  @apply border-red-300;
+  border-color: rgb(248 113 113);
 }
 
 .p-inputtext.ng-invalid.ng-touched:focus,
@@ -173,37 +198,40 @@
 .p-datepicker.ng-invalid.ng-touched input:focus,
 .p-select.ng-invalid.ng-touched .p-inputtext:focus,
 .p-textarea.ng-invalid.ng-touched:focus {
-  @apply border-red-500 ring-4 ring-red-500/10;
+  border-color: rgb(239 68 68);
+  box-shadow: 0 0 0 4px rgb(239 68 68 / 0.2);
 }
 
-/* Disabled States */
 .p-inputtext:disabled,
 .p-password input:disabled,
 .p-datepicker input:disabled,
 .p-select:disabled .p-inputtext,
 .p-textarea:disabled {
-  @apply bg-gray-50 text-gray-500 cursor-not-allowed border-gray-100;
+  background-color: rgb(248 250 252);
+  color: rgb(100 116 139);
+  cursor: not-allowed;
+  border-color: rgb(226 232 240);
 }
 
 /* ConfirmDialog Styles */
 .p-confirmdialog {
-  @apply rounded-xl shadow-2xl border border-gray-200;
+  @apply rounded-xl shadow-2xl border border-slate-200;
 }
 
 .p-confirmdialog .p-dialog-header {
-  @apply bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200 rounded-t-xl;
+  @apply bg-gradient-to-r from-slate-50 to-slate-100 border-b border-slate-200 rounded-t-xl;
 }
 
 .p-confirmdialog .p-dialog-title {
-  @apply text-xl font-bold text-gray-900;
+  @apply text-xl font-bold text-slate-900;
 }
 
 .p-confirmdialog .p-dialog-content {
-  @apply p-6 text-gray-700;
+  @apply p-6 text-slate-700;
 }
 
 .p-confirmdialog .p-dialog-footer {
-  @apply bg-gray-50 border-t border-gray-200 rounded-b-xl px-6 py-4;
+  @apply bg-slate-50 border-t border-slate-200 rounded-b-xl px-6 py-4;
 }
 
 .p-confirmdialog .p-button {
@@ -215,7 +243,7 @@
 }
 
 .p-confirmdialog .p-button-secondary {
-  @apply bg-gray-200 hover:bg-gray-300 text-gray-700;
+  @apply bg-slate-200 hover:bg-slate-300 text-slate-700;
 }
 
 .p-confirmdialog .p-confirm-dialog-icon {

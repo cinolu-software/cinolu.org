@@ -1,5 +1,5 @@
 <section
-  class="py-10 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto fade-left-init overflow-hidden"
+  class="py-10 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto fade-left-init overflow-x-hidden"
   id="projects"
   appAnimationsOnScroll>
   <div class="mb-8 lg:mb-12">
@@ -8,7 +8,7 @@
         <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black font-satoshi mb-3 tracking-tight leading-tight">
           {{ 'recent_projects.title' | translate }}
         </h3>
-        <p class="max-w-3xl text-base text-gray-600 lg:text-left hyphens-none">
+        <p class="max-w-3xl text-base text-slate-600 lg:text-left hyphens-none">
           {{ 'recent_projects.description' | translate }}
         </p>
       </div>
@@ -43,7 +43,7 @@
       [circular]="true"
       [responsiveOptions]="carouselConfig"
       [autoplayInterval]="5000"
-      touchMoveThreshold="0"
+      [draggable]="true"
       class="projects-carousel">
       <ng-template let-project #item>
         <div class="carousel-item-wrapper">

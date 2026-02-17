@@ -43,13 +43,8 @@
               id="currentPassword"
               formControlName="currentPassword"
               placeholder="Saisis ton mot de passe actuel"
-              [ngClass]="{
-                'border-red-300 focus:border-red-500 focus:ring-red-500/20':
-                  form.get('currentPassword')?.invalid && form.get('currentPassword')?.touched,
-                'border-slate-300 focus:border-primary-500 focus:ring-primary-500/20':
-                  !form.get('currentPassword')?.invalid || !form.get('currentPassword')?.touched
-              }"
-              class="w-full px-4 py-3 pr-12 border rounded-lg text-sm focus:outline-none focus:ring-4 transition-all duration-200" />
+              class="input-global pr-12"
+              [class.input-global--error]="form.get('currentPassword')?.invalid && form.get('currentPassword')?.touched" />
             <button
               type="button"
               (click)="togglePasswordVisibility('current')"
@@ -83,13 +78,8 @@
               id="newPassword"
               formControlName="newPassword"
               placeholder="Saisis ton nouveau mot de passe"
-              [ngClass]="{
-                'border-red-300 focus:border-red-500 focus:ring-red-500/20':
-                  form.get('newPassword')?.invalid && form.get('newPassword')?.touched,
-                'border-slate-300 focus:border-primary-500 focus:ring-primary-500/20':
-                  !form.get('newPassword')?.invalid || !form.get('newPassword')?.touched
-              }"
-              class="w-full px-4 py-3 pr-12 border rounded-lg text-sm focus:outline-none focus:ring-4 transition-all duration-200" />
+              class="input-global pr-12"
+              [class.input-global--error]="form.get('newPassword')?.invalid && form.get('newPassword')?.touched" />
             <button
               type="button"
               (click)="togglePasswordVisibility('new')"
@@ -124,13 +114,8 @@
               id="newPasswordConfirm"
               formControlName="newPasswordConfirm"
               placeholder="Confirme ton nouveau mot de passe"
-              [ngClass]="{
-                'border-red-300 focus:border-red-500 focus:ring-red-500/20':
-                  form.get('newPasswordConfirm')?.invalid && form.get('newPasswordConfirm')?.touched,
-                'border-slate-300 focus:border-primary-500 focus:ring-primary-500/20':
-                  !form.get('newPasswordConfirm')?.invalid || !form.get('newPasswordConfirm')?.touched
-              }"
-              class="w-full px-4 py-3 pr-12 border rounded-lg text-sm focus:outline-none focus:ring-4 transition-all duration-200" />
+              class="input-global pr-12"
+              [class.input-global--error]="form.get('newPasswordConfirm')?.invalid && form.get('newPasswordConfirm')?.touched" />
             <button
               type="button"
               (click)="togglePasswordVisibility('confirm')"
