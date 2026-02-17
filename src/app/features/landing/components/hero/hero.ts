@@ -1,16 +1,14 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { afterNextRender, Component, ChangeDetectionStrategy, inject, PLATFORM_ID, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   LucideAngularModule,
   ArrowRight,
-  Quote,
-  Sparkles,
   ExternalLink,
   Lightbulb,
   Rocket,
   TrendingUp,
-  Star,
   LucideIconData
 } from 'lucide-angular';
 import { CountUpDirective } from '../../../../shared/directives/count-up.directive';
@@ -34,13 +32,21 @@ interface Stat {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Hero {
+  private readonly platformId = inject(PLATFORM_ID);
+
+  readonly ready = signal(false);
+
   icons = {
     arrowRight: ArrowRight,
-    quote: Quote,
-    sparkles: Sparkles,
-    externalLink: ExternalLink,
-    star: Star
+    externalLink: ExternalLink
   };
+
+  constructor() {
+    if (!isPlatformBrowser(this.platformId)) return;
+    afterNextRender(() => {
+      setTimeout(() => this.ready.set(true), 350);
+    });
+  }
 
   journey: JourneyStep[] = [
     { key: 'ideation', image: 'blog.jpg', icon: Lightbulb },
