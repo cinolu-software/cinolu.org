@@ -24,7 +24,7 @@
         <span
           class="ml-1 px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px] text-center"
           [class.bg-white]="activeTab() === 'ventures'"
-          [class.text-brand-700]="activeTab() === 'ventures'"
+          [class.text-primary-700]="activeTab() === 'ventures'"
           [class.bg-slate-100]="activeTab() !== 'ventures'"
           [class.text-slate-600]="activeTab() !== 'ventures'">
           {{ venturesStore.ventures().length }}
@@ -62,7 +62,7 @@
       } @if (venturesStore.isLoading()) {
       <div class="flex flex-col items-center justify-center py-24">
         <div class="relative">
-          <div class="w-16 h-16 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin"></div>
+          <div class="w-16 h-16 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
         </div>
         <p class="mt-6 text-slate-600 font-medium">Chargement de vos entreprises...</p>
       </div>
@@ -70,7 +70,7 @@
       } @else if (venturesStore.ventures().length === 0) {
       <div class="flex flex-col items-center justify-center py-20 px-4">
         <div
-          class="w-24 h-24 rounded-xl bg-gradient-to-br from-brand-500/90 to-brand-700/85 flex items-center justify-center shadow-lg mb-6">
+          class="w-24 h-24 rounded-xl bg-gradient-to-br from-primary-500/90 to-primary-700/85 flex items-center justify-center shadow-lg mb-6">
           <span class="material-icons text-white text-5xl">business_center</span>
         </div>
         <h2 class="text-2xl font-bold text-slate-900 mb-3">Aucune entreprise</h2>
@@ -104,8 +104,8 @@
                 loading="lazy" />
             </div>
             } @else {
-            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-50 to-brand-100">
-              <span class="material-icons text-brand-600 text-7xl">business</span>
+            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-50 to-primary-100">
+              <span class="material-icons text-primary-600 text-7xl">business</span>
             </div>
             }
 
@@ -127,7 +127,7 @@
           </div>
 
           <div class="flex-1 p-6 flex flex-col">
-            <h3 class="dashboard-heading-5 mb-3 group-hover:text-brand-600 transition-colors">{{ venture.name }}</h3>
+            <h3 class="dashboard-heading-5 mb-3 group-hover:text-primary-600 transition-colors">{{ venture.name }}</h3>
 
             @if (venture.description) {
             <p class="dashboard-text-small mb-4 line-clamp-1 leading-relaxed">{{ venture.description }}</p>
@@ -160,7 +160,7 @@
             <div class="grid grid-cols-3 gap-2 mt-auto pt-4 border-t border-slate-100">
               <a
                 [routerLink]="['/dashboard/ventures', venture.slug]"
-                class="flex flex-col items-center justify-center gap-1 py-2.5 px-2 bg-brand-50 hover:bg-brand-100 text-brand-700 rounded-lg transition-all duration-200 hover:shadow-md group/btn">
+                class="flex flex-col items-center justify-center gap-1 py-2.5 px-2 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-lg transition-all duration-200 hover:shadow-md group/btn">
                 <span class="material-icons text-lg group-hover/btn:scale-110 transition-transform"
                   >visibility</span
                 >
@@ -226,7 +226,7 @@
             <div class="mb-4">
               <a
                 [routerLink]="['/dashboard/ventures', product.venture.slug]"
-                class="dashboard-badge-primary hover:bg-brand-600 hover:text-white transition-all duration-200">
+                class="dashboard-badge-primary hover:bg-primary-600 hover:text-white transition-all duration-200">
                 <span class="material-icons text-sm">business</span>
                 <span>{{ product.venture.name }}</span>
               </a>

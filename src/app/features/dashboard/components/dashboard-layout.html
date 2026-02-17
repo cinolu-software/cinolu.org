@@ -16,14 +16,14 @@
 
 @if (isMobile() && isMobileSidebarOpen()) {
 <div
-  class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 animate-in fade-in duration-300"
+  class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 anim-fade-in"
   (click)="closeMobileSidebar()"
   (keydown.escape)="closeMobileSidebar()"
   role="button"
   tabindex="0"
   aria-label="Fermer le menu"></div>
 
-<div class="fixed inset-y-0 left-0 z-50 animate-in slide-in-from-left duration-300">
+<div class="fixed inset-y-0 left-0 z-50 anim-fade-in">
   <app-dashboard-sidebar
     [isCollapsed]="false"
     [isMobile]="true"

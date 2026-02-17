@@ -136,26 +136,21 @@
   </div>
 
   <div class="relative">
-    <div class="max-w-7xl mx-auto max-w-sm:px-6 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
         <div class="lg:col-span-2 space-y-8">
           <div
-            class="relative group bg-white/80 backdrop-blur-xl rounded-lg border-2 border-slate-200 hover:border-primary-300 p-8 transition-all duration-500 overflow-hidden">
-            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary-500 to-primary-600"></div>
-
+            class="relative group bg-white rounded-xl border border-slate-200 hover:border-primary-300 p-6 lg:p-8 transition-all duration-300 overflow-hidden border-l-4 border-l-primary-500">
             <div class="flex items-start gap-4 mb-6">
-              <div class="relative">
-                <div
-                  class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
-                  <span class="material-icons text-white text-xl">description</span>
-                </div>
+              <div
+                class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center flex-shrink-0">
+                <span class="material-icons text-white text-xl">description</span>
               </div>
-              <div class="flex-1">
-                <h2 class="text-2xl font-bold text-slate-900 mb-1">Description du programme</h2>
+              <div class="flex-1 min-w-0">
+                <h2 class="text-xl font-bold text-slate-900 mb-1">Description du programme</h2>
                 <p class="text-slate-600 text-sm">Présentation générale</p>
               </div>
             </div>
-
             <div class="prose prose-slate max-w-none">
               <p class="text-slate-700 leading-relaxed text-base whitespace-pre-line">{{ project.description }}</p>
             </div>
@@ -163,66 +158,53 @@
 
           @if (project.context) {
           <div
-            class="group relative bg-white/80 backdrop-blur-xl rounded-lg border-2 border-slate-200 hover:border-blue-400 p-8 transition-all duration-500 overflow-hidden">
-            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-blue-500 to-blue-600"></div>
-
+            class="relative group bg-white rounded-xl border border-slate-200 hover:border-primary-300 p-6 lg:p-8 transition-all duration-300 overflow-hidden border-l-4 border-l-primary-500">
             <div class="flex items-start gap-4 mb-6">
-              <div class="relative">
-                <div
-                  class="w-14 h-14 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <span class="material-icons text-white text-2xl">lightbulb</span>
-                </div>
-                <div class="absolute -top-1 -right-1 w-4 h-4 bg-blue-400 rounded-full animate-ping"></div>
+              <div
+                class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center flex-shrink-0">
+                <span class="material-icons text-white text-xl">lightbulb</span>
               </div>
-              <div class="flex-1">
-                <h2 class="text-2xl font-bold text-slate-900 mb-1">Contexte du programme</h2>
+              <div class="flex-1 min-w-0">
+                <h2 class="text-xl font-bold text-slate-900 mb-1">Contexte du programme</h2>
                 <p class="text-slate-600 text-sm">Comprenez les enjeux et l'origine</p>
               </div>
             </div>
             <div class="prose prose-slate max-w-none">
-              <p class="text-slate-700 leading-relaxed whitespace-pre-line text-base">{{ project.context }}</p>
+              <p class="text-slate-700 leading-relaxed text-base whitespace-pre-line">{{ project.context }}</p>
             </div>
           </div>
           } @if (project.objectives) {
           <div
-            class="group relative bg-white/80 backdrop-blur-xl rounded-lg border-2 border-slate-200 hover:border-amber-400 p-8 transition-all duration-500 overflow-hidden">
-            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-amber-500 to-orange-600"></div>
-
+            class="relative group bg-white rounded-xl border border-slate-200 hover:border-primary-300 p-6 lg:p-8 transition-all duration-300 overflow-hidden border-l-4 border-l-primary-500">
             <div class="flex items-start gap-4 mb-6">
-              <div class="relative">
-                <div
-                  class="w-14 h-14 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <span class="material-icons text-white text-2xl">emoji_events</span>
-                </div>
+              <div
+                class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center flex-shrink-0">
+                <span class="material-icons text-white text-xl">emoji_events</span>
               </div>
-              <div class="flex-1">
-                <h2 class="text-2xl font-bold text-slate-900 mb-1">Objectifs visés</h2>
+              <div class="flex-1 min-w-0">
+                <h2 class="text-xl font-bold text-slate-900 mb-1">Objectifs visés</h2>
                 <p class="text-slate-600 text-sm">Les résultats attendus et impacts</p>
               </div>
             </div>
             <div class="prose prose-slate max-w-none">
-              <p class="text-slate-700 leading-relaxed whitespace-pre-line text-base">{{ project.objectives }}</p>
+              <p class="text-slate-700 leading-relaxed text-base whitespace-pre-line">{{ project.objectives }}</p>
             </div>
           </div>
           } @if (project.selection_criteria) {
           <div
-            class="group relative bg-white/80 backdrop-blur-xl rounded-lg border-2 border-slate-200 hover:border-primary-400 p-8 transition-all duration-500 overflow-hidden">
-            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary-500 to-primary-600"></div>
-
+            class="relative group bg-white rounded-xl border border-slate-200 hover:border-primary-300 p-6 lg:p-8 transition-all duration-300 overflow-hidden border-l-4 border-l-primary-500">
             <div class="flex items-start gap-4 mb-6">
-              <div class="relative">
-                <div
-                  class="w-14 h-14 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <span class="material-icons text-white text-2xl">verified</span>
-                </div>
+              <div
+                class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center flex-shrink-0">
+                <span class="material-icons text-white text-xl">verified</span>
               </div>
-              <div class="flex-1">
-                <h2 class="text-2xl font-bold text-slate-900 mb-1">Critères de sélection</h2>
+              <div class="flex-1 min-w-0">
+                <h2 class="text-xl font-bold text-slate-900 mb-1">Critères de sélection</h2>
                 <p class="text-slate-600 text-sm">Ce que nous recherchons</p>
               </div>
             </div>
             <div class="prose prose-slate max-w-none">
-              <p class="text-slate-700 leading-relaxed whitespace-pre-line text-base">
+              <p class="text-slate-700 leading-relaxed text-base whitespace-pre-line">
                 {{ project.selection_criteria }}
               </p>
             </div>
@@ -232,70 +214,66 @@
 
         <div class="lg:col-span-1">
           <div
-            class="relative bg-gradient-to-br from-white via-white to-primary-50/30 backdrop-blur-xl rounded-lg border-2 border-primary-200 hover:border-primary-300 p-6 transition-all duration-500 overflow-hidden">
-            <div
-              class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary-200/30 to-transparent rounded-full -mr-12 -mt-12 blur-2xl"></div>
-
-            <div class="relative">
-              <div class="flex items-center gap-3 mb-6">
-                <div
-                  class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
-                  <span class="material-icons text-white text-lg">info</span>
-                </div>
-                <h3 class="text-lg font-bold text-slate-900">Informations clés</h3>
+            class="relative bg-white rounded-xl border border-slate-200 shadow-sm p-6 transition-all duration-300 overflow-hidden">
+            <div class="flex items-center gap-3 mb-6">
+              <div
+                class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center flex-shrink-0">
+                <span class="material-icons text-white text-lg">info</span>
               </div>
+              <h3 class="text-lg font-bold text-slate-900">Informations clés</h3>
+            </div>
 
-              <div class="space-y-4">
-                @if (project.duration_hours) {
+            <div class="space-y-4">
+              @if (project.duration_hours) {
+              <div
+                class="flex items-start gap-3 p-3 rounded-lg border border-slate-200 bg-slate-50/50 hover:border-slate-300 transition-colors duration-200">
                 <div
-                  class="flex items-start gap-3 p-3 rounded-lg border-2 border-purple-100 hover:border-purple-300 transition-colors duration-300">
-                  <div
-                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center flex-shrink-0">
-                    <span class="material-icons text-purple-600 text-lg">schedule</span>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Durée</p>
-                    <p class="text-sm text-slate-900 font-bold">{{ project.duration_hours }}h</p>
-                  </div>
+                  class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0">
+                  <span class="material-icons text-primary-600 text-lg">schedule</span>
                 </div>
-                } @if (project.started_at) {
-                <div
-                  class="flex items-start gap-3 p-3 rounded-lg border-2 border-primary-100 hover:border-primary-300 transition-colors duration-300">
-                  <div
-                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-100 to-primary-50 flex items-center justify-center flex-shrink-0">
-                    <span class="material-icons text-primary-600 text-lg">event</span>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Début</p>
-                    <p class="text-sm text-slate-900 font-bold">{{ project.started_at | date: 'dd/MM/yy' }}</p>
-                  </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Durée</p>
+                  <p class="text-sm text-slate-900 font-bold">{{ project.duration_hours }}h</p>
                 </div>
-                } @if (project.ended_at) {
-                <div
-                  class="flex items-start gap-3 p-3 rounded-lg border-2 border-red-100 hover:border-red-300 transition-colors duration-300">
-                  <div
-                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center flex-shrink-0">
-                    <span class="material-icons text-red-600 text-lg">event_busy</span>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Fin</p>
-                    <p class="text-sm text-slate-900 font-bold">{{ project.ended_at | date: 'dd/MM/yy' }}</p>
-                  </div>
-                </div>
-                } @if (project.project_manager) {
-                <div
-                  class="flex items-start gap-3 p-3 rounded-lg border-2 border-indigo-100 hover:border-indigo-300 transition-colors duration-300">
-                  <div
-                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-100 to-indigo-50 flex items-center justify-center flex-shrink-0">
-                    <span class="material-icons text-indigo-600 text-lg">person</span>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Responsable</p>
-                    <p class="text-sm text-slate-900 font-bold truncate">{{ project.project_manager.name }}</p>
-                  </div>
-                </div>
-                }
               </div>
+              } @if (project.started_at) {
+              <div
+                class="flex items-start gap-3 p-3 rounded-lg border border-slate-200 bg-slate-50/50 hover:border-slate-300 transition-colors duration-200">
+                <div
+                  class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0">
+                  <span class="material-icons text-primary-600 text-lg">event</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Début</p>
+                  <p class="text-sm text-slate-900 font-bold">{{ project.started_at | date: 'dd/MM/yy' }}</p>
+                </div>
+              </div>
+              } @if (project.ended_at) {
+              <div
+                class="flex items-start gap-3 p-3 rounded-lg border border-slate-200 bg-slate-50/50 hover:border-slate-300 transition-colors duration-200">
+                <div
+                  class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0">
+                  <span class="material-icons text-primary-600 text-lg">event_busy</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Fin</p>
+                  <p class="text-sm text-slate-900 font-bold">{{ project.ended_at | date: 'dd/MM/yy' }}</p>
+                </div>
+              </div>
+              } @if (project.project_manager) {
+              <div
+                class="flex items-start gap-3 p-3 rounded-lg border border-slate-200 bg-slate-50/50 hover:border-slate-300 transition-colors duration-200">
+                <div
+                  class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0">
+                  <span class="material-icons text-primary-600 text-lg">person</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Responsable</p>
+                  <p class="text-sm text-slate-900 font-bold truncate">{{ project.project_manager.name }}</p>
+                </div>
+              </div>
+              }
+            </div>
 
               @if (project.categories && project.categories.length > 0) {
               <div class="mt-6 pt-6 border-t border-slate-200">
@@ -338,7 +316,6 @@
                 </div>
                 }
               </div>
-            </div>
           </div>
         </div>
       </div>
@@ -346,18 +323,14 @@
       <div class="space-y-6">
         @if (project.gallery && project.gallery.length > 0) {
         <div
-          class="group relative bg-white/80 backdrop-blur-xl rounded-lg border-2 border-slate-200 hover:border-purple-400 p-6 transition-all duration-500 overflow-hidden">
-          <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500 to-pink-600"></div>
-
+          class="relative group bg-white rounded-xl border border-slate-200 hover:border-primary-300 p-6 lg:p-8 transition-all duration-300 overflow-hidden border-l-4 border-l-primary-500">
           <div class="flex items-start gap-4 mb-6">
-            <div class="relative">
-              <div
-                class="w-14 h-14 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <span class="material-icons text-white text-2xl">collections</span>
-              </div>
+            <div
+              class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center flex-shrink-0">
+              <span class="material-icons text-white text-xl">collections</span>
             </div>
-            <div class="flex-1">
-              <h2 class="text-2xl font-bold text-slate-900 mb-1">Galerie photos</h2>
+            <div class="flex-1 min-w-0">
+              <h2 class="text-xl font-bold text-slate-900 mb-1">Galerie photos</h2>
               <p class="text-slate-600 text-sm">Découvrez l'ambiance du programme</p>
             </div>
           </div>
@@ -403,6 +376,12 @@
     <p class="text-slate-600 text-lg mb-8 text-center max-w-md">
       Ce programme n'existe pas ou n'est plus disponible. Il a peut-être été supprimé ou archivé.
     </p>
+    <a
+      routerLink="/dashboard/programs"
+      class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-lg transition-colors">
+      <span class="material-icons text-xl">arrow_back</span>
+      Retour aux programmes
+    </a>
   </div>
   } }
 
@@ -413,7 +392,7 @@
     [resizable]="false"
     [closable]="true"
     (onHide)="closeVentureModal()"
-    [style]="{ width: '600px' }"
+    [style]="{ width: '100%', maxWidth: '600px' }"
     [contentStyle]="{ padding: '0', 'border-radius': '12px', overflow: 'hidden' }">
     <ng-template pTemplate="header">
       <div class="w-full p-8 bg-gradient-to-r from-primary-600 to-primary-500">

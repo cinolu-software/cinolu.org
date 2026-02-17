@@ -16,23 +16,23 @@
         <span class="dashboard-text-small font-semibold text-slate-700">
           Étape {{ currentStep() }} sur {{ maxSteps }}
         </span>
-        <span class="dashboard-text-small font-semibold text-brand-600"> {{ getProgressPercentage() }}% complété </span>
+        <span class="dashboard-text-small font-semibold text-primary-600"> {{ getProgressPercentage() }}% complété </span>
       </div>
       <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
         <div
-          class="bg-gradient-to-r from-purple-500 to-brand-600 h-2.5 rounded-full transition-all duration-500"
+          class="bg-gradient-to-r from-purple-500 to-primary-600 h-2.5 rounded-full transition-all duration-500"
           [style.width.%]="getProgressPercentage()"></div>
       </div>
 
       <div class="flex items-center justify-between mt-6">
         <div
           class="flex items-center gap-2"
-          [class.text-brand-600]="currentStep() >= 1"
+          [class.text-primary-600]="currentStep() >= 1"
           [class.text-slate-400]="currentStep() < 1">
           <div
             class="w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all"
-            [class.bg-brand-600]="currentStep() >= 1"
-            [class.border-brand-600]="currentStep() >= 1"
+            [class.bg-primary-600]="currentStep() >= 1"
+            [class.border-primary-600]="currentStep() >= 1"
             [class.border-slate-300]="currentStep() < 1">
             <span class="material-icons text-sm" [class.text-white]="currentStep() >= 1">person</span>
           </div>
@@ -41,17 +41,17 @@
 
         <div
           class="flex-1 h-0.5 mx-2"
-          [class.bg-brand-600]="currentStep() > 1"
+          [class.bg-primary-600]="currentStep() > 1"
           [class.bg-slate-300]="currentStep() <= 1"></div>
 
         <div
           class="flex items-center gap-2"
-          [class.text-brand-600]="currentStep() >= 2"
+          [class.text-primary-600]="currentStep() >= 2"
           [class.text-slate-400]="currentStep() < 2">
           <div
             class="w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all"
-            [class.bg-brand-600]="currentStep() >= 2"
-            [class.border-brand-600]="currentStep() >= 2"
+            [class.bg-primary-600]="currentStep() >= 2"
+            [class.border-primary-600]="currentStep() >= 2"
             [class.border-slate-300]="currentStep() < 2">
             <span class="material-icons text-sm" [class.text-white]="currentStep() >= 2">star</span>
           </div>
@@ -60,17 +60,17 @@
 
         <div
           class="flex-1 h-0.5 mx-2"
-          [class.bg-brand-600]="currentStep() > 2"
+          [class.bg-primary-600]="currentStep() > 2"
           [class.bg-slate-300]="currentStep() <= 2"></div>
 
         <div
           class="flex items-center gap-2"
-          [class.text-brand-600]="currentStep() >= 3"
+          [class.text-primary-600]="currentStep() >= 3"
           [class.text-slate-400]="currentStep() < 3">
           <div
             class="w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all"
-            [class.bg-brand-600]="currentStep() >= 3"
-            [class.border-brand-600]="currentStep() >= 3"
+            [class.bg-primary-600]="currentStep() >= 3"
+            [class.border-primary-600]="currentStep() >= 3"
             [class.border-slate-300]="currentStep() < 3">
             <span class="material-icons text-sm" [class.text-white]="currentStep() >= 3">work</span>
           </div>
@@ -83,7 +83,7 @@
   <form [formGroup]="applicationForm" (ngSubmit)="submitApplication()">
     <app-form-manager [form]="applicationForm" [loading]="mentorProfileStore.isLoading()">
       @if (currentStep() === 1) {
-      <div class="dashboard-card-elevated p-8 animate-fade-in">
+      <div class="dashboard-card-elevated p-8 anim-fade-in">
         <div class="flex items-center gap-3 mb-6 pb-6 border-b border-slate-100">
           <div
             class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
@@ -98,7 +98,7 @@
         <div class="w-full mx-auto space-y-6">
           <div>
             <label for="years_experience" class="dashboard-label">
-              <span class="material-icons text-base text-brand-600">calendar_today</span>
+              <span class="material-icons text-base text-primary-600">calendar_today</span>
               <span>Années d'expérience <span class="text-red-500">*</span></span>
             </label>
             <input
@@ -128,7 +128,7 @@
         </div>
       </div>
       } @if (currentStep() === 2) {
-      <div class="dashboard-card-elevated p-8 animate-fade-in">
+      <div class="dashboard-card-elevated p-8 anim-fade-in">
         <div class="flex items-center gap-3 mb-6 pb-6 border-b border-slate-100">
           <div
             class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
@@ -142,7 +142,7 @@
 
         @if (mentorProfileStore.isLoading()) {
         <div class="flex justify-center py-12">
-          <div class="w-12 h-12 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin"></div>
+          <div class="w-12 h-12 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
         </div>
         } @else {
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -151,30 +151,30 @@
             type="button"
             (click)="toggleExpertise(expertise.id)"
             class="dashboard-card p-5 text-left transition-all cursor-pointer group"
-            [class.!border-brand-500]="isExpertiseSelected(expertise.id)"
-            [class.!bg-brand-50]="isExpertiseSelected(expertise.id)">
+            [class.!border-primary-500]="isExpertiseSelected(expertise.id)"
+            [class.!bg-primary-50]="isExpertiseSelected(expertise.id)">
             <div class="flex items-start justify-between gap-3">
               <div class="flex items-center gap-3 flex-1">
                 <div
                   class="w-10 h-10 rounded-lg flex items-center justify-center transition-all"
-                  [class.bg-brand-100]="isExpertiseSelected(expertise.id)"
+                  [class.bg-primary-100]="isExpertiseSelected(expertise.id)"
                   [class.bg-slate-100]="!isExpertiseSelected(expertise.id)">
                   <span
                     class="material-icons text-xl transition-colors"
-                    [class.text-brand-600]="isExpertiseSelected(expertise.id)"
+                    [class.text-primary-600]="isExpertiseSelected(expertise.id)"
                     [class.text-slate-500]="!isExpertiseSelected(expertise.id)">
                     lightbulb
                   </span>
                 </div>
                 <span
                   class="font-medium text-sm transition-colors"
-                  [class.text-brand-700]="isExpertiseSelected(expertise.id)"
+                  [class.text-primary-700]="isExpertiseSelected(expertise.id)"
                   [class.text-slate-700]="!isExpertiseSelected(expertise.id)">
                   {{ expertise.name }}
                 </span>
               </div>
               @if (isExpertiseSelected(expertise.id)) {
-              <span class="material-icons text-brand-600 text-xl">check_circle</span>
+              <span class="material-icons text-primary-600 text-xl">check_circle</span>
               }
             </div>
           </button>
@@ -195,7 +195,7 @@
         }
       </div>
       } @if (currentStep() === 3) {
-      <div class="dashboard-card-elevated p-8 animate-fade-in">
+      <div class="dashboard-card-elevated p-8 anim-fade-in">
         <div class="flex items-center justify-between mb-6 pb-6 border-b border-slate-100">
           <div class="flex items-center gap-3">
             <div
@@ -229,7 +229,7 @@
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label [for]="'company_' + i" class="dashboard-label">
-                    <span class="material-icons text-base text-brand-600">business</span>
+                    <span class="material-icons text-base text-primary-600">business</span>
                     <span>Entreprise <span class="text-red-500">*</span></span>
                   </label>
                   <input
@@ -292,7 +292,7 @@
                   [id]="'current_' + i"
                   type="checkbox"
                   formControlName="is_current"
-                  class="w-4 h-4 text-brand-600 bg-gray-100 border-gray-300 rounded focus:ring-brand-500" />
+                  class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500" />
                 <label [for]="'current_' + i" class="dashboard-text-small cursor-pointer">
                   J'occupe actuellement ce poste
                 </label>

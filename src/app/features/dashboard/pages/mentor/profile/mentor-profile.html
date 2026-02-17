@@ -2,9 +2,9 @@
   @if (profileStore.isLoading()) {
   <div class="flex flex-col justify-center items-center py-24">
     <div class="relative">
-      <div class="w-16 h-16 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin"></div>
+      <div class="w-16 h-16 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
       <div
-        class="absolute inset-0 w-16 h-16 border-4 border-transparent border-b-brand-400 rounded-full animate-ping"></div>
+        class="absolute inset-0 w-16 h-16 border-4 border-transparent border-b-primary-400 rounded-full animate-ping"></div>
     </div>
     <p class="mt-6 text-slate-600 font-medium animate-pulse">Chargement du profil...</p>
   </div>
@@ -90,11 +90,11 @@
               [disabled]="!isEditMode()"
               (click)="isEditMode() ? toggleExpertise(expertise.id) : null"
               [class]="isExpertiseSelected(expertise.id)
-                ? 'px-4 py-3 rounded-lg border-2 border-brand-500 bg-brand-50 text-brand-700 font-medium transition-all flex items-center justify-between'
-                : 'px-4 py-3 rounded-lg border-2 border-slate-200 bg-white text-slate-700 font-medium hover:border-brand-300 transition-all flex items-center justify-between'">
+                ? 'px-4 py-3 rounded-lg border-2 border-primary-500 bg-primary-50 text-primary-700 font-medium transition-all flex items-center justify-between'
+                : 'px-4 py-3 rounded-lg border-2 border-slate-200 bg-white text-slate-700 font-medium hover:border-primary-300 transition-all flex items-center justify-between'">
               <span>{{ expertise.name }}</span>
               @if (isExpertiseSelected(expertise.id)) {
-              <span class="material-icons text-brand-600 text-lg">check_circle</span>
+              <span class="material-icons text-primary-600 text-lg">check_circle</span>
               }
             </button>
             } @empty {
@@ -183,7 +183,7 @@
                       formControlName="is_current"
                       [disabled]="!isEditMode()"
                       (change)="toggleCurrentPosition(i)"
-                      class="w-4 h-4 text-brand-600 border-slate-300 rounded focus:ring-brand-500" />
+                      class="w-4 h-4 text-primary-600 border-slate-300 rounded focus:ring-primary-500" />
                     <span class="dashboard-text-body">Poste actuel</span>
                   </label>
                 </div>

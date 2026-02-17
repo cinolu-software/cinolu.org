@@ -1,5 +1,6 @@
 import { Component, input, output, signal, computed, ChangeDetectionStrategy, inject, OnDestroy } from '@angular/core';
 import { CommonModule, NgClass, NgOptimizedImage } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { ApiImgPipe } from '@shared/pipes';
 import { IRole } from '@shared/models';
@@ -7,7 +8,7 @@ import { IRole } from '@shared/models';
 @Component({
   selector: 'app-dashboard-header',
 
-  imports: [NgClass, NgOptimizedImage, ApiImgPipe, CommonModule],
+  imports: [NgClass, NgOptimizedImage, ApiImgPipe, CommonModule, RouterLink],
   templateUrl: './dashboard-header.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProjectStore } from '../../../../projects/store/project.store';
 import { VenturesStore } from '../../../store/ventures.store';
 import { ParticipationsStore } from '../../../store/participations.store';
@@ -17,10 +17,9 @@ import { AuthStore } from '@core/auth/auth.store';
 @Component({
   selector: 'app-program-detail',
   standalone: true,
-  imports: [CommonModule, ConfirmDialogModule, DialogModule, ButtonModule, TagModule, GalleriaModule, ApiImgPipe],
+  imports: [CommonModule, ConfirmDialogModule, DialogModule, ButtonModule, TagModule, GalleriaModule, ApiImgPipe, RouterLink],
   providers: [ProjectStore, ConfirmationService],
   templateUrl: './program-detail.html',
-  styleUrls: []
 })
 export class ProgramDetail implements OnInit {
   route = inject(ActivatedRoute);
