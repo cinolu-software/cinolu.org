@@ -2,7 +2,7 @@
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,401,500,501,700,701,900,901,1,2&display=swap');
 
 @theme {
-  /* Palette primaire (brand = alias de primary) */
+  /* Palette primaire */
   --color-primary-50: #f1f8ed;
   --color-primary-100: #dfefd8;
   --color-primary-200: #c3e1b5;
@@ -14,17 +14,6 @@
   --color-primary-800: #2f4d27;
   --color-primary-900: #2b4225;
   --color-primary-950: #142310;
-  --color-brand-50: var(--color-primary-50);
-  --color-brand-100: var(--color-primary-100);
-  --color-brand-200: var(--color-primary-200);
-  --color-brand-300: var(--color-primary-300);
-  --color-brand-400: var(--color-primary-400);
-  --color-brand-500: var(--color-primary-500);
-  --color-brand-600: var(--color-primary-600);
-  --color-brand-700: var(--color-primary-700);
-  --color-brand-800: var(--color-primary-800);
-  --color-brand-900: var(--color-primary-900);
-  --color-brand-950: var(--color-primary-950);
 
   --font-family-mona: 'Mona Sans', sans-serif;
   --font-family-satoshi: 'Satoshi', sans-serif;
@@ -41,20 +30,15 @@
 
 @import 'tailwindcss';
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px) scale(1);
-  }
-  50% {
-    transform: translateY(-20px) scale(1.05);
-  }
-}
+/* ═══════════════════════════════════════════════════════════════════════
+   GLOBAL ANIMATIONS (max 4 — transform + opacity only)
+   Naming: anim-<name> for keyframes and utility classes
+   ═══════════════════════════════════════════════════════════════════════ */
 
-@keyframes fadeInUp {
+@keyframes anim-fade-in {
   from {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -62,18 +46,7 @@
   }
 }
 
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes shimmer {
+@keyframes anim-shimmer {
   0% {
     transform: translateX(-100%);
   }
@@ -82,19 +55,42 @@
   }
 }
 
-@keyframes pulse-ring {
-  0% {
-    transform: scale(1);
-    opacity: 0.6;
+@keyframes anim-spin {
+  from {
+    transform: rotate(0deg);
   }
-  80% {
-    transform: scale(1.8);
-    opacity: 0;
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes anim-scroll {
+  0% {
+    transform: translateX(0);
   }
   100% {
-    transform: scale(1.8);
-    opacity: 0;
+    transform: translateX(-50%);
   }
+}
+
+.anim-fade-in {
+  animation: anim-fade-in 0.3s ease-out forwards;
+}
+
+.anim-shimmer {
+  animation: anim-shimmer 1.5s linear infinite;
+}
+
+.anim-spin {
+  animation: anim-spin 1s linear infinite;
+}
+
+.anim-scroll {
+  animation: anim-scroll 60s linear infinite;
+}
+
+.anim-scroll-reverse {
+  animation: anim-scroll 60s linear infinite reverse;
 }
 
 html {
@@ -171,95 +167,6 @@ section {
   animation-delay: 2s;
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-spin-slow {
-  animation: spin 12s linear infinite;
-}
-
-
-
-/* Animations de pulse avec délai */
-.animate-pulse-delayed {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  animation-delay: 1s;
-}
-
-.animate-pulse-delayed-short {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  animation-delay: 0.5s;
-}
-
-.animate-pulse-delayed-long {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  animation-delay: 1.5s;
-}
-
-.animate-pulse-delay-1 {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  animation-delay: 0.1s;
-}
-
-.animate-pulse-delay-2 {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  animation-delay: 0.2s;
-}
-
-.animate-pulse-delay-3 {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  animation-delay: 0.3s;
-}
-
-/* Animations fade in up avec délais variés */
-.animate-fade-in-up-0 {
-  animation: fadeInUp 0.6s ease-out forwards;
-  animation-delay: 0s;
-  opacity: 0;
-}
-.animate-fade-in-up-1 {
-  animation: fadeInUp 0.6s ease-out forwards;
-  animation-delay: 0.1s;
-  opacity: 0;
-}
-.animate-fade-in-up-2 {
-  animation: fadeInUp 0.6s ease-out forwards;
-  animation-delay: 0.2s;
-  opacity: 0;
-}
-.animate-fade-in-up-3 {
-  animation: fadeInUp 0.6s ease-out forwards;
-  animation-delay: 0.3s;
-  opacity: 0;
-}
-.animate-fade-in-up-4 {
-  animation: fadeInUp 0.6s ease-out forwards;
-  animation-delay: 0.4s;
-  opacity: 0;
-}
-.animate-fade-in-up-5 {
-  animation: fadeInUp 0.6s ease-out forwards;
-  animation-delay: 0.5s;
-  opacity: 0;
-}
-.animate-fade-in-up-6 {
-  animation: fadeInUp 0.6s ease-out forwards;
-  animation-delay: 0.6s;
-  opacity: 0;
-}
-.animate-fade-in-up-7 {
-  animation: fadeInUp 0.6s ease-out forwards;
-  animation-delay: 0.7s;
-  opacity: 0;
-}
-.animate-fade-in-up-8 {
-  animation: fadeInUp 0.6s ease-out forwards;
-  animation-delay: 0.8s;
-  opacity: 0;
-}
-
-/* Perspective 3D */
 .perspective-1000 {
   perspective: 1000px;
 }
@@ -288,18 +195,6 @@ section {
 
 .custom-scroll::-webkit-scrollbar-track {
   background: rgb(243, 244, 246);
-}
-
-.ring-pulse::before {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 9999px;
-  border: 2px solid rgba(34, 197, 94, 0.5);
-  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  z-index: -1;
 }
 
 .bg-grid {
@@ -515,35 +410,6 @@ section {
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
-}
-
-@keyframes bounce-slow {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 2s ease-in-out infinite;
-}
-
 /* Partners Scrolling Animation */
 .partners-scroll-container {
   overflow: hidden;
@@ -562,31 +428,13 @@ section {
 }
 
 .partners-scroll-right {
-  animation: scroll-right 60s linear infinite;
+  animation: anim-scroll 60s linear infinite;
 }
 
 .partners-scroll-left {
-  animation: scroll-left 60s linear infinite;
+  animation: anim-scroll 60s linear infinite reverse;
 }
 
 .partners-scroll-track:hover {
   animation-play-state: paused;
-}
-
-@keyframes scroll-right {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes scroll-left {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(0);
-  }
 }
