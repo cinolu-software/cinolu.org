@@ -90,11 +90,11 @@
 
       <button (click)="toggleDropdown('mycinolu', $event)" class="group relative flex items-center gap-1">
         <div class="flex items-center gap-1">
-          <div class="relative h-8 w-8">
+          <div class="relative h-8 w-8 min-h-8 min-w-8" style="position: relative;">
             <img
               [ngSrc]="currentUser | apiIMG: 'user'"
               alt="User Image"
-              class="aspect-video object-cover ring-2 ring-primary-600 bg-gray-200 rounded-full"
+              class="aspect-square object-cover ring-2 ring-primary-600 bg-gray-200 rounded-full"
               fill />
           </div>
           <i-lucide
