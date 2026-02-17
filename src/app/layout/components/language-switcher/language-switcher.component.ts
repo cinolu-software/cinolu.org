@@ -27,7 +27,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
       @if (isOpen) {
         <div
-          class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50 animate-fade-in">
+          class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-50 anim-fade-in">
           @for (lang of languageService.availableLanguages; track lang.code) {
             <button
               (click)="selectLanguage(lang.code)"
@@ -53,24 +53,7 @@ import { TranslateModule } from '@ngx-translate/core';
       }
     </div>
   `,
-  styles: [
-    `
-      @keyframes fade-in {
-        from {
-          opacity: 0;
-          transform: translateY(-8px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .animate-fade-in {
-        animation: fade-in 0.2s ease-out;
-      }
-    `
-  ]
+  styles: []
 })
 export class LanguageSwitcherComponent {
   readonly languageService = inject(LanguageService);
