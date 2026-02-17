@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   LucideAngularModule,
@@ -28,7 +29,7 @@ interface Stat {
 
 @Component({
   selector: 'app-hero',
-  imports: [LucideAngularModule, CountUpDirective, FadeInOnScrollDirective, TranslateModule],
+  imports: [LucideAngularModule, CountUpDirective, FadeInOnScrollDirective, TranslateModule, RouterLink],
   templateUrl: './hero.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

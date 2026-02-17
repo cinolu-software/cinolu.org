@@ -1,5 +1,5 @@
 <section
-  class="relative min-h-screen flex-col justify-center z-0 overflow-hidden flex items-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 pt-20">
+  class="relative min-h-screen flex-col justify-center z-0 overflow-hidden flex items-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-20">
   <div class="absolute inset-0 -z-10">
     <picture>
       <source media="(min-width: 1024px)" srcset="/images/mise-avant-default.jpg" />
@@ -10,7 +10,7 @@
         loading="eager"
         decoding="async" />
     </picture>
-    <div class="absolute inset-0 bg-zinc-950/75"></div>
+    <div class="absolute inset-0 bg-slate-950/75"></div>
 
     <div class="absolute top-20 right-20 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl animate-pulse"></div>
     <div
@@ -53,7 +53,7 @@
 
         <nav class="flex flex-col sm:flex-row gap-4 pt-4" aria-label="Actions principales">
           <a
-            href="/sign-up"
+            routerLink="/sign-up"
             class="group relative inline-flex items-center justify-center gap-3 px-7 py-4 bg-gradient-to-r from-primary-500 via-primary-600 to-primary-500 text-white rounded-xl font-bold text-base overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary-500/40"
             aria-label="Découvrir nos programmes">
             <span class="relative z-10 flex items-center gap-3">
@@ -68,7 +68,7 @@
           </a>
 
           <a
-            href="/entrepreneurs"
+            routerLink="/entrepreneurs"
             class="group relative inline-flex items-center justify-center gap-3 px-7 py-4 bg-white/5 backdrop-blur-xl border-2 border-white/20 rounded-xl text-white font-bold text-base transition-all duration-300 hover:bg-white/10 hover:border-white/40 hover:scale-[1.02]"
             aria-label="Voir les projets">
             {{ 'storytelling.cta_projects' | translate }}
