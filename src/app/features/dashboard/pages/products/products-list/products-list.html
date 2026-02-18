@@ -1,102 +1,93 @@
-<p-confirmDialog />
+<div class="pb-20">
+  <p-confirmDialog />
 
-<div class="dashboard-fade-in-up flex flex-col gap-6 lg:gap-8">
-  <div class="pb-6 border-b border-slate-200">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <div class="flex items-center gap-3 flex-1">
+  <!-- En-tête : fil d’Ariane + titre + actions -->
+  <header class="mb-8">
+ 
+
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+      <div class="flex items-center gap-4">
         <div
-          class="w-14 h-14 rounded-lg bg-gradient-to-br from-primary-500/90 to-primary-700/85 flex items-center justify-center shadow-lg">
-          <span class="material-icons text-white text-3xl">shopping_bag</span>
+          class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-lg">
+          <span class="material-icons text-3xl">inventory_2</span>
         </div>
         <div>
-          <h1 class="dashboard-heading-2">Mes Produits</h1>
-          <p class="dashboard-text-body text-slate-600">Gérez votre catalogue de produits et services</p>
+          <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Mes Produits</h1>
+          <p class="text-slate-600 text-sm mt-0.5">Gérez votre catalogue de produits et services</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-3">
-        <span class="dashboard-badge-success">
-          <span class="material-icons text-sm text-emerald-600">inventory_2</span>
-          <span class="font-bold">{{ productsStore.products().length || 0 }}</span>
-          <span class="text-slate-500">Produit{{ productsStore.products().length > 1 ? 's' : '' }}</span>
+      <div class="flex items-center gap-3 flex-wrap">
+        <span
+          class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-100 text-slate-700 text-sm font-semibold border border-slate-200">
+          <span class="material-icons text-primary-600 text-lg">inventory_2</span>
+          {{ productsStore.products().length || 0 }} produit{{ (productsStore.products().length || 0) !== 1 ? 's' : ''
+          }}
         </span>
-        <a routerLink="/dashboard/products/create" class="dashboard-btn-primary">
+        <a routerLink="/dashboard/products/create" class="dashboard-btn-primary inline-flex gap-2">
           <span class="material-icons text-xl">add</span>
           <span>Nouveau produit</span>
         </a>
       </div>
     </div>
-  </div>
+  </header>
 
   @if (productsStore.isLoading()) {
-  <div class="flex flex-col justify-center items-center py-24">
-    <div class="relative">
-      <div class="w-16 h-16 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
-    </div>
+  <div class="flex flex-col items-center justify-center py-24">
+    <div class="w-12 h-12 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
     <p class="mt-6 text-slate-600 font-medium">Chargement de vos produits...</p>
   </div>
-
   } @else if (productsStore.isEmpty()) {
-  <div class="dashboard-card-elevated p-12 text-center">
-    <div class="flex flex-col items-center">
-      <div
-        class="w-20 h-20 rounded-lg bg-gradient-to-br from-primary-500/90 to-primary-700/85 flex items-center justify-center shadow-lg mb-6">
-        <span class="material-icons text-white text-5xl">shopping_bag</span>
-      </div>
-      <h2 class="text-2xl font-bold text-slate-900 mb-3">Aucun produit</h2>
-      <p class="text-slate-600 mb-8 max-w-md">Ajoutez vos premiers produits ou services pour commencer à vendre</p>
-      <a routerLink="/dashboard/products/create" class="dashboard-btn-primary">
-        <span class="material-icons text-xl">add</span>
-        <span>Créer mon premier produit</span>
-      </a>
+  <div class="dashboard-card-elevated rounded-xl p-10 sm:p-12 text-center max-w-lg mx-auto">
+    <div
+      class="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-lg mx-auto mb-6">
+      <span class="material-icons text-white text-5xl">inventory_2</span>
     </div>
+    <h2 class="text-xl font-bold text-slate-900 mb-2">Aucun produit</h2>
+    <p class="text-slate-600 text-sm mb-8">Ajoutez vos premiers produits ou services pour commencer à vendre.</p>
+    <a routerLink="/dashboard/products/create" class="dashboard-btn-primary inline-flex gap-2">
+      <span class="material-icons text-xl">add</span>
+      <span>Créer mon premier produit</span>
+    </a>
   </div>
   } @else {
-  <div class="dashboard-grid-2">
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
     @for (product of productsStore.products(); track product.id) {
-    <article class="dashboard-card flex flex-col h-full group">
-      <div class="p-6 pb-4 space-y-4">
+    <article
+      class="group flex flex-col rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:border-slate-300">
+      <div class="flex flex-1 flex-col p-6">
         @if (product.venture) {
-        <div>
-          <span class="dashboard-badge-primary text-xs">
-            <span class="material-icons text-xs">business</span>
-            <span class="font-semibold">{{ product.venture.name }}</span>
-          </span>
-        </div>
+        <a
+          [routerLink]="['/dashboard/ventures', product.venture.slug]"
+          class="inline-flex items-center gap-1.5 w-fit mb-4 px-2.5 py-1 rounded-lg bg-primary-50 text-primary-700 text-xs font-semibold border border-primary-100 hover:bg-primary-100 transition-colors">
+          <span class="material-icons text-sm">business</span>
+          {{ product.venture.name }}
+        </a>
         }
-
-        <div class="flex items-start justify-between gap-4">
-          <h3 class="dashboard-heading-5 flex-1 group-hover:text-primary-600 transition-colors leading-snug">
+        <div class="flex items-start justify-between gap-3 mb-3">
+          <h3
+            class="text-lg font-semibold text-slate-900 line-clamp-2 flex-1 group-hover:text-primary-600 transition-colors">
             {{ product.name }}
           </h3>
-          <div class="flex-shrink-0">
-            <span class="dashboard-badge-primary">
-              <span class="text-lg font-bold">{{ product.price | number:'1.0-0' }}</span>
-              <span class="text-xs font-bold text-white/90">$</span>
-            </span>
+          <div
+            class="shrink-0 px-3 py-1.5 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-sm">
+            <span class="text-lg font-bold">{{ product.price | number: '1.0-0' }}</span>
+            <span class="text-sm font-semibold text-white/90">$</span>
           </div>
         </div>
-      </div>
-
-      <div class="px-6 py-4 flex-1 border-t border-slate-100">
-        <p class="dashboard-text-small dashboard-line-clamp-3 leading-relaxed text-slate-600">
-          {{ product.description }}
-        </p>
-      </div>
-
-      <div class="px-6 pb-6 pt-4 border-t border-slate-100">
-        <div class="grid grid-cols-2 gap-3">
+        <p class="text-slate-500 text-sm line-clamp-3 leading-relaxed flex-1 mb-5">{{ product.description }}</p>
+        <div class="pt-4 border-t border-slate-100 flex gap-2">
           <a
             [routerLink]="['/dashboard/products/edit', product.slug]"
-            class="dashboard-btn-primary w-full py-2.5 text-sm font-semibold">
-            <span class="material-icons text-base">edit</span>
+            class="flex-1 dashboard-btn-primary py-2.5 text-sm font-semibold rounded-lg inline-flex items-center justify-center gap-1.5">
+            <span class="material-icons text-lg">edit</span>
             <span>Modifier</span>
           </a>
           <button
+            type="button"
             (click)="deleteProduct(product.id, product.name)"
-            class="dashboard-btn-outline w-full py-2.5 text-sm text-red-600 border-red-200 hover:border-red-300 hover:bg-red-50 transition-colors">
-            <span class="material-icons text-base">delete</span>
-            <span>Supprimer</span>
+            class="inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-lg bg-red-50 text-red-600 font-semibold text-sm hover:bg-red-100 transition-colors min-h-[44px]">
+            <span class="material-icons text-lg">delete</span>
           </button>
         </div>
       </div>
