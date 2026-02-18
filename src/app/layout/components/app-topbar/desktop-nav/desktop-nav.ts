@@ -88,4 +88,14 @@ export class DesktopNav {
   onSignOut(): void {
     this.authStore().signOut();
   }
+
+    getUserInitials(): string {
+    const name = this.user()?.name || 'U';
+    return name
+      .split(' ')
+      .map((n: string) => n[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  }
 }
