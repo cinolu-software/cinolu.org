@@ -1,5 +1,5 @@
-@if (store.ambassadors().length >0) {
-  <section class="bg-gradient-to-br bg-grid from-primary-500 via-white to-blue-500/30 overflow-hidden min-h-2/3">
+@if (store.ambassadors().length > 0) {
+<section class="bg-gradient-to-br bg-grid from-primary-500 via-white to-blue-500/30 overflow-hidden min-h-2/3">
   <div class="py-12 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
     <div class="text-center mb-12 lg:mb-16">
       <div
@@ -26,63 +26,37 @@
       </div>
       <p class="text-gray-500 font-medium">{{ 'common.loading' | translate }}</p>
     </div>
-    } @if (!store.isLoading() && store.ambassadors().length > 0) {
+    } @else if (store.ambassadors().length > 0) {
     <div
       class="flex flex-col md:flex-row items-center md:items-end justify-center gap-6 md:gap-6 lg:gap-8 xl:gap-10 mb-12 lg:mb-20 px-4">
-      @if (store.ambassadors().length >= 2) {
+      @for (item of topFiveAmbassadors(); track trackByDisplayId($index, item); let i = $index) {
+      @if (item.type === 'real') {
       <a
-        [routerLink]="['/ambassadors', store.ambassadors()[1].email]"
-        class="flex flex-col items-center w-full sm:w-auto sm:flex-1 sm:max-w-[280px] md:max-w-[240px] lg:max-w-[280px] xl:max-w-[300px] md:transform md:translate-y-8 hover:scale-105 transition-all duration-300 cursor-pointer group">
-        <div class="relative mb-4">
+        [routerLink]="['/ambassadors', item.data.email]"
+        [class]="getSlotWrapperClasses(i) + ' cursor-pointer'"
+        class="no-underline text-inherit">
+        <div class="relative mb-4" [class.group]="true">
+          @if (getSlotTheme(i) === 'slate') {
           <div
             class="absolute -inset-2 bg-gradient-to-r from-slate-400 to-slate-500 rounded-full blur opacity-40 group-hover:opacity-70 transition"></div>
-          @if (store.ambassadors()[1].profile) {
-          <img
-            [src]="store.ambassadors()[1] | apiIMG: 'user'"
-            [alt]="store.ambassadors()[1].name"
-            class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full object-cover border-4 border-slate-400 shadow-xl" />
-          } @else {
-          <div
-            class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center text-white font-bold text-2xl border-4 border-slate-400 shadow-xl">
-            {{ getInitials(store.ambassadors()[1].name) }}
-          </div>
-          }
-          <div
-            class="absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-br from-slate-400 to-slate-500 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
-            <i-lucide [name]="icons.medal" class="w-5 h-5 text-gray-900" [strokeWidth]="2.5" />
-          </div>
-        </div>
-        <div
-          class="bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg p-4 sm:p-5 lg:p-6 w-full text-center shadow-lg border border-slate-300">
-          <h4 class="font-bold text-gray-900 text-sm sm:text-base lg:text-lg truncate mb-1">
-            {{ store.ambassadors()[1].name }}
-          </h4>
-          <p class="text-xs sm:text-sm text-gray-600 mb-2 truncate">{{ store.ambassadors()[1].city }}</p>
-          <div
-            class="inline-flex items-center px-3 sm:px-4 py-1 sm:py-1.5 bg-slate-500 text-white rounded-full text-xs sm:text-sm font-semibold">
-            {{ store.ambassadors()[1].referralsCount }} {{ 'ambassadors.referrals' | translate }}
-          </div>
-        </div>
-      </a>
-      }
-
-      <a
-        [routerLink]="['/ambassadors', store.ambassadors()[0].email]"
-        class="flex flex-col items-center w-full sm:w-auto sm:flex-1 sm:max-w-[320px] md:max-w-[280px] lg:max-w-[340px] xl:max-w-[380px] hover:scale-105 transition-all duration-300 cursor-pointer group">
-        <div class="relative mb-4 group">
+          } @else if (getSlotTheme(i) === 'yellow') {
           <div
             class="absolute -inset-3 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-full blur opacity-50 group-hover:opacity-80 transition animate-pulse"></div>
-          @if (store.ambassadors()[0].profile) {
-          <img
-            [src]="store.ambassadors()[0] | apiIMG: 'user'"
-            [alt]="store.ambassadors()[0].name"
-            class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-32 md:h-32 lg:w-36 lg:h-36 xl:w-40 xl:h-40 rounded-full object-cover border-4 border-yellow-400 shadow-2xl" />
           } @else {
           <div
-            class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-32 md:h-32 lg:w-36 lg:h-36 xl:w-40 xl:h-40 rounded-full bg-gradient-to-br from-yellow-300 to-yellow-600 flex items-center justify-center text-white font-bold text-3xl border-4 border-yellow-400 shadow-2xl">
-            {{ getInitials(store.ambassadors()[0].name) }}
+            class="absolute -inset-2 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full blur opacity-40 group-hover:opacity-70 transition"></div>
+          }
+          @if (item.data.profile) {
+          <img
+            [src]="item.data | apiIMG: 'user'"
+            [alt]="item.data.name"
+            [class]="getAvatarImgClasses(i)" />
+          } @else {
+          <div [class]="getAvatarInitialsClasses(i)">
+            {{ getInitials(item.data.name) }}
           </div>
           }
+          @if (isFirstSlot(i)) {
           <div
             class="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-xl border-3 border-white animate-bounce">
             <i-lucide [name]="icons.crown" class="w-6 h-6 text-gray-900" [strokeWidth]="2.5" />
@@ -91,7 +65,13 @@
             class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center shadow-xl border-3 border-white">
             <i-lucide [name]="icons.trophy" class="w-6 h-6 text-gray-900" [strokeWidth]="2.5" />
           </div>
+          } @else {
+          <div [class]="getMedalClasses(i)">
+            <i-lucide [name]="icons.medal" class="w-5 h-5 text-gray-900" [strokeWidth]="2.5" />
+          </div>
+          }
         </div>
+        @if (isFirstSlot(i)) {
         <div
           class="bg-gradient-to-br from-yellow-100 via-yellow-200 to-yellow-300 rounded-lg p-5 sm:p-6 lg:p-7 w-full text-center shadow-2xl border-2 border-yellow-400">
           <div
@@ -100,51 +80,90 @@
             #1 Ambassadeur
           </div>
           <h4 class="font-black text-gray-900 text-base sm:text-lg lg:text-xl truncate mb-1">
-            {{ store.ambassadors()[0].name }}
+            {{ item.data.name }}
           </h4>
-          <p class="text-xs sm:text-sm text-gray-700 mb-3 truncate">{{ store.ambassadors()[0].city }}</p>
+          <p class="text-xs sm:text-sm text-gray-700 mb-3 truncate">{{ item.data.city }}</p>
           <div
             class="inline-flex items-center px-4 sm:px-5 py-2 sm:py-2.5 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-full text-sm sm:text-base font-bold shadow-md">
-            {{ store.ambassadors()[0].referralsCount }} {{ 'ambassadors.referrals' | translate }}
+            {{ item.data.referralsCount }} {{ 'ambassadors.referrals' | translate }}
           </div>
         </div>
+        } @else {
+        <div [class]="getCardClasses(i)">
+          <h4 class="font-bold text-gray-900 text-sm sm:text-base lg:text-lg truncate mb-1">
+            {{ item.data.name }}
+          </h4>
+          <p class="text-xs sm:text-sm text-gray-600 mb-2 truncate">{{ item.data.city }}</p>
+          <div [class]="getBadgeClasses(i)">
+            {{ item.data.referralsCount }} {{ 'ambassadors.referrals' | translate }}
+          </div>
+        </div>
+        }
       </a>
-
-      @if (store.ambassadors().length >= 3) {
-      <a
-        [routerLink]="['/ambassadors', store.ambassadors()[2].email]"
-        class="flex flex-col items-center w-full sm:w-auto sm:flex-1 sm:max-w-[280px] md:max-w-[260px] lg:max-w-[300px] xl:max-w-[320px] md:transform md:translate-y-8 hover:scale-105 transition-all duration-300 cursor-pointer group">
-        <div class="relative mb-4 group">
+      } @else {
+      <div [class]="getSlotWrapperClasses(i) + ' opacity-60 cursor-default'">
+        <div class="relative mb-4">
+          @if (getSlotTheme(i) === 'slate') {
           <div
-            class="absolute -inset-2 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full blur opacity-40 group-hover:opacity-70 transition"></div>
-          @if (store.ambassadors()[2].profile) {
-          <img
-            [src]="store.ambassadors()[2] | apiIMG: 'user'"
-            [alt]="store.ambassadors()[2].name"
-            class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full object-cover border-4 border-orange-400 shadow-xl" />
+            class="absolute -inset-2 bg-gradient-to-r from-slate-400 to-slate-500 rounded-full blur opacity-40 transition"></div>
+          } @else if (getSlotTheme(i) === 'yellow') {
+          <div
+            class="absolute -inset-3 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-full blur opacity-50 transition"></div>
           } @else {
           <div
-            class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full bg-gradient-to-br from-orange-300 to-orange-500 flex items-center justify-center text-white font-bold text-2xl border-4 border-orange-400 shadow-xl">
-            {{ getInitials(store.ambassadors()[2].name) }}
-          </div>
+            class="absolute -inset-2 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full blur opacity-40 transition"></div>
           }
           <div
-            class="absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
-            <i-lucide [name]="icons.medal" class="w-5 h-5 text-gray-900" [strokeWidth]="2.5" />
+            [class]="
+              isFirstSlot(i)
+                ? 'relative w-28 h-28 sm:w-32 sm:h-32 md:w-32 md:h-32 lg:w-36 lg:h-36 xl:w-40 xl:h-40 rounded-full bg-gradient-to-br from-gray-200 to-gray-400 flex items-center justify-center text-gray-500 font-bold text-3xl border-4 border-gray-300 shadow-2xl'
+                : getSlotTheme(i) === 'orange'
+                  ? 'relative w-24 h-24 sm:w-28 sm:h-28 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full bg-gradient-to-br from-gray-200 to-gray-400 flex items-center justify-center text-gray-500 font-bold text-2xl border-4 border-gray-300 shadow-xl'
+                  : 'relative w-24 h-24 sm:w-28 sm:h-28 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full bg-gradient-to-br from-gray-200 to-gray-400 flex items-center justify-center text-gray-500 font-bold text-2xl border-4 border-gray-300 shadow-xl'
+            ">
+            ?
           </div>
-        </div>
-        <div
-          class="bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg p-4 sm:p-5 lg:p-6 w-full text-center shadow-lg border border-orange-300">
-          <h4 class="font-bold text-gray-900 text-sm sm:text-base lg:text-lg truncate mb-1">
-            {{ store.ambassadors()[2].name }}
-          </h4>
-          <p class="text-xs sm:text-sm text-gray-600 mb-2 truncate">{{ store.ambassadors()[2].city }}</p>
+          @if (isFirstSlot(i)) {
           <div
-            class="inline-flex items-center px-3 sm:px-4 py-1 sm:py-1.5 bg-orange-500 text-white rounded-full text-xs sm:text-sm font-semibold">
-            {{ store.ambassadors()[2].referralsCount }} {{ 'ambassadors.referrals' | translate }}
+            class="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-gray-300 to-gray-400 rounded-full flex items-center justify-center shadow-xl border-3 border-white"></div>
+          <div
+            class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-gray-300 to-gray-400 rounded-full flex items-center justify-center shadow-xl border-3 border-white"></div>
+          } @else {
+          <div
+            class="absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-br from-gray-300 to-gray-400 rounded-full flex items-center justify-center shadow-lg border-2 border-white"></div>
+          }
+        </div>
+        @if (isFirstSlot(i)) {
+        <div
+          class="bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg p-5 sm:p-6 lg:p-7 w-full text-center shadow-2xl border-2 border-gray-300">
+          <div
+            class="inline-flex items-center gap-1.5 px-4 py-1.5 sm:px-5 sm:py-2 bg-gray-300 text-gray-500 rounded-full text-xs sm:text-sm font-bold mb-3 shadow-md">
+            —
+          </div>
+          <h4 class="font-black text-gray-400 text-base sm:text-lg lg:text-xl truncate mb-1">—</h4>
+          <p class="text-xs sm:text-sm text-gray-400 mb-3 truncate">—</p>
+          <div
+            class="inline-flex items-center px-4 sm:px-5 py-2 sm:py-2.5 bg-gray-300 text-gray-500 rounded-full text-sm sm:text-base font-bold shadow-md">
+            —
           </div>
         </div>
-      </a>
+        } @else {
+        <div
+          [class]="
+            getSlotTheme(i) === 'orange'
+              ? 'bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 sm:p-5 lg:p-6 w-full text-center shadow-lg border border-orange-200'
+              : 'bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg p-4 sm:p-5 lg:p-6 w-full text-center shadow-lg border border-slate-200'
+          ">
+          <h4 class="font-bold text-gray-400 text-sm sm:text-base lg:text-lg truncate mb-1">—</h4>
+          <p class="text-xs sm:text-sm text-gray-400 mb-2 truncate">—</p>
+          <div
+            class="inline-flex items-center px-3 sm:px-4 py-1 sm:py-1.5 bg-gray-300 text-gray-400 rounded-full text-xs sm:text-sm font-semibold">
+            —
+          </div>
+        </div>
+        }
+      </div>
+      }
       }
     </div>
 
@@ -159,7 +178,7 @@
         </button>
       </a>
     </div>
-    } @if (!store.isLoading() && store.ambassadors().length === 0) {
+    } @else {
     <div class="text-center py-20">
       <div
         class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full mb-6 shadow-inner">
