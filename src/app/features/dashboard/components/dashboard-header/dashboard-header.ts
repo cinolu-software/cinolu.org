@@ -7,7 +7,6 @@ import { IRole } from '@shared/models';
 
 @Component({
   selector: 'app-dashboard-header',
-
   imports: [NgClass, NgOptimizedImage, ApiImgPipe, CommonModule, RouterLink],
   templateUrl: './dashboard-header.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -68,7 +67,7 @@ export class DashboardHeader implements OnDestroy {
     const name = this.user()?.name || 'U';
     return name
       .split(' ')
-      .map((n) => n[0])
+      .map((n: string) => n[0])
       .join('')
       .toUpperCase()
       .slice(0, 2);
