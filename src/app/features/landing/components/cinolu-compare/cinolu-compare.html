@@ -1,0 +1,126 @@
+<section
+  id="cinolu-compare"
+  class="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 py-20 lg:py-28 px-6 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 relative overflow-hidden"
+  aria-labelledby="cinolu-compare-title">
+  <!-- Decorative -->
+  <div class="absolute inset-0">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-primary-500/30 rounded-full blur-3xl animate-pulse"></div>
+    <svg class="absolute inset-0 w-full h-full opacity-5" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <defs>
+        <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" stroke-width="0.2" class="text-white" />
+        </pattern>
+      </defs>
+      <rect width="100" height="100" fill="url(#grid)" />
+    </svg>
+  </div>
+  <div
+    class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(255,255,255,0.08),transparent)] pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <header class="text-center mb-14 lg:mb-20 fade-left-init" appAnimationsOnScroll>
+      <h2
+        id="cinolu-compare-title"
+        class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white font-satoshi tracking-tight leading-[1.1] mb-4">
+        La grande question
+      </h2>
+      <p id="cinolu-compare-subtitle" class="text-white text-lg lg:text-xl max-w-xl mx-auto">
+        Pourquoi rejoindre Cinolu selon votre profil ?
+      </p>
+    </header>
+
+    <div class="space-y-8 lg:space-y-10">
+      <!-- Card 1 : image à GAUCHE, contenu à droite -->
+      <article
+        class="group flex flex-col lg:flex-row rounded-lg bg-white shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/10 fade-left-init"
+        appAnimationsOnScroll
+        aria-labelledby="compare-entrepreneur-title">
+        <div class="relative lg:w-2/5 min-h-[220px] lg:min-h-0 aspect-[4/3] lg:aspect-auto overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+            alt="Entrepreneur, startup founder"
+            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-primary-900/40 lg:from-transparent to-transparent lg:to-primary-900/30"></div>
+          <div class="absolute bottom-4 left-4 right-4 lg:bottom-6 lg:left-6 flex items-center gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/95 text-primary-600 shadow-lg">
+              <i-lucide [name]="icons.briefcase" class="w-5 h-5" aria-hidden="true" />
+            </span>
+            <h3 id="compare-entrepreneur-title" class="text-lg font-black text-white font-satoshi drop-shadow-sm">
+              Entrepreneur
+            </h3>
+          </div>
+        </div>
+        <div class="flex flex-1 flex-col justify-center p-6 lg:p-8 xl:p-10">
+          <p class="text-slate-600 font-semibold mb-4 text-base leading-snug border-l-4 border-primary-500 pl-4">
+            « Est-ce que Cinolu peut vraiment accélérer mon projet ? »
+          </p>
+          <ul class="space-y-2.5 mb-6" role="list">
+            @for (item of entrepreneurBenefits; track item) {
+            <li class="flex items-center gap-3 text-slate-600 text-sm font-medium">
+              <i-lucide [name]="icons.check" class="w-4 h-4 text-primary-500 flex-shrink-0" />
+              <span>{{ item }}</span>
+            </li>
+            }
+          </ul>
+          <a
+            routerLink="/entrepreneurs"
+            class="inline-flex items-center justify-center gap-2 w-fit px-6 py-3.5 bg-primary-500 hover:bg-primary-600 text-white font-bold rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 group/btn"
+            aria-label="Je suis entrepreneur, aller vers la page entrepreneurs">
+            Je suis entrepreneur
+            <i-lucide
+              [name]="icons.arrowRight"
+              class="w-5 h-5 transition-transform group-hover/btn:translate-x-0.5"
+              aria-hidden="true" />
+          </a>
+        </div>
+      </article>
+
+      <!-- Card 2 : image à DROITE, contenu à gauche -->
+      <article
+        class="group flex flex-col lg:flex-row-reverse rounded-lg bg-white shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-slate-500/10 fade-right-init"
+        appAnimationsOnScroll
+        aria-labelledby="compare-investisseur-title">
+        <div class="relative lg:w-2/5 min-h-[220px] lg:min-h-0 aspect-[4/3] lg:aspect-auto overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
+            alt="Réunion d'affaires, investisseurs"
+            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+          <div
+            class="absolute inset-0 bg-gradient-to-l from-slate-900/40 lg:from-transparent to-transparent lg:to-slate-900/30"></div>
+          <div class="absolute bottom-4 left-4 right-4 lg:bottom-6 lg:left-6 flex items-center gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/95 text-slate-700 shadow-lg">
+              <i-lucide [name]="icons.trendingUp" class="w-5 h-5" aria-hidden="true" />
+            </span>
+            <h3 id="compare-investisseur-title" class="text-lg font-black text-white font-satoshi drop-shadow-sm">
+              Investisseur / partenaire
+            </h3>
+          </div>
+        </div>
+        <div class="flex flex-1 flex-col justify-center p-6 lg:p-8 xl:p-10">
+          <p class="text-slate-600 font-semibold mb-4 text-base leading-snug border-l-4 border-slate-800 pl-4">
+            « Pourquoi investir dans la communauté Cinolu ? »
+          </p>
+          <ul class="space-y-2.5 mb-6" role="list">
+            @for (item of investorBenefits; track item) {
+            <li class="flex items-center gap-3 text-slate-600 text-sm font-medium">
+              <i-lucide [name]="icons.check" class="w-4 h-4 text-slate-700 flex-shrink-0" />
+              <span>{{ item }}</span>
+            </li>
+            }
+          </ul>
+          <a
+            routerLink="/partners"
+            class="inline-flex items-center justify-center gap-2 w-fit px-6 py-3.5 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 group/btn"
+            aria-label="Je suis investisseur, aller vers la page partenaires">
+            Je suis investisseur
+            <i-lucide
+              [name]="icons.arrowRight"
+              class="w-5 h-5 transition-transform group-hover/btn:translate-x-0.5"
+              aria-hidden="true" />
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
