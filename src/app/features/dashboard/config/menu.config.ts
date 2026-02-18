@@ -39,39 +39,11 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
     title: 'Entreprises',
     items: [
       {
-        id: 'ventures',
-        label: 'Mes Entreprises',
+        id: 'entreprises',
+        label: 'Entreprises',
         icon: 'business_center',
-        children: [
-          {
-            id: 'ventures-list',
-            label: 'Mes entreprises',
-            icon: 'list',
-            path: '/dashboard/ventures',
-            tooltip: 'Gérer mes entreprises'
-          },
-          {
-            id: 'ventures-create',
-            label: 'Créer une entreprise',
-            icon: 'add_business',
-            path: '/dashboard/ventures/create',
-            tooltip: 'Ajouter une nouvelle entreprise'
-          },
-          {
-            id: 'products-list',
-            label: 'Mes produits',
-            icon: 'inventory_2',
-            path: '/dashboard/products',
-            tooltip: 'Voir et gérer mes produits'
-          },
-          {
-            id: 'products-create',
-            label: 'Créer un produit',
-            icon: 'add_shopping_cart',
-            path: '/dashboard/products/create',
-            tooltip: 'Ajouter un nouveau produit'
-          }
-        ]
+        path: '/dashboard/entreprises',
+        tooltip: 'Accéder au panel Entreprises et Produits'
       }
     ]
   },
@@ -244,8 +216,15 @@ export function findMenuItemById(menu: MenuSection[], id: string): MenuItem | nu
 }
 
 export function isMenuActive(item: MenuItem, currentPath: string): boolean {
-  if (item.path && currentPath === item.path) {
-    return true;
+  if (item.path && currentPath === item.path) return true;
+
+  // Menu "Entreprises" : actif sur le hub et sur toutes les routes ventures/products
+  if (item.id === 'entreprises') {
+    return (
+      currentPath === '/dashboard/entreprises' ||
+      currentPath.startsWith('/dashboard/ventures') ||
+      currentPath.startsWith('/dashboard/products')
+    );
   }
 
   if (item.children) {
