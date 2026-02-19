@@ -17,10 +17,7 @@
           <p class="font-bold text-primary-700 leading-none">{{ totalInvitations() }}</p>
         </div>
 
-        <a
-          routerLink="/dashboard/referral/badges"
-          class="dashboard-btn-secondary inline-flex"
-          aria-label="Consulter mes badges de parrainage">
+        <a routerLink="/dashboard/referral/badges" class="dashboard-btn-secondary inline-flex">
           <span class="material-icons text-lg">military_tech</span>
           <span>Voir mes badges</span>
         </a>
@@ -51,10 +48,7 @@
       <p class="dashboard-text-body text-slate-600 mb-6">
         Commence à partager ton lien de parrainage pour voir tes premières inscriptions
       </p>
-      <a
-        routerLink="/dashboard/referral/link"
-        class="dashboard-btn-primary inline-flex"
-        aria-label="Partager mon lien de parrainage">
+      <a routerLink="/dashboard/referral/link" class="dashboard-btn-primary inline-flex">
         <span class="material-icons text-lg">share</span>
         <span>Partager mon lien</span>
       </a>
@@ -99,7 +93,6 @@
       <button
         (click)="previousPage()"
         [disabled]="currentPage() === 1"
-        aria-label="Page précédente"
         class="px-4 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
         <span class="material-icons text-xl">chevron_left</span>
       </button>
@@ -121,7 +114,6 @@
       <button
         (click)="nextPage()"
         [disabled]="currentPage() === totalPages()"
-        aria-label="Page suivante"
         class="px-4 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
         <span class="material-icons text-xl">chevron_right</span>
       </button>
