@@ -8,9 +8,7 @@ import { getAmbassadorLevel, getInitials } from '../../../../shared/helpers/amba
 import { IUser } from '../../../../shared/models';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 
-export type AmbassadorDisplay =
-  | { type: 'real'; data: IUser; id: string }
-  | { type: 'placeholder'; id: string };
+export type AmbassadorDisplay = { type: 'real'; data: IUser; id: string } | { type: 'placeholder'; id: string };
 
 const DISPLAY_ORDER_INDICES = [3, 1, 0, 2, 4] as const;
 
@@ -79,8 +77,7 @@ export class TopAmbassadors {
     if (index === 0) return `${base} ${sideTranslate} ${hover}`;
     if (index === 1) return `${base} ${sideTranslate} ${hover}`;
     if (index === 2) return `${firstBase} ${hover}`;
-    if (index === 3)
-      return `${base} md:max-w-[260px] lg:max-w-[300px] xl:max-w-[320px] ${sideTranslate} ${hover}`;
+    if (index === 3) return `${base} md:max-w-[260px] lg:max-w-[300px] xl:max-w-[320px] ${sideTranslate} ${hover}`;
     if (index === 4) return `${base} ${sideTranslate} ${hover}`;
     return base;
   }
@@ -97,44 +94,32 @@ export class TopAmbassadors {
 
   getAvatarImgClasses(index: number): string {
     const sizeFirst =
-      'relative w-28 h-28 sm:w-32 sm:h-32 md:w-32 md:h-32 lg:w-36 lg:h-36 xl:w-40 xl:h-40 rounded-full object-cover border-4 shadow-2xl';
+      'relative w-28 h-28 sm:w-32 sm:h-32 md:w-32 md:h-32 lg:w-36 lg:h-36 xl:w-40 xl:h-40 rounded-full object-cover';
     const sizeSide =
-      'relative w-24 h-24 sm:w-28 sm:h-28 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full object-cover border-4 shadow-xl';
-    const theme = this.getSlotTheme(index);
-    const border =
-      theme === 'yellow'
-        ? 'border-yellow-400'
-        : theme === 'orange'
-          ? 'border-orange-400'
-          : 'border-slate-400';
-    return this.isFirstSlot(index) ? `${sizeFirst} ${border}` : `${sizeSide} ${border}`;
+      'relative w-24 h-24 sm:w-28 sm:h-28 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full object-cover';
+    return this.isFirstSlot(index) ? sizeFirst : sizeSide;
   }
 
   getAvatarInitialsClasses(index: number): string {
     const theme = this.getSlotTheme(index);
     const sizeFirst =
-      'relative w-28 h-28 sm:w-32 sm:h-32 md:w-32 md:h-32 lg:w-36 lg:h-36 xl:w-40 xl:h-40 rounded-full flex items-center justify-center text-white font-bold text-3xl border-4 shadow-2xl';
+      'relative w-28 h-28 sm:w-32 sm:h-32 md:w-32 md:h-32 lg:w-36 lg:h-36 xl:w-40 xl:h-40 rounded-full flex items-center justify-center text-white font-bold text-3xl';
     const sizeSide =
-      'relative w-24 h-24 sm:w-28 sm:h-28 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full flex items-center justify-center text-white font-bold text-2xl border-4 shadow-xl';
-    const gradient =
-      theme === 'yellow'
-        ? 'bg-gradient-to-br from-yellow-300 to-yellow-600 border-yellow-400'
-        : theme === 'orange'
-          ? 'bg-gradient-to-br from-orange-300 to-orange-500 border-orange-400'
-          : 'bg-gradient-to-br from-slate-300 to-slate-500 border-slate-400';
-    return this.isFirstSlot(index) ? `${sizeFirst} ${gradient}` : `${sizeSide} ${gradient}`;
+      'relative w-24 h-24 sm:w-28 sm:h-28 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full flex items-center justify-center text-white font-bold text-2xl';
+    const bgColor = theme === 'yellow' ? 'bg-yellow-400' : theme === 'orange' ? 'bg-orange-400' : 'bg-slate-400';
+    return this.isFirstSlot(index) ? `${sizeFirst} ${bgColor}` : `${sizeSide} ${bgColor}`;
   }
 
   getMedalClasses(index: number): string {
     return this.getSlotTheme(index) === 'orange'
-      ? 'absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg border-2 border-white'
-      : 'absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-br from-slate-400 to-slate-500 rounded-full flex items-center justify-center shadow-lg border-2 border-white';
+      ? 'absolute -bottom-2 -right-2 w-10 h-10 bg-orange-400 rounded-full flex items-center justify-center shadow-md border-2 border-white'
+      : 'absolute -bottom-2 -right-2 w-10 h-10 bg-slate-400 rounded-full flex items-center justify-center shadow-md border-2 border-white';
   }
 
   getCardClasses(index: number): string {
     return this.getSlotTheme(index) === 'orange'
-      ? 'bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg p-4 sm:p-5 lg:p-6 w-full text-center shadow-lg border border-orange-300'
-      : 'bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg p-4 sm:p-5 lg:p-6 w-full text-center shadow-lg border border-slate-300';
+      ? 'bg-white rounded-xl p-4 sm:p-5 lg:p-6 w-full text-center shadow-lg border border-gray-200'
+      : 'bg-white rounded-xl p-4 sm:p-5 lg:p-6 w-full text-center shadow-lg border border-gray-200';
   }
 
   getBadgeClasses(index: number): string {
