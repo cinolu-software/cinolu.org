@@ -28,34 +28,27 @@ import { LanguageService } from '@core/services/language/language.service';
   }
 })
 export class DesktopNav {
-  // Services
   private languageService = inject(LanguageService);
 
-  // Inputs
-  readonly links = input.required<ILink[]>();
-  readonly programs = input.required<IProgram[]>();
-  readonly onestopUrl = input.required<string>();
-  readonly authStore = input.required<InstanceType<typeof AuthStore>>();
+  links = input.required<ILink[]>();
+  programs = input.required<IProgram[]>();
+  onestopUrl = input.required<string>();
+  authStore = input.required<InstanceType<typeof AuthStore>>();
 
-  // Configuration
-  readonly icons = TOPBAR_ICONS;
+  icons = TOPBAR_ICONS;
 
-  // Computed
-  readonly user = computed(() => this.authStore().user());
+  user = computed(() => this.authStore().user());
 
-  // State for touch interactions
-  readonly openDropdown = signal<string | null>(null);
+  openDropdown = signal<string | null>(null);
 
-  // Helper computed pour traduire les champs selon la langue active
   translateField = computed(() => {
     const currentLang = this.languageService.currentLanguage();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (value: string | null | undefined, fieldName: string, obj: any): string => {
+    return (value: string | null | undefined, fieldName: string, obj: unknown): string => {
       if (!value) return '';
       if (currentLang === 'fr') return value;
-      if (obj && fieldName) {
+      if (obj && fieldName && typeof obj === 'object' && obj !== null) {
         const translatedField = `${fieldName}_${currentLang}`;
-        const translatedValue = obj[translatedField];
+        const translatedValue = (obj as Record<string, unknown>)[translatedField];
         return (translatedValue as string) || value;
       }
       return value;
@@ -78,7 +71,6 @@ export class DesktopNav {
   }
 
   onDocumentClick(event: Event): void {
-    // Fermer tous les dropdowns quand on clique ailleurs
     const target = event.target as HTMLElement;
     if (!target.closest('.group')) {
       this.openDropdown.set(null);
@@ -89,7 +81,7 @@ export class DesktopNav {
     this.authStore().signOut();
   }
 
-    getUserInitials(): string {
+  getUserInitials(): string {
     const name = this.user()?.name || 'U';
     return name
       .split(' ')
