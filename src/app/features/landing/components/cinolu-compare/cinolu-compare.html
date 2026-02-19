@@ -1,17 +1,19 @@
 <section
   id="cinolu-compare"
-  class="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 py-20 lg:py-28 px-6 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 relative overflow-hidden"
+  class="bg-gradient-to-br from-slate-900 via-primary-900/95 to-slate-900 py-20 lg:py-28 px-6 sm:px-8 lg:px-16 xl:px-24 2xl:px-32 relative overflow-hidden"
   aria-labelledby="cinolu-compare-title">
   <!-- Decorative -->
-  <div class="absolute inset-0">
-    <div class="absolute top-0 right-0 w-96 h-96 bg-primary-500/30 rounded-full blur-3xl animate-pulse"></div>
-    <svg class="absolute inset-0 w-full h-full opacity-5" viewBox="0 0 100 100" preserveAspectRatio="none">
+  <div class="absolute inset-0 pointer-events-none">
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary-500/20 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-primary-600/10 rounded-full blur-3xl"></div>
+    <svg class="absolute inset-0 w-full h-full opacity-[0.03]" viewBox="0 0 100 100" preserveAspectRatio="none">
       <defs>
-        <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" stroke-width="0.2" class="text-white" />
+        <pattern id="ambassadors-grid" width="8" height="8" patternUnits="userSpaceOnUse">
+          <path d="M 8 0 L 0 0 0 8" fill="none" stroke="currentColor" stroke-width="0.25" class="text-white" />
         </pattern>
       </defs>
-      <rect width="100" height="100" fill="url(#grid)" />
+      <rect width="100" height="100" fill="url(#ambassadors-grid)" />
     </svg>
   </div>
   <div
@@ -30,7 +32,6 @@
     </header>
 
     <div class="space-y-8 lg:space-y-10">
-      <!-- Card 1 : image à GAUCHE, contenu à droite -->
       <article
         class="group flex flex-col lg:flex-row rounded-lg bg-white shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/10 fade-left-init"
         appAnimationsOnScroll
@@ -76,7 +77,6 @@
         </div>
       </article>
 
-      <!-- Card 2 : image à DROITE, contenu à gauche -->
       <article
         class="group flex flex-col lg:flex-row-reverse rounded-lg bg-white shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-slate-500/10 fade-right-init"
         appAnimationsOnScroll
