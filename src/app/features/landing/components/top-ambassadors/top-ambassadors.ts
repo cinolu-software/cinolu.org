@@ -12,7 +12,7 @@ export type AmbassadorDisplay =
   | { type: 'real'; data: IUser; id: string }
   | { type: 'placeholder'; id: string };
 
-const DISPLAY_ORDER_INDICES = [1, 3, 0, 2, 4] as const;
+const DISPLAY_ORDER_INDICES = [3, 1, 0, 2, 4] as const;
 
 @Component({
   selector: 'app-top-ambassadors',
