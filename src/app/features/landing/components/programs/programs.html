@@ -1,19 +1,21 @@
 <section class="min-h-fit bg-gray-50 backdrop-blur-[1px] bg-grid items-center content-center" appAnimationsOnScroll>
   <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 md:py-28">
-    <div class="mb-15 lg:mb-28 text-center">
-      <div
-        class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
-        <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
-        {{ 'programs.badge' | translate }}
+    <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 lg:mb-28">
+      <div class="max-w-2xl">
+        <div
+          class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
+          <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
+          {{ 'programs.badge' | translate }}
+        </div>
+        <h3
+          class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-4 tracking-tight leading-tight hyphens-none">
+          {{ 'programs.title' | translate }}
+        </h3>
       </div>
-      <h3
-        class="text-3xl text-center sm:text-4xl lg:text-5xl font-black font-satoshi mb-3 tracking-tight leading-tight">
-        {{ 'programs.title' | translate }}
-      </h3>
-      <p class="max-w-3xl text-center text-base text-gray-600 m-auto hyphens-none">
+      <p class="text-slate-500 text-lg max-w-sm border-l-2 border-primary-500 pl-6 italic">
         {{ 'programs.description' | translate }}
       </p>
-    </div>
+    </header>
     <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-16 md:gap-8 lg:gap-4 mt-16">
       @for (p of store.programs(); track p.id) {
       <div

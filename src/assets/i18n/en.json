@@ -342,7 +342,9 @@
   },
   "services": {
     "badge": "Open Innovation",
-    "title": "Our Open Innovation approach",
+    "title": "Our approach to ",
+    "titleHighlight": "Open Innovation",
+    "description": "We are committed to turning local challenges into market opportunities by working with startups, entrepreneurs and local partners.",
     "items": {
       "innovative_solutions": {
         "title": "Innovative Solutions",

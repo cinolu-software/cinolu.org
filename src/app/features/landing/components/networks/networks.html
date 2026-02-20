@@ -7,22 +7,23 @@
   </div>
 
   <div class="relative px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto pt-20 pb-15">
-    <div class="mb-16 text-center px-4">
-      <div
-        class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
-        <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
-        Réseaux Partenaires
+    <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
+      <div class="max-w-2xl">
+        <div
+          class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
+          <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
+          Réseaux Partenaires
+        </div>
+        <h3
+          class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-4 tracking-tight leading-tight hyphens-none">
+          {{ 'networks.title' | translate }}
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">{{ 'networks.title_highlight' | translate }}</span>
+        </h3>
       </div>
-
-      <h3
-        class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-satoshi mb-4 tracking-tight leading-tight">
-        {{ 'networks.title' | translate }}
-        <span class="bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">
-          {{ 'networks.title_highlight' | translate }}
-        </span>
-      </h3>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">{{ 'networks.description' | translate }}</p>
-    </div>
+      <p class="text-slate-500 text-lg max-w-sm border-l-2 border-primary-500 pl-6 italic">
+        {{ 'networks.description' | translate }}
+      </p>
+    </header>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-6 mb-16 max-w-7xl mx-auto">
       @for (network of networks; track network.name) {
