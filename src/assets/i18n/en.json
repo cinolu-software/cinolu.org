@@ -903,8 +903,10 @@
   "ambassadors": {
     "badge": "Ambassadors",
     "landing": {
-      "title": "Top 3 Ambassadors",
-      "subtitle": "The 3 most active entrepreneurs driving our community by sponsoring new talents."
+      "title": "Top 5 Ambassadors",
+      "subtitle": "The {{count}} most active entrepreneurs driving our community by sponsoring new talents.",
+      "eliteTitle": "Ambassadors",
+      "availableSlot": "Available slot"
     },
     "page": {
       "title": "All Ambassadors",

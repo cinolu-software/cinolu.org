@@ -906,8 +906,10 @@
   "ambassadors": {
     "badge": "Ambassadeurs",
     "landing": {
-      "title": "Le Top 3 des Ambassadeurs",
-      "subtitle": "Les 3 entrepreneurs les plus actifs qui propulsent notre communauté en parrainant de nouveaux talents."
+      "title": "Le Top 5 des Ambassadeurs",
+      "subtitle": "Les {{count}} entrepreneurs les plus actifs qui propulsent notre communauté en parrainant de nouveaux talents.",
+      "eliteTitle": "Ambassadeurs",
+      "availableSlot": "Slot disponible"
     },
     "page": {
       "title": "Tous les Ambassadeurs",
