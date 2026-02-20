@@ -1,168 +1,107 @@
 @if (store.ambassadors().length > 0) {
-<section
-  aria-labelledby="top-ambassadors-heading"
-  class="relative overflow-hidden py-20 lg:py-28 bg-gradient-to-b from-slate-50/80 via-white to-slate-50/60">
-  <!-- Fond décoratif discret -->
-  <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute top-20 left-1/4 w-72 h-72 rounded-full bg-primary-200/20 blur-3xl"></div>
-    <div class="absolute bottom-32 right-1/4 w-96 h-96 rounded-full bg-amber-100/30 blur-3xl"></div>
+<section class="relative py-24 overflow-hidden bg-white">
+  <div class="absolute inset-0 opacity-40 pointer-events-none">
+    <div class="absolute -top-24 -left-24 w-[500px] h-[500px] border border-primary-100 rounded-full"></div>
+    <div class="absolute -top-12 -left-12 w-[500px] h-[500px] border border-primary-50 rounded-full"></div>
   </div>
 
-  <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
-    <header class="text-center mb-16 lg:mb-24">
-      <p
-        class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/90 text-primary-700 text-sm font-semibold shadow-sm shadow-slate-200/50 border border-primary-100 mb-8">
-        <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse ring-2 ring-primary-200"></span>
-        {{ 'ambassadors.badge' | translate }}
-      </p>
-      <h2
-        id="top-ambassadors-heading"
-        class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 font-satoshi tracking-tight leading-[1.08] mb-5">
-        {{ 'ambassadors.landing.title' | translate }}
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-600">Cinolu</span>
-      </h2>
-      <p class="text-slate-600 text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed">
-        {{ 'ambassadors.landing.subtitle' | translate }}
+  <div class="relative z-10 max-w-7xl mx-auto max-sm:px-6">
+    <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-20">
+      <div class="max-w-2xl">
+        <div
+          class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
+          <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
+          {{ 'ambassadors.badge' | translate }}
+        </div>
+
+        <h3
+          class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-4 tracking-tight leading-tight hyphens-none">
+          {{ 'ambassadors.landing.eliteTitle' | translate }}
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">Cinolu</span>
+        </h3>
+      </div>
+      <p class="text-slate-500 text-lg max-w-sm border-l-2 border-primary-500 pl-6 italic">
+        {{ 'ambassadors.landing.subtitle' | translate: { count: realAmbassadorsCount() } }}
       </p>
     </header>
 
     @if (store.isLoading()) {
-    <div class="flex flex-col items-center justify-center py-28 gap-6" role="status" aria-live="polite">
-      <div
-        class="w-16 h-16 rounded-2xl bg-white shadow-lg shadow-slate-200/50 border border-slate-200/80 flex items-center justify-center">
-        <i-lucide [name]="icons.sparkles" class="w-8 h-8 text-primary-500 animate-spin" [strokeWidth]="2" />
+    <div class="h-96 flex items-center justify-center">
+      <div class="animate-ping size-12 rounded-full bg-primary-100 flex items-center justify-center">
+        <span class="size-6 rounded-full bg-primary-500"></span>
       </div>
-      <p class="text-slate-500 font-medium">{{ 'common.loading' | translate }}</p>
     </div>
-    } @else if (store.ambassadors().length > 0) {
-    <div class="flex flex-col md:flex-row items-center md:items-end justify-center gap-6 lg:gap-8 xl:gap-10 mb-20 px-2">
+    } @else {
+    <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 auto-rows-[240px]">
       @for (item of topFiveAmbassadors(); track trackByDisplayId($index, item); let i = $index) { @if (item.type ===
       'real') {
       <a
         [routerLink]="['/ambassadors', item.data.email]"
-        [class]="getSlotWrapperClasses(i) + ' cursor-pointer'"
-        class="block no-underline text-inherit rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 transition-transform duration-300 group-hover:-translate-y-1"
-        [attr.aria-label]="item.data.name + ' — ' + (item.data.referralsCount ?? 0) + ' parrainages'">
-        <article class="flex flex-col items-center w-full">
-          <div class="relative mb-6">
-            <div
-              class="relative rounded-full overflow-hidden ring-4 ring-white shadow-xl shadow-slate-300/40 transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-slate-400/30">
-              @if (item.data.profile) {
-              <img
-                [src]="item.data | apiIMG: 'user'"
-                [alt]="item.data.name"
-                [class]="getAvatarImgClasses(i)"
-                loading="lazy"
-                class="transition-transform duration-500 group-hover:scale-105" />
-              } @else {
-              <div
-                [class]="getAvatarInitialsClasses(i)"
-                class="transition-transform duration-500 group-hover:scale-105">
-                {{ getInitials(item.data.name) }}
-              </div>
-              }
-            </div>
-            @if (isFirstSlot(i)) {
-            <div
-              class="absolute -top-1 -right-1 w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center shadow-lg border-2 border-white">
-              <i-lucide [name]="icons.crown" class="w-5 h-5 text-slate-900" [strokeWidth]="2.5" />
-            </div>
-            <div
-              class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg border-2 border-white">
-              <i-lucide [name]="icons.trophy" class="w-5 h-5 text-slate-900" [strokeWidth]="2.5" />
-            </div>
-            } @else {
-            <div [class]="getMedalClasses(i)">
-              <i-lucide [name]="icons.medal" class="w-5 h-5 text-slate-900" [strokeWidth]="2.5" />
-            </div>
-            }
-          </div>
-          @if (isFirstSlot(i)) {
-          <div
-            class="relative w-full rounded-2xl bg-white p-6 sm:p-7 text-center overflow-hidden transition-all duration-300 group-hover:-translate-y-0.5 shadow-xl shadow-slate-200/50 border border-slate-200/80 group-hover:shadow-2xl group-hover:shadow-amber-200/30 group-hover:border-amber-200/80">
-            <div
-              class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500"></div>
-            <span
-              class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-50 text-amber-800 text-xs font-bold border border-amber-200/90 mb-4 shadow-sm">
-              <i-lucide [name]="icons.sparkles" class="w-3.5 h-3.5" [strokeWidth]="2.5" />
-              #1 Ambassadeur
-            </span>
-            <h3 class="font-bold text-slate-900 text-lg sm:text-xl truncate mb-1">{{ item.data.name }}</h3>
-            <p class="text-slate-500 text-sm truncate mb-5">{{ item.data.city }}</p>
-            <p
-              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 text-white text-sm font-semibold shadow-md">
-              <span>{{ item.data.referralsCount }}</span>
-              <span class="text-white/90">{{ 'ambassadors.referrals' | translate }}</span>
-            </p>
-          </div>
+        [class]="getMosaicClasses(i)"
+        class="group relative overflow-hidden rounded-lg border border-slate-100 bg-slate-50 shadow-sm transition-all duration-500 hover:shadow-2xl hover:border-primary-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2">
+        <div class="absolute inset-0">
+          @if (item.data.profile) {
+          <img
+            [src]="item.data | apiIMG: 'user'"
+            [alt]="item.data.name"
+            class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
           } @else {
           <div
-            class="w-full rounded-2xl bg-white p-5 sm:p-6 text-center transition-all duration-300 group-hover:-translate-y-0.5 shadow-lg shadow-slate-200/40 border border-slate-200/80 group-hover:shadow-xl group-hover:border-slate-300/80">
-            <h3 class="font-semibold text-slate-900 text-base truncate mb-1">{{ item.data.name }}</h3>
-            <p class="text-slate-500 text-sm truncate mb-4">{{ item.data.city }}</p>
-            <p [class]="getBadgeClasses(i)" class="rounded-xl text-xs sm:text-sm font-medium">
-              {{ item.data.referralsCount }} {{ 'ambassadors.referrals' | translate }}
-            </p>
+            class="w-full h-full bg-slate-100 flex items-center justify-center text-primary-300 text-5xl font-black uppercase">
+            {{ getInitials(item.data.name) }}
           </div>
           }
-        </article>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent opacity-80"></div>
+        </div>
+        <div class="absolute inset-0 p-6 flex flex-col justify-end">
+          <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+            <span class="text-primary-400 font-bold md:text-lg lg:text-5xl text-sm mb-2 block"
+              >#{{ getRealRank(i) }}</span
+            >
+            <h3 class="text-white font-bold text-xl lg:text-2xl leading-tight uppercase font-satoshi">
+              {{ item.data.name }}
+            </h3>
+            <div
+              class="flex items-center justify-between mt-4 opacity-0 group-hover:opacity-100 transition-opacity delay-100">
+              <span class="text-white/80 text-xs uppercase tracking-widest">{{ item.data.city }}</span>
+              <span
+                class="flex items-center gap-2 bg-primary-500 text-white px-3 py-1.5 rounded-full text-xs font-bold truncate">
+                {{ item.data.referralsCount }} {{ 'ambassadors.referrals' | translate }}
+              </span>
+            </div>
+          </div>
+        </div>
+        @if (isTopOne(i)) {
+        <div
+          class="absolute top-4 right-4 size-10 bg-white rounded-lg flex items-center justify-center shadow-xl rotate-12 group-hover:rotate-0 transition-transform">
+          <i-lucide [name]="icons.crown" class="text-primary-600 size-6" />
+        </div>
+        }
       </a>
       } @else {
-      <div [class]="getSlotWrapperClasses(i)" class="opacity-50 cursor-default rounded-lg">
-        <article class="flex flex-col items-center w-full">
-          <div class="relative mb-6">
-            <div
-              class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full bg-slate-200/80 ring-4 ring-white shadow-xl flex items-center justify-center text-slate-400 font-bold text-2xl">
-              ?
-            </div>
-            @if (isFirstSlot(i)) {
-            <div class="absolute -top-2 -right-2 w-12 h-12 rounded-full bg-gray-300 border-2 border-white"></div>
-            <div
-              class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-gray-300 border-2 border-white"></div>
-            } @else {
-            <div class="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-gray-300 border-2 border-white"></div>
-            }
-          </div>
-          @if (isFirstSlot(i)) {
-          <div
-            class="relative w-full rounded-lg bg-white border border-slate-200/80 p-6 sm:p-7 text-center shadow-lg shadow-slate-200/40 overflow-hidden">
-            <div class="absolute top-0 left-0 right-0 h-1.5 bg-slate-200"></div>
-            <span class="inline-block w-20 h-6 rounded-xl bg-slate-100 mb-4"></span>
-            <p class="text-slate-300 text-lg truncate mb-1">—</p>
-            <p class="text-slate-300 text-sm truncate mb-5">—</p>
-            <div class="inline-block w-24 h-9 rounded-xl bg-slate-100"></div>
-          </div>
-          } @else {
-          <div
-            class="w-full rounded-lg bg-white border border-slate-200/80 p-5 sm:p-6 text-center shadow-lg shadow-slate-200/40">
-            <p class="text-slate-300 text-base truncate mb-1">—</p>
-            <p class="text-slate-300 text-sm truncate mb-4">—</p>
-            <div class="inline-block w-20 h-7 rounded-xl bg-slate-100"></div>
-          </div>
-          }
-        </article>
+      <div
+        [class]="getMosaicClasses(i)"
+        class="relative overflow-hidden rounded-lg border border-dashed border-slate-200 bg-slate-50/80 flex flex-col items-center justify-center gap-3 opacity-70">
+        <span
+          class="size-16 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 text-2xl font-bold"
+          >?</span
+        >
+        <span class="text-slate-400 text-sm font-medium">{{ 'ambassadors.landing.availableSlot' | translate }}</span>
       </div>
       } }
-    </div>
 
-    <div class="w-full flex justify-center items-center mt-12">
-      <a routerLink="/ambassadors" class="group relative">
-        <button
-          class="relative flex items-center gap-3 px-8 py-4 bg-white border-2 border-primary-500 text-primary-600 font-semibold rounded-full hover:bg-primary-50 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25">
-          <span>{{ 'ambassadors.viewAll' | translate }}</span>
-          <i-lucide
-            class="size-5 group-hover:translate-x-1 transition-transform duration-300"
-            [name]="icons.MoveRight" />
-        </button>
+      <a
+        routerLink="/ambassadors"
+        class="group md:col-span-2 lg:col-span-2 rounded-lg bg-primary-600 flex flex-col items-center justify-center gap-4 text-center p-8 transition-all hover:bg-primary-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2">
+        <span
+          class="size-16 rounded-full border border-white/20 flex items-center justify-center transition-transform group-hover:scale-110">
+          <i-lucide [name]="icons.MoveRight" class="text-white size-8" />
+        </span>
+        <span class="text-white font-bold text-lg tracking-tight leading-none uppercase">
+          {{ 'ambassadors.viewAll' | translate }}
+        </span>
       </a>
-    </div>
-    } @else {
-    <div class="text-center py-28" role="status">
-      <div
-        class="inline-flex items-center justify-center w-28 h-28 rounded-2xl bg-white shadow-lg shadow-slate-200/40 border border-slate-200/80 mb-8">
-        <i-lucide [name]="icons.users" class="w-14 h-14 text-slate-400" />
-      </div>
-      <p class="text-slate-500 text-lg font-medium">{{ 'ambassadors.noData' | translate }}</p>
     </div>
     }
   </div>
