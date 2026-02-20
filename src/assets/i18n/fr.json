@@ -961,5 +961,40 @@
     "progress": "Progression",
     "viewAll": "Découvrir tous les ambassadeurs",
     "noData": "Aucune donnée disponible"
+  },
+
+  "compare": {
+    "badge": "Deux perspectives",
+    "title": "Choisissez votre",
+    "titleHighlight": "trajectoire",
+    "description": "Un écosystème. Deux visions complémentaires. Un seul objectif : transformer l'innovation africaine.",
+    "entrepreneur": {
+      "badge": "01",
+      "title": "Entrepreneurs",
+      "subtitle": "Propulser l'ambition",
+      "quote": "Cinolu est le catalyseur de ma croissance.",
+      "benefits": {
+        "network": "Accès à un réseau stratégique",
+        "mentorship": "Mentorat personnalisé",
+        "programs": "Programmes d'accélération",
+        "visibility": "Visibilité investisseurs",
+        "funding": "Financements catalytiques"
+      },
+      "cta": "Nos Entrepreneurs"
+    },
+    "investor": {
+      "badge": "02",
+      "title": "Investisseurs",
+      "subtitle": "Sécuriser l'impact",
+      "quote": "Investir dans l'excellence africaine.",
+      "benefits": {
+        "dealflow": "Dealflow qualifié",
+        "startups": "Startups filtrées",
+        "risk": "Risque réduit via incubation",
+        "impact": "Impact mesurable",
+        "coinvestment": "Opportunités co-investissement"
+      },
+      "cta": "Nos Partenaires"
+    }
   }
 }

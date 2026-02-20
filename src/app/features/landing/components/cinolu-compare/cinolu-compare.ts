@@ -1,35 +1,87 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LucideAngularModule, ArrowRight, Briefcase, TrendingUp, CheckCircle } from 'lucide-angular';
+import { LucideAngularModule, ArrowRight, Briefcase, TrendingUp, Check } from 'lucide-angular';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+
+interface CardData {
+  id: string;
+  badgeKey: string;
+  icon: typeof Briefcase;
+  titleKey: string;
+  subtitleKey: string;
+  quoteKey: string;
+  benefitsKeys: readonly string[];
+  ctaKey: string;
+  ctaRoute: string;
+  ctaStyle: 'primary' | 'outlined';
+  imagePath: string;
+}
 
 @Component({
   selector: 'app-cinolu-compare',
-  imports: [RouterLink, LucideAngularModule, FadeInOnScrollDirective],
+  standalone: true,
+  imports: [CommonModule, RouterLink, LucideAngularModule, FadeInOnScrollDirective, TranslateModule],
   templateUrl: './cinolu-compare.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CinoluCompare {
-  icons = {
+  readonly activeSide = signal<string | null>(null);
+
+  readonly icons = {
     arrowRight: ArrowRight,
     briefcase: Briefcase,
     trendingUp: TrendingUp,
-    check: CheckCircle
-  };
+    check: Check
+  } as const;
 
-  entrepreneurBenefits = [
-    'Accès à un réseau stratégique',
-    'Mentorat personnalisé',
-    "Programmes d'accélération",
-    'Visibilité investisseurs',
-    'Financements catalytiques'
-  ];
+  readonly cards: readonly CardData[] = [
+    {
+      id: 'entrepreneur',
+      badgeKey: 'compare.entrepreneur.badge',
+      icon: Briefcase,
+      titleKey: 'compare.entrepreneur.title',
+      subtitleKey: 'compare.entrepreneur.subtitle',
+      quoteKey: 'compare.entrepreneur.quote',
+      benefitsKeys: [
+        'compare.entrepreneur.benefits.network',
+        'compare.entrepreneur.benefits.mentorship',
+        'compare.entrepreneur.benefits.programs',
+        'compare.entrepreneur.benefits.visibility',
+        'compare.entrepreneur.benefits.funding'
+      ],
+      ctaKey: 'compare.entrepreneur.cta',
+      ctaRoute: '/entrepreneurs',
+      ctaStyle: 'primary',
+      imagePath: '/images/gallery/15.jpg'
+    },
+    {
+      id: 'investor',
+      badgeKey: 'compare.investor.badge',
+      icon: TrendingUp,
+      titleKey: 'compare.investor.title',
+      subtitleKey: 'compare.investor.subtitle',
+      quoteKey: 'compare.investor.quote',
+      benefitsKeys: [
+        'compare.investor.benefits.dealflow',
+        'compare.investor.benefits.startups',
+        'compare.investor.benefits.risk',
+        'compare.investor.benefits.impact',
+        'compare.investor.benefits.coinvestment'
+      ],
+      ctaKey: 'compare.investor.cta',
+      ctaRoute: '/partners',
+      ctaStyle: 'outlined',
+      imagePath: '/images/gallery/8.jpg'
+    }
+  ] as const;
 
-  investorBenefits = [
-    'Dealflow qualifié',
-    'Startups filtrées',
-    'Risque réduit via incubation',
-    'Impact mesurable',
-    'Opportunités co-investissement'
-  ];
+  setHover(side: string | null): void {
+    this.activeSide.set(side);
+  }
+
+  trackById(_index: number, card: CardData): string {
+    return card.id;
+  }
 }
