@@ -27,7 +27,7 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class RecentEvents {
   store = inject(RecentEventsStore);
-  carouselOptions = carouselConfig;
+  carouselConfig = carouselConfig;
   icons = {
     moveUpRight: MoveUpRight,
     arrowLeft: ArrowLeft,

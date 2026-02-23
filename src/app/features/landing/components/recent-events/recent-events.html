@@ -1,7 +1,7 @@
 <div class="bg-grid bg-slate-50 overflow-hidden">
   <section
     class="py-10 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto fade-left-init"
-    id="projects"
+    id="events"
     appAnimationsOnScroll>
     <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-8 lg:mb-12">
       <div class="max-w-2xl">
@@ -19,6 +19,7 @@
         <p class="text-slate-500 text-lg max-w-sm border-l-2 border-primary-500 pl-6 italic">
           {{ 'recent_events.description' | translate }}
         </p>
+        @if (store.events()?.length) {
         <div class="hidden lg:flex items-center gap-4 shrink-0">
           <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
             <i-lucide [name]="icons.arrowLeft" class="size-3.5" />
@@ -27,6 +28,7 @@
             <i-lucide [name]="icons.arrowRight" class="size-3.5" />
           </button>
         </div>
+        }
       </div>
     </header>
 
@@ -37,17 +39,18 @@
       }
     </div>
     }
-    <div class="space-y-6 lg:space-y-8">
+    <div class="space-y-6 lg:space-y-8 mt-8 lg:mt-12">
       <p-carousel
         #carousel
         [value]="store.events()"
-        [draggable]="true"
         [numVisible]="3"
         [numScroll]="1"
         [showIndicators]="false"
         [showNavigators]="false"
         [circular]="true"
-        [responsiveOptions]="carouselOptions"
+        [responsiveOptions]="carouselConfig"
+        [autoplayInterval]="5000"
+        [draggable]="true"
         class="w-full events-carousel">
         <ng-template let-event #item>
           <div class="carousel-item-wrapper">
@@ -55,6 +58,17 @@
           </div>
         </ng-template>
       </p-carousel>
+
+      @if (store.events()?.length) {
+      <div class="flex lg:hidden justify-center items-center gap-6 pt-4">
+        <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
+          <i-lucide [name]="icons.arrowLeft" class="size-4" />
+        </button>
+        <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button">
+          <i-lucide [name]="icons.arrowRight" class="size-4" />
+        </button>
+      </div>
+      }
 
       <div class="w-full flex justify-center items-center mt-12">
         <a routerLink="/events" class="group relative">
