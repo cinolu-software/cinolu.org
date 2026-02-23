@@ -1,4 +1,14 @@
-import { Component, input, output, signal, computed, ChangeDetectionStrategy, inject, OnDestroy } from '@angular/core';
+import {
+  Component,
+  input,
+  output,
+  signal,
+  computed,
+  ChangeDetectionStrategy,
+  inject,
+  OnDestroy,
+  HostListener
+} from '@angular/core';
 import { CommonModule, NgClass, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
@@ -73,12 +83,30 @@ export class DashboardHeader implements OnDestroy {
       .slice(0, 2);
   }
 
-  onUserMenuClick(): void {
+  onUserMenuClick(event: MouseEvent): void {
+    event.stopPropagation();
     this.showUserMenu.update((v) => !v);
   }
 
+  closeUserMenu(): void {
+    this.showUserMenu.set(false);
+  }
+
   signOut(): void {
+    this.closeUserMenu();
     this.authStore.signOut();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const menuButton = target.closest('.user-menu-button');
+    const menuDropdown = target.closest('.user-menu-dropdown');
+
+    // Fermer le menu si on clique en dehors du bouton et du dropdown
+    if (!menuButton && !menuDropdown && this.showUserMenu()) {
+      this.closeUserMenu();
+    }
   }
 
   ngOnDestroy(): void {

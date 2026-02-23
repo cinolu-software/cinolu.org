@@ -41,14 +41,20 @@
 
     <div class="relative">
       <button
-        (click)="onUserMenuClick()"
+        (click)="onUserMenuClick($event)"
         type="button"
-        class="flex items-center gap-2.5 hover:bg-slate-50 rounded-lg pl-2 pr-3 py-1.5 transition-colors group">
+        class="user-menu-button flex items-center gap-2.5 hover:bg-slate-50 rounded-lg pl-2 pr-3 py-1.5 transition-colors group">
         <div class="relative">
           @if (user()?.profile || user()?.google_image) {
           <div
             class="relative w-9 h-9 min-w-9 min-h-9 rounded-lg overflow-hidden ring-2 ring-slate-200 group-hover:ring-primary-300 transition-all">
-            <img priority [ngSrc]="user() | apiIMG: 'user'" [alt]="user()?.name" referrerpolicy="no-referrer" fill class="object-cover" />
+            <img
+              priority
+              [ngSrc]="user() | apiIMG: 'user'"
+              [alt]="user()?.name"
+              referrerpolicy="no-referrer"
+              fill
+              class="object-cover" />
           </div>
           } @else {
           <div
@@ -73,7 +79,7 @@
 
       @if (showUserMenu()) {
       <div
-        class="absolute right-0 top-full mt-2 w-56 bg-white rounded-lg shadow-xl border border-slate-200 overflow-hidden anim-fade-in">
+        class="user-menu-dropdown absolute right-0 top-full mt-2 w-56 bg-white rounded-lg shadow-xl border border-slate-200 overflow-hidden anim-fade-in">
         <div class="px-4 py-3 border-b border-slate-200">
           <p class="font-semibold text-sm text-slate-900">{{ user()?.name }}</p>
           <p class="text-xs text-slate-500">{{ user()?.email }}</p>
@@ -86,6 +92,7 @@
 
         <div class="py-1">
           <a
+            (click)="closeUserMenu()"
             routerLink="/dashboard/profile"
             class="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors group">
             <span class="material-icons text-slate-500 group-hover:text-primary-600 text-lg">account_circle</span>
@@ -93,6 +100,7 @@
           </a>
 
           <a
+            (click)="closeUserMenu()"
             routerLink="/dashboard/profile/security"
             class="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors group">
             <span class="material-icons text-slate-500 group-hover:text-primary-600 text-lg">security</span>
@@ -100,6 +108,7 @@
           </a>
 
           <a
+            (click)="closeUserMenu()"
             routerLink="/dashboard/referral/referred-users"
             class="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors group">
             <span class="material-icons text-slate-500 group-hover:text-primary-600 text-lg">group_add</span>
