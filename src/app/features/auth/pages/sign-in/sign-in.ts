@@ -55,7 +55,6 @@ export class SignIn {
   onSignIn(): void {
     if (this.form.invalid) return;
 
-    // Récupérer le returnUrl depuis les query params
     const returnUrl = this.#route.snapshot.queryParams['returnUrl'] || '/dashboard';
 
     this.store.signIn({
@@ -66,6 +65,6 @@ export class SignIn {
   }
 
   signinWithGoogle(): void {
-    window.location.replace(environment.apiUrl + 'auth/sign-in');
+    window.location.replace(environment.apiUrl + 'auth/google');
   }
 }
