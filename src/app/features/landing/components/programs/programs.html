@@ -1,6 +1,6 @@
 <section class="min-h-fit bg-gray-50 backdrop-blur-[1px] bg-grid items-center content-center" appAnimationsOnScroll>
-  <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 md:py-28">
-    <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 lg:mb-28">
+  <div class="py-12 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
+    <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12 lg:mb-16">
       <div class="max-w-2xl">
         <div
           class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
@@ -16,10 +16,10 @@
         {{ 'programs.description' | translate }}
       </p>
     </header>
-    <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-16 md:gap-8 lg:gap-4 mt-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-8 md:gap-8 lg:gap-6 mt-12 lg:mt-20">
       @for (p of store.programs(); track p.id) {
       <div
-        class="relative group flex flex-col bg-white hover:scale-[1.02] px-6 py-8 pt-16 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-300 rounded-lg overflow-visible min-h-[280px] sm:min-h-[300px] md:min-h-[280px]">
+        class="relative group flex flex-col bg-white hover:scale-[1.02] px-6 py-8 pt-16 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-300 rounded-lg overflow-visible">
         <div
           class="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center justify-center w-20 h-20 bg-white border-4 border-primary-400 rounded-full shadow-xl group-hover:shadow-2xl group-hover:-translate-y-2 transition-all duration-300 overflow-hidden">
           <div class="p-4 w-full h-full flex items-center justify-center">
@@ -37,7 +37,7 @@
           </div>
         </div>
 
-        <div class="flex-1 flex flex-col text-center space-y-3 sm:space-y-4">
+        <div class="flex flex-1 flex-col text-center min-h-0 space-y-3 xl:space-x-4">
           <div class="space-y-2 sm:space-y-3">
             <h5 class="font-black text-lg sm:text-xl text-gray-900 line-clamp-1 leading-tight font-satoshi">
               {{ p?.name }}
@@ -45,10 +45,12 @@
             <div class="w-12 h-0.5 bg-gradient-to-r from-primary-400 to-primary-600 mx-auto rounded-full"></div>
           </div>
 
-          <p class="text-gray-600 text-base leading-relaxed line-clamp-2! md:flex-1">{{ p.description }}</p>
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed xl:line-clamp-3 line-clamp-2">
+            {{ p.description }}
+          </p>
         </div>
 
-        <div class="pt-2 mx-auto">
+        <div class="pt-2 md:pt-4 mx-auto shrink-0">
           <p-button [routerLink]="['/our-programs/', p.slug]" size="small" outlined severity="primary" class="w-full">
             <div class="flex items-center justify-center gap-2 group/btn px-2">
               <span class="text-sm font-medium">{{ 'programs.learn_more' | translate }}</span>
