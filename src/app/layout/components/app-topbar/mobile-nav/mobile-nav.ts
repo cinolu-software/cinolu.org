@@ -7,7 +7,7 @@ import { ILink } from '../../../data/links.data';
 import { ApiImgPipe } from '@shared/pipes';
 import { AuthStore } from '@core/auth/auth.store';
 import { IProgram } from '@shared/models';
-import { LanguageSwitcherComponent } from '../../language-switcher/language-switcher.component';
+import { LanguageSwitcherComponent } from '../../language-switcher/language-switcher';
 import { TOPBAR_ICONS, TOPBAR_ANIMATION } from '../topbar.config';
 import { LanguageService } from '@core/services/language/language.service';
 
