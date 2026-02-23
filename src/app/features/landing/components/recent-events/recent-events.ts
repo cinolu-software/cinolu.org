@@ -30,9 +30,9 @@ export class RecentEvents {
   carouselOptions = carouselConfig;
   icons = {
     moveUpRight: MoveUpRight,
-    moveLeft: ArrowLeft,
-    moveRight: ArrowRight,
-    MoveRight: MoveRight
+    arrowLeft: ArrowLeft,
+    arrowRight: ArrowRight,
+    moveRight: MoveRight
   };
 
   constructor() {
