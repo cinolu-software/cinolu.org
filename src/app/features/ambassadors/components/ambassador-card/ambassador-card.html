@@ -29,6 +29,7 @@
         <img
           [src]="ambassador() | apiIMG: 'user'"
           [alt]="ambassador().name"
+          referrerpolicy="no-referrer"
           class="w-24 h-24 rounded-full object-cover border-4 border-gray-100 group-hover:border-primary-300 shadow-lg transition-all"
           (error)="onImageError($event)" />
         } @else {

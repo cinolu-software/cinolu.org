@@ -161,6 +161,7 @@
               <img
                 [src]="authStore.user() | apiIMG: 'user'"
                 [alt]="authStore.user()?.name"
+                referrerpolicy="no-referrer"
                 class="relative w-44 h-44 rounded-full object-cover border-4 border-white shadow-2xl transition-transform group-hover:scale-105 duration-300" />
             </div>
             } @else {
