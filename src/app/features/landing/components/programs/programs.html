@@ -16,7 +16,7 @@
         {{ 'programs.description' | translate }}
       </p>
     </header>
-    <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-8 md:gap-8 lg:gap-6 mt-12 lg:mt-20">
+    <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-16 lg:gap-6 mt-14 lg:mt-20">
       @for (p of store.programs(); track p.id) {
       <div
         class="relative group flex flex-col bg-white hover:scale-[1.02] px-6 py-8 pt-16 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-300 rounded-lg overflow-visible">
@@ -45,9 +45,7 @@
             <div class="w-12 h-0.5 bg-gradient-to-r from-primary-400 to-primary-600 mx-auto rounded-full"></div>
           </div>
 
-          <p class="text-gray-600 text-sm sm:text-base leading-relaxed xl:line-clamp-3 line-clamp-2">
-            {{ p.description }}
-          </p>
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed line-clamp-3">{{ p.description }}</p>
         </div>
 
         <div class="pt-2 md:pt-4 mx-auto shrink-0">
