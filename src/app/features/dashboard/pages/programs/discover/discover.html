@@ -47,50 +47,50 @@
   </ng-template>
 
   <section class="mb-12">
-    <ng-container *ngTemplateOutlet="sectionHeader; context: currentHeaderContext" />
+    <ng-container [ngTemplateOutlet]="sectionHeader" [ngTemplateOutletContext]="currentHeaderContext" />
     @if (isCurrentLoading()) {
-    <ng-container *ngTemplateOutlet="loadingBlock; context: { color: 'primary' }" />
+      <ng-container [ngTemplateOutlet]="loadingBlock" [ngTemplateOutletContext]="loadingPrimaryContext" />
     } @else if (currentProjects().length > 0) {
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-      @for (project of currentProjects(); track project.id) {
-      <app-program-card
-        [project]="project"
-        [isProgramClosed]="isProgramClosed(project)"
-        [hasApplied]="hasApplied(project.id)" />
-      }
-    </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        @for (project of currentProjects(); track project.id) {
+          <app-program-card
+            [project]="project"
+            [isProgramClosed]="isProgramClosed(project)"
+            [hasApplied]="hasApplied(project.id)" />
+        }
+      </div>
     } @else {
-    <ng-container *ngTemplateOutlet="emptyBlock; context: emptyCurrentContext" />
+      <ng-container [ngTemplateOutlet]="emptyBlock" [ngTemplateOutletContext]="emptyCurrentContext" />
     }
   </section>
 
   <section>
-    <ng-container *ngTemplateOutlet="sectionHeader; context: upcomingHeaderContext" />
+    <ng-container [ngTemplateOutlet]="sectionHeader" [ngTemplateOutletContext]="upcomingHeaderContext" />
     @if (isUpcomingLoading()) {
-    <ng-container *ngTemplateOutlet="loadingBlock; context: { color: 'blue' }" />
+      <ng-container [ngTemplateOutlet]="loadingBlock" [ngTemplateOutletContext]="loadingBlueContext" />
     } @else if (upcomingProjects().length > 0) {
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-      @for (project of upcomingProjects(); track project.id) {
-      <app-program-card
-        [project]="project"
-        [isProgramClosed]="isProgramClosed(project)"
-        [hasApplied]="hasApplied(project.id)" />
-      }
-    </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        @for (project of upcomingProjects(); track project.id) {
+          <app-program-card
+            [project]="project"
+            [isProgramClosed]="isProgramClosed(project)"
+            [hasApplied]="hasApplied(project.id)" />
+        }
+      </div>
     } @else {
-    <ng-container *ngTemplateOutlet="emptyBlock; context: emptyUpcomingContext" />
+      <ng-container [ngTemplateOutlet]="emptyBlock" [ngTemplateOutletContext]="emptyUpcomingContext" />
     }
   </section>
 
   @if (hasNoProjectsAtAll()) {
-  <div class="text-center py-20 mt-8">
-    <div class="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
-      <span class="material-icons text-4xl text-slate-400">search_off</span>
+    <div class="text-center py-20 mt-8">
+      <div class="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
+        <span class="material-icons text-4xl text-slate-400">search_off</span>
+      </div>
+      <h3 class="text-lg font-semibold text-slate-900 mb-2">Aucun programme disponible</h3>
+      <p class="text-slate-600 mb-6">
+        Il n'y a pas de programmes ouverts pour le moment. Revenez bientôt pour découvrir de nouvelles opportunités !
+      </p>
     </div>
-    <h3 class="text-lg font-semibold text-slate-900 mb-2">Aucun programme disponible</h3>
-    <p class="text-slate-600 mb-6">
-      Il n'y a pas de programmes ouverts pour le moment. Revenez bientôt pour découvrir de nouvelles opportunités !
-    </p>
-  </div>
   }
 </div>

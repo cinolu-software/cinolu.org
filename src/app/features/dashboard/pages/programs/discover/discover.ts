@@ -1,5 +1,13 @@
-import { Component, inject, OnInit, signal, computed, ChangeDetectionStrategy, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  Component,
+  inject,
+  OnInit,
+  signal,
+  computed,
+  ChangeDetectionStrategy,
+  effect
+} from '@angular/core';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ParticipationsStore } from '../../../store/participations.store';
 import { ProgramCard } from '../../../components/program-card/program-card';
 import { IProject } from '@shared/models';
@@ -9,52 +17,55 @@ type LoadingPhase = 'current' | 'upcoming' | 'done';
 
 @Component({
   selector: 'app-discover-programs',
-  imports: [CommonModule, ProgramCard],
+  imports: [NgClass, NgTemplateOutlet, ProgramCard],
   templateUrl: './discover.html',
   providers: [ProjectsStore],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DiscoverPrograms implements OnInit {
-  private readonly projectsStore = inject(ProjectsStore);
-  private readonly participationsStore = inject(ParticipationsStore);
+   projectsStore = inject(ProjectsStore);
+   participationsStore = inject(ParticipationsStore);
 
-  private readonly loadingPhase = signal<LoadingPhase>('current');
-  private readonly currentList = signal<IProject[]>([]);
-  private readonly upcomingList = signal<IProject[]>([]);
+   loadingPhase = signal<LoadingPhase>('current');
+   currentList = signal<IProject[]>([]);
+   upcomingList = signal<IProject[]>([]);
 
-  readonly currentProjects = this.currentList.asReadonly();
-  readonly upcomingProjects = this.upcomingList.asReadonly();
+   currentProjects = this.currentList.asReadonly();
+   upcomingProjects = this.upcomingList.asReadonly();
 
-  readonly isCurrentLoading = computed(() => this.loadingPhase() === 'current');
-  readonly isUpcomingLoading = computed(() => this.loadingPhase() === 'upcoming');
-  readonly isFullyLoaded = computed(() => this.loadingPhase() === 'done');
+   isCurrentLoading = computed(() => this.loadingPhase() === 'current');
+   isUpcomingLoading = computed(() => this.loadingPhase() === 'upcoming');
+   isFullyLoaded = computed(() => this.loadingPhase() === 'done');
 
-  readonly hasNoProjectsAtAll = computed(
+   hasNoProjectsAtAll = computed(
     () => this.isFullyLoaded() && this.currentList().length === 0 && this.upcomingList().length === 0
   );
 
-  readonly currentHeaderContext = {
+   currentHeaderContext = {
     icon: 'rocket_launch',
     label: 'Programmes en cours'
   } as const;
 
-  readonly upcomingHeaderContext = {
+   upcomingHeaderContext = {
     icon: 'schedule',
     label: 'Programmes à venir',
     accent: 'blue'
   } as const;
 
-  readonly emptyCurrentContext = {
+   emptyCurrentContext = {
     title: 'Aucun programme en cours',
     message: "Il n'y a pas de programmes actifs pour le moment.",
     icon: 'event_busy'
   } as const;
 
-  readonly emptyUpcomingContext = {
+   emptyUpcomingContext = {
     title: 'Aucun programme à venir',
     message: "Il n'y a pas de programmes prévus pour l'instant. Revenez bientôt !",
     icon: 'upcoming'
   } as const;
+
+   loadingPrimaryContext = { color: 'primary' } as const;
+   loadingBlueContext = { color: 'blue' } as const;
 
   constructor() {
     effect(() => {
