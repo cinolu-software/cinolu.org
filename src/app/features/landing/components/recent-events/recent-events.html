@@ -19,7 +19,7 @@
         <p class="text-slate-500 text-lg max-w-sm border-l-2 border-primary-500 pl-6 italic">
           {{ 'recent_events.description' | translate }}
         </p>
-        @if (store.events()?.length) {
+        @if (store.events().length) {
         <div class="hidden lg:flex items-center gap-4 shrink-0">
           <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
             <i-lucide [name]="icons.arrowLeft" class="size-3.5" />
@@ -59,7 +59,7 @@
         </ng-template>
       </p-carousel>
 
-      @if (store.events()?.length) {
+      @if (store.events().length) {
       <div class="flex lg:hidden justify-center items-center gap-6 pt-4">
         <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
           <i-lucide [name]="icons.arrowLeft" class="size-4" />
