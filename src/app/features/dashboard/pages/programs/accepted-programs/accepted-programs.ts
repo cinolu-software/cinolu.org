@@ -81,7 +81,14 @@ export class AcceptedPrograms implements OnInit {
     const progressPercentage =
       totalProjectPhases > 0 ? Math.round((completedPhasesCount / totalProjectPhases) * 100) : 0;
 
-    const status = this.determineStatus(completedPhasesCount, totalProjectPhases);
+    // Calculer combien de phases du projet sont déjà terminées
+    const now = new Date();
+    const endedProjectPhasesCount = projectPhases.filter((phase) => {
+      const phaseEndDate = new Date(phase.ended_at);
+      return phaseEndDate <= now;
+    }).length;
+
+    const status = this.determineStatus(completedPhasesCount, totalProjectPhases, endedProjectPhasesCount);
     const currentPhase = completedPhases.length > 0 ? completedPhases[completedPhases.length - 1] : null;
 
     return {
@@ -95,16 +102,17 @@ export class AcceptedPrograms implements OnInit {
     };
   }
 
-  private determineStatus(completed: number, total: number): ParticipationStatus {
+  private determineStatus(completed: number, total: number, endedPhases: number): ParticipationStatus {
     if (completed === total && total > 0) {
       return ParticipationStatus.VALIDATED;
     }
-    if (completed > 0 && completed < total) {
-      return ParticipationStatus.IN_PROGRESS;
-    }
-    return ParticipationStatus.ELIMINATED;
-  }
+    const phasesDelay = endedPhases - completed;
 
+    if (phasesDelay >= 2) {
+      return ParticipationStatus.ELIMINATED;
+    }
+    return ParticipationStatus.IN_PROGRESS;
+  }
   getStatusConfig(status: ParticipationStatus): StatusConfig {
     const configs: Record<ParticipationStatus, StatusConfig> = {
       [ParticipationStatus.VALIDATED]: {
