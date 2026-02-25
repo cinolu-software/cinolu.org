@@ -13,7 +13,6 @@ import { CommonModule, NgClass, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { ApiImgPipe } from '@shared/pipes';
-import { IRole } from '@shared/models';
 
 @Component({
   selector: 'app-dashboard-header',
@@ -69,7 +68,9 @@ export class DashboardHeader implements OnDestroy {
   getRoleLabel(): string {
     const user = this.user();
     if (!user || !user.roles) return 'Entrepreneur';
-    if (user.roles.includes('mentor' as unknown as IRole)) return 'Mentor';
+    if (user.roles.includes('coach')) return 'Coach';
+    if (user.roles.includes('admin')) return 'Administrateur';
+    if (user.roles.includes('mentor')) return 'Mentor';
     return 'Entrepreneur';
   }
 
