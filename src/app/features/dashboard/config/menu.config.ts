@@ -1,5 +1,3 @@
-import { IRole } from '@shared/models';
-
 export interface MenuItem {
   id: string;
   label: string;
@@ -10,7 +8,7 @@ export interface MenuItem {
     color: 'primary' | 'success' | 'warning' | 'danger';
   };
   children?: MenuItem[];
-  roles?: IRole[];
+  roles?: string[];
   isExternal?: boolean;
   disabled?: boolean;
   tooltip?: string;
@@ -87,14 +85,14 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
         id: 'mentor',
         label: 'Espace Mentor',
         icon: 'school',
-        roles: ['mentor' as unknown as IRole],
+        roles: ['coach'],
         children: [
           {
             id: 'mentor-dashboard',
             label: 'Dashboard Mentor',
             icon: 'dashboard',
             path: '/dashboard/mentor',
-            roles: ['mentor' as unknown as IRole],
+            roles: ['coach'],
             tooltip: 'Tableau de bord mentor'
           },
           {
@@ -102,7 +100,7 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
             label: 'Mon Profil Mentor',
             icon: 'badge',
             path: '/dashboard/mentor/profile',
-            roles: ['mentor' as unknown as IRole],
+            roles: ['coach'],
             tooltip: 'Gérer mon profil de mentor'
           }
         ]
@@ -177,6 +175,7 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
             label: 'Mentorat',
             icon: 'school',
             path: '/dashboard/mentor/apply',
+            roles: ['coach'],
             tooltip: 'Devenir mentor ou gérer ma candidature'
           }
         ]
@@ -185,7 +184,7 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
   }
 ];
 
-export function filterMenuByRoles(menu: MenuSection[], userRoles: IRole[]): MenuSection[] {
+export function filterMenuByRoles(menu: MenuSection[], userRoles: string[]): MenuSection[] {
   return menu
     .map((section) => ({
       ...section,
@@ -218,7 +217,6 @@ export function findMenuItemById(menu: MenuSection[], id: string): MenuItem | nu
 export function isMenuActive(item: MenuItem, currentPath: string): boolean {
   if (item.path && currentPath === item.path) return true;
 
-  // Menu "Entreprises" : actif sur le hub et sur toutes les routes ventures/products
   if (item.id === 'entreprises') {
     return (
       currentPath === '/dashboard/entreprises' ||
