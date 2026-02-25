@@ -66,12 +66,9 @@ export class DashboardSidebar {
       });
 
     // Auto-expand active menus on init
-    effect(
-      () => {
-        this.autoExpandActiveMenus();
-      },
-      { allowSignalWrites: true }
-    );
+    effect(() => {
+      this.autoExpandActiveMenus();
+    });
   }
 
   /**
