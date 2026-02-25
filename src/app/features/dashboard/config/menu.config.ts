@@ -175,7 +175,6 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
             label: 'Mentorat',
             icon: 'school',
             path: '/dashboard/mentor/apply',
-            roles: ['coach'],
             tooltip: 'Devenir mentor ou gérer ma candidature'
           }
         ]
