@@ -10,7 +10,9 @@
     "test": "ng test",
     "ssr": "node dist/app/server/server.mjs",
     "prepare": "husky",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "db:seed": "node scripts/seed-database.mjs",
+    "db:seed:extended": "node scripts/seed-database-extended.mjs"
   },
   "private": true,
   "dependencies": {
