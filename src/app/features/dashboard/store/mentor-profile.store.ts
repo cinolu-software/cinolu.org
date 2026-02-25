@@ -88,7 +88,7 @@ export const MentorProfileStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({ data, onSuccess }) =>
-          _http.post<{ data: IMentorProfile }>('mentors', data).pipe(
+          _http.post<{ data: IMentorProfile }>('mentors/request', data).pipe(
             tap(({ data: profile }) => {
               patchState(store, {
                 profile: profile,
