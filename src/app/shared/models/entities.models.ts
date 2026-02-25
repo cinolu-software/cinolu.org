@@ -57,7 +57,7 @@ export interface IUser extends IBase {
   referralsCount?: number;
   referrals: IUser[];
   ventures: IVenture[];
-  roles: IRole[];
+  roles: string[];
   participated_projects: IProject[];
   participated_events: IEvent[];
   managed_projects: IProject[];
@@ -178,11 +178,6 @@ export interface IProduct extends IBase {
 
 export interface ICategory extends IBase {
   name: string;
-}
-
-export interface IRole extends IBase {
-  name: string;
-  label: string;
 }
 
 export interface IHighlight {
