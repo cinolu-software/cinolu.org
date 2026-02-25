@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { Router, CanActivateFn } from '@angular/router';
 import { AuthStore } from '../auth/auth.store';
-import { IRole, MentorStatus } from '@shared/models';
+import { MentorStatus } from '@shared/models';
 
 export const mentorGuard: CanActivateFn = (state) => {
   const auth = inject(AuthStore);
@@ -14,7 +14,7 @@ export const mentorGuard: CanActivateFn = (state) => {
     return false;
   }
 
-  const isMentor = user.roles?.includes('mentor' as unknown as IRole);
+  const isMentor = user.roles?.some((role) => ['coach', 'mentor'].includes(role));
 
   if (!isMentor) {
     router.navigate(['/dashboard'], {
