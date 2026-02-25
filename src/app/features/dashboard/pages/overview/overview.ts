@@ -60,7 +60,7 @@ export class DashboardOverview implements OnInit {
 
   isAdminUser = computed(() => {
     const user = this.authStore.user();
-    const roles = user?.roles as unknown as string[];
+    const roles = user?.roles || [];
     return roles.some((role) => role === 'admin' || role === 'staff');
   });
 
