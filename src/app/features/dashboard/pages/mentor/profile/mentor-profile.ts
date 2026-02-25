@@ -30,7 +30,6 @@ export class MentorProfile implements OnInit {
   });
 
   constructor() {
-    // Charger les expertises disponibles
     this.profileStore.loadExpertises();
 
     effect(() => {
@@ -42,10 +41,7 @@ export class MentorProfile implements OnInit {
   }
 
   ngOnInit(): void {
-    // Charger le profil depuis AuthStore
     this.authStore.getProfile();
-
-    // Synchroniser le profil dans le store local
     setTimeout(() => {
       this.profileStore.loadProfileFromAuth();
     }, 100);
@@ -56,7 +52,6 @@ export class MentorProfile implements OnInit {
   }
 
   populateForm(profile: IMentorProfile): void {
-    // Remplir les expertises
     const expertiseIds = profile.expertises?.map((exp: IExpertise) => exp.id) || [];
     this.selectedExpertises.set(expertiseIds);
 

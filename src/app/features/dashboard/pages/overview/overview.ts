@@ -120,7 +120,6 @@ export class DashboardOverview implements OnInit {
     const highlight = this.featuredHighlight();
     if (!highlight) return 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1000';
 
-    // Utilisation du pipe ApiImgPipe pour générer l'URL
     const apiImgPipe = new ApiImgPipe();
 
     switch (highlight.sourceKey) {
@@ -139,7 +138,6 @@ export class DashboardOverview implements OnInit {
     }
   });
 
-  // Computed signal pour la complétion du profil
   profileCompletion = computed(() => this.calculateProfileCompletion());
 
   private truncateText(text: string, maxLength: number): string {
@@ -147,10 +145,6 @@ export class DashboardOverview implements OnInit {
     return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
   }
 
-  /**
-   * Calcule le pourcentage de complétion du profil utilisateur
-   * en fonction des champs remplis
-   */
   calculateProfileCompletion(): number {
     const user = this.authStore.user();
     if (!user) return 0;
@@ -173,17 +167,10 @@ export class DashboardOverview implements OnInit {
     return Math.round((filledFields / totalFields) * 100);
   }
 
-  /**
-   * Gère le partage du lien de parrainage
-   */
   onShareReferral(link: string) {
-    // Ouvrir un menu de partage ou copier le lien
     this.onCopyReferral(link);
   }
 
-  /**
-   * Copie le lien de parrainage dans le presse-papier
-   */
   onCopyReferral(link: string) {
     if (link) {
       navigator.clipboard

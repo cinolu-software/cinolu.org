@@ -26,7 +26,6 @@ export class ProfilePage {
   isEditing = signal(false);
   isEditingInterests = signal(false);
 
-  // Computed signals pour réactivité
   user = computed(() => this.authStore.user());
   hasMentorProfile = computed(() => !!this.user()?.mentor_profile);
   mentorStatus = computed(() => this.user()?.mentor_profile?.status || null);
@@ -42,7 +41,6 @@ export class ProfilePage {
   });
 
   constructor() {
-    // Effect pour synchroniser les formulaires avec les changements du user
     effect(() => {
       const user = this.user();
       if (user) {
