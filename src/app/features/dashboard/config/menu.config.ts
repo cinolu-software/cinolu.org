@@ -85,14 +85,14 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
         id: 'mentor',
         label: 'Espace Mentor',
         icon: 'school',
-        roles: ['coach'],
+        roles: ['mentor'],
         children: [
           {
             id: 'mentor-dashboard',
             label: 'Dashboard Mentor',
             icon: 'dashboard',
             path: '/dashboard/mentor',
-            roles: ['coach'],
+            roles: ['mentor'],
             tooltip: 'Tableau de bord mentor'
           },
           {
@@ -100,7 +100,7 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
             label: 'Mon Profil Mentor',
             icon: 'badge',
             path: '/dashboard/mentor/profile',
-            roles: ['coach'],
+            roles: ['mentor'],
             tooltip: 'Gérer mon profil de mentor'
           }
         ]
