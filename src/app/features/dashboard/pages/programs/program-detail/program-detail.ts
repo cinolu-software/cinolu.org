@@ -13,13 +13,24 @@ import { GalleriaModule } from 'primeng/galleria';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { carouselConfig } from '../../../../landing/config/carousel.config';
 import { AuthStore } from '@core/auth/auth.store';
+import { AlertTriangle, Info, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-program-detail',
   standalone: true,
-  imports: [CommonModule, ConfirmDialogModule, DialogModule, ButtonModule, TagModule, GalleriaModule, ApiImgPipe, RouterLink],
+  imports: [
+    CommonModule,
+    ConfirmDialogModule,
+    DialogModule,
+    ButtonModule,
+    TagModule,
+    GalleriaModule,
+    ApiImgPipe,
+    RouterLink,
+    LucideAngularModule
+  ],
   providers: [ProjectStore, ConfirmationService],
-  templateUrl: './program-detail.html',
+  templateUrl: './program-detail.html'
 })
 export class ProgramDetail implements OnInit {
   route = inject(ActivatedRoute);
@@ -32,6 +43,12 @@ export class ProgramDetail implements OnInit {
 
   showVentureSelectionModal = signal(false);
   responsiveOptions = carouselConfig;
+  confirmIcon = signal<'alert' | 'info'>('alert');
+
+  icons = {
+    alertTriangle: AlertTriangle,
+    info: Info
+  };
 
   // Computed properties
   projectStatus = computed(() => {
@@ -91,10 +108,10 @@ export class ProgramDetail implements OnInit {
     const ventures = this.venturesStore.ventures();
 
     if (ventures.length === 0) {
+      this.confirmIcon.set('alert');
       this.confirmationService.confirm({
         header: 'Aucune entreprise',
         message: 'Vous devez créer une entreprise avant de pouvoir postuler à un programme.',
-        icon: 'pi pi-exclamation-triangle',
         acceptLabel: 'Créer une entreprise',
         rejectLabel: 'Annuler',
         acceptButtonStyleClass: 'p-button-primary',
@@ -116,14 +133,13 @@ export class ProgramDetail implements OnInit {
     const project = this.projectStore.project();
     if (!project) return;
 
-    // Vérifier si une candidature existe déjà
     const alreadyApplied = this.participationsStore.checkExistingParticipation(project.id, ventureId);
 
     if (alreadyApplied) {
+      this.confirmIcon.set('info');
       this.confirmationService.confirm({
         header: 'Candidature existante',
         message: 'Vous avez déjà postulé à ce programme avec cette entreprise.',
-        icon: 'pi pi-info-circle',
         rejectVisible: false,
         acceptLabel: 'Compris'
       });
