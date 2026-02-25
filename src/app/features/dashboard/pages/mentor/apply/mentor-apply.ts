@@ -52,13 +52,26 @@ export class MentorApply implements OnInit {
   }
 
   createExperienceFormGroup() {
-    return this.fb.group({
+    const group = this.fb.group({
       company_name: ['', Validators.required],
       job_title: ['', Validators.required],
       is_current: [false],
       start_date: [null as Date | null, Validators.required],
       end_date: [null as Date | null]
     });
+
+    // Écouter les changements de is_current pour activer/désactiver end_date
+    group.get('is_current')?.valueChanges.subscribe((isCurrent) => {
+      const endDateControl = group.get('end_date');
+      if (isCurrent) {
+        endDateControl?.disable();
+        endDateControl?.setValue(null);
+      } else {
+        endDateControl?.enable();
+      }
+    });
+
+    return group;
   }
 
   addExperience() {
@@ -115,10 +128,18 @@ export class MentorApply implements OnInit {
 
   submitApplication() {
     if (this.applicationForm.invalid) {
+      console.warn('⚠️ Formulaire invalide:', this.applicationForm.errors);
+      Object.keys(this.applicationForm.controls).forEach((key) => {
+        const control = this.applicationForm.get(key);
+        if (control?.invalid) {
+          console.warn(`  - ${key}:`, control.errors);
+        }
+      });
       return;
     }
 
-    const formValue = this.applicationForm.value;
+    // Utiliser getRawValue() pour obtenir les valeurs même des contrôles désactivés
+    const formValue = this.applicationForm.getRawValue();
 
     interface ExperienceFormValue {
       company_name: string;
@@ -128,21 +149,37 @@ export class MentorApply implements OnInit {
       end_date?: Date | null;
     }
 
-    const experiences: CreateExperienceDto[] = ((formValue.experiences as ExperienceFormValue[]) || []).map(
-      (exp: ExperienceFormValue) => ({
-        company_name: exp.company_name,
-        job_title: exp.job_title,
-        is_current: exp.is_current,
-        start_date: exp.start_date!,
-        end_date: exp.is_current ? null : exp.end_date || null
-      })
-    );
+    const experiences: CreateExperienceDto[] = ((formValue.experiences as ExperienceFormValue[]) || [])
+      .filter((exp) => exp.company_name && exp.job_title && exp.start_date) // Filtrer les expériences valides
+      .map((exp: ExperienceFormValue) => {
+        const experience: CreateExperienceDto = {
+          company_name: exp.company_name.trim(),
+          job_title: exp.job_title.trim(),
+          is_current: exp.is_current || false,
+          start_date: exp.start_date instanceof Date ? exp.start_date.toISOString() : exp.start_date!,
+          end_date: exp.is_current
+            ? null
+            : exp.end_date instanceof Date
+              ? exp.end_date.toISOString()
+              : exp.end_date || null
+        };
+        return experience;
+      });
 
     const payload = {
-      years_experience: formValue.years_experience || 0,
-      expertises: formValue.expertises || [],
+      years_experience: Number(formValue.years_experience) || 0,
+      expertises: (formValue.expertises || []).filter((id) => id && id.trim()),
       experiences
     };
+
+    console.log("📤 Payload envoyé à l'API:", JSON.stringify(payload, null, 2));
+    console.log('🔍 Types:', {
+      years_experience: typeof payload.years_experience,
+      expertises: Array.isArray(payload.expertises),
+      expertises_count: payload.expertises.length,
+      experiences_count: payload.experiences.length,
+      first_experience: payload.experiences[0]
+    });
 
     this.mentorProfileStore.createProfile({
       data: payload,
