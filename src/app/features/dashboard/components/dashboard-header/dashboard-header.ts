@@ -68,7 +68,6 @@ export class DashboardHeader implements OnDestroy {
   getRoleLabel(): string {
     const user = this.user();
     if (!user || !user.roles) return 'Entrepreneur';
-    if (user.roles.includes('coach')) return 'Coach';
     if (user.roles.includes('admin')) return 'Administrateur';
     if (user.roles.includes('mentor')) return 'Mentor';
     return 'Entrepreneur';
