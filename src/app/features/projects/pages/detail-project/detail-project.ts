@@ -20,7 +20,8 @@ import {
   AlertCircle,
   Home,
   ArrowLeft,
-  Search
+  Search,
+  Layers
 } from 'lucide-angular';
 import { ProjectStore } from '../../store/project.store';
 import { formatDateForGoogleCalendarUTC, openExternalUrl } from '@shared/helpers';
@@ -113,6 +114,13 @@ export class DetailProject implements OnInit {
     this.toggleSection('context');
   }
 
+  orderedPhases = computed(() => {
+    const phases = this.store.project()?.phases ?? [];
+    console.log(this.store.project(), 'phases', phases);
+
+    return [...phases].sort((a, b) => ((a as { order?: number }).order ?? 0) - ((b as { order?: number }).order ?? 0));
+  });
+
   icons = {
     fileText: FileText,
     calendarDays: CalendarDays,
@@ -131,7 +139,8 @@ export class DetailProject implements OnInit {
     alertCircle: AlertCircle,
     home: Home,
     arrowLeft: ArrowLeft,
-    search: Search
+    search: Search,
+    layers: Layers
   };
 
   responsiveOptions = carouselConfig;
