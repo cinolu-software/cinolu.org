@@ -10,12 +10,12 @@
           <span class="material-icons text-3xl">business_center</span>
         </div>
         <div>
-          <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Mes Entreprises</h1>
+          <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Mes Projets</h1>
           <p class="text-slate-600 text-sm mt-0.5">Gérez vos projets et vos produits</p>
         </div>
       </div>
 
-      <!-- Onglets Entreprises / Produits -->
+      <!-- Onglets Projets / Produits -->
       <div class="inline-flex rounded-lg border border-slate-200 bg-slate-50/80 p-1 gap-0.5" role="tablist">
         <button
           type="button"
@@ -26,7 +26,7 @@
           [class.shadow-sm]="activeTab() === 'ventures'"
           class="flex items-center gap-2.5 px-5 py-3 rounded-lg font-semibold text-sm text-slate-600 transition-all duration-200 hover:text-slate-900 min-h-[44px]">
           <span class="material-icons text-xl">business</span>
-          <span>Entreprises</span>
+          <span>Projets</span>
           <span
             class="ml-1 min-w-[22px] h-5 flex items-center justify-center rounded-full text-xs font-bold px-1.5"
             [class.bg-primary-100]="activeTab() === 'ventures'"
@@ -59,13 +59,13 @@
     </div>
   </header>
 
-  <!-- Contenu : onglet Entreprises -->
+  <!-- Contenu : onglet Projets -->
   @if (activeTab() === 'ventures') {
   <section class="dashboard-fade-in-up">
     @if (venturesStore.isLoading()) {
     <div class="flex flex-col items-center justify-center py-24">
       <div class="w-12 h-12 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
-      <p class="mt-6 text-slate-600 font-medium">Chargement de vos entreprises...</p>
+      <p class="mt-6 text-slate-600 font-medium">Chargement de vos projets...</p>
     </div>
     } @else if (venturesStore.ventures().length === 0) {
     <div class="dashboard-card-elevated rounded-xl p-10 sm:p-12 text-center max-w-lg mx-auto">
@@ -73,20 +73,20 @@
         class="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-lg mx-auto mb-6">
         <span class="material-icons text-white text-5xl">business_center</span>
       </div>
-      <h2 id="ventures-heading" class="text-xl font-bold text-slate-900 mb-2">Aucune entreprise</h2>
+      <h2 id="ventures-heading" class="text-xl font-bold text-slate-900 mb-2">Aucun projet</h2>
       <p class="text-slate-600 text-sm mb-8">
-        Créez votre première entreprise pour commencer à gérer vos projets et produits.
+        Créez votre premier projet pour commencer à gérer vos produits.
       </p>
       <a routerLink="/dashboard/ventures/create" class="dashboard-btn-primary inline-flex gap-2">
         <span class="material-icons text-xl">add</span>
-        <span>Créer une entreprise</span>
+        <span>Créer un projet</span>
       </a>
     </div>
     } @else {
     <div class="flex justify-end mb-6">
       <a routerLink="/dashboard/ventures/create" class="dashboard-btn-primary inline-flex gap-2">
         <span class="material-icons text-xl">add</span>
-        <span>Créer une entreprise</span>
+        <span>Créer un projet</span>
       </a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -207,7 +207,7 @@
         <span class="material-icons text-white text-5xl">inventory_2</span>
       </div>
       <h2 id="products-heading" class="text-xl font-bold text-slate-900 mb-2">Aucun produit</h2>
-      <p class="text-slate-600 text-sm mb-8">Ajoutez vos premiers produits ou associez-les à une entreprise.</p>
+      <p class="text-slate-600 text-sm mb-8">Ajoutez vos premiers produits ou associez-les à un projet.</p>
       <a routerLink="/dashboard/products/create" class="dashboard-btn-primary inline-flex gap-2">
         <span class="material-icons text-xl">add</span>
         <span>Créer un produit</span>

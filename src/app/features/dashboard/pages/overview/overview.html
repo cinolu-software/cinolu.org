@@ -61,7 +61,7 @@
             </div>
           </div>
           <div class="space-y-1">
-            <p class="dashboard-stat-label">Mes Entreprises</p>
+            <p class="dashboard-stat-label">Mes Projets</p>
             <h3 class="dashboard-stat-value">{{ venturesStore.ventures().length || 0 }}</h3>
           </div>
         </div>
@@ -196,7 +196,7 @@
     <div class="col-span-12">
       <div class="mb-6">
         <h2 class="text-xl font-bold text-slate-900 mb-1">Activité Récente</h2>
-        <p class="text-sm text-slate-600">Dernières actions sur vos entreprises</p>
+        <p class="text-sm text-slate-600">Dernières actions sur vos projets</p>
       </div>
 
       @if (venturesStore.ventures() && venturesStore.ventures().length > 0) {
@@ -243,8 +243,8 @@
             <span class="material-icons text-primary-600 text-2xl">business_center</span>
           </div>
           <div>
-            <h3 class="font-bold text-slate-900">Aucune entreprise</h3>
-            <p class="text-sm text-slate-600">Créez votre première entreprise</p>
+            <h3 class="font-bold text-slate-900">Aucun projet</h3>
+            <p class="text-sm text-slate-600">Créez votre premier projet</p>
           </div>
         </div>
         <a [routerLink]="['/dashboard/ventures/create']" class="dashboard-btn-primary">
@@ -271,7 +271,7 @@
               <span class="material-icons text-4xl">add_business</span>
             </div>
             <div>
-              <h4 class="font-black text-lg mb-1">Créer une entreprise</h4>
+              <h4 class="font-black text-lg mb-1">Créer un projet</h4>
               <p class="text-white/80 text-sm">Lancez votre projet</p>
             </div>
           </div>

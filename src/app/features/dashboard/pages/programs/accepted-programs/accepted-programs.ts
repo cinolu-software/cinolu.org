@@ -2,8 +2,6 @@ import { Component, computed, inject, OnInit, ChangeDetectionStrategy } from '@a
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ParticipationsStore } from '../../../store/participations.store';
-import { ButtonModule } from 'primeng/button';
-import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { IParticipation, IPhase } from '../../../../../shared/models/entities.models';
 
 enum ParticipationStatus {
@@ -33,7 +31,7 @@ interface StatusConfig {
 @Component({
   selector: 'app-accepted-programs',
   standalone: true,
-  imports: [CommonModule, RouterLink, ButtonModule, ApiImgPipe],
+  imports: [CommonModule, RouterLink],
   providers: [],
   templateUrl: './accepted-programs.html',
   styleUrls: [],
@@ -47,14 +45,12 @@ export class AcceptedPrograms implements OnInit {
   });
 
   stats = computed(() => {
-    const validParticipations = this.validParticipations();
-    const analyses = validParticipations.map((p) => this.analyzeParticipation(p));
-
+    const valid = this.validParticipations();
+    const analyses = valid.map((p) => this.analyzeParticipation(p));
     return {
-      total: validParticipations.length,
+      total: valid.length,
       validated: analyses.filter((a) => a.status === ParticipationStatus.VALIDATED).length,
       inProgress: analyses.filter((a) => a.status === ParticipationStatus.IN_PROGRESS).length,
-      eliminated: analyses.filter((a) => a.status === ParticipationStatus.ELIMINATED).length,
       averageProgress:
         analyses.length > 0
           ? Math.round(analyses.reduce((sum, a) => sum + a.progressPercentage, 0) / analyses.length)
@@ -148,17 +144,5 @@ export class AcceptedPrograms implements OnInit {
   getConfig(participation: IParticipation): StatusConfig {
     const analysis = this.analyzeParticipation(participation);
     return this.getStatusConfig(analysis.status);
-  }
-
-  formatProgress(percentage: number): string {
-    return `${percentage}%`;
-  }
-
-  isRecentPhase(phase: IPhase | null): boolean {
-    if (!phase) return false;
-    const phaseDate = new Date(phase.ended_at);
-    const now = new Date();
-    const diffDays = Math.floor((now.getTime() - phaseDate.getTime()) / (1000 * 60 * 60 * 24));
-    return diffDays <= 7;
   }
 }

@@ -34,14 +34,14 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
   },
 
   {
-    title: 'Entreprises',
+    title: 'Mes Projets',
     items: [
       {
         id: 'entreprises',
-        label: 'Entreprises',
+        label: 'Mes Projets',
         icon: 'business_center',
         path: '/dashboard/entreprises',
-        tooltip: 'Accéder au panel Entreprises et Produits'
+        tooltip: 'Accéder à Mes Projets et Produits'
       }
     ]
   },

@@ -7,11 +7,11 @@
         >
       </div>
       <h1 class="text-xl md:text-3xl font-bold text-gray-900 leading-tight">
-        {{ isEditMode() ? 'Modifier l\'entreprise' : 'Créer une entreprise' }}
+        {{ isEditMode() ? 'Modifier le projet' : 'Créer un projet' }}
       </h1>
     </div>
     <p class="text-sm md:text-base text-gray-600 leading-relaxed pl-12 md:pl-16">
-      {{ isEditMode() ? 'Mettez à jour les informations de votre entreprise' : 'Ajoutez votre projet entrepreneurial' }}
+      {{ isEditMode() ? 'Mettez à jour les informations de votre projet' : 'Ajoutez votre projet entrepreneurial' }}
     </p>
   </div>
 
@@ -31,7 +31,7 @@
               for="name"
               class="text-xs md:text-sm font-semibold text-gray-700 flex items-center gap-1.5 group-focus-within:text-primary-600 transition-colors">
               <span class="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0"></span>
-              Nom de l'entreprise
+              Nom du projet
             </label>
             <input
               id="name"
@@ -152,7 +152,7 @@
             <div>
               <p class="text-sm text-primary-900 font-semibold">Information</p>
               <p class="text-sm text-primary-700">
-                Vous pourrez ajouter des images (couverture et galerie) après avoir créé l'entreprise.
+                Vous pourrez ajouter des images (couverture et galerie) après avoir créé le projet.
               </p>
             </div>
           </div>
@@ -198,7 +198,7 @@
 
           <div class="bg-gray-50/50 rounded-xl p-4 md:p-6 border-2 border-dashed border-gray-200">
             <div class="flex items-center justify-between mb-3">
-              <div class="text-xs md:text-sm font-semibold text-gray-700">Logo de l'entreprise</div>
+              <div class="text-xs md:text-sm font-semibold text-gray-700">Logo du projet</div>
               @if (venture()?.logo && !showLogoUpload()) {
               <button
                 type="button"
@@ -274,7 +274,7 @@
       <div class="mb-8">
         <div class="flex items-center gap-2 mb-4">
           <div class="h-6 w-1 bg-primary-500 rounded-full"></div>
-          <h2 class="text-base md:text-lg font-bold text-gray-900">Détails de l'entreprise</h2>
+          <h2 class="text-base md:text-lg font-bold text-gray-900">Détails du projet</h2>
         </div>
         <div class="space-y-4 md:space-y-6">
           <div class="space-y-2 group">
@@ -282,14 +282,14 @@
               for="description"
               class="text-xs md:text-sm font-semibold text-gray-700 flex items-center gap-1.5 group-focus-within:text-primary-600 transition-colors">
               <span class="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0"></span>
-              Description de l'entreprise
+              Description du projet
             </label>
             <textarea
               id="description"
               formControlName="description"
               rows="4"
               class="w-full px-3 md:px-4 py-2.5 md:py-3 text-sm md:text-base rounded-lg border border-gray-300 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none transition-all resize-none"
-              placeholder="Décrivez votre entreprise..."></textarea>
+              placeholder="Décrivez votre projet..."></textarea>
             @if (form.get('description')?.invalid && form.get('description')?.touched) {
             <p class="text-red-500 text-xs mt-1 flex items-center gap-1">
               <span class="material-icons text-sm">error</span>

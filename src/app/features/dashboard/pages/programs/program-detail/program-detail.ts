@@ -110,9 +110,9 @@ export class ProgramDetail implements OnInit {
     if (ventures.length === 0) {
       this.confirmIcon.set('alert');
       this.confirmationService.confirm({
-        header: 'Aucune entreprise',
-        message: 'Vous devez créer une entreprise avant de pouvoir postuler à un programme.',
-        acceptLabel: 'Créer une entreprise',
+        header: 'Aucun projet',
+        message: 'Vous devez créer un projet avant de pouvoir postuler à un programme.',
+        acceptLabel: 'Créer un projet',
         rejectLabel: 'Annuler',
         acceptButtonStyleClass: 'p-button-primary',
         accept: () => {
@@ -139,7 +139,7 @@ export class ProgramDetail implements OnInit {
       this.confirmIcon.set('info');
       this.confirmationService.confirm({
         header: 'Candidature existante',
-        message: 'Vous avez déjà postulé à ce programme avec cette entreprise.',
+        message: 'Vous avez déjà postulé à ce programme avec ce projet.',
         rejectVisible: false,
         acceptLabel: 'Compris'
       });

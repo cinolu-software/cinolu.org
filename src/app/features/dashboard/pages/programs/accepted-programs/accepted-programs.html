@@ -1,260 +1,120 @@
-<div>
-  <div class="dashboard-section mb-8">
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-6">
-      <div>
-        <div class="flex items-center gap-3 mb-3">
-          <div
-            class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-400/90 to-primary-500/85 flex items-center justify-center shadow-lg">
-            <span class="material-icons text-white text-2xl">check_circle</span>
-          </div>
-          <h1 class="text-2xl font-bold text-slate-900">Programmes Acceptés</h1>
-        </div>
-        <p class="text-slate-600">Suivez votre progression dans les programmes à phases multiples</p>
-      </div>
-    </div>
-
-    @if (!participationsStore.isLoading() && stats().total > 0) {
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-      <div class="bg-white rounded-lg border border-slate-200 p-4">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center">
-            <span class="material-icons text-primary-600">folder_open</span>
-          </div>
-          <div>
-            <p class="text-2xl font-bold text-slate-900">{{ stats().total }}</p>
-            <p class="text-xs text-slate-600">Programme{{ stats().total > 1 ? 's' : '' }}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-primary-50 rounded-lg border border-primary-200 p-4">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-lg bg-primary-100 flex items-center justify-center">
-            <span class="material-icons text-primary-600">verified</span>
-          </div>
-          <div>
-            <p class="text-2xl font-bold text-primary-900">{{ stats().validated }}</p>
-            <p class="text-xs text-primary-700">Validé{{ stats().validated > 1 ? 's' : '' }}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-blue-50 rounded-lg border border-blue-200 p-4">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
-            <span class="material-icons text-blue-600">pending_actions</span>
-          </div>
-          <div>
-            <p class="text-2xl font-bold text-blue-900">{{ stats().inProgress }}</p>
-            <p class="text-xs text-blue-700">En cours</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-gradient-to-br from-primary-50 to-primary-50 rounded-lg border border-primary-200 p-4">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center">
-            <span class="material-icons text-primary-600">trending_up</span>
-          </div>
-          <div>
-            <p class="text-2xl font-bold text-slate-900">{{ stats().averageProgress }}%</p>
-            <p class="text-xs text-slate-600">Progression moy.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    }
-  </div>
+<div class="w-full mx-auto py-8">
+  <header class="mb-8">
+    <h1 class="text-xl font-bold text-slate-900">Programmes acceptés</h1>
+    <p class="text-sm text-slate-600 mt-1">Suivez votre progression et accédez au détail ou à la roadmap</p>
+  </header>
 
   @if (participationsStore.isLoading()) {
-  <div class="flex items-center justify-center py-20">
-    <div class="text-center">
-      <i class="pi pi-spin pi-spinner text-4xl text-primary-600 mb-4"></i>
-      <p class="text-slate-600">Analyse de vos programmes en cours...</p>
+  <div class="flex justify-center py-16 text-slate-500 text-sm">Chargement...</div>
+  } @else if (validParticipations().length > 0) { @if (stats().total > 0) {
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div class="w-full bg-white rounded-lg border border-slate-200 p-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center">
+          <span class="material-icons text-primary-600">folder_open</span>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-slate-900">{{ stats().total }}</p>
+          <p class="text-xs text-slate-600">Programme{{ stats().total > 1 ? 's' : '' }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="w-full bg-primary-50 rounded-lg border border-primary-200 p-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-primary-100 flex items-center justify-center">
+          <span class="material-icons text-primary-600">verified</span>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-primary-900">{{ stats().validated }}</p>
+          <p class="text-xs text-primary-700">Validé{{ stats().validated > 1 ? 's' : '' }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="w-full bg-blue-50 rounded-lg border border-blue-200 p-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+          <span class="material-icons text-blue-600">pending_actions</span>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-blue-900">{{ stats().inProgress }}</p>
+          <p class="text-xs text-blue-700">En cours</p>
+        </div>
+      </div>
+    </div>
+    <div class="w-full bg-slate-50 rounded-lg border border-slate-200 p-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-white border border-slate-200 flex items-center justify-center">
+          <span class="material-icons text-slate-600">trending_up</span>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-slate-900">{{ stats().averageProgress }}%</p>
+          <p class="text-xs text-slate-600">Progression moy.</p>
+        </div>
+      </div>
     </div>
   </div>
-  } @else if (validParticipations().length > 0) {
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  }
+  <ul class="space-y-3 w-full">
     @for (participation of validParticipations(); track participation.id) { @let analysis = getAnalysis(participation);
     @let config = getConfig(participation);
-
-    <div
-      class="bg-white rounded-xl border-2 transition-all duration-300 overflow-hidden group hover:shadow-xl"
-      [ngClass]="config.borderClasses">
-      <div class="px-6 py-3 flex items-center justify-between" [ngClass]="config.classes">
-        <div class="flex items-center gap-2">
-          <span class="material-icons text-lg">{{ config.icon }}</span>
-          <span class="font-semibold text-sm">{{ config.label }}</span>
-        </div>
-        <div class="text-xs font-bold">{{ analysis.completedPhases }}/{{ analysis.totalProjectPhases }} phases</div>
-      </div>
-
-      <div class="p-6">
-        <div class="flex gap-4 mb-4">
-          <div class="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-slate-100">
-            @if (participation.project.cover) {
-            <img
-              [src]="participation.project | apiIMG : 'project'"
-              [alt]="participation.project.name"
-              class="w-full h-full object-cover" />
-            } @else {
-            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-              <span class="material-icons text-2xl text-slate-400">folder_open</span>
-            </div>
-            }
-          </div>
-
-          <div class="flex-1">
-            <h3 class="text-lg font-bold text-slate-900 mb-1 line-clamp-1">{{ participation.project.name }}</h3>
-            <div class="flex items-center gap-2 text-sm text-slate-600 mb-2">
-              <span class="material-icons text-sm">business</span>
-              <span class="line-clamp-1">{{ participation.venture.name }}</span>
-            </div>
-
-            <div
-              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold border"
-              [ngClass]="config.badgeClasses">
-              <span class="material-icons text-xs">{{ config.icon }}</span>
-              {{ formatProgress(analysis.progressPercentage) }} @if (isRecentPhase(analysis.currentPhase)) {
-              <span class="relative flex h-1.5 w-1.5 ml-1">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-current opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-current"></span>
+    <li class="w-full">
+      <div
+        class="w-full bg-white border rounded-lg p-4 hover:shadow-sm transition-shadow"
+        [ngClass]="config.borderClasses">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div class="flex-1 min-w-0">
+            <h3 class="font-bold text-slate-900 truncate">{{ participation.project.name }}</h3>
+            <p class="text-sm text-slate-500 truncate">{{ participation.venture.name }}</p>
+            <div class="mt-2 flex items-center gap-2 flex-wrap">
+              <span
+                class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium"
+                [ngClass]="config.badgeClasses">
+                <span class="material-icons text-sm">{{ config.icon }}</span>
+                {{ config.label }}
               </span>
-              }
+              <span class="text-xs text-slate-500"
+                >{{ analysis.completedPhases }}/{{ analysis.totalProjectPhases }} phases</span
+              >
             </div>
           </div>
-        </div>
-
-        <div class="mb-4">
-          <div class="flex items-center justify-between text-xs text-slate-600 mb-1.5">
-            <span class="font-medium">Progression</span>
-            <span class="font-bold" [ngClass]="config.classes">{{ formatProgress(analysis.progressPercentage) }}</span>
-          </div>
-          <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
-            <div
-              class="h-full rounded-full transition-all duration-500 ease-out"
-              [ngClass]="config.classes"
-              [style.width.%]="analysis.progressPercentage"></div>
-          </div>
-          @if (analysis.remainingPhases > 0) {
-          <p class="text-xs text-slate-500 mt-1">
-            {{ analysis.remainingPhases }} phase{{ analysis.remainingPhases > 1 ? 's' : '' }} restante{{
-            analysis.remainingPhases > 1 ? 's' : '' }}
-          </p>
-          }
-        </div>
-
-        @if (analysis.currentPhase) {
-        <div class="rounded-lg p-3 mb-4 border" [ngClass]="config.classes + ' ' + config.badgeClasses">
-          <div class="flex items-center gap-2 mb-1">
-            <span class="material-icons text-sm">flag</span>
-            <span class="text-xs font-bold uppercase tracking-wide">Phase actuelle</span>
-          </div>
-          <p class="font-semibold text-sm">{{ analysis.currentPhase.name }}</p>
-          @if (analysis.currentPhase.description) {
-          <p class="text-xs mt-1 opacity-80 line-clamp-2">{{ analysis.currentPhase.description }}</p>
-          }
-        </div>
-        }
-
-        <p class="text-slate-600 text-sm mb-4 line-clamp-2">{{ participation.project.description }}</p>
-
-        <div class="grid grid-cols-2 gap-3 mb-4">
-          @if (participation.project.duration_hours) {
-          <div class="bg-slate-50 rounded-lg p-3 flex items-center gap-2">
-            <span class="material-icons text-slate-600 text-lg">schedule</span>
-            <div>
-              <p class="text-xs text-slate-500">Durée</p>
-              <p class="font-semibold text-slate-900 text-sm">{{ participation.project.duration_hours }}h</p>
+          <div class="sm:w-24 flex items-center gap-2">
+            <div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden min-w-[60px]">
+              <div
+                class="h-full rounded-full transition-all"
+                [ngClass]="config.classes"
+                [style.width.%]="analysis.progressPercentage"></div>
             </div>
+            <span class="text-xs font-bold text-slate-700 w-8">{{ analysis.progressPercentage }}%</span>
           </div>
-          } @if (participation.project.started_at) {
-          <div class="bg-slate-50 rounded-lg p-3 flex items-center gap-2">
-            <span class="material-icons text-slate-600 text-lg">event</span>
-            <div>
-              <p class="text-xs text-slate-500">Début</p>
-              <p class="font-semibold text-slate-900 text-sm">
-                {{ participation.project.started_at | date: 'dd/MM/yyyy' }}
-              </p>
-            </div>
+          <div class="flex gap-2 flex-shrink-0">
+            <a
+              [routerLink]="['/dashboard/programs/', participation.project.slug, 'roadmap']"
+              class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg transition-colors">
+              Roadmap
+            </a>
+            <a
+              [routerLink]="['/dashboard/programs/', participation.project.slug]"
+              class="px-4 py-2 border border-slate-200 hover:border-primary-400 hover:bg-primary-50 text-slate-700 text-sm font-medium rounded-lg transition-colors">
+              Détail
+            </a>
           </div>
-          }
-        </div>
-
-        <div class="flex gap-2 pt-4 border-t border-slate-100">
-          <a
-            [routerLink]="['/dashboard/programs/', participation.project.slug, 'roadmap']"
-            class="flex-1 px-4 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white rounded-lg font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2">
-            <span class="material-icons text-sm">route</span>
-            Feuille de route
-          </a>
-          <a
-            [routerLink]="['/dashboard/programs/', participation.project.slug]"
-            class="px-4 py-2.5 border-2 border-slate-200 hover:border-primary-500 hover:bg-primary-50 text-slate-700 hover:text-primary-700 rounded-lg font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2">
-            <span class="material-icons text-sm">info</span>
-            Détails
-          </a>
         </div>
       </div>
-    </div>
+    </li>
     }
-  </div>
-
-  @if (stats().validated > 0) {
-  <div class="mt-8 bg-gradient-to-r from-primary-50 to-primary-50 rounded-lg p-6 border border-primary-200">
-    <div class="flex items-center gap-3 mb-4">
-      <span class="material-icons text-primary-600 text-2xl">celebration</span>
-      <h3 class="text-lg font-bold text-slate-900">Excellent travail !</h3>
-    </div>
-    <p class="text-slate-700">
-      Vous avez complété
-      <span class="font-bold text-primary-700">
-        {{ stats().validated }} programme{{ stats().validated > 1 ? 's' : '' }}
-      </span>
-      avec succès. Continuez sur cette lancée !
+  </ul>
+  } @else {
+  <div class="text-center py-16 bg-slate-50 rounded-lg border border-dashed border-slate-200">
+    <span class="material-icons text-4xl text-slate-300 mb-3 block">folder_open</span>
+    <p class="font-medium text-slate-700 mb-1">Aucun programme accepté</p>
+    <p class="text-sm text-slate-500 mb-6">
+      Les programmes avec phases apparaîtront ici une fois votre candidature acceptée.
     </p>
-  </div>
-  } } @else {
-  <div class="text-center py-20">
-    <div
-      class="w-24 h-24 rounded-full bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center mx-auto mb-4">
-      <span class="material-icons text-5xl text-primary-500">filter_alt</span>
-    </div>
-    <h3 class="text-lg font-semibold text-slate-900 mb-2">Aucun programme à phases multiples</h3>
-    <p class="text-slate-600 mb-6">
-      Vous n'avez pas encore accès à des programmes structurés en phases.<br />
-      Les programmes avec une seule phase n'apparaissent pas ici.
-    </p>
-
-    @if (participationsStore.participations().length > 0) {
-    <div class="max-w-md mx-auto mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-      <div class="flex items-center gap-2 text-blue-700 text-sm">
-        <span class="material-icons text-sm">info</span>
-        <span>
-          <strong>{{ participationsStore.participations().length }}</strong>
-          participation{{ participationsStore.participations().length > 1 ? 's' : '' }} {{
-          participationsStore.participations().length > 1 ? 'trouvées' : 'trouvée' }}, mais {{
-          participationsStore.participations().length > 1 ? 'aucune ne correspond' : 'elle ne correspond pas' }} aux
-          critères (>1 phase requise)
-        </span>
-      </div>
-    </div>
-    }
-
-    <div class="flex gap-3 justify-center">
-      <a
-        routerLink="/dashboard/programs/discover"
-        class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors duration-200">
-        <span class="material-icons">explore</span>
-        Découvrir des programmes
-      </a>
-      <a
-        routerLink="/dashboard/programs/my-applications"
-        class="inline-flex items-center gap-2 px-6 py-3 border border-slate-300 text-slate-700 rounded-lg font-medium hover:bg-slate-50 transition-colors duration-200">
-        <span class="material-icons">folder_open</span>
-        Mes candidatures
-      </a>
-    </div>
+    <a
+      routerLink="/dashboard/programs/discover"
+      class="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700">
+      Découvrir les programmes
+    </a>
   </div>
   }
 </div>

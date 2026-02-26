@@ -20,27 +20,27 @@ export const dashboardRoutes: Routes = [
       },
       {
         path: 'entreprises',
-        title: 'Entreprises',
+        title: 'Mes Projets',
         loadComponent: () => import('./pages/ventures/ventures-list/ventures-list').then((c) => c.VenturesUnified)
       },
       {
         path: 'ventures',
-        title: 'Mes Entreprises',
+        title: 'Mes Projets',
         loadComponent: () => import('./pages/ventures/ventures-list/ventures-list').then((c) => c.VenturesUnified)
       },
       {
         path: 'ventures/create',
-        title: 'Créer une Entreprise',
+        title: 'Créer un projet',
         loadComponent: () => import('./pages/ventures/venture-form/venture-form').then((c) => c.VentureForm)
       },
       {
         path: 'ventures/edit/:slug',
-        title: 'Modifier une Entreprise',
+        title: 'Modifier le projet',
         loadComponent: () => import('./pages/ventures/venture-form/venture-form').then((c) => c.VentureForm)
       },
       {
         path: 'ventures/:slug',
-        title: "Détails de l'Entreprise",
+        title: 'Détails du projet',
         loadComponent: () => import('./pages/ventures/venture-details/venture-details').then((c) => c.VentureDetails)
       },
       {

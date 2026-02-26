@@ -66,7 +66,7 @@ export const VenturesStore = signalStore(
             catchError((err) => {
               patchState(store, { isLoading: false });
               if (err.status === 404) {
-                _toast.showError('Entreprise introuvable');
+                _toast.showError('Projet introuvable');
                 _router.navigate(['/dashboard/ventures']);
               } else {
                 _toast.showError(err.error?.message || 'Erreur lors du chargement');
@@ -88,7 +88,7 @@ export const VenturesStore = signalStore(
                 ventures: [venture, ...store.ventures()],
                 isLoading: false
               });
-              _toast.showSuccess('Entreprise créée avec succès');
+              _toast.showSuccess('Projet créé avec succès');
               _router.navigate(['/dashboard/ventures']);
               onSuccess?.(venture);
             }),
@@ -113,7 +113,7 @@ export const VenturesStore = signalStore(
                 selectedVenture: updated,
                 isLoading: false
               });
-              _toast.showSuccess('Entreprise mise à jour');
+              _toast.showSuccess('Projet mis à jour');
               onSuccess?.();
               _router.navigate(['/dashboard/ventures', updated.slug]);
             }),
