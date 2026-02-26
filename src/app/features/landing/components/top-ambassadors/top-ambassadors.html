@@ -84,11 +84,12 @@
       <div
         [class]="getMosaicClasses(i)"
         class="relative overflow-hidden rounded-lg border border-dashed border-slate-200 bg-slate-50/80 flex flex-col items-center justify-center gap-3 opacity-70">
-        <span
-          class="size-16 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 text-2xl font-bold"
-          >?</span
+        <div class="size-16 rounded-full bg-slate-100 border-2 border-slate-200 flex items-center justify-center">
+          <i-lucide [name]="icons.userCircle" class="text-slate-400 size-10" />
+        </div>
+        <span class="text-slate-500 text-sm font-medium text-center px-4"
+          >{{ 'ambassadors.landing.availableSlot' | translate }}</span
         >
-        <span class="text-slate-400 text-sm font-medium">{{ 'ambassadors.landing.availableSlot' | translate }}</span>
       </div>
       } }
 

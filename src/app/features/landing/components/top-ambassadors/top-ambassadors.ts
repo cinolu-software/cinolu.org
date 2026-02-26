@@ -2,7 +2,7 @@ import { Component, inject, ChangeDetectionStrategy, computed } from '@angular/c
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { LucideAngularModule, Crown, MoveRight } from 'lucide-angular';
+import { LucideAngularModule, Crown, MoveRight, UserCircle } from 'lucide-angular';
 import { AmbassadorsStore } from '../../../ambassadors/store/ambassadors.store';
 import { getInitials } from '../../../../shared/helpers/ambassador.helpers';
 import { IUser } from '../../../../shared/models';
@@ -24,7 +24,8 @@ export class TopAmbassadors {
 
   icons = {
     crown: Crown,
-    MoveRight: MoveRight
+    MoveRight: MoveRight,
+    userCircle: UserCircle
   };
 
   store = {
