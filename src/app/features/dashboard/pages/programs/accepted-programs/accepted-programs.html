@@ -183,11 +183,16 @@
 
         <div class="flex gap-2 pt-4 border-t border-slate-100">
           <a
+            [routerLink]="['/dashboard/programs/', participation.project.slug, 'roadmap']"
+            class="flex-1 px-4 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white rounded-lg font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2">
+            <span class="material-icons text-sm">route</span>
+            Feuille de route
+          </a>
+          <a
             [routerLink]="['/dashboard/programs/', participation.project.slug]"
-            class="flex-1 px-4 py-2.5 text-white rounded-lg font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-sm"
-            [ngClass]="analysis.isComplete ? 'bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800' : 'bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800'">
-            <span class="material-icons text-sm">launch</span>
-            {{ analysis.isComplete ? 'Programme terminé' : 'Accéder au programme' }}
+            class="px-4 py-2.5 border-2 border-slate-200 hover:border-primary-500 hover:bg-primary-50 text-slate-700 hover:text-primary-700 rounded-lg font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2">
+            <span class="material-icons text-sm">info</span>
+            Détails
           </a>
         </div>
       </div>
