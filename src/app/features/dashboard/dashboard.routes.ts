@@ -19,11 +19,6 @@ export const dashboardRoutes: Routes = [
         loadComponent: () => import('./pages/overview/overview').then((c) => c.DashboardOverview)
       },
       {
-        path: 'entreprises',
-        title: 'Mes Projets',
-        loadComponent: () => import('./pages/ventures/ventures-list/ventures-list').then((c) => c.VenturesUnified)
-      },
-      {
         path: 'ventures',
         title: 'Mes Projets',
         loadComponent: () => import('./pages/ventures/ventures-list/ventures-list').then((c) => c.VenturesUnified)

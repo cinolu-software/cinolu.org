@@ -40,7 +40,7 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
         id: 'entreprises',
         label: 'Mes Projets',
         icon: 'business_center',
-        path: '/dashboard/entreprises',
+        path: '/dashboard/ventures',
         tooltip: 'Accéder à Mes Projets et Produits'
       }
     ]
@@ -217,11 +217,7 @@ export function isMenuActive(item: MenuItem, currentPath: string): boolean {
   if (item.path && currentPath === item.path) return true;
 
   if (item.id === 'entreprises') {
-    return (
-      currentPath === '/dashboard/entreprises' ||
-      currentPath.startsWith('/dashboard/ventures') ||
-      currentPath.startsWith('/dashboard/products')
-    );
+    return currentPath.startsWith('/dashboard/ventures') || currentPath.startsWith('/dashboard/products');
   }
 
   if (item.children) {
