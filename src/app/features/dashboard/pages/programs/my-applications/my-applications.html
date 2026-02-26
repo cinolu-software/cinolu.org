@@ -74,7 +74,7 @@
 
               @if (hasMultiplePhases(participation)) {
               <span class="text-xs text-slate-500 font-medium">
-                Phase {{ getPhaseCount(participation) }}/{{ participation.project.phases?.length || 0 }}
+                Phase {{ getPhaseCount(participation) }}/{{ participation.project.phases.length || 0 }}
               </span>
               }
             </div>
