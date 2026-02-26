@@ -9,12 +9,10 @@ import { Onestop } from '../components/onestop/onestop';
 import { Services } from '../components/services/services';
 import { Hero } from '../components/hero/hero';
 import { TopAmbassadors } from '../components/top-ambassadors/top-ambassadors';
-import { CinoluCompare } from '../components/cinolu-compare/cinolu-compare';
 
 @Component({
   selector: 'app-landing',
   imports: [
-    CinoluCompare,
     RecentProjects,
     RecentEvents,
     Networks,
