@@ -86,7 +86,7 @@ export interface IProject extends IBase {
   gallery: IImage[];
   metrics: IMetric[];
   participants: IUser[];
-  phases?: IPhase[];
+  phases: IPhase[];
 }
 
 export interface IEvent extends IBase {
@@ -198,74 +198,27 @@ export type HighlightItem =
 export interface IPhase extends IBase {
   name: string;
   description: string;
-  order: number;
   started_at: Date;
   ended_at: Date;
-  is_active: boolean;
-  project: IProject;
-  resources?: IResource[];
+  deliverables: IDeliverable[];
 }
 
-export type ResourceType = 'PDF' | 'LINK' | 'IMAGE' | 'OTHER';
-
-export interface IResource extends IBase {
+export interface IDeliverable extends IBase {
   title: string;
-  url: string;
-  type: ResourceType;
-  phase: IPhase;
-  project: IProject;
+  description: string;
 }
 
-export type PhaseFormFieldType =
-  | 'SHORT_TEXT'
-  | 'LONG_TEXT'
-  | 'EMAIL'
-  | 'PHONE'
-  | 'NUMBER'
-  | 'DATE'
-  | 'DROPDOWN'
-  | 'MULTI_SELECT'
-  | 'CHECKBOX'
-  | 'RADIO'
-  | 'FILE_UPLOAD'
-  | 'text'
-  | 'textarea'
-  | 'email'
-  | 'phone'
-  | 'number'
-  | 'date'
-  | 'select'
-  | 'dropdown'
-  | 'multiselect'
-  | 'multi_select'
-  | 'radio'
-  | 'checkbox'
-  | 'file'
-  | 'file_upload';
-
-export interface IFormFieldOption {
-  label: string;
-  value: string;
-}
-
-export interface IFormField {
-  id: string;
-  label: string;
-  type: PhaseFormFieldType;
-  required: boolean;
-  placeholder?: string;
-  helperText?: string;
-  description?: string;
-  options?: IFormFieldOption[];
-  validation?: Record<string, unknown>;
-}
-
-export interface IForm extends IBase {
-  title: string;
-  description?: string;
-  is_active: boolean;
-  phase: IPhase | string;
-  fields: IFormField[];
+/** Soumission d’un livrable par un candidat (version, fichier, date). */
+export interface IDeliverableSubmission extends IBase {
+  phase?: { id: string };
+  deliverable?: { id: string };
+  participation?: { id: string };
+  version: number;
+  file_url: string;
+  file_name: string;
+  file_type: string;
+  file_size: number;
+  submitted_at: string;
 }
 
 export interface FAQItem {
