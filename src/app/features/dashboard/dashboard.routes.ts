@@ -108,6 +108,11 @@ export const dashboardRoutes: Routes = [
           import('./pages/programs/accepted-programs/accepted-programs').then((c) => c.AcceptedPrograms)
       },
       {
+        path: 'programs/:slug/roadmap',
+        title: 'Feuille de route',
+        loadComponent: () => import('./pages/programs/program-roadmap/program-roadmap').then((c) => c.ProgramRoadmap)
+      },
+      {
         path: 'programs/:slug',
         title: 'Détail du Programme',
         loadComponent: () => import('./pages/programs/program-detail/program-detail').then((c) => c.ProgramDetail)
