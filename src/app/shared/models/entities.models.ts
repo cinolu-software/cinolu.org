@@ -224,7 +224,7 @@ export interface IDeliverableSubmission extends IBase {
 export interface FAQItem {
   question: string;
   answer: string;
-  category: 'general' | 'programs' | 'events' | 'entrepreneurs' | 'technical';
+  category: 'general' | 'programs' | 'events' | 'entrepreneurs' | 'technical' | 'dashboard';
   open?: boolean;
 }
 
