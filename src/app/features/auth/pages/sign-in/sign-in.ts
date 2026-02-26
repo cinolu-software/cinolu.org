@@ -5,6 +5,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { environment } from '@environments/environment';
+import { validateReturnUrl } from '@core/auth/auth-redirect.util';
 import { AuthCard } from '../../components/auth-card/auth-card';
 import { SignInStore } from '../../store/sign-in.store';
 import { Password } from 'primeng/password';
@@ -55,11 +56,11 @@ export class SignIn {
   onSignIn(): void {
     if (this.form.invalid) return;
 
-    const returnUrl = this.#route.snapshot.queryParams['returnUrl'] || '/dashboard';
+    const returnUrl = validateReturnUrl(this.#route.snapshot.queryParams['returnUrl']);
 
     this.store.signIn({
       payload: this.form.value,
-      onSuccess: () => true,
+      onSuccess: () => undefined,
       returnUrl
     });
   }

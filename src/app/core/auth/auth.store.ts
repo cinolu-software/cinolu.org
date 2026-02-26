@@ -7,6 +7,9 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from '../services/toast/toastr.service';
 
+/** Clé sessionStorage pour l’URL de redirection après login (route protégée demandée). */
+export const AUTH_REDIRECT_KEY = 'cinolu.auth.redirectUrl';
+
 interface IAuthStore {
   isLoading: boolean;
   user: IUser | null;
@@ -54,6 +57,35 @@ export const AuthStore = signalStore(
         )
       )
     ),
-    setUser: (user: IUser | null) => patchState(store, { user })
+    setUser: (user: IUser | null) => patchState(store, { user }),
+
+    /** Enregistre l’URL cible pour redirection après connexion (sessionStorage). */
+    setRedirectUrl: (url: string) => {
+      try {
+        sessionStorage.setItem(AUTH_REDIRECT_KEY, url);
+      } catch {
+        // sessionStorage indisponible (SSR, contexte privé)
+      }
+    },
+
+    /** Récupère l’URL cible enregistrée, ou null si absente / invalide. */
+    getRedirectUrl: (): string | null => {
+      try {
+        const url = sessionStorage.getItem(AUTH_REDIRECT_KEY);
+        if (url == null || url === '' || !url.startsWith('/')) return null;
+        return url;
+      } catch {
+        return null;
+      }
+    },
+
+    /** Supprime l’URL cible après redirection (évite réutilisation). */
+    clearRedirectUrl: () => {
+      try {
+        sessionStorage.removeItem(AUTH_REDIRECT_KEY);
+      } catch {
+        // no-op
+      }
+    }
   }))
 );
