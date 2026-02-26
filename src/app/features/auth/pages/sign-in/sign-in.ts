@@ -6,6 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { environment } from '@environments/environment';
 import { validateReturnUrl } from '@core/auth/auth-redirect.util';
+import { AuthStore } from '@core/auth/auth.store';
 import { AuthCard } from '../../components/auth-card/auth-card';
 import { SignInStore } from '../../store/sign-in.store';
 import { Password } from 'primeng/password';
@@ -36,6 +37,7 @@ import { FormManager } from '@shared/components/form-manager/form-manager';
 export class SignIn {
   #formBuilder: FormBuilder = inject(FormBuilder);
   #route = inject(ActivatedRoute);
+  #authStore = inject(AuthStore);
   form: FormGroup;
   store = inject(SignInStore);
 
@@ -66,6 +68,8 @@ export class SignIn {
   }
 
   signinWithGoogle(): void {
+    const returnUrl = validateReturnUrl(this.#route.snapshot.queryParams['returnUrl']);
+    this.#authStore.setRedirectUrl(returnUrl);
     window.location.replace(environment.apiUrl + 'auth/google');
   }
 }
