@@ -208,7 +208,6 @@ export interface IDeliverable extends IBase {
   description: string;
 }
 
-/** Soumission d’un livrable par un candidat (version, fichier, date). */
 export interface IDeliverableSubmission extends IBase {
   phase?: { id: string };
   deliverable?: { id: string };
@@ -346,8 +345,20 @@ export enum ParticipationStatus {
   REJECTED = 'rejected'
 }
 
+/** D’après l’API : un upvote est lié à un user (pour dériver hasUserVoted). */
+export interface IParticipationUpvote {
+  user: Pick<IUser, 'id'>;
+}
+
 export interface IParticipation extends IBase {
+  user?: IUser;
   project: IProject;
   phases?: IPhase[];
-  venture: IVenture;
+  venture: IVenture | null;
+  upvotes?: IParticipationUpvote[];
+}
+
+export interface IParticipationWithVote extends IParticipation {
+  voteCount: number;
+  hasUserVoted: boolean;
 }
