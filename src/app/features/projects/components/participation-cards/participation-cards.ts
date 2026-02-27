@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { LucideAngularModule, ThumbsUp, Check, MapPin, Building2, Layers, Trash } from 'lucide-angular';
+import { LucideAngularModule, ThumbsUp, Check, MapPin, Building2, Layers } from 'lucide-angular';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthStore } from '@core/auth/auth.store';
@@ -29,14 +29,7 @@ export class ParticipationCards {
   voteClos = computed(() => !this.canVote());
   isAuthenticated = computed(() => this.authStore.user() != null);
 
-  icons = {
-    thumbsUp: ThumbsUp,
-    check: Check,
-    mapPin: MapPin,
-    building2: Building2,
-    layers: Layers,
-    trash: Trash
-  };
+  icons = { thumbsUp: ThumbsUp, check: Check, mapPin: MapPin, building2: Building2, layers: Layers };
 
   onVoteClick(participationId: string): void {
     if (!this.isAuthenticated()) {

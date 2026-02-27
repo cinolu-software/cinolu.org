@@ -1,5 +1,5 @@
 <ul class="grid gap-6 sm:grid-cols-2">
-  @for (p of participationsStore.participations(); track p.id) {
+  @for (p of participationsStore.participations(); track p.id) { @if (p.venture) {
   <li>
     <article
       class="h-full flex flex-col rounded-lg border border-gray-200 bg-white overflow-hidden transition-shadow duration-200 hover:shadow-md">
@@ -15,10 +15,10 @@
           <div class="min-w-0 flex-1">
             <h4 class="font-semibold text-gray-900 truncate">{{ p.user?.name ?? '—' }}</h4>
             <p class="text-sm text-gray-500 truncate mt-0.5">{{ p.user?.country ?? '—' }}</p>
-            @if (p.venture?.sector) {
+            @if (p.venture.sector || '—') {
             <span
               class="inline-block mt-2 px-2.5 py-1 rounded-full text-xs font-medium bg-primary-50 text-primary-700 border border-primary-100">
-              {{ p.venture?.sector }}
+              {{ p.venture.sector || '—' }}
             </span>
             }
           </div>
@@ -29,16 +29,16 @@
             <div class="w-9 h-9 shrink-0 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center">
               <i-lucide [name]="icons.building2" class="size-4 stroke-[1.5]"></i-lucide>
             </div>
-            <h3 class="font-bold text-gray-900 leading-tight">{{ p.venture?.name ?? '—' }}</h3>
+            <h3 class="font-bold text-gray-900 leading-tight">{{ p.venture.name || '—' }}</h3>
           </div>
-          @if (p.venture?.description) {
-          <p class="text-sm text-gray-600 leading-relaxed line-clamp-2">{{ p.venture?.description }}</p>
+          @if (p.venture.description) {
+          <p class="text-sm text-gray-600 leading-relaxed line-clamp-2">{{ p.venture.description || '—' }}</p>
           }
           <div class="flex flex-wrap gap-4 text-sm text-gray-500">
-            @if (p.venture?.location) {
+            @if (p.venture.location) {
             <span class="inline-flex items-center gap-1.5">
               <i-lucide [name]="icons.mapPin" class="size-3.5 text-gray-400"></i-lucide>
-              {{ p.venture?.location }}
+              {{ p.venture.location || '—' }}
             </span>
             } @if (p.phases?.length) {
             <span class="inline-flex items-center gap-1.5">
@@ -51,9 +51,9 @@
 
         <div class="mt-5 pt-5 border-t border-gray-100 space-y-4">
           <div class="flex flex-wrap items-center gap-3">
-            @if (p.venture?.slug) {
+            @if (p.venture.slug) {
             <a
-              [routerLink]="['/dashboard', 'ventures', p.venture?.slug]"
+              [routerLink]="['/dashboard', 'ventures', p.venture.slug]"
               class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2">
               <i-lucide [name]="icons.building2" class="size-4"></i-lucide>
               Voir l’entreprise
@@ -100,5 +100,5 @@
       </div>
     </article>
   </li>
-  }
+  } }
 </ul>
