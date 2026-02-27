@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { LucideAngularModule, UserRound, Users } from 'lucide-angular';
+import { LucideAngularModule, UserRound, Users, Sparkles } from 'lucide-angular';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { IVenture } from '@shared/models/entities.models';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
@@ -23,7 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OurEntrepreneurs implements OnInit {
-  icons = { users: Users, userRound: UserRound };
+  icons = { users: Users, userRound: UserRound, sparkles: Sparkles };
   venturesStore = inject(PublicVenturesStore);
 
   first = 0;
