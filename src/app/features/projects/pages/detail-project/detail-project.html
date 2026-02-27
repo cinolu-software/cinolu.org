@@ -2,579 +2,66 @@
   <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-white pt-[7.5rem] pb-20">
     @if (store.project(); as project) {
     <div class="space-y-16">
-      <header class="text-left space-y-6">
-        <div>
-          <h1 class="font-black font-satoshi text-4xl md:text-6xl text-gray-900 leading-tight tracking-tight">
-            {{ project.name | titlecase }}
-          </h1>
-          <p class="text-lg text-gray-500 mt-2">{{ 'project_detail.detail.subtitle' | translate }}</p>
-        </div>
-
-        @if (isProjectOpen()) {
-        <div
-          class="relative overflow-hidden rounded-lg bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 p-8 shadow-2xl">
-          <div
-            class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxIDAgNiAyLjY5IDYgNnMtMi42OSA2LTYgNi02LTIuNjktNi02IDIuNjktNiA2LTZ6TTI0IDQyYzMuMzEgMCA2IDIuNjkgNiA2cy0yLjY5IDYtNiA2LTYtMi42OS02LTYgMi42OS02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4xIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+')] opacity-20"></div>
-
-          <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="text-center md:text-left flex-1">
-              <div class="flex items-center justify-center md:justify-start gap-2 mb-3">
-                <span
-                  class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white text-sm font-semibold">
-                  <i-lucide [name]="icons.checkCircle2" class="size-4"></i-lucide>
-                  {{ projectStatus() }}
-                </span>
-              </div>
-              <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">
-                {{ 'project_detail.detail.cta_title' | translate }}
-              </h3>
-              <p class="text-primary-50 text-base md:text-lg max-w-2xl">
-                {{ 'project_detail.detail.cta_subtitle' | translate }}
-              </p>
-
-              <div
-                class="flex flex-wrap items-center justify-center md:justify-start gap-4 mt-4 text-sm text-primary-50">
-                @if (project.started_at) {
-                <div class="flex items-center gap-2">
-                  <i-lucide [name]="icons.calendarDays" class="size-4"></i-lucide>
-                  <span>{{ project.started_at | date: 'mediumDate' }}</span>
-                </div>
-                } @if (project.duration_hours) {
-                <div class="flex items-center gap-2">
-                  <i-lucide [name]="icons.hourglass" class="size-4"></i-lucide>
-                  <span>{{ project.duration_hours }}h</span>
-                </div>
-                }
-              </div>
-            </div>
-
-            <div class="flex flex-col gap-3">
-              <button
-                type="button"
-                class="group relative overflow-hidden px-8 py-4 rounded-lg bg-white text-primary-700 hover:bg-primary-50 transition-all duration-300 font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transform"
-                (click)="applyToProject()">
-                <span class="flex items-center justify-center gap-3">
-                  <i-lucide
-                    [name]="icons.userPlus"
-                    class="size-6 group-hover:scale-110 transition-transform"></i-lucide>
-                  <span>{{ 'project_detail.detail.apply_now' | translate }}</span>
-                </span>
-              </button>
-
-              <p class="text-xs text-primary-100 text-center">{{ 'project_detail.detail.cta_hint' | translate }}</p>
-            </div>
-          </div>
-        </div>
-        }
-      </header>
+      <app-project-detail-header
+        [project]="project"
+        [projectStatus]="projectStatus()"
+        [isProjectOpen]="isProjectOpen()"
+        (apply)="applyToProject()" />
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
         <aside class="md:sticky md:top-28 2xl:top-36 self-start z-10">
-          @if (project.gallery && project.gallery.length > 0) {
-          <p-galleria
-            [value]="project.gallery"
-            [autoPlay]="true"
-            [circular]="true"
-            [responsiveOptions]="responsiveOptions"
-            [numVisible]="5"
-            [containerStyle]="{ 'max-width': '640px' }"
-            class="rounded-lg shadow bg-white">
-            <ng-template pTemplate="item" let-img>
-              <figure class="relative h-80 md:h-[30rem] w-full rounded-md overflow-hidden">
-                <img
-                  [src]="img | apiIMG: 'gallery'"
-                  [alt]="img.image || project.name || 'gallery image'"
-                  class="object-cover w-full h-full transition-opacity duration-300 hover:opacity-95"
-                  loading="lazy"
-                  fill />
-              </figure>
-            </ng-template>
-
-            <ng-template pTemplate="thumbnail" let-img>
-              <img
-                [src]="img | apiIMG: 'gallery'"
-                [alt]="img.image || 'thumbnail'"
-                class="object-cover h-20 w-20 rounded-md hover:ring-2 ring-primary-400 transition-all duration-200"
-                loading="lazy" />
-            </ng-template>
-          </p-galleria>
-          } @else {
-          <figure class="relative w-full overflow-hidden h-80 md:h-[34rem] rounded-md shadow bg-gray-50">
-            <img
-              [src]="project | apiIMG: 'project'"
-              [alt]="project.name"
-              class="object-cover w-full h-full"
-              loading="lazy" />
-          </figure>
-          }
+          <app-project-detail-gallery [project]="project" />
         </aside>
 
         <div class="flex flex-col gap-10">
-          <div
-            class="bg-white rounded-lg border border-gray-200 overflow-hidden transition-shadow duration-200 hover:shadow-xl">
-            <div class="p-6">
-              <div class="mb-4 flex items-center gap-3 justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 text-primary-600">
-                    <i-lucide [name]="icons.fileText" class="size-5 stroke-[1.5]"></i-lucide>
-                  </div>
-                  <h2 class="text-lg font-bold text-gray-900">{{ 'project_detail.detail.description' | translate }}</h2>
-                </div>
+          <app-project-detail-collapsible
+            titleKey="project_detail.detail.description"
+            [content]="project.description"
+            [expanded]="expandedDescription()"
+            sectionId="project-description"
+            theme="primary"
+            (toggleChange)="toggleDescription()" />
+          <app-project-detail-collapsible
+            titleKey="project_detail.detail.selection_criteria"
+            [content]="project.selection_criteria"
+            [expanded]="expandedCriteria()"
+            sectionId="criteria-description"
+            theme="primary-check"
+            (toggleChange)="toggleCriteria()" />
+          <app-project-detail-collapsible
+            titleKey="project_detail.detail.objectives"
+            [content]="project.objectives"
+            [expanded]="expandedObjectives()"
+            sectionId="project-objectives"
+            theme="amber"
+            (toggleChange)="toggleObjectives()" />
+          <app-project-detail-collapsible
+            titleKey="project_detail.detail.context"
+            [content]="project.context"
+            [expanded]="expandedContext()"
+            sectionId="project-context"
+            theme="blue"
+            (toggleChange)="toggleContext()" />
 
-                <button
-                  type="button"
-                  class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-50 hover:bg-primary-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-400"
-                  (click)="toggleDescription()"
-                  [attr.aria-expanded]="expandedDescription()"
-                  aria-controls="project-description">
-                  <i-lucide
-                    [name]="icons.chevronUp"
-                    class="size-4 transition-transform duration-200"
-                    [ngClass]="expandedDescription() ? 'rotate-180 text-primary-600' : 'rotate-0 text-primary-500'" />
-                </button>
-              </div>
-
-              <div class="relative">
-                <p
-                  id="project-description"
-                  class="text-gray-700 leading-relaxed transition-all duration-300 ease-in-out overflow-hidden"
-                  [ngClass]="expandedDescription()
-                  ? 'max-h-[500px] opacity-100 bg-primary-50/20 rounded-md p-3 border border-primary-100'
-                  : 'max-h-[3.5em] opacity-90 line-clamp-2'">
-                  {{ project.description || ('project_detail.detail.empty' | translate) }}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="bg-white rounded-lg shadow border border-gray-200 overflow-hidden transition-shadow duration-200 hover:shadow-md">
-            <div class="p-6">
-              <div class="mb-4 flex items-center gap-3 justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 text-primary-600">
-                    <i-lucide [name]="icons.checkCircle2" class="size-5 stroke-[1.5]"></i-lucide>
-                  </div>
-                  <h2 class="text-lg font-bold text-gray-900">
-                    {{ 'project_detail.detail.selection_criteria' | translate }}
-                  </h2>
-                </div>
-
-                <button
-                  type="button"
-                  class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-50 hover:bg-primary-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-400"
-                  (click)="toggleCriteria()"
-                  [attr.aria-expanded]="expandedCriteria()"
-                  aria-controls="criteria-description">
-                  <i-lucide
-                    [name]="icons.chevronUp"
-                    class="size-4 transition-transform duration-200"
-                    [ngClass]="expandedCriteria() ? 'rotate-180 text-primary-600' : 'rotate-0 text-primary-500'" />
-                </button>
-              </div>
-
-              <div class="relative">
-                <p
-                  id="criteria-description"
-                  class="text-gray-700 leading-relaxed transition-all duration-300 ease-in-out overflow-hidden"
-                  [ngClass]="expandedCriteria()
-                  ? 'max-h-[500px] opacity-100 bg-primary-50/20 rounded-md p-3 border border-primary-100'
-                  : 'max-h-[3.5em] opacity-90 line-clamp-2'">
-                  {{ project.selection_criteria || ('project_detail.detail.empty' | translate) }}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="bg-white rounded-lg shadow border border-gray-200 overflow-hidden transition-shadow duration-200 hover:shadow-md">
-            <div class="p-6">
-              <div class="mb-4 flex items-center gap-3 justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
-                    <i-lucide [name]="icons.target" class="size-5 stroke-[1.5]"></i-lucide>
-                  </div>
-                  <h3 class="font-bold text-lg text-gray-900">{{ 'project_detail.detail.objectives' | translate }}</h3>
-                </div>
-
-                <button
-                  type="button"
-                  class="flex items-center justify-center w-8 h-8 rounded-full bg-amber-50 hover:bg-amber-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-amber-400"
-                  (click)="toggleObjectives()"
-                  [attr.aria-expanded]="expandedObjectives()"
-                  aria-controls="project-objectives">
-                  <i-lucide
-                    [name]="icons.chevronUp"
-                    class="size-4 transition-transform duration-200"
-                    [ngClass]="expandedObjectives() ? 'rotate-180 text-amber-600' : 'rotate-0 text-amber-500'" />
-                </button>
-              </div>
-
-              <div class="relative">
-                <p
-                  id="project-objectives"
-                  class="text-gray-700 leading-relaxed transition-all duration-300 ease-in-out overflow-hidden"
-                  [ngClass]="expandedObjectives()
-                  ? 'max-h-[500px] opacity-100 bg-amber-50/20 rounded-md p-3 border border-amber-100'
-                  : 'max-h-[3.5em] opacity-90 line-clamp-2'">
-                  {{ project.objectives || ('project_detail.detail.empty' | translate) }}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="bg-white rounded-lg shadow border border-gray-200 overflow-hidden transition-shadow duration-200 hover:shadow-md">
-            <div class="p-6">
-              <div class="mb-4 flex items-center gap-3 justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-                    <i-lucide [name]="icons.info" class="size-5 stroke-[1.5]"></i-lucide>
-                  </div>
-                  <h3 class="font-bold text-lg text-gray-900">{{ 'project_detail.detail.context' | translate }}</h3>
-                </div>
-
-                <button
-                  type="button"
-                  class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 hover:bg-blue-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  (click)="toggleContext()"
-                  [attr.aria-expanded]="expandedContext()"
-                  aria-controls="project-context">
-                  <i-lucide
-                    [name]="icons.chevronUp"
-                    class="size-4 transition-transform duration-200"
-                    [ngClass]="expandedContext() ? 'rotate-180 text-blue-600' : 'rotate-0 text-blue-500'" />
-                </button>
-              </div>
-
-              <div class="relative">
-                <p
-                  id="project-context"
-                  class="text-gray-700 leading-relaxed transition-all duration-300 ease-in-out overflow-hidden"
-                  [ngClass]="expandedContext()
-                  ? 'max-h-[500px] opacity-100 bg-blue-50/20 rounded-md p-3 border border-blue-100'
-                  : 'max-h-[3.5em] opacity-90 line-clamp-2'">
-                  {{ project.context || ('project_detail.detail.empty' | translate) }}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          @if (orderedPhases().length > 0) {
-          <div
-            class="bg-white rounded-lg shadow border border-gray-200 overflow-hidden transition-shadow duration-200 hover:shadow-md">
-            <div class="p-6">
-              <div class="flex items-center gap-3 mb-5">
-                <div class="w-10 h-10 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center">
-                  <i-lucide [name]="icons.layers" class="size-5 stroke-[1.5]"></i-lucide>
-                </div>
-                <h2 class="text-lg font-bold text-gray-900">Phases du programme</h2>
-              </div>
-              <ul class="space-y-4">
-                @for (phase of orderedPhases(); track phase.id; let i = $index) {
-                <li class="border border-gray-100 rounded-lg p-4 bg-gray-50/50 hover:bg-gray-50 transition-colors">
-                  <div class="flex flex-col sm:flex-row items-start gap-3">
-                    <span
-                      class="flex-shrink-0 w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-sm font-bold">
-                      {{ i + 1 }}
-                    </span>
-                    <div class="min-w-0 flex-1">
-                      <h3 class="font-semibold text-gray-900">{{ phase.name }}</h3>
-                      @if (phase.description) {
-                      <p class="text-gray-600 text-sm mt-1 leading-relaxed hyphens-none text-justify">
-                        {{ phase.description }}
-                      </p>
-                      }
-                      <div class="flex flex-wrap items-center gap-3 mt-2 text-xs text-gray-500">
-                        @if (phase.started_at) {
-                        <span class="flex items-center gap-1">
-                          <i-lucide [name]="icons.calendarDays" class="size-3.5"></i-lucide>
-                          {{ phase.started_at | date: 'dd/MM/yyyy' }}
-                        </span>
-                        } @if (phase.ended_at) {
-                        <span class="flex items-center gap-1">
-                          <i-lucide [name]="icons.calendarCheck" class="size-3.5"></i-lucide>
-                          {{ phase.ended_at | date: 'dd/MM/yyyy' }}
-                        </span>
-                        }
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                }
-              </ul>
-            </div>
-          </div>
-          }
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div
-              class="bg-white rounded-lg shadow border border-gray-200 p-5 transition-shadow duration-200 hover:shadow-md">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-9 h-9 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
-                  <i-lucide [name]="icons.hourglass" class="size-5 stroke-[1.5]"></i-lucide>
-                </div>
-                <h4 class="font-bold text-base text-gray-900">{{ 'project_detail.detail.duration' | translate }}</h4>
-              </div>
-              <p class="text-gray-700">
-                {{ project.duration_hours || ('project_detail.detail.empty' | translate) }} {{
-                'project_detail.detail.duration_hours' | translate }}
-              </p>
-            </div>
-            <div
-              class="bg-white rounded-lg shadow border border-gray-200 p-5 transition-shadow duration-200 hover:shadow-md">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-9 h-9 rounded-lg bg-pink-50 text-pink-600 flex items-center justify-center">
-                  <i-lucide [name]="icons.users" class="size-5 stroke-[1.5]"></i-lucide>
-                </div>
-                <h4 class="font-bold text-base text-gray-900">
-                  {{ 'project_detail.detail.participants' | translate }}
-                </h4>
-              </div>
-
-              <div class="flex flex-wrap gap-2">
-                @if (project.participants && project.participants.length > 0) { @for (participant of
-                project.participants; track participant.id) {
-                <span
-                  class="px-3 py-1.5 rounded-full bg-pink-50 border border-pink-200 text-gray-700 text-sm font-medium transition-colors duration-200 hover:bg-pink-100"
-                  >{{ participant.name }}</span
-                >
-                } } @else {
-                <span class="text-gray-500 text-sm italic"
-                  >{{ 'project_detail.detail.no_participant' | translate }}</span
-                >
-                }
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="bg-white rounded-lg shadow border border-gray-200 p-6 transition-shadow duration-200 hover:shadow-md">
-            <div class="flex items-center gap-3 mb-5">
-              <div class="w-10 h-10 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center">
-                <i-lucide [name]="icons.calendarDays" class="size-5 stroke-[1.5]"></i-lucide>
-              </div>
-              <h4 class="font-bold text-lg text-gray-900">{{ 'project_detail.detail.dates' | translate }}</h4>
-            </div>
-
-            <dl class="space-y-3">
-              <div class="flex items-center justify-between p-3 rounded-md bg-gray-50 border border-gray-200">
-                <dt class="font-medium text-gray-800 flex items-center gap-2">
-                  <i-lucide class="size-4 text-primary-600" [name]="icons.calendarDays"></i-lucide>
-                  {{ 'project_detail.detail.start' | translate }}
-                </dt>
-                <dd class="font-semibold text-gray-900">
-                  {{ project.started_at ? (project.started_at | date: 'longDate') : ('project_detail.detail.empty' |
-                  translate) }}
-                </dd>
-              </div>
-
-              <div class="flex items-center justify-between p-3 rounded-md bg-gray-50 border border-gray-200">
-                <dt class="font-medium text-gray-800 flex items-center gap-2">
-                  <i-lucide class="size-4 text-red-600" [name]="icons.calendarCheck"></i-lucide>
-                  {{ 'project_detail.detail.end' | translate }}
-                </dt>
-                <dd class="font-semibold text-gray-900">
-                  {{ project.ended_at ? (project.ended_at | date: 'longDate') : ('project_detail.detail.empty' |
-                  translate) }}
-                </dd>
-              </div>
-            </dl>
-          </div>
-
-          @if (project.categories && project.categories.length > 0) {
-          <div
-            class="bg-white rounded-lg shadow border border-gray-200 p-6 transition-shadow duration-200 hover:shadow-md">
-            <div class="flex items-start gap-3 mb-4">
-              <div class="w-10 h-10 rounded-lg bg-green-50 text-green-600 flex items-center justify-center">
-                <i-lucide [name]="icons.tag" class="size-5 stroke-[1.5]"></i-lucide>
-              </div>
-              <div>
-                <h3 class="font-bold text-lg text-gray-900">{{ 'project_detail.detail.categories' | translate }}</h3>
-                <p class="text-sm text-gray-600">
-                  {{ project.categories.length }} {{ 'project_detail.detail.categories_label' | translate }}
-                </p>
-              </div>
-            </div>
-
-            <div class="flex flex-wrap gap-2">
-              @for (cat of project.categories; track cat.id) {
-              <span
-                class="px-3 py-1.5 rounded-full bg-green-50 border border-green-200 text-sm text-gray-700 font-medium transition-colors duration-200 hover:bg-green-100"
-                >{{ cat.name || ('project_detail.detail.empty' | translate) }}</span
-              >
-              }
-            </div>
-          </div>
-          }
-
-          <div
-            class="bg-white rounded-lg shadow border border-gray-200 p-6 transition-shadow duration-200 hover:shadow-md">
-            <div class="flex flex-col gap-5">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
-                    <i-lucide [name]="icons.squaresSubtract" class="size-5 stroke-[1.5]"></i-lucide>
-                  </div>
-                  <div>
-                    <h3 class="font-bold text-lg text-gray-900">
-                      {{ 'project_detail.detail.actions_status' | translate }}
-                    </h3>
-                    <p class="text-sm text-gray-500">{{ 'project_detail.detail.quick_actions' | translate }}</p>
-                  </div>
-                </div>
-
-                <span
-                  class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-sm font-semibold"
-                  [ngClass]="statusBadgeClasses()">
-                  {{ projectStatus() }}
-                </span>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-all duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed font-semibold shadow-sm hover:shadow-md"
-                  (click)="addToCalendar()"
-                  [disabled]="projectStatus() === 'Terminé'">
-                  <i-lucide class="size-5" [name]="icons.calendarSync"></i-lucide>
-                  <span class="text-sm">{{ 'project_detail.detail.add_to_calendar' | translate }}</span>
-                </button>
-
-                <button
-                  type="button"
-                  class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 font-semibold"
-                  (click)="shareProject()">
-                  <i-lucide class="size-5" [name]="icons.share"></i-lucide>
-                  <span class="text-sm">{{ 'project_detail.detail.share_project' | translate }}</span>
-                </button>
-              </div>
-
-              @if (isProjectOpen()) {
-              <div class="pt-4 border-t border-gray-200">
-                <button
-                  type="button"
-                  class="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-all duration-200 font-bold shadow-md hover:shadow-lg"
-                  (click)="applyToProject()">
-                  <i-lucide class="size-5" [name]="icons.userPlus"></i-lucide>
-                  <span>{{ 'project_detail.detail.apply_now' | translate }}</span>
-                </button>
-                <p class="text-xs text-gray-500 text-center mt-2">{{ 'project_detail.detail.cta_hint' | translate }}</p>
-              </div>
-              }
-            </div>
-          </div>
+          <app-project-detail-phases [phases]="orderedPhases()" />
+          <app-project-detail-meta [project]="project" />
+          <app-project-detail-dates [project]="project" />
+          <app-project-detail-categories [project]="project" />
+          <app-project-detail-quick-actions
+            [project]="project"
+            [projectStatus]="projectStatus()"
+            [statusBadgeClasses]="statusBadgeClasses()"
+            [isProjectOpen]="isProjectOpen()"
+            (addToCalendar)="addToCalendar()"
+            (share)="shareProject()"
+            (apply)="applyToProject()" />
         </div>
       </div>
     </div>
     } @else if (store.isLoading()) {
     <app-project-skeleton />
     } @else {
-    <div class="min-h-[calc(100vh-7.5rem)] w-full flex items-center justify-center py-16 px-4">
-      <div class="max-w-2xl w-full">
-        <div class="relative">
-          <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
-            <div
-              class="w-96 h-96 rounded-full bg-gradient-to-br from-primary-200 via-primary-100 to-gray-100 blur-3xl"></div>
-          </div>
-
-          <div
-            class="relative bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden transition-all duration-500 hover:shadow-3xl">
-            <div class="h-2 bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700"></div>
-
-            <div class="p-12 md:p-16">
-              <div class="flex justify-center mb-8">
-                <div class="relative">
-                  <div class="absolute inset-0 rounded-full bg-red-100 animate-ping opacity-75"></div>
-                  <div
-                    class="relative w-24 h-24 rounded-full bg-gradient-to-br from-red-50 to-orange-50 border-4 border-red-100 flex items-center justify-center shadow-lg">
-                    <i-lucide
-                      [name]="icons.alertCircle"
-                      class="w-12 h-12 text-red-500 stroke-[1.5]"
-                      [attr.aria-hidden]="true"></i-lucide>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Contenu textuel -->
-              <div class="text-center space-y-4 mb-10">
-                <!-- Titre principal -->
-                <h1 class="text-4xl md:text-5xl font-black font-satoshi text-gray-900 tracking-tight">
-                  {{ 'project_detail.error.title' | translate }}
-                </h1>
-
-                <!-- Sous-titre -->
-                <p class="text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg mx-auto">
-                  {{ 'project_detail.error.subtitle' | translate }}
-                </p>
-
-                <!-- Message explicatif détaillé -->
-                <div class="mt-6 p-6 bg-gray-50 rounded-2xl border border-gray-200">
-                  <p class="text-sm text-gray-700 leading-relaxed">
-                    {{ 'project_detail.error.description' | translate }}
-                  </p>
-                </div>
-              </div>
-
-              <!-- Actions CTA -->
-              <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <!-- Action principale -->
-                <a
-                  routerLink="/programs"
-                  class="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:from-primary-700 hover:to-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300">
-                  <i-lucide [name]="icons.search" class="w-5 h-5 group-hover:scale-110 transition-transform"></i-lucide>
-                  <span>{{ 'project_detail.error.cta_primary' | translate }}</span>
-                </a>
-
-                <!-- Action secondaire -->
-                <a
-                  routerLink="/"
-                  class="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl border-2 border-gray-300 text-gray-700 font-semibold text-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-gray-200">
-                  <i-lucide
-                    [name]="icons.home"
-                    class="w-5 h-5 group-hover:-translate-x-1 transition-transform"></i-lucide>
-                  <span>{{ 'project_detail.error.cta_secondary' | translate }}</span>
-                </a>
-              </div>
-
-              <div class="mt-8 text-center">
-                <a
-                  routerLink="/programs"
-                  class="group inline-flex items-center gap-2 text-sm text-gray-500 hover:text-primary-600 transition-colors duration-200 font-medium">
-                  <i-lucide
-                    [name]="icons.arrowLeft"
-                    class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i-lucide>
-                  <span>{{ 'project_detail.error.back' | translate }}</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-12 py-8 border-t border-gray-200">
-              <p class="text-center text-sm text-gray-600 mb-4 font-semibold">
-                {{ 'project_detail.error.suggestions_title' | translate }}
-              </p>
-              <div class="flex flex-wrap justify-center gap-3">
-                <a
-                  routerLink="/programs"
-                  class="inline-flex items-center px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 text-sm font-medium hover:border-primary-300 hover:text-primary-600 hover:shadow-md transition-all duration-200">
-                  {{ 'project_detail.error.suggestion_programs' | translate }}
-                </a>
-                <a
-                  routerLink="/events"
-                  class="inline-flex items-center px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 text-sm font-medium hover:border-primary-300 hover:text-primary-600 hover:shadow-md transition-all duration-200">
-                  {{ 'project_detail.error.suggestion_events' | translate }}
-                </a>
-                <a
-                  routerLink="/contact-us"
-                  class="inline-flex items-center px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 text-sm font-medium hover:border-primary-300 hover:text-primary-600 hover:shadow-md transition-all duration-200">
-                  {{ 'project_detail.error.suggestion_contact' | translate }}
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-project-detail-error />
     }
 
     <div class="overflow-hidden mt-10">

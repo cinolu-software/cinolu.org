@@ -1,0 +1,35 @@
+@if (project().gallery && project().gallery.length > 0) {
+<p-galleria
+  [value]="project().gallery"
+  [autoPlay]="true"
+  [circular]="true"
+  [responsiveOptions]="responsiveOptions"
+  [numVisible]="5"
+  [containerStyle]="{ 'max-width': '640px' }"
+  class="rounded-lg shadow bg-white">
+  <ng-template pTemplate="item" let-img>
+    <figure class="relative h-80 md:h-[30rem] w-full rounded-md overflow-hidden">
+      <img
+        [src]="img | apiIMG: 'gallery'"
+        [alt]="img.image || project().name || 'gallery image'"
+        class="object-cover w-full h-full transition-opacity duration-300 hover:opacity-95"
+        loading="lazy" />
+    </figure>
+  </ng-template>
+  <ng-template pTemplate="thumbnail" let-img>
+    <img
+      [src]="img | apiIMG: 'gallery'"
+      [alt]="img.image || 'thumbnail'"
+      class="object-cover h-20 w-20 rounded-md hover:ring-2 ring-primary-400 transition-all duration-200"
+      loading="lazy" />
+  </ng-template>
+</p-galleria>
+} @else {
+<figure class="relative w-full overflow-hidden h-80 md:h-[34rem] rounded-md shadow bg-gray-50">
+  <img
+    [src]="project() | apiIMG: 'project'"
+    [alt]="project().name"
+    class="object-cover w-full h-full"
+    loading="lazy" />
+</figure>
+}

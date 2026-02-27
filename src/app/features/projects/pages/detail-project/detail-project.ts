@@ -1,55 +1,45 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, effect, inject, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
 import { ProjectSkeleton } from '../../components/project-skeleton/project-skeleton';
-import {
-  LucideAngularModule,
-  FileText,
-  CalendarDays,
-  CalendarCheck,
-  Tag,
-  CalendarSync,
-  Share2,
-  ChevronUp,
-  Target,
-  Info,
-  Hourglass,
-  CheckCircle2,
-  Users,
-  SquaresSubtract,
-  UserPlus,
-  AlertCircle,
-  Home,
-  ArrowLeft,
-  Search,
-  Layers,
-  ThumbsUp
-} from 'lucide-angular';
+import { LucideAngularModule, ThumbsUp } from 'lucide-angular';
 import { ProjectStore } from '../../store/project.store';
 import { formatDateForGoogleCalendarUTC, openExternalUrl } from '@shared/helpers';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-import { GalleriaModule } from 'primeng/galleria';
-import { carouselConfig } from '../../../landing/config/carousel.config';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthStore } from '@core/auth/auth.store';
 import { AuthRequiredModalComponent } from '@shared/components/auth-required-modal/auth-required-modal';
 import { ParticipationsStore } from '../../../dashboard/store/participations.store';
 import { VoteStore } from '../../../dashboard/store/vote.store';
 import { ParticipationCards } from '../../components/participation-cards/participation-cards';
+import { ProjectDetailHeaderComponent } from '../../components/project-detail-header/project-detail-header';
+import { ProjectDetailGalleryComponent } from '../../components/project-detail-gallery/project-detail-gallery';
+import { ProjectDetailCollapsibleComponent } from '../../components/project-detail-collapsible/project-detail-collapsible';
+import { ProjectDetailPhasesComponent } from '../../components/project-detail-phases/project-detail-phases';
+import { ProjectDetailMetaComponent } from '../../components/project-detail-meta/project-detail-meta';
+import { ProjectDetailDatesComponent } from '../../components/project-detail-dates/project-detail-dates';
+import { ProjectDetailCategoriesComponent } from '../../components/project-detail-categories/project-detail-categories';
+import { ProjectDetailQuickActionsComponent } from '../../components/project-detail-quick-actions/project-detail-quick-actions';
+import { ProjectDetailErrorComponent } from '../../components/project-detail-error/project-detail-error';
 
 @Component({
   selector: 'app-project-detail',
   providers: [ProjectStore, VoteStore],
   imports: [
     CommonModule,
-    ApiImgPipe,
     ProjectSkeleton,
     LucideAngularModule,
-    GalleriaModule,
     TranslateModule,
-    RouterLink,
     ParticipationCards,
-    AuthRequiredModalComponent
+    AuthRequiredModalComponent,
+    ProjectDetailHeaderComponent,
+    ProjectDetailGalleryComponent,
+    ProjectDetailCollapsibleComponent,
+    ProjectDetailPhasesComponent,
+    ProjectDetailMetaComponent,
+    ProjectDetailDatesComponent,
+    ProjectDetailCategoriesComponent,
+    ProjectDetailQuickActionsComponent,
+    ProjectDetailErrorComponent
   ],
   templateUrl: './detail-project.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -64,7 +54,6 @@ export class DetailProject implements OnInit {
   activeSection = signal<string | null>(null);
   showAuthModal = signal(false);
   returnUrl = computed(() => this.#router.url.split('?')[0] || '/');
-  /** Évite de recharger les participations en boucle (effet + rxMethod). */
   private lastLoadedProjectId = signal<string | null>(null);
 
   constructor() {
@@ -85,18 +74,12 @@ export class DetailProject implements OnInit {
   projectStatus = computed(() => {
     const project = this.store.project();
     if (!project) return null;
-
     const now = new Date();
     const startedAt = new Date(project.started_at);
     const endedAt = new Date(project.ended_at);
-
-    if (startedAt <= now && endedAt >= now) {
-      return 'En cours';
-    } else if (startedAt > now) {
-      return 'À venir';
-    } else {
-      return 'Terminé';
-    }
+    if (startedAt <= now && endedAt >= now) return 'En cours';
+    if (startedAt > now) return 'À venir';
+    return 'Terminé';
   });
 
   isProjectOpen = computed(() => {
@@ -125,48 +108,24 @@ export class DetailProject implements OnInit {
   toggleDescription() {
     this.toggleSection('description');
   }
-
   toggleCriteria() {
     this.toggleSection('criteria');
   }
-
   toggleObjectives() {
     this.toggleSection('objectives');
   }
-
   toggleContext() {
     this.toggleSection('context');
   }
 
   orderedPhases = computed(() => {
     const phases = this.store.project()?.phases ?? [];
-    return [...phases].sort((a, b) => ((a as { order?: number }).order ?? 0) - ((b as { order?: number }).order ?? 0));
+    return [...phases].sort(
+      (a, b) => ((a as { order?: number }).order ?? 0) - ((b as { order?: number }).order ?? 0)
+    );
   });
 
-  icons = {
-    fileText: FileText,
-    calendarDays: CalendarDays,
-    calendarCheck: CalendarCheck,
-    tag: Tag,
-    calendarSync: CalendarSync,
-    share: Share2,
-    chevronUp: ChevronUp,
-    target: Target,
-    info: Info,
-    hourglass: Hourglass,
-    checkCircle2: CheckCircle2,
-    users: Users,
-    squaresSubtract: SquaresSubtract,
-    userPlus: UserPlus,
-    alertCircle: AlertCircle,
-    home: Home,
-    arrowLeft: ArrowLeft,
-    search: Search,
-    layers: Layers,
-    thumbsUp: ThumbsUp
-  };
-
-  responsiveOptions = carouselConfig;
+  icons = { thumbsUp: ThumbsUp };
 
   ngOnInit(): void {
     const slug = this.#route.snapshot.params['slug'];
@@ -187,20 +146,13 @@ export class DetailProject implements OnInit {
   async shareProject() {
     const project = this.store.project();
     if (!project) return;
-    interface LocalShareData {
-      title?: string;
-      text?: string;
-      url?: string;
-    }
-
-    const shareData: LocalShareData = {
+    const shareData = {
       title: project.name,
       text: (project.description || '').slice(0, 200),
       url: typeof window !== 'undefined' ? window.location.href : ''
     };
-
     try {
-      const nav = navigator as unknown as { share?: (data: LocalShareData) => Promise<void> };
+      const nav = navigator as unknown as { share?: (data: typeof shareData) => Promise<void> };
       if (nav.share) {
         await nav.share(shareData);
       } else if (typeof window !== 'undefined') {
@@ -208,7 +160,7 @@ export class DetailProject implements OnInit {
         window.open(`mailto:?subject=${encodeURIComponent(shareData.title || '')}&body=${body}`, '_blank');
       }
     } catch {
-      // ignore (user cancelled or not supported)
+      // ignore
     }
   }
 
