@@ -1,5 +1,5 @@
 import { Component, effect, inject, OnDestroy, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import {
   ArrowLeft,
@@ -38,11 +38,11 @@ import { ConfirmationService } from 'primeng/api';
 import { CommentsStore } from '../../store/comments/comments.store';
 import { Subject, takeUntil } from 'rxjs';
 import { QuillViewComponent } from 'ngx-quill';
-import { GalleriaModule } from 'primeng/galleria';
-import { carouselConfig } from '../../../landing/config/carousel.config';
 import { ArticleStore } from '@features/blog/store/articles/article.store';
 import { AnalyticsService } from '../../../../core/services/analytics/analytics.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { ArticleDetailSidebarComponent } from '../../components/article-detail-sidebar/article-detail-sidebar';
+import { ArticleDetailNotFoundComponent } from '../../components/article-detail-not-found/article-detail-not-found';
 
 @Component({
   selector: 'app-detail-article',
@@ -61,15 +61,15 @@ import { TranslateModule } from '@ngx-translate/core';
     ApiImgPipe,
     ArticleCardDetailSkeleton,
     NgOptimizedImage,
-    RouterLink,
     ReactiveFormsModule,
     TextareaModule,
     Button,
     Dialog,
     ConfirmDialog,
     QuillViewComponent,
-    GalleriaModule,
-    TranslateModule
+    TranslateModule,
+    ArticleDetailSidebarComponent,
+    ArticleDetailNotFoundComponent
   ],
   templateUrl: './detail-article.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -86,7 +86,6 @@ export class DetailArticle implements OnInit, OnDestroy {
   store = inject(ArticleStore);
   storeArticle = inject(RecentArticlesStore);
   #route = inject(ActivatedRoute);
-  responsiveOptions = carouselConfig;
   updateCommentForm: FormGroup;
   icons = {
     moveLeft: ArrowLeft,

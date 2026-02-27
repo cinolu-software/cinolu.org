@@ -1,0 +1,69 @@
+<div class="bg-white rounded-lg shadow-lg p-6 border border-gray-100">
+  <h2 class="text-lg font-black text-gray-900 mb-6 flex items-center gap-3 font-satoshi tracking-tight">
+    <span class="w-1 h-7 bg-gradient-to-b from-primary-500 via-primary-600 to-primary-700 rounded-full shadow-sm"></span>
+    {{ 'blog.recent_articles' | translate }}
+  </h2>
+  <div class="space-y-5">
+    @for (article of articles(); track article.id; let first = $first) {
+    <a
+      [routerLink]="['/blog-ressources', article.slug]"
+      class="group block p-3 rounded-lg hover:bg-primary-50/30 transition-colors">
+      <div class="flex gap-4">
+        <div class="relative h-16 w-16 flex-shrink-0 bg-gray-100 overflow-hidden rounded-lg">
+          <img
+            [ngSrc]="article | apiIMG: 'article'"
+            [alt]="'Miniature de l\'article ' + article.title"
+            class="object-cover w-full h-full"
+            fill
+            [priority]="first"
+            [loading]="first ? undefined : 'lazy'" />
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3
+            class="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-primary-600 transition-colors leading-tight mb-2">
+            {{ article.title | titlecase }}
+          </h3>
+          <time class="text-xs text-gray-500 font-medium">{{ article.published_at | date: 'shortDate' }}</time>
+        </div>
+      </div>
+    </a>
+    }
+  </div>
+</div>
+
+@if (gallery().length > 0) {
+<div class="bg-white rounded-lg shadow-lg p-6 border border-gray-100">
+  <h3 class="text-lg font-black text-gray-900 mb-6 flex items-center gap-3 font-satoshi tracking-tight">
+    <span class="w-1 h-7 bg-gradient-to-b from-secondary-500 via-secondary-600 to-secondary-700 rounded-full shadow-sm"></span>
+    {{ 'blog.gallery' | translate }}
+  </h3>
+  <p-galleria
+    [value]="gallery()"
+    [autoPlay]="false"
+    [responsiveOptions]="responsiveOptions"
+    [numVisible]="3"
+    [containerStyle]="{ 'max-width': '100%' }"
+    [showThumbnails]="true"
+    [showItemNavigators]="true"
+    [circular]="true">
+    <ng-template pTemplate="item" let-img>
+      <div class="relative w-full aspect-video overflow-hidden rounded-lg bg-gray-100">
+        <img
+          [src]="img | apiIMG: 'gallery'"
+          [alt]="img?.image || 'Image de galerie'"
+          loading="lazy"
+          class="object-cover w-full h-full" />
+      </div>
+    </ng-template>
+    <ng-template pTemplate="thumbnail" let-img>
+      <div class="relative w-16 h-16 overflow-hidden rounded-lg bg-gray-100">
+        <img
+          [src]="img | apiIMG: 'gallery'"
+          [alt]="img?.image || 'Miniature'"
+          loading="lazy"
+          class="object-cover w-full h-full cursor-pointer hover:opacity-75 transition-opacity" />
+      </div>
+    </ng-template>
+  </p-galleria>
+</div>
+}
