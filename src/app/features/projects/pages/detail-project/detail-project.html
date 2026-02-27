@@ -1,7 +1,6 @@
 <section class="bg-grid">
   <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-white pt-[7.5rem] pb-20">
     @if (store.project(); as project) {
-
     <div class="space-y-16">
       <header class="text-left space-y-6">
         <div>
@@ -274,7 +273,7 @@
               <ul class="space-y-4">
                 @for (phase of orderedPhases(); track phase.id; let i = $index) {
                 <li class="border border-gray-100 rounded-lg p-4 bg-gray-50/50 hover:bg-gray-50 transition-colors">
-                  <div class="flex items-start gap-3">
+                  <div class="flex flex-col sm:flex-row items-start gap-3">
                     <span
                       class="flex-shrink-0 w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-sm font-bold">
                       {{ i + 1 }}
@@ -282,7 +281,9 @@
                     <div class="min-w-0 flex-1">
                       <h3 class="font-semibold text-gray-900">{{ phase.name }}</h3>
                       @if (phase.description) {
-                      <p class="text-gray-600 text-sm mt-1 leading-relaxed">{{ phase.description }}</p>
+                      <p class="text-gray-600 text-sm mt-1 leading-relaxed hyphens-none text-justify">
+                        {{ phase.description }}
+                      </p>
                       }
                       <div class="flex flex-wrap items-center gap-3 mt-2 text-xs text-gray-500">
                         @if (phase.started_at) {
@@ -469,18 +470,14 @@
     } @else if (store.isLoading()) {
     <app-project-skeleton />
     } @else {
-    <!-- État d'erreur Premium -->
     <div class="min-h-[calc(100vh-7.5rem)] w-full flex items-center justify-center py-16 px-4">
       <div class="max-w-2xl w-full">
-        <!-- Conteneur principal avec animation -->
         <div class="relative">
-          <!-- Cercle décoratif en arrière-plan -->
           <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
             <div
               class="w-96 h-96 rounded-full bg-gradient-to-br from-primary-200 via-primary-100 to-gray-100 blur-3xl"></div>
           </div>
 
-          <!-- Carte principale -->
           <div
             class="relative bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden transition-all duration-500 hover:shadow-3xl">
             <div class="h-2 bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700"></div>
@@ -579,5 +576,17 @@
       </div>
     </div>
     }
+
+    <div class="overflow-hidden mt-10">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center">
+          <i-lucide [name]="icons.thumbsUp" class="size-5 stroke-[1.5]"></i-lucide>
+        </div>
+        <h2 class="text-lg font-bold text-gray-900">{{ 'project_detail.detail.participations_title' | translate }}</h2>
+      </div>
+      <app-participation-cards [project]="store.project()" (authRequired)="showAuthModal.set(true)" />
+    </div>
   </div>
+
+  <app-auth-required-modal [isOpen]="showAuthModal()" [returnUrl]="returnUrl()" (closed)="closeAuthModal()" />
 </section>

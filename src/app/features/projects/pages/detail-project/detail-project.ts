@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
 import { ProjectSkeleton } from '../../components/project-skeleton/project-skeleton';
 import {
   LucideAngularModule,
@@ -21,7 +21,8 @@ import {
   Home,
   ArrowLeft,
   Search,
-  Layers
+  Layers,
+  ThumbsUp
 } from 'lucide-angular';
 import { ProjectStore } from '../../store/project.store';
 import { formatDateForGoogleCalendarUTC, openExternalUrl } from '@shared/helpers';
@@ -30,10 +31,15 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { GalleriaModule } from 'primeng/galleria';
 import { carouselConfig } from '../../../landing/config/carousel.config';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthStore } from '@core/auth/auth.store';
+import { AuthRequiredModalComponent } from '@shared/components/auth-required-modal/auth-required-modal';
+import { ParticipationsStore } from '../../../dashboard/store/participations.store';
+import { VoteStore } from '../../../dashboard/store/vote.store';
+import { ParticipationCards } from '../../components/participation-cards/participation-cards';
 
 @Component({
   selector: 'app-project-detail',
-  providers: [ProjectStore],
+  providers: [ProjectStore, VoteStore],
   imports: [
     CommonModule,
     ApiImgPipe,
@@ -41,7 +47,9 @@ import { TranslateModule } from '@ngx-translate/core';
     LucideAngularModule,
     GalleriaModule,
     TranslateModule,
-    RouterLink
+    RouterLink,
+    ParticipationCards,
+    AuthRequiredModalComponent
   ],
   templateUrl: './detail-project.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -50,8 +58,24 @@ export class DetailProject implements OnInit {
   #route = inject(ActivatedRoute);
   #router = inject(Router);
   store = inject(ProjectStore);
+  participationsStore = inject(ParticipationsStore);
+  authStore = inject(AuthStore);
 
   activeSection = signal<string | null>(null);
+  showAuthModal = signal(false);
+  returnUrl = computed(() => this.#router.url.split('?')[0] || '/');
+  /** Évite de recharger les participations en boucle (effet + rxMethod). */
+  private lastLoadedProjectId = signal<string | null>(null);
+
+  constructor() {
+    effect(() => {
+      const project = this.store.project();
+      const id = project?.id ?? null;
+      if (!id || id === this.lastLoadedProjectId()) return;
+      this.lastLoadedProjectId.set(id);
+      this.participationsStore.loadProjectParticipations(id);
+    });
+  }
 
   expandedDescription = computed(() => this.activeSection() === 'description');
   expandedCriteria = computed(() => this.activeSection() === 'criteria');
@@ -116,8 +140,6 @@ export class DetailProject implements OnInit {
 
   orderedPhases = computed(() => {
     const phases = this.store.project()?.phases ?? [];
-    console.log(this.store.project(), 'phases', phases);
-
     return [...phases].sort((a, b) => ((a as { order?: number }).order ?? 0) - ((b as { order?: number }).order ?? 0));
   });
 
@@ -140,7 +162,8 @@ export class DetailProject implements OnInit {
     home: Home,
     arrowLeft: ArrowLeft,
     search: Search,
-    layers: Layers
+    layers: Layers,
+    thumbsUp: ThumbsUp
   };
 
   responsiveOptions = carouselConfig;
@@ -189,9 +212,17 @@ export class DetailProject implements OnInit {
     }
   }
 
-  applyToProject() {
+  applyToProject(): void {
+    if (!this.authStore.user()) {
+      this.showAuthModal.set(true);
+      return;
+    }
     const project = this.store.project();
     if (!project?.slug) return;
     this.#router.navigate(['/dashboard/programs', project.slug]);
+  }
+
+  closeAuthModal(): void {
+    this.showAuthModal.set(false);
   }
 }
