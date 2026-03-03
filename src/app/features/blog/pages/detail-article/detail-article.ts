@@ -22,7 +22,6 @@ import {
   UserPlus
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ArticleCardDetailSkeleton } from '../article-card-detail-skeleton/article-card-detail-skeleton';
 import { RecentArticlesStore } from '../../store/articles/recent-articles.store';
@@ -57,7 +56,6 @@ import { ArticleDetailNotFoundComponent } from '../../components/article-detail-
     ConfirmationService
   ],
   imports: [
-    RouterLink,
     LucideAngularModule,
     CommonModule,
     ApiImgPipe,
