@@ -124,7 +124,7 @@ export class ProfilePage {
   }
 
   applyAsMentor() {
-    this.router.navigate(['/dashboard/mentor/apply']);
+    this.router.navigate(['/dashboard/user/mentor/apply']);
   }
 
   goToMentorDashboard() {
