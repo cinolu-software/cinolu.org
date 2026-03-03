@@ -1,42 +1,57 @@
 import { Injectable } from '@angular/core';
-import { RoleEnum } from './role.enum';
+import { getRoles, hasMentorRole, ROLE_ADMIN, ROLE_MENTOR, ROLE_STAFF } from './role.util';
+import type { IUser } from '@shared/models';
+import { MentorStatus } from '@shared/models';
 
-interface IAuthorizedParams {
-  currentRoles: RoleEnum[];
-  requiredRole: RoleEnum;
-}
-
-interface Ihierarchy {
-  role: string;
-  priority: number;
-}
+export type MentorRedirectReason = 'pending' | 'rejected' | null;
 
 @Injectable({
   providedIn: 'root'
 })
 export class RightsService {
-  #hierarchies: Ihierarchy[] = [];
 
-  constructor() {
-    this.buildRoles([RoleEnum.Guest, RoleEnum.User, RoleEnum.Mentor, RoleEnum.Staff, RoleEnum.Admin]);
+  /** Rôles de l'utilisateur (alias getRoles, mentor uniquement, pas coach). */
+  getRoles(user: IUser | null): string[] {
+    return getRoles(user);
   }
 
-  private buildRoles(roles: RoleEnum[]): void {
-    this.#hierarchies = roles.map((role, i) => {
-      const priority = ++i;
-      return { role, priority };
-    });
+  /** Vérifie la présence d'un rôle (strings backend). */
+  hasRole(user: IUser | null, role: string): boolean {
+    return getRoles(user).includes(role);
   }
 
-  private getPriority(role: RoleEnum): number {
-    const hierarchy = this.#hierarchies.find((h) => h.role === role);
-    return hierarchy ? hierarchy.priority : -1;
+  /** Accès à l'espace mentor : rôle mentor + profil présent + status APPROVED. */
+  canAccessMentorArea(user: IUser | null): boolean {
+    if (!user || !hasMentorRole(user)) return false;
+    const profile = user.mentor_profile;
+    return !!profile && profile.status === MentorStatus.APPROVED;
   }
 
-  isAuthorized({ currentRoles, requiredRole }: IAuthorizedParams): boolean {
-    const requiredPriority = this.getPriority(requiredRole);
-    const currentPriorities = currentRoles?.map((role) => this.getPriority(role)) ?? [1];
-    const currentHighPriority = Math.max(...currentPriorities);
-    return currentHighPriority >= requiredPriority;
+  /** Visibilité du menu "Espace Mentor" (alignée sur l'accès route). */
+  canSeeMentorMenu(user: IUser | null): boolean {
+    return this.canAccessMentorArea(user);
+  }
+
+  /** Raison de redirection si rôle mentor + profil mais pas APPROVED. */
+  getMentorRedirectReason(user: IUser | null): MentorRedirectReason {
+    if (!user || !hasMentorRole(user) || !user.mentor_profile) return null;
+    const status = user.mentor_profile.status;
+    if (status === MentorStatus.PENDING) return 'pending';
+    if (status === MentorStatus.REJECTED) return 'rejected';
+    return null;
+  }
+
+  /** Admin ou staff (affichage bandeau overview, etc.). */
+  isAdminOrStaff(user: IUser | null): boolean {
+    const roles = getRoles(user);
+    return roles.includes(ROLE_ADMIN) || roles.includes(ROLE_STAFF);
+  }
+
+  /** Libellé affiché pour le rôle (header, menu user). */
+  getRoleLabel(user: IUser | null): string {
+    if (!user || !user.roles?.length) return 'Entrepreneur';
+    if (this.hasRole(user, ROLE_ADMIN)) return 'Administrateur';
+    if (this.hasRole(user, ROLE_MENTOR)) return 'Mentor';
+    return 'Entrepreneur';
   }
 }
