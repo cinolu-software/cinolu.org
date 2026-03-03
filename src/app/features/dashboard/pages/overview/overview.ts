@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, computed, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
+import { RightsService } from '@core/auth/rights.service';
 import { VenturesStore } from '../../store/ventures.store';
 import { ReferralsStore } from '@features/dashboard/store/referrals.store';
 import { ProductsStore } from '../../store/products.store';
@@ -17,6 +18,7 @@ import { ToastrService } from '@core/services/toast/toastr.service';
 })
 export class DashboardOverview implements OnInit {
   authStore = inject(AuthStore);
+  rightsService = inject(RightsService);
   venturesStore = inject(VenturesStore);
   referralsStore = inject(ReferralsStore);
   productsStore = inject(ProductsStore);
@@ -58,11 +60,7 @@ export class DashboardOverview implements OnInit {
     return 'Bonsoir';
   });
 
-  isAdminUser = computed(() => {
-    const user = this.authStore.user();
-    const roles = user?.roles || [];
-    return roles.some((role) => role === 'admin' || role === 'staff');
-  });
+  isAdminUser = computed(() => this.rightsService.isAdminOrStaff(this.authStore.user()));
 
   highlightTitle = computed(() => {
     const highlight = this.featuredHighlight();

@@ -1,3 +1,6 @@
+import type { IUser } from '@shared/models';
+import type { RightsService } from '@core/auth/rights.service';
+
 export interface MenuItem {
   id: string;
   label: string;
@@ -183,16 +186,24 @@ export const DASHBOARD_MENU_CONFIG: MenuSection[] = [
   }
 ];
 
-export function filterMenuByRoles(menu: MenuSection[], userRoles: string[]): MenuSection[] {
+/** Vérifie si un item doit être visible selon l'utilisateur et le RightsService (menu aligné sur les guards). */
+function isMenuItemVisible(item: MenuItem, user: IUser | null, rightsService: RightsService): boolean {
+  if (!item.roles || item.roles.length === 0) return true;
+  if (item.roles.includes('mentor')) return rightsService.canSeeMentorMenu(user);
+  const userRoles = rightsService.getRoles(user);
+  return item.roles.some((role) => userRoles.includes(role));
+}
+
+export function filterMenuByRoles(menu: MenuSection[], user: IUser | null, rightsService: RightsService): MenuSection[] {
   return menu
     .map((section) => ({
       ...section,
       items: section.items
-        .filter((item) => !item.roles || item.roles.some((role) => userRoles.includes(role)))
+        .filter((item) => isMenuItemVisible(item, user, rightsService))
         .map((item) => ({
           ...item,
           children: item.children
-            ? item.children.filter((child) => !child.roles || child.roles.some((role) => userRoles.includes(role)))
+            ? item.children.filter((child) => isMenuItemVisible(child, user, rightsService))
             : undefined
         }))
         .filter((item) => !item.children || item.children.length > 0)
