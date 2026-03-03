@@ -187,7 +187,7 @@ export class MentorApply implements OnInit {
         // Rafraîchir le profil utilisateur pour obtenir le mentor_profile
         this.authStore.getProfile();
         // Rediriger vers la page d'attente d'approbation
-        this.router.navigate(['/dashboard/mentor/application-pending']);
+        this.router.navigate(['/dashboard/user/mentor/application-pending']);
       }
     });
   }
