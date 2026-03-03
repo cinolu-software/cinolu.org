@@ -116,7 +116,7 @@ export class ProgramDetail implements OnInit {
         rejectLabel: 'Annuler',
         acceptButtonStyleClass: 'p-button-primary',
         accept: () => {
-          this.router.navigate(['/dashboard/ventures/create']);
+          this.router.navigate(['/dashboard/user/ventures/create']);
         }
       });
       return;

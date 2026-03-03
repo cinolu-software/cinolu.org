@@ -12,7 +12,7 @@
     </div>
 
     <a
-      routerLink="/dashboard/programs/discover"
+      routerLink="/dashboard/user/programs/discover"
       class="px-4 py-2 bg-primary-600 text-white rounded-lg font-medium text-sm hover:bg-primary-700 transition-colors duration-200 flex items-center gap-2 w-fit">
       <span class="material-icons text-sm">add</span>
       Découvrir des programmes
@@ -116,7 +116,7 @@
 
           <div class="flex gap-2 mt-auto pt-4 border-t border-slate-100">
             <a
-              [routerLink]="['/dashboard/programs/', participation.project.slug]"
+              [routerLink]="['/dashboard/user/programs/', participation.project.slug]"
               class="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg font-medium text-sm hover:bg-slate-50 transition-colors duration-200 flex items-center gap-2">
               <span class="material-icons text-sm">visibility</span>
               Voir le programme
@@ -135,7 +135,7 @@
     <h3 class="text-lg font-semibold text-slate-900 mb-2">Aucune candidature active</h3>
     <p class="text-slate-600 mb-6">Vous n'avez pas encore soumis de candidature.</p>
     <a
-      routerLink="/dashboard/programs/discover"
+      routerLink="/dashboard/user/programs/discover"
       class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors duration-200">
       <span class="material-icons">explore</span>
       Découvrir les programmes

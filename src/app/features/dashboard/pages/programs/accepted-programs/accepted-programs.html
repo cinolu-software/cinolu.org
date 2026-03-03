@@ -88,12 +88,12 @@
           </div>
           <div class="flex gap-2 flex-shrink-0">
             <a
-              [routerLink]="['/dashboard/programs/', participation.project.slug, 'roadmap']"
+              [routerLink]="['/dashboard/user/programs/', participation.project.slug, 'roadmap']"
               class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg transition-colors">
               Roadmap
             </a>
             <a
-              [routerLink]="['/dashboard/programs/', participation.project.slug]"
+              [routerLink]="['/dashboard/user/programs/', participation.project.slug]"
               class="px-4 py-2 border border-slate-200 hover:border-primary-400 hover:bg-primary-50 text-slate-700 text-sm font-medium rounded-lg transition-colors">
               Détail
             </a>
@@ -111,7 +111,7 @@
       Les programmes avec phases apparaîtront ici une fois votre candidature acceptée.
     </p>
     <a
-      routerLink="/dashboard/programs/discover"
+      routerLink="/dashboard/user/programs/discover"
       class="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700">
       Découvrir les programmes
     </a>
