@@ -1,4 +1,5 @@
-@let comments = commentsStore.comments()[0]; @let count = commentsStore.comments()[1]; @let user = profile.user(); @if (store.article(); as article) {
+@let comments = commentsStore.comments()[0]; @let count = commentsStore.comments()[1]; @let user = profile.user(); @if
+(store.article(); as article) {
 <section class="min-h-screen bg-gradient-to-b from-gray-50 to-white">
   <div class="relative w-full h-[80vh] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
     <div class="absolute inset-0">
@@ -12,14 +13,14 @@
     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
   </div>
 
-  <div class="max-w-7xl mx-auto max-sm:px-6 -mt-40">
-    <div class="flex flex-col lg:flex-row gap-8 items-start relative z-10">
-      <div class="lg:w-3/4 w-full">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0 -mt-40 relative z-10 pb-10 lg:pb-28">
+    <div class="flex flex-col items-start gap-8 lg:flex-row lg:gap-10">
+      <div class="w-full lg:w-3/4">
         <article
-          class="bg-white rounded-lg shadow-2xl shadow-primary-500/5 overflow-hidden border border-gray-100/50 backdrop-blur-sm">
-          <header class="p-6 sm:p-8 lg:p-12 bg-gradient-to-br from-white via-gray-50/50 to-primary-50/30">
-            @if (article.tags && article.tags.length > 0) {
-            <div class="flex flex-wrap gap-2 mb-6">
+          class="overflow-hidden rounded-lg border border-gray-100/50 bg-white shadow-2xl shadow-primary-500/5 backdrop-blur-sm">
+          <header class="bg-gradient-to-br from-white via-gray-50/50 to-primary-50/30 p-6 sm:p-8 lg:p-12">
+            @if (article.tags?.length) {
+            <div class="mb-6 flex flex-wrap gap-2">
               @for (tag of article.tags; track tag.id) {
               <span
                 class="px-4 py-1.5 text-xs font-semibold text-primary-700 bg-primary-50 rounded-full border border-primary-200/50">
@@ -30,57 +31,59 @@
             }
 
             <h1
-              class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 leading-[1.1] mb-8 tracking-tight">
+              class="mb-8 text-3xl font-black leading-tight tracking-tight text-gray-900 sm:text-4xl lg:text-5xl font-satoshi">
               {{ article.title | titlecase }}
             </h1>
 
             <div
-              class="flex flex-wrap items-center gap-4 text-sm bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-200/50 shadow-sm">
+              class="flex flex-wrap items-center gap-4 rounded-lg border border-gray-200/50 bg-white/80 p-4 text-sm shadow-sm backdrop-blur-sm">
+              @if (article.author) {
               <div class="flex items-center gap-3">
                 <div
-                  class="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white font-bold text-sm">
+                  class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-primary-600 text-sm font-bold text-white">
                   {{ article.author.name.charAt(0) }}
                 </div>
                 <span class="font-semibold text-gray-900">{{ article.author.name }}</span>
               </div>
-              <span class="text-gray-300">•</span>
-              <time class="text-gray-600 font-medium">{{ article.published_at | date: 'longDate' }}</time>
-              <span class="text-gray-300">•</span>
+              <span class="text-gray-300" aria-hidden="true">·</span>
+              }
+              <time class="font-medium text-gray-600">{{ article.published_at | date: 'longDate' }}</time>
+              <span class="text-gray-300" aria-hidden="true">·</span>
               <div class="flex items-center gap-1.5 text-gray-600">
-                <i-lucide [name]="icons.messageCircle" class="size-4 text-primary-500" />
+                <i-lucide [name]="icons.messageCircle" class="size-4 text-primary-500" aria-hidden="true" />
                 <span class="font-medium">{{ count }}</span>
               </div>
             </div>
           </header>
 
-          <div class="px-4 sm:px-6 lg:px-12 pb-12">
+          <div class="px-4 pb-12 sm:px-6 lg:px-12">
             @if (article.summary) {
-            <div class="bg-primary-50/50 rounded-lg p-8 mb-10 border-l-4 border-primary-400">
-              <p class="text-lg sm:text-xl text-gray-800 leading-relaxed italic font-medium hyphens-none">
-                <span class="text-4xl text-primary-500 font-serif leading-none">"</span>
+            <div class="mb-10 rounded-lg border-l-4 border-primary-400 bg-primary-50/50 p-6 sm:p-8">
+              <p class="hyphens-none text-lg font-medium italic leading-relaxed text-gray-800 sm:text-xl">
+                <span class="font-serif text-4xl leading-none text-primary-500">"</span>
                 {{ article.summary }}
-                <span class="text-4xl text-primary-500 font-serif leading-none">"</span>
+                <span class="font-serif text-4xl leading-none text-primary-500">"</span>
               </p>
             </div>
             }
 
             <div
-              class="prose prose-lg lg:prose-xl max-w-none text-gray-700 prose-headings:font-satoshi prose-headings:font-black prose-headings:tracking-tight prose-p:leading-relaxed prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg prose-img:shadow-xl">
+              class="prose prose-lg max-w-none text-gray-700 prose-headings:font-black prose-headings:tracking-tight prose-headings:font-satoshi prose-p:leading-relaxed prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg prose-img:shadow-xl lg:prose-xl">
               <quill-view [content]="article.content" class="hyphens-none" />
             </div>
           </div>
 
           <section
-            class="bg-gradient-to-br from-gray-50 via-primary-50/20 to-gray-50 px-4 sm:px-6 lg:px-12 py-12 border-t border-gray-200/50">
-            <div class="flex items-center gap-3 mb-8">
-              <div class="w-1 h-8 bg-gradient-to-b from-primary-500 to-primary-600 rounded-full"></div>
-              <h2 class="text-2xl sm:text-3xl font-black text-gray-900 font-satoshi tracking-tight">
+            class="border-t border-gray-200/50 bg-gradient-to-br from-gray-50 via-primary-50/20 to-gray-50 px-4 py-12 sm:px-6 lg:px-12">
+            <div class="mb-8 flex items-center gap-3">
+              <div class="h-8 w-1 rounded-full bg-gradient-to-b from-primary-500 to-primary-600"></div>
+              <h2 class="font-satoshi text-2xl font-black tracking-tight text-gray-900 sm:text-3xl">
                 {{ 'blog.comments.title' | translate }}
               </h2>
             </div>
 
-            <form class="mb-10" [formGroup]="form" (ngSubmit)="onAddComment()">
-              <div class="bg-white rounded-lg p-6 sm:p-8 shadow-md border border-gray-200">
+            <form [formGroup]="form" class="mb-10" (ngSubmit)="onAddComment()">
+              <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-md sm:p-8">
                 <label for="content" class="sr-only">{{ 'blog.comments.placeholder' | translate }}</label>
                 <textarea
                   id="content"
@@ -89,11 +92,11 @@
                   fluid
                   formControlName="content"
                   rows="5"
-                  class="w-full mb-4 border-0 focus:ring-2 focus:ring-primary-500/20 rounded-lg resize-none bg-gray-50/50"
+                  class="mb-4 w-full resize-none rounded-lg border-0 bg-gray-50/50 focus:ring-2 focus:ring-primary-500/20"
                   [placeholder]="'blog.comments.placeholder' | translate"></textarea>
 
                 @if (!isLoggedIn()) {
-                <div class="bg-amber-50 border-l-4 border-amber-400 text-amber-800 text-sm p-4 mb-4 rounded">
+                <div class="mb-4 rounded border-l-4 border-amber-400 bg-amber-50 p-4 text-sm text-amber-800">
                   <p class="font-medium">{{ 'blog.comments.login_required' | translate }}</p>
                 </div>
                 }
@@ -101,14 +104,14 @@
                 <input type="hidden" formControlName="articleId" />
 
                 @if (isLoggedIn()) {
-                <div class="flex justify-end pt-4 border-t border-gray-100">
+                <div class="flex justify-end border-t border-gray-100 pt-4">
                   <p-button
-                    [loading]="storeAddComment.isLoading()"
-                    [disabled]="!isLoggedIn() || form.invalid || storeAddComment.isLoading()"
-                    size="small"
                     type="submit"
+                    size="small"
                     severity="primary"
-                    class="rounded-full !px-8">
+                    class="rounded-full !px-8"
+                    [loading]="storeAddComment.isLoading()"
+                    [disabled]="form.invalid || storeAddComment.isLoading()">
                     {{ 'blog.comments.publish' | translate }}
                   </p-button>
                 </div>
@@ -119,37 +122,39 @@
             @if (count > 0) {
             <div class="space-y-4">
               @for (comment of comments; track comment.id) {
-              <div class="bg-white rounded-lg p-5 border border-gray-200 hover:border-gray-300 transition-colors">
+              <div class="rounded-lg border border-gray-200 bg-white p-5 transition-colors hover:border-gray-300">
                 <div class="flex gap-3">
                   <div class="flex-shrink-0">
                     <div
-                      class="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
-                      @if (comment.author; as a) {
-                      <span class="text-white font-semibold text-sm">{{ a.name.charAt(0) }}</span>
+                      class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-primary-600">
+                      @if (comment.author; as author) {
+                      <span class="text-sm font-semibold text-white">{{ author.name.charAt(0) }}</span>
                       }
                     </div>
                   </div>
 
-                  <div class="flex-1 min-w-0">
-                    <div class="flex items-center gap-2 mb-2">
-                      <span class="font-semibold text-gray-900 text-sm">{{ comment?.author?.name }}</span>
-                      <span class="text-gray-400">•</span>
+                  <div class="min-w-0 flex-1">
+                    <div class="mb-2 flex items-center gap-2">
+                      <span class="text-sm font-semibold text-gray-900">{{ comment.author?.name }}</span>
+                      <span class="text-gray-400" aria-hidden="true">·</span>
                       <time class="text-xs text-gray-500">{{ comment.created_at | date: 'shortDate' }}</time>
                     </div>
 
-                    <p class="text-gray-700 text-sm leading-relaxed mb-3">{{ comment.content }}</p>
+                    <p class="mb-3 text-sm leading-relaxed text-gray-700">{{ comment.content }}</p>
 
-                    @if (comment.author.id === user?.id) {
+                    @if (comment.author?.id === user?.id) {
                     <div class="flex gap-2">
                       <button
+                        type="button"
                         (click)="onToggleEditModal(comment)"
-                        class="text-xs text-primary-600 hover:text-primary-700 font-medium">
+                        class="text-xs font-medium text-primary-600 hover:text-primary-700">
                         {{ 'blog.comments.edit' | translate }}
                       </button>
-                      <span class="text-gray-300">•</span>
+                      <span class="text-gray-300" aria-hidden="true">·</span>
                       <button
+                        type="button"
                         (click)="onDeleteComment(comment.id, $event)"
-                        class="text-xs text-red-600 hover:text-red-700 font-medium">
+                        class="text-xs font-medium text-red-600 hover:text-red-700">
                         {{ 'blog.comments.delete' | translate }}
                       </button>
                     </div>
@@ -158,9 +163,10 @@
                 </div>
               </div>
               } @if (comments.length < count) {
-              <div class="text-center pt-4">
+              <div class="pt-4 text-center">
                 <button
-                  class="text-sm text-primary-600 hover:text-primary-700 font-medium hover:underline"
+                  type="button"
+                  class="text-sm font-medium text-primary-600 hover:text-primary-700 hover:underline"
                   (click)="loadMore()">
                   {{ 'blog.comments.load_more' | translate }}
                 </button>
@@ -172,10 +178,8 @@
         </article>
       </div>
 
-      <aside class="lg:w-1/4 w-full lg:sticky lg:top-28 space-y-6">
-        <app-article-detail-sidebar
-          [articles]="storeArticle.articles()"
-          [gallery]="store.article()?.gallery ?? []" />
+      <aside class="w-full space-y-6 lg:sticky lg:top-28 lg:w-1/4">
+        <app-article-detail-sidebar [articles]="storeArticle.articles()" [gallery]="store.article()?.gallery ?? []" />
       </aside>
     </div>
   </div>
@@ -187,35 +191,43 @@
 }
 
 <p-dialog
-  [(visible)]="showEditModal"
-  [closable]="false"
+  [visible]="showEditModal()"
+  (visibleChange)="showEditModal.set($event)"
+  [closable]="true"
   [modal]="true"
   [style]="{ width: '32rem' }"
-  styleClass="rounded-lg overflow-hidden">
-  <div class="p-8 bg-gradient-to-br from-white via-gray-50/50 to-primary-50/30">
-    <h3 class="text-xl font-black text-gray-900 mb-6 flex items-center gap-3 font-satoshi tracking-tight">
+  styleClass="rounded-lg overflow-hidden"
+  (onHide)="closeModal()">
+  <div class="bg-gradient-to-br from-white via-gray-50/50 to-primary-50/30 p-6 sm:p-8">
+    <h3 class="mb-6 flex items-center gap-3 font-satoshi text-xl font-black tracking-tight text-gray-900">
       <span
-        class="w-1 h-7 bg-gradient-to-b from-primary-500 via-primary-600 to-primary-700 rounded-full shadow-sm"></span>
+        class="h-7 w-1 rounded-full bg-gradient-to-b from-primary-500 via-primary-600 to-primary-700 shadow-sm"></span>
       {{ 'blog.comments.edit_modal_title' | translate }}
     </h3>
 
     <form [formGroup]="updateCommentForm" class="space-y-6" (ngSubmit)="onUpdateComment()">
-      <div class="bg-white rounded-lg p-5 shadow-lg shadow-gray-200/50 border border-gray-200/50">
+      <div class="rounded-lg border border-gray-200/50 bg-white p-5 shadow-lg shadow-gray-200/50">
         <label for="edit-content" class="sr-only">{{ 'blog.comments.edit_placeholder' | translate }}</label>
         <textarea
           pTextarea
           id="edit-content"
           formControlName="content"
           rows="5"
-          class="w-full border-0 bg-transparent focus:ring-2 focus:ring-primary-500/20 rounded-lg resize-none"
+          class="w-full resize-none rounded-lg border-0 bg-transparent focus:ring-2 focus:ring-primary-500/20"
           [placeholder]="'blog.comments.edit_placeholder' | translate"></textarea>
       </div>
 
       <div class="flex justify-end gap-3">
-        <p-button size="small" outlined severity="secondary" (onClick)="closeModal()" class="rounded-full">
+        <p-button
+          type="button"
+          size="small"
+          severity="secondary"
+          outlined
+          (onClick)="closeModal()"
+          class="rounded-full">
           {{ 'common.cancel' | translate }}
         </p-button>
-        <p-button size="small" severity="primary" (onClick)="onUpdateComment()" class="rounded-full">
+        <p-button type="submit" size="small" severity="primary" class="rounded-full">
           {{ 'blog.comments.update' | translate }}
         </p-button>
       </div>

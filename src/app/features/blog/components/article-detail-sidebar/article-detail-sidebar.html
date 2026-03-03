@@ -1,29 +1,30 @@
-<div class="bg-white rounded-lg shadow-lg p-6 border border-gray-100">
-  <h2 class="text-lg font-black text-gray-900 mb-6 flex items-center gap-3 font-satoshi tracking-tight">
-    <span class="w-1 h-7 bg-gradient-to-b from-primary-500 via-primary-600 to-primary-700 rounded-full shadow-sm"></span>
+<div class="rounded-lg border border-gray-100 bg-white p-6 shadow-lg">
+  <h2 class="mb-6 flex items-center gap-3 font-satoshi text-lg font-black tracking-tight text-gray-900">
+    <span
+      class="h-7 w-1 rounded-full bg-gradient-to-b from-primary-500 via-primary-600 to-primary-700 shadow-sm"></span>
     {{ 'blog.recent_articles' | translate }}
   </h2>
-  <div class="space-y-5">
+  <div class="space-y-2">
     @for (article of articles(); track article.id; let first = $first) {
     <a
       [routerLink]="['/blog-ressources', article.slug]"
-      class="group block p-3 rounded-lg hover:bg-primary-50/30 transition-colors">
+      class="block rounded-lg p-3 transition-colors hover:bg-primary-50/40 group">
       <div class="flex gap-4">
-        <div class="relative h-16 w-16 flex-shrink-0 bg-gray-100 overflow-hidden rounded-lg">
+        <div class="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
           <img
             [ngSrc]="article | apiIMG: 'article'"
             [alt]="'Miniature de l\'article ' + article.title"
-            class="object-cover w-full h-full"
+            class="h-full w-full object-cover"
             fill
             [priority]="first"
             [loading]="first ? undefined : 'lazy'" />
         </div>
-        <div class="flex-1 min-w-0">
+        <div class="min-w-0 flex-1">
           <h3
-            class="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-primary-600 transition-colors leading-tight mb-2">
+            class="mb-1 line-clamp-2 text-sm font-bold leading-tight text-gray-900 transition-colors group-hover:text-primary-600">
             {{ article.title | titlecase }}
           </h3>
-          <time class="text-xs text-gray-500 font-medium">{{ article.published_at | date: 'shortDate' }}</time>
+          <time class="text-xs font-medium text-gray-500">{{ article.published_at | date: 'shortDate' }}</time>
         </div>
       </div>
     </a>
@@ -32,9 +33,10 @@
 </div>
 
 @if (gallery().length > 0) {
-<div class="bg-white rounded-lg shadow-lg p-6 border border-gray-100">
-  <h3 class="text-lg font-black text-gray-900 mb-6 flex items-center gap-3 font-satoshi tracking-tight">
-    <span class="w-1 h-7 bg-gradient-to-b from-secondary-500 via-secondary-600 to-secondary-700 rounded-full shadow-sm"></span>
+<div class="mt-6 rounded-lg border border-gray-100 bg-white p-6 shadow-lg">
+  <h3 class="mb-6 flex items-center gap-3 font-satoshi text-lg font-black tracking-tight text-gray-900">
+    <span
+      class="h-7 w-1 rounded-full bg-gradient-to-b from-primary-500 via-primary-600 to-primary-700 shadow-sm"></span>
     {{ 'blog.gallery' | translate }}
   </h3>
   <p-galleria
@@ -47,21 +49,21 @@
     [showItemNavigators]="true"
     [circular]="true">
     <ng-template pTemplate="item" let-img>
-      <div class="relative w-full aspect-video overflow-hidden rounded-lg bg-gray-100">
+      <div class="relative aspect-video w-full overflow-hidden rounded-lg bg-gray-100">
         <img
           [src]="img | apiIMG: 'gallery'"
           [alt]="img?.image || 'Image de galerie'"
           loading="lazy"
-          class="object-cover w-full h-full" />
+          class="h-full w-full object-cover" />
       </div>
     </ng-template>
     <ng-template pTemplate="thumbnail" let-img>
-      <div class="relative w-16 h-16 overflow-hidden rounded-lg bg-gray-100">
+      <div class="relative h-16 w-16 overflow-hidden rounded-lg bg-gray-100">
         <img
           [src]="img | apiIMG: 'gallery'"
           [alt]="img?.image || 'Miniature'"
           loading="lazy"
-          class="object-cover w-full h-full cursor-pointer hover:opacity-75 transition-opacity" />
+          class="h-full w-full cursor-pointer object-cover transition-opacity hover:opacity-80" />
       </div>
     </ng-template>
   </p-galleria>

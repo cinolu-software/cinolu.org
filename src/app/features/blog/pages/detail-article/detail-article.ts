@@ -22,6 +22,7 @@ import {
   UserPlus
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ArticleCardDetailSkeleton } from '../article-card-detail-skeleton/article-card-detail-skeleton';
 import { RecentArticlesStore } from '../../store/articles/recent-articles.store';
@@ -56,6 +57,7 @@ import { ArticleDetailNotFoundComponent } from '../../components/article-detail-
     ConfirmationService
   ],
   imports: [
+    RouterLink,
     LucideAngularModule,
     CommonModule,
     ApiImgPipe,
@@ -106,8 +108,8 @@ export class DetailArticle implements OnInit, OnDestroy {
     newspaper: Newspaper,
     search: Search
   };
-  queryParams = signal({
-    page: this.#route.snapshot.params['page'] || '1'
+  queryParams = signal<{ page: string }>({
+    page: this.#route.snapshot.queryParams['page'] || '1'
   });
   #slug = this.#route.snapshot.params['slug'];
   comment = signal<IComment | null>(null);
@@ -164,7 +166,7 @@ export class DetailArticle implements OnInit, OnDestroy {
   loadMore(): void {
     this.queryParams.update((params) => ({
       ...params,
-      page: +params.page + 1
+      page: String(Number(params.page) + 1)
     }));
   }
 
