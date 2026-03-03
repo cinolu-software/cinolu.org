@@ -145,7 +145,7 @@ export class VentureForm implements OnInit {
       this.venturesStore.updateVenture({
         slug: this.currentSlug,
         data: formData as Partial<IVenture>,
-        onSuccess: () => this.router.navigate(['/dashboard/ventures'])
+        onSuccess: () => this.router.navigate(['/dashboard/user/ventures'])
       });
     } else {
       this.venturesStore.createVenture({
@@ -219,6 +219,6 @@ export class VentureForm implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/dashboard/ventures']);
+    this.router.navigate(['/dashboard/user/ventures']);
   }
 }

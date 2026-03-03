@@ -31,12 +31,12 @@ export class VentureDetails implements OnInit {
   editVenture() {
     const slug = this.route.snapshot.paramMap.get('slug');
     if (slug) {
-      this.router.navigate(['/dashboard/ventures/edit', slug]);
+      this.router.navigate(['/dashboard/user/ventures/edit', slug]);
     }
   }
 
   goBack() {
-    this.router.navigate(['/dashboard/ventures']);
+    this.router.navigate(['/dashboard/user/ventures']);
   }
 
   deleteProduct(id: string, name: string) {
