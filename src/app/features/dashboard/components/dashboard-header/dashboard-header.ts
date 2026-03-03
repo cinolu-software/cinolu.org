@@ -12,6 +12,7 @@ import {
 import { CommonModule, NgClass, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
+import { RightsService } from '@core/auth/rights.service';
 import { ApiImgPipe } from '@shared/pipes';
 
 @Component({
@@ -22,6 +23,7 @@ import { ApiImgPipe } from '@shared/pipes';
 })
 export class DashboardHeader implements OnDestroy {
   private authStore = inject(AuthStore);
+  private rightsService = inject(RightsService);
   isMobile = input<boolean>(false);
 
   toggleSidebar = output<void>();
@@ -66,11 +68,7 @@ export class DashboardHeader implements OnDestroy {
   }
 
   getRoleLabel(): string {
-    const user = this.user();
-    if (!user || !user.roles) return 'Entrepreneur';
-    if (user.roles.includes('admin')) return 'Administrateur';
-    if (user.roles.includes('mentor')) return 'Mentor';
-    return 'Entrepreneur';
+    return this.rightsService.getRoleLabel(this.user());
   }
 
   getUserInitials(): string {

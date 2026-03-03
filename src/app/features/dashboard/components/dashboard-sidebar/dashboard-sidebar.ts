@@ -14,6 +14,7 @@ import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { filter } from 'rxjs';
 import { AuthStore } from '@core/auth/auth.store';
+import { RightsService } from '@core/auth/rights.service';
 import {
   DASHBOARD_MENU_CONFIG,
   MenuItem,
@@ -31,6 +32,7 @@ import {
 export class DashboardSidebar {
   private router = inject(Router);
   private authStore = inject(AuthStore);
+  private rightsService = inject(RightsService);
   private destroyRef = inject(DestroyRef);
 
   isCollapsed = input<boolean>(false);
@@ -42,10 +44,9 @@ export class DashboardSidebar {
   currentPath = signal<string>(this.router.url);
   expandedMenus = signal<Set<string>>(new Set());
 
-  menuConfig = computed(() => {
-    const userRoles = this.authStore.user()?.roles || [];
-    return filterMenuByRoles(DASHBOARD_MENU_CONFIG, userRoles);
-  });
+  menuConfig = computed(() =>
+    filterMenuByRoles(DASHBOARD_MENU_CONFIG, this.authStore.user(), this.rightsService)
+  );
 
   constructor() {
     this.router.events
