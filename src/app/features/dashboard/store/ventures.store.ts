@@ -67,7 +67,7 @@ export const VenturesStore = signalStore(
               patchState(store, { isLoading: false });
               if (err.status === 404) {
                 _toast.showError('Projet introuvable');
-                _router.navigate(['/dashboard/ventures']);
+                _router.navigate(['/dashboard/user/ventures']);
               } else {
                 _toast.showError(err.error?.message || 'Erreur lors du chargement');
               }
@@ -89,7 +89,7 @@ export const VenturesStore = signalStore(
                 isLoading: false
               });
               _toast.showSuccess('Projet créé avec succès');
-              _router.navigate(['/dashboard/ventures']);
+              _router.navigate(['/dashboard/user/ventures']);
               onSuccess?.(venture);
             }),
             catchError((err) => {
@@ -115,7 +115,7 @@ export const VenturesStore = signalStore(
               });
               _toast.showSuccess('Projet mis à jour');
               onSuccess?.();
-              _router.navigate(['/dashboard/ventures', updated.slug]);
+              _router.navigate(['/dashboard/user/ventures', updated.slug]);
             }),
             catchError((err) => {
               patchState(store, { isLoading: false });
