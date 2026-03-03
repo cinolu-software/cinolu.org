@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { merge } from 'lodash-es';
+import merge from 'lodash-es/merge';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { APP_CONFIG } from './config.constants';
 

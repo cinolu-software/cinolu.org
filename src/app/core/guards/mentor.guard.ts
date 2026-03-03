@@ -1,11 +1,12 @@
 import { inject } from '@angular/core';
 import { Router, CanActivateFn } from '@angular/router';
 import { AuthStore } from '../auth/auth.store';
-import { MentorStatus } from '@shared/models';
+import { RightsService } from '../auth/rights.service';
 
 export const mentorGuard: CanActivateFn = (state) => {
   const auth = inject(AuthStore);
   const router = inject(Router);
+  const rightsService = inject(RightsService);
 
   const user = auth.user();
 
@@ -14,34 +15,25 @@ export const mentorGuard: CanActivateFn = (state) => {
     return false;
   }
 
-  const isMentor = user.roles?.some((role) => ['coach', 'mentor'].includes(role));
+  if (rightsService.canAccessMentorArea(user)) {
+    return true;
+  }
 
-  if (!isMentor) {
-    router.navigate(['/dashboard'], {
-      queryParams: { error: 'access-denied', message: 'Accès réservé aux mentors' }
-    });
+  const reason = rightsService.getMentorRedirectReason(user);
+  if (reason === 'pending') {
+    router.navigate(['/dashboard/mentor/application-pending']);
+    return false;
+  }
+  if (reason === 'rejected') {
+    router.navigate(['/dashboard/mentor/application-rejected']);
     return false;
   }
 
-  const mentorProfile = user.mentor_profile;
-
-  if (!mentorProfile) {
-    router.navigate(['/dashboard'], {
-      queryParams: { error: 'no-mentor-profile', message: 'Profil mentor introuvable' }
-    });
-    return false;
-  }
-
-  if (mentorProfile.status !== MentorStatus.APPROVED) {
-    if (mentorProfile.status === MentorStatus.PENDING) {
-      router.navigate(['/dashboard/mentor/application-pending']);
-      return false;
+  router.navigate(['/dashboard'], {
+    queryParams: {
+      error: user.mentor_profile ? 'access-denied' : 'no-mentor-profile',
+      message: user.mentor_profile ? 'Accès réservé aux mentors' : 'Profil mentor introuvable'
     }
-
-    if (mentorProfile.status === MentorStatus.REJECTED) {
-      router.navigate(['/dashboard/mentor/application-rejected']);
-      return false;
-    }
-  }
-  return true;
+  });
+  return false;
 };
