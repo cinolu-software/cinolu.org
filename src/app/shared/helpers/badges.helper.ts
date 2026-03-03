@@ -101,14 +101,3 @@ export function calculateBadgeInfo(referralCount: number): BadgeResult {
     shareMessage
   };
 }
-
-export function hasUnlockedNewBadge(previousCount: number, newCount: number): BadgeLevel | null {
-  const previousBadge = getCurrentBadge(previousCount);
-  const newBadge = getCurrentBadge(newCount);
-
-  if (newBadge.level > previousBadge.level) {
-    return newBadge;
-  }
-
-  return null;
-}

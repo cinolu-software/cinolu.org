@@ -67,27 +67,3 @@ export function shareToSocial(options: ShareOptions): void {
       console.error('Plateforme de partage non supportée');
   }
 }
-
-export function canUseWebShare(): boolean {
-  return typeof navigator !== 'undefined' && 'share' in navigator;
-}
-
-export async function shareWithWebAPI(link: string, referralCount: number): Promise<void> {
-  if (!canUseWebShare()) {
-    throw new Error('Web Share API non disponible');
-  }
-
-  const message = generateShareMessage(referralCount);
-
-  try {
-    await navigator.share({
-      title: 'Rejoins Cinolu',
-      text: message,
-      url: link
-    });
-  } catch (error) {
-    if ((error as Error).name !== 'AbortError') {
-      throw error;
-    }
-  }
-}
