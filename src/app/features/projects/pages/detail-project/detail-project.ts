@@ -171,7 +171,7 @@ export class DetailProject implements OnInit {
     }
     const project = this.store.project();
     if (!project?.slug) return;
-    this.#router.navigate(['/dashboard/programs', project.slug]);
+    this.#router.navigate(['/dashboard/user/programs', project.slug]);
   }
 
   closeAuthModal(): void {
