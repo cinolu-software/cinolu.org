@@ -209,7 +209,7 @@ export class VentureForm implements OnInit {
     if (!ventureId) {
       return '';
     }
-    const url = `ventures/gallery/${ventureId}`;
+    const url = `ventures/${ventureId}/gallery`;
     return url;
   }
 
