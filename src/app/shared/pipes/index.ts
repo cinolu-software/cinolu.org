@@ -3,5 +3,3 @@
  */
 
 export * from './api-img.pipe';
-export * from './form-error.pipe';
-export * from './translate-field.pipe';
