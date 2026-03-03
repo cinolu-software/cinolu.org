@@ -54,4 +54,21 @@ export class RightsService {
     if (this.hasRole(user, ROLE_MENTOR)) return 'Mentor';
     return 'Entrepreneur';
   }
+
+  /**
+   * Route de landing dashboard selon le rôle et le statut mentor.
+   * - Admin → /dashboard/user (pas de dashboard admin interne)
+   * - Mentor APPROVED → /dashboard/mentor
+   * - Mentor PENDING → /dashboard/user/mentor/application-pending
+   * - Mentor REJECTED → /dashboard/user/mentor/application-rejected
+   * - User → /dashboard/user
+   */
+  resolveLandingRoute(user: IUser | null): string {
+    if (!user) return '/dashboard/user';
+    const reason = this.getMentorRedirectReason(user);
+    if (reason === 'pending') return '/dashboard/user/mentor/application-pending';
+    if (reason === 'rejected') return '/dashboard/user/mentor/application-rejected';
+    if (this.canAccessMentorArea(user)) return '/dashboard/mentor';
+    return '/dashboard/user';
+  }
 }

@@ -21,15 +21,15 @@ export const mentorGuard: CanActivateFn = (state) => {
 
   const reason = rightsService.getMentorRedirectReason(user);
   if (reason === 'pending') {
-    router.navigate(['/dashboard/mentor/application-pending']);
+    router.navigate(['/dashboard/user/mentor/application-pending']);
     return false;
   }
   if (reason === 'rejected') {
-    router.navigate(['/dashboard/mentor/application-rejected']);
+    router.navigate(['/dashboard/user/mentor/application-rejected']);
     return false;
   }
 
-  router.navigate(['/dashboard'], {
+  router.navigate(['/dashboard/user'], {
     queryParams: {
       error: user.mentor_profile ? 'access-denied' : 'no-mentor-profile',
       message: user.mentor_profile ? 'Accès réservé aux mentors' : 'Profil mentor introuvable'
