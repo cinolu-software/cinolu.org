@@ -1,6 +1,7 @@
 import {
   ApplicationConfig,
   LOCALE_ID,
+  provideAppInitializer,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection
 } from '@angular/core';
@@ -15,18 +16,20 @@ import { HttpClient, provideHttpClient, withFetch, withInterceptors } from '@ang
 import { httpInterceptor } from './core/interceptors/http.interceptor';
 import { LoadingInterceptor } from './core/services/loading';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { registerLocaleData } from '@angular/common';
-import localeFr from '@angular/common/locales/fr';
-import { provideQuillConfig } from 'ngx-quill';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { importProvidersFrom, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
 import { provideServiceWorker } from '@angular/service-worker';
+import { registerLocaleData } from '@angular/common';
 
-registerLocaleData(localeFr, 'fr');
+export function provideLocaleInitializer() {
+  return () =>
+    import('@angular/common/locales/fr').then((m) => {
+      registerLocaleData(m.default, 'fr');
+    });
+}
 
 export class CustomTranslateLoader implements TranslateLoader {
-  // Static cache buster - only changes on app build/reload, not on every request
   private static readonly CACHE_BUSTER = Date.now().toString();
 
   constructor(private http: HttpClient) {}
@@ -43,6 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAppInitializer(provideLocaleInitializer()),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(
@@ -74,19 +78,6 @@ export const appConfig: ApplicationConfig = {
     ),
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: TitleStrategy, useClass: PageTitleStrategy },
-    provideQuillConfig({
-      modules: {
-        toolbar: [
-          ['bold', 'italic', 'underline'],
-          ['blockquote'],
-          [{ list: 'ordered' }, { list: 'bullet' }],
-          [{ indent: '-1' }, { indent: '+1' }],
-          [{ header: [1, 2, 3, 4, 5, 6, false] }],
-          [{ color: [] }, { background: [] }],
-          [{ align: [] }]
-        ]
-      }
-    }),
     providePrimeNG({
       theme: {
         preset: primeNGPreset,
