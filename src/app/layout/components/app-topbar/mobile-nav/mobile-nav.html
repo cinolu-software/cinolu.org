@@ -1,11 +1,7 @@
 <div class="lg:hidden">
   @let currentUser = user();
 
-  <button
-    (click)="toggleNav()"
-    class="relative z-50 p-2 -mr-2 group"
-    [attr.aria-label]="isOpen() ? 'Fermer le menu' : 'Ouvrir le menu'"
-    [attr.aria-expanded]="isOpen()">
+  <button (click)="toggleNav()" class="relative z-50 p-2 -mr-2 group" [attr.aria-expanded]="isOpen()">
     <div class="w-5 h-4 flex flex-col justify-between">
       <span
         class="w-full h-0.5 transform transition-all duration-300 ease-in-out origin-left"

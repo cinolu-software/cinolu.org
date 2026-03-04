@@ -48,8 +48,7 @@
             <button
               type="button"
               (click)="togglePasswordVisibility('current')"
-              class="absolute right-3 top-1/2 -translate-y-1/2 p-2 hover:bg-slate-100 rounded-lg transition-colors"
-              [attr.aria-label]="showCurrentPassword() ? 'Masquer le mot de passe' : 'Afficher le mot de passe'">
+              class="absolute right-3 top-1/2 -translate-y-1/2 p-2 hover:bg-slate-100 rounded-lg transition-colors">
               <span class="material-icons text-slate-600 text-xl"
                 >{{ showCurrentPassword() ? 'visibility_off' : 'visibility' }}</span
               >
@@ -83,8 +82,7 @@
             <button
               type="button"
               (click)="togglePasswordVisibility('new')"
-              class="absolute right-3 top-1/2 -translate-y-1/2 p-2 hover:bg-slate-100 rounded-lg transition-colors"
-              [attr.aria-label]="showNewPassword() ? 'Masquer le mot de passe' : 'Afficher le mot de passe'">
+              class="absolute right-3 top-1/2 -translate-y-1/2 p-2 hover:bg-slate-100 rounded-lg transition-colors">
               <span class="material-icons text-slate-600 text-xl"
                 >{{ showNewPassword() ? 'visibility_off' : 'visibility' }}</span
               >
@@ -119,8 +117,7 @@
             <button
               type="button"
               (click)="togglePasswordVisibility('confirm')"
-              class="absolute right-3 top-1/2 -translate-y-1/2 p-2 hover:bg-slate-100 rounded-lg transition-colors"
-              [attr.aria-label]="showConfirmPassword() ? 'Masquer le mot de passe' : 'Afficher le mot de passe'">
+              class="absolute right-3 top-1/2 -translate-y-1/2 p-2 hover:bg-slate-100 rounded-lg transition-colors">
               <span class="material-icons text-slate-600 text-xl"
                 >{{ showConfirmPassword() ? 'visibility_off' : 'visibility' }}</span
               >

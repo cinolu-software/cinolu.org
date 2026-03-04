@@ -44,8 +44,7 @@
         (click)="openLightbox(p)"
         (keydown)="($event.key === 'Enter' || $event.key === ' ') && openLightbox(p)"
         tabindex="0"
-        role="button"
-        [attr.aria-label]="'gallery.view_image' | translate: {alt: p.alt}">
+        role="button">
         <div class="relative overflow-hidden">
           <img
             [src]="p.src"
@@ -100,9 +99,7 @@
       class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-4 anim-fade-in"
       (click)="closeLightbox()"
       (keydown)="$event.key === 'Escape' && closeLightbox()"
-      role="dialog"
-      aria-modal="true"
-      [attr.aria-label]="('gallery.viewing' | translate) + ' ' + current()?.alt">
+      role="dialog">
       <div
         class="relative w-full max-w-7xl max-h-[95vh] flex flex-col bg-white rounded-lg shadow-2xl overflow-hidden animate-scale-in"
         (click)="$event.stopPropagation()"
@@ -124,8 +121,7 @@
 
           <button
             (click)="closeLightbox()"
-            class="flex-shrink-0 ml-4 p-2.5 rounded-lg hover:bg-red-50 border border-transparent hover:border-red-200 transition-all duration-200 group"
-            [attr.aria-label]="'gallery.close' | translate">
+            class="flex-shrink-0 ml-4 p-2.5 rounded-lg hover:bg-red-50 border border-transparent hover:border-red-200 transition-all duration-200 group">
             <i-lucide
               [name]="icons.close"
               class="size-5 text-gray-600 group-hover:text-red-600 transition-colors"></i-lucide>
@@ -141,8 +137,7 @@
 
           <button
             (click)="prev($event)"
-            class="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-lg bg-white/95 backdrop-blur-sm hover:bg-white border border-gray-200/50 shadow-xl flex items-center justify-center transition-all duration-300 group hover:scale-110 hover:shadow-2xl"
-            [attr.aria-label]="'gallery.previous_image' | translate">
+            class="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-lg bg-white/95 backdrop-blur-sm hover:bg-white border border-gray-200/50 shadow-xl flex items-center justify-center transition-all duration-300 group hover:scale-110 hover:shadow-2xl">
             <i-lucide
               [name]="icons.back"
               class="size-6 text-gray-900 group-hover:-translate-x-0.5 transition-transform duration-300"></i-lucide>
@@ -150,8 +145,7 @@
 
           <button
             (click)="next($event)"
-            class="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-lg bg-white/95 backdrop-blur-sm hover:bg-white border border-gray-200/50 shadow-xl flex items-center justify-center transition-all duration-300 group hover:scale-110 hover:shadow-2xl"
-            [attr.aria-label]="'gallery.next_image' | translate">
+            class="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-lg bg-white/95 backdrop-blur-sm hover:bg-white border border-gray-200/50 shadow-xl flex items-center justify-center transition-all duration-300 group hover:scale-110 hover:shadow-2xl">
             <i-lucide
               [name]="icons.prev"
               class="size-6 text-gray-900 group-hover:translate-x-0.5 transition-transform duration-300"></i-lucide>

@@ -16,7 +16,7 @@
       <div class="relative">
         <div
           class="relative w-24 h-24 rounded-lg overflow-hidden border-2 border-white shadow-lg ring-2 ring-gray-100 group-hover:ring-primary-200 transition-all duration-300">
-          <img [ngSrc]="entrepreneur | apiIMG: 'user'" [alt]="entrepreneur.name"  class="object-cover" fill priority />
+          <img [ngSrc]="entrepreneur | apiIMG: 'user'" [alt]="entrepreneur.name" class="object-cover" fill priority />
         </div>
         <div
           class="absolute -bottom-1.5 -right-1.5 w-7 h-7 bg-gradient-to-br from-green-400 to-green-600 rounded-full border-3 border-white shadow-md"></div>
@@ -81,7 +81,6 @@
         <a
           [href]="'mailto:' + v.email"
           [title]="v.email"
-          [attr.aria-label]="'Email: ' + v.email"
           class="relative group/btn p-3 rounded-lg bg-gradient-to-br from-purple-50 to-purple-100/50 border border-purple-200/60 text-purple-600 hover:from-purple-500 hover:to-purple-600 hover:text-white hover:border-purple-600 hover:shadow-lg hover:shadow-purple-500/30 hover:-translate-y-1 transition-all duration-300 overflow-hidden">
           <div
             class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
@@ -91,7 +90,6 @@
         <a
           [href]="'tel:' + v.phone_number"
           [title]="v.phone_number"
-          [attr.aria-label]="'Phone: ' + v.phone_number"
           class="relative group/btn p-3 rounded-lg bg-gradient-to-br from-green-50 to-green-100/50 border border-green-200/60 text-green-600 hover:from-green-500 hover:to-green-600 hover:text-white hover:border-green-600 hover:shadow-lg hover:shadow-green-500/30 hover:-translate-y-1 transition-all duration-300 overflow-hidden">
           <div
             class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>

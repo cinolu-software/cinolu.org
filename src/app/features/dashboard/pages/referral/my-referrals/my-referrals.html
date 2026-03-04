@@ -100,8 +100,6 @@
       @for (page of [].constructor(totalPages()); track $index) {
       <button
         (click)="goToPage($index + 1)"
-        [attr.aria-label]="'Aller à la page ' + ($index + 1)"
-        [attr.aria-current]="currentPage() === $index + 1 ? 'page' : null"
         [class]="
           currentPage() === $index + 1
             ? 'px-4 py-2 rounded-lg bg-primary-600 text-white font-bold'

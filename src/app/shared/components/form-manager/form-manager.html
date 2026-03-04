@@ -37,7 +37,6 @@
           [class.text-slate-600]="$index > currentStep()"
           [class.cursor-pointer]="$index <= currentStep()"
           [class.cursor-not-allowed]="$index > currentStep()"
-          [attr.aria-label]="'Étape ' + ($index + 1) + ': ' + step.label"
           [attr.aria-current]="$index === currentStep() ? 'step' : null">
           @if ($index < currentStep()) {
           <span class="material-icons text-lg">check</span>
