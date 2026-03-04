@@ -29,7 +29,6 @@
               <img
                 [src]="ambassador | apiIMG: 'user'"
                 [alt]="ambassador.name"
-                referrerpolicy="no-referrer"
                 class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110" />
               } @else {
               <div
@@ -114,7 +113,6 @@
       <div class="space-y-10 md:space-y-12 lg:space-y-16">
         @for (venture of ambassador.ventures; track venture.id) {
         <div class="rounded-lg overflow-hidden group/v transition-all">
-          <!-- Cover Image -->
           <div class="relative h-48 sm:h-56 md:h-64 lg:h-72 overflow-hidden">
             <img
               [src]="venture | apiIMG: 'ventureCover'"
@@ -397,9 +395,7 @@
       <i-lucide [name]="icons.x" class="size-6 group-hover:rotate-90 transition-transform duration-300" />
     </button>
 
-    <div
-      class="absolute top-6 left-1/2 -translate-x-1/2 z-10 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full"
-      aria-live="polite">
+    <div class="absolute top-6 left-1/2 -translate-x-1/2 z-10 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full">
       <span class="text-white font-bold text-sm"> {{ lightboxIndex() + 1 }} / {{ lightboxImages().length }} </span>
     </div>
 
