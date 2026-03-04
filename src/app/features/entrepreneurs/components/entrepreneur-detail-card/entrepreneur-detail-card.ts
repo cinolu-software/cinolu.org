@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
@@ -13,15 +13,17 @@ import {
   Linkedin,
   Globe,
   Mail,
-  Phone
+  Phone,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
-import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
 import { map } from 'rxjs';
 import { PublicVentureStore } from '@features/entrepreneurs/store/venture.store';
 import { IUser, IVenture } from '../../../../shared/models';
 import { ApiImgPipe } from '../../../../shared/pipes';
 import { TranslateModule } from '@ngx-translate/core';
+import { getInitials } from '@shared/helpers/user.helper';
 
 @Component({
   selector: 'app-entrepreneur-detail-card',
@@ -32,7 +34,6 @@ import { TranslateModule } from '@ngx-translate/core';
     LucideAngularModule,
     ButtonModule,
     ApiImgPipe,
-    HeroCard,
     NgOptimizedImage,
     TranslateModule
   ],
@@ -41,6 +42,9 @@ import { TranslateModule } from '@ngx-translate/core';
 export class EntrepreneurDetailCard {
   #route = inject(ActivatedRoute);
   ventureStore = inject(PublicVentureStore);
+
+  /** Toggle ouvert/fermé pour la section Parcours */
+  parcoursExpanded = signal(true);
 
   icons = {
     users: Users,
@@ -52,7 +56,9 @@ export class EntrepreneurDetailCard {
     linkedin: Linkedin,
     globe: Globe,
     email: Mail,
-    phone: Phone
+    phone: Phone,
+    chevronDown: ChevronDown,
+    chevronUp: ChevronUp
   };
 
   #slugParam = toSignal(
@@ -100,6 +106,12 @@ export class EntrepreneurDetailCard {
   hasAnyContact = computed<boolean>(() => {
     return this.hasLinkedin() || this.hasWebsite() || this.hasEmail() || this.hasPhone();
   });
+
+  getInitials = getInitials;
+
+  toggleParcours(): void {
+    this.parcoursExpanded.update((v) => !v);
+  }
 
   constructor() {
     effect(() => {
