@@ -15,12 +15,19 @@ import {
   Mail,
   Phone,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Calendar,
+  Target,
+  TrendingUp,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Eye
 } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { map } from 'rxjs';
 import { PublicVentureStore } from '@features/entrepreneurs/store/venture.store';
-import { IUser, IVenture } from '../../../../shared/models';
+import { IImage, IProduct, IUser, IVenture } from '../../../../shared/models';
 import { ApiImgPipe } from '../../../../shared/pipes';
 import { TranslateModule } from '@ngx-translate/core';
 import { getInitials } from '@shared/helpers/user.helper';
@@ -46,6 +53,11 @@ export class EntrepreneurDetailCard {
   /** Toggle ouvert/fermé pour la section Parcours */
   parcoursExpanded = signal(true);
 
+  /** Lightbox galerie venture */
+  lightboxOpen = signal(false);
+  lightboxImages = signal<IImage[]>([]);
+  lightboxIndex = signal(0);
+
   icons = {
     users: Users,
     moveRight: MoveRight,
@@ -58,7 +70,14 @@ export class EntrepreneurDetailCard {
     email: Mail,
     phone: Phone,
     chevronDown: ChevronDown,
-    chevronUp: ChevronUp
+    chevronUp: ChevronUp,
+    calendar: Calendar,
+    target: Target,
+    trendingUp: TrendingUp,
+    x: X,
+    chevronLeft: ChevronLeft,
+    chevronRight: ChevronRight,
+    eye: Eye
   };
 
   #slugParam = toSignal(
@@ -107,10 +126,38 @@ export class EntrepreneurDetailCard {
     return this.hasLinkedin() || this.hasWebsite() || this.hasEmail() || this.hasPhone();
   });
 
+  products = computed<IProduct[]>(() => this.venture()?.products ?? []);
+
+  hasProducts = computed<boolean>(() => this.products().length > 0);
+
   getInitials = getInitials;
 
   toggleParcours(): void {
     this.parcoursExpanded.update((v) => !v);
+  }
+
+  openLightbox(images: IImage[], index: number): void {
+    this.lightboxImages.set(images);
+    this.lightboxIndex.set(index);
+    this.lightboxOpen.set(true);
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeLightbox(): void {
+    this.lightboxOpen.set(false);
+    document.body.style.overflow = '';
+  }
+
+  nextLightboxImage(): void {
+    const current = this.lightboxIndex();
+    const total = this.lightboxImages().length;
+    this.lightboxIndex.set((current + 1) % total);
+  }
+
+  previousLightboxImage(): void {
+    const current = this.lightboxIndex();
+    const total = this.lightboxImages().length;
+    this.lightboxIndex.set((current - 1 + total) % total);
   }
 
   constructor() {

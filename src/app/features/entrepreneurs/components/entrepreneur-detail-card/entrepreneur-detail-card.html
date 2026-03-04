@@ -66,7 +66,7 @@
               <a
                 [href]="'mailto:' + venture()?.email"
                 class="ml-2 px-6 py-2.5 bg-slate-900 text-white text-sm font-bold rounded-lg hover:bg-primary-600 shadow-xl shadow-slate-900/10 active:scale-95 transition-all">
-                Contacter l'expert
+                Contacter le promoteur
               </a>
             </div>
           </div>
@@ -103,44 +103,213 @@
         }
       </section>
 
-      <section class="w-full">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="size-8 rounded bg-primary-50 text-primary-600 flex items-center justify-center">
+      <section class="w-full" aria-labelledby="venture-heading">
+        <div class="flex items-center gap-3 mb-6" id="venture-heading">
+          <span class="size-8 rounded bg-primary-50 text-primary-600 flex items-center justify-center shrink-0">
             <i-lucide [name]="icons.briefcase" [size]="16"></i-lucide>
           </span>
           <h2 class="text-xl font-black text-slate-900 tracking-tight uppercase italic">L'Entreprise</h2>
         </div>
+
         @if (hasVenture() && venture(); as v) {
-        <article class="group relative overflow-hidden rounded-lg bg-slate-900 aspect-[4/5] max-w-lg shadow-2xl">
-          @if (v.cover) {
-          <img
-            [ngSrc]="v | apiIMG: 'ventureCover'"
-            [alt]="v.name"
-            fill
-            class="object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
-          }
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-
-          <div class="absolute inset-0 p-8 flex flex-col justify-end">
-            <div
-              class="size-16 rounded-lg bg-white p-2 mb-4 shadow-2xl transform -rotate-3 group-hover:rotate-0 transition-transform">
-              <img [ngSrc]="v | apiIMG: 'venture'" alt="logo" fill class="p-2 object-contain" />
+        <div class="w-full space-y-6 lg:space-y-8">
+          <!-- Overview -->
+          <div
+            class="bg-white rounded-lg border border-slate-200 overflow-hidden transition-all hover:border-slate-300/80">
+            @if (v.cover) {
+            <div class="relative h-32 sm:h-40 lg:h-48 w-full bg-slate-100">
+              <img [ngSrc]="v | apiIMG: 'ventureCover'" [alt]="v.name" fill class="object-cover w-full h-full" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
             </div>
-
-            <h3 class="text-3xl font-black text-white mb-2 tracking-tight">{{ v.name }}</h3>
-            <p class="text-slate-300 text-sm font-medium line-clamp-3 mb-6 leading-relaxed">{{ v.description }}</p>
-
-            <button
-              [routerLink]="['/entrepreneurs/venture', v.slug]"
-              class="group/btn w-full py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-lg font-black text-xs uppercase tracking-widest hover:bg-white hover:text-slate-900 transition-all flex items-center justify-center gap-3">
-              Explorer le projet
-              <i-lucide
-                [name]="icons.moveRight"
-                [size]="16"
-                class="group-hover/btn:translate-x-2 transition-transform"></i-lucide>
-            </button>
+            }
+            <div class="p-6 lg:p-8">
+              <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+                <div
+                  class="relative size-16 sm:size-20 rounded-xl bg-slate-50 border border-slate-100 p-2 shrink-0 overflow-hidden">
+                  @if (v.logo) {
+                  <img [ngSrc]="v | apiIMG: 'venture'" [alt]="v.name" fill class="object-contain" />
+                  } @else {
+                  <div class="size-full flex items-center justify-center text-slate-300">
+                    <i-lucide [name]="icons.briefcase" [size]="32"></i-lucide>
+                  </div>
+                  }
+                </div>
+                <div class="min-w-0 flex-1">
+                  <h3 class="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight mb-3">{{ v.name }}</h3>
+                  <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+                    @if (v.sector) {
+                    <span
+                      class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-primary-50 text-primary-700 rounded-md text-xs font-bold uppercase tracking-wider border border-primary-100">
+                      {{ v.sector }}
+                    </span>
+                    } @if (v.stage) {
+                    <span
+                      class="inline-flex items-center px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md text-xs font-bold uppercase tracking-wider">
+                      {{ v.stage }}
+                    </span>
+                    } @if (v.location) {
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-slate-600 text-xs font-medium">
+                      <i-lucide [name]="icons.mapPin" [size]="12" class="text-slate-400"></i-lucide>
+                      {{ v.location }}
+                    </span>
+                    } @if (v.founded_at) {
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-slate-600 text-xs font-medium">
+                      <i-lucide [name]="icons.calendar" [size]="12" class="text-slate-400"></i-lucide>
+                      {{ v.founded_at | date: 'yyyy' }}
+                    </span>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </article>
+
+          <!-- Description -->
+          @if (v.description) {
+          <div class="bg-white rounded-lg border border-slate-200 p-6 lg:p-8">
+            <h4 class="text-xs font-black uppercase tracking-widest text-primary-600 mb-3">Présentation</h4>
+            <p class="text-slate-600 leading-relaxed text-base lg:text-lg">{{ v.description }}</p>
+          </div>
+          }
+
+          <!-- Problem & Market -->
+          @if (v.problem_solved || v.target_market) {
+          <div class="grid sm:grid-cols-2 gap-4 lg:gap-6">
+            @if (v.problem_solved) {
+            <div class="bg-white rounded-lg border border-slate-200 p-6 lg:p-8">
+              <div class="flex items-center gap-3 mb-4">
+                <span
+                  class="size-10 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center shrink-0">
+                  <i-lucide [name]="icons.target" [size]="20"></i-lucide>
+                </span>
+                <h4 class="text-sm font-black uppercase tracking-wider text-slate-900">Problème résolu</h4>
+              </div>
+              <p class="text-slate-600 text-sm lg:text-base leading-relaxed">{{ v.problem_solved }}</p>
+            </div>
+            } @if (v.target_market) {
+            <div class="bg-white rounded-lg border border-slate-200 p-6 lg:p-8">
+              <div class="flex items-center gap-3 mb-4">
+                <span
+                  class="size-10 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center shrink-0">
+                  <i-lucide [name]="icons.trendingUp" [size]="20"></i-lucide>
+                </span>
+                <h4 class="text-sm font-black uppercase tracking-wider text-slate-900">Marché cible</h4>
+              </div>
+              <p class="text-slate-600 text-sm lg:text-base leading-relaxed">{{ v.target_market }}</p>
+            </div>
+            }
+          </div>
+          }
+
+          <!-- Gallery -->
+          @if (v.gallery && v.gallery.length > 0) {
+          <div class="bg-white rounded-lg border border-slate-200 overflow-hidden">
+            <div class="px-6 lg:px-8 py-4 border-b border-slate-100">
+              <div class="flex flex-col gap-2">
+                <h4 class="text-lg font-black text-slate-900 tracking-tight flex items-center gap-2">
+                  <i-lucide [name]="icons.globe" [size]="20" class="text-primary-600"></i-lucide>
+                  Galerie
+                </h4>
+                <div class="h-1 w-12 bg-primary-600 rounded-full"></div>
+              </div>
+            </div>
+            <div class="p-4 lg:p-6">
+              <div class="grid grid-cols-4 md:grid-cols-6 gap-3 md:gap-4">
+                @for (image of v.gallery; track image.id; let idx = $index) {
+                <button
+                  type="button"
+                  (click)="openLightbox(v.gallery, idx)"
+                  class="relative aspect-square overflow-hidden group/vimg hover:shadow-lg border border-slate-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                  <img
+                    [src]="image | apiIMG: 'gallery'"
+                    [alt]="v.name + ' - Image ' + (idx + 1)"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover/vimg:scale-105" />
+                  <div
+                    class="absolute inset-0 bg-black/0 group-hover/vimg:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                    <span
+                      class="opacity-0 group-hover/vimg:opacity-100 transition-opacity duration-300 flex items-center justify-center size-12 rounded-full bg-white/90 text-slate-900">
+                      <i-lucide [name]="icons.eye" [size]="18"></i-lucide>
+                    </span>
+                  </div>
+                </button>
+                }
+              </div>
+            </div>
+          </div>
+          }
+
+          <!-- Products -->
+          @if (hasProducts()) {
+          <div class="bg-white rounded-lg border border-slate-200 overflow-hidden">
+            <div class="px-6 lg:px-8 py-4 border-b border-slate-100 flex flex-wrap items-center justify-between gap-3">
+              <h4 class="text-sm font-black uppercase tracking-wider text-slate-900">Catalogue</h4>
+              <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
+                {{ products().length }} produit{{ products().length > 1 ? 's' : '' }}
+              </span>
+            </div>
+            <div class="p-4 lg:p-6">
+              <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                @for (product of products(); track product.id) {
+                <a
+                  [routerLink]="['/entrepreneurs/venture', v.slug, product.slug]"
+                  class="group flex flex-col sm:flex-row lg:flex-col rounded-lg border border-slate-100 overflow-hidden hover:border-slate-200 hover:shadow-md transition-all duration-300 bg-slate-50/30">
+                  <div
+                    class="relative w-full sm:w-24 lg:w-full aspect-video sm:aspect-square lg:aspect-video bg-slate-100 shrink-0 overflow-hidden">
+                    @if (product.gallery.length > 0) {
+                    <img
+                      [src]="product.gallery[0] | apiIMG: 'gallery'"
+                      [alt]="product.name"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    } @else {
+                    <div class="absolute inset-0 flex items-center justify-center text-slate-300">
+                      <i-lucide [name]="icons.package" [size]="28"></i-lucide>
+                    </div>
+                    }
+                    <div class="absolute top-2 right-2 bg-white/95 backdrop-blur rounded-md px-2 py-1 shadow-sm">
+                      <span class="text-sm font-black text-slate-900">{{ product.price }}</span>
+                      <span class="text-xs font-bold text-primary-600">$</span>
+                    </div>
+                  </div>
+                  <div class="p-3 sm:p-4 flex-1 min-w-0 flex flex-col justify-center">
+                    <h5 class="font-bold text-slate-900 truncate group-hover:text-primary-600 transition-colors">
+                      {{ product.name }}
+                    </h5>
+                    <p class="text-slate-500 text-xs sm:text-sm line-clamp-2 mt-0.5">{{ product.description }}</p>
+                  </div>
+                </a>
+                }
+              </div>
+            </div>
+          </div>
+          }
+
+          <!-- Contact & CTA -->
+          <div class="bg-white rounded-lg border border-slate-200 p-6 lg:p-8">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div class="flex flex-wrap items-center gap-2">
+                @if (hasWebsite()) {
+                <a
+                  [href]="v.website"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 text-slate-600 text-sm font-bold hover:bg-slate-50 hover:border-slate-300 transition-all">
+                  <i-lucide [name]="icons.globe" [size]="18"></i-lucide>
+                  Site web
+                </a>
+                } @if (hasLinkedin()) {
+                <a
+                  [href]="v.linkedin_url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 text-slate-600 text-sm font-bold hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700 transition-all">
+                  <i-lucide [name]="icons.linkedin" [size]="18"></i-lucide>
+                  LinkedIn
+                </a>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
         } @else {
         <div class="rounded-lg border-2 border-dashed border-slate-200 p-12 text-center bg-slate-50/50">
           <i-lucide [name]="icons.package" [size]="48" class="text-slate-300 mx-auto mb-4"></i-lucide>
@@ -151,5 +320,57 @@
       </section>
     </div>
   </div>
+
+  @if (lightboxOpen()) {
+  <div
+    class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm flex items-center justify-center"
+    role="dialog"
+    aria-modal="true"
+    tabindex="-1"
+    (click)="closeLightbox()"
+    (keydown.escape)="closeLightbox()">
+    <button
+      type="button"
+      (click)="closeLightbox()"
+      class="absolute top-4 right-4 z-10 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all text-white">
+      <i-lucide [name]="icons.x" [size]="24"></i-lucide>
+    </button>
+    <div
+      class="absolute top-6 left-1/2 -translate-x-1/2 z-10 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full"
+      aria-live="polite">
+      <span class="text-white font-bold text-sm">{{ lightboxIndex() + 1 }} / {{ lightboxImages().length }}</span>
+    </div>
+    <button
+      type="button"
+      (click)="previousLightboxImage(); $event.stopPropagation()"
+      class="absolute left-4 z-10 p-4 bg-white/10 hover:bg-white/20 rounded-full transition-all text-white disabled:opacity-50 disabled:cursor-not-allowed"
+      [disabled]="lightboxImages().length <= 1">
+      <i-lucide [name]="icons.chevronLeft" [size]="24"></i-lucide>
+    </button>
+    <div
+      role="img"
+      class="w-full h-full flex items-center justify-center p-8"
+      tabindex="0"
+      (click)="$event.stopPropagation()"
+      (keydown.escape)="closeLightbox()">
+      @for (image of lightboxImages(); track image.id; let idx = $index) {
+      <img
+        [src]="image | apiIMG: 'gallery'"
+        [alt]="'Image ' + (idx + 1)"
+        class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-opacity duration-500"
+        [class.opacity-0]="idx !== lightboxIndex()"
+        [class.opacity-100]="idx === lightboxIndex()"
+        [class.hidden]="idx !== lightboxIndex()" />
+      }
+    </div>
+    <button
+      type="button"
+      (click)="nextLightboxImage(); $event.stopPropagation()"
+      class="absolute right-4 z-10 p-4 bg-white/10 hover:bg-white/20 rounded-full transition-all text-white disabled:opacity-50 disabled:cursor-not-allowed"
+      [disabled]="lightboxImages().length <= 1">
+      <i-lucide [name]="icons.chevronRight" [size]="24"></i-lucide>
+    </button>
+  </div>
+  }
 </div>
 }
