@@ -6,6 +6,7 @@ import { Button } from 'primeng/button';
 import { IVenture } from '../../../../shared/models';
 import { ApiImgPipe } from '../../../../shared/pipes';
 import { TranslateModule } from '@ngx-translate/core';
+import { getInitials } from '@shared/helpers/user.helper';
 
 @Component({
   selector: 'app-entrepreneur-user-card',
@@ -20,4 +21,6 @@ export class EntrepreneurUserCard {
     verified: Star,
     moveRight: MoveRight
   };
+
+  getInitials = getInitials;
 }
