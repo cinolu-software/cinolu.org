@@ -1,4 +1,13 @@
 <div class="pb-20">
+  @if (mentorApply.pendingMessage(); as message) {
+  <div
+    class="mb-6 flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-amber-800"
+    role="status">
+    <span class="material-icons text-2xl text-amber-600">schedule</span>
+    <p class="font-semibold">{{ message }}</p>
+  </div>
+  }
+
   <div class="dashboard-section mb-8">
     <div class="flex items-center gap-4 mb-6">
       <div
@@ -152,7 +161,8 @@
           <button
             type="button"
             (click)="toggleExpertise(expertise.id)"
-            class="dashboard-card p-5 text-left transition-all cursor-pointer group"
+            [disabled]="mentorApply.isFormReadonly()"
+            class="dashboard-card p-5 text-left transition-all cursor-pointer group disabled:opacity-60 disabled:cursor-not-allowed"
             [class.!border-primary-500]="isExpertiseSelected(expertise.id)"
             [class.!bg-primary-50]="isExpertiseSelected(expertise.id)">
             <div class="flex items-start justify-between gap-3">
@@ -209,7 +219,11 @@
               <p class="dashboard-text-small">Ajoutez vos expériences professionnelles pertinentes</p>
             </div>
           </div>
-          <button type="button" (click)="addExperience()" class="dashboard-btn-secondary text-sm">
+          <button
+            type="button"
+            (click)="addExperience()"
+            [disabled]="mentorApply.isFormReadonly()"
+            class="dashboard-btn-secondary text-sm">
             <span class="material-icons text-lg">add</span>
             <span class="hidden sm:inline">Ajouter</span>
           </button>
@@ -218,7 +232,7 @@
         <div class="space-y-6" formArrayName="experiences">
           @for (experience of experiences.controls; track $index; let i = $index) {
           <div [formGroupName]="i" class="dashboard-card border border-slate-200 p-6 relative">
-            @if (experiences.length > 1) {
+            @if (experiences.length > 1 && !mentorApply.isFormReadonly()) {
             <button
               type="button"
               (click)="removeExperience(i)"
@@ -307,11 +321,11 @@
 
       <div class="flex flex-col-reverse sm:flex-row gap-3 justify-between mt-8">
         <div class="flex gap-3">
-          <a routerLink="/dashboard/profile" class="dashboard-btn-secondary">
+          <a routerLink="/dashboard/user/profile" class="dashboard-btn-secondary">
             <span class="material-icons text-lg">arrow_back</span>
             <span>Retour au profil</span>
           </a>
-          @if (currentStep() > 1) {
+          @if (currentStep() > 1 && !mentorApply.isFormReadonly()) {
           <button formActions type="button" (click)="previousStep()" class="dashboard-btn-secondary">
             <span class="material-icons text-lg">chevron_left</span>
             <span>Précédent</span>
@@ -321,7 +335,12 @@
 
         <div class="flex gap-3">
           @if (currentStep() < maxSteps) {
-          <button formActions type="button" (click)="nextStep()" class="dashboard-btn-primary">
+          <button
+            formActions
+            type="button"
+            (click)="nextStep()"
+            [disabled]="mentorApply.isFormReadonly()"
+            class="dashboard-btn-primary">
             <span>Suivant</span>
             <span class="material-icons text-lg">chevron_right</span>
           </button>
@@ -329,7 +348,7 @@
           <button
             formActions
             type="submit"
-            [disabled]="applicationForm.invalid || mentorProfileStore.isLoading()"
+            [disabled]="applicationForm.invalid || mentorProfileStore.isLoading() || !mentorApply.canSubmitApplication()"
             class="dashboard-btn-primary">
             @if (mentorProfileStore.isLoading()) {
             <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

@@ -1,8 +1,9 @@
-import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy, effect } from '@angular/core';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { DatePicker } from 'primeng/datepicker';
 import { AuthStore } from '@core/auth/auth.store';
+import { MentorApplicationState } from '@core/auth/mentor-application.state';
 import { MentorProfileStore } from '@features/dashboard/store/mentor-profile.store';
 import { FormManager } from '@shared/components/form-manager/form-manager';
 import { CreateExperienceDto } from '@shared/models';
@@ -14,37 +15,48 @@ import { CreateExperienceDto } from '@shared/models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MentorApply implements OnInit {
-  authStore = inject(AuthStore);
-  mentorProfileStore = inject(MentorProfileStore);
-  fb = inject(FormBuilder);
-  router = inject(Router);
+   authStore = inject(AuthStore);
+   mentorApplyState = inject(MentorApplicationState);
+  readonly mentorProfileStore = inject(MentorProfileStore);
+   fb = inject(FormBuilder);
+   router = inject(Router);
 
   currentStep = signal(1);
   maxSteps = 3;
 
-  // Form Groups
   applicationForm = this.fb.group({
     years_experience: [0, [Validators.required, Validators.min(0)]],
     expertises: [[] as string[], Validators.required],
     experiences: this.fb.array([])
   });
 
-  // Expertises disponibles (sera chargé depuis le store)
   availableExpertises = this.mentorProfileStore.expertises;
 
+  readonly mentorApply = this.mentorApplyState;
+
+  constructor() {
+    effect(() => {
+      if (this.mentorApplyState.shouldRedirectToMentorDashboard()) {
+        this.router.navigate(['/dashboard/mentor']);
+      }
+    });
+
+    effect(() => {
+      const readonly = this.mentorApplyState.isFormReadonly();
+      if (readonly) {
+        this.applicationForm.disable({ emitEvent: false });
+      } else {
+        this.applicationForm.enable({ emitEvent: false });
+      }
+    });
+  }
+
   ngOnInit() {
-    // Charger les expertises disponibles
     this.mentorProfileStore.loadExpertises();
 
-    // Vérifier si l'utilisateur a déjà un profil mentor
-    const user = this.authStore.user();
-    if (user?.mentor_profile) {
-      // Si déjà mentor, rediriger vers le dashboard mentor
-      this.router.navigate(['/dashboard/mentor']);
+    if (this.experiences.length === 0) {
+      this.addExperience();
     }
-
-    // Ajouter une expérience par défaut
-    this.addExperience();
   }
 
   get experiences(): FormArray {
@@ -60,7 +72,6 @@ export class MentorApply implements OnInit {
       end_date: [null as Date | null]
     });
 
-    // Écouter les changements de is_current pour activer/désactiver end_date
     group.get('is_current')?.valueChanges.subscribe((isCurrent) => {
       const endDateControl = group.get('end_date');
       if (isCurrent) {
@@ -75,24 +86,25 @@ export class MentorApply implements OnInit {
   }
 
   addExperience() {
+    if (this.mentorApplyState.isFormReadonly()) return;
     this.experiences.push(this.createExperienceFormGroup());
   }
 
   removeExperience(index: number) {
+    if (this.mentorApplyState.isFormReadonly()) return;
     if (this.experiences.length > 1) {
       this.experiences.removeAt(index);
     }
   }
 
   toggleExpertise(expertiseId: string) {
+    if (this.mentorApplyState.isFormReadonly()) return;
     const currentExpertises = this.applicationForm.get('expertises')?.value || [];
     const index = currentExpertises.indexOf(expertiseId);
 
     if (index > -1) {
-      // Remove expertise
       currentExpertises.splice(index, 1);
     } else {
-      // Add expertise
       currentExpertises.push(expertiseId);
     }
 
@@ -105,8 +117,8 @@ export class MentorApply implements OnInit {
   }
 
   nextStep() {
+    if (this.mentorApplyState.isFormReadonly()) return;
     if (this.currentStep() < this.maxSteps) {
-      // Validation basée sur l'étape actuelle
       if (this.currentStep() === 1 && !this.applicationForm.get('years_experience')?.valid) {
         return;
       }
@@ -121,14 +133,15 @@ export class MentorApply implements OnInit {
   }
 
   previousStep() {
+    if (this.mentorApplyState.isFormReadonly()) return;
     if (this.currentStep() > 1) {
       this.currentStep.set(this.currentStep() - 1);
     }
   }
 
   submitApplication() {
+    if (!this.mentorApplyState.canSubmitApplication()) return;
     if (this.applicationForm.invalid) {
-      console.warn('⚠️ Formulaire invalide:', this.applicationForm.errors);
       Object.keys(this.applicationForm.controls).forEach((key) => {
         const control = this.applicationForm.get(key);
         if (control?.invalid) {
@@ -137,8 +150,6 @@ export class MentorApply implements OnInit {
       });
       return;
     }
-
-    // Utiliser getRawValue() pour obtenir les valeurs même des contrôles désactivés
     const formValue = this.applicationForm.getRawValue();
 
     interface ExperienceFormValue {
@@ -184,9 +195,7 @@ export class MentorApply implements OnInit {
     this.mentorProfileStore.createProfile({
       data: payload,
       onSuccess: () => {
-        // Rafraîchir le profil utilisateur pour obtenir le mentor_profile
         this.authStore.getProfile();
-        // Rediriger vers la page d'attente d'approbation
         this.router.navigate(['/dashboard/user/mentor/application-pending']);
       }
     });
