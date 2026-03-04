@@ -43,7 +43,7 @@ export const routes: Route[] = [
   {
     path: 'entrepreneurs',
     component: Layout,
-    data: { layout: 'full-layout' },
+    data: { layout: 'fixed-layout' },
     loadChildren: () => import('./features/entrepreneurs/entrepreneurs.routes').then((m) => m.entrepreneursRoutes)
   },
   {
