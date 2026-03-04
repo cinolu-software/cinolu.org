@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from '@core/guards/auth.guard';
+import { mentorApplyGuard } from '@core/guards/mentor-apply.guard';
 
 export const dashboardUserRoutes: Routes = [
   {
@@ -130,6 +131,7 @@ export const dashboardUserRoutes: Routes = [
       {
         path: 'mentor/apply',
         title: 'Devenir Mentor',
+        canActivate: [mentorApplyGuard],
         loadComponent: () =>
           import('../dashboard/pages/mentor/apply/mentor-apply').then((c) => c.MentorApply)
       },
