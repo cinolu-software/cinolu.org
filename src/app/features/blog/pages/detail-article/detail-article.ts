@@ -141,7 +141,6 @@ export class DetailArticle implements OnInit, OnDestroy {
       content: ['', Validators.required]
     });
 
-    // Effect pour gérer l'authentification et le chargement des commentaires
     effect(() => {
       this.isLoggedIn.set(!!this.profile.user());
       if (!this.isLoggedIn()) this.form.get('content')?.disable();
@@ -151,7 +150,6 @@ export class DetailArticle implements OnInit, OnDestroy {
       });
     });
 
-    // Effect pour tracker l'ouverture d'article
     effect(() => {
       const a = this.store.article();
       if (a) {
