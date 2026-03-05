@@ -17,7 +17,7 @@ export const dashboardMentorRoutes: Routes = [
       },
       {
         path: 'profile',
-        title: 'Mon Profil Mentor',
+        title: 'Profil Mentor',
         loadComponent: () =>
           import('../dashboard/pages/mentor/profile/mentor-profile').then((c) => c.MentorProfile)
       }
