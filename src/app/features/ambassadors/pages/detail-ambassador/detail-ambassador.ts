@@ -16,7 +16,8 @@ import {
   ChevronUp,
   ChevronDown,
   X,
-  Building2
+  Building2,
+  Eye
 } from 'lucide-angular';
 import { AmbassadorStore } from '../../store/ambassador.store';
 import { getInitials } from '../../../../shared/helpers/ambassador.helpers';
@@ -53,7 +54,8 @@ export class DetailAmbassador implements OnInit {
     chevronUp: ChevronUp,
     chevronDown: ChevronDown,
     x: X,
-    building: Building2
+    building: Building2,
+    eye: Eye
   };
 
   ambassador = computed(() => this.store.ambassador());
