@@ -1,109 +1,186 @@
-<section class="min-h-fit bg-gradient-to-br from-gray-50 via-white to-gray-50 flex items-center">
-  <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 md:py-24 w-full">
-    <div class="flex flex-col items-center justify-center">
-      @if (store.isLoading()) {
-      <app-product-detail-skeleton />
+<section class="relative min-h-screen bg-[#fafafa] py-8 sm:py-12 lg:py-28 selection:bg-primary-100">
+  <div class="absolute top-0 right-0 w-1/3 h-screen bg-slate-100/50 -z-10 hidden lg:block"></div>
 
-      } @if (store.product(); as product) {
-      <div
-        class="relative bg-white rounded-2xl shadow-xl border border-gray-200/50 overflow-hidden max-w-4xl w-full group hover:shadow-2xl transition-all duration-300">
-        @if (product.gallery.length > 0) {
-        <div class="relative">
-          <p-galleria
-            [value]="product.gallery"
-            [autoPlay]="true"
-            [circular]="true"
-            [responsiveOptions]="responsiveOptions"
-            [numVisible]="5"
-            [showIndicators]="true"
-            [showThumbnails]="false"
-            [containerStyle]="{ 'max-width': '100%' }"
-            class="w-full">
-            <ng-template pTemplate="item" let-img>
-              <div class="relative w-full overflow-hidden h-80 md:h-[32rem] bg-gray-900">
-                <img
-                  [src]="img | apiIMG:'gallery'"
-                  [alt]="product.name + ' - image'"
-                  class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105" />
-                <div
-                  class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
-              </div>
-            </ng-template>
-          </p-galleria>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    @if (store.isLoading()) {
+    <app-product-detail-skeleton />
+    } @else { @if (store.product(); as product) {
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-20 items-start">
+      <div class="lg:col-span-5 space-y-8 lg:space-y-12 lg:sticky lg:top-28">
+        <header class="space-y-6">
+          @if (product.venture) {
+          <a
+            [routerLink]="['/entrepreneurs/venture', product.venture.slug]"
+            class="group inline-flex items-center gap-4 text-xs font-black uppercase tracking-[0.3em] sm:tracking-[0.4em] text-slate-400 hover:text-primary-600 transition-all min-h-[44px] items-center">
+            <span class="w-10 h-px bg-slate-200 group-hover:bg-primary-200 group-hover:w-16 transition-all"></span>
+            {{ product.venture.name }}
+          </a>
+          }
+
+          <h1
+            class="text-3xl sm:text-4xl font-satoshi lg:text-7xl font-black text-slate-900 tracking-tighter leading-[1.05] sm:leading-[0.9]">
+            {{ product.name }}
+          </h1>
+
+          <div class="flex items-center gap-4 sm:gap-6 pt-4">
+            <div class="relative group">
+              <div
+                class="absolute -inset-2 bg-primary-500/10 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <span class="relative text-3xl sm:text-4xl font-black text-primary-600 tabular-nums">
+                {{ product.price }}<span class="text-lg sm:text-xl ml-1 font-bold italic">$</span>
+              </span>
+            </div>
+            <div class="h-8 sm:h-10 w-px bg-slate-200 hidden sm:block"></div>
+            <span class="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest"
+              >Édition limitée</span
+            >
+          </div>
+        </header>
+
+        <section class="space-y-6">
+          <h2 class="text-xs font-black uppercase tracking-[0.3em] text-slate-900 flex items-center gap-3">
+            <span class="size-1.5 rounded-full bg-primary-500"></span>
+            Description
+          </h2>
+          <p class="text-lg text-slate-500 font-light leading-relaxed italic border-l-2 border-slate-100 pl-6">
+            {{ product.description }}
+          </p>
+        </section>
+
+        @if (product.venture) {
+        <div class="pt-8">
+          <a
+            [routerLink]="['/entrepreneurs/venture', product.venture.slug]"
+            class="inline-flex items-center justify-center font-satoshi w-full lg:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-slate-900 text-white text-xs sm:text-[11px] font-black uppercase tracking-[0.25em] sm:tracking-[0.3em] rounded-lg hover:bg-primary-600 shadow-[0_20px_40px_-12px_rgba(15,23,42,0.3)] hover:shadow-primary-500/30 transition-all active:scale-[0.98] min-h-[48px]">
+            Voir l'entreprise
+          </a>
+        </div>
+        }
+      </div>
+
+      <div class="lg:col-span-7 space-y-6 sm:space-y-8">
+        @if (product.gallery && product.gallery.length > 0) {
+        <button
+          type="button"
+          (click)="openLightbox(product.gallery, 0)"
+          class="relative w-full h-[260px] sm:h-[340px] lg:h-[400px] rounded-lg overflow-hidden bg-slate-100 shadow-xl lg:shadow-2xl group block text-left touch-manipulation">
+          <img
+            alt="{{ product.name }}"
+            [src]="product.gallery[0] | apiIMG: 'gallery'"
+            class="size-full object-cover transition-transform duration-[2s] group-hover:scale-110" />
+          <div
+            class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center">
+            <span
+              class="opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center size-14 rounded-full bg-white/90 text-slate-900">
+              <i-lucide [name]="icons.eye" [size]="28"></i-lucide>
+            </span>
+          </div>
+          <div
+            class="absolute bottom-4 left-4 sm:bottom-8 sm:left-8 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg pointer-events-none">
+            <span class="text-white text-[10px] font-bold uppercase tracking-widest"
+              >Visual Assets — 0{{ product.gallery.length }}</span
+            >
+          </div>
+        </button>
+
+        <div class="grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-4">
+          @for (image of product.gallery; track image.id; let idx = $index) {
+          <button
+            type="button"
+            (click)="openLightbox(product.gallery, idx)"
+            class="relative aspect-square rounded-lg overflow-hidden group/thumb shadow-sm transition-all hover:shadow-xl hover:-translate-y-1 active:scale-[0.98] min-h-[80px] touch-manipulation">
+            <img [src]="image | apiIMG: 'gallery'" class="size-full object-cover" [alt]="product.name" />
+            <div
+              class="absolute inset-0 bg-primary-600/0 group-hover/thumb:bg-black/40 transition-all flex items-center justify-center">
+              <i-lucide
+                [name]="icons.eye"
+                [size]="20"
+                class="text-white opacity-0 group-hover/thumb:opacity-100 scale-50 group-hover/thumb:scale-100 transition-all"></i-lucide>
+            </div>
+          </button>
+          }
         </div>
         } @else {
-        <div class="relative w-full overflow-hidden h-80 md:h-[32rem] bg-gray-100">
-          <img src="/images/no-image.jpg" alt="No image available" class="object-cover w-full h-full opacity-60" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div class="text-center bg-white/90 backdrop-blur-sm rounded-lg px-8 py-6 shadow-lg">
-              <svg class="w-16 h-16 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <p class="text-gray-600 font-medium text-lg">{{ 'entrepreneurs.no_image_available' | translate }}</p>
-            </div>
+        <div
+          class="lg:h-[550px] rounded-lg bg-slate-100 flex items-center justify-center border border-slate-200 border-dashed">
+          <div class="text-center space-y-4">
+            <i-lucide [name]="icons.package" [size]="64" class="text-slate-200 mx-auto"></i-lucide>
+            <p class="text-slate-400 font-serif italic">Pas encore de visuels disponibles.</p>
           </div>
         </div>
         }
-
-        <div
-          class="absolute top-4 right-4 md:top-6 md:right-6 bg-gradient-to-br from-primary-500 to-primary-600 shadow-lg flex flex-col justify-center items-center px-4 py-2.5 md:px-6 md:py-4 rounded-lg border-2 border-white/50 hover:scale-105 transition-transform duration-300">
-          <span class="text-white/90 text-[10px] md:text-xs font-bold uppercase tracking-wider mb-0.5 md:mb-1">{{ 'entrepreneurs.price' | translate }}</span>
-          <p class="text-white text-xl md:text-3xl font-black drop-shadow-md">{{ product.price }} $</p>
-        </div>
       </div>
-
-      <div class="w-full max-w-4xl mt-10 px-4 md:px-8">
-        <div
-          class="bg-white rounded-lg shadow-lg border border-gray-200/50 p-8 md:p-10 hover:shadow-xl transition-shadow duration-500">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="h-1.5 w-16 bg-gradient-to-r from-primary-400 to-primary-600 rounded-full shadow-lg"></div>
-            <h3
-              class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-              {{ product.name }}
-            </h3>
-          </div>
-
-          <div class="prose prose-lg max-w-none">
-            <p class="text-gray-600 text-base md:text-lg leading-relaxed whitespace-pre-line">
-              {{ product.description }}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      } @else {
-      <div class="w-full max-w-4xl">
-        <div
-          class="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-16 md:p-24 text-center border-2 border-dashed border-gray-300 overflow-hidden">
-          <div class="absolute top-0 right-0 w-64 h-64 bg-primary-100/20 rounded-full -mr-32 -mt-32 blur-3xl"></div>
-          <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary-100/20 rounded-full -ml-32 -mb-32 blur-3xl"></div>
-
-          <div class="relative z-10">
-            <div
-              class="w-32 h-32 bg-gradient-to-br from-gray-200 to-gray-300 rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl">
-              <svg class="w-16 h-16 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-              </svg>
-            </div>
-            <h3 class="text-3xl md:text-4xl font-black text-gray-800 mb-4">
-              {{ 'entrepreneurs.product_not_found' | translate }}
-            </h3>
-            <p class="text-gray-600 text-lg max-w-md mx-auto">
-              {{ 'entrepreneurs.product_not_found_message' | translate }}
-            </p>
-          </div>
-        </div>
-      </div>
-      }
     </div>
+    } @else {
+    <div class="max-w-2xl mx-auto py-20 text-center space-y-8">
+      <div class="relative inline-block">
+        <div class="absolute inset-0 bg-primary-500/20 blur-3xl rounded-full"></div>
+        <i-lucide [name]="icons.package" [size]="80" class="relative text-slate-200 mx-auto"></i-lucide>
+      </div>
+      <h2 class="text-4xl font-black text-slate-900 tracking-tighter italic">Produit Introuvable</h2>
+      <a
+        routerLink="/entrepreneurs"
+        class="inline-block border-b-2 border-primary-600 pb-1 font-bold text-primary-600 hover:text-slate-900 hover:border-slate-900 transition-all"
+        >Retourner explorer</a
+      >
+    </div>
+    } }
   </div>
 </section>
+
+@if (lightboxOpen()) {
+<div
+  class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm flex items-center justify-center"
+  role="dialog"
+  aria-modal="true"
+  tabindex="-1"
+  (click)="closeLightbox()"
+  (keydown.escape)="closeLightbox()">
+  <button
+    type="button"
+    (click)="closeLightbox()"
+    class="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 p-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full transition-all text-white touch-manipulation"
+    aria-label="Fermer">
+    <i-lucide [name]="icons.x" [size]="24"></i-lucide>
+  </button>
+  <div
+    class="absolute top-4 sm:top-6 left-1/2 -translate-x-1/2 z-10 px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-md rounded-full"
+    aria-live="polite">
+    <span class="text-white font-bold text-xs sm:text-sm"
+      >{{ lightboxIndex() + 1 }} / {{ lightboxImages().length }}</span
+    >
+  </div>
+  <button
+    type="button"
+    (click)="previousLightboxImage(); $event.stopPropagation()"
+    class="absolute left-2 sm:left-4 z-10 p-3 sm:p-4 min-w-[44px] min-h-[44px] flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full transition-all text-white disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+    [disabled]="lightboxImages().length <= 1"
+    aria-label="Image précédente">
+    <i-lucide [name]="icons.chevronLeft" [size]="24"></i-lucide>
+  </button>
+  <div
+    role="img"
+    class="w-full h-full flex items-center justify-center p-4 sm:p-8"
+    tabindex="0"
+    (click)="$event.stopPropagation()"
+    (keydown.escape)="closeLightbox()">
+    @for (image of lightboxImages(); track image.id; let idx = $index) {
+    <img
+      [src]="image | apiIMG: 'gallery'"
+      [alt]="'Image ' + (idx + 1)"
+      class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-opacity duration-500"
+      [class.opacity-0]="idx !== lightboxIndex()"
+      [class.opacity-100]="idx === lightboxIndex()"
+      [class.hidden]="idx !== lightboxIndex()" />
+    }
+  </div>
+  <button
+    type="button"
+    (click)="nextLightboxImage(); $event.stopPropagation()"
+    class="absolute right-2 sm:right-4 z-10 p-3 sm:p-4 min-w-[44px] min-h-[44px] flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full transition-all text-white disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+    [disabled]="lightboxImages().length <= 1"
+    aria-label="Image suivante">
+    <i-lucide [name]="icons.chevronRight" [size]="24"></i-lucide>
+  </button>
+</div>
+}
