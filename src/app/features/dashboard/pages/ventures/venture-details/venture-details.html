@@ -86,20 +86,31 @@
   </div>
   } @if (venture.gallery && venture.gallery.length > 0) {
   <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
-    <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-      <span class="material-icons text-primary-600">photo_library</span>
-      Galerie ({{ venture.gallery.length }})
-    </h2>
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      @for (image of venture.gallery; track image.id) {
-      <div class="relative group cursor-pointer overflow-hidden rounded-lg aspect-square bg-gray-100">
+    <div class="flex flex-col gap-2 mb-4">
+      <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+        <i-lucide [name]="icons.eye" [size]="20" class="text-primary-600" />
+        Galerie ({{ venture.gallery.length }})
+      </h2>
+      <div class="h-1 w-12 bg-primary-600 rounded-full"></div>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
+      @for (image of venture.gallery; track image.id; let idx = $index) {
+      <button
+        type="button"
+        (click)="openLightbox(venture.gallery, idx)"
+        class="relative aspect-square rounded-lg overflow-hidden group/vimg border border-gray-200 hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
         <img
-          [ngSrc]="image | apiIMG: 'gallery'"
-          [alt]="'Gallery image ' + $index"
-          fill
-          class="object-cover transition-transform duration-300 group-hover:scale-110" />
-        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity"></div>
-      </div>
+          [src]="image | apiIMG: 'gallery'"
+          [alt]="venture.name + ' - Image ' + (idx + 1)"
+          class="w-full h-full object-cover transition-transform duration-500 group-hover/vimg:scale-105" />
+        <div
+          class="absolute inset-0 bg-black/0 group-hover/vimg:bg-black/40 transition-all duration-300 flex items-center justify-center">
+          <span
+            class="opacity-0 group-hover/vimg:opacity-100 transition-opacity duration-300 flex items-center justify-center size-12 rounded-full bg-white/90 text-slate-900">
+            <i-lucide [name]="icons.eye" [size]="24"></i-lucide>
+          </span>
+        </div>
+      </button>
       }
     </div>
   </div>
@@ -136,7 +147,7 @@
             Produits & Services ({{ venture.products.length }})
           </h2>
           <a
-            routerLink="/dashboard/products/create"
+            routerLink="/dashboard/user/products/create"
             [queryParams]="{ venture: venture.id }"
             class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-lg text-sm font-semibold transition-all duration-200 hover:shadow-md">
             <span class="material-icons text-lg">add</span>
@@ -165,7 +176,7 @@
 
               <div class="flex gap-2 mt-auto pt-4 border-t border-gray-100">
                 <a
-                  [routerLink]="['/dashboard/products/edit', product.slug]"
+                  [routerLink]="['/dashboard/user/products/edit', product.slug]"
                   class="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg text-sm font-semibold transition-all duration-200 hover:shadow-md group/btn">
                   <span class="material-icons text-base group-hover/btn:rotate-12 transition-transform">edit</span>
                   <span>Modifier</span>
@@ -194,7 +205,7 @@
             Ce projet n'a pas encore de produits ou services. Ajoutez-en un pour commencer.
           </p>
           <a
-            routerLink="/dashboard/products/create"
+            routerLink="/dashboard/user/products/create"
             [queryParams]="{ venture: venture.id }"
             class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-br from-primary-400 to-primary-500 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5">
             <span class="material-icons text-xl">add</span>
@@ -317,5 +328,58 @@
     <h2 class="text-2xl font-bold text-gray-900 mb-2">Venture introuvable</h2>
     <p class="text-gray-600 mb-6">Cette venture n'existe pas ou a été supprimée</p>
   </div>
-  } }
+  } } @if (lightboxOpen()) {
+  <div
+    class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm flex items-center justify-center"
+    role="dialog"
+    aria-modal="true"
+    tabindex="-1"
+    (click)="closeLightbox()"
+    (keydown.escape)="closeLightbox()">
+    <button
+      type="button"
+      (click)="closeLightbox()"
+      class="absolute top-4 right-4 z-10 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all text-white"
+      aria-label="Fermer">
+      <i-lucide [name]="icons.x" [size]="24"></i-lucide>
+    </button>
+    <div
+      class="absolute top-6 left-1/2 -translate-x-1/2 z-10 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full"
+      aria-live="polite">
+      <span class="text-white font-bold text-sm">{{ lightboxIndex() + 1 }} / {{ lightboxImages().length }}</span>
+    </div>
+    <button
+      type="button"
+      (click)="previousLightboxImage(); $event.stopPropagation()"
+      class="absolute left-4 z-10 p-4 bg-white/10 hover:bg-white/20 rounded-full transition-all text-white disabled:opacity-50 disabled:cursor-not-allowed"
+      [disabled]="lightboxImages().length <= 1"
+      aria-label="Image précédente">
+      <i-lucide [name]="icons.chevronLeft" [size]="24"></i-lucide>
+    </button>
+    <div
+      role="img"
+      class="w-full h-full flex items-center justify-center p-8"
+      tabindex="0"
+      (click)="$event.stopPropagation()"
+      (keydown.escape)="closeLightbox()">
+      @for (image of lightboxImages(); track image.id; let idx = $index) {
+      <img
+        [src]="image | apiIMG: 'gallery'"
+        [alt]="'Image ' + (idx + 1)"
+        class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-opacity duration-500"
+        [class.opacity-0]="idx !== lightboxIndex()"
+        [class.opacity-100]="idx === lightboxIndex()"
+        [class.hidden]="idx !== lightboxIndex()" />
+      }
+    </div>
+    <button
+      type="button"
+      (click)="nextLightboxImage(); $event.stopPropagation()"
+      class="absolute right-4 z-10 p-4 bg-white/10 hover:bg-white/20 rounded-full transition-all text-white disabled:opacity-50 disabled:cursor-not-allowed"
+      [disabled]="lightboxImages().length <= 1"
+      aria-label="Image suivante">
+      <i-lucide [name]="icons.chevronRight" [size]="24"></i-lucide>
+    </button>
+  </div>
+  }
 </div>
