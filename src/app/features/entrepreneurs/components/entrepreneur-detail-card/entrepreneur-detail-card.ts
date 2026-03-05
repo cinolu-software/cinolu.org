@@ -31,6 +31,7 @@ import { IImage, IProduct, IUser, IVenture } from '../../../../shared/models';
 import { ApiImgPipe } from '../../../../shared/pipes';
 import { TranslateModule } from '@ngx-translate/core';
 import { getInitials } from '@shared/helpers/user.helper';
+import { EntrepreneurDetailCardSkeleton } from '../entrepreneur-detail-card-skeleton/entrepreneur-detail-card-skeleton';
 
 @Component({
   selector: 'app-entrepreneur-detail-card',
@@ -42,7 +43,8 @@ import { getInitials } from '@shared/helpers/user.helper';
     ButtonModule,
     ApiImgPipe,
     NgOptimizedImage,
-    TranslateModule
+    TranslateModule,
+    EntrepreneurDetailCardSkeleton
   ],
   templateUrl: './entrepreneur-detail-card.html'
 })
