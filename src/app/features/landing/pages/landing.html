@@ -1,7 +1,6 @@
 <div class="relative bg-gray-50">
   <app-hero />
   <app-why-join-us />
-  <!-- <app-cinolu-compare /> -->
   @defer (on viewport) {
   <app-top-ambassadors />
   } @placeholder {
@@ -13,6 +12,10 @@
   <app-programs />
   } @placeholder {
   <div class="h-96 bg-gray-50" aria-hidden="true"></div>
+  } @defer (on viewport) {
+  <!-- <app-testimonials /> -->
+  } @placeholder {
+  <div class="h-64 bg-white" aria-hidden="true"></div>
   } @defer (on viewport) {
   <app-recent-projects />
   } @placeholder {

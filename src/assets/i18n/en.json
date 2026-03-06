@@ -549,7 +549,8 @@
   },
   "programs": {
     "badge": "Support",
-    "title": "Our Programs",
+    "title": "Our ",
+    "title_highlight": "Programs",
     "description": "At Cinolu, we support every idea with programs tailored to your profile, ambitions, and development level.",
     "learn_more": "Learn more",
     "projects_title": "Projects of {{name}}",
@@ -559,28 +560,37 @@
   },
   "recent_projects": {
     "badge": "Recent Programs",
-    "title": "Recent Programs",
+    "title": "Recent ",
+    "title_highlight": "Programs",
     "description": "Discover the programs we have recently launched to support entrepreneurs.",
     "view_all": "All programs",
     "explore": "Explore this program"
   },
   "recent_events": {
     "badge": "Events",
-    "title": "Recent Events",
+    "title": "Recent ",
+    "title_highlight": "Events",
     "description": "Discover upcoming and past events that bring together our community of innovators and entrepreneurs.",
     "view_all": "Events list",
     "explore": "View event"
   },
   "networks": {
+    "badge": "Partner Networks",
     "title": "Networks where",
     "title_highlight": "Cinolu is a member",
     "description": "We are proud to be part of international networks that share our vision of innovation",
     "member": "Member",
     "visit_website": "Visit website",
+    "visit": "Visit",
     "stats": {
       "networks_count": "{{count}} Networks",
+      "networks_label": "Networks",
       "global_reach": "Global reach",
-      "collaboration": "Active collaboration"
+      "global": "Global",
+      "global_label": "Global reach",
+      "active": "Active",
+      "collaboration": "Active collaboration",
+      "collaboration_label": "Collaboration"
     },
     "items": {
       "segal": {
@@ -907,7 +917,8 @@
     "landing": {
       "title": "Top 5 Ambassadors",
       "subtitle": "The {{count}} most active entrepreneurs driving our community by sponsoring new talents.",
-      "eliteTitle": "Ambassadors",
+      "eliteTitle": "Ambassadors ",
+      "eliteTitleHighlight": "Cinolu",
       "availableSlot": "Your spot awaits"
     },
     "page": {

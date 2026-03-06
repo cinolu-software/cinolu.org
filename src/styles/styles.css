@@ -15,6 +15,19 @@
   --color-primary-900: #2b4225;
   --color-primary-950: #142310;
 
+  /* Secondary: aligné sur primary pour cohérence (testimonial, why-join-us) */
+  --color-secondary-50: #f1f8ed;
+  --color-secondary-100: #dfefd8;
+  --color-secondary-200: #c3e1b5;
+  --color-secondary-300: #9ecc8a;
+  --color-secondary-400: #7cb764;
+  --color-secondary-500: #5d9c46;
+  --color-secondary-600: #508c3c;
+  --color-secondary-700: #385f2c;
+  --color-secondary-800: #2f4d27;
+  --color-secondary-900: #2b4225;
+  --color-secondary-950: #142310;
+
   --font-family-mona: 'Mona Sans', sans-serif;
   --font-family-satoshi: 'Satoshi', sans-serif;
 }
@@ -243,12 +256,12 @@ section {
 .carousel-nav-btn {
   height: 2rem;
   width: 2rem;
-  color: rgb(56, 95, 44);
+  color: var(--color-primary-700);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgb(56, 95, 44);
+  border: 1px solid var(--color-primary-700);
   border-radius: 9999px;
   transition:
     background-color 0.3s,
@@ -256,7 +269,7 @@ section {
 }
 
 .carousel-nav-btn:hover {
-  background-color: rgb(56, 95, 44);
+  background-color: var(--color-primary-700);
   color: white;
 }
 

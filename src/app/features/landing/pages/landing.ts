@@ -22,7 +22,7 @@ import { TopAmbassadors } from '../components/top-ambassadors/top-ambassadors';
     Onestop,
     Services,
     Hero,
-    TopAmbassadors
+    TopAmbassadors,
   ],
   templateUrl: './landing.html',
   changeDetection: ChangeDetectionStrategy.OnPush

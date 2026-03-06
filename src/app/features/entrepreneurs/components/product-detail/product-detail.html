@@ -1,4 +1,4 @@
-<section class="relative min-h-screen bg-[#fafafa] py-8 sm:py-12 lg:py-28 selection:bg-primary-100">
+<section class="relative min-h-screen bg-white py-8 sm:py-12 lg:py-28 selection:bg-primary-100">
   <div class="absolute top-0 right-0 w-1/3 h-screen bg-slate-100/50 -z-10 hidden lg:block"></div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
@@ -11,7 +11,7 @@
           @if (product.venture) {
           <a
             [routerLink]="['/entrepreneurs/venture', product.venture.slug]"
-            class="group inline-flex items-center gap-4 text-xs font-black uppercase tracking-[0.3em] sm:tracking-[0.4em] text-slate-400 hover:text-primary-600 transition-all min-h-[44px] items-center">
+            class="group inline-flex gap-4 text-xs font-black uppercase tracking-[0.3em] sm:tracking-[0.4em] text-slate-400 hover:text-primary-600 transition-all min-h-[44px] items-center">
             <span class="w-10 h-px bg-slate-200 group-hover:bg-primary-200 group-hover:w-16 transition-all"></span>
             {{ product.venture.name }}
           </a>
@@ -48,11 +48,16 @@
         </section>
 
         @if (product.venture) {
-        <div class="pt-8">
+
+        <div class="pt-2">
           <a
             [routerLink]="['/entrepreneurs/venture', product.venture.slug]"
-            class="inline-flex items-center justify-center font-satoshi w-full lg:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-slate-900 text-white text-xs sm:text-[11px] font-black uppercase tracking-[0.25em] sm:tracking-[0.3em] rounded-lg hover:bg-primary-600 shadow-[0_20px_40px_-12px_rgba(15,23,42,0.3)] hover:shadow-primary-500/30 transition-all active:scale-[0.98] min-h-[48px]">
+            class="inline-flex items-center gap-2 font-satoshi text-primary-600 font-bold text-sm uppercase tracking-wider group/link hover:text-primary-700 transition-colors">
             Voir l'entreprise
+
+            <i-lucide
+              class="size-4 transition-transform duration-300 group-hover/link:translate-x-1"
+              [name]="icons.moveRight" />
           </a>
         </div>
         }

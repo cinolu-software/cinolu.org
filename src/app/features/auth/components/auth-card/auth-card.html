@@ -5,8 +5,7 @@
       <div class="space-y-6">
         <a
           class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-slate-50 shadow-sm hover:shadow-md border border-slate-200 text-slate-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm group"
-          routerLink="/"
-          [attr.aria-label]="'auth.backToHome' | translate">
+          routerLink="/">
           <i-lucide
             [name]="icons.arrowLeft"
             class="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
@@ -61,7 +60,7 @@
               @for (member of team; track member.name) {
               <div
                 class="relative h-12 w-12 rounded-full ring-4 ring-primary-600 transition-transform duration-300 hover:scale-110 hover:z-10">
-                <img class="rounded-full object-cover w-full h-full" [ngSrc]="member.image" [alt]="member.name"  fill />
+                <img class="rounded-full object-cover w-full h-full" [ngSrc]="member.image" [alt]="member.name" fill />
               </div>
               }
             </div>

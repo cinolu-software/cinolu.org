@@ -560,7 +560,8 @@
   },
   "programs": {
     "badge": "Accompagnement",
-    "title": "Nos Programmes",
+    "title": "Nos ",
+    "title_highlight": "Programmes",
     "description": "Chez Cinolu, nous accompagnons chaque idée avec des programmes adaptés à votre profil, vos ambitions et votre niveau de développement.",
     "learn_more": "En savoir plus",
     "projects_title": "Projets de {{name}}",
@@ -570,28 +571,37 @@
   },
   "recent_projects": {
     "badge": "Programmes récents",
-    "title": "Les programmes récents",
+    "title": "Programmes ",
+    "title_highlight": "récents",
     "description": "Découvrez les programmes que nous avons récemment lancés pour soutenir les entrepreneurs.",
     "view_all": "Tous les programmes",
     "explore": "Explorer ce programme"
   },
   "recent_events": {
     "badge": "Événements",
-    "title": "Les événements récents",
+    "title": "Événements ",
+    "title_highlight": "récents",
     "description": "Découvrez les événements à venir et passés qui rassemblent notre communauté d'innovateurs et d'entrepreneurs.",
     "view_all": "Liste des événements",
     "explore": "Voir l'événement"
   },
   "networks": {
+    "badge": "Réseaux Partenaires",
     "title": "Réseaux dont",
     "title_highlight": "Cinolu est membre",
     "description": "Nous sommes fiers de faire partie de réseaux internationaux qui partagent notre vision de l'innovation",
     "member": "Membre",
     "visit_website": "Visiter le site",
+    "visit": "Visiter le site",
     "stats": {
       "networks_count": "{{count}} Réseaux",
+      "networks_label": "Réseaux",
       "global_reach": "Portée mondiale",
-      "collaboration": "Collaboration active"
+      "global": "Global",
+      "global_label": "Portée mondiale",
+      "active": "Actif",
+      "collaboration": "Collaboration active",
+      "collaboration_label": "Collaboration"
     },
     "items": {
       "segal": {
@@ -919,7 +929,8 @@
     "landing": {
       "title": "Le Top 5 des Ambassadeurs",
       "subtitle": "Les {{count}} entrepreneurs les plus actifs qui propulsent notre communauté en parrainant de nouveaux talents.",
-      "eliteTitle": "Ambassadeurs",
+      "eliteTitle": "Ambassadeurs ",
+      "eliteTitleHighlight": "Cinolu",
       "availableSlot": "Votre place vous attend"
     },
     "page": {
