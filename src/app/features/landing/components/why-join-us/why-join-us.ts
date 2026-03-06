@@ -6,10 +6,18 @@ import { ButtonModule } from 'primeng/button';
 import { CountUpDirective } from '../../../../shared/directives/count-up.directive';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { REASONS } from '../../data/reasons-join-us.data';
+import { LandingSectionHeader } from '../landing-section-header/landing-section-header';
 
 @Component({
   selector: 'app-why-join-us',
-  imports: [LucideAngularModule, ButtonModule, CountUpDirective, FadeInOnScrollDirective, TranslateModule],
+  imports: [
+    LucideAngularModule,
+    ButtonModule,
+    CountUpDirective,
+    FadeInOnScrollDirective,
+    TranslateModule,
+    LandingSectionHeader
+  ],
   templateUrl: './why-join-us.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
