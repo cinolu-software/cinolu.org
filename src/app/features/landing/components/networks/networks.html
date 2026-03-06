@@ -7,23 +7,11 @@
   </div>
 
   <div class="relative py-12 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
-    <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12 lg:mb-16">
-      <div class="max-w-2xl">
-        <div
-          class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
-          <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
-          Réseaux Partenaires
-        </div>
-        <h3
-          class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-4 tracking-tight leading-tight hyphens-none">
-          {{ 'networks.title' | translate }}
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">{{ 'networks.title_highlight' | translate }}</span>
-        </h3>
-      </div>
-      <p class="text-slate-500 text-lg max-w-sm border-l-2 border-primary-500 pl-6 italic">
-        {{ 'networks.description' | translate }}
-      </p>
-    </header>
+    <app-landing-section-header
+      badgeKey="networks.badge"
+      titleKey="networks.title"
+      titleHighlightKey="networks.title_highlight"
+      descriptionKey="networks.description" />
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-6 mb-12 lg:mb-16 max-w-7xl mx-auto">
       @for (network of networks; track network.name) {
@@ -49,11 +37,11 @@
           <div class="flex-1 p-4 flex flex-col">
             <div class="flex-1 space-y-2 mb-3">
               <h4
-                class="font-bold text-sm text-gray-900 line-clamp-2 leading-snug group-hover:text-primary-700 transition-colors duration-300">
+                class="text-base sm:text-lg font-bold text-gray-900 font-satoshi line-clamp-2 leading-snug group-hover:text-primary-700 transition-colors duration-300">
                 {{ network.name }}
               </h4>
 
-              <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">{{ network.descriptionKey | translate }}</p>
+              <p class="text-sm text-gray-500 line-clamp-2 leading-relaxed">{{ network.descriptionKey | translate }}</p>
             </div>
 
             @if (network.website) {
@@ -62,7 +50,7 @@
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center justify-center gap-2 py-2.5 text-xs text-primary-600 hover:text-white font-semibold transition-all duration-300 group/link border-t border-gray-100 -mx-4 px-4 -mb-4 hover:bg-gradient-to-r hover:from-primary-600 hover:to-primary-700 hover:border-transparent rounded-b-lg">
-              <span class="uppercase tracking-wide">{{ 'networks.visit' | translate }}</span>
+              <span class="text-sm uppercase tracking-wide">{{ 'networks.visit' | translate }}</span>
               <i-lucide [name]="icons.globe" class="size-3.5 group-hover/link:translate-x-1 transition-transform" />
             </a>
             }
@@ -85,8 +73,8 @@
               <i-lucide [name]="icons.network" class="size-4 lg:size-5 text-white" />
             </div>
             <div class="text-left">
-              <div class="font-black text-xl lg:text-2xl text-gray-900">{{ networks.length }}</div>
-              <div class="text-xs font-medium text-gray-600 uppercase tracking-wide">Réseaux</div>
+              <div class="text-xl lg:text-2xl font-black text-gray-900 font-satoshi">{{ networks.length }}</div>
+              <div class="text-sm font-medium text-gray-600 uppercase tracking-wide">{{ 'networks.stats.networks_label' | translate }}</div>
             </div>
           </div>
 
@@ -100,8 +88,8 @@
               <i-lucide [name]="icons.globe" class="size-4 lg:size-5 text-white" />
             </div>
             <div class="text-left">
-              <div class="font-black text-xl lg:text-2xl text-gray-900">Global</div>
-              <div class="text-xs font-medium text-gray-600 uppercase tracking-wide">Portée mondiale</div>
+              <div class="text-xl lg:text-2xl font-black text-gray-900 font-satoshi">{{ 'networks.stats.global' | translate }}</div>
+              <div class="text-sm font-medium text-gray-600 uppercase tracking-wide">{{ 'networks.stats.global_label' | translate }}</div>
             </div>
           </div>
 
@@ -115,8 +103,8 @@
               <i-lucide [name]="icons.users" class="size-4 lg:size-5 text-white" />
             </div>
             <div class="text-left">
-              <div class="font-black text-xl lg:text-2xl text-gray-900">Actif</div>
-              <div class="text-xs font-medium text-gray-600 uppercase tracking-wide">Collaboration</div>
+              <div class="text-xl lg:text-2xl font-black text-gray-900 font-satoshi">{{ 'networks.stats.active' | translate }}</div>
+              <div class="text-sm font-medium text-gray-600 uppercase tracking-wide">{{ 'networks.stats.collaboration_label' | translate }}</div>
             </div>
           </div>
         </div>

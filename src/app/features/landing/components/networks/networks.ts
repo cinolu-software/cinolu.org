@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { LucideAngularModule, Network, Globe, Users } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { NETWORKS } from '@features/landing/data/networks.data';
+import { LandingSectionHeader } from '../landing-section-header/landing-section-header';
 
 @Component({
   selector: 'app-networks',
-  imports: [CommonModule, LucideAngularModule, TranslateModule],
+  imports: [CommonModule, LucideAngularModule, TranslateModule, LandingSectionHeader],
   templateUrl: './networks.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
