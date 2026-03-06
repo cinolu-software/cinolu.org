@@ -1,22 +1,11 @@
-<section class="min-h-fit bg-gray-50 backdrop-blur-[1px] bg-grid items-center content-center" appAnimationsOnScroll>
+<section class="min-h-fit bg-gray-50 bg-grid items-center content-center" appAnimationsOnScroll>
   <div class="py-12 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
-    <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12 lg:mb-16">
-      <div class="max-w-2xl">
-        <div
-          class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
-          <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
-          {{ 'programs.badge' | translate }}
-        </div>
-        <h3
-          class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-4 tracking-tight leading-tight hyphens-none">
-          {{ 'programs.title' | translate }}
-        </h3>
-      </div>
-      <p class="text-slate-500 text-lg max-w-sm border-l-2 border-primary-500 pl-6 italic">
-        {{ 'programs.description' | translate }}
-      </p>
-    </header>
-    <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-16 lg:gap-6 mt-14 lg:mt-20">
+    <app-landing-section-header
+      badgeKey="programs.badge"
+      titleKey="programs.title"
+      titleHighlightKey="programs.title_highlight"
+      descriptionKey="programs.description" />
+    <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-6 mt-14 lg:mt-20">
       @for (p of store.programs(); track p.id) {
       <div
         class="relative group flex flex-col bg-white hover:scale-[1.02] px-6 py-8 pt-16 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-300 rounded-lg overflow-visible">
@@ -37,9 +26,9 @@
           </div>
         </div>
 
-        <div class="flex flex-1 flex-col text-center min-h-0 space-y-3 xl:space-x-4">
+        <div class="flex flex-1 flex-col text-center min-h-0 gap-3">
           <div class="space-y-2 sm:space-y-3">
-            <h5 class="font-black text-lg sm:text-xl text-gray-900 line-clamp-1 leading-tight font-satoshi">
+            <h5 class="text-lg sm:text-xl font-bold text-gray-900 line-clamp-1 leading-tight font-satoshi">
               {{ p?.name }}
             </h5>
             <div class="w-12 h-0.5 bg-gradient-to-r from-primary-400 to-primary-600 mx-auto rounded-full"></div>
