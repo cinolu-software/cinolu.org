@@ -4,10 +4,11 @@ import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { BookOpen, LucideAngularModule, MoveRight, Users } from 'lucide-angular';
 import { ADVANTAGES } from '@features/landing/data/advantages.data';
+import { LandingSectionHeader } from '../landing-section-header/landing-section-header';
 
 @Component({
   selector: 'app-onestop',
-  imports: [RouterLink, LucideAngularModule, TranslateModule],
+  imports: [RouterLink, LucideAngularModule, TranslateModule, LandingSectionHeader],
   templateUrl: './onestop.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

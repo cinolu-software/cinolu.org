@@ -1,30 +1,19 @@
 <section
-  class="min-h-[85vh] py-12 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto"
+  class="min-h-[85vh] py-12 lg:py-20 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-gradient-to-br from-white via-gray-50/50 to-primary-50/30"
   [attr.inert]="ready() ? null : ''"
   tabindex="-1">
-  <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12 lg:mb-16">
-    <div class="max-w-2xl">
-      <div
-        class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
-        <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
-        {{ 'onestop.badge' | translate }}
-      </div>
-      <h3
-        class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-4 tracking-tight leading-tight hyphens-none">
-        {{ 'onestop.title' | translate }}
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">{{ 'onestop.title_highlight' | translate }}</span>
-      </h3>
-    </div>
-    <p class="text-slate-500 text-lg max-w-sm border-l-2 border-primary-500 pl-6 italic hidden lg:block">
-      {{ 'onestop.heading' | translate }}
-    </p>
-  </header>
+  <app-landing-section-header
+    badgeKey="onestop.badge"
+    titleKey="onestop.title"
+    titleHighlightKey="onestop.title_highlight"
+    descriptionKey="onestop.heading"
+    descriptionClass="hidden lg:block" />
 
   <div class="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-10 xl:gap-16">
     <div class="lg:w-1/2 w-full text-center lg:text-left space-y-8">
       <div>
         <h2
-          class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-gray-900 leading-[1.2] tracking-tight font-satoshi mb-5">
+          class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight leading-tight font-satoshi mb-5">
           {{ 'onestop.heading' | translate }} <br class="hidden sm:block" />
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700"
             >{{ 'onestop.heading_highlight' | translate }}</span
@@ -82,7 +71,7 @@
         <div
           class="relative w-72 sm:w-80 md:w-96 lg:w-[380px] xl:w-[420px] h-[350px] sm:h-[400px] md:h-[450px] lg:h-[480px] xl:h-[520px] mx-auto">
           <img
-            src="images/entrepreneur-default.png"
+            src="/images/entrepreneur-default.png"
             [alt]="'onestop.image_alt' | translate"
             loading="eager"
             decoding="async"
