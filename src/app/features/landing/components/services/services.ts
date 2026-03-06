@@ -2,10 +2,11 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { SERVICES } from '@features/landing/data/services.data';
 import { ServiceCard } from '../service-card/service-card';
+import { LandingSectionHeader } from '../landing-section-header/landing-section-header';
 
 @Component({
   selector: 'app-services',
-  imports: [ServiceCard, TranslateModule],
+  imports: [ServiceCard, TranslateModule, LandingSectionHeader],
   templateUrl: './services.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

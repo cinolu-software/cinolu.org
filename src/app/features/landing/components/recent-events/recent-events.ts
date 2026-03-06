@@ -2,13 +2,14 @@ import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { carouselConfig } from '../../config/carousel.config';
 import { CarouselModule } from 'primeng/carousel';
-import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight, MoveRight } from 'lucide-angular';
+import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight } from 'lucide-angular';
 import { EventCardSkeleton } from '../../../events/components/event-card-skeleton/event-card-skeleton';
 import { EventCard } from '../../../events/components/event-card/event-card';
 import { RecentEventsStore } from '../../../events/store/recent-events.store';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { IEvent } from '../../../../shared/models';
 import { TranslateModule } from '@ngx-translate/core';
+import { LandingSectionHeader } from '../landing-section-header/landing-section-header';
 
 @Component({
   selector: 'app-recent-events',
@@ -20,7 +21,8 @@ import { TranslateModule } from '@ngx-translate/core';
     LucideAngularModule,
     EventCardSkeleton,
     FadeInOnScrollDirective,
-    TranslateModule
+    TranslateModule,
+    LandingSectionHeader
   ],
   templateUrl: './recent-events.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -31,8 +33,7 @@ export class RecentEvents {
   icons = {
     moveUpRight: MoveUpRight,
     arrowLeft: ArrowLeft,
-    arrowRight: ArrowRight,
-    moveRight: MoveRight
+    arrowRight: ArrowRight
   };
 
   constructor() {

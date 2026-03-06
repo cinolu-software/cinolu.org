@@ -7,6 +7,7 @@ import { AmbassadorsStore } from '../../../ambassadors/store/ambassadors.store';
 import { getInitials } from '../../../../shared/helpers/ambassador.helpers';
 import { IUser } from '../../../../shared/models';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
+import { LandingSectionHeader } from '../landing-section-header/landing-section-header';
 
 export type AmbassadorDisplay = { type: 'real'; data: IUser; id: string } | { type: 'placeholder'; id: string };
 
@@ -14,7 +15,7 @@ const DISPLAY_ORDER_INDICES = [0, 1, 2, 3, 4] as const;
 
 @Component({
   selector: 'app-top-ambassadors',
-  imports: [CommonModule, RouterLink, TranslateModule, ApiImgPipe, LucideAngularModule],
+  imports: [CommonModule, RouterLink, TranslateModule, ApiImgPipe, LucideAngularModule, LandingSectionHeader],
   providers: [AmbassadorsStore],
   templateUrl: './top-ambassadors.html',
   changeDetection: ChangeDetectionStrategy.OnPush

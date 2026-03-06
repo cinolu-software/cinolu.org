@@ -29,7 +29,7 @@
         aria-hidden="true"></i-lucide>
 
       <blockquote
-        class="text-base sm:text-lg lg:text-xl text-gray-900 font-semibold leading-relaxed mb-6 sm:mb-8 italic">
+        class="text-base sm:text-lg text-gray-900 font-semibold leading-relaxed mb-6 sm:mb-8 italic">
         "{{ item.quote }}"
       </blockquote>
 
@@ -40,8 +40,8 @@
           {{ item.name.charAt(0).toUpperCase() }}
         </div>
         <div class="flex-1 min-w-0">
-          <cite class="not-italic font-bold text-gray-900 text-sm sm:text-base truncate">{{ item.name }}</cite>
-          <p class="text-gray-600 text-xs sm:text-sm truncate">{{ item.role }}</p>
+          <cite class="not-italic text-base font-bold text-gray-900 font-satoshi truncate">{{ item.name }}</cite>
+          <p class="text-gray-600 text-sm truncate">{{ item.role }}</p>
           <div class="flex gap-1 mt-2" role="img" aria-label="5 étoiles sur 5">
             @for (star of [1,2,3,4,5]; track star) {
             <i-lucide [name]="starIcon" class="w-4 h-4 text-yellow-400 fill-yellow-400" aria-hidden="true"></i-lucide>

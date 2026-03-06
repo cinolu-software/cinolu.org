@@ -6,24 +6,12 @@
   </div>
 
   <div class="relative z-10 px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto">
-    <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12 lg:mb-16">
-      <div class="max-w-2xl">
-        <div
-          class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 text-sm font-semibold rounded-full border border-primary-200/60 mb-6">
-          <div class="w-2 h-2 bg-primary-500 rounded-full mr-2"></div>
-          {{ 'ambassadors.badge' | translate }}
-        </div>
-
-        <h3
-          class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 font-satoshi mb-4 tracking-tight leading-tight hyphens-none">
-          {{ 'ambassadors.landing.eliteTitle' | translate }}
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">Cinolu</span>
-        </h3>
-      </div>
-      <p class="text-slate-500 text-lg max-w-sm border-l-2 border-primary-500 pl-6 italic">
-        {{ 'ambassadors.landing.subtitle' | translate: { count: realAmbassadorsCount() } }}
-      </p>
-    </header>
+    <app-landing-section-header
+      badgeKey="ambassadors.badge"
+      titleKey="ambassadors.landing.eliteTitle"
+      titleHighlightKey="ambassadors.landing.eliteTitleHighlight"
+      descriptionKey="ambassadors.landing.subtitle"
+      [descriptionParams]="{ count: realAmbassadorsCount() }" />
 
     @if (store.isLoading()) {
     <div class="h-96 flex items-center justify-center">
@@ -47,7 +35,7 @@
             class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
           } @else {
           <div
-            class="w-full h-full bg-slate-100 flex items-center justify-center text-primary-300 text-5xl font-black uppercase">
+            class="w-full h-full bg-slate-100 flex items-center justify-center text-primary-300 text-3xl font-black font-satoshi uppercase">
             {{ getInitials(item.data.name) }}
           </div>
           }
@@ -56,10 +44,10 @@
         </div>
         <div class="absolute inset-0 p-6 flex flex-col justify-end">
           <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-            <span class="text-primary-400 font-bold md:text-lg lg:text-5xl text-sm mb-2 block"
+            <span class="text-primary-400 font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-2 block font-satoshi"
               >#{{ getRealRank(i) }}</span
             >
-            <h3 class="text-white font-bold text-xl lg:text-2xl leading-tight uppercase font-satoshi">
+            <h3 class="text-white font-bold text-lg sm:text-xl lg:text-2xl leading-tight uppercase font-satoshi">
               {{ item.data.name }}
             </h3>
             <div
@@ -99,7 +87,7 @@
           class="size-16 rounded-full border border-white/20 flex items-center justify-center transition-transform group-hover:scale-110">
           <i-lucide [name]="icons.MoveRight" class="text-white size-8" />
         </span>
-        <span class="text-white font-bold text-lg tracking-tight leading-none uppercase">
+        <span class="text-white font-bold text-base sm:text-lg tracking-tight leading-none font-satoshi">
           {{ 'ambassadors.viewAll' | translate }}
         </span>
       </a>

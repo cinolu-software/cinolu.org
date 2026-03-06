@@ -1,0 +1,23 @@
+<div
+  class="group relative bg-white border border-slate-200/60 hover:border-primary-300 rounded-xl p-3 sm:p-4 md:p-5 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 hover:-translate-y-1 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] flex flex-col w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px] shrink-0">
+  <div class="absolute top-2 right-2 z-[1]">
+    <span
+      class="inline-flex items-center px-2 py-0.5 bg-primary-50 text-primary-700 text-xs font-medium rounded-full border border-primary-200">
+      {{ partner.category }}
+    </span>
+  </div>
+  <div class="flex-1 flex items-center justify-center mb-2 sm:mb-3 p-2 sm:p-3 min-h-0">
+    <img
+      [src]="partner.image"
+      [alt]="'Logo de ' + partner.name"
+      [title]="partner.name"
+      loading="lazy"
+      decoding="async"
+      class="object-contain max-w-full max-h-10 sm:max-h-12 md:max-h-14 w-auto h-auto group-hover:scale-105 transition-transform duration-300 grayscale group-hover:grayscale-0" />
+  </div>
+  <div class="text-center pt-2 border-t border-slate-100">
+    <h3 class="text-base sm:text-lg font-bold text-slate-900 font-satoshi leading-tight group-hover:text-primary-700 transition-colors duration-200 line-clamp-2">
+      {{ partner.name }}
+    </h3>
+  </div>
+</div>

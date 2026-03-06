@@ -7,6 +7,8 @@ import { UserPlus, LucideAngularModule, Heart, ShoppingCart, MoveUpRight, MoveRi
 import { RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { TranslateModule } from '@ngx-translate/core';
+import { LandingSectionHeader } from '../landing-section-header/landing-section-header';
+import { PartnerCard } from './partner-card/partner-card';
 
 @Component({
   selector: 'app-partners',
@@ -17,7 +19,9 @@ import { TranslateModule } from '@ngx-translate/core';
     LucideAngularModule,
     RouterLink,
     ButtonModule,
-    TranslateModule
+    TranslateModule,
+    LandingSectionHeader,
+    PartnerCard
   ],
   templateUrl: './partners.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -28,13 +32,15 @@ export class Partners {
 
   firstRow: IPartner[] = [];
   secondRow: IPartner[] = [];
+  firstRowDuplicated: IPartner[] = [];
+  secondRowDuplicated: IPartner[] = [];
 
   icons = {
     userPlus: UserPlus,
     piHeart: Heart,
     shoppingCart: ShoppingCart,
     moveUp: MoveUpRight,
-    MoveRight: MoveRight
+    moveRight: MoveRight
   };
 
   selectedUserId = 0;
@@ -47,6 +53,8 @@ export class Partners {
     const mid = Math.ceil(this.partners.length / 2);
     this.firstRow = this.partners.slice(0, mid);
     this.secondRow = this.partners.slice(mid);
+    this.firstRowDuplicated = [...this.firstRow, ...this.firstRow];
+    this.secondRowDuplicated = [...this.secondRow, ...this.secondRow];
   }
 
   selectPartenerType(type: number) {
