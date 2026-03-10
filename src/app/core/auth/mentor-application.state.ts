@@ -29,6 +29,9 @@ export class MentorApplicationState {
   readonly isRejected = computed(() => this.status() === MentorStatus.REJECTED);
   readonly isApproved = computed(() => this.status() === MentorStatus.APPROVED);
 
+  /** CV manquant : candidature pending mais aucun CV soumis. */
+  readonly isCvMissing = computed(() => this.isPending() && !this.mentorProfile()?.cv);
+
   /** Si true, la page candidature doit rediriger vers /dashboard/mentor. */
   readonly shouldRedirectToMentorDashboard = computed(() => this.isApproved());
 
@@ -36,12 +39,8 @@ export class MentorApplicationState {
   readonly isFormReadonly = computed(() => this.isPending());
 
   /** L'utilisateur peut soumettre / resoumettre (jamais postulé ou refusé). */
-  readonly canSubmitApplication = computed(
-    () => this.hasNoApplication() || this.isRejected()
-  );
+  readonly canSubmitApplication = computed(() => this.hasNoApplication() || this.isRejected());
 
   /** Message à afficher lorsque candidature en attente. */
-  readonly pendingMessage = computed(() =>
-    this.isPending() ? 'Votre candidature est en cours de traitement' : null
-  );
+  readonly pendingMessage = computed(() => (this.isPending() ? 'Votre candidature est en cours de traitement' : null));
 }
