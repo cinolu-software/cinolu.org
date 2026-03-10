@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal, ChangeDetectionStrategy, effect } fr
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { DatePicker } from 'primeng/datepicker';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { AuthStore } from '@core/auth/auth.store';
 import { MentorApplicationState } from '@core/auth/mentor-application.state';
 import { MentorProfileStore } from '@features/dashboard/store/mentor-profile.store';
@@ -10,16 +11,16 @@ import { CreateExperienceDto } from '@shared/models';
 
 @Component({
   selector: 'app-mentor-apply',
-  imports: [ReactiveFormsModule, RouterModule, DatePicker, FormManager],
+  imports: [ReactiveFormsModule, RouterModule, DatePicker, MultiSelectModule, FormManager],
   templateUrl: './mentor-apply.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MentorApply implements OnInit {
-   authStore = inject(AuthStore);
-   mentorApplyState = inject(MentorApplicationState);
+  authStore = inject(AuthStore);
+  mentorApplyState = inject(MentorApplicationState);
   readonly mentorProfileStore = inject(MentorProfileStore);
-   fb = inject(FormBuilder);
-   router = inject(Router);
+  fb = inject(FormBuilder);
+  router = inject(Router);
 
   currentStep = signal(1);
   maxSteps = 3;
