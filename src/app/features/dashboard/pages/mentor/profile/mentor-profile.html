@@ -9,6 +9,7 @@
     <p class="mt-6 text-slate-600 font-medium animate-pulse">Chargement du profil...</p>
   </div>
   } @else { @if (profileStore.profile(); as profile) {
+
   <div class="dashboard-grid dashboard-grid-cols-12">
     <div class="col-span-12">
       <div class="dashboard-card p-6">
@@ -43,7 +44,7 @@
 
     <div class="col-span-12">
       <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-        <div class="dashboard-card p-6 mb-6">
+        <div id="mentor-cv-section" class="dashboard-card p-6 mb-6">
           <div class="flex items-center gap-3 mb-6">
             <div class="dashboard-stat-icon bg-gradient-to-br from-blue-500 to-indigo-600">
               <span class="material-icons text-white text-xl">work</span>
@@ -181,8 +182,8 @@
                     <input
                       type="checkbox"
                       formControlName="is_current"
-                      [disabled]="!isEditMode()"
-                      (change)="toggleCurrentPosition(i)"
+                      (change)="isEditMode() && toggleCurrentPosition(i)"
+                      [class.pointer-events-none]="!isEditMode()"
                       class="w-4 h-4 text-primary-600 border-slate-300 rounded focus:ring-primary-500" />
                     <span class="dashboard-text-body">Poste actuel</span>
                   </label>
@@ -207,7 +208,7 @@
           </div>
         </div>
 
-        <div class="dashboard-card p-6 mb-6">
+        <div id="mentor-upload-cv-section" class="dashboard-card p-6 mb-6">
           <div class="flex items-center gap-3 mb-6">
             <div class="dashboard-stat-icon bg-gradient-to-br from-purple-500 to-pink-600">
               <span class="material-icons text-white text-xl">description</span>
@@ -246,7 +247,7 @@
                 <span>Téléchargement en cours...</span>
                 } @else {
                 <span class="material-icons text-sm">upload_file</span>
-                <span>{{ profile.cv ? 'Remplacer le CV' : 'Télécharger le CV' }}</span>
+                <span>{{ profile?.cv ? 'Remplacer le CV' : 'Télécharger le CV' }}</span>
                 }
               </button>
             </div>

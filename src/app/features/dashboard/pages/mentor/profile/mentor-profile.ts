@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, signal, effect, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators, FormArray } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { MentorProfileStore } from '../../../store/mentor-profile.store';
 import { CreateExperienceDto, IExpertise, IExperience, IMentorProfile } from '@shared/models';
@@ -14,7 +13,6 @@ import { ToastrService } from '@core/services/toast/toastr.service';
 })
 export class MentorProfile implements OnInit {
   private fb = inject(FormBuilder);
-  private router = inject(Router);
   private toast = inject(ToastrService);
 
   authStore = inject(AuthStore);
@@ -38,13 +36,24 @@ export class MentorProfile implements OnInit {
         this.populateForm(profile);
       }
     });
+
+    effect(() => {
+      const profile = this.profileStore.profile();
+      if (!profile) return;
+
+      if (!profile.cv && !this.isEditMode()) {
+        this.enableEditMode();
+        queueMicrotask(() => {
+          const cvSection = document.getElementById('mentor-upload-cv-section');
+          cvSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+    });
   }
 
   ngOnInit(): void {
     this.authStore.getProfile();
-    setTimeout(() => {
-      this.profileStore.loadProfileFromAuth();
-    }, 100);
+    this.profileStore.loadProfileFromMe();
   }
 
   get experiencesArray(): FormArray {
@@ -73,23 +82,37 @@ export class MentorProfile implements OnInit {
 
   createExperienceFormGroup(experience?: Partial<IExperience>) {
     const isCurrent = experience?.is_current || false;
+    const startDate = this.formatDateForInput(experience?.start_date);
+    const endDate = isCurrent ? null : this.formatDateForInput(experience?.end_date) || null;
+
     const group = this.fb.group({
       id: [experience?.id || null],
       company_name: [experience?.company_name || '', Validators.required],
       job_title: [experience?.job_title || '', Validators.required],
-      start_date: [
-        experience?.start_date ? new Date(experience.start_date).toISOString().split('T')[0] : '',
-        Validators.required
-      ],
+      start_date: [startDate, Validators.required],
       end_date: [
         {
-          value: experience?.end_date ? new Date(experience.end_date).toISOString().split('T')[0] : null,
+          value: endDate,
           disabled: isCurrent
         }
       ],
       is_current: [isCurrent]
     });
     return group;
+  }
+
+  private formatDateForInput(dateValue?: Date | string | null): string {
+    if (!dateValue) return '';
+
+    if (typeof dateValue === 'string') {
+      const yyyyMmDd = dateValue.match(/^\d{4}-\d{2}-\d{2}/);
+      if (yyyyMmDd) return yyyyMmDd[0];
+    }
+
+    const parsedDate = new Date(dateValue);
+    if (Number.isNaN(parsedDate.getTime())) return '';
+
+    return parsedDate.toISOString().split('T')[0];
   }
 
   addExperience(): void {
@@ -176,11 +199,11 @@ export class MentorProfile implements OnInit {
         is_current: boolean;
       }[]
     ).map((exp) => ({
-      id: exp.id,
+      ...(exp.id ? { id: exp.id } : {}),
       company_name: exp.company_name,
       job_title: exp.job_title,
       start_date: exp.start_date,
-      end_date: exp.is_current ? null : exp.end_date,
+      end_date: exp.is_current ? null : exp.end_date || null,
       is_current: exp.is_current
     }));
 
@@ -195,7 +218,7 @@ export class MentorProfile implements OnInit {
       dto: updateDto
     });
     setTimeout(() => {
-      this.authStore.getProfile();
+      this.profileStore.loadProfileFromMe();
       this.isEditMode.set(false);
     }, 500);
   }
@@ -227,7 +250,7 @@ export class MentorProfile implements OnInit {
 
     // Recharger le profil après l'upload
     setTimeout(() => {
-      this.authStore.getProfile();
+      this.profileStore.loadProfileFromMe();
     }, 1000);
   }
 
