@@ -1,5 +1,45 @@
 <div class="pb-20">
   <div class="w-full">
+    @if (isCvMissing()) {
+    <div class="mb-8 rounded-2xl border-2 border-amber-300 bg-amber-50 p-6 shadow-sm">
+      <div class="flex items-start gap-4 mb-5">
+        <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center flex-shrink-0">
+          <span class="material-icons text-amber-600 text-2xl">upload_file</span>
+        </div>
+        <div>
+          <h2 class="font-bold text-amber-900 text-base mb-1">CV manquant — étape obligatoire</h2>
+          <p class="text-amber-800 text-sm leading-relaxed">
+            Votre candidature est bien enregistrée, mais votre CV est indispensable pour que notre équipe puisse
+            l'évaluer. Téléchargez-le maintenant pour compléter votre dossier.
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <input type="file" accept=".pdf" (change)="handleCVUpload($event)" class="hidden" #cvInput />
+        <button
+          type="button"
+          (click)="cvInput.click()"
+          [disabled]="mentorProfileStore.isUploadingCV()"
+          class="w-full flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+          @if (mentorProfileStore.isUploadingCV()) {
+          <span class="material-icons animate-spin text-sm">sync</span>
+          <span>Téléchargement en cours...</span>
+          } @else {
+          <span class="material-icons text-sm">upload_file</span>
+          <span>Télécharger mon CV (PDF, 1 MB max)</span>
+          }
+        </button>
+        <p class="text-amber-700 text-xs text-center">Format PDF uniquement · Taille maximale 1 MB</p>
+      </div>
+    </div>
+    } @else {
+    <div class="mb-6 flex items-center gap-3 rounded-xl border border-green-200 bg-green-50 p-4 text-green-800">
+      <span class="material-icons text-2xl text-green-600">check_circle</span>
+      <p class="font-semibold text-sm">CV reçu — votre dossier est complet !</p>
+    </div>
+    }
+
     <div class="text-center mb-10">
       <div
         class="inline-flex w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 items-center justify-center shadow-2xl mb-6 animate-bounce">
