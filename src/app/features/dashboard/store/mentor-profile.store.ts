@@ -16,21 +16,19 @@ import {
 import { environment } from '@environments/environment';
 
 interface MentorProfileState {
-  profile: IMentorProfile | null;
+  profileMentor: IMentorProfile[];
   expertises: IExpertise[];
   isLoading: boolean;
   isUploadingCV: boolean;
-  error: string | null;
 }
 
 export const MentorProfileStore = signalStore(
   { providedIn: 'root' },
   withState<MentorProfileState>({
-    profile: null,
     expertises: [],
+    profileMentor: [],
     isLoading: false,
-    isUploadingCV: false,
-    error: null
+    isUploadingCV: false
   }),
   withProps(() => ({
     _http: inject(HttpClient),
@@ -39,12 +37,13 @@ export const MentorProfileStore = signalStore(
     _authStore: inject(AuthStore)
   })),
   withComputed((state) => ({
-    hasProfile: computed(() => !!state.profile()),
-    isApproved: computed(() => state.profile()?.status === MentorStatus.APPROVED),
-    isPending: computed(() => state.profile()?.status === MentorStatus.PENDING),
-    isRejected: computed(() => state.profile()?.status === MentorStatus.REJECTED),
+    profile: computed(() => state.profileMentor()[0] ?? null),
+    hasProfile: computed(() => !!state.profileMentor()[0]),
+    isApproved: computed(() => state.profileMentor()[0]?.status === MentorStatus.APPROVED),
+    isPending: computed(() => state.profileMentor()[0]?.status === MentorStatus.PENDING),
+    isRejected: computed(() => state.profileMentor()[0]?.status === MentorStatus.REJECTED),
     cvUrl: computed(() => {
-      const cv = state.profile()?.cv;
+      const cv = state.profileMentor()[0]?.cv;
       if (!cv) return null;
       return `${environment.apiUrl}uploads/mentors/cvs/${cv}`;
     })
@@ -52,19 +51,10 @@ export const MentorProfileStore = signalStore(
 
   withMethods(({ _http, _toast, _router, _authStore, ...store }) => ({
     loadProfileFromAuth: () => {
+      if (store.profileMentor().length > 0) return;
       const user = _authStore.user();
       if (user?.mentor_profile) {
-        patchState(store, {
-          profile: user.mentor_profile,
-          isLoading: false,
-          error: null
-        });
-      } else {
-        patchState(store, {
-          profile: null,
-          isLoading: false,
-          error: 'Profil mentor non trouvé'
-        });
+        patchState(store, { profileMentor: [user.mentor_profile], isLoading: false });
       }
     },
 
@@ -84,14 +74,32 @@ export const MentorProfileStore = signalStore(
       )
     ),
 
+    loadProfileFromMe: rxMethod<void>(
+      pipe(
+        switchMap(() =>
+          _http.get<{ data: IMentorProfile[] }>('mentors/me').pipe(
+            tap(({ data }) => {
+              patchState(store, {
+                profileMentor: data,
+                isLoading: false
+              });
+            }),
+            catchError((err) => {
+              _toast.showError(err.error?.message || 'Erreur lors du chargement du profil mentor');
+              return of(null);
+            })
+          )
+        )
+      )
+    ),
     createProfile: rxMethod<{ data: CreateMentorProfileDto; onSuccess?: (profile: IMentorProfile) => void }>(
       pipe(
-        tap(() => patchState(store, { isLoading: true, error: null })),
+        tap(() => patchState(store, { isLoading: true })),
         switchMap(({ data, onSuccess }) =>
           _http.post<{ data: IMentorProfile }>('mentors/request', data).pipe(
             tap(({ data: profile }) => {
               patchState(store, {
-                profile: profile,
+                profileMentor: [profile],
                 isLoading: false
               });
               _toast.showSuccess('Candidature soumise avec succès');
@@ -101,8 +109,7 @@ export const MentorProfileStore = signalStore(
             }),
             catchError((err) => {
               patchState(store, {
-                isLoading: false,
-                error: err.error?.message || 'Erreur'
+                isLoading: false
               });
               _toast.showError(err.error?.message || 'Erreur lors de la soumission de la candidature');
               return of(null);
@@ -114,12 +121,12 @@ export const MentorProfileStore = signalStore(
 
     updateProfile: rxMethod<{ id: string; dto: UpdateMentorProfileDto }>(
       pipe(
-        tap(() => patchState(store, { isLoading: true, error: null })),
+        tap(() => patchState(store, { isLoading: true })),
         switchMap(({ id, dto }) =>
-          _http.patch<{ data: IMentorProfile }>(`mentors/${id}`, dto).pipe(
+          _http.patch<{ data: IMentorProfile }>(`mentors/request/${id}`, dto).pipe(
             tap(({ data }) => {
               patchState(store, {
-                profile: data,
+                profileMentor: [data],
                 isLoading: false
               });
               _toast.showSuccess('Profil mis à jour avec succès');
@@ -127,8 +134,7 @@ export const MentorProfileStore = signalStore(
             }),
             catchError((err) => {
               patchState(store, {
-                isLoading: false,
-                error: err.error?.message || 'Erreur'
+                isLoading: false
               });
               _toast.showError(err.error?.message || 'Erreur lors de la mise à jour du profil');
               return of(null);
@@ -140,22 +146,21 @@ export const MentorProfileStore = signalStore(
 
     uploadCV: rxMethod<{ id: string; file: File }>(
       pipe(
-        tap(() => patchState(store, { isUploadingCV: true, error: null })),
+        tap(() => patchState(store, { isUploadingCV: true })),
         switchMap(({ id, file }) => {
           const formData = new FormData();
           formData.append('cv', file);
           return _http.post<{ data: IMentorProfile }>(`mentors/${id}/cv`, formData).pipe(
             tap(({ data }) => {
               patchState(store, {
-                profile: data,
+                profileMentor: [data],
                 isUploadingCV: false
               });
               _toast.showSuccess('CV uploadé avec succès');
             }),
             catchError((err) => {
               patchState(store, {
-                isUploadingCV: false,
-                error: err.error?.message || 'Erreur'
+                isUploadingCV: false
               });
               _toast.showError(err.error?.message || "Erreur lors de l'upload du CV");
               return of(null);
@@ -167,11 +172,10 @@ export const MentorProfileStore = signalStore(
 
     reset: () => {
       patchState(store, {
-        profile: null,
         expertises: [],
+        profileMentor: [],
         isLoading: false,
-        isUploadingCV: false,
-        error: null
+        isUploadingCV: false
       });
     }
   }))
