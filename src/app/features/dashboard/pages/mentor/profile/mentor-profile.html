@@ -80,30 +80,46 @@
             </div>
             <div>
               <h2 class="dashboard-heading-4">Domaines d'expertise</h2>
-              <p class="dashboard-text-tiny">Sélectionnez vos domaines de compétences</p>
+              <p class="dashboard-text-tiny">Vos domaines de compétences</p>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            @for (expertise of profileStore.expertises(); track expertise.id) {
-            <button
-              type="button"
-              [disabled]="!isEditMode()"
-              (click)="isEditMode() ? toggleExpertise(expertise.id) : null"
-              [class]="isExpertiseSelected(expertise.id)
-                ? 'px-4 py-3 rounded-lg border-2 border-primary-500 bg-primary-50 text-primary-700 font-medium transition-all flex items-center justify-between'
-                : 'px-4 py-3 rounded-lg border-2 border-slate-200 bg-white text-slate-700 font-medium hover:border-primary-300 transition-all flex items-center justify-between'">
-              <span>{{ expertise.name }}</span>
-              @if (isExpertiseSelected(expertise.id)) {
-              <span class="material-icons text-primary-600 text-lg">check_circle</span>
-              }
-            </button>
-            } @empty {
-            <div class="col-span-full">
-              <p class="dashboard-text-body text-center py-8">Aucune expertise disponible</p>
-            </div>
+          @if (!isEditMode()) { @if (selectedExpertiseObjects().length > 0) {
+          <div class="flex flex-wrap gap-2">
+            @for (expertise of selectedExpertiseObjects(); track expertise.id) {
+            <span
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-50 border border-primary-200 text-primary-700 text-sm font-medium">
+              <span class="material-icons text-xs text-primary-500">check_circle</span>
+              {{ expertise.name }}
+            </span>
             }
           </div>
+          } @else {
+          <p class="dashboard-text-body text-center py-8">Aucune expertise sélectionnée</p>
+          } } @else {
+          <div class="space-y-3">
+            <label for="expertisesSelect" class="dashboard-label flex items-center gap-2">
+              <span class="material-icons text-base text-primary-600">manage_search</span>
+              <span>Sélectionner vos domaines</span>
+            </label>
+            <p-multiselect
+              inputId="expertisesSelect"
+              formControlName="expertises"
+              [options]="profileStore.expertises()"
+              [optionValue]="'id'"
+              [optionLabel]="'name'"
+              [filter]="true"
+              [showClear]="true"
+              [display]="'chip'"
+              placeholder="Rechercher et sélectionner vos domaines"
+              filterPlaceHolder="Rechercher un domaine"
+              class="w-full !rounded-lg !border-slate-200 !bg-slate-50 !shadow-none hover:!border-primary-300">
+            </p-multiselect>
+            <p class="dashboard-text-tiny text-slate-500">
+              Utilisez la recherche pour trouver rapidement vos domaines parmi une longue liste.
+            </p>
+          </div>
+          }
         </div>
 
         <div class="dashboard-card p-6 mb-6">

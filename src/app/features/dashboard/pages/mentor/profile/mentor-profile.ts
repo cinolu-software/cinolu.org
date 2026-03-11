@@ -1,5 +1,6 @@
-import { Component, inject, OnInit, signal, effect, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, signal, effect, computed, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators, FormArray } from '@angular/forms';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { AuthStore } from '@core/auth/auth.store';
 import { MentorProfileStore } from '../../../store/mentor-profile.store';
 import { CreateExperienceDto, IExpertise, IExperience, IMentorProfile } from '@shared/models';
@@ -7,7 +8,7 @@ import { ToastrService } from '@core/services/toast/toastr.service';
 
 @Component({
   selector: 'app-mentor-profile',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MultiSelectModule],
   templateUrl: './mentor-profile.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -20,6 +21,11 @@ export class MentorProfile implements OnInit {
 
   isEditMode = signal(false);
   selectedExpertises = signal<string[]>([]);
+
+  selectedExpertiseObjects = computed(() => {
+    const ids = this.selectedExpertises();
+    return this.profileStore.expertises().filter((e) => ids.includes(e.id));
+  });
 
   profileForm = this.fb.group({
     years_experience: [0, [Validators.required, Validators.min(0)]],
