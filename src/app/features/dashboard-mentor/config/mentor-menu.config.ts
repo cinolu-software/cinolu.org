@@ -19,6 +19,13 @@ export const MENTOR_MENU_CONFIG: MenuSection[] = [
         icon: 'badge',
         path: MENTOR_BASE + '/profile',
         tooltip: 'Gérer mon profil de mentor'
+      },
+      {
+        id: 'mentor-mentored-projects',
+        label: 'Projets mentorés',
+        icon: 'school',
+        path: MENTOR_BASE + '/mentored-projects',
+        tooltip: 'Voir les projets dont je suis mentor'
       }
     ]
   }

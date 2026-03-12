@@ -20,6 +20,30 @@ export const dashboardMentorRoutes: Routes = [
         title: 'Profil Mentor',
         loadComponent: () =>
           import('../dashboard/pages/mentor/profile/mentor-profile').then((c) => c.MentorProfile)
+      },
+      {
+        path: 'mentored-projects',
+        title: 'Projets mentorés',
+        loadComponent: () =>
+          import('../dashboard/pages/mentor/mentored-projects/mentored-projects').then(
+            (c) => c.MentoredProjects
+          )
+      },
+      {
+        path: 'mentored-projects/:projectId',
+        title: 'Candidatures du projet',
+        loadComponent: () =>
+          import('../dashboard/pages/mentor/mentored-project-detail/mentored-project-detail').then(
+            (c) => c.MentoredProjectDetail
+          )
+      },
+      {
+        path: 'mentored-projects/:projectId/participations/:participationId',
+        title: 'Détail candidature',
+        loadComponent: () =>
+          import(
+            '../dashboard/pages/mentor/mentored-participation-detail/mentored-participation-detail'
+          ).then((c) => c.MentoredParticipationDetail)
       }
     ]
   }
