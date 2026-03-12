@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IEvent } from '../../../../shared/models/entities.models';
 import {
@@ -18,9 +18,8 @@ import {
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-import { Tag } from 'primeng/tag';
-import { Button } from 'primeng/button';
 import { QuillViewComponent } from 'ngx-quill';
+import { ButtonComponent, TagComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-subprogram-event-card',
@@ -29,12 +28,14 @@ import { QuillViewComponent } from 'ngx-quill';
     CommonModule,
     NgOptimizedImage,
     ApiImgPipe,
-    Tag,
-    Button,
+    TagComponent,
+    ButtonComponent,
     QuillViewComponent,
     RouterLink
   ],
-  templateUrl: './subprogram-event-card.html'
+  templateUrl: './subprogram-event-card.html',
+  styleUrl: '../../../../shared/styles/quill-view.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SubprogramEventCard {
   icons = {

@@ -1,14 +1,14 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { HISTORY_TIMELINE } from '../../data/history.data';
 import { CommonModule } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
 import { ArrowDown, CalendarClock, ChevronDown, ChevronRight, LucideAngularModule } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-history',
-  imports: [CommonModule, LucideAngularModule, ButtonModule, TranslateModule],
-  templateUrl: './history.html'
+  imports: [CommonModule, LucideAngularModule, TranslateModule],
+  templateUrl: './history.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class History {
   historyData = HISTORY_TIMELINE;

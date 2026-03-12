@@ -1,14 +1,14 @@
 import { Component, inject, OnInit, signal, effect, computed, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators, FormArray } from '@angular/forms';
-import { MultiSelectModule } from 'primeng/multiselect';
 import { AuthStore } from '@core/auth/auth.store';
 import { MentorProfileStore } from '../../../store/mentor-profile.store';
 import { CreateExperienceDto, IExpertise, IExperience, IMentorProfile } from '@shared/models';
 import { ToastrService } from '@core/services/toast/toastr.service';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-mentor-profile',
-  imports: [ReactiveFormsModule, MultiSelectModule],
+  imports: [ReactiveFormsModule, IconComponent],
   templateUrl: './mentor-profile.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -141,6 +141,12 @@ export class MentorProfile implements OnInit {
 
   isExpertiseSelected(expertiseId: string): boolean {
     return this.selectedExpertises().includes(expertiseId);
+  }
+
+  onExpertisesChange(event: Event): void {
+    const values = Array.from((event.target as HTMLSelectElement).selectedOptions).map((option) => option.value);
+    this.selectedExpertises.set(values);
+    this.profileForm.patchValue({ expertises: values });
   }
 
   toggleCurrentPosition(index: number): void {

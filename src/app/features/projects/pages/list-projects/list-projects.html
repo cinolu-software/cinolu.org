@@ -53,20 +53,18 @@
             {{ 'projects.list.choose_category' | translate }}
           </label>
           <div class="relative w-full max-w-md">
-            <p-multiselect
-              [inputId]="'categoriesFilter'"
-              [autocomplete]="'off'"
-              [showHeader]="false"
-              [appendTo]="'body'"
-              (onChange)="onFilterChange($event, 'categories')"
-              (onClear)="onClear()"
-              [options]="categoriesStore.categories()"
-              [optionValue]="'id'"
-              [optionLabel]="'name'"
-              [showClear]="true"
-              placeholder="{{ 'projects.list.choose_category' | translate }}"
-              styleClass="w-full !rounded-lg !border-slate-200 !bg-slate-50 !shadow-none hover:!border-primary-300">
-            </p-multiselect>
+            <select
+              id="categoriesFilter"
+              multiple
+              (change)="onFilterChange($event, 'categories')"
+              class="min-h-14 w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-400 focus:ring-4 focus:ring-primary-100">
+              @for (category of categoriesStore.categories(); track category.id) {
+              <option [value]="category.id">{{ category.name }}</option>
+              }
+            </select>
+            <button type="button" (click)="onClear()" class="mt-2 text-sm font-medium text-primary-600 hover:text-primary-700">
+              {{ 'common.clear' | translate }}
+            </button>
           </div>
         </div>
         }

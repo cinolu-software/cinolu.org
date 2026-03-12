@@ -1,5 +1,4 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { ProgramsStore } from '../../store/programs.store';
 import { NgOptimizedImage } from '@angular/common';
@@ -8,12 +7,13 @@ import { LucideAngularModule, MoveRight } from 'lucide-angular';
 import { IProgram } from '../../../../shared/models';
 import { TranslateModule } from '@ngx-translate/core';
 import { LandingSectionHeader } from '../landing-section-header/landing-section-header';
+import { ButtonComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-programs',
   providers: [ProgramsStore],
   imports: [
-    ButtonModule,
+    ButtonComponent,
     RouterLink,
     ApiImgPipe,
     NgOptimizedImage,

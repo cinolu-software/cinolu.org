@@ -1,14 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { InputText } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
 import { AuthCard } from '../../components/auth-card/auth-card';
 import { ForgotPasswordStore } from '../../store/forgot-password.store';
 import { LucideAngularModule, Mail, AlertCircle, ArrowRight } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormManager } from '@shared/components/form-manager/form-manager';
+import { ButtonComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-forgot-password',
@@ -18,15 +17,15 @@ import { FormManager } from '@shared/components/form-manager/form-manager';
     FormsModule,
     RouterLink,
     ReactiveFormsModule,
-    ButtonModule,
-    InputText,
+    ButtonComponent,
     RouterModule,
     CommonModule,
     AuthCard,
     FormManager,
     LucideAngularModule,
     TranslateModule
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ForgotPassword {
   #formBuilder = inject(FormBuilder);

@@ -8,15 +8,9 @@
       titleKey="recent_projects.title"
       titleHighlightKey="recent_projects.title_highlight"
       descriptionKey="recent_projects.description">
-      <div headerEnd class="hidden lg:flex items-center gap-4 shrink-0">
-        @if (store.projects()) {
-        <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
-          <i-lucide [name]="icons.moveLeft" class="size-3.5" />
-        </button>
-        <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button">
-          <i-lucide [name]="icons.moveRight" class="size-3.5" />
-        </button>
-        }
+      <div headerEnd class="hidden lg:flex items-center gap-2 shrink-0 text-sm font-semibold text-slate-400">
+        <i-lucide [name]="icons.moveRight" class="size-4" />
+        <span>Selection recente</span>
       </div>
     </app-landing-section-header>
     @if (store.isLoading()) {
@@ -27,33 +21,12 @@
     </div>
     }
     <div class="space-y-6 lg:space-y-8 mt-8 lg:mt-12">
-      <p-carousel
-        #carousel
-        [value]="store.projects()"
-        [numVisible]="3"
-        [numScroll]="1"
-        [showIndicators]="false"
-        [showNavigators]="false"
-        [circular]="true"
-        [responsiveOptions]="carouselConfig"
-        [autoplayInterval]="5000"
-        [draggable]="true"
-        class="projects-carousel">
-        <ng-template let-project #item>
-          <div class="carousel-item-wrapper">
-            <app-project-card [project]="project" [buttonTextKey]="'recent_projects.explore'" />
-          </div>
-        </ng-template>
-      </p-carousel>
-
-      <div class="flex lg:hidden justify-center items-center gap-6 pt-4">
-        <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
-          <i-lucide [name]="icons.moveLeft" class="size-4" />
-        </button>
-
-        <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button">
-          <i-lucide [name]="icons.moveRight" class="size-4" />
-        </button>
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+        @for (project of store.projects(); track trackByProjectId($index, project)) {
+        <div class="carousel-item-wrapper">
+          <app-project-card [project]="project" [buttonTextKey]="'recent_projects.explore'" />
+        </div>
+        }
       </div>
 
       <div class="w-full flex justify-center items-center mt-12">

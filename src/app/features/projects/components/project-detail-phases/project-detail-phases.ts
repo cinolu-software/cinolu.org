@@ -6,7 +6,6 @@ import type { IPhase } from '@shared/models/entities.models';
 
 @Component({
   selector: 'app-project-detail-phases',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DatePipe, TranslateModule, LucideAngularModule],
   templateUrl: './project-detail-phases.html'

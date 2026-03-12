@@ -3,11 +3,11 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
 import { MentorshipStore } from '../../../store/mentorship.store';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-mentored-projects',
-  standalone: true,
-  imports: [RouterLink, ApiImgPipe, CommonModule],
+  imports: [RouterLink, ApiImgPipe, CommonModule, IconComponent],
   templateUrl: './mentored-projects.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

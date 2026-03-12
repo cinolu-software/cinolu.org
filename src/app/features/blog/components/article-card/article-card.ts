@@ -14,12 +14,12 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { RouterLink } from '@angular/router';
 import { CommentsStore } from '../../store/comments/comments.store';
-import { Button } from 'primeng/button';
 import { TranslateModule } from '@ngx-translate/core';
+import { ButtonComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-article-card',
-  imports: [LucideAngularModule, NgOptimizedImage, ApiImgPipe, RouterLink, CommonModule, Button, TranslateModule],
+  imports: [LucideAngularModule, NgOptimizedImage, ApiImgPipe, RouterLink, CommonModule, ButtonComponent, TranslateModule],
   providers: [CommentsStore],
   templateUrl: './article-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush

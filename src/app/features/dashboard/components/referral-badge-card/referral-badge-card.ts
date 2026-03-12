@@ -6,11 +6,12 @@ import { BadgeProgressBarComponent } from '@shared/components/badge-progress-bar
 import { ShareModalComponent } from '@shared/components/share-modal/share-modal';
 import { ToastrService } from '@core/services/toast/toastr.service';
 import { LucideAngularModule, Award, TrendingUp, Crown, Sparkles, Trophy, Share2, Copy, Target } from 'lucide-angular';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-referral-badge-card',
 
-  imports: [NgClass, BadgeProgressBarComponent, ShareModalComponent, LucideAngularModule],
+  imports: [NgClass, BadgeProgressBarComponent, ShareModalComponent, LucideAngularModule, IconComponent],
   templateUrl: './referral-badge-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

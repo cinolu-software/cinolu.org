@@ -1,11 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PARTNERS, PARTNERS_CATEGORIES, IPartner } from '../../data/partners.data';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { UserPlus, LucideAngularModule, Heart, ShoppingCart, MoveUpRight, MoveRight } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { LandingSectionHeader } from '../landing-section-header/landing-section-header';
 import { PartnerCard } from './partner-card/partner-card';
@@ -14,11 +11,8 @@ import { PartnerCard } from './partner-card/partner-card';
   selector: 'app-partners',
   imports: [
     CommonModule,
-    InputGroupModule,
-    InputGroupAddonModule,
     LucideAngularModule,
     RouterLink,
-    ButtonModule,
     TranslateModule,
     LandingSectionHeader,
     PartnerCard

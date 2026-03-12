@@ -13,6 +13,7 @@ import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { filter } from 'rxjs';
 import { AuthStore } from '@core/auth/auth.store';
+import { IconComponent } from '@shared/ui';
 import {
   USER_MENU_CONFIG,
   isUserMenuActive
@@ -21,7 +22,7 @@ import type { MenuItem } from '@features/dashboard/config/menu.config';
 
 @Component({
   selector: 'app-user-dashboard-sidebar',
-  imports: [NgClass, RouterModule],
+  imports: [NgClass, RouterModule, IconComponent],
   templateUrl: './user-dashboard-sidebar.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

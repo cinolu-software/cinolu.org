@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -9,17 +9,8 @@ import {
   Validators
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { InputTextModule } from 'primeng/inputtext';
-import { PasswordModule } from 'primeng/password';
-import { ButtonModule } from 'primeng/button';
 import { AuthCard } from '../../components/auth-card/auth-card';
 import { SignUpStore } from '../../store/sign-up.store';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { TextareaModule } from 'primeng/textarea';
-import { DatePickerModule } from 'primeng/datepicker';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { SelectChangeEvent, SelectModule } from 'primeng/select';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { COUNTRY_CODE } from '../../../../shared/data/country-item.data';
 import { GENDERS } from '../../../../shared/data/genders.data';
@@ -34,34 +25,31 @@ import {
   Lock,
   AlertCircle,
   ArrowRight,
-  Loader2
+  Loader2,
+  Eye,
+  EyeOff
 } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormManager, StepConfig } from '@shared/components/form-manager/form-manager';
+import { ButtonComponent, SelectComponent, type UiSelectOption } from '@shared/ui';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.html',
   providers: [SignUpStore],
   imports: [
-    InputTextModule,
-    PasswordModule,
-    ButtonModule,
+    ButtonComponent,
     FormsModule,
     RouterLink,
     ReactiveFormsModule,
     AuthCard,
-    FloatLabelModule,
-    SelectModule,
-    DatePickerModule,
-    TextareaModule,
     CommonModule,
-    InputGroupModule,
-    InputGroupAddonModule,
+    SelectComponent,
     FormManager,
     LucideAngularModule,
     TranslateModule
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignUp {
   #formBuilder: FormBuilder = inject(FormBuilder);
@@ -70,8 +58,12 @@ export class SignUp {
   store = inject(SignUpStore);
   genderItems = GENDERS;
   countryItems = COUNTRY_CODE;
+  countryOptions: UiSelectOption[] = COUNTRY_CODE.map((item) => ({ label: item.name, value: item.name }));
+  genderOptions: UiSelectOption[] = GENDERS.map((item) => ({ label: item.label, value: item.value }));
   selectedCountryCode = '';
   ref = this.#route.snapshot.queryParams['ref'] || null;
+  showPassword = signal(false);
+  showPasswordConfirm = signal(false);
 
   // Configuration stepper : 3 étapes logiques
   stepConfig: StepConfig[] = [
@@ -90,7 +82,9 @@ export class SignUp {
     lock: Lock,
     alertCircle: AlertCircle,
     arrowRight: ArrowRight,
-    loader: Loader2
+    loader: Loader2,
+    eye: Eye,
+    eyeOff: EyeOff
   };
 
   constructor() {
@@ -147,8 +141,8 @@ export class SignUp {
     });
   }
 
-  onSelectCountry(event: SelectChangeEvent): void {
-    const value = event.value;
+  onSelectCountry(value: string | string[] | null): void {
+    if (Array.isArray(value)) return;
     this.selectedCountryCode = this.countryItems.find((item) => item.name === value)?.code || '';
   }
 
@@ -157,5 +151,14 @@ export class SignUp {
     return this.selectedCountryCode.toString().startsWith('+')
       ? this.selectedCountryCode
       : `+${this.selectedCountryCode}`;
+  }
+
+  togglePasswordVisibility(field: 'password' | 'passwordConfirm'): void {
+    if (field === 'password') {
+      this.showPassword.update((value) => !value);
+      return;
+    }
+
+    this.showPasswordConfirm.update((value) => !value);
   }
 }

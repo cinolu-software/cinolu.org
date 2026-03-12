@@ -1,7 +1,5 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { carouselConfig } from '../../config/carousel.config';
-import { CarouselModule } from 'primeng/carousel';
 import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight } from 'lucide-angular';
 import { EventCardSkeleton } from '../../../events/components/event-card-skeleton/event-card-skeleton';
 import { EventCard } from '../../../events/components/event-card/event-card';
@@ -16,7 +14,6 @@ import { LandingSectionHeader } from '../landing-section-header/landing-section-
   providers: [RecentEventsStore],
   imports: [
     EventCard,
-    CarouselModule,
     RouterModule,
     LucideAngularModule,
     EventCardSkeleton,
@@ -29,7 +26,6 @@ import { LandingSectionHeader } from '../landing-section-header/landing-section-
 })
 export class RecentEvents {
   store = inject(RecentEventsStore);
-  carouselConfig = carouselConfig;
   icons = {
     moveUpRight: MoveUpRight,
     arrowLeft: ArrowLeft,

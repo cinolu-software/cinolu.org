@@ -1,17 +1,16 @@
 import { Component, inject, OnInit, signal, ChangeDetectionStrategy, effect } from '@angular/core';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { DatePicker } from 'primeng/datepicker';
-import { MultiSelectModule } from 'primeng/multiselect';
 import { AuthStore } from '@core/auth/auth.store';
 import { MentorApplicationState } from '@core/auth/mentor-application.state';
 import { MentorProfileStore } from '@features/dashboard/store/mentor-profile.store';
 import { FormManager } from '@shared/components/form-manager/form-manager';
 import { CreateExperienceDto } from '@shared/models';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-mentor-apply',
-  imports: [ReactiveFormsModule, RouterModule, DatePicker, MultiSelectModule, FormManager],
+  imports: [ReactiveFormsModule, RouterModule, FormManager, IconComponent],
   templateUrl: './mentor-apply.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -69,8 +68,8 @@ export class MentorApply implements OnInit {
       company_name: ['', Validators.required],
       job_title: ['', Validators.required],
       is_current: [false],
-      start_date: [null as Date | null, Validators.required],
-      end_date: [null as Date | null]
+      start_date: [null as string | null, Validators.required],
+      end_date: [null as string | null]
     });
 
     group.get('is_current')?.valueChanges.subscribe((isCurrent) => {
@@ -157,8 +156,8 @@ export class MentorApply implements OnInit {
       company_name: string;
       job_title: string;
       is_current: boolean;
-      start_date: Date | null;
-      end_date?: Date | null;
+      start_date: string | null;
+      end_date?: string | null;
     }
 
     const experiences: CreateExperienceDto[] = ((formValue.experiences as ExperienceFormValue[]) || [])
@@ -168,12 +167,8 @@ export class MentorApply implements OnInit {
           company_name: exp.company_name.trim(),
           job_title: exp.job_title.trim(),
           is_current: exp.is_current || false,
-          start_date: exp.start_date instanceof Date ? exp.start_date.toISOString() : exp.start_date!,
-          end_date: exp.is_current
-            ? null
-            : exp.end_date instanceof Date
-              ? exp.end_date.toISOString()
-              : exp.end_date || null
+          start_date: new Date(exp.start_date!).toISOString(),
+          end_date: exp.is_current || !exp.end_date ? null : new Date(exp.end_date).toISOString()
         };
         return experience;
       });
@@ -183,15 +178,6 @@ export class MentorApply implements OnInit {
       expertises: (formValue.expertises || []).filter((id) => id && id.trim()),
       experiences
     };
-
-    console.log("📤 Payload envoyé à l'API:", JSON.stringify(payload, null, 2));
-    console.log('🔍 Types:', {
-      years_experience: typeof payload.years_experience,
-      expertises: Array.isArray(payload.expertises),
-      expertises_count: payload.expertises.length,
-      experiences_count: payload.experiences.length,
-      first_experience: payload.experiences[0]
-    });
 
     this.mentorProfileStore.createProfile({
       data: payload,

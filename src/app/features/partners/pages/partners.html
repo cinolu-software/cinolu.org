@@ -12,9 +12,11 @@
   <div class="px-8 min-h-dvh xl:min-h-[800px] lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-14 md:py-28">
     <div class="mx-auto">
       <div class="flex flex-wrap gap-2 justify-center items-center pb-16">
-        <p-button [outlined]="!!isActiveCategory()" (click)="resetFilter()">Tout</p-button>
+        <ui-button [variant]="isActiveCategory() ? 'secondary' : 'primary'" size="sm" (click)="resetFilter()">Tout</ui-button>
         @for (item of listCategories(); track item) {
-        <p-button [outlined]="!isActiveButton(item)" (click)="filterByCategory(item)">{{ item }}</p-button>
+        <ui-button [variant]="isActiveButton(item) ? 'primary' : 'secondary'" size="sm" (click)="filterByCategory(item)">
+          {{ item }}
+        </ui-button>
         }
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-6">

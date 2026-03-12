@@ -73,14 +73,16 @@
     </p>
 
     <div class="group/btn">
-      <p-button [routerLink]="['/entrepreneurs', venture.slug]" size="small" severity="primary" [outlined]="true">
-        <span class="flex items-center justify-center gap-2 font-semibold text-sm px-4">
-          {{ 'entrepreneurs.view_profile' | translate }}
-          <i-lucide
-            class="size-4 transition-transform duration-200 group-hover/btn:translate-x-1"
-            [name]="icons.moveRight" />
-        </span>
-      </p-button>
+      <a [routerLink]="['/entrepreneurs', venture.slug]">
+        <ui-button variant="secondary" size="sm">
+          <span class="flex items-center justify-center gap-2 font-semibold text-sm px-4">
+            {{ 'entrepreneurs.view_profile' | translate }}
+            <i-lucide
+              class="size-4 transition-transform duration-200 group-hover/btn:translate-x-1"
+              [name]="icons.moveRight" />
+          </span>
+        </ui-button>
+      </a>
     </div>
   </div>
 

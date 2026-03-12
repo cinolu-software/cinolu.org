@@ -1,7 +1,5 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CarouselModule } from 'primeng/carousel';
-import { carouselConfig } from '../../config/carousel.config';
 import { LucideAngularModule, MoveUpRight, ArrowLeft, ArrowRight } from 'lucide-angular';
 import { RecentProjectsStore } from '../../../projects/store/recent-projects.store';
 import { ProgramCardSkeletonComponent } from '../../../projects/components/project-card-skeleton/project-card-skeleton';
@@ -16,7 +14,6 @@ import { LandingSectionHeader } from '../landing-section-header/landing-section-
   providers: [RecentProjectsStore],
   imports: [
     ProjectCard,
-    CarouselModule,
     RouterModule,
     LucideAngularModule,
     ProgramCardSkeletonComponent,
@@ -29,7 +26,6 @@ import { LandingSectionHeader } from '../landing-section-header/landing-section-
 })
 export class RecentProjects {
   store = inject(RecentProjectsStore);
-  carouselConfig = carouselConfig;
   icons = {
     moveUpRight: MoveUpRight,
     moveLeft: ArrowLeft,

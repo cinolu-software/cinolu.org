@@ -9,9 +9,11 @@ import { HighlightsStore } from '@features/landing/store/highlights.store';
 import { environment } from '@environments/environment';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ToastrService } from '@core/services/toast/toastr.service';
+import { IconComponent } from '@shared/ui';
+
 @Component({
   selector: 'app-dashboard-overview',
-  imports: [RouterModule, ApiImgPipe],
+  imports: [RouterModule, ApiImgPipe, IconComponent],
   providers: [HighlightsStore],
   templateUrl: './overview.html',
   changeDetection: ChangeDetectionStrategy.OnPush

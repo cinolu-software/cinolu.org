@@ -12,12 +12,13 @@ import { ParticipationsStore } from '../../../store/participations.store';
 import { ProgramCard } from '../../../components/program-card/program-card';
 import { IProject } from '@shared/models';
 import { ProjectsStore } from '../../../../projects/store/projects.store';
+import { IconComponent } from '@shared/ui';
 
 type LoadingPhase = 'current' | 'upcoming' | 'done';
 
 @Component({
   selector: 'app-discover-programs',
-  imports: [NgClass, NgTemplateOutlet, ProgramCard],
+  imports: [NgClass, NgTemplateOutlet, ProgramCard, IconComponent],
   templateUrl: './discover.html',
   providers: [ProjectsStore],
   changeDetection: ChangeDetectionStrategy.OnPush

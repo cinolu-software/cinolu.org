@@ -1,0 +1,32 @@
+@if (totalPages() > 1) {
+<nav class="flex flex-wrap items-center justify-center gap-2" aria-label="Pagination">
+  <button
+    type="button"
+    (click)="setPage(page() - 1)"
+    [disabled]="page() === 1"
+    class="rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50">
+    Precedent
+  </button>
+  @for (item of pages(); track item) {
+  <button
+    type="button"
+    (click)="setPage(item)"
+    class="rounded-lg border px-3 py-2 text-sm font-semibold transition"
+    [class.border-primary-600]="item === page()"
+    [class.bg-primary-600]="item === page()"
+    [class.text-white]="item === page()"
+    [class.border-slate-200]="item !== page()"
+    [class.text-slate-700]="item !== page()"
+    [class.hover:bg-slate-50]="item !== page()">
+    {{ item }}
+  </button>
+  }
+  <button
+    type="button"
+    (click)="setPage(page() + 1)"
+    [disabled]="page() === totalPages()"
+    class="rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50">
+    Suivant
+  </button>
+</nav>
+}

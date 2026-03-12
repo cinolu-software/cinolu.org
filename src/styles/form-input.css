@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════════
    GLOBAL INPUT SYSTEM — Single source of truth
    Canonical reference: /dashboard/profile/security
-   All inputs (native, PrimeNG, dashboard) use this system.
+   All inputs (native, local UI, dashboard) use this system.
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* Base input — matches profile-security page */

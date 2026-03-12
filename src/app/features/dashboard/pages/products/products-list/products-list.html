@@ -1,6 +1,4 @@
 <div class="pb-20">
-  <p-confirmDialog />
-
   <!-- En-tête : fil d’Ariane + titre + actions -->
   <header class="mb-8">
  
@@ -9,7 +7,7 @@
       <div class="flex items-center gap-4">
         <div
           class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-lg">
-          <span class="material-icons text-3xl">inventory_2</span>
+          <ui-icon class="text-3xl" name="inventory_2" />
         </div>
         <div>
           <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Mes Produits</h1>
@@ -20,12 +18,12 @@
       <div class="flex items-center gap-3 flex-wrap">
         <span
           class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-100 text-slate-700 text-sm font-semibold border border-slate-200">
-          <span class="material-icons text-primary-600 text-lg">inventory_2</span>
+          <ui-icon class="text-primary-600 text-lg" name="inventory_2" />
           {{ productsStore.products().length || 0 }} produit{{ (productsStore.products().length || 0) !== 1 ? 's' : ''
           }}
         </span>
         <a routerLink="/dashboard/user/products/create" class="dashboard-btn-primary inline-flex gap-2">
-          <span class="material-icons text-xl">add</span>
+          <ui-icon class="text-xl" name="add" />
           <span>Nouveau produit</span>
         </a>
       </div>
@@ -41,12 +39,12 @@
   <div class="dashboard-card-elevated rounded-xl p-10 sm:p-12 text-center max-w-lg mx-auto">
     <div
       class="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-lg mx-auto mb-6">
-      <span class="material-icons text-white text-5xl">inventory_2</span>
+      <ui-icon class="text-white text-5xl" name="inventory_2" />
     </div>
     <h2 class="text-xl font-bold text-slate-900 mb-2">Aucun produit</h2>
     <p class="text-slate-600 text-sm mb-8">Ajoutez vos premiers produits ou services pour commencer à vendre.</p>
     <a routerLink="/dashboard/user/products/create" class="dashboard-btn-primary inline-flex gap-2">
-      <span class="material-icons text-xl">add</span>
+      <ui-icon class="text-xl" name="add" />
       <span>Créer mon premier produit</span>
     </a>
   </div>
@@ -60,7 +58,7 @@
         <a
           [routerLink]="['/dashboard/user/ventures', product.venture.slug]"
           class="inline-flex items-center gap-1.5 w-fit mb-4 px-2.5 py-1 rounded-lg bg-primary-50 text-primary-700 text-xs font-semibold border border-primary-100 hover:bg-primary-100 transition-colors">
-          <span class="material-icons text-sm">business</span>
+          <ui-icon class="text-sm" name="business" />
           {{ product.venture.name }}
         </a>
         }
@@ -80,14 +78,14 @@
           <a
             [routerLink]="['/dashboard/user/products/edit', product.slug]"
             class="flex-1 dashboard-btn-primary py-2.5 text-sm font-semibold rounded-lg inline-flex items-center justify-center gap-1.5">
-            <span class="material-icons text-lg">edit</span>
+            <ui-icon class="text-lg" name="edit" />
             <span>Modifier</span>
           </a>
           <button
             type="button"
             (click)="deleteProduct(product.id, product.name)"
             class="inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-lg bg-red-50 text-red-600 font-semibold text-sm hover:bg-red-100 transition-colors min-h-[44px]">
-            <span class="material-icons text-lg">delete</span>
+            <ui-icon class="text-lg" name="delete" />
           </button>
         </div>
       </div>

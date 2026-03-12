@@ -21,7 +21,6 @@ interface CardData {
 
 @Component({
   selector: 'app-cinolu-compare',
-  standalone: true,
   imports: [CommonModule, RouterLink, LucideAngularModule, FadeInOnScrollDirective, TranslateModule],
   templateUrl: './cinolu-compare.html',
   changeDetection: ChangeDetectionStrategy.OnPush

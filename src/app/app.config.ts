@@ -8,19 +8,18 @@ import {
 import { provideRouter, TitleStrategy, withInMemoryScrolling, withViewTransitions } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay, withHttpTransferCacheOptions } from '@angular/platform-browser';
-import { providePrimeNG } from 'primeng/config';
 import { PageTitleStrategy } from './core/strategies/page-title.strategy';
-import { primeNGPreset } from './shared/config/primeng.config';
 import { provideApp } from './core/providers/app.provider';
 import { HttpClient, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { httpInterceptor } from './core/interceptors/http.interceptor';
 import { LoadingInterceptor } from './core/services/loading';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { importProvidersFrom, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
 import { provideServiceWorker } from '@angular/service-worker';
 import { registerLocaleData } from '@angular/common';
+import { APP_CONFIG, AppConfig } from './core/services/config';
 
 export function provideLocaleInitializer() {
   return () =>
@@ -30,19 +29,21 @@ export function provideLocaleInitializer() {
 }
 
 export class CustomTranslateLoader implements TranslateLoader {
-  private static readonly CACHE_BUSTER = Date.now().toString();
-
   constructor(private http: HttpClient) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getTranslation(lang: string): Observable<any> {
-    return this.http.get(`/assets/i18n/${lang}.json?v=${CustomTranslateLoader.CACHE_BUSTER}`);
+    return this.http.get(`/assets/i18n/${lang}.json`);
   }
 }
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new CustomTranslateLoader(http);
 }
+
+const defaultAppConfig: AppConfig = {
+  layout: 'full-layout'
+};
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -58,7 +59,7 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideApp(),
-    provideAnimations(),
+    provideAnimationsAsync(),
     provideHttpClient(withFetch(), withInterceptors([httpInterceptor, LoadingInterceptor])),
     provideClientHydration(
       withEventReplay(),
@@ -76,20 +77,9 @@ export const appConfig: ApplicationConfig = {
         }
       })
     ),
+    { provide: APP_CONFIG, useValue: defaultAppConfig },
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: TitleStrategy, useClass: PageTitleStrategy },
-    providePrimeNG({
-      theme: {
-        preset: primeNGPreset,
-        options: {
-          darkModeSelector: false,
-          cssLayer: {
-            name: 'primeng',
-            order: 'theme, base, primeng'
-          }
-        }
-      }
-    }),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'

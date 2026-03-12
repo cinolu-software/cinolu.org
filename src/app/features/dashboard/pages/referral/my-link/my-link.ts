@@ -16,6 +16,7 @@ import { AuthStore } from '@core/auth/auth.store';
 import { ToastrService } from '@core/services/toast/toastr.service';
 import { environment } from '@environments/environment';
 import { REFERRAL_CONFIG, QRCodeCache } from '@features/dashboard/config/referral.constants';
+import { IconComponent } from '@shared/ui';
 import {
   shareToLinkedIn,
   shareToFacebook,
@@ -25,7 +26,7 @@ import {
 
 @Component({
   selector: 'app-my-referral-link',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, IconComponent],
   templateUrl: './my-link.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

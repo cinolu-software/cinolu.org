@@ -5,9 +5,6 @@ import { IProject } from '@shared/models/entities.models';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProjectCard } from '../../components/project-card/project-card';
 import { ProgramCardSkeletonComponent } from '../../components/project-card-skeleton/project-card-skeleton';
-import { MultiSelectModule, MultiSelectChangeEvent } from 'primeng/multiselect';
-import { FormsModule } from '@angular/forms';
-import { ChipModule } from 'primeng/chip';
 import { ProjectsStore } from '../../store/projects.store';
 import { ProjectCategoriesStore } from '../../store/categories.store';
 import { FilterProjectsDto } from '../../dto/filter-projects.dto';
@@ -21,11 +18,8 @@ import { CirclePlus, LucideAngularModule } from 'lucide-angular';
     CommonModule,
     NgClass,
     NgxPaginationModule,
-    ChipModule,
-    MultiSelectModule,
     NgOptimizedImage,
     ProjectCard,
-    FormsModule,
     ProgramCardSkeletonComponent,
     TranslateModule,
     LucideAngularModule
@@ -63,8 +57,9 @@ export class ListProjects implements OnInit {
     return project.id || index.toString();
   }
 
-  onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'categories'): void {
-    this.queryParams.update((p: FilterProjectsDto) => ({ ...p, page: null, [filter]: event.value }));
+  onFilterChange(event: Event, filter: 'page' | 'categories'): void {
+    const value = Array.from((event.target as HTMLSelectElement).selectedOptions).map((option) => option.value);
+    this.queryParams.update((p: FilterProjectsDto) => ({ ...p, page: null, [filter]: value }));
     this.updateRouteAndprojects();
   }
 

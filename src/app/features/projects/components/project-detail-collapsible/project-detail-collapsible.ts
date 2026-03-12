@@ -7,7 +7,6 @@ export type CollapsibleTheme = 'primary' | 'primary-check' | 'amber' | 'blue';
 
 @Component({
   selector: 'app-project-detail-collapsible',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgClass, TranslateModule, LucideAngularModule],
   templateUrl: './project-detail-collapsible.html'

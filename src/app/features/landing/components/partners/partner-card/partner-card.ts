@@ -3,7 +3,6 @@ import { IPartner } from '../../../data/partners.data';
 
 @Component({
   selector: 'app-partner-card',
-  standalone: true,
   templateUrl: './partner-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

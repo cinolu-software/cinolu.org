@@ -10,7 +10,6 @@ import type { IProject } from '@shared/models/entities.models';
 
 @Component({
   selector: 'app-participation-cards',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, LucideAngularModule, ApiImgPipe, TranslateModule],
   templateUrl: './participation-cards.html'

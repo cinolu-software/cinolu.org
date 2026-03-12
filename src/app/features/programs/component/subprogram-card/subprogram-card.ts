@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { IProject } from '../../../../shared/models/entities.models';
 import {
   Calendar1,
@@ -19,14 +19,15 @@ import {
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
-import { Tag } from 'primeng/tag';
 import { QuillViewComponent } from 'ngx-quill';
+import { TagComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-subprogram-card',
-  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, ApiImgPipe, Tag, QuillViewComponent],
+  imports: [LucideAngularModule, CommonModule, NgOptimizedImage, ApiImgPipe, TagComponent, QuillViewComponent],
   templateUrl: './subprogram-card.html',
-  styles: ``
+  styleUrl: '../../../../shared/styles/quill-view.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SubprogramCard {
   icons = {

@@ -20,7 +20,7 @@
         <div class="relative z-10 flex items-start gap-5">
           <div
             class="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-700 flex items-center justify-center shadow-xl shadow-purple-500/30 flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
-            <span class="material-icons text-white text-4xl md:text-5xl">school</span>
+            <ui-icon class="text-white text-4xl md:text-5xl" name="school" />
           </div>
 
           <div class="flex-1 min-w-0">
@@ -32,14 +32,14 @@
             @if (profileStore.isApproved()) {
             <div class="flex items-center gap-2 text-slate-700 text-base md:text-lg flex-wrap">
               <span class="dashboard-badge-success">
-                <span class="material-icons text-sm">verified</span>
+                <ui-icon class="text-sm" name="verified" />
                 Mentor Approuvé
               </span>
             </div>
             } @else if (profileStore.isPending()) {
             <div class="flex items-center gap-2 text-slate-700 text-base md:text-lg flex-wrap">
               <span class="dashboard-badge-warning">
-                <span class="material-icons text-sm">schedule</span>
+                <ui-icon class="text-sm" name="schedule" />
                 En attente d'approbation
               </span>
             </div>
@@ -54,7 +54,7 @@
         <div class="flex items-center gap-4">
           <div
             class="w-11 h-11 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shadow-lg">
-            <span class="material-icons text-white text-xl">insights</span>
+            <ui-icon class="text-white text-xl" name="insights" />
           </div>
           <div>
             <h2 class="dashboard-heading-5">Statistiques du mentor</h2>
@@ -62,7 +62,7 @@
           </div>
         </div>
         <span class="dashboard-badge-neutral hidden sm:inline-flex">
-          <span class="material-icons text-xs">update</span>
+          <ui-icon class="text-xs" name="update" />
           <span>Temps réel</span>
         </span>
       </div>
@@ -73,10 +73,10 @@
       <div class="dashboard-stat-card">
         <div class="flex items-start justify-between mb-4">
           <div class="dashboard-stat-icon bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/30">
-            <span class="material-icons text-white text-2xl">{{ sessionsIcon }}</span>
+            <ui-icon class="text-white text-2xl" [name]="sessionsIcon" />
           </div>
           <div class="dashboard-badge-info">
-            <span class="material-icons text-xs">schedule</span>
+            <ui-icon class="text-xs" name="schedule" />
           </div>
         </div>
         <div class="space-y-1">
@@ -91,10 +91,10 @@
         <div class="flex items-start justify-between mb-4">
           <div
             class="dashboard-stat-icon bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/30">
-            <span class="material-icons text-white text-2xl">{{ menteesIcon }}</span>
+            <ui-icon class="text-white text-2xl" [name]="menteesIcon" />
           </div>
           <div class="dashboard-badge-success">
-            <span class="material-icons text-xs">people</span>
+            <ui-icon class="text-xs" name="people" />
           </div>
         </div>
         <div class="space-y-1">
@@ -108,15 +108,15 @@
       <div class="dashboard-stat-card">
         <div class="flex items-start justify-between mb-4">
           <div class="dashboard-stat-icon bg-gradient-to-br from-amber-500 to-orange-600 shadow-lg shadow-amber-500/30">
-            <span class="material-icons text-white text-2xl">{{ requestsIcon }}</span>
+            <ui-icon class="text-white text-2xl" [name]="requestsIcon" />
           </div>
           @if (stats.pendingRequests > 0) {
           <div class="dashboard-badge-warning">
-            <span class="material-icons text-xs">notifications_active</span>
+            <ui-icon class="text-xs" name="notifications_active" />
           </div>
           } @else {
           <div class="dashboard-badge-neutral">
-            <span class="material-icons text-xs">done_all</span>
+            <ui-icon class="text-xs" name="done_all" />
           </div>
           }
         </div>
@@ -131,10 +131,10 @@
       <div class="dashboard-stat-card">
         <div class="flex items-start justify-between mb-4">
           <div class="dashboard-stat-icon bg-gradient-to-br from-purple-500 to-pink-600 shadow-lg shadow-purple-500/30">
-            <span class="material-icons text-white text-2xl">{{ ratingIcon }}</span>
+            <ui-icon class="text-white text-2xl" [name]="ratingIcon" />
           </div>
           <div class="dashboard-badge-success">
-            <span class="material-icons text-xs">trending_up</span>
+            <ui-icon class="text-xs" name="trending_up" />
           </div>
         </div>
         <div class="space-y-1">
@@ -154,22 +154,21 @@
             class="flex items-center gap-4 p-4 rounded-lg border-2 border-slate-200/60 hover:border-primary-500 hover:bg-primary-50/30 transition-all group">
             <div
               class="dashboard-stat-icon bg-gradient-to-br from-primary-500 to-primary-700 shadow-lg shadow-primary-500/20 group-hover:shadow-primary-500/40 transition-shadow">
-              <span class="material-icons text-white text-xl">{{ profileIcon }}</span>
+              <ui-icon class="text-white text-xl" [name]="profileIcon" />
             </div>
             <div class="flex-1">
               <p class="font-semibold text-slate-900 group-hover:text-primary-700 transition-colors">Mon profil</p>
               <p class="text-xs text-slate-600">Gérer mes informations</p>
             </div>
-            <span class="material-icons text-slate-400 group-hover:text-primary-600 transition-colors"
-              >arrow_forward</span
-            >
+            <ui-icon class="text-slate-400 group-hover:text-primary-600 transition-colors"
+               name="arrow_forward" />
           </a>
 
           <a
             class="flex items-center gap-4 p-4 rounded-lg border-2 border-slate-200/60 hover:border-amber-500 hover:bg-amber-50/30 transition-all group">
             <div
               class="dashboard-stat-icon bg-gradient-to-br from-amber-500 to-orange-600 shadow-lg shadow-amber-500/20 group-hover:shadow-amber-500/40 transition-shadow">
-              <span class="material-icons text-white text-xl">{{ requestsIcon }}</span>
+              <ui-icon class="text-white text-xl" [name]="requestsIcon" />
             </div>
             <div class="flex-1">
               <p class="font-semibold text-slate-900 group-hover:text-amber-700 transition-colors">Demandes</p>
@@ -180,37 +179,35 @@
               >{{ count }}</span
             >
             } }
-            <span class="material-icons text-slate-400 group-hover:text-amber-600 transition-colors"
-              >arrow_forward</span
-            >
+            <ui-icon class="text-slate-400 group-hover:text-amber-600 transition-colors"
+               name="arrow_forward" />
           </a>
 
           <a
             class="flex items-center gap-4 p-4 rounded-lg border-2 border-slate-200/60 hover:border-blue-500 hover:bg-blue-50/30 transition-all group">
             <div
               class="dashboard-stat-icon bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-shadow">
-              <span class="material-icons text-white text-xl">{{ sessionsIcon }}</span>
+              <ui-icon class="text-white text-xl" [name]="sessionsIcon" />
             </div>
             <div class="flex-1">
               <p class="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors">Sessions</p>
               <p class="text-xs text-slate-600">Mes rendez-vous</p>
             </div>
-            <span class="material-icons text-slate-400 group-hover:text-blue-600 transition-colors">arrow_forward</span>
+            <ui-icon class="text-slate-400 group-hover:text-blue-600 transition-colors" name="arrow_forward" />
           </a>
 
           <a
             class="flex items-center gap-4 p-4 rounded-lg border-2 border-slate-200/60 hover:border-emerald-500 hover:bg-emerald-50/30 transition-all group">
             <div
               class="dashboard-stat-icon bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/20 group-hover:shadow-emerald-500/40 transition-shadow">
-              <span class="material-icons text-white text-xl">{{ menteesIcon }}</span>
+              <ui-icon class="text-white text-xl" [name]="menteesIcon" />
             </div>
             <div class="flex-1">
               <p class="font-semibold text-slate-900 group-hover:text-emerald-700 transition-colors">Entrepreneurs</p>
               <p class="text-xs text-slate-600">Mes accompagnés</p>
             </div>
-            <span class="material-icons text-slate-400 group-hover:text-emerald-600 transition-colors"
-              >arrow_forward</span
-            >
+            <ui-icon class="text-slate-400 group-hover:text-emerald-600 transition-colors"
+               name="arrow_forward" />
           </a>
         </div>
       </div>
@@ -221,7 +218,7 @@
         <div class="flex items-center justify-between mb-6">
           <h2 class="dashboard-heading-4">Activité récente</h2>
           <span class="dashboard-badge-neutral">
-            <span class="material-icons text-xs">history</span>
+            <ui-icon class="text-xs" name="history" />
             <span>Dernières actions</span>
           </span>
         </div>
@@ -229,7 +226,7 @@
         <div class="flex flex-col items-center justify-center py-12 px-4">
           <div
             class="w-20 h-20 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center shadow-lg mb-4">
-            <span class="material-icons text-slate-400 text-4xl">inbox</span>
+            <ui-icon class="text-slate-400 text-4xl" name="inbox" />
           </div>
           <h3 class="dashboard-heading-5 mb-2">Aucune activité récente</h3>
           <p class="dashboard-text-body text-center max-w-md">Vos dernières actions s'afficheront ici</p>

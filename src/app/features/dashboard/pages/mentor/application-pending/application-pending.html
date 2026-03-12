@@ -4,7 +4,7 @@
     <div class="mb-8 rounded-2xl border-2 border-amber-300 bg-amber-50 p-6 shadow-sm">
       <div class="flex items-start gap-4 mb-5">
         <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center flex-shrink-0">
-          <span class="material-icons text-amber-600 text-2xl">upload_file</span>
+          <ui-icon class="text-amber-600 text-2xl" name="upload_file" />
         </div>
         <div>
           <h2 class="font-bold text-amber-900 text-base mb-1">CV manquant — étape obligatoire</h2>
@@ -23,10 +23,10 @@
           [disabled]="mentorProfileStore.isUploadingCV()"
           class="w-full flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
           @if (mentorProfileStore.isUploadingCV()) {
-          <span class="material-icons animate-spin text-sm">sync</span>
+          <ui-icon class="animate-spin text-sm" name="sync" />
           <span>Téléchargement en cours...</span>
           } @else {
-          <span class="material-icons text-sm">upload_file</span>
+          <ui-icon class="text-sm" name="upload_file" />
           <span>Télécharger mon CV (PDF, 1 MB max)</span>
           }
         </button>
@@ -35,7 +35,7 @@
     </div>
     } @else {
     <div class="mb-6 flex items-center gap-3 rounded-xl border border-green-200 bg-green-50 p-4 text-green-800">
-      <span class="material-icons text-2xl text-green-600">check_circle</span>
+      <ui-icon class="text-2xl text-green-600" name="check_circle" />
       <p class="font-semibold text-sm">CV reçu — votre dossier est complet !</p>
     </div>
     }
@@ -43,7 +43,7 @@
     <div class="text-center mb-10">
       <div
         class="inline-flex w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 items-center justify-center shadow-2xl mb-6 animate-bounce">
-        <span class="material-icons text-white text-6xl">schedule</span>
+        <ui-icon class="text-white text-6xl" name="schedule" />
       </div>
       <h1 class="dashboard-heading-2 mb-3">
         Candidature <span class="dashboard-text-gradient-warning">en attente</span>
@@ -56,7 +56,7 @@
     <div class="dashboard-card-elevated p-8 mb-8">
       <div class="flex items-start gap-4 mb-6">
         <div class="w-12 h-12 rounded-xl bg-yellow-100 flex items-center justify-center flex-shrink-0">
-          <span class="material-icons text-yellow-600 text-2xl">info</span>
+          <ui-icon class="text-yellow-600 text-2xl" name="info" />
         </div>
         <div>
           <h2 class="dashboard-heading-4 mb-2">Prochaines étapes</h2>
@@ -67,7 +67,7 @@
       <div class="space-y-4">
         <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg">
           <div class="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-            <span class="material-icons text-primary-600 text-sm">check</span>
+            <ui-icon class="text-primary-600 text-sm" name="check" />
           </div>
           <div>
             <h3 class="font-semibold text-slate-900 text-sm mb-1">Examen de la candidature</h3>
@@ -79,7 +79,7 @@
 
         <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg">
           <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center flex-shrink-0 mt-0.5">
-            <span class="material-icons text-slate-500 text-sm">schedule</span>
+            <ui-icon class="text-slate-500 text-sm" name="schedule" />
           </div>
           <div>
             <h3 class="font-semibold text-slate-900 text-sm mb-1">Évaluation (3-5 jours)</h3>
@@ -91,7 +91,7 @@
 
         <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg">
           <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center flex-shrink-0 mt-0.5">
-            <span class="material-icons text-slate-500 text-sm">email</span>
+            <ui-icon class="text-slate-500 text-sm" name="email" />
           </div>
           <div>
             <h3 class="font-semibold text-slate-900 text-sm mb-1">Notification par email</h3>
@@ -105,7 +105,7 @@
 
     <div class="dashboard-card bg-blue-50 border border-blue-100 p-6 mb-8">
       <div class="flex items-start gap-3">
-        <span class="material-icons text-blue-600 text-2xl">lightbulb</span>
+        <ui-icon class="text-blue-600 text-2xl" name="lightbulb" />
         <div>
           <h3 class="font-semibold text-blue-900 text-sm mb-2">En attendant...</h3>
           <p class="text-blue-700 text-xs leading-relaxed mb-3">
@@ -122,11 +122,11 @@
 
     <div class="flex flex-col sm:flex-row gap-3 justify-center">
       <a routerLink="/dashboard/user/profile" class="dashboard-btn-secondary">
-        <span class="material-icons text-lg">person</span>
+        <ui-icon class="text-lg" name="person" />
         <span>Retour au profil</span>
       </a>
       <a routerLink="/dashboard/user/overview" class="dashboard-btn-primary">
-        <span class="material-icons text-lg">dashboard</span>
+        <ui-icon class="text-lg" name="dashboard" />
         <span>Aller au tableau de bord</span>
       </a>
     </div>

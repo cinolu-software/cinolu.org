@@ -18,7 +18,7 @@
         <div class="relative z-10 flex items-center gap-4">
           <div
             class="w-14 h-14 rounded-lg bg-gradient-to-br from-primary-500/90 to-primary-700/85 flex items-center justify-center shadow-lg flex-shrink-0">
-            <span class="material-icons text-white text-2xl">waving_hand</span>
+            <ui-icon class="text-white text-2xl" name="waving_hand" />
           </div>
 
           <div class="flex-1 min-w-0">
@@ -26,7 +26,7 @@
             @if (isAdminUser()) {
             <div class="flex items-center gap-2 text-slate-700 text-sm flex-wrap">
               <span class="dashboard-badge-purple">
-                <span class="material-icons text-xs">admin_panel_settings</span>
+                <ui-icon class="text-xs" name="admin_panel_settings" />
                 Administrateur
               </span>
               <span class="text-slate-600">•</span>
@@ -36,7 +36,7 @@
                 target="_blank"
                 rel="noopener noreferrer">
                 <span>admin.cinolu.org</span>
-                <span class="material-icons text-sm">open_in_new</span>
+                <ui-icon class="text-sm" name="open_in_new" />
               </a>
             </div>
             } @else {
@@ -57,7 +57,7 @@
         <div class="dashboard-stat-card">
           <div class="flex items-start justify-between mb-4">
             <div class="dashboard-stat-icon bg-gradient-to-br from-primary-500/90 to-primary-700/85 shadow-lg">
-              <span class="material-icons text-white text-2xl">{{ businessIcon }}</span>
+              <ui-icon class="text-white text-2xl" [name]="businessIcon" />
             </div>
           </div>
           <div class="space-y-1">
@@ -69,7 +69,7 @@
         <div class="dashboard-stat-card">
           <div class="flex items-start justify-between mb-4">
             <div class="dashboard-stat-icon bg-gradient-to-br from-blue-500/90 to-indigo-600/85 shadow-lg">
-              <span class="material-icons text-white text-2xl">{{ packageIcon }}</span>
+              <ui-icon class="text-white text-2xl" [name]="packageIcon" />
             </div>
           </div>
           <div class="space-y-1">
@@ -81,7 +81,7 @@
         <div class="dashboard-stat-card">
           <div class="flex items-start justify-between mb-4">
             <div class="dashboard-stat-icon bg-gradient-to-br from-emerald-500/90 to-teal-600/85 shadow-lg">
-              <span class="material-icons text-white text-2xl">{{ userPlusIcon }}</span>
+              <ui-icon class="text-white text-2xl" [name]="userPlusIcon" />
             </div>
           </div>
           <div class="space-y-1">
@@ -93,7 +93,7 @@
         <div class="dashboard-stat-card">
           <div class="flex items-start justify-between mb-4">
             <div class="dashboard-stat-icon bg-gradient-to-br from-amber-500/90 to-orange-600/85 shadow-lg">
-              <span class="material-icons text-white text-2xl">{{ usersIcon }}</span>
+              <ui-icon class="text-white text-2xl" [name]="usersIcon" />
             </div>
           </div>
           <div class="space-y-1">
@@ -174,7 +174,7 @@
             <div class="relative z-10 space-y-4 p-8">
               <span
                 class="dashboard-badge bg-gradient-to-r from-primary-500/90 to-primary-700/85 text-white border-0 shadow-lg inline-flex">
-                <span class="material-icons text-sm">star</span>
+                <ui-icon class="text-sm" name="star" />
                 <span class="uppercase tracking-wider font-bold text-xs">{{ highlightBadge() }}</span>
               </span>
               <h4 class="text-2xl font-black text-white leading-tight dashboard-line-clamp-2">
@@ -183,9 +183,8 @@
               <p class="text-slate-200 text-sm leading-relaxed dashboard-line-clamp-2">{{ highlightDescription() }}</p>
               <div class="flex items-center gap-2 text-white font-semibold pt-2">
                 <span class="text-sm">Découvrir</span>
-                <span class="material-icons text-base group-hover:translate-x-1 transition-transform"
-                  >arrow_forward</span
-                >
+                <ui-icon class="text-base group-hover:translate-x-1 transition-transform"
+                   name="arrow_forward" />
               </div>
             </div>
           </a>
@@ -228,10 +227,9 @@
 
           <div
             class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center group-hover:bg-primary-50 transition-all duration-300 flex-shrink-0 shadow-sm">
-            <span
-              class="material-icons text-slate-600 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all text-xl"
-              >arrow_forward</span
-            >
+            <ui-icon
+              class="text-slate-600 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all text-xl"
+               name="arrow_forward" />
           </div>
         </a>
         }
@@ -240,7 +238,7 @@
       <div class="dashboard-card flex items-center justify-between">
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 rounded-lg bg-primary-100 flex items-center justify-center">
-            <span class="material-icons text-primary-600 text-2xl">business_center</span>
+            <ui-icon class="text-primary-600 text-2xl" name="business_center" />
           </div>
           <div>
             <h3 class="font-bold text-slate-900">Aucun projet</h3>
@@ -248,7 +246,7 @@
           </div>
         </div>
         <a [routerLink]="['/dashboard/user/ventures/create']" class="dashboard-btn-primary">
-          <span class="material-icons text-xl">add</span>
+          <ui-icon class="text-xl" name="add" />
           <span>Créer</span>
         </a>
       </div>
@@ -268,7 +266,7 @@
           <div class="flex flex-col items-center text-center text-white gap-4">
             <div
               class="w-16 h-16 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-110 transition-transform duration-300">
-              <span class="material-icons text-4xl">add_business</span>
+              <ui-icon class="text-4xl" name="add_business" />
             </div>
             <div>
               <h4 class="font-black text-lg mb-1">Créer un projet</h4>
@@ -281,7 +279,7 @@
           <div class="flex flex-col items-center text-center gap-4">
             <div
               class="w-16 h-16 rounded-lg bg-gradient-to-br from-blue-500/90 to-indigo-600/85 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-              <span class="material-icons text-white text-4xl">add_shopping_cart</span>
+              <ui-icon class="text-white text-4xl" name="add_shopping_cart" />
             </div>
             <div>
               <h4 class="font-black text-lg text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">
@@ -296,7 +294,7 @@
           <div class="flex flex-col items-center text-center gap-4">
             <div
               class="w-16 h-16 rounded-lg bg-gradient-to-br from-purple-500/90 to-pink-600/85 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-              <span class="material-icons text-white text-4xl">edit</span>
+              <ui-icon class="text-white text-4xl" name="edit" />
             </div>
             <div>
               <h4 class="font-black text-lg text-slate-900 mb-1 group-hover:text-purple-600 transition-colors">

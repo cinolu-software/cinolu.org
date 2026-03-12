@@ -8,21 +8,19 @@ import { FilterArticlesDto } from '../../dto/filter-articles.dto';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ArticleCardSkeleton } from '../../components/article-card-skeleton/article-card-skeleton';
 import { TagsStore } from '../../store/articles/tags.store';
-import { MultiSelectChangeEvent, MultiSelectModule } from 'primeng/multiselect';
 import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
-import { Pen, LucideAngularModule } from 'lucide-angular';
+import { Pen } from 'lucide-angular';
 import { AnalyticsService } from '@core/services/analytics/analytics.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-blog',
-  providers: [ArticlesStore, TagsStore, LucideAngularModule],
+  providers: [ArticlesStore, TagsStore],
   imports: [
     CommonModule,
     ArticleCard,
     NgxPaginationModule,
     ArticleCardSkeleton,
-    MultiSelectModule,
     HeroCard,
     TranslateModule
   ],
@@ -50,11 +48,12 @@ export class ListArticles implements OnInit {
     return article.id || index.toString();
   }
 
-  async onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'tags'): Promise<void> {
+  async onFilterChange(event: Event, filter: 'page' | 'tags'): Promise<void> {
+    const value = Array.from((event.target as HTMLSelectElement).selectedOptions).map((option) => option.value);
     this.queryParams().page = null;
-    this.queryParams()[filter] = event.value;
+    this.queryParams()[filter] = value.length ? value.join(',') : null;
     if (filter === 'tags') {
-      const raw = (event.value || []) as unknown[];
+      const raw = value as unknown[];
       const tags = raw.map((t) => (typeof t === 'string' ? t : ((t as { name?: string }).name ?? String(t))));
       this.#analytics.trackBlogFilter(tags);
     }

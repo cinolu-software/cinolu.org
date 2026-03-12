@@ -1,36 +1,20 @@
-import { Component, inject, OnInit, signal, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProjectStore } from '../../../../projects/store/project.store';
 import { VenturesStore } from '../../../store/ventures.store';
 import { ParticipationsStore } from '../../../store/participations.store';
-import { ConfirmationService } from 'primeng/api';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DialogModule } from 'primeng/dialog';
-import { ButtonModule } from 'primeng/button';
-import { TagModule } from 'primeng/tag';
-import { GalleriaModule } from 'primeng/galleria';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
-import { carouselConfig } from '../../../../landing/config/carousel.config';
 import { AuthStore } from '@core/auth/auth.store';
 import { AlertTriangle, Info, LucideAngularModule } from 'lucide-angular';
+import { ButtonComponent, DialogComponent, IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-program-detail',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ConfirmDialogModule,
-    DialogModule,
-    ButtonModule,
-    TagModule,
-    GalleriaModule,
-    ApiImgPipe,
-    RouterLink,
-    LucideAngularModule
-  ],
-  providers: [ProjectStore, ConfirmationService],
-  templateUrl: './program-detail.html'
+  imports: [CommonModule, ApiImgPipe, RouterLink, LucideAngularModule, ButtonComponent, DialogComponent, IconComponent],
+  providers: [ProjectStore],
+  templateUrl: './program-detail.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProgramDetail implements OnInit {
   route = inject(ActivatedRoute);
@@ -39,38 +23,31 @@ export class ProgramDetail implements OnInit {
   venturesStore = inject(VenturesStore);
   participationsStore = inject(ParticipationsStore);
   authStore = inject(AuthStore);
-  confirmationService = inject(ConfirmationService);
 
   showVentureSelectionModal = signal(false);
-  responsiveOptions = carouselConfig;
+  showConfirmModal = signal(false);
+  confirmTitle = signal('');
+  confirmMessage = signal('');
+  confirmAcceptLabel = signal('OK');
+  confirmHideReject = signal(false);
   confirmIcon = signal<'alert' | 'info'>('alert');
+  pendingConfirmAction = signal<(() => void) | null>(null);
 
-  icons = {
-    alertTriangle: AlertTriangle,
-    info: Info
-  };
+  readonly icons = { alertTriangle: AlertTriangle, info: Info };
 
-  // Computed properties
-  projectStatus = computed(() => {
+  readonly projectStatus = computed(() => {
     const project = this.projectStore.project();
     if (!project) return null;
-
     const now = new Date();
     const startedAt = new Date(project.started_at);
     const endedAt = new Date(project.ended_at);
-
-    if (startedAt <= now && endedAt >= now) {
-      return 'En cours';
-    } else if (startedAt > now) {
-      return 'À venir';
-    } else {
-      return 'Terminé';
-    }
+    if (startedAt <= now && endedAt >= now) return 'En cours';
+    if (startedAt > now) return 'À venir';
+    return 'Terminé';
   });
 
-  statusBadgeClasses = computed(() => {
-    const status = this.projectStatus();
-    switch (status) {
+  readonly statusBadgeClasses = computed(() => {
+    switch (this.projectStatus()) {
       case 'En cours':
         return 'bg-green-50 text-green-700 border-green-300';
       case 'À venir':
@@ -91,7 +68,7 @@ export class ProgramDetail implements OnInit {
 
   isProgramClosed(): boolean {
     const project = this.projectStore.project();
-    if (!project || !project.ended_at) return false;
+    if (!project?.ended_at) return false;
     return new Date(project.ended_at) < new Date();
   }
 
@@ -104,55 +81,46 @@ export class ProgramDetail implements OnInit {
   onApplyClick(): void {
     const project = this.projectStore.project();
     if (!project) return;
-
     const ventures = this.venturesStore.ventures();
 
     if (ventures.length === 0) {
       this.confirmIcon.set('alert');
-      this.confirmationService.confirm({
-        header: 'Aucun projet',
-        message: 'Vous devez créer un projet avant de pouvoir postuler à un programme.',
-        acceptLabel: 'Créer un projet',
-        rejectLabel: 'Annuler',
-        acceptButtonStyleClass: 'p-button-primary',
-        accept: () => {
-          this.router.navigate(['/dashboard/user/ventures/create']);
-        }
-      });
+      this.confirmTitle.set('Aucun projet');
+      this.confirmMessage.set('Vous devez créer un projet avant de pouvoir postuler à un programme.');
+      this.confirmAcceptLabel.set('Créer un projet');
+      this.confirmHideReject.set(false);
+      this.pendingConfirmAction.set(() => this.router.navigate(['/dashboard/user/ventures/create']));
+      this.showConfirmModal.set(true);
       return;
     }
     if (ventures.length === 1) {
       this.submitApplication(ventures[0].id);
       return;
     }
-
     this.showVentureSelectionModal.set(true);
+  }
+
+  onConfirmAccept(): void {
+    const action = this.pendingConfirmAction();
+    if (action) action();
+    this.showConfirmModal.set(false);
   }
 
   submitApplication(ventureId: string): void {
     const project = this.projectStore.project();
     if (!project) return;
-
     const alreadyApplied = this.participationsStore.checkExistingParticipation(project.id, ventureId);
-
     if (alreadyApplied) {
       this.confirmIcon.set('info');
-      this.confirmationService.confirm({
-        header: 'Candidature existante',
-        message: 'Vous avez déjà postulé à ce programme avec ce projet.',
-        rejectVisible: false,
-        acceptLabel: 'Compris'
-      });
+      this.confirmTitle.set('Candidature existante');
+      this.confirmMessage.set('Vous avez déjà postulé à ce programme avec ce projet.');
+      this.confirmAcceptLabel.set('Compris');
+      this.confirmHideReject.set(true);
+      this.pendingConfirmAction.set(null);
+      this.showConfirmModal.set(true);
       return;
     }
-
-    this.participationsStore.create({
-      projectId: project.id,
-      ventureId
-    });
-  }
-
-  closeVentureModal(): void {
+    this.participationsStore.create({ projectId: project.id, ventureId });
     this.showVentureSelectionModal.set(false);
   }
 }

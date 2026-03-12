@@ -3,16 +3,16 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { IUser } from '@shared/models/entities.models';
-import { DatePicker } from 'primeng/datepicker';
 import { UpdateInfoStore } from '@features/dashboard/store/update-info.store';
 import { UpdateInfoDto } from '@features/dashboard/dto/update-info.dto';
 import { FileUpload } from '@shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '@shared/pipes';
 import { FormManager } from '@shared/components/form-manager/form-manager';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-profile',
-  imports: [ReactiveFormsModule, RouterModule, DatePicker, FileUpload, ApiImgPipe, FormManager],
+  imports: [ReactiveFormsModule, RouterModule, FileUpload, ApiImgPipe, FormManager, IconComponent],
   providers: [UpdateInfoStore],
   templateUrl: './profile.html',
   changeDetection: ChangeDetectionStrategy.OnPush

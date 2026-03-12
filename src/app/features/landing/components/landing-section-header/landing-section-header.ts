@@ -4,7 +4,6 @@ import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-landing-section-header',
-  standalone: true,
   imports: [TranslateModule, NgClass],
   templateUrl: './landing-section-header.html',
   changeDetection: ChangeDetectionStrategy.OnPush

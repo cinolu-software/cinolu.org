@@ -2,13 +2,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule, FileX, ArrowRight, Newspaper, Tag, Search } from 'lucide-angular';
-import { Button } from 'primeng/button';
+import { ButtonComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-article-detail-not-found',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, TranslateModule, LucideAngularModule, Button],
+  imports: [RouterLink, TranslateModule, LucideAngularModule, ButtonComponent],
   templateUrl: './article-detail-not-found.html'
 })
 export class ArticleDetailNotFoundComponent {

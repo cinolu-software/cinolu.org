@@ -3,7 +3,7 @@
     <div class="flex flex-col lg:flex-row lg:items-center gap-6">
       <div class="flex items-center gap-3">
         <div class="w-12 h-12 rounded-lg bg-primary-100 flex items-center justify-center">
-          <span class="material-icons text-primary-700 text-2xl">people</span>
+          <ui-icon class="text-primary-700 text-2xl" name="people" />
         </div>
         <div>
           <h1 class="dashboard-heading-2">Personnes invitées</h1>
@@ -18,7 +18,7 @@
         </div>
 
         <a routerLink="/dashboard/referral/badges" class="dashboard-btn-secondary inline-flex">
-          <span class="material-icons text-lg">military_tech</span>
+          <ui-icon class="text-lg" name="military_tech" />
           <span>Voir mes badges</span>
         </a>
       </div>
@@ -42,14 +42,14 @@
     @if (paginatedUsers().length === 0) {
     <div class="py-16 text-center">
       <div class="w-20 h-20 rounded-lg bg-slate-100 flex items-center justify-center mx-auto mb-6">
-        <span class="material-icons text-slate-400 text-4xl">person_off</span>
+        <ui-icon class="text-slate-400 text-4xl" name="person_off" />
       </div>
       <h4 class="dashboard-heading-4 mb-2">Aucune personne invitée</h4>
       <p class="dashboard-text-body text-slate-600 mb-6">
         Commence à partager ton lien de parrainage pour voir tes premières inscriptions
       </p>
       <a routerLink="/dashboard/referral/link" class="dashboard-btn-primary inline-flex">
-        <span class="material-icons text-lg">share</span>
+        <ui-icon class="text-lg" name="share" />
         <span>Partager mon lien</span>
       </a>
     </div>
@@ -78,7 +78,7 @@
 
             <div class="flex items-center gap-2">
               <span class="dashboard-text-tiny">
-                <span class="material-icons text-xs align-middle">calendar_today</span>
+                <ui-icon class="text-xs align-middle" name="calendar_today" />
                 {{ formatDate(user.created_at) }}
               </span>
             </div>
@@ -94,7 +94,7 @@
         (click)="previousPage()"
         [disabled]="currentPage() === 1"
         class="px-4 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-        <span class="material-icons text-xl">chevron_left</span>
+        <ui-icon class="text-xl" name="chevron_left" />
       </button>
 
       @for (page of [].constructor(totalPages()); track $index) {
@@ -113,7 +113,7 @@
         (click)="nextPage()"
         [disabled]="currentPage() === totalPages()"
         class="px-4 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-        <span class="material-icons text-xl">chevron_right</span>
+        <ui-icon class="text-xl" name="chevron_right" />
       </button>
     </div>
     } }

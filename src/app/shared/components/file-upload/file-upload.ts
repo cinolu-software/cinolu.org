@@ -10,6 +10,7 @@ registerPlugin(imagePreview, validateType, validateSize);
   selector: 'app-file-upload',
   imports: [FilePondModule],
   templateUrl: './file-upload.html',
+  styleUrl: './file-upload.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileUpload implements OnInit {
@@ -36,7 +37,7 @@ export class FileUpload implements OnInit {
       imagePreviewHeight: 200,
       labelIdle: `
         <div class="filepond-custom-label">
-          <span class="material-icons" style="font-size: 48px; color: #5d9c46;">cloud_upload</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#5d9c46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="m7 8 5-5 5 5"/><path d="M20 16.58A5 5 0 0 1 18 7h-1.26A8 8 0 1 0 4 16.25"/><path d="M8 16h8"/></svg>
           <p style="margin: 8px 0; font-weight: 600; color: #2b4225;">Glissez-déposez votre image ici</p>
           <p style="margin: 0; font-size: 14px; color: #7cb764;">ou <span style="color: #5d9c46; text-decoration: underline;">parcourir</span></p>
         </div>

@@ -4,8 +4,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { VenturesStore } from '../../../store/ventures.store';
 import { ProductsStore } from '../../../store/products.store';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
+import { IconComponent } from '@shared/ui';
 import {
   LucideAngularModule,
   Eye,
@@ -23,16 +22,7 @@ import type { IImage } from '@shared/models';
 
 @Component({
   selector: 'app-venture-details',
-  imports: [
-    RouterModule,
-    ApiImgPipe,
-    NgOptimizedImage,
-    ConfirmDialogModule,
-    DecimalPipe,
-    DatePipe,
-    LucideAngularModule
-  ],
-  providers: [ConfirmationService],
+  imports: [RouterModule, ApiImgPipe, NgOptimizedImage, DecimalPipe, DatePipe, LucideAngularModule, IconComponent],
   templateUrl: './venture-details.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -41,7 +31,6 @@ export class VentureDetails implements OnInit {
   router = inject(Router);
   venturesStore = inject(VenturesStore);
   productsStore = inject(ProductsStore);
-  confirmationService = inject(ConfirmationService);
 
   lightboxOpen = signal(false);
   lightboxImages = signal<IImage[]>([]);
@@ -103,17 +92,9 @@ export class VentureDetails implements OnInit {
   }
 
   deleteProduct(id: string, name: string) {
-    this.confirmationService.confirm({
-      message: `Êtes-vous sûr de vouloir supprimer "${name}" ?`,
-      header: 'Confirmation de suppression',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Oui, supprimer',
-      rejectLabel: 'Annuler',
-      acceptButtonStyleClass: 'p-button-danger',
-      accept: () => {
-        this.productsStore.deleteProduct(id);
-      }
-    });
+    if (confirm(`Êtes-vous sûr de vouloir supprimer "${name}" ?`)) {
+      this.productsStore.deleteProduct(id);
+    }
   }
 
   getInitials(name: string): string {

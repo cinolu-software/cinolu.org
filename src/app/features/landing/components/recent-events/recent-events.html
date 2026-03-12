@@ -8,15 +8,9 @@
       titleKey="recent_events.title"
       titleHighlightKey="recent_events.title_highlight"
       descriptionKey="recent_events.description">
-      <div headerEnd class="hidden lg:flex items-center gap-4 shrink-0">
-        @if (store.events().length) {
-        <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
-          <i-lucide [name]="icons.arrowLeft" class="size-3.5" />
-        </button>
-        <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button">
-          <i-lucide [name]="icons.arrowRight" class="size-3.5" />
-        </button>
-        }
+      <div headerEnd class="hidden lg:flex items-center gap-2 shrink-0 text-sm font-semibold text-slate-400">
+        <i-lucide [name]="icons.arrowRight" class="size-4" />
+        <span>Selection recente</span>
       </div>
     </app-landing-section-header>
 
@@ -28,35 +22,13 @@
     </div>
     }
     <div class="space-y-6 lg:space-y-8 mt-8 lg:mt-12">
-      <p-carousel
-        #carousel
-        [value]="store.events()"
-        [numVisible]="3"
-        [numScroll]="1"
-        [showIndicators]="false"
-        [showNavigators]="false"
-        [circular]="true"
-        [responsiveOptions]="carouselConfig"
-        [autoplayInterval]="5000"
-        [draggable]="true"
-        class="w-full events-carousel">
-        <ng-template let-event #item>
-          <div class="carousel-item-wrapper">
-            <app-event-card [event]="event" [buttonTextKey]="'recent_events.explore'" />
-          </div>
-        </ng-template>
-      </p-carousel>
-
-      @if (store.events().length) {
-      <div class="flex lg:hidden justify-center items-center gap-6 pt-4">
-        <button (click)="carousel.navBackward($event)" class="carousel-nav-btn" type="button">
-          <i-lucide [name]="icons.arrowLeft" class="size-4" />
-        </button>
-        <button (click)="carousel.navForward($event)" class="carousel-nav-btn" type="button">
-          <i-lucide [name]="icons.arrowRight" class="size-4" />
-        </button>
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+        @for (event of store.events(); track trackByEventId($index, event)) {
+        <div class="carousel-item-wrapper">
+          <app-event-card [event]="event" [buttonTextKey]="'recent_events.explore'" />
+        </div>
+        }
       </div>
-      }
 
       <div class="w-full flex justify-center items-center font-satoshi mt-12">
         <a routerLink="/events" class="group relative">

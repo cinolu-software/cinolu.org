@@ -9,13 +9,11 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { ProgressBar } from 'primeng/progressbar';
 
 import { LoadingService } from '../../../core/services/loading';
 
 @Component({
   selector: 'app-loading-bar',
-  imports: [ProgressBar],
   templateUrl: './loading-bar.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

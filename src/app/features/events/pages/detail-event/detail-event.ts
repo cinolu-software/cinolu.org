@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, inject, signal, effect, model, computed } from '@angular/core';
 import { EventSkeleton } from '../../components/event-detail-skeleton/event-skeleton';
-import { GalleriaModule } from 'primeng/galleria';
 import {
   LucideAngularModule,
   CalendarDays,
@@ -21,19 +20,19 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { IEvent, IImage } from '../../../../shared/models/entities.models';
 import { GalleryEventStore } from '../../store/galleries.event.store';
-import { carouselConfig } from '../../../landing/config/carousel.config';
 import { TranslateModule } from '@ngx-translate/core';
 import { formatDateForGoogleCalendarUTC, openExternalUrl } from '@shared/helpers';
 
 @Component({
   selector: 'app-event',
   providers: [EventStore, GalleryEventStore],
-  imports: [CommonModule, EventSkeleton, LucideAngularModule, ApiImgPipe, TranslateModule, GalleriaModule],
+  imports: [CommonModule, EventSkeleton, LucideAngularModule, ApiImgPipe, TranslateModule],
   templateUrl: './detail-event.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailEvent implements OnInit {
   images = model<IImage[]>([]);
+  activeImageIndex = signal(0);
   activeSection = signal<string | null>(null);
 
   expandedDescription = computed(() => this.activeSection() === 'description');
@@ -59,14 +58,13 @@ export class DetailEvent implements OnInit {
   readonly store = inject(EventStore);
   readonly galleryStore = inject(GalleryEventStore);
 
-  responsiveOptions = carouselConfig;
-
   readonly event = computed(() => this.store.event());
 
   constructor() {
     effect(() => {
       const gallery = this.galleryStore.images();
       this.images.set(gallery ?? []);
+      this.activeImageIndex.set(0);
     });
   }
 

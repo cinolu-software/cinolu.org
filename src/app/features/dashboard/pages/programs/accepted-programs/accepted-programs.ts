@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ParticipationsStore } from '../../../store/participations.store';
 import { IParticipation, IPhase } from '../../../../../shared/models/entities.models';
+import { IconComponent } from '@shared/ui';
 
 enum ParticipationStatus {
   VALIDATED = 'VALIDATED',
@@ -30,8 +31,7 @@ interface StatusConfig {
 
 @Component({
   selector: 'app-accepted-programs',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, IconComponent],
   providers: [],
   templateUrl: './accepted-programs.html',
   styleUrls: [],

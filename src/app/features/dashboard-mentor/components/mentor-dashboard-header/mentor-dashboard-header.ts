@@ -14,10 +14,11 @@ import { RouterLink } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { RightsService } from '@core/auth/rights.service';
 import { ApiImgPipe } from '@shared/pipes';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-mentor-dashboard-header',
-  imports: [NgClass, NgOptimizedImage, ApiImgPipe, RouterLink],
+  imports: [NgClass, NgOptimizedImage, ApiImgPipe, RouterLink, IconComponent],
   templateUrl: './mentor-dashboard-header.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

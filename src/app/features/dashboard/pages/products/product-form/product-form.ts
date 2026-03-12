@@ -9,11 +9,12 @@ import { FileUpload } from '@shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { ProductGalleryStore } from '@features/dashboard/store/product-gallery.store';
 import { FormManager } from '@shared/components/form-manager/form-manager';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-product-form',
   providers: [ProductGalleryStore],
-  imports: [ReactiveFormsModule, FileUpload, ApiImgPipe, NgOptimizedImage, FormManager],
+  imports: [ReactiveFormsModule, FileUpload, ApiImgPipe, NgOptimizedImage, FormManager, IconComponent],
   templateUrl: './product-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -11,7 +11,7 @@
           <div class="flex items-center gap-5 flex-1">
             <div
               class="w-16 h-16 rounded-xl bg-gradient-to-br from-primary-500/90 to-primary-700/85 flex items-center justify-center shadow-lg flex-shrink-0">
-              <span class="material-icons text-white text-3xl">school</span>
+              <ui-icon class="text-white text-3xl" name="school" />
             </div>
             <div class="text-center md:text-left">
               <h3 class="dashboard-heading-4 mb-1">
@@ -25,7 +25,7 @@
           </div>
 
           <button type="button" (click)="applyAsMentor()" class="dashboard-btn-primary flex-shrink-0 whitespace-nowrap">
-            <span class="material-icons text-lg">rocket_launch</span>
+            <ui-icon class="text-lg" name="rocket_launch" />
             <span>Postuler maintenant</span>
           </button>
         </div>
@@ -34,7 +34,7 @@
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0">
-                <span class="material-icons text-primary-600 text-xl">groups</span>
+                <ui-icon class="text-primary-600 text-xl" name="groups" />
               </div>
               <div>
                 <p class="dashboard-text-small font-semibold text-slate-800">Impact</p>
@@ -43,7 +43,7 @@
             </div>
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0">
-                <span class="material-icons text-primary-600 text-xl">star</span>
+                <ui-icon class="text-primary-600 text-xl" name="star" />
               </div>
               <div>
                 <p class="dashboard-text-small font-semibold text-slate-800">Reconnaissance</p>
@@ -52,7 +52,7 @@
             </div>
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
-                <span class="material-icons text-blue-600 text-xl">network_check</span>
+                <ui-icon class="text-blue-600 text-xl" name="network_check" />
               </div>
               <div>
                 <p class="dashboard-text-small font-semibold text-slate-800">Réseau</p>
@@ -68,7 +68,7 @@
           <div class="flex items-center gap-3">
             <div
               class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500/90 to-primary-700/85 flex items-center justify-center shadow-lg">
-              <span class="material-icons text-white text-2xl">school</span>
+              <ui-icon class="text-white text-2xl" name="school" />
             </div>
             <div>
               <h3 class="dashboard-heading-5">Statut Mentor</h3>
@@ -78,17 +78,17 @@
 
           @if (mentorStatus() === 'approved') {
           <span class="dashboard-badge-success">
-            <span class="material-icons text-sm">verified</span>
+            <ui-icon class="text-sm" name="verified" />
             Approuvé
           </span>
           } @else if (mentorStatus() === 'pending') {
           <span class="dashboard-badge-warning">
-            <span class="material-icons text-sm">schedule</span>
+            <ui-icon class="text-sm" name="schedule" />
             En attente
           </span>
           } @else if (mentorStatus() === 'rejected') {
           <span class="dashboard-badge-danger">
-            <span class="material-icons text-sm">cancel</span>
+            <ui-icon class="text-sm" name="cancel" />
             Refusé
           </span>
           }
@@ -98,7 +98,7 @@
           @if (mentorStatus() === 'approved') {
           <div class="dashboard-card bg-primary-50 border border-primary-100 p-5">
             <div class="flex items-start gap-3">
-              <span class="material-icons text-primary-600 text-2xl">check_circle</span>
+              <ui-icon class="text-primary-600 text-2xl" name="check_circle" />
               <div class="flex-1">
                 <h4 class="font-semibold text-primary-900 text-sm mb-2">Félicitations !</h4>
                 <p class="text-primary-700 text-xs leading-relaxed mb-4">
@@ -109,7 +109,7 @@
                   type="button"
                   (click)="goToMentorDashboard()"
                   class="inline-flex items-center gap-2 px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white text-sm font-medium rounded-lg transition-colors">
-                  <span class="material-icons text-lg">dashboard</span>
+                  <ui-icon class="text-lg" name="dashboard" />
                   <span>Accéder au Dashboard Mentor</span>
                 </button>
               </div>
@@ -118,7 +118,7 @@
           } @else if (mentorStatus() === 'pending') {
           <div class="dashboard-card bg-yellow-50 border border-yellow-100 p-5">
             <div class="flex items-start gap-3">
-              <span class="material-icons text-yellow-600 text-2xl">schedule</span>
+              <ui-icon class="text-yellow-600 text-2xl" name="schedule" />
               <div>
                 <h4 class="font-semibold text-yellow-900 text-sm mb-2">Candidature en cours d'examen</h4>
                 <p class="text-yellow-700 text-xs leading-relaxed">
@@ -131,7 +131,7 @@
           } @else if (mentorStatus() === 'rejected') {
           <div class="dashboard-card bg-red-50 border border-red-100 p-5">
             <div class="flex items-start gap-3">
-              <span class="material-icons text-red-600 text-2xl">cancel</span>
+              <ui-icon class="text-red-600 text-2xl" name="cancel" />
               <div>
                 <h4 class="font-semibold text-red-900 text-sm mb-2">Candidature refusée</h4>
                 <p class="text-red-700 text-xs leading-relaxed">
@@ -166,7 +166,7 @@
             } @else {
             <div
               class="relative w-44 h-44 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center border-4 border-white shadow-2xl transition-transform group-hover:scale-105 duration-300">
-              <span class="material-icons text-white text-[80px]">person</span>
+              <ui-icon class="text-white text-[80px]" name="person" />
             </div>
             } @if (authStore.isLoading()) {
             <div
@@ -181,7 +181,7 @@
 
             <div class="dashboard-card p-3 text-center">
               <p class="dashboard-text-tiny flex items-center justify-center gap-1.5">
-                <span class="material-icons text-slate-600 text-sm">info</span>
+                <ui-icon class="text-slate-600 text-sm" name="info" />
                 <span>JPG, PNG ou WEBP • Max 1MB</span>
               </p>
             </div>
@@ -196,7 +196,7 @@
           <div class="flex items-center gap-3">
             <div
               class="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
-              <span class="material-icons text-white text-xl">badge</span>
+              <ui-icon class="text-white text-xl" name="badge" />
             </div>
             <div>
               <h2 class="dashboard-heading-5">Informations personnelles</h2>
@@ -205,7 +205,7 @@
           </div>
           @if (!isEditing()) {
           <button type="button" (click)="toggleEdit()" class="dashboard-btn-primary inline-flex max-sm:w-full">
-            <span class="material-icons text-lg">edit</span>
+            <ui-icon class="text-lg" name="edit" />
             <span>Modifier</span>
           </button>
           }
@@ -216,7 +216,7 @@
             <div class="dashboard-grid-2">
               <div class="form-group">
                 <label for="name" class="dashboard-label">
-                  <span class="material-icons text-base text-primary-600">person</span>
+                  <ui-icon class="text-base text-primary-600" name="person" />
                   <span>Nom complet <span class="text-red-500">*</span></span>
                 </label>
                 <input
@@ -229,7 +229,7 @@
 
               <div class="form-group">
                 <label for="email" class="dashboard-label">
-                  <span class="material-icons text-base text-indigo-600">email</span>
+                  <ui-icon class="text-base text-indigo-600" name="email" />
                   <span>Email</span>
                 </label>
                 <input
@@ -244,7 +244,7 @@
             <div class="dashboard-grid-2">
               <div class="form-group">
                 <label for="phone_number" class="dashboard-label">
-                  <span class="material-icons text-base text-blue-600">phone</span>
+                  <ui-icon class="text-base text-blue-600" name="phone" />
                   <span>Téléphone</span>
                 </label>
                 <input
@@ -257,7 +257,7 @@
 
               <div class="form-group">
                 <label for="gender" class="dashboard-label">
-                  <span class="material-icons text-base text-purple-600">wc</span>
+                  <ui-icon class="text-base text-purple-600" name="wc" />
                   <span>Genre</span>
                 </label>
                 <select
@@ -274,7 +274,7 @@
             <div class="dashboard-grid-2">
               <div class="form-group">
                 <label for="city" class="dashboard-label">
-                  <span class="material-icons text-base text-teal-600">location_city</span>
+                  <ui-icon class="text-base text-teal-600" name="location_city" />
                   <span>Ville</span>
                 </label>
                 <input
@@ -287,7 +287,7 @@
 
               <div class="form-group">
                 <label for="country" class="dashboard-label">
-                  <span class="material-icons text-base text-emerald-600">public</span>
+                  <ui-icon class="text-base text-emerald-600" name="public" />
                   <span>Pays</span>
                 </label>
                 <input
@@ -301,21 +301,21 @@
 
             <div>
               <label for="birth_date" class="dashboard-label">
-                <span class="material-icons text-base text-pink-600">cake</span>
+                <ui-icon class="text-base text-pink-600" name="cake" />
                 <span>Date de naissance</span>
               </label>
-              <p-datepicker
-                inputId="birth_date"
+              <input
+                id="birth_date"
+                type="date"
                 formControlName="birth_date"
-                dateFormat="dd/mm/yy"
-                [showIcon]="isEditing()"
                 placeholder="Sélectionner une date"
-                [fluid]="true" />
+                [readonly]="!isEditing()"
+                [class]="isEditing() ? 'dashboard-input' : 'dashboard-input !bg-slate-50 !border-slate-100 text-slate-600'" />
             </div>
 
             <div>
               <label for="biography" class="dashboard-label">
-                <span class="material-icons text-base text-amber-600">description</span>
+                <ui-icon class="text-base text-amber-600" name="description" />
                 <span>Biographie</span>
               </label>
               <textarea
@@ -329,7 +329,7 @@
             @if (isEditing()) {
             <div class="flex flex-col-reverse sm:flex-row gap-3 justify-end pt-8 border-t border-slate-100">
               <button formActions type="button" (click)="cancelEdit()" class="dashboard-btn-secondary">
-                <span class="material-icons text-lg">close</span>
+                <ui-icon class="text-lg" name="close" />
                 <span>Annuler</span>
               </button>
               <button
@@ -341,7 +341,7 @@
                 <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                 <span>Enregistrement...</span>
                 } @else {
-                <span class="material-icons text-lg">save</span>
+                <ui-icon class="text-lg" name="save" />
                 <span>Enregistrer les modifications</span>
                 }
               </button>

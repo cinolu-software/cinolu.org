@@ -5,8 +5,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { EventCard } from '../../components/event-card/event-card';
 import { EventCardSkeleton } from '../../components/event-card-skeleton/event-card-skeleton';
 import { FilterEventsDto } from '../../dto/filter-events.dto';
-import { MultiSelectModule, MultiSelectChangeEvent } from 'primeng/multiselect';
-import { FormsModule } from '@angular/forms';
 import { EventsStore } from '../../store/events.store';
 import { EventCategoriesStore } from '../../store/categories.store';
 import { TranslateModule } from '@ngx-translate/core';
@@ -18,8 +16,6 @@ import { CirclePlus, LucideAngularModule } from 'lucide-angular';
   imports: [
     CommonModule,
     NgxPaginationModule,
-    FormsModule,
-    MultiSelectModule,
     NgOptimizedImage,
     EventCard,
     EventCardSkeleton,
@@ -55,11 +51,12 @@ export class ListEvents implements OnInit {
     this.store.loadEvents(this.queryParams());
   }
 
-  async onFilterChange(event: MultiSelectChangeEvent, filter: 'page' | 'categories'): Promise<void> {
+  async onFilterChange(event: Event, filter: 'page' | 'categories'): Promise<void> {
+    const value = Array.from((event.target as HTMLSelectElement).selectedOptions).map((option) => option.value);
     this.queryParams.update((params) => ({
       ...params,
       page: 1,
-      [filter]: event.value
+      [filter]: value
     }));
     await this.updateRouteAndEvents();
   }

@@ -39,7 +39,7 @@
           [class.cursor-not-allowed]="$index > currentStep()"
           [attr.aria-current]="$index === currentStep() ? 'step' : null">
           @if ($index < currentStep()) {
-          <span class="material-icons text-lg">check</span>
+          <ui-icon class="text-lg" name="check" />
           } @else {
           <span>{{ $index + 1 }}</span>
           }
@@ -71,28 +71,16 @@
 
   @if (isStepper() && steps && steps.length > 1) {
   <div class="flex items-center justify-between gap-4 mt-8 pt-6 border-t border-gray-200">
-    <button
-      [outlined]="true"
-      type="button"
-      pButton
-      [size]="'small'"
-      (click)="prevStep()"
-      [disabled]="!canGoPrev() || loading">
-      <span class="material-icons text-lg">arrow_back</span>
+    <ui-button variant="secondary" size="sm" type="button" (click)="prevStep()" [disabled]="!canGoPrev() || loading">
+      <ui-icon class="text-lg" name="arrow_back" />
       <span>Précédent</span>
-    </button>
+    </ui-button>
 
     @if (!isLastStep()) {
-    <button
-      [outlined]="true"
-      type="button"
-      pButton
-      [size]="'small'"
-      (click)="nextStep()"
-      [disabled]="!canGoNext() || loading">
+    <ui-button variant="secondary" size="sm" type="button" (click)="nextStep()" [disabled]="!canGoNext() || loading">
       <span>Suivant</span>
-      <span class="material-icons text-lg">arrow_forward</span>
-    </button>
+      <ui-icon class="text-lg" name="arrow_forward" />
+    </ui-button>
     } @else {
     <ng-content select="[formActions]" />
     }

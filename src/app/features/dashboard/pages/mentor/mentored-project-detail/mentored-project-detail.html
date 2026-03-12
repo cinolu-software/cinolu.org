@@ -3,7 +3,7 @@
   <a
     routerLink="/dashboard/mentor/mentored-projects"
     class="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-primary-600 mb-6 group transition-colors">
-    <span class="material-icons text-base group-hover:-translate-x-0.5 transition-transform">arrow_back</span>
+    <ui-icon class="text-base group-hover:-translate-x-0.5 transition-transform" name="arrow_back" />
     Retour aux projets mentorés
   </a>
 
@@ -42,15 +42,15 @@
         <!-- Stats row -->
         <div class="flex flex-wrap gap-3">
           <span class="dashboard-badge-info">
-            <span class="material-icons text-xs">layers</span>
+            <ui-icon class="text-xs" name="layers" />
             {{ project.phases.length }} phase{{ project.phases.length !== 1 ? 's' : '' }}
           </span>
           <span class="dashboard-badge-neutral">
-            <span class="material-icons text-xs">group</span>
+            <ui-icon class="text-xs" name="group" />
             {{ project.participantsCount ?? 0 }} candidat{{ (project.participantsCount ?? 0) !== 1 ? 's' : '' }}
           </span>
           <span class="dashboard-badge-neutral">
-            <span class="material-icons text-xs">calendar_today</span>
+            <ui-icon class="text-xs" name="calendar_today" />
             {{ project.started_at | date:'d MMM yyyy':'':'fr' }} → {{ project.ended_at | date:'d MMM yyyy':'':'fr' }}
           </span>
         </div>
@@ -70,8 +70,8 @@
                   'bg-blue-50 border-blue-200 text-blue-700': status === 'future'
                 }">
           @if (status === 'active') { <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> } @if
-          (status === 'past') { <span class="material-icons text-xs">check</span> } @if (status === 'future') {
-          <span class="material-icons text-xs">schedule</span> } {{ phase.name }} @if (phase.participationsCount !==
+          (status === 'past') { <ui-icon class="text-xs" name="check" /> } @if (status === 'future') {
+          <ui-icon class="text-xs" name="schedule" /> } {{ phase.name }} @if (phase.participationsCount !==
           undefined) {
           <span class="ml-1 opacity-60">({{ phase.participationsCount }})</span>
           }
@@ -87,7 +87,7 @@
       <div class="flex items-center gap-3 flex-1">
         <div
           class="w-9 h-9 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-sm">
-          <span class="material-icons text-white text-base">group</span>
+          <ui-icon class="text-white text-base" name="group" />
         </div>
         <div>
           <h2 class="dashboard-heading-5">Candidatures</h2>
@@ -98,9 +98,8 @@
       </div>
 
       <div class="relative flex-1 max-w-xs">
-        <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none"
-          >search</span
-        >
+        <ui-icon class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none"
+           name="search" />
         <input
           type="text"
           placeholder="Rechercher par nom…"
@@ -156,7 +155,7 @@
                 [alt]="participation.user.name"
                 class="w-full h-full object-cover" />
               } @else {
-              <span class="material-icons text-primary-600 text-base">person</span>
+              <ui-icon class="text-primary-600 text-base" name="person" />
               }
             </div>
           </div>
@@ -198,10 +197,9 @@
             {{ participation.created_at | date:'d MMM':'':'fr' }}
           </span>
 
-          <span
-            class="material-icons text-slate-400 group-hover:text-primary-600 text-base flex-shrink-0 transition-colors"
-            >chevron_right</span
-          >
+          <ui-icon
+            class="text-slate-400 group-hover:text-primary-600 text-base flex-shrink-0 transition-colors"
+             name="chevron_right" />
         </a>
       </li>
       }
@@ -225,7 +223,7 @@
     } } @else {
     <div class="text-center py-12">
       <div class="w-16 h-16 rounded-xl bg-slate-100 flex items-center justify-center mx-auto mb-3">
-        <span class="material-icons text-3xl text-slate-400">group_off</span>
+        <ui-icon class="text-3xl text-slate-400" name="group_off" />
       </div>
       @if (searchQuery() || selectedPhaseId()) {
       <h3 class="dashboard-heading-5 mb-2">Aucun résultat</h3>
@@ -247,14 +245,14 @@
   } @else {
   <div class="dashboard-card p-12 text-center">
     <div class="w-16 h-16 rounded-xl bg-slate-100 flex items-center justify-center mx-auto mb-3">
-      <span class="material-icons text-3xl text-slate-400">error_outline</span>
+      <ui-icon class="text-3xl text-slate-400" name="error_outline" />
     </div>
     <h3 class="dashboard-heading-5 mb-2">Projet introuvable</h3>
     <p class="dashboard-text-body">Ce projet n'existe pas ou vous n'y avez pas accès.</p>
     <a
       routerLink="/dashboard/mentor/mentored-projects"
       class="mt-4 inline-flex items-center gap-1 text-sm text-primary-600 hover:underline">
-      <span class="material-icons text-base">arrow_back</span>
+      <ui-icon class="text-base" name="arrow_back" />
       Retour
     </a>
   </div>

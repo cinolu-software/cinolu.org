@@ -4,10 +4,11 @@ import { RouterModule } from '@angular/router';
 import { ReferralsStore } from '@features/dashboard/store/referrals.store';
 import { AuthStore } from '@core/auth/auth.store';
 import { ReferralBadgesService, BadgeLevel } from '@features/dashboard/services/referral-badges.service';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-referral-badges',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, IconComponent],
   templateUrl: './badges.html'
 })
 export class ReferralBadges implements OnInit {

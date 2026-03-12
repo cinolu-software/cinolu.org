@@ -2,11 +2,11 @@ import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/cor
 import { LucideAngularModule, UserRound, Users, Sparkles } from 'lucide-angular';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { IVenture } from '@shared/models/entities.models';
-import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { PublicVenturesStore } from '../store/ventures.store';
 import { EntrepreneurUserCard } from '../components/entrepreneur-user-card/entrepreneur-user-card';
 import { EntrepreneurCardSkeleton } from '../components/entrepreneur-card-skeleton/entrepreneur-card-skeleton';
 import { TranslateModule } from '@ngx-translate/core';
+import { PaginationComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-our-entrepreneurs',
@@ -14,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     LucideAngularModule,
     HeroCard,
-    PaginatorModule,
+    PaginationComponent,
     EntrepreneurUserCard,
     EntrepreneurCardSkeleton,
     TranslateModule
@@ -38,9 +38,8 @@ export class OurEntrepreneurs implements OnInit {
     return data.slice(this.first, this.first + this.rows);
   }
 
-  onPageChange(event: PaginatorState) {
-    this.first = event.first ?? 0;
-    this.rows = event.rows ?? 8;
+  onPageChange(page: number) {
+    this.first = (page - 1) * this.rows;
   }
 
   trackByVentureId(index: number, venture: IVenture): string {

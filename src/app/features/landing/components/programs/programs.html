@@ -38,14 +38,16 @@
         </div>
 
         <div class="pt-2 md:pt-4 mx-auto shrink-0">
-          <p-button [routerLink]="['/our-programs/', p.slug]" size="small" outlined severity="primary" class="w-full">
-            <div class="flex items-center justify-center gap-2 group/btn px-2">
-              <span class="text-sm font-medium">{{ 'programs.learn_more' | translate }}</span>
-              <i-lucide
-                class="size-4 group-hover/btn:translate-x-1 transition-transform duration-300"
-                [name]="icons.MoveRight" />
-            </div>
-          </p-button>
+          <a [routerLink]="['/our-programs/', p.slug]">
+            <ui-button variant="secondary" size="sm" [fullWidth]="true">
+              <div class="flex items-center justify-center gap-2 group/btn px-2">
+                <span class="text-sm font-medium">{{ 'programs.learn_more' | translate }}</span>
+                <i-lucide
+                  class="size-4 group-hover/btn:translate-x-1 transition-transform duration-300"
+                  [name]="icons.MoveRight" />
+              </div>
+            </ui-button>
+          </a>
         </div>
       </div>
       }

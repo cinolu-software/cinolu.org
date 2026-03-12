@@ -5,7 +5,6 @@ import type { IProject } from '@shared/models/entities.models';
 
 @Component({
   selector: 'app-project-detail-categories',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [TranslateModule, LucideAngularModule],
   templateUrl: './project-detail-categories.html'

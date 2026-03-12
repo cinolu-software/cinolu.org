@@ -43,12 +43,11 @@
       }
     </div>
 
-    <p-paginator
-      (onPageChange)="onPageChange($event)"
-      [first]="first"
-      [rows]="rows"
-      [totalRecords]="venturesStore.ventures().length">
-    </p-paginator>
+    <ui-pagination
+      [page]="first / rows + 1"
+      [pageSize]="rows"
+      [total]="venturesStore.ventures().length"
+      (pageChange)="onPageChange($event)" />
     }
   </div>
 </section>

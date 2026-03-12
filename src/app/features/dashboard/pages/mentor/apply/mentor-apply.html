@@ -3,7 +3,7 @@
   <div
     class="mb-6 flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-amber-800"
     role="status">
-    <span class="material-icons text-2xl text-amber-600">schedule</span>
+    <ui-icon class="text-2xl text-amber-600" name="schedule" />
     <p class="font-semibold">{{ message }}</p>
   </div>
   }
@@ -12,7 +12,7 @@
     <div class="flex items-center gap-4 mb-6">
       <div
         class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shadow-lg">
-        <span class="material-icons text-white text-3xl">school</span>
+        <ui-icon class="text-white text-3xl" name="school" />
       </div>
       <div>
         <h1 class="dashboard-heading-2">Devenir <span class="dashboard-text-gradient-primary">Mentor</span></h1>
@@ -45,7 +45,7 @@
             [class.bg-primary-600]="currentStep() >= 1"
             [class.border-primary-600]="currentStep() >= 1"
             [class.border-slate-300]="currentStep() < 1">
-            <span class="material-icons text-sm" [class.text-white]="currentStep() >= 1">person</span>
+            <ui-icon class="text-sm" [class.text-white]="currentStep() >= 1" name="person" />
           </div>
           <span class="dashboard-text-tiny font-medium hidden sm:inline">Expérience</span>
         </div>
@@ -64,7 +64,7 @@
             [class.bg-primary-600]="currentStep() >= 2"
             [class.border-primary-600]="currentStep() >= 2"
             [class.border-slate-300]="currentStep() < 2">
-            <span class="material-icons text-sm" [class.text-white]="currentStep() >= 2">star</span>
+            <ui-icon class="text-sm" [class.text-white]="currentStep() >= 2" name="star" />
           </div>
           <span class="dashboard-text-tiny font-medium hidden sm:inline">Expertises</span>
         </div>
@@ -83,7 +83,7 @@
             [class.bg-primary-600]="currentStep() >= 3"
             [class.border-primary-600]="currentStep() >= 3"
             [class.border-slate-300]="currentStep() < 3">
-            <span class="material-icons text-sm" [class.text-white]="currentStep() >= 3">work</span>
+            <ui-icon class="text-sm" [class.text-white]="currentStep() >= 3" name="work" />
           </div>
           <span class="dashboard-text-tiny font-medium hidden sm:inline">Parcours</span>
         </div>
@@ -98,7 +98,7 @@
         <div class="flex items-center gap-3 mb-6 pb-6 border-b border-slate-100">
           <div
             class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
-            <span class="material-icons text-white text-2xl">person</span>
+            <ui-icon class="text-white text-2xl" name="person" />
           </div>
           <div>
             <h2 class="dashboard-heading-4">Votre Expérience</h2>
@@ -109,7 +109,7 @@
         <div class="w-full mx-auto space-y-6">
           <div>
             <label for="years_experience" class="dashboard-label">
-              <span class="material-icons text-base text-primary-600">calendar_today</span>
+              <ui-icon class="text-base text-primary-600" name="calendar_today" />
               <span>Années d'expérience <span class="text-red-500">*</span></span>
             </label>
             <input
@@ -126,7 +126,7 @@
 
           <div class="dashboard-card bg-blue-50 border border-blue-100 p-5">
             <div class="flex items-start gap-3">
-              <span class="material-icons text-blue-600 text-xl">info</span>
+              <ui-icon class="text-blue-600 text-xl" name="info" />
               <div>
                 <h4 class="font-semibold text-blue-900 text-sm mb-1">Pourquoi cette information ?</h4>
                 <p class="text-blue-700 text-xs leading-relaxed">
@@ -143,7 +143,7 @@
         <div class="flex items-center gap-3 mb-6 pb-6 border-b border-slate-100">
           <div
             class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
-            <span class="material-icons text-white text-2xl">star</span>
+            <ui-icon class="text-white text-2xl" name="star" />
           </div>
           <div>
             <h2 class="dashboard-heading-4">Vos Domaines d'Expertise</h2>
@@ -158,23 +158,19 @@
         } @else {
         <div class="space-y-4 w-full">
           <label for="expertisesSelect" class="dashboard-label flex items-center gap-2">
-            <span class="material-icons text-base text-primary-600">manage_search</span>
+            <ui-icon class="text-base text-primary-600" name="manage_search" />
             <span>Domaines d'expertise</span>
           </label>
-          <p-multiselect
-            inputId="expertisesSelect"
+          <select
+            id="expertisesSelect"
             formControlName="expertises"
-            [options]="availableExpertises()"
-            [optionValue]="'id'"
-            [optionLabel]="'name'"
-            [filter]="true"
-            [showClear]="true"
-            [display]="'chip'"
+            multiple
             [disabled]="mentorApply.isFormReadonly()"
-            placeholder="Rechercher et sélectionner vos domaines"
-            filterPlaceHolder="Rechercher un domaine"
-            class="w-full !rounded-lg !border-slate-200 !bg-slate-50 !shadow-none hover:!border-primary-300">
-          </p-multiselect>
+            class="dashboard-select min-h-40">
+            @for (expertise of availableExpertises(); track expertise.id) {
+            <option [value]="expertise.id">{{ expertise.name }}</option>
+            }
+          </select>
 
           <p class="dashboard-text-tiny text-slate-500">
             Utilisez la recherche pour trouver rapidement vos domaines parmi une longue liste.
@@ -183,13 +179,13 @@
 
         @if (availableExpertises().length === 0) {
         <div class="text-center py-12">
-          <span class="material-icons text-slate-300 text-6xl mb-3">info</span>
+          <ui-icon class="text-slate-300 text-6xl mb-3" name="info" />
           <p class="dashboard-text-base text-slate-500">Aucune expertise disponible</p>
         </div>
         } } @if (applicationForm.get('expertises')?.hasError('required') && applicationForm.get('expertises')?.touched)
         {
         <p class="text-red-500 text-sm mt-4 flex items-center gap-2">
-          <span class="material-icons text-lg">error</span>
+          <ui-icon class="text-lg" name="error" />
           <span>Veuillez sélectionner au moins une expertise</span>
         </p>
         }
@@ -200,7 +196,7 @@
           <div class="flex items-center gap-3">
             <div
               class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center shadow-lg">
-              <span class="material-icons text-white text-2xl">work</span>
+              <ui-icon class="text-white text-2xl" name="work" />
             </div>
             <div>
               <h2 class="dashboard-heading-4">Votre Parcours Professionnel</h2>
@@ -212,7 +208,7 @@
             (click)="addExperience()"
             [disabled]="mentorApply.isFormReadonly()"
             class="dashboard-btn-secondary text-sm">
-            <span class="material-icons text-lg">add</span>
+            <ui-icon class="text-lg" name="add" />
             <span class="hidden sm:inline">Ajouter</span>
           </button>
         </div>
@@ -225,7 +221,7 @@
               type="button"
               (click)="removeExperience(i)"
               class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 flex items-center justify-center transition-colors">
-              <span class="material-icons text-lg">close</span>
+              <ui-icon class="text-lg" name="close" />
             </button>
             }
 
@@ -233,7 +229,7 @@
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label [for]="'company_' + i" class="dashboard-label">
-                    <span class="material-icons text-base text-primary-600">business</span>
+                    <ui-icon class="text-base text-primary-600" name="business" />
                     <span>Projet <span class="text-red-500">*</span></span>
                   </label>
                   <input
@@ -246,7 +242,7 @@
 
                 <div>
                   <label [for]="'job_' + i" class="dashboard-label">
-                    <span class="material-icons text-base text-purple-600">work</span>
+                    <ui-icon class="text-base text-purple-600" name="work" />
                     <span>Poste <span class="text-red-500">*</span></span>
                   </label>
                   <input
@@ -261,32 +257,28 @@
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label [for]="'start_' + i" class="dashboard-label">
-                    <span class="material-icons text-base text-primary-600">event</span>
+                    <ui-icon class="text-base text-primary-600" name="event" />
                     <span>Date de début <span class="text-red-500">*</span></span>
                   </label>
-                  <p-datepicker
-                    [inputId]="'start_' + i"
+                  <input
+                    [id]="'start_' + i"
+                    type="month"
                     formControlName="start_date"
-                    dateFormat="mm/yy"
-                    view="month"
-                    [showIcon]="true"
-                    placeholder="MM/YYYY"
-                    [fluid]="true" />
+                    class="dashboard-input"
+                    placeholder="MM/YYYY" />
                 </div>
 
                 <div>
                   <label [for]="'end_' + i" class="dashboard-label">
-                    <span class="material-icons text-base text-red-600">event</span>
+                    <ui-icon class="text-base text-red-600" name="event" />
                     <span>Date de fin</span>
                   </label>
-                  <p-datepicker
-                    [inputId]="'end_' + i"
+                  <input
+                    [id]="'end_' + i"
+                    type="month"
                     formControlName="end_date"
-                    dateFormat="mm/yy"
-                    view="month"
-                    [showIcon]="true"
-                    placeholder="MM/YYYY"
-                    [fluid]="true" />
+                    class="dashboard-input"
+                    placeholder="MM/YYYY" />
                 </div>
               </div>
 
@@ -310,12 +302,12 @@
       <div class="flex flex-col-reverse sm:flex-row gap-3 justify-between mt-8">
         <div class="flex gap-3">
           <a routerLink="/dashboard/user/profile" class="dashboard-btn-secondary">
-            <span class="material-icons text-lg">arrow_back</span>
+            <ui-icon class="text-lg" name="arrow_back" />
             <span>Retour au profil</span>
           </a>
           @if (currentStep() > 1 && !mentorApply.isFormReadonly()) {
           <button formActions type="button" (click)="previousStep()" class="dashboard-btn-secondary">
-            <span class="material-icons text-lg">chevron_left</span>
+            <ui-icon class="text-lg" name="chevron_left" />
             <span>Précédent</span>
           </button>
           }
@@ -330,7 +322,7 @@
             [disabled]="mentorApply.isFormReadonly()"
             class="dashboard-btn-primary">
             <span>Suivant</span>
-            <span class="material-icons text-lg">chevron_right</span>
+            <ui-icon class="text-lg" name="chevron_right" />
           </button>
           } @else {
           <button
@@ -342,7 +334,7 @@
             <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
             <span>Soumission en cours...</span>
             } @else {
-            <span class="material-icons text-lg">send</span>
+            <ui-icon class="text-lg" name="send" />
             <span>Soumettre ma candidature</span>
             }
           </button>

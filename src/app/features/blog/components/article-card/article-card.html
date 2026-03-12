@@ -65,14 +65,14 @@
 
     <div class="pt-2 w-fit group/btn">
       <a [routerLink]="article().slug" class="block">
-        <p-button size="small" outlined severity="primary" class="w-full" [style]="{'min-height': '44px'}">
+        <ui-button size="sm" variant="secondary" [fullWidth]="true">
           <div class="flex items-center justify-center gap-2 py-1 px-2">
             <span class="text-sm font-medium">{{ 'blog.read_article' | translate }}</span>
             <i-lucide
               class="size-4 group-hover/btn:translate-x-1 transition-transform duration-300"
               [name]="icons.moveRight" />
           </div>
-        </p-button>
+        </ui-button>
       </a>
     </div>
   </div>

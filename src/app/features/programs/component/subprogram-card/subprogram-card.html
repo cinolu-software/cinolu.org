@@ -35,11 +35,11 @@
     <div class="flex flex-wrap gap-3 items-center justify-between text-sm sm:text-base">
       <div class="font-medium">
         @switch (getStatut(project())) { @case ('En cours') {
-        <p-tag severity="Primary" value="En cours" />
+        <ui-tag variant="primary">En cours</ui-tag>
         } @case ('À venir') {
-        <p-tag severity="info" value="À venir" />
+        <ui-tag variant="info">À venir</ui-tag>
         } @default {
-        <p-tag severity="warn" value="{{ getStatut(project()) }}" />
+        <ui-tag variant="warning">{{ getStatut(project()) }}</ui-tag>
         } }
       </div>
     </div>

@@ -9,18 +9,20 @@
 <div class="px-8 min-h-[100vh] lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto py-10 lg:py-20">
   @if (tagsStore.tags().length > 0) {
   <div class="mb-10 flex flex-wrap gap-4 md:w-1/4">
-    <p-multiSelect
-      [inputId]="'tagsFilter'"
-      [autocomplete]="'off'"
-      [showHeader]="false"
-      (onChange)="onFilterChange($event, 'tags')"
-      (onClear)="onClear()"
-      [options]="tagsStore.tags()"
-      [optionValue]="'id'"
-      [optionLabel]="'name'"
-      [showClear]="true"
-      [placeholder]="'blog.choose_tag' | translate"
-      class="w-full md:w-64" />
+    <div class="w-full md:w-64">
+      <select
+        id="tagsFilter"
+        multiple
+        (change)="onFilterChange($event, 'tags')"
+        class="min-h-14 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-400 focus:ring-4 focus:ring-primary-100">
+        @for (tag of tagsStore.tags(); track tag.id) {
+        <option [value]="tag.id">{{ tag.name }}</option>
+        }
+      </select>
+      <button type="button" (click)="onClear()" class="mt-2 text-sm font-medium text-primary-600 hover:text-primary-700">
+        {{ 'common.clear' | translate }}
+      </button>
+    </div>
   </div>
   }
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-8">

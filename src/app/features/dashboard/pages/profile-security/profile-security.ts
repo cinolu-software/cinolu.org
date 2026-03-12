@@ -1,4 +1,5 @@
 import { Component, inject, signal, effect, ChangeDetectionStrategy } from '@angular/core';
+import { IconComponent } from '@shared/ui';
 import {
   AbstractControl,
   FormBuilder,
@@ -13,7 +14,7 @@ import { UpdatePasswordStore } from '../../store/update-password.store';
 @Component({
   selector: 'app-profile-security',
 
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, IconComponent],
   templateUrl: './profile-security.html',
   providers: [UpdatePasswordStore],
   changeDetection: ChangeDetectionStrategy.OnPush

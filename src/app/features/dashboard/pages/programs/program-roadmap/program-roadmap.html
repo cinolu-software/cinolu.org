@@ -7,7 +7,7 @@
       <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6">
         <nav class="flex items-center gap-2 text-xs font-medium text-slate-500 mb-4">
           <a routerLink="/dashboard/user/programs/accepted" class="hover:text-slate-700 transition-colors">Programmes</a>
-          <span class="material-icons text-[14px]">chevron_right</span>
+          <ui-icon class="text-[14px]" name="chevron_right" />
           <span class="text-slate-900 truncate">{{ project.name }}</span>
         </nav>
 
@@ -15,7 +15,7 @@
           <div class="space-y-2">
             <div
               class="inline-flex items-center gap-2 border border-slate-200 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-              <span class="material-icons text-[14px] text-slate-500">rocket_launch</span>
+              <ui-icon class="text-[14px] text-slate-500" name="rocket_launch" />
               Roadmap
             </div>
             <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">{{ project.name }}</h1>
@@ -51,7 +51,7 @@
 
           <div class="border border-dashed border-slate-200 bg-white px-4 py-3 text-xs text-slate-500">
             <div class="flex items-center gap-2">
-              <span class="material-icons text-[16px] text-slate-400">description</span>
+              <ui-icon class="text-[16px] text-slate-400" name="description" />
               <span>Livrables en PDF uniquement, taille max {{ uploadMaxLabel }}</span>
             </div>
           </div>
@@ -84,10 +84,8 @@
                      'bg-amber-50 text-amber-600': status === 'future',
                      'bg-slate-50 text-slate-400': status === 'past'
                    }">
-                <span class="material-icons text-2xl">
-                  {{ status === 'completed' ? 'check' : (status === 'active' ? 'play_arrow' : (status === 'past' ?
-                  'event_available' : 'lock')) }}
-                </span>
+                <ui-icon class="text-2xl" [name]="status === 'completed' ? 'check' : (status === 'active' ? 'play_arrow' : (status === 'past' ?
+                  'event_available' : 'lock'))" />
               </div>
 
               <div class="flex-1 min-w-0">
@@ -108,12 +106,12 @@
                 <h3 class="font-bold text-slate-900 truncate sm:text-lg leading-tight">{{ phase.name }}</h3>
                 <div class="mt-2 flex flex-wrap items-center gap-3 text-xs text-slate-500">
                   <span class="inline-flex items-center gap-1">
-                    <span class="material-icons text-[14px]">calendar_today</span>
+                    <ui-icon class="text-[14px]" name="calendar_today" />
                     {{ phase.started_at | date:'dd MMM' }} - {{ phase.ended_at | date:'dd MMM yyyy' }}
                   </span>
                   @if (status === 'active') {
                   <span class="inline-flex items-center gap-1 text-amber-700 font-semibold">
-                    <span class="material-icons text-[14px]">timelapse</span>
+                    <ui-icon class="text-[14px]" name="timelapse" />
                     Phase active
                   </span>
                   }
@@ -124,11 +122,9 @@
                 <span class="hidden sm:block text-xs text-slate-400 font-medium italic">
                   {{ phase.ended_at | date:'dd/MM/yy' }}
                 </span>
-                <span
-                  class="material-icons text-slate-300 transition-transform"
-                  [ngClass]="{'rotate-180 text-slate-700': isExpanded}">
-                  expand_more
-                </span>
+                <ui-icon
+                  class="text-slate-300 transition-transform"
+                  [ngClass]="{'rotate-180 text-slate-700': isExpanded}" name="expand_more" />
               </div>
             </button>
 
@@ -151,7 +147,7 @@
                       <input type="file" (change)="onFileSelected(phase.id, $event)" class="hidden" />
                       <div
                         class="px-4 py-2.5 bg-white border border-slate-300 text-xs font-bold text-slate-700 hover:border-slate-500 transition-all flex items-center justify-center gap-2">
-                        <span class="material-icons text-sm">attach_file</span>
+                        <ui-icon class="text-sm" name="attach_file" />
                         <span class="truncate max-w-[160px]">
                           {{ selectedFiles()[phase.id].name || 'Choisir un fichier' }}
                         </span>
@@ -162,7 +158,7 @@
                       (click)="submitDeliverable(phase)"
                       [disabled]="!canSubmitPhase(phase) || !selectedFiles()[phase.id]"
                       class="px-4 py-2.5 bg-slate-800 text-white text-xs font-bold hover:bg-slate-900 disabled:bg-slate-200 disabled:text-slate-400 transition-colors flex items-center justify-center gap-2">
-                      <span class="material-icons text-sm">publish</span>
+                      <ui-icon class="text-sm" name="publish" />
                       Envoyer
                     </button>
                   </div>

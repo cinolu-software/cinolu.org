@@ -1,19 +1,14 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Headset, LucideAngularModule, Phone, Mail, MapPin } from 'lucide-angular';
 import { CONTACT_ITEMS, SOCIAL_LINKS } from '../data/contact.data';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { COUNTRY_CODE } from '../../../shared/data/country-item.data';
 import { FadeInOnScrollDirective } from '../../../shared/directives/animations-on-scroll.directive';
-import { InputTextModule } from 'primeng/inputtext';
-import { TextareaModule } from 'primeng/textarea';
-import { SelectChangeEvent, SelectModule } from 'primeng/select';
-import { InputGroupAddon } from 'primeng/inputgroupaddon';
-import { InputGroup } from 'primeng/inputgroup';
-import { ButtonModule } from 'primeng/button';
 import { GENDERS } from '../../../shared/data/genders.data';
 import { ContactUsStore } from '../store/contact-us.store';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { TranslateModule } from '@ngx-translate/core';
+import { ButtonComponent, SelectComponent, type UiSelectOption } from '@shared/ui';
 
 @Component({
   selector: 'app-contact-us',
@@ -23,12 +18,8 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     FadeInOnScrollDirective,
     ReactiveFormsModule,
-    InputTextModule,
-    TextareaModule,
-    InputGroupAddon,
-    InputGroup,
-    SelectModule,
-    ButtonModule,
+    ButtonComponent,
+    SelectComponent,
     HeroCard,
     TranslateModule
   ],
@@ -50,6 +41,7 @@ export class ContactUs {
   selectedCountryCode = '';
   genderItems = GENDERS;
   socialMediaItems = SOCIAL_LINKS;
+  countryOptions: UiSelectOption[] = COUNTRY_CODE.map((item) => ({ label: item.name, value: item.name }));
 
   constructor() {
     this.form = this.#formBuilder.group({
@@ -61,8 +53,8 @@ export class ContactUs {
     });
   }
 
-  onSelectCountry(event: SelectChangeEvent): void {
-    const value = event.value;
+  onSelectCountry(value: string | string[] | null): void {
+    if (Array.isArray(value)) return;
     this.selectedCountryCode = this.countryItems.find((item) => item.name === value)?.code || '';
   }
 

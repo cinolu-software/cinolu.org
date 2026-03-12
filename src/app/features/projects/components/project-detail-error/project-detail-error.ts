@@ -5,7 +5,6 @@ import { LucideAngularModule, AlertCircle, Search, Home, ArrowLeft } from 'lucid
 
 @Component({
   selector: 'app-project-detail-error',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, TranslateModule, LucideAngularModule],
   templateUrl: './project-detail-error.html'

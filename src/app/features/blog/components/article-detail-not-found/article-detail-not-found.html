@@ -16,12 +16,14 @@
       {{ 'blog.not_found.message' | translate }}
     </p>
 
-    <p-button routerLink="/blog-ressources" severity="primary" class="rounded-full !px-8 !py-3 font-semibold">
-      <span class="flex items-center gap-2">
-        {{ 'blog.not_found.discover' | translate }}
-        <i-lucide [name]="icons.arrowRight" class="size-4" />
-      </span>
-    </p-button>
+    <a routerLink="/blog-ressources">
+      <ui-button size="lg">
+        <span class="flex items-center gap-2">
+          {{ 'blog.not_found.discover' | translate }}
+          <i-lucide [name]="icons.arrowRight" class="size-4" />
+        </span>
+      </ui-button>
+    </a>
 
     <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
       <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">

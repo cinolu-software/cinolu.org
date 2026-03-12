@@ -4,11 +4,11 @@ import { RouterLink } from '@angular/router';
 import { ParticipationsStore } from '../../../store/participations.store';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { IParticipation } from '../../../../../shared/models/entities.models';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-my-applications',
-  standalone: true,
-  imports: [CommonModule, RouterLink, ApiImgPipe],
+  imports: [CommonModule, RouterLink, ApiImgPipe, IconComponent],
   providers: [],
   templateUrl: './my-applications.html',
   styleUrls: []

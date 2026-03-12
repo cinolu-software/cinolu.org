@@ -1,34 +1,28 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
-  // Static pages - Prerender
+  // Dashboard routes - Client-side only (authenticated)
   {
-    path: '',
-    renderMode: RenderMode.Prerender
+    path: 'dashboard/**',
+    renderMode: RenderMode.Client
+  },
+
+  // Auth routes - Client-side only
+  {
+    path: 'sign-in',
+    renderMode: RenderMode.Client
   },
   {
-    path: 'about-us',
-    renderMode: RenderMode.Prerender
+    path: 'sign-up',
+    renderMode: RenderMode.Client
   },
   {
-    path: 'contact-us',
-    renderMode: RenderMode.Prerender
+    path: 'forgot-password',
+    renderMode: RenderMode.Client
   },
   {
-    path: 'gallery',
-    renderMode: RenderMode.Prerender
-  },
-  {
-    path: 'faq',
-    renderMode: RenderMode.Prerender
-  },
-  {
-    path: 'partners',
-    renderMode: RenderMode.Prerender
-  },
-  {
-    path: 'ambassadors',
-    renderMode: RenderMode.Prerender
+    path: 'reset-password',
+    renderMode: RenderMode.Client
   },
 
   // Dynamic pages - Client-side rendering
@@ -77,33 +71,9 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Client
   },
 
-  // Dashboard routes - Client-side only (authenticated)
-  {
-    path: 'dashboard/**',
-    renderMode: RenderMode.Client
-  },
-
-  // Auth routes - Client-side only
-  {
-    path: 'sign-in',
-    renderMode: RenderMode.Client
-  },
-  {
-    path: 'sign-up',
-    renderMode: RenderMode.Client
-  },
-  {
-    path: 'forgot-password',
-    renderMode: RenderMode.Client
-  },
-  {
-    path: 'reset-password',
-    renderMode: RenderMode.Client
-  },
-
-  // Fallback - Prerender remaining routes
+  // All other routes - Server-side rendering
   {
     path: '**',
-    renderMode: RenderMode.Prerender
+    renderMode: RenderMode.Server
   }
 ];

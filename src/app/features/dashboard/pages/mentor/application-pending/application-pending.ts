@@ -4,10 +4,11 @@ import { AuthStore } from '../../../../../core/auth/auth.store';
 import { MentorApplicationState } from '@core/auth/mentor-application.state';
 import { MentorProfileStore } from '../../../store/mentor-profile.store';
 import { ToastrService } from '@core/services/toast/toastr.service';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-mentor-application-pending',
-  imports: [RouterModule],
+  imports: [RouterModule, IconComponent],
   templateUrl: './application-pending.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -2,11 +2,11 @@ import { Component, input, computed, ChangeDetectionStrategy } from '@angular/co
 import { RouterModule } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
 import { IProject } from '@shared/models';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-program-card',
-  standalone: true,
-  imports: [CommonModule, RouterModule, DatePipe],
+  imports: [CommonModule, RouterModule, DatePipe, IconComponent],
   templateUrl: './program-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -15,10 +15,11 @@ import { AuthStore } from '@core/auth/auth.store';
 import { RightsService } from '@core/auth/rights.service';
 import { ApiImgPipe } from '@shared/pipes';
 import { environment } from '@environments/environment';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-user-dashboard-header',
-  imports: [NgClass, NgOptimizedImage, ApiImgPipe, RouterLink],
+  imports: [NgClass, NgOptimizedImage, ApiImgPipe, RouterLink, IconComponent],
   templateUrl: './user-dashboard-header.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

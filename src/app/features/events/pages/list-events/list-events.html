@@ -21,18 +21,20 @@
   <div class="flex flex-col items-center">
     @if (categoriesStore.categories().length > 0) {
     <div class="mb-6 flex flex-wrap gap-4 w-full max-w-md justify-center">
-      <p-multiSelect
-        [inputId]="'categoriesFilter'"
-        [autocomplete]="'off'"
-        [showHeader]="false"
-        (onChange)="onFilterChange($event, 'categories')"
-        (onClear)="onClear()"
-        [options]="categoriesStore.categories()"
-        [optionValue]="'id'"
-        [optionLabel]="'name'"
-        [showClear]="true"
-        [placeholder]="'events.list.choose_category' | translate"
-        class="w-full md:w-64 rounded-xl border border-gray-200 shadow-sm focus:ring-primary-400 transition-all duration-200" />
+      <div class="w-full md:w-64">
+        <select
+          id="categoriesFilter"
+          multiple
+          (change)="onFilterChange($event, 'categories')"
+          class="min-h-14 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition-all duration-200 focus:border-primary-400 focus:ring-4 focus:ring-primary-100">
+          @for (category of categoriesStore.categories(); track category.id) {
+          <option [value]="category.id">{{ category.name }}</option>
+          }
+        </select>
+        <button type="button" (click)="onClear()" class="mt-2 text-sm font-medium text-primary-600 hover:text-primary-700">
+          Effacer
+        </button>
+      </div>
     </div>
     } @if (store.events()[1] > 0 && !store.isLoading()) {
     <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">

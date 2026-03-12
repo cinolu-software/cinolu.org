@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ButtonDirective } from 'primeng/button';
+import { ButtonComponent, IconComponent } from '@shared/ui';
 
 export interface FormManagerSubmittedPayload {
   value: unknown;
@@ -26,7 +26,7 @@ export interface StepConfig {
 
 @Component({
   selector: 'app-form-manager',
-  imports: [ReactiveFormsModule, ButtonDirective],
+  imports: [ReactiveFormsModule, ButtonComponent, IconComponent],
   templateUrl: './form-manager.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

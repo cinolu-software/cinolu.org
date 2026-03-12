@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   ArrowLeft,
@@ -14,13 +14,12 @@ import {
 import { CommonModule } from '@angular/common';
 import { SubprogramsStore } from '../../../landing/store/subprogram.store';
 import { IProject } from '../../../../shared/models/entities.models';
-import { Carousel, CarouselModule } from 'primeng/carousel';
 import { SubprogramCardSkeleton } from '../../component/subprogram-card-skeleton/subprogram-card-skeleton';
-import { carouselConfig } from '@features/landing/config/carousel.config';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectCard } from '@features/projects/components/project-card/project-card';
 import { ProgramCardSkeletonComponent } from '@features/projects/components/project-card-skeleton/project-card-skeleton';
 import { EventCard } from '@features/events/components/event-card/event-card';
+import { ButtonComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-list-sub-programs',
@@ -28,13 +27,13 @@ import { EventCard } from '@features/events/components/event-card/event-card';
   imports: [
     LucideAngularModule,
     CommonModule,
-    CarouselModule,
     SubprogramCardSkeleton,
     TranslateModule,
     ProjectCard,
     ProgramCardSkeletonComponent,
     EventCard,
-    RouterLink
+    RouterLink,
+    ButtonComponent
   ],
   templateUrl: './list-sub-programs.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -51,12 +50,6 @@ export class ListSubPrograms implements OnInit {
     folderOpen: FolderOpenDot,
     alertTriangle: AlertTriangle
   };
-
-  carouselConfig = carouselConfig;
-
-  @ViewChild('carousel') carousel!: Carousel;
-  @ViewChild('eventCarousel') eventCarousel!: Carousel;
-
   #route = inject(ActivatedRoute);
   store = inject(SubprogramsStore);
 

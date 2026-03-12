@@ -5,11 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
 import { MentorshipStore } from '../../../store/mentorship.store';
 import { IPhase } from '@shared/models/entities.models';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-mentored-project-detail',
-  standalone: true,
-  imports: [RouterLink, NgClass, FormsModule, ApiImgPipe, CommonModule],
+  imports: [RouterLink, NgClass, FormsModule, ApiImgPipe, CommonModule, IconComponent],
   templateUrl: './mentored-project-detail.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

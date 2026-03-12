@@ -21,10 +21,6 @@
   border-radius: 0 4px 4px 0;
 }
 
-.sidebar-item-active .material-icons {
-  @apply text-primary-600;
-}
-
-.sidebar-item-active span:not(.material-icons) {
+.sidebar-item-active span {
   @apply font-bold;
 }

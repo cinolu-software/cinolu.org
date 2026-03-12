@@ -24,7 +24,6 @@ import {
   ChevronRight,
   Eye
 } from 'lucide-angular';
-import { ButtonModule } from 'primeng/button';
 import { map } from 'rxjs';
 import { PublicVentureStore } from '@features/entrepreneurs/store/venture.store';
 import { IImage, IProduct, IUser, IVenture } from '../../../../shared/models';
@@ -40,7 +39,6 @@ import { EntrepreneurDetailCardSkeleton } from '../entrepreneur-detail-card-skel
     CommonModule,
     RouterModule,
     LucideAngularModule,
-    ButtonModule,
     ApiImgPipe,
     NgOptimizedImage,
     TranslateModule,

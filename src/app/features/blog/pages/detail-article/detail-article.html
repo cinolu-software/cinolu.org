@@ -87,9 +87,6 @@
                 <label for="content" class="sr-only">{{ 'blog.comments.placeholder' | translate }}</label>
                 <textarea
                   id="content"
-                  pTextarea
-                  pSize="large"
-                  fluid
                   formControlName="content"
                   rows="5"
                   class="mb-4 w-full resize-none rounded-lg border-0 bg-gray-50/50 focus:ring-2 focus:ring-primary-500/20"
@@ -105,15 +102,9 @@
 
                 @if (isLoggedIn()) {
                 <div class="flex justify-end border-t border-gray-100 pt-4">
-                  <p-button
-                    type="submit"
-                    size="small"
-                    severity="primary"
-                    class="rounded-full !px-8"
-                    [loading]="storeAddComment.isLoading()"
-                    [disabled]="form.invalid || storeAddComment.isLoading()">
+                  <ui-button type="submit" size="sm" [loading]="storeAddComment.isLoading()" [disabled]="form.invalid || storeAddComment.isLoading()">
                     {{ 'blog.comments.publish' | translate }}
-                  </p-button>
+                  </ui-button>
                 </div>
                 }
               </div>
@@ -190,26 +181,12 @@
 <app-article-detail-not-found />
 }
 
-<p-dialog
-  [visible]="showEditModal()"
-  (visibleChange)="showEditModal.set($event)"
-  [closable]="true"
-  [modal]="true"
-  [style]="{ width: '32rem' }"
-  styleClass="rounded-lg overflow-hidden"
-  (onHide)="closeModal()">
+<ui-dialog [open]="showEditModal()" (openChange)="showEditModal.set($event)" title="{{ 'blog.comments.edit_modal_title' | translate }}" maxWidthClass="max-w-xl">
   <div class="bg-gradient-to-br from-white via-gray-50/50 to-primary-50/30 p-6 sm:p-8">
-    <h3 class="mb-6 flex items-center gap-3 font-satoshi text-xl font-black tracking-tight text-gray-900">
-      <span
-        class="h-7 w-1 rounded-full bg-gradient-to-b from-primary-500 via-primary-600 to-primary-700 shadow-sm"></span>
-      {{ 'blog.comments.edit_modal_title' | translate }}
-    </h3>
-
     <form [formGroup]="updateCommentForm" class="space-y-6" (ngSubmit)="onUpdateComment()">
       <div class="rounded-lg border border-gray-200/50 bg-white p-5 shadow-lg shadow-gray-200/50">
         <label for="edit-content" class="sr-only">{{ 'blog.comments.edit_placeholder' | translate }}</label>
         <textarea
-          pTextarea
           id="edit-content"
           formControlName="content"
           rows="5"
@@ -218,21 +195,13 @@
       </div>
 
       <div class="flex justify-end gap-3">
-        <p-button
-          type="button"
-          size="small"
-          severity="secondary"
-          outlined
-          (onClick)="closeModal()"
-          class="rounded-full">
+        <ui-button type="button" size="sm" variant="secondary" (click)="closeModal()">
           {{ 'common.cancel' | translate }}
-        </p-button>
-        <p-button type="submit" size="small" severity="primary" class="rounded-full">
+        </ui-button>
+        <ui-button type="submit" size="sm">
           {{ 'blog.comments.update' | translate }}
-        </p-button>
+        </ui-button>
       </div>
     </form>
   </div>
-</p-dialog>
-
-<p-confirmdialog />
+</ui-dialog>

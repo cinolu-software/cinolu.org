@@ -7,11 +7,11 @@ import { DeliverablesStore } from '../../../store/deliverables.store';
 import { ToastrService } from '@core/services/toast/toastr.service';
 import { IPhase } from '@shared/models/entities.models';
 import { DELIVERABLE_UPLOAD } from '../../../config/deliverable-upload.config';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-program-roadmap',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, IconComponent],
   providers: [ProjectStore],
   templateUrl: './program-roadmap.html'
 })

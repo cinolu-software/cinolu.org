@@ -4,16 +4,16 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VenturesStore } from '../../../store/ventures.store';
 import { IVenture, IImage } from '@shared/models/entities.models';
-import { DatePicker } from 'primeng/datepicker';
 import { FileUpload } from '@shared/components/file-upload/file-upload';
 import { ApiImgPipe } from '../../../../../shared/pipes/api-img.pipe';
 import { VentureGalleryStore } from '@features/dashboard/store/venture-gallery.store';
 import { FormManager, StepConfig } from '@shared/components/form-manager/form-manager';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-venture-form',
   providers: [VentureGalleryStore],
-  imports: [ReactiveFormsModule, DatePicker, FileUpload, ApiImgPipe, NgOptimizedImage, FormManager],
+  imports: [ReactiveFormsModule, FileUpload, ApiImgPipe, NgOptimizedImage, FormManager, IconComponent],
   templateUrl: './venture-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

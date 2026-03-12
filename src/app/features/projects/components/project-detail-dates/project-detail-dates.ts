@@ -6,7 +6,6 @@ import type { IProject } from '@shared/models/entities.models';
 
 @Component({
   selector: 'app-project-detail-dates',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DatePipe, TranslateModule, LucideAngularModule],
   templateUrl: './project-detail-dates.html'

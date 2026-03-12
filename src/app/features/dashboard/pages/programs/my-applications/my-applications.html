@@ -4,7 +4,7 @@
       <div class="flex items-center gap-3 mb-3">
         <div
           class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-400/90 to-blue-500/85 flex items-center justify-center shadow-lg">
-          <span class="material-icons text-white text-2xl">folder_open</span>
+          <ui-icon class="text-white text-2xl" name="folder_open" />
         </div>
         <h1 class="text-2xl font-bold text-slate-900">Mes Candidatures</h1>
       </div>
@@ -14,7 +14,7 @@
     <a
       routerLink="/dashboard/user/programs/discover"
       class="px-4 py-2 bg-primary-600 text-white rounded-lg font-medium text-sm hover:bg-primary-700 transition-colors duration-200 flex items-center gap-2 w-fit">
-      <span class="material-icons text-sm">add</span>
+      <ui-icon class="text-sm" name="add" />
       Découvrir des programmes
     </a>
   </div>
@@ -41,7 +41,7 @@
               class="w-full h-full object-cover" />
             } @else {
             <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-              <span class="material-icons text-4xl text-slate-400">folder_open</span>
+              <ui-icon class="text-4xl text-slate-400" name="folder_open" />
             </div>
             }
           </div>
@@ -52,7 +52,7 @@
             <div class="flex-1">
               <h3 class="text-lg font-bold text-slate-900 mb-1">{{ participation.project.name }}</h3>
               <div class="flex items-center gap-2 text-sm text-slate-600">
-                <span class="material-icons text-sm">business</span>
+                <ui-icon class="text-sm" name="business" />
                 <span>{{ participation.venture?.name ?? '—' }}</span>
               </div>
             </div>
@@ -68,7 +68,7 @@
                   <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
                 </span>
                 } @else {
-                <span class="material-icons text-sm">{{ getApplicationStatus(participation).icon }}</span>
+                <ui-icon class="text-sm" [name]="getApplicationStatus(participation).icon" />
                 } {{ getApplicationStatus(participation).label }}
               </span>
 
@@ -85,7 +85,7 @@
           @if (participation.phases && participation.phases.length > 0) {
           <div class="mb-4 p-3 bg-slate-50 rounded-lg border border-slate-200">
             <div class="flex items-center gap-2 mb-2">
-              <span class="material-icons text-sm text-slate-500">timeline</span>
+              <ui-icon class="text-sm text-slate-500" name="timeline" />
               <span class="text-xs font-bold text-slate-700 uppercase tracking-wide">Progression</span>
             </div>
             <div class="flex flex-wrap gap-2">
@@ -93,11 +93,11 @@
               <div class="flex items-center gap-1.5">
                 <span
                   class="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">
-                  <span class="material-icons text-xs">check_circle</span>
+                  <ui-icon class="text-xs" name="check_circle" />
                   {{ phase.name }}
                 </span>
                 @if (idx < participation.phases.length - 1) {
-                <span class="material-icons text-slate-300 text-sm">arrow_forward</span>
+                <ui-icon class="text-slate-300 text-sm" name="arrow_forward" />
                 }
               </div>
               }
@@ -108,7 +108,7 @@
           <div class="flex flex-wrap gap-4 mb-4 text-sm text-slate-600">
             @if (participation.project.duration_hours) {
             <div class="flex items-center gap-1.5">
-              <span class="material-icons text-sm">schedule</span>
+              <ui-icon class="text-sm" name="schedule" />
               <span>{{ participation.project.duration_hours }}h</span>
             </div>
             }
@@ -118,7 +118,7 @@
             <a
               [routerLink]="['/dashboard/user/programs/', participation.project.slug]"
               class="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg font-medium text-sm hover:bg-slate-50 transition-colors duration-200 flex items-center gap-2">
-              <span class="material-icons text-sm">visibility</span>
+              <ui-icon class="text-sm" name="visibility" />
               Voir le programme
             </a>
           </div>
@@ -130,14 +130,14 @@
   } @else {
   <div class="text-center py-20">
     <div class="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
-      <span class="material-icons text-4xl text-slate-400">inbox</span>
+      <ui-icon class="text-4xl text-slate-400" name="inbox" />
     </div>
     <h3 class="text-lg font-semibold text-slate-900 mb-2">Aucune candidature active</h3>
     <p class="text-slate-600 mb-6">Vous n'avez pas encore soumis de candidature.</p>
     <a
       routerLink="/dashboard/user/programs/discover"
       class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors duration-200">
-      <span class="material-icons">explore</span>
+      <ui-icon name="explore" />
       Découvrir les programmes
     </a>
   </div>

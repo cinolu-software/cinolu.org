@@ -1,6 +1,5 @@
 import { Component, effect, inject, OnDestroy, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ConfirmDialog } from 'primeng/confirmdialog';
 import {
   ArrowLeft,
   ArrowRight,
@@ -26,15 +25,11 @@ import { ApiImgPipe } from '../../../../shared/pipes/api-img.pipe';
 import { ArticleCardDetailSkeleton } from '../article-card-detail-skeleton/article-card-detail-skeleton';
 import { RecentArticlesStore } from '../../store/articles/recent-articles.store';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TextareaModule } from 'primeng/textarea';
 import { AddCommentStore } from '../../store/comments/add-comment.store';
-import { Button } from 'primeng/button';
 import { AuthStore } from '../../../../core/auth/auth.store';
 import { UpdateCommentStore } from '../../store/comments/update-comment.store';
 import { IComment } from '../../../../shared/models/entities.models';
-import { Dialog } from 'primeng/dialog';
 import { DeleteCommentStore } from '../../store/comments/delete-comment';
-import { ConfirmationService } from 'primeng/api';
 import { CommentsStore } from '../../store/comments/comments.store';
 import { Subject, takeUntil } from 'rxjs';
 import { QuillViewComponent } from 'ngx-quill';
@@ -43,6 +38,7 @@ import { AnalyticsService } from '../../../../core/services/analytics/analytics.
 import { TranslateModule } from '@ngx-translate/core';
 import { ArticleDetailSidebarComponent } from '../../components/article-detail-sidebar/article-detail-sidebar';
 import { ArticleDetailNotFoundComponent } from '../../components/article-detail-not-found/article-detail-not-found';
+import { ButtonComponent, DialogComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-detail-article',
@@ -52,8 +48,7 @@ import { ArticleDetailNotFoundComponent } from '../../components/article-detail-
     UpdateCommentStore,
     RecentArticlesStore,
     AddCommentStore,
-    DeleteCommentStore,
-    ConfirmationService
+    DeleteCommentStore
   ],
   imports: [
     LucideAngularModule,
@@ -62,23 +57,21 @@ import { ArticleDetailNotFoundComponent } from '../../components/article-detail-
     ArticleCardDetailSkeleton,
     NgOptimizedImage,
     ReactiveFormsModule,
-    TextareaModule,
-    Button,
-    Dialog,
-    ConfirmDialog,
+    ButtonComponent,
+    DialogComponent,
     QuillViewComponent,
     TranslateModule,
     ArticleDetailSidebarComponent,
     ArticleDetailNotFoundComponent
   ],
   templateUrl: './detail-article.html',
+  styleUrl: '../../../../shared/styles/quill-view.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailArticle implements OnInit, OnDestroy {
   #fb = inject(FormBuilder);
   form: FormGroup;
   storeAddComment = inject(AddCommentStore);
-  #confirmationService = inject(ConfirmationService);
   profile = inject(AuthStore);
   updateCommentStore = inject(UpdateCommentStore);
   deleteCommentStore = inject(DeleteCommentStore);
@@ -204,25 +197,9 @@ export class DetailArticle implements OnInit, OnDestroy {
   }
 
   onDeleteComment(commentId: string, event: Event): void {
-    this.#confirmationService.confirm({
-      target: event.currentTarget as EventTarget,
-      message: 'Êtes-vous sûr ?',
-      acceptLabel: 'Confirmer',
-      rejectLabel: 'Annuler',
-      closable: false,
-      acceptButtonProps: {
-        severity: 'danger',
-        outlined: true,
-        size: 'small'
-      },
-      rejectButtonProps: {
-        severity: 'secondary',
-        outlined: true,
-        size: 'small'
-      },
-      accept: () => {
-        this.deleteCommentStore.deleteComment({ id: commentId });
-      }
-    });
+    event.stopPropagation();
+    if (confirm('Êtes-vous sûr ?')) {
+      this.deleteCommentStore.deleteComment({ id: commentId });
+    }
   }
 }

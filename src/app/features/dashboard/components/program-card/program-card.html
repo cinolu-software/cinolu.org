@@ -14,7 +14,7 @@
       } @if (hasApplied()) {
       <span
         class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-wider rounded border border-blue-100 shadow-sm anim-fade-in">
-        <span class="material-icons text-[12px]">verified</span>
+        <ui-icon class="text-[12px]" name="verified" />
         Candidature envoyée
       </span>
       }
@@ -23,7 +23,7 @@
     <span
       class="inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest rounded shadow-sm border transition-all duration-300"
       [ngClass]="statusConfig().classes">
-      <span class="material-icons text-[12px]">{{ statusConfig().icon }}</span>
+      <ui-icon class="text-[12px]" [name]="statusConfig().icon" />
       {{ statusConfig().label }}
     </span>
   </div>
@@ -55,7 +55,7 @@
 
     <div class="flex items-center justify-between py-3 px-4 bg-slate-50/50 rounded-lg border border-slate-100">
       <div class="flex items-center gap-3">
-        <span class="material-icons text-slate-400 text-base">event</span>
+        <ui-icon class="text-slate-400 text-base" name="event" />
         <div class="flex flex-col">
           <span class="text-[10px] text-slate-400 uppercase font-black tracking-tighter leading-none mb-1">Début</span>
           <time [dateTime]="project().started_at" class="text-xs font-bold text-slate-700">
@@ -73,7 +73,7 @@
             {{ project().ended_at | date: 'mediumDate' }}
           </time>
         </div>
-        <span class="material-icons text-slate-400 text-base">event_busy</span>
+        <ui-icon class="text-slate-400 text-base" name="event_busy" />
       </div>
     </div>
 
@@ -82,9 +82,7 @@
         [routerLink]="['/dashboard/user/programs', project().slug]"
         class="inline-flex items-center gap-2 min-h-[44px] py-2 -my-2 px-2 -mx-2 text-[11px] sm:text-xs font-black text-primary-600 hover:text-primary-700 transition-all uppercase tracking-[0.2em] font-satoshi rounded-lg active:bg-primary-50/50">
         Détails du programme
-        <span class="material-icons text-base transition-transform duration-300 group-hover/action:translate-x-1.5">
-          arrow_forward
-        </span>
+        <ui-icon class="text-base transition-transform duration-300 group-hover/action:translate-x-1.5" name="arrow_forward" />
       </a>
     </div>
   </div>

@@ -7,6 +7,7 @@ import { ReferralBadgesService, BadgeLevel } from '@features/dashboard/services/
 import { IUser } from '@shared/models/entities.models';
 import { REFERRAL_CONFIG } from '@features/dashboard/config/referral.constants';
 import { ReferralCtaCard } from '../../../components/referral-cta-card/referral-cta-card';
+import { IconComponent } from '@shared/ui';
 
 interface TimelineEvent {
   id: string;
@@ -22,7 +23,7 @@ interface TimelineEvent {
 
 @Component({
   selector: 'app-referral-activity',
-  imports: [CommonModule, RouterModule, ReferralCtaCard],
+  imports: [CommonModule, RouterModule, ReferralCtaCard, IconComponent],
   templateUrl: './activity.html'
 })
 export class ReferralActivity implements OnInit {

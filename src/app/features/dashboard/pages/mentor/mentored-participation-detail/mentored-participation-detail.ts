@@ -4,11 +4,11 @@ import { CommonModule, NgClass } from '@angular/common';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
 import { MentorshipStore } from '../../../store/mentorship.store';
 import { environment } from '@environments/environment';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-mentored-participation-detail',
-  standalone: true,
-  imports: [RouterLink, NgClass, ApiImgPipe, CommonModule],
+  imports: [RouterLink, NgClass, ApiImgPipe, CommonModule, IconComponent],
   templateUrl: './mentored-participation-detail.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -16,7 +16,7 @@
     <a [routerLink]="['/']" class="flex items-center gap-2.5 group">
       <div
         class="w-9 h-9 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-200">
-        <span class="material-icons text-white text-xl">verified</span>
+        <ui-icon class="text-white text-xl" name="verified" />
       </div>
       <span
         class="text-xl font-black tracking-tight text-slate-900 uppercase group-hover:text-primary-600 transition-colors"
@@ -27,7 +27,7 @@
     <a [routerLink]="['/']" class="flex items-center justify-center group">
       <div
         class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-200">
-        <span class="material-icons text-white text-2xl">verified</span>
+        <ui-icon class="text-white text-2xl" name="verified" />
       </div>
     </a>
     } @if (isMobile()) {
@@ -35,7 +35,7 @@
       (click)="closeSidebar.emit()"
       type="button"
       class="min-h-[44px] min-w-[44px] flex items-center justify-center hover:bg-slate-100 rounded-lg transition-colors">
-      <span class="material-icons text-slate-600 text-xl">close</span>
+      <ui-icon class="text-slate-600 text-xl" name="close" />
     </button>
     }
   </div>
@@ -68,14 +68,13 @@
               'bg-slate-100 group-hover:bg-primary-50': !isActive(item)
             }"
             class="w-9 h-9 flex items-center justify-center rounded-lg transition-colors flex-shrink-0">
-            <span
+            <ui-icon
               [ngClass]="{
                 'text-primary-600': isActive(item),
                 'text-slate-600 group-hover:text-primary-600': !isActive(item)
               }"
-              class="material-icons text-xl"
-              >{{ item.icon }}</span
-            >
+              class="text-xl"
+               [name]="item.icon" />
           </div>
           @if (!isCollapsed() || isMobile()) {
           <span class="font-medium text-sm truncate flex-1">{{ item.label }}</span>
@@ -95,7 +94,7 @@
         'justify-start': !isCollapsed() || isMobile()
       }"
       class="w-full flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-lg transition-all duration-200 border border-slate-200">
-      <span class="material-icons text-xl">person</span>
+      <ui-icon class="text-xl" name="person" />
       @if (!isCollapsed() || isMobile()) {
       <span class="font-semibold text-sm">Tableau de bord</span>
       }
@@ -108,7 +107,7 @@
         'justify-start': !isCollapsed() || isMobile()
       }"
       class="w-full flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] bg-red-50 hover:bg-red-600 text-red-600 hover:text-white rounded-lg transition-all duration-200 border border-red-200 hover:border-red-600 group">
-      <span class="material-icons text-xl">logout</span>
+      <ui-icon class="text-xl" name="logout" />
       @if (!isCollapsed() || isMobile()) {
       <span class="font-semibold text-sm">Déconnexion</span>
       }

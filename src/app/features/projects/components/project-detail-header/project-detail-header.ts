@@ -6,7 +6,6 @@ import type { IProject } from '@shared/models/entities.models';
 
 @Component({
   selector: 'app-project-detail-header',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DatePipe, TitleCasePipe, TranslateModule, LucideAngularModule],
   templateUrl: './project-detail-header.html'

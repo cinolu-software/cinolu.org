@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { STATS } from '../../data/stats.data';
 import { LucideAngularModule, HandCoins, Lightbulb, MoveUpRight, User, UserPlus } from 'lucide-angular';
-import { ButtonModule } from 'primeng/button';
 import { CountUpDirective } from '../../../../shared/directives/count-up.directive';
 import { FadeInOnScrollDirective } from '../../../../shared/directives/animations-on-scroll.directive';
 import { REASONS } from '../../data/reasons-join-us.data';
@@ -12,7 +11,6 @@ import { LandingSectionHeader } from '../landing-section-header/landing-section-
   selector: 'app-why-join-us',
   imports: [
     LucideAngularModule,
-    ButtonModule,
     CountUpDirective,
     FadeInOnScrollDirective,
     TranslateModule,

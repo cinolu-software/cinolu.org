@@ -6,10 +6,11 @@ import { AuthStore } from '@core/auth/auth.store';
 import { IUser } from '@shared/models/entities.models';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
 import { ReferralCtaCard } from '../../../components/referral-cta-card/referral-cta-card';
+import { IconComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-my-referrals',
-  imports: [CommonModule, RouterModule, ApiImgPipe, ReferralCtaCard],
+  imports: [CommonModule, RouterModule, ApiImgPipe, ReferralCtaCard, IconComponent],
   templateUrl: './my-referrals.html',
   standalone: true
 })

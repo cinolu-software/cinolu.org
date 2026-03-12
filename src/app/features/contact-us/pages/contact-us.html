@@ -34,12 +34,12 @@
               {{ 'contact.form.name' | translate }}
             </label>
             <input
-              pInputText
               id="name"
+              type="text"
               [placeholder]="'contact.form.namePlaceholder' | translate"
               formControlName="name"
               autocomplete="off"
-              class="transition-all duration-200 focus:shadow-md focus:border-primary-400" />
+              class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition-all duration-200 focus:border-primary-400 focus:ring-4 focus:ring-primary-100" />
           </div>
           <div class="flex flex-col gap-2.5 group">
             <label
@@ -50,12 +50,12 @@
               {{ 'contact.form.email' | translate }}
             </label>
             <input
-              pInputText
               id="email"
+              type="email"
               [placeholder]="'contact.form.emailPlaceholder' | translate"
               formControlName="email"
               autocomplete="off"
-              class="transition-all duration-200 focus:shadow-md focus:border-primary-400" />
+              class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition-all duration-200 focus:border-primary-400 focus:ring-4 focus:ring-primary-100" />
           </div>
         </div>
 
@@ -68,15 +68,11 @@
                 class="w-1.5 h-1.5 rounded-full bg-primary-500 group-focus-within:scale-125 transition-transform"></span>
               {{ 'contact.form.country' | translate }}
             </label>
-            <p-select
-              (onChange)="onSelectCountry($event)"
+            <ui-select
+              (changed)="onSelectCountry($event)"
               [inputId]="'country'"
-              [options]="countryItems"
-              [optionLabel]="'name'"
-              [optionValue]="'name'"
-              [showClear]="true"
+              [options]="countryOptions"
               formControlName="country"
-              styleClass="w-full"
               [placeholder]="'contact.form.countryPlaceholder' | translate" />
           </div>
           <div class="flex flex-col gap-2.5 group">
@@ -87,23 +83,23 @@
                 class="w-1.5 h-1.5 rounded-full bg-primary-500 group-focus-within:scale-125 transition-transform"></span>
               {{ 'contact.form.phone' | translate }}
             </label>
-            <p-inputgroup>
-              <p-inputgroup-addon
+            <div class="flex overflow-hidden rounded-lg border border-slate-200 bg-white">
+              <span
                 id="phone-addon"
                 role="text"
-                class="bg-gray-50 border-gray-300 font-semibold text-primary-600">
+                class="inline-flex items-center border-r border-slate-200 bg-slate-50 px-4 font-semibold text-primary-600">
                 {{ formattedCountryCode }}
-              </p-inputgroup-addon>
+              </span>
               <input
-                pInputText
                 id="phone"
+                type="tel"
                 inputmode="tel"
                 pattern="[0-9]*"
                 [placeholder]="'contact.form.phonePlaceholder' | translate"
                 formControlName="phone_number"
                 autocomplete="off"
-                class="transition-all duration-200 focus:shadow-md focus:border-primary-400" />
-            </p-inputgroup>
+                class="w-full px-4 py-3 text-sm text-slate-900 outline-none transition-all duration-200 focus:bg-primary-50/30" />
+            </div>
           </div>
         </div>
 
@@ -116,31 +112,28 @@
             {{ 'contact.form.message' | translate }}
           </label>
           <textarea
-            pTextarea
             id="message"
             [placeholder]="'contact.form.messagePlaceholder' | translate"
             formControlName="message"
             rows="5"
-            resize="none"
             autocomplete="off"
-            class="transition-all duration-200 focus:shadow-md focus:border-primary-400"></textarea>
+            class="w-full resize-none rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition-all duration-200 focus:border-primary-400 focus:ring-4 focus:ring-primary-100"></textarea>
         </div>
 
         <div class="pt-4">
-          <button
+          <ui-button
             formActions
             [loading]="store.isLoading()"
             [disabled]="form.invalid || store.isLoading()"
-            pButton
             type="submit"
-            severity="primary"
-            class="w-full py-3 font-semibold text-base rounded-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]">
+            [fullWidth]="true"
+            size="lg">
             <span class="flex items-center gap-2 justify-center">
               @if (!store.isLoading()) {
               <i-lucide [name]="icons.mail" class="size-5"></i-lucide>
               } {{ store.isLoading() ? ('contact.form.sending' | translate) : ('contact.form.submit' | translate) }}
             </span>
-          </button>
+          </ui-button>
         </div>
       </form>
     </div>

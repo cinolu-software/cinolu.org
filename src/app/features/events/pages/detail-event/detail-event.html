@@ -8,31 +8,27 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
       <div class="md:sticky md:top-28 2xl:top-36 3xl:mt-14 self-start">
         @if (images() && images().length > 0) {
-        <p-galleria
-          [value]="images()"
-          [autoPlay]="true"
-          [circular]="true"
-          [responsiveOptions]="responsiveOptions"
-          [numVisible]="5"
-          [containerStyle]="{ 'max-width': '640px' }">
-          <ng-template pTemplate="item" let-img>
-            <div class="relative h-72 md:h-[27rem] w-full rounded-lg overflow-hidden shadow-2xl mb-8">
-              <img
-                [src]="img | apiIMG: 'gallery'"
-                [alt]="img.image"
-                class="relative object-cover w-full h-full brightness-95 transition-transform duration-700 hover:scale-105"
-                priority />
-            </div>
-          </ng-template>
-
-          <ng-template pTemplate="thumbnail" let-img>
+        <div class="space-y-4">
+          <div class="relative mb-8 h-72 w-full overflow-hidden rounded-lg shadow-2xl md:h-[27rem]">
             <img
-              [src]="img | apiIMG: 'gallery'"
-              [alt]="img.image"
-              class="relative object-cover h-20 w-20"
-              loading="lazy" />
-          </ng-template>
-        </p-galleria>
+              [src]="images()[activeImageIndex()] | apiIMG: 'gallery'"
+              [alt]="images()[activeImageIndex()].image"
+              class="relative h-full w-full object-cover brightness-95 transition-transform duration-700 hover:scale-105"
+              priority />
+          </div>
+          <div class="flex flex-wrap gap-3">
+            @for (img of images(); track img.id; let idx = $index) {
+            <button
+              type="button"
+              (click)="activeImageIndex.set(idx)"
+              class="overflow-hidden rounded-lg border-2 transition"
+              [class.border-primary-500]="idx === activeImageIndex()"
+              [class.border-transparent]="idx !== activeImageIndex()">
+              <img [src]="img | apiIMG: 'gallery'" [alt]="img.image" class="relative h-20 w-20 object-cover" loading="lazy" />
+            </button>
+            }
+          </div>
+        </div>
         } @else {
         <div class="relative w-full overflow-hidden h-72 md:h-[34rem]">
           <img

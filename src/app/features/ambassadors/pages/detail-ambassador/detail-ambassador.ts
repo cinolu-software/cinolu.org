@@ -26,7 +26,6 @@ import type { IImage } from '../../../../shared/models/entities.models';
 
 @Component({
   selector: 'app-detail-ambassador',
-  standalone: true,
   imports: [CommonModule, TranslateModule, ApiImgPipe, LucideAngularModule, RouterLink],
   providers: [AmbassadorStore],
   templateUrl: './detail-ambassador.html',

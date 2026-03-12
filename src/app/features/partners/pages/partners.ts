@@ -1,21 +1,19 @@
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { IPartner, PARTNERS } from '../../landing/data/partners.data';
 import { CommonModule } from '@angular/common';
-import { AnimateOnScrollModule } from 'primeng/animateonscroll';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { ArrowRight, Handshake, LucideAngularModule } from 'lucide-angular';
 import { PartnersSkeleton } from '../component/partners-skeleton/partners-skeleton';
 import { PartnersCard } from '../component/partners-card/partners-card';
-import { Button } from 'primeng/button';
+import { ButtonComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-partners',
   imports: [
     CommonModule,
-    AnimateOnScrollModule,
     HeroCard,
     LucideAngularModule,
-    Button,
+    ButtonComponent,
     PartnersCard,
     PartnersSkeleton
   ],

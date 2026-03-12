@@ -4,7 +4,6 @@ import { LucideAngularModule, Lock, LogIn, UserPlus, X } from 'lucide-angular';
 
 @Component({
   selector: 'app-auth-required-modal',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [LucideAngularModule],
   templateUrl: './auth-required-modal.html'
@@ -14,9 +13,7 @@ export class AuthRequiredModalComponent {
 
   isOpen = input.required<boolean>();
   returnUrl = input<string>('/');
-  message = input<string>(
-    'Cette action nécessite une connexion. Connectez-vous ou créez un compte pour continuer.'
-  );
+  message = input<string>('Cette action nécessite une connexion. Connectez-vous ou créez un compte pour continuer.');
 
   closed = output<void>();
 

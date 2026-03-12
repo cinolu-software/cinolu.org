@@ -6,7 +6,6 @@ import type { IProject } from '@shared/models/entities.models';
 
 @Component({
   selector: 'app-project-detail-quick-actions',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgClass, TranslateModule, LucideAngularModule],
   templateUrl: './project-detail-quick-actions.html'
