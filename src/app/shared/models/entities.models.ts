@@ -87,6 +87,8 @@ export interface IProject extends IBase {
   metrics: IMetric[];
   participants: IUser[];
   phases: IPhase[];
+  /** Mapped count (loadRelationCountAndMap) */
+  participantsCount?: number;
 }
 
 export interface IEvent extends IBase {
@@ -201,23 +203,28 @@ export interface IPhase extends IBase {
   started_at: Date;
   ended_at: Date;
   deliverables: IDeliverable[];
+  /** Populated when the current user is a mentor on this project */
+  mentors?: IMentorProfileSummary[];
+  /** Mapped count from API (loadRelationCountAndMap) */
+  participationsCount?: number;
 }
 
 export interface IDeliverable extends IBase {
   title: string;
   description: string;
+  submissions?: IDeliverableSubmission[];
 }
 
 export interface IDeliverableSubmission extends IBase {
-  phase?: { id: string };
-  deliverable?: { id: string };
+  file: string;
+  deliverable: IDeliverable;
   participation?: { id: string };
-  version: number;
-  file_url: string;
-  file_name: string;
-  file_type: string;
-  file_size: number;
-  submitted_at: string;
+}
+
+/** Lightweight mentor profile returned inside phases */
+export interface IMentorProfileSummary {
+  id: string;
+  owner: Pick<IUser, 'id' | 'name' | 'email' | 'profile'>;
 }
 
 export interface FAQItem {
@@ -356,6 +363,10 @@ export interface IParticipation extends IBase {
   phases?: IPhase[];
   venture: IVenture | null;
   upvotes?: IParticipationUpvote[];
+  /** Populated in mentor detail view */
+  deliverable_submissions?: IDeliverableSubmission[];
+  /** Mapped count from API */
+  upvotesCount?: number;
 }
 
 export interface IParticipationWithVote extends IParticipation {
