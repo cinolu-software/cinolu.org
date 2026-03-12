@@ -6,7 +6,7 @@
     <button
       (click)="toggleSidebar.emit()"
       type="button"
-      class="min-h-[44px] flex items-center justify-center hover:bg-slate-100 rounded-lg transition-colors lg:hidden -ml-1">
+      class="min-h-11 flex items-center justify-center hover:bg-slate-100 rounded-lg transition-colors lg:hidden -ml-1">
       <ui-icon class="text-slate-600 text-xl" name="menu" />
     </button>
     }
@@ -33,7 +33,7 @@
     </a>
 
     <div
-      class="hidden lg:flex items-center gap-2 bg-gradient-to-br from-primary-50 to-primary-100/50 rounded-lg px-3 py-1.5 border border-primary-200/60">
+      class="hidden lg:flex items-center gap-2 bg-linear-to-br from-primary-50 to-primary-100/50 rounded-lg px-3 py-1.5 border border-primary-200/60">
       <ui-icon class="text-primary-600 text-sm" name="key" />
       <span class="text-xs font-bold text-primary-700 tracking-wider">{{ referralCode() }}</span>
     </div>
@@ -53,16 +53,11 @@
           @if (user()?.profile || user()?.google_image) {
           <div
             class="relative w-9 h-9 min-w-9 min-h-9 rounded-lg overflow-hidden ring-2 ring-slate-200 group-hover:ring-primary-300 transition-all">
-            <img
-              priority
-              [ngSrc]="user() | apiIMG: 'user'"
-              [alt]="user()?.name"
-              fill
-              class="object-cover" />
+            <img priority [ngSrc]="user() | apiIMG: 'user'" [alt]="user()?.name" fill class="object-cover" />
           </div>
           } @else {
           <div
-            class="w-9 h-9 rounded-lg bg-gradient-to-br from-primary-500/90 to-primary-600/90 flex items-center justify-center font-bold text-white text-xs shadow-sm ring-2 ring-slate-200 group-hover:ring-primary-300 transition-all">
+            class="w-9 h-9 rounded-lg bg-linear-to-br from-primary-500/90 to-primary-600/90 flex items-center justify-center font-bold text-white text-xs shadow-sm ring-2 ring-slate-200 group-hover:ring-primary-300 transition-all">
             {{ getUserInitials() }}
           </div>
           }
@@ -76,7 +71,8 @@
 
         <ui-icon
           [ngClass]="{ 'rotate-180': showUserMenu() }"
-          class="text-slate-600 text-lg transition-transform hidden md:block" name="expand_more" />
+          class="text-slate-600 text-lg transition-transform hidden md:block"
+          name="expand_more" />
       </button>
 
       @if (showUserMenu()) {
